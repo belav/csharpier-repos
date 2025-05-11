@@ -41,11 +41,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.IDropTarget.OnDragDrop(System.Windows.Forms.DragEventArgs)" />
+
+            
 
             
 
@@ -60,6 +64,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -68,8 +74,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragEventArgs" />
+
+          
 
           
 
@@ -103,11 +113,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.IDropTarget.OnDragEnter(System.Windows.Forms.DragEventArgs)" />
+
+            
 
             
 
@@ -122,6 +136,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -130,8 +146,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragEventArgs" />
+
+          
 
           
 
@@ -162,11 +182,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.IDropTarget.OnDragLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -181,6 +205,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -189,8 +215,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -224,11 +254,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.IDropTarget.OnDragOver(System.Windows.Forms.DragEventArgs)" />
+
+            
 
             
 
@@ -243,6 +277,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -251,8 +287,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragEventArgs" />
+
+          
 
           
 

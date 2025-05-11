@@ -25,7 +25,7 @@
          in targets. -->
     <WasmDebugLevel
       Condition="'$(DebuggerSupport)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true' and '$(WasmDebugLevel)' == ''"
-      >reset-to-zero</WasmDebugLevel
+>reset-to-zero</WasmDebugLevel
     >
     <TrimMode Condition="'$(TrimMode)' == ''">full</TrimMode>
     <JsonSerializerIsReflectionEnabledByDefault

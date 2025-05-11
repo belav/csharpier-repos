@@ -26,13 +26,19 @@
 
         
 
+        
+
          interface. Otherwise, inherit from <see
          cref="T:System.Windows.Forms.FeatureSupport" />
 
         
 
+        
+
          and provide your own implementation. For an implementation of this class, see <see
          cref="T:System.Windows.Forms.OSFeature" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
         . Call <see
          cref="M:System.Windows.Forms.FeatureSupport.IsPresent(System.String,System.String)" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.FeatureSupport" />
+
+            
 
             
 
@@ -110,11 +122,15 @@
 
             
 
+            
+
              representing the version number of the specified feature available on the system; or null if the feature is not installed.</para
           >
         </returns>
         <param name="feature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,8 +165,12 @@
 
             
 
+            
+
              and the <paramref
              name="featureConstName" />
+
+            
 
             
 
@@ -169,6 +189,8 @@
 
             
 
+            
+
              with the version number of the specified feature available on the system; or null if the feature is not installed.</para
           >
         </returns>
@@ -177,8 +199,12 @@
 
           
 
+          
+
           The fully qualified name of the class to query for information about the specified feature. This class must implement the <see
            cref="T:System.Windows.Forms.IFeatureSupport" />
+
+          
 
           
 
@@ -186,6 +212,8 @@
         >
         <param name="featureConstName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +246,8 @@
         </returns>
         <param name="feature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,6 +287,8 @@
 
           
 
+          
+
           The feature to look for. </param
         >
         <param name="minimumVersion">
@@ -264,8 +296,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -299,8 +335,12 @@
 
             
 
+            
+
              and the <paramref
              name="featureConstName" />
+
+            
 
             
 
@@ -320,8 +360,12 @@
 
           
 
+          
+
           The fully qualified name of the class to query for information about the specified feature. This class must implement the <see
            cref="T:System.Windows.Forms.IFeatureSupport" />
+
+          
 
           
 
@@ -329,6 +373,8 @@
         >
         <param name="featureConstName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -363,8 +409,12 @@
 
             
 
+            
+
              and the <paramref
              name="featureConstName" />
+
+            
 
             
 
@@ -384,8 +434,12 @@
 
           
 
+          
+
           The fully qualified name of the class to query for information about the specified feature. This class must implement the <see
            cref="T:System.Windows.Forms.IFeatureSupport" />
+
+          
 
           
 
@@ -396,6 +450,8 @@
 
           
 
+          
+
           The fully qualified name of the feature to look for. </param
         >
         <param name="minimumVersion">
@@ -403,8 +459,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Version" />
+
+          
 
           
 

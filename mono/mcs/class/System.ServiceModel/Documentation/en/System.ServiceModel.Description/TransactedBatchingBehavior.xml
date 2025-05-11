@@ -59,8 +59,12 @@
 
             
 
+            
+
              value passed into the constructor is only a hint. It is possible that all messages are received before reaching the <paramref
              name="maxBatchSize" />
+
+            
 
             
 
@@ -75,11 +79,15 @@
 
             
 
+            
+
              class with the specified batch size.</para
           >
         </summary>
         <param name="maxBatchSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -107,8 +115,12 @@
 
             
 
+            
+
              value is only a hint. It is possible that all messages are received before reaching the <paramref
              name="maxBatchSize" />
+
+            
 
             
 
@@ -188,10 +200,14 @@
 
           
 
+          
+
           A service endpoint where behavior settings are applied.</param
         >
         <param name="behavior">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,6 +250,8 @@
 
           
 
+          
+
           A service endpoint where behavior settings are applied.</param
         >
       </Docs>
@@ -268,6 +286,8 @@
         </summary>
         <param name="serviceEndpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

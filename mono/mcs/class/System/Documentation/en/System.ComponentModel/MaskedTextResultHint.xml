@@ -23,8 +23,12 @@
 
         
 
+        
+
          control delegates the actual responsibility for parsing the input characters to the <see
          cref="T:System.ComponentModel.MaskedTextProvider" />
+
+        
 
         
 
@@ -33,13 +37,19 @@
 
         
 
+        
+
         , in addition to returning a <see
          cref="T:System.Boolean" />
 
         
 
+        
+
          success result, also provide an additional output parameter of type <see
          cref="T:System.ComponentModel.MaskedTextResultHint" />
+
+        
 
         
 
@@ -52,13 +62,19 @@
 
           
 
+          
+
            method can be used to convert a <see
            cref="T:System.ComponentModel.MaskedTextResultHint" />
 
           
 
+          
+
            value into a <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -140,6 +156,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -188,6 +206,8 @@
           <para
             >Operation did not succeed. The program encountered an  input character that was not valid. For more information about characters that are not valid, see the <see
              cref="M:System.ComponentModel.MaskedTextProvider.IsValidInputChar(System.Char)" />
+
+            
 
             
 
@@ -308,6 +328,8 @@
 
             
 
+            
+
              property is set to false. </para
           >
         </summary>
@@ -334,6 +356,8 @@
           <para
             >Success. The primary operation was not performed because it was not needed, but the method produced a side effect. For example, the <see
              cref="Overload:System.ComponentModel.MaskedTextProvider.RemoveAt" />
+
+            
 
             
 

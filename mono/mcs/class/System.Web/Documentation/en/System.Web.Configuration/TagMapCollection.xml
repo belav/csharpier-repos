@@ -27,11 +27,15 @@
 
         
 
+        
+
          class allows you to remap the types of tags at compile time. This remapping causes the mapped type to be used in place of the original tag type for all pages and controls in the ASP.NET application in the scope of the configuration file. </para
       >
       <para
         >The <see
          cref="T:System.Web.Configuration.TagMapCollection" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
       <para
         >Contains a collection of <see
          cref="T:System.Web.Configuration.TagMapInfo" />
+
+        
 
         
 
@@ -68,13 +74,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Configuration.PagesSection" />
 
             
 
+            
+
              class always contains an instance of the <see
              cref="T:System.Web.Configuration.TagMapCollection" />
+
+            
 
             
 
@@ -86,6 +98,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.TagMapCollection" />
+
+            
 
             
 
@@ -119,13 +133,19 @@
 
             
 
+            
+
              object with the same <see
              cref="P:System.Web.Configuration.TagMapInfo.TagType" />
 
             
 
+            
+
              property value. If it does, a <see
              cref="T:System.Configuration.ConfigurationException" />
+
+            
 
             
 
@@ -140,6 +160,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -148,8 +170,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.TagMapInfo" />
+
+          
 
           
 
@@ -288,8 +314,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.TagMapInfo" />
+
+          
 
           
 

@@ -19,7 +19,7 @@
       >false</StabilizePackageVersion
     >
     <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
-      >release</DotNetFinalVersionKind
+>release</DotNetFinalVersionKind
     >
     <PreReleaseVersionLabel>alpha</PreReleaseVersionLabel>
     <PreReleaseBrandingLabel>Alpha $(PreReleaseVersionIteration)</PreReleaseBrandingLabel>

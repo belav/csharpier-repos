@@ -50,6 +50,8 @@
 
         
 
+        
+
          is to allow for data binding on both Windows Forms and Web Forms.</para
       >
       <para
@@ -58,8 +60,12 @@
 
         
 
+        
+
          can be customized to present a subset of data from the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -68,8 +74,12 @@
 
         
 
+        
+
         , but that show different versions of the data. For example, one control might be bound to a <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -78,8 +88,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          property. This returns the default <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -98,13 +116,19 @@
 
         
 
+        
+
          on the <see
          cref="T:System.Data.DataView" />
 
         
 
+        
+
          returned by the <see
          cref="P:System.Data.DataTable.DefaultView" />
+
+        
 
         
 
@@ -116,8 +140,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Data.DataView.Sort" />
+
+        
 
         
 
@@ -126,8 +154,12 @@
 
         
 
+        
+
          property to return a single <see
          cref="T:System.Data.DataRowView" />
+
+        
 
         
 
@@ -139,8 +171,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Data.DataView.Delete(System.Int32)" />
+
+        
 
         
 
@@ -149,8 +185,12 @@
 
         
 
+        
+
          property can set to specify that only deleted rows or new rows be displayed by the <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -165,8 +205,12 @@
 
         
 
+        
+
          by using vbteclinq. A linq_dataset query returns an enumeration of <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -175,8 +219,12 @@
 
         
 
+        
+
          can be created from a linq_dataset query and takes on the filtering and sorting characteristics of that query. linq_dataset extends the functionality of the <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -184,6 +232,8 @@
          type="text/html">
           <a href="310bff4a-32dd-4f20-a271-6dbd82912631">Data Binding and LINQ to DataSet</a>
         </format>
+
+        
 
         
 
@@ -198,8 +248,12 @@
 
         
 
+        
+
          for sorting, filtering, searching, editing, and navigation. The <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -208,8 +262,12 @@
 
         
 
+        
+
         . Changes to the <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -218,13 +276,19 @@
 
         
 
+        
+
         . Changes to the <see
          cref="T:System.Data.DataTable" />
 
         
 
+        
+
         ’s data will affect all <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -245,6 +309,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -274,8 +340,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -287,13 +357,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataTable" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Data.DataView" />
+
+          
 
           
 
@@ -328,8 +404,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -338,13 +418,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.DataView.Sort" />
 
             
 
+            
+
             , and <see
              cref="T:System.Data.DataViewRowState" />
+
+            
 
             
 
@@ -356,13 +442,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataTable" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Data.DataView" />
+
+          
 
           
 
@@ -373,13 +465,19 @@
 
           
 
+          
+
           A <see
            cref="P:System.Data.DataView.RowFilter" />
 
           
 
+          
+
            to apply to the <see
            cref="T:System.Data.DataView" />
+
+          
 
           
 
@@ -390,13 +488,19 @@
 
           
 
+          
+
           A <see
            cref="P:System.Data.DataView.Sort" />
 
           
 
+          
+
            to apply to the <see
            cref="T:System.Data.DataView" />
+
+          
 
           
 
@@ -407,13 +511,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataViewRowState" />
 
           
 
+          
+
            to apply to the <see
            cref="T:System.Data.DataView" />
+
+          
 
           
 
@@ -442,6 +552,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -450,6 +562,8 @@
           <para
             >A new <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -530,6 +644,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -559,6 +675,8 @@
           <para
             >Gets or sets a value that indicates whether to use the default sort. The default sort is (ascending) by all primary keys as specified by <see
              cref="P:System.Data.DataTable.PrimaryKey" />
+
+            
 
             
 
@@ -595,6 +713,8 @@
 
             
 
+            
+
              method ends the initialization. Using the BeginInit and EndInit methods prevents the control from being used before it is fully initialized.</para
           >
         </remarks>
@@ -603,6 +723,8 @@
           <para
             >Starts the initialization of a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -631,13 +753,19 @@
 
             
 
+            
+
              in derived classes. Use the corresponding <see
              cref="M:System.Data.DataView.Open" />
 
             
 
+            
+
              method to open the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -650,6 +778,8 @@
           <para
             >Closes the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -685,11 +815,15 @@
 
             
 
+            
+
              has been changed successfully.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -700,8 +834,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedEventArgs" />
+
+          
 
           
 
@@ -734,10 +872,14 @@
 
           
 
+          
+
           array to copy into. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -766,13 +908,19 @@
 
             
 
+            
+
              after <see
              cref="P:System.Data.DataView.RowFilter" />
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataView.RowStateFilter" />
+
+            
 
             
 
@@ -810,6 +958,8 @@
 
             
 
+            
+
              associated with this view.</para
           >
         </summary>
@@ -842,13 +992,19 @@
 
             
 
+            
+
             , its state changes to DataViewRowState.Deleted. You can roll back the deletion by calling <see
              cref="M:System.Data.DataTable.RejectChanges" />
 
             
 
+            
+
              on the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -861,6 +1017,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -890,8 +1048,12 @@
 
             
 
+            
+
              and the underlying <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -900,8 +1062,12 @@
 
             
 
+            
+
              should be called for all <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -916,11 +1082,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -948,6 +1118,8 @@
 
             
 
+            
+
              method starts the initialization. Using the BeginInit and EndInit methods prevents the control from being used before it is fully initialized.</para
           >
         </remarks>
@@ -956,6 +1128,8 @@
           <para
             >Ends the initialization of a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -994,6 +1168,8 @@
 
             
 
+            
+
              instances are considered equal. </para
           >
         </summary>
@@ -1002,6 +1178,8 @@
           <para
             >true if the two <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1029,6 +1207,8 @@
 
             
 
+            
+
              by the specified sort key value.</para
           >
         </summary>
@@ -1040,11 +1220,15 @@
 
             
 
+            
+
              that contains the sort key value specified; otherwise -1 if the sort key value does not exist.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1075,6 +1259,8 @@
 
             
 
+            
+
              by the specified sort key values.</para
           >
         </summary>
@@ -1086,6 +1272,8 @@
 
             
 
+            
+
              that matches the sort key values specified; otherwise -1 if there are no matching sort key values. </para
           >
         </returns>
@@ -1094,8 +1282,12 @@
 
           
 
+          
+
           An array of values, typed as <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1129,6 +1321,8 @@
 
             
 
+            
+
              objects whose columns match the specified sort key value.</para
           >
         </summary>
@@ -1141,8 +1335,12 @@
 
           
 
+          
+
           The column value, typed as <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1176,6 +1374,8 @@
 
             
 
+            
+
              objects whose columns match the specified sort key value.</para
           >
         </summary>
@@ -1188,8 +1388,12 @@
 
           
 
+          
+
           An array of column values, typed as <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1221,6 +1425,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1229,6 +1435,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1264,11 +1472,15 @@
 
             
 
+            
+
              has been changed successfully.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1279,8 +1491,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedEventArgs" />
+
+          
 
           
 
@@ -1308,6 +1524,8 @@
           <para
             >Occurs when initialization of the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1355,8 +1573,12 @@
 
             
 
+            
+
              is a "view" on a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1365,13 +1587,19 @@
 
             
 
+            
+
              property can be queried to determine whether a <see
              cref="T:System.Data.DataView" />
 
             
 
+            
+
              has been opened by using the <see
              cref="M:System.Data.DataView.Open" />
+
+            
 
             
 
@@ -1384,6 +1612,8 @@
           <para
             >Gets a value that indicates whether the data source is currently open and projecting views of data on the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1444,6 +1674,8 @@
 
             
 
+            
+
              changes.</para
           >
         </summary>
@@ -1475,6 +1707,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1483,8 +1717,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedEventArgs" />
+
+          
 
           
 
@@ -1512,13 +1750,19 @@
 
             
 
+            
+
              in derived classes. Use the corresponding <see
              cref="M:System.Data.DataView.Close" />
 
             
 
+            
+
              method to close the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1531,6 +1775,8 @@
           <para
             >Opens a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1579,6 +1825,8 @@
 
             
 
+            
+
              value, specify the name of a column followed by an operator and a value to filter on. The value must be in quotation marks. For example: </para
           >
           <para>"LastName = 'Smith'" </para>
@@ -1588,8 +1836,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -1603,6 +1855,8 @@
           <para
             >Gets or sets the expression used to filter which rows are viewed in the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1640,13 +1894,19 @@
 
             
 
+            
+
              method will have their <see
              cref="P:System.Data.DataView.RowStateFilter" />
 
             
 
+            
+
              value set to Deleted. Those rows added using the <see
              cref="M:System.Data.DataView.AddNew" />
+
+            
 
             
 
@@ -1659,8 +1919,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Data.DataRowCollection" />
+
+              
 
               
 
@@ -1669,8 +1933,12 @@
 
               
 
+              
+
                method instead to make sure that such rows can be viewed in the <see
                cref="T:System.Data.DataView" />
+
+              
 
               
 
@@ -1683,11 +1951,15 @@
 
             
 
+            
+
              is set to ModifiedCurrent or CurrentRows.</para
           >
           <para
             >Deleted rows will also be visible when the <see
              cref="P:System.Data.DataView.RowStateFilter" />
+
+            
 
             
 
@@ -1699,6 +1971,8 @@
           <para
             >Gets or sets the row state filter used in the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1736,6 +2010,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1744,6 +2020,8 @@
           <para
             >Gets or sets the sort column or columns, and sort order for the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1784,8 +2062,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1797,6 +2079,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -1828,8 +2112,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1841,6 +2129,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1871,8 +2161,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1887,6 +2181,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1898,6 +2194,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1906,8 +2204,12 @@
 
           
 
+          
+
           A <see
            cref="System.Object" />
+
+          
 
           
 
@@ -1935,13 +2237,19 @@
 
             
 
+            
+
             . Instead, use the Clear method on the <see
              cref="T:System.Data.DataRowCollection" />
 
             
 
+            
+
              object returned by <see
              cref="P:System.Data.DataTable.Rows" />
+
+            
 
             
 
@@ -1953,6 +2261,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IList.Clear" />
+
+            
 
             
 
@@ -1983,8 +2293,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1999,6 +2313,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2010,6 +2326,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2018,8 +2336,12 @@
 
           
 
+          
+
           A <see
            cref="System.Object" />
+
+          
 
           
 
@@ -2049,8 +2371,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2065,6 +2391,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2076,6 +2404,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2084,8 +2414,12 @@
 
           
 
+          
+
           A <see
            cref="System.Object" />
+
+          
 
           
 
@@ -2116,8 +2450,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2132,6 +2470,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2140,8 +2480,12 @@
 
           
 
+          
+
           A <see
            cref="System.Int32" />
+
+          
 
           
 
@@ -2152,8 +2496,12 @@
 
           
 
+          
+
           A <see
            cref="System.Object" />
+
+          
 
           
 
@@ -2181,8 +2529,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2194,6 +2546,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -2222,8 +2576,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2235,6 +2593,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -2288,8 +2648,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2304,6 +2668,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2312,8 +2678,12 @@
 
           
 
+          
+
           A <see
            cref="System.Object" />
+
+          
 
           
 
@@ -2343,8 +2713,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2359,6 +2733,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2367,8 +2743,12 @@
 
           
 
+          
+
           A <see
            cref="System.Int32" />
+
+          
 
           
 
@@ -2401,8 +2781,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2417,6 +2801,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2425,8 +2811,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2454,8 +2844,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2467,6 +2861,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IBindingList.AddNew" />
+
+            
 
             
 
@@ -2502,8 +2898,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2515,6 +2915,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.AllowEdit" />
+
+            
 
             
 
@@ -2546,8 +2948,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2559,6 +2965,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.AllowNew" />
+
+            
 
             
 
@@ -2590,8 +2998,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2603,6 +3015,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.AllowRemove" />
+
+            
 
             
 
@@ -2637,8 +3051,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2653,6 +3071,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2661,8 +3081,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2673,8 +3097,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.ListSortDirection" />
+
+          
 
           
 
@@ -2708,8 +3136,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2724,6 +3156,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2735,6 +3169,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2743,8 +3179,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2755,8 +3195,12 @@
 
           
 
+          
+
           A <see
            cref="System.Object" />
+
+          
 
           
 
@@ -2787,8 +3231,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2800,6 +3248,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.IsSorted" />
+
+            
 
             
 
@@ -2833,8 +3283,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2849,6 +3303,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2857,8 +3313,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2886,8 +3346,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2899,6 +3363,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IBindingList.RemoveSort" />
+
+            
 
             
 
@@ -2930,8 +3396,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2943,6 +3413,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SortDirection" />
+
+            
 
             
 
@@ -2974,8 +3446,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2987,6 +3463,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SortProperty" />
+
+            
 
             
 
@@ -3018,8 +3496,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -3031,6 +3513,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
+
+            
 
             
 
@@ -3062,8 +3546,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -3075,6 +3563,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
+
+            
 
             
 
@@ -3106,8 +3596,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -3119,6 +3613,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+
+            
 
             
 
@@ -3151,8 +3647,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -3167,6 +3667,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3175,8 +3677,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.ListSortDescriptionCollection" />
+
+          
 
           
 
@@ -3206,8 +3712,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -3219,6 +3729,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingListView.Filter" />
+
+            
 
             
 
@@ -3246,8 +3758,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -3259,6 +3775,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IBindingListView.RemoveFilter" />
+
+            
 
             
 
@@ -3289,13 +3807,19 @@
 
             
 
+            
+
             . Instead, use the Clear method on the <see
              cref="T:System.Data.DataRowCollection" />
 
             
 
+            
+
              object returned by <see
              cref="P:System.Data.DataTable.Rows" />
+
+            
 
             
 
@@ -3307,6 +3831,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingListView.SortDescriptions" />
+
+            
 
             
 
@@ -3337,8 +3863,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -3350,6 +3880,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingListView.SupportsAdvancedSorting" />
+
+            
 
             
 
@@ -3380,8 +3912,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -3393,6 +3929,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingListView.SupportsFiltering" />
+
+            
 
             
 
@@ -3428,8 +3966,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ITypedList" />
+
+            
 
             
 
@@ -3441,6 +3983,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -3474,8 +4018,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ITypedList" />
+
+            
 
             
 
@@ -3490,6 +4038,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3501,6 +4051,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3509,8 +4061,12 @@
 
           
 
+          
+
           An array of <see
            cref="System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -3535,8 +4091,12 @@
 
             
 
+            
+
              also has a <see
              cref="P:System.Data.DataTable.DefaultView" />
+
+            
 
             
 
@@ -3545,8 +4105,12 @@
 
             
 
+            
+
              for the table. For example, if you want to create a custom view on the table, set the <see
              cref="P:System.Data.DataView.RowFilter" />
+
+            
 
             
 
@@ -3555,8 +4119,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Data.DataTable.DefaultView" />
+
+            
 
             
 
@@ -3568,6 +4136,8 @@
 
             
 
+            
+
              property if the current value is null.</para
           >
         </remarks>
@@ -3576,6 +4146,8 @@
           <para
             >Gets or sets the source <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3618,6 +4190,8 @@
 
             
 
+            
+
             , its name is the same as the name of the source DataTable. Because this method does not let you specify a subset of available columns, the output table contains the same columns as the input table.</para
           >
         </remarks>
@@ -3629,8 +4203,12 @@
 
             
 
+            
+
              based on rows in an existing <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -3642,6 +4220,8 @@
           <para
             >A new <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3678,8 +4258,12 @@
 
             
 
+            
+
              based on rows in an existing <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -3694,6 +4278,8 @@
 
             
 
+            
+
              instance that contains the requested rows and columns.</para
           >
         </returns>
@@ -3702,8 +4288,12 @@
 
           
 
+          
+
           The name of the returned <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -3743,8 +4333,12 @@
 
             
 
+            
+
             , its name is the same as the name of the source <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3759,8 +4353,12 @@
 
             
 
+            
+
              based on rows in an existing <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -3775,6 +4373,8 @@
 
             
 
+            
+
              instance that contains the requested rows and columns.</para
           >
         </returns>
@@ -3783,13 +4383,19 @@
 
           
 
+          
+
           A string array that contains a list of the column names to be included in the returned <see
            cref="T:System.Data.DataTable" />
 
           
 
+          
+
           . The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -3831,13 +4437,19 @@
 
             
 
+            
+
              method if you have to retrieve distinct values in a subset of available columns, specifying a new name for the returned <see
              cref="T:System.Data.DataTable" />
 
             
 
+            
+
             . If you do not need distinct rows or a subset of columns, see <see
              cref="M:System.Data.DataView.ToTable(System.String)" />
+
+            
 
             
 
@@ -3852,8 +4464,12 @@
 
             
 
+            
+
              based on rows in an existing <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -3868,6 +4484,8 @@
 
             
 
+            
+
              instance that contains the requested rows and columns.</para
           >
         </returns>
@@ -3876,8 +4494,12 @@
 
           
 
+          
+
           A string array that contains a list of the column names to be included in the returned <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -3921,6 +4543,8 @@
         </summary>
         <param name="force">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

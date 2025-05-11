@@ -39,6 +39,8 @@
 
         
 
+        
+
          event occurs when a designer finalizes a transaction.</para
       >
     </remarks>
@@ -50,8 +52,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosing" />
+
+        
 
         
 
@@ -94,8 +100,12 @@
 
             
 
+            
+
              class, using the specified value that indicates whether the designer called <see
              cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+
+            
 
             
 
@@ -104,6 +114,8 @@
         </summary>
         <param name="commit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -138,8 +150,12 @@
 
             
 
+            
+
              is true, the <see
              cref="P:System.ComponentModel.Design.DesignerTransactionCloseEventArgs.LastTransaction" />
+
+            
 
             
 
@@ -154,6 +170,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -162,10 +180,14 @@
 
           
 
+          
+
           A value indicating whether the transaction was committed.</param
         >
         <param name="lastTransaction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,6 +235,8 @@
           <para
             >Indicates whether the designer called <see
              cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+
+            
 
             
 

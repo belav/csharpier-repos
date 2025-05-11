@@ -38,6 +38,8 @@
 
         
 
+        
+
          can represent a parameter passed to a method and the reference direction of the parameter.</para
       >
       <para
@@ -46,8 +48,12 @@
 
         
 
+        
+
          property indicates the expression to qualify with a direction. The <see
          cref="P:System.CodeDom.CodeDirectionExpression.Direction" />
+
+        
 
         
 
@@ -56,11 +62,15 @@
 
         
 
+        
+
          enumeration values.</para
       >
       <block subset="none" type="note">
         <para>
           <see cref="T:System.CodeDom.CodeDirectionExpression" />
+
+          
 
           
 
@@ -95,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeDirectionExpression" />
+
+            
 
             
 
@@ -133,6 +145,8 @@
 
             
 
+            
+
              class using the specified field direction and expression.</para
           >
         </summary>
@@ -141,8 +155,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.FieldDirection" />
+
+          
 
           
 
@@ -153,8 +171,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

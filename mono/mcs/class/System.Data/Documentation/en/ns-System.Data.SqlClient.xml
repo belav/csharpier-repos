@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace is the.NET Framework Data Provider for SQL Server.</para
       >
     </summary>
@@ -20,8 +22,12 @@
 
         
 
+        
+
         , you can fill a memory-resident <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -35,6 +41,8 @@
               >Using the .NET Framework Data Provider for SQL Server</a
             >
           </format>
+
+          
 
           
 

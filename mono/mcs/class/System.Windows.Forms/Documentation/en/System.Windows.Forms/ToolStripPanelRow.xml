@@ -27,6 +27,8 @@
 
         
 
+        
+
          that can contain controls.</para
       >
     </summary>
@@ -52,8 +54,12 @@
 
             
 
+            
+
              class, specifying the containing <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -65,8 +71,12 @@
 
           
 
+          
+
           The containing <see
            cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          
 
           
 
@@ -94,8 +104,12 @@
 
             
 
+            
+
              property gets only the client elements of the control, the <see
              cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
+
+            
 
             
 
@@ -107,6 +121,8 @@
           <para
             >Gets the size and location of the <see
              cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+            
 
             
 
@@ -141,8 +157,12 @@
 
             
 
+            
+
              can be dragged and dropped into a <see
              cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+            
 
             
 
@@ -157,8 +177,12 @@
 
             
 
+            
+
              to receive the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -170,13 +194,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
+          
+
            to be dragged and dropped into the <see
            cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+          
 
           
 
@@ -205,6 +235,8 @@
           <para
             >Gets the controls in the <see
              cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+            
 
             
 
@@ -288,8 +320,12 @@
 
             
 
+            
+
              property gets the nonclient and client elements, the <see
              cref="P:System.Windows.Forms.ToolStripPanelRow.DisplayRectangle" />
+
+            
 
             
 
@@ -324,8 +360,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -334,8 +374,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -347,8 +391,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+            
 
             
 
@@ -363,11 +411,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,11 +499,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanelRow.OnBoundsChanged(System.Drawing.Rectangle,System.Drawing.Rectangle)" />
+
+            
 
             
 
@@ -466,6 +522,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -474,8 +532,12 @@
 
           
 
+          
+
           The original value of the <see
            cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
+
+          
 
           
 
@@ -486,8 +548,12 @@
 
           
 
+          
+
           The new value of the <see
            cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
+
+          
 
           
 
@@ -525,11 +591,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanelRow.OnControlAdded(System.Windows.Forms.Control,System.Int32)" />
+
+            
 
             
 
@@ -544,6 +614,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -552,8 +624,12 @@
 
           
 
+          
+
           The control that was added to the <see
            cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+          
 
           
 
@@ -561,6 +637,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,11 +673,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanelRow.OnControlRemoved(System.Windows.Forms.Control,System.Int32)" />
+
+            
 
             
 
@@ -614,6 +696,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -622,8 +706,12 @@
 
           
 
+          
+
           The control that was removed from the <see
            cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+          
 
           
 
@@ -631,6 +719,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -662,11 +752,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanelRow.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -681,6 +775,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -689,8 +785,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -722,11 +822,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanelRow.OnOrientationChanged" />
+
+            
 
             
 
@@ -738,6 +842,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripPanelRow.Orientation" />
+
+            
 
             
 
@@ -767,8 +873,12 @@
 
             
 
+            
+
              relative to its containing <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -823,8 +933,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+            
 
             
 

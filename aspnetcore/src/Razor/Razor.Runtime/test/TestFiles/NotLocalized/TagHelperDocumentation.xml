@@ -5,20 +5,22 @@
   </assembly>
   <members>
     <member name="T:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper">
-      <summary
-        >
+      <summary>
         The summary for <see
          cref="T:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper" />
+
+        
 
         
 
         .
       </summary
       >
-      <remarks
-        >
+      <remarks>
         Inherits from <see
          cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" />
+
+        
 
         
 
@@ -27,10 +29,11 @@
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty">
-      <summary
-        >
+      <summary>
         This <see
          cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
+
+        
 
         
 
@@ -39,15 +42,18 @@
 
         
 
+        
+
         .
       </summary
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.RemarksProperty">
-      <remarks
-        >
+      <remarks>
         The <see
          cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
+
+        
 
         
 
@@ -56,15 +62,18 @@
 
         
 
+        
+
         .
       </remarks
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.RemarksAndSummaryProperty">
-      <summary
-        >
+      <summary>
         This is a complex <see
          cref="T:System.Collections.Generic.IDictionary`2" />
+
+        
 
         
 

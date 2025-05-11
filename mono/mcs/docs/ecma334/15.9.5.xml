@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>throw</keyword>
@@ -29,6 +31,8 @@
         <list_item
           > If the try block of S encloses the throw point and if S has one or more catch clauses, the catch clauses are examined in order of appearance to locate a suitable handler for the exception. The first catch clause that specifies the exception type or a base type of the exception type is considered a match. A general catch (<hyperlink
           >15.10</hyperlink>
+
+          
 
           
 

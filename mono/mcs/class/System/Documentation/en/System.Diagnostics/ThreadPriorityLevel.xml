@@ -27,6 +27,8 @@
 
         
 
+        
+
          property, to set the thread's priority.</para
       >
     </remarks>
@@ -62,6 +64,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -90,6 +94,8 @@
           <para
             >Specifies one step below the normal priority for the associated <see
              cref="T:System.Diagnostics.ProcessPriorityClass" />
+
+            
 
             
 
@@ -124,6 +130,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -152,6 +160,8 @@
           <para
             >Specifies idle priority. This is the lowest possible priority value of all threads, independent of the value of the associated <see
              cref="T:System.Diagnostics.ProcessPriorityClass" />
+
+            
 
             
 
@@ -186,6 +196,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -217,6 +229,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -245,6 +259,8 @@
           <para
             >Specifies time-critical priority. This is the highest priority of all threads, independent of the value of the associated <see
              cref="T:System.Diagnostics.ProcessPriorityClass" />
+
+            
 
             
 

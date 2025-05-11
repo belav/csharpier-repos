@@ -24,6 +24,8 @@
 
         
 
+        
+
          event is raised when the current user changes.</para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >Provides data for the <see
          cref="E:Microsoft.Win32.SystemEvents.SessionSwitch" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
 
             
 
+            
+
              class using the specified session change event type identifer.</para
           >
         </summary>
@@ -76,8 +82,12 @@
 
           
 
+          
+
           A <see
            cref="T:Microsoft.Win32.SessionSwitchReason" />
+
+          
 
           
 

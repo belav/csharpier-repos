@@ -27,6 +27,8 @@
 
         
 
+        
+
          method to return network traffic information for an interface.</para
       >
     </remarks>
@@ -58,6 +60,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -66,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IPv4InterfaceStatistics" />
+
+            
 
             
 

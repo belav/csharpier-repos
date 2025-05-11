@@ -12,7 +12,7 @@
       >false</StabilizePackageVersion
     >
     <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
-      >release</DotNetFinalVersionKind
+>release</DotNetFinalVersionKind
     >
     <DefaultNetCoreTargetFramework>net8.0</DefaultNetCoreTargetFramework>
   </PropertyGroup>

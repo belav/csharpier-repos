@@ -18,13 +18,19 @@
 
         
 
+        
+
          represents the possible values for the <see
          cref="P:System.Web.Hosting.HostingEnvironment.ShutdownReason" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Hosting.HostingEnvironment" />
+
+        
 
         
 
@@ -36,6 +42,8 @@
       <para
         >Specifies why the <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -179,6 +187,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -217,6 +227,8 @@
           <para
             >An <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -309,6 +321,8 @@
           <para
             >A call was made to <see
              cref="M:System.Web.HttpRuntime.UnloadAppDomain" />
+
+            
 
             
 

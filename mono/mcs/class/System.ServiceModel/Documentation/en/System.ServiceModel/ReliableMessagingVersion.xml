@@ -22,13 +22,19 @@
 
         
 
+        
+
          and WS-ReliableMessagingFebruary2005 is returned by <see
          cref="P:System.ServiceModel.ReliableMessagingVersion.WSReliableMessagingFebruary2005" />
 
         
 
+        
+
         . The <see
          cref="P:System.ServiceModel.ReliableMessagingVersion.Default" />
+
+        
 
         
 

@@ -109,6 +109,8 @@
 
           
 
+          
+
           Initial capacity.</param
         >
       </Docs>
@@ -175,6 +177,8 @@
           <para
             >Removes all items from the <see
              cref="T:System.Runtime.CompilerServices.ReadOnlyCollectionBuilder`1" />
+
+            
 
             
 
@@ -277,6 +281,8 @@
           <para
             >A <see
              cref="T:System.Collections.Generic.IEnumerator`1" />
+
+            
 
             
 
@@ -401,11 +407,15 @@
 
             
 
+            
+
              item at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,6 +444,8 @@
           <para
             >Reverses the order of the elements in the entire <see
              cref="T:System.Runtime.CompilerServices.ReadOnlyCollectionBuilder`1" />
+
+            
 
             
 
@@ -470,10 +482,14 @@
 
           
 
+          
+
           The zero-based starting index of the range to reverse.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,6 +546,8 @@
 
             
 
+            
+
              to an array, starting at the specified array index.</para
           >
         </summary>
@@ -538,8 +556,12 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -550,8 +572,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -586,6 +612,8 @@
 
             
 
+            
+
              is synchronized (thread safe).</para
           >
         </summary>
@@ -615,6 +643,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -654,6 +684,8 @@
 
             
 
+            
+
              that can be used to iterate through the collection.</para
           >
         </returns>
@@ -685,6 +717,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -697,13 +731,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -737,6 +777,8 @@
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -748,8 +790,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -761,13 +807,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -801,6 +853,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -812,6 +866,8 @@
 
             
 
+            
+
              if found in the list; otherwise, –1.</para
           >
         </returns>
@@ -820,8 +876,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -856,6 +916,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -864,8 +926,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="item" />
+
+          
 
           
 
@@ -876,8 +942,12 @@
 
           
 
+          
+
           The object to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -909,6 +979,8 @@
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -935,6 +1007,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -995,6 +1069,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1003,8 +1079,12 @@
 
           
 
+          
+
           The object to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1036,6 +1116,8 @@
 
             
 
+            
+
              to a new array.</para
           >
         </summary>
@@ -1044,6 +1126,8 @@
           <para
             >An array containing copies of the elements of the <see
              cref="T:System.Runtime.CompilerServices.ReadOnlyCollectionBuilder`1" />
+
+            
 
             
 
@@ -1079,8 +1163,12 @@
 
             
 
+            
+
              containing all of the elements of the <see
              cref="T:System.Runtime.CompilerServices.ReadOnlyCollectionBuilder`1" />
+
+            
 
             
 
@@ -1089,8 +1177,12 @@
 
             
 
+            
+
              after the <see
              cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+
+            
 
             
 
@@ -1102,6 +1194,8 @@
           <para
             >A new instance of <see
              cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+
+            
 
             
 

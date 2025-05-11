@@ -29,8 +29,12 @@
 
         
 
+        
+
          objects that represent the selected dates in a <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >This collection stores only whole dates. The time portion of each <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          objects that represent the selected dates in a <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -82,12 +92,16 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
             <para
               >This constructor is primarily used by control developers when extending the <see
                cref="T:System.Web.UI.WebControls.Calendar" />
+
+              
 
               
 
@@ -103,6 +117,8 @@
 
             
 
+            
+
              class with the specified date list.</para
           >
         </summary>
@@ -111,8 +127,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -142,8 +162,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -158,8 +182,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -171,8 +199,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -200,13 +232,19 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
+            
+
              collection and set the <see
              cref="P:System.Web.UI.WebControls.SelectedDatesCollection.Count" />
+
+            
 
             
 
@@ -218,6 +256,8 @@
           <para
             >Removes all <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -248,8 +288,12 @@
 
             
 
+            
+
              collection contains the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -264,8 +308,12 @@
 
             
 
+            
+
              collection contains the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -280,8 +328,12 @@
 
             
 
+            
+
              contains the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -293,13 +345,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            to search for in the <see
            cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+          
 
           
 
@@ -330,8 +388,12 @@
 
             
 
+            
+
              collection into the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -344,8 +406,12 @@
 
               
 
+              
+
                parameter must be a zero-based <see
                cref="T:System.Array" />
+
+              
 
               
 
@@ -361,8 +427,12 @@
 
             
 
+            
+
              collection to the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -374,13 +444,19 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+          
 
           
 
@@ -391,8 +467,12 @@
 
           
 
+          
+
           The first index in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -420,8 +500,12 @@
 
             
 
+            
+
              collection. The <see
              cref="P:System.Web.UI.WebControls.SelectedDatesCollection.Count" />
+
+            
 
             
 
@@ -436,8 +520,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -469,8 +557,12 @@
 
             
 
+            
+
             -implemented object that can be easily iterated through to get each item in the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -482,6 +574,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -490,11 +584,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -507,8 +605,12 @@
 
               
 
+              
+
                method needs to be called after creating an <see
                cref="T:System.Collections.IEnumerator" />
+
+              
 
               
 
@@ -517,8 +619,12 @@
 
               
 
+              
+
                method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -534,13 +640,19 @@
 
             
 
+            
+
             -implemented object that contains all <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              objects within the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -555,13 +667,19 @@
 
             
 
+            
+
             -implemented object that contains all <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              objects within the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -590,6 +708,8 @@
 
             
 
+            
+
              collection can be written to in all cases.</para
           >
         </remarks>
@@ -598,6 +718,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -626,6 +748,8 @@
 
             
 
+            
+
              and is overridden to always return false.</para
           >
           <para
@@ -634,13 +758,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -652,6 +782,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -702,8 +834,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -718,8 +854,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 
@@ -731,13 +871,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+          
 
           
 
@@ -771,6 +917,8 @@
 
             
 
+            
+
              collection.</para
           >
         </remarks>
@@ -782,6 +930,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -790,13 +940,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            that specifies the initial date to add to the <see
            cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+          
 
           
 
@@ -807,13 +963,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            that specifies the end date to add to the <see
            cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+          
 
           
 
@@ -841,6 +1003,8 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
@@ -849,13 +1013,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -867,6 +1037,8 @@
           <para
             >Gets the object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+
+            
 
             
 

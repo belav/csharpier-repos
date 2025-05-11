@@ -35,8 +35,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
       <para
         >An abstract class that supplements the base <see
          cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+        
 
         
 
@@ -88,8 +94,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+
+            
 
             
 
@@ -98,8 +108,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.IRequestChannel" />
+
+            
 
             
 
@@ -119,8 +133,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -128,6 +146,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -172,8 +192,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+
+            
 
             
 
@@ -182,8 +206,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.IReplyChannel" />
+
+            
 
             
 
@@ -203,8 +231,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -212,6 +244,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,6 +280,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -313,13 +349,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.ServiceModel.Channels.IChannelListener" />
 
             
 
+            
+
             , and <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -338,6 +380,8 @@
 
             
 
+            
+
              object from the binding stack, if present.</para
           >
         </returns>
@@ -346,10 +390,14 @@
 
           
 
+          
+
           The binding context.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -383,6 +431,8 @@
 
             
 
+            
+
              enumeration for further values and their descriptions.</para
           >
         </remarks>
@@ -413,6 +463,8 @@
 
             
 
+            
+
              and must be larger than the size of the headers of the message or the channel throws an exception. </para
           >
           <para
@@ -421,8 +473,12 @@
 
             
 
+            
+
             , which contains a <see
              cref="T:System.ServiceModel.QuotaExceededException" />
+
+            
 
             
 
@@ -458,6 +514,8 @@
 
             
 
+            
+
              is false then this property is ignored for that message.</para
           >
         </remarks>
@@ -484,6 +542,8 @@
           <para
             >This property limits the number of channels that the server can have waiting on a listener. When MaxPendingAccepts is too low, there will be a small interval of time in which all of the waiting channels have started servicing connections, but no new channels have begun listening. A connection can arrive during this interval and will fail because nothing is waiting for it on the server. This property can be configured by setting the <see
              cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxPendingConnections" />
+
+            
 
             
 
@@ -549,8 +609,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+            
 
             
 
@@ -559,13 +623,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
             
 
+            
+
             , and <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+            
 
             
 
@@ -577,8 +647,12 @@
 
             
 
+            
+
              property exposes the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -587,11 +661,15 @@
 
             
 
+            
+
              that indicate where security policy assertions should be added.</para
           >
           <para
             >Once custom policy assertions have been attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see
              cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+            
 
             
 
@@ -607,8 +685,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -619,8 +701,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 
@@ -662,8 +748,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -671,6 +761,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -713,8 +805,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 

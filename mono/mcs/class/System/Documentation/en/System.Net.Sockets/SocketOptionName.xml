@@ -35,13 +35,19 @@
 
         
 
+        
+
          enumeration defines the name of each <see
          cref="T:System.Net.Sockets.Socket" />
 
         
 
+        
+
          configuration option. Sockets can be configured with the <see
          cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
+
+        
 
         
 
@@ -714,6 +720,8 @@
 
             
 
+            
+
              if used.</para
           >
         </summary>
@@ -982,6 +990,8 @@
 
             
 
+            
+
              operations.</para
           >
         </summary>
@@ -1015,6 +1025,8 @@
           <para
             >Receive a time-out. This option applies only to synchronous methods; it has no effect on asynchronous methods such as the <see
              cref="M:System.Net.Sockets.Socket.BeginSend(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1112,6 +1124,8 @@
 
             
 
+            
+
              operations.</para
           >
         </summary>
@@ -1145,6 +1159,8 @@
           <para
             >Send a time-out. This option applies only to synchronous methods; it has no effect on asynchronous methods such as the <see
              cref="M:System.Net.Sockets.Socket.BeginSend(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)" />
+
+            
 
             
 

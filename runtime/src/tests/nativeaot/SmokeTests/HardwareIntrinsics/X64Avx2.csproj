@@ -21,7 +21,7 @@
   </ItemGroup>
   <PropertyGroup>
     <CLRTestBashPreCommands>
-      <![CDATA[
+<![CDATA[
 $(CLRTestBashPreCommands)
     if [[ "$OSTYPE" == "darwin"* ]]; then
         sysctl -a

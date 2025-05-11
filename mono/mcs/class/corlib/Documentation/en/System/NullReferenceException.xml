@@ -41,6 +41,8 @@
 
         
 
+        
+
          exception.</para
       >
       <code lang="C#"
@@ -75,6 +77,8 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
         
 
+        
+
          exception is thrown when you try to access a member on a type whose value is null. The following example illustrates one such scenario: </para
       >
       <para>code reference: System.NullReferenceException.Class#1</para>
@@ -86,13 +90,19 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
         
 
+        
+
          exception is thrown by a method that is passed null. Some methods validate the arguments that are passed to them. If they do and one of the arguments is null, the method throws an <see
          cref="T:System.ArgumentNullException" />
 
         
 
+        
+
          exception. Otherwise, it throws a <see
          cref="T:System.NullReferenceException" />
+
+        
 
         
 
@@ -107,6 +117,8 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
         
 
+        
+
         . </para
       >
       <para
@@ -115,10 +127,14 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
         
 
+        
+
         : callvirt, cpblk, cpobj, initblk, ldelem.&lt;type&gt;, ldelema, ldfld, ldflda, ldind.&lt;type&gt;, ldlen, stelem.&lt;type&gt;, stfld, stind.&lt;type&gt;, throw, and unbox.  </para
       >
       <para>
         <see cref="T:System.NullReferenceException" />
+
+        
 
         
 
@@ -130,8 +146,12 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
         
 
+        
+
         , see the <see
          cref="M:System.NullReferenceException.#ctor" />
+
+        
 
         
 
@@ -168,6 +188,8 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NullReferenceException" />
+
+            
 
             
 
@@ -214,8 +236,12 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
             
 
+            
+
              class, setting the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -251,6 +277,8 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NullReferenceException" />
+
+            
 
             
 
@@ -297,6 +325,8 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
@@ -305,13 +335,19 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -352,6 +388,8 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -363,6 +401,8 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -371,10 +411,14 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -415,8 +459,12 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -425,11 +473,15 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NullReferenceException" />
+
+            
 
             
 
@@ -476,11 +528,15 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -491,8 +547,12 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

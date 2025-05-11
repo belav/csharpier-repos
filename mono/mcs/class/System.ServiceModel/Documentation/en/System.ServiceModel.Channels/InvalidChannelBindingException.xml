@@ -45,6 +45,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -76,6 +78,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </remarks>
@@ -87,11 +91,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,6 +137,8 @@
 
             
 
+            
+
              class with serialization information and streaming context specified.</para
           >
         </summary>
@@ -137,8 +147,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -149,8 +163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -185,13 +203,19 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
 
             
 
+            
+
              property returns the same value that is passed into the constructor or a null reference (Nothing in Visual Basic) if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -206,11 +230,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of the exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,8 +249,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 

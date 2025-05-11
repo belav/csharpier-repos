@@ -48,6 +48,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -79,11 +81,15 @@
 
             
 
+            
+
              class using the specified message. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,6 +124,8 @@
 
             
 
+            
+
              class using the specified serialization information and context objects. </para
           >
         </summary>
@@ -126,10 +134,14 @@
 
           
 
+          
+
           Information relevant to the deserialization process.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,6 +176,8 @@
 
             
 
+            
+
              class using the specified message and the inner exception. </para
           >
         </summary>
@@ -172,10 +186,14 @@
 
           
 
+          
+
           The description of the error condition.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

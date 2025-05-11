@@ -31,8 +31,12 @@
 
         
 
+        
+
          takes a password, a salt, and an iteration count, and then generates keys through calls to the <see
          cref="M:System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes(System.Int32)" />
+
+        
 
         
 
@@ -44,11 +48,15 @@
 
         
 
+        
+
          class can be used to produce a derived key from a base key and other parameters. In a password-based key derivation function, the base key is a password and the other parameters are a salt value and an iteration count.</para
       >
       <para
         >For more information about PBKDF2, see RFC 2898, "PKCS #5: Password-Based Cryptography Specification Version 2.0," available on the <see
          cref="http://go.microsoft.com/fwlink/?LinkID=37119">Request for Comments Web site</see>
+
+        
 
         
 
@@ -63,6 +71,8 @@
 
           
 
+          
+
           , by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
         >
       </block>
@@ -72,6 +82,8 @@
       <para
         >Implements password-based key derivation functionality, PBKDF2, by using a pseudo-random number generator based on <see
          cref="T:System.Security.Cryptography.HMACSHA1" />
+
+        
 
         
 
@@ -109,11 +121,15 @@
 
             
 
+            
+
              class can be used to produce a derived key from a base key and other parameters. In a password-based key derivation function, the base key is a password and the other parameters are a salt value and an iteration count.</para
           >
           <para
             >For more information about PBKDF2, see RFC 2898, "PKCS #5: Password-Based Cryptography Specification Version 2.0," available on the <see
              cref="http://go.microsoft.com/fwlink/?LinkID=37119">Request for Comments Web site</see>
+
+            
 
             
 
@@ -125,6 +141,8 @@
                type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
+
+              
 
               
 
@@ -140,6 +158,8 @@
 
             
 
+            
+
              class using a password and salt to derive the key.</para
           >
         </summary>
@@ -148,10 +168,14 @@
 
           
 
+          
+
           The password used to derive the key. </param
         >
         <param name="salt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,11 +212,15 @@
 
             
 
+            
+
              class can be used to produce a derived key from a base key and other parameters. In a password-based key derivation function, the base key is a password and the other parameters are a salt value and an iteration count.</para
           >
           <para
             >For more information about PBKDF2, see RFC 2898, "PKCS #5: Password-Based Cryptography Specification Version 2.0," available on the <see
              cref="http://go.microsoft.com/fwlink/?LinkID=37119">Request for Comments Web site</see>
+
+            
 
             
 
@@ -204,6 +232,8 @@
                type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
+
+              
 
               
 
@@ -219,6 +249,8 @@
 
             
 
+            
+
              class using the password and salt size to derive the key.</para
           >
         </summary>
@@ -227,10 +259,14 @@
 
           
 
+          
+
           The password used to derive the key. </param
         >
         <param name="saltSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,11 +304,15 @@
 
             
 
+            
+
              class can be used to produce a derived key from a base key and other parameters. In a password-based key derivation function, the base key is a password and the other parameters are a salt value and an iteration count.</para
           >
           <para
             >For more information about PBKDF2, see RFC 2898, "PKCS #5: Password-Based Cryptography Specification Version 2.0," available on the <see
              cref="http://go.microsoft.com/fwlink/?LinkID=37119">Request for Comments Web site</see>
+
+            
 
             
 
@@ -284,6 +324,8 @@
                type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
+
+              
 
               
 
@@ -299,11 +341,15 @@
 
             
 
+            
+
              class using a password, a salt, and number of iterations to derive the key.</para
           >
         </summary>
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,10 +360,14 @@
 
           
 
+          
+
           The key salt used to derive the key.</param
         >
         <param name="iterations">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -355,11 +405,15 @@
 
             
 
+            
+
              class can be used to produce a derived key from a base key and other parameters. In a password-based key derivation function, the base key is a password and the other parameters are a salt value and an iteration count.</para
           >
           <para
             >For more information about PBKDF2, see RFC 2898, "PKCS #5: Password-Based Cryptography Specification Version 2.0," available on the <see
              cref="http://go.microsoft.com/fwlink/?LinkID=37119">Request for Comments Web site</see>
+
+            
 
             
 
@@ -371,6 +425,8 @@
                type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
+
+              
 
               
 
@@ -386,11 +442,15 @@
 
             
 
+            
+
              class using a password, a salt, and number of iterations to derive the key.</para
           >
         </summary>
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -401,10 +461,14 @@
 
           
 
+          
+
           The key salt used to derive the key. </param
         >
         <param name="iterations">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -442,11 +506,15 @@
 
             
 
+            
+
              class can be used to produce a derived key from a base key and other parameters. In a password-based key derivation function, the base key is a password and the other parameters are a salt value and an iteration count.</para
           >
           <para
             >For more information on PBKDF2, see RFC 2898,"PKCS #5: Password-Based Cryptography Specification Version 2.0," available on the <see
              cref="http://go.microsoft.com/fwlink/?LinkID=37119">Request for Comments Web site</see>
+
+            
 
             
 
@@ -458,6 +526,8 @@
                type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
+
+              
 
               
 
@@ -473,11 +543,15 @@
 
             
 
+            
+
              class using a password, a salt size, and number of iterations to derive the key.</para
           >
         </summary>
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -488,10 +562,14 @@
 
           
 
+          
+
           The size of the random salt that you want the class to generate. </param
         >
         <param name="iterations">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -524,8 +602,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -537,8 +619,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.Rfc2898DeriveBytes" />
+
+            
 
             
 
@@ -553,11 +639,15 @@
 
             
 
+            
+
              class and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -592,8 +682,12 @@
 
             
 
+            
+
              class implements PBKDF2 functionality by using a pseudorandom number generator based on <see
              cref="T:System.Security.Cryptography.HMACSHA1" />
+
+            
 
             
 
@@ -602,8 +696,12 @@
 
             
 
+            
+
              class takes a password, a salt, and an iteration count, and then generates keys through calls to the <see
              cref="M:System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes(System.Int32)" />
+
+            
 
             
 
@@ -612,8 +710,12 @@
 
             
 
+            
+
              method with a <paramref
              name="cb" />
+
+            
 
             
 
@@ -622,8 +724,12 @@
 
             
 
+            
+
              is the equivalent of calling the <see
              cref="M:System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes(System.Int32)" />
+
+            
 
             
 
@@ -632,8 +738,12 @@
 
             
 
+            
+
              parameter value of <paramref
              name="40" />
+
+            
 
             
 
@@ -650,6 +760,8 @@
         </returns>
         <param name="cb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

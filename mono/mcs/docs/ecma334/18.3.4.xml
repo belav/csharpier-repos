@@ -6,16 +6,20 @@
 
     
 
+    
+
     , several kinds of variables are automatically initialized to their default value when they are created. For variables of class types and other reference types, this default value is null. However, since structs are value types that cannot be null, the default value of a struct is the value produced by setting all value type fields to their default value and all reference type fields to null. </paragraph
   >
   <paragraph>
     <example
       >[Example: Referring to the Point struct declared above, the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 Point[] a = new Point[100];  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -28,13 +32,15 @@ Point[] a = new Point[100];
 
     
 
+    
+
     ). Unlike a class, a struct is not permitted to declare a parameterless instance constructor. Instead, every struct implicitly has a parameterless instance constructor, which always returns the value that results from setting all value type fields to their default value and all reference type fields to null. </paragraph
   >
   <paragraph>
     <note
       >[Note: Structs should be designed to consider the default initialization state a valid state. In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 struct KeyValuePair  
 {  
@@ -48,6 +54,8 @@ struct KeyValuePair
 }  
 ]]>
       </code_example>
+
+      
 
       
 

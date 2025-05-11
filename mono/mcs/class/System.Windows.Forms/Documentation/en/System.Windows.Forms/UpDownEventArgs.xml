@@ -19,13 +19,19 @@
 
         
 
+        
+
          is used when the user clicks a button on a control that derives from the <see
          cref="T:System.Windows.Forms.UpDownBase" />
 
         
 
+        
+
          control. The <see
          cref="T:System.Windows.Forms.UpDownEventArgs" />
+
+        
 
         
 
@@ -37,6 +43,8 @@
       <para
         >Provides data for controls that derive from the <see
          cref="T:System.Windows.Forms.UpDownBase" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
           <para
             >The following table describes the values that are valid for <paramref
              name="buttonPushed" />
+
+            
 
             
 
@@ -107,6 +117,8 @@
 
             
 
+            
+
              class</para
           >
         </summary>
@@ -115,8 +127,12 @@
 
           
 
+          
+
           The button that was clicked on the <see
            cref="T:System.Windows.Forms.UpDownBase" />
+
+          
 
           
 
@@ -141,6 +157,8 @@
           <para
             >The following table describes the values that the <see
              cref="P:System.Windows.Forms.UpDownEventArgs.ButtonID" />
+
+            
 
             
 

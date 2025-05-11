@@ -28,8 +28,12 @@
 
       
 
+      
+
        method is compiled into internal compiled stylesheet (that contains, for example, all compiled XPath expressions in the stylesheet, via <see
        cref="M:System.Xml.XPath.XPathNavigator.Compile" />
+
+      
 
       
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -94,11 +100,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,8 +146,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -149,10 +163,14 @@
 
           
 
+          
+
           The SerializationInfo object containing all the properties of an XsltCompileException. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,6 +207,8 @@
 
             
 
+            
+
              class specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
@@ -197,10 +217,14 @@
 
           
 
+          
+
           The message that describes the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,8 +265,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -253,6 +281,8 @@
 
           
 
+          
+
           The location path of the style sheet. </param
         >
         <param name="lineNumber">
@@ -260,10 +290,14 @@
 
           
 
+          
+
           The line number indicating where the error occurred in the style sheet. </param
         >
         <param name="linePosition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,8 +337,12 @@
 
             
 
+            
+
              class for the given <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -316,10 +354,14 @@
 
           
 
+          
+
           The SerializationInfo object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

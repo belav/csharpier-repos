@@ -10,8 +10,12 @@
 
         
 
+        
+
          namespace contains classes that can be used to extend design-time support for <see
          cref="N:System.Messaging" />
+
+        
 
         
 

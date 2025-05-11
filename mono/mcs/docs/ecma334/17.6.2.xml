@@ -6,11 +6,15 @@
 
     
 
+    
+
      of a property specify the executable statements associated with reading and writing that property. <grammar_production
     >
       <name>
         <non_terminal where="17.6.2">accessor-declarations</non_terminal>
       </name>
+
+      
 
       
 
@@ -30,6 +34,8 @@
       <name>
         <non_terminal where="17.6.2">get-accessor-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -48,6 +54,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -60,6 +68,8 @@
       <name>
         <non_terminal where="17.6.2">accessor-body</non_terminal>
       </name>
+
+      
 
       
 
@@ -78,8 +88,12 @@
 
     
 
+    
+
     , a <non_terminal
      where="17.6.2">set-accessor-declaration</non_terminal>
+
+    
 
     
 
@@ -88,13 +102,19 @@
 
     
 
+    
+
     . For abstract and extern properties, the <non_terminal
      where="17.6.2">accessor-body</non_terminal>
 
     
 
+    
+
      for each accessor specified is simply a semicolon. For the accessors of any non-abstract, non-extern property, the <non_terminal
      where="17.6.2">accessor-body</non_terminal>
+
+    
 
     
 
@@ -106,8 +126,12 @@
 
     
 
+    
+
     ). The body of a get accessor must conform to the rules for value-returning methods described in <hyperlink
     >17.5.8</hyperlink>
+
+    
 
     
 
@@ -119,8 +143,12 @@
 
     
 
+    
+
      return type. The implicit parameter of a set accessor is always named value. When a property is referenced as the target of an assignment (<hyperlink
     >14.13</hyperlink>
+
+    
 
     
 
@@ -129,8 +157,12 @@
 
     
 
+    
+
     , --14.6.5), the set accessor is invoked with an argument (whose value is that of the right-hand side of the assignment or the operand of the ++ or  --operator) that provides the new value (<hyperlink
     >14.13.1</hyperlink>
+
+    
 
     
 
@@ -139,8 +171,12 @@
 
     
 
+    
+
      methods described in <hyperlink
     >17.5.8</hyperlink>
+
+    
 
     
 
@@ -161,7 +197,7 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 public class Button: Control  
 {  
    private string caption;  
@@ -185,6 +221,8 @@ public class Button: Control
 
       
 
+      
+
       the Button control declares a public Caption property. The get accessor of the Caption property returns the string stored in the private caption field. The set accessor checks if the new value is different from the current value, and if so, it stores the new value and repaints the control. Properties often follow the pattern shown above: The get accessor simply returns a value stored in a private field, and the set accessor modifies that private field and then performs any additional actions required to fully update the state of the object. </example
     >
   </paragraph>
@@ -192,7 +230,7 @@ public class Button: Control
     <example
       >Given the Button class above, the following is an example of use of the Caption property: <code_example
       >
-        <![CDATA[
+<![CDATA[
 Button okButton = new Button();  
 okButton.Caption = "OK";      // Invokes set accessor  
 string s = okButton.Caption;    // Invokes get accessor  
@@ -209,7 +247,7 @@ string s = okButton.Caption;    // Invokes get accessor
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A  
 {  
    private string name;  
@@ -225,6 +263,8 @@ class A
 
       
 
+      
+
       does not declare a single read-write property. Rather, it declares two properties with the same name, one read-only and one write-only. Since two members declared in the same class cannot have the same name, the example causes a compile-time error to occur. end example]</example
     >
   </paragraph>
@@ -233,7 +273,7 @@ class A
 
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A  
 {  
    public int P {  
@@ -251,14 +291,18 @@ class B: A
 
       
 
+      
+
       the P property in B hides the P property in A with respect to both reading and writing. Thus, in the statements <code_example
       >
-        <![CDATA[
+<![CDATA[
 B b = new B();  
 b.P = 1;     // Error, B.P is read-only  
 ((A)b).P = 1;  // Ok, reference to A.P  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -270,7 +314,7 @@ b.P = 1;     // Error, B.P is read-only
 
       >[Example: Consider the example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Label  
 {  
    private int x, y;  
@@ -304,9 +348,11 @@ class Label
 
       
 
+      
+
        fields, x and y, to store its location. The location is publicly exposed both as an X and a Y property and as a Location property of type Point. If, in a future version of Label, it becomes more convenient to store the location as a Point internally, the change can be made without affecting the public interface of the class: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Label  
 {  
    private Point location;  
@@ -342,7 +388,7 @@ class Label
     <example
       >[Example: Since invoking a get accessor is conceptually equivalent to reading the value of a field, it is considered bad programming style for get accessors to have observable side-effects. In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Counter  
 {  
    private int next;  
@@ -352,6 +398,8 @@ class Counter
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -369,7 +417,7 @@ class Counter
 
       >[Example: For example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System.IO;  
 public class Console  
 {  
@@ -409,10 +457,12 @@ public class Console
     <example
       >The Console class contains three properties, In, Out, and Error, that represent the standard input, output, and error devices, respectively. By exposing these members as properties, the Console class can delay their initialization until they are actually used. For example, upon first referencing the Out property, as in <code_example
       >
-        <![CDATA[
+<![CDATA[
 Console.Out.WriteLine("hello, world");  
 ]]>
       </code_example>
+
+      
 
       
 

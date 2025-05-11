@@ -48,6 +48,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -80,6 +82,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -109,6 +113,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+            
 
             
 
@@ -146,6 +152,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -179,6 +187,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+            
 
             
 
@@ -225,6 +235,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+            
 
             
 
@@ -277,6 +289,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+            
 
             
 
@@ -689,6 +703,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -725,6 +741,8 @@
           <para
             >Reads the key identifier core using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -769,6 +787,8 @@
           <para
             >Reads the token core using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -841,6 +861,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -878,6 +900,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -912,6 +936,8 @@
           <para
             >Writes the token core with a specified security token using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 

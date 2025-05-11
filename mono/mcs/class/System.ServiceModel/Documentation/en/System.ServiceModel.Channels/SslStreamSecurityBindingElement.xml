@@ -35,8 +35,12 @@
 
         
 
+        
+
         , which can be configured and added to a custom binding. In addition, a third party can write their own custom StreamSecurityBindingElement. These binding elements extend the <see
          cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
               
 
+              
+
               .</para
             >
           </step>
@@ -65,8 +71,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+
+              
 
               
 
@@ -80,8 +90,12 @@
 
               
 
+              
+
                using the <see
                cref="M:System.ServiceModel.Channels.BindingElementCollection.InsertItem(System.Int32,System.ServiceModel.Channels.BindingElement)" />
+
+              
 
               
 
@@ -95,6 +109,8 @@
 
               
 
+              
+
                and add it to the collection.</para
             >
           </step>
@@ -102,6 +118,8 @@
             <para
               >Add any additional custom binding elements to the collection, such as <see
                cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+
+              
 
               
 
@@ -116,8 +134,12 @@
 
         
 
+        
+
          on the client’s <see
          cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+
+        
 
         
 
@@ -131,13 +153,19 @@
 
             
 
+            
+
              and HTTPS are used (for example, a <see
              cref="T:System.ServiceModel.WSHttpBinding" />
 
             
 
+            
+
              with SecurityMode = <see
              cref="F:System.ServiceModel.SecurityMode.TransportWithMessageCredential" />
+
+            
 
             
 
@@ -151,8 +179,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+
+            
 
             
 
@@ -161,8 +193,12 @@
 
             
 
+            
+
              with SecurityMode = <see
              cref="F:System.ServiceModel.SecurityMode.TransportWithMessageCredential" />
+
+            
 
             
 
@@ -176,13 +212,19 @@
 
             
 
+            
+
              is overridden on the client, you must specify a custom <see
              cref="T:System.ServiceModel.Security.IdentityVerifier" />
 
             
 
+            
+
              on the client's <see
              cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+
+            
 
             
 
@@ -196,8 +238,12 @@
 
         
 
+        
+
          on the client's <see
          cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+
+        
 
         
 
@@ -328,6 +374,8 @@ namespace ServiceNamespace
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -372,8 +420,12 @@ namespace ServiceNamespace
 
             
 
+            
+
              object that represents the channel factory of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -385,8 +437,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           The <see
            cref="T:System.serviceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -394,6 +450,8 @@ namespace ServiceNamespace
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,8 +503,12 @@ namespace ServiceNamespace
 
             
 
+            
+
              object that represents a channel listener of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -458,8 +520,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           The <see
            cref="T:System.serviceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -467,6 +533,8 @@ namespace ServiceNamespace
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -502,11 +570,15 @@ namespace ServiceNamespace
 
             
 
+            
+
              abstract class.</para
           >
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -521,6 +593,8 @@ namespace ServiceNamespace
 
             
 
+            
+
              based on the channel context provided.</para
           >
         </summary>
@@ -532,6 +606,8 @@ namespace ServiceNamespace
 
             
 
+            
+
             . </para
           >
         </returns>
@@ -540,8 +616,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -577,11 +657,15 @@ namespace ServiceNamespace
 
             
 
+            
+
              abstract class.</para
           >
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -596,6 +680,8 @@ namespace ServiceNamespace
 
             
 
+            
+
              based on the channel context provided.</para
           >
         </summary>
@@ -607,6 +693,8 @@ namespace ServiceNamespace
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -615,8 +703,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -664,8 +756,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -673,6 +769,8 @@ namespace ServiceNamespace
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -725,8 +823,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           The <see
            cref="T:System.serviceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -734,6 +836,8 @@ namespace ServiceNamespace
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -769,6 +873,8 @@ namespace ServiceNamespace
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+
+            
 
             
 
@@ -812,6 +918,8 @@ namespace ServiceNamespace
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -820,6 +928,8 @@ namespace ServiceNamespace
           <para
             >Gets a specified object from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -834,8 +944,12 @@ namespace ServiceNamespace
 
             
 
+            
+
             from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -847,8 +961,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -856,6 +974,8 @@ namespace ServiceNamespace
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -893,6 +1013,8 @@ namespace ServiceNamespace
 
             
 
+            
+
              that represents the transport token used in the security binding.</para
           >
         </summary>
@@ -901,6 +1023,8 @@ namespace ServiceNamespace
           <para
             >An <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -983,8 +1107,12 @@ namespace ServiceNamespace
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+            
 
             
 
@@ -993,13 +1121,19 @@ namespace ServiceNamespace
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
             
 
+            
+
             , and <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+            
 
             
 
@@ -1011,8 +1145,12 @@ namespace ServiceNamespace
 
             
 
+            
+
              property exposes the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -1021,11 +1159,15 @@ namespace ServiceNamespace
 
             
 
+            
+
              that indicate where security policy assertions should be added.</para
           >
           <para
             >Once custom policy assertions are attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see
              cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+            
 
             
 
@@ -1041,8 +1183,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -1053,8 +1199,12 @@ namespace ServiceNamespace
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 

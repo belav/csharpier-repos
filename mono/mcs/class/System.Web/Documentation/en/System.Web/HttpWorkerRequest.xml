@@ -26,8 +26,12 @@
 
         
 
+        
+
          directly because request and response data are exposed through the <see
          cref="T:System.Web.HttpRequest" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          classes. Some internal ASP.NET classes extend this class. If your code implements its own hosting environment, it will need to extend this class to call the <see
          cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
+
+        
 
         
 
@@ -46,8 +54,12 @@
 
         
 
+        
+
         . In this case, the derived class should keep a reference to the current <see
          cref="T:System.Web.HttpWorkerRequest" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
             
 
+            
+
              constructor is the default constructor for the <see
              cref="T:System.Web.HttpWorkerRequest" />
+
+            
 
             
 
@@ -87,6 +103,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.HttpWorkerRequest" />
+
+            
 
             
 
@@ -135,6 +153,8 @@
 
             
 
+            
+
              that request processing for the current request is complete.</para
           >
         </summary>
@@ -164,6 +184,8 @@
         </summary>
         <param name="finalFlush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,6 +305,8 @@
 
             
 
+            
+
              collection returns empty.</para
           >
         </remarks>
@@ -340,6 +364,8 @@
           <para
             >When overridden in a derived class, returns the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -406,6 +432,8 @@
 
             
 
+            
+
              object representing when the certificate becomes valid.</para
           >
         </returns>
@@ -436,6 +464,8 @@
           <para
             >A <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -582,8 +612,7 @@
 
 <example
           >
-            <code lang="C#"
-              >
+            <code lang="C#">
     string value = worker_request.GetKnownRequestHeader (HttpWorkerRequest.HeaderContentLength);
   </code
             >
@@ -602,8 +631,12 @@
 
           
 
+          
+
           The index of the header. For example, the <see
            cref="F:System.Web.HttpWorkerRequest.HeaderAllow" />
+
+          
 
           
 
@@ -641,11 +674,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="header">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -683,11 +720,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -725,11 +766,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="header">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -767,11 +812,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -866,17 +915,22 @@
 
           
 
+          
+
            as the web server implementing this class might have loaded some data in advance.
 <para
-
-            >
+          >
 See also: <see
              cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" />
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.IsEntireEntityBodyIsPreloaded()" />
+
+            
 
             
 
@@ -929,10 +983,14 @@ See also: <see
 
           
 
+          
+
           The data to read.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -980,6 +1038,8 @@ See also: <see
           <para
             >HTTPS if the <see
              cref="M:System.Web.HttpWorkerRequest.IsSecure" />
+
+            
 
             
 
@@ -1203,6 +1263,8 @@ See also: <see
 
           
 
+          
+
           The name of the requested server variable. </param
         >
       </Docs>
@@ -1237,11 +1299,15 @@ See also: <see
 
             
 
+            
+
              (404) returns "Not Found".</para
           >
         </returns>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1299,6 +1365,8 @@ See also: <see
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1447,9 +1515,13 @@ See also: <see
 
           
 
+          
+
            ,
 <see
            cref="M:System.Web.HttpWorkerRequest.GetPreloadedEntityBody()" />
+
+          
 
           
 
@@ -1487,8 +1559,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1522,8 +1598,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1557,8 +1637,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1592,8 +1676,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1627,8 +1715,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1662,8 +1754,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1697,8 +1793,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1732,8 +1832,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1767,8 +1871,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1802,8 +1910,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1837,8 +1949,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1872,8 +1988,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1907,8 +2027,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1942,8 +2066,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -1977,8 +2105,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2012,8 +2144,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2047,8 +2183,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2082,8 +2222,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2117,8 +2261,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2152,8 +2300,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2187,8 +2339,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2222,8 +2378,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2257,8 +2417,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2292,8 +2456,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2327,8 +2495,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2362,8 +2534,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2397,8 +2573,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2432,8 +2612,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2467,8 +2651,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2502,8 +2690,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2537,8 +2729,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2572,8 +2768,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2607,8 +2807,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2642,8 +2846,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2677,8 +2885,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2712,8 +2924,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2747,8 +2963,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2782,8 +3002,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2817,8 +3041,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2852,8 +3080,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2887,8 +3119,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2945,8 +3181,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2980,8 +3220,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3015,8 +3259,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3050,8 +3298,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3085,8 +3337,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3120,8 +3376,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3155,8 +3415,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3190,8 +3454,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3225,8 +3493,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3380,11 +3652,15 @@ See also: <see
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3428,10 +3704,14 @@ See also: <see
 
           
 
+          
+
           The byte array to read data into. </param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3479,6 +3759,8 @@ See also: <see
 
           
 
+          
+
           The byte array to read data into.</param
         >
         <param name="offset">
@@ -3486,10 +3768,14 @@ See also: <see
 
           
 
+          
+
           The byte offset at which to begin reading.</param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3574,6 +3860,8 @@ See also: <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3640,8 +3928,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3696,8 +3988,12 @@ See also: <see
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3734,8 +4030,12 @@ See also: <see
 
             
 
+            
+
              class which provides a simple implementation of the <see
              cref="T:System.Web.HttpWorkerRequest" />
+
+            
 
             
 
@@ -3744,8 +4044,12 @@ See also: <see
 
             
 
+            
+
              property of <see
              cref="T:System.Web.Hosting.SimpleWorkerRequest" />
+
+            
 
             
 
@@ -3754,8 +4058,12 @@ See also: <see
 
             
 
+            
+
              property of <see
              cref="T:System.Web.HttpWorkerRequest" />
+
+            
 
             
 
@@ -3789,6 +4097,8 @@ See also: <see
 
             
 
+            
+
              instance to add a Content-Length HTTP header to the response.</para
           >
           <para>Use this overload to set the Content-Length header when the length of the response message body is less than or equal to 2 GB.</para>
@@ -3799,6 +4109,8 @@ See also: <see
         </summary>
         <param name="contentLength">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3834,13 +4146,19 @@ See also: <see
 
             
 
+            
+
              instance to add a Content-Length HTTP header to the response. The default implementation calls the overload that takes a <paramref
              name="contentLength" />
 
             
 
+            
+
              parameter of type <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -3854,6 +4172,8 @@ See also: <see
         </summary>
         <param name="contentLength">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3885,8 +4205,12 @@ See also: <see
 
           
 
+          
+
           The header index. For example, <see
            cref="F:System.Web.HttpWorkerRequest.HeaderContentLength" />
+
+          
 
           
 
@@ -3894,6 +4218,8 @@ See also: <see
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3930,6 +4256,8 @@ See also: <see
 
           
 
+          
+
           The handle of the file to send. </param
         >
         <param name="offset">
@@ -3937,10 +4265,14 @@ See also: <see
 
           
 
+          
+
           The starting position in the file. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3977,6 +4309,8 @@ See also: <see
 
           
 
+          
+
           The name of the file to send. </param
         >
         <param name="offset">
@@ -3984,10 +4318,14 @@ See also: <see
 
           
 
+          
+
           The starting position in the file. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4023,10 +4361,14 @@ See also: <see
 
           
 
+          
+
           The byte array to send. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4062,10 +4404,14 @@ See also: <see
 
           
 
+          
+
           An unmanaged pointer to the block of memory. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4099,6 +4445,8 @@ This methods sends the HTTP status response to the client.
           
 
           
+
+          
 You should call this method before writing any other headers.</remarks
         >
         <summary>
@@ -4110,10 +4458,14 @@ You should call this method before writing any other headers.</remarks
 
           
 
+          
+
           The status code to send </param
         >
         <param name="statusDescription">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4149,10 +4501,14 @@ You should call this method before writing any other headers.</remarks
 
           
 
+          
+
           The name of the header to send. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

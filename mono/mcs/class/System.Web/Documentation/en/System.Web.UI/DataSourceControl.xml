@@ -44,8 +44,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
         , to perform most Web development tasks. You use the base <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          interface is a data source control, most ASP.NET data source controls extend the abstract <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -77,13 +89,19 @@
 
         
 
+        
+
          interface. The <see
          cref="T:System.Web.UI.DataSourceControl" />
 
         
 
+        
+
          class also provides an implementation of the <see
          cref="T:System.ComponentModel.IListSource" />
+
+        
 
         
 
@@ -95,8 +113,12 @@
 
         
 
+        
+
          class can bind to a data source control. When a <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -105,10 +127,14 @@
 
         
 
+        
+
         . When using these data-bound controls, you must explicitly call the DataBind method. For more information on data binding, see <format
          type="text/html">
           <a href="f9219396-a0fa-481f-894d-e3d9c67d64f2">Accessing Data with ASP.NET</a>
         </format>
+
+        
 
         
 
@@ -120,8 +146,12 @@
 
         
 
+        
+
          object and its associated lists of data, called data source views. Each list of data is represented by a <see
          cref="T:System.Web.UI.DataSourceView" />
+
+        
 
         
 
@@ -130,8 +160,12 @@
 
         
 
+        
+
          is always associated with one or more named <see
          cref="T:System.Web.UI.DataSourceView" />
+
+        
 
         
 
@@ -140,13 +174,19 @@
 
         
 
+        
+
          interface defines the methods that all data source controls use to interact with data source views: the <see
          cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
         
 
+        
+
          method is used to enumerate the data source views currently associated with the data source control, and the <see
          cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+
+        
 
         
 
@@ -158,13 +198,19 @@
 
         
 
+        
+
          class is the interface that page developers interact with directly when developing a Web Forms page, and the <see
          cref="T:System.Web.UI.DataSourceView" />
 
         
 
+        
+
          class is the interface that data-bound controls and data-bound control authors interact with. Because the <see
          cref="T:System.Web.UI.DataSourceView" />
+
+        
 
         
 
@@ -176,8 +222,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Web.UI.DataSourceControl.SkinID" />
+
+        
 
         
 
@@ -202,6 +252,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -237,8 +289,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -304,6 +360,8 @@
 
             
 
+            
+
              object that represents the child controls for a specified server control in the UI hierarchy.</para
           >
         </summary>
@@ -333,6 +391,8 @@
 
               
 
+              
+
                class's default implementation does not support the embedding of child controls.</para
             >
           </block>
@@ -346,6 +406,8 @@
           <para
             >Returns a <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -385,6 +447,8 @@
 
             
 
+            
+
              control has no visual rendering, it does not support themes.</para
           >
         </remarks>
@@ -420,6 +484,8 @@
 
             
 
+            
+
              parameter. </para
           >
         </summary>
@@ -429,6 +495,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,13 +529,19 @@
 
             
 
+            
+
              control has no visual rendering, calling the <see
              cref="M:System.Web.UI.DataSourceControl.Focus" />
 
             
 
+            
+
              method on it throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -510,11 +584,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >Data source control classes can support one or more views on their underlying data. These views are represented by instances of the <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -527,8 +605,12 @@
 
               
 
+              
+
                class's default implementation returns null. If you extend the <see
                cref="T:System.Web.UI.DataSourceControl" />
+
+              
 
               
 
@@ -537,8 +619,12 @@
 
               
 
+              
+
                method to return the specified <see
                cref="T:System.Web.UI.DataSourceView" />
+
+              
 
               
 
@@ -558,8 +644,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -571,13 +661,19 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.UI.DataSourceView" />
 
           
 
+          
+
            to retrieve. In data source controls that support only one view, such as <see
            cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+          
 
           
 
@@ -608,8 +704,12 @@
 
             
 
+            
+
              collection of names is the allowable set of values that can be passed to the <see
              cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+
+            
 
             
 
@@ -621,8 +721,12 @@
 
             
 
+            
+
              class, which is used for the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -631,8 +735,12 @@
 
             
 
+            
+
              implementation, checks the <see
              cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+
+            
 
             
 
@@ -641,8 +749,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#GetList" />
+
+            
 
             
 
@@ -651,13 +763,19 @@
 
             
 
+            
+
              returns null, which is the default implementation of the method, <see
              cref="P:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#ContainsListCollection" />
 
             
 
+            
+
              returns false and <see
              cref="M:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#GetList" />
+
+            
 
             
 
@@ -670,13 +788,19 @@
 
               
 
+              
+
                class's default implementation returns null. If you extend the <see
                cref="T:System.Web.UI.DataSourceControl" />
 
               
 
+              
+
                class, override the <see
                cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+
+              
 
               
 
@@ -692,8 +816,12 @@
 
             
 
+            
+
              objects associated with the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -708,13 +836,19 @@
 
             
 
+            
+
              that contains the names of the <see
              cref="T:System.Web.UI.DataSourceView" />
 
             
 
+            
+
              objects associated with the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -776,8 +910,12 @@
 
             
 
+            
+
              method notifies a data-bound control that the underlying data source or the data cached in memory has changed, and that the control should rebind and perform any necessary additional work. Typically, the <see
              cref="M:System.Web.UI.DataSourceControl.RaiseDataSourceChangedEvent(System.EventArgs)" />
+
+            
 
             
 
@@ -788,6 +926,8 @@
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -802,6 +942,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -810,8 +952,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -843,6 +989,8 @@
           <para
             >Outputs server control content to a provided <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -887,8 +1035,12 @@
 
             
 
+            
+
              control has no visual rendering, you cannot set the <see
              cref="P:System.Web.UI.DataSourceControl.SkinID" />
+
+            
 
             
 
@@ -900,6 +1052,8 @@
           <para
             >Gets the skin to apply to the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -933,13 +1087,19 @@
 
             
 
+            
+
              objects; therefore, when associated with one or more <see
              cref="T:System.Web.UI.DataSourceView" />
 
             
 
+            
+
              objects, a <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -951,8 +1111,12 @@
 
             
 
+            
+
              method to determine whether the current data source control can be used as a source of data. The <see
              cref="T:System.Web.UI.ListSourceHelper" />
+
+            
 
             
 
@@ -961,13 +1125,19 @@
 
             
 
+            
+
              method returns a valid collection of view names. If it does, this property returns true. If <see
              cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
             
 
+            
+
              returns null, which is the default implementation of the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -999,8 +1169,12 @@
 
             
 
+            
+
              objects; therefore, when associated with one or more <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -1009,13 +1183,19 @@
 
             
 
+            
+
              control represents a list source object and the method returns an <see
              cref="T:System.Collections.IList" />
 
             
 
+            
+
              collection of one element, the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -1027,8 +1207,12 @@
 
             
 
+            
+
              method to retrieve an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1037,8 +1221,12 @@
 
             
 
+            
+
              class determines whether <see
              cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+
+            
 
             
 
@@ -1047,8 +1235,12 @@
 
             
 
+            
+
              class returns an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1057,8 +1249,12 @@
 
             
 
+            
+
              control. If <see
              cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+
+            
 
             
 
@@ -1067,8 +1263,12 @@
 
             
 
+            
+
              class, the <see
              cref="T:System.Web.UI.ListSourceHelper" />
+
+            
 
             
 
@@ -1084,6 +1284,8 @@
           <para
             >An <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1116,13 +1318,19 @@
 
             
 
+            
+
              parameter is ignored when this method is called on data source controls that support only one view, such as the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+            
 
             
 
@@ -1135,8 +1343,12 @@
 
               
 
+              
+
                class's default implementation, which is called by this interface method, returns null. If you extend the <see
                cref="T:System.Web.UI.DataSourceControl" />
+
+              
 
               
 
@@ -1145,8 +1357,12 @@
 
               
 
+              
+
                method to return the specified <see
                cref="T:System.Web.UI.DataSourceView" />
+
+              
 
               
 
@@ -1162,8 +1378,12 @@
 
             
 
+            
+
              object associated with the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -1178,8 +1398,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -1191,13 +1415,19 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.UI.DataSourceView" />
 
           
 
+          
+
            to retrieve. In data source controls that support only one view, such as <see
            cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+          
 
           
 
@@ -1228,8 +1458,12 @@
 
               
 
+              
+
                class's default implementation, which is called by this interface method, returns null, which indicates that only one view is supported. If you extend the <see
                cref="T:System.Web.UI.DataSourceControl" />
+
+              
 
               
 
@@ -1238,13 +1472,19 @@
 
               
 
+              
+
                method to return a collection of view names. A name can be passed to the <see
                cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
               
 
+              
+
                method to return a <see
                cref="T:System.Web.UI.DataSourceView" />
+
+              
 
               
 
@@ -1260,8 +1500,12 @@
 
             
 
+            
+
              objects associated with the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -1276,13 +1520,19 @@
 
             
 
+            
+
              that contains the names of the <see
              cref="T:System.Web.UI.DataSourceView" />
 
             
 
+            
+
              objects associated with the <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -1319,8 +1569,12 @@
 
             
 
+            
+
              control has no visual rendering, the <see
              cref="P:System.Web.UI.DataSourceControl.Visible" />
+
+            
 
             
 

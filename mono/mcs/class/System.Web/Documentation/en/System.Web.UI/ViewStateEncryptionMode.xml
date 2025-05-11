@@ -18,13 +18,19 @@
 
         
 
+        
+
          enumeration provides values for specifying whether the view-state information in a <see
          cref="T:System.Web.UI.Page" />
 
         
 
+        
+
          object is encrypted. The <see
          cref="T:System.Web.UI.ViewStateEncryptionMode" />
+
+        
 
         
 
@@ -35,10 +41,14 @@
 
         
 
+        
+
          directive or in the <format
          type="text/html">
           <a href="4123bb66-3fe4-4d62-b70e-33758656b458">pages</a>
         </format>
+
+        
 
         
 
@@ -81,6 +91,8 @@
           <para
             >The view-state information is encrypted if a control requests encryption by calling the <see
              cref="M:System.Web.UI.Page.RegisterRequiresViewStateEncryption" />
+
+            
 
             
 

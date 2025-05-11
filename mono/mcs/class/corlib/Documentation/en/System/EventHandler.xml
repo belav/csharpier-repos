@@ -48,6 +48,8 @@
 
       
 
+      
+
        instance that contains the event data.</param
     >
     <remarks>
@@ -68,8 +70,12 @@
 
         
 
+        
+
          and refers to the instance that raises the event. Its second parameter is derived from type <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -78,8 +84,12 @@
 
         
 
+        
+
          field. Otherwise, the second parameter is a type derived from <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -91,8 +101,12 @@
 
         
 
+        
+
          delegate is a predefined delegate that specifically represents an event handler method for an event that does not generate data. If your event does generate data, you must use the generic <see
          cref="T:System.EventHandler`1" />
+
+        
 
         
 
@@ -104,6 +118,8 @@
          type="text/html">
           <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
         </format>
+
+        
 
         
 

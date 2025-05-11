@@ -21,6 +21,8 @@
 
         
 
+        
+
          enumeration returns the following categories of literal information.</para
       >
       <list type="table">
@@ -73,12 +75,16 @@
 
         
 
+        
+
          enumeration maps to one of the OLE DB DBLITERAL values that are returned in the DBLITERALINFO structure.</para
       >
       <para>Multidimensional restriction columns are members of schema objects and map to OLE DB for OLAP used by the IDBSchemaRowset interface.</para>
       <para
         >A <see
          cref="T:System.NotSupportedException" />
+
+        
 
         
 

@@ -33,8 +33,12 @@
 
         
 
+        
+
          contract allows users to create multiple channels of a given type without having to specify the channel type each time. In other words, defining the channel type as a generic parameter for the channel factory implementing the <see
          cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          methods. If users want to create different channel types, they can create additional channel factories for each type of channel required. The <see
          cref="M:System.ServiceModel.Channels.IChannelFactory`1.CreateChannel(System.ServiceModel.EndpointAddress,System.Uri)" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
          type="text/html">
           <a href="13f269e3-ebb1-433c-86cf-54fbd866a627">Addresses</a>
         </format>
+
+        
 
         
 
@@ -92,6 +102,8 @@
 
             
 
+            
+
              overload to distinguish the address to which the message is initially sent from the ultimate destination when you want to do manual routing. Note that any channels created by this channel factory are closed when the channel factory is closed.</para
           >
         </remarks>
@@ -107,6 +119,8 @@
 
             
 
+            
+
              to the specified endpoint address.</para
           >
         </returns>
@@ -115,8 +129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -153,8 +171,12 @@
 
             
 
+            
+
              is the location to which a message should initially be sent on its way to some other remote address specified by the <paramref
              name="to" />
+
+            
 
             
 
@@ -163,8 +185,12 @@
 
             
 
+            
+
              URI is the same as the <see
              cref="P:System.ServiceModel.EndpointAddress.Uri" />
+
+            
 
             
 
@@ -173,10 +199,14 @@
 
             
 
+            
+
              address of the service. You only distinguish between these two addresses when you want to do some kind of manual routing. Note that any channels created by this channel factory are closed when the channel factory is closed. For a discussion of addressing, see the <format
              type="text/html">
               <a href="13f269e3-ebb1-433c-86cf-54fbd866a627">Addresses</a>
             </format>
+
+            
 
             
 
@@ -195,6 +225,8 @@
 
             
 
+            
+
              to the specified endpoint address and transport address.</para
           >
         </returns>
@@ -203,8 +235,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -215,8 +251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 

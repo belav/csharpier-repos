@@ -41,13 +41,19 @@
 
         
 
+        
+
          control lets you host Web pages and other browser-enabled documents in your Windows Forms applications. You can use the <see
          cref="T:System.Windows.Forms.WebBrowser" />
 
         
 
+        
+
          control, for example, to provide integrated HTML-based user assistance or Web browsing capabilities in your application. Additionally, you can use the <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 
@@ -60,13 +66,19 @@
 
           
 
+          
+
            control is resource-intensive. Be sure to call the <see
            cref="M:System.ComponentModel.Component.Dispose" />
 
           
 
+          
+
            method when you are finished using the control to ensure that all resources are released in a timely fashion. You must call the <see
            cref="M:System.ComponentModel.Component.Dispose" />
+
+          
 
           
 
@@ -79,6 +91,8 @@
 
         
 
+        
+
          control cannot be used by partially trusted code. For more information, see <format
          type="text/html">
           <a href="dd66cd4c-b087-415f-9c3e-94e3a1835f74"
@@ -88,11 +102,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 
@@ -136,13 +154,19 @@
 
         
 
+        
+
         , <see
          cref="E:System.Windows.Forms.WebBrowser.Navigated" />
 
         
 
+        
+
         , and <see
          cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+
+        
 
         
 
@@ -154,8 +178,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+        
 
         
 
@@ -164,8 +192,12 @@
 
         
 
+        
+
          control on your form. For example, you can use the <see
          cref="M:System.Windows.Forms.WebBrowser.Print" />
+
+        
 
         
 
@@ -177,13 +209,19 @@
 
         
 
+        
+
          control also lets you display content that you create in your application or you retrieve from a database or resource file. Use the <see
          cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
 
         
 
+        
+
          or <see
          cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+
+        
 
         
 
@@ -195,8 +233,12 @@
 
         
 
+        
+
          property, which contains an <see
          cref="T:System.Windows.Forms.HtmlDocument" />
+
+        
 
         
 
@@ -205,13 +247,19 @@
 
         
 
+        
+
          property, to implement two-way communication between your application code and dynamic HTML (DHTML) code in a Web page, letting you combine Web-based controls and Windows Forms controls in a single user interface. You can use the <see
          cref="P:System.Windows.Forms.WebBrowser.Document" />
 
         
 
+        
+
          property to call scripting code methods from your application. Your scripting code can access your application through the window.external object, which is a built-in DOM object provided for host access, and which maps to the object that you specify for the <see
          cref="P:System.Windows.Forms.WebBrowser.ObjectForScripting" />
+
+        
 
         
 
@@ -223,8 +271,12 @@
 
         
 
+        
+
          control is a managed wrapper for the ActiveX <see
          cref="http://go.microsoft.com/fwlink/?LinkId=198812">WebBrowser control</see>
+
+        
 
         
 
@@ -237,6 +289,8 @@
 
           
 
+          
+
            is thrown when a derived class or any caller in the call stack does not have full trust permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
@@ -244,10 +298,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -261,8 +319,12 @@
 
           
 
+          
+
            class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
            cref="T:System.STAThreadAttribute" />
+
+          
 
           
 
@@ -292,8 +354,12 @@
 
             
 
+            
+
              control is empty. To navigate it to an initial document, set the <see
              cref="P:System.Windows.Forms.WebBrowser.Url" />
+
+            
 
             
 
@@ -305,6 +371,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -337,13 +405,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+
+            
 
             
 
@@ -380,13 +454,19 @@
 
             
 
+            
+
              control automatically navigates to documents that are dropped onto it. This behavior is useful when you use the control as a generic browser. If you use the control to display content designed specifically for your application, such as HTML-based user assistance, set the <see
              cref="P:System.Windows.Forms.WebBrowser.AllowWebBrowserDrop" />
 
             
 
+            
+
              property to false to prevent the display of other content. This is particularly useful when you want to conceal the fact that you are using the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -398,8 +478,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.WebBrowser.IsWebBrowserContextMenuEnabled" />
+
+            
 
             
 
@@ -412,8 +496,12 @@
 
               
 
+              
+
                property and does not cause drag-and-drop events such as the <see
                cref="E:System.Windows.Forms.Control.DragDrop" />
+
+              
 
               
 
@@ -426,6 +514,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -460,6 +550,8 @@
 
           
 
+          
+
           An object that represents the underlying ActiveX control.</param
         >
       </Docs>
@@ -491,8 +583,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. The <see
              cref="M:System.Windows.Forms.WebBrowser.GoBack" />
+
+            
 
             
 
@@ -501,8 +597,12 @@
 
             
 
+            
+
              control to the previous page in this history, if one is available. Use the <see
              cref="P:System.Windows.Forms.WebBrowser.CanGoBack" />
+
+            
 
             
 
@@ -511,8 +611,12 @@
 
             
 
+            
+
              method will succeed. Otherwise, calling the <see
              cref="M:System.Windows.Forms.WebBrowser.GoBack" />
+
+            
 
             
 
@@ -524,8 +628,12 @@
 
             
 
+            
+
              event to receive a notification when the <see
              cref="P:System.Windows.Forms.WebBrowser.CanGoBack" />
+
+            
 
             
 
@@ -534,8 +642,12 @@
 
             
 
+            
+
              button when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -547,6 +659,8 @@
           <para
             >Gets a value indicating whether a previous page in navigation history is available, which allows the <see
              cref="M:System.Windows.Forms.WebBrowser.GoBack" />
+
+            
 
             
 
@@ -573,8 +687,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. The <see
              cref="M:System.Windows.Forms.WebBrowser.GoBack" />
+
+            
 
             
 
@@ -583,8 +701,12 @@
 
             
 
+            
+
              control to the previous page in this history, if one is available. The <see
              cref="P:System.Windows.Forms.WebBrowser.CanGoBack" />
+
+            
 
             
 
@@ -593,8 +715,12 @@
 
             
 
+            
+
              event to receive a notification when the <see
              cref="P:System.Windows.Forms.WebBrowser.CanGoBack" />
+
+            
 
             
 
@@ -603,8 +729,12 @@
 
             
 
+            
+
              button when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -618,6 +748,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -626,6 +758,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.WebBrowser.CanGoBack" />
+
+            
 
             
 
@@ -666,8 +800,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. The <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -676,13 +814,19 @@
 
             
 
+            
+
              control to the next page in this history, if one is available as a result of a previous backward navigation. If this property is true, the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
 
             
 
+            
+
              method will succeed. Otherwise, calling the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -694,8 +838,12 @@
 
             
 
+            
+
              property to determine whether navigation history is available and contains a page located after the current one, allowing the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -707,8 +855,12 @@
 
             
 
+            
+
              event to receive a notification when the <see
              cref="P:System.Windows.Forms.WebBrowser.CanGoForward" />
+
+            
 
             
 
@@ -717,8 +869,12 @@
 
             
 
+            
+
              button when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -730,6 +886,8 @@
           <para
             >Gets a value indicating whether a subsequent page in navigation history is available, which allows the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -756,8 +914,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. The <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -766,8 +928,12 @@
 
             
 
+            
+
              control to the next page in this history, if one is available as a result of a previous backward navigation. The <see
              cref="P:System.Windows.Forms.WebBrowser.CanGoForward" />
+
+            
 
             
 
@@ -776,8 +942,12 @@
 
             
 
+            
+
              method to succeed. Handle the <see
              cref="E:System.Windows.Forms.WebBrowser.CanGoForwardChanged" />
+
+            
 
             
 
@@ -786,13 +956,19 @@
 
             
 
+            
+
              property changes. Handling this event is useful, for example, to change the enabled state of a <ui
             >Forward</ui>
 
             
 
+            
+
              button when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -806,6 +982,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -814,6 +992,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.WebBrowser.CanGoForward" />
+
+            
 
             
 
@@ -843,6 +1023,8 @@
           <para
             >This method is useful if you are familiar with OLE development using the unmanaged WebBrowser ActiveX control and you want to extend the functionality of the Windows Forms <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -877,6 +1059,8 @@
 
             
 
+            
+
              control, which is a managed wrapper for the ActiveX control. You can use this extensibility, for example, to customize the browser shortcut menu and shortcut keys or to provide a custom security configuration for hosted documents.</para
           >
           <para
@@ -885,8 +1069,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" />
+
+            
 
             
 
@@ -895,8 +1083,12 @@
 
             
 
+            
+
              method to retrieve extensibility interfaces implemented by the <see
              cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" />
+
+            
 
             
 
@@ -905,13 +1097,19 @@
 
             
 
+            
+
              method to return an instance of your own class that inherits from the <see
              cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" />
 
             
 
+            
+
              class. The <see
              cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" />
+
+            
 
             
 
@@ -929,6 +1127,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -937,6 +1137,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" />
+
+            
 
             
 
@@ -1003,6 +1205,8 @@
 
             
 
+            
+
              control, which is a managed wrapper for the ActiveX control. You can use this extensibility to implement events from the ActiveX control that are not provided by the wrapper control.</para
           >
         </remarks>
@@ -1011,6 +1215,8 @@
           <para
             >Releases the event-handling client attached in the <see
              cref="M:System.Windows.Forms.WebBrowser.CreateSink" />
+
+            
 
             
 
@@ -1041,11 +1247,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1075,6 +1285,8 @@
 
             
 
+            
+
              control through the HTML document object model (DOM). This is useful, for example, when you want to use Web-based controls in your Windows Forms application.</para
           >
           <para
@@ -1083,8 +1295,12 @@
 
             
 
+            
+
              property, to implement two-way communication between a Web page displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1093,8 +1309,12 @@
 
             
 
+            
+
              method to call script methods implemented in a Web page from your client application code. Your scripting code can access your application through the window.external object, which is a built-in DOM object provided for host access, and which maps to an object that you specify for the <see
              cref="P:System.Windows.Forms.WebBrowser.ObjectForScripting" />
+
+            
 
             
 
@@ -1106,13 +1326,19 @@
 
             
 
+            
+
              property. To access the contents of a Web page as a <see
              cref="T:System.IO.Stream" />
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+
+            
 
             
 
@@ -1127,8 +1353,12 @@
 
             
 
+            
+
              representing the Web page currently displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1163,6 +1393,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1216,8 +1448,12 @@
 
             
 
+            
+
              event to receive notification when the new document finishes loading. When the <see
              cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+
+            
 
             
 
@@ -1226,13 +1462,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
 
             
 
+            
+
             , or <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+
+            
 
             
 
@@ -1244,13 +1486,19 @@
 
             
 
+            
+
              event. Handling this event lets you cancel navigation if certain conditions have not been met, for example, when the user has not completely filled out a form. Handle the <see
              cref="E:System.Windows.Forms.WebBrowser.Navigated" />
 
             
 
+            
+
              event to receive notification when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1264,6 +1512,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1272,6 +1522,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1299,8 +1551,12 @@
 
             
 
+            
+
              control from a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1309,8 +1565,12 @@
 
             
 
+            
+
              control automatically navigates to the about:blank URL before loading the specified text. This means that the <see
              cref="E:System.Windows.Forms.WebBrowser.Navigating" />
+
+            
 
             
 
@@ -1319,13 +1579,19 @@
 
             
 
+            
+
             , and <see
              cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
 
             
 
+            
+
              events occur when you set this property, and the value of the <see
              cref="P:System.Windows.Forms.WebBrowser.Url" />
+
+            
 
             
 
@@ -1338,8 +1604,12 @@
 
               
 
+              
+
                control has not had time to load the new content. You can retrieve the new value in a <see
                cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+
+              
 
               
 
@@ -1352,8 +1622,12 @@
 
             
 
+            
+
              property. You can also access the page contents using the HTML document object model (DOM) through the <see
              cref="P:System.Windows.Forms.WebBrowser.Document" />
+
+            
 
             
 
@@ -1365,6 +1639,8 @@
           <para
             >Gets or sets a stream containing the contents of the Web page displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1400,8 +1676,12 @@
 
             
 
+            
+
              control using string processing tools. You can use this property, for example, to load pages from a database or to analyze pages using regular expressions. When you set this property, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1410,8 +1690,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.WebBrowser.Navigated" />
+
+            
 
             
 
@@ -1420,8 +1704,12 @@
 
             
 
+            
+
              events occur when you set this property, and the value of the <see
              cref="P:System.Windows.Forms.WebBrowser.Url" />
+
+            
 
             
 
@@ -1434,8 +1722,12 @@
 
               
 
+              
+
                control has not had time to load the new content. You can retrieve the new value in a <see
                cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+
+              
 
               
 
@@ -1444,8 +1736,12 @@
 
               
 
+              
+
                method in a loop until the <see
                cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
+
+              
 
               
 
@@ -1458,13 +1754,19 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
 
             
 
+            
+
              property. You can also access the page contents using the HTML document object model (DOM) through the <see
              cref="P:System.Windows.Forms.WebBrowser.Document" />
+
+            
 
             
 
@@ -1476,6 +1778,8 @@
           <para
             >Gets or sets the HTML contents of the page displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1512,8 +1816,12 @@
 
             
 
+            
+
              event to update the title in the title bar when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1525,6 +1833,8 @@
           <para
             >Gets the title of the document currently displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1559,6 +1869,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -1566,6 +1878,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1577,6 +1891,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentTitle" />
+
+            
 
             
 
@@ -1610,6 +1926,8 @@
           <para
             >Gets the type of the document currently displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1648,8 +1966,12 @@
 
             
 
+            
+
              event to implement an indicator in the user interface of your application similar to the lock icon in Internet Explorer. When the current document is not encrypted, the value of this property is <see
              cref="F:System.Windows.Forms.WebBrowserEncryptionLevel.Insecure" />
+
+            
 
             
 
@@ -1658,13 +1980,19 @@
 
             
 
+            
+
              control displays a Web page containing multiple frames with content of different encryption levels, the value of this property is <see
              cref="F:System.Windows.Forms.WebBrowserEncryptionLevel.Mixed" />
 
             
 
+            
+
             . When the encryption level is unknown, the value of this property is <see
              cref="F:System.Windows.Forms.WebBrowserEncryptionLevel.Unknown" />
+
+            
 
             
 
@@ -1676,6 +2004,8 @@
           <para
             >Gets a value indicating the encryption method used by the document currently displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1710,8 +2040,12 @@
 
             
 
+            
+
              property to implement an indicator in the user interface of your application similar to the lock icon in Internet Explorer. In a handler for this event, check the value of the <see
              cref="P:System.Windows.Forms.WebBrowser.EncryptionLevel" />
+
+            
 
             
 
@@ -1725,6 +2059,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1733,6 +2069,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1766,6 +2104,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1774,6 +2114,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1819,13 +2161,19 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. You can use the <see
              cref="M:System.Windows.Forms.WebBrowser.GoBack" />
 
             
 
+            
+
              method to implement a <ui
             >Back</ui>
+
+            
 
             
 
@@ -1837,8 +2185,12 @@
 
             
 
+            
+
              property to determine whether the navigation history is available and contains a previous page. Handle the <see
              cref="E:System.Windows.Forms.WebBrowser.CanGoBackChanged" />
+
+            
 
             
 
@@ -1847,13 +2199,19 @@
 
             
 
+            
+
              property value changes. Handling this event is useful, for example, to change the enabled state of a <ui
             >Back</ui>
 
             
 
+            
+
              button when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1865,6 +2223,8 @@
           <para
             >Navigates the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1896,13 +2256,19 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. You can use the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
 
             
 
+            
+
              method to implement a <ui
             >Forward</ui>
+
+            
 
             
 
@@ -1914,8 +2280,12 @@
 
             
 
+            
+
              property to determine whether the navigation history is available and contains a page located after the current one. Handle the <see
              cref="E:System.Windows.Forms.WebBrowser.CanGoForwardChanged" />
+
+            
 
             
 
@@ -1924,13 +2294,19 @@
 
             
 
+            
+
              property value changes. Handling this event is useful, for example, to change the enabled state of a <ui
             >Forward</ui>
 
             
 
+            
+
              button when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1942,6 +2318,8 @@
           <para
             >Navigates the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1973,13 +2351,19 @@
 
             
 
+            
+
              button similar to the one in Internet Explorer. The user can specify a home page in the <ui
             >Internet Options</ui>
 
             
 
+            
+
              dialog box, which is available from Control Panel or from the <ui
             >Tools</ui>
+
+            
 
             
 
@@ -1991,6 +2375,8 @@
           <para
             >Navigates the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2018,8 +2404,12 @@
 
             
 
+            
+
              dialog box, which is available from Control Panel or from the <ui
             >Tools</ui>
+
+            
 
             
 
@@ -2031,8 +2421,12 @@
 
             
 
+            
+
              method or specify the <see
              cref="P:System.Windows.Forms.WebBrowser.Url" />
+
+            
 
             
 
@@ -2044,6 +2438,8 @@
           <para
             >Navigates the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2071,8 +2467,12 @@
 
             
 
+            
+
              method to halt the current navigation before the new document is fully loaded. Use the <see
              cref="P:System.Windows.Forms.WebBrowser.ReadyState" />
+
+            
 
             
 
@@ -2081,8 +2481,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Windows.Forms.WebBrowser.IsBusy" />
+
+            
 
             
 
@@ -2091,8 +2495,12 @@
 
             
 
+            
+
              property value is <see
              cref="F:System.Windows.Forms.WebBrowserReadyState.Complete" />
+
+            
 
             
 
@@ -2104,6 +2512,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2139,6 +2549,8 @@
 
             
 
+            
+
              control is forced to load Web pages from the local cache rather than downloading them.</para
           >
         </remarks>
@@ -2147,6 +2559,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2185,13 +2599,19 @@
 
             
 
+            
+
              control displays a shortcut menu when a user right-clicks it. This behavior is useful when you use the control as a generic browser. If you want to conceal the fact that you are using the <see
              cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
+            
+
              control, for example to create a user interface that seamlessly combines Web-based controls with Windows Forms controls, set the <see
              cref="P:System.Windows.Forms.WebBrowser.IsWebBrowserContextMenuEnabled" />
+
+            
 
             
 
@@ -2203,8 +2623,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.WebBrowser.WebBrowserShortcutsEnabled" />
+
+            
 
             
 
@@ -2216,6 +2640,8 @@
           <para
             >Gets or a sets a value indicating whether the shortcut menu of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2250,8 +2676,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you call this overload, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2260,8 +2690,12 @@
 
             
 
+            
+
              method to return the control to a previous page in the navigation history. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -2273,8 +2707,12 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+            
 
             
 
@@ -2283,11 +2721,15 @@
 
             
 
+            
+
              control to reload the current page by downloading it, ensuring that the control displays the latest version.</para
           >
           <para
             >You can use the <see
              cref="Overload:System.Windows.Forms.WebBrowser.Navigate" />
+
+            
 
             
 
@@ -2302,11 +2744,15 @@
 
             
 
+            
+
              control, replacing the previous document.</para
           >
         </summary>
         <param name="urlString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2335,8 +2781,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you call this overload, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2345,8 +2795,12 @@
 
             
 
+            
+
              method to return the control to a previous page in the navigation history. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -2358,8 +2812,12 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+            
 
             
 
@@ -2368,11 +2826,15 @@
 
             
 
+            
+
              control to reload the current page by downloading it, ensuring that the control displays the latest version.</para
           >
           <para
             >You can use the <see
              cref="Overload:System.Windows.Forms.WebBrowser.Navigate" />
+
+            
 
             
 
@@ -2387,8 +2849,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2400,8 +2866,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -2434,8 +2904,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you call this overload with a <paramref
              name="newWindow" />
+
+            
 
             
 
@@ -2444,13 +2918,19 @@
 
             
 
+            
+
              parameter value of true, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
+            
+
              control loads the document at the specified URI into a new Internet Explorer window, which maintains its own navigation history. You can handle the <see
              cref="E:System.Windows.Forms.WebBrowser.NewWindow" />
+
+            
 
             
 
@@ -2462,8 +2942,12 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page or loads a page into a separate browser window, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+            
 
             
 
@@ -2472,8 +2956,12 @@
 
             
 
+            
+
              control to reload the current page by downloading it, ensuring that the control displays the latest version. When a page is loaded into a separate Internet Explorer window, the user can retrieve the latest version by clicking the <ui
             >Refresh</ui>
+
+            
 
             
 
@@ -2488,11 +2976,15 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
         <param name="urlString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2503,8 +2995,12 @@
 
           
 
+          
+
           true to load the document into a new browser window; false to load the document into the <see
            cref="T:System.Windows.Forms.WebBrowser" />
+
+          
 
           
 
@@ -2537,8 +3033,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you call this overload, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2550,8 +3050,12 @@
 
             
 
+            
+
              method to return the control to a previous page in the navigation history. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -2563,13 +3067,19 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
 
             
 
+            
+
              method to force the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2584,6 +3094,8 @@
 
             
 
+            
+
              control, replacing the contents of the Web page frame with the specified name.</para
           >
         </summary>
@@ -2592,10 +3104,14 @@
 
           
 
+          
+
           The URL of the document to load.</param
         >
         <param name="targetFrameName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2625,8 +3141,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you call this overload with a <paramref
              name="newWindow" />
+
+            
 
             
 
@@ -2635,13 +3155,19 @@
 
             
 
+            
+
              parameter value of true, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
+            
+
              control loads the document at the specified URI into a new Internet Explorer window, which maintains its own navigation history. You can handle the <see
              cref="E:System.Windows.Forms.WebBrowser.NewWindow" />
+
+            
 
             
 
@@ -2653,8 +3179,12 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page or loads a page into a separate browser window, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+            
 
             
 
@@ -2663,8 +3193,12 @@
 
             
 
+            
+
              control to reload the current page by downloading it, ensuring that the control displays the latest version. When a page is loaded into a separate Internet Explorer window, the user can retrieve the latest version by clicking the <ui
             >Refresh</ui>
+
+            
 
             
 
@@ -2679,8 +3213,12 @@
 
             
 
+            
+
              into a new browser window or into the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2692,8 +3230,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -2704,8 +3246,12 @@
 
           
 
+          
+
           true to load the document into a new browser window; false to load the document into the <see
            cref="T:System.Windows.Forms.WebBrowser" />
+
+          
 
           
 
@@ -2738,8 +3284,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you call this overload, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2751,8 +3301,12 @@
 
             
 
+            
+
              method to return the control to a previous page in the navigation history. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -2764,13 +3318,19 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
 
             
 
+            
+
              method to force the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2785,8 +3345,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2798,8 +3362,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -2807,6 +3375,8 @@
         >
         <param name="targetFrameName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2841,8 +3411,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you call this overload, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2854,8 +3428,12 @@
 
             
 
+            
+
              method to return the control to a previous page in the navigation history. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -2867,13 +3445,19 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
 
             
 
+            
+
              method to force the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2888,11 +3472,15 @@
 
             
 
+            
+
              control, requesting it using the specified HTTP data and replacing the contents of the Web page frame with the specified name.</para
           >
         </summary>
         <param name="urlString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2903,6 +3491,8 @@
 
           
 
+          
+
           The name of the frame in which to load the document.</param
         >
         <param name="postData">
@@ -2910,10 +3500,14 @@
 
           
 
+          
+
           HTTP POST data such as form data.</param
         >
         <param name="additionalHeaders">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2948,8 +3542,12 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you call this overload, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2961,8 +3559,12 @@
 
             
 
+            
+
              method to return the control to a previous page in the navigation history. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.GoForward" />
+
+            
 
             
 
@@ -2974,13 +3576,19 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
 
             
 
+            
+
              method to force the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2995,8 +3603,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3008,8 +3620,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -3020,6 +3636,8 @@
 
           
 
+          
+
           The name of the frame in which to load the document.</param
         >
         <param name="postData">
@@ -3027,10 +3645,14 @@
 
           
 
+          
+
           HTTP POST data such as form data.</param
         >
         <param name="additionalHeaders">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3056,6 +3678,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3109,8 +3733,12 @@
 
             
 
+            
+
              event to receive notification when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3119,8 +3747,12 @@
 
             
 
+            
+
              event occurs, the new document has begun loading, which means you can access the loaded content through the <see
              cref="P:System.Windows.Forms.WebBrowser.Document" />
+
+            
 
             
 
@@ -3129,8 +3761,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+
+            
 
             
 
@@ -3139,8 +3775,12 @@
 
             
 
+            
+
              event to receive notification when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3149,6 +3789,8 @@
           <para
             >You can also receive notification before navigation begins by handling the <see
              cref="E:System.Windows.Forms.WebBrowser.Navigating" />
+
+            
 
             
 
@@ -3162,6 +3804,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3170,6 +3814,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3196,6 +3842,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3249,8 +3897,12 @@
 
             
 
+            
+
              event to cancel navigation if certain conditions have not been met, for example, when the user has not completely filled out a form. To cancel navigation, set the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -3259,13 +3911,19 @@
 
             
 
+            
+
              object passed to the event handler to true. You can also use this object to retrieve the URL of the new document through the <see
              cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.Url" />
 
             
 
+            
+
              property. If the new document will be displayed in a Web page frame, you can retrieve the name of the frame through the <see
              cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.TargetFrameName" />
+
+            
 
             
 
@@ -3277,8 +3935,12 @@
 
             
 
+            
+
              event to receive notification when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3287,8 +3949,12 @@
 
             
 
+            
+
              event to receive notification when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3302,6 +3968,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3310,6 +3978,8 @@
           <para
             >Occurs before the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3339,8 +4009,12 @@
 
             
 
+            
+
              control opens a separate browser window when the appropriate overload of the <see
              cref="Overload:System.Windows.Forms.WebBrowser.Navigate" />
+
+            
 
             
 
@@ -3349,8 +4023,12 @@
 
             
 
+            
+
              option of the browser shortcut menu when the mouse pointer hovers over a hyperlink. You can disable the shortcut menu by setting the <see
              cref="P:System.Windows.Forms.WebBrowser.IsWebBrowserContextMenuEnabled" />
+
+            
 
             
 
@@ -3362,6 +4040,8 @@
 
             
 
+            
+
              event occurs before the new browser window is opened. You can handle this event, for example, to prevent the window from opening when certain conditions have not been met.</para
           >
           <para
@@ -3369,6 +4049,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3400,8 +4082,12 @@
 
             
 
+            
+
              control and the application that contains the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3413,6 +4099,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -3421,13 +4109,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
+            
+
              object you can retrieve from the <see
              cref="P:System.Windows.Forms.WebBrowser.Document" />
+
+            
 
             
 
@@ -3439,6 +4133,8 @@
           <para
             >Gets or sets an object that can be accessed by scripting code that is contained within a Web page displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -3481,11 +4177,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnCanGoBackChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -3500,6 +4200,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3508,8 +4210,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3543,11 +4249,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnCanGoForwardChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -3562,6 +4272,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3570,8 +4282,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3605,11 +4321,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnDocumentCompleted(System.Windows.Forms.WebBrowserDocumentCompletedEventArgs)" />
+
+            
 
             
 
@@ -3624,6 +4344,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3632,8 +4354,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs" />
+
+          
 
           
 
@@ -3667,11 +4393,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnDocumentTitleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -3686,6 +4416,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3694,8 +4426,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3729,11 +4465,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnEncryptionLevelChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -3748,6 +4488,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3756,8 +4498,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3788,11 +4534,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnFileDownload(System.EventArgs)" />
+
+            
 
             
 
@@ -3807,6 +4557,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3815,8 +4567,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -3850,11 +4606,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnNavigated(System.Windows.Forms.WebBrowserNavigatedEventArgs)" />
+
+            
 
             
 
@@ -3869,6 +4629,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3877,8 +4639,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.WebBrowserNavigatedEventArgs" />
+
+          
 
           
 
@@ -3912,11 +4678,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnNavigating(System.Windows.Forms.WebBrowserNavigatingEventArgs)" />
+
+            
 
             
 
@@ -3931,6 +4701,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3939,8 +4711,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" />
+
+          
 
           
 
@@ -3974,11 +4750,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnNewWindow(System.ComponentModel.CancelEventArgs)" />
+
+            
 
             
 
@@ -3993,6 +4773,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4001,8 +4783,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -4036,11 +4822,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnProgressChanged(System.Windows.Forms.WebBrowserProgressChangedEventArgs)" />
+
+            
 
             
 
@@ -4055,6 +4845,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4063,8 +4855,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.WebBrowserProgressChangedEventArgs" />
+
+          
 
           
 
@@ -4098,11 +4894,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowser.OnStatusTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4117,6 +4917,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4125,8 +4927,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4195,6 +5001,8 @@
 
             
 
+            
+
              property and respond to changes by handling this event, the Padding property is not meaningful for this control. </para
           >
         </remarks>
@@ -4203,6 +5011,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.WebBrowser.Padding" />
+
+            
 
             
 
@@ -4230,8 +5040,12 @@
 
             
 
+            
+
              button similar to the one in Internet Explorer. This method prints the current document without requiring further user input. To display the <ui
             >Print</ui>
+
+            
 
             
 
@@ -4240,8 +5054,12 @@
 
             
 
+            
+
              method. To display the <ui
             >Page Setup</ui>
+
+            
 
             
 
@@ -4250,13 +5068,19 @@
 
             
 
+            
+
              method. To display the <ui
             >Print Preview</ui>
 
             
 
+            
+
              dialog box, use the <see
              cref="M:System.Windows.Forms.WebBrowser.ShowPrintPreviewDialog" />
+
+            
 
             
 
@@ -4268,6 +5092,8 @@
           <para
             >Prints the document currently displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -4297,8 +5123,12 @@
 
             
 
+            
+
              property to determine the number of bytes that have been downloaded successfully. Use the <see
              cref="P:System.Windows.Forms.WebBrowserProgressChangedEventArgs.MaximumProgress" />
+
+            
 
             
 
@@ -4312,6 +5142,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4320,6 +5152,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -4350,13 +5184,19 @@
 
             
 
+            
+
              property to retrieve the specific state of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
+            
+
              control when you need more information than the <see
              cref="P:System.Windows.Forms.WebBrowser.IsBusy" />
+
+            
 
             
 
@@ -4368,8 +5208,12 @@
 
             
 
+            
+
              control does not contain a document, the value of this property is <see
              cref="F:System.Windows.Forms.WebBrowserReadyState.Uninitialized" />
+
+            
 
             
 
@@ -4378,8 +5222,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.WebBrowserReadyState.Loaded" />
+
+            
 
             
 
@@ -4388,8 +5236,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Windows.Forms.WebBrowserReadyState.Complete" />
+
+            
 
             
 
@@ -4401,6 +5253,8 @@
           <para
             >Gets a value indicating the current state of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -4436,8 +5290,12 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. The <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+            
 
             
 
@@ -4446,8 +5304,12 @@
 
             
 
+            
+
              control to reload the current page by downloading it, ensuring that the control displays the latest version. You can use this method to implement a <ui
             >Refresh</ui>
+
+            
 
             
 
@@ -4460,8 +5322,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.Windows.Forms.WebBrowser.Navigated" />
+
+              
 
               
 
@@ -4470,8 +5336,12 @@
 
               
 
+              
+
                events do not occur when you call the <see
                cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+              
 
               
 
@@ -4484,6 +5354,8 @@
           <para
             >Reloads the document currently displayed in the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -4516,8 +5388,12 @@
 
             
 
+            
+
              control stores recently visited Web pages in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. The <see
              cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+            
 
             
 
@@ -4526,8 +5402,12 @@
 
             
 
+            
+
              control to reload the current page. The type of reload depends on the <see
              cref="T:System.Windows.Forms.WebBrowserRefreshOption" />
+
+            
 
             
 
@@ -4536,8 +5416,12 @@
 
             
 
+            
+
              method with the <see
              cref="F:System.Windows.Forms.WebBrowserRefreshOption.Completely" />
+
+            
 
             
 
@@ -4546,8 +5430,12 @@
 
             
 
+            
+
              value, the latest version is downloaded only if the current document has expired. If you use the <see
              cref="F:System.Windows.Forms.WebBrowserRefreshOption.Normal" />
+
+            
 
             
 
@@ -4560,8 +5448,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.Windows.Forms.WebBrowser.Navigated" />
+
+              
 
               
 
@@ -4570,8 +5462,12 @@
 
               
 
+              
+
                events do not occur when you call the <see
                cref="M:System.Windows.Forms.WebBrowser.Refresh" />
+
+              
 
               
 
@@ -4587,6 +5483,8 @@
 
             
 
+            
+
              control using the specified refresh options.</para
           >
         </summary>
@@ -4595,8 +5493,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.WebBrowserRefreshOption" />
+
+          
 
           
 
@@ -4623,6 +5525,8 @@
 
             
 
+            
+
              control. This is useful when you use the control to add Web-based controls and scripting code to your application. It is less useful when you use the control as a generic browser. When you have finished debugging your application, set this property to true to suppress script errors.</para
           >
           <block subset="none" type="note">
@@ -4632,8 +5536,12 @@
 
               
 
+              
+
                is set to true, the <see
                cref="T:System.Windows.Forms.WebBrowser" />
+
+              
 
               
 
@@ -4642,8 +5550,12 @@
 
               
 
+              
+
                to false and suppress script errors in a handler for the <see
                cref="E:System.Windows.Forms.HtmlWindow.Error" />
+
+              
 
               
 
@@ -4656,6 +5568,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -4692,6 +5606,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -4721,8 +5637,12 @@
 
             
 
+            
+
              menu item similar to the one on the Internet Explorer <ui
             >File</ui>
+
+            
 
             
 
@@ -4731,8 +5651,12 @@
 
             
 
+            
+
              dialog box, which lets your users specify header and footer values and other page settings prior to printing. To print the current document, use the <see
              cref="M:System.Windows.Forms.WebBrowser.Print" />
+
+            
 
             
 
@@ -4741,13 +5665,19 @@
 
             
 
+            
+
              method. To display the <ui
             >Print Preview</ui>
 
             
 
+            
+
              dialog box, use the <see
              cref="M:System.Windows.Forms.WebBrowser.ShowPrintPreviewDialog" />
+
+            
 
             
 
@@ -4759,6 +5689,8 @@
           <para
             >Opens the Internet Explorer <ui
             >Page Setup</ui>
+
+            
 
             
 
@@ -4786,8 +5718,12 @@
 
             
 
+            
+
              menu item similar to the one on the Internet Explorer <ui
             >File</ui>
+
+            
 
             
 
@@ -4796,8 +5732,12 @@
 
             
 
+            
+
              dialog box, letting your users modify print settings prior to printing. To let your users specify page settings prior to printing, use the <see
              cref="M:System.Windows.Forms.WebBrowser.ShowPageSetupDialog" />
+
+            
 
             
 
@@ -4806,8 +5746,12 @@
 
             
 
+            
+
              dialog box, use the <see
              cref="M:System.Windows.Forms.WebBrowser.ShowPrintPreviewDialog" />
+
+            
 
             
 
@@ -4819,6 +5763,8 @@
           <para
             >Opens the Internet Explorer <ui
             >Print</ui>
+
+            
 
             
 
@@ -4846,8 +5792,12 @@
 
             
 
+            
+
              menu item similar to the one on the Internet Explorer <ui
             >File</ui>
+
+            
 
             
 
@@ -4856,8 +5806,12 @@
 
             
 
+            
+
              dialog box, letting users see how the current document will appear if it is printed. To let your users specify page settings prior to printing, use the <see
              cref="M:System.Windows.Forms.WebBrowser.ShowPageSetupDialog" />
+
+            
 
             
 
@@ -4866,8 +5820,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Windows.Forms.WebBrowser.ShowPrintDialog" />
+
+            
 
             
 
@@ -4879,6 +5837,8 @@
           <para
             >Opens the Internet Explorer <ui
             >Print Preview</ui>
+
+            
 
             
 
@@ -4906,13 +5866,19 @@
 
             
 
+            
+
              menu option similar to the one on the Internet Explorer <ui
             >File</ui>
 
             
 
+            
+
              menu. This method displays the <ui
             >Properties</ui>
+
+            
 
             
 
@@ -4924,6 +5890,8 @@
           <para
             >Opens the Internet Explorer <ui
             >Properties</ui>
+
+            
 
             
 
@@ -4951,8 +5919,12 @@
 
             
 
+            
+
              menu item similar to the one on the Internet Explorer <ui
             >File</ui>
+
+            
 
             
 
@@ -4965,12 +5937,16 @@
 
               
 
+              
+
                property are not persisted. For information on retrieving the run-time modifications, see <format
                type="text/html">
                 <a href="53db79fa-8a5e-448e-88c2-f54ace3860b6"
                   >How to: Access the HTML Source in the Managed HTML Document Object Model</a
                 >
               </format>
+
+              
 
               
 
@@ -4986,8 +5962,12 @@
 
             
 
+            
+
              dialog box or the <ui
             >Save</ui>
+
+            
 
             
 
@@ -5015,13 +5995,19 @@
 
             
 
+            
+
              control in a status bar. The status text is a message that contains information such as the URL of a hyperlink when the mouse pointer hovers over it and the URL of the document currently being loaded. Handle the <see
              cref="E:System.Windows.Forms.WebBrowser.StatusTextChanged" />
 
             
 
+            
+
              event to update the status bar when the value of the <see
              cref="P:System.Windows.Forms.WebBrowser.StatusText" />
+
+            
 
             
 
@@ -5033,6 +6019,8 @@
           <para
             >Gets the status text of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -5067,6 +6055,8 @@
 
             
 
+            
+
              property changes.</para
           >
           <para
@@ -5074,6 +6064,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5085,6 +6077,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.WebBrowser.StatusText" />
+
+            
 
             
 
@@ -5117,8 +6111,12 @@
 
             
 
+            
+
              method to implement a <ui
             >Stop</ui>
+
+            
 
             
 
@@ -5161,6 +6159,8 @@
 
             
 
+            
+
              method and passing it the specified URL.</para
           >
           <para
@@ -5169,13 +6169,19 @@
 
             
 
+            
+
              control maintains a history list of all the Web pages visited during a browsing session. When you set the <see
              cref="P:System.Windows.Forms.WebBrowser.Url" />
 
             
 
+            
+
              property, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -5187,13 +6193,19 @@
 
             
 
+            
+
              control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see
              cref="Overload:System.Windows.Forms.WebBrowser.Refresh" />
 
             
 
+            
+
              method to force the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -5206,8 +6218,12 @@
 
               
 
+              
+
                control has not had time to load the new document. You can retrieve the new value in a <see
                cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+
+              
 
               
 
@@ -5237,6 +6253,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -5276,8 +6294,12 @@
 
             
 
+            
+
              control. This is useful when you want to conceal the fact that you are using the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -5289,8 +6311,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.WebBrowser.IsWebBrowserContextMenuEnabled" />
+
+            
 
             
 
@@ -5302,6 +6328,8 @@
           <para
             >Gets or sets a value indicating whether keyboard shortcuts are enabled within the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 

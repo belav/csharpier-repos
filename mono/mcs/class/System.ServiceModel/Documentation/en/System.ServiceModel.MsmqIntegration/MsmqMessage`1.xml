@@ -34,6 +34,8 @@
 
         
 
+        
+
          class to access the properties of the Message Queuing message.</para
       >
     </remarks>
@@ -42,6 +44,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" />
+
+        
 
         
 
@@ -95,6 +99,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -103,6 +109,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Messaging.AcknowledgeTypes" />
+
+            
 
             
 
@@ -141,6 +149,8 @@
 
             
 
+            
+
              that is associated with this message.</para
           >
         </summary>
@@ -173,6 +183,8 @@
 
             
 
+            
+
              of the administration queue that is associated with this message.</para
           >
         </summary>
@@ -202,6 +214,8 @@
 
             
 
+            
+
              value that represents any additional application-specific information that is associated with this message.</para
           >
         </summary>
@@ -228,6 +242,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -308,6 +324,8 @@
 
             
 
+            
+
              value that indicates the type of the body of the message.</para
           >
         </summary>
@@ -335,6 +353,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -367,6 +387,8 @@
 
             
 
+            
+
              of the destination queue for this message.</para
           >
         </summary>
@@ -393,6 +415,8 @@
           <para
             >Gets or sets an array of <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -427,6 +451,8 @@
 
             
 
+            
+
              that contains the message identifier for this message.</para
           >
         </summary>
@@ -454,6 +480,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -490,6 +518,8 @@
 
                 
 
+                
+
                 : A message sent by an application.</para
               >
             </item>
@@ -499,12 +529,16 @@
 
                 
 
+                
+
                 : A message that Message Queuing generates when an application sends a normal message and requests an acknowledgment. For example, Message Queuing can generate a positive or negative acknowledgment to indicate whether the original message arrived at its destination queue, or whether it was retrieved from the destination queue by the receiving application. Message Queuing returns the appropriate acknowledgment message to the administration queue specified by the sending application.</para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.Messaging.MessageType.Report" />
+
+                
 
                 
 
@@ -518,6 +552,8 @@
           <para
             >Gets the <see
              cref="T:System.Messaging.MessageType" />
+
+            
 
             
 
@@ -556,6 +592,8 @@
 
             
 
+            
+
              that is associated with this message.</para
           >
         </summary>
@@ -579,6 +617,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -608,6 +648,8 @@
           <para
             >Gets an array of <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -644,6 +686,8 @@
 
             
 
+            
+
              that indicates when the message was sent by the queue manager of the sending application's computer.</para
           >
         </summary>
@@ -675,6 +719,8 @@
 
             
 
+            
+
              property is true, the message is sent to the dead-letter queue. Otherwise, the message is dropped.</para
           >
           <para>The default for this property is null.</para>
@@ -684,6 +730,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 

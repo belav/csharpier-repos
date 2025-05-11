@@ -30,13 +30,19 @@
 
         
 
+        
+
          class is nearly identical to the <see
          cref="T:System.Globalization.HijriCalendar" />
 
         
 
+        
+
          class, except the Um Al Qura calendar uses a table-based algorithm licensed from the Saudi government to calculate dates, can express dates to the year 1500 A.H., and does not support the <see
          cref="P:System.Globalization.HijriCalendar.HijriAdjustment" />
+
+        
 
         
 
@@ -49,10 +55,14 @@
 
           
 
+          
+
            class and the other calendar classes in the .NET Framework, see <format
            type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
           </format>
+
+          
 
           
 
@@ -65,6 +75,8 @@
 
         
 
+        
+
          class, each month has either 29 or 30 days, but usually in no discernible order. Whereas the documentation for the Hijri Calendar gives a table that shows the corresponding days in each month, no such general table can be produced for the Um Al Qura calendar.</para
       >
       <para
@@ -73,11 +85,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >Note   The <see
          cref="T:System.Globalization.UmAlQuraCalendar" />
+
+        
 
         
 
@@ -110,6 +126,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Globalization.UmAlQuraCalendar" />
+
+            
 
             
 
@@ -149,8 +167,12 @@
 
             
 
+            
+
              is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The year part of the resulting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -159,8 +181,12 @@
 
             
 
+            
+
             . This implementation supports only the current era. Therefore, an exception is thrown if the resulting year is outside the era of the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -169,8 +195,12 @@
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -182,6 +212,8 @@
 
             
 
+            
+
              parameter is 3, the resulting year is one more than the specified year, the resulting month is Safar, and the resulting day is the 29th day, which is the last day in Safar.</para
           >
           <para
@@ -190,13 +222,19 @@
 
             
 
+            
+
              parameter is negative, the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              is earlier than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -208,8 +246,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -218,8 +260,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -228,8 +274,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -249,8 +299,12 @@
 
             
 
+            
+
              parameter to the date specified by the <paramref
              name="time" />
+
+            
 
             
 
@@ -262,8 +316,12 @@
 
           
 
+          
+
           The date to which to add months. The <see
            cref="T:System.Globalization.UmAlQuraCalendar" />
+
+          
 
           
 
@@ -271,6 +329,8 @@
         >
         <param name="months">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,13 +369,19 @@
 
             
 
+            
+
              is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The month part of the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -324,13 +390,19 @@
 
             
 
+            
+
             . The time-of-day part of the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -342,6 +414,8 @@
 
             
 
+            
+
              parameter is 1, the resulting date is the 29th day of Zulhijjah in the following year.</para
           >
           <para
@@ -350,13 +424,19 @@
 
             
 
+            
+
              is negative, the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              is earlier than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -368,8 +448,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -378,8 +462,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -388,8 +476,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -409,8 +501,12 @@
 
             
 
+            
+
              parameter to the date specified by the <paramref
              name="time" />
+
+            
 
             
 
@@ -422,8 +518,12 @@
 
           
 
+          
+
           The date to which to add years. The <see
            cref="T:System.Globalization.UmAlQuraCalendar" />
+
+          
 
           
 
@@ -431,6 +531,8 @@
         >
         <param name="years">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,6 +597,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -523,6 +627,8 @@
           <para
             >Gets a list of the eras that are supported by the current <see
              cref="T:System.Globalization.UmAlQuraCalendar" />
+
+            
 
             
 
@@ -563,6 +669,8 @@
 
             
 
+            
+
              parameter. </para
           >
         </returns>
@@ -571,8 +679,12 @@
 
           
 
+          
+
           The date value to read. The <see
            cref="T:System.Globalization.UmAlQuraCalendar" />
+
+          
 
           
 
@@ -607,6 +719,8 @@
           <para
             >The <see
              cref="T:System.DayOfWeek" />
+
+            
 
             
 
@@ -693,8 +807,12 @@
 
             
 
+            
+
              value that represents the day of the week specified by the <paramref
              name="time" />
+
+            
 
             
 
@@ -706,8 +824,12 @@
 
           
 
+          
+
           The date value to read. The <see
            cref="T:System.Globalization.UmAlQuraCalendar" />
+
+          
 
           
 
@@ -742,6 +864,8 @@
 
             
 
+            
+
              method returns 1 for the first day of the first month of the year, and the total number of days in the year for the last day of the last month. </para
           >
         </remarks>
@@ -757,6 +881,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -765,8 +891,12 @@
 
           
 
+          
+
           The date value to read. The <see
            cref="T:System.Globalization.UmAlQuraCalendar" />
+
+          
 
           
 
@@ -806,8 +936,12 @@
 
             
 
+            
+
              = 12), depending on whether <paramref
              name="year" />
+
+            
 
             
 
@@ -827,10 +961,14 @@
 
           
 
+          
+
           A year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -841,8 +979,12 @@
 
           
 
+          
+
           An era. Specify UmAlQuraCalendar.Eras[UmAlQuraCalendar.CurrentEra] or <see
            cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+          
 
           
 
@@ -887,6 +1029,8 @@
 
           
 
+          
+
           A year. </param
         >
         <param name="era">
@@ -894,8 +1038,12 @@
 
           
 
+          
+
           An era. Specify UmAlQuraCalendar.Eras[UmAlQuraCalendar.CurrentEra] or <see
            cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+          
 
           
 
@@ -938,11 +1086,15 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
         <param name="time">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -981,8 +1133,12 @@
 
             
 
+            
+
              method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
              cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+
+            
 
             
 
@@ -1001,11 +1157,15 @@
 
             
 
+            
+
              class does not support leap months.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1016,8 +1176,12 @@
 
           
 
+          
+
           An era. Specify UmAlQuraCalendar.Eras[UmAlQuraCalendar.CurrentEra] or <see
            cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+          
 
           
 
@@ -1057,6 +1221,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -1065,8 +1231,12 @@
 
           
 
+          
+
           The date value to read. The <see
            cref="T:System.Globalization.UmAlQuraCalendar" />
+
+          
 
           
 
@@ -1111,6 +1281,8 @@
 
           
 
+          
+
           A year. </param
         >
         <param name="era">
@@ -1118,8 +1290,12 @@
 
           
 
+          
+
           An era. Specify UmAlQuaraCalendar.Eras[UmAlQuraCalendar.CurrentEra] or <see
            cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+          
 
           
 
@@ -1155,6 +1331,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1166,6 +1344,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -1174,8 +1354,12 @@
 
           
 
+          
+
           The date value to read. The <see
            cref="T:System.Globalization.UmAlQuraCalendar" />
+
+          
 
           
 
@@ -1224,11 +1408,15 @@
 
             
 
+            
+
              class does not support leap days.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1239,10 +1427,14 @@
 
           
 
+          
+
           An integer from 1 through 12 that represents a month. </param
         >
         <param name="day">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1253,8 +1445,12 @@
 
           
 
+          
+
           An era. Specify UmAlQuraCalendar.Eras[UmAlQuraCalendar.CurrentEra] or <see
            cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+          
 
           
 
@@ -1302,11 +1498,15 @@
 
             
 
+            
+
              class does not support leap months.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1317,6 +1517,8 @@
 
           
 
+          
+
           An integer from 1 through 12 that represents a month. </param
         >
         <param name="era">
@@ -1324,8 +1526,12 @@
 
           
 
+          
+
           An era. Specify UmAlQuraCalendar.Eras[UmAlQuraCalendar.CurrentEra] or <see
            cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+          
 
           
 
@@ -1370,6 +1576,8 @@
 
           
 
+          
+
           A year. </param
         >
         <param name="era">
@@ -1377,8 +1585,12 @@
 
           
 
+          
+
           An era. Specify UmAlQuraCalendar.Eras[UmAlQuraCalendar.CurrentEra] or <see
            cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+          
 
           
 
@@ -1412,6 +1624,8 @@
             <para
               >Starting with the net_v45, the value of the <see
                cref="P:System.Globalization.UmAlQuraCalendar.MaxSupportedDateTime" />
+
+              
 
               
 
@@ -1489,6 +1703,8 @@
 
             
 
+            
+
              method is useful because it can convert any date in the current calendar to a Gregorian calendar date. The Gregorian date can subsequently be used, for example, to compare dates in different calendars or create an equivalent date in a particular calendar.</para
           >
         </remarks>
@@ -1497,6 +1713,8 @@
           <para
             >Returns a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1511,11 +1729,15 @@
 
             
 
+            
+
              that is set to the specified date and time in the current era.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1526,10 +1748,14 @@
 
           
 
+          
+
           An integer from 1 through 12 that represents a month. </param
         >
         <param name="day">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1540,10 +1766,14 @@
 
           
 
+          
+
           An integer from 0 through 23 that represents an hour. </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1554,10 +1784,14 @@
 
           
 
+          
+
           An integer from 0 through 59 that represents a second. </param
         >
         <param name="millisecond">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1568,8 +1802,12 @@
 
           
 
+          
+
           An era. Specify UmAlQuraCalendar.Eras[UmAlQuraCalendar.CurrentEra] or <see
            cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+          
 
           
 
@@ -1604,8 +1842,12 @@
 
             
 
+            
+
              method uses the <paramref
              name="year" />
+
+            
 
             
 
@@ -1614,13 +1856,19 @@
 
             
 
+            
+
              property, and a year to calculate a 4-digit year. The century is determined by finding the sole occurrence of the 2-digit <paramref
              name="year" />
 
             
 
+            
+
              parameter within that 100-year range. For example, if <see
              cref="P:System.Globalization.UmAlQuraCalendar.TwoDigitYearMax" />
+
+            
 
             
 
@@ -1632,13 +1880,19 @@
 
             
 
+            
+
              property is the special value 99, the <see
              cref="M:System.Globalization.UmAlQuraCalendar.ToFourDigitYear(System.Int32)" />
 
             
 
+            
+
              method ignores the settings in the regional and language options in Control Panel and returns the <paramref
              name="year" />
+
+            
 
             
 
@@ -1649,13 +1903,19 @@
 
             
 
+            
+
              supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see
              cref="P:System.Globalization.UmAlQuraCalendar.TwoDigitYearMax" />
 
             
 
+            
+
              value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see
              cref="M:System.Globalization.UmAlQuraCalendar.ToFourDigitYear(System.Int32)" />
+
+            
 
             
 
@@ -1670,6 +1930,8 @@
 
             
 
+            
+
              property to determine the appropriate century.</para
           >
         </summary>
@@ -1681,8 +1943,12 @@
 
             
 
+            
+
              parameter is a 2-digit year, the return value is the corresponding 4-digit year. If the <paramref
              name="year" />
+
+            
 
             
 
@@ -1691,11 +1957,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1726,8 +1996,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Globalization.UmAlQuraCalendar" />
+
+            
 
             
 
@@ -1736,6 +2010,8 @@
           <para
             >The special value 99 causes the <see
              cref="M:System.Globalization.UmAlQuraCalendar.ToFourDigitYear(System.Int32)" />
+
+            
 
             
 
@@ -1770,6 +2046,8 @@
           <para
             >The value of the <see
              cref="F:System.Globalization.UmAlQuraCalendar.UmAlQuraEra" />
+
+            
 
             
 

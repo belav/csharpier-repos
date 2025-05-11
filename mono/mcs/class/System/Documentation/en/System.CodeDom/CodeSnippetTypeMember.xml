@@ -38,6 +38,8 @@
 
         
 
+        
+
          can represent a member of a type using a literal code fragment that is included directly in the source without modification. This code can be included in the type declaration.</para
       >
       <para
@@ -46,11 +48,15 @@
 
         
 
+        
+
          stores a section of code, exactly in its original format, as a string. The CodeDOM does not translate literal code fragments. Literal code fragments are stored and output in their original format. CodeDOM objects that contain literal code are provided so developers can encapsulate code that is already in the target language.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeSnippetTypeMember.Text" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -118,11 +126,15 @@
 
             
 
+            
+
              class using the specified text.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

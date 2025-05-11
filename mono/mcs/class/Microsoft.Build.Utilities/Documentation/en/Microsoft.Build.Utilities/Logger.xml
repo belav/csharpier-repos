@@ -26,6 +26,8 @@
 
         
 
+        
+
          interface.</para
       >
       <para>This class can only be instantiated in a derived form.</para>
@@ -48,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Utilities.Logger" />
+
+            
 
             
 
@@ -82,6 +86,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -93,11 +99,15 @@
 
             
 
+            
+
              that represents an error message in canonical format.</para
           >
         </returns>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,6 +141,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -142,11 +154,15 @@
 
             
 
+            
+
              that represents a warning message in canonical format.</para
           >
         </returns>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -179,6 +195,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -188,6 +206,8 @@
         </summary>
         <param name="eventSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,6 +239,8 @@
           <para
             >Determines whether the current <see
              cref="P:Microsoft.Build.Utilities.Logger.Verbosity" />
+
+            
 
             
 

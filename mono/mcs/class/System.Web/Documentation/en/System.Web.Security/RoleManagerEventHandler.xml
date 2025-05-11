@@ -30,13 +30,19 @@
 
         
 
+        
+
          delegate is defined for the <see
          cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.RoleManagerModule" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.RoleManagerModule" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          to replace the creation of the <see
          cref="T:System.Web.Security.RolePrincipal" />
+
+        
 
         
 
@@ -68,8 +82,12 @@
 
         
 
+        
+
          with your own custom object. To do this, define a delegate using the <see
          cref="T:System.Web.Security.RoleManagerEventHandler" />
+
+        
 
         
 
@@ -78,8 +96,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.RoleManagerModule" />
+
+        
 
         
 
@@ -94,8 +116,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.RoleManagerModule" />
+
+        
 
         
 

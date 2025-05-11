@@ -39,8 +39,12 @@
 
         
 
+        
+
          class contains methods that are common to file and directory manipulation. A <see
          cref="T:System.IO.FileSystemInfo" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.IO.DirectoryInfo" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          only if the derived class has the AllAccess permission from the <see
          cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+        
 
         
 
@@ -92,6 +104,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -103,8 +117,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.DirectoryInfo" />
+
+        
 
         
 
@@ -138,6 +156,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -146,6 +166,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -184,6 +206,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -195,6 +219,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -203,8 +229,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -215,8 +245,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -253,13 +287,19 @@
 
             
 
+            
+
              property is pre-cached if the current instance of the <see
              cref="T:System.IO.FileSystemInfo" />
 
             
 
+            
+
              object was returned from any of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -303,6 +343,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>The value of this property is a combination of the archive, compressed, directory, hidden, offline, read-only, system, and temporary file attribute flags. </para>
@@ -312,8 +354,12 @@
 
             
 
+            
+
              property, include the value of the <see
              cref="P:System.IO.FileSystemInfo.Attributes" />
+
+            
 
             
 
@@ -354,13 +400,19 @@
 
             
 
+            
+
              property is pre-cached if the current instance of the <see
              cref="T:System.IO.FileSystemInfo" />
 
             
 
+            
+
              object was returned from any of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -404,11 +456,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >If the file described in the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -418,6 +474,8 @@
           <para
             >This property value is null if the file system containing the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -461,13 +519,19 @@
 
             
 
+            
+
              property is pre-cached if the current instance of the <see
              cref="T:System.IO.FileSystemInfo" />
 
             
 
+            
+
              object was returned from any of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -511,11 +575,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >If the file described in the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -525,6 +593,8 @@
           <para
             >This property value is null if the file system containing the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -585,6 +655,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -613,6 +685,8 @@
           <para
             >The Extension property returns the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -745,6 +819,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -813,6 +889,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -824,6 +902,8 @@
 
             
 
+            
+
              object with the file name and additional exception information.</para
           >
         </summary>
@@ -832,8 +912,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -844,8 +928,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -880,6 +968,8 @@
 
             
 
+            
+
              object does not exist, this property will return 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para
           >
           <para
@@ -888,13 +978,19 @@
 
             
 
+            
+
              property is pre-cached if the current instance of the <see
              cref="T:System.IO.FileSystemInfo" />
 
             
 
+            
+
              object was returned from any of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -935,6 +1031,8 @@
           <para
             >To get the latest value, call the <see
              cref="M:System.IO.FileSystemInfo.Refresh" />
+
+            
 
             
 
@@ -978,13 +1076,19 @@
 
             
 
+            
+
              property is pre-cached if the current instance of the <see
              cref="T:System.IO.FileSystemInfo" />
 
             
 
+            
+
               object was returned from any of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -1028,11 +1132,15 @@
 
             
 
+            
+
               method.</para
           >
           <para
             >If the file described in the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -1043,6 +1151,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1082,13 +1192,19 @@
 
             
 
+            
+
              property is pre-cached if the current instance of the <see
              cref="T:System.IO.FileSystemInfo" />
 
             
 
+            
+
              object was returned from any of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -1132,11 +1248,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >If the file described in the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -1181,13 +1301,19 @@
 
             
 
+            
+
              property is pre-cached if the current instance of the <see
              cref="T:System.IO.FileSystemInfo" />
 
             
 
+            
+
              object was returned from any of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -1231,11 +1357,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >If the file described in the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -1295,6 +1425,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 

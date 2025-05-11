@@ -397,7 +397,8 @@
       <first-name>Rachel</first-name>
       <last-name>Hestilow</last-name>
     </name>
-    <e-mail>rachel@nullenvoid.com</e-mail>
+    <e-mail
+>rachel@nullenvoid.com</e-mail>
     <image>none.png</image>
     <location>USA</location>
     <organization></organization>
@@ -475,7 +476,8 @@
       <first-name>Rafael</first-name>
       <last-name>Teixeira</last-name>
     </name>
-    <e-mail>rafaelteixeirabr@hotmail.com</e-mail>
+    <e-mail
+>rafaelteixeirabr@hotmail.com</e-mail>
     <image>none.png</image>
     <location>São Paulo</location>
     <organization>WEBforAll.</organization>
@@ -507,8 +509,10 @@
       <first-name>Ravi</first-name>
       <last-name>Pratap M</last-name>
     </name>
-    <e-mail>ravi@ximian.com</e-mail>
-    <image>rpratap.png</image>
+    <e-mail
+>ravi@ximian.com</e-mail>
+    <image
+>rpratap.png</image>
     <location>St. Louis</location>
     <organization>Ximian (formerly)</organization>
     <description>Ximian hacker</description>
@@ -521,7 +525,8 @@
       <first-name>Mark</first-name>
       <last-name>Crichton</last-name>
     </name>
-    <e-mail>reverse_gro.pmig@nothcirc</e-mail>
+    <e-mail
+>reverse_gro.pmig@nothcirc</e-mail>
     <image>none.png</image>
     <location>Amherst, MA</location>
     <organization>Univ. of Mass., Amherst</organization>
@@ -594,8 +599,10 @@
       <first-name>Reggie</first-name>
       <last-name>Burnett</last-name>
     </name>
-    <e-mail>reggie@bytefx.com</e-mail>
-    <image>reggie.png</image>
+    <e-mail
+>reggie@bytefx.com</e-mail>
+    <image
+>reggie.png</image>
     <location>Tennessee, USA</location>
     <organization>ByteFX, Inc.</organization>
     <description>Consultant</description>
@@ -624,7 +631,8 @@
       <first-name>Aleksey</first-name>
       <last-name>Ryabchuk</last-name>
     </name>
-    <e-mail>ryabchuk@yahoo.com</e-mail>
+    <e-mail
+>ryabchuk@yahoo.com</e-mail>
     <image>aleksey.png</image>
     <location>Ireland</location>
     <description>External Contributor</description>

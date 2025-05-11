@@ -37,6 +37,8 @@
 
         
 
+        
+
          instead. </para
       >
     </summary>
@@ -137,6 +139,8 @@
           <para
             >The function that is displayed to the user as bindable. <see
              cref="F:System.Runtime.InteropServices.FUNCFLAGS.FUNCFLAG_FBINDABLE" />
+
+            
 
             
 

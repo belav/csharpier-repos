@@ -31,6 +31,8 @@
 
         
 
+        
+
          class is created. Each property is itself a managed object. Depending on whether or not properties contribute message sinks, they are considered either active or passive.</para
       >
     </remarks>

@@ -26,8 +26,12 @@
 
         
 
+        
+
          class provides support for the If-Range header as defined in <see
          cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+
+        
 
         
 
@@ -66,11 +70,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="date">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -104,6 +112,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -112,8 +122,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Http.Headers.EntityTagHeaderValue" />
+
+          
 
           
 
@@ -144,11 +158,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="entityTag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,6 +195,8 @@
           <para
             >Gets the date from the <see
              cref="T:System.Net.Http.Headers.RangeConditionHeaderValue" />
+
+            
 
             
 
@@ -212,6 +232,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -243,8 +265,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.Http.Headers.RangeConditionHeaderValue" />
+
+            
 
             
 
@@ -259,6 +285,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -267,11 +295,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,6 +335,8 @@
 
             
 
+            
+
               method is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -314,6 +348,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -322,6 +358,8 @@
           <para
             >Returns <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -360,6 +398,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -371,6 +411,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -379,11 +421,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -415,6 +461,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -423,6 +471,8 @@
           <para
             >Returns <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -456,6 +506,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -464,6 +516,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          and other message originators.</para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          methods on the <see
          cref="T:System.Net.Http.HttpClient" />
+
+        
 
         
 
@@ -47,6 +53,8 @@
       <para
         >A specialty class that allows applications to call the <see
          cref="M:System.Net.Http.HttpMessageInvoker.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+
+        
 
         
 
@@ -81,8 +89,12 @@
 
             
 
+            
+
              class with a specific <see
              cref="T:System.Net.Http.HttpMessageHandler" />
+
+            
 
             
 
@@ -94,8 +106,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Http.HttpMessageHandler" />
+
+          
 
           
 
@@ -130,8 +146,12 @@
 
             
 
+            
+
              class with a specific <see
              cref="T:System.Net.Http.HttpMessageHandler" />
+
+            
 
             
 
@@ -143,8 +163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Http.HttpMessageHandler" />
+
+          
 
           
 
@@ -152,6 +176,8 @@
         >
         <param name="disposeHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -180,6 +206,8 @@
           <para
             >Releases the unmanaged resources and disposes of the managed resources used by the <see
              cref="T:System.Net.Http.HttpMessageInvoker" />
+
+            
 
             
 
@@ -214,11 +242,15 @@
 
             
 
+            
+
              and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -255,6 +287,8 @@
 
             
 
+            
+
              object will complete once the entire response including content is read.</para
           >
           <para
@@ -263,8 +297,12 @@
 
             
 
+            
+
              methods on the <see
              cref="T:System.Net.Http.HttpClient" />
+
+            
 
             
 
@@ -283,6 +321,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -292,10 +332,14 @@
 
           
 
+          
+
           The HTTP request message to send.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

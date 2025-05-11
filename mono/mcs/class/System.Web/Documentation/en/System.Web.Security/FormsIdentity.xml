@@ -29,8 +29,12 @@
 
         
 
+        
+
          class is used by the <see
          cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          class is created using the <see
          cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          class is used to construct a new <see
          cref="T:System.Security.Principal.GenericPrincipal" />
+
+        
 
         
 
@@ -59,8 +71,12 @@
 
         
 
+        
+
          property for the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -93,11 +109,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="ticket">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -163,13 +183,19 @@
 
             
 
+            
+
              property returns the value of the <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.Name" />
 
             
 
+            
+
              property from the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 
@@ -203,6 +229,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 

@@ -28,10 +28,14 @@
 
         
 
+        
+
          interface is used to interoperate with the <format
          type="text/html">
           <a href="ebbff4bc-36b2-4861-9efa-ffa45e013eb5">IDispatch interface</a>
         </format>
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          defines a subset of the <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -50,13 +58,19 @@
 
         
 
+        
+
          class can be used to marshal an object that implements <see
          cref="T:System.Reflection.IReflect" />
 
         
 
+        
+
          or <see
          cref="T:System.Runtime.InteropServices.Expando.IExpando" />
+
+        
 
         
 
@@ -70,6 +84,8 @@
          type="text/html">
           <a href="ebbff4bc-36b2-4861-9efa-ffa45e013eb5">IDispatch interface</a>
         </format>
+
+        
 
         
 
@@ -110,6 +126,8 @@
 
             
 
+            
+
              object that corresponds to the specified field and binding flag.</para
           >
         </summary>
@@ -121,8 +139,12 @@
 
             
 
+            
+
              object containing the field information for the named object that meets the search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -134,10 +156,14 @@
 
           
 
+          
+
           The name of the field to find. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,8 +201,12 @@
 
             
 
+            
+
              flag specifies that non-public methods are included in the search. The <see
              cref="F:System.Reflection.BindingFlags.Public" />
+
+            
 
             
 
@@ -191,6 +221,8 @@
 
             
 
+            
+
              objects that correspond to all fields of the current class.</para
           >
         </summary>
@@ -202,8 +234,12 @@
 
             
 
+            
+
              objects containing all the field information for this reflection object that meets the search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -212,6 +248,8 @@
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,13 +288,19 @@
 
             
 
+            
+
              method retrieves an array of <see
              cref="T:System.Reflection.MemberInfo" />
 
             
 
+            
+
              objects by using the name and binding attribute that correspond to all public members or to all members that match a specified name. The case of the specified name is observed or ignored, as specified by <see
              cref="F:System.Reflection.BindingFlags.IgnoreCase" />
+
+            
 
             
 
@@ -271,6 +315,8 @@
 
             
 
+            
+
              objects corresponding to all public members or to all members that match a specified name.</para
           >
         </summary>
@@ -282,8 +328,12 @@
 
             
 
+            
+
              objects matching the <paramref
              name="name" />
+
+            
 
             
 
@@ -295,10 +345,14 @@
 
           
 
+          
+
           The name of the member to find. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -336,6 +390,8 @@
 
             
 
+            
+
              objects by using the binding attribute that corresponds either to all public members or to all members of the current class. It returns an array of all of the members defined for this object.</para
           >
         </remarks>
@@ -344,6 +400,8 @@
           <para
             >Retrieves an array of <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -358,11 +416,15 @@
 
             
 
+            
+
              objects containing all the member information for this reflection object.</para
           >
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,6 +464,8 @@
 
             
 
+            
+
              object that corresponds to a specified method under specified search constraints.</para
           >
         </summary>
@@ -413,8 +477,12 @@
 
             
 
+            
+
              object containing the method information, with the match being based on the method name and search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -426,10 +494,14 @@
 
           
 
+          
+
           The name of the member to find. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,13 +543,19 @@
 
             
 
+            
+
              enum member, the kind of type conversion specified by the <paramref
              name="binder" />
 
             
 
+            
+
              parameter, the overload, and the <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -492,8 +570,12 @@
 
             
 
+            
+
              object corresponding to a specified method, using a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -509,10 +591,14 @@
 
           
 
+          
+
           The name of the member to find. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -523,8 +609,12 @@
 
           
 
+          
+
           An object that implements <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -535,10 +625,14 @@
 
           
 
+          
+
           An array used to choose among overloaded methods. </param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -576,6 +670,8 @@
 
             
 
+            
+
              is indicated only if public methods are returned.</para
           >
         </remarks>
@@ -584,6 +680,8 @@
           <para
             >Retrieves an array of <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -598,8 +696,12 @@
 
             
 
+            
+
              objects containing all the methods defined for this reflection object that meet the search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -608,6 +710,8 @@
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -646,6 +750,8 @@
 
             
 
+            
+
              objects corresponding to all public properties or to all properties of the current class.</para
           >
         </summary>
@@ -657,11 +763,15 @@
 
             
 
+            
+
              objects for all the properties defined on the reflection object.</para
           >
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -701,6 +811,8 @@
 
             
 
+            
+
              object corresponding to a specified property under specified search constraints.</para
           >
         </summary>
@@ -712,8 +824,12 @@
 
             
 
+            
+
              object for the located property that meets the search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -725,10 +841,14 @@
 
           
 
+          
+
           The name of the property to find. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -771,6 +891,8 @@
 
             
 
+            
+
              object corresponding to a specified property under specified search constraints. A type array is used to choose from among overloaded methods.</para
           >
         </remarks>
@@ -779,6 +901,8 @@
           <para
             >Retrieves a <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -793,11 +917,15 @@
 
             
 
+            
+
              object for the located property, if a property with the specified name was located in this reflection object, or null if the property was not located.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -808,6 +936,8 @@
 
           
 
+          
+
           The binding attribute used to control the search. </param
         >
         <param name="binder">
@@ -815,8 +945,12 @@
 
           
 
+          
+
           An object that implements <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -827,6 +961,8 @@
 
           
 
+          
+
           The type of the property. </param
         >
         <param name="types">
@@ -834,10 +970,14 @@
 
           
 
+          
+
           An array used to choose among overloaded methods with the same name. </param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -885,6 +1025,8 @@
 
               
 
+              
+
                method must contain a single parameter modifier. Only the first parameter modifier is considered when determining which argument needs to be passed by reference when exposed to COM.</para
             >
           </block>
@@ -894,13 +1036,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Reflection.IReflect.GetProperties(System.Reflection.BindingFlags)" />
 
             
 
+            
+
             , and so on). The set of methods is filtered by the name, number of arguments, and a set of search modifiers defined in the binder. After the method is selected, it is invoked, and accessibility is checked at that point. The search may control which set of methods is searched based upon the accessibility attribute associated with the method. <see
              cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" />
+
+            
 
             
 
@@ -921,10 +1069,14 @@
 
           
 
+          
+
           The name of the member to find. </param
         >
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -933,8 +1085,12 @@
 
           
 
+          
+
            invocation attributes. The <paramref
            name="invokeAttr" />
+
+          
 
           
 
@@ -945,13 +1101,19 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Reflection.BindingFlags" />
 
           
 
+          
+
            bit flags. Implements <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -962,10 +1124,14 @@
 
           
 
+          
+
           The object on which to invoke the specified member. This parameter is ignored for static members. </param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -976,13 +1142,19 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.ParameterModifier" />
 
           
 
+          
+
            objects. This array has the same length as the <paramref
            name="args" />
+
+          
 
           
 
@@ -993,8 +1165,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1003,8 +1179,12 @@
 
           
 
+          
+
            converts a String that represents 1000 to a Double value, since 1000 is represented differently by different cultures. If this parameter is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1012,6 +1192,8 @@
         >
         <param name="namedParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1042,6 +1224,8 @@
           <para
             >Gets the underlying type that represents the <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 

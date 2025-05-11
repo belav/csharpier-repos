@@ -34,8 +34,12 @@
 
         
 
+        
+
          class contains a collection of <see
          cref="T:System.ServiceModel.Description.MetadataSection" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          class is used to pass a group of XML metadata documents to and from <see
          cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+        
 
         
 
@@ -54,13 +62,19 @@
 
         
 
+        
+
          objects, such as <see
          cref="T:System.ServiceModel.Description.WsdlImporter" />
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+        
 
         
 
@@ -72,13 +86,19 @@
 
         
 
+        
+
          from a <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
+        
+
          object of type <see
          cref="T:System.ServiceModel.Description.MetadataSection" />
+
+        
 
         
 
@@ -87,8 +107,12 @@
 
         
 
+        
+
          constructor. To obtain a <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -97,8 +121,12 @@
 
         
 
+        
+
         , use the <see
          cref="P:System.ServiceModel.Description.MetadataSet.MetadataSections" />
+
+        
 
         
 
@@ -110,13 +138,19 @@
 
         
 
+        
+
          method to load a <see
          cref="T:System.ServiceModel.Description.MetadataSet" />
 
         
 
+        
+
          from XML data and the <see
          cref="M:System.ServiceModel.Description.MetadataSet.WriteTo(System.Xml.XmlWriter)" />
+
+        
 
         
 
@@ -150,6 +184,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -158,6 +194,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -194,8 +232,12 @@
 
             
 
+            
+
              from <paramref
              name="sections" />
+
+            
 
             
 
@@ -210,8 +252,12 @@
 
             
 
+            
+
              class that contains the specified collection of <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -223,8 +269,12 @@
 
           
 
+          
+
           The metadata values that the <see
            cref="T:System.ServiceModel.Description.MetadataSet" />
+
+          
 
           
 
@@ -264,8 +314,12 @@
 
             
 
+            
+
              objects that appear in the serialized form of the <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -306,6 +360,8 @@
 
             
 
+            
+
              objects that represents the metadata.</para
           >
         </summary>
@@ -339,8 +395,12 @@
 
             
 
+            
+
              from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -355,8 +415,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -371,11 +435,15 @@
 
             
 
+            
+
              that contains all the metadata present in the XML stream.</para
           >
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,6 +478,8 @@
 
             
 
+            
+
              method to provide serialization support.</para
           >
         </summary>
@@ -421,6 +491,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -429,13 +501,19 @@
 
             
 
+            
+
              object that describes the XML representation of the object that is produced by the <see
              cref="M:System.ServiceModel.Description.MetadataSet.System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
 
             
 
+            
+
              method and accessed by the <see
              cref="M:System.ServiceModel.Description.MetadataSet.System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -473,11 +551,15 @@
 
             
 
+            
+
              method to support deserialization from XML.</para
           >
         </summary>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -514,11 +596,15 @@
 
             
 
+            
+
              method to support serialization to XML.</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -551,6 +637,8 @@
 
             
 
+            
+
              to an XML stream.</para
           >
         </remarks>
@@ -562,8 +650,12 @@
 
             
 
+            
+
              to XML using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -572,6 +664,8 @@
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -24,13 +24,19 @@
 
         
 
+        
+
          control. You can access the <see
          cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -59,8 +73,12 @@
 
         
 
+        
+
          that defines the location of the hyperlink within the control's text. When a hyperlink is specified using the <see
          cref="T:System.Windows.Forms.LinkArea" />
+
+        
 
         
 
@@ -69,13 +87,19 @@
 
         
 
+        
+
          in the same manner as adding the link using the <see
          cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+        
 
         
 
@@ -87,8 +111,12 @@
 
         
 
+        
+
          property specifies the number of characters within the text of the <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -97,8 +125,12 @@
 
         
 
+        
+
          property specifies the first character in the control text to include in the hyperlink. If you want to determine whether a specific <see
          cref="T:System.Windows.Forms.LinkArea" />
+
+        
 
         
 
@@ -107,13 +139,19 @@
 
         
 
+        
+
          property instead of checking the values of the <see
          cref="P:System.Windows.Forms.LinkArea.Start" />
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.LinkArea.Length" />
+
+        
 
         
 
@@ -125,6 +163,8 @@
       <para
         >Represents an area within a <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -150,6 +190,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -158,8 +200,12 @@
 
           
 
+          
+
           The zero-based starting location of the link area within the text of the <see
            cref="T:System.Windows.Forms.LinkLabel" />
+
+          
 
           
 
@@ -167,6 +213,8 @@
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -197,6 +245,8 @@
 
             
 
+            
+
              is equal to the specified object.</para
           >
         </summary>
@@ -208,6 +258,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -216,8 +268,12 @@
 
           
 
+          
+
           The object to compare to this <see
            cref="T:System.Windows.Forms.LinkArea" />
+
+          
 
           
 
@@ -270,8 +326,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.LinkArea.Start" />
+
+            
 
             
 
@@ -283,6 +343,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.LinkArea" />
+
+            
 
             
 
@@ -311,8 +373,12 @@
 
             
 
+            
+
              to display as a link, set the <see
              cref="P:System.Windows.Forms.LinkArea.Start" />
+
+            
 
             
 
@@ -321,8 +387,12 @@
 
             
 
+            
+
              property is set, set the value of the <see
              cref="P:System.Windows.Forms.LinkArea.Length" />
+
+            
 
             
 
@@ -331,13 +401,19 @@
 
             
 
+            
+
              property, that you want to make the link text. For example, if you want to make the first word of the text "The quick brown fox" a link, you set the <see
              cref="P:System.Windows.Forms.LinkArea.Start" />
 
             
 
+            
+
              property to zero (0) and the <see
              cref="P:System.Windows.Forms.LinkArea.Length" />
+
+            
 
             
 
@@ -380,6 +456,8 @@
 
             
 
+            
+
              class are equal.</para
           >
         </summary>
@@ -391,6 +469,8 @@
 
             
 
+            
+
              class are equal; otherwise, false.</para
           >
         </returns>
@@ -399,8 +479,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LinkArea" />
+
+          
 
           
 
@@ -411,8 +495,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LinkArea" />
+
+          
 
           
 
@@ -446,6 +534,8 @@
 
             
 
+            
+
              class are not equal.</para
           >
         </summary>
@@ -457,6 +547,8 @@
 
             
 
+            
+
              class are not equal; otherwise, false.</para
           >
         </returns>
@@ -465,8 +557,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LinkArea" />
+
+          
 
           
 
@@ -477,8 +573,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LinkArea" />
+
+          
 
           
 
@@ -502,8 +602,12 @@
 
             
 
+            
+
              to display as a link, set the <see
              cref="P:System.Windows.Forms.LinkArea.Start" />
+
+            
 
             
 
@@ -512,8 +616,12 @@
 
             
 
+            
+
              property is set, set the value of the <see
              cref="P:System.Windows.Forms.LinkArea.Length" />
+
+            
 
             
 
@@ -522,13 +630,19 @@
 
             
 
+            
+
              property, that you want to make the link text. For example, if you want to make the first word of the text "The quick brown fox" a link, you set the <see
              cref="P:System.Windows.Forms.LinkArea.Start" />
 
             
 
+            
+
              property to zero (0) and the <see
              cref="P:System.Windows.Forms.LinkArea.Length" />
+
+            
 
             
 
@@ -540,6 +654,8 @@
           <para
             >Gets or sets the starting location of the link area within the text of the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration identifies the state of a row in a data control such as <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
         . A row's state can be one or a combination of the <see
          cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+        
 
         
 
@@ -43,8 +51,12 @@
 
         
 
+        
+
          value, rather than an equivalence test. The <see
          cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+        
 
         
 
@@ -53,8 +65,12 @@
 
         
 
+        
+
          rows (typically, the state of header and footer rows is set to <see
          cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
+
+        
 
         
 
@@ -66,8 +82,12 @@
 
         
 
+        
+
          enumeration to identify the state of a <see
          cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
 
         
 
@@ -76,8 +96,12 @@
 
         
 
+        
+
          object when enumerating through a <see
          cref="T:System.Web.UI.WebControls.GridViewRowCollection" />
+
+        
 
         
 
@@ -86,8 +110,12 @@
 
         
 
+        
+
          collection, respectively. If you are writing a data control that uses rows, you can use the <see
          cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+        
 
         
 
@@ -96,13 +124,19 @@
 
         
 
+        
+
          value), or controls that are enabled or disabled for editing a row (the <see
          cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
 
         
 
+        
+
          and <see
          cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
+
+        
 
         
 
@@ -117,8 +151,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -143,8 +181,12 @@
 
             
 
+            
+
              state can be combined with other states, such as <see
              cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
+
+            
 
             
 
@@ -153,8 +195,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
+
+            
 
             
 
@@ -186,8 +232,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
+
+            
 
             
 
@@ -215,8 +265,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
+
+            
 
             
 
@@ -244,8 +298,12 @@
 
             
 
+            
+
              state is mutually exclusive with other states except the <see
              cref="F:System.Web.UI.WebControls.DataControlRowState.Alternate" />
+
+            
 
             
 

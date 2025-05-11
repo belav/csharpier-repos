@@ -30,6 +30,8 @@
 
             
 
+            
+
              number.</para
           >
         </item>
@@ -37,6 +39,8 @@
           <para
             >The next 16 bits are the <see
              cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+
+            
 
             
 
@@ -50,6 +54,8 @@
 
             
 
+            
+
              number.</para
           >
         </item>
@@ -57,6 +63,8 @@
           <para
             >The last 16 bits are the <see
              cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+
+            
 
             
 
@@ -70,8 +78,12 @@
 
         
 
+        
+
          method of this class to get a <see
          cref="T:System.Diagnostics.FileVersionInfo" />
+
+        
 
         
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
          property provides version information about the file. The <see
          cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
+
+        
 
         
 
@@ -90,8 +106,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
+
+        
 
         
 
@@ -100,13 +120,19 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Diagnostics.FileVersionInfo.ProductVersion" />
 
         
 
+        
+
          properties provide version information for the product that the specified file is a part of. Call <see
          cref="M:System.Diagnostics.FileVersionInfo.ToString" />
+
+        
 
         
 
@@ -118,6 +144,8 @@
 
         
 
+        
+
          properties are based on version resource information built into the file. Version resources are often built into binary files such as .exe or .dll files; text files do not have version resource information.</para
       >
       <para
@@ -126,10 +154,14 @@
 
         
 
+        
+
          property reflects the VS_FF_DEBUG flag value in the file's VS_FIXEDFILEINFO block, which is built from the VERSIONINFO resource in a Win32 resource file.  For more information about specifying version resources in a Win32 resource file, see "About Resource Files" and "VERSIONINFO Resource" in the Platform SDK. For more information about specifying version resources in a .NET module, see the <format
          type="text/html">
           <a href="36a98a81-b5b5-4c19-912a-11f91eff7f4e">Setting Assembly Attributes</a>
         </format>
+
+        
 
         
 
@@ -142,10 +174,14 @@
 
           
 
+          
+
            is thrown when the immediate caller does not have full trust permission. For details about link demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
+
+          
 
           
 
@@ -230,6 +266,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -237,6 +275,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+
+                
 
                 
 
@@ -250,6 +290,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -257,6 +299,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+
+                
 
                 
 
@@ -318,6 +362,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -325,6 +371,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+
+                
 
                 
 
@@ -338,6 +386,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -345,6 +395,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+
+                
 
                 
 
@@ -385,6 +437,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -392,6 +446,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+
+                
 
                 
 
@@ -405,6 +461,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -412,6 +470,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+
+                
 
                 
 
@@ -450,6 +510,8 @@
 
             
 
+            
+
              describes.</para
           >
         </summary>
@@ -480,6 +542,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -487,6 +551,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+
+                
 
                 
 
@@ -500,6 +566,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -507,6 +575,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+
+                
 
                 
 
@@ -547,6 +617,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -554,6 +626,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+
+                
 
                 
 
@@ -567,6 +641,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -574,6 +650,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+
+                
 
                 
 
@@ -619,6 +697,8 @@
 
             
 
+            
+
              representing the version information associated with the specified file.</para
           >
         </summary>
@@ -630,8 +710,12 @@
 
             
 
+            
+
              containing information about the file. If the file did not contain version information, the <see
              cref="T:System.Diagnostics.FileVersionInfo" />
+
+            
 
             
 
@@ -640,6 +724,8 @@
         </returns>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -690,11 +776,15 @@
 
             
 
+            
+
              properties are based on version resource information built into the file. Version resources are often built into binary files such as .exe or .dll files; text files do not have version resource information.</para
           >
           <para
             >Version resources are typically specified in a Win32 resource file, or in assembly attributes. The <see
              cref="P:System.Diagnostics.FileVersionInfo.IsDebug" />
+
+            
 
             
 
@@ -771,6 +861,8 @@
 
             
 
+            
+
              will describe how this version of the file differs from the standard version.</para
           >
         </remarks>
@@ -799,6 +891,8 @@
           <para
             >A file that is a special build was built using standard release procedures, but the file differs from a standard file of the same version number. If this value is true, the <see
              cref="P:System.Diagnostics.FileVersionInfo.SpecialBuild" />
+
+            
 
             
 
@@ -926,6 +1020,8 @@
 
             
 
+            
+
              is true.</para
           >
         </remarks>
@@ -960,6 +1056,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -967,6 +1065,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+
+                
 
                 
 
@@ -980,6 +1080,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -987,6 +1089,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+
+                
 
                 
 
@@ -1027,6 +1131,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -1034,6 +1140,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+
+                
 
                 
 
@@ -1047,6 +1155,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -1054,6 +1164,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+
+                
 
                 
 
@@ -1094,6 +1206,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -1101,6 +1215,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+
+                
 
                 
 
@@ -1114,6 +1230,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -1121,6 +1239,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+
+                
 
                 
 
@@ -1182,6 +1302,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -1189,6 +1311,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+
+                
 
                 
 
@@ -1202,6 +1326,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -1209,6 +1335,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+
+                
 
                 
 
@@ -1249,6 +1377,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -1256,6 +1386,8 @@
               <para
                 >The next 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+
+                
 
                 
 
@@ -1269,6 +1401,8 @@
 
                 
 
+                
+
                  number.</para
               >
             </item>
@@ -1276,6 +1410,8 @@
               <para
                 >The last 16 bits are the <see
                  cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+
+                
 
                 
 
@@ -1312,8 +1448,12 @@
 
             
 
+            
+
              is true, <see
              cref="P:System.Diagnostics.FileVersionInfo.SpecialBuild" />
+
+            
 
             
 
@@ -1352,6 +1492,8 @@
 
             
 
+            
+
              and their values.</para
           >
         </summary>
@@ -1363,8 +1505,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.FileVersionInfo.InternalName" />
+
+            
 
             
 
@@ -1373,8 +1519,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.FileVersionInfo.FileVersion" />
+
+            
 
             
 
@@ -1383,8 +1533,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.FileVersionInfo.ProductName" />
+
+            
 
             
 
@@ -1393,8 +1547,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.FileVersionInfo.IsDebug" />
+
+            
 
             
 
@@ -1403,8 +1561,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.FileVersionInfo.IsPreRelease" />
+
+            
 
             
 
@@ -1413,8 +1575,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.FileVersionInfo.IsSpecialBuild" />
+
+            
 
             
 
@@ -1422,6 +1588,8 @@
           >
           <para>
             <see cref="P:System.Diagnostics.FileVersionInfo.Language" />
+
+            
 
             
 

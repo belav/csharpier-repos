@@ -16,8 +16,12 @@
 
         
 
+        
+
          interface defines the property and event that must be implemented for a control to act as a check box on a Web page. The <see
          cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+
+        
 
         
 
@@ -26,8 +30,12 @@
 
         
 
+        
+
          event is raised when the <see
          cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
             
 
+            
+
              use <see
              cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+
+            
 
             
 
@@ -70,6 +82,8 @@
           <para
             >Gets or sets the value of an <see
              cref="T:System.Web.UI.ICheckBoxControl" />
+
+            
 
             
 
@@ -97,8 +111,12 @@
 
             
 
+            
+
              event is raised when the value of <see
              cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+
+            
 
             
 
@@ -110,6 +128,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+
+            
 
             
 

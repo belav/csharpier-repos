@@ -43,13 +43,19 @@
 
         
 
+        
+
          instances control permission to accept connections or initiate <see
          cref="T:System.Net.Sockets.Socket" />
 
         
 
+        
+
          connections. A <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -97,8 +103,12 @@
 
             
 
+            
+
              instance is created with the Unrestricted value from <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -107,8 +117,12 @@
 
             
 
+            
+
              instance passes all demands. Any other value for <paramref
              name="state" />
+
+            
 
             
 
@@ -117,8 +131,12 @@
 
             
 
+            
+
              instance that fails all demands unless a transport address permission is added with <see
              cref="M:System.Net.SocketPermission.AddPermission(System.Net.NetworkAccess,System.Net.TransportType,System.String,System.Int32)" />
+
+            
 
             
 
@@ -133,13 +151,19 @@
 
             
 
+            
+
              class that allows unrestricted access to the <see
              cref="T:System.Net.Sockets.Socket" />
 
             
 
+            
+
              or disallows access to the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -151,8 +175,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -194,8 +222,12 @@
 
           
 
+          
+
            parameter is <see
            langword="null" />
+
+          
 
           
 
@@ -209,8 +241,12 @@
 
             
 
+            
+
              that controls access to the specified <paramref
              name="hostName" />
+
+            
 
             
 
@@ -219,8 +255,12 @@
 
             
 
+            
+
              using the specified <paramref
              name="transport" />
+
+            
 
             
 
@@ -232,6 +272,8 @@
 
             
 
+            
+
              can be a DNS name, an IP address, or a specified IP subnet, such as 192.168.1.*.</para
           >
           <para
@@ -240,8 +282,12 @@
 
             
 
+            
+
              can be any valid port number defined by the transport, or <see
              cref="F:System.Net.SocketPermission.AllPorts" />
+
+            
 
             
 
@@ -256,6 +302,8 @@
 
             
 
+            
+
              class for the given transport address with the specified permission.</para
           >
         </summary>
@@ -264,8 +312,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.NetworkAccess" />
+
+          
 
           
 
@@ -276,8 +328,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.TransportType" />
+
+          
 
           
 
@@ -288,10 +344,14 @@
 
           
 
+          
+
           The host name for the transport address. </param
         >
         <param name="portNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,6 +386,8 @@
           <para
             >Gets a list of <see
              cref="T:System.Net.EndpointPermission" />
+
+            
 
             
 
@@ -367,6 +429,8 @@
 
             
 
+            
+
              can be a DNS name, an IP address, or a specified IP subnet, such as 192.168.1.*.</para
           >
         </remarks>
@@ -379,8 +443,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.NetworkAccess" />
+
+          
 
           
 
@@ -391,8 +459,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.TransportType" />
+
+          
 
           
 
@@ -403,10 +475,14 @@
 
           
 
+          
+
           The host name for the transport address. </param
         >
         <param name="portNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -473,6 +549,8 @@
 
             
 
+            
+
              instances that identifies the endpoints that can be connected to under this permission instance.</para
           >
         </summary>
@@ -507,8 +585,12 @@
 
             
 
+            
+
              and is implemented to support the <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -523,6 +605,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -531,6 +615,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -572,8 +658,12 @@
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -586,8 +676,12 @@
 
             
 
+            
+
             is not a <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -602,13 +696,19 @@
 
             
 
+            
+
              method reconstructs a <see
              cref="T:System.Net.SocketPermission" />
 
             
 
+            
+
              instance from an XML encoding defined by the <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -620,8 +720,12 @@
 
             
 
+            
+
              method to encode the <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -636,6 +740,8 @@
 
             
 
+            
+
              instance for an XML encoding.</para
           >
         </summary>
@@ -644,8 +750,12 @@
 
           
 
+          
+
           The XML encoding used to reconstruct the <see
            cref="T:System.Net.SocketPermission" />
+
+          
 
           
 
@@ -685,8 +795,12 @@
 
           
 
+          
+
            is not of type <see
            cref="T:System.Net.SocketPermission" />
+
+          
 
           
 
@@ -700,8 +814,12 @@
 
             
 
+            
+
              and is implemented to support the <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -716,6 +834,8 @@
 
             
 
+            
+
              instances.</para
           >
         </summary>
@@ -727,13 +847,19 @@
 
             
 
+            
+
              instance that represents the intersection of two <see
              cref="T:System.Net.SocketPermission" />
 
             
 
+            
+
              instances. If the intersection is empty, the method returns null. If the <paramref
              name="target" />
+
+            
 
             
 
@@ -745,8 +871,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.SocketPermission" />
+
+          
 
           
 
@@ -787,13 +917,19 @@
 
             
 
+            
+
             is not <see
              langword="null" />
 
             
 
+            
+
              and is not of type <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -817,13 +953,19 @@
 
             
 
+            
+
              is null, this method returns true if the current instance defines no permissions; otherwise, false. If <paramref
              name="target" />
 
             
 
+            
+
              is not null, this method returns true if the current instance defines a subset of <paramref
              name="target" />
+
+            
 
             
 
@@ -835,8 +977,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.SocketPermission" />
+
+          
 
           
 
@@ -875,8 +1021,12 @@
 
             
 
+            
+
              instance is created with the Unrestricted value from <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -917,13 +1067,19 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.Security.SecurityElement" />
 
             
 
+            
+
              instance to encode a representation of the <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -935,8 +1091,12 @@
 
             
 
+            
+
              method to restore the state information from a <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -951,6 +1111,8 @@
 
             
 
+            
+
              instance and its current state.</para
           >
         </summary>
@@ -962,8 +1124,12 @@
 
             
 
+            
+
              instance that contains an XML-encoded representation of the <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -1004,8 +1170,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1016,8 +1186,12 @@
 
           
 
+          
+
            is not of type <see
            cref="T:System.Net.SocketPermission" />
+
+          
 
           
 
@@ -1031,8 +1205,12 @@
 
             
 
+            
+
              is a permission that represents all of the access to <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1041,8 +1219,12 @@
 
             
 
+            
+
             . Any demand that passes either the current instance or <paramref
              name="target" />
+
+            
 
             
 
@@ -1051,8 +1233,12 @@
 
             
 
+            
+
              and is implemented to support the <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -1067,6 +1253,8 @@
 
             
 
+            
+
              instances.</para
           >
         </summary>
@@ -1078,13 +1266,19 @@
 
             
 
+            
+
              instance that represents the union of two <see
              cref="T:System.Net.SocketPermission" />
 
             
 
+            
+
              instances. If <paramref
              name="target" />
+
+            
 
             
 
@@ -1096,8 +1290,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.SocketPermission" />
+
+          
 
           
 

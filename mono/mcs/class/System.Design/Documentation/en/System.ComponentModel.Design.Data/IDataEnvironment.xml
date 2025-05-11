@@ -15,8 +15,12 @@
 
         
 
+        
+
          interface can access the data connections available to an application at design time. The <see
          cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+
+        
 
         
 
@@ -25,6 +29,8 @@
       <para
         >The <see
          cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+
+        
 
         
 
@@ -65,8 +71,12 @@
 
             
 
+            
+
              method to activate the design environment's user interface for creating or editing data connections. If the <paramref
              name="initialConnection" />
+
+            
 
             
 
@@ -75,8 +85,12 @@
 
             
 
+            
+
              parameter is a <see
              cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+
+            
 
             
 
@@ -88,6 +102,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -96,8 +112,12 @@
 
             
 
+            
+
              method to return a <see
              cref="T:System.Data.Common.DbConnection" />
+
+            
 
             
 
@@ -106,6 +126,8 @@
           <para
             >If the user chooses to cancel the new connection creation process, the <see
              cref="M:System.ComponentModel.Design.Data.IDataEnvironment.BuildConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+            
 
             
 
@@ -124,11 +146,15 @@
 
             
 
+            
+
              object, or null if the user canceled.</para
           >
         </returns>
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -139,8 +165,12 @@
 
           
 
+          
+
           The connection, if any, to edit. To create a new connection, <paramref
            name="initialConnection" />
+
+          
 
           
 
@@ -178,8 +208,12 @@
 
             
 
+            
+
              method launches the design environment's UI for editing or creating SQL query strings. If the <paramref
              name="initialQueryText" />
+
+            
 
             
 
@@ -188,8 +222,12 @@
 
             
 
+            
+
             , it indicates the user wants to create a new query. If the <paramref
              name="initialQueryText" />
+
+            
 
             
 
@@ -201,8 +239,12 @@
 
             
 
+            
+
              parameter indicates the type of query the user wants to build; either select, update, insert, or delete. Your user interface can use the <paramref
              name="mode" />
+
+            
 
             
 
@@ -222,10 +264,14 @@
 
           
 
+          
+
           The parent window for the dialog.</param
         >
         <param name="connection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,8 +282,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.Design.Data.QueryBuilderMode" />
+
+          
 
           
 
@@ -248,8 +298,12 @@
 
           
 
+          
+
           The initial value of the query or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -286,10 +340,14 @@
 
             
 
+            
+
              method writes a connection to the application's configuration file. The connection string and provider name are written to the <format
              type="text/html">
               <a href="b6ffbb2e-a4d1-410e-8f7e-9755e92c65de">connectionStrings</a>
             </format>
+
+            
 
             
 
@@ -298,8 +356,12 @@
 
             
 
+            
+
              parameter. The <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
+
+            
 
             
 
@@ -308,11 +370,15 @@
 
             
 
+            
+
              parameter is ignored. </para
           >
           <para
             >Implementations of the <see
              cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" />
+
+            
 
             
 
@@ -346,8 +412,12 @@
 
                   
 
+                  
+
                   , <see
                    cref="T:System.UnauthorizedAccessException" />
+
+                  
 
                   
 
@@ -358,6 +428,8 @@
                 <para
                   >The application's configuration file cannot be updated. Your <see
                    cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" />
+
+                  
 
                   
 
@@ -382,8 +454,12 @@
 
             
 
+            
+
              namespace to read and write the application's configuration file. The <see
              cref="T:System.Configuration.ConnectionStringsSection" />
+
+            
 
             
 
@@ -391,6 +467,8 @@
              type="text/html">
               <a href="b6ffbb2e-a4d1-410e-8f7e-9755e92c65de">connectionStrings</a>
             </format>
+
+            
 
             
 
@@ -409,8 +487,12 @@
 
             
 
+            
+
              object containing the saved connection data with the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
+
+            
 
             
 
@@ -419,8 +501,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
+
+            
 
             
 
@@ -432,10 +518,14 @@
 
           
 
+          
+
           The parent window for the dialog, if any.</param
         >
         <param name="connection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,10 +534,14 @@
 
           
 
+          
+
            object containing the connection data to save.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,8 +571,12 @@
 
             
 
+            
+
              property returns the set of connections available at design time. Your implementation of the <see
              cref="P:System.ComponentModel.Design.Data.IDataEnvironment.Connections" />
+
+            
 
             
 
@@ -524,11 +622,15 @@
 
             
 
+            
+
              object containing the source code required to retrieve a connection string from the application's configuration file.</para
           >
         </returns>
         <param name="connection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -563,8 +665,12 @@
 
             
 
+            
+
              method returns the database schema for the specified data connection. If the schema is unavailable, or if the provider for the connection is unavailable, the <see
              cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+            
 
             
 
@@ -583,11 +689,15 @@
 
             
 
+            
+
              object containing the schema information for the specified data connection, or null if no schema information is available.</para
           >
         </returns>
         <param name="connection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -622,6 +732,8 @@
 
             
 
+            
+
              method returns a valid, open connection to the data store that can be used by the control designer. </para
           >
           <para
@@ -630,8 +742,12 @@
 
             
 
+            
+
              to obtain a data connection and should not attempt to open a connection using the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.ConnectionString" />
+
+            
 
             
 
@@ -650,11 +766,15 @@
 
             
 
+            
+
              object that can be used at design time.</para
           >
         </returns>
         <param name="connection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

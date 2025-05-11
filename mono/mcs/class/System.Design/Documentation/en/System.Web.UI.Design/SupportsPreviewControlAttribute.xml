@@ -29,6 +29,8 @@
 
         
 
+        
+
          attribute to a control designer class to indicate the type of preview control that is supported by the control designer. Use this attribute to change a preview control for design-time rendering without affecting the actual persisted instance of the associated control.</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          when declaring a custom designer class that is derived from the <see
          cref="T:System.Web.UI.Design.ControlDesigner" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          property for the <see
          cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+        
 
         
 
@@ -57,13 +67,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
         
 
+        
+
          members in the base <see
          cref="T:System.Web.UI.Design.ControlDesigner" />
+
+        
 
         
 
@@ -75,6 +91,8 @@
 
         
 
+        
+
          property to true to indicate that the designer uses a temporary copy of the associated control to generate the design-time HTML. Changes to the temporary control are not persisted. </para
       >
       <para
@@ -83,13 +101,19 @@
 
         
 
+        
+
          property to false to indicate that the designer returns the control instance, specifically the <see
          cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
 
         
 
+        
+
          property, from the <see
          cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+
+        
 
         
 
@@ -101,13 +125,19 @@
 
         
 
+        
+
          class is marked with the <see
          cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
 
         
 
+        
+
          set to true. The designer uses the preview control with the automatic style formatting task, which allows the user to preview various autoformat styles that can be applied to the calendar. As the user selects different autoformat styles in the user interface, the selected style scheme is applied to the preview control. Applying a new style to the preview control does not change the scheme that is applied to the instance of the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -119,13 +149,19 @@
 
         
 
+        
+
          is not specified in the control designer declaration, the <see
          cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
+        
+
          behavior is equivalent to specifying the <see
          cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+
+        
 
         
 
@@ -138,13 +174,19 @@
 
           
 
+          
+
            class can override the <see
            cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
 
           
 
+          
+
            and <see
            cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+
+          
 
           
 
@@ -153,13 +195,19 @@
 
           
 
+          
+
            attribute. To determine the expected behavior for <see
            cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
           
 
+          
+
            and <see
            cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
+
+          
 
           
 
@@ -174,6 +222,8 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
@@ -181,10 +231,14 @@
 
         
 
+        
+
         . For more information about design-time attributes, see <format
          type="text/html">
           <a href="7aed9eb4-124b-4a15-a0a3-458f37ac9ef7">Attributes and Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -218,8 +272,12 @@
 
             
 
+            
+
              class directly. Apply the <see
              cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+            
 
             
 
@@ -234,8 +292,12 @@
 
             
 
+            
+
              class and sets the initial value of the <see
              cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+
+            
 
             
 
@@ -247,8 +309,12 @@
 
           
 
+          
+
           The initial value to assign for <see
            cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+
+          
 
           
 
@@ -277,8 +343,12 @@
 
             
 
+            
+
              property of the <see
              cref="F:System.Web.UI.Design.SupportsPreviewControlAttribute.Default" />
+
+            
 
             
 
@@ -290,8 +360,12 @@
 
             
 
+            
+
              method to determine whether the value for the <see
              cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+
+            
 
             
 
@@ -303,6 +377,8 @@
           <para
             >Gets an instance of the <see
              cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+            
 
             
 
@@ -332,8 +408,12 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -345,8 +425,12 @@
 
             
 
+            
+
              method compares two instances based on the value of their <see
              cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+
+            
 
             
 
@@ -361,6 +445,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -372,13 +458,19 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
 
             
 
+            
+
              attribute and its value is the same as this instance of <see
              cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+            
 
             
 
@@ -390,8 +482,12 @@
 
           
 
+          
+
           The object to compare with the current instance of <see
            cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+          
 
           
 
@@ -418,8 +514,12 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -431,8 +531,12 @@
 
             
 
+            
+
              method generates the same hash code for two objects that are equal according to the <see
              cref="M:System.Web.UI.Design.SupportsPreviewControlAttribute.Equals(System.Object)" />
+
+            
 
             
 
@@ -447,6 +551,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -455,6 +561,8 @@
           <para
             >A 32-bit signed integer hash code for the current instance of <see
              cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+            
 
             
 
@@ -482,8 +590,12 @@
 
             
 
+            
+
              method compares the value for the <see
              cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+
+            
 
             
 
@@ -492,13 +604,19 @@
 
             
 
+            
+
              object with the value for the <see
              cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
 
             
 
+            
+
              property of the static <see
              cref="F:System.Web.UI.Design.SupportsPreviewControlAttribute.Default" />
+
+            
 
             
 
@@ -513,6 +631,8 @@
 
             
 
+            
+
              class is set to the default preview attribute value.</para
           >
         </summary>
@@ -521,6 +641,8 @@
           <para
             >true if the current instance of <see
              cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+            
 
             
 
@@ -548,8 +670,12 @@
 
             
 
+            
+
              property by applying the <see
              cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+            
 
             
 
@@ -558,8 +684,12 @@
 
             
 
+            
+
              property for the <see
              cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+
+            
 
             
 
@@ -568,13 +698,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
+            
+
              members in the base <see
              cref="T:System.Web.UI.Design.ControlDesigner" />
+
+            
 
             
 
@@ -586,6 +722,8 @@
 
             
 
+            
+
              property to true to indicate that the designer uses a temporary copy of the associated control to generate the design-time HTML. Changes to the temporary control are not persisted. </para
           >
           <para
@@ -594,13 +732,19 @@
 
             
 
+            
+
              property to false to indicate that the designer returns the control instance, specifically the <see
              cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
 
             
 
+            
+
              property, from the <see
              cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+
+            
 
             
 

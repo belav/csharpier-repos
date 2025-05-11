@@ -61,10 +61,14 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="operation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -75,8 +79,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -87,8 +95,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 
@@ -132,10 +144,14 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,8 +162,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -194,6 +214,8 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="context">
@@ -201,8 +223,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -213,8 +239,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 
@@ -262,10 +292,14 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,8 +310,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -288,8 +326,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 
@@ -336,6 +378,8 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="context">
@@ -343,8 +387,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -355,8 +403,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 
@@ -403,6 +455,8 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="context">
@@ -410,8 +464,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -422,8 +480,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 
@@ -475,10 +537,14 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,6 +555,8 @@
 
           
 
+          
+
           The list of type arguments specified for this invoke.</param
         >
         <param name="context">
@@ -496,8 +564,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -508,8 +580,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 
@@ -553,10 +629,14 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -567,8 +647,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -615,6 +699,8 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="context">
@@ -622,8 +708,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -634,8 +724,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 
@@ -683,10 +777,14 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -697,8 +795,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -709,8 +811,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 
@@ -758,10 +864,14 @@
 
           
 
+          
+
           The flags with which to initialize the binder.</param
         >
         <param name="operation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -772,8 +882,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -784,8 +898,12 @@
 
           
 
+          
+
           The sequence of <see
            cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+
+          
 
           
 

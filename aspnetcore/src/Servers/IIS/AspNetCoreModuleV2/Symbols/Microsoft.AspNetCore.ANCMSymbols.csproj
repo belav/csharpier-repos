@@ -7,7 +7,8 @@
     <IncludeBuildOutput>true</IncludeBuildOutput>
     <IsPackable>$(PackNativeAssets)</IsPackable>
     <IsShippingPackage>false</IsShippingPackage>
-    <BuildOutputTargetFolder>runtimes/$(TargetRuntimeIdentifier)/native/</BuildOutputTargetFolder>
+    <BuildOutputTargetFolder
+>runtimes/$(TargetRuntimeIdentifier)/native/</BuildOutputTargetFolder>
     <RuntimeIdentifier>$(TargetRuntimeIdentifier)</RuntimeIdentifier>
     <DebugType>none</DebugType>
     <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>

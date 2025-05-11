@@ -62,6 +62,8 @@
 
         
 
+        
+
          control is a container for other controls. It is especially useful when you want to generate controls programmatically, hide/show a group of controls, or localize a group of controls.</para
       >
       <para
@@ -70,8 +72,12 @@
 
         
 
+        
+
          property is useful for localizing a <see
          cref="T:System.Web.UI.WebControls.Panel" />
+
+        
 
         
 
@@ -83,8 +89,12 @@
 
         
 
+        
+
          control provides several properties that allow you to customize the behavior and display of its contents. Use the <see
          cref="P:System.Web.UI.WebControls.Panel.BackImageUrl" />
+
+        
 
         
 
@@ -93,8 +103,12 @@
 
         
 
+        
+
          control. Use the <see
          cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
+
+        
 
         
 
@@ -117,6 +131,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -127,9 +143,13 @@
 
         
 
+        
+
         |LeftToRight|RightToLeft"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -139,9 +159,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -151,9 +175,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -161,6 +189,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -172,9 +202,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -184,6 +218,8 @@
     Height="size"
     HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -201,6 +237,8 @@
 
         
 
+        
+
         |Horizontal|Vertical|Both|Auto"
     SkinID="string"
     Style="string"
@@ -211,10 +249,14 @@
 
         
 
+        
+
         |False"
     Width="size"
     Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -240,6 +282,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -277,6 +321,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
         </remarks>
@@ -307,6 +353,8 @@
 
             
 
+            
+
              control.</para
           >
           <para
@@ -315,8 +363,12 @@
 
             
 
+            
+
             , it will be tiled to fill in the <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -369,6 +421,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
         </remarks>
@@ -380,6 +434,8 @@
 
             
 
+            
+
              control to implement all style related properties.</para
           >
         </summary>
@@ -388,6 +444,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.PanelStyle" />
+
+            
 
             
 
@@ -420,8 +478,12 @@
 
             
 
+            
+
              property to indicate which button gets clicked when the <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -430,8 +492,12 @@
 
             
 
+            
+
              can be set to the identifier for a <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 
@@ -440,8 +506,12 @@
 
             
 
+            
+
              interface except a <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -453,8 +523,12 @@
 
             
 
+            
+
              is set to a control that does not implement the <see
              cref="T:System.Web.UI.WebControls.IButtonControl" />
+
+            
 
             
 
@@ -463,8 +537,12 @@
 
             
 
+            
+
              control, the <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -473,6 +551,8 @@
           <para
             >Setting the <see
              cref="P:System.Web.UI.WebControls.Panel.DefaultButton" />
+
+            
 
             
 
@@ -489,6 +569,8 @@
 
                 
 
+                
+
                  property collection to add client script for the onKeyPress event.</para
               >
             </item>
@@ -499,13 +581,19 @@
 
                 
 
+                
+
                  control. Only <see
                  cref="T:System.Web.UI.WebControls.Button" />
 
                 
 
+                
+
                  and <see
                  cref="T:System.Web.UI.WebControls.ImageButton" />
+
+                
 
                 
 
@@ -519,8 +607,12 @@
 
                 
 
+                
+
                  programmatically during an asynchronous post back when the <see
                  cref="T:System.Web.UI.WebControls.Panel" />
+
+                
 
                 
 
@@ -529,13 +621,19 @@
 
                 
 
+                
+
                  control. Asynchronous post backs can be enabled on a page by adding one or more <see
                  cref="T:System.Web.UI.UpdatePanel" />
 
                 
 
+                
+
                  controls to the page. <see
                  cref="T:System.Web.UI.UpdatePanel" />
+
+                
 
                 
 
@@ -546,10 +644,14 @@
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
                 </format>
+
+                
 
                 
 
@@ -563,10 +665,14 @@
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
                 </format>
+
+                
 
                 
 
@@ -580,6 +686,8 @@
           <para
             >Gets or sets the identifier for the default button that is contained in the <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -610,13 +718,19 @@
 
             
 
+            
+
              property to specify the display direction for controls that include text in a <see
              cref="T:System.Web.UI.WebControls.Panel" />
 
             
 
+            
+
              control. This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.ContentDirection" />
+
+            
 
             
 
@@ -671,6 +785,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -700,8 +816,12 @@
 
             
 
+            
+
              property to display a frame and caption for the group of controls that is contained in the <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -713,13 +833,19 @@
 
             
 
+            
+
              value of a <see
              cref="T:System.Web.UI.WebControls.Panel" />
 
             
 
+            
+
              control is rendered using the FIELDSET and LEGEND elements, which were introduced in the HTML 4.0 specification. If the client browser uses HTML 3.2, the <see
              cref="P:System.Web.UI.WebControls.Panel.GroupingText" />
+
+            
 
             
 
@@ -731,12 +857,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -766,6 +896,8 @@
           <para
             >Use this property to specify the alignment of the elements in the <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -814,6 +946,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
         </remarks>
@@ -825,6 +959,8 @@
 
             
 
+            
+
              control to the specified writer.</para
           >
         </summary>
@@ -833,8 +969,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -866,6 +1006,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
         </remarks>
@@ -877,6 +1019,8 @@
 
             
 
+            
+
              control into the specified writer.</para
           >
         </summary>
@@ -885,8 +1029,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -916,13 +1064,19 @@
 
             
 
+            
+
              property to specify the visibility and position of scroll bars in a <see
              cref="T:System.Web.UI.WebControls.Panel" />
 
             
 
+            
+
              control. This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.ScrollBars" />
+
+            
 
             
 
@@ -986,8 +1140,12 @@
 
             
 
+            
+
              property, scroll bars are automatically shown when the size of the content in a <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -996,8 +1154,12 @@
 
             
 
+            
+
              control itself. For example, if a <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -1012,6 +1174,8 @@
           <para
             >Gets or sets the visibility and position of scroll bars in a <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 
@@ -1034,6 +1198,8 @@
           <para
             >Use this property to wrap the contents of the <see
              cref="T:System.Web.UI.WebControls.Panel" />
+
+            
 
             
 

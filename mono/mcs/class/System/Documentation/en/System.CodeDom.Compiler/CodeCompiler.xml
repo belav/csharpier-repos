@@ -34,12 +34,16 @@
 
         
 
+        
+
          is a useful utility base class for code generators to derive from in order to provide code compilation functions.</para
       >
       <block subset="none" type="note">
         <para
           >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
            cref="T:System.Security.SecurityException" />
+
+          
 
           
 
@@ -50,10 +54,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -66,6 +74,8 @@
       <para
         >Provides an example implementation of the <see
          cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+        
 
         
 
@@ -95,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.Compiler.CodeCompiler" />
+
+            
 
             
 
@@ -134,6 +146,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -146,8 +160,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -240,8 +258,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -252,8 +274,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -298,8 +324,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -310,8 +340,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -356,8 +390,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -365,6 +403,8 @@
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,8 +449,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -418,6 +462,8 @@
         >
         <param name="fileNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,8 +508,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -471,6 +521,8 @@
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -515,8 +567,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -524,6 +580,8 @@
         >
         <param name="sources">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -573,8 +631,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -582,6 +644,8 @@
         >
         <param name="cmdArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -626,10 +690,14 @@
 
           
 
+          
+
           The array of strings to join. </param
         >
         <param name="separator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -669,6 +737,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -677,8 +747,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerResults" />
+
+          
 
           
 
@@ -686,6 +760,8 @@
         >
         <param name="line">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -724,8 +800,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+            
 
             
 
@@ -737,6 +817,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDom(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit)" />
+
+            
 
             
 
@@ -752,8 +834,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -764,8 +850,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -804,8 +894,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+            
 
             
 
@@ -817,6 +911,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDomBatch(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit[])" />
+
+            
 
             
 
@@ -832,8 +928,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -844,8 +944,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -884,8 +988,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+            
 
             
 
@@ -897,6 +1005,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFile(System.CodeDom.Compiler.CompilerParameters,System.String)" />
+
+            
 
             
 
@@ -912,8 +1022,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -921,6 +1035,8 @@
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -959,8 +1075,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+            
 
             
 
@@ -972,6 +1092,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFileBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />
+
+            
 
             
 
@@ -987,8 +1109,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -996,6 +1122,8 @@
         >
         <param name="fileNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1034,8 +1162,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+            
 
             
 
@@ -1047,6 +1179,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSource(System.CodeDom.Compiler.CompilerParameters,System.String)" />
+
+            
 
             
 
@@ -1062,8 +1196,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -1071,6 +1209,8 @@
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1109,8 +1249,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+            
 
             
 
@@ -1122,6 +1266,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSourceBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />
+
+            
 
             
 
@@ -1137,8 +1283,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -1146,6 +1296,8 @@
         >
         <param name="sources">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

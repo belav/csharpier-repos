@@ -22,8 +22,12 @@
 
         
 
+        
+
          derives from the <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          to return either a <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
         . The actual object returned depends on the data source and data member passed to the <see
          cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
         . If the data source is an object that can return only a single property (instead of a list of objects), the type will be a <see
          cref="T:System.Windows.Forms.PropertyManager" />
+
+        
 
         
 
@@ -62,8 +78,12 @@
 
         
 
+        
+
          as the data source, a <see
          cref="T:System.Windows.Forms.PropertyManager" />
+
+        
 
         
 
@@ -72,8 +92,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ComponentModel.IListSource" />
+
+        
 
         
 
@@ -82,8 +106,12 @@
 
         
 
+        
+
          interface, a <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -95,13 +123,19 @@
 
         
 
+        
+
          property returns the current item in the underlying list. To change the current item, set the <see
          cref="P:System.Windows.Forms.BindingManagerBase.Position" />
 
         
 
+        
+
          property to a new value. The value must be greater than 0 and must be less than the value of the <see
          cref="P:System.Windows.Forms.BindingManagerBase.Count" />
+
+        
 
         
 
@@ -113,13 +147,19 @@
 
         
 
+        
+
          interface, and the <see
          cref="P:System.ComponentModel.IBindingList.AllowNew" />
 
         
 
+        
+
          property is set to true, you can use the <see
          cref="M:System.Windows.Forms.CurrencyManager.AddNew" />
+
+        
 
         
 
@@ -131,6 +171,8 @@
       <para
         >Manages a list of <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -155,8 +197,12 @@
 
             
 
+            
+
              interface and the data source allows adding rows (<see
              cref="P:System.ComponentModel.IBindingList.AllowNew" />
+
+            
 
             
 
@@ -169,6 +215,8 @@
 
               
 
+              
+
                control, to add new items to list.</para
             >
           </block>
@@ -178,8 +226,12 @@
 
             
 
+            
+
             . Otherwise, to add items if the data source is a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -188,8 +240,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -198,13 +254,19 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Data.DataTable.NewRow" />
 
             
 
+            
+
              method and add the row to the <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -237,8 +299,12 @@
 
             
 
+            
+
              interface. If the objects contained within the data source do not implement the <see
              cref="T:System.ComponentModel.IEditableObject" />
+
+            
 
             
 
@@ -251,8 +317,12 @@
 
               
 
+              
+
                control, to cancel edits. For example, when the user presses the ESC key, the <see
                cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+
+              
 
               
 
@@ -261,8 +331,12 @@
 
               
 
+              
+
                for the <see
                cref="T:System.Windows.Forms.DataGrid" />
+
+              
 
               
 
@@ -271,8 +345,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Data.DataRowView" />
+
+              
 
               
 
@@ -325,8 +403,12 @@
 
             
 
+            
+
              maintains a 0-based array of items, the end of the list is always <see
              cref="P:System.Windows.Forms.CurrencyManager.Count" />
+
+            
 
             
 
@@ -359,13 +441,19 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.DataTable" />
 
             
 
+            
+
             , you must cast the current item as a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -398,8 +486,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ComponentModel.ICancelAddNew" />
+
+            
 
             
 
@@ -412,8 +504,12 @@
 
               
 
+              
+
                control. Unless you are creating a control that requires this same functionality, you should not use this method. Instead, if the data source is either a <see
                cref="T:System.Data.DataView" />
+
+              
 
               
 
@@ -422,13 +518,19 @@
 
               
 
+              
+
               , use the <see
                cref="M:System.Data.DataRowView.EndEdit" />
 
               
 
+              
+
                method of the <see
                cref="T:System.Data.DataRowView" />
+
+              
 
               
 
@@ -483,8 +585,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -500,6 +606,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -537,8 +645,12 @@
 
             
 
+            
+
              method to be successful, the underlying list must be of type <see
              cref="T:System.ComponentModel.ITypedList" />
+
+            
 
             
 
@@ -557,8 +669,12 @@
 
             
 
+            
+
              containing name of the list supplying the data for the binding; otherwise, an <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -570,8 +686,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -597,13 +717,19 @@
 
             
 
+            
+
              event will occur when the user calls the <see
              cref="M:System.Windows.Forms.BindingManagerBase.ResumeBinding" />
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.BindingManagerBase.SuspendBinding" />
+
+            
 
             
 
@@ -615,8 +741,12 @@
 
             
 
+            
+
              event occurs only when the item itself has been changed in some manner. For example, if the value of an item is changed from 10 to 42, the event will occur. This should not be confused with the <see
              cref="E:System.Windows.Forms.BindingManagerBase.PositionChanged" />
+
+            
 
             
 
@@ -628,8 +758,12 @@
 
             
 
+            
+
             , the <see
              cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
+
+            
 
             
 
@@ -642,8 +776,12 @@
 
               
 
+              
+
               , you should use the <see
                cref="E:System.ComponentModel.IBindingList.ListChanged" />
+
+              
 
               
 
@@ -652,13 +790,19 @@
 
               
 
+              
+
                event. The <see
                cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
               
 
+              
+
                property of the <see
                cref="T:System.ComponentModel.ListChangedEventArgs" />
+
+              
 
               
 
@@ -670,6 +814,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -702,8 +848,12 @@
 
             
 
+            
+
              property can be cast to any type that implements the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -712,8 +862,12 @@
 
             
 
+            
+
             , the underlying list is a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -722,8 +876,12 @@
 
             
 
+            
+
             ). Other classes that implement the interface (this is not a complete list) include <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -732,8 +890,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -745,8 +907,12 @@
 
             
 
+            
+
              property depends on the class that implements the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -755,13 +921,19 @@
 
             
 
+            
+
              property to determine the name of the list. If the data source implements the <see
              cref="T:System.ComponentModel.ITypedList" />
 
             
 
+            
+
              interface, you can use the <see
              cref="M:System.ComponentModel.ITypedList.GetListName(System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -781,6 +953,8 @@
           <para
             >Gets the list for this <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -814,8 +988,12 @@
 
             
 
+            
+
              event is thrown by the <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -824,8 +1002,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+
+            
 
             
 
@@ -834,8 +1016,12 @@
 
             
 
+            
+
             . This event can also occur when the data source is edited directly if it implements the <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -847,6 +1033,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -874,8 +1062,12 @@
 
             
 
+            
+
              property is greater than 0, the <see
              cref="F:System.Windows.Forms.CurrencyManager.listposition" />
+
+            
 
             
 
@@ -884,13 +1076,19 @@
 
             
 
+            
+
              minus 1. If <see
              cref="P:System.Windows.Forms.CurrencyManager.Count" />
 
             
 
+            
+
              is 0, <see
              cref="F:System.Windows.Forms.CurrencyManager.listposition" />
+
+            
 
             
 
@@ -902,6 +1100,8 @@
           <para
             >Specifies the current position of the <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -929,8 +1129,12 @@
 
             
 
+            
+
              consists of the schema of the underlying <see
              cref="P:System.Windows.Forms.Binding.DataSource" />
+
+            
 
             
 
@@ -939,8 +1143,12 @@
 
             
 
+            
+
              event is raised when that schema has changed. For example, the <see
              cref="E:System.Windows.Forms.CurrencyManager.MetaDataChanged" />
+
+            
 
             
 
@@ -949,8 +1157,12 @@
 
             
 
+            
+
              is programmatically added to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -964,6 +1176,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -972,6 +1186,8 @@
           <para
             >Occurs when the metadata of the <see
              cref="P:System.Windows.Forms.CurrencyManager.List" />
+
+            
 
             
 
@@ -1008,8 +1224,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1040,8 +1260,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1072,11 +1296,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CurrencyManager.OnItemChanged(System.Windows.Forms.ItemChangedEventArgs)" />
+
+            
 
             
 
@@ -1091,6 +1319,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1099,8 +1329,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.ItemChangedEventArgs" />
+
+          
 
           
 
@@ -1135,11 +1369,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CurrencyManager.OnMetaDataChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1154,6 +1392,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1162,8 +1402,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1194,11 +1438,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CurrencyManager.OnPositionChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1213,6 +1461,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1221,8 +1471,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1250,8 +1504,12 @@
 
             
 
+            
+
              class is the <see
              cref="P:System.Windows.Forms.CurrencyManager.Position" />
+
+            
 
             
 
@@ -1260,8 +1518,12 @@
 
             
 
+            
+
              to a number between 0 (the beginning of the list) and <see
              cref="P:System.Windows.Forms.CurrencyManager.Count" />
+
+            
 
             
 
@@ -1273,8 +1535,12 @@
 
             
 
+            
+
              determines the currency, or place in the list, of all controls bound to the same <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -1283,13 +1549,19 @@
 
             
 
+            
+
              controls are bound to the same list; the first control is bound to the first column, and the second control is bound to the second column. When the <see
              cref="P:System.Windows.Forms.CurrencyManager.Position" />
 
             
 
+            
+
              of the common <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -1322,8 +1594,12 @@
 
             
 
+            
+
              method when the data source does not support notification when it is changed (for example, if it is an <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1358,8 +1634,12 @@
 
             
 
+            
+
              method was designed to allow complex controls, such as the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -1368,8 +1648,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1382,6 +1666,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1408,8 +1694,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
+
+            
 
             
 
@@ -1422,8 +1712,12 @@
 
               
 
+              
+
                prevents changes from being pushed into the data source until <see
                cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
+
+              
 
               
 
@@ -1432,8 +1726,12 @@
 
               
 
+              
+
                control, update their values based on change events such as the <see
                cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+
+              
 
               
 
@@ -1442,8 +1740,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
+
+              
 
               
 
@@ -1452,13 +1754,19 @@
 
               
 
+              
+
               . Alternatively, you can use these methods in a complex binding scenario if you suppress <see
                cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
               
 
+              
+
                events by setting the <see
                cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+
+              
 
               
 
@@ -1492,8 +1800,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+
+            
 
             
 
@@ -1505,8 +1817,12 @@
 
               
 
+              
+
                prevents changes from being applied to the data source until <see
                cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+
+              
 
               
 
@@ -1515,8 +1831,12 @@
 
               
 
+              
+
                control, update their values based on change events, such as the <see
                cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+
+              
 
               
 
@@ -1525,8 +1845,12 @@
 
               
 
+              
+
                will not prevent complex-bound controls from receiving events to update the data source. For this reason, <see
                cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+
+              
 
               
 
@@ -1535,8 +1859,12 @@
 
               
 
+              
+
                are designed for use with simple-bound controls, such as the <see
                cref="T:System.Windows.Forms.TextBox" />
+
+              
 
               
 
@@ -1545,8 +1873,12 @@
 
               
 
+              
+
                events by setting the <see
                cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+
+              
 
               
 

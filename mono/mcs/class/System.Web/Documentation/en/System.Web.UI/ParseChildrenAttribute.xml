@@ -30,8 +30,12 @@
 
         
 
+        
+
          class allows you to specify parsing logic for a custom server control by marking the server control with the <see
          cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+        
 
         
 
@@ -43,11 +47,15 @@
 
         
 
+        
+
          property is true. </para
       >
       <para
         >Marking your server control with the metadata attribute ParseChildren(true,"&lt;Default Property&gt;") sets the <see
          cref="P:System.Web.UI.ParseChildrenAttribute.DefaultProperty" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          that is, as controls. In this scenario, the <see
          cref="P:System.Web.UI.ParseChildrenAttribute.ChildrenAsProperties" />
+
+        
 
         
 
@@ -74,6 +86,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -82,6 +96,8 @@
       <para
         >Defines a metadata attribute that you can use when developing ASP.NET server controls. Use the <see
          cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+        
 
         
 
@@ -104,8 +120,12 @@
 
             
 
+            
+
              class is created with the <see
              cref="P:System.Web.UI.ParseChildrenAttribute.ChildrenAsProperties" />
+
+            
 
             
 
@@ -117,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+            
 
             
 
@@ -148,8 +170,12 @@
 
             
 
+            
+
              is false, the elements that are contained within the server control are parsed as a control. false is the default for <see
              cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+            
 
             
 
@@ -164,8 +190,12 @@
 
             
 
+            
+
              class using the <see
              cref="P:System.Web.UI.ParseChildrenAttribute.ChildrenAsProperties" />
+
+            
 
             
 
@@ -174,6 +204,8 @@
         </summary>
         <param name="childrenAsProperties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -207,8 +239,12 @@
 
             
 
+            
+
              class using the <see
              cref="P:System.Web.UI.ParseChildrenAttribute.ChildControlType" />
+
+            
 
             
 
@@ -217,6 +253,8 @@
         </summary>
         <param name="childControlType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -244,6 +282,8 @@
 
             
 
+            
+
              is false, the elements are parsed as controls.</para
           >
         </remarks>
@@ -255,13 +295,19 @@
 
             
 
+            
+
              class using the <paramref
              name="childrenAsProperties" />
 
             
 
+            
+
              and <paramref
              name="defaultProperty" />
+
+            
 
             
 
@@ -273,10 +319,14 @@
 
           
 
+          
+
           true to parse the elements as properties of the server control; otherwise, false. </param
         >
         <param name="defaultProperty">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -307,6 +357,8 @@
 
             
 
+            
+
              control, is returned.</para
           >
         </remarks>
@@ -330,6 +382,8 @@
           <para
             >If the <see
              cref="P:System.Web.UI.ParseChildrenAttribute.ChildrenAsProperties" />
+
+            
 
             
 
@@ -365,6 +419,8 @@
 
             
 
+            
+
              field is false, which means that elements are not parsed as properties of the server control.</para
           >
         </remarks>
@@ -373,6 +429,8 @@
           <para
             >Defines the default value for the <see
              cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+            
 
             
 
@@ -402,8 +460,12 @@
 
             
 
+            
+
              property is used only if a string is passed to the <see
              cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+            
 
             
 
@@ -412,8 +474,12 @@
 
             
 
+            
+
              class is created, the <see
              cref="P:System.Web.UI.ParseChildrenAttribute.DefaultProperty" />
+
+            
 
             
 
@@ -453,11 +519,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -486,6 +556,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -494,6 +566,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+            
 
             
 
@@ -522,8 +596,12 @@
 
             
 
+            
+
              class is the <see
              cref="F:System.Web.UI.ParseChildrenAttribute.ParseAsChildren" />
+
+            
 
             
 
@@ -538,6 +616,8 @@
 
             
 
+            
+
              class is the default value of the derived class.</para
           >
         </summary>
@@ -546,6 +626,8 @@
           <para
             >true if the current <see
              cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+            
 
             
 
@@ -579,6 +661,8 @@
 
             
 
+            
+
              field is called, the nested content that are contained within the server control are not parsed as properties; rather, they are parsed as a control.</para
           >
         </remarks>
@@ -606,6 +690,8 @@
           <para
             >If the <see
              cref="F:System.Web.UI.ParseChildrenAttribute.ParseAsProperties" />
+
+            
 
             
 

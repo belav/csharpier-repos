@@ -28,6 +28,8 @@
 
         
 
+        
+
          event handler.</para
       >
     </summary>
@@ -58,11 +60,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="argument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

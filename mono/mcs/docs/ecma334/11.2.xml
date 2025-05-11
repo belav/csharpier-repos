@@ -4,8 +4,12 @@
     >A reference type is a class type, an interface type, an array type, or a delegate type. <grammar_production
     >
       <name>
-        <non_terminal where="11.2">reference-type</non_terminal>
+        <non_terminal where="11.2"
+>reference-type</non_terminal
+        >
       </name>
+
+      
 
       
 
@@ -27,6 +31,8 @@
       <name>
         <non_terminal where="11.2">class-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -48,6 +54,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="10.8">type-name</non_terminal>
@@ -60,16 +68,22 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="19.1">non-array-type</non_terminal>
-        <non_terminal where="19.1">rank-specifiers</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifiers</non_terminal
+        >
       </rhs>
     </grammar_production>
     <grammar_production>
       <name>
         <non_terminal where="19.1">non-array-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -80,7 +94,11 @@
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="19.1">rank-specifier</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifier</non_terminal
+        >
+
+        
 
         
 
@@ -89,19 +107,31 @@
 
       
 
+      
+
        : <rhs
       >
-        <non_terminal where="19.1">rank-specifier</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifier</non_terminal
+        >
       </rhs>
       <rhs>
-        <non_terminal where="19.1">rank-specifiers</non_terminal>
-        <non_terminal where="19.1">rank-specifier</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifiers</non_terminal
+        >
+        <non_terminal where="19.1"
+>rank-specifier</non_terminal
+        >
       </rhs>
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="19.1">rank-specifier</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifier</non_terminal
+        >
       </name>
+
+      
 
       
 
@@ -120,6 +150,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>,</terminal>
@@ -133,6 +165,8 @@
       <name>
         <non_terminal where="11.2">delegate-type</non_terminal>
       </name>
+
+      
 
       
 

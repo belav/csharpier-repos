@@ -24,12 +24,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >Only use <see
            cref="T:System.Runtime.Serialization.DataContractResolver" />
+
+          
 
           
 
@@ -61,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.DataContractResolver" />
+
+            
 
             
 
@@ -103,6 +109,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -119,10 +127,14 @@
 
           
 
+          
+
           The xsi:type name to map.</param
         >
         <param name="typeNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,10 +145,14 @@
 
           
 
+          
+
           The type declared in the data contract.</param
         >
         <param name="knownTypeResolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

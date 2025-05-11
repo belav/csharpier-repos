@@ -34,8 +34,12 @@
 
         
 
+        
+
          and their respective mappings to columns in a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -66,8 +70,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -82,6 +90,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -90,8 +100,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -122,8 +136,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -138,6 +156,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </returns>
@@ -146,8 +166,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -187,8 +211,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -203,11 +231,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,8 +250,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.Odbc.OdbcType" />
+
+          
 
           
 
@@ -253,8 +289,12 @@
 
             
 
+            
+
              method to specify integer parameter values. Because this overload takes a <paramref
              name="value" />
+
+            
 
             
 
@@ -263,8 +303,12 @@
 
             
 
+            
+
             , you must convert the integer value to an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -274,6 +318,8 @@
           <para
             >If you do not perform this conversion, the compiler will assume you are attempting to call the <see
              cref="M:System.Data.Odbc.OdbcParameterCollection.Add(System.String,System.Data.Odbc.OdbcType)" />
+
+            
 
             
 
@@ -288,8 +334,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -304,11 +354,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -319,13 +373,19 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.OleDb.OleDbParameter.Value" />
 
           
 
+          
+
            of the <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -369,8 +429,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -385,11 +449,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -400,8 +468,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.Odbc.OdbcType" />
+
+          
 
           
 
@@ -409,6 +481,8 @@
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -446,8 +520,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -462,11 +540,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,8 +559,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.Odbc.OdbcType" />
+
+          
 
           
 
@@ -489,10 +575,14 @@
 
           
 
+          
+
           The length of the column. </param
         >
         <param name="sourceColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -524,6 +614,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -532,8 +624,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -569,8 +665,12 @@
 
             
 
+            
+
              values to the end of the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -582,8 +682,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -617,6 +721,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -628,6 +734,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -636,10 +744,14 @@
 
           
 
+          
+
           The name of the parameter.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -664,8 +776,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -703,8 +819,12 @@
 
             
 
+            
+
              is in this <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -719,6 +839,8 @@
 
             
 
+            
+
              is in the collection; otherwise, false.</para
           >
         </returns>
@@ -727,8 +849,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -755,8 +881,12 @@
 
             
 
+            
+
              is in this <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -771,6 +901,8 @@
 
             
 
+            
+
              contains the value otherwise false.</para
           >
         </returns>
@@ -779,8 +911,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -811,6 +947,8 @@
 
             
 
+            
+
              object with the specified parameter name exists in the collection.</para
           >
         </summary>
@@ -823,8 +961,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -859,13 +1001,19 @@
 
             
 
+            
+
              to the specified one-dimensional <see
              cref="T:System.Array" />
 
             
 
+            
+
              starting at the specified destination <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -877,13 +1025,19 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the elements copied from the current <see
            cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+          
 
           
 
@@ -894,8 +1048,12 @@
 
           
 
+          
+
           A 32-bit integer that represents the index in the <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -933,8 +1091,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -946,13 +1108,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
           
 
+          
+
            that is the destination of the elements copied from the current <see
            cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+          
 
           
 
@@ -963,8 +1131,12 @@
 
           
 
+          
+
           A 32-bit integer that represents the index in the <see
            cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+          
 
           
 
@@ -986,6 +1158,8 @@
           <para
             >Returns an Integer that contains the number of elements in the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1018,6 +1192,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1029,8 +1205,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1114,6 +1294,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </summary>
@@ -1125,6 +1307,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </returns>
@@ -1133,8 +1317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -1161,6 +1349,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </summary>
@@ -1172,8 +1362,12 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Data.Odbc.OdbcParameter" />
+
+            
 
             
 
@@ -1185,8 +1379,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1217,6 +1415,8 @@
 
             
 
+            
+
              with the specified name.</para
           >
         </summary>
@@ -1228,6 +1428,8 @@
 
             
 
+            
+
              with the specified case-sensitive name.</para
           >
         </returns>
@@ -1236,8 +1438,12 @@
 
           
 
+          
+
           The case-sensitive name of the <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -1275,8 +1481,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1288,10 +1498,14 @@
 
           
 
+          
+
           The zero-based index at which the object should be inserted.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1300,8 +1514,12 @@
 
           
 
+          
+
            object to be inserted in the <see
            cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+          
 
           
 
@@ -1332,8 +1550,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1345,10 +1567,14 @@
 
           
 
+          
+
           The zero-based index at which the object should be inserted.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1357,8 +1583,12 @@
 
           
 
+          
+
            to be inserted in the <see
            cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+          
 
           
 
@@ -1388,6 +1618,8 @@
 
             
 
+            
+
              has a fixed size. Read-only.</para
           >
         </summary>
@@ -1414,6 +1646,8 @@
 
             
 
+            
+
              is read-only.</para
           >
         </summary>
@@ -1437,6 +1671,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1537,8 +1773,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1550,8 +1790,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -1578,8 +1822,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1591,13 +1839,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
 
           
 
+          
+
            to be removed from the <see
            cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+          
 
           
 
@@ -1628,8 +1882,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1641,8 +1899,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -1676,8 +1938,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1689,8 +1955,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Odbc.OdbcParameter" />
+
+          
 
           
 
@@ -1765,6 +2035,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 

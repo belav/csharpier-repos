@@ -60,6 +60,8 @@
 
             
 
+            
+
              object throws an exception.</para
           >
         </summary>
@@ -71,11 +73,15 @@
 
             
 
+            
+
              copy of the node from which the method is called.</para
           >
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,11 +308,15 @@
 
             
 
+            
+
             . This method has no effect on XmlNotation nodes.</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -348,11 +358,15 @@
 
             
 
+            
+
             . This method has no effect on XmlNotation nodes.</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

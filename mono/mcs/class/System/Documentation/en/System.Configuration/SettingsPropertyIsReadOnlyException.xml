@@ -30,8 +30,12 @@
 
         
 
+        
+
          class when attempting to change the value of a <see
          cref="T:System.Configuration.SettingsPropertyValue" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >Provides an exception for read-only <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -71,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingsPropertyIsReadOnlyException" />
+
+            
 
             
 
@@ -107,11 +115,15 @@
 
             
 
+            
+
              class based on a supplied parameter.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -148,6 +160,8 @@
 
             
 
+            
+
              class based on the supplied parameters.</para
           >
         </summary>
@@ -156,8 +170,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -168,8 +186,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -206,6 +228,8 @@
 
             
 
+            
+
              class based on supplied parameters.</para
           >
         </summary>
@@ -214,10 +238,14 @@
 
           
 
+          
+
           A string containing an exception message.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -19,6 +19,8 @@
 
         
 
+        
+
          represents an vstecmsbuild project. It is a container for items, properties and targets. It can load project content from in-memory XML or from an XML file, and can save to an XML file, preserving most whitespace and all XML comments.</para
       >
       <para
@@ -27,13 +29,19 @@
 
         
 
+        
+
          must be associated with an <see
          cref="T:Microsoft.Build.BuildEngine.Engine" />
 
         
 
+        
+
          to access shared information. During a build, the <see
          cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.BuildEngine.Project" />
+
+            
 
             
 
@@ -89,8 +99,12 @@
 
             
 
+            
+
              class using the supplied <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 
@@ -102,8 +116,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+          
 
           
 
@@ -139,6 +157,8 @@
              type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
+
+            
 
             
 
@@ -179,6 +199,8 @@
 
             
 
+            
+
              element to the project.</para
           >
         </summary>
@@ -190,6 +212,8 @@
 
             
 
+            
+
              containing the created item.</para
           >
         </returns>
@@ -198,10 +222,14 @@
 
           
 
+          
+
           The name of the item collection to add the item to. Corresponds to the user-defined name of the Item element.</param
         >
         <param name="itemInclude">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,6 +270,8 @@
 
             
 
+            
+
              element to the project.</para
           >
         </summary>
@@ -253,11 +283,15 @@
 
             
 
+            
+
              containing the created item.</para
           >
         </returns>
         <param name="itemName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,6 +302,8 @@
 
           
 
+          
+
           The value of the Include attribute of the item.</param
         >
         <param name="treatItemIncludeAsLiteral">
@@ -275,8 +311,12 @@
 
           
 
+          
+
           true to treat the <paramref
            name="itemInclude" />
+
+          
 
           
 
@@ -310,6 +350,8 @@
 
             
 
+            
+
              element to the project.</para
           >
         </summary>
@@ -318,6 +360,8 @@
           <para
             >A <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -354,6 +398,8 @@
 
             
 
+            
+
              element to the project.</para
           >
         </summary>
@@ -365,11 +411,15 @@
 
             
 
+            
+
              containing the created property group.</para
           >
         </returns>
         <param name="insertAtEndOfProject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -406,6 +456,8 @@
 
             
 
+            
+
              element with the specified assembly file.</para
           >
         </summary>
@@ -414,10 +466,14 @@
 
           
 
+          
+
           The name of the task to reference from the assembly. Corresponds to the TaskName attribute of the UsingTask element.</param
         >
         <param name="assemblyFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,6 +510,8 @@
 
             
 
+            
+
              element with the specified assembly name.</para
           >
         </summary>
@@ -462,10 +520,14 @@
 
           
 
+          
+
           The name of the task to reference from the assembly. Corresponds to the TaskName attribute of the UsingTask element.</param
         >
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -524,6 +586,8 @@
 
           
 
+          
+
           The target to build.</param
         >
       </Docs>
@@ -553,6 +617,8 @@
         </returns>
         <param name="targetNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -592,10 +658,14 @@
 
           
 
+          
+
           The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param
         >
         <param name="targetOutputs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -636,10 +706,14 @@
 
           
 
+          
+
           The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param
         >
         <param name="targetOutputs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -650,8 +724,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.BuildSettings" />
+
+          
 
           
 
@@ -679,8 +757,12 @@
 
             
 
+            
+
              property of the project's <see
              cref="P:Microsoft.Build.BuildEngine.Project.ParentEngine" />
+
+            
 
             
 
@@ -714,10 +796,14 @@
 
             
 
+            
+
              attribute of the <format
              type="text/html">
               <a href="d1cda56a-dbef-4109-9201-39e962e3f653">Project</a>
             </format>
+
+            
 
             
 
@@ -768,6 +854,8 @@
 
             
 
+            
+
              contains all the evaluated items in the project after wildcard and property expansion. The items in this property represent the actual items used during the build process. This property value is generated every time something in the project changes. Changes to existing items in this collection will be reflected the next time the project is saved, but adding or deleting items will not impact the project.</para
           >
         </remarks>
@@ -800,8 +888,12 @@
 
             
 
+            
+
              contains all items in the project after wildcard and property expansion, including those that were not used during the build process due to <unmanagedCodeEntityReference
             >Condition</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -809,6 +901,8 @@
              type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
+
+            
 
             
 
@@ -822,6 +916,8 @@
              type="text/html">
               <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a>
             </format>
+
+            
 
             
 
@@ -853,12 +949,16 @@
 
             
 
+            
+
              contains all the evaluated properties in the project after performing condition evaluation and property expansion. The properties in this collection include global properties, environment variables, reserved properties, and imported properties. Changes to existing properties in this collection will be reflected the next time the project is saved, but adding or deleting properties will not impact the project.</para
           >
           <block subset="none" type="note">
             <para
               >Cloning a <see
                cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+              
 
               
 
@@ -921,6 +1021,8 @@
 
             
 
+            
+
              attributes in the project that involve the property.</para
           >
         </remarks>
@@ -934,6 +1036,8 @@
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -971,11 +1075,15 @@
 
             
 
+            
+
              containing all of the evaluated items belonging to the specified item collection.</para
           >
         </returns>
         <param name="itemName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1013,10 +1121,14 @@
 
             
 
+            
+
              containing all items belonging to the specified item collection, even those not used in the build process because a <format
              type="text/html">
               <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a>
             </format>
+
+            
 
             
 
@@ -1025,6 +1137,8 @@
         </returns>
         <param name="itemName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1057,6 +1171,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1070,6 +1186,8 @@
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1102,6 +1220,8 @@
 
             
 
+            
+
              element.</para
           >
         </summary>
@@ -1113,11 +1233,15 @@
 
             
 
+            
+
              element of the project.</para
           >
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1148,10 +1272,14 @@
 
             
 
+            
+
              switch on the command line, or properties set by the integrated development environment before invoking vstecmsbuild. For more information, see <format
              type="text/html">
               <a href="edaa65ec-ab8a-42a1-84cb-d76d5b2f4584">MSBuild Command Line Reference</a>
             </format>
+
+            
 
             
 
@@ -1189,6 +1317,8 @@
 
             
 
+            
+
              element in the project.</para
           >
         </remarks>
@@ -1219,10 +1349,14 @@
 
             
 
+            
+
              attribute of the <format
              type="text/html">
               <a href="d1cda56a-dbef-4109-9201-39e962e3f653">Project</a>
             </format>
+
+            
 
             
 
@@ -1292,6 +1426,8 @@
 
             
 
+            
+
              returned by this property contains the item groups in this project and all imported projects.</para
           >
         </remarks>
@@ -1302,6 +1438,8 @@
              type="text/html">
               <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
             </format>
+
+            
 
             
 
@@ -1333,8 +1471,12 @@
 
             
 
+            
+
              into the <see
              cref="T:Microsoft.Build.BuildEngine.Project" />
+
+            
 
             
 
@@ -1346,8 +1488,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -1378,11 +1524,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="projectFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1413,11 +1563,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="projectXml">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1443,6 +1597,8 @@
           <para
             >Sets the <see
              cref="P:Microsoft.Build.BuildEngine.Project.IsDirty" />
+
+            
 
             
 
@@ -1475,6 +1631,8 @@
 
             
 
+            
+
              that builds the project.</para
           >
         </summary>
@@ -1503,6 +1661,8 @@
 
             
 
+            
+
              returned by this property contains the property groups in this project and all imported projects.</para
           >
         </remarks>
@@ -1513,6 +1673,8 @@
              type="text/html">
               <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
             </format>
+
+            
 
             
 
@@ -1586,6 +1748,8 @@
 
           
 
+          
+
           The item to remove from the project.</param
         >
       </Docs>
@@ -1614,6 +1778,8 @@
         </summary>
         <param name="itemGroupToRemove">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1650,6 +1816,8 @@
 
             
 
+            
+
              from the project, but does not modify imported projects.</para
           >
         </summary>
@@ -1676,6 +1844,8 @@
         </summary>
         <param name="itemName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1713,6 +1883,8 @@
 
           
 
+          
+
           The property group to remove from the project.</param
         >
       </Docs>
@@ -1745,11 +1917,15 @@
 
             
 
+            
+
              from the project, but does not modify imported projects.</para
           >
         </summary>
         <param name="matchCondition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1803,6 +1979,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1829,6 +2007,8 @@
         </summary>
         <param name="projectFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1864,6 +2044,8 @@
 
           
 
+          
+
           The name of the file in which to save the project.</param
         >
         <param name="encoding">
@@ -1871,8 +2053,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -1929,10 +2115,14 @@
 
           
 
+          
+
           The name of the property to change.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1943,6 +2133,8 @@
 
           
 
+          
+
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="importProject">
@@ -1950,8 +2142,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -1990,10 +2186,14 @@
 
           
 
+          
+
           The name of the property to change.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2004,6 +2204,8 @@
 
           
 
+          
+
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="importedProject">
@@ -2011,8 +2213,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -2023,8 +2229,12 @@
 
           
 
+          
+
           A <see
            cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+
+          
 
           
 
@@ -2067,10 +2277,14 @@
 
           
 
+          
+
           The name of the property to change.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2081,6 +2295,8 @@
 
           
 
+          
+
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="importedProject">
@@ -2088,8 +2304,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -2100,8 +2320,12 @@
 
           
 
+          
+
           A <see
            cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+
+          
 
           
 
@@ -2112,8 +2336,12 @@
 
           
 
+          
+
           true to treat the <paramref
            name="propertyValue" />
+
+          
 
           
 
@@ -2151,11 +2379,15 @@
 
             
 
+            
+
              element of the project with the specified element name and content.</para
           >
         </summary>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2191,10 +2423,14 @@
 
           
 
+          
+
           The name of the property to change.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2231,6 +2467,8 @@
 
           
 
+          
+
           The name of the property to change.</param
         >
         <param name="propertyValue">
@@ -2238,10 +2476,14 @@
 
           
 
+          
+
           The value to assign the property.</param
         >
         <param name="condition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2276,13 +2518,19 @@
 
             
 
+            
+
              is called from the integrated development environment (IDE) to set a particular property at the project level. This method searches the existing property groups for a property with this name. If one is found, it changes its value. Otherwise, it either adds a new property to that property group, or adds a new property group to the project. <see
              cref="M:Microsoft.Build.BuildEngine.Project.SetProperty(System.String,System.String,System.String,Microsoft.Build.BuildEngine.PropertyPosition)" />
 
             
 
+            
+
              uses the <paramref
              name="condition" />
+
+            
 
             
 
@@ -2298,10 +2546,14 @@
 
           
 
+          
+
           The name of the property to change.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2312,6 +2564,8 @@
 
           
 
+          
+
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="position">
@@ -2319,8 +2573,12 @@
 
           
 
+          
+
           A <see
            cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+
+          
 
           
 
@@ -2359,10 +2617,14 @@
 
           
 
+          
+
           The name of the property to change.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2373,6 +2635,8 @@
 
           
 
+          
+
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="position">
@@ -2380,8 +2644,12 @@
 
           
 
+          
+
           A <see
            cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+
+          
 
           
 
@@ -2392,8 +2660,12 @@
 
           
 
+          
+
           true to treat the <paramref
            name="propertyValue" />
+
+          
 
           
 
@@ -2423,6 +2695,8 @@
              type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
+
+            
 
             
 
@@ -2456,6 +2730,8 @@
 
             
 
+            
+
              object indicating the time the project was last changed in a way that required it to be saved to a file.</para
           >
         </summary>
@@ -2484,6 +2760,8 @@
              type="text/html">
               <a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a>
             </format>
+
+            
 
             
 

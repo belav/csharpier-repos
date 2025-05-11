@@ -22,10 +22,14 @@
 
         
 
+        
+
          is used by the <format
          type="text/html">
           <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
         </format>
+
+        
 
         
 
@@ -34,11 +38,15 @@
 
         
 
+        
+
          class can install event logs only on the local computer.</para
       >
       <para
         >Use the <see
          cref="T:System.Diagnostics.EventLogInstaller" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          property and registers it for the event log specified in <see
          cref="P:System.Diagnostics.EventLogInstaller.Log" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          on the <see
          cref="T:System.Diagnostics.EventLog" />
+
+        
 
         
 
@@ -76,8 +92,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Diagnostics.EventLog.WriteEntry" />
+
+        
 
         
 
@@ -89,8 +109,12 @@
 
         
 
+        
+
         , or using the <see
          cref="Overload:System.Diagnostics.EventLog.CreateEventSource" />
+
+        
 
         
 
@@ -103,13 +127,19 @@
 
         
 
+        
+
         , and set the <see
          cref="T:System.ComponentModel.RunInstallerAttribute" />
 
         
 
+        
+
          for the class to true. Within your project, create an <see
          cref="T:System.Diagnostics.EventLogInstaller" />
+
+        
 
         
 
@@ -123,8 +153,12 @@
 
         
 
+        
+
          is called, it looks at the <see
          cref="T:System.ComponentModel.RunInstallerAttribute" />
+
+        
 
         
 
@@ -133,8 +167,12 @@
 
         
 
+        
+
          collection that are associated with your project installer. If <see
          cref="T:System.ComponentModel.RunInstallerAttribute" />
+
+        
 
         
 
@@ -146,13 +184,19 @@
 
         
 
+        
+
          either before or after adding the instance to the <see
          cref="P:System.Configuration.Install.Installer.Installers" />
 
         
 
+        
+
          collection of your project installer, but before the installer tool runs. You must set the <see
          cref="P:System.Diagnostics.EventLogInstaller.Source" />
+
+        
 
         
 
@@ -164,8 +208,12 @@
 
         
 
+        
+
          to register a new source for a new or existing event log; do not use <see
          cref="T:System.Diagnostics.EventLogInstaller" />
+
+        
 
         
 
@@ -174,8 +222,12 @@
 
         
 
+        
+
          class does not modify the configuration properties of an existing source to match the specified installation properties. The <see
          cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -184,8 +236,12 @@
 
         
 
+        
+
          property matches a source name that is registered for a different event log on the computer. The <see
          cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -194,8 +250,12 @@
 
         
 
+        
+
          property matches a source name that is already registered for the same event log specified in the <see
          cref="P:System.Diagnostics.EventLogInstaller.Log" />
+
+        
 
         
 
@@ -207,8 +267,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Diagnostics.EventLogInstaller.CategoryResourceFile" />
+
+        
 
         
 
@@ -217,8 +281,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Diagnostics.EventLogInstaller.ParameterResourceFile" />
+
+        
 
         
 
@@ -230,8 +298,12 @@
 
         
 
+        
+
          method to write entries using resource identifiers to the event log. Create a different source without resource files and then use that source in the <see
          cref="Overload:System.Diagnostics.EventLog.WriteEntry" />
+
+        
 
         
 
@@ -243,13 +315,19 @@
 
         
 
+        
+
          class from within your code; they are generally called only by Installutil.exe. The tool automatically calls the <see
          cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
 
         
 
+        
+
          method during the installation process. It backs out failures, if necessary, by calling the <see
          cref="M:System.Diagnostics.EventLogInstaller.Rollback(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -273,6 +351,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.EventLogInstaller" />
+
+            
 
             
 
@@ -309,8 +389,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventLogInstaller.CategoryResourceFile" />
+
+            
 
             
 
@@ -322,8 +406,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventLogInstaller.CategoryResourceFile" />
+
+            
 
             
 
@@ -332,6 +420,8 @@
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -374,8 +464,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventLogInstaller.CategoryResourceFile" />
+
+            
 
             
 
@@ -387,8 +481,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventLogInstaller.CategoryResourceFile" />
+
+            
 
             
 
@@ -397,6 +495,8 @@
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -430,8 +530,12 @@
 
             
 
+            
+
              parameter must be an <see
              cref="T:System.Diagnostics.EventLog" />
+
+            
 
             
 
@@ -443,10 +547,14 @@
 
             
 
+            
+
              from within your code; they are generally called only by the <format
              type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
+
+            
 
             
 
@@ -455,13 +563,19 @@
 
             
 
+            
+
              is used by Installutil.exe to set the property values for the <see
              cref="T:System.Diagnostics.EventLogInstaller" />
 
             
 
+            
+
              to the values of an existing <see
              cref="T:System.Diagnostics.EventLog" />
+
+            
 
             
 
@@ -473,13 +587,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Diagnostics.EventLog" />
 
             
 
+            
+
              that is passed in is an empty string (""), you must set the <see
              cref="P:System.Diagnostics.EventLog.Log" />
+
+            
 
             
 
@@ -494,6 +614,8 @@
 
             
 
+            
+
              component that are required at installation time for an event log.</para
           >
         </summary>
@@ -502,13 +624,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.IComponent" />
 
           
 
+          
+
            to use as a template for the <see
            cref="T:System.Diagnostics.EventLogInstaller" />
+
+          
 
           
 
@@ -541,13 +669,19 @@
 
             
 
+            
+
              method writes event log information to the registry, and associates the event log with a log that is specified by the <see
              cref="P:System.Diagnostics.EventLogInstaller.Log" />
 
             
 
+            
+
              property. If the log does not already exist (and a source is specified), <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -559,10 +693,14 @@
 
             
 
+            
+
              from within your code; they are generally called only by the <format
              type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
+
+            
 
             
 
@@ -571,8 +709,12 @@
 
             
 
+            
+
              method during the installation process to write registry information that is associated with the event log being installed. Installation is transactional, so if there is a failure of any installation project component during the installation, all the previously-installed components are rolled back to their pre-installation states. This is accomplished by calling each component's <see
              cref="M:System.Diagnostics.EventLogInstaller.Rollback(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -584,8 +726,12 @@
 
             
 
+            
+
              to register a new source for a new or existing event log; do not use <see
              cref="T:System.Diagnostics.EventLogInstaller" />
+
+            
 
             
 
@@ -594,8 +740,12 @@
 
             
 
+            
+
              class does not modify the configuration properties of an existing source to match the specified installation properties. The <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -604,8 +754,12 @@
 
             
 
+            
+
              property matches a source name that is registered for a different event log on the computer. The <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -614,8 +768,12 @@
 
             
 
+            
+
              property matches a source name that is already registered for the same event log specified in the <see
              cref="P:System.Diagnostics.EventLogInstaller.Log" />
+
+            
 
             
 
@@ -627,8 +785,12 @@
 
             
 
+            
+
              property to automatically maintain information about the components that have already been installed. This state information, which is passed to <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -637,8 +799,12 @@
 
             
 
+            
+
              parameter, is continuously updated as the tool installs each <see
              cref="T:System.Diagnostics.EventLogInstaller" />
+
+            
 
             
 
@@ -654,8 +820,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -688,6 +858,8 @@
 
             
 
+            
+
              from within your code; they are generally called only by the Installer tool (Installutil.exe).</para
           >
         </remarks>
@@ -703,11 +875,15 @@
 
             
 
+            
+
              parameter would install or uninstall the same source; otherwise, false.</para
           >
         </returns>
         <param name="otherInstaller">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -740,8 +916,12 @@
 
             
 
+            
+
              property to associate the source you specify in the <see
              cref="P:System.Diagnostics.EventLogInstaller.Source" />
+
+            
 
             
 
@@ -749,6 +929,8 @@
              type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
+
+            
 
             
 
@@ -760,6 +942,8 @@
 
             
 
+            
+
              property to register your application with the event log as a valid source of entries. If you do not specify a log name before the installer runs, the installer registers your source to the Application log. If you specify a new source and an existing log, the installer creates a new event source and associates it with the log you specify. If you specify both a new source and a new log, the installer associates the new source with the new log in the registry, but the log is not created until the first entry is written to it.</para
           >
           <para
@@ -768,13 +952,19 @@
 
             
 
+            
+
              or the <see
              cref="Overload:System.Diagnostics.EventLog.CreateEventSource" />
 
             
 
+            
+
              method to create a new event log, the associated file is stored in the %SystemRoot%\System32\Config directory on the specified computer. The file name is set by appending the first 8 characters of the <see
              cref="P:System.Diagnostics.EventLogInstaller.Log" />
+
+            
 
             
 
@@ -786,8 +976,12 @@
 
             
 
+            
+
              to register a new source for a new or existing event log; do not use <see
              cref="T:System.Diagnostics.EventLogInstaller" />
+
+            
 
             
 
@@ -796,8 +990,12 @@
 
             
 
+            
+
              class does not modify the configuration properties of an existing source to match the specified installation properties. The <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -806,8 +1004,12 @@
 
             
 
+            
+
              property matches a source name that is registered for a different event log on the computer. The <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -816,8 +1018,12 @@
 
             
 
+            
+
              property matches a source name that is already registered for the same event log specified in the <see
              cref="P:System.Diagnostics.EventLogInstaller.Log" />
+
+            
 
             
 
@@ -829,13 +1035,19 @@
 
             
 
+            
+
              class documentation for the <see
              cref="P:System.Diagnostics.EventLog.Log" />
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventLog.Source" />
+
+            
 
             
 
@@ -882,11 +1094,15 @@
 
             
 
+            
+
              property to configure an event log source to write localized event messages. Event messages are application-defined strings that describe the event to the user.</para
           >
           <para
             >Your application can write event log entries using resource identifiers. A resource identifier indexes a message located in the <see
              cref="P:System.Diagnostics.EventLogInstaller.MessageResourceFile" />
+
+            
 
             
 
@@ -898,11 +1114,15 @@
 
             
 
+            
+
              method to write localized entries for a source configured with a message resource file.</para
           >
           <para
             >If your application writes event message strings directly, rather than using a resource identifier in a localized resource file, do not set the <see
              cref="P:System.Diagnostics.EventLogInstaller.MessageResourceFile" />
+
+            
 
             
 
@@ -914,8 +1134,12 @@
 
             
 
+            
+
              property is not the local computer identifier ("."), the .NET Framework assumes that the resource file is on a remote computer. If the <see
              cref="P:System.Diagnostics.EventLogInstaller.MessageResourceFile" />
+
+            
 
             
 
@@ -924,6 +1148,8 @@
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -966,13 +1192,19 @@
 
             
 
+            
+
              property to configure an event log source to write localized event messages with inserted parameter strings. Each localized event message specified in the <see
              cref="P:System.Diagnostics.EventLogInstaller.MessageResourceFile" />
 
             
 
+            
+
              property can contain placeholders for insertion strings. These placeholders are used to specify the position and resource identifier for a language-independent string within the event message. The Event Viewer replaces the placeholders with the corresponding strings from the <see
              cref="P:System.Diagnostics.EventLogInstaller.ParameterResourceFile" />
+
+            
 
             
 
@@ -1001,6 +1233,8 @@ TRIGGER.EXE
 
             
 
+            
+
              method to write localized entries for a source configured with a message resource file.</para
           >
           <para
@@ -1009,8 +1243,12 @@ TRIGGER.EXE
 
             
 
+            
+
              does not contain messages with parameter insertion placeholders, do not set the <see
              cref="P:System.Diagnostics.EventLogInstaller.ParameterResourceFile" />
+
+            
 
             
 
@@ -1019,6 +1257,8 @@ TRIGGER.EXE
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -1052,8 +1292,12 @@ TRIGGER.EXE
 
             
 
+            
+
              method undoes the effects of the <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1062,13 +1306,19 @@ TRIGGER.EXE
 
             
 
+            
+
              is called if the installation of any component in the installation project fails. The <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
 
             
 
+            
+
              method creates or sets the properties for an event log and event source. <see
              cref="M:System.Diagnostics.EventLogInstaller.Rollback(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1080,6 +1330,8 @@ TRIGGER.EXE
 
             
 
+            
+
              from within your code; they are generally called only by the <format
              type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
@@ -1087,8 +1339,12 @@ TRIGGER.EXE
 
             
 
+            
+
             . The tool calls the <see
              cref="M:System.Diagnostics.EventLogInstaller.Rollback(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1100,8 +1356,12 @@ TRIGGER.EXE
 
             
 
+            
+
              property to automatically maintain information about the components that have already been installed. This state information, which is passed to <see
              cref="M:System.Diagnostics.EventLogInstaller.Rollback(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1110,8 +1370,12 @@ TRIGGER.EXE
 
             
 
+            
+
              parameter, is continuously updated as the tool rolls back each <see
              cref="T:System.Diagnostics.EventLogInstaller" />
+
+            
 
             
 
@@ -1127,8 +1391,12 @@ TRIGGER.EXE
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1162,11 +1430,15 @@ TRIGGER.EXE
 
             
 
+            
+
              property to register your application with the event log as a valid source of entries. A new source name cannot match an existing source name or an existing event log name. Each source can only write to one event log at a time; however, your application can use multiple sources to write to multiple event logs. For example, your application might require multiple sources configured for different event logs or different resource files.</para
           >
           <para
             >Applications and services should write to the Application log or a custom log. Device drivers should write to the System log. If you do not specify a log name before the installer runs, the installer registers your source to the Application log. If you specify the name of a log that does not exist, the system registers the <see
              cref="P:System.Diagnostics.EventLogInstaller.Source" />
+
+            
 
             
 
@@ -1178,8 +1450,12 @@ TRIGGER.EXE
 
             
 
+            
+
              to register a new source for a new or existing event log; do not use <see
              cref="T:System.Diagnostics.EventLogInstaller" />
+
+            
 
             
 
@@ -1188,8 +1464,12 @@ TRIGGER.EXE
 
             
 
+            
+
              class does not modify the configuration properties of an existing source to match the specified installation properties. The <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1198,8 +1478,12 @@ TRIGGER.EXE
 
             
 
+            
+
              property matches a source name that is registered for a different event log on the computer. The <see
              cref="M:System.Diagnostics.EventLogInstaller.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1208,8 +1492,12 @@ TRIGGER.EXE
 
             
 
+            
+
              property matches a source name that is already registered for the same event log specified in the <see
              cref="P:System.Diagnostics.EventLogInstaller.Log" />
+
+            
 
             
 
@@ -1221,13 +1509,19 @@ TRIGGER.EXE
 
             
 
+            
+
              class documentation for the <see
              cref="P:System.Diagnostics.EventLog.Log" />
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventLog.Source" />
+
+            
 
             
 
@@ -1265,8 +1559,12 @@ TRIGGER.EXE
 
             
 
+            
+
              property value is Remove, the <see
              cref="M:System.Diagnostics.EventLogInstaller.Uninstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1275,8 +1573,12 @@ TRIGGER.EXE
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventLogInstaller.Source" />
+
+            
 
             
 
@@ -1288,6 +1590,8 @@ TRIGGER.EXE
 
             
 
+            
+
              from within your code; they are generally called only by the <format
              type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
@@ -1295,8 +1599,12 @@ TRIGGER.EXE
 
             
 
+            
+
              in uninstall mode. The tool automatically calls the <see
              cref="M:System.Diagnostics.EventLogInstaller.Uninstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1308,8 +1616,12 @@ TRIGGER.EXE
 
             
 
+            
+
              property to automatically maintain information about the components that have already been uninstalled. This state information, which is passed to <see
              cref="M:System.Diagnostics.EventLogInstaller.Uninstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1318,8 +1630,12 @@ TRIGGER.EXE
 
             
 
+            
+
              parameter, is continuously updated as the tool uninstalls each <see
              cref="T:System.Diagnostics.EventLogInstaller" />
+
+            
 
             
 
@@ -1335,8 +1651,12 @@ TRIGGER.EXE
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1372,6 +1692,8 @@ TRIGGER.EXE
 
             
 
+            
+
              to their pre-installation values.</para
           >
         </remarks>
@@ -1382,6 +1704,8 @@ TRIGGER.EXE
              type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
+
+            
 
             
 

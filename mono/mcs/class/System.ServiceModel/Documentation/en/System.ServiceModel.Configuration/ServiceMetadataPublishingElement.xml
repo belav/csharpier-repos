@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -190,6 +192,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -217,6 +221,8 @@
           <para
             >If the <see
              cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl" />
+
+            
 
             
 
@@ -319,6 +325,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -346,6 +354,8 @@
           <para
             >If the <see
              cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl" />
+
+            
 
             
 

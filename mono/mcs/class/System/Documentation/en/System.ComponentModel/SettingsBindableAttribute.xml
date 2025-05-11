@@ -53,11 +53,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="bindable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -115,11 +119,15 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

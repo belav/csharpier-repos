@@ -6,6 +6,8 @@
 
     
 
+    
+
      of an external method simply consists of a semicolon. </paragraph
   >
   <paragraph>The mechanism by which linkage to an external method is achieved, is implementation-defined. </paragraph>
@@ -13,7 +15,7 @@
     <example
       >[Example: The following example demonstrates the use of the extern modifier in combination with a DllImport attribute that specifies the name of the external library in which the method is implemented: <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System.Text;  
 using System.Security.Permissions;  
 using System.Runtime.InteropServices;  
@@ -30,6 +32,8 @@ class Path
 }  
 ]]>
       </code_example>
+
+      
 
       
 

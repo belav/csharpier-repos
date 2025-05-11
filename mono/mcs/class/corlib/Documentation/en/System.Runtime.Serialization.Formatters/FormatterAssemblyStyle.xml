@@ -58,8 +58,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -91,6 +95,8 @@
           <para
             >In simple mode, the assembly used during deserialization need not match exactly the assembly used during serialization. Specifically, the version numbers need not match as the <see
              cref="Overload:System.Reflection.Assembly.LoadWithPartialName" />
+
+            
 
             
 

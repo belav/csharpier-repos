@@ -37,8 +37,12 @@
 
         
 
+        
+
          class contains the host and local or remote port information needed by an application to connect to a service on a host. By combining the host's IP address and port number of a service, the <see
          cref="T:System.Net.IPEndPoint" />
+
+        
 
         
 
@@ -80,8 +84,12 @@
 
             
 
+            
+
             is less than <see
              cref="F:System.Net.IPEndPoint.MinPort" />
+
+            
 
             
 
@@ -90,11 +98,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >A negative number was specified for <paramref
              name="address" />
+
+            
 
             
 
@@ -109,11 +121,15 @@
 
             
 
+            
+
              class with the specified address and port number.</para
           >
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -124,13 +140,19 @@
 
           
 
+          
+
           The port number associated with the <paramref
            name="address" />
 
           
 
+          
+
           , or 0 to specify any available port. <paramref
            name="port" />
+
+          
 
           
 
@@ -170,8 +192,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -183,13 +209,19 @@
 
             
 
+            
+
             is less than <see
              cref="F:System.Net.IPEndPoint.MinPort" />
 
             
 
+            
+
              or greater than <see
              cref="F:System.Net.IPEndPoint.MaxPort" />
+
+            
 
             
 
@@ -204,6 +236,8 @@
 
             
 
+            
+
              class with the specified address and port number.</para
           >
         </summary>
@@ -212,8 +246,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -224,13 +262,19 @@
 
           
 
+          
+
           The port number associated with the <paramref
            name="address" />
 
           
 
+          
+
           , or 0 to specify any available port. <paramref
            name="port" />
+
+          
 
           
 
@@ -264,6 +308,8 @@
           <para
             >A <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -307,6 +353,8 @@
           <para
             >Returns <see
              cref="F:System.Net.Sockets.AddressFamily.InterNetwork" qualify="true" />
+
+            
 
             
 
@@ -358,6 +406,8 @@
 
               
 
+              
+
                .</block
             >
           </para>
@@ -368,13 +418,19 @@
 
           
 
+          
+
            of the specified <see
            cref="T:System.Net.SocketAddress" />
 
           
 
+          
+
            is not equal to the <see
            langword="AddressFamily" />
+
+          
 
           
 
@@ -392,6 +448,8 @@
 
             
 
+            
+
              instance using the specified socket address.</para
           >
         </returns>
@@ -400,8 +458,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.SocketAddress" />
+
+          
 
           
 
@@ -439,8 +501,12 @@
 
             
 
+            
+
              if <paramref
              name="comparand" />
+
+            
 
             
 
@@ -450,9 +516,13 @@
 
             
 
+            
+
              is a
 <see
              langword="null" />
+
+            
 
             
 
@@ -461,9 +531,13 @@
 
             
 
+            
+
             , returns 
 <see
              langword="false" />
+
+            
 
             
 
@@ -477,14 +551,20 @@
 
             
 
+            
+
              instances are equal if their <see
              cref="P:System.Net.IPEndPoint.Address" />
+
+            
 
             
 
              
 and <see
              cref="P:System.Net.IPEndPoint.Port" />
+
+            
 
             
 
@@ -495,6 +575,8 @@ and <see
               >This method 
  overrides <see
                cref="M:System.Object.Equals(System.Object)" />
+
+              
 
               
 
@@ -510,8 +592,12 @@ and <see
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.IPEndPoint" />
+
+            
 
             
 
@@ -523,13 +609,19 @@ and <see
 
           
 
+          
+
           The specified <see
            cref="T:System.Object" />
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Net.IPEndPoint" />
+
+          
 
           
 
@@ -567,6 +659,8 @@ and <see
 
             
 
+            
+
              method returns a hash code of the IP endpoint instance. This value can be used as a key in hash tables.</para
           >
         </remarks>
@@ -575,6 +669,8 @@ and <see
           <para
             >Returns a hash value for a <see
              cref="T:System.Net.IPEndPoint" />
+
+            
 
             
 
@@ -621,6 +717,8 @@ and <see
 
             
 
+            
+
              property. The MaxPort value is set to 0x0000FFFF. This field is read-only.</para
           >
         </summary>
@@ -651,6 +749,8 @@ and <see
           <para
             >Specifies the minimum value that can be assigned to the <see
              cref="P:System.Net.IPEndPoint.Port" />
+
+            
 
             
 
@@ -685,13 +785,19 @@ and <see
 
             
 
+            
+
              value that is between <see
              cref="F:System.Net.IPEndPoint.MinPort" />
 
             
 
+            
+
              and <see
              cref="F:System.Net.IPEndPoint.MaxPort" />
+
+            
 
             
 
@@ -706,8 +812,12 @@ inclusive.</para
 
           
 
+          
+
            or greater than <see
            cref="F:System.Net.IPEndPoint.MaxPort" />
+
+          
 
           
 
@@ -749,6 +859,8 @@ inclusive.</para
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -757,6 +869,8 @@ inclusive.</para
           <para
             >A <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -791,6 +905,8 @@ inclusive.</para
             <block subset="none" type="note"
               >This method overrides <see
                cref="M:System.Object.ToString" />
+
+              
 
               
 

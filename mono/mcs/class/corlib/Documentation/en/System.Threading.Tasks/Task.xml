@@ -36,8 +36,12 @@
 
         
 
+        
+
          instances may be created in a variety of ways. The most common approach is by using the task’s <see
          cref="P:System.Threading.Tasks.Task.Factory" />
+
+        
 
         
 
@@ -46,13 +50,19 @@
 
         
 
+        
+
          instance that can be used to create tasks for several purposes. For example, to create a <see
          cref="T:System.Threading.Tasks.Task" />
 
         
 
+        
+
          that runs an action, the factory's <see
          cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" />
+
+        
 
         
 
@@ -73,6 +83,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
         
 
+        
+
         .</para
       >
       <para
@@ -81,8 +93,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
         
 
+        
+
          class also provides constructors that initialize the task but that do not schedule it for execution. For performance reasons, the task factory’s <see
          cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" />
+
+        
 
         
 
@@ -91,11 +107,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
         
 
+        
+
          method may then be used to schedule the task for execution at a later time. </para
       >
       <para
         >For operations that return values, the <see
          cref="T:System.Threading.Tasks.Task`1" />
+
+        
 
         
 
@@ -110,8 +130,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
         
 
+        
+
          property, however accessing this field directly from a debugger may be more efficient than accessing the same value through the property's getter method (the s_taskIdCounter counter is used to retrieve the next available ID for a task). Similarly, the m_stateFlags field stores information about the current lifecycle stage of the task, information also accessible through the <see
          cref="P:System.Threading.Tasks.Task.Status" />
+
+        
 
         
 
@@ -146,13 +170,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object and launch a task is by calling the static <see
              cref="M:System.Threading.Tasks.Task.Run(System.Action)" />
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" />
+
+            
 
             
 
@@ -167,11 +197,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              with the specified action.</para
           >
         </summary>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -205,13 +239,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object and launch a task is by calling the static <see
              cref="M:System.Threading.Tasks.Task.Run(System.Action,System.Threading.CancellationToken)" />
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -227,10 +267,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eea11fe5-d8b0-4314-bb5d-8a58166fb1c3">Cancellation</a>
             </format>
+
+            
 
             
 
@@ -245,8 +289,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              with the specified action and <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -258,6 +306,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The delegate that represents the code to execute in the task.</param
         >
         <param name="cancellationToken">
@@ -265,8 +315,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -300,8 +354,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object and launch a task is by calling the static <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.Tasks.TaskCreationOptions)" />
+
+            
 
             
 
@@ -316,11 +374,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              with the specified action and creation options.</para
           >
         </summary>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -331,8 +393,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+          
 
           
 
@@ -366,8 +432,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object and launch a task is by calling the static <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object)" />
+
+            
 
             
 
@@ -382,6 +452,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              with the specified action and state.</para
           >
         </summary>
@@ -390,10 +462,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The delegate that represents the code to execute in the task.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -428,8 +504,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object and launch a task is by calling the static <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions,System.Threading.Tasks.TaskScheduler)" />
+
+            
 
             
 
@@ -445,10 +525,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="3ecf1ea9-e399-4a6a-a0d6-8475f48dcb28">Task Cancellation</a>
             </format>
+
+            
 
             
 
@@ -463,11 +547,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              with the specified action and creation options.</para
           >
         </summary>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,8 +566,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -490,8 +582,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+          
 
           
 
@@ -526,8 +622,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object and launch a task is by calling the static <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -542,11 +642,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              with the specified action, state, and options.</para
           >
         </summary>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -557,6 +661,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the action.</param
         >
         <param name="cancellationToken">
@@ -564,8 +670,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -600,8 +710,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object and launch a task is by calling the static <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.Tasks.TaskCreationOptions)" />
+
+            
 
             
 
@@ -616,11 +730,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              with the specified action, state, and options.</para
           >
         </summary>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -631,6 +749,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the action.</param
         >
         <param name="creationOptions">
@@ -638,8 +758,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+          
 
           
 
@@ -675,8 +799,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object and launch a task is by calling the static <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions,System.Threading.Tasks.TaskScheduler)" />
+
+            
 
             
 
@@ -691,11 +819,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              with the specified action, state, and options.</para
           >
         </summary>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,6 +838,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the action.</param
         >
         <param name="cancellationToken">
@@ -713,8 +847,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -725,8 +863,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+          
 
           
 
@@ -755,6 +897,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Gets the state object supplied when the <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -792,6 +936,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -801,6 +947,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         </returns>
         <param name="continueOnCapturedContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -839,6 +987,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed, whether it completes due to running to completion successfully, faulting due to an unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -847,6 +997,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes asynchronously when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -861,6 +1013,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -869,8 +1023,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -910,6 +1068,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed, whether it completes due to running to completion successfully, faulting due to an unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -918,6 +1078,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -932,6 +1094,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -940,8 +1104,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -949,6 +1117,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -988,6 +1158,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed, whether it completes due to running to completion successfully, faulting due to an unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -996,6 +1168,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes asynchronously when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -1010,6 +1184,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1018,8 +1194,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -1030,8 +1210,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -1074,8 +1258,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed. If the continuation criteria specified through the <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -1090,6 +1278,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1101,6 +1291,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1109,8 +1301,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run according to the specified <paramref
            name="continuationOptions" />
+
+          
 
           
 
@@ -1121,13 +1317,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           Options for when the continuation is scheduled and how it behaves. This includes criteria, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.OnlyOnCanceled" />
 
           
 
+          
+
           , as well as execution options, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.ExecuteSynchronously" />
+
+          
 
           
 
@@ -1167,6 +1369,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed, whether it completes due to running to completion successfully, faulting due to an unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -1175,6 +1379,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes asynchronously when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -1189,6 +1395,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1197,8 +1405,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -1209,8 +1421,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -1251,6 +1467,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has  completed, whether it completes due to running to completion successfully, faulting due to an  unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -1259,6 +1477,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -1273,6 +1493,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1281,8 +1503,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -1293,6 +1519,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation action.</param
         >
         <param name="cancellationToken">
@@ -1300,8 +1528,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -1345,8 +1577,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed. If the continuation criteria specified through the <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -1361,6 +1597,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              completes.</para
           >
         </summary>
@@ -1372,6 +1610,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1380,8 +1620,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -1392,10 +1636,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation action.</param
         >
         <param name="continuationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1404,8 +1652,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           , as well as execution options, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.ExecuteSynchronously" />
+
+          
 
           
 
@@ -1446,6 +1698,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has  completed, whether it completes due to running to completion successfully, faulting due to an  unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -1454,6 +1708,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -1468,6 +1724,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1476,8 +1734,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -1488,6 +1750,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation action.</param
         >
         <param name="scheduler">
@@ -1495,8 +1759,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -1541,8 +1809,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed. If the criteria specified through the <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -1557,6 +1829,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1568,6 +1842,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1576,8 +1852,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run according to the specified <paramref
            name="continuationOptions" />
+
+          
 
           
 
@@ -1588,8 +1868,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -1600,13 +1884,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           Options for when the continuation is scheduled and how it behaves. This includes criteria, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.OnlyOnCanceled" />
 
           
 
+          
+
           , as well as execution options, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.ExecuteSynchronously" />
+
+          
 
           
 
@@ -1617,8 +1907,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -1664,8 +1958,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has  completed. If the criteria specified through the <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -1680,6 +1978,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              completes.</para
           >
         </summary>
@@ -1691,6 +1991,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1699,8 +2001,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An action to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -1711,6 +2017,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation action.</param
         >
         <param name="cancellationToken">
@@ -1718,8 +2026,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -1730,13 +2042,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           Options for when the continuation is scheduled and how it behaves. This includes criteria, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.OnlyOnCanceled" />
 
           
 
+          
+
           , as well as execution options, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.ExecuteSynchronously" />
+
+          
 
           
 
@@ -1747,8 +2065,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -1790,6 +2112,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed, whether it completes due to running to completion successfully, faulting due to an unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -1798,6 +2122,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes asynchronously when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -1812,6 +2138,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1820,8 +2148,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -1829,6 +2161,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1871,6 +2205,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has  completed, whether it completes due to running to completion successfully, faulting due to an  unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -1879,6 +2215,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -1893,6 +2231,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1901,8 +2241,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -1913,10 +2257,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation function.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1959,6 +2307,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed, whether it completes due to running to completion successfully, faulting due to an unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -1967,6 +2317,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes asynchronously when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -1981,6 +2333,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1989,8 +2343,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2001,8 +2359,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -2010,6 +2372,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2055,8 +2419,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed. If the continuation criteria specified through the <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -2071,6 +2439,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2082,6 +2452,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2090,8 +2462,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run according to the condition specified in <paramref
            name="continuationOptions" />
+
+          
 
           
 
@@ -2102,8 +2478,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           Options for when the continuation is scheduled and how it behaves. This includes criteria, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.OnlyOnCanceled" />
+
+          
 
           
 
@@ -2112,10 +2492,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           .</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2158,6 +2542,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed, whether it completes due to running to completion successfully, faulting due to an unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -2166,6 +2552,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes asynchronously when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -2180,6 +2568,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2188,8 +2578,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2200,8 +2594,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -2209,6 +2607,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2252,6 +2652,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has  completed, whether it completes due to running to completion successfully, faulting due to an  unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -2260,6 +2662,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -2274,6 +2678,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2282,8 +2688,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2294,10 +2704,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation function.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2306,10 +2720,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
            that will be assigned to the new continuation task.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2356,8 +2774,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed. If the continuation criteria specified through the <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -2372,6 +2794,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              completes.</para
           >
         </summary>
@@ -2383,6 +2807,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2391,8 +2817,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2403,10 +2833,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation function.</param
         >
         <param name="continuationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2415,8 +2849,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           , as well as execution options, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.ExecuteSynchronously" />
+
+          
 
           
 
@@ -2424,6 +2862,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2467,6 +2907,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has  completed, whether it completes due to running to completion successfully, faulting due to an  unhandled exception, or exiting out early due to being canceled.</para
           >
         </remarks>
@@ -2475,6 +2917,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Creates a continuation that executes when the target <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -2489,6 +2933,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2497,8 +2943,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2509,10 +2959,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation function.</param
         >
         <param name="scheduler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2521,10 +2975,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
            to associate with the continuation task and to use for its execution.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2572,8 +3030,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has completed. If the criteria specified through the <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -2588,6 +3050,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2599,6 +3063,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2607,8 +3073,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run according to the specified <paramref
            name="continuationOptions." />
+
+          
 
           
 
@@ -2619,8 +3089,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -2631,13 +3105,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           Options for when the continuation is scheduled and how it behaves. This includes criteria, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.OnlyOnCanceled" />
 
           
 
+          
+
           , as well as execution options, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.ExecuteSynchronously" />
+
+          
 
           
 
@@ -2648,8 +3128,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -2657,6 +3141,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2705,8 +3191,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will not be scheduled for execution until the current task has  completed. If the criteria specified through the <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -2721,6 +3211,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              completes.</para
           >
         </summary>
@@ -2732,6 +3224,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2740,8 +3234,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A function to run when the <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2752,6 +3250,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An object representing data to be used by the continuation function.</param
         >
         <param name="cancellationToken">
@@ -2759,8 +3259,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -2771,13 +3275,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           Options for when the continuation is scheduled and how it behaves. This includes criteria, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.OnlyOnCanceled" />
 
           
 
+          
+
           , as well as execution options, such as <see
            cref="F:System.Threading.Tasks.TaskContinuationOptions.ExecuteSynchronously" />
+
+          
 
           
 
@@ -2788,8 +3298,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -2797,6 +3311,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2831,6 +3347,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              used to create this task.</para
           >
         </summary>
@@ -2857,6 +3375,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Returns the unique ID of the currently executing <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -2902,6 +3422,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The number of milliseconds to wait before completing the returned task</param
         >
       </Docs>
@@ -2934,6 +3456,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              state.</para
           >
         </remarks>
@@ -2947,6 +3471,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         </returns>
         <param name="delay">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2992,10 +3518,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The number of milliseconds to wait before completing the returned task</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3032,8 +3562,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              state.  Otherwise, the task is completed in <see
              cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
+
+            
 
             
 
@@ -3053,10 +3587,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The time span to wait before completing the returned task</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3085,6 +3623,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -3118,6 +3658,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             , this method is not thread-safe.</para
           >
         </remarks>
@@ -3129,6 +3671,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             , releasing all of its unmanaged resources.</para
           >
         </summary>
@@ -3137,8 +3681,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A Boolean value that indicates whether this method is being called due to a call to <see
            cref="M:System.Threading.Tasks.Task.Dispose" />
+
+          
 
           
 
@@ -3169,13 +3717,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              in calls to <see
              cref="M:System.Threading.Tasks.Task.Wait" />
 
             
 
+            
+
              or in accesses to the <see
              cref="P:System.Threading.Tasks.Task.Exception" />
+
+            
 
             
 
@@ -3185,6 +3739,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
                 >Exception Handling (Task Parallel Library)</a
               >
             </format>
+
+            
 
             
 
@@ -3199,13 +3755,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              that caused the <see
              cref="T:System.Threading.Tasks.Task" />
 
             
 
+            
+
              to end prematurely. If the <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -3240,8 +3802,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              is a default instance of <see
              cref="T:System.Threading.Tasks.TaskFactory" />
+
+            
 
             
 
@@ -3250,10 +3816,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             . For an example, see <format
              type="text/html">
               <a href="c4bc0f44-eba2-4e96-9e03-1cc787461e61">How to: Return a Value from a Task</a>
             </format>
+
+            
 
             
 
@@ -3268,8 +3838,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              and <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -3338,6 +3912,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3371,6 +3947,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -3396,8 +3974,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will complete in Canceled state either if its <see
              cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+            
 
             
 
@@ -3406,8 +3988,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              that bears the same <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -3419,6 +4005,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Gets whether this <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -3446,8 +4034,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will return true when the task is in one of the three final states: <see
              cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
+
+            
 
             
 
@@ -3456,8 +4048,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             , or <see
              cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+
+            
 
             
 
@@ -3469,6 +4065,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Gets whether this <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -3497,8 +4095,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              is true, the task's <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -3507,8 +4109,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             , and its <see
              cref="P:System.Threading.Tasks.Task.Exception" />
+
+            
 
             
 
@@ -3520,6 +4126,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Gets whether the <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -3556,8 +4164,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              method is a simpler alternative to the <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" />
+
+            
 
             
 
@@ -3571,6 +4183,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -3581,8 +4195,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
                 
 
+                
+
                  property value is <see
                  cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />
+
+                
 
                 
 
@@ -3604,6 +4222,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3640,6 +4260,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3651,11 +4273,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="function">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3692,8 +4318,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              method is a simpler alternative to the <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -3707,8 +4337,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
                 
 
+                
+
                  property value is <see
                  cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />
+
+                
 
                 
 
@@ -3733,10 +4367,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The work to execute asynchronously</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3774,6 +4412,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3785,6 +4425,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3793,10 +4435,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The work to execute asynchronously</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3839,6 +4485,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3850,6 +4498,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3858,10 +4508,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The work to execute asynchronously</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3900,8 +4554,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              method is a simpler alternative to the <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" />
+
+            
 
             
 
@@ -3915,6 +4573,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -3925,8 +4585,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
                 
 
+                
+
                  property value is <see
                  cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />
+
+                
 
                 
 
@@ -3951,10 +4615,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The work to execute asynchronously</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3998,6 +4666,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4009,11 +4679,15 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="function">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4024,10 +4698,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A cancellation token that should be used to cancel the work</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4067,8 +4745,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              method is a simpler alternative to the <see
              cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" />
+
+            
 
             
 
@@ -4082,8 +4764,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
                 
 
+                
+
                  property value is <see
                  cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />
+
+                
 
                 
 
@@ -4108,6 +4794,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The work to execute asynchronously</param
         >
         <param name="cancellationToken">
@@ -4115,10 +4803,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A cancellation token that should be used to cancel the work</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4150,8 +4842,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              will be associated with the current <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -4168,8 +4864,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              synchronously on the current <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -4212,8 +4912,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              synchronously on the <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -4222,6 +4926,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         </summary>
         <param name="scheduler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4256,8 +4962,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             , scheduling it for execution to the current <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -4298,8 +5008,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             , scheduling it for execution to the specified <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -4311,8 +5025,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -4350,12 +5068,16 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="08574301-8331-4719-ad50-9cf7f6ff3048"
                 >How to: Cancel a Task and Its Children</a
               >
             </format>
+
+            
 
             
 
@@ -4367,6 +5089,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Gets the <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -4401,8 +5125,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              should be preferred over using <see
              cref="P:System.IAsyncResult.AsyncWaitHandle" />
+
+            
 
             
 
@@ -4415,12 +5143,16 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="7add905b-ff60-4353-af79-5089038d9a08"
                 >TPL With Other Asynchronous Patterns</a
               >
             </format>
+
+            
 
             
 
@@ -4432,6 +5164,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Gets a <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -4492,6 +5226,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4500,6 +5236,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Waits for the <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -4534,6 +5272,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              to complete execution within a specified number of milliseconds.</para
           >
         </summary>
@@ -4545,6 +5285,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              completed execution within the allotted time; otherwise, false.</para
           >
         </returns>
@@ -4553,8 +5295,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -4591,6 +5337,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              to complete execution.</para
           >
         </summary>
@@ -4599,8 +5347,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -4634,6 +5386,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              to complete execution within a specified time interval.</para
           >
         </summary>
@@ -4645,6 +5399,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              completed execution within the allotted time; otherwise, false.</para
           >
         </returns>
@@ -4653,13 +5409,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -4697,6 +5459,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              to complete execution.</para
           >
         </summary>
@@ -4708,6 +5472,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              completed execution within the allotted time; otherwise, false.</para
           >
         </returns>
@@ -4716,8 +5482,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -4728,8 +5498,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -4772,6 +5546,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              objects to complete execution.</para
           >
         </summary>
@@ -4780,8 +5556,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -4819,6 +5599,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              objects to complete execution within a specified number of milliseconds.</para
           >
         </summary>
@@ -4830,6 +5612,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              instances completed execution within the allotted time; otherwise, false.</para
           >
         </returns>
@@ -4838,8 +5622,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -4850,8 +5638,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -4888,6 +5680,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              argument is used to cancel the wait operation. If it is canceled, the Wait returns false (False in Visual Basic). Cancellation of the tasks is a distinct operation, and is signaled by the AggregateException as noted above.</para
           >
         </remarks>
@@ -4899,6 +5693,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              objects to complete execution.</para
           >
         </summary>
@@ -4907,8 +5703,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -4919,8 +5719,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -4957,6 +5761,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              argument is used to cancel the wait operation. If it is canceled, the Wait returns false (False in Visual Basic). Cancellation of the tasks is a distinct operation, and is signaled by the AggregateException as noted above.</para
           >
         </remarks>
@@ -4965,6 +5771,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Waits for all of the provided cancellable <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -4979,6 +5787,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              instances completed execution within the allotted time; otherwise, false.</para
           >
         </returns>
@@ -4987,8 +5797,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -4999,13 +5813,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -5043,6 +5863,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              argument is used to cancel the wait operation. If it is canceled, the Wait returns false (False in Visual Basic). Cancellation of the tasks is a distinct operation, and is signaled by the AggregateException as noted above.</para
           >
         </remarks>
@@ -5051,6 +5873,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >Waits for all of the provided cancellable <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -5065,6 +5889,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              instances completed execution within the allotted time; otherwise, false.</para
           >
         </returns>
@@ -5073,8 +5899,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -5085,8 +5915,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -5097,8 +5931,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -5141,6 +5979,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              objects to complete execution.</para
           >
         </summary>
@@ -5152,6 +5992,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              array argument.</para
           >
         </returns>
@@ -5160,8 +6002,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -5199,6 +6045,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              objects to complete execution within a specified number of milliseconds.</para
           >
         </summary>
@@ -5210,6 +6058,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              array argument, or -1 if the timeout occurred.</para
           >
         </returns>
@@ -5218,8 +6068,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -5230,8 +6084,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -5269,6 +6127,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              objects to complete execution.</para
           >
         </summary>
@@ -5280,6 +6140,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              array argument.</para
           >
         </returns>
@@ -5288,8 +6150,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -5300,8 +6166,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -5339,6 +6209,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              objects to complete execution within a specified time interval.</para
           >
         </summary>
@@ -5350,6 +6222,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              array argument, or -1 if the timeout occurred.</para
           >
         </returns>
@@ -5358,8 +6232,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -5370,13 +6248,19 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -5415,6 +6299,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              objects to complete execution within a specified number of milliseconds.</para
           >
         </summary>
@@ -5426,6 +6312,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              array argument, or -1 if the timeout occurred.</para
           >
         </returns>
@@ -5434,8 +6322,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           An array of <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -5446,8 +6338,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -5458,8 +6354,12 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           A <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -5507,6 +6407,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5560,6 +6462,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The tasks to wait on for completion.</param
         >
       </Docs>
@@ -5610,10 +6514,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The tasks to wait on for completion.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5670,10 +6578,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The tasks to wait on for completion.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5718,6 +6630,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5768,6 +6682,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The tasks to wait on for completion.</param
         >
       </Docs>
@@ -5815,10 +6731,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The tasks to wait on for completion.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5872,10 +6792,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
           
 
+          
+
           The tasks to wait on for completion.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5909,10 +6833,14 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
 
             
 
+            
+
              object), this will post the remainder of the method’s execution back to that context. However, the context will decide how to prioritize this work relative to other work that may be pending. The synchronization context that is present on a UI thread in most UI environments will often prioritize work posted to the context higher than input and rendering work. For this reason, do not rely on await Task.Yield(); to keep a UI responsive.  For more information, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2008/07/23/8768673.aspx"
               >Useful Abstractions Enabled with ContinueWith</see
             >
+
+            
 
             
 
@@ -5928,6 +6856,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
           <para
             >A context that, when awaited, will asynchronously transition back into the current context at the time of the await. If the current <see
              cref="T:System.Threading.SynchronizationContext" />
+
+            
 
             
 

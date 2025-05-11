@@ -11,12 +11,13 @@
     <AssemblyVersion>0.2.2.0</AssemblyVersion>
     <AssemblyVersion>0.2.3.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadingSafetyStatement
-    >
+  <ThreadingSafetyStatement>
     All members of this type are safe for multithreaded operations.
     Subclasses must be thread-safe if multithreaded invocation of 
     <see
      cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable&lt;System.String&gt;)" />
+
+    
 
     
 
@@ -33,16 +34,19 @@
       Represents information about an option.
     </summary>
     <remarks>
-      <para
-        >
+      <para>
         Instances of <see
          cref="T:Mono.Options.Option" />
+
+        
 
         
 
          are created via
         the various <see
          cref="M:Mono.Options.OptionSet.Add" />
+
+        
 
         
 
@@ -92,16 +96,19 @@
           </term>
         </item>
       </list>
-      <para
-        >
+      <para>
         You can also add custom <see
          cref="T:Mono.Options.Option" />
+
+        
 
         
 
          
         subclasses to an <see
          cref="T:Mono.Options.OptionSet" />
+
+        
 
         
 
@@ -112,19 +119,24 @@
         
 
         
+
+        
         method.
       </para
       >
-      <block subset="none" type="overrides"
-        >
+      <block subset="none" type="overrides">
         Inheritors of this type must override the <see
          langword="abstract" />
+
+        
 
         
 
          method
         <see
          cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+
+        
 
         
 
@@ -136,8 +148,12 @@
         
 
         
+
+        
         when an option matching one of the <paramref
          name="prototype" />
+
+        
 
         
 
@@ -169,10 +185,11 @@
         <Parameter Name="description" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
+        <param name="prototype">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -181,14 +198,17 @@
 
           
 
+          
+
           -separated
           list of option names (aliases) and an optional value-type specifier.
         </param
         >
-        <param name="description"
-          >
+        <param name="description">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -196,11 +216,12 @@
           option.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the 
           <see
            cref="T:Mono.Options.Option" />
+
+          
 
           
 
@@ -208,11 +229,12 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the 
             <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -222,9 +244,13 @@
 
             
 
+            
+
             , the 
             <see
              cref="P:Mono.Options.Option.Description" />
+
+            
 
             
 
@@ -234,9 +260,13 @@
 
             
 
+            
+
             . and
             initializes the <see
              cref="P:Mono.Options.Option.MaxValueCount" />
+
+            
 
             
 
@@ -246,14 +276,17 @@
 
             
 
+            
+
             .
           </para
           >
-          <para
-            >
+          <para>
             This is equivalent to calling the 
             <see
              cref="C:Mono.Options.Option(System.String,System.String,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -265,14 +298,20 @@
 
               
 
+              
+
               , 
             <paramref
                name="description" />
 
               
 
+              
+
               , 1,false)</c
             >
+
+            
 
             
 
@@ -286,8 +325,12 @@
 
             
 
+            
+
              is the empty string <c
             >""</c>
+
+            
 
             
 
@@ -297,6 +340,8 @@
           <para>-or-</para>
           <para>
             <paramref name="prototype" />
+
+            
 
             
 
@@ -306,20 +351,25 @@
 
             
 
+            
+
             .
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Conflicting <see
              cref="T:Mono.Options.OptionValueType" />
+
+            
 
             
 
              values
             were found within <paramref
              name="prototype" />
+
+            
 
             
 
@@ -332,14 +382,20 @@
 
             
 
+            
+
              only includes the default handler
             <c
             >&lt;&gt;</c>
 
             
 
+            
+
              and <paramref
              name="prototype" />
+
+            
 
             
 
@@ -349,9 +405,13 @@
 
             
 
+            
+
              value of
             <see
              cref="F:Mono.Options.OptionValueType.None" />
+
+            
 
             
 
@@ -364,8 +424,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -396,10 +460,11 @@
         <Parameter Name="maxValueCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
+        <param name="prototype">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -408,14 +473,17 @@
 
           
 
+          
+
           -separated
           list of option names (aliases) and an optional value-type specifier.
         </param
         >
-        <param name="description"
-          >
+        <param name="description">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -423,10 +491,11 @@
           option.
         </param
         >
-        <param name="maxValueCount"
-          >
+        <param name="maxValueCount">
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -434,11 +503,12 @@
           option accepts.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the 
           <see
            cref="T:Mono.Options.Option" />
+
+          
 
           
 
@@ -446,11 +516,12 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the 
             <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -460,15 +531,21 @@
 
             
 
+            
+
             , the 
             <see
              cref="P:Mono.Options.Option.Description" />
 
             
 
+            
+
              property of the
             new instance using <paramref
              name="description" />
+
+            
 
             
 
@@ -479,19 +556,24 @@
             
 
             
+
+            
             property of the new instance to <c
             >1</c>
+
+            
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             This is equivalent to calling the
             <see
              cref="C:Mono.Options.Option(System.String,System.String,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -503,9 +585,13 @@
 
               
 
+              
+
               ,
             <paramref
                name="description" />
+
+              
 
               
 
@@ -514,8 +600,12 @@
 
               
 
+              
+
               , false)</c
             >
+
+            
 
             
 
@@ -529,8 +619,12 @@
 
             
 
+            
+
              is the empty string <c
             >""</c>
+
+            
 
             
 
@@ -540,6 +634,8 @@
           <para>-or-</para>
           <para>
             <paramref name="prototype" />
+
+            
 
             
 
@@ -549,14 +645,17 @@
 
             
 
+            
+
             .
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Conflicting <see
              cref="T:Mono.Options.OptionValueType" />
+
+            
 
             
 
@@ -566,6 +665,8 @@
 
             
 
+            
+
             .
           </para
           >
@@ -575,8 +676,12 @@
 
             
 
+            
+
              is <c
             >0</c>
+
+            
 
             
 
@@ -586,9 +691,13 @@
 
             
 
+            
+
              specified an
             <see
              cref="T:Mono.Options.OptionValueType" />
+
+            
 
             
 
@@ -598,9 +707,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Options.OptionValueType.Required" />
+
+            
 
             
 
@@ -613,8 +726,12 @@
 
             
 
+            
+
              is greater than <c
             >1</c>
+
+            
 
             
 
@@ -624,9 +741,13 @@
 
             
 
+            
+
              specified an
             <see
              cref="T:Mono.Options.OptionValueType" />
+
+            
 
             
 
@@ -636,12 +757,16 @@
 
             
 
+            
+
             .
           </para
           >
           <para>-or-</para>
           <para>
             <paramref name="prototype" />
+
+            
 
             
 
@@ -651,13 +776,19 @@
 
             
 
+            
+
              is <c
             >0</c>
 
             
 
+            
+
              or <c
             >1</c>
+
+            
 
             
 
@@ -670,9 +801,13 @@
 
             
 
+            
+
              contains a badly formatted
             separator list, such as <c
             >{{</c>
+
+            
 
             
 
@@ -681,8 +816,12 @@
 
             
 
+            
+
             , <c
             >{{}</c>
+
+            
 
             
 
@@ -695,14 +834,20 @@
 
             
 
+            
+
              only includes the default handler
             <c
             >&lt;&gt;</c>
 
             
 
+            
+
              and <paramref
              name="prototype" />
+
+            
 
             
 
@@ -712,9 +857,13 @@
 
             
 
+            
+
              value of
             <see
              cref="F:Mono.Options.OptionValueType.None" />
+
+            
 
             
 
@@ -727,9 +876,13 @@
 
             
 
+            
+
              includes the default handler
             <c
             >&lt;&gt;</c>
+
+            
 
             
 
@@ -738,9 +891,13 @@
 
             
 
+            
+
              is greater
             than <c
             >1</c>
+
+            
 
             
 
@@ -753,8 +910,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -783,10 +944,11 @@
         <Parameter Name="hidden" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
+        <param name="prototype">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -795,14 +957,17 @@
 
           
 
+          
+
           -separated
           list of option names (aliases) and an optional value-type specifier.
         </param
         >
-        <param name="description"
-          >
+        <param name="description">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -810,10 +975,11 @@
           option.
         </param
         >
-        <param name="maxValueCount"
-          >
+        <param name="maxValueCount">
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -821,10 +987,11 @@
           option accepts.
         </param
         >
-        <param name="hidden"
-          >
+        <param name="hidden">
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -835,14 +1002,17 @@
 
           
 
+          
+
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the
           <see
            cref="T:Mono.Options.Option" />
+
+          
 
           
 
@@ -850,11 +1020,12 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the
             <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -864,9 +1035,13 @@
 
             
 
+            
+
             , the
             <see
              cref="P:Mono.Options.Option.Description" />
+
+            
 
             
 
@@ -876,15 +1051,21 @@
 
             
 
+            
+
             ,
             initializes the <see
              cref="P:Mono.Options.Option.MaxValueCount" />
 
             
 
+            
+
              
             property of the new instance using <paramref
              name="maxValueCount" />
+
+            
 
             
 
@@ -895,8 +1076,12 @@
             
 
             
+
+            
             property of the new instance using <paramref
              name="hidden" />
+
+            
 
             
 
@@ -908,8 +1093,12 @@
 
             
 
+            
+
              is a <c
             >|</c>
+
+            
 
             
 
@@ -920,8 +1109,12 @@
 
             
 
+            
+
             .  <paramref
              name="prototype" />
+
+            
 
             
 
@@ -931,9 +1124,13 @@
 
             
 
+            
+
              specifier following
             one of the <c
             >|</c>
+
+            
 
             
 
@@ -943,14 +1140,17 @@
 
             
 
+            
+
              
             specifier.
           </para
           >
-          <para
-            >
+          <para>
             The <see
              cref="P:Mono.Options.Option.OptionValueType" />
+
+            
 
             
 
@@ -960,8 +1160,12 @@
 
             
 
+            
+
              or <c
             >:</c>
+
+            
 
             
 
@@ -971,9 +1175,13 @@
 
             
 
+            
+
             .
             <c
             >=</c>
+
+            
 
             
 
@@ -983,9 +1191,13 @@
 
             
 
+            
+
              value,
             while <c
             >:</c>
+
+            
 
             
 
@@ -995,9 +1207,13 @@
 
             
 
+            
+
              value.  
             If neither <c
             >=</c>
+
+            
 
             
 
@@ -1006,9 +1222,13 @@
 
             
 
+            
+
              is not specified, then 
             <see
              cref="F:Mono.Options.OptionValueType.None" />
+
+            
 
             
 
@@ -1019,13 +1239,19 @@
 
             
 
+            
+
             , so <c
             >n|name=</c>
 
             
 
+            
+
             , <c
             >n=|name</c>
+
+            
 
             
 
@@ -1035,19 +1261,24 @@
 
             
 
+            
+
              are equivalent, but you cannot mix types; 
             <c
             >n:|name=</c>
 
             
 
+            
+
              is invalid.
           </para
           >
-          <para
-            >
+          <para>
             A default handler may be specified by using <c
             >&lt;&gt;</c>
+
+            
 
             
 
@@ -1059,10 +1290,14 @@
 
             
 
+            
+
             ;
             consequently, if a default handler is provided then
         		<see
              cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+
+            
 
             
 
@@ -1073,14 +1308,17 @@
 
             
 
+            
+
             .
           </para
           >
-          <para
-            >
+          <para>
             The default handler may either be provided as a stand-alone 
             <see
              cref="T:Mono.Options.Option" />
+
+            
 
             
 
@@ -1090,9 +1328,13 @@
 
             
 
+            
+
              other
             than <see
              cref="F:Mono.Options.OptionValueType.None" />
+
+            
 
             
 
@@ -1103,9 +1345,13 @@
 
             
 
+            
+
              must accept an
             <see
              cref="F:Mono.Options.OptionValueType.Optional" />
+
+            
 
             
 
@@ -1115,9 +1361,13 @@
 
             
 
+            
+
              value, and
             <paramref
              name="maxValueCount" />
+
+            
 
             
 
@@ -1126,14 +1376,17 @@
 
             
 
+            
+
             .
           </para
           >
-          <para
-            >
+          <para>
             Multiple values may be bundled together, such as 
             <c
             >-opt key=value</c>
+
+            
 
             
 
@@ -1145,8 +1398,12 @@
 
             
 
+            
+
              is greater than <c
             >1</c>
+
+            
 
             
 
@@ -1156,9 +1413,13 @@
 
             
 
+            
+
              was
             specified.  The value separator list follows the <c
             >=</c>
+
+            
 
             
 
@@ -1168,21 +1429,26 @@
 
             
 
+            
+
              and is one of the following:
           </para
           >
           <list type="bullet">
             <item>
               <term>
-                <para
-                  >
+                <para>
                 A sequence of character enclosed by <c
                   >{</c>
 
                   
 
+                  
+
                    and <c
                   >}</c>
+
+                  
 
                   
 
@@ -1193,13 +1459,16 @@
 
                   
 
+                  
+
                    sequence multiple times.
               </para
                 >
-                <para
-                  >
+                <para>
                 The sequence <c
                   >{}</c>
+
+                  
 
                   
 
@@ -1213,16 +1482,19 @@
                   
 
                   
+
+                  
                 values).
               </para
                 >
               </term>
             </item>
             <item>
-              <term
-                >
+              <term>
               Any literal character other than <c
                 >{</c>
+
+                
 
                 
 
@@ -1231,15 +1503,18 @@
 
                 
 
+                
+
                 .
             </term
               >
             </item>
           </list>
-          <para
-            >
+          <para>
             If the separator list is not provided, then <c
             >=:</c>
+
+            
 
             
 
@@ -1247,10 +1522,11 @@
             default separator list.
           </para
           >
-          <para
-            >
+          <para>
             For example, the prototype <c
             >"A:+-*/"</c>
+
+            
 
             
 
@@ -1260,8 +1536,12 @@
 
             
 
+            
+
             ', `<c
             >-</c>
+
+            
 
             
 
@@ -1270,8 +1550,12 @@
 
             
 
+            
+
             ', or `<c
             >/</c>
+
+            
 
             
 
@@ -1281,9 +1565,13 @@
 
             
 
+            
+
              would generate the
             sequence of values <c
             >5</c>
+
+            
 
             
 
@@ -1292,8 +1580,12 @@
 
             
 
+            
+
              for the option <c
             >-A</c>
+
+            
 
             
 
@@ -1303,14 +1595,20 @@
 
             
 
+            
+
              would permit
             either the string <c
             >--&gt;</c>
 
             
 
+            
+
              or the string <c
             >=&gt;</c>
+
+            
 
             
 
@@ -1320,8 +1618,12 @@
 
             
 
+            
+
              woud parse <c
             >A-&gt;B</c>
+
+            
 
             
 
@@ -1331,8 +1633,12 @@
 
             
 
+            
+
              as the other value, while <c
             >-A A--&gt;B C</c>
+
+            
 
             
 
@@ -1342,8 +1648,12 @@
 
             
 
+            
+
              as one value and <c
             >B</c>
+
+            
 
             
 
@@ -1353,9 +1663,13 @@
 
             
 
+            
+
              would be unhandled (unless the option required 3 values,
             in which case <c
             >C</c>
+
+            
 
             
 
@@ -1369,8 +1683,12 @@
 
             
 
+            
+
              is the empty string <c
             >""</c>
+
+            
 
             
 
@@ -1380,6 +1698,8 @@
           <para>-or-</para>
           <para>
             <paramref name="prototype" />
+
+            
 
             
 
@@ -1389,14 +1709,17 @@
 
             
 
+            
+
             .
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Conflicting <see
              cref="T:Mono.Options.OptionValueType" />
+
+            
 
             
 
@@ -1406,6 +1729,8 @@
 
             
 
+            
+
             .
           </para
           >
@@ -1415,8 +1740,12 @@
 
             
 
+            
+
              is <c
             >0</c>
+
+            
 
             
 
@@ -1426,9 +1755,13 @@
 
             
 
+            
+
              specified an
             <see
              cref="T:Mono.Options.OptionValueType" />
+
+            
 
             
 
@@ -1438,9 +1771,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Options.OptionValueType.Required" />
+
+            
 
             
 
@@ -1453,8 +1790,12 @@
 
             
 
+            
+
              is greater than <c
             >1</c>
+
+            
 
             
 
@@ -1464,9 +1805,13 @@
 
             
 
+            
+
              specified an
             <see
              cref="T:Mono.Options.OptionValueType" />
+
+            
 
             
 
@@ -1476,12 +1821,16 @@
 
             
 
+            
+
             .
           </para
           >
           <para>-or-</para>
           <para>
             <paramref name="prototype" />
+
+            
 
             
 
@@ -1491,13 +1840,19 @@
 
             
 
+            
+
              is <c
             >0</c>
 
             
 
+            
+
              or <c
             >1</c>
+
+            
 
             
 
@@ -1510,9 +1865,13 @@
 
             
 
+            
+
              contains a badly formatted 
             separator list, such as <c
             >{{</c>
+
+            
 
             
 
@@ -1521,8 +1880,12 @@
 
             
 
+            
+
             , <c
             >{{}</c>
+
+            
 
             
 
@@ -1535,14 +1898,20 @@
 
             
 
+            
+
              only includes the default handler
             <c
             >&lt;&gt;</c>
 
             
 
+            
+
              and <paramref
              name="prototype" />
+
+            
 
             
 
@@ -1552,9 +1921,13 @@
 
             
 
+            
+
              value of
             <see
              cref="F:Mono.Options.OptionValueType.None" />
+
+            
 
             
 
@@ -1567,9 +1940,13 @@
 
             
 
+            
+
              includes the default handler
             <c
             >&lt;&gt;</c>
+
+            
 
             
 
@@ -1578,9 +1955,13 @@
 
             
 
+            
+
              is greater
             than <c
             >1</c>
+
+            
 
             
 
@@ -1593,8 +1974,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1617,10 +2002,11 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1628,10 +2014,11 @@
           option.
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1639,11 +2026,12 @@
           option.
         </value
         >
-        <remarks
-          >
+        <remarks>
           This property is used to generate documentation within 
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+
+          
 
           
 
@@ -1654,6 +2042,8 @@
 
           
 
+          
+
            parameter provided to the
           <see
            cref="C:Mono.Options.OptionSet(System.Converter{System.String,System.String})" />
@@ -1661,9 +2051,13 @@
           
 
           
+
+          
           constructor before being written to the 
           <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1698,12 +2092,15 @@
 
           
 
+          
+
           .</summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1713,14 +2110,17 @@
 
           
 
+          
+
            instance.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           The returned option names will not contain any 
           <see
            cref="T:Mono.Options.OptionValueType" />
+
+          
 
           
 
@@ -1730,9 +2130,13 @@
 
           
 
+          
+
           .  
           If <see
            cref="P:Mono.Options.Option.Prototype" />
+
+          
 
           
 
@@ -1742,8 +2146,12 @@
 
           
 
+          
+
           , the array returned will contain <c
           >a</c>
+
+          
 
           
 
@@ -1752,9 +2160,13 @@
 
           
 
+          
+
           ,
           and <c
           >c</c>
+
+          
 
           
 
@@ -1781,8 +2193,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Retreives all value separators, strings which are used to split an
           argument into one or more values for the this 
           <see
@@ -1790,13 +2201,16 @@
 
           
 
+          
+
           .
         </summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1807,15 +2221,18 @@
 
           
 
+          
+
           .
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Value separators may be provided within 
             <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -1829,6 +2246,8 @@
 
                 
 
+                
+
                  is greater than 1.
             </term
               >
@@ -1839,9 +2258,13 @@
 
                 
 
+                
+
                  is 
               <see
                  cref="F:Mono.Options.OptionValueType.Optional" />
+
+                
 
                 
 
@@ -1851,16 +2274,19 @@
 
                 
 
+                
+
                 .
             </term
               >
             </item>
           </list>
-          <para
-            >
+          <para>
             See the 
             <see
              cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+
+            
 
             
 
@@ -1882,8 +2308,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           Whether
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
@@ -1891,13 +2316,16 @@
           
 
           
+
+          
           should write this option.
         </summary
         >
-        <value
-          >
+        <value>
           If <see
            langword="true" />
+
+          
 
           
 
@@ -1908,9 +2336,13 @@
           
 
           
+
+          
           will not print this option; otherwise,
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
+
+          
 
           
 
@@ -1941,10 +2373,11 @@
         <Parameter Name="c" Type="Mono.Options.OptionContext" />
       </Parameters>
       <Docs>
-        <param name="c"
-          >
+        <param name="c">
           An <see
            cref="T:Mono.Options.OptionContext" />
+
+          
 
           
 
@@ -1952,11 +2385,12 @@
           information about the option that was parsed.
         </param
         >
-        <summary
-          >
+        <summary>
           Invokes 
           <see
            cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+
+          
 
           
 
@@ -1966,15 +2400,18 @@
 
           
 
+          
+
           .
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This method is invoked from within 
             <see
              cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
+
+            
 
             
 
@@ -1985,10 +2422,14 @@
 
             
 
+            
+
              is encountered and
             matches the required number of values governed by
             <see
              cref="P:Mono.Options.Option.OptionValueType" />
+
+            
 
             
 
@@ -1998,15 +2439,18 @@
 
             
 
+            
+
             .
           </para
           >
           <block subset="none" type="behaviors">
-            <para
-              >
+            <para>
               This method invokes 
               <see
                cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+
+              
 
               
 
@@ -2016,9 +2460,13 @@
 
               
 
+              
+
                unchanged, and then sets the 
               <see
                cref="P:Mono.Options.OptionContext.Option" />
+
+              
 
               
 
@@ -2029,8 +2477,12 @@
               
 
               
+
+              
               properties to <see
                langword="null" />
+
+              
 
               
 
@@ -2040,9 +2492,13 @@
 
               
 
+              
+
               s out
               <see
                cref="P:Mono.Options.OptionContext.OptionValues" />
+
+              
 
               
 
@@ -2070,32 +2526,38 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
            containing the maximum number of
           values this <see
            cref="T:Mono.Options.Option" />
+
+          
 
           
 
            accepts.
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
            containing the maximum number of
           values this <see
            cref="T:Mono.Options.Option" />
+
+          
 
           
 
@@ -2103,11 +2565,12 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This is a maximum, and may not be the number of values present
             within <see
              cref="P:Mono.Options.OptionContext.OptionValues" />
+
+            
 
             
 
@@ -2119,9 +2582,13 @@
             
 
             
+
+            
             is invoked.  There will be 
             <see
              cref="P:Mono.Options.Option.MaxValueCount" />
+
+            
 
             
 
@@ -2131,9 +2598,13 @@
 
             
 
+            
+
              is
             <see
              cref="F:Mono.Options.OptionValueType.Required" />
+
+            
 
             
 
@@ -2143,15 +2614,21 @@
 
             
 
+            
+
              is
             <see
              cref="F:Mono.Options.OptionValueType.Optional" />
 
             
 
+            
+
              then
             <see
              cref="P:Mono.Options.OptionContext.OptionValues" />
+
+            
 
             
 
@@ -2185,10 +2662,11 @@
         <Parameter Name="c" Type="Mono.Options.OptionContext" />
       </Parameters>
       <Docs>
-        <param name="c"
-          >
+        <param name="c">
           An <see
            cref="T:Mono.Options.OptionContext" />
+
+          
 
           
 
@@ -2204,11 +2682,12 @@
             This method must be overridden by all subclasses, within which the
             subclass can perform some custom per-option processing.
           </para>
-          <para
-            >
+          <para>
             This method is invoked from within 
             <see
              cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
+
+            
 
             
 
@@ -2219,10 +2698,14 @@
 
             
 
+            
+
              is encountered and
             matches the required number of values governed by
             <see
              cref="P:Mono.Options.Option.OptionValueType" />
+
+            
 
             
 
@@ -2232,22 +2715,27 @@
 
             
 
+            
+
             .
           </para
           >
         </remarks>
         <example>
-          <para
-            >
+          <para>
             The following example has a custom 
             <see
              cref="T:Mono.Options.Option" />
 
             
 
+            
+
              subclass which overrides
             <see
              cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+
+            
 
             
 
@@ -2392,10 +2880,11 @@ class Demo {
 
 </code
           >
-          <para
-            >
+          <para>
             See <see
              cref="T:Mono.Options.OptionSet" />
+
+            
 
             
 
@@ -2427,10 +2916,11 @@ class Demo {
         <ReturnType>Mono.Options.OptionValueType</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           An <see
            cref="T:Mono.Options.OptionValueType" />
+
+          
 
           
 
@@ -2440,14 +2930,17 @@ class Demo {
 
           
 
+          
+
            takes
           a value, and if so, whether it's required or optional.
         </summary
         >
-        <value
-          >
+        <value>
           An <see
            cref="T:Mono.Options.OptionValueType" />
+
+          
 
           
 
@@ -2456,10 +2949,11 @@ class Demo {
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This is initialized based on the presence of <c
             >=</c>
+
+            
 
             
 
@@ -2469,8 +2963,12 @@ class Demo {
 
             
 
+            
+
              within <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -2507,20 +3005,22 @@ class Demo {
         <Parameter Name="c" Type="Mono.Options.OptionContext" />
       </Parameters>
       <Docs>
-        <typeparam name="T"
-          >
+        <typeparam name="T">
           The type to convert the string <paramref
            name="value" />
+
+          
 
           
 
            to.
         </typeparam
         >
-        <param name="value"
-          >
+        <param name="value">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2530,19 +3030,24 @@ class Demo {
 
           
 
+          
+
            that should be converted into an
           instance of type <typeparamref
            name="T" />
 
           
 
+          
+
           .
         </param
         >
-        <param name="c"
-          >
+        <param name="c">
           A <see
            cref="T:Mono.Options.OptionContext" />
+
+          
 
           
 
@@ -2550,11 +3055,12 @@ class Demo {
           contextual information needed error handling.
         </param
         >
-        <summary
-          >
+        <summary>
           Converts the <see
            cref="T:System.String" />
           <paramref name="value" />
+
+          
 
           
 
@@ -2564,18 +3070,23 @@ class Demo {
 
           
 
+          
+
           .
         </summary
         >
-        <returns
-          >
+        <returns>
           If <paramref
            name="value" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2585,15 +3096,21 @@ class Demo {
 
           
 
+          
+
            is returned.  Otherwise, 
           <paramref
            name="value" />
 
           
 
+          
+
            is converted to a value of type 
           <typeparamref
            name="T" />
+
+          
 
           
 
@@ -2607,15 +3124,21 @@ class Demo {
             
 
             
+
+            
             is used to get the 
             <see
              cref="T:System.ComponentModel.TypeConverter" />
 
             
 
+            
+
              associated
             with type <typeparamref
              name="T" />
+
+            
 
             
 
@@ -2626,8 +3149,12 @@ class Demo {
             
 
             
+
+            
             is used to convert <paramref
              name="value" />
+
+            
 
             
 
@@ -2637,19 +3164,24 @@ class Demo {
 
             
 
+            
+
             .
           </para
           >
         </remarks>
-        <exception cref="T:Mono.Options.OptionException"
-          >
+        <exception cref="T:Mono.Options.OptionException">
           If <paramref
            name="value" />
 
           
 
+          
+
            is not <see
            langword="null" />
+
+          
 
           
 
@@ -2660,9 +3192,13 @@ class Demo {
           
 
           
+
+          
           generated an exception while trying to convert 
           <paramref
            name="value" />
+
+          
 
           
 
@@ -2685,10 +3221,11 @@ class Demo {
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           The <see
            cref="T:Mono.Options.Option" />
+
+          
 
           
 
@@ -2696,10 +3233,11 @@ class Demo {
           option name aliases and the option value requirements.
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2709,14 +3247,17 @@ class Demo {
 
           
 
+          
+
            instance.
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The prototype contains a <c
             >|</c>
+
+            
 
             
 
@@ -2726,9 +3267,13 @@ class Demo {
 
             
 
+            
+
              for required values and
             <c
             >:</c>
+
+            
 
             
 
@@ -2737,8 +3282,12 @@ class Demo {
 
             
 
+            
+
              nor <c
             >:</c>
+
+            
 
             
 
@@ -2771,26 +3320,30 @@ class Demo {
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Returns <see
            cref="P:Mono.Options.Option.Prototype" />
+
+          
 
           
 
           .
         </summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
            containing
           <see
            cref="P:Mono.Options.Option.Prototype" />
+
+          
 
           
 

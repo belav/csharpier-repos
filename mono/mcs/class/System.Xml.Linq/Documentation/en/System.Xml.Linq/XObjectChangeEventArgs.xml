@@ -26,8 +26,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Xml.Linq.XObject.Changed" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Xml.Linq.XObjectChangeEventArgs.Remove" />
+
+            
 
             
 
@@ -71,8 +79,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Xml.Linq.XObjectChangeEventArgs.Value" />
+
+            
 
             
 
@@ -87,6 +99,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -95,8 +109,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XObjectChange" />
+
+          
 
           
 
@@ -129,6 +147,8 @@
 
             
 
+            
+
              event, it passes the instance returned by this property as an argument.</para
           >
         </remarks>
@@ -137,6 +157,8 @@
           <para
             >Event argument for an <see
              cref="F:System.Xml.Linq.XObjectChange.Add" />
+
+            
 
             
 
@@ -170,6 +192,8 @@
 
             
 
+            
+
              event, it passes the instance returned by this property as an argument.</para
           >
         </remarks>
@@ -178,6 +202,8 @@
           <para
             >Event argument for a <see
              cref="F:System.Xml.Linq.XObjectChange.Name" />
+
+            
 
             
 
@@ -236,6 +262,8 @@
 
             
 
+            
+
              event, it passes the instance returned by this property as an argument.</para
           >
         </remarks>
@@ -244,6 +272,8 @@
           <para
             >Event argument for a <see
              cref="F:System.Xml.Linq.XObjectChange.Remove" />
+
+            
 
             
 
@@ -277,6 +307,8 @@
 
             
 
+            
+
              event, it passes the instance returned by this property as an argument.</para
           >
         </remarks>
@@ -285,6 +317,8 @@
           <para
             >Event argument for a <see
              cref="F:System.Xml.Linq.XObjectChange.Value" />
+
+            
 
             
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          class provides a service-side method, <see
          cref="M:System.Web.Services.Protocols.UrlParameterReader.Read(System.Web.HttpRequest)" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          directly. HTTP-GET Web services are enabled when an ASP.NET configuration file's (Web.config) protocols element contains an add element whose name attribute's value is "HttpGet". The <see
          cref="T:System.Web.Services.Protocols.UrlParameterReader" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.UrlParameterReader" />
+
+            
 
             
 
@@ -109,13 +123,19 @@
 
             
 
+            
+
              method uses the content of the <see
              cref="T:System.Web.HttpRequest" />
 
             
 
+            
+
              object's <see
              cref="P:System.Web.HttpRequest.QueryString" />
+
+            
 
             
 
@@ -135,8 +155,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.WebResponse" />
+
+          
 
           
 

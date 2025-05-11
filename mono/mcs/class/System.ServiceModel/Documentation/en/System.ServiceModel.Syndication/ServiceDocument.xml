@@ -45,6 +45,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -79,8 +81,12 @@
 
             
 
+            
+
              class, initializing it with the specified collection of <see
              cref="T:System.ServiceModel.Syndication.Workspace" />
+
+            
 
             
 
@@ -89,6 +95,8 @@
         </summary>
         <param name="workspaces">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,6 +150,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -171,6 +181,8 @@
           <para
             >Creates a new <see
              cref="T:System.ServiceModel.Syndication.Workspace" />
+
+            
 
             
 
@@ -241,15 +253,18 @@ A new workspace.
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 A <see
              cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
+
+            
 
             
 
@@ -307,8 +322,12 @@ A <see
 
             
 
+            
+
              into a <see
              cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+            
 
             
 
@@ -317,10 +336,11 @@ A <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 A <see
              cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+            
 
             
 
@@ -333,8 +353,12 @@ A <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -379,8 +403,12 @@ A <see
 
             
 
+            
+
              into a <see
              cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+            
 
             
 
@@ -395,6 +423,8 @@ A <see
 
             
 
+            
+
              instance.</para
           >
         </returns>
@@ -403,8 +433,12 @@ A <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -412,6 +446,8 @@ A <see
         >
         <typeparam name="TServiceDocument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,8 +481,12 @@ A <see
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -458,8 +498,12 @@ A <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -504,12 +548,16 @@ Returns <see
 
             
 
+            
+
             .
 </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -520,6 +568,8 @@ Returns <see
 
           
 
+          
+
           The namespace of the element.</param
         >
         <param name="value">
@@ -527,10 +577,14 @@ Returns <see
 
           
 
+          
+
           The attribute to parse.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -573,8 +627,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -582,6 +640,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -644,6 +704,8 @@ Returns <see
 
             
 
+            
+
              using the specified syndication version.</para
           >
         </summary>
@@ -652,8 +714,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -661,6 +727,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -698,6 +766,8 @@ Returns <see
 
             
 
+            
+
              using the specified syndication version.</para
           >
         </summary>
@@ -706,8 +776,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -715,6 +789,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

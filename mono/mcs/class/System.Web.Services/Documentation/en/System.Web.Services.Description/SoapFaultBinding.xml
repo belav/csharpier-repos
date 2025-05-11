@@ -35,6 +35,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -43,6 +45,8 @@
       <para
         >Represents an extensibility element added to a <see
          cref="T:System.Web.Services.Description.FaultBinding" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.Services.Description.SoapFaultBinding" />
+
+            
 
             
 
@@ -89,6 +95,8 @@
           <para
             >The value of this property should be set only if the value of the <see
              cref="P:System.Web.Services.Description.SoapFaultBinding.Use" />
+
+            
 
             
 
@@ -153,6 +161,8 @@
 
             
 
+            
+
              property is Encoded. Otherwise the XML Web service will exhibit unexpected behavior.</para
           >
         </remarks>
@@ -161,6 +171,8 @@
           <para
             >Get or sets the URI representing the location of the specification for encoding of content not specifically defined by the <see
              cref="P:System.Web.Services.Description.SoapFaultBinding.Encoding" />
+
+            
 
             
 
@@ -196,6 +208,8 @@
           <para
             >Specifies whether the fault message is encoded using rules specified by the <see
              cref="P:System.Web.Services.Description.SoapFaultBinding.Encoding" />
+
+            
 
             
 

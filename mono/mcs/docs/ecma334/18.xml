@@ -10,8 +10,12 @@
 
     
 
+    
+
     , the simple types provided by C#, such as <keyword
     >int</keyword>
+
+    
 
     
 
@@ -20,13 +24,19 @@
 
     
 
+    
+
     , and <keyword
     >bool</keyword>
 
     
 
+    
+
     , are, in fact, all struct types. Just as these predefined types are structs, it is also possible to use structs and operator overloading to implement new "primitive" types in the C# language. Two examples of such types are given at the end of this chapter (<hyperlink
     >18.4</hyperlink>
+
+    
 
     
 

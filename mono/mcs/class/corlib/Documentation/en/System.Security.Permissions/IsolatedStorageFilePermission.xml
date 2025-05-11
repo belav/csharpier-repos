@@ -45,13 +45,19 @@
 
           
 
+          
+
           , <see
            cref="M:System.Security.CodeAccessPermission.PermitOnly" />
 
           
 
+          
+
           , or <see
            cref="M:System.Security.CodeAccessPermission.Deny" />
+
+          
 
           
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              class with either fully restricted or unrestricted permission as specified.</para
           >
         </summary>
@@ -105,8 +113,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -184,6 +196,8 @@
 
           
 
+          
+
           A permission to intersect with the current permission object. It must be of the same type as the current permission. </param
         >
       </Docs>
@@ -224,6 +238,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,8 +302,12 @@
 
             
 
+            
+
              method enables the <see
              cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+
+            
 
             
 
@@ -334,6 +354,8 @@
 
             
 
+            
+
              is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. </para
           >
         </remarks>
@@ -347,6 +369,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

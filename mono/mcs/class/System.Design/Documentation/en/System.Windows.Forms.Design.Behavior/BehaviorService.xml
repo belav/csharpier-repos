@@ -22,8 +22,12 @@
 
         
 
+        
+
          is created, it adds a transparent window over the designer frame. The <see
          cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          objects, as well as catch all mouse messages. In this way, the <see
          cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          class supports a behavior stack, onto which <see
          cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
          can send the message to the <see
          cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+        
 
         
 
@@ -65,8 +81,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+        
 
         
 
@@ -75,8 +95,12 @@
 
         
 
+        
+
          objects, such as selection borders, sizing handles, and smart tags. The <see
          cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+        
 
         
 
@@ -87,6 +111,8 @@
          type="text/html">
           <a href="7c60cc41-4324-46b5-b444-b39eda7cb33f">Behavior Service Overview</a>
         </format>
+
+        
 
         
 
@@ -121,13 +147,19 @@
 
             
 
+            
+
              property provides access to the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
+            
+
              managed by the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -139,6 +171,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -167,6 +201,8 @@
           <para
             >Gets the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -200,6 +236,8 @@
 
             
 
+            
+
              in the adorner window to screen coordinates.</para
           >
         </summary>
@@ -211,6 +249,8 @@
 
             
 
+            
+
              value, in screen coordinates.</para
           >
         </returns>
@@ -219,8 +259,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -274,8 +318,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" />
+
+            
 
             
 
@@ -289,6 +337,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -297,6 +347,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -329,8 +381,12 @@
 
             
 
+            
+
              to intercept all messages. It also serves as a unified canvas on which to paint a <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -345,8 +401,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -361,8 +421,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -374,8 +438,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -408,6 +476,8 @@
 
             
 
+            
+
              translated to adorner window coordinates.</para
           >
         </summary>
@@ -419,8 +489,12 @@
 
             
 
+            
+
              value indicating the location of <paramref
              name="c" />
+
+            
 
             
 
@@ -432,8 +506,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -464,6 +542,8 @@
 
             
 
+            
+
              at the top of the behavior stack without removing it.</para
           >
         </summary>
@@ -488,8 +568,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -498,8 +582,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -508,13 +596,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -525,10 +619,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -541,13 +639,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+              
 
               
 
@@ -560,6 +664,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -589,8 +695,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" />
+
+            
 
             
 
@@ -604,6 +714,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -612,6 +724,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -645,8 +759,12 @@
 
             
 
+            
+
              immediately after the given <see
              cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+            
 
             
 
@@ -661,8 +779,12 @@
 
             
 
+            
+
              immediately after <paramref
              name="behavior" />
+
+            
 
             
 
@@ -674,13 +796,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
+          
+
            preceding the <see
            cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+          
 
           
 
@@ -707,13 +835,19 @@
 
             
 
+            
+
              method forces a refresh of all <see
              cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
+            
+
              objects and, in turn, all <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -725,6 +859,8 @@
           <para
             >Invalidates the adorner window of the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -757,13 +893,19 @@
 
             
 
+            
+
              method will force a refresh of all <see
              cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
 
             
 
+            
+
              and, in turn, all <see
              cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />
+
+            
 
             
 
@@ -778,11 +920,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="rect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -811,13 +957,19 @@
 
             
 
+            
+
              method will force a refresh of all <see
              cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
 
             
 
+            
+
              and, in turn, all <see
              cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />
+
+            
 
             
 
@@ -832,11 +984,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="r">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -874,11 +1030,15 @@
 
             
 
+            
+
              in the adorner window coordinates.</para
           >
         </returns>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -889,8 +1049,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -922,8 +1086,12 @@
 
             
 
+            
+
              from the behavior stack internally maintained by the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -938,6 +1106,8 @@
 
             
 
+            
+
              at the top of the stack.</para
           >
         </summary>
@@ -949,6 +1119,8 @@
 
             
 
+            
+
              that was removed from the stack.</para
           >
         </returns>
@@ -957,8 +1129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+          
 
           
 
@@ -990,8 +1166,12 @@
 
             
 
+            
+
              method is often performed by means of a hit-tested <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -1006,6 +1186,8 @@
 
             
 
+            
+
              onto the behavior stack.</para
           >
         </summary>
@@ -1014,8 +1196,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+          
 
           
 
@@ -1047,13 +1233,19 @@
 
             
 
+            
+
             . If a behavior calls the <see
              cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushCaptureBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
 
             
 
+            
+
              method and mouse capture is lost, the behavior's <see
              cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" />
+
+            
 
             
 
@@ -1068,6 +1260,8 @@
 
             
 
+            
+
              onto the behavior stack and assigns mouse capture to the behavior.</para
           >
         </summary>
@@ -1076,8 +1270,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+          
 
           
 
@@ -1110,6 +1308,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1121,6 +1321,8 @@
 
             
 
+            
+
              value, in adorner window coordinates.</para
           >
         </returns>
@@ -1129,8 +1331,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1155,6 +1361,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 

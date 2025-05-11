@@ -31,6 +31,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -65,8 +67,12 @@
 
             
 
+            
+
              class that describes a <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />
+
+            
 
             
 
@@ -78,8 +84,12 @@
 
           
 
+          
+
           The action that caused the event. This must be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />
+
+          
 
           
 
@@ -117,6 +127,8 @@
 
             
 
+            
+
              class that describes a multi-item change.</para
           >
         </summary>
@@ -125,8 +137,12 @@
 
           
 
+          
+
           The action that caused the event. This can be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />
+
+          
 
           
 
@@ -135,8 +151,12 @@
 
           
 
+          
+
           , or <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />
+
+          
 
           
 
@@ -144,6 +164,8 @@
         >
         <param name="changedItems">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -181,6 +203,8 @@
 
             
 
+            
+
              class that describes a one-item change.</para
           >
         </summary>
@@ -189,8 +213,12 @@
 
           
 
+          
+
           The action that caused the event. This can be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />
+
+          
 
           
 
@@ -199,8 +227,12 @@
 
           
 
+          
+
           , or <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />
+
+          
 
           
 
@@ -208,6 +240,8 @@
         >
         <param name="changedItem">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,8 +280,12 @@
 
             
 
+            
+
              class that describes a multi-item <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />
+
+            
 
             
 
@@ -259,8 +297,12 @@
 
           
 
+          
+
           The action that caused the event. This can only be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />
+
+          
 
           
 
@@ -271,10 +313,14 @@
 
           
 
+          
+
           The new items that are replacing the original items.</param
         >
         <param name="oldItems">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,8 +359,12 @@
 
             
 
+            
+
              class that describes a multi-item change or a <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />
+
+            
 
             
 
@@ -326,8 +376,12 @@
 
           
 
+          
+
           The action that caused the event. This can be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />
+
+          
 
           
 
@@ -336,8 +390,12 @@
 
           
 
+          
+
           , or <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />
+
+          
 
           
 
@@ -348,10 +406,14 @@
 
           
 
+          
+
           The items affected by the change.</param
         >
         <param name="startingIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -390,6 +452,8 @@
 
             
 
+            
+
              class that describes a one-item change.</para
           >
         </summary>
@@ -398,8 +462,12 @@
 
           
 
+          
+
           The action that caused the event. This can be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />
+
+          
 
           
 
@@ -408,8 +476,12 @@
 
           
 
+          
+
           , or <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />
+
+          
 
           
 
@@ -420,10 +492,14 @@
 
           
 
+          
+
           The item that is affected by the change.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,8 +538,12 @@
 
             
 
+            
+
              class that describes a one-item <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />
+
+            
 
             
 
@@ -475,8 +555,12 @@
 
           
 
+          
+
           The action that caused the event. This can only be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />
+
+          
 
           
 
@@ -487,10 +571,14 @@
 
           
 
+          
+
           The new item that is replacing the original item.</param
         >
         <param name="oldItem">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,8 +618,12 @@
 
             
 
+            
+
              class that describes a multi-item <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />
+
+            
 
             
 
@@ -543,8 +635,12 @@
 
           
 
+          
+
           The action that caused the event. This can only be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />
+
+          
 
           
 
@@ -555,6 +651,8 @@
 
           
 
+          
+
           The new items that are replacing the original items.</param
         >
         <param name="oldItems">
@@ -562,10 +660,14 @@
 
           
 
+          
+
           The original items that are replaced.</param
         >
         <param name="startingIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -605,8 +707,12 @@
 
             
 
+            
+
              class that describes a multi-item <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />
+
+            
 
             
 
@@ -618,8 +724,12 @@
 
           
 
+          
+
           The action that caused the event. This can only be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />
+
+          
 
           
 
@@ -630,6 +740,8 @@
 
           
 
+          
+
           The items affected by the change.</param
         >
         <param name="index">
@@ -637,10 +749,14 @@
 
           
 
+          
+
           The new index for the changed items.</param
         >
         <param name="oldIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -680,8 +796,12 @@
 
             
 
+            
+
              class that describes a one-item <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />
+
+            
 
             
 
@@ -693,8 +813,12 @@
 
           
 
+          
+
           The action that caused the event. This can only be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />
+
+          
 
           
 
@@ -705,6 +829,8 @@
 
           
 
+          
+
           The item affected by the change.</param
         >
         <param name="index">
@@ -712,10 +838,14 @@
 
           
 
+          
+
           The new index for the changed item.</param
         >
         <param name="oldIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -755,8 +885,12 @@
 
             
 
+            
+
              class that describes a one-item <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />
+
+            
 
             
 
@@ -768,8 +902,12 @@
 
           
 
+          
+
           The action that caused the event. This can be set to <see
            cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />
+
+          
 
           
 
@@ -780,6 +918,8 @@
 
           
 
+          
+
           The new item that is replacing the original item.</param
         >
         <param name="oldItem">
@@ -787,10 +927,14 @@
 
           
 
+          
+
           The original item that is replaced.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -888,6 +1032,8 @@
 
             
 
+            
+
             , Remove, or Move action.</para
           >
         </summary>
@@ -911,6 +1057,8 @@
           <para
             >Gets the index at which a <see
              cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />
+
+            
 
             
 

@@ -30,8 +30,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Data.IDataRecord" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
         . </para
       >
       <para
@@ -52,8 +58,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IDataReader" />
+
+        
 
         
 
@@ -62,6 +72,8 @@
       <para
         >Classes that inherit <see
          cref="T:System.Data.IDataReader" />
+
+        
 
         
 
@@ -91,13 +103,19 @@
 
             
 
+            
+
              method when you are through using the <see
              cref="T:System.Data.IDataReader" />
 
             
 
+            
+
              to use the associated <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -109,6 +127,8 @@
           <para
             >Closes the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -159,13 +179,19 @@
 
             
 
+            
+
              method for the .NET Framework Data Provider for OLE DB maps to the OLE DB IColumnsRowset::GetColumnsRowset method, while implementations for other .NET Framework data providers do not use an OLE DB provider layer. The order in which <see
              cref="M:System.Data.IDataReader.GetSchemaTable" />
 
             
 
+            
+
              returns metadata about each column in a table, and the DataReader columns that are returned, vary depending on which data provider you use. The following table lists data providers and members that implement <see
              cref="M:System.Data.IDataReader.GetSchemaTable" />
+
+            
 
             
 
@@ -192,6 +218,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -203,6 +231,8 @@
               <description>
                 <para>
                   <see cref="M:System.Data.OleDb.OleDbDataReader.GetSchemaTable" />
+
+                  
 
                   
 
@@ -220,6 +250,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -231,6 +263,8 @@
               <description>
                 <para>
                   <see cref="M:System.Data.SqlClient.SqlDataReader.GetSchemaTable" />
+
+                  
 
                   
 
@@ -248,8 +282,12 @@
 
             
 
+            
+
              that describes the column metadata of the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -261,6 +299,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -288,13 +328,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.IDataReader.RecordsAffected" />
 
             
 
+            
+
              are the only properties that you can call after the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -355,8 +401,12 @@
 
             
 
+            
+
              is prior to the first record. Therefore you must call <see
              cref="M:System.Data.IDataReader.Read" />
+
+            
 
             
 
@@ -368,8 +418,12 @@
 
             
 
+            
+
             . This is the case until <see
              cref="M:System.Data.IDataReader.Close" />
+
+            
 
             
 
@@ -381,6 +435,8 @@
           <para
             >Advances the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -413,8 +469,12 @@
 
             
 
+            
+
              property is not set until all rows are read and you close the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -425,13 +485,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.IDataReader.RecordsAffected" />
 
             
 
+            
+
              are the only properties that you can call after the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 

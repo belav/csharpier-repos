@@ -38,6 +38,8 @@
 
         
 
+        
+
          is an abstract class that developers implement in order to specify the criteria to use for inspecting messages. Typically, filters are used by an endpoint application to determine what to do with a message based on an examination of some part of the message. A queuing process, for example, can use an XPath 1.0 query to check the priority element of a known header to determine whether to move a message to the front of the queue. </para
       >
       <para
@@ -46,8 +48,12 @@
 
         
 
+        
+
         . Each filter in the table is associated with specified filter data that can be used to indicate what actions to take if a message matches the filter. The <see
          cref="Overload:System.ServiceModel.Dispatcher.MessageFilter.Match" />
+
+        
 
         
 
@@ -60,12 +66,16 @@
 
         
 
+        
+
          class:</para
       >
       <list type="bullet">
         <item>
           <para>
             <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+
+            
 
             
 
@@ -78,12 +88,16 @@
 
             
 
+            
+
              matches all messages.</para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" />
+
+            
 
             
 
@@ -96,6 +110,8 @@
 
             
 
+            
+
              tests whether the action of a message is one of a specified set of actions.</para
           >
         </item>
@@ -105,12 +121,16 @@
 
             
 
+            
+
              tests whether a message satisfies a specified endpoint address.</para
           >
         </item>
       </list>
       <para>
         <see cref="T:System.ServiceModel.Channels.ChannelListenerBase`1" />
+
+        
 
         
 
@@ -143,6 +163,8 @@
 
             
 
+            
+
              can be instantiated.</para
           >
         </remarks>
@@ -151,6 +173,8 @@
           <para
             >When called in a derived class, initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+            
 
             
 
@@ -188,8 +212,12 @@
 
             
 
+            
+
             . Users should create a filter table by calling a constructor for the filter table. The default implementation of this method returns a filter table that calls the <see
              cref="Overload:System.ServiceModel.Dispatcher.MessageFilter.Match" />
+
+            
 
             
 
@@ -208,8 +236,12 @@
 
             
 
+            
+
              object to which filters associated with <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -218,6 +250,8 @@
         </returns>
         <typeparam name="FilterData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,6 +295,8 @@
 
             
 
+            
+
              object satisfies the filter criteria; otherwise, false.</para
           >
         </returns>
@@ -269,8 +305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -306,13 +346,19 @@
 
             
 
+            
+
              is fully buffered and therefore can be inspected by a filter. The body of a <see
              cref="T:System.ServiceModel.Channels.Message" />
 
             
 
+            
+
              that has not been fully buffered may be consumed by the filter inspection. The header element of a <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -331,6 +377,8 @@
 
             
 
+            
+
              object satisfies the filter criteria; otherwise, false.</para
           >
         </returns>
@@ -339,8 +387,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+          
 
           
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          topic.</para
       >
       <para
@@ -34,13 +36,19 @@
 
         
 
+        
+
          is <see
          cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />
 
         
 
+        
+
         . It uses Microsoft’s <see
          cref="http://go.microsoft.com/fwlink/?LinkId=96704">Windows Data Protection (DPAPI)</see>
+
+        
 
         
 
@@ -74,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.SecurityStateEncoder" />
+
+            
 
             
 
@@ -116,6 +126,8 @@
 
           
 
+          
+
           Security data.</param
         >
       </Docs>
@@ -151,6 +163,8 @@
         </returns>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

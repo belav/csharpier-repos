@@ -22,8 +22,12 @@
 
         
 
+        
+
          contains the versioning information both about the SOAP envelope and the addressing protocol that is used by a message. An instance of <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          by passing the version as a parameter into one of the <see
          cref="Overload:System.ServiceModel.Channels.Message.CreateMessage" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Channels.MessageVersion.Soap12" />
+
+        
 
         
 
@@ -55,13 +67,19 @@
 
         
 
+        
+
          is just a shortcut for supplying {<see
          cref="T:System.ServiceModel.EnvelopeVersion" />
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+        
 
         
 
@@ -73,8 +91,12 @@
 
         
 
+        
+
          and are returned by the <see
          cref="P:System.ServiceModel.EnvelopeVersion.Soap11" />
+
+        
 
         
 
@@ -83,8 +105,12 @@
 
         
 
+        
+
          properties. The version of SOAP associated with the <see
          cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+        
 
         
 
@@ -93,13 +119,19 @@
 
         
 
+        
+
          property. crdefault the schema for <see
          cref="http://go.microsoft.com/fwlink/?LinkId=96641">SOAP 1.1</see>
 
         
 
+        
+
          and <see
          cref="http://go.microsoft.com/fwlink/?LinkId=96642">SOAP 1.2</see>
+
+        
 
         
 
@@ -111,8 +143,12 @@
 
         
 
+        
+
          property. These versions of WS-Addressing are represented by <see
          cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+        
 
         
 
@@ -121,8 +157,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Channels.AddressingVersion.WSAddressing10" />
+
+        
 
         
 
@@ -133,10 +173,14 @@
 
         
 
+        
+
         . The 17 August 2005 W3C Candidate Recommendation for WS-Addressing 1.0 - Core is available at <see
          cref="http://go.microsoft.com/fwlink/?LinkId=96644"
           >Web Services Addressing 1.0 - Core</see
         >
+
+        
 
         
 
@@ -147,8 +191,12 @@
 
         
 
+        
+
          provides support for using "plain old XML" (POX)-style messaging. Enabling basic POX messaging is now a matter of setting up an HTTP binding on your service with a text encoder that uses <see
          cref="P:System.ServiceModel.Channels.AddressingVersion.None" />
+
+        
 
         
 
@@ -157,6 +205,8 @@
       <para
         >Message version objects can be created using specified versions of WS-Addressing and SOAP using one of the <see
          cref="Overload:System.ServiceModel.Channels.MessageVersion.CreateVersion" />
+
+        
 
         
 
@@ -195,13 +245,19 @@
 
             
 
+            
+
              and are returned by the <see
              cref="P:System.ServiceModel.Channels.AddressingVersion.WSAddressingAugust2004" />
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Channels.AddressingVersion.WSAddressing10" />
+
+            
 
             
 
@@ -212,10 +268,14 @@
 
             
 
+            
+
             . The 17 August 2005 W3C Candidate Recommendation for WS-Addressing 1.0 - Core is available at <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96644"
               >Web Services Addressing 1.0 - Core</see
             >
+
+            
 
             
 
@@ -257,6 +317,8 @@
 
             
 
+            
+
              for each version of SOAP that contains the data relevant to its use. </para
           >
         </remarks>
@@ -269,6 +331,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+            
 
             
 
@@ -311,6 +375,8 @@
 
             
 
+            
+
              for each version of SOAP that contains the data relevant to its use.</para
           >
           <para>There are currently two versions of WS-Addressing available. One submitted 10 August 2004 and the other submitted August 2005 and referred to as the WS-Addressing 1.0 protocol. </para>
@@ -324,6 +390,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+            
 
             
 
@@ -355,6 +423,8 @@
           <para
             >This returns the same object as <see
              cref="P:System.ServiceModel.Channels.MessageVersion.Soap12WSAddressing10" />
+
+            
 
             
 
@@ -393,8 +463,12 @@
 
             
 
+            
+
              and are returned by the <see
              cref="P:System.ServiceModel.EnvelopeVersion.Soap11" />
+
+            
 
             
 
@@ -403,8 +477,12 @@
 
             
 
+            
+
              properties. The version of SOAP associated with the <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+            
 
             
 
@@ -413,13 +491,19 @@
 
             
 
+            
+
              property. crdefault the schema for <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96641">SOAP 1.1</see>
 
             
 
+            
+
              and <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96642">SOAP 1.2</see>
+
+            
 
             
 
@@ -463,6 +547,8 @@
 
             
 
+            
+
              object; otherwise, false.</para
           >
         </returns>
@@ -493,6 +579,8 @@
           <para
             >A unique hash code for the current <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+            
 
             
 
@@ -527,8 +615,12 @@
 
             
 
+            
+
              consists of the <see
              cref="P:System.ServiceModel.EnvelopeVersion.None" />
+
+            
 
             
 
@@ -537,8 +629,12 @@
 
             
 
+            
+
             . This provides support for using "plain old XML" (POX)-style messaging. Enabling basic POX messaging is now a matter of setting up an HTTP binding on your service with a text encoder that uses <see
              cref="P:System.ServiceModel.Channels.AddressingVersion.None" />
+
+            
 
             
 
@@ -550,13 +646,19 @@
 
             
 
+            
+
              and the <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
 
             
 
+            
+
              is set to <see
              cref="P:System.ServiceModel.Channels.MessageVersion.None" />
+
+            
 
             
 

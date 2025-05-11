@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used in the <see
          cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          events to pass information about a database operation after it is performed by the data source control. This information includes the number of rows affected by the operation, the <see
          cref="T:System.Data.Common.DbCommand" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />
+
+        
 
         
 
@@ -62,8 +78,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+        
 
         
 
@@ -75,13 +95,19 @@
 
         
 
+        
+
          control exposes many events that you can handle to work with the underlying data objects during the course of a data operation. The following table lists the events and associated <see
          cref="T:System.EventArgs" />
 
         
 
+        
+
          and event handler classes, to better guide you to the various events that correspond to the life cycle of a data operation using the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -108,6 +134,8 @@
 
               
 
+              
+
                occurs before the data is retrieved.</para
             >
           </term>
@@ -129,13 +157,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Updating" />
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Deleting" />
+
+              
 
               
 
@@ -160,8 +194,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+              
 
               
 
@@ -170,8 +208,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+              
 
               
 
@@ -196,6 +238,8 @@
       <para
         >Provides data for an event that is raised by the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -227,6 +271,8 @@
 
             
 
+            
+
              class, using the specified output parameters, return value, and number of rows affected by the database operation.</para
           >
         </summary>
@@ -235,13 +281,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DbCommand" />
 
           
 
+          
+
            that represents the database query, command, or stored procedure that is submitted to the database by the <see
            cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+          
 
           
 
@@ -252,8 +304,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -281,8 +337,12 @@
 
             
 
+            
+
              property has the same value as the return value of the <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Update" />
+
+            
 
             
 
@@ -291,8 +351,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" />
+
+            
 
             
 
@@ -304,8 +368,12 @@
 
             
 
+            
+
              method is called and the data source is set to <see
              cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataReader" />
+
+            
 
             
 
@@ -338,8 +406,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />
+
+            
 
             
 
@@ -348,8 +420,12 @@
 
             
 
+            
+
             , or <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+            
 
             
 
@@ -358,8 +434,12 @@
 
             
 
+            
+
              after it is submitted by the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -368,13 +448,19 @@
 
             
 
+            
+
              property enables you to access return values and values in any output parameters after the database operation is performed through its <see
              cref="P:System.Data.Common.DbCommand.Parameters" />
 
             
 
+            
+
              property, as well as the <see
              cref="P:System.Data.Common.DbCommand.CommandText" />
+
+            
 
             
 
@@ -386,8 +472,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Data.ParameterDirection.Output" />
+
+            
 
             
 
@@ -396,13 +486,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
+            
+
              object. A return value is from a parameter that has a <see
              cref="F:System.Data.ParameterDirection.ReturnValue" />
+
+            
 
             
 
@@ -435,8 +531,12 @@
 
             
 
+            
+
              property does not represent the actual exception thrown by the database operation. You can access the thrown exception using the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -469,8 +569,12 @@
 
             
 
+            
+
              property is set to false and the exception is wrapped by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.Exception" />
+
+            
 
             
 
@@ -479,8 +583,12 @@
 
             
 
+            
+
             , you can check the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.Exception" />
+
+            
 
             
 
@@ -489,8 +597,12 @@
 
             
 
+            
+
              property to true or the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 

@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes, interfaces and enumerations that enable language-level code expressions to be represented as objects in the form of expression trees.</para
       >
     </summary>
@@ -20,6 +22,8 @@
 
         
 
+        
+
          provides the root of a class hierarchy used to model expression trees.</para
       >
       <para
@@ -28,8 +32,12 @@
 
         
 
+        
+
         , for example <see
          cref="T:System.Linq.Expressions.MemberExpression" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
         , are used to represent nodes in an expression tree. The <see
          cref="T:System.Linq.Expressions.Expression" />
+
+        
 
         
 
@@ -48,6 +60,8 @@
       <para
         >The enumeration type <see
          cref="T:System.Linq.Expressions.ExpressionType" />
+
+        
 
         
 

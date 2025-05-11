@@ -47,6 +47,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -55,8 +57,12 @@
 
           
 
+          
+
           The content used to initialize the <see
            cref="T:System.Net.Http.ByteArrayContent" />
+
+          
 
           
 
@@ -91,8 +97,12 @@
 
             
 
+            
+
              parameter and the <paramref
              name="count " />
+
+            
 
             
 
@@ -107,6 +117,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -115,8 +127,12 @@
 
           
 
+          
+
           The content used to initialize the <see
            cref="T:System.Net.Http.ByteArrayContent" />
+
+          
 
           
 
@@ -127,13 +143,19 @@
 
           
 
+          
+
           The offset, in bytes, in the <paramref
            name="content" />
 
           
 
+          
+
             parameter used to initialize the <see
            cref="T:System.Net.Http.ByteArrayContent" />
+
+          
 
           
 
@@ -144,8 +166,12 @@
 
           
 
+          
+
           The number of bytes in the <paramref
            name="content" />
+
+          
 
           
 
@@ -154,8 +180,12 @@
 
           
 
+          
+
            parameter used to initialize the <see
            cref="T:System.Net.Http.ByteArrayContent" />
+
+          
 
           
 
@@ -189,6 +219,8 @@
 
             
 
+            
+
             object will complete after all of the content stream has been created.</para
           >
         </remarks>
@@ -200,6 +232,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -208,6 +242,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -246,8 +282,12 @@
 
             
 
+            
+
              object completes, the whole byte array has been written to the <paramref
              name="stream" />
+
+            
 
             
 
@@ -266,6 +306,8 @@
 
             
 
+            
+
             . </para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -275,10 +317,14 @@
 
           
 
+          
+
           The target stream.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

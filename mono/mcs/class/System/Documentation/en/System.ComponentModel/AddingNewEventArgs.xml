@@ -24,8 +24,12 @@
 
         
 
+        
+
          class provides data for the <see
          cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         , the option of supplying the new object by setting the <see
          cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+
+        
 
         
 
@@ -47,6 +55,8 @@
 
         
 
+        
+
          interface, the item will be provisionally added, waiting a subsequent commit or rollback.</para
       >
       <para
@@ -55,8 +65,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ComponentModel.BindingList`1" />
+
+        
 
         
 
@@ -70,6 +84,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -78,6 +94,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+
+        
 
         
 
@@ -108,8 +126,12 @@
 
             
 
+            
+
              property to null. A value that is null indicates that, if the <see
              cref="T:System.ComponentModel.AddingNewEventHandler" />
+
+            
 
             
 
@@ -121,6 +143,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.AddingNewEventArgs" />
+
+            
 
             
 
@@ -153,13 +177,19 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
             
 
+            
+
              property to the <paramref
              name="newObject" />
+
+            
 
             
 
@@ -174,6 +204,8 @@
 
             
 
+            
+
              class using the specified object as the new item.</para
           >
         </summary>
@@ -182,8 +214,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -210,6 +246,8 @@
           <para
             >If the <see
              cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+
+            
 
             
 

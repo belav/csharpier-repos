@@ -18,7 +18,7 @@
       >false</StabilizePackageVersion
     >
     <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
-      >release</DotNetFinalVersionKind
+>release</DotNetFinalVersionKind
     >
   </PropertyGroup>
   <PropertyGroup>

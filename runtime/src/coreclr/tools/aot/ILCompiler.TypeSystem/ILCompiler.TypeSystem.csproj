@@ -700,7 +700,8 @@
       Version="$(MicrosoftCodeAnalysisBannedApiAnalyzersVersion)"
       Condition="'$(DotNetBuildFromSource)' != 'true'"
     >
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <IncludeAssets
+>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>

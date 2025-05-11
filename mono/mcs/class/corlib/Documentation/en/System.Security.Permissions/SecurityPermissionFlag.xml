@@ -42,11 +42,15 @@
 
         
 
+        
+
          attribute that allows a bitwise combination of its member values.</para
       >
       <para
         >This enumeration is used by <see
          cref="T:System.Security.Permissions.SecurityPermission" />
+
+        
 
         
 
@@ -163,6 +167,8 @@
           <para
             >Ability to create and manipulate an <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -333,13 +339,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
+            
+
             , and <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 
@@ -486,13 +498,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
+            
+
             , and <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 

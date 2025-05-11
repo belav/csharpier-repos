@@ -27,6 +27,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -56,6 +58,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 
@@ -89,6 +93,8 @@
           <para
             >LineNumber is used to store the line number when a schema is read from a file. This is reported through <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
+
+            
 
             
 
@@ -126,6 +132,8 @@
           <para
             >This is used to store the line position when a schema is read from a file. This is reported through <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
+
+            
 
             
 
@@ -173,6 +181,8 @@
 
             
 
+            
+
              property to change namespace prefixes in a schema. For example, you can change the prefix used by a schema for the W3C XML Schema namespace from xs to xsd as illustrated in the following example.</para
           >
           <code>Dim namespaces As XmlSerializerNamespaces = New XmlSerializerNamespaces()
@@ -187,6 +197,8 @@ s.Namespaces = namespaces;</code>
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -226,6 +238,8 @@ s.Namespaces = namespaces;</code>
           <para
             >Gets or sets the parent of this <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 

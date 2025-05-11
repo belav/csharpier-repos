@@ -30,8 +30,12 @@
 
         
 
+        
+
          allows you to get a list of the font families contained in the collection with its <see
          cref="P:System.Drawing.Text.FontCollection.Families" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
          type="text/html">
           <a href="d43640f3-da94-4df2-a29d-a9d021a1c069">Using Fonts and Text</a>
         </format>
+
+        
 
         
 
@@ -67,8 +73,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Drawing.Text.FontCollection" />
+
+            
 
             
 
@@ -77,8 +87,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Drawing.Text.FontCollection" />
+
+            
 
             
 
@@ -87,13 +101,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Drawing.Text.FontCollection" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Drawing.Text.FontCollection" />
+
+            
 
             
 
@@ -104,10 +124,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -120,13 +144,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.Text.FontCollection" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Drawing.Text.FontCollection" />
+
+              
 
               
 
@@ -139,6 +169,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Text.FontCollection" />
+
+            
 
             
 
@@ -173,8 +205,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -183,8 +219,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -196,8 +236,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Drawing.Text.FontCollection" />
+
+            
 
             
 
@@ -212,11 +256,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,8 +293,12 @@
 
             
 
+            
+
              objects associated with this <see
              cref="T:System.Drawing.Text.FontCollection" />
+
+            
 
             
 

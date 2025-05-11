@@ -20,13 +20,19 @@
 
         
 
+        
+
          class. You can think of a data source control as the combination of the data source control object and its associated views on the underlying data, which are represented by data source view objects. Hierarchical data source controls support a hierarchical data source view for each hierarchical level of data they represent. The data source views are not named, like the <see
          cref="T:System.Web.UI.DataSourceView" />
 
         
 
+        
+
          objects associated with a <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
         , support data retrieval from the underlying data source using the <see
          cref="M:System.Web.UI.HierarchicalDataSourceView.Select" />
+
+        
 
         
 
@@ -48,8 +58,12 @@
 
         
 
+        
+
          object. All data source view objects optionally support a basic set of capabilities, including operations such as <see
          cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+
+        
 
         
 
@@ -58,8 +72,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+
+        
 
         
 
@@ -68,8 +86,12 @@
 
         
 
+        
+
          method and querying the view at design time or at run time. <see
          cref="T:System.Web.UI.HierarchicalDataSourceView" />
+
+        
 
         
 
@@ -78,13 +100,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.DataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
         
 
+        
+
          or <see
          cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+
+        
 
         
 
@@ -96,6 +124,8 @@
       <para
         >Represents a data view on a node or collection of nodes in a hierarchical data structure for a <see
          cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+        
 
         
 
@@ -116,6 +146,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.HierarchicalDataSourceView" />
+
+            
 
             
 
@@ -147,8 +179,12 @@
 
             
 
+            
+
              method returns an <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -157,8 +193,12 @@
 
             
 
+            
+
              method to get an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -174,6 +214,8 @@
           <para
             >An <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 

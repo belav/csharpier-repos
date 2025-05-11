@@ -19,13 +19,19 @@
 
         
 
+        
+
          delegate is defined for the <see
          cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -34,8 +40,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -44,8 +54,12 @@
 
         
 
+        
+
          event is raised at the end of page execution if the <see
          cref="P:System.Web.Profile.ProfileManager.AutomaticSaveEnabled" />
+
+        
 
         
 
@@ -57,8 +71,12 @@
 
         
 
+        
+
          method automatically determines whether properties that are made up of primitive types, strings, or <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -67,8 +85,12 @@
 
         
 
+        
+
          property value for each <see
          cref="T:System.Configuration.SettingsPropertyValue" />
+
+        
 
         
 
@@ -77,8 +99,12 @@
 
         
 
+        
+
          method cannot explicitly determine whether a custom class has changed. You can use the <see
          cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+        
 
         
 
@@ -90,13 +116,19 @@
 
         
 
+        
+
          property to false in the <see
          cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
+        
+
          event; otherwise, set the <see
          cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+
+        
 
         
 
@@ -108,8 +140,12 @@
 
         
 
+        
+
          event. The <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -118,13 +154,19 @@
 
         
 
+        
+
          property is set to. As a result, it is recommended that you explicitly set the <see
          cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
         
 
+        
+
          property in the <see
          cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+        
 
         
 
@@ -139,8 +181,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -168,8 +214,12 @@
 
             
 
+            
+
              creates an instance of the <see
              cref="T:System.Web.Profile.ProfileAutoSaveEventArgs" />
+
+            
 
             
 
@@ -178,8 +228,12 @@
 
             
 
+            
+
              property to the specified <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -194,6 +248,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -202,8 +258,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -231,8 +291,12 @@
 
             
 
+            
+
              object provides event information to the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+            
 
             
 
@@ -241,13 +305,19 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.Context" />
 
             
 
+            
+
              property provides access to the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -259,6 +329,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -290,8 +362,12 @@
 
             
 
+            
+
              method automatically determines whether properties that are made up of primitive types, strings, or <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -300,8 +376,12 @@
 
             
 
+            
+
              property value for each <see
              cref="T:System.Configuration.SettingsPropertyValue" />
+
+            
 
             
 
@@ -310,8 +390,12 @@
 
             
 
+            
+
              method cannot explicitly determine whether a custom class has changed. You can use the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+            
 
             
 
@@ -323,13 +407,19 @@
 
             
 
+            
+
              property to false in the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
             
 
+            
+
              event; otherwise, set the <see
              cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+
+            
 
             
 
@@ -341,8 +431,12 @@
 
             
 
+            
+
              event. The <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -351,13 +445,19 @@
 
             
 
+            
+
              property is set to. As a result, it is recommended that you explicitly set the <see
              cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
             
 
+            
+
              property in the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+            
 
             
 
@@ -369,6 +469,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 

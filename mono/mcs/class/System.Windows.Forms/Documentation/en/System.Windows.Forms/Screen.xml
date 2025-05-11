@@ -19,6 +19,8 @@
 
         
 
+        
+
          object. The object is created when you call its public methods.</para
       >
     </remarks>
@@ -70,6 +72,8 @@
                 >[&lt;topic://_gdiplus_Types_of_Bitmaps_about&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -146,6 +150,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -154,8 +160,12 @@
 
           
 
+          
+
           The object to compare to this <see
            cref="T:System.Windows.Forms.Screen" />
+
+          
 
           
 
@@ -189,6 +199,8 @@
 
             
 
+            
+
              for the display that contains the largest portion of the specified control.</para
           >
         </summary>
@@ -200,6 +212,8 @@
 
             
 
+            
+
              for the display that contains the largest region of the specified control. In multiple display environments where no display contains the control, the display closest to the specified control is returned.</para
           >
         </returns>
@@ -208,13 +222,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
 
           
 
+          
+
            for which to retrieve a <see
            cref="T:System.Windows.Forms.Screen" />
+
+          
 
           
 
@@ -248,6 +268,8 @@
 
             
 
+            
+
              for the display that contains the largest portion of the object referred to by the specified handle.</para
           >
         </summary>
@@ -259,6 +281,8 @@
 
             
 
+            
+
              for the display that contains the largest region of the object. In multiple display environments where no display contains any portion of the specified window, the display closest to the object is returned.</para
           >
         </returns>
@@ -267,8 +291,12 @@
 
           
 
+          
+
           The window handle for which to retrieve the <see
            cref="T:System.Windows.Forms.Screen" />
+
+          
 
           
 
@@ -302,6 +330,8 @@
 
             
 
+            
+
              for the display that contains the specified point.</para
           >
         </summary>
@@ -313,6 +343,8 @@
 
             
 
+            
+
              for the display that contains the point. In multiple display environments where no display contains the point, the display closest to the specified point is returned.</para
           >
         </returns>
@@ -321,13 +353,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
 
           
 
+          
+
            that specifies the location for which to retrieve a <see
            cref="T:System.Windows.Forms.Screen" />
+
+          
 
           
 
@@ -361,6 +399,8 @@
 
             
 
+            
+
              for the display that contains the largest portion of the rectangle.</para
           >
         </summary>
@@ -372,6 +412,8 @@
 
             
 
+            
+
              for the display that contains the largest region of the specified rectangle. In multiple display environments where no display contains the rectangle, the display closest to the rectangle is returned.</para
           >
         </returns>
@@ -380,8 +422,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -419,6 +465,8 @@
 
             
 
+            
+
              that specifies the bounds of the display that contains the specified point. In multiple display environments where no display contains the specified point, the display closest to the point is returned.</para
           >
         </returns>
@@ -427,8 +475,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -466,6 +518,8 @@
 
             
 
+            
+
              that specifies the bounds of the display that contains the specified rectangle. In multiple display environments where no monitor contains the specified rectangle, the monitor closest to the rectangle is returned.</para
           >
         </returns>
@@ -474,8 +528,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -513,6 +571,8 @@
 
             
 
+            
+
              that specifies the bounds of the display that contains the specified control. In multiple display environments where no display contains the specified control, the display closest to the control is returned.</para
           >
         </returns>
@@ -521,8 +581,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -547,6 +611,8 @@
           <para
             >This method implements the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -593,6 +659,8 @@
 
             
 
+            
+
              that specifies the working area. In multiple display environments where no display contains the specified point, the display closest to the point is returned.</para
           >
         </returns>
@@ -601,8 +669,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -640,6 +712,8 @@
 
             
 
+            
+
              that specifies the working area. In multiple display environments where no display contains the specified rectangle, the display closest to the rectangle is returned.</para
           >
         </returns>
@@ -648,8 +722,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -687,6 +765,8 @@
 
             
 
+            
+
              that specifies the working area. In multiple display environments where no display contains the specified control, the display closest to the control is returned.</para
           >
         </returns>
@@ -695,8 +775,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -788,6 +872,8 @@
           <para>The working area is the desktop area of the display, excluding taskbars, docked windows, and docked tool bars.</para>
           <para>
             <see cref="P:System.Windows.Forms.Screen.WorkingArea" />
+
+            
 
             
 

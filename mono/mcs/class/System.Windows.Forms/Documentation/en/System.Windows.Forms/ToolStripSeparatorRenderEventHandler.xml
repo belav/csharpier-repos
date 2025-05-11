@@ -33,8 +33,12 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the <see
          cref="E:System.Windows.Forms.ToolStripRenderer.RenderSeparator" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+        
 
         
 

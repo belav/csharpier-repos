@@ -27,8 +27,12 @@
 
         
 
+        
+
          server control or any OnClick event handlers that you create for an <see
          cref="T:System.Web.UI.WebControls.ImageButton" />
+
+        
 
         
 
@@ -43,10 +47,14 @@
 
         
 
+        
+
         . For information about how to raise events, see <format
          type="text/html">
           <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
         </format>
+
+        
 
         
 

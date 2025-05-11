@@ -17,10 +17,11 @@
   <Interfaces />
   <Docs>
     <summary>Operations that can be performed on a file handle.</summary>
-    <remarks
-      >
+    <remarks>
       The <see
        cref="T:Mono.Unix.FileHandleOperations" />
+
+      
 
       
 
@@ -31,9 +32,13 @@
 
       
 
+      
+
       s,
       <see
        cref="T:Mono.Unix.UnixStream" />
+
+      
 
       
 
@@ -67,10 +72,11 @@
       </Parameters>
       <Docs>
         <param name="stream">File stream to advise.</param>
-        <param name="pattern"
-          >
+        <param name="pattern">
           A <see
            cref="T:Mono.Unix.FileAccessPattern" />
+
+          
 
           
 
@@ -85,12 +91,16 @@
 
             
 
+            
+
              is used to announce an intention
         to access file data with a specific pattern, allowing the kernel to
         perform appropriate optimizations.</para
           >
           <para>
             <paramref name="pattern" />
+
+            
 
             
 
@@ -106,12 +116,16 @@
 
             
 
+            
+
              is not a valid file stream.
           </para
           >
           <para>-or-</para>
           <para>
             <paramref name="advice" />
+
+            
 
             
 
@@ -124,9 +138,13 @@
 
           
 
+          
+
            
           is <see
            langword="null" />
+
+          
 
           
 
@@ -134,6 +152,8 @@
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="stream" />
+
+          
 
           
 
@@ -166,20 +186,22 @@
         <Parameter Name="pattern" Type="Mono.Unix.FileAccessPattern" />
       </Parameters>
       <Docs>
-        <param name="fd"
-          >
+        <param name="fd">
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
            containing the file descriptor to advise.
         </param
         >
-        <param name="pattern"
-          >
+        <param name="pattern">
           A <see
            cref="T:Mono.Unix.FileAccessPattern" />
+
+          
 
           
 
@@ -194,12 +216,16 @@
 
             
 
+            
+
              is used to announce an intention
         to access file data with a specific pattern, allowing the kernel to
         perform appropriate optimizations.</para
           >
           <para>
             <paramref name="pattern" />
+
+            
 
             
 
@@ -215,6 +241,8 @@
 
             
 
+            
+
              is not a valid file descriptor.
           </para
           >
@@ -224,12 +252,16 @@
 
             
 
+            
+
              is not a valid value.
           </para
           >
         </exception>
         <exception cref="T:System.IO.IOException">
           <paramref name="fd" />
+
+          
 
           
 
@@ -263,10 +295,11 @@
       </Parameters>
       <Docs>
         <param name="file">File stream to advise.</param>
-        <param name="pattern"
-          >
+        <param name="pattern">
           A <see
            cref="T:Mono.Unix.FileAccessPattern" />
+
+          
 
           
 
@@ -281,12 +314,16 @@
 
             
 
+            
+
              is used to announce an intention
         to access file data with a specific pattern, allowing the kernel to
         perform appropriate optimizations.</para
           >
           <para>
             <paramref name="pattern" />
+
+            
 
             
 
@@ -302,12 +339,16 @@
 
             
 
+            
+
              is not a valid file stream.
           </para
           >
           <para>-or-</para>
           <para>
             <paramref name="advice" />
+
+            
 
             
 
@@ -320,9 +361,13 @@
 
           
 
+          
+
            
           is <see
            langword="null" />
+
+          
 
           
 
@@ -330,6 +375,8 @@
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="file" />
+
+          
 
           
 
@@ -365,10 +412,11 @@
       </Parameters>
       <Docs>
         <param name="stream">File stream to advise.</param>
-        <param name="pattern"
-          >
+        <param name="pattern">
           A <see
            cref="T:Mono.Unix.FileAccessPattern" />
+
+          
 
           
 
@@ -376,10 +424,11 @@
           access pattern to suggest.
         </param
         >
-        <param name="offset"
-          >
+        <param name="offset">
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -389,13 +438,16 @@
 
           
 
+          
+
            access pattern.
         </param
         >
-        <param name="len"
-          >
+        <param name="len">
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -406,13 +458,19 @@
           
 
           
+
+          
           access pattern.  If <c
           >0</c>
 
           
 
+          
+
           , <paramref
            name="pattern" />
+
+          
 
           
 
@@ -427,6 +485,8 @@
 
             
 
+            
+
              is used to announce an intention
         to access file data with a specific pattern, allowing the kernel to
         perform appropriate optimizations.</para
@@ -436,9 +496,13 @@
 
             
 
+            
+
              applies to a region starting at
         <paramref
              name="offset" />
+
+            
 
             
 
@@ -448,8 +512,12 @@
             
 
             
+
+            
         bytes (or until end-of-file if <paramref
              name="len" />
+
+            
 
             
 
@@ -458,9 +526,13 @@
 
             
 
+            
+
             )
         within the file specified by <paramref
              name="stream" />
+
+            
 
             
 
@@ -476,12 +548,16 @@
 
             
 
+            
+
              is not a valid file stream.
           </para
           >
           <para>-or-</para>
           <para>
             <paramref name="advice" />
+
+            
 
             
 
@@ -494,8 +570,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -503,6 +583,8 @@
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="stream" />
+
+          
 
           
 
@@ -537,20 +619,22 @@
         <Parameter Name="len" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="fd"
-          >
+        <param name="fd">
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
            containing the file descriptor to advise.
         </param
         >
-        <param name="pattern"
-          >
+        <param name="pattern">
           A <see
            cref="T:Mono.Unix.FileAccessPattern" />
+
+          
 
           
 
@@ -558,10 +642,11 @@
           access pattern to suggest.
         </param
         >
-        <param name="offset"
-          >
+        <param name="offset">
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -571,13 +656,16 @@
 
           
 
+          
+
            access pattern.
         </param
         >
-        <param name="len"
-          >
+        <param name="len">
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -588,13 +676,19 @@
           
 
           
+
+          
           access pattern.  If <c
           >0</c>
 
           
 
+          
+
           , <paramref
            name="pattern" />
+
+          
 
           
 
@@ -609,6 +703,8 @@
 
             
 
+            
+
              is used to announce an intention
         to access file data with a specific pattern, allowing the kernel to
         perform appropriate optimizations.</para
@@ -618,9 +714,13 @@
 
             
 
+            
+
              applies to a region starting at
         <paramref
              name="offset" />
+
+            
 
             
 
@@ -630,8 +730,12 @@
             
 
             
+
+            
         bytes (or until end-of-file if <paramref
              name="len" />
+
+            
 
             
 
@@ -640,9 +744,13 @@
 
             
 
+            
+
             )
         within the file specified by <paramref
              name="fd" />
+
+            
 
             
 
@@ -658,6 +766,8 @@
 
             
 
+            
+
              is not a valid file descriptor.
           </para
           >
@@ -667,12 +777,16 @@
 
             
 
+            
+
              is not a valid value.
           </para
           >
         </exception>
         <exception cref="T:System.IO.IOException">
           <paramref name="fd" />
+
+          
 
           
 
@@ -708,10 +822,11 @@
       </Parameters>
       <Docs>
         <param name="file">File stream to advise.</param>
-        <param name="pattern"
-          >
+        <param name="pattern">
           A <see
            cref="T:Mono.Unix.FileAccessPattern" />
+
+          
 
           
 
@@ -719,10 +834,11 @@
           access pattern to suggest.
         </param
         >
-        <param name="offset"
-          >
+        <param name="offset">
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -732,13 +848,16 @@
 
           
 
+          
+
            access pattern.
         </param
         >
-        <param name="len"
-          >
+        <param name="len">
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -749,13 +868,19 @@
           
 
           
+
+          
           access pattern.  If <c
           >0</c>
 
           
 
+          
+
           , <paramref
            name="pattern" />
+
+          
 
           
 
@@ -770,6 +895,8 @@
 
             
 
+            
+
              is used to announce an intention
         to access file data with a specific pattern, allowing the kernel to
         perform appropriate optimizations.</para
@@ -779,9 +906,13 @@
 
             
 
+            
+
              applies to a region starting at
         <paramref
              name="offset" />
+
+            
 
             
 
@@ -791,8 +922,12 @@
             
 
             
+
+            
         bytes (or until end-of-file if <paramref
              name="len" />
+
+            
 
             
 
@@ -801,9 +936,13 @@
 
             
 
+            
+
             )
         within the file specified by <paramref
              name="file" />
+
+            
 
             
 
@@ -819,12 +958,16 @@
 
             
 
+            
+
              is not a valid file stream.
           </para
           >
           <para>-or-</para>
           <para>
             <paramref name="advice" />
+
+            
 
             
 
@@ -837,9 +980,13 @@
 
           
 
+          
+
            
           is <see
            langword="null" />
+
+          
 
           
 
@@ -847,6 +994,8 @@
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="file" />
+
+          
 
           
 

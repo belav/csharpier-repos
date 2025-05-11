@@ -50,8 +50,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+
+        
 
         
 
@@ -60,11 +64,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
+
+        
 
         
 
@@ -98,6 +106,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -124,6 +134,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
+
+            
 
             
 
@@ -294,6 +306,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -306,6 +320,8 @@
           <para
             >true if the <paramref
              name="filter" />
+
+            
 
             
 
@@ -389,6 +405,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -401,6 +419,8 @@
           <para
             >An <see
              cref="T:System.Collections.Generic.IEnumerator`1" />
+
+            
 
             
 
@@ -571,8 +591,12 @@
 
             
 
+            
+
              objects are stored in the <paramref
              name="results" />
+
+            
 
             
 
@@ -581,8 +605,12 @@
 
             
 
+            
+
             . The <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -591,11 +619,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method implements <see
              cref="M:System.ServiceModel.Dispatcher.IMessageFilterTable`1.GetMatchingFilters(System.ServiceModel.Message,System.Collections.Generic.ICollection{System.ServiceModel.Dispatcher.MessageFilter})" />
+
+            
 
             
 
@@ -610,6 +642,8 @@
 
             
 
+            
+
              in the table is satisfied by the specified message and adds the matching filters to a collection.</para
           >
         </summary>
@@ -621,6 +655,8 @@
 
             
 
+            
+
             ; false if no filter is satisfied.</para
           >
         </returns>
@@ -629,8 +665,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -641,13 +681,19 @@
 
           
 
+          
+
           The reference parameter that stores the <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
+          
+
            objects that match in <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -690,8 +736,12 @@
 
             
 
+            
+
              objects are stored in the <paramref
              name="results" />
+
+            
 
             
 
@@ -700,8 +750,12 @@
 
             
 
+            
+
             . The <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -710,11 +764,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method implements <see
              cref="M:System.ServiceModel.Dispatcher.MessageFilterTable`1.GetMatchingFilters(System.ServiceModel.Channels.MessageBuffer,System.Collections.Generic.ICollection{System.ServiceModel.Dispatcher.MessageFilter})" />
+
+            
 
             
 
@@ -729,6 +787,8 @@
 
             
 
+            
+
              in the table is satisfied by the specified buffered message and adds the matching filters to a collection.</para
           >
         </summary>
@@ -740,6 +800,8 @@
 
             
 
+            
+
             ; false if no filter is satisfied.</para
           >
         </returns>
@@ -748,13 +810,19 @@
 
           
 
+          
+
           The reference parameter that stores the <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
+          
+
            objects that match in <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -795,6 +863,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -803,6 +873,8 @@
           <para
             >Returns a value that indicates whether the match criterion of at least one <see
              cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+
+            
 
             
 
@@ -817,6 +889,8 @@
 
             
 
+            
+
             ; false if no filter is satisfied.</para
           >
         </returns>
@@ -825,8 +899,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+
+          
 
           
 
@@ -837,13 +915,19 @@
 
           
 
+          
+
           The reference parameter that stores the <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
+          
+
            objects that match in <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -883,11 +967,15 @@
 
             
 
+            
+
              and the matching filters are required. </para
           >
           <para
             >If only one filter is expected to match the message, use the <see
              cref="M:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1.GetMatchingFilter(System.Xml.XPath.XPathNavigator,System.ServiceModel.Dispatcher.MessageFilter@)" />
+
+            
 
             
 
@@ -902,6 +990,8 @@
 
             
 
+            
+
              in the table is satisfied by the specified buffered message and adds the matching filters to a collection.</para
           >
         </summary>
@@ -913,6 +1003,8 @@
 
             
 
+            
+
             ; false if no filter is satisfied.</para
           >
         </returns>
@@ -921,8 +1013,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -933,13 +1029,19 @@
 
           
 
+          
+
           The reference parameter that stores the <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
+          
+
            objects that match in <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -1204,6 +1306,8 @@
 
             
 
+            
+
              is not read-only.</para
           >
         </summary>
@@ -1261,8 +1365,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1271,8 +1379,12 @@
 
             
 
+            
+
              as the key and the <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -1284,8 +1396,12 @@
 
             
 
+            
+
              in the collection returned by the <see
              cref="P:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1.Values" />
+
+            
 
             
 
@@ -1297,6 +1413,8 @@
           <para
             >Gets a collection of all the filters contained in the <see
              cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
+
+            
 
             
 
@@ -1327,6 +1445,8 @@
           <para
             >This property can be used to alleviate a security threat. Some filters can be extremely expensive to evaluate or are very long-running. <see
              cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+
+            
 
             
 
@@ -1402,8 +1522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 
@@ -1443,6 +1567,8 @@
 
             
 
+            
+
              and its associated filter data from the filter table.</para
           >
         </summary>
@@ -1454,6 +1580,8 @@
 
             
 
+            
+
              was found and removed; otherwise, false.</para
           >
         </returns>
@@ -1462,8 +1590,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+
+          
 
           
 
@@ -1497,6 +1629,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1509,6 +1643,8 @@
           <para
             >An <see
              cref="T:System.Collections.Generic.IEnumerator`1" />
+
+            
 
             
 
@@ -1596,8 +1732,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1606,13 +1746,19 @@
 
             
 
+            
+
             &gt; that the filter table implements uses the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
             
 
+            
+
              as the key and the <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -1624,8 +1770,12 @@
 
             
 
+            
+
              returned in the collection is unspecified, but it is guaranteed to be the same order as the corresponding filters in the collection returned by the <see
              cref="P:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1.Keys" />
+
+            
 
             
 
@@ -1640,8 +1790,12 @@
 
             
 
+            
+
              contained in the <see
              cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
+
+            
 
             
 

@@ -6,11 +6,15 @@
 
     
 
+    
+
      consists of an expression enclosed in parentheses. <grammar_production
     >
       <name>
         <non_terminal where="14.5.3">parenthesized-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -28,8 +32,12 @@
 
     
 
+    
+
      is evaluated by evaluating the expression within the parentheses. If the expression within the parentheses denotes a namespace, type, or method group, a compile-time error occurs. Otherwise, the result of the <non_terminal
      where="14.5.3">parenthesized-expression</non_terminal>
+
+    
 
     
 

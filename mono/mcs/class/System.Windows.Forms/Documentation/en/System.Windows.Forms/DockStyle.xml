@@ -24,8 +24,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Windows.Forms.DockStyle.Right" />
+
+        
 
         
 
@@ -34,13 +38,19 @@
 
         
 
+        
+
         , or <see
          cref="F:System.Windows.Forms.DockStyle.Bottom" />
 
         
 
+        
+
          is selected, the specified and opposite edges of the control are resized to the size of the containing control's corresponding edges. If <see
          cref="F:System.Windows.Forms.DockStyle.Fill" />
+
+        
 
         
 

@@ -29,6 +29,8 @@
 
         
 
+        
+
          class.  </para
       >
       <para
@@ -37,13 +39,19 @@
 
         
 
+        
+
          can have zero or more headers that are used as an extension mechanism to pass information in messages that are application-specific. You can use <see
          cref="P:System.ServiceModel.Channels.Message.Headers" />
 
         
 
+        
+
          to add message headers to a message by calling the <see
          cref="M:System.ServiceModel.Channels.MessageHeaders.Add(System.ServiceModel.Channels.MessageHeader)" />
+
+        
 
         
 
@@ -160,6 +168,8 @@
 
             
 
+            
+
              class with the specified collection of message headers.</para
           >
         </summary>
@@ -191,11 +201,15 @@
 
             
 
+            
+
              class with the specified message version.</para
           >
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,11 +245,15 @@
 
             
 
+            
+
              class with the specified message version and size.</para
           >
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,6 +278,8 @@
           <para
             >This property corresponds to the &lt;Action&gt; element described in the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96163">WS-Addressing specification</see>
+
+            
 
             
 
@@ -299,6 +319,8 @@
         </summary>
         <param name="header">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -476,6 +498,8 @@
 
           
 
+          
+
           The zero-based index in the array at which copying begins. </param
         >
       </Docs>
@@ -525,6 +549,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -566,10 +592,14 @@
 
           
 
+          
+
           The LocalName of the header XML element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -619,6 +649,8 @@
 
           
 
+          
+
           The LocalName of the header XML element.</param
         >
         <param name="ns">
@@ -626,10 +658,14 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="actors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -660,6 +696,8 @@
           <para
             >This property corresponds to the &lt;From&gt; element described in the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96163">WS-Addressing specification</see>
+
+            
 
             
 
@@ -703,6 +741,8 @@
 
             
 
+            
+
              object that can be used to iterate through the collection.</para
           >
         </returns>
@@ -736,13 +776,19 @@
 
             
 
+            
+
             . It does not try to detect from the type whether it should use the <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
+            
+
              or DataContractSerializer. To use the XML serializer, call <see
              cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" />
+
+            
 
             
 
@@ -762,10 +808,14 @@
 
           
 
+          
+
           The zero-based index of the header to get.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -811,10 +861,14 @@
 
           
 
+          
+
           The zero-based index of the header to get.</param
         >
         <param name="serializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -823,10 +877,14 @@
 
           
 
+          
+
            that is used to serialize the header.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -866,13 +924,19 @@
 
             
 
+            
+
             . It does not try to detect from the type whether it should use the <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
+            
+
              or the DataContractSerializer. To use the XML serializer, call <see
              cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" />
+
+            
 
             
 
@@ -892,6 +956,8 @@
 
           
 
+          
+
           The LocalName of the header XML element.</param
         >
         <param name="ns">
@@ -899,10 +965,14 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -949,10 +1019,14 @@
 
           
 
+          
+
           The LocalName of the header XML element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -963,8 +1037,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+          
 
           
 
@@ -972,6 +1050,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1018,13 +1098,19 @@
 
             
 
+            
+
             . It does not try to detect from the type whether it should use the <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
+            
+
              or DataContractSerializer. To use the XML serializer, call <see
              cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" />
+
+            
 
             
 
@@ -1044,10 +1130,14 @@
 
           
 
+          
+
           The LocalName of the header XML element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1058,10 +1148,14 @@
 
           
 
+          
+
           The targeted recipient of the message header.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1103,6 +1197,8 @@
 
             
 
+            
+
              object that consumes the message header at the specified location of the collection.</para
           >
         </returns>
@@ -1136,6 +1232,8 @@
           <para
             >true if the recipients specified by <paramref
              name="actors" />
+
+            
 
             
 
@@ -1186,11 +1284,15 @@
 
             
 
+            
+
              have properly interpreted and processed all the message headers marked with MustUnderstand; otherwise, false.</para
           >
         </returns>
         <param name="actors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1227,6 +1329,8 @@
         </summary>
         <param name="header">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1280,6 +1384,8 @@
           <para
             >This property corresponds to the &lt;MessageID&gt; element described in the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96163">WS-Addressing specification</see>
+
+            
 
             
 
@@ -1340,6 +1446,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1377,10 +1485,14 @@
 
           
 
+          
+
           The LocalName of the header XML element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1439,6 +1551,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1478,6 +1592,8 @@
 
           
 
+          
+
           A description of how the message should be processed.</param
         >
       </Docs>
@@ -1513,6 +1629,8 @@
 
             
 
+            
+
              object that can be used to iterate through the collection.</para
           >
         </returns>
@@ -1535,6 +1653,8 @@
           <para
             >This property corresponds to the &lt;To&gt; element described in the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96163">WS-Addressing specification</see>
+
+            
 
             
 
@@ -1607,8 +1727,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1648,8 +1772,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1689,8 +1817,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1730,8 +1862,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1771,8 +1907,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1812,8 +1952,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

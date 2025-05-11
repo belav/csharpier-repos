@@ -43,8 +43,12 @@
 
         
 
+        
+
          delegate or a <see
          cref="T:System.Threading.ParameterizedThreadStart" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          constructor. The thread does not begin executing until the <see
          cref="Overload:System.Threading.Thread.Start" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Threading.ParameterizedThreadStart" />
+
+        
 
         
 
@@ -77,13 +89,19 @@
 
           
 
+          
+
            or <see
            cref="T:System.Threading.ParameterizedThreadStart" />
 
           
 
+          
+
            delegate constructor when creating a thread. In Visual Basic, use the AddressOf operator when passing your method to the <see
            cref="Overload:System.Threading.Thread.#ctor" />
+
+          
 
           
 
@@ -98,6 +116,8 @@
 
           
 
+          
+
            delegate for a static method in C++ requires only one parameter: the address of the callback method, qualified by the class name. In earlier versions two parameters were required when creating a delegate for a static method: zero (null) and the method address. For an instance method, all versions require two parameters: the instance variable and the method address.</para
         >
       </block>
@@ -107,6 +127,8 @@
       <para
         >Represents the method that executes on a <see
          cref="T:System.Threading.Thread" />
+
+        
 
         
 

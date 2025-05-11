@@ -19,6 +19,8 @@
 
         
 
+        
+
          class allows you to access computer and application information. </para
       >
       <para
@@ -27,8 +29,12 @@
 
         
 
+        
+
          is the preferred way to work with configuration files related to Web applications. For client applications, use the <see
          cref="T:System.Configuration.ConfigurationManager" />
+
+        
 
         
 
@@ -37,6 +43,8 @@
       <para
         >Your application can extend the <see
          cref="N:System.Configuration" />
+
+        
 
         
 
@@ -53,13 +61,19 @@
 
                 
 
+                
+
                 . For &lt;appSettings&gt; and &lt;connectionStrings&gt;, you use the <see
                  cref="P:System.Web.Configuration.WebConfigurationManager.AppSettings" />
 
                 
 
+                
+
                  and <see
                  cref="P:System.Web.Configuration.WebConfigurationManager.ConnectionStrings" />
+
+                
 
                 
 
@@ -73,8 +87,12 @@
 
                 
 
+                
+
                 . These methods will return a <see
                  cref="T:System.Configuration.Configuration" />
+
+                
 
                 
 
@@ -88,8 +106,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Configuration.PropertyInformation" />
+
+                
 
                 
 
@@ -98,8 +120,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Configuration.ElementInformation" />
+
+                
 
                 
 
@@ -108,13 +134,19 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Configuration.ConfigurationSectionGroup" />
 
                 
 
+                
+
                 , and <see
                  cref="T:System.Configuration.ConfigurationSectionGroupCollection" />
+
+                
 
                 
 
@@ -130,8 +162,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Configuration.ConfigurationElementCollection" />
+
+            
 
             
 
@@ -140,8 +176,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Configuration.ConfigurationSection" />
+
+            
 
             
 
@@ -150,8 +190,12 @@
 
             
 
+            
+
              class for an example of how to extend a standard configuration type programmatically. Refer to the <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -183,6 +227,8 @@
           <para
             >An <see
              cref="T:System.Configuration.AppSettingsSection" />
+
+            
 
             
 
@@ -242,6 +288,8 @@
 
             
 
+            
+
              is called from within a Web application, it gets the section from the configuration file selected by the system according to the Web-application configuration hierarchy. </para
           >
           <block subset="none" type="note">
@@ -251,8 +299,12 @@
 
               
 
+              
+
                overload that takes both a section name and a path in its parameter list is the one to use. You must specify the configuration file path because the system cannot make any assumptions about the configuration hierarchy level. If you use the <see
                cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+
+              
 
               
 
@@ -265,6 +317,8 @@
 
             
 
+            
+
              from within a client application. In this case, it gets the default section from the configuration file selected by the system according to the client configuration hierarchy. Usually, this is the Machine.config file, unless you have a mapped configuration in place. For mapping configuration files, refer to the mapping methods described next.</para
           >
           <block subset="none" type="note">
@@ -274,13 +328,19 @@
 
               
 
+              
+
                method is a run-time method that operates on the section of a configuration file at the hierarchy level in which the application runs. For a non-run-time operation, use <see
                cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
               
 
+              
+
                instead. This method operates on the specified section of a configuration file that you obtain using one of the overloaded methods for opening a configuration file, <see
                cref="Overload:System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration" />
+
+              
 
               
 
@@ -300,11 +360,15 @@
 
             
 
+            
+
              as a runtime operation. You might not be able to access a section at run time for modifications, for example.</para
           >
         </returns>
         <param name="sectionName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -338,6 +402,8 @@
 
             
 
+            
+
              is called from within a Web application, it gets the section from the configuration file defined by the specified path in the configuration hierarchy. </para
           >
           <block subset="none" type="note">
@@ -347,8 +413,12 @@
 
               
 
+              
+
                overload that takes both a section name and a path in its parameter list is the one to use. You must specify the configuration file path because the system cannot make any assumptions about the configuration hierarchy level. If you use the <see
                cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+
+              
 
               
 
@@ -362,6 +432,8 @@
 
             
 
+            
+
              method. </para
           >
           <block subset="none" type="note">
@@ -371,8 +443,12 @@
 
               
 
+              
+
                method is a run-time method operating on the section of a configuration file at the hierarchy level in which the application runs. For a non-run-time operation, use <see
                cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+              
 
               
 
@@ -392,6 +468,8 @@
 
             
 
+            
+
              as a run-time operation. You might not be able to access a section at run time for modifications, for instance.</para
           >
         </returns>
@@ -400,10 +478,14 @@
 
           
 
+          
+
           The configuration section name.</param
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,11 +518,15 @@
 
             
 
+            
+
              is called from within a Web application, it gets the section from the configuration file selected by the system according to the Web-application configuration hierarchy. </para
           >
           <para
             >You could call <see
              cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
+
+            
 
             
 
@@ -453,8 +539,12 @@
 
               
 
+              
+
                method is a run-time operation that acts on the section of the application configuration file located at the current level. The <see
                cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+              
 
               
 
@@ -472,6 +562,8 @@
         </returns>
         <param name="sectionName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -502,6 +594,8 @@
 
             
 
+            
+
              method opens the machine-configuration file on the computer where the application runs. This file is located in the standard build directory %windir%\Microsoft.NET\Framework\version\config.</para
           >
         </remarks>
@@ -513,6 +607,8 @@
 
             
 
+            
+
              object to allow read or write operations.</para
           >
         </summary>
@@ -521,6 +617,8 @@
           <para
             >A <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -554,6 +652,8 @@
 
             
 
+            
+
              parameter. </para
           >
         </remarks>
@@ -562,6 +662,8 @@
           <para
             >Opens the machine-configuration file on the current computer as a <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -576,11 +678,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,8 +720,12 @@
 
             
 
+            
+
              parameter and on the computer specified by the <paramref
              name="server" />
+
+            
 
             
 
@@ -630,6 +740,8 @@
 
             
 
+            
+
              object to allow read or write operations.</para
           >
         </summary>
@@ -641,6 +753,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -649,10 +763,14 @@
 
           
 
+          
+
           The application path to which the configuration applies.</param
         >
         <param name="server">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -689,10 +807,14 @@
 
               
 
+              
+
                class or through a call to unmanaged code, such as a call to the Win32 API LogonUser. For more information about calls to unmanaged code, see <format
                type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
+
+              
 
               
 
@@ -708,6 +830,8 @@
 
             
 
+            
+
              object, using the specified security context to allow read or write operations.</para
           >
         </summary>
@@ -719,11 +843,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -734,10 +862,14 @@
 
           
 
+          
+
           The fully qualified name of the server to return the configuration for.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -777,6 +909,8 @@
 
             
 
+            
+
              object, using the specified security context to allow read or write operations.</para
           >
         </summary>
@@ -788,11 +922,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -803,6 +941,8 @@
 
           
 
+          
+
           The fully qualified name of the server to return the configuration for.</param
         >
         <param name="userName">
@@ -810,10 +950,14 @@
 
           
 
+          
+
           The full user name (Domain\User) to use when opening the file.</param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -847,6 +991,8 @@
 
             
 
+            
+
              object, using the specified file mapping to allow read or write operations. </para
           >
         </summary>
@@ -858,6 +1004,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -866,8 +1014,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.ConfigurationFileMap" />
+
+          
 
           
 
@@ -902,6 +1054,8 @@
 
             
 
+            
+
              object using the specified file mapping and location to allow read or write operations.</para
           >
         </summary>
@@ -913,6 +1067,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -921,8 +1077,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.ConfigurationFileMap" />
+
+          
 
           
 
@@ -930,6 +1090,8 @@
         >
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -963,6 +1125,8 @@
 
             
 
+            
+
              object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
           >
         </remarks>
@@ -971,6 +1135,8 @@
           <para
             >Opens the specified Web-application configuration file as a <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -985,6 +1151,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -993,8 +1161,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+          
 
           
 
@@ -1002,6 +1174,8 @@
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1036,6 +1210,8 @@
 
             
 
+            
+
              object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
           >
         </remarks>
@@ -1044,6 +1220,8 @@
           <para
             >Opens the specified Web application configuration file as a <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -1058,6 +1236,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1066,8 +1246,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+          
 
           
 
@@ -1078,10 +1262,14 @@
 
           
 
+          
+
           The virtual path to the configuration file.</param
         >
         <param name="site">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1117,6 +1305,8 @@
 
             
 
+            
+
              object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
           >
         </remarks>
@@ -1125,6 +1315,8 @@
           <para
             >Opens the specified Web-application configuration file as a <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -1139,6 +1331,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1147,8 +1341,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+          
 
           
 
@@ -1159,6 +1357,8 @@
 
           
 
+          
+
           The virtual path to the configuration file. </param
         >
         <param name="site">
@@ -1166,10 +1366,14 @@
 
           
 
+          
+
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1202,6 +1406,8 @@
 
             
 
+            
+
              object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
           >
         </remarks>
@@ -1210,6 +1416,8 @@
           <para
             >Opens the Web-application configuration file as a <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -1224,11 +1432,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1262,6 +1474,8 @@
 
             
 
+            
+
              object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
           >
         </remarks>
@@ -1270,6 +1484,8 @@
           <para
             >Opens the Web-application configuration file as a <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -1284,6 +1500,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1292,10 +1510,14 @@
 
           
 
+          
+
           The virtual path to the configuration file. </param
         >
         <param name="site">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1330,6 +1552,8 @@
 
             
 
+            
+
              object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
           >
         </remarks>
@@ -1338,6 +1562,8 @@
           <para
             >Opens the Web-application configuration file as a <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -1352,11 +1578,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1367,10 +1597,14 @@
 
           
 
+          
+
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1406,6 +1640,8 @@
 
             
 
+            
+
              object for a remote resource, your code must have administrative privileges on the remote computer.</para
           >
         </remarks>
@@ -1414,6 +1650,8 @@
           <para
             >Opens the Web-application configuration file as a <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -1428,11 +1666,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1443,6 +1685,8 @@
 
           
 
+          
+
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
@@ -1450,10 +1694,14 @@
 
           
 
+          
+
           The specific resource to which the configuration applies. </param
         >
         <param name="server">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1492,10 +1740,14 @@
 
               
 
+              
+
                class or through a call to unmanaged code, such as a call to the Win32 API LogonUser. For more information about calls to unmanaged code, see <format
                type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
+
+              
 
               
 
@@ -1505,6 +1757,8 @@
           <para
             >To obtain the <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -1519,6 +1773,8 @@
 
             
 
+            
+
              object using the specified virtual path, site name, location, server, and security context to allow read or write operations.</para
           >
         </summary>
@@ -1530,11 +1786,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1545,10 +1805,14 @@
 
           
 
+          
+
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1559,10 +1823,14 @@
 
           
 
+          
+
           The network name of the server the Web application resides on.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1601,6 +1869,8 @@
 
             
 
+            
+
              object for a remote resource, your code must have administrative privileges on the remote computer.</para
           >
           <para
@@ -1610,6 +1880,8 @@
                 >ASP.NET IIS Registration Tool (Aspnet_regiis.exe)</a
               >
             </format>
+
+            
 
             
 
@@ -1624,6 +1896,8 @@
 
             
 
+            
+
              object using the specified virtual path, site name, location, server, and security context to allow read or write operations.</para
           >
         </summary>
@@ -1635,11 +1909,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1650,10 +1928,14 @@
 
           
 
+          
+
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1664,6 +1946,8 @@
 
           
 
+          
+
           The network name of the server the Web application resides on.</param
         >
         <param name="userName">
@@ -1671,10 +1955,14 @@
 
           
 
+          
+
           The full user name (Domain\User) to use when opening the file.</param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

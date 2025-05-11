@@ -35,6 +35,8 @@
 
         
 
+        
+
          to set default values during deserialization. For example, if the type that you are deserializing does not contain a constructor, create a method to set values of any fields in the instance and apply the attribute to the method.</para
       >
       <para
@@ -43,13 +45,19 @@
 
         
 
+        
+
         , the method must contain a <see
          cref="T:System.Runtime.Serialization.StreamingContext" />
 
         
 
+        
+
          parameter. The attribute marks the method to be called by the serialization infrastructure and the <see
          cref="T:System.Runtime.Serialization.StreamingContext" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
         <para
           >In your code, you can use the word OnDeserializing instead of the longer <see
            cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
+
+          
 
           
 
@@ -93,6 +103,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
+
+            
 
             
 

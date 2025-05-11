@@ -32,8 +32,12 @@
 
         
 
+        
+
          object represents a Web site page in a site map structure. <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          class at run time using one or more site map providers to load site map data from persistent storage into memory. <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          class for use by Web server controls, such as the <see
          cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          class includes several properties that are used to describe a single page in a Web site, including properties that describe a page, such as the <see
          cref="P:System.Web.SiteMapNode.Url" />
+
+        
 
         
 
@@ -75,8 +91,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.SiteMapNode.Description" />
+
+        
 
         
 
@@ -85,8 +105,12 @@
 
         
 
+        
+
          property is used by the <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -95,8 +119,12 @@
 
         
 
+        
+
          class supports a basic <see
          cref="P:System.Web.SiteMapNode.Key" />
+
+        
 
         
 
@@ -105,8 +133,12 @@
 
         
 
+        
+
          property is used by navigation controls to render hyperlinks to pages within a navigation structure. The <see
          cref="P:System.Web.SiteMapNode.Title" />
+
+        
 
         
 
@@ -115,8 +147,12 @@
 
         
 
+        
+
         , is often the same as the HTML title of a Web Form, and is used by navigation controls to render simple labels. Finally, a <see
          cref="T:System.Collections.Specialized.NameValueCollection" />
+
+        
 
         
 
@@ -125,13 +161,19 @@
 
         
 
+        
+
          attributes is available to site map providers that use <see
          cref="T:System.Web.SiteMapNode" />
 
         
 
+        
+
          objects, but require additional properties that are not available in the base <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -146,8 +188,12 @@
 
         
 
+        
+
          class and classes that implement the abstract <see
          cref="T:System.Web.SiteMapProvider" />
+
+        
 
         
 
@@ -176,8 +222,12 @@
 
             
 
+            
+
              class, which is the default <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -186,13 +236,19 @@
 
             
 
+            
+
              property as a lookup key, if one is provided for the node (if a URL is not provided, a tracking identifier is generated for the node). Therefore, any <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              control that provides a URL and is used by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -207,8 +263,12 @@
 
             
 
+            
+
              class, using the specified <paramref
              name="key" />
+
+            
 
             
 
@@ -220,8 +280,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 
@@ -229,6 +293,8 @@
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,8 +326,12 @@
 
             
 
+            
+
              class, which is the default <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -270,13 +340,19 @@
 
             
 
+            
+
              property as a lookup key, if one is provided for the node (if a URL is not provided, a tracking identifier is generated for the node). Therefore, any <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              object that provides a URL and is used by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -291,8 +367,12 @@
 
             
 
+            
+
              class using the specified URL, a <paramref
              name="key" />
+
+            
 
             
 
@@ -304,8 +384,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 
@@ -316,10 +400,14 @@
 
           
 
+          
+
           A provider-specific lookup key.</param
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -352,8 +440,12 @@
 
             
 
+            
+
              class, which is the default <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -362,13 +454,19 @@
 
             
 
+            
+
              property as a lookup key, if one is provided for the node (if a URL is not provided, a tracking identifier is generated for the node). Therefore, any <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              object that provides a URL and is used by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -380,13 +478,19 @@
 
             
 
+            
+
              is provided, calls to the <see
              cref="P:System.Web.SiteMapNode.Title" />
 
             
 
+            
+
              property return the <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -401,8 +505,12 @@
 
             
 
+            
+
              class using the specified URL, a <paramref
              name="key" />
+
+            
 
             
 
@@ -414,8 +522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 
@@ -426,6 +538,8 @@
 
           
 
+          
+
           A provider-specific lookup key.</param
         >
         <param name="url">
@@ -433,10 +547,14 @@
 
           
 
+          
+
           The URL of the page that the node represents within the site. </param
         >
         <param name="title">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,8 +588,12 @@
 
             
 
+            
+
              class, which is the default <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -480,13 +602,19 @@
 
             
 
+            
+
              property as a lookup key, if one is provided for the node (if a URL is not provided, a tracking identifier is generated for the node). Therefore, any <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              object that provides a URL and is used by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -498,8 +626,12 @@
 
             
 
+            
+
              or <paramref
              name="description" />
+
+            
 
             
 
@@ -508,13 +640,19 @@
 
             
 
+            
+
              or <see
              cref="P:System.Web.SiteMapNode.Description" />
 
             
 
+            
+
              properties return an <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -529,8 +667,12 @@
 
             
 
+            
+
              class using the specified URL, a <paramref
              name="key" />
+
+            
 
             
 
@@ -542,8 +684,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 
@@ -554,10 +700,14 @@
 
           
 
+          
+
           A provider-specific lookup key.</param
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -568,10 +718,14 @@
 
           
 
+          
+
           A label for the node, often displayed by navigation controls. </param
         >
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,8 +766,12 @@
 
             
 
+            
+
              class, which is the default <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -622,13 +780,19 @@
 
             
 
+            
+
              property as a lookup key, if one is provided for the node (if a URL is not provided, a tracking identifier is generated for the node). Therefore, any <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              object that provides a URL and is used by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -640,13 +804,19 @@
 
             
 
+            
+
              collection of attributes that the <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              is created with is available through the <see
              cref="P:System.Web.SiteMapNode.Attributes" />
+
+            
 
             
 
@@ -658,13 +828,19 @@
 
             
 
+            
+
              collection of roles to provide a set of roles that can view the node when the <see
              cref="P:System.Web.SiteMapProvider.SecurityTrimmingEnabled" />
 
             
 
+            
+
              property returns true.  For more information, see <see
              cref="P:System.Web.SiteMapProvider.SecurityTrimmingEnabled" />
+
+            
 
             
 
@@ -676,8 +852,12 @@
 
             
 
+            
+
              provider uses the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -686,8 +866,12 @@
 
             
 
+            
+
              that is used by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -699,8 +883,12 @@
 
             
 
+            
+
              or <paramref
              name="description" />
+
+            
 
             
 
@@ -709,13 +897,19 @@
 
             
 
+            
+
              or <see
              cref="P:System.Web.SiteMapNode.Description" />
 
             
 
+            
+
              properties return an <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -727,8 +921,12 @@
 
             
 
+            
+
              to a unique name that will be used to identify localized resources for the node or set <paramref
              name="explicitResourceKeys" />
+
+            
 
             
 
@@ -737,8 +935,12 @@
 
             
 
+            
+
              collection of <paramref
              name="name/value" />
+
+            
 
             
 
@@ -747,8 +949,12 @@
 
             
 
+            
+
              is the node property or custom attribute to localize and <paramref
              name="value" />
+
+            
 
             
 
@@ -757,13 +963,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.SiteMapNode.Description" />
 
             
 
+            
+
             , and any custom properties of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -774,13 +986,19 @@
 
             
 
+            
+
             . For the syntax requirements of the <paramref
              name="explicitResourceKeys" />
 
             
 
+            
+
              collection, see <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -795,6 +1013,8 @@
 
             
 
+            
+
              class using the specified site map provider that manages the node, URL, title, description, roles, additional attributes, and explicit and implicit resource keys for localization.</para
           >
         </summary>
@@ -803,8 +1023,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 
@@ -815,10 +1039,14 @@
 
           
 
+          
+
           A provider-specific lookup key. </param
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -829,10 +1057,14 @@
 
           
 
+          
+
           A label for the node, often displayed by navigation controls. </param
         >
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -843,13 +1075,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IList" />
 
           
 
+          
+
            of roles that are allowed to view the page represented by the <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -860,13 +1098,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 
+          
+
            of additional attributes used to initialize the <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -877,8 +1121,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -886,6 +1134,8 @@
         >
         <param name="implicitResourceKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -916,6 +1166,8 @@
 
             
 
+            
+
              collection is typically used when you need to apply additional attributes to a site map node, but do not want to derive a custom class in order to do so. </para
           >
           <para
@@ -924,13 +1176,19 @@
 
             
 
+            
+
              attribute does not perform in the same manner as the <see
              cref="P:System.Web.SiteMapNode.Title" />
 
             
 
+            
+
              or <see
              cref="P:System.Web.SiteMapNode.Description" />
+
+            
 
             
 
@@ -942,6 +1200,8 @@
           <para
             >Gets or sets a collection of additional attributes beyond the strongly typed properties that are defined for the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -973,8 +1233,12 @@
 
             
 
+            
+
              relies on the <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -983,8 +1247,12 @@
 
             
 
+            
+
              method, passing a reference to itself, to retrieve the <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -1000,8 +1268,12 @@
 
             
 
+            
+
              object from the associated <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -1030,8 +1302,12 @@
 
             
 
+            
+
              method with the parameter set to false. The provider, <see
              cref="P:System.Web.SiteMapNode.Title" />
+
+            
 
             
 
@@ -1040,8 +1316,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.SiteMapNode.Description" />
+
+            
 
             
 
@@ -1050,13 +1330,19 @@
 
             
 
+            
+
              properties are copied. The <see
              cref="P:System.Web.SiteMapNode.Roles" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.SiteMapNode.Attributes" />
+
+            
 
             
 
@@ -1098,8 +1384,12 @@
 
             
 
+            
+
              parameter is true, the <see
              cref="M:System.Web.SiteMapNode.Clone(System.Boolean)" />
+
+            
 
             
 
@@ -1111,8 +1401,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.SiteMapNode.Attributes" />
+
+            
 
             
 
@@ -1129,6 +1423,8 @@
         </returns>
         <param name="cloneParentNodes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1161,13 +1457,19 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              is used by some navigation controls as a label or hyperlink, the <see
              cref="P:System.Web.SiteMapNode.Description" />
+
+            
 
             
 
@@ -1179,8 +1481,12 @@
 
             
 
+            
+
              property is returned if the <see
              cref="P:System.Web.SiteMapProvider.EnableLocalization" />
+
+            
 
             
 
@@ -1192,6 +1498,8 @@
           <para
             >Gets or sets a description for the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1223,6 +1531,8 @@
 
             
 
+            
+
              objects are considered equal if both of the following conditions are met:</para
           >
           <list type="bullet">
@@ -1233,8 +1543,12 @@
 
                 
 
+                
+
                  objects have the same value for the <see
                  cref="P:System.Web.SiteMapNode.Key" />
+
+                
 
                 
 
@@ -1245,6 +1559,8 @@
               <para
                 >The culture-invariant, case-insensitive comparison of both <see
                  cref="P:System.Web.SiteMapNode.Url" />
+
+                
 
                 
 
@@ -1261,6 +1577,8 @@
 
             
 
+            
+
              is identical to the specified object. </para
           >
         </summary>
@@ -1272,13 +1590,19 @@
 
             
 
+            
+
              is both a <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              and identical to the current <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1314,6 +1638,8 @@
 
             
 
+            
+
              objects that are descendants of the calling node, regardless of the degree of separation.</para
           >
         </summary>
@@ -1325,8 +1651,12 @@
 
             
 
+            
+
              that represents all the descendants of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1362,6 +1692,8 @@
 
             
 
+            
+
              object that is associated with the current node.</para
           >
         </summary>
@@ -1373,6 +1705,8 @@
 
             
 
+            
+
              for the current node.</para
           >
         </returns>
@@ -1381,8 +1715,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+
+          
 
           
 
@@ -1390,6 +1728,8 @@
         >
         <param name="viewName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1424,8 +1764,12 @@
 
             
 
+            
+
              method is invoked in the get accessor of the <see
              cref="P:System.Web.SiteMapNode.Title" />
+
+            
 
             
 
@@ -1434,8 +1778,12 @@
 
             
 
+            
+
              property, and any custom attributes that are defined in the <see
              cref="P:System.Web.SiteMapNode.Attributes" />
+
+            
 
             
 
@@ -1444,8 +1792,12 @@
 
             
 
+            
+
              object by which the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1454,8 +1806,12 @@
 
             
 
+            
+
              property set to true for the <see
              cref="M:System.Web.SiteMapNode.GetExplicitResourceString(System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1464,8 +1820,12 @@
 
             
 
+            
+
              is set to false, localization is not performed and the <see
              cref="M:System.Web.SiteMapNode.GetExplicitResourceString(System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1477,8 +1837,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.SiteMapNode.Description" />
+
+            
 
             
 
@@ -1487,8 +1851,12 @@
 
             
 
+            
+
              property first invoke the <see
              cref="M:System.Web.SiteMapNode.GetImplicitResourceString(System.String)" />
+
+            
 
             
 
@@ -1497,13 +1865,19 @@
 
             
 
+            
+
              method is invoked with <paramref
              name="defaultValue" />
 
             
 
+            
+
              set to the value of the default value from the explicit resource expression (assuming one was defined) and <paramref
              name="throwIfNotFound" />
+
+            
 
             
 
@@ -1516,8 +1890,12 @@
 
               
 
+              
+
                class imposes the restriction that the <see
                cref="T:System.Web.SiteMapNode" />
+
+              
 
               
 
@@ -1530,8 +1908,12 @@
 
             
 
+            
+
              method uses the <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -1540,8 +1922,12 @@
 
             
 
+            
+
              object was initialized with. If a collection of resource keys was not specified, the <see
              cref="M:System.Web.SiteMapNode.GetExplicitResourceString(System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1553,6 +1939,8 @@
           <para
             >Retrieves a localized string based on a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1568,8 +1956,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1580,10 +1972,14 @@
 
           
 
+          
+
           The default value to return if a matching resource is not found.</param
         >
         <param name="throwIfNotFound">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1592,13 +1988,19 @@
 
           
 
+          
+
           , if an explicit resource is defined for <paramref
            name="attributeName" />
 
           
 
+          
+
           , <paramref
            name="defaultValue" />
+
+          
 
           
 
@@ -1626,6 +2028,8 @@
 
             
 
+            
+
              property) for a site map node. </para
           >
         </remarks>
@@ -1634,6 +2038,8 @@
           <para
             >Returns the hash code of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1670,6 +2076,8 @@
 
             
 
+            
+
              object that is associated with the current node.</para
           >
         </summary>
@@ -1678,6 +2086,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.SiteMapHierarchicalDataSourceView" />
+
+            
 
             
 
@@ -1711,8 +2121,12 @@
 
             
 
+            
+
              method is invoked in the get accessor of the <see
              cref="P:System.Web.SiteMapNode.Title" />
+
+            
 
             
 
@@ -1721,8 +2135,12 @@
 
             
 
+            
+
              property, and any custom attributes that are defined in the <see
              cref="P:System.Web.SiteMapNode.Attributes" />
+
+            
 
             
 
@@ -1731,8 +2149,12 @@
 
             
 
+            
+
              provider by which the  <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1741,8 +2163,12 @@
 
             
 
+            
+
              property set to true for the <see
              cref="M:System.Web.SiteMapNode.GetImplicitResourceString(System.String)" />
+
+            
 
             
 
@@ -1751,8 +2177,12 @@
 
             
 
+            
+
              is set to false, localization is not performed and the <see
              cref="M:System.Web.SiteMapNode.GetImplicitResourceString(System.String)" />
+
+            
 
             
 
@@ -1764,13 +2194,19 @@
 
             
 
+            
+
              method returns a string that is not empty, this becomes the value of the <see
              cref="P:System.Web.SiteMapNode.Title" />
 
             
 
+            
+
             , <see
              cref="P:System.Web.SiteMapNode.Description" />
+
+            
 
             
 
@@ -1782,8 +2218,12 @@
 
             
 
+            
+
              method uses the value of the <see
              cref="P:System.Web.SiteMapNode.ResourceKey" />
+
+            
 
             
 
@@ -1792,8 +2232,12 @@
 
             
 
+            
+
              is not specified, the <see
              cref="M:System.Web.SiteMapNode.GetImplicitResourceString(System.String)" />
+
+            
 
             
 
@@ -1806,8 +2250,12 @@
 
               
 
+              
+
                class imposes the restriction that the <see
                cref="T:System.Web.SiteMapNode" />
+
+              
 
               
 
@@ -1823,13 +2271,19 @@
 
             
 
+            
+
              property that is specified by the <see
              cref="T:System.Web.SiteMapProvider" />
 
             
 
+            
+
              by which the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1845,8 +2299,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1874,8 +2332,12 @@
 
             
 
+            
+
              property internally, so it will not perform better than if you call the <see
              cref="P:System.Web.SiteMapNode.ChildNodes" />
+
+            
 
             
 
@@ -1887,6 +2349,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1921,13 +2385,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.SiteMapProvider.IsAccessibleToUser(System.Web.HttpContext,System.Web.SiteMapNode)" />
 
             
 
+            
+
              method of the provider that the node is associated with, passing the specified <paramref
              name="context" />
+
+            
 
             
 
@@ -1943,6 +2413,8 @@
           <para
             >true if any one of the following conditions is met: the security trimming is enabled and the current user is a member of at least one of the roles allowing access to view the site map node; the current user is authorized specifically for the requested node's URL in the authorization element for the current application and the URL is located within the directory structure for the application; the current thread has an associated <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1982,8 +2454,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -2031,13 +2507,19 @@
 
             
 
+            
+
              class also exposes the <see
              cref="M:System.Web.SiteMapProvider.FindSiteMapNodeFromKey(System.String)" />
 
             
 
+            
+
              method as a means for getting a reference to a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2074,8 +2556,12 @@
 
             
 
+            
+
              property presumes that the <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -2084,8 +2570,12 @@
 
             
 
+            
+
              property, the nodes are in the same order as they appear in the site map. If you use .NET Framework collection classes in an implementation of a site map provider, choose collections that implement the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2094,8 +2584,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -2104,8 +2598,12 @@
 
             
 
+            
+
              interface, such as the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2120,8 +2618,12 @@
 
             
 
+            
+
              node on the same hierarchical level as the current one, relative to the <see
              cref="P:System.Web.SiteMapNode.ParentNode" />
+
+            
 
             
 
@@ -2153,8 +2655,12 @@
 
             
 
+            
+
              class relies on the site map provider with which it is associated to track its relationships to other nodes in the site map. The <see
              cref="P:System.Web.SiteMapNode.ParentNode" />
+
+            
 
             
 
@@ -2163,8 +2669,12 @@
 
             
 
+            
+
              method, passing a reference to itself, to retrieve the parent <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2176,6 +2686,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2207,8 +2719,12 @@
 
             
 
+            
+
              property presumes that the site map provider implements its internal collections such that when a parent node retrieves its <see
              cref="P:System.Web.SiteMapNode.ChildNodes" />
+
+            
 
             
 
@@ -2217,8 +2733,12 @@
 
             
 
+            
+
              provider, choose collections that implement the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2227,8 +2747,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -2237,8 +2761,12 @@
 
             
 
+            
+
              interface, such as the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2253,8 +2781,12 @@
 
             
 
+            
+
              object on the same level as the current one, relative to the <see
              cref="P:System.Web.SiteMapNode.ParentNode" />
+
+            
 
             
 
@@ -2283,8 +2815,12 @@
 
             
 
+            
+
              constructor results in an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -2299,8 +2835,12 @@
 
             
 
+            
+
              provider that the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2329,12 +2869,16 @@
 
             
 
+            
+
              object is modifiable by default. </para
           >
           <block subset="none" type="note">
             <para
               >All nodes that are returned by the <see
                cref="T:System.Web.XmlSiteMapProvider" />
+
+              
 
               
 
@@ -2347,8 +2891,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.SiteMapNode.ChildNodes" />
+
+            
 
             
 
@@ -2357,8 +2905,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.SiteMapNode.ParentNode" />
+
+            
 
             
 
@@ -2367,8 +2919,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.SiteMapNode.Title" />
+
+            
 
             
 
@@ -2377,8 +2933,12 @@
 
             
 
+            
+
              property mutators check the <see
              cref="P:System.Web.SiteMapNode.ReadOnly" />
+
+            
 
             
 
@@ -2387,8 +2947,12 @@
 
             
 
+            
+
              object throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -2421,8 +2985,12 @@
 
             
 
+            
+
              property when the <see
              cref="P:System.Web.SiteMapNode.ReadOnly" />
+
+            
 
             
 
@@ -2431,8 +2999,12 @@
 
             
 
+            
+
              exception. To set the <see
              cref="P:System.Web.SiteMapNode.ResourceKey" />
+
+            
 
             
 
@@ -2441,8 +3013,12 @@
 
             
 
+            
+
              object, use the <see
              cref="M:System.Web.SiteMapNode.#ctor(System.Web.SiteMapProvider,System.String,System.String,System.String,System.String,System.Collections.IList,System.Collections.Specialized.NameValueCollection,System.Collections.Specialized.NameValueCollection,System.String)" />
+
+            
 
             
 
@@ -2454,6 +3030,8 @@
           <para
             >Gets or sets the resource key that is used to localize the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2482,8 +3060,12 @@
 
             
 
+            
+
              collection. URL authorization and file authorization are also used to determine whether a user has the rights to access a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2491,6 +3073,8 @@
              type="text/html">
               <a href="ba7c17d4-f709-4501-8441-2340e2d6db05">ASP.NET Authorization</a>
             </format>
+
+            
 
             
 
@@ -2502,8 +3086,12 @@
 
             
 
+            
+
              constructor to supply a list of roles to the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2515,6 +3103,8 @@
           <para
             >Gets or sets a collection of roles that are associated with the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2546,8 +3136,12 @@
 
             
 
+            
+
              class relies on the site map provider with which it is associated to track its relationships to other nodes in the site map. The <see
              cref="P:System.Web.SiteMapNode.RootNode" />
+
+            
 
             
 
@@ -2556,8 +3150,12 @@
 
             
 
+            
+
              property of the root provider (the <see
              cref="P:System.Web.SiteMapProvider.RootProvider" />
+
+            
 
             
 
@@ -2569,6 +3167,8 @@
           <para
             >Gets the root node of the root provider in a site map provider hierarchy. If no provider hierarchy exists, the <see
              cref="P:System.Web.SiteMapNode.RootNode" />
+
+            
 
             
 
@@ -2599,8 +3199,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.SiteMapNode.Attributes" />
+
+            
 
             
 
@@ -2612,6 +3216,8 @@
           <para
             >Creates a new node that is a copy of the current node. For a description of this member, see <see
              cref="M:System.ICloneable.Clone" />
+
+            
 
             
 
@@ -2646,8 +3252,12 @@
 
             
 
+            
+
              method delegates to the <see
              cref="P:System.Web.SiteMapNode.ChildNodes" />
+
+            
 
             
 
@@ -2659,8 +3269,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -2675,6 +3289,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2683,6 +3299,8 @@
           <para
             >An <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -2713,8 +3331,12 @@
 
             
 
+            
+
              method delegates to the <see
              cref="P:System.Web.SiteMapNode.ParentNode" />
+
+            
 
             
 
@@ -2726,8 +3348,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -2742,6 +3368,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2750,6 +3378,8 @@
           <para
             >An <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -2780,8 +3410,12 @@
 
             
 
+            
+
              property delegates to the <see
              cref="P:System.Web.SiteMapNode.HasChildNodes" />
+
+            
 
             
 
@@ -2793,8 +3427,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -2809,8 +3447,12 @@
 
             
 
+            
+
              object has any child nodes. For a description of this member, see <see
              cref="P:System.Web.UI.IHierarchyData.HasChildren" />
+
+            
 
             
 
@@ -2838,8 +3480,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -2851,6 +3497,8 @@
           <para
             >Gets the hierarchical data item. For a description of this member, see <see
              cref="P:System.Web.UI.IHierarchyData.Item" />
+
+            
 
             
 
@@ -2878,8 +3526,12 @@
 
             
 
+            
+
              property delegates to the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -2891,8 +3543,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -2904,6 +3560,8 @@
           <para
             >Gets the path of the hierarchical data item. For a description of this member, see <see
              cref="P:System.Web.UI.IHierarchyData.Path" />
+
+            
 
             
 
@@ -2931,8 +3589,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -2944,6 +3606,8 @@
           <para
             >Gets a string that represents the type name of the hierarchical data item. For a description of this member, see <see
              cref="P:System.Web.UI.IHierarchyData.Type" />
+
+            
 
             
 
@@ -2971,8 +3635,12 @@
 
             
 
+            
+
              property delegates to the <see
              cref="P:System.Web.SiteMapNode.Title" />
+
+            
 
             
 
@@ -2984,8 +3652,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.INavigateUIData" />
+
+            
 
             
 
@@ -3000,8 +3672,12 @@
 
             
 
+            
+
              property of the site map node. For a description of this member, see <see
              cref="P:System.Web.UI.INavigateUIData.Name" />
+
+            
 
             
 
@@ -3032,8 +3708,12 @@
 
             
 
+            
+
              property delegates to the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -3045,8 +3725,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.INavigateUIData" />
+
+            
 
             
 
@@ -3061,8 +3745,12 @@
 
             
 
+            
+
              property of the site map node. For a description of this member, see <see
              cref="P:System.Web.UI.INavigateUIData.NavigateUrl" />
+
+            
 
             
 
@@ -3090,8 +3778,12 @@
 
             
 
+            
+
              property delegates to the <see
              cref="P:System.Web.SiteMapNode.Title" />
+
+            
 
             
 
@@ -3103,8 +3795,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.INavigateUIData" />
+
+            
 
             
 
@@ -3119,8 +3815,12 @@
 
             
 
+            
+
              property of the site map node. For a description of this member, see <see
              cref="P:System.Web.UI.INavigateUIData.Value" />
+
+            
 
             
 
@@ -3151,13 +3851,19 @@
 
             
 
+            
+
              property is used by navigation controls to render a label for the node, instead of using the <see
              cref="P:System.Web.SiteMapNode.Url" />
 
             
 
+            
+
              property, while the <see
              cref="P:System.Web.SiteMapNode.Description" />
+
+            
 
             
 
@@ -3169,8 +3875,12 @@
 
             
 
+            
+
              property is returned if the <see
              cref="P:System.Web.SiteMapProvider.EnableLocalization" />
+
+            
 
             
 
@@ -3182,6 +3892,8 @@
           <para
             >Gets or sets the title of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -3210,13 +3922,19 @@
 
             
 
+            
+
              method returns the <see
              cref="P:System.Web.SiteMapNode.Title" />
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -3231,6 +3949,8 @@
 
             
 
+            
+
              class to its equivalent string representation.</para
           >
         </summary>
@@ -3239,6 +3959,8 @@
           <para
             >The string representation of the value of this <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -3267,8 +3989,12 @@
 
             
 
+            
+
              class, which is the default site map provider implementation for ASP.NET, uses the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -3277,8 +4003,12 @@
 
             
 
+            
+
              object that is used by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -3291,6 +4021,8 @@
           <para
             >Gets or sets the URL of the page that the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 

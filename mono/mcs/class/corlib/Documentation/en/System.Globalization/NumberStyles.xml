@@ -42,6 +42,8 @@
 
         
 
+        
+
          enumeration consists of two kinds of enumeration values that are used to parse the string representations of numeric values: </para
       >
       <list type="bullet">
@@ -58,8 +60,12 @@
 
         
 
+        
+
         , the individual field flags in the <see
          cref="T:System.Globalization.NumberStyles" />
+
+        
 
         
 
@@ -68,8 +74,12 @@
 
         
 
+        
+
          indicates that only digits can be present in the parsed string. The remaining individual field flags define style elements that may be, but do not have to be, present in the string representation of a decimal number for the parse operation to succeed. In contrast, the <see
          cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+        
 
         
 
@@ -78,8 +88,12 @@
 
         
 
+        
+
          are <see
          cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+        
 
         
 
@@ -88,13 +102,19 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Globalization.NumberStyles" />
 
         
 
+        
+
          enumeration includes a composite number style, <see
          cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          object that is passed either implicitly or explicitly to the Parse method. The members table in this topic provides a description of each individual flag and indicates its relationship to <see
          cref="T:System.Globalization.NumberFormatInfo" />
+
+        
 
         
 
@@ -432,6 +456,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -469,8 +495,12 @@
 
             
 
+            
+
              value includes the <see
              cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+            
 
             
 
@@ -479,8 +509,12 @@
 
             
 
+            
+
              property. Otherwise, the decimal separator character is determined by the <see
              cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />
+
+            
 
             
 
@@ -521,13 +555,19 @@
 
             
 
+            
+
              flag allows the parsed string to contain an exponent that begins with the "E" or "e" character and that is followed by an optional positive or negative sign and an integer. In other words, it successfully parses strings in the form nnnExx, nnnE+xx, and nnnE-xx. It does not allow a decimal separator or sign in the significand or mantissa; to allow these elements in the string to be parsed, use the <see
              cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+
+            
 
             
 
@@ -568,8 +608,12 @@
 
             
 
+            
+
              style will always be interpreted as a hexadecimal value. The only flags that can be combined with <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+            
 
             
 
@@ -578,8 +622,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+            
 
             
 
@@ -588,8 +636,12 @@
 
             
 
+            
+
              enumeration includes a composite style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -630,8 +682,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+
+            
 
             
 
@@ -669,6 +725,8 @@
           <para
             >Indicates that leading white-space characters can be present in the parsed string. Valid white-space characters have the Unicode values U+0009, U+000A, U+000B, U+000C, U+000D, and U+0020. Note that this is a subset of the characters for which the <see
              cref="M:System.Char.IsWhiteSpace(System.Char)" />
+
+            
 
             
 
@@ -739,8 +797,12 @@
 
             
 
+            
+
              value includes the <see
              cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+            
 
             
 
@@ -749,8 +811,12 @@
 
             
 
+            
+
              property,  and the number of digits in each group is determined by the <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes" />
+
+            
 
             
 
@@ -759,8 +825,12 @@
 
             
 
+            
+
              property, and the number of digits in each group is determined by the <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
+
+            
 
             
 
@@ -801,8 +871,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+
+            
 
             
 
@@ -843,6 +917,8 @@
 
             
 
+            
+
              method returns true.</para
           >
         </summary>
@@ -877,6 +953,8 @@
           <para
             >Indicates that all styles except <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+            
 
             
 
@@ -917,8 +995,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+            
 
             
 
@@ -959,8 +1041,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+            
 
             
 
@@ -969,13 +1055,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
             
 
+            
+
             , and <see
              cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+            
 
             
 
@@ -1016,13 +1108,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
+            
+
             , and <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+            
 
             
 
@@ -1063,13 +1161,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
+            
+
             , and <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+
+            
 
             
 
@@ -1140,8 +1244,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+            
 
             
 
@@ -1150,8 +1258,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+            
 
             
 
@@ -1160,8 +1272,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+            
 
             
 

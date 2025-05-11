@@ -67,13 +67,19 @@
 
         
 
+        
+
          control to create an image that contains defined hot spot regions. When a user clicks a hot spot region, the control can either generate a postback to the server or navigate to a specified URL. For example, you can use this control to display a map of a geographical region. When a user clicks a specific region on the map, the control navigates to a URL that provides additional data about the selected region. You can also use this control to generate a postback to the server and run specific code based on the hot spot region that was clicked. For example, you can use an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
 
         
 
+        
+
          control to capture user responses such as votes. When a user clicks the hot spot region defined for yes votes, code is called to record a yes response in a database. When a user clicks on the hot spot region defined for no votes, a no response is recorded. You can also mix these two scenarios within a single <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -85,8 +91,12 @@
 
         
 
+        
+
          property to specify the path to the image to display for the <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -95,8 +105,12 @@
 
         
 
+        
+
          objects within an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -105,8 +119,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+        
 
         
 
@@ -115,8 +133,12 @@
 
         
 
+        
+
          classes to define hot spot regions. Alternatively, you can derive from the abstract <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -128,8 +150,12 @@
 
         
 
+        
+
          object in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -138,13 +164,19 @@
 
         
 
+        
+
          is clicked. You can use either the <see
          cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
 
         
 
+        
+
          property on the <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -153,8 +185,12 @@
 
         
 
+        
+
          property on an individual <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -163,8 +199,12 @@
 
         
 
+        
+
          enumeration values. If both properties are set, the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -173,13 +213,19 @@
 
         
 
+        
+
          object takes precedence over the <see
          cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
 
         
 
+        
+
          property on the <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -191,13 +237,19 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
 
         
 
+        
+
          property to HotSpotMode.Navigate. Use the <see
          cref="P:System.Web.UI.WebControls.HotSpot.NavigateUrl" />
+
+        
 
         
 
@@ -209,8 +261,12 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -219,8 +275,12 @@
 
         
 
+        
+
          property to specify a name for the hot spot region. This name will be passed in the <see
          cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+
+        
 
         
 
@@ -229,8 +289,12 @@
 
         
 
+        
+
          is clicked, the <see
          cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+        
 
         
 
@@ -239,8 +303,12 @@
 
         
 
+        
+
          is clicked, provide an event handler for the <see
          cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+        
 
         
 
@@ -252,8 +320,12 @@
 
         
 
+        
+
          objects in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -262,8 +334,12 @@
 
         
 
+        
+
          property to specify the behavior. Then, either set the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -272,8 +348,12 @@
 
         
 
+        
+
          object to HotSpotMode.NotSet or do not specify a value for the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -285,8 +365,12 @@
 
         
 
+        
+
          objects in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -295,8 +379,12 @@
 
         
 
+        
+
          property on each individual <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -309,8 +397,12 @@
 
           
 
+          
+
            control's <see
            cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+          
 
           
 
@@ -319,8 +411,12 @@
 
           
 
+          
+
            property on any of the <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -343,10 +439,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -369,6 +469,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -379,15 +481,21 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -399,10 +507,14 @@
 
         
 
+        
+
         |Navigate|PostBack|Inactive"
     ID="string"
     ImageAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -427,6 +539,8 @@
 
         
 
+        
+
         |False"
     Width="size"
 &gt;
@@ -438,6 +552,8 @@
 
         
 
+        
+
         |Navigate|PostBack|Inactive"
                 NavigateUrl="uri"
                 PostBackValue="string"
@@ -445,6 +561,8 @@
                 TabIndex="integer"
                 Target="string|_blank|_parent|_search|_self|<codeFeaturedElement
         >_top</codeFeaturedElement>
+
+        
 
         
 
@@ -461,12 +579,16 @@
 
         
 
+        
+
         |Navigate|PostBack|Inactive"
                 NavigateUrl="uri"
                 PostBackValue="string"
                 TabIndex="integer"
                 Target="string|_blank|_parent|_search|_self|<codeFeaturedElement
         >_top</codeFeaturedElement>
+
+        
 
         
 
@@ -481,6 +603,8 @@
 
         
 
+        
+
         |Navigate|PostBack|Inactive"
                 Left="integer"
                 NavigateUrl="uri"
@@ -489,6 +613,8 @@
                 TabIndex="integer"
                 Target="string|_blank|_parent|_search|_self|<codeFeaturedElement
         >_top</codeFeaturedElement>
+
+        
 
         
 
@@ -503,6 +629,8 @@
       <para
         >Creates a control that displays an image on a page. When a hot spot region defined within the <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -525,6 +653,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -533,6 +663,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -566,13 +698,19 @@
 
             
 
+            
+
              output stream for an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
 
             
 
+            
+
              control. This method overrides <see
              cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -587,8 +725,12 @@
 
             
 
+            
+
              control to be rendered to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -600,8 +742,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -636,8 +782,12 @@
 
             
 
+            
+
              event is raised when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -646,8 +796,12 @@
 
             
 
+            
+
              control is clicked. To allow a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -656,8 +810,12 @@
 
             
 
+            
+
              event, you must first set either the <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+            
 
             
 
@@ -666,13 +824,19 @@
 
             
 
+            
+
              control or the <see
              cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
 
             
 
+            
+
              property on the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -684,8 +848,12 @@
 
             
 
+            
+
              is clicked, provide an event handler for the <see
              cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+            
 
             
 
@@ -696,6 +864,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -710,8 +880,12 @@
 
             
 
+            
+
              object in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -748,8 +922,12 @@
 
             
 
+            
+
              property to specify the default click behavior of the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -758,8 +936,12 @@
 
             
 
+            
+
              control. This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.HotSpotMode" />
+
+            
 
             
 
@@ -787,6 +969,8 @@
 
                   
 
+                  
+
                    object does not have any behavior.</para
                 >
               </description>
@@ -802,8 +986,12 @@
 
                   
 
+                  
+
                    object uses the behavior set by the <see
                    cref="T:System.Web.UI.WebControls.ImageMap" />
+
+                  
 
                   
 
@@ -812,13 +1000,19 @@
 
                   
 
+                  
+
                    property. If the <see
                    cref="T:System.Web.UI.WebControls.ImageMap" />
 
                   
 
+                  
+
                    control does not define the behavior, the <see
                    cref="T:System.Web.UI.WebControls.HotSpot" />
+
+                  
 
                   
 
@@ -837,6 +1031,8 @@
 
                   
 
+                  
+
                    objects navigate to a URL. </para
                 >
               </description>
@@ -852,6 +1048,8 @@
 
                   
 
+                  
+
                    objects generate a postback to the server. </para
                 >
               </description>
@@ -863,8 +1061,12 @@
 
             
 
+            
+
              object's behavior using either the <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+            
 
             
 
@@ -873,8 +1075,12 @@
 
             
 
+            
+
              control or the <see
              cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+            
 
             
 
@@ -883,8 +1089,12 @@
 
             
 
+            
+
              object. If both properties are set, the <see
              cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+            
 
             
 
@@ -893,13 +1103,19 @@
 
             
 
+            
+
              object takes precedence over the <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
 
             
 
+            
+
              property on the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -911,8 +1127,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -921,8 +1141,12 @@
 
             
 
+            
+
              property of an individual <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -931,13 +1155,19 @@
 
             
 
+            
+
              determines its behavior from the value of the <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -949,13 +1179,19 @@
 
             
 
+            
+
              property, the page navigates to a URL when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              is clicked. Use the <see
              cref="P:System.Web.UI.WebControls.HotSpot.NavigateUrl" />
+
+            
 
             
 
@@ -967,8 +1203,12 @@
 
             
 
+            
+
              property, the page generates a postback to the server when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -977,8 +1217,12 @@
 
             
 
+            
+
              property to specify the name of the hot spot region. This name will be passed in the <see
              cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+
+            
 
             
 
@@ -987,8 +1231,12 @@
 
             
 
+            
+
              is clicked, the <see
              cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+            
 
             
 
@@ -997,8 +1245,12 @@
 
             
 
+            
+
              is clicked, provide an event handler for the <see
              cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+            
 
             
 
@@ -1010,13 +1262,19 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              object does not have any behavior when it is clicked. You can use this value to create an inactive hot spot within a larger active hot spot. This option is provided to allow you to create more complex hot spot zones within an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1028,8 +1286,12 @@
 
             
 
+            
+
              control. For example, the following <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1052,8 +1314,12 @@
 
             
 
+            
+
              objects in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1062,8 +1328,12 @@
 
             
 
+            
+
              property on the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1072,13 +1342,19 @@
 
             
 
+            
+
              property on each individual <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              object to HotSpotMode.NotSet or do not specify a value for the <see
              cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+            
 
             
 
@@ -1090,8 +1366,12 @@
 
             
 
+            
+
              objects in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1100,8 +1380,12 @@
 
             
 
+            
+
              property on each individual <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1114,8 +1398,12 @@
 
               
 
+              
+
                control's <see
                cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+              
 
               
 
@@ -1124,8 +1412,12 @@
 
               
 
+              
+
                property on any of the <see
                cref="T:System.Web.UI.WebControls.HotSpot" />
+
+              
 
               
 
@@ -1141,13 +1433,19 @@
 
             
 
+            
+
              objects of an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
 
             
 
+            
+
              control when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1190,8 +1488,12 @@
 
             
 
+            
+
              property to programmatically manage the hot spot regions in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1200,13 +1502,19 @@
 
             
 
+            
+
              property to add, insert, remove, and retrieve <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              objects. For more information, see <see
              cref="T:System.Web.UI.WebControls.HotSpotCollection" />
+
+            
 
             
 
@@ -1221,8 +1529,12 @@
 
             
 
+            
+
              objects that represents the defined hot spot regions in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1258,6 +1570,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1269,8 +1583,12 @@
 
             
 
+            
+
              control from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.ImageMap.SaveViewState" />
+
+            
 
             
 
@@ -1282,13 +1600,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that represents the <see
            cref="T:System.Web.UI.WebControls.ImageMap" />
+
+          
 
           
 
@@ -1321,8 +1645,12 @@
 
             
 
+            
+
              event is raised when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1331,8 +1659,12 @@
 
             
 
+            
+
              control is clicked. To allow a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1341,8 +1673,12 @@
 
             
 
+            
+
              event, you must first set either the <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+            
 
             
 
@@ -1351,13 +1687,19 @@
 
             
 
+            
+
              control or the <see
              cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
 
             
 
+            
+
              property on the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1371,11 +1713,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ImageMap.OnClick(System.Web.UI.WebControls.ImageMapEventArgs)" />
+
+            
 
             
 
@@ -1390,8 +1736,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1403,8 +1753,12 @@
 
           
 
+          
+
           An argument of type <see
            cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+
+          
 
           
 
@@ -1437,8 +1791,12 @@
 
             
 
+            
+
              parameter to the <see
              cref="M:System.Web.UI.WebControls.ImageMap.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -1447,8 +1805,12 @@
 
             
 
+            
+
              control. The <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1457,8 +1819,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1473,11 +1839,15 @@
 
             
 
+            
+
              control when a form is posted back to the server.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1512,8 +1882,12 @@
 
             
 
+            
+
              control, you can override this method to generate content for the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1528,8 +1902,12 @@
 
             
 
+            
+
              control content to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1541,13 +1919,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
+          
+
            object that receives the <see
            cref="T:System.Web.UI.WebControls.ImageMap" />
+
+          
 
           
 
@@ -1573,8 +1957,12 @@
 
             
 
+            
+
              property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1585,6 +1973,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -1592,6 +1982,8 @@
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -1606,6 +1998,8 @@
 
             
 
+            
+
              control's view-state that have occurred since the time the page was posted back to the server.</para
           >
         </summary>
@@ -1614,6 +2008,8 @@
           <para
             >Returns the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1647,13 +2043,19 @@
 
             
 
+            
+
              property to specify the frame or window that displays the Web page r when the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
 
             
 
+            
+
              control is clicked. The Web page is specified by setting the <see
              cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
+
+            
 
             
 
@@ -1665,13 +2067,19 @@
 
             
 
+            
+
              property is used when the value of the <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
 
             
 
+            
+
              property is HotSpotMode.Navigate; it is ignored when the value of the <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+            
 
             
 
@@ -1683,8 +2091,12 @@
 
             
 
+            
+
              property is not set, the browser or window with focus refreshes when the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1697,13 +2109,19 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
                cref="P:System.Web.UI.WebControls.ImageMap.Target" />
 
               
 
+              
+
                property if the rendered output for the <see
                cref="T:System.Web.UI.WebControls.ImageMap" />
+
+              
 
               
 
@@ -1714,11 +2132,15 @@
 
               
 
+              
+
               . </para
             >
             <para
               >When creating accessible Web pages, it is strongly recommended that you avoid using the <see
                cref="P:System.Web.UI.WebControls.ImageMap.Target" />
+
+              
 
               
 
@@ -1731,12 +2153,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0"
                   >ASP.NET Controls and Accessibility</a
                 >
               </format>
+
+              
 
               
 
@@ -1749,6 +2175,8 @@
           <para
             >Gets or sets the target window or frame that displays the Web page content linked to when the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -1777,6 +2205,8 @@
 
             
 
+            
+
              control is initialized.</para
           >
         </remarks>
@@ -1788,13 +2218,19 @@
 
             
 
+            
+
              control so they can be stored in the control's <see
              cref="T:System.Web.UI.StateBag" />
 
             
 
+            
+
              object. This object is accessible through the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 

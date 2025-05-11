@@ -19,13 +19,19 @@
 
         
 
+        
+
          controls. The <see
          cref="T:System.Windows.Forms.ContentsResizedEventArgs" />
 
         
 
+        
+
          identifies the requested size of the <see
          cref="T:System.Windows.Forms.RichTextBox" />
+
+        
 
         
 
@@ -37,6 +43,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -72,13 +82,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that specifies the requested dimensions of the <see
            cref="T:System.Windows.Forms.RichTextBox" />
+
+          
 
           
 
@@ -109,8 +125,12 @@
 
             
 
+            
+
              control, the <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 
@@ -119,13 +139,19 @@
 
             
 
+            
+
              property in an event handler for the <see
              cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 
@@ -137,6 +163,8 @@
           <para
             >Represents the requested size of the <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 

@@ -39,8 +39,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeNamespace" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeNamespace" />
+
+        
 
         
 
@@ -81,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeNamespaceCollection" />
+
+            
 
             
 
@@ -118,8 +126,12 @@
 
             
 
+            
+
              class that contains the specified array of <see
              cref="T:System.CodeDom.CodeNamespace" />
+
+            
 
             
 
@@ -131,8 +143,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -169,6 +185,8 @@
 
             
 
+            
+
              class that contains the elements of the specified source collection.</para
           >
         </summary>
@@ -177,8 +195,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespaceCollection" />
+
+          
 
           
 
@@ -214,6 +236,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -226,8 +250,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -266,6 +294,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -274,8 +304,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -314,6 +348,8 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
@@ -322,8 +358,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespaceCollection" />
+
+          
 
           
 
@@ -362,6 +402,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -373,6 +415,8 @@
 
             
 
+            
+
              is contained in the collection; otherwise, false.</para
           >
         </returns>
@@ -381,8 +425,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -422,6 +470,8 @@
 
             
 
+            
+
              instance, starting at the specified index.</para
           >
         </summary>
@@ -430,8 +480,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -439,6 +493,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,8 +533,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.CodeDom.CodeNamespaceCollection" />
+
+            
 
             
 
@@ -493,6 +553,8 @@
 
             
 
+            
+
             , if it is found, in the collection; otherwise, -1.</para
           >
         </returns>
@@ -501,8 +563,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -542,11 +608,15 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -557,8 +627,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -625,6 +699,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -633,8 +709,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 

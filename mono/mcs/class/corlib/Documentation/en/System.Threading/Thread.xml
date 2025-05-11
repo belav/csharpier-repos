@@ -51,13 +51,19 @@
 
         
 
+        
+
          delegate or the <see
          cref="T:System.Threading.ParameterizedThreadStart" />
 
         
 
+        
+
          delegate to specify the program code executed by a thread. The <see
          cref="T:System.Threading.ParameterizedThreadStart" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
         
 
+        
+
         . A scheduling priority level, as defined by <see
          cref="T:System.Threading.ThreadPriority" />
+
+        
 
         
 
@@ -78,6 +88,8 @@
       >
       <para>
         <see cref="M:System.Object.GetHashCode" />
+
+        
 
         
 
@@ -89,6 +101,8 @@
       <para
         >It is not necessary to retain a reference to a <see
          cref="T:System.Threading.Thread" />
+
+        
 
         
 
@@ -131,8 +145,12 @@
 
             
 
+            
+
              method. To pass a data object to the thread, use the <see
              cref="M:System.Threading.Thread.Start(System.Object)" />
+
+            
 
             
 
@@ -145,8 +163,12 @@
 
               
 
+              
+
                constructor when creating a thread. Use the AddressOf operator when passing your method, for example Dim t As New Thread(AddressOf ThreadProc). Visual Basic automatically calls the <see
                cref="T:System.Threading.ThreadStart" />
+
+              
 
               
 
@@ -162,6 +184,8 @@
 
             
 
+            
+
              class, specifying a delegate that allows an object to be passed to the thread when the thread is started.</para
           >
         </summary>
@@ -170,8 +194,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.ParameterizedThreadStart" />
+
+          
 
           
 
@@ -205,8 +233,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -220,6 +252,8 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
@@ -229,8 +263,12 @@
 
               
 
+              
+
                constructor when creating a thread. Use the AddressOf operator when passing your method for example Dim t As New Thread(AddressOf ThreadProc). Visual Basic automatically calls the <see
                cref="T:System.Threading.ThreadStart" />
+
+              
 
               
 
@@ -246,6 +284,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -254,8 +294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.ThreadStart" />
+
+          
 
           
 
@@ -292,6 +336,8 @@
 
             
 
+            
+
              constructor overload is the recommended stack size for threads. If a thread has memory problems, the most likely cause is programming error, such as infinite recursion. </para
           >
           <block subset="none" type="note">
@@ -301,8 +347,12 @@
 
               
 
+              
+
                to a value that is greater than the default stack size (1 megabyte). If a larger value is specified for <paramref
                name="maxStackSize" />
+
+              
 
               
 
@@ -311,8 +361,12 @@
 
               
 
+              
+
                is ignored and the default stack size is used. No exception is thrown. Code at any trust level can set <paramref
                name="maxStackSize" />
+
+              
 
               
 
@@ -328,8 +382,12 @@
 
             
 
+            
+
              is less than the minimum stack size, the minimum stack size is used. If <paramref
              name="maxStackSize" />
+
+            
 
             
 
@@ -339,6 +397,8 @@
             <para
               >On versions of Microsoft Windows prior to Windows XP and Windows Server 2003, <paramref
                name="maxStackSize" />
+
+              
 
               
 
@@ -360,6 +420,8 @@
 
             
 
+            
+
              class, specifying a delegate that allows an object to be passed to the thread when the thread is started and specifying the maximum stack size for the thread.</para
           >
         </summary>
@@ -368,8 +430,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.ParameterizedThreadStart" />
+
+          
 
           
 
@@ -377,6 +443,8 @@
         >
         <param name="maxStackSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -412,6 +480,8 @@
 
             
 
+            
+
              constructor overload is the recommended stack size for threads. If a thread has memory problems, the most likely cause is programming error, such as infinite recursion. </para
           >
           <block subset="none" type="note">
@@ -421,8 +491,12 @@
 
               
 
+              
+
                to a value that is greater than the default stack size (1 megabyte). If a larger value is specified for <paramref
                name="maxStackSize" />
+
+              
 
               
 
@@ -431,8 +505,12 @@
 
               
 
+              
+
                is ignored and the default stack size is used. No exception is thrown. Code at any trust level can set <paramref
                name="maxStackSize" />
+
+              
 
               
 
@@ -448,8 +526,12 @@
 
             
 
+            
+
              is less than the minimum stack size, the minimum stack size is used. If <paramref
              name="maxStackSize" />
+
+            
 
             
 
@@ -459,6 +541,8 @@
             <para
               >On versions of Microsoft Windows prior to Windows XP and Windows Server 2003, <paramref
                name="maxStackSize" />
+
+              
 
               
 
@@ -480,6 +564,8 @@
 
             
 
+            
+
              class, specifying the maximum stack size for the thread.</para
           >
         </summary>
@@ -488,8 +574,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.ThreadStart" />
+
+          
 
           
 
@@ -497,6 +587,8 @@
         >
         <param name="maxStackSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,6 +622,8 @@
 
               
 
+              
+
                security permission for the thread to be aborted.</SPAN
             >
           </SPAN>
@@ -537,6 +631,8 @@
         <permission cref="!:System.Security.SecurityPermission"
           >Requires permission to control the thread to be aborted. See <see
            cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+
+          
 
           
 
@@ -550,8 +646,12 @@
 
             
 
+            
+
              in the thread to abort it. ThreadAbortException is a special exception that can be caught by application code, but is re-thrown at the end of the catch block unless <see
              cref="M:System.Threading.Thread.ResetAbort" />
+
+            
 
             
 
@@ -564,6 +664,8 @@
 
               
 
+              
+
                happens immediately, and the result is predictable. However, if one thread calls Abort on another thread, the abort interrupts whatever code is running. There is also a chance that a static constructor could be aborted. In rare cases, this might prevent instances of that class from being created in that application domain. In the .NET Framework versions 1.0 and 1.1, there is a chance the thread could abort while a finally block is running, in which case the finally block is aborted.</para
             >
           </block>
@@ -573,8 +675,12 @@
 
             
 
+            
+
              method on the thread after calling the <see
              cref="M:System.Threading.Thread.Abort" />
+
+            
 
             
 
@@ -587,8 +693,12 @@
 
               
 
+              
+
                might block if the thread that is being aborted is in a protected region of code, such as a catch block, finally block, or constrained execution region. If the thread that calls <see
                cref="M:System.Threading.Thread.Abort" />
+
+              
 
               
 
@@ -601,6 +711,8 @@
 
             
 
+            
+
              is called. If Abort is called on a thread that is blocked or is sleeping, the thread is interrupted and then aborted. </para
           >
           <para
@@ -609,8 +721,12 @@
 
             
 
+            
+
              is thrown in the thread that called <see
              cref="Overload:System.Threading.Thread.Abort" />
+
+            
 
             
 
@@ -619,8 +735,12 @@
 
             
 
+            
+
              is added to the <see
              cref="P:System.Threading.Thread.ThreadState" />
+
+            
 
             
 
@@ -629,8 +749,12 @@
 
             
 
+            
+
              is not thrown in the suspended thread until <see
              cref="M:System.Threading.Thread.Resume" />
+
+            
 
             
 
@@ -644,8 +768,12 @@
 
             
 
+            
+
             . After the thread has terminated as a result of a successful call to Abort, the state of the thread is changed to <see
              cref="F:System.Threading.ThreadState.Stopped" />
+
+            
 
             
 
@@ -657,6 +785,8 @@
           <para
             >Raises a <see
              cref="T:System.Threading.ThreadAbortException" />
+
+            
 
             
 
@@ -697,6 +827,8 @@
 
               
 
+              
+
                security permission for this thread.</SPAN
             >
           </SPAN>
@@ -704,6 +836,8 @@
         <permission cref="!:System.Security.SecurityPermission"
           >Requires permission to control the thread to be aborted. See <see
            cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+
+          
 
           
 
@@ -717,8 +851,12 @@
 
             
 
+            
+
              in the thread to abort it. ThreadAbortException is a special exception that can be caught by application code, but is re-thrown at the end of the catch block unless <see
              cref="M:System.Threading.Thread.ResetAbort" />
+
+            
 
             
 
@@ -731,6 +869,8 @@
 
               
 
+              
+
                happens immediately, and the result is predictable. However, if one thread calls Abort on another thread, the abort interrupts whatever code is running. There is a chance that a static constructor could be aborted. In rare cases, this might prevent instances of that class from being created in that application domain. In the .NET Framework versions 1.0 and 1.1, there is a chance the thread could abort while a finally block is running, in which case the finally block is aborted.</para
             >
           </block>
@@ -740,8 +880,12 @@
 
             
 
+            
+
              method on the thread after calling the <see
              cref="M:System.Threading.Thread.Abort(System.Object)" />
+
+            
 
             
 
@@ -754,8 +898,12 @@
 
               
 
+              
+
                might block if the thread that is being aborted is in a protected region of code, such as a catch block, finally block, or constrained execution region. If the thread that calls <see
                cref="M:System.Threading.Thread.Abort" />
+
+              
 
               
 
@@ -768,6 +916,8 @@
 
             
 
+            
+
              is called. If Abort is called on a thread that is blocked or is sleeping, the thread is interrupted and then aborted. </para
           >
           <para
@@ -776,8 +926,12 @@
 
             
 
+            
+
              is thrown in the thread that called <see
              cref="Overload:System.Threading.Thread.Abort" />
+
+            
 
             
 
@@ -786,8 +940,12 @@
 
             
 
+            
+
              is added to the <see
              cref="P:System.Threading.Thread.ThreadState" />
+
+            
 
             
 
@@ -796,8 +954,12 @@
 
             
 
+            
+
              is not thrown in the suspended thread until <see
              cref="M:System.Threading.Thread.Resume" />
+
+            
 
             
 
@@ -811,8 +973,12 @@
 
             
 
+            
+
             . After the thread has terminated as a result of a successful call to Abort, the state of the thread is changed to <see
              cref="F:System.Threading.ThreadState.Stopped" />
+
+            
 
             
 
@@ -827,11 +993,15 @@
 
             
 
+            
+
              in the thread on which it is invoked, to begin the process of terminating the thread while also providing exception information about the thread termination. Calling this method usually terminates the thread.</para
           >
         </summary>
         <param name="stateInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -869,12 +1039,16 @@
 
               
 
+              
+
                attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
                type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
               </format>
+
+              
 
               
 
@@ -889,6 +1063,8 @@
           <para
             >Allocates an unnamed data slot on all the threads. For better performance, use fields that are marked with the <see
              cref="T:System.ThreadStaticAttribute" />
+
+            
 
             
 
@@ -932,12 +1108,16 @@
 
               
 
+              
+
                attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
                type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
               </format>
+
+              
 
               
 
@@ -951,8 +1131,12 @@
 
             
 
+            
+
              method to allocate a named data slot, because the <see
              cref="M:System.Threading.Thread.GetNamedDataSlot(System.String)" />
+
+            
 
             
 
@@ -965,12 +1149,16 @@
 
               
 
+              
+
                method is used, it should be called in the main thread at program startup, because it throws an exception if a slot with the specified name has already been allocated. There is no way to test whether a slot has already been allocated.</para
             >
           </block>
           <para
             >Slots allocated with this method must be freed with <see
              cref="M:System.Threading.Thread.FreeNamedDataSlot(System.String)" />
+
+            
 
             
 
@@ -985,6 +1173,8 @@
 
             
 
+            
+
              attribute instead.</para
           >
         </summary>
@@ -994,6 +1184,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1036,8 +1228,12 @@
 
               
 
+              
+
                if their apartment state has not been set before they are started. The main application thread is initialized to <see
                cref="F:System.Threading.ApartmentState.MTA" />
+
+              
 
               
 
@@ -1046,13 +1242,19 @@
 
               
 
+              
+
                by setting the <see
                cref="T:System.Threading.ApartmentState" />
 
               
 
+              
+
                property on the first line of code. Use the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1066,6 +1268,8 @@
                 >/CLRTHREADATTRIBUTE (Set CLR Thread Attribute)</a
               >
             </format>
+
+            
 
             
 
@@ -1109,6 +1313,8 @@
 
             
 
+            
+
             , because there can be other tasks in the domain waiting for the same lock. If the current task is terminated, other tasks could be deadlocked.</para
           >
           <para
@@ -1117,13 +1323,19 @@
 
             
 
+            
+
              rather than take the risk of continuing execution in a potentially unstable state. To inform the host that your code is entering a critical region, call <see
              cref="M:System.Threading.Thread.BeginCriticalRegion" />
 
             
 
+            
+
             . Call <see
              cref="M:System.Threading.Thread.EndCriticalRegion" />
+
+            
 
             
 
@@ -1168,8 +1380,12 @@
 
             
 
+            
+
              before acquiring the lock, and <see
              cref="M:System.Threading.Thread.EndThreadAffinity" />
+
+            
 
             
 
@@ -1238,13 +1454,19 @@
 
             
 
+            
+
              object that is returned by this property, together with its associated objects, determine the default format for dates, times, numbers, currency values, the sorting order of text, casing conventions, and string comparisons. See the <see
              cref="T:System.Globalization.CultureInfo" />
 
             
 
+            
+
              class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see
              cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+            
 
             
 
@@ -1256,8 +1478,12 @@
 
             
 
+            
+
              property to a neutral culture. This is because the behavior of the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1266,8 +1492,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.CultureInfo.CompareInfo" />
+
+            
 
             
 
@@ -1276,8 +1506,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -1286,13 +1520,19 @@
 
             
 
+            
+
              properties) now reflect the specific culture that is associated with the neutral culture. In earlier versions of the .NET Framework, the <see
              cref="P:System.Threading.Thread.CurrentCulture" />
 
             
 
+            
+
              property threw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1327,6 +1567,8 @@
         <value
           >An object implementing <see
            cref="T:System.Security.Principal.IPrincipal" />
+
+          
 
           
 
@@ -1375,6 +1617,8 @@
 
             
 
+            
+
              representing the current thread.</para
           >
         </value>
@@ -1416,8 +1660,12 @@
 
             
 
+            
+
              class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -1429,8 +1677,12 @@
 
             
 
+            
+
              returned by this property can be a neutral culture. Neutral cultures should not be used with formatting methods such as <see
              cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+
+            
 
             
 
@@ -1439,8 +1691,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Convert.ToString(System.Char,System.IFormatProvider)" />
+
+            
 
             
 
@@ -1449,8 +1705,12 @@
 
             
 
+            
+
              method to get a specific culture, or use the <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -1463,8 +1723,12 @@
 
               
 
+              
+
                method throws <see
                cref="T:System.ArgumentException" />
+
+              
 
               
 
@@ -1509,6 +1773,8 @@
 
             
 
+            
+
             , because there can be other tasks in the domain waiting for the same lock. If the current task is terminated, other tasks could be deadlocked.</para
           >
           <para
@@ -1517,13 +1783,19 @@
 
             
 
+            
+
              rather than take the risk of continuing execution in a potentially unstable state. To inform the host that your code is entering a critical region, call <see
              cref="M:System.Threading.Thread.BeginCriticalRegion" />
 
             
 
+            
+
             . Call <see
              cref="M:System.Threading.Thread.EndCriticalRegion" />
+
+            
 
             
 
@@ -1568,8 +1840,12 @@
 
             
 
+            
+
              before acquiring the lock, and <see
              cref="M:System.Threading.Thread.EndThreadAffinity" />
+
+            
 
             
 
@@ -1616,6 +1892,8 @@
 
             
 
+            
+
              class provides a single container for all information relevant to a logical thread of execution. This includes security context, call context, synchronization context, localization context, and transaction context.</para
           >
         </remarks>
@@ -1624,6 +1902,8 @@
           <para
             >Gets an <see
              cref="T:System.Threading.ExecutionContext" />
+
+            
 
             
 
@@ -1698,12 +1978,16 @@
 
               
 
+              
+
                attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
                type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
               </format>
+
+              
 
               
 
@@ -1716,8 +2000,12 @@
 
             
 
+            
+
              with the same name will allocate a new slot associated with the name. Subsequent calls to GetNamedDataSlot by any thread will return the new slot. However, any thread that still has a <see
              cref="T:System.LocalDataStoreSlot" />
+
+            
 
             
 
@@ -1734,11 +2022,15 @@
 
             
 
+            
+
              attribute instead.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1774,13 +2066,19 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Threading.Thread.TrySetApartmentState(System.Threading.ApartmentState)" />
 
             
 
+            
+
              method, replaces the <see
              cref="P:System.Threading.Thread.ApartmentState" />
+
+            
 
             
 
@@ -1795,6 +2093,8 @@
 
             
 
+            
+
              value indicating the apartment state.</para
           >
         </summary>
@@ -1806,8 +2106,12 @@
 
             
 
+            
+
              values indicating the apartment state of the managed thread. The default is <see
              cref="F:System.Threading.ApartmentState.Unknown" />
+
+            
 
             
 
@@ -1853,6 +2157,8 @@
 
             
 
+            
+
              object that can be used to capture the stack for the current thread. </para
           >
         </summary>
@@ -1893,12 +2199,16 @@
 
               
 
+              
+
                attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
                type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
               </format>
+
+              
 
               
 
@@ -1909,6 +2219,8 @@
           <block subset="none" type="note">
             <para>
               <see cref="M:System.Threading.Thread.GetData(System.LocalDataStoreSlot)" />
+
+              
 
               
 
@@ -1924,6 +2236,8 @@
 
             
 
+            
+
              attribute instead.</para
           >
         </summary>
@@ -1936,8 +2250,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.LocalDataStoreSlot" />
+
+          
 
           
 
@@ -1976,6 +2294,8 @@
           <para
             >An <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -2044,6 +2364,8 @@
 
             
 
+            
+
              property if you need a unique identifier for a managed thread.</para
           >
         </remarks>
@@ -2088,12 +2410,16 @@
 
               
 
+              
+
                attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
                type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
               </format>
+
+              
 
               
 
@@ -2111,6 +2437,8 @@
 
             
 
+            
+
              attribute instead.</para
           >
         </summary>
@@ -2122,11 +2450,15 @@
 
             
 
+            
+
              allocated for this thread.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2156,6 +2488,8 @@
           <para>If this thread is not currently blocked in a wait, sleep, or join state, it will be interrupted when it next begins to block.</para>
           <para>
             <see cref="T:System.Threading.ThreadInterruptedException" />
+
+            
 
             
 
@@ -2193,9 +2527,13 @@
             
 
             
+
+            
 if this thread has been started, and has not terminated; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -2236,9 +2574,13 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             if the thread is or is to become
    a background thread; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -2249,6 +2591,8 @@ if this thread has been started, and has not terminated; otherwise,
         <exception cref="T:System.Threading.ThreadStateException"
           > The thread has reached the <see
            cref="F:System.Threading.ThreadState.Stopped" />
+
+          
 
           
 
@@ -2289,6 +2633,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2322,6 +2668,8 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
            state. </exception
         >
         <remarks>
@@ -2329,6 +2677,8 @@ if this thread has been started, and has not terminated; otherwise,
           <para
             >Use this method to ensure a thread has terminated. The caller will block indefinitely if the thread does not terminate. If the thread has already terminated when <see
              cref="Overload:System.Threading.Thread.Join" />
+
+            
 
             
 
@@ -2340,8 +2690,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             . You cannot invoke Join on a thread that is in the <see
              cref="F:System.Threading.ThreadState.Unstarted" />
+
+            
 
             
 
@@ -2384,8 +2738,12 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
            is negative and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -2394,6 +2752,8 @@ if this thread has been started, and has not terminated; otherwise,
         <exception cref="T:System.Threading.ThreadStateException"
           >The caller attempted to join a thread that is in the <see
            cref="F:System.Threading.ThreadState.Unstarted" />
+
+          
 
           
 
@@ -2407,13 +2767,19 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              is specified for the <paramref
              name="millisecondsTimeout" />
 
             
 
+            
+
              parameter, this method behaves identically to the <see
              cref="M:System.Threading.Thread.Join" />
+
+            
 
             
 
@@ -2425,6 +2791,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              is called, the method returns immediately.</para
           >
           <para
@@ -2433,8 +2801,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             . You cannot invoke Join on a thread that is in the <see
              cref="F:System.Threading.ThreadState.Unstarted" />
+
+            
 
             
 
@@ -2453,11 +2825,15 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              parameter has elapsed.</para
           >
         </returns>
         <param name="millisecondsTimeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2495,8 +2871,12 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
            is negative and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -2505,11 +2885,15 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
            milliseconds.</exception
         >
         <exception cref="T:System.Threading.ThreadStateException"
           >The caller attempted to join a thread that is in the <see
            cref="F:System.Threading.ThreadState.Unstarted" />
+
+          
 
           
 
@@ -2523,13 +2907,19 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              is specified for <paramref
              name="timeout" />
 
             
 
+            
+
             , this method behaves identically to the <see
              cref="M:System.Threading.Thread.Join" />
+
+            
 
             
 
@@ -2541,6 +2931,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              is called, the method returns immediately.</para
           >
           <para
@@ -2549,8 +2941,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             . You cannot invoke Join on a thread that is in the <see
              cref="F:System.Threading.ThreadState.Unstarted" />
+
+            
 
             
 
@@ -2569,6 +2965,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              parameter has elapsed.</para
           >
         </returns>
@@ -2577,8 +2975,12 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -2611,6 +3013,8 @@ if this thread has been started, and has not terminated; otherwise,
           <para
             >The value of the <see
              cref="P:System.Threading.Thread.ManagedThreadId" />
+
+            
 
             
 
@@ -2647,11 +3051,15 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              is required only on multiprocessor systems with weak memory ordering (for example, a system employing multiple Intel Itanium processors).</para
           >
           <para
             >For most purposes, the C# lock statement, the Visual Basic SyncLock statement, or the <see
              cref="T:System.Threading.Monitor" />
+
+            
 
             
 
@@ -2666,8 +3074,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              execute after memory accesses that follow the call to <see
              cref="M:System.Threading.Thread.MemoryBarrier" />
+
+            
 
             
 
@@ -2701,9 +3113,13 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              containing the
    name of the thread, or <see
              langword="null" />
+
+            
 
             
 
@@ -2714,6 +3130,8 @@ if this thread has been started, and has not terminated; otherwise,
         <exception cref="T:System.InvalidOperationException"
           >A set operation was requested, and the <see
            langword="Name" />
+
+          
 
           
 
@@ -2761,6 +3179,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              value.
    </para
           >
@@ -2771,11 +3191,15 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
            state.</exception
         >
         <exception cref="T:System.ArgumentException"
           >The value specified for a set operation is not a valid <see
            cref="T:System.Threading.ThreadPriority" />
+
+          
 
           
 
@@ -2833,12 +3257,16 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
            was not invoked on the current thread.</exception
         >
         <exception cref="T:System.Security.SecurityException">
           <SPAN
             >Caller does not have <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+
+            
 
             
 
@@ -2851,6 +3279,8 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
           .</permission
         >
         <example>
@@ -2858,6 +3288,8 @@ if this thread has been started, and has not terminated; otherwise,
             >For an example that demonstrates calling 
       this method, see <see
              cref="T:System.Threading.ThreadAbortException" />
+
+            
 
             
 
@@ -2876,11 +3308,15 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             .</para
           >
           <para
             >When a call is made to Abort to terminate a thread, the system throws a <see
              cref="T:System.Threading.ThreadAbortException" />
+
+            
 
             
 
@@ -2892,6 +3328,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              for an example that demonstrates calling the ResetAbort method.</para
           >
         </remarks>
@@ -2900,6 +3338,8 @@ if this thread has been started, and has not terminated; otherwise,
           <para
             >Cancels an <see
              cref="M:System.Threading.Thread.Abort(System.Object)" />
+
+            
 
             
 
@@ -2940,8 +3380,12 @@ if this thread has been started, and has not terminated; otherwise,
 
               
 
+              
+
                and <see
                cref="M:System.Threading.Thread.Resume" />
+
+              
 
               
 
@@ -2950,8 +3394,12 @@ if this thread has been started, and has not terminated; otherwise,
 
               
 
+              
+
                might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see
                cref="T:System.AppDomain" />
+
+              
 
               
 
@@ -2995,6 +3443,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              if their apartment state has not been set before they are started. Apartment state must be set before a thread is started.</para
           >
           <block subset="none" type="note">
@@ -3004,13 +3454,19 @@ if this thread has been started, and has not terminated; otherwise,
 
               
 
+              
+
                by default. The only way to set the apartment state of the main application thread to <see
                cref="F:System.Threading.ApartmentState.STA" />
 
               
 
+              
+
                is to apply the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -3023,8 +3479,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              method, along with the <see
              cref="M:System.Threading.Thread.GetApartmentState" />
+
+            
 
             
 
@@ -3033,8 +3493,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              method, replaces the <see
              cref="P:System.Threading.Thread.ApartmentState" />
+
+            
 
             
 
@@ -3047,6 +3511,8 @@ if this thread has been started, and has not terminated; otherwise,
         </summary>
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3093,6 +3559,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              to the current thread. </para
           >
         </summary>
@@ -3101,8 +3569,12 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CompressedStack" />
+
+          
 
           
 
@@ -3142,12 +3614,16 @@ if this thread has been started, and has not terminated; otherwise,
 
               
 
+              
+
                attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
                type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
               </format>
+
+              
 
               
 
@@ -3160,11 +3636,15 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              object has been reclaimed by garbage collection. Data slots are unique per thread. No other thread (not even a child thread) can get that data.</para
           >
           <block subset="none" type="note">
             <para>
               <see cref="M:System.Threading.Thread.SetData(System.LocalDataStoreSlot,System.Object)" />
+
+              
 
               
 
@@ -3180,6 +3660,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              attribute instead.</para
           >
         </summary>
@@ -3188,8 +3670,12 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
           The <see
            cref="T:System.LocalDataStoreSlot" />
+
+          
 
           
 
@@ -3197,6 +3683,8 @@ if this thread has been started, and has not terminated; otherwise,
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3233,8 +3721,12 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
            is negative and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" qualify="true" />
+
+          
 
           
 
@@ -3248,6 +3740,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             .</para
           >
           <para
@@ -3256,8 +3750,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              for the <paramref
              name="millisecondsTimeout" />
+
+            
 
             
 
@@ -3266,8 +3764,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              classes such as <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -3276,13 +3778,19 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             , <see
              cref="T:System.Threading.EventWaitHandle" />
 
             
 
+            
+
             , or <see
              cref="T:System.Threading.Semaphore" />
+
+            
 
             
 
@@ -3296,8 +3804,12 @@ if this thread has been started, and has not terminated; otherwise,
 
               
 
+              
+
               , but you want to perform standard COM and SendMessage pumping, consider using one of the overloads of the <see
                cref="Overload:System.Threading.Thread.Join" />
+
+              
 
               
 
@@ -3311,6 +3823,8 @@ if this thread has been started, and has not terminated; otherwise,
         </summary>
         <param name="millisecondsTimeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3348,13 +3862,19 @@ if this thread has been started, and has not terminated; otherwise,
 
           
 
+          
+
            is negative and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
 
           
 
+          
+
            milliseconds, or is greater than <see
            cref="F:System.Int32.MaxValue" qualify="true" />
+
+          
 
           
 
@@ -3368,6 +3888,8 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             .</para
           >
           <para
@@ -3376,8 +3898,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              for the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -3386,8 +3912,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              classes such as <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -3396,13 +3926,19 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             , <see
              cref="T:System.Threading.EventWaitHandle" />
 
             
 
+            
+
             , or <see
              cref="T:System.Threading.Semaphore" />
+
+            
 
             
 
@@ -3414,8 +3950,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              uses the total number of whole milliseconds in <paramref
              name="timeout" />
+
+            
 
             
 
@@ -3429,8 +3969,12 @@ if this thread has been started, and has not terminated; otherwise,
 
               
 
+              
+
               , but you want to perform standard COM and SendMessage pumping, consider using one of the overloads of the <see
                cref="Overload:System.Threading.Thread.Join" />
+
+              
 
               
 
@@ -3444,6 +3988,8 @@ if this thread has been started, and has not terminated; otherwise,
         </summary>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3484,8 +4030,12 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              method is useful for implementing locks. Classes in the .NET Framework, such as <see
              cref="T:System.Threading.Monitor" />
+
+            
 
             
 
@@ -3494,13 +4044,19 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
             , use this method internally. <see
              cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
 
             
 
+            
+
              essentially puts the processor into a very tight loop, with the loop count specified by the <paramref
              name="iterations" />
+
+            
 
             
 
@@ -3512,13 +4068,19 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              method. A thread that calls <see
              cref="M:System.Threading.Thread.Sleep(System.Int32)" />
 
             
 
+            
+
              yields the rest of its current slice of processor time, even if the specified interval is zero. Specifying a non-zero interval for <see
              cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+
+            
 
             
 
@@ -3529,13 +4091,19 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              is not generally useful for ordinary applications. In most cases, you should use the synchronization classes provided by the .NET Framework; for example, call <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
 
             
 
+            
+
              or a statement that wraps <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -3548,13 +4116,19 @@ if this thread has been started, and has not terminated; otherwise,
 
               
 
+              
+
                method in your loop. The code <see
                cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
 
               
 
+              
+
                executes is designed to prevent problems that can occur on computers with multiple processors. For example, on computers with multiple Intel processors employing Hyper-Threading technology, <see
                cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
+
+              
 
               
 
@@ -3570,11 +4144,15 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
+            
+
              parameter.</para
           >
         </summary>
         <param name="iterations">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3606,6 +4184,8 @@ if this thread has been started, and has not terminated; otherwise,
         <exception cref="T:System.NullReferenceException"
           >This method was invoked on a <see
            langword="null" />
+
+          
 
           
 
@@ -3659,13 +4239,19 @@ class ThreadTest{
 
             
 
+            
+
              state, the operating system can schedule it for execution. The thread begins executing at the first line of the method represented by the <see
              cref="T:System.Threading.ThreadStart" />
 
             
 
+            
+
              or <see
              cref="T:System.Threading.ParameterizedThreadStart" />
+
+            
 
             
 
@@ -3675,6 +4261,8 @@ class ThreadTest{
             <para
               >If this overload is used with a thread created using a <see
                cref="T:System.Threading.ParameterizedThreadStart" />
+
+              
 
               
 
@@ -3688,6 +4276,8 @@ class ThreadTest{
           <para
             >Causes the operating system to change the state of the current instance to <see
              cref="F:System.Threading.ThreadState.Running" />
+
+            
 
             
 
@@ -3724,13 +4314,19 @@ class ThreadTest{
 
             
 
+            
+
              state, the operating system can schedule it for execution. The thread begins executing at the first line of the method represented by the <see
              cref="T:System.Threading.ThreadStart" />
 
             
 
+            
+
              or <see
              cref="T:System.Threading.ParameterizedThreadStart" />
+
+            
 
             
 
@@ -3743,10 +4339,14 @@ class ThreadTest{
 
             
 
+            
+
              delegate make it easy to pass data to a thread procedure, but the technique is not type safe because any object can be passed to this overload. A more robust way to pass data to a thread procedure is to put both the thread procedure and the data fields into a worker object. For more information, see <format
              type="text/html">
               <a href="52b32222-e185-4f42-91a7-eaca65c0ab6d">Creating Threads</a>
             </format>
+
+            
 
             
 
@@ -3761,11 +4361,15 @@ class ThreadTest{
 
             
 
+            
+
             , and optionally supplies an object containing data to be used by the method the thread executes.</para
           >
         </summary>
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3805,8 +4409,12 @@ class ThreadTest{
 
               
 
+              
+
                and <see
                cref="M:System.Threading.Thread.Resume" />
+
+              
 
               
 
@@ -3815,8 +4423,12 @@ class ThreadTest{
 
               
 
+              
+
                might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see
                cref="T:System.AppDomain" />
+
+              
 
               
 
@@ -3897,6 +4509,8 @@ class ThreadTest{
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -3909,6 +4523,8 @@ class ThreadTest{
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -3916,10 +4532,14 @@ class ThreadTest{
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4023,6 +4643,8 @@ class ThreadTest{
 
             
 
+            
+
              values, which indicate
    the state of the current thread.</para
           >
@@ -4035,8 +4657,12 @@ class ThreadTest{
 
             
 
+            
+
              property provides more specific information than the <see
              cref="P:System.Threading.Thread.IsAlive" />
+
+            
 
             
 
@@ -4083,6 +4709,8 @@ class ThreadTest{
 
             
 
+            
+
              if their apartment state has not been set before they are started. Apartment state must be set before a thread is started.</para
           >
           <block subset="none" type="note">
@@ -4092,13 +4720,19 @@ class ThreadTest{
 
               
 
+              
+
                by default. The only way to set the apartment state of the main application thread to <see
                cref="F:System.Threading.ApartmentState.STA" />
 
               
 
+              
+
                is to apply the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -4111,8 +4745,12 @@ class ThreadTest{
 
             
 
+            
+
              method, along with the <see
              cref="M:System.Threading.Thread.GetApartmentState" />
+
+            
 
             
 
@@ -4121,8 +4759,12 @@ class ThreadTest{
 
             
 
+            
+
              method, replaces the <see
              cref="P:System.Threading.Thread.ApartmentState" />
+
+            
 
             
 
@@ -4139,6 +4781,8 @@ class ThreadTest{
         </returns>
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4175,6 +4819,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4184,6 +4830,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -4197,13 +4845,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4248,6 +4902,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4257,6 +4913,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -4270,13 +4928,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4321,6 +4985,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4330,6 +4996,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -4343,13 +5011,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4391,6 +5065,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4400,6 +5076,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -4413,13 +5091,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4461,6 +5145,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4470,6 +5156,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -4483,13 +5171,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4534,6 +5228,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4543,6 +5239,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -4556,13 +5254,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4608,6 +5312,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4617,6 +5323,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -4630,13 +5338,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4686,6 +5400,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4695,6 +5411,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.SByte" />
+
+            
 
             
 
@@ -4708,13 +5426,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4759,6 +5483,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4768,6 +5494,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -4781,13 +5509,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4837,6 +5571,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4846,6 +5582,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -4859,13 +5597,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4912,6 +5656,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4921,6 +5667,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.UInt32" />
+
+            
 
             
 
@@ -4934,13 +5682,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -4990,6 +5744,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -4999,6 +5755,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -5012,13 +5770,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -5064,6 +5828,8 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory from which to read.</param
         >
         <summary>
@@ -5073,6 +5839,8 @@ class ThreadTest{
           <para
             >A <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 
@@ -5086,13 +5854,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileWrite" />
+
+            
 
             
 
@@ -5137,11 +5911,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -5157,13 +5935,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5209,11 +5993,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -5229,13 +6017,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5281,11 +6075,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.Int16" />
+
+          
 
           
 
@@ -5301,13 +6099,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5353,11 +6157,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -5373,13 +6181,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5425,11 +6239,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -5445,13 +6263,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5497,11 +6321,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -5517,13 +6345,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5570,11 +6404,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -5590,13 +6428,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5647,11 +6491,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.SByte" />
+
+          
 
           
 
@@ -5667,13 +6515,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5719,11 +6573,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.Single" />
+
+          
 
           
 
@@ -5739,13 +6597,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5796,11 +6660,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.UInt16" />
+
+          
 
           
 
@@ -5816,13 +6684,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5873,11 +6747,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.UInt32" />
+
+          
 
           
 
@@ -5893,13 +6771,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -5946,11 +6830,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.UInt64" />
+
+          
 
           
 
@@ -5966,13 +6854,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -6022,11 +6916,15 @@ class ThreadTest{
 
           
 
+          
+
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
           >A <see
            cref="T:System.UIntPtr" />
+
+          
 
           
 
@@ -6042,13 +6940,19 @@ class ThreadTest{
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
+            
+
              be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
              cref="M:System.Threading.Thread.VolatileRead" />
+
+            
 
             
 
@@ -6092,8 +6996,12 @@ class ThreadTest{
 
             
 
+            
+
              function. You should call the <see
              cref="M:System.Threading.Thread.Yield" />
+
+            
 
             
 

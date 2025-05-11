@@ -27,6 +27,8 @@
 
         
 
+        
+
         . </para
       >
     </summary>
@@ -44,6 +46,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Common.DbParameterCollection" />
+
+            
 
             
 
@@ -75,8 +79,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.Common.DbParameterCollection" />
+
+            
 
             
 
@@ -91,6 +99,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </returns>
@@ -99,13 +109,19 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.Common.DbParameter.Value" />
 
           
 
+          
+
            of the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -136,6 +152,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -144,8 +162,12 @@
 
           
 
+          
+
           An array of values of type <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -174,8 +196,12 @@
 
             
 
+            
+
              values from the <see
              cref="T:System.Data.Common.DbParameterCollection" />
+
+            
 
             
 
@@ -207,8 +233,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:System.Data.Common.DbParameter.Value" />
+
+            
 
             
 
@@ -223,6 +253,8 @@
 
             
 
+            
+
              is in the collection; otherwise false.</para
           >
         </returns>
@@ -231,13 +263,19 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.Common.DbParameter.Value" />
 
           
 
+          
+
            of the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -268,6 +306,8 @@
 
             
 
+            
+
              with the specified name exists in the collection.</para
           >
         </summary>
@@ -279,6 +319,8 @@
 
             
 
+            
+
              is in the collection; otherwise false.</para
           >
         </returns>
@@ -287,8 +329,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -324,10 +370,14 @@
 
           
 
+          
+
           The array of items to copy to the collection.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,6 +436,8 @@
 
             
 
+            
+
              method, which supports a simple iteration over a collection by a .NET Framework data provider.</para
           >
         </summary>
@@ -394,6 +446,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -433,6 +487,8 @@
 
             
 
+            
+
              object at the specified index in the collection.</para
           >
         </summary>
@@ -444,6 +500,8 @@
 
             
 
+            
+
              object at the specified index in the collection.</para
           >
         </returns>
@@ -452,8 +510,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -487,6 +549,8 @@
 
             
 
+            
+
              the object with the specified name.</para
           >
         </summary>
@@ -498,6 +562,8 @@
 
             
 
+            
+
              the object with the specified name.</para
           >
         </returns>
@@ -506,8 +572,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -538,6 +608,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -549,6 +621,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -557,8 +631,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -589,6 +667,8 @@
 
             
 
+            
+
              object with the specified name.</para
           >
         </summary>
@@ -600,6 +680,8 @@
 
             
 
+            
+
              object with the specified name.</para
           >
         </returns>
@@ -608,8 +690,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -644,6 +730,8 @@
 
             
 
+            
+
              object with the specified name into the collection at the specified index.</para
           >
         </summary>
@@ -652,8 +740,12 @@
 
           
 
+          
+
           The index at which to insert the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -664,8 +756,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -832,6 +928,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -840,8 +938,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -872,6 +974,8 @@
 
             
 
+            
+
              object at the specified from the collection.</para
           >
         </summary>
@@ -880,8 +984,12 @@
 
           
 
+          
+
           The index where the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -915,6 +1023,8 @@
 
             
 
+            
+
              object with the specified name from the collection.</para
           >
         </summary>
@@ -923,8 +1033,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -959,6 +1073,8 @@
 
             
 
+            
+
              object at the specified index to a new value. </para
           >
         </summary>
@@ -967,8 +1083,12 @@
 
           
 
+          
+
           The index where the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -979,8 +1099,12 @@
 
           
 
+          
+
           The new <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -1015,6 +1139,8 @@
 
             
 
+            
+
              object with the specified name to a new value.</para
           >
         </summary>
@@ -1023,8 +1149,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -1035,8 +1165,12 @@
 
           
 
+          
+
           The new <see
            cref="T:System.Data.Common.DbParameter" />
+
+          
 
           
 
@@ -1073,6 +1207,8 @@
           <para
             >Specifies the <see
              cref="T:System.Object" />
+
+            
 
             
 

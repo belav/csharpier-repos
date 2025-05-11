@@ -24,6 +24,8 @@
 
         
 
+        
+
          is thrown when invalid data is detected in the data stream.</para
       >
     </remarks>
@@ -55,6 +57,8 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "An invalid argument was specified." This message is localized based on the current system culture.</para
           >
         </remarks>
@@ -63,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.InvalidDataException" />
+
+            
 
             
 
@@ -95,6 +101,8 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "An invalid argument was specified." This message is localized based on the current system culture.</para
           >
         </remarks>
@@ -106,11 +114,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,13 +158,19 @@
 
             
 
+            
+
              property of the new instance using the value of the <paramref
              name="message" />
 
             
 
+            
+
              parameter. The content of the <paramref
              name="message" />
+
+            
 
             
 
@@ -164,13 +182,19 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
 
             
 
+            
+
              property returns the same value that is passed into the constructor, or null if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -185,11 +209,15 @@
 
             
 
+            
+
              class with a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,8 +228,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

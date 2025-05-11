@@ -26,13 +26,19 @@
 
         
 
+        
+
         , you must call the <see
          cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" />
 
         
 
+        
+
          method of the <see
          cref="T:System.Data.OleDb.OleDbCommand" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
         , first close the <see
          cref="T:System.Data.OleDb.OleDbDataReader" />
+
+        
 
         
 
@@ -54,13 +64,19 @@
 
         
 
+        
+
          object if you plan to resuse an <see
          cref="T:System.Data.OleDb.OleDbCommand" />
 
         
 
+        
+
          object.For example, you cannot retrieve output parameters until after you call <see
          cref="M:System.Data.OleDb.OleDbDataReader.Close" />
+
+        
 
         
 
@@ -72,10 +88,14 @@
 
         
 
+        
+
         . However, the precise behavior is timing dependent.</para
       >
       <para>
         <see cref="P:System.Data.OleDb.OleDbDataReader.IsClosed" />
+
+        
 
         
 
@@ -84,8 +104,12 @@
 
         
 
+        
+
          are the only properties that you can call after the <see
          cref="T:System.Data.OleDb.OleDbDataReader" />
+
+        
 
         
 
@@ -94,8 +118,12 @@
 
         
 
+        
+
          property may be accessed while the <see
          cref="T:System.Data.OleDb.OleDbDataReader" />
+
+        
 
         
 
@@ -104,8 +132,12 @@
 
         
 
+        
+
          before returning the value of <see
          cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
+
+        
 
         
 
@@ -134,13 +166,19 @@
 
             
 
+            
+
              method when you are through using the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
+            
+
              to use the associated <see
              cref="T:System.Data.OleDb.OleDbConnection" />
+
+            
 
             
 
@@ -155,6 +193,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -164,6 +204,8 @@
           <para
             >Closes the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -214,11 +256,15 @@
 
             
 
+            
+
              to exclude hidden fields.</para
           >
           <para
             >After executing a query that does not return rows, <see
              cref="P:System.Data.OleDb.OleDbDataReader.FieldCount" />
+
+            
 
             
 
@@ -269,6 +315,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -282,6 +330,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,6 +362,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -325,6 +377,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,8 +414,12 @@
 
             
 
+            
+
              returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field. This may be the case, for example, when the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -370,11 +428,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If you pass a buffer that is null, <see
              cref="M:System.Data.OleDb.OleDbDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -395,10 +457,14 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,10 +475,14 @@
 
           
 
+          
+
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -421,10 +491,14 @@
 
           
 
+          
+
            where the write operation is to start. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,6 +528,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -467,6 +543,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -507,8 +585,12 @@
 
             
 
+            
+
              returns the number of available characters in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetChars has already been used to obtain characters from the field. This may be the case, for example, when the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -517,11 +599,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If you pass a buffer that is null, <see
              cref="M:System.Data.OleDb.OleDbDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -542,10 +628,14 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -556,10 +646,14 @@
 
           
 
+          
+
           The buffer into which to copy data. </param
         >
         <param name="bufferIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -568,10 +662,14 @@
 
           
 
+          
+
            where the write operation is to start. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -604,8 +702,12 @@
 
             
 
+            
+
              will call <see
              cref="M:System.Data.OleDb.OleDbDataReader.GetData(System.Int32)" />
+
+            
 
             
 
@@ -614,8 +716,12 @@
 
             
 
+            
+
              that has a column that supports <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -630,6 +736,8 @@
 
             
 
+            
+
              object for the requested column ordinal.</para
           >
         </summary>
@@ -641,11 +749,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -685,8 +797,12 @@
 
             
 
+            
+
              or <see
              cref="http://go.microsoft.com/fwlink/?LinkId=198033">Access data types</see>
+
+            
 
             
 
@@ -695,6 +811,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -724,11 +842,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >Call <see
              cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -743,6 +865,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -752,6 +876,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -803,11 +929,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >Call <see
              cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -822,6 +952,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -831,6 +963,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -861,6 +995,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -874,6 +1010,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -911,6 +1049,8 @@
 
             
 
+            
+
              that can be used to iterate through the rows in the data reader.</para
           >
         </summary>
@@ -919,6 +1059,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -946,6 +1088,8 @@
 
             
 
+            
+
              that is the data type of the object.</para
           >
         </summary>
@@ -957,11 +1101,15 @@
 
             
 
+            
+
              that is the data type of the object.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -992,6 +1140,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1005,6 +1155,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1035,6 +1187,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1048,6 +1202,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1078,6 +1234,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1091,6 +1249,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1121,6 +1281,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1134,6 +1296,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1164,6 +1328,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1177,6 +1343,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1212,6 +1380,8 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
       </Docs>
@@ -1237,10 +1407,14 @@
 
             
 
+            
+
              performs a case-sensitive lookup first. If it fails, a second case-insensitive search is made. The method throws an IndexOutOfRange exception if the zero-based column ordinal is not found.</para
           >
           <para>
             <see cref="M:System.Data.OleDb.OleDbDataReader.GetOrdinal(System.String)" />
+
+            
 
             
 
@@ -1252,8 +1426,12 @@
 
             
 
+            
+
              within a loop. Save time by calling <see
              cref="M:System.Data.OleDb.OleDbDataReader.GetOrdinal(System.String)" />
+
+            
 
             
 
@@ -1270,6 +1448,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1297,6 +1477,8 @@
           <para
             >The <see
              cref="M:System.Data.OleDb.OleDbDataReader.GetSchemaTable" />
+
+            
 
             
 
@@ -1525,8 +1707,12 @@
 
               
 
+              
+
                with the <paramref
                name="behavior" />
+
+              
 
               
 
@@ -1542,8 +1728,12 @@
 
             
 
+            
+
              that describes the column metadata of the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -1555,6 +1745,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1586,6 +1778,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1599,6 +1793,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1628,11 +1824,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >Call <see
              cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -1647,6 +1847,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1656,6 +1858,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1685,6 +1889,8 @@
 
             
 
+            
+
              for null database columns.</para
           >
         </remarks>
@@ -1698,6 +1904,8 @@
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1727,6 +1935,8 @@
 
             
 
+            
+
              method provides an efficient means for retrieving all columns, instead of retrieving each column individually.</para
           >
           <para
@@ -1735,8 +1945,12 @@
 
             
 
+            
+
              array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1745,11 +1959,15 @@
 
             
 
+            
+
              array whose length is more than the number of columns that are contained in the resulting row.</para
           >
           <para
             >This method returns <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1768,6 +1986,8 @@
 
             
 
+            
+
              in the array.</para
           >
         </returns>
@@ -1776,8 +1996,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1810,6 +2034,8 @@
 
             
 
+            
+
              contains one or more rows.</para
           >
         </summary>
@@ -1830,13 +2056,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
 
             
 
+            
+
              are the only properties that you can call after the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -1871,8 +2103,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.OleDb.OleDbDataReader.GetChar(System.Int32)" />
+
+            
 
             
 
@@ -1891,11 +2127,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1990,8 +2230,12 @@
 
             
 
+            
+
              is before the first record. Therefore, you must call <see
              cref="M:System.Data.OleDb.OleDbDataReader.Read" />
+
+            
 
             
 
@@ -2003,13 +2247,19 @@
 
             
 
+            
+
              is being used, the associated <see
              cref="T:System.Data.OleDb.OleDbConnection" />
 
             
 
+            
+
              is busy serving it until you call <see
              cref="M:System.Data.OleDb.OleDbDataReader.Close" />
+
+            
 
             
 
@@ -2021,6 +2271,8 @@
           <para
             >Advances the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -2053,8 +2305,12 @@
 
             
 
+            
+
              property is not set until all rows are read and you close the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -2066,10 +2322,14 @@
 
             
 
+            
+
              is two.</para
           >
           <para>
             <see cref="P:System.Data.OleDb.OleDbDataReader.IsClosed" />
+
+            
 
             
 
@@ -2078,8 +2338,12 @@
 
             
 
+            
+
              are the only properties that you can call after the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -2172,6 +2436,8 @@
 
             
 
+            
+
              are visible. For example, a SELECT on a partial primary key returns the remaining parts of the key as hidden fields. The hidden fields are always appended behind the visible fields.</para
           >
         </remarks>
@@ -2180,6 +2446,8 @@
           <para
             >Gets the number of fields in the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 

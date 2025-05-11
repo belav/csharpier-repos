@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used by data-bound controls (such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         ) to display custom content for each record displayed. When you need to display content in a data-bound control that is not provided by one of the predefined data control fields (such as <see
          cref="T:System.Web.UI.WebControls.BoundField" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          class to create your custom user interface (UI). The <see
          cref="T:System.Web.UI.WebControls.TemplateField" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
          control displays a <see
          cref="T:System.Web.UI.WebControls.TemplateField" />
+
+        
 
         
 
@@ -62,11 +78,15 @@
 
         
 
+        
+
          control displays it as a row.</para
       >
       <para
         >You can define a custom template for the different parts of the <see
          cref="T:System.Web.UI.WebControls.TemplateField" />
+
+        
 
         
 
@@ -96,6 +116,8 @@
 
               
 
+              
+
                 object.</para
             >
           </description>
@@ -110,6 +132,8 @@
             <para
               >Specifies the content to display for an item in edit mode in a <see
                cref="T:System.Web.UI.WebControls.TemplateField" />
+
+              
 
               
 
@@ -130,6 +154,8 @@
 
               
 
+              
+
                 object.</para
             >
           </description>
@@ -144,6 +170,8 @@
             <para
               >Specifies the content to display for the header section of a <see
                cref="T:System.Web.UI.WebControls.TemplateField" />
+
+              
 
               
 
@@ -164,8 +192,12 @@
 
               
 
+              
+
                 object. This template is supported only by the <see
                cref="T:System.Web.UI.WebControls.DetailsView" />
+
+              
 
               
 
@@ -186,6 +218,8 @@
 
               
 
+              
+
                 object.</para
             >
           </description>
@@ -197,8 +231,12 @@
 
         
 
+        
+
          object in a data-bound control by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+
+        
 
         
 
@@ -210,8 +248,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Web.UI.WebControls.TemplateField.FooterTemplate" />
+
+        
 
         
 
@@ -220,8 +262,12 @@
 
         
 
+        
+
          object by setting other properties of the <see
          cref="T:System.Web.UI.WebControls.TemplateField" />
+
+        
 
         
 
@@ -230,8 +276,12 @@
 
         
 
+        
+
          or the <see
          cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
+
+        
 
         
 
@@ -240,13 +290,19 @@
 
         
 
+        
+
          property. The header section can be hidden in the <see
          cref="T:System.Web.UI.WebControls.TemplateField" />
 
         
 
+        
+
          object by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+        
 
         
 
@@ -259,8 +315,12 @@
 
           
 
+          
+
            control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
            cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+          
 
           
 
@@ -270,6 +330,8 @@
       <para
         >You also can customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.TemplateField" />
+
+        
 
         
 
@@ -299,6 +361,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -313,6 +377,8 @@
             <para
               >The style settings for the footer section of the <see
                cref="T:System.Web.UI.WebControls.TemplateField" />
+
+              
 
               
 
@@ -333,6 +399,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -347,6 +415,8 @@
             <para
               >The style settings for the data items in the <see
                cref="T:System.Web.UI.WebControls.TemplateField" />
+
+              
 
               
 
@@ -376,6 +446,8 @@
 
             
 
+            
+
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
@@ -384,8 +456,12 @@
 
             
 
+            
+
              object to a data-bound control, create a new <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -394,13 +470,19 @@
 
             
 
+            
+
              control, add the <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
 
             
 
+            
+
              object to the <see
              cref="P:System.Web.UI.WebControls.GridView.Columns" />
+
+            
 
             
 
@@ -415,6 +497,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -460,8 +544,12 @@
 
             
 
+            
+
              property to specify the custom content displayed for the alternating items in a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -474,8 +562,12 @@
 
               
 
+              
+
                property is commonly used in combination with the <see
                cref="P:System.Web.UI.WebControls.TemplateField.ItemTemplate" />
+
+              
 
               
 
@@ -489,8 +581,12 @@
 
             
 
+            
+
              object in the data-bound control contains the control. Next, use the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -499,8 +595,12 @@
 
             
 
+            
+
              object to access the control. You can also use the <see
              cref="M:System.Web.UI.Control.FindControl(System.String)" />
+
+            
 
             
 
@@ -509,8 +609,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -522,6 +626,8 @@
           <para
             >Gets or sets the template for displaying the alternating items in a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -559,6 +665,8 @@
 
             
 
+            
+
              property to specify whether an empty string value is automatically converted to null when the data field is updated in the data source.</para
           >
         </remarks>
@@ -570,8 +678,12 @@
 
             
 
+            
+
              object is bound to should be converted to null if it is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -605,13 +717,19 @@
 
             
 
+            
+
              method is a helper method used to copy the properties of the current <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
 
             
 
+            
+
             -derived object to the <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -626,8 +744,12 @@
 
             
 
+            
+
             -derived object to the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -639,13 +761,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
 
           
 
+          
+
            to copy the properties of the current <see
            cref="T:System.Web.UI.WebControls.TemplateField" />
+
+          
 
           
 
@@ -676,8 +804,12 @@
 
             
 
+            
+
              method overrides the base method to return a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -692,6 +824,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -700,6 +834,8 @@
           <para
             >Always returns a new <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -745,13 +881,19 @@
 
             
 
+            
+
              property to specify the custom content displayed for an item that is in edit mode in a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
 
             
 
+            
+
              object. Define the content by creating a template that specifies how an item in edit mode is rendered. The <see
              cref="P:System.Web.UI.WebControls.TemplateField.EditItemTemplate" />
+
+            
 
             
 
@@ -764,8 +906,12 @@
 
             
 
+            
+
              object in the data-bound control contains the control. Next, use the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -774,8 +920,12 @@
 
             
 
+            
+
              object to access the control. You can also use the <see
              cref="M:System.Web.UI.Control.FindControl(System.String)" />
+
+            
 
             
 
@@ -784,8 +934,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -797,6 +951,8 @@
           <para
             >Gets or sets the template for displaying an item in edit mode in a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -833,8 +989,12 @@
 
             
 
+            
+
              method is implemented by types derived from <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -843,8 +1003,12 @@
 
             
 
+            
+
             . This method is called to extract the values of two-way data-bound fields in the template to populate dictionaries to be passed to the data source for an update, insert, or delete operation. The field/value pair is stored in the dictionary collection that is passed to the method. The <see
              cref="M:System.Web.UI.WebControls.TemplateField.ExtractValuesFromCell(System.Collections.Specialized.IOrderedDictionary,System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState,System.Boolean)" />
+
+            
 
             
 
@@ -853,8 +1017,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -869,6 +1037,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -877,8 +1047,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Specialized.IOrderedDictionary" />
+
+          
 
           
 
@@ -889,13 +1063,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
           
 
+          
+
            that contains the text or controls of the <see
            cref="T:System.Web.UI.WebControls.TemplateField" />
+
+          
 
           
 
@@ -906,8 +1086,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -918,8 +1102,12 @@
 
           
 
+          
+
           true to indicate that the values of read-only fields are included in the <paramref
            name="dictionary" />
+
+          
 
           
 
@@ -964,8 +1152,12 @@
 
             
 
+            
+
              property to specify the custom content displayed in the footer section of a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -978,8 +1170,12 @@
 
             
 
+            
+
              object in the data-bound control contains the control. Next, use the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -988,8 +1184,12 @@
 
             
 
+            
+
              object to access the control. You can also use the <see
              cref="M:System.Web.UI.Control.FindControl(System.String)" />
+
+            
 
             
 
@@ -998,8 +1198,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -1011,6 +1215,8 @@
           <para
             >Gets or sets the template for displaying the footer section of a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -1056,8 +1262,12 @@
 
             
 
+            
+
              property to specify the custom content displayed for the header section of a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -1070,8 +1280,12 @@
 
             
 
+            
+
              object in the data-bound control contains the control. Next, use the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -1080,8 +1294,12 @@
 
             
 
+            
+
              object to access the control. You can also use the <see
              cref="M:System.Web.UI.Control.FindControl(System.String)" />
+
+            
 
             
 
@@ -1090,8 +1308,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -1103,6 +1325,8 @@
           <para
             >Gets or sets the template for displaying the header section of a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -1139,6 +1363,8 @@
 
             
 
+            
+
              objects to initialize the cells of the table structure with data or controls.</para
           >
         </remarks>
@@ -1151,13 +1377,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
           
 
+          
+
            that contains the text or controls of the <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
+
+          
 
           
 
@@ -1168,8 +1400,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlCellType" />
+
+          
 
           
 
@@ -1180,13 +1416,19 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
+          
+
            values, specifying the state of the row that contains the <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -1197,8 +1439,12 @@
 
           
 
+          
+
           The index of the row that the <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -1243,8 +1489,12 @@
 
             
 
+            
+
              property to specify the custom content displayed for an item in insert mode in a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -1257,8 +1507,12 @@
 
             
 
+            
+
              object in the data-bound control contains the control. Next, use the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -1267,8 +1521,12 @@
 
             
 
+            
+
              object to access the control. You can also use the <see
              cref="M:System.Web.UI.Control.FindControl(System.String)" />
+
+            
 
             
 
@@ -1277,8 +1535,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -1291,6 +1553,8 @@
 
               
 
+              
+
                control.</para
             >
           </block>
@@ -1300,6 +1564,8 @@
           <para
             >Gets or sets the template for displaying an item in insert mode in a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -1345,8 +1611,12 @@
 
             
 
+            
+
              property to specify the custom content displayed for the items in a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 
@@ -1359,8 +1629,12 @@
 
               
 
+              
+
                property in combination with the <see
                cref="P:System.Web.UI.WebControls.TemplateField.ItemTemplate" />
+
+              
 
               
 
@@ -1374,8 +1648,12 @@
 
             
 
+            
+
              object in the data-bound control contains the control. Next, use the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -1384,8 +1662,12 @@
 
             
 
+            
+
              object to access the control. You can also use the <see
              cref="M:System.Web.UI.Control.FindControl(System.String)" />
+
+            
 
             
 
@@ -1394,8 +1676,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -1428,8 +1714,12 @@
 
             
 
+            
+
              method is not supported for this class and always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1441,6 +1731,8 @@
           <para
             >Determines whether the controls contained in a <see
              cref="T:System.Web.UI.WebControls.TemplateField" />
+
+            
 
             
 

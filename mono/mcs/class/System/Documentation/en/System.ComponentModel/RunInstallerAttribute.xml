@@ -36,13 +36,19 @@
 
         
 
+        
+
          is marked with the <see
          cref="T:System.ComponentModel.RunInstallerAttribute" />
 
         
 
+        
+
          set to true, Visual Studio's Custom Action Installer or the InstallUtil.exe will be invoked when the assembly is installed. Members marked with the <see
          cref="T:System.ComponentModel.RunInstallerAttribute" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
           
 
+          
+
            set to true, the value of this attribute is set to the constant member <see
            cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
+
+          
 
           
 
@@ -65,8 +75,12 @@
 
           
 
+          
+
            set to false, the value is <see
            cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+
+          
 
           
 
@@ -75,8 +89,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+
+          
 
           
 
@@ -91,6 +109,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -101,6 +121,8 @@
          type="text/html">
           <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
         </format>
+
+        
 
         
 
@@ -135,11 +157,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="runInstaller">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,8 +201,12 @@
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+
+            
 
             
 
@@ -188,6 +218,8 @@
           <para
             >Specifies the default visiblity, which is <see
              cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+
+            
 
             
 
@@ -224,8 +256,12 @@
 
             
 
+            
+
              is equivalent to the current <see
              cref="T:System.ComponentModel.RunInstallerAttribute" />
+
+            
 
             
 
@@ -240,8 +276,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ComponentModel.RunInstallerAttribute" />
+
+            
 
             
 
@@ -250,6 +290,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,6 +325,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -291,6 +335,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.RunInstallerAttribute" />
+
+            
 
             
 
@@ -356,13 +402,19 @@
 
             
 
+            
+
              set to false, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.RunInstallerAttribute.No" />
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+
+            
 
             
 
@@ -376,6 +428,8 @@
              type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
+
+            
 
             
 
@@ -433,13 +487,19 @@
 
             
 
+            
+
              set to true, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
+
+            
 
             
 
@@ -453,6 +513,8 @@
              type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
+
+            
 
             
 

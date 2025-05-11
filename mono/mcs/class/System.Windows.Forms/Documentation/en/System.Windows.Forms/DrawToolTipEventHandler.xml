@@ -29,8 +29,12 @@
 
         
 
+        
+
          event is raised by the <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          is drawn and the <see
          cref="P:System.Windows.Forms.ToolTip.OwnerDraw" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          class contains all the information needed to paint the <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -59,8 +71,12 @@
 
         
 
+        
+
         , and the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -69,8 +85,12 @@
 
         
 
+        
+
          to determine the bounds of the ToolTip, and the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -79,8 +99,12 @@
 
         
 
+        
+
          before it is shown by handling the <see
          cref="E:System.Windows.Forms.ToolTip.Popup" />
+
+        
 
         
 
@@ -92,10 +116,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
          type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
+
+        
 
         
 
@@ -110,8 +138,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 

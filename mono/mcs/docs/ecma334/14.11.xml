@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.10">inclusive-or-expression</non_terminal>
@@ -23,6 +25,8 @@
       <name>
         <non_terminal where="14.11">conditional-or-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -50,6 +54,8 @@
 
     
 
+    
+
     ) as if the operation was written x &amp; y or x | y. Then, <list
     >
       <list_item> If overload resolution fails to find a single best operator, or if overload resolution selects one of the predefined integer logical operators, a compile-time error occurs. </list_item>
@@ -59,8 +65,12 @@
 
         
 
+        
+
         ), the operation is processed as described in <hyperlink
         >14.11.1</hyperlink>
+
+        
 
         
 
@@ -72,6 +82,8 @@
 
         
 
+        
+
         . </list_item
       >
     </list>
@@ -79,6 +91,8 @@
   <paragraph
     >It is not possible to directly overload the conditional logical operators. However, because the conditional logical operators are evaluated in terms of the regular logical operators, overloads of the regular logical operators are, with certain restrictions, also considered overloads of the conditional logical operators. This is described further in <hyperlink
     >14.11.2</hyperlink>
+
+    
 
     
 

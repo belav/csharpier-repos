@@ -21,13 +21,19 @@
 
         
 
+        
+
          with the <see
          cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
         
 
+        
+
          property to inform indigo1 that the current service object must be recycled at a particular point in the invocation process. The default behavior is to recycle a service object according to the <see
          cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+        
 
         
 
@@ -119,6 +125,8 @@
           <para
             >Recycles the object according to the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+            
 
             
 

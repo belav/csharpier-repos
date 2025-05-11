@@ -23,6 +23,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -31,6 +33,8 @@
       <para
         >Specifies the control protocol used in establishing a serial port communication for a <see
          cref="T:System.IO.Ports.SerialPort" />
+
+        
 
         
 

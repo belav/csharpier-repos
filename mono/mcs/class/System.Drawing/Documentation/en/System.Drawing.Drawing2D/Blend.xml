@@ -22,8 +22,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Drawing.Drawing2D.Blend.Positions" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          array represents a proportion of the distance along the gradient line. Each element of the <see
          cref="P:System.Drawing.Drawing2D.Blend.Factors" />
 
         
 
+        
+
          array represents the proportion of the starting and ending colors in the gradient blend at the position along the gradient line represented by the corresponding element in the <see
          cref="P:System.Drawing.Drawing2D.Blend.Positions" />
+
+        
 
         
 
@@ -50,8 +60,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Drawing.Drawing2D.Blend.Factors" />
+
+        
 
         
 
@@ -63,6 +77,8 @@
       <para
         >Defines a blend pattern for a <see
          cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+        
 
         
 
@@ -83,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Drawing2D.Blend" />
+
+            
 
             
 
@@ -112,6 +130,8 @@
 
             
 
+            
+
              class with the specified number of factors and positions.</para
           >
         </summary>
@@ -120,13 +140,19 @@
 
           
 
+          
+
           The number of elements in the <see
            cref="P:System.Drawing.Drawing2D.Blend.Factors" />
 
           
 
+          
+
            and <see
            cref="P:System.Drawing.Drawing2D.Blend.Positions" />
+
+          
 
           
 

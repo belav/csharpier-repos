@@ -32,6 +32,8 @@
 
         
 
+        
+
          content intended to be displayed to an end user.</para
       >
     </summary>
@@ -63,8 +65,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+
+            
 
             
 
@@ -76,8 +82,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+
+          
 
           
 
@@ -108,11 +118,15 @@
 
             
 
+            
+
              with the specified text. </para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,6 +163,8 @@
 
             
 
+            
+
              parameter may be set to one of the following values:</para
           >
           <list type="bullet">
@@ -177,8 +193,12 @@
 
             
 
+            
+
              with the specified text and <see
              cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />
+
+            
 
             
 
@@ -190,6 +210,8 @@
 
           
 
+          
+
           The text of the content.</param
         >
         <param name="textKind">
@@ -197,8 +219,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />
+
+          
 
           
 
@@ -233,6 +259,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -241,6 +269,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+
+            
 
             
 
@@ -267,6 +297,8 @@
           <para
             >Gets the text of the <see
              cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+
+            
 
             
 
@@ -310,6 +342,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -344,8 +378,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -357,8 +395,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

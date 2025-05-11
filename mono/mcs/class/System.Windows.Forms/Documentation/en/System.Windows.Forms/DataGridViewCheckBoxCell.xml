@@ -26,8 +26,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          values. The <see
          cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          is the column type specialized to hold cells of this type. By default, the <see
          cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+
+        
 
         
 
@@ -59,13 +71,19 @@
 
         
 
+        
+
         . To pattern the cells within a column after an existing <see
          cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
         
 
+        
+
         , set the column's <see
          cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+
+        
 
         
 
@@ -78,8 +96,12 @@
 
         
 
+        
+
         , the <see
          cref="P:System.Windows.Forms.DataGridView.IsCurrentCellInEditMode" />
+
+        
 
         
 
@@ -91,8 +113,12 @@
 
         
 
+        
+
          event, but this event occurs before the cell value is updated. If you need the new value at the time of the click, one option is to calculate what the expected value will be based on the current value. Another approach is to commit the change immediately, and handle the <see
          cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+        
 
         
 
@@ -101,13 +127,19 @@
 
         
 
+        
+
          event. In the handler, if the current cell is a check box cell, call the <see
          cref="M:System.Windows.Forms.DataGridView.CommitEdit(System.Windows.Forms.DataGridViewDataErrorContexts)" />
 
         
 
+        
+
          method and pass in the <see
          cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" />
+
+        
 
         
 
@@ -119,6 +151,8 @@
       <para
         >Displays a check box user interface (UI) to use in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -141,6 +175,8 @@
 
             
 
+            
+
              property value to false.</para
           >
         </remarks>
@@ -149,6 +185,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+
+            
 
             
 
@@ -176,6 +214,8 @@
 
             
 
+            
+
              parameter is set to true, an additional, indeterminate state is allowed, which is visually denoted by a grey partial check.</para
           >
         </remarks>
@@ -187,11 +227,15 @@
 
             
 
+            
+
              class, enabling binary or ternary state.</para
           >
         </summary>
         <param name="threeState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,8 +263,12 @@
 
             
 
+            
+
              method whenever you derive from <see
              cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+
+            
 
             
 
@@ -239,8 +287,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+
+            
 
             
 
@@ -273,13 +325,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+            
 
             
 
@@ -292,6 +350,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -311,8 +371,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -346,13 +410,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+            
 
             
 
@@ -365,6 +435,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -384,8 +456,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -413,8 +489,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+            
 
             
 
@@ -424,6 +504,8 @@
             <para
               >To get or set <see
                cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+              
 
               
 
@@ -439,6 +521,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -450,8 +534,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+
+            
 
             
 
@@ -549,13 +637,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+
+            
 
             
 
@@ -567,8 +661,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+
+            
 
             
 
@@ -609,6 +707,8 @@
 
             
 
+            
+
              flat style is not supported by this cell type.</para
           >
           <para
@@ -617,8 +717,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FlatStyle" />
+
+            
 
             
 
@@ -656,13 +760,19 @@
 
             
 
+            
+
              property value is false, the value of this property is the <see
              cref="T:System.Boolean" />
 
             
 
+            
+
              type; otherwise, it is the <see
              cref="T:System.Windows.Forms.CheckState" />
+
+            
 
             
 
@@ -727,8 +837,12 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.ClipboardContent" />
+
+            
 
             
 
@@ -737,8 +851,12 @@
 
             
 
+            
+
              that you can cast to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -747,13 +865,19 @@
 
             
 
+            
+
              or a <see
              cref="T:System.Windows.Forms.CheckState" />
 
             
 
+            
+
              value, depending on the value of the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FormattedValueType" />
+
+            
 
             
 
@@ -772,6 +896,8 @@
 
             
 
+            
+
              representing the formatted value of the editing cell. </para
           >
         </returns>
@@ -780,8 +906,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+
+          
 
           
 
@@ -901,13 +1031,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+
+            
 
             
 
@@ -919,8 +1055,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+
+            
 
             
 
@@ -963,8 +1103,12 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyDown(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+
+            
 
             
 
@@ -973,8 +1117,12 @@
 
             
 
+            
+
              with the same <see
              cref="T:System.Windows.Forms.KeyEventArgs" />
+
+            
 
             
 
@@ -987,6 +1135,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1006,8 +1156,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1015,6 +1169,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1047,8 +1203,12 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+
+            
 
             
 
@@ -1057,8 +1217,12 @@
 
             
 
+            
+
              with the same <see
              cref="T:System.Windows.Forms.KeyEventArgs" />
+
+            
 
             
 
@@ -1071,6 +1235,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1090,8 +1256,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1099,6 +1269,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1131,13 +1303,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -1150,6 +1328,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1169,8 +1349,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1202,13 +1386,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
+
+            
 
             
 
@@ -1221,6 +1411,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1237,6 +1429,8 @@
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1268,13 +1462,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseLeave(System.Int32)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseLeave(System.Int32)" />
+
+            
 
             
 
@@ -1287,6 +1487,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1303,6 +1505,8 @@
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1335,13 +1539,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -1354,6 +1564,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1373,8 +1585,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1453,8 +1669,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.KeyDown" />
+
+            
 
             
 
@@ -1470,8 +1690,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1479,6 +1703,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1512,13 +1738,19 @@
 
             
 
+            
+
              value), this method updates the cell's user interface (UI) and raises the <see
              cref="M:System.Windows.Forms.DataGridView.OnCellClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
+            
+
              event on the owning <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1530,8 +1762,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -1547,8 +1783,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1556,6 +1796,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1590,8 +1832,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.Leave" />
+
+            
 
             
 
@@ -1607,10 +1853,14 @@
 
           
 
+          
+
           The row index of the current cell, or -1 if the cell is not owned by a row.</param
         >
         <param name="throughMouseClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1644,8 +1894,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseDown" />
+
+            
 
             
 
@@ -1661,8 +1915,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1692,6 +1950,8 @@
 
             
 
+            
+
              is normal, this method causes the cell's user interface (UI) to be updated.</para
           >
           <para
@@ -1700,8 +1960,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseLeave" />
+
+            
 
             
 
@@ -1714,6 +1978,8 @@
         </summary>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1749,8 +2015,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseMove" />
+
+            
 
             
 
@@ -1766,8 +2036,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1798,8 +2072,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseUp" />
+
+            
 
             
 
@@ -1815,8 +2093,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1863,6 +2145,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1871,8 +2155,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1883,13 +2171,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -1900,8 +2194,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1912,6 +2210,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="elementState">
@@ -1919,8 +2219,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1931,10 +2235,14 @@
 
           
 
+          
+
           The data of the cell that is being painted.</param
         >
         <param name="formattedValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1945,6 +2253,8 @@
 
           
 
+          
+
           An error message that is associated with the cell.</param
         >
         <param name="cellStyle">
@@ -1952,8 +2262,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -1964,8 +2278,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -1976,8 +2294,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -2013,13 +2335,19 @@
 
             
 
+            
+
              control calls this method to convert the displayed value from the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
 
             
 
+            
+
              to the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />
+
+            
 
             
 
@@ -2031,13 +2359,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+
+            
 
             
 
@@ -2057,6 +2391,8 @@
 
           
 
+          
+
           The display value of the cell.</param
         >
         <param name="cellStyle">
@@ -2064,8 +2400,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -2076,8 +2416,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -2088,8 +2432,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -2127,6 +2475,8 @@
 
           
 
+          
+
           This parameter is ignored.</param
         >
       </Docs>
@@ -2152,8 +2502,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+
+            
 
             
 
@@ -2165,8 +2519,12 @@
 
             
 
+            
+
              property, the cell <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+
+            
 
             
 
@@ -2175,8 +2533,12 @@
 
             
 
+            
+
              property of the associated cell style when you change its value. When you change the cell <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+
+            
 
             
 
@@ -2185,8 +2547,12 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+
+            
 
             
 
@@ -2195,13 +2561,19 @@
 
             
 
+            
+
             . When you change the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
+            
+
              property value to false, be sure to set the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -2247,6 +2619,8 @@
 
             
 
+            
+
              that represents the current cell.</para
           >
         </returns>
@@ -2272,13 +2646,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+
+            
 
             
 
@@ -2290,8 +2670,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+
+            
 
             
 
@@ -2329,13 +2713,19 @@
 
             
 
+            
+
              property of the cell has not been set, then the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.ValueType" />
 
             
 
+            
+
              property for the owning <see
              cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+
+            
 
             
 
@@ -2347,8 +2737,12 @@
 
             
 
+            
+
              for binary mode and <see
              cref="T:System.Windows.Forms.CheckState" />
+
+            
 
             
 
@@ -2360,8 +2754,12 @@
 
             
 
+            
+
              is the actual data object contained in the cell, whereas the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
+
+            
 
             
 
@@ -2370,8 +2768,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FormattedValueType" />
+
+            
 
             
 

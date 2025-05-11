@@ -16,8 +16,12 @@
 
         
 
+        
+
          interface enables you to associate custom <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+        
 
         
 
@@ -26,8 +30,12 @@
 
         
 
+        
+
          control, a user control, or a custom server control. The <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+        
 
         
 
@@ -36,8 +44,12 @@
 
         
 
+        
+
          control, and this zone with its editing controls provides end users with a user interface (UI) for modifying properties, appearance, and behavior on the associated <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -49,8 +61,12 @@
 
         
 
+        
+
          interface includes two exposed members. The <see
          cref="P:System.Web.UI.WebControls.WebParts.IWebEditable.WebBrowsableObject" />
+
+        
 
         
 
@@ -59,13 +75,19 @@
 
         
 
+        
+
          controls to get a reference to the associated server control. The <see
          cref="M:System.Web.UI.WebControls.WebParts.IWebEditable.CreateEditorParts" />
 
         
 
+        
+
          method is used to create an instance of each custom <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+        
 
         
 
@@ -77,8 +99,12 @@
 
         
 
+        
+
          interface is already implemented on the base <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -87,8 +113,12 @@
 
         
 
+        
+
          controls with the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -97,13 +127,19 @@
 
         
 
+        
+
          control with custom <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
 
         
 
+        
+
          controls, you can override the <see
          cref="M:System.Web.UI.WebControls.WebParts.IWebEditable.CreateEditorParts" />
+
+        
 
         
 
@@ -115,6 +151,8 @@
       <para
         >Provides an interface for developers to specify custom editing controls that are associated with a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -143,8 +181,12 @@
 
             
 
+            
+
              method enables you to create a collection of all the custom <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -153,8 +195,12 @@
 
             
 
+            
+
              control, or user control, and return them as an <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -163,8 +209,12 @@
 
             
 
+            
+
              control takes the collection and creates instances of all the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -176,8 +226,12 @@
 
             
 
+            
+
              control by overriding its <see
              cref="M:System.Web.UI.WebControls.WebParts.WebPart.CreateEditorParts" />
+
+            
 
             
 
@@ -186,8 +240,12 @@
 
             
 
+            
+
              controls you want to associate with your controls, add them to an <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -196,13 +254,19 @@
 
             
 
+            
+
              controls is then assigned to the <see
              cref="P:System.Web.UI.WebControls.WebParts.EditorZoneBase.EditorParts" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorZoneBase" />
+
+            
 
             
 
@@ -215,8 +279,12 @@
 
               
 
+              
+
                that is added to the collection of <see
                cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+              
 
               
 
@@ -225,8 +293,12 @@
 
               
 
+              
+
                method must have a value assigned to its ID property, otherwise an exception will be thrown when the collection is assigned to the <see
                cref="P:System.Web.UI.WebControls.WebParts.EditorZoneBase.EditorParts" />
+
+              
 
               
 
@@ -242,8 +314,12 @@
 
             
 
+            
+
              controls associated with a server control that implements the <see
              cref="T:System.Web.UI.WebControls.WebParts.IWebEditable" />
+
+            
 
             
 
@@ -258,8 +334,12 @@
 
             
 
+            
+
              that contains the collection of custom <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -288,8 +368,12 @@
 
             
 
+            
+
              property provides a way for <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -298,6 +382,8 @@
           <para
             >Although the property itself is read-only, the object reference that it returns enables <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -312,8 +398,12 @@
 
             
 
+            
+
              control, user control, or custom control that will be edited by <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 

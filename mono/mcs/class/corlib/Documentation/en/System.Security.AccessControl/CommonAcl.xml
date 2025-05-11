@@ -37,8 +37,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.AccessControl.PropagationFlags.NoPropagateInherit" />
+
+            
 
             
 
@@ -47,8 +51,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+            
 
             
 
@@ -62,13 +70,19 @@
 
             
 
+            
+
              flag in the absence of the <see
              cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
 
             
 
+            
+
              or <see
              cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+            
 
             
 
@@ -82,13 +96,19 @@
 
             
 
+            
+
              flag in the absence of the <see
              cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
 
             
 
+            
+
              or <see
              cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+            
 
             
 
@@ -102,13 +122,19 @@
 
             
 
+            
+
              value of <see
              cref="F: System.Security.AccessControl.AuditFlags.Success" />
 
             
 
+            
+
              or <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+
+            
 
             
 
@@ -122,8 +148,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+
+            
 
             
 
@@ -161,8 +191,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -180,8 +214,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.AccessControl.SystemAcl" />
+
+        
 
         
 
@@ -213,8 +251,12 @@
 
             
 
+            
+
              object. This length should be used before marshaling the access control list (ACL) into a binary array by using the <see
              cref="M:System.Security.AccessControl.CommonAcl.GetBinaryForm" />
+
+            
 
             
 
@@ -243,6 +285,8 @@
           <para
             >Gets the number of access control entries (ACEs) in the current <see
              cref="T:System.Security.AccessControl.CommonAcl" />
+
+            
 
             
 
@@ -283,6 +327,8 @@
 
             
 
+            
+
              object into the specified byte array beginning at the specified offset.</para
           >
         </summary>
@@ -291,8 +337,12 @@
 
           
 
+          
+
           The byte array into which the contents of the <see
            cref="T:System.Security.AccessControl.CommonAcl" />
+
+          
 
           
 
@@ -300,6 +350,8 @@
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,6 +379,8 @@
           <para
             >Gets a Boolean value that specifies whether the access control entries (ACEs) in the current <see
              cref="T:System.Security.AccessControl.CommonAcl" />
+
+            
 
             
 
@@ -358,6 +412,8 @@
 
             
 
+            
+
              object is a container. </para
           >
         </summary>
@@ -383,6 +439,8 @@
           <para
             >Sets whether the current <see
              cref="T:System.Security.AccessControl.CommonAcl" />
+
+            
 
             
 
@@ -450,8 +508,12 @@
 
             
 
+            
+
              object that are associated with the specified <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -463,8 +525,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -498,6 +564,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -523,6 +591,8 @@
           <para
             >Gets the revision level of the <see
              cref="T:System.Security.AccessControl.CommonAcl" />
+
+            
 
             
 

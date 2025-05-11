@@ -29,8 +29,12 @@
 
         
 
+        
+
          object based on data in an XML file. You can add the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -39,13 +43,19 @@
 
         
 
+        
+
          object that makes the <see
          cref="T:System.Data.DataSet" />
 
         
 
+        
+
          dependent on the XML file. If the XML file changes, the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -57,13 +67,19 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Web.Caching.Cache.Insert" />
 
         
 
+        
+
          methods. You cannot use the <see
          cref="P:System.Web.Caching.Cache.Item(System.String)" />
+
+        
 
         
 
@@ -75,8 +91,12 @@
 
         
 
+        
+
          class, specifying the files, keys, or directories on which the item is dependent, and then pass the dependency to the <see
          cref="M:System.Web.Caching.Cache.Add(System.String,System.Object,System.Web.Caching.CacheDependency,System.DateTime,System.TimeSpan,System.Web.Caching.CacheItemPriority,System.Web.Caching.CacheItemRemovedCallback)" />
+
+        
 
         
 
@@ -85,13 +105,19 @@
 
         
 
+        
+
          method. The <see
          cref="T:System.Web.Caching.CacheDependency" />
 
         
 
+        
+
          instance can represent a single file or directory, an array of files or directories, or an array of files or directories along with an array of cache keys (these represent other items stored in the <see
          cref="T:System.Web.Caching.Cache" />
+
+        
 
         
 
@@ -106,13 +132,19 @@
 
         
 
+        
+
          object and a file, cache key, an array of either, or another <see
          cref="T:System.Web.Caching.CacheDependency" />
 
         
 
+        
+
          object. The <see
          cref="T:System.Web.Caching.CacheDependency" />
+
+        
 
         
 
@@ -137,8 +169,12 @@
 
             
 
+            
+
             , implement this version of the <see
              cref="M:System.Web.Caching.CacheDependency.#ctor" />
+
+            
 
             
 
@@ -150,6 +186,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -174,13 +212,19 @@
 
             
 
+            
+
              parameter is not found in the file system, it will be treated as missing. If the directory or file is missing when the object with the dependency is added to the <see
              cref="T:System.Web.Caching.Cache" />
 
             
 
+            
+
             , the cached object will be removed from the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -192,8 +236,12 @@
 
             
 
+            
+
              with a dependency on the following file path: c:\stocks\xyz.dat. If that file is not found when the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -208,11 +256,15 @@
 
             
 
+            
+
              class that monitors a file or directory for changes.</para
           >
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -240,6 +292,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -248,13 +302,19 @@
 
             
 
+            
+
              parameter is not found in the file system, it is treated as missing. If a directory or file is missing when the object with the dependency is added to the <see
              cref="T:System.Web.Caching.Cache" />
 
             
 
+            
+
             , the cached object will be removed from the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -266,8 +326,12 @@
 
             
 
+            
+
              with a dependency on the following file path: c:\stocks\xyz.dat. If that file is not found when the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -277,6 +341,8 @@
             <para
               >When you create the array that contains the file dependencies, you must define the number of files that the item you are adding to the <see
                cref="T:System.Web.Caching.Cache" />
+
+              
 
               
 
@@ -292,11 +358,15 @@
 
             
 
+            
+
              class that monitors an array of paths (to files or directories) for changes.</para
           >
         </summary>
         <param name="filenames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,13 +398,19 @@
 
             
 
+            
+
              parameter is not found in the file system, it will be treated as missing. If the directory or file is missing when the object with the dependency is added to the <see
              cref="T:System.Web.Caching.Cache" />
 
             
 
+            
+
             , the cached object will be removed from the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -346,8 +422,12 @@
 
             
 
+            
+
              with a dependency on the following file path: c:\stocks\xyz.dat. If that file is not found when the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -360,8 +440,12 @@
 
               
 
+              
+
                parameter. Use the <paramref
                name="start" />
+
+              
 
               
 
@@ -370,13 +454,19 @@
 
               
 
+              
+
                parameter. If the last modified date is later than the date and time set passed in the <paramref
                name="start" />
 
               
 
+              
+
                parameter, the cached item is removed from the <see
                cref="T:System.Web.Caching.Cache" />
+
+              
 
               
 
@@ -392,6 +482,8 @@
 
             
 
+            
+
              class that monitors a file or directory for changes.</para
           >
         </summary>
@@ -400,10 +492,14 @@
 
           
 
+          
+
           The path to a file or directory that the cached object is dependent upon. When this resource changes, the cached object becomes obsolete and is removed from the cache. </param
         >
         <param name="start">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -435,13 +531,19 @@
 
             
 
+            
+
              parameter is not found in the file system, it is treated as missing. If a directory or file is missing when the object with the dependency is added to the <see
              cref="T:System.Web.Caching.Cache" />
 
             
 
+            
+
             , the cached object will be removed from the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -453,8 +555,12 @@
 
             
 
+            
+
              with a dependency on the following file path: c:\stocks\xyz.dat. If that file is not found when the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -467,8 +573,12 @@
 
               
 
+              
+
                parameter. Use the <paramref
                name="start" />
+
+              
 
               
 
@@ -477,13 +587,19 @@
 
               
 
+              
+
                parameter. If the last modified date of any object in the array is later than the date and time set passed in the <paramref
                name="start" />
 
               
 
+              
+
                parameter, the cached item is removed from the <see
                cref="T:System.Web.Caching.Cache" />
+
+              
 
               
 
@@ -499,6 +615,8 @@
 
             
 
+            
+
              class that monitors an array of paths (to files or directories) for changes and specifies a time when change monitoring begins.</para
           >
         </summary>
@@ -507,10 +625,14 @@
 
           
 
+          
+
           An array of paths (to files or directories) that the cached object is dependent upon. When any of these resources changes, the cached object becomes obsolete and is removed from the cache. </param
         >
         <param name="start">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,13 +664,19 @@
 
             
 
+            
+
              parameter is not found in the file system, it is treated as missing. If a directory or file is missing when the object with the dependency is added to the <see
              cref="T:System.Web.Caching.Cache" />
 
             
 
+            
+
             , the cached object will be removed from the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -560,8 +688,12 @@
 
             
 
+            
+
              with a dependency on the following file path: c:\stocks\xyz.dat. If that file is not found when the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -576,6 +708,8 @@
 
             
 
+            
+
              class that monitors an array of paths (to files or directories), an array of cache keys, or both for changes.</para
           >
         </summary>
@@ -584,10 +718,14 @@
 
           
 
+          
+
           An array of paths (to files or directories) that the cached object is dependent upon. When any of these resources changes, the cached object becomes obsolete and is removed from the cache. </param
         >
         <param name="cachekeys">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -620,13 +758,19 @@
 
             
 
+            
+
              parameter is not found in the file system, it is treated as missing. If a directory or file is missing when the object with the dependency is added to the <see
              cref="T:System.Web.Caching.Cache" />
 
             
 
+            
+
             , the cached object will be removed from the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -638,8 +782,12 @@
 
             
 
+            
+
              with a dependency on the following file path: c:\stocks\xyz.dat. If that file is not found when the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -652,8 +800,12 @@
 
               
 
+              
+
                parameter. Use the <paramref
                name="start" />
+
+              
 
               
 
@@ -662,8 +814,12 @@
 
               
 
+              
+
                or <paramref
                name="cachekeys" />
+
+              
 
               
 
@@ -672,8 +828,12 @@
 
               
 
+              
+
                parameter, the cached item is removed from the <see
                cref="T:System.Web.Caching.Cache" />
+
+              
 
               
 
@@ -689,11 +849,15 @@
 
             
 
+            
+
              class that monitors an array of paths (to files or directories), an array of cache keys, or both for changes.</para
           >
         </summary>
         <param name="filenames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -704,10 +868,14 @@
 
           
 
+          
+
           An array of cache keys that the new object monitors for changes. When any of these cache keys changes, the cached object associated with this dependency object becomes obsolete and is removed from the cache. </param
         >
         <param name="start">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -716,8 +884,12 @@
 
           
 
+          
+
            and <paramref
            name="cachekeys" />
+
+          
 
           
 
@@ -750,13 +922,19 @@
 
             
 
+            
+
              parameter is not found in the file system, it is treated as missing. If a directory or file is missing when the object with the dependency is added to the <see
              cref="T:System.Web.Caching.Cache" />
 
             
 
+            
+
             , the cached object will be removed from the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -768,8 +946,12 @@
 
             
 
+            
+
              with a dependency on the following file path: c:\stocks\xyz.dat. If that file is not found when the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -784,8 +966,12 @@
 
             
 
+            
+
              class that monitors an array of paths (to files or directories), an array of cache keys, or both for changes. It also makes itself dependent upon a separate instance of the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -797,10 +983,14 @@
 
           
 
+          
+
           An array of paths (to files or directories) that the cached object is dependent upon. When any of these resources changes, the cached object becomes obsolete and is removed from the cache. </param
         >
         <param name="cachekeys">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -811,8 +1001,12 @@
 
           
 
+          
+
           Another instance of the <see
            cref="T:System.Web.Caching.CacheDependency" />
+
+          
 
           
 
@@ -846,13 +1040,19 @@
 
             
 
+            
+
              parameter is not found in the file system, it is treated as missing. If a directory or file is missing when the object with the dependency is added to the <see
              cref="T:System.Web.Caching.Cache" />
 
             
 
+            
+
             , the cached object will be removed from the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -864,8 +1064,12 @@
 
             
 
+            
+
              with a dependency on the following file path: c:\stocks\xyz.dat. If that file is not found when the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -878,8 +1082,12 @@
 
               
 
+              
+
                parameter. Use the <paramref
                name="start" />
+
+              
 
               
 
@@ -888,8 +1096,12 @@
 
               
 
+              
+
               , <paramref
                name="cachekeys" />
+
+              
 
               
 
@@ -898,13 +1110,19 @@
 
               
 
+              
+
                parameters. If the last modified date for any of those objects is later than the date and time passed in the <paramref
                name="start" />
 
               
 
+              
+
                parameter, the cached item is removed from the <see
                cref="T:System.Web.Caching.Cache" />
+
+              
 
               
 
@@ -920,8 +1138,12 @@
 
             
 
+            
+
              class that monitors an array of paths (to files or directories), an array of cache keys, or both for changes. It also makes itself dependent upon another instance of the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -933,10 +1155,14 @@
 
           
 
+          
+
           An array of paths (to files or directories) that the cached object is dependent upon. When any of these resources changes, the cached object becomes obsolete and is removed from the cache. </param
         >
         <param name="cachekeys">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -947,8 +1173,12 @@
 
           
 
+          
+
           Another instance of the <see
            cref="T:System.Web.Caching.CacheDependency" />
+
+          
 
           
 
@@ -959,8 +1189,12 @@
 
           
 
+          
+
           The time against which to check the last modified date of the objects in the arrays and the <see
            cref="T:System.Web.Caching.CacheDependency" />
+
+          
 
           
 
@@ -991,6 +1225,8 @@
 
             
 
+            
+
              class is required to implement this method to clean up resources the derived class has used.</para
           >
         </remarks>
@@ -1002,8 +1238,12 @@
 
             
 
+            
+
              class and any classes that derive from <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1026,6 +1266,8 @@
           <para
             >Releases the resources used by the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1057,13 +1299,19 @@
 
             
 
+            
+
              method completes the initialization of the <see
              cref="T:System.Web.Caching.CacheDependency" />
 
             
 
+            
+
              object. This method is called by all <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1075,6 +1323,8 @@
           <para
             >Completes initialization of the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1102,11 +1352,15 @@
 
             
 
+            
+
              class associated with an item or an application.</para
           >
           <para
             >The identifier is a combination of either the file name (for a file dependency) or the key name (for a cache-key dependency) and a string that this method assigns to the dependency. In classes that derive from the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1121,6 +1375,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1129,6 +1385,8 @@
           <para
             >The unique identifier for the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1153,8 +1411,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1163,8 +1425,12 @@
 
             
 
+            
+
              changes, the item added to the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -1173,8 +1439,12 @@
 
             
 
+            
+
              has changed, and recreate the item in the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -1186,6 +1456,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1223,6 +1495,8 @@
 
             
 
+            
+
              class must implement this method.</para
           >
           <para
@@ -1231,8 +1505,12 @@
 
             
 
+            
+
              class, you use the base functionality of any method or property that you have not overridden. When you create an instance of the derived class, it represents the files, cache keys, database tables, or other arbitrary objects that you want to make a cached item dependent upon. When a dependency item changes, this method notifies the base functionality of the <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1241,8 +1519,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Caching.CacheDependency.UtcLastModified" />
+
+            
 
             
 
@@ -1257,8 +1539,12 @@
 
             
 
+            
+
              object that the dependency represented by a derived <see
              cref="T:System.Web.Caching.CacheDependency" />
+
+            
 
             
 
@@ -1270,6 +1556,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -1277,8 +1565,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1309,6 +1601,8 @@
         </summary>
         <param name="utcLastModified">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -36,6 +36,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -69,8 +71,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Util.TransactedCallback" />
+
+          
 
           
 
@@ -81,8 +87,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EnterpriseServices.TransactionOption" />
+
+          
 
           
 

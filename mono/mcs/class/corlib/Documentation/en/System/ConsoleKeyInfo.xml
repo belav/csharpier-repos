@@ -24,8 +24,12 @@
 
         
 
+        
+
          type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see
          cref="M:System.Console.ReadKey" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          object describes the <see
          cref="T:System.ConsoleKey" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          object also describes, in a bitwise combination of <see
          cref="T:System.ConsoleModifiers" />
+
+        
 
         
 
@@ -92,11 +104,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The <see
              cref="T:System.ConsoleKeyInfo" />
+
+            
 
             
 
@@ -111,6 +127,8 @@
 
             
 
+            
+
              structure using the specified character, console key, and modifier keys.</para
           >
         </summary>
@@ -119,8 +137,12 @@
 
           
 
+          
+
           The Unicode character that corresponds to the <paramref
            name="key" />
+
+          
 
           
 
@@ -131,8 +153,12 @@
 
           
 
+          
+
           The console key that corresponds to the <paramref
            name="keyChar" />
+
+          
 
           
 
@@ -143,6 +169,8 @@
 
           
 
+          
+
           true to indicate that a SHIFT key was pressed; otherwise, false. </param
         >
         <param name="alt">
@@ -150,10 +178,14 @@
 
           
 
+          
+
           true to indicate that an ALT key was pressed; otherwise, false. </param
         >
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,8 +220,12 @@
 
             
 
+            
+
              objects are equal if their corresponding <see
              cref="P:System.ConsoleKeyInfo.KeyChar" />
+
+            
 
             
 
@@ -198,8 +234,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ConsoleKeyInfo.Modifiers" />
+
+            
 
             
 
@@ -211,13 +251,19 @@
 
             
 
+            
+
              method performs slightly better than the <see
              cref="M:System.ConsoleKeyInfo.Equals(System.Object)" />
 
             
 
+            
+
              method because it does not have to convert <paramref
              name="obj" />
+
+            
 
             
 
@@ -232,8 +278,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.ConsoleKeyInfo" />
+
+            
 
             
 
@@ -248,8 +298,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ConsoleKeyInfo" />
+
+            
 
             
 
@@ -261,8 +315,12 @@
 
           
 
+          
+
           An object to compare to the current <see
            cref="T:System.ConsoleKeyInfo" />
+
+          
 
           
 
@@ -297,8 +355,12 @@
 
             
 
+            
+
              objects are equal if their corresponding <see
              cref="P:System.ConsoleKeyInfo.KeyChar" />
+
+            
 
             
 
@@ -307,8 +369,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ConsoleKeyInfo.Modifiers" />
+
+            
 
             
 
@@ -323,6 +389,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -334,13 +402,19 @@
 
             
 
+            
+
              is a <see
              cref="T:System.ConsoleKeyInfo" />
 
             
 
+            
+
              object and is equal to the current <see
              cref="T:System.ConsoleKeyInfo" />
+
+            
 
             
 
@@ -352,8 +426,12 @@
 
           
 
+          
+
           An object to compare to the current <see
            cref="T:System.ConsoleKeyInfo" />
+
+          
 
           
 
@@ -386,13 +464,19 @@
 
             
 
+            
+
              method is not suitable for distinguishing one <see
              cref="T:System.ConsoleKeyInfo" />
 
             
 
+            
+
              object from another. If your application needs a unique hash code, override the <see
              cref="M:System.ConsoleKeyInfo.GetHashCode" />
+
+            
 
             
 
@@ -404,6 +488,8 @@
           <para
             >Returns the hash code for the current <see
              cref="T:System.ConsoleKeyInfo" />
+
+            
 
             
 
@@ -442,6 +528,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -469,13 +557,19 @@
 
             
 
+            
+
              key or the <ui
             >Home</ui>
 
             
 
+            
+
              key), the value of the <see
              cref="P:System.ConsoleKeyInfo.KeyChar" />
+
+            
 
             
 
@@ -487,6 +581,8 @@
           <para
             >Gets the Unicode character represented by the current <see
              cref="T:System.ConsoleKeyInfo" />
+
+            
 
             
 
@@ -518,6 +614,8 @@
           <para
             >Gets a bitwise combination of <see
              cref="T:System.ConsoleModifiers" />
+
+            
 
             
 
@@ -556,8 +654,12 @@
 
             
 
+            
+
              objects are equal if their corresponding <see
              cref="P:System.ConsoleKeyInfo.KeyChar" />
+
+            
 
             
 
@@ -566,8 +668,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ConsoleKeyInfo.Modifiers" />
+
+            
 
             
 
@@ -582,6 +688,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -593,8 +701,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="b" />
+
+            
 
             
 
@@ -606,10 +718,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -647,8 +763,12 @@
 
             
 
+            
+
              objects are equal if their corresponding <see
              cref="P:System.ConsoleKeyInfo.KeyChar" />
+
+            
 
             
 
@@ -657,8 +777,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ConsoleKeyInfo.Modifiers" />
+
+            
 
             
 
@@ -673,6 +797,8 @@
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -684,8 +810,12 @@
 
             
 
+            
+
              is not equal to <paramref
              name="b" />
+
+            
 
             
 
@@ -697,10 +827,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

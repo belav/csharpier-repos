@@ -34,6 +34,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -158,6 +160,8 @@
           <para
             >The function is accessed the same as <see
              cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_PUREVIRTUAL" />
+
+            
 
             
 

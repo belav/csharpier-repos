@@ -30,13 +30,19 @@
 
         
 
+        
+
          enables streaming communication in both directions. Setting the transfer mode to <see
          cref="F:System.ServiceModel.TransferMode.StreamedRequest" />
 
         
 
+        
+
          or <see
          cref="F:System.ServiceModel.TransferMode.StreamedResponse" />
+
+        
 
         
 
@@ -49,13 +55,19 @@
 
         
 
+        
+
          on the <see
          cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.NetTcpBinding" />
+
+        
 
         
 
@@ -64,13 +76,19 @@
 
         
 
+        
+
          system-provided bindings using the transfer mode properties exposed on them. The mode can be set on the <see
          cref="T:System.ServiceModel.NetTcpBinding" />
 
         
 
+        
+
         , for example, by using the <see
          cref="P:System.ServiceModel.NetTcpBinding.TransferMode" />
+
+        
 
         
 
@@ -82,8 +100,12 @@
 
         
 
+        
+
          and use the <see
          cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.TransferMode" />
+
+        
 
         
 
@@ -93,6 +115,8 @@
       <para
         >Using the <see
          cref="F:System.ServiceModel.TransferMode.Streamed" />
+
+        
 
         
 
@@ -106,13 +130,19 @@
 
             
 
+            
+
             , be a subtype of <see
              cref="T:System.IO.Stream" />
 
             
 
+            
+
             , or implement the <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -129,6 +159,8 @@
 
             
 
+            
+
             . The headers for a message must not exceed the size of the MaxBufferSize transport quota which is exposed on the various bindings and binding elements. </para
           >
         </item>
@@ -139,8 +171,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.ServiceModel.TransferMode.Streamed" />
+
+        
 
         
 
@@ -149,13 +185,19 @@
 
         
 
+        
+
         . For streamed transfers, the native channels are <see
          cref="T:System.ServiceModel.Channels.IRequestChannel" />
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.IReplyChannel" />
+
+        
 
         
 

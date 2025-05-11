@@ -5,7 +5,7 @@
 
       >[Example: Consider an application that consists of two separate programs: <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 namespace Program1  
 {  

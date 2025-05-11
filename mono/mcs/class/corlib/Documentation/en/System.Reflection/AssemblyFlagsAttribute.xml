@@ -38,6 +38,8 @@
 
         
 
+        
+
          enumeration describes the assembly characteristics that can be set using this attribute.</para
       >
       <para
@@ -46,8 +48,12 @@
 
         
 
+        
+
          property to obtain an <see
          cref="T:System.Reflection.AssemblyName" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          property to obtain an <see
          cref="T:System.Reflection.AssemblyNameFlags" />
+
+        
 
         
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
          flags for a dynamic assembly, set the <see
          cref="P:System.Reflection.AssemblyName.Flags" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          object that you pass to the <see
          cref="Overload:System.AppDomain.DefineDynamicAssembly" />
+
+        
 
         
 
@@ -92,6 +110,8 @@
       <para
         >Specifies a bitwise combination of <see
          cref="T:System.Reflection.AssemblyNameFlags" />
+
+        
 
         
 
@@ -133,8 +153,12 @@
 
             
 
+            
+
              class with the specified combination of <see
              cref="T:System.Reflection.AssemblyNameFlags" />
+
+            
 
             
 
@@ -146,8 +170,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.AssemblyNameFlags" />
+
+          
 
           
 
@@ -183,8 +211,12 @@
 
             
 
+            
+
              class with the specified combination of <see
              cref="T:System.Reflection.AssemblyNameFlags" />
+
+            
 
             
 
@@ -196,8 +228,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.AssemblyNameFlags" />
+
+          
 
           
 
@@ -242,8 +278,12 @@
 
             
 
+            
+
              class with the specified combination of <see
              cref="T:System.Reflection.AssemblyNameFlags" />
+
+            
 
             
 
@@ -255,8 +295,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.AssemblyNameFlags" />
+
+          
 
           
 
@@ -286,6 +330,8 @@
 
             
 
+            
+
              type before using it.</para
           >
         </remarks>
@@ -294,6 +340,8 @@
           <para
             >Gets an integer value representing the combination of <see
              cref="T:System.Reflection.AssemblyNameFlags" />
+
+            
 
             
 
@@ -332,6 +380,8 @@
 
             
 
+            
+
              type before using it.</para
           >
         </remarks>
@@ -340,6 +390,8 @@
           <para
             >Gets an unsigned integer value representing the combination of <see
              cref="T:System.Reflection.AssemblyNameFlags" />
+
+            
 
             
 

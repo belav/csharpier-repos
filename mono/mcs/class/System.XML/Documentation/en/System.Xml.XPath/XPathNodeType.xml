@@ -26,6 +26,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -54,6 +56,8 @@
           <para
             >Any of the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -181,6 +185,8 @@
           <para
             >A processing instruction, such as &lt;?pi test?&gt;. This does not include XML declarations, which are not visible to the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 

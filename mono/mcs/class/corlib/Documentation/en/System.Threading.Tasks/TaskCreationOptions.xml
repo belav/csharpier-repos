@@ -49,6 +49,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -73,6 +75,8 @@
           <para
             >Specifies that an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -103,6 +107,8 @@
 
             
 
+            
+
              as the current scheduler.</para
           >
         </summary>
@@ -127,6 +133,8 @@
           <para
             >Specifies that a task will be a long-running, coarse-grained operation involving fewer, larger components than fine-grained systems. It provides a hint to the <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -174,6 +182,8 @@
           <para
             >A hint to a <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 

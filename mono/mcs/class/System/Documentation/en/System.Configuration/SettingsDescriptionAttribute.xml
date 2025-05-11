@@ -35,6 +35,8 @@
 
         
 
+        
+
          is intended to assist both design time tools and administrative run time tools in identifying and describing the associated configuration property.</para
       >
       <para>This attribute is optional and can only be applied at the individual configuration property level.</para>
@@ -72,13 +74,19 @@
 
             
 
+            
+
              class, whose length is represented by a <see
              cref="T:System.Int32" />
 
             
 
+            
+
             , the following two practical considerations will limit the size of the <paramref
              name="description" />
+
+            
 
             
 
@@ -101,6 +109,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -109,8 +119,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -140,8 +154,12 @@
 
             
 
+            
+
              property is set by the <see
              cref="M:System.Configuration.SettingsDescriptionAttribute.#ctor(System.String)" />
+
+            
 
             
 

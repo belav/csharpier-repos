@@ -31,8 +31,12 @@
 
         
 
+        
+
          class. Instead, this class is inherited by the <see
          cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          class to create a custom hot spot class that represents a unique shape that you define. However, you can define most shapes using the <see
          cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+        
 
         
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+        
 
         
 
@@ -74,8 +90,12 @@
 
         
 
+        
+
          in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -84,8 +104,12 @@
 
         
 
+        
+
          property specifies this behavior. To navigate to a URL, set the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -94,8 +118,12 @@
 
         
 
+        
+
          property to specify the URL to navigate to. To post back to the server, set the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -104,8 +132,12 @@
 
         
 
+        
+
          property to specify a name for the <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -114,8 +146,12 @@
 
         
 
+        
+
          event data when the <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -124,8 +160,12 @@
 
         
 
+        
+
          object to have no behavior set the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -137,8 +177,12 @@
 
         
 
+        
+
          property on the containing <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -147,8 +191,12 @@
 
         
 
+        
+
          object's behavior. For more information, see <see
          cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+        
 
         
 
@@ -175,6 +223,8 @@
 
             
 
+            
+
              class is abstract and therefore cannot be instantiated directly.</para
           >
         </remarks>
@@ -183,6 +233,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -219,13 +271,19 @@
 
             
 
+            
+
              property to specify the keyboard shortcut for a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              region. This allows you to navigate quickly to the region by pressing the ALT key and the key for the specified character on the keyboard. For example, setting the access key of a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -237,8 +295,12 @@
 
             
 
+            
+
              property. If you attempt to set this property to a value that is neither null, <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -253,12 +315,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -270,6 +336,8 @@
           <para
             >Gets or sets the access key that allows you to quickly navigate to the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -312,8 +380,12 @@
 
             
 
+            
+
              property to specify the text to display for a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -322,8 +394,12 @@
 
             
 
+            
+
              control when the image specified by the <see
              cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
+
+            
 
             
 
@@ -335,8 +411,12 @@
 
             
 
+            
+
              control is rendered to a browser that does not support images, instead of displaying an image, it renders a hyperlink for each <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -345,8 +425,12 @@
 
             
 
+            
+
              control. The control retrieves the text to display for each hyperlink from the <see
              cref="P:System.Web.UI.WebControls.HotSpot.AlternateText" />
+
+            
 
             
 
@@ -355,8 +439,12 @@
 
             
 
+            
+
             . When a user clicks one of the hyperlinks, it behaves like a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -368,13 +456,19 @@
 
             
 
+            
+
              control renders to a browser that supports the ToolTips feature, the value of the <see
              cref="P:System.Web.UI.WebControls.HotSpot.AlternateText" />
 
             
 
+            
+
              property is displayed as a ToolTip for the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -386,12 +480,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -406,8 +504,12 @@
 
             
 
+            
+
              object in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -436,8 +538,12 @@
 
             
 
+            
+
              method returns the string representation of the coordinates of the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -452,6 +558,8 @@
 
             
 
+            
+
              region.</para
           >
         </summary>
@@ -460,6 +568,8 @@
           <para
             >A string that represents the coordinates of the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -499,8 +609,12 @@
 
             
 
+            
+
              property to specify the behavior of a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -509,13 +623,19 @@
 
             
 
+            
+
              control when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              is clicked. This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.HotSpotMode" />
+
+            
 
             
 
@@ -543,8 +663,12 @@
 
                   
 
+                  
+
                    uses the behavior set by the <see
                    cref="T:System.Web.UI.WebControls.ImageMap" />
+
+                  
 
                   
 
@@ -553,13 +677,19 @@
 
                   
 
+                  
+
                    property. If the <see
                    cref="T:System.Web.UI.WebControls.ImageMap" />
 
                   
 
+                  
+
                    control does not define the behavior, the <see
                    cref="T:System.Web.UI.WebControls.HotSpot" />
+
+                  
 
                   
 
@@ -578,6 +708,8 @@
 
                   
 
+                  
+
                    does not have any behavior.</para
                 >
               </description>
@@ -590,6 +722,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.HotSpot" />
+
+                  
 
                   
 
@@ -608,6 +742,8 @@
 
                   
 
+                  
+
                    generates a postback to the server. </para
                 >
               </description>
@@ -619,8 +755,12 @@
 
             
 
+            
+
              behavior on either the <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+            
 
             
 
@@ -629,8 +769,12 @@
 
             
 
+            
+
              property of each individual <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -639,8 +783,12 @@
 
             
 
+            
+
              property specified on each individual <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -649,8 +797,12 @@
 
             
 
+            
+
              property on the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -662,8 +814,12 @@
 
             
 
+            
+
              property of an individual <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -672,13 +828,19 @@
 
             
 
+            
+
              gets its behavior from the containing <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
 
             
 
+            
+
              control's <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+            
 
             
 
@@ -687,8 +849,12 @@
 
             
 
+            
+
              control's <see
              cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+            
 
             
 
@@ -700,8 +866,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -710,8 +880,12 @@
 
             
 
+            
+
              object navigates to a URL when the hot spot region is clicked. Use the <see
              cref="P:System.Web.UI.WebControls.HotSpot.NavigateUrl" />
+
+            
 
             
 
@@ -723,8 +897,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -733,8 +911,12 @@
 
             
 
+            
+
              object generates a post back to the server when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -743,8 +925,12 @@
 
             
 
+            
+
              property to specify a name for the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -753,8 +939,12 @@
 
             
 
+            
+
              event data on when a postback event occurs. When a postback <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -763,13 +953,19 @@
 
             
 
+            
+
              event is raised. To programmatically control the actions performed when a postback <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              is clicked, provide an event handler for the <see
              cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+            
 
             
 
@@ -781,8 +977,12 @@
 
             
 
+            
+
              objects in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -791,13 +991,19 @@
 
             
 
+            
+
              property on each individual <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              object to HotSpotMode.NotSet or do not specify a value for the <see
              cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+            
 
             
 
@@ -809,8 +1015,12 @@
 
             
 
+            
+
              objects in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -819,8 +1029,12 @@
 
             
 
+            
+
              property on each individual <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -833,8 +1047,12 @@
 
               
 
+              
+
                control's <see
                cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+              
 
               
 
@@ -843,8 +1061,12 @@
 
               
 
+              
+
                property on the <see
                cref="T:System.Web.UI.WebControls.HotSpot" />
+
+              
 
               
 
@@ -857,13 +1079,19 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              object does not have any behavior when it is clicked. You can use this value to create an inactive hot spot within a larger active hot spot. This option is provided to allow you to create more complex hot-spot zones within an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -875,8 +1103,12 @@
 
             
 
+            
+
              control. For example, the following <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -901,13 +1133,19 @@
 
             
 
+            
+
              object in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
 
             
 
+            
+
              control when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -936,8 +1174,12 @@
 
             
 
+            
+
              member is used primarily by control developers when deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -949,6 +1191,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -984,6 +1228,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -992,8 +1238,12 @@
 
             
 
+            
+
              method is used primarily by control developers when deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1005,8 +1255,12 @@
 
             
 
+            
+
              object from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.HotSpot.SaveViewState" />
+
+            
 
             
 
@@ -1021,6 +1275,8 @@
 
             
 
+            
+
              object's previously saved view state to the object.</para
           >
         </summary>
@@ -1029,13 +1285,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that represents the <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -1065,8 +1327,12 @@
 
             
 
+            
+
              member is used primarily by control developers when deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1078,8 +1344,12 @@
 
             
 
+            
+
              property gets a string that represents the name of the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1091,6 +1361,8 @@
           <para
             >When overridden in a derived class, gets the string representation for the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1133,13 +1405,19 @@
 
             
 
+            
+
              property to specify the URL to navigate to when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              object is clicked. This property has an effect only when the <see
              cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+            
 
             
 
@@ -1151,6 +1429,8 @@
           <para
             >Gets or sets the URL to navigate to when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1190,8 +1470,12 @@
 
             
 
+            
+
              property to specify a name for a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1200,13 +1484,19 @@
 
             
 
+            
+
              event data when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              is clicked. This property has an effect only when the <see
              cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+            
 
             
 
@@ -1218,8 +1508,12 @@
 
             
 
+            
+
              object is clicked, provide an event handler for the <see
              cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+            
 
             
 
@@ -1234,8 +1528,12 @@
 
             
 
+            
+
              object to pass in the event data when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1264,8 +1562,12 @@
 
             
 
+            
+
              member is used primarily by control developers when deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1277,8 +1579,12 @@
 
             
 
+            
+
              property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1291,6 +1597,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -1298,6 +1606,8 @@
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -1312,6 +1622,8 @@
 
             
 
+            
+
              object's view state since the time the page was posted back to the server.</para
           >
         </summary>
@@ -1323,8 +1635,12 @@
 
             
 
+            
+
              that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1358,8 +1674,12 @@
 
             
 
+            
+
              member to determine whether a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1371,13 +1691,19 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1389,6 +1715,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1421,8 +1749,12 @@
 
             
 
+            
+
              member to restore the view state for a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1434,13 +1766,19 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1455,6 +1793,8 @@
 
             
 
+            
+
              object's previously saved view state to the object.</para
           >
         </summary>
@@ -1463,13 +1803,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that contains the saved view state values for the <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -1496,8 +1842,12 @@
 
             
 
+            
+
              method to save the view state for the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1509,13 +1859,19 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1530,6 +1886,8 @@
 
             
 
+            
+
              object's view state since the last time the page was posted back to the server.</para
           >
         </summary>
@@ -1541,8 +1899,12 @@
 
             
 
+            
+
              that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1570,8 +1932,12 @@
 
             
 
+            
+
              method to start tracking view-state changes for the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1583,13 +1949,19 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1601,6 +1973,8 @@
           <para
             >Instructs the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1631,8 +2005,12 @@
 
             
 
+            
+
              property to specify or determine the tab index of a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1644,8 +2022,12 @@
 
             
 
+            
+
              property of each control. When a page is initially loaded, the first item that receives focus when the TAB key is pressed is the address bar. Next, the controls on the Web Forms page are tabbed to in ascending order, based on the value of the <see
              cref="P:System.Web.UI.WebControls.HotSpot.TabIndex" />
+
+            
 
             
 
@@ -1660,8 +2042,12 @@
 
             
 
+            
+
              region from the tab order by setting the <see
              cref="P:System.Web.UI.WebControls.HotSpot.TabIndex" />
+
+            
 
             
 
@@ -1676,6 +2062,8 @@
           <para
             >Gets or sets the tab index of the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1715,8 +2103,12 @@
 
             
 
+            
+
              property to specify the frame or window that displays the Web page linked to when a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1725,8 +2117,12 @@
 
             
 
+            
+
              property is set to HotSpotMode.Navigate, to navigate to a URL. If this property is not set, the browser or window with focus refreshes when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1739,8 +2135,12 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on ANCHOR elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
                cref="P:System.Web.UI.WebControls.HotSpot.Target" />
+
+              
 
               
 
@@ -1749,10 +2149,14 @@
 
               
 
+              
+
                must be XHTML 1.1 compliant. For more information, refer to the topic <format
                type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
+
+              
 
               
 
@@ -1766,10 +2170,14 @@
 
               
 
+              
+
                property to target another window. For more information, see <format
                type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
               </format>
+
+              
 
               
 
@@ -1779,6 +2187,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.HotSpot.Target" />
+
+            
 
             
 
@@ -1848,6 +2258,8 @@
 
             
 
+            
+
              object that navigates to a URL is clicked.</para
           >
         </summary>
@@ -1873,8 +2285,12 @@
 
             
 
+            
+
              method returns a string that represents the current <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1883,8 +2299,12 @@
 
             
 
+            
+
              is an instance of the <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -1899,8 +2319,12 @@
 
             
 
+            
+
              representation of this instance of a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1912,6 +2336,8 @@
           <para
             >A string that represents this <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1940,8 +2366,12 @@
 
             
 
+            
+
              member is used primarily by control developers when deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1950,6 +2380,8 @@
           <para
             >This method is called automatically by ASP.NET when the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -1964,13 +2396,19 @@
 
             
 
+            
+
              object to track changes to its view state so they can be stored in the object's <see
              cref="T:System.Web.UI.StateBag" />
 
             
 
+            
+
              object. This object is accessible through the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -2007,8 +2445,12 @@
 
             
 
+            
+
              member is used primarily by control developers when deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -2020,8 +2462,12 @@
 
             
 
+            
+
              property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -2029,6 +2475,8 @@
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -2042,6 +2490,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2049,6 +2499,8 @@
              type="text/html">
               <a href="60CC581F-1DB5-445B-BA04-A173396BF872">Collections and Data Structures</a>
             </format>
+
+            
 
             
 
@@ -2060,6 +2512,8 @@
           <para
             >Gets a dictionary of state information that allows you to save and restore the view state of a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 

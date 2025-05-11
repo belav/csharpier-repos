@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -24,8 +26,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -42,6 +48,8 @@
       <name>
         <non_terminal where="17.9">operator-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -63,6 +71,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="17.9">unary-operator-declarator</non_terminal>
@@ -81,6 +91,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11">type</non_terminal>
@@ -96,6 +108,8 @@
       <name>
         <non_terminal where="17.9">overloadable-unary-operator</non_terminal>
       </name>
+
+      
 
       
 
@@ -118,6 +132,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11">type</non_terminal>
@@ -136,6 +152,8 @@
       <name>
         <non_terminal where="17.9">overloadable-binary-operator</non_terminal>
       </name>
+
+      
 
       
 
@@ -166,6 +184,8 @@
 
       
 
+      
+
        :  <rhs
       >
         <keyword>implicit</keyword>
@@ -193,6 +213,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.2">block</non_terminal>
@@ -208,13 +230,19 @@
 
     
 
+    
+
     ), binary operators (<hyperlink
     >17.9.2</hyperlink>
 
     
 
+    
+
     ), and conversion operators (<hyperlink
     >17.9.3</hyperlink>
+
+    
 
     
 
@@ -226,13 +254,19 @@
 
     
 
+    
+
      consists of a semi-colon. For all other operators, the <non_terminal
      where="17.9">operator-body</non_terminal>
 
     
 
+    
+
      consists of a block, which specifies the statements to execute when the operator is invoked. The block of an operator must conform to the rules for value-returning methods described in <hyperlink
     >17.5.8</hyperlink>
+
+    
 
     
 
@@ -249,8 +283,12 @@
 
         
 
+        
+
         , <hyperlink
         >17.9.2</hyperlink>
+
+        
 
         
 
@@ -259,11 +297,15 @@
 
         
 
+        
+
         ) must differ from the signatures of all other operators declared in the same class. </list_item
       >
       <list_item
         > All types referenced in an operator declaration must be at least as accessible as the operator itself (<hyperlink
         >10.5.4</hyperlink>
+
+        
 
         
 
@@ -280,11 +322,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >Additional information on conversion operators can be found in <hyperlink
     >13.4</hyperlink>
+
+    
 
     
 

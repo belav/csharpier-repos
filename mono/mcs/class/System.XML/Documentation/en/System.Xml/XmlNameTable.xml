@@ -35,6 +35,8 @@
 
         
 
+        
+
          class for an example using this 
    class.</para
       >
@@ -47,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
       <para
         >XmlNameTable is implemented in the <see
          cref="T:System.Xml.NameTable" />
+
+        
 
         
 
@@ -95,6 +103,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -129,8 +139,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -141,6 +155,8 @@
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -157,6 +173,8 @@
         </returns>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,6 +217,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>- or -</para>
@@ -207,8 +227,12 @@
 
             
 
+            
+
              &gt;= <paramref
              name="array" />
+
+            
 
             
 
@@ -220,13 +244,19 @@
 
             
 
+            
+
              &gt; <paramref
              name="array" />
 
             
 
+            
+
             .Length - <paramref
              name="offset" />
+
+            
 
             
 
@@ -238,11 +268,15 @@
 
             
 
+            
+
              = 0.</para
           >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="length" />
+
+          
 
           
 
@@ -253,6 +287,8 @@
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -272,6 +308,8 @@
 
           
 
+          
+
           The character array containing the name to add. </param
         >
         <param name="offset">
@@ -279,10 +317,14 @@
 
           
 
+          
+
           Zero-based index into the array specifying the first character of the name. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -319,8 +361,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -331,6 +377,8 @@
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -347,6 +395,8 @@
         </returns>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,6 +438,8 @@
 
           
 
+          
+
            &lt; 0. <para
           >- or -</para>
           <para>
@@ -395,8 +447,12 @@
 
             
 
+            
+
              &gt;= <paramref
              name="array" />
+
+            
 
             
 
@@ -408,13 +464,19 @@
 
             
 
+            
+
              &gt; <paramref
              name="array" />
 
             
 
+            
+
             .Length - <paramref
              name="offset" />
+
+            
 
             
 
@@ -426,11 +488,15 @@
 
             
 
+            
+
              = 0.</para
           >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="length" />
+
+          
 
           
 
@@ -441,6 +507,8 @@
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -459,11 +527,15 @@
 
             
 
+            
+
              is zero, String.Empty is returned.</para
           >
         </returns>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,10 +546,14 @@
 
           
 
+          
+
           The zero-based index into the array specifying the first character of the name. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

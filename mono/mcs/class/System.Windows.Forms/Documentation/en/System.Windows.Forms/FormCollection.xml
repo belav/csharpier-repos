@@ -21,13 +21,19 @@
 
         
 
+        
+
          is used by the <see
          cref="T:System.Windows.Forms.Application" />
 
         
 
+        
+
          object to list the currently open forms in an application through the <see
          cref="P:System.Windows.Forms.Application.OpenForms" />
+
+        
 
         
 
@@ -39,6 +45,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -59,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.FormCollection" />
+
+            
 
             
 

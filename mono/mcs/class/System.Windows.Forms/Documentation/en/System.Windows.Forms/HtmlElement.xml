@@ -17,6 +17,8 @@
 
         
 
+        
+
          represents any possible type of element in an HTML document, such as BODY, TABLE, and FORM, among others. The class exposes the most common properties you can expect to find on all elements.</para
       >
       <para
@@ -25,8 +27,12 @@
 
         
 
+        
+
         : other HTML elements that are placed underneath them. Use the <see
          cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" />
+
+        
 
         
 
@@ -35,13 +41,19 @@
 
         
 
+        
+
          collection to iterate through them. The <see
          cref="P:System.Windows.Forms.HtmlElement.Parent" />
 
         
 
+        
+
          property returns the <see
          cref="T:System.Windows.Forms.HtmlElement" />
+
+        
 
         
 
@@ -53,8 +65,12 @@
 
         
 
+        
+
         , such as the SRC attribute on an IMG element or the Submit method on a FORM. The <see
          cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
+
+        
 
         
 
@@ -63,13 +79,19 @@
 
         
 
+        
+
          methods enable you to retrieve and alter any attribute or property on a specific element, while <see
          cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String)" />
 
         
 
+        
+
          provides access to any methods not exposed in the managed Document Object Model (DOM). If your application has unmanaged code permission, you can also access unexposed properties and methods with the <see
          cref="P:System.Windows.Forms.HtmlElement.DomElement" />
+
+        
 
         
 
@@ -81,6 +103,8 @@
 
         
 
+        
+
          property to test whether an element is of a specific type. </para
       >
       <para
@@ -89,8 +113,12 @@
 
         
 
+        
+
          objects with the <see
          cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
+
+        
 
         
 
@@ -99,8 +127,12 @@
 
         
 
+        
+
         , and add them to another element using the <see
          cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+
+        
 
         
 
@@ -109,8 +141,12 @@
 
         
 
+        
+
          methods. You can also create the elements as HTML tags and assign them to an existing element's <see
          cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+
+        
 
         
 
@@ -145,6 +181,8 @@
 
             
 
+            
+
              collection instead.</para
           >
           <para>Elements in this collection will not necessarily be returned in source order.</para>
@@ -154,6 +192,8 @@
           <para
             >Gets an <see
              cref="T:System.Windows.Forms.HtmlElementCollection" />
+
+            
 
             
 
@@ -186,6 +226,8 @@
 
             
 
+            
+
              to add new elements to an existing document, or to move an element on the page.</para
           >
           <para>If an element has already been parented, appending an element to another element will automatically remove that element from its previous parent.</para>
@@ -195,13 +237,19 @@
 
             
 
+            
+
              will not be persisted when you call the <see
              cref="M:System.Windows.Forms.WebBrowser.ShowSaveAsDialog" />
 
             
 
+            
+
              method on the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -221,8 +269,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.HtmlElement" />
+
+          
 
           
 
@@ -255,6 +307,8 @@
 
             
 
+            
+
              to add an event handler to these unexposed events.</para
           >
           <para
@@ -263,8 +317,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -280,8 +338,12 @@
 
             
 
+            
+
              and the IHTMLElement interfaces: <see
              cref="http://go.microsoft.com/fwlink/?LinkId=104876">IHTMLElement</see>
+
+            
 
             
 
@@ -290,13 +352,19 @@
 
             
 
+            
+
             , <see
              cref="http://go.microsoft.com/fwlink/?LinkId=104878">IHTMLElement3</see>
 
             
 
+            
+
             , <see
              cref="http://go.microsoft.com/fwlink/?LinkId=104879">IHTMLElement4</see>
+
+            
 
             
 
@@ -312,10 +380,14 @@
 
           
 
+          
+
           The name of the event you want to handle.</param
         >
         <param name="eventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,8 +414,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
+
+            
 
             
 
@@ -378,10 +454,14 @@
 
             
 
+            
+
              collection provides a simple mechanism for exploring the tree structure of a document. </para
           >
           <para>
             <see cref="P:System.Windows.Forms.HtmlElement.Children" />
+
+            
 
             
 
@@ -390,8 +470,12 @@
 
             
 
+            
+
              for a TABLE element, <see
              cref="P:System.Windows.Forms.HtmlElement.Children" />
+
+            
 
             
 
@@ -400,13 +484,19 @@
 
             
 
+            
+
              collection on each individual TR element, or use the <see
              cref="P:System.Windows.Forms.HtmlElement.All" />
 
             
 
+            
+
              collection on <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -419,6 +509,8 @@
 
             
 
+            
+
              is false, Children will always be empty. </para
           >
         </remarks>
@@ -427,6 +519,8 @@
           <para
             >Gets an <see
              cref="T:System.Windows.Forms.HtmlElementCollection" />
+
+            
 
             
 
@@ -456,13 +550,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -474,8 +574,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -484,8 +588,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -497,13 +605,19 @@
 
             
 
+            
+
              event will occur after the <see
              cref="E:System.Windows.Forms.HtmlElement.Focusing" />
 
             
 
+            
+
              event, but before the <see
              cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
+
+            
 
             
 
@@ -514,6 +628,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -547,8 +663,12 @@
 
             
 
+            
+
              will return position data only for elements that have been assigned an explicit height and width, or elements that use absolute positioning. A document is absolutely positioned if its position style is set to <userInput
             >absolute</userInput>
+
+            
 
             
 
@@ -588,10 +708,14 @@
 
           
 
+          
+
           The name of the event you want to handle.</param
         >
         <param name="eventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -621,8 +745,12 @@
 
             
 
+            
+
             . This property is most useful when you have received a reference to an element in an event handler from the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -634,6 +762,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -657,6 +787,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -692,13 +824,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -710,8 +848,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -720,8 +862,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -732,6 +878,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -768,6 +916,8 @@
 
                 
 
+                
+
                  control or Internet Explorer</para
               >
             </item>
@@ -784,13 +934,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -802,8 +958,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -812,8 +972,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -824,6 +988,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -857,13 +1023,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -875,8 +1047,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -885,8 +1061,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -897,6 +1077,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -950,13 +1132,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -968,8 +1156,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -978,8 +1170,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -990,6 +1186,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -1021,13 +1219,19 @@
 
             
 
+            
+
              to false will prevent the user from using these form fields. For other elements, such as DIV or SPAN, setting <see
              cref="P:System.Windows.Forms.HtmlElement.Enabled" />
 
             
 
+            
+
              to false will cause all text within the element to appear shaded; however, the text will still be selectable. To cancel selection, add an event handler for the unexposed onselectstart event using the <see
              cref="M:System.Windows.Forms.HtmlElement.AttachEventHandler(System.String,System.EventHandler)" />
+
+            
 
             
 
@@ -1066,8 +1270,12 @@
 
             
 
+            
+
              is an <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -1076,6 +1284,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1105,8 +1315,12 @@
 
             
 
+            
+
              in conjunction with <see
              cref="P:System.Windows.Forms.HtmlElement.NextSibling" />
+
+            
 
             
 
@@ -1138,8 +1352,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -1148,6 +1366,8 @@
           <para
             >Any key strokes entered by a user after <see
              cref="M:System.Windows.Forms.HtmlElement.Focus" />
+
+            
 
             
 
@@ -1181,8 +1401,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
+
+            
 
             
 
@@ -1194,8 +1418,12 @@
 
             
 
+            
+
              on a different element from within the <see
              cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
+
+            
 
             
 
@@ -1207,8 +1435,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parents and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -1217,8 +1449,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -1229,6 +1465,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -1262,13 +1500,19 @@
 
             
 
+            
+
              exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see
              cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -1279,8 +1523,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -1299,11 +1547,15 @@
 
             
 
+            
+
              value. If the specified attribute does not exist on this element, returns an empty string.</para
           >
         </returns>
         <param name="attributeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1340,8 +1592,12 @@
 
             
 
+            
+
              containing all elements whose HTML tag name is equal to <paramref
              name="tagName" />
+
+            
 
             
 
@@ -1353,8 +1609,12 @@
 
           
 
+          
+
           The name of the tag whose <see
            cref="T:System.Windows.Forms.HtmlElement" />
+
+          
 
           
 
@@ -1399,8 +1659,12 @@
 
             
 
+            
+
              on a different element from within the <see
              cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
+
+            
 
             
 
@@ -1411,6 +1675,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -1441,13 +1707,19 @@
 
             
 
+            
+
              must be unique; you cannot have two elements with the same <see
              cref="P:System.Windows.Forms.HtmlElement.Id" />
 
             
 
+            
+
              inside of the same document. Use the <see
              cref="P:System.Windows.Forms.HtmlElement.Name" />
+
+            
 
             
 
@@ -1479,13 +1751,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
 
             
 
+            
+
              methods. Using <see
              cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+
+            
 
             
 
@@ -1496,8 +1774,12 @@
 
             
 
+            
+
              differs from <see
              cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+
+            
 
             
 
@@ -1506,8 +1788,12 @@
 
             
 
+            
+
              will not include the HTML that represents the object you are calling. See <see
              cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+
+            
 
             
 
@@ -1519,8 +1805,12 @@
 
             
 
+            
+
              destroys any children previously appended to the element. If you retrieve an element from the DOM and then assign new HTML to its parents' <see
              cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+
+            
 
             
 
@@ -1532,8 +1822,12 @@
 
             
 
+            
+
              is not a valid operation. Some HTML tags have no closing tag, such as the IMG tag, and therefore cannot contain nested elements. Some tags, such as the SCRIPT tag, can only contain text content; setting <see
              cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+
+            
 
             
 
@@ -1542,8 +1836,12 @@
 
             
 
+            
+
              property will return false. However, you also cannot set <see
              cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+
+            
 
             
 
@@ -1552,8 +1850,12 @@
 
             
 
+            
+
              or the <unmanagedCodeEntityReference
             >insertRow</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -1562,8 +1864,12 @@
 
             
 
+            
+
              methods on the unmanaged <unmanagedCodeEntityReference
             >IHTMLTable</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -1575,6 +1881,8 @@
 
             
 
+            
+
              property instead.</para
           >
           <para
@@ -1583,8 +1891,12 @@
 
             
 
+            
+
              will destroy any text values previously assigned using <see
              cref="P:System.Windows.Forms.HtmlElement.InnerText" />
+
+            
 
             
 
@@ -1616,8 +1928,12 @@
 
             
 
+            
+
             , the HTML code will display as literals in the document, just as if you were viewing HTML within a text file. If you assign HTML to an element using the <see
              cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+
+            
 
             
 
@@ -1626,11 +1942,15 @@
 
             
 
+            
+
              will return all of the text in that HTML with the markup removed.</para
           >
           <para
             >Assigning a value to <see
              cref="P:System.Windows.Forms.HtmlElement.InnerText" />
+
+            
 
             
 
@@ -1668,8 +1988,12 @@
 
             
 
+            
+
              event on the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1681,8 +2005,12 @@
 
             
 
+            
+
              is valid will depend on the type of the element. For example, <see
              cref="F:System.Windows.Forms.HtmlElementInsertionOrientation.AfterBegin" />
+
+            
 
             
 
@@ -1701,6 +2029,8 @@
 
             
 
+            
+
              that was just inserted. If insertion failed, this will return null.</para
           >
         </returns>
@@ -1709,10 +2039,14 @@
 
           
 
+          
+
           Where to insert this element in relation to the current element.</param
         >
         <param name="newElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1741,8 +2075,12 @@
 
             
 
+            
+
              to execute unexposed methods that take no arguments. For an example, see <see
              cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String,System.Object[])" />
+
+            
 
             
 
@@ -1761,8 +2099,12 @@
 
             
 
+            
+
             . If this <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1771,6 +2113,8 @@
         </returns>
         <param name="methodName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1809,6 +2153,8 @@
 
             
 
+            
+
              will be converted to Win32 VARIANT data types before they are passed to the named scripting function. </para
           >
         </remarks>
@@ -1824,8 +2170,12 @@
 
             
 
+            
+
             . If this <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1837,10 +2187,14 @@
 
           
 
+          
+
           The name of the property or method to invoke.</param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1868,13 +2222,19 @@
 
             
 
+            
+
              occurs before <see
              cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
 
             
 
+            
+
             , which in turns occurs before <see
              cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
+
+            
 
             
 
@@ -1886,13 +2246,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -1904,8 +2270,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -1914,8 +2284,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -1926,6 +2300,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -1958,13 +2334,19 @@
 
             
 
+            
+
              occurs after <see
              cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
 
             
 
+            
+
              and before <see
              cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
+
+            
 
             
 
@@ -1976,13 +2358,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -1994,8 +2382,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -2004,8 +2396,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2016,6 +2412,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -2048,13 +2446,19 @@
 
             
 
+            
+
              occurs after <see
              cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
 
             
 
+            
+
             , which occurs after <see
              cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
+
+            
 
             
 
@@ -2067,8 +2471,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -2077,8 +2485,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2089,6 +2501,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -2142,8 +2556,12 @@
 
             
 
+            
+
              occurs until it is given focus again, either by the user selecting it on the page or by the application calling the <see
              cref="M:System.Windows.Forms.HtmlElement.Focus" />
+
+            
 
             
 
@@ -2156,8 +2574,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parents and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -2166,8 +2588,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2178,6 +2604,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -2211,13 +2639,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2229,8 +2663,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -2239,8 +2677,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2251,6 +2693,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -2325,8 +2769,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -2335,8 +2783,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2347,6 +2799,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -2380,13 +2834,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2398,8 +2858,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -2408,8 +2872,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2420,6 +2888,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -2453,13 +2923,19 @@
 
             
 
+            
+
              event on an element by setting the <see
              cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2471,8 +2947,12 @@
 
             
 
+            
+
              event on an element will also occur on that element's parent elements and on the <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -2481,8 +2961,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+
+            
 
             
 
@@ -2493,6 +2977,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -2524,8 +3010,12 @@
 
             
 
+            
+
              property to retrieve elements from a document using the <see
              cref="M:System.Windows.Forms.HtmlElementCollection.GetElementsByName(System.String)" />
+
+            
 
             
 
@@ -2534,8 +3024,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -2544,6 +3038,8 @@
           <para
             >When applied to INPUT elements, <see
              cref="P:System.Windows.Forms.HtmlElement.Name" />
+
+            
 
             
 
@@ -2578,8 +3074,12 @@
 
             
 
+            
+
              in conjunction with <see
              cref="P:System.Windows.Forms.HtmlElement.FirstChild" />
+
+            
 
             
 
@@ -2618,6 +3118,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2626,6 +3128,8 @@
           <para
             >Gets the element from which <see
              cref="P:System.Windows.Forms.HtmlElement.OffsetRectangle" />
+
+            
 
             
 
@@ -2670,6 +3174,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2704,6 +3210,8 @@
 
             
 
+            
+
              classes.</para
           >
         </remarks>
@@ -2720,8 +3228,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Windows.Forms.HtmlElement" />
+
+          
 
           
 
@@ -2732,8 +3244,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Windows.Forms.HtmlElement" />
+
+          
 
           
 
@@ -2767,6 +3283,8 @@
 
             
 
+            
+
              objects for inequality.</para
           >
         </summary>
@@ -2779,8 +3297,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Windows.Forms.HtmlElement" />
+
+          
 
           
 
@@ -2791,8 +3313,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Windows.Forms.HtmlElement" />
+
+          
 
           
 
@@ -2819,8 +3345,12 @@
 
             
 
+            
+
              will return all HTML contained in the current element excluding the current element's surrounding tags, <see
              cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+
+            
 
             
 
@@ -2845,6 +3375,8 @@
 
             
 
+            
+
              on div2 will return:</para
           >
           <para>&lt;DIV id="div2"&gt;</para>
@@ -2859,6 +3391,8 @@
 
             
 
+            
+
              will return:</para
           >
           <para>World</para>
@@ -2868,6 +3402,8 @@
           <para
             >If you assign a new value to <see
              cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+
+            
 
             
 
@@ -2899,8 +3435,12 @@
 
             
 
+            
+
             , the HTML code will display as literals in the document, just as if you were viewing HTML within a text file. If you assign HTML to an element using the <see
              cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+
+            
 
             
 
@@ -2909,11 +3449,15 @@
 
             
 
+            
+
              will return all of the text in that HTML with the markup removed.</para
           >
           <para
             >Assigning a value to <see
              cref="P:System.Windows.Forms.HtmlElement.OuterText" />
+
+            
 
             
 
@@ -2948,8 +3492,12 @@
 
             
 
+            
+
              property enables discovery of an element's context. It is most useful inside of event handlers such as <see
              cref="E:System.Windows.Forms.HtmlElement.Click" />
+
+            
 
             
 
@@ -2961,8 +3509,12 @@
 
             
 
+            
+
              property of the HTML element (the top of an HTML document) points back to itself. If you call <see
              cref="P:System.Windows.Forms.HtmlElement.Parent" />
+
+            
 
             
 
@@ -2996,8 +3548,12 @@
 
             
 
+            
+
              method. For more information about how to use the DOM through the <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -3010,6 +3566,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3019,6 +3577,8 @@
         </summary>
         <param name="eventName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3042,6 +3602,8 @@
           <para
             >Calling this method raises the <see
              cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
+
+            
 
             
 
@@ -3078,6 +3640,8 @@
 
           
 
+          
+
           If true, the top of the object will be displayed at the top of the window. If false, the bottom of the object will be displayed at the bottom of the window.</param
         >
       </Docs>
@@ -3101,8 +3665,12 @@
 
             
 
+            
+
             ; ScrollLeft and <see
              cref="P:System.Windows.Forms.HtmlElement.ScrollTop" />
+
+            
 
             
 
@@ -3138,8 +3706,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.HtmlElement.ScrollTop" />
+
+            
 
             
 
@@ -3171,8 +3743,12 @@
 
             
 
+            
+
             ; <see
              cref="P:System.Windows.Forms.HtmlElement.ScrollLeft" />
+
+            
 
             
 
@@ -3210,13 +3786,19 @@
 
             
 
+            
+
              exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see
              cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -3228,8 +3810,12 @@
 
             
 
+            
+
              is not a defined attribute on an element, <see
              cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -3240,8 +3826,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -3250,6 +3840,8 @@
           <para
             >To set the class attribute on an <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -3266,10 +3858,14 @@
 
           
 
+          
+
           The name of the attribute to set.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3296,6 +3892,8 @@
 
             
 
+            
+
              property take the form of colon-delimited name-value pairs, with each pair separated by a semicolon, as follows:</para
           >
           <para>style-name1:value1;...;[style-nameN:valueN;]</para>
@@ -3304,6 +3902,8 @@
           <para
             >For a full list of all available styles in the HTML DOM, see <see
              cref="http://msdn.microsoft.com/en-us/library/ms534651.aspx">STYLE Attribute</see>
+
+            
 
             
 
@@ -3334,8 +3934,12 @@
 
             
 
+            
+
              determines which element in an HTML document will next receive focus when the user presses the TAB key. By default, the only elements included in the tab order are INPUT elements, the SELECT control, and any element whose contentEditable property is set to true. You can include any HTML element in the tab order, such as a DIV, by assigning it an explicit <see
              cref="P:System.Windows.Forms.HtmlElement.TabIndex" />
+
+            
 
             
 
@@ -3344,6 +3948,8 @@
           <para
             >Valid values for <see
              cref="P:System.Windows.Forms.HtmlElement.TabIndex" />
+
+            
 
             
 
@@ -3372,6 +3978,8 @@
           <para
             >Many elements in the HTML Document Object Model have attributes, properties, and methods that are unique to those elements; such as the HREF attribute on the A element, or the Submit method on FORM. Use <see
              cref="P:System.Windows.Forms.HtmlElement.TagName" />
+
+            
 
             
 

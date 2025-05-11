@@ -39,8 +39,12 @@
 
         
 
+        
+
          is a member of its associated <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          is accessible through the <see
          cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          properties of <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -72,6 +84,8 @@
       <para
         >Creates a panel that is associated with a <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -100,8 +114,12 @@
 
             
 
+            
+
              class with its specified <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -113,13 +131,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.SplitContainer" />
 
           
 
+          
+
            that contains the <see
            cref="T:System.Windows.Forms.SplitterPanel" />
+
+          
 
           
 
@@ -165,8 +189,12 @@
 
             
 
+            
+
              attaches to the edges of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -207,6 +235,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -286,8 +316,12 @@
 
             
 
+            
+
              to shrink when <see
              cref="P:System.Windows.Forms.SplitterPanel.AutoSize" />
+
+            
 
             
 
@@ -328,6 +362,8 @@
           <para
             >Gets or sets the border style for the <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -392,8 +428,12 @@
 
             
 
+            
+
              that the <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -436,6 +476,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -444,6 +486,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.SplitterPanel.Dock" />
+
+            
 
             
 
@@ -487,6 +531,8 @@
 
             
 
+            
+
              and its edges. This property is not relevant to this class.</para
           >
         </summary>
@@ -521,6 +567,8 @@
           <para
             >Gets or sets the height of the <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -564,8 +612,12 @@
 
             
 
+            
+
              relative to the upper-left corner of its <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -608,6 +660,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -616,6 +670,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.SplitterPanel.Location" />
+
+            
 
             
 
@@ -653,6 +709,8 @@
           <para
             >Gets or sets the size that is the upper limit that <see
              cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" />
+
+            
 
             
 
@@ -696,6 +754,8 @@
 
             
 
+            
+
              can specify. This property is not relevant to this class.</para
           >
         </summary>
@@ -733,6 +793,8 @@
           <para
             >The name of this <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -779,8 +841,12 @@
 
             
 
+            
+
              that contains this <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -824,6 +890,8 @@
 
             
 
+            
+
             . This property is not relevant to this class.</para
           >
         </summary>
@@ -864,8 +932,12 @@
 
             
 
+            
+
              within its <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -908,6 +980,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -916,6 +990,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.SplitterPanel.TabIndex" />
+
+            
 
             
 
@@ -953,6 +1029,8 @@
           <para
             >Gets or sets a value indicating whether the user can give the focus to this <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -995,6 +1073,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1003,6 +1083,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.SplitterPanel.TabStop" />
+
+            
 
             
 
@@ -1040,6 +1122,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -1082,6 +1166,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1090,6 +1176,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.SplitterPanel.Visible" />
+
+            
 
             
 
@@ -1124,6 +1212,8 @@
           <para
             >Gets or sets the width of the <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 

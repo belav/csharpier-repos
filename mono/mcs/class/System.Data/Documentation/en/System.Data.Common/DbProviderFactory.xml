@@ -32,6 +32,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -40,6 +42,8 @@
           <para
             >Initializes a new instance of a <see
              cref="T:System.Data.Common.DbProviderFactory" />
+
+            
 
             
 
@@ -72,8 +76,12 @@
 
             
 
+            
+
              supports the <see
              cref="T:System.Data.Common.DbDataSourceEnumerator" />
+
+            
 
             
 
@@ -106,6 +114,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -114,6 +124,8 @@
           <para
             >A new instance of <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -146,6 +158,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -154,6 +168,8 @@
           <para
             >A new instance of <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -186,6 +202,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -194,6 +212,8 @@
           <para
             >A new instance of <see
              cref="T:System.Data.Common.DbConnection" />
+
+            
 
             
 
@@ -226,6 +246,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -234,6 +256,8 @@
           <para
             >A new instance of <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -266,6 +290,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -274,6 +300,8 @@
           <para
             >A new instance of <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -306,6 +334,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -314,6 +344,8 @@
           <para
             >A new instance of <see
              cref="T:System.Data.Common.DbDataSourceEnumerator" />
+
+            
 
             
 
@@ -346,6 +378,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -354,6 +388,8 @@
           <para
             >A new instance of <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -388,6 +424,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -399,8 +437,12 @@
 
             
 
+            
+
              object for the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -412,8 +454,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 

@@ -31,6 +31,8 @@
 
         
 
+        
+
          provides a lightweight semaphore class that doesn't use Windows kernel semaphores.</para
       >
     </remarks>
@@ -39,6 +41,8 @@
       <para
         >A lightweight alternative to <see
          cref="T:System.Threading.Semaphore" />
+
+        
 
         
 
@@ -70,11 +74,15 @@
 
             
 
+            
+
              class, specifying the initial number of requests that can be granted concurrently.</para
           >
         </summary>
         <param name="initialCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -109,6 +117,8 @@
 
             
 
+            
+
              class, specifying the initial and maximum number of requests that can be granted concurrently.</para
           >
         </summary>
@@ -117,10 +127,14 @@
 
           
 
+          
+
           The initial number of requests for the semaphore that can be granted concurrently.</param
         >
         <param name="maxCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,13 +168,19 @@
 
             
 
+            
+
              does not imply a successful wait on the <see
              cref="T:System.Threading.SemaphoreSlim" />
 
             
 
+            
+
              itself, nor does it decrement the semaphore's count. After the available wait handle is signaled, you should wait on the <see
              cref="T:System.Threading.SemaphoreSlim" />
+
+            
 
             
 
@@ -172,6 +192,8 @@
           <para
             >Returns a <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -198,6 +220,8 @@
           <para
             >Gets the number of threads that will be allowed to enter the <see
              cref="T:System.Threading.SemaphoreSlim" />
+
+            
 
             
 
@@ -229,8 +253,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.SemaphoreSlim" />
+
+            
 
             
 
@@ -239,8 +267,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.SemaphoreSlim" />
+
+            
 
             
 
@@ -254,10 +286,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -270,8 +306,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.SemaphoreSlim" />
+
+              
 
               
 
@@ -284,6 +324,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.SemaphoreSlim" />
+
+            
 
             
 
@@ -317,8 +359,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.SemaphoreSlim.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -333,11 +379,15 @@
 
             
 
+            
+
             , and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -369,6 +419,8 @@
 
             
 
+            
+
              once.</para
           >
         </summary>
@@ -377,6 +429,8 @@
           <para
             >The previous count of the <see
              cref="T:System.Threading.SemaphoreSlim" />
+
+            
 
             
 
@@ -411,6 +465,8 @@
 
             
 
+            
+
              a specified number of times.</para
           >
         </summary>
@@ -422,11 +478,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="releaseCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -455,6 +515,8 @@
           <para
             >Blocks the current thread until it can enter the <see
              cref="T:System.Threading.SemaphoreSlim" />
+
+            
 
             
 
@@ -489,6 +551,8 @@
 
             
 
+            
+
             , using a 32-bit signed integer that specifies the timeout.</para
           >
         </summary>
@@ -500,6 +564,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -508,8 +574,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -546,8 +616,12 @@
 
             
 
+            
+
             , while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -559,8 +633,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -594,8 +672,12 @@
 
             
 
+            
+
             , using a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -610,6 +692,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -618,13 +702,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -662,8 +752,12 @@
 
             
 
+            
+
             , using a 32-bit signed integer that specifies the timeout, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -678,6 +772,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -686,8 +782,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -698,8 +798,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -737,13 +841,19 @@
 
             
 
+            
+
             , using a <see
              cref="T:System.TimeSpan" />
 
             
 
+            
+
              that specifies the timeout, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -758,6 +868,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -766,13 +878,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -783,8 +901,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -813,6 +935,8 @@
           <para
             >Asynchronously waits to enter the <see
              cref="T:System.Threading.SemaphoreSlim" />
+
+            
 
             
 
@@ -854,6 +978,8 @@
 
             
 
+            
+
             , using a 32-bit signed integer to measure the time interval.</para
           >
         </summary>
@@ -865,6 +991,8 @@
 
             
 
+            
+
             , otherwise with a result of false.</para
           >
         </returns>
@@ -873,8 +1001,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -911,8 +1043,12 @@
 
             
 
+            
+
             , while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -928,8 +1064,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -966,8 +1106,12 @@
 
             
 
+            
+
             , using a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -982,6 +1126,8 @@
 
             
 
+            
+
             , otherwise with a result of false.</para
           >
         </returns>
@@ -990,13 +1136,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1034,8 +1186,12 @@
 
             
 
+            
+
             , using a 32-bit signed integer to measure the time interval, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -1050,6 +1206,8 @@
 
             
 
+            
+
             , otherwise with a result of false.</para
           >
         </returns>
@@ -1058,8 +1216,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1070,8 +1232,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -1109,13 +1275,19 @@
 
             
 
+            
+
             , using a <see
              cref="T:System.TimeSpan" />
 
             
 
+            
+
              to measure the time interval, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -1130,6 +1302,8 @@
 
             
 
+            
+
             , otherwise with a result of false.</para
           >
         </returns>
@@ -1138,13 +1312,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1155,8 +1335,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 

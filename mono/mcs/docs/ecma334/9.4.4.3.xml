@@ -6,8 +6,12 @@
 
     
 
+    
+
     , <keyword
     >double</keyword>
+
+    
 
     
 
@@ -16,11 +20,17 @@
 
     
 
+    
+
     . <grammar_production
     >
       <name>
-        <non_terminal where="9.4.4.3">real-literal</non_terminal>
+        <non_terminal where="9.4.4.3"
+>real-literal</non_terminal
+        >
       </name>
+
+      
 
       
 
@@ -31,7 +41,9 @@
         <non_terminal where="9.4.4.2">decimal-digits</non_terminal>
         <non_terminal where="9.4.4.3">exponent-part</non_terminal>
         <opt />
-        <non_terminal where="9.4.4.3">real-type-suffix</non_terminal>
+        <non_terminal where="9.4.4.3"
+>real-type-suffix</non_terminal
+        >
         <opt />
       </rhs>
       <rhs>
@@ -39,24 +51,32 @@
         <non_terminal where="9.4.4.2">decimal-digits</non_terminal>
         <non_terminal where="9.4.4.3">exponent-part</non_terminal>
         <opt />
-        <non_terminal where="9.4.4.3">real-type-suffix</non_terminal>
+        <non_terminal where="9.4.4.3"
+>real-type-suffix</non_terminal
+        >
         <opt />
       </rhs>
       <rhs>
         <non_terminal where="9.4.4.2">decimal-digits</non_terminal>
         <non_terminal where="9.4.4.3">exponent-part</non_terminal>
-        <non_terminal where="9.4.4.3">real-type-suffix</non_terminal>
+        <non_terminal where="9.4.4.3"
+>real-type-suffix</non_terminal
+        >
         <opt />
       </rhs>
       <rhs>
         <non_terminal where="9.4.4.2">decimal-digits</non_terminal>
-        <non_terminal where="9.4.4.3">real-type-suffix</non_terminal>
+        <non_terminal where="9.4.4.3"
+>real-type-suffix</non_terminal
+        >
       </rhs>
     </grammar_production>
     <grammar_production>
       <name>
         <non_terminal where="9.4.4.3">exponent-part</non_terminal>
       </name>
+
+      
 
       
 
@@ -79,6 +99,8 @@
 
       
 
+      
+
        :: one of <rhs
       >
         <terminal>+</terminal>
@@ -87,8 +109,12 @@
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="9.4.4.3">real-type-suffix</non_terminal>
+        <non_terminal where="9.4.4.3"
+>real-type-suffix</non_terminal
+        >
       </name>
+
+      
 
       
 
@@ -100,7 +126,11 @@
   </paragraph>
   <paragraph
     >If no <non_terminal
-     where="9.4.4.3">real-type-suffix</non_terminal>
+     where="9.4.4.3"
+>real-type-suffix</non_terminal
+    >
+
+    
 
     
 
@@ -109,8 +139,14 @@
 
     
 
+    
+
     . Otherwise, the <non_terminal
-     where="9.4.4.3">real-type-suffix</non_terminal>
+     where="9.4.4.3"
+>real-type-suffix</non_terminal
+    >
+
+    
 
     
 
@@ -122,10 +158,14 @@
 
         
 
+        
+
         . <example
 
           >[Example: For example, the literals 1f, 1.5f, 1e10f, and 123.456F are all of type <keyword
           >float</keyword>
+
+          
 
           
 
@@ -138,10 +178,14 @@
 
         
 
+        
+
         . <example
 
           >[Example: For example, the literals 1d, 1.5d, 1e10d, and 123.456D are all of type <keyword
           >double</keyword>
+
+          
 
           
 
@@ -154,10 +198,14 @@
 
         
 
+        
+
         . <example
 
           >[Example: For example, the literals 1m, 1.5m, 1e10m, and 123.456M are all of type <keyword
           >decimal</keyword>
+
+          
 
           
 
@@ -166,8 +214,12 @@
 
         
 
+        
+
          This literal is converted to a <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -176,10 +228,14 @@
 
         
 
+        
+
         ). Any scale apparent in the literal is preserved unless the value is rounded or the value is zero (in which latter case the sign and scale will be 0). <note
 
           >[Note: Hence, the literal 2.900m will be parsed to form the <keyword
           >decimal</keyword>
+
+          
 
           
 
@@ -195,8 +251,12 @@
 
     
 
+    
+
      or <keyword
     >double</keyword>
+
+    
 
     
 

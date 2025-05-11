@@ -31,8 +31,12 @@
 
         
 
+        
+
          type represents a lambda expression in the form of an expression tree. The <see
          cref="T:System.Linq.Expressions.Expression`1" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          and captures the type of the lambda expression more explicitly, can also be used to represent a lambda expression. At runtime, an expression tree node that represents a lambda expression is always of type <see
          cref="T:System.Linq.Expressions.Expression`1" />
+
+        
 
         
 
@@ -54,13 +62,19 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Linq.Expressions.LambdaExpression" />
 
         
 
+        
+
          is <see
          cref="F:System.Linq.Expressions.ExpressionType.Lambda" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
          factory methods to create a <see
          cref="T:System.Linq.Expressions.LambdaExpression" />
+
+        
 
         
 
@@ -136,8 +154,12 @@
 
             
 
+            
+
              method can be used to convert a <see
              cref="T:System.Linq.Expressions.LambdaExpression" />
+
+            
 
             
 
@@ -153,6 +175,8 @@
           <para
             >A <see
              cref="T:System.Delegate" />
+
+            
 
             
 
@@ -198,6 +222,8 @@
 
           
 
+          
+
           Debugging information generator used by the compiler to mark sequence points and annotate local variables.</param
         >
       </Docs>
@@ -232,8 +258,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.Emit.MethodBuilder" />
+
+          
 
           
 
@@ -275,8 +305,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.Emit.MethodBuilder" />
+
+          
 
           
 
@@ -284,6 +318,8 @@
         >
         <param name="debugInfoGenerator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,6 +373,8 @@
           <para
             >Returns the node type of this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -427,6 +465,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 

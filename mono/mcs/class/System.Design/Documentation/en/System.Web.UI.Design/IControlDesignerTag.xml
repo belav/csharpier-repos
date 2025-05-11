@@ -15,6 +15,8 @@
 
         
 
+        
+
          interface is the contract between the control designer and a design host that enables the design host to manipulate the HTML tag at design time.</para
       >
     </remarks>
@@ -48,6 +50,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,6 +144,8 @@
 
           
 
+          
+
           The name of the attribute.</param
         >
       </Docs>
@@ -171,10 +177,14 @@
 
           
 
+          
+
           The attribute name.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -205,6 +215,8 @@
 
           
 
+          
+
           The HTML markup for the content of the tag.</param
         >
       </Docs>
@@ -231,6 +243,8 @@
 
             
 
+            
+
              property of the tag.</para
           >
         </summary>
@@ -239,8 +253,12 @@
 
           
 
+          
+
           The value for the <see
            cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
+
+          
 
           
 

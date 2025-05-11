@@ -59,6 +59,8 @@
 
           
 
+          
+
           A URI on which the channel hook will listen. </param
         >
       </Docs>
@@ -134,6 +136,8 @@
           <para
             >Gets a Boolean value that indicates whether <see
              cref="T:System.Runtime.Remoting.Channels.IChannelReceiverHook" />
+
+            
 
             
 

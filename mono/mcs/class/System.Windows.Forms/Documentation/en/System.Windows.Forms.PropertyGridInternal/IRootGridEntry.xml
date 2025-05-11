@@ -16,8 +16,12 @@
 
         
 
+        
+
          is used internally by the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
 
             
 
+            
+
              property to the default value.</para
           >
         </summary>
@@ -95,6 +101,8 @@
         </summary>
         <param name="showCategories">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

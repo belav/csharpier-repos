@@ -26,8 +26,12 @@
 
         
 
+        
+
          class provides methods that can convert a string to a <see
          cref="T:System.Drawing.Printing.Margins" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -54,10 +62,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -66,6 +78,8 @@
       <para
         >For more information on printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -80,8 +94,12 @@
 
         
 
+        
+
          for <see
          cref="T:System.Drawing.Printing.Margins" />
+
+        
 
         
 
@@ -102,6 +120,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.MarginsConverter" />
+
+            
 
             
 
@@ -136,6 +156,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment from which this converter is being invoked. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -152,8 +174,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -164,8 +190,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -199,6 +229,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment from which this converter is being invoked. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -215,8 +247,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -227,8 +263,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -263,6 +303,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment from which this converter is being invoked. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -278,6 +320,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -286,8 +330,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -298,8 +346,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -310,8 +362,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -347,6 +403,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment from which this converter is being invoked. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -362,6 +420,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -370,8 +430,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -382,8 +446,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -394,8 +462,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -406,8 +478,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -441,6 +517,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment from which this converter is being invoked. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -449,6 +527,8 @@
           <para
             >Creates an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -463,8 +543,12 @@
 
             
 
+            
+
              representing the specified <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -476,8 +560,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -488,8 +576,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -522,6 +614,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment from which this converter is being invoked. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -530,6 +624,8 @@
           <para
             >Returns whether changing a value on this object requires a call to the <see
              cref="M:System.Drawing.Printing.MarginsConverter.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -544,6 +640,8 @@
 
             
 
+            
+
              to create a new value; otherwise, false. This method always returns true.</para
           >
         </returns>
@@ -552,8 +650,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

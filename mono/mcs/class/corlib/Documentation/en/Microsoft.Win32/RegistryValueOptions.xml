@@ -28,8 +28,12 @@
 
         
 
+        
+
          flag with the <see
          cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String,System.Object,Microsoft.Win32.RegistryValueOptions)" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
           <para
             >A value of type <see
              cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
+
+            
 
             
 

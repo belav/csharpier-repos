@@ -27,8 +27,12 @@
 
         
 
+        
+
          with an <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -76,6 +80,8 @@
           <para
             >Omit duplicate namespaces when loading the <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 

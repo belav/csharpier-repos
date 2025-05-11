@@ -21,6 +21,8 @@
 
         
 
+        
+
          interface is used to notify clients, typically binding clients, that a property value has changed.</para
       >
       <para
@@ -29,8 +31,12 @@
 
         
 
+        
+
          interface and raises a <see
          cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+
+        
 
         
 
@@ -42,6 +48,8 @@
           <para
             >Implement the <see
              cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+            
 
             
 
@@ -87,13 +95,19 @@
 
             
 
+            
+
              event can indicate all properties on the object have changed by using either null or <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
              as the property name in the <see
              cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+
+            
 
             
 

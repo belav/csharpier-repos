@@ -38,6 +38,8 @@
 
         
 
+        
+
          objects specify access rights for specific key containers.</para
       >
     </remarks>
@@ -46,6 +48,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+        
 
         
 
@@ -87,6 +91,8 @@
 
             
 
+            
+
              object is added to the end of the collection.</para
           >
         </remarks>
@@ -95,6 +101,8 @@
           <para
             >Adds a <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -110,8 +118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+          
 
           
 
@@ -144,6 +156,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -152,6 +166,8 @@
           <para
             >Removes all the <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -196,8 +212,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+          
 
           
 
@@ -208,8 +228,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -239,8 +263,12 @@
 
             
 
+            
+
              property to determine the number of <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -249,8 +277,12 @@
 
             
 
+            
+
              collection. The <see
              cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.Count" />
+
+            
 
             
 
@@ -291,11 +323,15 @@
 
             
 
+            
+
              object that can be used to iterate through the collection to get each item.</para
           >
           <para
             >Use the <see
              cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+            
 
             
 
@@ -307,11 +343,15 @@
 
             
 
+            
+
              method of the enumerator to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+
+            
 
             
 
@@ -324,8 +364,12 @@
 
               
 
+              
+
                object or use the <see
                cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+
+              
 
               
 
@@ -334,8 +378,12 @@
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+              
 
               
 
@@ -351,6 +399,8 @@
 
             
 
+            
+
              object that can be used to iterate through the objects in the collection.</para
           >
         </summary>
@@ -359,6 +409,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+
+            
 
             
 
@@ -400,8 +452,12 @@
 
             
 
+            
+
              object in the collection. If the specified <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -416,6 +472,8 @@
 
             
 
+            
+
              object, if it exists in the collection.</para
           >
         </summary>
@@ -427,6 +485,8 @@
 
             
 
+            
+
              object in the collection, or –1 if no match is found.</para
           >
         </returns>
@@ -435,8 +495,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+          
 
           
 
@@ -463,6 +527,8 @@
           <para
             >This property implements the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -536,6 +602,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -547,6 +615,8 @@
 
             
 
+            
+
              object from thecollection.</para
           >
         </summary>
@@ -555,8 +625,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+          
 
           
 
@@ -586,6 +660,8 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
@@ -594,13 +670,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -643,6 +725,8 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from the current collection.</param
         >
         <param name="index">
@@ -650,8 +734,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -688,6 +776,8 @@
 
             
 
+            
+
              object that can be used to iterate through the objects in the collection.</para
           >
         </summary>
@@ -696,6 +786,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+
+            
 
             
 

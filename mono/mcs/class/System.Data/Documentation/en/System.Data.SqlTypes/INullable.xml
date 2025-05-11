@@ -23,6 +23,8 @@
 
         
 
+        
+
          objects and structures implement the INullable interface. </para
       >
     </summary>
@@ -44,8 +46,12 @@
 
             
 
+            
+
              instance is null. Use <see
              cref="P:System.Data.SqlTypes.INullable.IsNull" />
+
+            
 
             
 

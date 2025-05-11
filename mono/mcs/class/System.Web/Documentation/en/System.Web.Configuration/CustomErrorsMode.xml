@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumerates the values you can use when setting the <see
          cref="P:System.Web.Configuration.CustomErrorsSection.Mode" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
           <para
             >Enables custom errors. If no <see
              cref="P:System.Web.Configuration.CustomErrorsSection.DefaultRedirect" />
+
+            
 
             
 

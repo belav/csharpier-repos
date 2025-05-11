@@ -25,8 +25,12 @@
 
         
 
+        
+
          is created to hold the pager controls in a <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          interface is a marker that indicates that the <see
          cref="T:System.Web.UI.WebControls.FormViewPagerRow" />
 
         
 
+        
+
          control is part of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -53,8 +63,12 @@
 
         
 
+        
+
          constructor and the <see
          cref="M:System.Web.UI.WebControls.FormView.CreateRow(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+
+        
 
         
 
@@ -63,8 +77,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -76,6 +94,8 @@
       <para
         >Represents the pager row in a <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -107,8 +127,12 @@
 
             
 
+            
+
              constructor calls the base class constructor, <see
              cref="M:System.Web.UI.WebControls.FormViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+
+            
 
             
 
@@ -117,8 +141,12 @@
 
             
 
+            
+
              control in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -127,8 +155,12 @@
 
             
 
+            
+
              equal to <see
              cref="F:System.Web.UI.WebControls.DataControlRowType.Pager" />
+
+            
 
             
 
@@ -137,8 +169,12 @@
 
             
 
+            
+
              equal to <see
              cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
+
+            
 
             
 
@@ -153,6 +189,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -161,8 +199,12 @@
 
           
 
+          
+
           The index of the row in the <see
            cref="T:System.Web.UI.WebControls.FormView" />
+
+          
 
           
 
@@ -173,8 +215,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+          
 
           
 
@@ -185,8 +231,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 

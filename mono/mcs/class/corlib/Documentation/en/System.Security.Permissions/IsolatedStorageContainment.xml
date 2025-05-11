@@ -49,13 +49,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
         
 
+        
+
         , and <see
          cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+        
 
         
 
@@ -66,6 +72,8 @@
       <para>Isolation by assembly and user could be used for user data that applies across multiple applications; for example, license information, or a user's personal information (name, authentication credentials, and so on) that is independent of an application.</para>
       <para>
         <see cref="T:System.Security.Permissions.IsolatedStorageContainment" />
+
+        
 
         
 

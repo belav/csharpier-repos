@@ -45,8 +45,12 @@
 
         
 
+        
+
          is optional. The attribute is supported for COM interop and platform invoke only. In the absence of explicit settings, the interop marshaler assumes rules based on the parameter type, whether the parameter is passed by reference or by value, and whether the type is blittable or non-blittable. For example, the <see
          cref="T:System.Text.StringBuilder" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          to a parameter modified with the C#-styled out keyword. To avoid confusing the In keyword in Visual Basic with the <see
          cref="T:System.Runtime.InteropServices.InAttribute" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.InteropServices.OutAttribute" />
+
+        
 
         
 
@@ -81,8 +93,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.InteropServices.OutAttribute" />
+
+        
 
         
 
@@ -94,12 +110,16 @@
 
         
 
+        
+
          on marshaling behavior, see <format
          type="text/html">
           <a href="241AC5B5-928E-4969-8F58-1DBC048F9EA2"
             >[&lt;topic://cpcondirectionalattributes&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -137,6 +157,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.InAttribute" />
+
+            
 
             
 

@@ -28,8 +28,12 @@
 
         
 
+        
+
          method to represent the top-level node of a requested key on a foreign (remote) machine. The node that can be opened with the OpenRemoteBaseKey method must be one of these top-level RegistryKeys. Further access to the subkeys of the identified node is available using using methods in <see
          cref="T:Microsoft.Win32.RegistryKey" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
 
             
 
+            
+
              method, to open this node remotely.</para
           >
         </summary>
@@ -92,6 +98,8 @@
           <para
             >Represents the HKEY_CURRENT_CONFIG base key on another computer. This value can be passed to the <see
              cref="M:Microsoft.Win32.RegistryKey.OpenRemoteBaseKey(Microsoft.Win32.RegistryHive,System.String)" />
+
+            
 
             
 
@@ -124,6 +132,8 @@
 
             
 
+            
+
              method, to open this node remotely.</para
           >
         </summary>
@@ -150,6 +160,8 @@
           <para
             >Represents the HKEY_DYN_DATA base key on another computer. This value can be passed to the <see
              cref="M:Microsoft.Win32.RegistryKey.OpenRemoteBaseKey(Microsoft.Win32.RegistryHive,System.String)" />
+
+            
 
             
 
@@ -182,6 +194,8 @@
 
             
 
+            
+
              method, to open this node remotely.</para
           >
         </summary>
@@ -211,6 +225,8 @@
 
             
 
+            
+
              method, to open this node remotely.</para
           >
         </summary>
@@ -237,6 +253,8 @@
           <para
             >Represents the HKEY_USERS base key on another computer. This value can be passed to the <see
              cref="M:Microsoft.Win32.RegistryKey.OpenRemoteBaseKey(Microsoft.Win32.RegistryHive,System.String)" />
+
+            
 
             
 

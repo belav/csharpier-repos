@@ -22,6 +22,8 @@
 
         
 
+        
+
          class allows you to access and configure a node in the Machine.config or Web.config configuration file identified by the passport tag.</para
       >
       <para
@@ -30,13 +32,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
 
         
 
+        
+
         , and <see
          cref="T:System.Web.Configuration.AuthenticationMode" />
+
+        
 
         
 
@@ -46,6 +54,8 @@
         <para
           >The <see
            cref="T:System.Web.Configuration.PassportAuthentication" />
+
+          
 
           
 
@@ -71,6 +81,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.PassportAuthentication" />
+
+            
 
             
 
@@ -125,6 +137,8 @@
 
             
 
+            
+
              properties.</para
           >
         </summary>
@@ -155,6 +169,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.PassportAuthentication.RedirectUrl" />
+
+            
 
             
 

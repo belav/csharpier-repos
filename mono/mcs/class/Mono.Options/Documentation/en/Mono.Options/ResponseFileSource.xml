@@ -26,14 +26,20 @@
 
         
 
+        
+
          looks for arguments which start with
         <c
         >@</c>
 
         
 
+        
+
         , assumes that what follows the <c
         >@</c>
+
+        
 
         
 
@@ -57,11 +63,12 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Constructs and initializes a
           <see
            cref="T:Mono.Options.ResponseFileSource" />
+
+          
 
           
 
@@ -83,11 +90,12 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           The description to provide for the argument source within
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+
+          
 
           
 
@@ -96,6 +104,8 @@
         >
         <value>
           <c>"Read response file for more options."</c>
+
+          
 
           
 
@@ -131,10 +141,11 @@
         />
       </Parameters>
       <Docs>
-        <param name="value"
-          >
+        <param name="value">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -142,10 +153,11 @@
           with additional arguments.
         </param
         >
-        <param name="replacement"
-          >
+        <param name="replacement">
           A <see
            cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+
+          
 
           
 
@@ -156,14 +168,17 @@
 
           
 
+          
+
           ; otherwise, this value should be ignored by
           callers.
         </param
         >
-        <summary
-          >
+        <summary>
           Replace the argument <paramref
            name="value" />
+
+          
 
           
 
@@ -171,10 +186,11 @@
           the specified file.
         </summary
         >
-        <returns
-          >
+        <returns>
           If <paramref
            name="value" />
+
+          
 
           
 
@@ -183,9 +199,13 @@
 
           
 
+          
+
           , then
           <paramref
            name="replacement" />
+
+          
 
           
 
@@ -196,8 +216,12 @@
 
             
 
+            
+
             .Substring(1)</c
           >
+
+          
 
           
 
@@ -207,9 +231,13 @@
 
           
 
+          
+
            is returned; otherwise, 
           <see
            langword="false" />
+
+          
 
           
 
@@ -222,8 +250,12 @@
 
           
 
+          
+
            starts with <c
           >@</c>
+
+          
 
           
 
@@ -234,8 +266,12 @@
 
             
 
+            
+
             .Substring(1)</c
           >
+
+          
 
           
 
@@ -261,27 +297,31 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           The names to provide for the argument source within 
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
           
 
+          
+
           .
         </summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
            array containing
           an element with the value <c
           >"@file"</c>
+
+          
 
           
 

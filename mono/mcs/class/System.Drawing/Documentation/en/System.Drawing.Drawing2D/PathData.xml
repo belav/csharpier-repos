@@ -23,6 +23,8 @@
 
         
 
+        
+
          object. This class cannot be inherited.</para
       >
     </summary>
@@ -40,6 +42,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Drawing2D.PathData" />
+
+            
 
             
 
@@ -67,6 +71,8 @@
           <para
             >Gets or sets an array of <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 

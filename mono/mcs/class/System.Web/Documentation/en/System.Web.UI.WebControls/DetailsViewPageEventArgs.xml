@@ -22,13 +22,19 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.DetailsView.PageIndexChanging" />
 
         
 
+        
+
          event when a pager button (a button with its CommandName property set to "Page") within the control is clicked, but before the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -41,6 +47,8 @@
 
           
 
+          
+
            control.</para
         >
       </block>
@@ -50,8 +58,12 @@
 
         
 
+        
+
          object is passed to the event handler, which allows you to determine the index of the page selected by the user and to indicate whether the paging operation should be canceled. To determine the index of the page selected by the user, use the <see
          cref="P:System.Web.UI.WebControls.DetailsViewPageEventArgs.NewPageIndex" />
+
+        
 
         
 
@@ -60,8 +72,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.DetailsViewPageEventArgs" />
+
+        
 
         
 
@@ -75,6 +91,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -83,8 +101,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.DetailsViewPageEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -96,6 +118,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.DetailsView.PageIndexChanging" />
+
+        
 
         
 
@@ -121,11 +145,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.DetailsViewPageEventArgs" />
+
+            
 
             
 
@@ -155,6 +183,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -169,6 +199,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DetailsViewPageEventArgs" />
+
+            
 
             
 
@@ -197,8 +229,12 @@
 
             
 
+            
+
              event occurs before the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -207,8 +243,12 @@
 
             
 
+            
+
              property of the control contains the index of the previously displayed page and cannot be used to determine the index of the page selected by the user. Use the <see
              cref="P:System.Web.UI.WebControls.DetailsViewPageEventArgs.NewPageIndex" />
+
+            
 
             
 
@@ -220,6 +260,8 @@
           <para
             >Gets or sets the index of the new page to display in the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 

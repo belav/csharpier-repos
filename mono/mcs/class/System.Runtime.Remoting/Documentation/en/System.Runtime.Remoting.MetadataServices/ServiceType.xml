@@ -22,10 +22,14 @@
 
         
 
+        
+
          class is used to hold information that is specified on the command line to the <format
          type="text/html">
           <a href="40F6F8C8-B80C-4E9F-A920-31BCD0CF45C5">Soapsuds tool</a>
         </format>
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
             
 
+            
+
              class with the object <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -68,8 +76,12 @@
 
           
 
+          
+
           The object <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -99,8 +111,12 @@
 
             
 
+            
+
              class with the URL and <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -112,8 +128,12 @@
 
           
 
+          
+
           The object <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -124,8 +144,12 @@
 
           
 
+          
+
           The well-known endpoint that can process messages that are sent to a method on the object type that is specified in the <paramref
            name="type" />
+
+          
 
           
 
@@ -154,6 +178,8 @@
 
             
 
+            
+
              that is passed to the Web Services Description Language (WSDL) generator.</para
           >
         </summary>
@@ -177,6 +203,8 @@
           <para
             >Gets the URL of an object <see
              cref="T:System.Type" />
+
+            
 
             
 

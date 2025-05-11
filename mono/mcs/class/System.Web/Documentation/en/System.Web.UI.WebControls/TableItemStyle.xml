@@ -25,8 +25,12 @@
 
         
 
+        
+
          class represents the style properties for an element of a control that renders as a <see
          cref="T:System.Web.UI.WebControls.TableRow" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
         . You can control the vertical and horizontal alignment of the contents in an item of the table by setting the <see
          cref="P:System.Web.UI.WebControls.TableItemStyle.HorizontalAlign" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          properties, respectively. You can also specify whether the contents of the cell automatically continue on the next line when the end of the cell is reached by setting the <see
          cref="P:System.Web.UI.WebControls.TableItemStyle.Wrap" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
          control. You can use the <see
          cref="M:System.Web.UI.WebControls.TableItemStyle.CopyFrom(System.Web.UI.WebControls.Style)" />
+
+        
 
         
 
@@ -68,13 +84,19 @@
 
         
 
+        
+
          methods to copy or merge the style properties of another <see
          cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
         
 
+        
+
          with the instance of the <see
          cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+        
 
         
 
@@ -89,8 +111,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -113,6 +139,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -121,6 +149,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -149,8 +179,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -165,6 +199,8 @@
 
             
 
+            
+
              class with the specified state bag.</para
           >
         </summary>
@@ -173,8 +209,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.StateBag" />
+
+          
 
           
 
@@ -208,8 +248,12 @@
 
             
 
+            
+
              method is used primarily by control developers to insert additional attributes and styles in the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -218,13 +262,19 @@
 
             
 
+            
+
             . The <see
              cref="Overload:System.Web.UI.WebControls.TableItemStyle.AddAttributesToRender" />
 
             
 
+            
+
              method overrides the <see
              cref="Overload:System.Web.UI.WebControls.Style.AddAttributesToRender" />
+
+            
 
             
 
@@ -240,10 +290,14 @@
 
           
 
+          
+
           The output stream that renders HTML content to the client. </param
         >
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,13 +330,19 @@
 
             
 
+            
+
              method to duplicate the non-empty style properties of the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
 
             
 
+            
+
              into the instance of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -295,8 +355,12 @@
 
               
 
+              
+
                class are replaced by the associated property in the <paramref
                name="s" />
+
+              
 
               
 
@@ -312,8 +376,12 @@
 
             
 
+            
+
              into the instance of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -325,8 +393,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -358,8 +430,12 @@
 
             
 
+            
+
              property to specify the horizontal alignment of the data list control within its container. This property is set with one of the <see
              cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+
+            
 
             
 
@@ -458,13 +534,19 @@
 
             
 
+            
+
              method to combine the style properties of the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
 
             
 
+            
+
              into the instance of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -476,8 +558,12 @@
 
             
 
+            
+
              object and the current instance of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -486,8 +572,12 @@
 
             
 
+            
+
              class with the value in the corresponding property of the <paramref
              name="s" />
+
+            
 
             
 
@@ -496,8 +586,12 @@
 
             
 
+            
+
              parameter is not set, it does not replace the corresponding property in the current instance of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -512,8 +606,12 @@
 
             
 
+            
+
              into the instance of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -525,8 +623,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -577,6 +679,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.TableItemStyle.VerticalAlign" />
+
+            
 
             
 
@@ -668,6 +772,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.TableItemStyle.Wrap" />
+
+            
 
             
 

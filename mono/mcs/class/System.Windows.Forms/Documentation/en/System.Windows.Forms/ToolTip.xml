@@ -37,8 +37,12 @@
 
         
 
+        
+
          class, you can provide hints to a user when the user places the pointer on a control. The <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          control that accepts a name, specifying the format of the name to be typed into the control. In addition to providing hints, you can also use the <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          class to display connection speed and line quality data when the user moves the pointer onto a <see
          cref="T:System.Windows.Forms.PictureBox" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
          class can be used in any container. To explicitly specify a container, use the <see
          cref="M:System.Windows.Forms.ToolTip.#ctor(System.ComponentModel.IContainer)" />
+
+        
 
         
 
@@ -80,8 +96,12 @@
 
         
 
+        
+
          component typically is used to create ToolTips for multiple controls on a single form. After you create a <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -90,8 +110,12 @@
 
         
 
+        
+
          method to associate ToolTip display text to an individual control. Then when the user moves the pointer on a control, the ToolTip with its text is displayed. You can call <see
          cref="M:System.Windows.Forms.ToolTip.SetToolTip(System.Windows.Forms.Control,System.String)" />
+
+        
 
         
 
@@ -100,13 +124,19 @@
 
         
 
+        
+
          method. To remove all ToolTip text associations with an instance of the <see
          cref="T:System.Windows.Forms.ToolTip" />
 
         
 
+        
+
          class, use the <see
          cref="M:System.Windows.Forms.ToolTip.RemoveAll" />
+
+        
 
         
 
@@ -119,12 +149,16 @@
 
           
 
+          
+
            property is set to true, ToolTips are not displayed when their container is inactive.</para
         >
       </block>
       <para
         >The <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -151,8 +185,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Windows.Forms.ToolTip.Show" />
+
+              
 
               
 
@@ -161,13 +199,19 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.ToolTip.ShowAlways" />
 
               
 
+              
+
               , <see
                cref="E:System.Windows.Forms.ToolTip.Popup" />
+
+              
 
               
 
@@ -186,8 +230,12 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.ToolTip.InitialDelay" />
+
+              
 
               
 
@@ -196,8 +244,12 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+              
 
               
 
@@ -216,8 +268,12 @@
 
               
 
+              
+
               , <see
                cref="M:System.Windows.Forms.ToolTip.GetToolTip(System.Windows.Forms.Control)" />
+
+              
 
               
 
@@ -226,13 +282,19 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.ToolTip.ToolTipIcon" />
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.ToolTip.ToolTipTitle" />
+
+              
 
               
 
@@ -251,8 +313,12 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.ToolTip.ForeColor" />
+
+              
 
               
 
@@ -261,13 +327,19 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.ToolTip.OwnerDraw" />
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.ToolTip.UseAnimation" />
+
+              
 
               
 
@@ -283,8 +355,12 @@
 
         
 
+        
+
          property. Usually the ToolTip is drawn by the operating system, but to customize the appearance of the <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -293,8 +369,12 @@
 
         
 
+        
+
          property to true and handle the <see
          cref="E:System.Windows.Forms.ToolTip.Draw" />
+
+        
 
         
 
@@ -306,8 +386,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.ComponentModel.IExtenderProvider" />
+
+        
 
         
 
@@ -316,10 +400,14 @@
 
         
 
+        
+
         . ToolTips extend controls on the same form at design time, adding a ToolTip property. For more information about extender providers, see <format
          type="text/html">
           <a href="4ce043d8-cd48-49dd-abef-185a2079e96a">Extender Providers</a>
         </format>
+
+        
 
         
 
@@ -346,6 +434,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -376,8 +466,12 @@
 
             
 
+            
+
              constructor enables you to associate a <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -386,8 +480,12 @@
 
             
 
+            
+
              object. By associating the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -396,8 +494,12 @@
 
             
 
+            
+
             . This can be useful if you use several components in your application, and want to dispose of all of them at the same time. For example, if you associate a <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -406,8 +508,12 @@
 
             
 
+            
+
             , and a <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 
@@ -416,13 +522,19 @@
 
             
 
+            
+
             , calling <see
              cref="M:System.ComponentModel.Container.Dispose" />
 
             
 
+            
+
              on the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -437,6 +549,8 @@
 
             
 
+            
+
              class with a specified container.</para
           >
         </summary>
@@ -445,13 +559,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.IContainer" />
 
           
 
+          
+
            that represents the container of the <see
            cref="T:System.Windows.Forms.ToolTip" />
+
+          
 
           
 
@@ -484,8 +604,12 @@
 
             
 
+            
+
              property, you can enable or disable the display of ToolTip text for all controls that have text specified by this particular <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -494,13 +618,19 @@
 
             
 
+            
+
              component can be created and assigned to a form, setting the <see
              cref="P:System.Windows.Forms.ToolTip.Active" />
 
             
 
+            
+
              property to false only affects the current <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -541,8 +671,12 @@
 
             
 
+            
+
              property enables you to set a single delay value, which is then used to set the values of the <see
              cref="P:System.Windows.Forms.ToolTip.AutoPopDelay" />
+
+            
 
             
 
@@ -551,13 +685,19 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ToolTip.ReshowDelay" />
 
             
 
+            
+
              properties. Each time the <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -587,6 +727,8 @@
 
                   
 
+                  
+
                    property value. </para
                 >
               </description>
@@ -601,6 +743,8 @@
                 <para
                   >Equal to the <see
                    cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+                  
 
                   
 
@@ -621,6 +765,8 @@
 
                   
 
+                  
+
                    property value. </para
                 >
               </description>
@@ -632,8 +778,12 @@
 
             
 
+            
+
              property has been set. For more information, see the <see
              cref="P:System.Windows.Forms.ToolTip.AutoPopDelay" />
+
+            
 
             
 
@@ -642,8 +792,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ToolTip.ReshowDelay" />
+
+            
 
             
 
@@ -681,8 +835,12 @@
 
             
 
+            
+
              property enables you to shorten or lengthen the time that the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -694,8 +852,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -704,8 +866,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolTip.ReshowDelay" />
+
+            
 
             
 
@@ -714,8 +880,12 @@
 
             
 
+            
+
              properties to initial values based on a single value. Every time the <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -724,8 +894,12 @@
 
             
 
+            
+
              property is set to 10 times the <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -734,8 +908,12 @@
 
             
 
+            
+
              property is set, you can independently set the <see
              cref="P:System.Windows.Forms.ToolTip.AutoPopDelay" />
+
+            
 
             
 
@@ -744,6 +922,8 @@
           <para
             >The maximum time you can delay a popup is 5000 milliseconds. For longer durations, use the <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
+
+            
 
             
 
@@ -786,6 +966,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -813,8 +995,12 @@
 
             
 
+            
+
              method is the only member of the <see
              cref="T:System.ComponentModel.IExtenderProvider" />
+
+            
 
             
 
@@ -823,8 +1009,12 @@
 
             
 
+            
+
              parameter is of type <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -843,11 +1033,15 @@
 
             
 
+            
+
              class can offer one or more extender properties; otherwise, false.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -881,8 +1075,12 @@
 
             
 
+            
+
              property should only be extended when you are wrapping a standard Windows control class or to set styles not provided by the <see
              cref="N:System.Windows.Forms" />
+
+            
 
             
 
@@ -895,8 +1093,12 @@
 
               
 
+              
+
                property in a derived class, use the base class's <see
                cref="P:System.Windows.Forms.ToolTip.CreateParams" />
+
+              
 
               
 
@@ -930,6 +1132,8 @@
 
             
 
+            
+
              component.</para
           >
         </summary>
@@ -960,8 +1164,12 @@
 
             
 
+            
+
              event, you can customize the appearance of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -973,8 +1181,12 @@
 
             
 
+            
+
              event is raised by the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -983,8 +1195,12 @@
 
             
 
+            
+
              is drawn and the <see
              cref="P:System.Windows.Forms.ToolTip.OwnerDraw" />
+
+            
 
             
 
@@ -993,8 +1209,12 @@
 
             
 
+            
+
              property is false. The <see
              cref="T:System.Windows.Forms.DrawToolTipEventArgs" />
+
+            
 
             
 
@@ -1003,8 +1223,12 @@
 
             
 
+            
+
             , including the ToolTip text, the <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1013,8 +1237,12 @@
 
             
 
+            
+
              object on which the drawing should be done. To customize the look of the ToolTip, use the <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1023,13 +1251,19 @@
 
             
 
+            
+
              object to perform your customized drawing. You can increase the bounds of the <see
              cref="T:System.Windows.Forms.ToolTip" />
 
             
 
+            
+
              before it is shown by handling the <see
              cref="E:System.Windows.Forms.ToolTip.Popup" />
+
+            
 
             
 
@@ -1045,6 +1279,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1056,8 +1292,12 @@
 
             
 
+            
+
              property is set to true and the <see
              cref="P:System.Windows.Forms.ToolTip.IsBalloon" />
+
+            
 
             
 
@@ -1082,13 +1322,19 @@
 
             
 
+            
+
             . Application code should not call this method; an object's <see
              cref="M:System.Object.Finalize" />
 
             
 
+            
+
              method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -1101,12 +1347,16 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1119,6 +1369,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1127,6 +1379,8 @@
           <para
             >Releases the unmanaged resources and performs other cleanup operations before the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -1163,13 +1417,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolTip.ForeColor" />
 
             
 
+            
+
              properties to modify the color scheme used by ToolTips. The system default font is automatically used and can only be overridden by owner-drawing the ToolTip. For more information, see the <see
              cref="P:System.Windows.Forms.ToolTip.OwnerDraw" />
+
+            
 
             
 
@@ -1203,8 +1463,12 @@
 
             
 
+            
+
              method, you can retrieve the ToolTip text for any control. If the ToolTip text changes dynamically in an application, you can use this method to find out what text is displayed at any point, depending on the state of the application. To change the text that a control is displaying, use the <see
              cref="M:System.Windows.Forms.ToolTip.SetToolTip(System.Windows.Forms.Control,System.String)" />
+
+            
 
             
 
@@ -1223,6 +1487,8 @@
 
             
 
+            
+
              containing the ToolTip text for the specified control.</para
           >
         </returns>
@@ -1231,13 +1497,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
 
           
 
+          
+
            for which to retrieve the <see
            cref="T:System.Windows.Forms.ToolTip" />
+
+          
 
           
 
@@ -1284,8 +1556,12 @@
 
             
 
+            
+
              method hides the ToolTip for the specified <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -1294,8 +1570,12 @@
 
             
 
+            
+
              component, set the <see
              cref="P:System.Windows.Forms.ToolTip.Active" />
+
+            
 
             
 
@@ -1307,8 +1587,12 @@
 
             
 
+            
+
              permission to use this method, as <see
              cref="M:System.Windows.Forms.ToolTip.Hide(System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -1324,8 +1608,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -1354,13 +1642,19 @@
 
             
 
+            
+
              property, you can shorten or lengthen the time that the <see
              cref="T:System.Windows.Forms.ToolTip" />
 
             
 
+            
+
              waits before displaying a ToolTip window. If the value of the <see
              cref="P:System.Windows.Forms.ToolTip.InitialDelay" />
+
+            
 
             
 
@@ -1373,8 +1667,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -1383,8 +1681,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolTip.ReshowDelay" />
+
+            
 
             
 
@@ -1393,8 +1695,12 @@
 
             
 
+            
+
              properties to initial values based on a single time value. Every time the <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -1403,8 +1709,12 @@
 
             
 
+            
+
              property is set to the same value as the <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -1413,8 +1723,12 @@
 
             
 
+            
+
              property is set, you can independently set the <see
              cref="P:System.Windows.Forms.ToolTip.InitialDelay" />
+
+            
 
             
 
@@ -1455,6 +1769,8 @@
 
             
 
+            
+
              property to true, the ToolTip will be displayed using a balloon window.</para
           >
         </remarks>
@@ -1488,8 +1804,12 @@
 
             
 
+            
+
              is drawn by the operating system, but to customize the appearance of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1498,8 +1818,12 @@
 
             
 
+            
+
              property to true and handle the <see
              cref="E:System.Windows.Forms.ToolTip.Draw" />
+
+            
 
             
 
@@ -1511,13 +1835,19 @@
 
             
 
+            
+
              property takes precedence over the <see
              cref="P:System.Windows.Forms.ToolTip.OwnerDraw" />
 
             
 
+            
+
              property. If both are set to true, the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1551,13 +1881,19 @@
 
             
 
+            
+
              event is raised whenever a ToolTip is displayed, either through an explicit call to one of the <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
 
             
 
+            
+
              methods or when the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1569,6 +1905,8 @@
 
             
 
+            
+
             , will result in an exception being thrown. </para
           >
         </remarks>
@@ -1577,6 +1915,8 @@
           <para
             >Occurs before a ToolTip is initially displayed. This is the default event for the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1601,13 +1941,19 @@
 
             
 
+            
+
              component for all associated controls. To disable the display of text instead, use the <see
              cref="P:System.Windows.Forms.ToolTip.Active" />
 
             
 
+            
+
              property. To change the text for a single associated control, use the <see
              cref="M:System.Windows.Forms.ToolTip.SetToolTip(System.Windows.Forms.Control,System.String)" />
+
+            
 
             
 
@@ -1645,8 +1991,12 @@
 
             
 
+            
+
              property, you can shorten or lengthen the time that the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1655,8 +2005,12 @@
 
             
 
+            
+
              property is used to determine the delay to apply before initially showing the ToolTip window. When a ToolTip window is currently being displayed and the user moves the pointer to another control that displays a ToolTip window, the value of the <see
              cref="P:System.Windows.Forms.ToolTip.ReshowDelay" />
+
+            
 
             
 
@@ -1665,8 +2019,12 @@
 
             
 
+            
+
              property to be used; otherwise the <see
              cref="P:System.Windows.Forms.ToolTip.InitialDelay" />
+
+            
 
             
 
@@ -1678,8 +2036,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -1688,8 +2050,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolTip.ReshowDelay" />
+
+            
 
             
 
@@ -1698,8 +2064,12 @@
 
             
 
+            
+
              properties to initial values based on a single time value. Every time the <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -1708,8 +2078,12 @@
 
             
 
+            
+
              property is set to 1/5 of the <see
              cref="P:System.Windows.Forms.ToolTip.AutomaticDelay" />
+
+            
 
             
 
@@ -1718,8 +2092,12 @@
 
             
 
+            
+
              property is set, you can independently set the <see
              cref="P:System.Windows.Forms.ToolTip.ReshowDelay" />
+
+            
 
             
 
@@ -1758,8 +2136,12 @@
 
             
 
+            
+
              method more than once for a given control does not specify multiple ToolTip text to display for a control, but instead changes the current ToolTip text for the control. To determine the ToolTip text that is associated with a control at run time, use the <see
              cref="M:System.Windows.Forms.ToolTip.GetToolTip(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1768,6 +2150,8 @@
           <para
             >As a general rule the text used should be short; however, you can insert line breaks by using the \r\n escape character sequence. Ampersands (&amp;) in the text are handled as described by the <see
              cref="P:System.Windows.Forms.ToolTip.StripAmpersands" />
+
+            
 
             
 
@@ -1783,8 +2167,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -1792,6 +2180,8 @@
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1828,8 +2218,12 @@
 
             
 
+            
+
              method displays the ToolTip for the specified control modally; that is, the ToolTip will be displayed until the <see
              cref="M:System.Windows.Forms.ToolTip.Hide(System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -1841,8 +2235,12 @@
 
             
 
+            
+
              permission to use this method, as <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
+
+            
 
             
 
@@ -1858,8 +2256,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1870,8 +2272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -1905,13 +2311,19 @@
 
             
 
+            
+
              parameter can specify a position outside the bounds of the associated control, its parent form, or even the desktop. The version of the <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
 
             
 
+            
+
              method displays the ToolTip for the specified control modally; that is, the ToolTip will be displayed until the <see
              cref="M:System.Windows.Forms.ToolTip.Hide(System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -1923,8 +2335,12 @@
 
             
 
+            
+
              permission to use this method, as <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
+
+            
 
             
 
@@ -1940,8 +2356,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1952,8 +2372,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -1964,8 +2388,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1999,8 +2427,12 @@
 
             
 
+            
+
              parameter. To display the ToolTip modally, call the <see
              cref="M:System.Windows.Forms.ToolTip.Show(System.String,System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -2012,8 +2444,12 @@
 
             
 
+            
+
              permission to use this method, as <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
+
+            
 
             
 
@@ -2029,8 +2465,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2041,8 +2481,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -2053,8 +2497,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -2089,8 +2537,12 @@
 
             
 
+            
+
              parameter can specify a position outside the bounds of the associated control, its parent form, or even the desktop.  The ToolTip is positioned in the center of the associated control. To display the ToolTip modally, call the <see
              cref="M:System.Windows.Forms.ToolTip.Show(System.String,System.Windows.Forms.IWin32Window,System.Drawing.Point)" />
+
+            
 
             
 
@@ -2102,8 +2554,12 @@
 
             
 
+            
+
              permission to use this method, as <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
+
+            
 
             
 
@@ -2119,8 +2575,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2131,8 +2591,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -2143,8 +2607,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -2155,8 +2623,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -2191,13 +2663,19 @@
 
             
 
+            
+
              method operates identically to the <see
              cref="M:System.Windows.Forms.ToolTip.Show(System.String,System.Windows.Forms.IWin32Window,System.Drawing.Point)" />
 
             
 
+            
+
              version, except that the offset is specified as separate x- and y-coordinates instead of a <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -2209,8 +2687,12 @@
 
             
 
+            
+
              permission to use this method, as <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
+
+            
 
             
 
@@ -2226,8 +2708,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2238,8 +2724,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -2250,10 +2740,14 @@
 
           
 
+          
+
           The horizontal offset, in pixels, relative to the upper-left corner of the associated control window, to display the ToolTip.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2289,8 +2783,12 @@
 
             
 
+            
+
              method operates identically to the <see
              cref="M:System.Windows.Forms.ToolTip.Show(System.String,System.Windows.Forms.IWin32Window,System.Drawing.Point,System.Int32)" />
+
+            
 
             
 
@@ -2299,8 +2797,12 @@
 
             
 
+            
+
             . To display the ToolTip modally, call the <see
              cref="M:System.Windows.Forms.ToolTip.Show(System.String,System.Windows.Forms.IWin32Window,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2312,8 +2814,12 @@
 
             
 
+            
+
              permission to use this method, as <see
              cref="Overload:System.Windows.Forms.ToolTip.Show" />
+
+            
 
             
 
@@ -2329,8 +2835,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2341,8 +2851,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -2353,10 +2867,14 @@
 
           
 
+          
+
           The horizontal offset, in pixels, relative to the upper-left corner of the associated control window, to display the ToolTip.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2367,8 +2885,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -2397,8 +2919,12 @@
 
             
 
+            
+
              property, you can display a ToolTip window even when the container of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -2407,13 +2933,19 @@
 
             
 
+            
+
             , which contains a number of controls within it that display ToolTip windows. Because the <see
              cref="T:System.Windows.Forms.UserControl" />
 
             
 
+            
+
              is often not the active window on a form, setting this property to true enables the controls within the <see
              cref="T:System.Windows.Forms.UserControl" />
+
+            
 
             
 
@@ -2449,8 +2981,12 @@
 
             
 
+            
+
              class has an internal timer that it uses to set the display duration for ToolTips. The duration associated with this timer is set through the <see
              cref="P:System.Windows.Forms.ToolTip.AutoPopDelay" />
+
+            
 
             
 
@@ -2459,8 +2995,12 @@
 
             
 
+            
+
              method will stop this internal timer, causing any displayed ToolTip to be shown modally until the <see
              cref="M:System.Windows.Forms.ToolTip.Hide(System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -2497,6 +3037,8 @@
           <para
             >An application commonly uses the same string resource for multiple purposes, such as a menu item and a ToolTip. However, menus often enable accelerators, denoted by an ampersand character, in the menu item string. ToolTips do not support this capability, so by default, ampersands are just displayed as normal characters. Setting the <see
              cref="P:System.Windows.Forms.ToolTip.StripAmpersands" />
+
+            
 
             
 
@@ -2542,8 +3084,12 @@
 
             
 
+            
+
              property to store data that is closely associated with the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -2552,13 +3098,19 @@
 
             
 
+            
+
              for a control that displays customer information, you might store the <see
              cref="T:System.Data.DataSet" />
 
             
 
+            
+
              that contains the customer's information in the <see
              cref="P:System.Windows.Forms.ToolTip.Tag" />
+
+            
 
             
 
@@ -2570,6 +3122,8 @@
           <para
             >Gets or sets the object that contains programmer-supplied data associated with the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -2605,8 +3159,12 @@
 
             
 
+            
+
              enumeration, you must owner-draw the entire ToolTip. For more information, see the <see
              cref="P:System.Windows.Forms.ToolTip.OwnerDraw" />
+
+            
 
             
 
@@ -2662,13 +3220,19 @@
 
             
 
+            
+
              method displays the class name, followed by the values of the <see
              cref="P:System.Windows.Forms.ToolTip.InitialDelay" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolTip.ShowAlways" />
+
+            
 
             
 
@@ -2687,8 +3251,12 @@
 
             
 
+            
+
              containing a description of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -2728,6 +3296,8 @@
 
             
 
+            
+
              property can be used to enable this capability for ToolTips displayed on these platforms.</para
           >
         </remarks>
@@ -2761,6 +3331,8 @@
           <para
             >Internet Explorer 5 and Microsoft Windows XP introduced dynamic user interface effects such as window fading and animation. If the user has not disabled these capabilities, the <see
              cref="P:System.Windows.Forms.ToolTip.UseFading" />
+
+            
 
             
 

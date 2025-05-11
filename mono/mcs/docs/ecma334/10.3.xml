@@ -6,8 +6,12 @@
 
     
 
+    
+
     ), which can contain type declarations and nested namespace declarations. Type declarations (<hyperlink
     >16.5</hyperlink>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
     ), structs (<hyperlink
     >18</hyperlink>
+
+    
 
     
 
@@ -26,8 +34,12 @@
 
     
 
+    
+
     ), enums (<hyperlink
     >21</hyperlink>
+
+    
 
     
 
@@ -36,8 +48,12 @@
 
     
 
+    
+
     ). The kinds of members permitted in a type declaration depend on the form of the type declaration. For instance, class declarations can contain declarations for constants (<hyperlink
     >17.3</hyperlink>
+
+    
 
     
 
@@ -46,8 +62,12 @@
 
     
 
+    
+
     ), methods (<hyperlink
     >17.5</hyperlink>
+
+    
 
     
 
@@ -56,8 +76,12 @@
 
     
 
+    
+
     ), events (<hyperlink
     >17.7</hyperlink>
+
+    
 
     
 
@@ -66,8 +90,12 @@
 
     
 
+    
+
     ), operators (<hyperlink
     >17.9</hyperlink>
+
+    
 
     
 
@@ -76,8 +104,12 @@
 
     
 
+    
+
     ), destructors (<hyperlink
     >17.12</hyperlink>
+
+    
 
     
 
@@ -86,11 +118,15 @@
 
     
 
+    
+
     ), and nested types. </paragraph
   >
   <paragraph
     >A declaration defines a name in the declaration space to which the declaration belongs. Except for overloaded members (<hyperlink
     >10.6</hyperlink>
+
+    
 
     
 
@@ -106,8 +142,12 @@
 
         
 
+        
+
         s with no enclosing  <non_terminal
          where="16.2">namespace-declaration</non_terminal>
+
+        
 
         
 
@@ -119,8 +159,12 @@
 
         
 
+        
+
         s within <non_terminal
          where="16.2">namespace-declaration</non_terminal>
+
+        
 
         
 
@@ -132,13 +176,19 @@
 
         
 
+        
+
         s, <non_terminal
          where="18.2">struct-member-declaration</non_terminal>
 
         
 
+        
+
         s, or  <non_terminal
          where="20.2">interface-member-declaration</non_terminal>
+
+        
 
         
 
@@ -149,8 +199,12 @@
 
           
 
+          
+
           ). end example]</example
         >
+
+        
 
         
 
@@ -162,6 +216,8 @@
 
         
 
+        
+
         s. </list_item
       >
       <list_item
@@ -170,8 +226,12 @@
 
         
 
+        
+
          creates a different declaration space for local variables. Names are introduced into this declaration space through <non_terminal
          where="15.5.1">local-variable-declaration</non_terminal>
+
+        
 
         
 
@@ -183,13 +243,19 @@
 
         
 
+        
+
          creates a separate declaration space for labels. Names are introduced into this declaration space through <non_terminal
          where="15.4">labeled-statement</non_terminal>
 
         
 
+        
+
         s, and the names are referenced through <non_terminal
          where="15.9.3">goto-statement</non_terminal>
+
+        
 
         
 
@@ -207,6 +273,8 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
@@ -215,8 +283,12 @@
 
         
 
+        
+
         ) is significant when <non_terminal
          where="14.15">constant-expression</non_terminal>
+
+        
 
         
 
@@ -228,7 +300,7 @@
     <example
       >[Example: The declaration space of a namespace is "open ended", and two namespace declarations with the same fully qualified name contribute to the same declaration space. For example <code_example
       >
-        <![CDATA[
+<![CDATA[
 namespace Megacorp.Data  
 {  
    class Customer  
@@ -254,7 +326,7 @@ namespace Megacorp.Data
     <note
       >[Note: As specified above, the declaration space of a block includes any nested blocks. Thus, in the following example, the F and G methods result in a compile-time error because the name i is declared in the outer block and cannot be redeclared in the inner block. However, the H and I methods are valid since the two i's are declared in separate non-nested blocks. <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A  
 {  
    void F() {  
@@ -286,6 +358,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

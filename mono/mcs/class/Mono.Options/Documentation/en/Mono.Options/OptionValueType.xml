@@ -15,10 +15,11 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary
-      >
+    <summary>
       Specifies whether or not a <see
        cref="T:Mono.Options.Option" />
+
+      
 
       
 
@@ -57,14 +58,20 @@
 
             
 
+            
+
              if the value is 
           <see
              langword="false" />
 
             
 
+            
+
              (e.g. <c
             >-optionName-</c>
+
+            
 
             
 
@@ -74,8 +81,12 @@
 
             
 
+            
+
              if the value is <see
              langword="true" />
+
+            
 
             
 
@@ -85,8 +96,12 @@
 
             
 
+            
+
             , <c
             >-optionName+</c>
+
+            
 
             
 
@@ -121,9 +136,13 @@
 
             
 
+            
+
              after the option name
             within <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -136,9 +155,13 @@
 
             
 
+            
+
              value if no value is provided, and will 
             otherwise receive a non-<see
              langword="null" />
+
+            
 
             
 
@@ -151,9 +174,13 @@
 
             
 
+            
+
              will 
             pass <c
             >"foo"</c>
+
+            
 
             
 
@@ -162,8 +189,12 @@
 
             
 
+            
+
             , but <c
             >-opt foo</c>
+
+            
 
             
 
@@ -173,8 +204,12 @@
 
             
 
+            
+
              as the value to <c
             >-opt</c>
+
+            
 
             
 
@@ -210,9 +245,13 @@
 
             
 
+            
+
              after the option name
             within <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -226,8 +265,12 @@
 
             
 
+            
+
              and <c
             >-opt foo</c>
+
+            
 
             
 
@@ -237,8 +280,12 @@
 
             
 
+            
+
              as the value to <c
             >-opt</c>
+
+            
 
             
 

@@ -47,6 +47,8 @@
 
             
 
+            
+
              objects based on metadata information for the table.</para
           >
         </summary>
@@ -58,6 +60,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -66,8 +70,12 @@
 
           
 
+          
+
           The data-bound control that will contain the <see
            cref="T:System.Web.DynamicData.DynamicField" />
+
+          
 
           
 

@@ -34,13 +34,19 @@
 
         
 
+        
+
         -derived type, and adds SQL-specific features such as database-style null semantics by implementing the <see
          cref="T:System.Data.SqlTypes.INullable" />
 
         
 
+        
+
          interface. When you use SqlXml, the XML value that you assign to the SqlXml instance must be consumable by an <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
           <para
             >Creates a new <see
              cref="T:System.Data.SqlTypes.SqlXml" />
+
+            
 
             
 
@@ -95,8 +103,12 @@
 
             
 
+            
+
              instance, supplying the XML value from the supplied <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -108,8 +120,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -118,8 +134,12 @@
 
           
 
+          
+
           ) from which to load the <see
            cref="T:System.Data.SqlTypes.SqlXml" />
+
+          
 
           
 
@@ -145,6 +165,8 @@
 
             
 
+            
+
              returns true.</para
           >
         </remarks>
@@ -156,8 +178,12 @@
 
             
 
+            
+
              instance and associates it with the content of the supplied <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -169,13 +195,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
           -derived class instance to be used as the value of the new <see
            cref="T:System.Data.SqlTypes.SqlXml" />
+
+          
 
           
 
@@ -202,6 +234,8 @@
 
             
 
+            
+
              instance was initialized to null (Nothing in Visual Basic), this method returns null.</para
           >
         </remarks>
@@ -213,8 +247,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -229,8 +267,12 @@
 
             
 
+            
+
             -derived instance that contains the XML content. The actual type may vary (for example, the return value might be <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -264,6 +306,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -275,6 +319,8 @@
 
             
 
+            
+
             . </para
           >
         </returns>
@@ -283,8 +329,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -309,6 +359,8 @@
           <para
             >Indicates whether this instance represents a null <see
              cref="T:System.Data.SqlTypes.SqlXml" />
+
+            
 
             
 
@@ -340,6 +392,8 @@
 
             
 
+            
+
              type.</para
           >
         </summary>
@@ -367,8 +421,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -383,6 +441,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -394,13 +454,19 @@
 
             
 
+            
+
              that describes the XML representation of the object that is produced by the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
 
             
 
+            
+
              method and consumed by the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -433,8 +499,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -449,11 +519,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="r">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,8 +559,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -501,11 +579,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -532,8 +614,12 @@
 
             
 
+            
+
             , call the <see
              cref="M:System.Data.SqlTypes.SqlXml.CreateReader" />
+
+            
 
             
 
@@ -545,6 +631,8 @@
           <para
             >Gets the string representation of the XML content of this <see
              cref="T:System.Data.SqlTypes.SqlXml" />
+
+            
 
             
 

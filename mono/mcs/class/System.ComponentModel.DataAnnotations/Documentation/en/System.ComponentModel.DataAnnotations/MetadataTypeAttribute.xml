@@ -30,6 +30,8 @@
 
         
 
+        
+
          attribute enables you to associate a class with a data-model partial class. In this associated class you provide additional metadata information that is not in the data model.</para
       >
       <para
@@ -38,11 +40,15 @@
 
         
 
+        
+
          attribute to a data field. This enforces that a value is provided for the field even if this constraint is not required by the database schema.</para
       >
       <para
         >You use the <see
          cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
           <para
             >Apply the <see
              cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
+
+            
 
             
 
@@ -111,11 +119,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="metadataClassType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

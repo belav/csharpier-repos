@@ -24,6 +24,8 @@
 
         
 
+        
+
          class is a base class that provides a free-threaded context with no synchronization. </para
       >
       <para>The purpose of the synchronization model implemented by this class is to allow the internal asynchronous/synchronous operations of the common language runtime to behave properly with different synchronization models. This model also simplifies some of the requirements that managed applications have had to follow in order to work correctly under different synchronization environments.</para>
@@ -33,6 +35,8 @@
          cref="http://msdn.microsoft.com/magazine/gg598924.aspx"
           >It's All About the SynchronizationContext</see
         >
+
+        
 
         
 
@@ -71,6 +75,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -104,6 +110,8 @@
 
             
 
+            
+
              object.  </para
           >
         </remarks>
@@ -116,6 +124,8 @@
           <para
             >A new <see
              cref="T:System.Threading.SynchronizationContext" />
+
+            
 
             
 
@@ -267,6 +277,8 @@
 
             
 
+            
+
              method starts an asynchronous request to post a message. </para
           >
         </remarks>
@@ -279,8 +291,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.SendOrPostCallback" />
+
+          
 
           
 
@@ -288,6 +304,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,6 +344,8 @@
 
             
 
+            
+
              method starts a synchronous request to send a message.</para
           >
         </remarks>
@@ -338,8 +358,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.SendOrPostCallback" />
+
+          
 
           
 
@@ -347,6 +371,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,8 +412,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.SynchronizationContext" />
+
+          
 
           
 
@@ -459,13 +489,19 @@
 
             
 
+            
+
              method calls the external declaration <see
              cref="M:System.Threading.SynchronizationContext.WaitHelper(System.IntPtr[],System.Boolean,System.Int32)" />
 
             
 
+            
+
              to perform the wait activity.  Override the <see
              cref="M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)" />
+
+            
 
             
 
@@ -485,8 +521,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -497,6 +537,8 @@
 
           
 
+          
+
           true to wait for all handles; false to wait for any handle. </param
         >
         <param name="millisecondsTimeout">
@@ -504,8 +546,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -555,13 +601,19 @@
 
             
 
+            
+
              is a declaration for an unmanaged external helper function. <see
              cref="M:System.Threading.SynchronizationContext.WaitHelper(System.IntPtr[],System.Boolean,System.Int32)" />
 
             
 
+            
+
              is called by the <see
              cref="M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)" />
+
+            
 
             
 
@@ -581,8 +633,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -593,6 +649,8 @@
 
           
 
+          
+
           true to wait for all handles;  false to wait for any handle. </param
         >
         <param name="millisecondsTimeout">
@@ -600,8 +658,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 

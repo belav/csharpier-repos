@@ -34,6 +34,8 @@
 
         
 
+        
+
          class provides a single container for all information relevant to a logical thread of execution. This includes security context, call context, and synchronization context.</para
       >
       <para
@@ -42,8 +44,12 @@
 
         
 
+        
+
          class provides the functionality for user code to capture and transfer this context across user-defined asynchronous points. The common language runtime ensures that the <see
          cref="T:System.Threading.ExecutionContext" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
          method, most thread pool operations, and Windows Forms thread marshaling through the Windows message pump. It does not occur in unsafe thread pool operations (such as the <see
          cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          class provides the <see
          cref="M:System.Threading.ExecutionContext.Capture" />
+
+        
 
         
 
@@ -75,8 +89,12 @@
 
         
 
+        
+
          methods to get the execution context and the <see
          cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
+
+        
 
         
 
@@ -88,13 +106,19 @@
 
         
 
+        
+
          that is associated with a thread cannot be set on another thread. Attempting to do so will result in an exception being thrown. To propagate the <see
          cref="T:System.Threading.ExecutionContext" />
 
         
 
+        
+
          from one thread to another, make a copy of the <see
          cref="T:System.Threading.ExecutionContext" />
+
+        
 
         
 
@@ -106,8 +130,12 @@
 
         
 
+        
+
          stores all data that is associated with the <see
          cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+        
 
         
 
@@ -116,8 +144,12 @@
 
         
 
+        
+
          data to be propagated when the <see
          cref="T:System.Threading.ExecutionContext" />
+
+        
 
         
 
@@ -158,8 +190,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
+
+            
 
             
 
@@ -175,6 +211,8 @@
           <para
             >An <see
              cref="T:System.Threading.ExecutionContext" />
+
+            
 
             
 
@@ -219,6 +257,8 @@
 
             
 
+            
+
              object representing the current execution context.</para
           >
         </returns>
@@ -247,8 +287,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.ExecutionContext" />
+
+            
 
             
 
@@ -257,8 +301,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.ExecutionContext" />
+
+            
 
             
 
@@ -272,10 +320,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -288,8 +340,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.ExecutionContext" />
+
+              
 
               
 
@@ -302,6 +358,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.ExecutionContext" />
+
+            
 
             
 
@@ -340,8 +398,12 @@
 
             
 
+            
+
              sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -350,11 +412,15 @@
 
             
 
+            
+
              transmitted over the stream.</para
           >
           <para
             >For more information, see <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -369,6 +435,8 @@
 
             
 
+            
+
              object with the logical context information needed to recreate an instance of the current execution context.</para
           >
         </summary>
@@ -377,8 +445,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -389,8 +461,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -423,8 +499,12 @@
 
             
 
+            
+
              method is used by infrastructure components to determine whether to transfer the <see
              cref="T:System.Threading.ExecutionContext" />
+
+            
 
             
 
@@ -465,8 +545,12 @@
 
             
 
+            
+
              reverses the effect of a prior <see
              cref="M:System.Threading.ExecutionContext.SuppressFlow" />
+
+            
 
             
 
@@ -478,8 +562,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Threading.AsyncFlowControl" />
+
+            
 
             
 
@@ -488,13 +576,19 @@
 
             
 
+            
+
              method.  You should use the <see
              cref="M:System.Threading.AsyncFlowControl.Undo" />
 
             
 
+            
+
              method to restore the flow of the execution context, not the <see
              cref="M:System.Threading.ExecutionContext.RestoreFlow" />
+
+            
 
             
 
@@ -544,8 +638,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.ExecutionContext" />
+
+          
 
           
 
@@ -556,8 +654,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.ContextCallback" />
+
+          
 
           
 
@@ -565,6 +667,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -600,6 +704,8 @@
 
             
 
+            
+
              on the current thread. </para
           >
           <para
@@ -608,13 +714,19 @@
 
             
 
+            
+
              method on the returned <see
              cref="T:System.Threading.AsyncFlowControl" />
 
             
 
+            
+
              structure to restore the flow of the <see
              cref="T:System.Threading.ExecutionContext" />
+
+            
 
             
 
@@ -626,8 +738,12 @@
 
             
 
+            
+
              for <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.Infrastructure" />
+
+            
 
             
 
@@ -636,8 +752,12 @@
 
             
 
+            
+
              during asynchronous calls. While the flow is suppressed, the <see
              cref="M:System.Security.SecurityContext.Capture" />
+
+            
 
             
 
@@ -653,6 +773,8 @@
           <para
             >An <see
              cref="T:System.Threading.AsyncFlowControl" />
+
+            
 
             
 

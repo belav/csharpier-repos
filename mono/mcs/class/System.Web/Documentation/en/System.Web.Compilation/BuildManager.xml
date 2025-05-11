@@ -19,10 +19,14 @@
 
         
 
+        
+
          class manages the process of compiling assemblies and pages for an application. It is a sealed class and cannot be inherited. </para
       >
       <para>
         <see cref="T:System.Web.Compilation.BuildManager" />
+
+        
 
         
 
@@ -92,6 +96,8 @@
 
             
 
+            
+
              method works for compiled and non-compile pages.</para
           >
         </remarks>
@@ -107,6 +113,8 @@
 
             
 
+            
+
              that represents the instance of the processed file.</para
           >
         </returns>
@@ -115,10 +123,14 @@
 
           
 
+          
+
           The virtual path of the file to create an instance of.</param
         >
         <param name="requiredBaseType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,8 +169,12 @@
 
             
 
+            
+
              object that is stored in the cache, or null if the <see
              cref="T:System.Web.Compilation.BuildDependencySet" />
+
+            
 
             
 
@@ -170,10 +186,14 @@
 
           
 
+          
+
           The context of the request.</param
         >
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -211,11 +231,15 @@
 
             
 
+            
+
              object that is compiled from the specified virtual path, which is cached to either memory or to disk.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,11 +277,15 @@
 
             
 
+            
+
              method, that is cached to disk or memory.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,11 +323,15 @@
 
             
 
+            
+
              object that represents the type generated from compiling the virtual path.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,10 +364,14 @@
 
             
 
+            
+
              method includes assemblies specified in the <format
              type="text/html">
               <a href="3811c448-af1c-498d-be2b-6ed2634c51e9">assemblies</a>
             </format>
+
+            
 
             
 
@@ -346,10 +382,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -365,6 +405,8 @@
           <para
             >An <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -404,8 +446,12 @@
 
             
 
+            
+
              object that represents the requested <paramref
              name="typeName" />
+
+            
 
             
 
@@ -417,6 +463,8 @@
 
           
 
+          
+
           The name of the type.</param
         >
         <param name="throwOnError">
@@ -424,8 +472,12 @@
 
           
 
+          
+
           true to throw an exception if a <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -468,8 +520,12 @@
 
             
 
+            
+
              object that represents the requested <paramref
              name="typeName" />
+
+            
 
             
 
@@ -481,6 +537,8 @@
 
           
 
+          
+
           The name of the type.</param
         >
         <param name="throwOnError">
@@ -488,8 +546,12 @@
 
           
 
+          
+
           true to throw an exception if a <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -500,8 +562,12 @@
 
           
 
+          
+
           true if <paramref
            name="typeName" />
+
+          
 
           
 
@@ -539,11 +605,15 @@
 
             
 
+            
+
              collection of files represented by virtual paths that are caching dependencies for the virtual path.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

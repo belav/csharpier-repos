@@ -3,7 +3,7 @@
   <paragraph
     >For a while statement stmt of the form: <code_example
     >
-      <![CDATA[
+<![CDATA[
 while (expr) while-body  
 ]]>
     </code_example>

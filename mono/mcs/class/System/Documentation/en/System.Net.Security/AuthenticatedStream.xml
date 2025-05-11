@@ -28,6 +28,8 @@
 
         
 
+        
+
         . </para
       >
       <para
@@ -36,8 +38,12 @@
 
         
 
+        
+
          together with the security protocols supported on the client and server will determine the security features that are available to an application. The <see
          cref="T:System.Net.Security.NegotiateStream" />
+
+        
 
         
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          classes inherit from <see
          cref="T:System.Net.Security.AuthenticatedStream" />
+
+        
 
         
 
@@ -88,8 +98,12 @@
 
             
 
+            
+
              parameter, closing the <see
              cref="T:System.Net.Security.AuthenticatedStream" />
+
+            
 
             
 
@@ -98,11 +112,15 @@
 
             
 
+            
+
              stream.</para
           >
           <para
             >This constructor is provided for implementers of authenticated streams, and can be called only by classes that are derived from <see
              cref="T:System.Net.Security.AuthenticatedStream" />
+
+            
 
             
 
@@ -117,6 +135,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -125,13 +145,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.AuthenticatedStream" />
+
+          
 
           
 
@@ -142,8 +168,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -152,8 +182,12 @@
 
           
 
+          
+
             object also closes <paramref
            name="innerStream" />
+
+          
 
           
 
@@ -188,8 +222,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -198,8 +236,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -211,8 +253,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Security.AuthenticatedStream" />
+
+            
 
             
 
@@ -227,11 +273,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,8 +314,12 @@
 
             
 
+            
+
              can use this property to access the stream passed to the <see
              cref="M:System.Net.Security.AuthenticatedStream.#ctor(System.IO.Stream,System.Boolean)" />
+
+            
 
             
 
@@ -277,6 +331,8 @@
           <para
             >Gets the stream used by this <see
              cref="T:System.Net.Security.AuthenticatedStream" />
+
+            
 
             
 
@@ -307,6 +363,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -315,6 +373,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -349,8 +409,12 @@
 
             
 
+            
+
              value that indicates whether data sent using this <see
              cref="T:System.Net.Security.AuthenticatedStream" />
+
+            
 
             
 
@@ -384,6 +448,8 @@
 
             
 
+            
+
             , check the class documentation.</para
           >
         </remarks>
@@ -392,6 +458,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -426,6 +494,8 @@
 
             
 
+            
+
              value that indicates whether the local side of the connection was authenticated as the server.</para
           >
         </summary>
@@ -457,6 +527,8 @@
 
             
 
+            
+
              value that indicates whether the data sent using this stream is signed.</para
           >
         </summary>
@@ -485,6 +557,8 @@
           <para
             >Gets whether the stream used by this <see
              cref="T:System.Net.Security.AuthenticatedStream" />
+
+            
 
             
 

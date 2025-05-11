@@ -56,8 +56,12 @@
 
         
 
+        
+
          control is a container for a group of <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -66,8 +70,12 @@
 
         
 
+        
+
          controls, where each <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -76,8 +84,12 @@
 
         
 
+        
+
          control to the client based on criteria such as user identity, user preferences, and information passed in a query-string parameter. You can also use the <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -86,13 +98,19 @@
 
         
 
+        
+
          control contained in a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
 
         
 
+        
+
          control represents a different step or page in the wizard. You should also use this control to develop multiple-screen applications for mobile devices. This control provides the same functionality as the ASP.NET mobile <see
          cref="T:System.Web.UI.MobileControls.Form" />
+
+        
 
         
 
@@ -104,8 +122,12 @@
 
         
 
+        
+
          control at a time can be defined as the active view within a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -114,8 +136,12 @@
 
         
 
+        
+
          control is defined as the active view, the child controls that it contains are rendered to the client. You can use either the <see
          cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+        
 
         
 
@@ -124,8 +150,12 @@
 
         
 
+        
+
          method to define the active view. If the <see
          cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+        
 
         
 
@@ -134,8 +164,12 @@
 
         
 
+        
+
          control does not render any content to the client. If the active view is set to a <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -144,8 +178,12 @@
 
         
 
+        
+
          control, an <see
          cref="T:System.ArgumentOutOfRangeException" />
+
+        
 
         
 
@@ -157,8 +195,12 @@
 
         
 
+        
+
          property declaratively when you define the <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -167,13 +209,19 @@
 
         
 
+        
+
          control that is set as the active view to render to the client the first time the <see
          cref="T:System.Web.UI.WebControls.MultiView" />
 
         
 
+        
+
          control is called. The following code example demonstrates how to set the <see
          cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+        
 
         
 
@@ -186,13 +234,19 @@
 
         
 
+        
+
          property programmatically, or calling the <see
          cref="M:System.Web.UI.WebControls.MultiView.SetActiveView(System.Web.UI.WebControls.View)" />
 
         
 
+        
+
          method, allows the application to determine which <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -204,8 +258,12 @@
 
         
 
+        
+
          controls within a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -214,8 +272,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.Button" />
+
+        
 
         
 
@@ -224,8 +286,12 @@
 
         
 
+        
+
          control. To take advantage of the <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -234,8 +300,12 @@
 
         
 
+        
+
         , set the CommandName property on the button or link button to the value of one of the following command-name fields that corresponds to the desired navigation behavior: <see
          cref="F:System.Web.UI.WebControls.MultiView.PreviousViewCommandName" />
+
+        
 
         
 
@@ -244,13 +314,19 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.UI.WebControls.MultiView.SwitchViewByIDCommandName" />
 
         
 
+        
+
         , or <see
          cref="F:System.Web.UI.WebControls.MultiView.SwitchViewByIndexCommandName" />
+
+        
 
         
 
@@ -270,9 +346,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -292,11 +372,15 @@
 
         
 
+        
+
         |False"
 &gt;
             &lt;asp:TemplatedWizardStep
                 AllowReturn="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -307,9 +391,13 @@
 
         
 
+        
+
         |False"
                 EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -330,10 +418,14 @@
 
         
 
+        
+
         |Complete|Finish|Start|Step"
                 Title="string"
                 Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -352,9 +444,13 @@
 
         
 
+        
+
         |False"
                 EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -375,11 +471,15 @@
 
         
 
+        
+
         |False"
             /&gt;
             &lt;asp:WizardStep
                 AllowReturn="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -389,9 +489,13 @@
 
         
 
+        
+
         |False"
                 EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -412,10 +516,14 @@
 
         
 
+        
+
         |Complete|Finish|Start|Step"
                 Title="string"
                 Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -429,6 +537,8 @@
       <para
         >Represents a control that acts as a container for a group of <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -451,6 +561,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -459,6 +571,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -486,13 +600,19 @@
 
             
 
+            
+
              event is raised when the active <see
              cref="T:System.Web.UI.WebControls.View" />
 
             
 
+            
+
              control within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -508,6 +628,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -519,8 +641,12 @@
 
             
 
+            
+
              control of a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -554,8 +680,12 @@
 
             
 
+            
+
              property to set a <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -564,8 +694,12 @@
 
             
 
+            
+
              control as the active view. You can also use this property to return the index of the <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -574,8 +708,12 @@
 
             
 
+            
+
              control is determined by the order in which it is declared within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -584,8 +722,12 @@
 
             
 
+            
+
              control declared within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -597,8 +739,12 @@
 
             
 
+            
+
              control at a time can be defined as active within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -607,8 +753,12 @@
 
             
 
+            
+
              control that is set to the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -617,8 +767,12 @@
 
             
 
+            
+
              property is set to a <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -627,13 +781,19 @@
 
             
 
+            
+
              control, a <see
              cref="T:System.ArgumentOutOfRangeException" />
 
             
 
+            
+
              is raised at run time. If the property is empty, the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -645,8 +805,12 @@
 
             
 
+            
+
              property either declaratively at development time or programmatically at run time. Setting the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -655,8 +819,12 @@
 
             
 
+            
+
              control causes the <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -665,13 +833,19 @@
 
             
 
+            
+
              control is called. Setting the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
 
             
 
+            
+
              property programmatically allows the application to determine which <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -683,13 +857,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.WebControls.MultiView.GetActiveView" />
 
             
 
+            
+
              methods to set or get the active view within the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -704,8 +884,12 @@
 
             
 
+            
+
              control within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -740,8 +924,12 @@
 
             
 
+            
+
              controls to be added to the <see
              cref="T:System.Web.UI.WebControls.ViewCollection" />
+
+            
 
             
 
@@ -756,13 +944,19 @@
 
             
 
+            
+
              control that an XML or HTML element was parsed, and adds the element to the <see
              cref="T:System.Web.UI.WebControls.ViewCollection" />
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -794,13 +988,19 @@
 
             
 
+            
+
              to contain the <see
              cref="T:System.Web.UI.WebControls.View" />
 
             
 
+            
+
              controls of the current <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -815,8 +1015,12 @@
 
             
 
+            
+
              to hold the child controls of the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -831,13 +1035,19 @@
 
             
 
+            
+
              to contain the <see
              cref="T:System.Web.UI.WebControls.View" />
 
             
 
+            
+
              controls of the current <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -871,8 +1081,12 @@
 
             
 
+            
+
              property indicates whether themes are enabled for the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -881,8 +1095,12 @@
 
             
 
+            
+
              property also affects whether themes are enabled for the controls contained in its <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -891,13 +1109,19 @@
 
             
 
+            
+
              property is true, the application's theme directory is searched for control skins to apply. If no skin for the particular control exists in the theme directory, a skin is not applied. When the <see
              cref="P:System.Web.UI.WebControls.MultiView.EnableTheming" />
 
             
 
+            
+
              property is false, the theme directory is not searched and the contents of the <see
              cref="P:System.Web.UI.Control.SkinID" />
+
+            
 
             
 
@@ -909,8 +1133,12 @@
 
             
 
+            
+
              value set by its parent control or the containing page. For example, if a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -919,8 +1147,12 @@
 
             
 
+            
+
              set to false, you can selectively apply themes to individual <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -929,8 +1161,12 @@
 
             
 
+            
+
              control by setting the <see
              cref="P:System.Web.UI.Control.EnableTheming" />
+
+            
 
             
 
@@ -942,6 +1178,8 @@
           <para
             >Gets or sets a value indicating whether themes apply to the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -973,8 +1211,12 @@
 
             
 
+            
+
              control within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -983,8 +1225,12 @@
 
             
 
+            
+
              control and therefore can be used to access the properties of the active view. For example, MultiView1.GetActiveView.ID returns the value of the <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -996,8 +1242,12 @@
 
             
 
+            
+
              property to get or set the zero-based index of the current active view in a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1012,8 +1262,12 @@
 
             
 
+            
+
              control within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1028,8 +1282,12 @@
 
             
 
+            
+
              control that represents the active view within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1066,6 +1324,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1074,13 +1334,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that represents the state of the <see
            cref="T:System.Web.UI.WebControls.MultiView" />
+
+          
 
           
 
@@ -1104,6 +1370,8 @@
 
             
 
+            
+
              field to represent the "NextView" command name.</para
           >
           <para
@@ -1112,8 +1380,12 @@
 
             
 
+            
+
              control's automatic updating of the active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1122,8 +1394,12 @@
 
             
 
+            
+
              control contains a <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 
@@ -1132,8 +1408,12 @@
 
             
 
+            
+
             , you can set the <see
              cref="P:System.Web.UI.WebControls.Button.CommandName" />
+
+            
 
             
 
@@ -1142,13 +1422,19 @@
 
             
 
+            
+
              field, which is "NextView". This causes the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
 
             
 
+            
+
              control to automatically decrement the value of the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -1163,8 +1449,12 @@
 
             
 
+            
+
              control to display in a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1198,13 +1488,19 @@
 
             
 
+            
+
              event is raised when the active <see
              cref="T:System.Web.UI.WebControls.View" />
 
             
 
+            
+
              control within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1220,11 +1516,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.MultiView.OnActiveViewChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1239,8 +1539,12 @@
 
             
 
+            
+
              event of a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1252,8 +1556,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1287,13 +1595,19 @@
 
             
 
+            
+
              control contains <see
              cref="T:System.Web.UI.WebControls.View" />
 
             
 
+            
+
              controls that raise events. This method overrides the base implementation to handle navigation between <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1305,6 +1619,8 @@
           <para
             >Determines whether the event for the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1320,6 +1636,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -1327,8 +1645,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1360,6 +1682,8 @@
 
             
 
+            
+
              control must perform any initialization steps that are required to create and set up an instance. In this stage of the server control's lifecycle, the control's view state has yet to be populated. You cannot access another server control when this method is called, even if it is a child or parent of this control. Other server controls are not certain to be created and ready for access.</para
           >
         </remarks>
@@ -1371,6 +1695,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1379,8 +1705,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1407,6 +1737,8 @@
 
             
 
+            
+
              field to represent the "PrevView" command name. </para
           >
           <para
@@ -1415,8 +1747,12 @@
 
             
 
+            
+
              control's automatic updating of the active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1425,8 +1761,12 @@
 
             
 
+            
+
              control contains a <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 
@@ -1435,8 +1775,12 @@
 
             
 
+            
+
             , you can set the <see
              cref="P:System.Web.UI.WebControls.Button.CommandName" />
+
+            
 
             
 
@@ -1445,13 +1789,19 @@
 
             
 
+            
+
              field, which is "PrevView". This causes the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
 
             
 
+            
+
              control to automatically increment the value of the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -1466,8 +1816,12 @@
 
             
 
+            
+
              control to display in a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1503,8 +1857,12 @@
 
             
 
+            
+
              method is called immediately after a <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1513,8 +1871,12 @@
 
             
 
+            
+
              collection of a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1529,13 +1891,19 @@
 
             
 
+            
+
              control is removed from the <see
              cref="P:System.Web.UI.Control.Controls" />
 
             
 
+            
+
              collection of a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1547,8 +1915,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.View" />
+
+          
 
           
 
@@ -1580,8 +1952,12 @@
 
             
 
+            
+
              method is used primarily by control developers when deriving a custom class from the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1593,8 +1969,12 @@
 
             
 
+            
+
              method writes the rendered content of the active view to the client using the supplied <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1603,13 +1983,19 @@
 
             
 
+            
+
              control using the <see
              cref="M:System.Web.UI.WebControls.MultiView.SetActiveView(System.Web.UI.WebControls.View)" />
 
             
 
+            
+
              method or the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -1618,8 +2004,12 @@
 
             
 
+            
+
              controls in the <see
              cref="P:System.Web.UI.WebControls.MultiView.Views" />
+
+            
 
             
 
@@ -1628,8 +2018,12 @@
 
             
 
+            
+
              method or the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -1641,8 +2035,12 @@
 
             
 
+            
+
              control, the active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1651,8 +2049,12 @@
 
             
 
+            
+
              control, no content is rendered to the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1667,8 +2069,12 @@
 
             
 
+            
+
              control content to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1680,8 +2086,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1709,6 +2119,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1720,13 +2132,19 @@
 
             
 
+            
+
              that represents the state of the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
 
             
 
+            
+
              control. If there is no state associated with the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1757,8 +2175,12 @@
 
             
 
+            
+
              control within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1767,8 +2189,12 @@
 
             
 
+            
+
              control at a time can be defined as active within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1777,8 +2203,12 @@
 
             
 
+            
+
              control that is set as the active view is rendered to the client. If a <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1787,13 +2217,19 @@
 
             
 
+            
+
              control is set as active, an exception is raised at run time. If no <see
              cref="T:System.Web.UI.WebControls.View" />
 
             
 
+            
+
              control is set as the active view, the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1805,8 +2241,12 @@
 
             
 
+            
+
              method to programmatically set the active view allows the application to determine which <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1818,8 +2258,12 @@
 
             
 
+            
+
              property to get or set the zero-based index of the current active view in a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1834,8 +2278,12 @@
 
             
 
+            
+
              control to the active view within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1847,13 +2295,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.View" />
 
           
 
+          
+
            control to set as the active view within a <see
            cref="T:System.Web.UI.WebControls.MultiView" />
+
+          
 
           
 
@@ -1883,6 +2337,8 @@
 
             
 
+            
+
              field to represent the "SwitchViewByID" command name.</para
           >
           <para
@@ -1891,8 +2347,12 @@
 
             
 
+            
+
              control's automatic updating of the active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1901,8 +2361,12 @@
 
             
 
+            
+
              control contains a <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 
@@ -1911,8 +2375,12 @@
 
             
 
+            
+
              when clicked, you can set the <see
              cref="P:System.Web.UI.WebControls.Button.CommandName" />
+
+            
 
             
 
@@ -1921,8 +2389,12 @@
 
             
 
+            
+
              field, which is "SwitchViewByID". Set the <see
              cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+
+            
 
             
 
@@ -1931,8 +2403,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -1941,8 +2417,12 @@
 
             
 
+            
+
              control to automatically set "Page1" as the active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1957,13 +2437,19 @@
 
             
 
+            
+
              control in a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
 
             
 
+            
+
              control, based on a specified <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -1994,6 +2480,8 @@
 
             
 
+            
+
              field to represent the "SwitchViewByIndex" command name.</para
           >
           <para
@@ -2002,8 +2490,12 @@
 
             
 
+            
+
              control's automatic updating of the active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -2012,8 +2504,12 @@
 
             
 
+            
+
              control contains a <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 
@@ -2022,8 +2518,12 @@
 
             
 
+            
+
              when clicked, you can set the <see
              cref="P:System.Web.UI.WebControls.Button.CommandName" />
+
+            
 
             
 
@@ -2032,8 +2532,12 @@
 
             
 
+            
+
              field, which is "SwitchViewByIndex". Set the <see
              cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+
+            
 
             
 
@@ -2042,8 +2546,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -2052,8 +2560,12 @@
 
             
 
+            
+
              control to automatically set the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -2068,13 +2580,19 @@
 
             
 
+            
+
              control in a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
 
             
 
+            
+
              control based on a specified <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -2114,8 +2632,12 @@
 
             
 
+            
+
              controls in a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -2130,8 +2652,12 @@
 
             
 
+            
+
              controls in the <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 

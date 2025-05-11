@@ -4,8 +4,12 @@
     >The ==, !=, &lt;, &gt;, &lt;=, &gt;=, is and as operators are called the relational and type-testing operators. <grammar_production
     >
       <name>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
       </name>
+
+      
 
       
 
@@ -14,32 +18,44 @@
         <non_terminal where="14.8">shift-expression</non_terminal>
       </rhs>
       <rhs>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
         <terminal>&lt;</terminal>
         <non_terminal where="14.8">shift-expression</non_terminal>
       </rhs>
       <rhs>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
         <terminal>&gt;</terminal>
         <non_terminal where="14.8">shift-expression</non_terminal>
       </rhs>
       <rhs>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
         <terminal>&lt;=</terminal>
         <non_terminal where="14.8">shift-expression</non_terminal>
       </rhs>
       <rhs>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
         <terminal>&gt;=</terminal>
         <non_terminal where="14.8">shift-expression</non_terminal>
       </rhs>
       <rhs>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
         <keyword>is</keyword>
         <non_terminal where="11">type</non_terminal>
       </rhs>
       <rhs>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
         <keyword>as</keyword>
         <non_terminal where="11">type</non_terminal>
       </rhs>
@@ -51,19 +67,27 @@
 
       
 
+      
+
        : <rhs
       >
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
       </rhs>
       <rhs>
         <non_terminal where="14.9">equality-expression</non_terminal>
         <terminal>==</terminal>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
       </rhs>
       <rhs>
         <non_terminal where="14.9">equality-expression</non_terminal>
         <terminal>!=</terminal>
-        <non_terminal where="14.9">relational-expression</non_terminal>
+        <non_terminal where="14.9"
+>relational-expression</non_terminal
+        >
       </rhs>
     </grammar_production>
   </paragraph>
@@ -73,8 +97,12 @@
 
     
 
+    
+
      and the as operator is described in <hyperlink
     >14.9.10</hyperlink>
+
+    
 
     
 
@@ -86,11 +114,15 @@
 
     
 
+    
+
     ) is applied to select a specific operator implementation. The operands are converted to the parameter types of the selected operator, and the type of the result is the return type of the operator. </paragraph
   >
   <paragraph
     >The predefined comparison operators are described in the following sections. All predefined comparison operators return a result of type <keyword
     >bool</keyword>
+
+    
 
     
 

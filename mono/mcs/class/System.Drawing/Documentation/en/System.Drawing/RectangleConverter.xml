@@ -27,6 +27,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -44,6 +46,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.RectangleConverter" />
+
+            
 
             
 
@@ -84,10 +88,14 @@
 
           
 
+          
+
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -121,6 +129,8 @@
 
             
 
+            
+
              parameter can be used to get additional information about the environment this converter is being called from. </para
           >
         </remarks>
@@ -137,8 +147,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -149,8 +163,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -186,6 +204,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -198,8 +218,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -210,8 +234,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -219,6 +247,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -254,8 +284,12 @@
 
             
 
+            
+
              method if the object is valid and if the destination type is string. If this method cannot convert to the destination type, it throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -275,8 +309,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -287,8 +325,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -299,10 +341,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,8 +388,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -354,8 +404,12 @@
 
           
 
+          
+
           A dictionary of new property values. The dictionary contains a series of name-value pairs, one for each property returned from a call to the <see
            cref="M:System.Drawing.RectangleConverter.GetProperties(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])" />
+
+          
 
           
 
@@ -389,6 +443,8 @@
 
             
 
+            
+
              to create a new value.</para
           >
         </summary>
@@ -400,11 +456,15 @@
 
             
 
+            
+
              should be called when a change is made to one or more properties of this object; otherwise, false.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -439,6 +499,8 @@
 
             
 
+            
+
              method for the correct data type.</para
           >
         </remarks>
@@ -455,8 +517,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -467,6 +533,8 @@
 
           
 
+          
+
           The value of the object to get the properties for. </param
         >
         <param name="attributes">
@@ -474,8 +542,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -513,6 +585,8 @@
 
             
 
+            
+
              should be called to find the properties of this object; otherwise, false.</para
           >
         </returns>
@@ -521,8 +595,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

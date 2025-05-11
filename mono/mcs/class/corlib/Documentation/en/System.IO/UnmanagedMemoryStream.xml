@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -90,8 +92,12 @@
 
             
 
+            
+
              class, and by default sets the <see
              cref="P:System.IO.UnmanagedMemoryStream.CanWrite" />
+
+            
 
             
 
@@ -100,13 +106,19 @@
 
             
 
+            
+
              property to true. The <see
              cref="P:System.IO.UnmanagedMemoryStream.Length" />
 
             
 
+            
+
              property is set to the value of the <paramref
              name="length" />
+
+            
 
             
 
@@ -121,6 +133,8 @@
 
             
 
+            
+
              class using the specified location and memory length.</para
           >
         </summary>
@@ -129,10 +143,14 @@
 
           
 
+          
+
           A pointer to an unmanaged memory location.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,11 +186,15 @@
 
             
 
+            
+
              class in a safe buffer with a specified offset and length. </para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,10 +205,14 @@
 
           
 
+          
+
           The byte position in the buffer at which to start the unmanaged memory stream.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,8 +255,12 @@
 
             
 
+            
+
              parameter defines the current amount of memory in use. If reading or appending data to the stream, the <paramref
              name="length" />
+
+            
 
             
 
@@ -242,6 +272,8 @@
 
             
 
+            
+
              parameter indicates the amount of total memory available. This value can describe a region that is longer than the length specified, or indicate a region that can be appended to. Any attempt to write beyond this value will fail. </para
           >
           <para
@@ -250,8 +282,12 @@
 
             
 
+            
+
              parameter sets the <see
              cref="P:System.IO.UnmanagedMemoryStream.CanRead" />
+
+            
 
             
 
@@ -260,8 +296,12 @@
 
             
 
+            
+
              properties. Note that specifying <see
              cref="F:System.IO.FileAccess.Write" />
+
+            
 
             
 
@@ -276,11 +316,15 @@
 
             
 
+            
+
              class using the specified location, memory length, total amount of memory, and file access values.</para
           >
         </summary>
         <param name="pointer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,10 +335,14 @@
 
           
 
+          
+
           The length of the memory to use.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,8 +353,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -343,11 +395,15 @@
 
             
 
+            
+
              class in a safe buffer with a specified offset, length, and file access. </para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,6 +414,8 @@
 
           
 
+          
+
           The byte position in the buffer at which to start the unmanaged memory stream.</param
         >
         <param name="length">
@@ -365,10 +423,14 @@
 
           
 
+          
+
           The length of the unmanaged memory stream.</param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,8 +532,12 @@
 
             
 
+            
+
              value provided to the constructor. If no <paramref
              name="capacity" />
+
+            
 
             
 
@@ -511,8 +577,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -521,8 +591,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.UnmanagedMemoryStream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -531,8 +605,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -541,8 +619,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -554,13 +636,19 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.UnmanagedMemoryStream" />
 
             
 
+            
+
              references. This method invokes the <see
              cref="M:System.ComponentModel.Component.Dispose" />
+
+            
 
             
 
@@ -575,11 +663,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,6 +704,8 @@
 
             
 
+            
+
              base class. Since any data is written to RAM, this method is redundant.</para
           >
         </remarks>
@@ -620,6 +714,8 @@
           <para
             >Overrides the <see
              cref="M:System.IO.Stream.Flush" />
+
+            
 
             
 
@@ -666,13 +762,19 @@
 
             
 
+            
+
              constructor. It supports methods that need to initialize the pointer before setting stream variables and, therefore, cannot call the parameterized constructor. Such methods should use the default constructor, <see
              cref="M:System.IO.UnmanagedMemoryStream.#ctor" />
 
             
 
+            
+
             , initialize the pointer, and then invoke the <see
              cref="M:System.IO.UnmanagedMemoryStream.Initialize(System.Byte*,System.Int64,System.Int64,System.IO.FileAccess)" />
+
+            
 
             
 
@@ -687,11 +789,15 @@
 
             
 
+            
+
              class by using a pointer to an unmanaged memory location. </para
           >
         </summary>
         <param name="pointer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -702,10 +808,14 @@
 
           
 
+          
+
           The length of the memory to use.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -716,8 +826,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -757,11 +871,15 @@
 
             
 
+            
+
              class in a safe buffer with a specified offset, length, and file access. </para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -772,6 +890,8 @@
 
           
 
+          
+
           The byte position in the buffer at which to start the unmanaged memory stream.</param
         >
         <param name="length">
@@ -779,10 +899,14 @@
 
           
 
+          
+
           The length of the unmanaged memory stream.</param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -837,8 +961,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.UnmanagedMemoryStream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -847,13 +975,19 @@
 
             
 
+            
+
              will return 0 and <see
              cref="M:System.IO.UnmanagedMemoryStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -890,6 +1024,8 @@
           <para
             >To return a pointer to the entire stream, set the <see
              cref="P:System.IO.UnmanagedMemoryStream.Position" />
+
+            
 
             
 
@@ -934,13 +1070,19 @@
 
             
 
+            
+
              parameter gives the offset of the byte in the <paramref
              name="array" />
 
             
 
+            
+
              parameter (the buffer index) at which to begin reading, and the <paramref
              name="count" />
+
+            
 
             
 
@@ -952,13 +1094,19 @@
 
             
 
+            
+
              method returns zero only after reaching the end of the stream. Otherwise, <see
              cref="M:System.IO.UnmanagedMemoryStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              always reads at least one byte from the stream before returning. If no data is available from the stream upon a call to <see
              cref="M:System.IO.UnmanagedMemoryStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -978,8 +1126,12 @@
 
           
 
+          
+
           When this method returns, contains the specified byte array with the values between <paramref
            name="offset" />
+
+          
 
           
 
@@ -988,8 +1140,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -1000,8 +1156,12 @@
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1009,6 +1169,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1049,6 +1211,8 @@
 
             
 
+            
+
              object, or -1 if at the end of the stream.</para
           >
         </returns>
@@ -1085,6 +1249,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1101,8 +1267,12 @@
 
           
 
+          
+
           The point relative to <paramref
            name="origin" />
+
+          
 
           
 
@@ -1113,13 +1283,19 @@
 
           
 
+          
+
           Specifies the beginning, the end, or the current position as a reference point for <paramref
            name="origin" />
 
           
 
+          
+
           , using a value of type <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -1155,6 +1331,8 @@
 
             
 
+            
+
              to work.</para
           >
         </remarks>
@@ -1164,6 +1342,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1208,6 +1388,8 @@
 
           
 
+          
+
           The byte array from which to copy bytes to the current stream.</param
         >
         <param name="offset">
@@ -1215,10 +1397,14 @@
 
           
 
+          
+
           The offset in the buffer at which to begin copying bytes to the current stream.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1252,6 +1438,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

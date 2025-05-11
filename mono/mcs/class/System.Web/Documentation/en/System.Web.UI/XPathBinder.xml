@@ -19,8 +19,12 @@
 
         
 
+        
+
          method of this class to bind to the result of an XPath expression executed against an object that implements the <see
          cref="T:System.Xml.XPath.IXPathNavigable" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
         . You can use the <see
          cref="M:System.Web.UI.XPathBinder.Select(System.Object,System.String)" />
+
+        
 
         
 
@@ -39,8 +47,12 @@
 
         
 
+        
+
          object as an <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -49,8 +61,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -62,8 +78,12 @@
 
         
 
+        
+
          methods declaratively. Instead of calling XPathBinder.Eval(Container.DataItem, <paramref
          name="xpath" />
+
+        
 
         
 
@@ -72,8 +92,12 @@
 
         
 
+        
+
         ). Similarly, instead of calling XPathBinder.Select(Container.DataItem, <paramref
          name="xpath" />
+
+        
 
         
 
@@ -82,8 +106,12 @@
 
         
 
+        
+
         ) to retrieve an <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -92,8 +120,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.XPathBinder.Select(System.Object,System.String)" />
+
+        
 
         
 
@@ -104,6 +136,8 @@
          type="text/html">
           <a href="676BEB1D-DDFA-4153-BBA8-3C86DCB7CECA">Data-Binding Expression Syntax</a>
         </format>
+
+        
 
         
 
@@ -140,6 +174,8 @@
 
             
 
+            
+
              method declaratively if you want to simplify the casting of an XML node to a text string to be displayed on a browser. To do so, you must place the &lt;%# and %&gt; tags, which are also used in standard ASP.NET data binding, around the data-binding expression.</para
           >
           <para
@@ -148,8 +184,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -158,13 +198,19 @@
 
             
 
+            
+
             , the <paramref
              name="container" />
 
             
 
+            
+
              parameter should be Container.DataItem. If you are binding against the page, the <paramref
              name="container" />
+
+            
 
             
 
@@ -183,6 +229,8 @@
 
             
 
+            
+
              that results from the evaluation of the data-binding expression.</para
           >
         </returns>
@@ -191,8 +239,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -230,11 +282,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >You can use the <see
              cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String)" />
+
+            
 
             
 
@@ -246,8 +302,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -256,13 +316,19 @@
 
             
 
+            
+
             , the <paramref
              name="container" />
 
             
 
+            
+
              parameter should be Container.DataItem. If you are binding against the page, the <paramref
              name="container" />
+
+            
 
             
 
@@ -281,6 +347,8 @@
 
             
 
+            
+
              that results from the evaluation of the data-binding expression and conversion to a string type.</para
           >
         </returns>
@@ -289,8 +357,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -301,8 +373,12 @@
 
           
 
+          
+
           A .NET Framework format string, similar to those used by <see
            cref="M:System.String.Format(System.String,System.Object)" />
+
+          
 
           
 
@@ -311,8 +387,12 @@
 
           
 
+          
+
            object (which results from the evaluation of the data-binding expression) to a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -350,8 +430,12 @@
 
             
 
+            
+
              method declaratively if you want to simplify the casting of an XML node to a text string to be displayed in a browser. To do so, you must place the &lt;%# and %&gt; tags, which are also used in standard ASP.NET data binding, around the data-binding expression. The data-binding expression includes the XPath expression and an <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -363,8 +447,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -373,13 +461,19 @@
 
             
 
+            
+
             , the <paramref
              name="container" />
 
             
 
+            
+
              parameter should be Container.DataItem. If you are binding against the page, the <paramref
              name="container" />
+
+            
 
             
 
@@ -394,6 +488,8 @@
 
             
 
+            
+
              object specified to resolve namespace prefixes in the XPath expression.</para
           >
         </summary>
@@ -405,6 +501,8 @@
 
             
 
+            
+
              that results from the evaluation of the data-binding expression.</para
           >
         </returns>
@@ -413,8 +511,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -425,8 +527,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -462,8 +568,12 @@
 
             
 
+            
+
              method declaratively if you want to simplify the casting of an XML node to a text string to be displayed in a browser. To do so, you must place the &lt;%# and %&gt; tags, which are also used in standard ASP.NET data binding, around the data-binding expression. The data-binding expression includes the XPath expression and an <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -475,8 +585,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -485,13 +599,19 @@
 
             
 
+            
+
             , the <paramref
              name="container" />
 
             
 
+            
+
              parameter should be Container.DataItem. If you are binding against the page, the <paramref
              name="container" />
+
+            
 
             
 
@@ -506,6 +626,8 @@
 
             
 
+            
+
              object specified to resolve namespace prefixes in the XPath expression..</para
           >
         </summary>
@@ -517,6 +639,8 @@
 
             
 
+            
+
              that results from the evaluation of the data-binding expression and conversion to a string type.</para
           >
         </returns>
@@ -525,8 +649,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -537,8 +665,12 @@
 
           
 
+          
+
           A .NET Framework format string, similar to those used by <see
            cref="M:System.String.Format(System.String,System.Object)" />
+
+          
 
           
 
@@ -547,8 +679,12 @@
 
           
 
+          
+
            object (which results from the evaluation of the data-binding expression) to a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -559,8 +695,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -592,6 +732,8 @@
 
             
 
+            
+
              method declaratively if you want to simplify the retrieval of a set of nodes using an XPath query. To do so, you must place the &lt;%# and %&gt; tags, which are also used in standard ASP.NET data binding, around the XPath query.</para
           >
           <para
@@ -600,8 +742,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -610,8 +756,12 @@
 
             
 
+            
+
             , the <paramref
              name="container" />
+
+            
 
             
 
@@ -630,6 +780,8 @@
 
             
 
+            
+
              list of nodes.</para
           >
         </returns>
@@ -638,8 +790,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -677,8 +833,12 @@
 
             
 
+            
+
              method declaratively if you want to simplify the retrieval of a set of nodes using an XPath query. To do so, you must place the &lt;%# and %&gt; tags, which are also used in standard ASP.NET data binding, around the XPath query and an <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -690,8 +850,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -700,8 +864,12 @@
 
             
 
+            
+
             , the <paramref
              name="container" />
+
+            
 
             
 
@@ -716,6 +884,8 @@
 
             
 
+            
+
              object specified to resolve namespace prefixes in the XPath expression.</para
           >
         </summary>
@@ -727,6 +897,8 @@
 
             
 
+            
+
              list of nodes.</para
           >
         </returns>
@@ -735,8 +907,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -747,8 +923,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 

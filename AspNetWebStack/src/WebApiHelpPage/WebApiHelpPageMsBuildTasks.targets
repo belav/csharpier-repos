@@ -20,7 +20,7 @@
       <Using Namespace="System.Net" />
       <Using Namespace="Microsoft.Build.Tasks" />
       <Code Type="Fragment" Language="cs">
-        <![CDATA[
+<![CDATA[
           try
           {
             NuGetExe = Path.GetFullPath(NuGetExe);
@@ -85,7 +85,7 @@
     </ParameterGroup>
     <Task>
       <Code Type="Fragment" Language="cs">
-        <![CDATA[
+<![CDATA[
           foreach (var sourceFile in SourceFiles)
           {
             string sourceFilePath = sourceFile.GetMetadata("FullPath");

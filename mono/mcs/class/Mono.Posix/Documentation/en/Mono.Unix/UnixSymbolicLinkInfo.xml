@@ -29,6 +29,8 @@
 
         
 
+        
+
          class provides
       information about a symbolic link.  It also allows basic 
       symbolic link manipulation:</para
@@ -42,6 +44,8 @@
 
             
 
+            
+
             .
           </term
           >
@@ -51,6 +55,8 @@
             >Symbolic link deletion with 
           <see
              cref="M:Mono.Unix.UnixFileInfo.Delete" />
+
+            
 
             
 
@@ -79,10 +85,11 @@
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >
+        <param name="path">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -97,12 +104,16 @@
           
 
           
+
+          
           instance containing information about the symbolic link.</summary
         >
         <remarks>
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -118,6 +129,8 @@
 
               
 
+              
+
               .
           </block
             >
@@ -129,6 +142,8 @@
 
             
 
+            
+
              objects for symbolic
           links that do not exist or for files and directories.
           However, attempts to use the 
@@ -137,9 +152,13 @@
 
             
 
+            
+
              instance may
           generate <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -150,9 +169,13 @@
 
             
 
+            
+
              to see if
           <paramref
              name="path" />
+
+            
 
             
 
@@ -162,15 +185,21 @@
 
             
 
+            
+
              to ensure
           that <paramref
              name="path" />
 
             
 
+            
+
              is a symbolic link, and
           Use <see
              cref="P:Mono.Unix.UnixSymbolicLinkInfo.HasContents" />
+
+            
 
             
 
@@ -184,8 +213,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -197,9 +230,13 @@
 
           
 
+          
+
            contains invalid characters; see
           <see
            cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+
+          
 
           
 
@@ -234,10 +271,11 @@
       <Docs>
         <summary>Gets the target of this symbolic link.</summary>
         <value>
-          <para
-            >
+          <para>
             A <see
              cref="T:Mono.Unix.UnixFileSystemInfo" />
+
+            
 
             
 
@@ -248,9 +286,13 @@
 
             
 
+            
+
              if 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -265,8 +307,7 @@
               <term>is not a symbolic link.</term>
             </item>
           </list>
-          <para
-            >
+          <para>
             The behavior will be changed in the future to generate an
             exception for either of the above error conditions, so current
             code needs to deal with both exceptions and a 
@@ -275,8 +316,12 @@
 
             
 
+            
+
              return value.  <see
              langword="null" />
+
+            
 
             
 
@@ -287,11 +332,12 @@
         </value>
         <remarks>
           <para>
-            <block subset="none" type="note"
-              >
+            <block subset="none" type="note">
               Do not use this method, as it always creates a new 
               <see
                cref="T:Mono.Unix.UnixFileSystemInfo" />
+
+              
 
               
 
@@ -302,15 +348,18 @@
 
               
 
+              
+
               ,
             </block
             >
           </para>
-          <para
-            >
+          <para>
             This really should throw the same exceptions as
             <see
              cref="P:Mono.Unix.UnixSymbolicLinkInfo.ContentsPath" />
+
+            
 
             
 
@@ -320,12 +369,13 @@
 
             
 
+            
+
             .
           </para
           >
           <para>
-            <block subset="none" type="note"
-              >
+            <block subset="none" type="note">
               The target may in turn be a symbolic link (nothing prevents
               symbolic links from referencing other symbolic links).
               To get the actual target, use
@@ -334,9 +384,13 @@
 
               
 
+              
+
               ,
               <see
                cref="M:Mono.Unix.UnixPath.GetCompleteRealPath" />
+
+              
 
               
 
@@ -361,9 +415,13 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             is not a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -372,8 +430,7 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.DirectoryNotFoundException">
-          <para
-            >
+          <para>
             A component of 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
@@ -381,9 +438,13 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             is not a directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+            
 
             
 
@@ -398,8 +459,12 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -408,11 +473,12 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.IOException">
-          <para
-            >
+          <para>
             An I/O error occurred while reading from the file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -421,12 +487,13 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.PathTooLongException">
-          <para
-            >
+          <para>
             A component of a pathname exceeded 255 characters,
             or an entire path name exceeded 1023 characters.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+            
 
             
 
@@ -435,11 +502,12 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             Search permission is denied for a component of the path prefix.
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -447,11 +515,12 @@ while (target != null &amp;&amp;
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Too many symbolic links were encountered in translating the pathname.
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -474,21 +543,23 @@ while (target != null &amp;&amp;
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           Gets the target of this symbolic link as a 
           <see
            cref="T:System.String" />
 
           
 
+          
+
           .
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -498,8 +569,7 @@ while (target != null &amp;&amp;
         >
         <remarks>
           <para>
-            <block subset="none" type="note"
-              >
+            <block subset="none" type="note">
               The target may in turn be a symbolic link (nothing prevents
               symbolic links from referencing other symbolic links).
               To get the actual target, use
@@ -508,9 +578,13 @@ while (target != null &amp;&amp;
 
               
 
+              
+
                or
               <see
                cref="M:Mono.Unix.UnixPath.GetCompleteRealPath" />
+
+              
 
               
 
@@ -526,9 +600,13 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             is not a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -537,8 +615,7 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.DirectoryNotFoundException">
-          <para
-            >
+          <para>
             A component of 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
@@ -546,9 +623,13 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             is not a directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+            
 
             
 
@@ -563,8 +644,12 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -573,11 +658,12 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.IOException">
-          <para
-            >
+          <para>
             An I/O error occurred while reading from the file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -586,12 +672,13 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.PathTooLongException">
-          <para
-            >
+          <para>
             A component of a pathname exceeded 255 characters,
             or an entire path name exceeded 1023 characters.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+            
 
             
 
@@ -600,11 +687,12 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             Search permission is denied for a component of the path prefix.
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -612,11 +700,12 @@ while (target != null &amp;&amp;
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Too many symbolic links were encountered in translating the pathname.
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -648,10 +737,11 @@ while (target != null &amp;&amp;
         <Parameter Name="path" Type="Mono.Unix.UnixFileSystemInfo" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >
+        <param name="path">
           A <see
            cref="T:Mono.Unix.UnixFileSystemInfo" />
+
+          
 
           
 
@@ -659,11 +749,12 @@ while (target != null &amp;&amp;
           the target of this symbolic link instance.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates the symbolic link 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -673,15 +764,18 @@ while (target != null &amp;&amp;
 
           
 
+          
+
           .
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             Creates the symbolic link
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -691,13 +785,16 @@ while (target != null &amp;&amp;
 
             
 
+            
+
             .
           </para
           >
-          <para
-            >
+          <para>
             The <paramref
              name="path" />
+
+            
 
             
 
@@ -709,11 +806,12 @@ while (target != null &amp;&amp;
 
             
 
+            
+
             .
           </para
           >
-          <para
-            >
+          <para>
             Using 
             <see
              cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
@@ -721,9 +819,13 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             instead of 
             <see
              cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
+
+            
 
             
 
@@ -739,13 +841,16 @@ while (target != null &amp;&amp;
 
               
 
+              
+
               (1) command:</para
             >
             <code lang="sh">ln -s target symlink</code>
-            <para
-              >
+            <para>
               Can be created using <see
                cref="N:Mono.Unix" />
+
+              
 
               
 
@@ -756,6 +861,8 @@ while (target != null &amp;&amp;
 
               
 
+              
+
               :
             </para
             >
@@ -763,11 +870,12 @@ while (target != null &amp;&amp;
               >UnixFileInfo f = new UnixFileInfo ("target.ufi");
 f.CreateSymbolicLink ("symlink.ufi");</code
             >
-            <para
-              >
+            <para>
               Second, it can be created using 
               <see
                cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+
+              
 
               
 
@@ -779,8 +887,7 @@ f.CreateSymbolicLink ("symlink.ufi");</code
     new UnixSymbolicLinkInfo ("symlink.usli");
 s.CreateSymbolicLinkTo ("target.usli");</code
             >
-            <para
-              >
+            <para>
               The links created by the above differ; in particular, the target
               of 
               <see
@@ -789,9 +896,13 @@ s.CreateSymbolicLinkTo ("target.usli");</code
               
 
               
+
+              
               is the full path name of the target, while 
               <see
                cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+
+              
 
               
 
@@ -807,8 +918,7 @@ symlink.usli -&gt; target.usli</code
           </example>
         </remarks>
         <exception cref="System.IO.DirectoryNotFoundException">
-          <para
-            >
+          <para>
             A component of 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
@@ -816,9 +926,13 @@ symlink.usli -&gt; target.usli</code
             
 
             
+
+            
             is not a directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+            
 
             
 
@@ -832,9 +946,13 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
              does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -843,11 +961,12 @@ symlink.usli -&gt; target.usli</code
           >
         </exception>
         <exception cref="System.IO.IOException">
-          <para
-            >
+          <para>
             An I/O error occurred while making the directory entry for
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -859,9 +978,13 @@ symlink.usli -&gt; target.usli</code
             
 
             
+
+            
             or writing out the link contents of
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -871,15 +994,18 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The file
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -890,12 +1016,13 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The directory in which the entry for the new symbolic link is being placed
             cannot be extended because there is no space left on the file
             system containing the directory.
@@ -904,12 +1031,13 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The new symbolic link cannot be created because
             there is no space left on the file
             system that will contain the symbolic link.
@@ -918,12 +1046,13 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             There are no free inodes on the file system on which the
             symbolic link is being created.
             [<see
@@ -931,15 +1060,18 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             An I/O error occurred while making the directory entry or allocating the inode.
             [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -948,12 +1080,13 @@ symlink.usli -&gt; target.usli</code
           >
         </exception>
         <exception cref="System.IO.PathTooLongException">
-          <para
-            >
+          <para>
             A component of either pathname exceeded 255 characters,
             or the entire length of either path name exceeded 1023 characters.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+            
 
             
 
@@ -962,11 +1095,12 @@ symlink.usli -&gt; target.usli</code
           >
         </exception>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             A component of 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -977,15 +1111,18 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Too many symbolic links were encountered in translating the pathname.
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -993,11 +1130,12 @@ symlink.usli -&gt; target.usli</code
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The path name pointed at by the
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1009,12 +1147,13 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The directory in which the entry for the new symbolic link
             is being placed cannot be extended because the
             user's quota of disk blocks on the file system
@@ -1024,12 +1163,13 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The new symbolic link cannot be created because the user's
             quota of disk blocks on the file system that will
             contain the symbolic link has been exhausted.
@@ -1038,16 +1178,19 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The user's quota of inodes on the file system on
             which the symbolic link is being created has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1076,10 +1219,11 @@ symlink.usli -&gt; target.usli</code
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >
+        <param name="path">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1087,11 +1231,12 @@ symlink.usli -&gt; target.usli</code
           symbolic link instance.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates the symbolic link 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1101,15 +1246,18 @@ symlink.usli -&gt; target.usli</code
 
           
 
+          
+
           .
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             Creates the symbolic link
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1119,13 +1267,16 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             .
           </para
           >
-          <para
-            >
+          <para>
             The <paramref
              name="path" />
+
+            
 
             
 
@@ -1137,11 +1288,12 @@ symlink.usli -&gt; target.usli</code
 
             
 
+            
+
             .
           </para
           >
-          <para
-            >
+          <para>
             Using 
             <see
              cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
@@ -1149,9 +1301,13 @@ symlink.usli -&gt; target.usli</code
             
 
             
+
+            
             instead of 
             <see
              cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
+
+            
 
             
 
@@ -1167,13 +1323,16 @@ symlink.usli -&gt; target.usli</code
 
               
 
+              
+
               (1) command:</para
             >
             <code lang="sh">ln -s target symlink</code>
-            <para
-              >
+            <para>
               Can be created using <see
                cref="N:Mono.Unix" />
+
+              
 
               
 
@@ -1184,6 +1343,8 @@ symlink.usli -&gt; target.usli</code
 
               
 
+              
+
               :
             </para
             >
@@ -1191,11 +1352,12 @@ symlink.usli -&gt; target.usli</code
               >UnixFileInfo f = new UnixFileInfo ("target.ufi");
 f.CreateSymbolicLink ("symlink.ufi");</code
             >
-            <para
-              >
+            <para>
               Second, it can be created using 
               <see
                cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+
+              
 
               
 
@@ -1207,8 +1369,7 @@ f.CreateSymbolicLink ("symlink.ufi");</code
     new UnixSymbolicLinkInfo ("symlink.usli");
 s.CreateSymbolicLinkTo ("target.usli");</code
             >
-            <para
-              >
+            <para>
               The links created by the above differ; in particular, the target
               of 
               <see
@@ -1217,9 +1378,13 @@ s.CreateSymbolicLinkTo ("target.usli");</code
               
 
               
+
+              
               is the full path name of the target, while 
               <see
                cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+
+              
 
               
 
@@ -1236,8 +1401,7 @@ symlink.usli -&gt; target.usli
           </example>
         </remarks>
         <exception cref="System.IO.DirectoryNotFoundException">
-          <para
-            >
+          <para>
             A component of 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
@@ -1245,9 +1409,13 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             is not a directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+            
 
             
 
@@ -1261,9 +1429,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -1272,11 +1444,12 @@ symlink.usli -&gt; target.usli
           >
         </exception>
         <exception cref="System.IO.IOException">
-          <para
-            >
+          <para>
             An I/O error occurred while making the directory entry for
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1288,9 +1461,13 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             or writing out the link contents of
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1300,15 +1477,18 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The file
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1319,12 +1499,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The directory in which the entry for the new symbolic link is being placed
             cannot be extended because there is no space left on the file
             system containing the directory.
@@ -1333,12 +1514,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The new symbolic link cannot be created because
             there is no space left on the file
             system that will contain the symbolic link.
@@ -1347,12 +1529,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             There are no free inodes on the file system on which the
             symbolic link is being created.
             [<see
@@ -1360,15 +1543,18 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             An I/O error occurred while making the directory entry or allocating the inode.
             [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -1377,12 +1563,13 @@ symlink.usli -&gt; target.usli
           >
         </exception>
         <exception cref="System.IO.PathTooLongException">
-          <para
-            >
+          <para>
             A component of either pathname exceeded 255 characters,
             or the entire length of either path name exceeded 1023 characters.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+            
 
             
 
@@ -1391,11 +1578,12 @@ symlink.usli -&gt; target.usli
           >
         </exception>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             A component of 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1406,15 +1594,18 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Too many symbolic links were encountered in translating the pathname.
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -1422,11 +1613,12 @@ symlink.usli -&gt; target.usli
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The path name pointed at by the
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1438,12 +1630,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The directory in which the entry for the new symbolic link
             is being placed cannot be extended because the
             user's quota of disk blocks on the file system
@@ -1453,12 +1646,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The new symbolic link cannot be created because the user's
             quota of disk blocks on the file system that will
             contain the symbolic link has been exhausted.
@@ -1467,16 +1661,19 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The user's quota of inodes on the file system on
             which the symbolic link is being created has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1526,10 +1723,11 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the target of this symbolic link.</summary>
         <returns>
-          <para
-            >
+          <para>
             A <see
              cref="T:Mono.Unix.UnixFileSystemInfo" />
+
+            
 
             
 
@@ -1540,9 +1738,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              if 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1557,13 +1759,14 @@ symlink.usli -&gt; target.usli
               <term>is not a symbolic link.</term>
             </item>
           </list>
-          <para
-            >
+          <para>
             The behavior will be changed in the future to generate an
             exception for either of the above error conditions, so current
             code needs to deal with both exceptions and a 
             <see
              langword="null" />
+
+            
 
             
 
@@ -1573,16 +1776,19 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             will not be used by the Mono 1.2 release.
           </para
           >
         </returns>
         <remarks>
-          <para
-            >
+          <para>
             This really should throw the same exceptions as
             <see
              cref="P:Mono.Unix.UnixSymbolicLinkInfo.ContentsPath" />
+
+            
 
             
 
@@ -1592,12 +1798,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
           </para
           >
           <para>
-            <block subset="none" type="note"
-              >
+            <block subset="none" type="note">
               The target may in turn be a symbolic link (nothing prevents
               symbolic links from referencing other symbolic links).
               To get the actual target, use
@@ -1606,9 +1813,13 @@ symlink.usli -&gt; target.usli
 
               
 
+              
+
               ,
               <see
                cref="M:Mono.Unix.UnixPath.GetCompleteRealPath" />
+
+              
 
               
 
@@ -1633,9 +1844,13 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             is not a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -1644,8 +1859,7 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.DirectoryNotFoundException">
-          <para
-            >
+          <para>
             A component of 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
@@ -1653,9 +1867,13 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             is not a directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+            
 
             
 
@@ -1670,8 +1888,12 @@ while (target != null &amp;&amp;
             
 
             
+
+            
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -1680,11 +1902,12 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.IOException">
-          <para
-            >
+          <para>
             An I/O error occurred while reading from the file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -1693,12 +1916,13 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="System.IO.PathTooLongException">
-          <para
-            >
+          <para>
             A component of a pathname exceeded 255 characters,
             or an entire path name exceeded 1023 characters.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+            
 
             
 
@@ -1707,11 +1931,12 @@ while (target != null &amp;&amp;
           >
         </exception>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             Search permission is denied for a component of the path prefix.
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -1719,11 +1944,12 @@ while (target != null &amp;&amp;
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Too many symbolic links were encountered in translating the pathname.
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -1776,16 +2002,19 @@ while (target != null &amp;&amp;
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           Returns a <see
            cref="T:System.Boolean" />
+
+          
 
           
 
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixSymbolicLinkInfo.Contents" />
+
+          
 
           
 
@@ -1796,9 +2025,13 @@ while (target != null &amp;&amp;
           
 
           
+
+          
           and
           <see
            cref="P:Mono.Unix.UnixSymbolicLinkInfo.ContentsPath" />
+
+          
 
           
 
@@ -1811,15 +2044,21 @@ while (target != null &amp;&amp;
 
           
 
+          
+
            if 
           <see
            cref="P:Mono.Unix.UnixSymbolicLinkInfo.Contents" />
 
           
 
+          
+
           ,
           <see
            cref="M:Mono.Unix.UnixSymbolicLinkInfo.GetContents" />
+
+          
 
           
 
@@ -1830,8 +2069,12 @@ while (target != null &amp;&amp;
           
 
           
+
+          
           are valid (i.e. won't return <see
            langword="null" />
+
+          
 
           
 
@@ -1841,17 +2084,20 @@ while (target != null &amp;&amp;
 
           
 
+          
+
           .
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This method is subject to race conditions in the file system --
             it's entirely possible for the symlink to be modified or deleted
             between a call to 
             <see
              cref="P:Mono.Unix.UnixSymbolicLinkInfo.HasContents" />
+
+            
 
             
 
@@ -1862,9 +2108,13 @@ while (target != null &amp;&amp;
 
             
 
+            
+
             ,
             <see
              cref="M:Mono.Unix.UnixSymbolicLinkInfo.GetContents" />
+
+            
 
             
 
@@ -1872,6 +2122,8 @@ while (target != null &amp;&amp;
             or 
             <see
              cref="P:Mono.Unix.UnixSymbolicLinkInfo.ContentsPath" />
+
+            
 
             
 

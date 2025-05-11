@@ -47,12 +47,16 @@
 
       
 
+      
+
        that is the source of the event.</param
     >
     <param name="args">
       <para
         >A <see
          cref="T:System.AssemblyLoadEventArgs" />
+
+        
 
         
 
@@ -66,8 +70,12 @@
 
         
 
+        
+
         , see <see
          cref="F:System.AppDomain.AssemblyLoad" />
+
+        
 
         
 
@@ -82,8 +90,12 @@
 
         
 
+        
+
          is used to specify the methods that are invoked in response to an <see
          cref="E:System.AppDomain.AssemblyLoad" />
+
+        
 
         
 
@@ -92,13 +104,19 @@
 
         
 
+        
+
          with an event, add the instance to the event. The methods referenced by the <see
          cref="T:System.AssemblyLoadEventHandler" />
 
         
 
+        
+
          are invoked whenever an assembly is loaded, until the <see
          cref="T:System.AssemblyLoadEventHandler" />
+
+        
 
         
 
@@ -113,8 +131,12 @@
 
         
 
+        
+
          event of an <see
          cref="T:System.AppDomain" />
+
+        
 
         
 

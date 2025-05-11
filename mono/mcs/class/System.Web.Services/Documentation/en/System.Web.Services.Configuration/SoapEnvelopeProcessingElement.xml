@@ -25,8 +25,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Xml.XmlReader.MoveToContent" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
       <para
         >Configures a timeout that helps mitigate denial of service attacks by terminating any request that takes longer than the <see
          cref="P:System.Web.Services.Configuration.SoapEnvelopeProcessingElement.ReadTimeout" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Configuration.SoapEnvelopeProcessingElement" />
+
+            
 
             
 
@@ -89,8 +97,12 @@
 
             
 
+            
+
              class using the provided <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -99,6 +111,8 @@
         </summary>
         <param name="readTimeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,13 +145,19 @@
 
           
 
+          
+
           The time to wait before terminating requests to <see
            cref="M:System.Xml.XmlReader.Read" />
 
           
 
+          
+
            and <see
            cref="M:System.Xml.XmlReader.MoveToContent" />
+
+          
 
           
 
@@ -148,8 +168,12 @@
 
           
 
+          
+
           Whether to throw an exception if the serializer encounters elements or attributes that were not in the original schema. For details, see the <see
            cref="P:System.Web.Services.Configuration.SoapEnvelopeProcessingElement.IsStrict" />
+
+          
 
           
 
@@ -182,8 +206,12 @@
 
             
 
+            
+
              property to true in order to help debug interoperation scenarios. In general, when the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -192,8 +220,12 @@
 
             
 
+            
+
              event and continues processing. (The same is true when the <see
              cref="P:System.Xml.Serialization.XmlArrayAttribute.Order" />
+
+            
 
             
 
@@ -202,8 +234,12 @@
 
             
 
+            
+
             , or <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Order" />
+
+            
 
             
 
@@ -212,8 +248,12 @@
 
             
 
+            
+
              property to true instructs the Web services run time to handle that event and throw a <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -223,6 +263,8 @@
             <para
               >Because exceptions are not thrown for all unexpected elements and attributes, the <see
                cref="P:System.Web.Services.Configuration.SoapEnvelopeProcessingElement.IsStrict" />
+
+              
 
               
 

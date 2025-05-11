@@ -20,10 +20,11 @@
       Provides information about a Unix process.
     </summary>
     <remarks>
-      <para
-        >
+      <para>
         The <see
          cref="T:Mono.Unix.UnixProcess" />
+
+        
 
         
 
@@ -45,6 +46,8 @@
 
             
 
+            
+
              filesystem, but not all
           operating systems provide that.
         </term
@@ -55,6 +58,8 @@
             >Many methods, such as
           <see
              cref="M:Mono.Unix.UnixProcess.WaitForExit" />
+
+            
 
             
 
@@ -83,10 +88,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the process' exit code.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.In32" />
+
+          
 
           
 
@@ -100,9 +106,13 @@
 
           
 
+          
+
            returns 
           <see
            langword="false" />
+
+          
 
           
 
@@ -133,10 +143,11 @@
       <Parameters />
       <Docs>
         <summary>Gets information about the currently executing process.</summary>
-        <returns
-          >
+        <returns>
           A <see
            cref="T:Mono.Unix.UnixProcess" />
+
+          
 
           
 
@@ -166,10 +177,11 @@
       <Parameters />
       <Docs>
         <summary>Gets the operating system process ID of the current process.</summary>
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -200,9 +212,13 @@
 
           
 
+          
+
            if the process has exited; otherwise, 
           <see
            langword="false" />
+
+          
 
           
 
@@ -210,11 +226,12 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             If the process has exited, 
             <see
              cref="M:Mono.Unix.UnixProcess.ExitCode" />
+
+            
 
             
 
@@ -224,8 +241,7 @@
           >
         </remarks>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see
@@ -233,17 +249,20 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             No status from the terminated child process is available
             because the calling process has asked the system to discard
             such status by ignoring the signal
             <see
              cref="F:Mono.Unix.Native.TODO.SIGCHLD" />
+
+            
 
             
 
@@ -255,9 +274,13 @@
             
 
             
+
+            
             for that signal.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -265,8 +288,7 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The call was interrupted by a caught signal,
             or the signal did not have the
             <see
@@ -275,9 +297,13 @@
             
 
             
+
+            
             flag set.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINTR" />
+
+            
 
             
 
@@ -307,9 +333,13 @@
 
           
 
+          
+
            if the process terminated due to an unhandled 
           signal; otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -318,8 +348,7 @@
         >
         <remarks></remarks>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see
@@ -327,17 +356,20 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             No status from the terminated child process is available
             because the calling process has asked the system to discard
             such status by ignoring the signal
             <see
              cref="F:Mono.Unix.Native.TODO.SIGCHLD" />
+
+            
 
             
 
@@ -349,9 +381,13 @@
             
 
             
+
+            
             for that signal.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -359,8 +395,7 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The call was interrupted by a caught signal,
             or the signal did not have the
             <see
@@ -369,9 +404,13 @@
             
 
             
+
+            
             flag set.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINTR" />
+
+            
 
             
 
@@ -401,9 +440,13 @@
 
           
 
+          
+
            if the process has been stopped; otherwise, 
           <see
            langword="false" />
+
+          
 
           
 
@@ -412,8 +455,7 @@
         >
         <remarks></remarks>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see
@@ -421,17 +463,20 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             No status from the terminated child process is available
             because the calling process has asked the system to discard
             such status by ignoring the signal
             <see
              cref="F:Mono.Unix.Native.TODO.SIGCHLD" />
+
+            
 
             
 
@@ -443,9 +488,13 @@
             
 
             
+
+            
             for that signal.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -453,8 +502,7 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The call was interrupted by a caught signal,
             or the signal did not have the
             <see
@@ -463,9 +511,13 @@
             
 
             
+
+            
             flag set.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINTR" />
+
+            
 
             
 
@@ -490,10 +542,11 @@
       </ReturnValue>
       <Docs>
         <summary>Get the operating system proces ID.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -521,10 +574,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Send the <see
            cref="F:Mono.Unix.Native.Signum.SIGKILL" />
+
+          
 
           
 
@@ -534,14 +588,15 @@
         >
         <remarks></remarks>
         <exception cref="System.InvalidOperationException">
-          <para
-            >
+          <para>
             The sending process is not the super-user and its effective
             user id does not match the effective user-id of the receiving process.
             When signaling a process group, this error is returned if any members
             of the group could not be signaled.
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -566,10 +621,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the process group ID.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -604,10 +660,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the session ID of the process.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -642,10 +699,11 @@
         <Parameter Name="signal" Type="Mono.Unix.Native.Signum" />
       </Parameters>
       <Docs>
-        <param name="signal"
-          >
+        <param name="signal">
           A <see
            cref="T:Mono.Unix.Native.Signum" />
+
+          
 
           
 
@@ -659,18 +717,21 @@
 
           
 
+          
+
            signal to the process.</summary
         >
         <remarks></remarks>
         <exception cref="System.InvalidOperationException">
-          <para
-            >
+          <para>
             The sending process is not the super-user and its effective
             user id does not match the effective user-id of the receiving 
             process.  When signaling a process group, this error is returned 
             if any members of the group could not be signaled.
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -697,10 +758,11 @@
       </ReturnValue>
       <Docs>
         <summary>Retrieves the signal which caused the process to stop.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:Mono.Unix.Native.Signum" />
+
+          
 
           
 
@@ -714,9 +776,13 @@
 
           
 
+          
+
            returns 
           <see
            langword="false" />
+
+          
 
           
 
@@ -746,10 +812,11 @@
       </ReturnValue>
       <Docs>
         <summary>Retrieves the unhandled signal which terminated the process.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:Mono.Unix.Native.Signum" />
+
+          
 
           
 
@@ -763,9 +830,13 @@
 
           
 
+          
+
            returns 
           <see
            langword="false" />
+
+          
 
           
 
@@ -794,11 +865,12 @@
       <Docs>
         <summary>Wait for the process to exit.</summary>
         <remarks>
-          <para
-            >
+          <para>
             Calling this method on the 
             <see
              cref="T:Mono.Unix.UnixProcess" />
+
+            
 
             
 
@@ -809,9 +881,13 @@
             
 
             
+
+            
             will generate a 
             <see
              cref="T:Mono.Unix.UnixIOException" />
+
+            
 
             
 
@@ -821,13 +897,14 @@
 
             
 
+            
+
             ].
           </para
           >
         </remarks>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see
@@ -835,17 +912,20 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             No status from the terminated child process is available
             because the calling process has asked the system to discard
             such status by ignoring the signal
             <see
              cref="F:Mono.Unix.Native.Signum.SIGCHLD" />
+
+            
 
             
 
@@ -857,9 +937,13 @@
             
 
             
+
+            
             for that signal.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -867,8 +951,7 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The call was interrupted by a caught signal,
             or the signal did not have the
             <see
@@ -877,9 +960,13 @@
             
 
             
+
+            
             flag set.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINTR" />
+
+            
 
             
 

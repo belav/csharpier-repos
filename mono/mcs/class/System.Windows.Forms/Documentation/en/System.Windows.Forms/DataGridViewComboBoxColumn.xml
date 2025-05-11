@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          has an associated <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
         
 
+        
+
          in every <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -50,8 +60,12 @@
 
         
 
+        
+
          properties. Alternatively, you can bind the column to the data source indicated by the <see
          cref="P:System.Windows.Forms.DataGridView.DataSource" />
+
+        
 
         
 
@@ -60,8 +74,12 @@
 
         
 
+        
+
          is bound to a database table, set the column <see
          cref="P:System.Windows.Forms.DataGridViewColumn.DataPropertyName" />
+
+        
 
         
 
@@ -70,8 +88,12 @@
 
         
 
+        
+
          is bound to a collection of objects, set the <see
          cref="P:System.Windows.Forms.DataGridViewColumn.DataPropertyName" />
+
+        
 
         
 
@@ -83,8 +105,12 @@
 
         
 
+        
+
          collection. Alternatively, you can bind the drop-down list to its own data source by setting the column <see
          cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DataSource" />
+
+        
 
         
 
@@ -93,8 +119,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.ValueMember" />
+
+        
 
         
 
@@ -103,13 +133,19 @@
 
         
 
+        
+
          property indicates which object property or database column provides the values that are displayed in the drop-down list. The <see
          cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.ValueMember" />
 
         
 
+        
+
          property indicates which object property or database column is used to set the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+
+        
 
         
 
@@ -121,8 +157,12 @@
 
         
 
+        
+
          control to a parent database table and bind the drop-down list to a related child table. For example, you might bind the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -131,8 +171,12 @@
 
         
 
+        
+
          property to a Products table that contains ProductID and ProductName columns. In this case, you would set the column <see
          cref="P:System.Windows.Forms.DataGridViewColumn.DataPropertyName" />
+
+        
 
         
 
@@ -141,8 +185,12 @@
 
         
 
+        
+
          property to "ProductID" and the <see
          cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayMember" />
+
+        
 
         
 
@@ -154,8 +202,12 @@
 
         
 
+        
+
          property) must include the actual cell values or the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -167,8 +219,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayMember" />
+
+        
 
         
 
@@ -177,8 +233,12 @@
 
         
 
+        
+
          properties automatically sets the corresponding properties of all cells in the column including the <see
          cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
+
+        
 
         
 
@@ -190,8 +250,12 @@
 
         
 
+        
+
          control, the <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+        
 
         
 
@@ -200,13 +264,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ListControl.SelectedValue" />
 
         
 
+        
+
          properties. Instead, selecting a value from a drop-down list sets the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+
+        
 
         
 
@@ -218,6 +288,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -226,6 +298,8 @@
       <para
         >Represents a column of <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+        
 
         
 
@@ -248,13 +322,19 @@
 
             
 
+            
+
              instance, this constructor sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property to a new <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -266,6 +346,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
+
+            
 
             
 
@@ -294,13 +376,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.AutoComplete" />
+
+            
 
             
 
@@ -344,8 +432,12 @@
 
             
 
+            
+
              class initializes this property to a newly created <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -355,6 +447,8 @@
             <para
               >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see
                cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
+
+              
 
               
 
@@ -404,8 +498,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxColumn" />
+
+            
 
             
 
@@ -434,8 +532,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.Items" />
+
+            
 
             
 
@@ -444,8 +546,12 @@
 
             
 
+            
+
              property, if the data must be drawn from a nondefault property or column, then the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayMember" />
+
+            
 
             
 
@@ -457,13 +563,19 @@
 
             
 
+            
+
              property is set to a string array, then <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.ValueMember" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayMember" />
+
+            
 
             
 
@@ -475,13 +587,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DataSource" />
+
+            
 
             
 
@@ -525,13 +643,19 @@
 
             
 
+            
+
              objects is obtained from the <see
              cref="P:System.Windows.Forms.DataGridView.DataSource" />
 
             
 
+            
+
             . If this data comes from a nondefault property or column, then the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayMember" />
+
+            
 
             
 
@@ -543,8 +667,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.ValueMember" />
+
+            
 
             
 
@@ -556,8 +684,12 @@
 
             
 
+            
+
              property is set to a string array, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayMember" />
+
+            
 
             
 
@@ -569,13 +701,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayMember" />
+
+            
 
             
 
@@ -622,8 +760,12 @@
 
             
 
+            
+
              property affects the appearance of cells in the column when they are not in edit mode, and regardless of whether they are read-only. When a cell is in edit mode, it always looks like a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -635,13 +777,19 @@
 
             
 
+            
+
              property value is false, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayStyle" />
 
             
 
+            
+
              property affects all cells in the column; otherwise, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayStyle" />
+
+            
 
             
 
@@ -653,6 +801,8 @@
 
             
 
+            
+
              property. </para
           >
           <para
@@ -661,8 +811,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox" />
+
+            
 
             
 
@@ -671,8 +825,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.FlatStyle.Popup" />
+
+            
 
             
 
@@ -684,13 +842,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayStyle" />
+
+            
 
             
 
@@ -738,13 +902,19 @@
 
             
 
+            
+
              property value is false, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayStyle" />
 
             
 
+            
+
              property affects all cells in the column; otherwise, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.DisplayStyle" />
+
+            
 
             
 
@@ -756,8 +926,12 @@
 
             
 
+            
+
              property affects the appearance of cells in the column when they are not in edit mode, and regardless of whether they are read-only. When a cell is in edit mode, it always looks like a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -769,13 +943,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayStyleForCurrentCellOnly" />
+
+            
 
             
 
@@ -790,8 +970,12 @@
 
             
 
+            
+
              property value applies only to the current cell in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -817,8 +1001,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
+
+            
 
             
 
@@ -830,13 +1018,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DropDownWidth" />
+
+            
 
             
 
@@ -877,6 +1071,8 @@
 
             
 
+            
+
              property affects the behavior and appearance of the drop-down arrows for the cells in this column. </para
           >
           <para
@@ -885,8 +1081,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox" />
+
+            
 
             
 
@@ -895,8 +1095,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.FlatStyle.Popup" />
+
+            
 
             
 
@@ -908,13 +1112,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.FlatStyle" />
+
+            
 
             
 
@@ -955,13 +1165,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
+
+            
 
             
 
@@ -973,8 +1189,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.DataGridView.DataSource" />
+
+            
 
             
 
@@ -986,8 +1206,12 @@
 
             
 
+            
+
             , then the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.ValueMember" />
+
+            
 
             
 
@@ -996,11 +1220,15 @@
 
             
 
+            
+
              properties do not need to be set because each string added will be used for both value and display.</para
           >
           <block subset="none" type="note">
             <para>
               <see cref="T:System.Windows.Forms.DataGridViewComboBoxColumn" />
+
+              
 
               
 
@@ -1013,8 +1241,12 @@
 
             
 
+            
+
              property is set, then <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.Items" />
+
+            
 
             
 
@@ -1055,13 +1287,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.MaxDropDownItems" />
+
+            
 
             
 
@@ -1099,13 +1337,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.Sorted" />
+
+            
 
             
 
@@ -1160,8 +1404,12 @@
 
             
 
+            
+
              for more information about its relationship with <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.ValueMember" />
+
+            
 
             
 
@@ -1173,8 +1421,12 @@
 
             
 
+            
+
              property is set to a string array, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.ValueMember" />
+
+            
 
             
 
@@ -1186,13 +1438,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.ValueMember" />
+
+            
 
             
 

@@ -35,8 +35,12 @@
 
         
 
+        
+
          enumeration defines the socket option levels that can be passed to the <see
          cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          methods. <see
          cref="T:System.Net.Sockets.SocketOptionName" />
+
+        
 
         
 
@@ -55,11 +63,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >Note   To use <see
          cref="F:System.Net.Sockets.SocketOptionLevel.IPv6" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.Sockets.Socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)" />
+
+        
 
         
 
@@ -113,6 +129,8 @@
 
             
 
+            
+
              options apply only to IP sockets.</para
           >
         </summary>
@@ -141,6 +159,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -175,6 +195,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -213,6 +235,8 @@
 
             
 
+            
+
              options apply only to TCP sockets.</para
           >
         </summary>
@@ -245,6 +269,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 

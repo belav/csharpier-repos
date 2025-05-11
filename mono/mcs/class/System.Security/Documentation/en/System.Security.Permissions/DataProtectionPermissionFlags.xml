@@ -31,8 +31,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Permissions.DataProtectionPermissionAttribute" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.ProtectedMemory" />
+
+        
 
         
 

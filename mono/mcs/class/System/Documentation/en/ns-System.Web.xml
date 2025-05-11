@@ -10,8 +10,12 @@
 
         
 
+        
+
          namespace supplies classes and interfaces that enable browser-server communication. This namespace includes the <see
          cref="T:System.Web.HttpRequest" />
+
+        
 
         
 
@@ -20,13 +24,19 @@
 
         
 
+        
+
          class, which manages HTTP output to the client; and the <see
          cref="T:System.Web.HttpServerUtility" />
 
         
 
+        
+
          class, which provides access to server-side utilities and processes. <see
          cref="N:System.Web" />
+
+        
 
         
 

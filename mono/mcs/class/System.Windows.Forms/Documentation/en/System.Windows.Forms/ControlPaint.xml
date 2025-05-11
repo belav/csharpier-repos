@@ -19,8 +19,12 @@
 
         
 
+        
+
          class enable you to draw your own controls or elements of controls. You can control the drawing of your own controls if the <see
          cref="F:System.Windows.Forms.ControlStyles.UserPaint" />
+
+        
 
         
 
@@ -29,13 +33,19 @@
 
         
 
+        
+
          or <see
          cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
 
         
 
+        
+
          methods. You can set multiple style bits for any control. The <see
          cref="T:System.Windows.Forms.ControlStyles" />
+
+        
 
         
 
@@ -67,13 +77,19 @@
 
             
 
+            
+
              mode, this property is set to <see
              cref="P:System.Drawing.SystemColors.WindowFrame" />
 
             
 
+            
+
             ; otherwise, it is set to <see
              cref="P:System.Drawing.SystemColors.ControlDark" />
+
+            
 
             
 
@@ -85,6 +101,8 @@
           <para
             >Gets the color to use as the <see
              cref="P:System.Drawing.SystemColors.ControlDark" />
+
+            
 
             
 
@@ -124,6 +142,8 @@
 
             
 
+            
+
              representing the handle to the bitmap.</para
           >
         </returns>
@@ -132,8 +152,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -144,8 +168,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -187,6 +215,8 @@
 
             
 
+            
+
              representing the handle to the bitmap.</para
           >
         </returns>
@@ -195,8 +225,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -204,6 +238,8 @@
         >
         <param name="monochromeMask">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -244,6 +280,8 @@
 
             
 
+            
+
              mask.</para
           >
         </returns>
@@ -252,8 +290,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -286,13 +328,19 @@
 
             
 
+            
+
              is one of the <see
              cref="T:System.Drawing.SystemColors" />
 
             
 
+            
+
             , the color is converted to a <see
              cref="P:System.Drawing.SystemColors.ControlDark" />
+
+            
 
             
 
@@ -311,6 +359,8 @@
 
             
 
+            
+
              that represents the dark color on the control.</para
           >
         </returns>
@@ -319,8 +369,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -354,13 +408,19 @@
 
             
 
+            
+
              is one of the <see
              cref="T:System.Drawing.SystemColors" />
 
             
 
+            
+
             , the color is converted to a <see
              cref="P:System.Drawing.SystemColors.ControlDark" />
+
+            
 
             
 
@@ -379,6 +439,8 @@
 
             
 
+            
+
              that represent the dark color on the control.</para
           >
         </returns>
@@ -387,8 +449,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -399,8 +465,12 @@
 
           
 
+          
+
           The percentage to darken the specified <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -433,13 +503,19 @@
 
             
 
+            
+
              is one of the <see
              cref="T:System.Drawing.SystemColors" />
 
             
 
+            
+
             , the color is converted to the <see
              cref="P:System.Drawing.SystemColors.ControlDarkDark" />
+
+            
 
             
 
@@ -458,6 +534,8 @@
 
             
 
+            
+
              that represents the dark color on the control.</para
           >
         </returns>
@@ -466,8 +544,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -505,8 +587,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -517,8 +603,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -529,8 +619,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -541,8 +635,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ButtonBorderStyle" />
+
+          
 
           
 
@@ -590,8 +688,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -602,8 +704,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -614,8 +720,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -626,6 +736,8 @@
 
           
 
+          
+
           The width of the left border. </param
         >
         <param name="leftStyle">
@@ -633,8 +745,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ButtonBorderStyle" />
+
+          
 
           
 
@@ -645,8 +761,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -657,6 +777,8 @@
 
           
 
+          
+
           The width of the top border. </param
         >
         <param name="topStyle">
@@ -664,8 +786,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ButtonBorderStyle" />
+
+          
 
           
 
@@ -676,8 +802,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -688,6 +818,8 @@
 
           
 
+          
+
           The width of the right border. </param
         >
         <param name="rightStyle">
@@ -695,8 +827,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ButtonBorderStyle" />
+
+          
 
           
 
@@ -707,8 +843,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -719,6 +859,8 @@
 
           
 
+          
+
           The width of the bottom border. </param
         >
         <param name="bottomStyle">
@@ -726,8 +868,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ButtonBorderStyle" />
+
+          
 
           
 
@@ -761,6 +907,8 @@
 
             
 
+            
+
              style is used by default to draw the border.</para
           >
         </remarks>
@@ -773,8 +921,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -785,8 +937,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -823,8 +979,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -835,8 +995,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -847,8 +1011,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Border3DStyle" />
+
+          
 
           
 
@@ -886,8 +1054,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -898,8 +1070,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -910,8 +1086,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Border3DStyle" />
+
+          
 
           
 
@@ -922,8 +1102,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Border3DSide" />
+
+          
 
           
 
@@ -960,6 +1144,8 @@
 
             
 
+            
+
              style is used by default to draw the border.</para
           >
         </remarks>
@@ -972,8 +1158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -984,10 +1174,14 @@
 
           
 
+          
+
           The x-coordinate of the top left of the border rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -998,10 +1192,14 @@
 
           
 
+          
+
           The width of the border rectangle. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1041,8 +1239,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1053,10 +1255,14 @@
 
           
 
+          
+
           The x-coordinate of the top left of the border rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1067,10 +1273,14 @@
 
           
 
+          
+
           The width of the border rectangle. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1081,8 +1291,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Border3DStyle" />
+
+          
 
           
 
@@ -1123,8 +1337,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1135,10 +1353,14 @@
 
           
 
+          
+
           The x-coordinate of the top left of the border rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1149,10 +1371,14 @@
 
           
 
+          
+
           The width of the border rectangle. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1163,8 +1389,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Border3DStyle" />
+
+          
 
           
 
@@ -1175,8 +1405,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Border3DSide" />
+
+          
 
           
 
@@ -1213,8 +1447,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1225,8 +1463,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1237,8 +1479,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -1278,8 +1524,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1290,10 +1540,14 @@
 
           
 
+          
+
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1304,10 +1558,14 @@
 
           
 
+          
+
           The width of the button. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1318,8 +1576,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -1357,8 +1619,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1369,8 +1635,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1381,8 +1651,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.CaptionButton" />
+
+          
 
           
 
@@ -1393,8 +1667,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -1435,8 +1713,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1447,10 +1729,14 @@
 
           
 
+          
+
           The x-coordinate of the top left of the drawing rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1461,10 +1747,14 @@
 
           
 
+          
+
           The width of the drawing rectangle. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1475,8 +1765,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.CaptionButton" />
+
+          
 
           
 
@@ -1487,8 +1781,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -1525,8 +1823,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1537,8 +1839,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1549,8 +1855,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -1590,8 +1900,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1602,10 +1916,14 @@
 
           
 
+          
+
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1616,10 +1934,14 @@
 
           
 
+          
+
           The width of the check box. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1630,8 +1952,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -1668,8 +1994,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1680,8 +2010,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1692,8 +2026,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -1733,8 +2071,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1745,10 +2087,14 @@
 
           
 
+          
+
           The x-coordinate of the top left of the border rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1759,10 +2105,14 @@
 
           
 
+          
+
           The width of the combo box. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1773,8 +2123,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -1813,8 +2167,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1825,8 +2183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1865,8 +2227,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1877,8 +2243,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1919,8 +2289,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1931,8 +2305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1943,8 +2321,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1955,8 +2337,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1997,8 +2383,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2009,8 +2399,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2021,10 +2415,14 @@
 
           
 
+          
+
           true to draw the handle as a primary grab handle; otherwise, false. </param
         >
         <param name="enabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2060,6 +2458,8 @@
 
             
 
+            
+
              parameter is used to calculate the fill color of the dots so that the grid is always visible against the background.</para
           >
         </remarks>
@@ -2072,8 +2472,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2084,8 +2488,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2096,8 +2504,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Size" />
+
+          
 
           
 
@@ -2108,8 +2520,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -2146,6 +2562,8 @@
 
             
 
+            
+
              parameter is used to calculate the fill color of the disabled image so that it is always visible against the background.</para
           >
         </remarks>
@@ -2158,8 +2576,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2170,8 +2592,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2182,10 +2608,14 @@
 
           
 
+          
+
           The x-coordinate of the top left of the border image. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2196,8 +2626,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -2234,8 +2668,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2246,8 +2684,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2255,6 +2697,8 @@
         >
         <param name="primary">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2289,8 +2733,12 @@
 
             
 
+            
+
              controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see
              cref="P:System.Windows.Forms.MenuItem.Checked" />
+
+            
 
             
 
@@ -2299,13 +2747,19 @@
 
             
 
+            
+
              value of <see
              cref="T:System.Windows.Forms.MenuGlyph" />
 
             
 
+            
+
              to draw a check mark on the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -2321,8 +2775,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2333,8 +2791,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2345,8 +2807,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MenuGlyph" />
+
+          
 
           
 
@@ -2386,8 +2852,12 @@
 
             
 
+            
+
              controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see
              cref="P:System.Windows.Forms.MenuItem.Checked" />
+
+            
 
             
 
@@ -2396,13 +2866,19 @@
 
             
 
+            
+
              value of <see
              cref="T:System.Windows.Forms.MenuGlyph" />
 
             
 
+            
+
              to draw a check mark on the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -2417,8 +2893,12 @@
 
             
 
+            
+
              with the color specified in the <paramref
              name="backColor" />
+
+            
 
             
 
@@ -2427,8 +2907,12 @@
 
             
 
+            
+
              with the color specified in the <paramref
              name="foreColor" />
+
+            
 
             
 
@@ -2440,8 +2924,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2452,8 +2940,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2464,8 +2956,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MenuGlyph" />
+
+          
 
           
 
@@ -2476,8 +2972,12 @@
 
           
 
+          
+
           The color that replaces <see
            cref="P:System.Drawing.Color.White" />
+
+          
 
           
 
@@ -2488,8 +2988,12 @@
 
           
 
+          
+
           The color that replaces <see
            cref="P:System.Drawing.Color.Black" />
+
+          
 
           
 
@@ -2523,8 +3027,12 @@
 
             
 
+            
+
              controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see
              cref="P:System.Windows.Forms.MenuItem.Checked" />
+
+            
 
             
 
@@ -2533,13 +3041,19 @@
 
             
 
+            
+
              value of <see
              cref="T:System.Windows.Forms.MenuGlyph" />
 
             
 
+            
+
              to draw a check mark on the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -2555,8 +3069,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2567,10 +3085,14 @@
 
           
 
+          
+
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2581,10 +3103,14 @@
 
           
 
+          
+
           The width of the menu glyph. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2595,8 +3121,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MenuGlyph" />
+
+          
 
           
 
@@ -2639,8 +3169,12 @@
 
             
 
+            
+
              controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see
              cref="P:System.Windows.Forms.MenuItem.Checked" />
+
+            
 
             
 
@@ -2649,13 +3183,19 @@
 
             
 
+            
+
              value of <see
              cref="T:System.Windows.Forms.MenuGlyph" />
 
             
 
+            
+
              to draw a check mark on the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -2670,8 +3210,12 @@
 
             
 
+            
+
              with the color specified in the <paramref
              name="backColor" />
+
+            
 
             
 
@@ -2680,8 +3224,12 @@
 
             
 
+            
+
              with the color specified in the <paramref
              name="foreColor" />
+
+            
 
             
 
@@ -2693,8 +3241,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2705,10 +3257,14 @@
 
           
 
+          
+
           The x-coordinate of the upper left corner of the drawing rectangle.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2719,10 +3275,14 @@
 
           
 
+          
+
           The width of the menu glyph.</param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2733,8 +3293,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MenuGlyph" />
+
+          
 
           
 
@@ -2745,8 +3309,12 @@
 
           
 
+          
+
           The color that replaces <see
            cref="P:System.Drawing.Color.White" />
+
+          
 
           
 
@@ -2757,8 +3325,12 @@
 
           
 
+          
+
           The color that replaces <see
            cref="P:System.Drawing.Color.Black" />
+
+          
 
           
 
@@ -2791,8 +3363,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2803,8 +3379,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2815,8 +3395,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -2856,8 +3440,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2868,10 +3456,14 @@
 
           
 
+          
+
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2882,10 +3474,14 @@
 
           
 
+          
+
           The width of the check box. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2896,8 +3492,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -2934,8 +3534,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2946,8 +3550,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2958,8 +3566,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -2999,8 +3611,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3011,10 +3627,14 @@
 
           
 
+          
+
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3025,10 +3645,14 @@
 
           
 
+          
+
           The width of the radio button. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3039,8 +3663,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -3075,6 +3703,8 @@
 
             
 
+            
+
              parameter is used to calculate the fill color of the frame so that it is always visible against the background.</para
           >
           <para>The results of this method can be reversed by drawing the same frame again. Drawing a frame using this method is similar to inverting a region of the screen, except that it provides better performance for a wider variety of colors.</para>
@@ -3088,8 +3718,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3100,8 +3734,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3112,8 +3750,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.FrameStyle" />
+
+          
 
           
 
@@ -3148,6 +3790,8 @@
 
             
 
+            
+
              parameter is used to calculate the fill color of the line so that it is always visible against the background.</para
           >
           <para>The results of this method can be reversed by drawing the same line again. Drawing a line using this method is similar to inverting a region of the screen, except that it provides better performance for a wider variety of colors.</para>
@@ -3161,8 +3805,12 @@
 
           
 
+          
+
           The starting <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -3173,8 +3821,12 @@
 
           
 
+          
+
           The ending <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -3185,8 +3837,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3224,8 +3880,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3236,8 +3896,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3248,8 +3912,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ScrollButton" />
+
+          
 
           
 
@@ -3260,8 +3928,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -3302,8 +3974,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3314,10 +3990,14 @@
 
           
 
+          
+
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3328,10 +4008,14 @@
 
           
 
+          
+
           The width of the scroll button. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3342,8 +4026,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ScrollButton" />
+
+          
 
           
 
@@ -3354,8 +4042,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.ButtonState" />
+
+          
 
           
 
@@ -3393,11 +4085,15 @@
 
             
 
+            
+
              parameter is used to calculate the fill color of the frame so that it is always visible against the background.</para
           >
           <para
             >If the <paramref
              name="active" />
+
+            
 
             
 
@@ -3413,8 +4109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3425,6 +4125,8 @@
 
           
 
+          
+
           true to draw the selection frame in an active state; otherwise, false. </param
         >
         <param name="outsideRect">
@@ -3432,8 +4134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3444,8 +4150,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3456,8 +4166,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3492,6 +4206,8 @@
 
             
 
+            
+
              parameter is used to calculate the color of the size grip so that it is always visible against the background.</para
           >
           <para>When you define a sizable window, you can include a size grip. A size grip is a special handle that enables the user to resize a window.</para>
@@ -3505,8 +4221,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3517,8 +4237,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3529,8 +4253,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3568,6 +4296,8 @@
 
             
 
+            
+
              parameter is used to calculate the color of the size grip so that it is always visible against the background.</para
           >
           <para>When you define a sizable window, you can include a size grip. A size grip is a special handle that enables the user to resize a window.</para>
@@ -3581,8 +4311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3593,8 +4327,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3605,10 +4343,14 @@
 
           
 
+          
+
           The x-coordinate of the upper left corner of the size grip. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3619,10 +4361,14 @@
 
           
 
+          
+
           The width of the size grip. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3662,8 +4408,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3674,6 +4424,8 @@
 
           
 
+          
+
           The string to draw. </param
         >
         <param name="font">
@@ -3681,8 +4433,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -3693,8 +4449,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3705,8 +4465,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -3717,8 +4481,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.StringFormat" />
+
+          
 
           
 
@@ -3760,6 +4528,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3768,8 +4538,12 @@
 
           
 
+          
+
           The GDI-based <see
            cref="T:System.Windows.Forms.TextRenderer" />
+
+          
 
           
 
@@ -3780,6 +4554,8 @@
 
           
 
+          
+
           The string to draw. </param
         >
         <param name="font">
@@ -3787,8 +4563,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -3799,8 +4579,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3811,8 +4595,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -3823,8 +4611,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.StringFormat" />
+
+          
 
           
 
@@ -3859,8 +4651,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3871,8 +4667,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3902,6 +4702,8 @@
 
             
 
+            
+
              parameter is used to calculate the fill color of the rectangle so that it is always visible against the background.</para
           >
           <para>The results of this method can be reversed by drawing the same rectangle again. Drawing a rectangle using this method is similar to inverting a region of the screen, except that it provides better performance for a wider variety of colors.</para>
@@ -3915,8 +4717,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3927,8 +4733,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3961,13 +4771,19 @@
 
             
 
+            
+
              is one of the <see
              cref="T:System.Drawing.SystemColors" />
 
             
 
+            
+
             , the color is converted to a <see
              cref="P:System.Drawing.SystemColors.ControlLight" />
+
+            
 
             
 
@@ -3986,6 +4802,8 @@
 
             
 
+            
+
              that represents the light color on the control.</para
           >
         </returns>
@@ -3994,8 +4812,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -4029,13 +4851,19 @@
 
             
 
+            
+
              is one of the <see
              cref="T:System.Drawing.SystemColors" />
 
             
 
+            
+
             , the color is converted to a <see
              cref="P:System.Drawing.SystemColors.ControlLight" />
+
+            
 
             
 
@@ -4054,6 +4882,8 @@
 
             
 
+            
+
              that represents the light color on the control.</para
           >
         </returns>
@@ -4062,8 +4892,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -4074,8 +4908,12 @@
 
           
 
+          
+
           The percentage to lighten the specified <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -4108,13 +4946,19 @@
 
             
 
+            
+
              is one of the <see
              cref="T:System.Drawing.SystemColors" />
 
             
 
+            
+
             , the color is converted to the <see
              cref="P:System.Drawing.SystemColors.ControlLightLight" />
+
+            
 
             
 
@@ -4133,6 +4977,8 @@
 
             
 
+            
+
              that represents the light color on the control.</para
           >
         </returns>
@@ -4141,8 +4987,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 

@@ -39,6 +39,8 @@
 
         
 
+        
+
          is an interface that works with the .NET Framework forms designer architecture to provide support for designer transaction and component management.</para
       >
       <para>The .NET Framework does not provide an implementation of this interface. The interface is implemented by development tools that support designers.</para>
@@ -128,13 +130,19 @@
 
             
 
+            
+
              contains the components of the current design mode document. You can list or access any of the components of the current design mode document through the <see
              cref="P:System.ComponentModel.IContainer.Components" />
 
             
 
+            
+
              member of this <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -177,6 +185,8 @@
 
             
 
+            
+
             , an exception is thrown.</para
           >
           <para>This method does not specify a name for the component. The method creates the component and adds it to the designer container.</para>
@@ -191,6 +201,8 @@
         </returns>
         <param name="componentClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,6 +241,8 @@
 
             
 
+            
+
             , an exception is thrown.</para
           >
           <para>This method creates the component and adds it to the designer container.</para>
@@ -246,10 +260,14 @@
 
           
 
+          
+
           The type of the component to create. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,6 +303,8 @@
 
             
 
+            
+
              that can be used to encapsulate a series of operations. Designer transactions can improve performance, reduce flicker caused by multiple updates during a process of operations, and enable most operations to be undone.</para
           >
           <para
@@ -293,13 +313,19 @@
 
             
 
+            
+
              and <see
              cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
 
             
 
+            
+
              events and perform work only when a transaction is not in progress. For more information on using transactions, see the documentation for <see
              cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+            
 
             
 
@@ -314,6 +340,8 @@
 
             
 
+            
+
              that can encapsulate event sequences to improve performance and enable undo and redo support functionality.</para
           >
         </summary>
@@ -325,8 +353,12 @@
 
             
 
+            
+
             . When you complete the steps in your transaction, you should call <see
              cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+
+            
 
             
 
@@ -365,6 +397,8 @@
 
             
 
+            
+
              that can be used to encapsulate a series of operations. Designer transactions can improve performance, reduce flicker caused by multiple updates during a process of operations, and enable most operations to be undone.</para
           >
           <para
@@ -373,13 +407,19 @@
 
             
 
+            
+
              and <see
              cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
 
             
 
+            
+
              events and perform work only when a transaction is not in progress. For more information on using transactions, see the documentation for <see
              cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+            
 
             
 
@@ -394,6 +434,8 @@
 
             
 
+            
+
              that can encapsulate event sequences to improve performance and enable undo and redo support functionality, using the specified transaction description.</para
           >
         </summary>
@@ -405,8 +447,12 @@
 
             
 
+            
+
             . When you have completed the steps in your transaction, you should call <see
              cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+
+            
 
             
 
@@ -415,6 +461,8 @@
         </returns>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,6 +526,8 @@
 
           
 
+          
+
           The component to destroy. </param
         >
       </Docs>
@@ -517,6 +567,8 @@
 
             
 
+            
+
             , or null if there is no designer for the specified component.</para
           >
         </returns>
@@ -525,8 +577,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -564,6 +620,8 @@
         </returns>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -665,8 +723,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.UserControl" />
+
+            
 
             
 
@@ -733,6 +795,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -771,6 +835,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -795,6 +861,8 @@
           <para
             >The description is the last description specified with <see
              cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
+
+            
 
             
 
@@ -837,6 +905,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -868,6 +938,8 @@
 
             
 
+            
+
              is made. Subsequent calls do not generate this event until all transaction objects have been disposed.</para
           >
         </remarks>
@@ -876,6 +948,8 @@
           <para
             >Adds an event handler for the <see
              cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpening" />
+
+            
 
             
 

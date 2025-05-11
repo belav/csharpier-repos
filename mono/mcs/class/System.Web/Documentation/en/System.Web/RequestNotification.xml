@@ -22,8 +22,12 @@
 
         
 
+        
+
          enumeration is used with the <see
          cref="P:System.Web.HttpContext.CurrentNotification" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          class to determine what event in the pipeline is currently processing. To determine when all the handlers for a specific event of the <see
          cref="T:System.Web.HttpApplication" />
 
         
 
+        
+
          instance have finished processing, use the <see
          cref="P:System.Web.HttpContext.IsPostNotification" />
+
+        
 
         
 
@@ -50,10 +60,14 @@
 
         
 
+        
+
          type is introduced in the net_v35_long. For more information, see <format
          type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
+
+        
 
         
 
@@ -65,6 +79,8 @@
       <para
         >Indicates when events and other life-cycle events occur while a <see
          cref="T:System.Web.HttpApplication" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
 
             
 
+            
+
              event was raised for the request and is processing.</para
           >
         </summary>
@@ -111,6 +129,8 @@
           <para
             >Indicates that the <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+            
 
             
 
@@ -137,6 +157,8 @@
 
             
 
+            
+
              event was raised for the request and is processing.</para
           >
         </summary>
@@ -160,6 +182,8 @@
 
             
 
+            
+
              event was raised for the request and is processing.</para
           >
         </summary>
@@ -180,6 +204,8 @@
           <para
             >Indicates that the <see
              cref="E:System.Web.HttpApplication.EndRequest" />
+
+            
 
             
 
@@ -222,6 +248,8 @@
 
             
 
+            
+
              event was raised for the request and is processing.</para
           >
         </summary>
@@ -242,6 +270,8 @@
           <para
             >Indicates that the <see
              cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+            
 
             
 
@@ -284,6 +314,8 @@
 
             
 
+            
+
              event was raised for the request and is processing.</para
           >
         </summary>
@@ -304,6 +336,8 @@
           <para
             >Indicates that the <see
              cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+
+            
 
             
 
@@ -343,6 +377,8 @@
           <para
             >Indicates that the <see
              cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+
+            
 
             
 

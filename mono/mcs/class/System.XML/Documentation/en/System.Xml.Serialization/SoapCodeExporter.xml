@@ -30,6 +30,8 @@
 
         
 
+        
+
          class is used by the <format
          type="text/html">
           <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
@@ -39,13 +41,19 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
         
 
+        
+
          class while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of using <see
          cref="T:System.Xml.Serialization.SoapCodeExporter" />
+
+        
 
         
 
@@ -86,6 +94,8 @@
 
             
 
+            
+
              class, use the Wsdl.exe tool.</para
           >
         </remarks>
@@ -97,6 +107,8 @@
 
             
 
+            
+
              class, assuming no code compile unit. </para
           >
         </summary>
@@ -105,8 +117,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -143,6 +159,8 @@
 
             
 
+            
+
              class, use the Wsdl.exe tool.</para
           >
         </remarks>
@@ -154,6 +172,8 @@
 
             
 
+            
+
              class, specifying a code compile unit parameter in addition to a namespace parameter.</para
           >
         </summary>
@@ -162,8 +182,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -174,8 +198,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -212,6 +240,8 @@
 
             
 
+            
+
              class, use the Wsdl.exe tool.</para
           >
         </remarks>
@@ -223,6 +253,8 @@
 
             
 
+            
+
              class, specifying a code namespace, a code compile unit, and code generation options.</para
           >
         </summary>
@@ -231,8 +263,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -243,8 +279,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -255,8 +295,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -294,6 +338,8 @@
 
             
 
+            
+
              class, use the Wsdl.exe tool.</para
           >
         </remarks>
@@ -305,6 +351,8 @@
 
             
 
+            
+
              class, specifying a code namespace, a code compile unit, code generation options, and mappings.</para
           >
         </summary>
@@ -313,8 +361,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -325,8 +377,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -337,8 +393,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -349,13 +409,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Hashtable" />
 
           
 
+          
+
            that contains <see
            cref="T:System.Xml.Serialization.XmlMapping" />
+
+          
 
           
 
@@ -395,6 +461,8 @@
 
             
 
+            
+
              class, specifying a code namespace, a code compile unit, a code generator, code generation options, and mappings.</para
           >
         </summary>
@@ -403,8 +471,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -415,8 +487,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -427,8 +503,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -439,8 +519,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -451,13 +535,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Hashtable" />
 
           
 
+          
+
            that contains <see
            cref="T:System.Xml.Serialization.XmlMapping" />
+
+          
 
           
 
@@ -500,6 +590,8 @@
 
             
 
+            
+
              declaration to a method parameter or return value corresponding to a part element of a SOAP message definition in a WSDL document. </para
           >
         </summary>
@@ -508,8 +600,12 @@
 
           
 
+          
+
           The collection of <see
            cref="T:System.CodeDom.CodeAttributeDeclaration" />
+
+          
 
           
 
@@ -517,6 +613,8 @@
         >
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,6 +658,8 @@
 
             
 
+            
+
              declaration to a method parameter or return value that corresponds to a part element of a SOAP message definition in a WSDL document. </para
           >
         </summary>
@@ -568,8 +668,12 @@
 
           
 
+          
+
           The collection of <see
            cref="T:System.CodeDom.CodeAttributeDeclaration" />
+
+          
 
           
 
@@ -580,10 +684,14 @@
 
           
 
+          
+
           An internal .NET Framework type mapping for a single part of a WSDL message definition.</param
         >
         <param name="forceUseMemberName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -626,6 +734,8 @@
 
           
 
+          
+
           Internal .NET Framework type mappings for the element parts of a WSDL message definition.</param
         >
       </Docs>
@@ -665,6 +775,8 @@
 
           
 
+          
+
           Internal .NET Framework type mapping information for a SOAP header element.</param
         >
       </Docs>
@@ -688,11 +800,15 @@
 
             
 
+            
+
              attributes can be applied to a base type to allow one or more derived types to be serialized, depending on an object's actual type at run time.</para
           >
           <para
             >Rather than use the <see
              cref="T:System.Xml.Serialization.SoapCodeExporter" />
+
+            
 
             
 
@@ -704,6 +820,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Xml.Serialization.XmlIncludeAttribute" />
+
+            
 
             
 

@@ -43,6 +43,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -81,6 +83,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -89,8 +93,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -149,6 +157,8 @@
 
             
 
+            
+
              property on the attribute.</para
           >
         </summary>
@@ -157,6 +167,8 @@
           <para
             >An <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 

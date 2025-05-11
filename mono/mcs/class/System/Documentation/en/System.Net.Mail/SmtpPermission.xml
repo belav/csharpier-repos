@@ -31,8 +31,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.Mail.SmtpPermissionAttribute" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class demands an <see
          cref="T:System.Net.Mail.SmtpPermission" />
+
+        
 
         
 
@@ -51,6 +59,8 @@
       <para
         >The <see
          cref="T:System.Net.Mail.SmtpAccess" />
+
+        
 
         
 
@@ -87,13 +97,19 @@
 
             
 
+            
+
              is true, the permission controls <see
              cref="F:System.Net.Mail.SmtpAccess.Connect" />
 
             
 
+            
+
              access to SMTP servers. If unrestricted is false, the permission controls <see
              cref="F:System.Net.Mail.SmtpAccess.None" />
+
+            
 
             
 
@@ -108,11 +124,15 @@
 
             
 
+            
+
              class with the specified state.</para
           >
         </summary>
         <param name="unrestricted">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,6 +171,8 @@
 
             
 
+            
+
              class using the specified access level.</para
           >
         </summary>
@@ -159,8 +181,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.Mail.SmtpAccess" />
+
+          
 
           
 
@@ -199,6 +225,8 @@
 
             
 
+            
+
              class using the specified permission state value.</para
           >
         </summary>
@@ -207,8 +235,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -275,8 +307,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.Mail.SmtpAccess" />
+
+          
 
           
 
@@ -317,6 +353,8 @@
 
             
 
+            
+
              that is identical to the current permission.</para
           >
         </returns>
@@ -354,6 +392,8 @@
         </summary>
         <param name="securityElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -399,8 +439,12 @@
 
             
 
+            
+
              that represents the intersection of the current permission and the specified permission. Returns null if the intersection is empty or <paramref
              name="target" />
+
+            
 
             
 
@@ -412,8 +456,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 
@@ -460,8 +508,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 
@@ -536,6 +588,8 @@
 
             
 
+            
+
              that contains an XML encoding of the current permission.</para
           >
         </returns>
@@ -571,6 +625,8 @@
 
             
 
+            
+
              method returns a permission that represents all the states represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -586,6 +642,8 @@
 
             
 
+            
+
              permission that represents the union of the current permission and the specified permission.</para
           >
         </returns>
@@ -594,8 +652,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 

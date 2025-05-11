@@ -21,8 +21,12 @@
 
         
 
+        
+
          property and the value of the <see
          cref="T:System.ServiceModel.Description.ListenUriMode" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          property. The default value for <see
          cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+
+        
 
         
 
@@ -41,13 +49,19 @@
 
         
 
+        
+
         . The default value for <see
          cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" />
 
         
 
+        
+
          is <see
          cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
+
+        
 
         
 
@@ -59,8 +73,12 @@
 
         
 
+        
+
          property and the <see
          cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUriMode" />
+
+        
 
         
 
@@ -72,8 +90,12 @@
 
         
 
+        
+
          is set to <see
          cref="F:System.ServiceModel.Description.ListenUriMode.Unique" />
+
+        
 
         
 
@@ -87,6 +109,8 @@
 
             
 
+            
+
              is false) this means binding to a uniquely available port number.</para
           >
         </item>
@@ -97,8 +121,12 @@
 
             
 
+            
+
              is true) and for all of the other existing indigo2 transports, this means appending a unique path (a GUID) to the end of the <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+
+            
 
             
 
@@ -112,13 +140,19 @@
 
         
 
+        
+
          is set to <see
          cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
 
         
 
+        
+
          mode, the transport uses the <see
          cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+
+        
 
         
 
@@ -153,6 +187,8 @@
 
             
 
+            
+
              exactly as provided. This is the default value.</para
           >
         </summary>
@@ -177,6 +213,8 @@
           <para
             >Specifies that the transport should use a transport-specific mechanism to ensure that the <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+
+            
 
             
 

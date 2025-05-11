@@ -26,6 +26,8 @@
 
         
 
+        
+
          enumeration to specify advanced pipe options.</para
       >
     </remarks>
@@ -37,8 +39,12 @@
 
         
 
+        
+
          object. This enumeration has a <see
          cref="T:System.FlagsAttribute" />
+
+        
 
         
 

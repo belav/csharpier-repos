@@ -30,13 +30,19 @@
 
         
 
+        
+
          class will parse and generate code during compilation for a resource with a specific file extension. The <see
          cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
 
         
 
+        
+
          attribute defines the location scope for which the <see
          cref="T:System.Web.Compilation.BuildProvider" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          attribute, you can limit a <see
          cref="T:System.Web.Compilation.BuildProvider" />
+
+        
 
         
 
@@ -61,13 +71,19 @@
 
         
 
+        
+
          attribute to a <see
          cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
+        
+
          class, the default is <see
          cref="F:System.Web.Compilation.BuildProviderAppliesTo.All" />
+
+        
 
         
 
@@ -100,6 +116,8 @@
 
             
 
+            
+
              class that applies to the specified resource location. </para
           >
         </summary>
@@ -108,8 +126,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Compilation.BuildProviderAppliesTo" />
+
+          
 
           
 
@@ -138,6 +160,8 @@
           <para
             >Gets a value that indicates where the specified <see
              cref="T:System.Web.Compilation.BuildProvider" />
+
+            
 
             
 

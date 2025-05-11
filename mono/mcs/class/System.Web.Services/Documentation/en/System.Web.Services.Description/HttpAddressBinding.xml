@@ -30,12 +30,16 @@
 
         
 
+        
+
          property, specifies the base URI for the XML Web service. For more information about XML Web services, see <format
          type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -47,6 +51,8 @@
       <para
         >Represents an extensibility element added to a <see
          cref="T:System.Web.Services.Description.Port" />
+
+        
 
         
 
@@ -67,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.HttpAddressBinding" />
+
+            
 
             
 

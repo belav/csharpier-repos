@@ -39,8 +39,12 @@
 
         
 
+        
+
          class to create a channel to a service that specifies a callback object. The <see
          cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+        
 
         
 
@@ -49,10 +53,14 @@
 
         
 
+        
+
          object, which provides the connectivity for the indigo2 object. You can use either type to connect to a duplex service. For more information about duplex services, see <format
          type="text/html">
           <a href="396b875a-d203-4ebe-a3a1-6a330d962e95">Duplex Services</a>
         </format>
+
+        
 
         
 
@@ -82,8 +90,12 @@
 
             
 
+            
+
              and the finalizer itself from (On)(Begin)Close (and/or OnAbort) in order to emulate what would have been the auto-generated <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -121,8 +133,12 @@
 
             
 
+            
+
              object using the <paramref
              name="callbackInstance" />
+
+            
 
             
 
@@ -134,6 +150,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -168,6 +186,8 @@
 
             
 
+            
+
              provided by the user is used to service all callback operations.</para
           >
         </remarks>
@@ -176,6 +196,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -213,6 +235,8 @@
 
             
 
+            
+
              class with the specified callback object and service endpoint.</para
           >
         </summary>
@@ -246,8 +270,12 @@
 
             
 
+            
+
              object using the <paramref
              name="callbackInstance" />
+
+            
 
             
 
@@ -259,6 +287,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -296,6 +326,8 @@
 
             
 
+            
+
              class with the specified callback object and service endpoint.</para
           >
         </summary>
@@ -329,6 +361,8 @@
 
             
 
+            
+
              provided by the user is used to service all callback operations.</para
           >
         </remarks>
@@ -337,6 +371,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -375,8 +411,12 @@
 
             
 
+            
+
              object using the <paramref
              name="callbackInstance" />
+
+            
 
             
 
@@ -388,6 +428,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -426,8 +468,12 @@
 
             
 
+            
+
              object using the <paramref
              name="callbackInstance" />
+
+            
 
             
 
@@ -439,6 +485,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -477,8 +525,12 @@
 
             
 
+            
+
              object using the <paramref
              name="callbackInstance" />
+
+            
 
             
 
@@ -490,6 +542,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -528,6 +582,8 @@
 
             
 
+            
+
              provided by the user is used to service all callback operations.</para
           >
         </remarks>
@@ -536,6 +592,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -574,6 +632,8 @@
 
             
 
+            
+
              provided by the user is used to service all callback operations.</para
           >
         </remarks>
@@ -582,6 +642,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 
@@ -620,6 +682,8 @@
 
             
 
+            
+
              provided by the user is used to service all callback operations.</para
           >
         </remarks>
@@ -628,6 +692,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DuplexClientBase`1" />
+
+            
 
             
 

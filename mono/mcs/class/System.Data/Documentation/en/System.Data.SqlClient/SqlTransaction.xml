@@ -26,8 +26,12 @@
 
         
 
+        
+
          object by calling <see
          cref="M:System.Data.SqlClient.SqlConnection.BeginTransaction" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction), are performed on the <see
          cref="T:System.Data.SqlClient.SqlTransaction" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
           
 
+          
+
           . Both <see
            cref="M:System.Data.SqlClient.SqlTransaction.Commit" />
+
+          
 
           
 
@@ -60,8 +72,12 @@
 
           
 
+          
+
            generate an <see
            cref="T:System.InvalidOperationException" />
+
+          
 
           
 
@@ -74,10 +90,14 @@
 
         
 
+        
+
          and <see
          cref="http://msdn.microsoft.com/library/ms187484(SQL.105).aspx"
           >Coding Efficient Transactions</see
         >
+
+        
 
         
 
@@ -106,6 +126,8 @@
 
             
 
+            
+
              method is equivalent to the Transact-SQL COMMIT TRANSACTION statement. You cannot roll back a transaction once it has been committed, because all modifications have become a permanent part of the database. For more information, see SQL Server Books Online.</para
           >
           <block subset="none" type="note">
@@ -115,13 +137,19 @@
 
               
 
+              
+
               . Both Commit and <see
                cref="M:System.Data.SqlClient.SqlTransaction.Rollback" />
 
               
 
+              
+
                generates an <see
                cref="T:System.InvalidOperationException" />
+
+              
 
               
 
@@ -159,6 +187,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -167,6 +197,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -252,6 +284,8 @@
 
             
 
+            
+
              applies to the whole transaction.</para
           >
           <para>For more information on SQL Server isolation levels, see "Isolation Levels in the Database Engine" in SQL Server Books Online.</para>
@@ -261,6 +295,8 @@
           <para
             >Specifies the <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 
@@ -289,6 +325,8 @@
 
             
 
+            
+
              method is equivalent to the Transact-SQL ROLLBACK TRANSACTION statement. For more information, see SQL Server Books Online.</para
           >
           <para
@@ -297,8 +335,12 @@
 
             
 
+            
+
              has been called, but before <see
              cref="M:System.Data.SqlClient.SqlTransaction.Commit" />
+
+            
 
             
 
@@ -308,6 +350,8 @@
             <para
               >Try/Catch exception handling should always be used when rolling back a transaction. A Rollback generates an <see
                cref="T:System.InvalidOperationException" />
+
+              
 
               
 
@@ -344,6 +388,8 @@
 
             
 
+            
+
              method is equivalent to the Transact-SQL ROLLBACK TRANSACTION statement. For more information, see "Explicit Transactions" and "Transaction Savepoints" in SQL Server Books Online.</para
           >
           <para
@@ -352,8 +398,12 @@
 
             
 
+            
+
              has been called, but before <see
              cref="M:System.Data.SqlClient.SqlTransaction.Commit" />
+
+            
 
             
 
@@ -363,6 +413,8 @@
             <para
               >Try/Catch exception handling should always be used when rolling back a transaction. A Rollback generates an <see
                cref="T:System.InvalidOperationException" />
+
+              
 
               
 
@@ -377,6 +429,8 @@
         </summary>
         <param name="transactionName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -405,6 +459,8 @@
 
             
 
+            
+
              method is equivalent to the Transact-SQL SAVE TRANSACTION statement. </para
           >
           <para
@@ -413,13 +469,19 @@
 
             
 
+            
+
              parameter can be the same value used in the <paramref
              name="transactionName" />
 
             
 
+            
+
              parameter of some implementations of the <see
              cref="M:System.Data.SqlClient.SqlConnection.BeginTransaction" />
+
+            
 
             
 
@@ -431,8 +493,12 @@
 
             
 
+            
+
              method, and then later call the <see
              cref="M:System.Data.SqlClient.SqlTransaction.Rollback" />
+
+            
 
             
 
@@ -445,6 +511,8 @@
         </summary>
         <param name="savePointName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,6 +545,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Data.IDbTransaction.Connection" />
+
+            
 
             
 

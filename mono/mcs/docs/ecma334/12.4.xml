@@ -6,8 +6,12 @@
 
     
 
+    
+
      is an expression that is classified as a variable. A <non_terminal
      where="12.4">variable-reference</non_terminal>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="12.4">variable-reference</non_terminal>
       </name>
+
+      
 
       
 
@@ -29,6 +35,8 @@
     <note
       >[Note: In C and C++, a <non_terminal
        where="12.4">variable-reference</non_terminal>
+
+      
 
       
 

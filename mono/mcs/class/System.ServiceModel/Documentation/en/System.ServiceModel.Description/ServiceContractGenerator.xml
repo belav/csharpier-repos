@@ -25,8 +25,12 @@
 
         
 
+        
+
          to create tools or to modify the default contract generation process using an <see
          cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          type generates service contract code and binding configurations from <see
          cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
             
 
+            
+
              class with a new <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -109,8 +121,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -146,8 +162,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -185,13 +205,19 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
+            
+
              instance and the specified <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -227,6 +253,8 @@
 
             
 
+            
+
              instance that contains the generated binding configurations.</para
           >
         </summary>
@@ -259,6 +287,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.ServiceModel.Description.MetadataConversionError" />
+
+            
 
             
 
@@ -327,6 +357,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -335,6 +367,8 @@
           <para
             >Generates a service contract type from the specified <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -349,6 +383,8 @@
 
             
 
+            
+
              instance for the generated contract type.</para
           >
         </returns>
@@ -357,8 +393,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ContractDescription" />
+
+          
 
           
 
@@ -454,6 +494,8 @@
 
             
 
+            
+
              attribute that allows a bitwise combination of its member values.</para
           >
         </remarks>
@@ -515,6 +557,8 @@
           <para
             >Gets the target <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 

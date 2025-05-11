@@ -24,7 +24,7 @@
   </ItemGroup>
   <PropertyGroup>
     <PathEnvSetupCommands>
-      <![CDATA[
+<![CDATA[
       mkdir Subdirectory
       ]]>
     </PathEnvSetupCommands>

@@ -10,11 +10,15 @@
 
         
 
+        
+
          are the members of the System.SByte struct. </list_item
       >
       <list_item
         > The members of <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -26,11 +30,15 @@
 
         
 
+        
+
          are the members of the System.Int16 struct. </list_item
       >
       <list_item
         > The members of <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -42,11 +50,15 @@
 
         
 
+        
+
          are the members of the System.Int32 struct. </list_item
       >
       <list_item
         > The members of <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -58,11 +70,15 @@
 
         
 
+        
+
          are the members of the System.Int64 struct. </list_item
       >
       <list_item
         > The members of <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -74,11 +90,15 @@
 
         
 
+        
+
          are the members of the System.Char struct. </list_item
       >
       <list_item
         > The members of <keyword
         >float</keyword>
+
+        
 
         
 
@@ -90,6 +110,8 @@
 
         
 
+        
+
          are the members of the System.Double struct. </list_item
       >
       <list_item
@@ -98,11 +120,15 @@
 
         
 
+        
+
          are the members of the System.Decimal struct. </list_item
       >
       <list_item
         > The members of <keyword
         >bool</keyword>
+
+        
 
         
 

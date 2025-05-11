@@ -21,6 +21,8 @@
 
         
 
+        
+
          enumeration specifies the type of dead-letter queue to use. The values are:</para
       >
       <list type="bullet">
@@ -28,6 +30,8 @@
           <para
             >None: No dead-letter queue is required. If a message fails delivery, no record of it is maintained in the dead-letter queue. This is the default value when <see
              cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
+
+            
 
             
 
@@ -41,6 +45,8 @@
 
             
 
+            
+
              is set to true.</para
           >
         </item>
@@ -48,6 +54,8 @@
           <para
             >Custom: The queue specified in the <see
              cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" />
+
+            
 
             
 
@@ -79,6 +87,8 @@
           <para
             >The sender does not have the <see
              cref="http://go.microsoft.com/fwlink/?LinkID=96167">access rights</see>
+
+            
 
             
 

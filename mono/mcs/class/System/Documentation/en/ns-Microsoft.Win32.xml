@@ -10,6 +10,8 @@
 
         
 
+        
+
          namespace provides two types of classes: those that handle events raised by the operating system and those that manipulate the system registry.</para
       >
     </summary>

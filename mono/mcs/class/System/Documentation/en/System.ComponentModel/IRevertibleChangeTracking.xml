@@ -28,8 +28,12 @@
 
         
 
+        
+
          extends <see
          cref="T:System.ComponentModel.IChangeTracking" />
+
+        
 
         
 

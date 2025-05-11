@@ -34,11 +34,15 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
         >This class is used to specify the values that are used to initialize new <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.ServicePointManagerElement" />
+
+            
 
             
 
@@ -168,6 +174,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -228,6 +236,8 @@
           <para
             >For additional information, see <see
              cref="P:System.Net.ServicePointManager.Expect100Continue" />
+
+            
 
             
 
@@ -294,8 +304,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Configuration.ServicePointManagerElement.DnsRefreshTimeout" />
+
+            
 
             
 
@@ -304,8 +318,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Configuration.ServicePointManagerElement.Expect100Continue" />
+
+            
 
             
 
@@ -316,8 +334,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateRevocationList" />
+
+            
 
             
 

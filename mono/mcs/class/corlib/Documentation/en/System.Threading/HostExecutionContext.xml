@@ -24,8 +24,12 @@
 
         
 
+        
+
          is part of a larger <see
          cref="T:System.Threading.ExecutionContext" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
             
 
+            
+
              property value is null.</para
           >
         </remarks>
@@ -68,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.HostExecutionContext" />
+
+            
 
             
 
@@ -100,13 +108,19 @@
 
             
 
+            
+
              is included with the <see
              cref="T:System.Threading.ExecutionContext" />
 
             
 
+            
+
             . The <paramref
              name="state" />
+
+            
 
             
 
@@ -121,11 +135,15 @@
 
             
 
+            
+
              class using the specified state. </para
           >
         </summary>
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +179,8 @@
 
             
 
+            
+
              method call.</para
           >
         </remarks>
@@ -173,6 +193,8 @@
           <para
             >A <see
              cref="T:System.Threading.HostExecutionContext" />
+
+            
 
             
 
@@ -200,6 +222,8 @@
           <para
             >The <see
              cref="P:System.Threading.HostExecutionContext.State" />
+
+            
 
             
 

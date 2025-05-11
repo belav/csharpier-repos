@@ -29,11 +29,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >A master page can contain direct markup and server controls, as well as container controls. Every element that is placed in the master page outside of a <see
          cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          directive. Content pages can contain only a @ Page directive and one or more <see
          cref="T:System.Web.UI.WebControls.Content" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          controls. You identify the <see
          cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+        
 
         
 
@@ -67,13 +79,19 @@
 
         
 
+        
+
          control is associated with by setting the <see
          cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.Content" />
+
+        
 
         
 
@@ -85,8 +103,12 @@
 
         
 
+        
+
          control in the requested page is merged with the master page in the exact location of the related <see
          cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+        
 
         
 
@@ -94,6 +116,8 @@
          type="text/html">
           <a href="b3ab2d01-9e37-4788-82d0-c6065e3ff5bd">Events in Master and Content Pages</a>
         </format>
+
+        
 
         
 
@@ -105,8 +129,12 @@
 
         
 
+        
+
          class is associated with files that have a .master extension. These files are compiled at run time as <see
          cref="T:System.Web.UI.MasterPage" />
+
+        
 
         
 
@@ -118,8 +146,12 @@
 
         
 
+        
+
          property of the base <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -128,8 +160,12 @@
 
         
 
+        
+
          property returns the instance of the master page; however, it is typed as the base <see
          cref="T:System.Web.UI.MasterPage" />
+
+        
 
         
 
@@ -138,8 +174,12 @@
 
         
 
+        
+
          property can be cast to a <see
          cref="T:System.Web.UI.MasterPage" />
+
+        
 
         
 
@@ -147,6 +187,8 @@
          type="text/html">
           <a href="3d263ecb-5169-4b28-8ad9-f5c82302ca99">@ Master</a>
         </format>
+
+        
 
         
 
@@ -158,6 +200,8 @@
       <para
         >The directives that are valid on a master page are the same as those that are available on a <see
          cref="T:System.Web.UI.UserControl" />
+
+        
 
         
 
@@ -240,8 +284,12 @@
 
         
 
+        
+
          class. In addition to extending the <see
          cref="T:System.Web.UI.MasterPage" />
+
+        
 
         
 
@@ -258,6 +306,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -266,6 +316,8 @@
       <para
         >Acts as a template and merging container for pages that are composed only of <see
          cref="T:System.Web.UI.WebControls.Content" />
+
+        
 
         
 
@@ -286,6 +338,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.UI.MasterPage" />
+
+            
 
             
 
@@ -327,8 +381,12 @@
 
             
 
+            
+
              controls to the <see
              cref="P:System.Web.UI.MasterPage.ContentTemplates" />
+
+            
 
             
 
@@ -337,8 +395,12 @@
 
             
 
+            
+
              method. Derived types do not typically override the <see
              cref="M:System.Web.UI.MasterPage.AddContentTemplate(System.String,System.Web.UI.ITemplate)" />
+
+            
 
             
 
@@ -353,8 +415,12 @@
 
             
 
+            
+
              control to the <see
              cref="P:System.Web.UI.MasterPage.ContentTemplates" />
+
+            
 
             
 
@@ -366,8 +432,12 @@
 
           
 
+          
+
           A unique name for the <see
            cref="T:System.Web.UI.WebControls.Content" />
+
+          
 
           
 
@@ -378,8 +448,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Content" />
+
+          
 
           
 
@@ -417,13 +491,19 @@
 
             
 
+            
+
              property to list the current <see
              cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
             
 
+            
+
              controls that are contained by the master. Derived types do not typically override the <see
              cref="P:System.Web.UI.MasterPage.ContentPlaceHolders" />
+
+            
 
             
 
@@ -435,6 +515,8 @@
           <para
             >Gets a list of <see
              cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+            
 
             
 
@@ -473,13 +555,19 @@
 
             
 
+            
+
              property to retrieve the current <see
              cref="T:System.Web.UI.WebControls.Content" />
 
             
 
+            
+
              controls, as defined by associated content pages. Derived types do not typically override the <see
              cref="P:System.Web.UI.MasterPage.ContentTemplates" />
+
+            
 
             
 
@@ -514,6 +602,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.MasterPage.Master" />
+
+            
 
             
 

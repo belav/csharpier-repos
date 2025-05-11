@@ -28,6 +28,8 @@
 
         
 
+        
+
          object also contains information about the type of object to which the rule applies, the type of child object that can inherit the rule, how the rule is inherited by child objects, and how that inheritance is propagated.</para
       >
     </summary>
@@ -68,6 +70,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -76,8 +80,12 @@
 
           
 
+          
+
           The identity to which the access rule applies.  It must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -88,10 +96,14 @@
 
           
 
+          
+
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -102,10 +114,14 @@
 
           
 
+          
+
           Specifies the inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -114,8 +130,12 @@
 
           
 
+          
+
            is set to <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -126,6 +146,8 @@
 
           
 
+          
+
           The type of object to which the rule applies.</param
         >
         <param name="inheritedObjectType">
@@ -133,10 +155,14 @@
 
           
 
+          
+
           The type of child object that can inherit the rule.</param
         >
         <param name="auditFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,6 +193,8 @@
           <para
             >Gets the type of child object that can inherit the <see
              cref="System.Security.AccessControl.ObjectAuditRule" />
+
+            
 
             
 
@@ -203,13 +231,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.AccessControl.ObjectAuditRule.InheritedObjectType" />
 
             
 
+            
+
              properties of the <see
              cref="System.Security.AccessControl.ObjectAuditRule" />
+
+            
 
             
 
@@ -241,6 +275,8 @@
           <para
             >Gets the type of object to which the <see
              cref="System.Security.AccessControl.ObjectAuditRule" />
+
+            
 
             
 

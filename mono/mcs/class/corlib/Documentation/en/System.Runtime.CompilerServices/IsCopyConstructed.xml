@@ -29,6 +29,8 @@
 
         
 
+        
+
          class must implement a method named MarshalCopy that calls the native copy constructor.  </para
       >
       <para>Any native C++ type that is emitted into metadata with copy constructors needs to have those methods called by the marshaler when copying values across the marshaling boundary.  The Microsoft C++ compiler modifies all native C++ types in method parameters and return types that have this modifier to trigger this behavior in the marshaling code.</para>
@@ -42,8 +44,12 @@
 
             
 
+            
+
              class such as <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+
+            
 
             
 
@@ -52,13 +58,19 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineConstructor" />
 
             
 
+            
+
             , and <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineProperty" />
+
+            
 
             
 
@@ -71,6 +83,8 @@
              type="text/html">
               <a href="4ca3a4f0-4400-47ce-8936-8e219961c76f">MSIL Assembler (Ilasm.exe)</a>
             </format>
+
+            
 
             
 

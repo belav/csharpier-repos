@@ -39,8 +39,12 @@
 
         
 
+        
+
          and before the thread returns to the user code, a <see
          cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          property) and a new object is created. The remoting application then returns a <see
          cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+
+        
 
         
 
@@ -59,13 +67,19 @@
 
         
 
+        
+
          contains an instance of <see
          cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
+        
+
         , which packages information about the remote object. The remoting infrastructure converts the <see
          cref="T:System.Runtime.Remoting.ObjRef" />
+
+        
 
         
 
@@ -151,6 +165,8 @@
 
             
 
+            
+
              property on the activator that is returned by the current property to traverse the chain of activators.</para
           >
           <para>If you add your own activator into the message's activator chain on the client side, the activator may be serialized and transported to the server side, if deemed necessary. For this reason, custom activators should be fairly lightweight in terms of serialization requirements.</para>
@@ -189,8 +205,12 @@
 
             
 
+            
+
              indexer allows you to specify additional attributes to use during object activation. The user specifies the <see
              cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.CallSiteActivationAttributes" />
+
+            
 
             
 
@@ -199,8 +219,12 @@
 
             
 
+            
+
              parameter to <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -238,6 +262,8 @@
           <para
             >A new object's context is generally chosen based on metadata attributes of the class. The context selection mechanism is extensible through custom attributes, also known as static context properties, which are compiled into the class metadata. When activating an object remotely, the <see
              cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.ContextProperties" />
+
+            
 
             
 

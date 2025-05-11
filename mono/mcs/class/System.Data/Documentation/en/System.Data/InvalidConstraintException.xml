@@ -26,6 +26,8 @@
 
         
 
+        
+
          is thrown when incorrectly invoking the following methods while trying to create or access a relation.</para
       >
       <list type="bullet">
@@ -51,8 +53,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Data.InvalidConstraintException" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Data.InvalidConstraintException" />
+
+        
 
         
 
@@ -71,8 +81,12 @@
 
         
 
+        
+
          is enforced on the <see
          cref="T:System.Data.DataRowCollection" />
+
+        
 
         
 
@@ -81,13 +95,19 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Data.InvalidConstraintException" />
 
         
 
+        
+
          may be thrown if the columns have different data types or the tables do not belong to the same <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -112,6 +132,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.InvalidConstraintException" />
+
+            
 
             
 
@@ -141,11 +163,15 @@
 
             
 
+            
+
              class with the specified string.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -178,6 +204,8 @@
 
             
 
+            
+
              class with serialization information.</para
           >
         </summary>
@@ -186,10 +214,14 @@
 
           
 
+          
+
           The data that is required to serialize or deserialize an object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,11 +257,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

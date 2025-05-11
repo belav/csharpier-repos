@@ -47,8 +47,12 @@
 
         
 
+        
+
          such as a <see
          cref="T:System.Windows.Controls.ListBox" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Windows.Controls.TreeView" />
+
+        
 
         
 
@@ -70,13 +78,19 @@
 
         
 
+        
+
          interface. However, to set up dynamic bindings so that insertions or deletions in the collection update the TLA2#tla_ui automatically, the collection must implement the <see
          cref="T:System.Collections.Specialized.INotifyCollectionChanged" />
 
         
 
+        
+
          interface. This interface exposes the <see
          cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" />
+
+        
 
         
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          class, which is a built-in implementation of a data collection that implements the <see
          cref="T:System.Collections.Specialized.INotifyCollectionChanged" />
+
+        
 
         
 
@@ -101,8 +119,12 @@
 
         
 
+        
+
          or one of the existing collection classes, such as <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -111,8 +133,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.ComponentModel.BindingList`1" />
+
+        
 
         
 
@@ -121,8 +147,12 @@
 
         
 
+        
+
         , which provides a non-generic collection of objects that can be individually accessed by index. Implementing <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -137,6 +167,8 @@
 
           
 
+          
+
            objects to <format
            type="text/html">
             <a href="GTMT#binding_target#2b16294b-64eb-4210-83a4-c215cf4c140a">binding target</a>
@@ -144,8 +176,12 @@
 
           
 
+          
+
           s, each object in your collection that supports bindable properties must implement an appropriate property changed notification mechanism such as the <see
            cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+          
 
           
 
@@ -160,6 +196,8 @@
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -167,6 +205,8 @@
       </format>
       <para>
         <see cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+
+        
 
         
 
@@ -179,6 +219,8 @@
 
             
 
+            
+
              must be the root element, because the <format
              type="text/html">
               <a href="86561058-d393-4a44-b5c3-993a4513ea74">x:TypeArguments attribute</a>
@@ -186,8 +228,12 @@
 
             
 
+            
+
              that must be used to specify the constrained type of the generic <see
              cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+
+            
 
             
 
@@ -203,6 +249,8 @@
 
             
 
+            
+
              (which entails that the build action for this XAML file must be Page or some other build action that compiles the XAML).</para
           >
         </item>
@@ -212,8 +260,12 @@
 
             
 
+            
+
              is in a namespace and assembly that are not initially mapped to the default XML namespace. You must map a prefix for the namespace and assembly, and then use that prefix on the object element tag for <see
              cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+
+            
 
             
 
@@ -227,8 +279,12 @@
 
         
 
+        
+
          capabilities from XAML in an application is to declare your own non-generic custom collection class that derives from <see
          cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+
+        
 
         
 
@@ -266,6 +322,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+
+            
 
             
 
@@ -346,6 +404,8 @@
 
             
 
+            
+
              object that can be used to dispose of the object.</para
           >
         </returns>
@@ -396,6 +456,8 @@
 
             
 
+            
+
              event.</para
           >
           <para
@@ -404,8 +466,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -495,6 +561,8 @@
 
             
 
+            
+
              method to provide custom behavior for this method.</para
           >
         </remarks>
@@ -507,10 +575,14 @@
 
           
 
+          
+
           The zero-based index specifying the location of the item to be moved.</param
         >
         <param name="newIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -547,11 +619,15 @@
 
             
 
+            
+
              event.</para
           >
           <para
             >Subclasses can override this protected method to provide custom behavior for the <see
              cref="M:System.Collections.ObjectModel.ObservableCollection`1.Move(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -567,10 +643,14 @@
 
           
 
+          
+
           The zero-based index specifying the location of the item to be moved.</param
         >
         <param name="newIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -609,6 +689,8 @@
 
             
 
+            
+
              event through this virtual method.</para
           >
         </remarks>
@@ -620,11 +702,15 @@
 
             
 
+            
+
              event with the provided arguments.</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -661,11 +747,15 @@
 
             
 
+            
+
              event with the provided arguments.</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -722,6 +812,8 @@
 
             
 
+            
+
              event.</para
           >
           <para
@@ -730,8 +822,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -744,6 +840,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

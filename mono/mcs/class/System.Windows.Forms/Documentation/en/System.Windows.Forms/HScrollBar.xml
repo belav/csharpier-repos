@@ -19,13 +19,19 @@
 
         
 
+        
+
          control, a <see
          cref="T:System.Windows.Forms.ListBox" />
 
         
 
+        
+
         , and a <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
          or for user input of numeric data. The numeric data can be displayed in a control or used in code. The <see
          cref="P:System.Windows.Forms.ScrollBar.Minimum" />
+
+        
 
         
 
@@ -47,13 +57,19 @@
 
         
 
+        
+
          properties determine the range of values the user can select. The <see
          cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
         
 
+        
+
          property determines the effect of clicking within the scroll bar but outside the scroll box. The <see
          cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+
+        
 
         
 
@@ -77,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.HScrollBar" />
+
+            
 
             
 

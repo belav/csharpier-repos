@@ -29,8 +29,12 @@
 
         
 
+        
+
          class whenever it parses declarative two-way data-binding within the templated content of an ASP.NET control such as <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -44,10 +48,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="14cdd57d-0f82-4667-b503-73e1a96f136a">Data-Binding Expression Syntax</a>
         </format>
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          object, which ASP.NET uses whenever it parses two-way data-binding within the templated content of an ASP.NET control such as <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -96,6 +108,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -104,8 +118,12 @@
 
           
 
+          
+
           A delegate used to handle the <see
            cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+
+          
 
           
 
@@ -116,8 +134,12 @@
 
           
 
+          
+
           A delegate used to handle the <see
            cref="M:System.Web.UI.CompiledBindableTemplateBuilder.ExtractValues(System.Web.UI.Control)" />
+
+          
 
           
 
@@ -150,13 +172,19 @@
 
             
 
+            
+
              method is the <see
              cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
 
             
 
+            
+
              class's implementation of the <see
              cref="M:System.Web.UI.IBindableTemplate.ExtractValues(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -175,6 +203,8 @@
 
             
 
+            
+
              of name/value pairs. The name represents the name of the data item field specified as the first parameter to bind within templated content. The value is the current value of a property value bound using two-way ASP.NET data-binding syntax.</para
           >
         </returns>
@@ -183,8 +213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -217,13 +251,19 @@
 
             
 
+            
+
              method is the <see
              cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
 
             
 
+            
+
              class's implementation of the <see
              cref="M:System.Web.UI.ITemplate.InstantiateIn(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -238,6 +278,8 @@
 
             
 
+            
+
              object that child controls and templates belong to. These child controls are in turn defined within an inline template.</para
           >
         </summary>
@@ -246,8 +288,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 

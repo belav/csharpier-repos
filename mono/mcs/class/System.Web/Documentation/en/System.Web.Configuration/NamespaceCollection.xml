@@ -27,13 +27,19 @@
 
         
 
+        
+
          contains <see
          cref="T:System.Web.Configuration.NamespaceInfo" />
 
         
 
+        
+
          objects. Each <see
          cref="T:System.Web.Configuration.NamespaceInfo" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.NamespaceCollection" />
+
+            
 
             
 
@@ -91,8 +99,12 @@
 
             
 
+            
+
              object with the same <see
              cref="P:System.Web.Configuration.NamespaceInfo.Namespace" />
+
+            
 
             
 
@@ -107,6 +119,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -115,8 +129,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.NamespaceInfo" />
+
+          
 
           
 
@@ -149,8 +167,12 @@
 
             
 
+            
+
              namespace is automatically imported unless the <see
              cref="P:System.Web.Configuration.NamespaceCollection.AutoImportVBNamespace" />
+
+            
 
             
 
@@ -184,6 +206,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.Configuration.NamespaceInfo" />
+
+            
 
             
 
@@ -299,6 +323,8 @@
 
             
 
+            
+
              is thrown.</para
           >
         </remarks>
@@ -310,6 +336,8 @@
 
             
 
+            
+
              object with the specified key from the collection.</para
           >
         </summary>
@@ -318,8 +346,12 @@
 
           
 
+          
+
           The namespace of a <see
            cref="T:System.Web.Configuration.NamespaceInfo" />
+
+          
 
           
 
@@ -349,6 +381,8 @@
 
             
 
+            
+
              is thrown.</para
           >
         </remarks>
@@ -360,6 +394,8 @@
 
             
 
+            
+
              object from the specified index in the collection.</para
           >
         </summary>
@@ -368,8 +404,12 @@
 
           
 
+          
+
           The index of a <see
            cref="T:System.Web.Configuration.NamespaceInfo" />
+
+          
 
           
 

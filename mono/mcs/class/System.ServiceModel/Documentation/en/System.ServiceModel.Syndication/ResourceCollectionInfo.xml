@@ -45,6 +45,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -77,6 +79,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -85,10 +89,14 @@
 
           
 
+          
+
           The title of the collection.</param
         >
         <param name="link">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,6 +131,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -131,10 +141,14 @@
 
           
 
+          
+
           The title of the collection.</param
         >
         <param name="link">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,11 +191,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="title">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,6 +210,8 @@
 
           
 
+          
+
           The URI of the collection.</param
         >
         <param name="categories">
@@ -199,10 +219,14 @@
 
           
 
+          
+
           A collection of categories documents.</param
         >
         <param name="allowsNewEntries">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,11 +269,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="title">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,6 +288,8 @@
 
           
 
+          
+
           The URI of the collection.</param
         >
         <param name="categories">
@@ -267,10 +297,14 @@
 
           
 
+          
+
           A collection of categories documents.</param
         >
         <param name="accepts">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,6 +383,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -378,6 +414,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -413,15 +451,18 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            
 
             
 
@@ -458,15 +499,18 @@ Returns <see
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />
+
+            
 
             
 
@@ -580,10 +624,11 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -596,10 +641,14 @@ Returns <see
 
           
 
+          
+
           The name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -610,10 +659,14 @@ Returns <see
 
           
 
+          
+
           The attribute to parse.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -649,10 +702,11 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -665,8 +719,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -674,6 +732,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -711,6 +771,8 @@ Returns <see
 
             
 
+            
+
              using the specified syndication version.</para
           >
         </summary>
@@ -719,8 +781,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -728,6 +794,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -765,6 +833,8 @@ Returns <see
 
             
 
+            
+
              using the specified syndication version.</para
           >
         </summary>
@@ -773,8 +843,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -782,6 +856,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -7,19 +7,22 @@
   <ItemGroup>
     <Content Include="$(NuGetPackageRoot)\runtime.win-x64.microsoft.netcore.ildasm\$(runtimeWinX64MicrosoftNETCoreILDAsmPackageVersion)\runtimes\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LinkBase>runtimes</LinkBase>
+      <LinkBase
+>runtimes</LinkBase>
       <Visible>false</Visible>
       <Pack>false</Pack>
     </Content>
     <Content Include="$(NuGetPackageRoot)\runtime.linux-x64.microsoft.netcore.ildasm\$(runtimeLinuxX64MicrosoftNETCoreILDAsmPackageVersion)\runtimes\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LinkBase>runtimes</LinkBase>
+      <LinkBase
+>runtimes</LinkBase>
       <Visible>false</Visible>
       <Pack>false</Pack>
     </Content>
     <Content Include="$(NuGetPackageRoot)\runtime.osx-x64.microsoft.netcore.ildasm\$(runtimeOSXX64MicrosoftNETCoreILDAsmPackageVersion)\runtimes\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LinkBase>runtimes</LinkBase>
+      <LinkBase
+>runtimes</LinkBase>
       <Visible>false</Visible>
       <Pack>false</Pack>
     </Content>

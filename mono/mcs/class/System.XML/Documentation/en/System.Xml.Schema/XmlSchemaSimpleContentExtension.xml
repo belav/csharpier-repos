@@ -36,6 +36,8 @@
 
         
 
+        
+
         . This class can be used to derive simple types by extension. Such derivations are used to extend the simple type content of the element by adding attributes.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleContentExtension" />
+
+            
 
             
 
@@ -140,8 +144,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />
+
+            
 
             
 

@@ -36,13 +36,19 @@
 
         
 
+        
+
          lets you add a new property page to a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
+        
+
          control. The <see
          cref="T:System.ComponentModel.PropertyTabAttribute" />
+
+        
 
         
 
@@ -78,8 +84,12 @@
 
             
 
+            
+
             . This constructor can be used to derive from this attribute and specify multiple tab types by calling <see
              cref="M:System.ComponentModel.PropertyTabAttribute.InitializeArrays(System.String[],System.ComponentModel.PropertyTabScope[])" />
+
+            
 
             
 
@@ -91,6 +101,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.PropertyTabAttribute" />
+
+            
 
             
 
@@ -125,6 +137,8 @@
 
             
 
+            
+
              class using the specified tab class name.</para
           >
         </summary>
@@ -133,8 +147,12 @@
 
           
 
+          
+
           The assembly qualified name of the type of tab to create. For an example of this format convention, see <see
            cref="P:System.Type.AssemblyQualifiedName" />
+
+          
 
           
 
@@ -168,11 +186,15 @@
 
             
 
+            
+
              class using the specified type of tab.</para
           >
         </summary>
         <param name="tabClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,6 +232,8 @@
 
             
 
+            
+
              class using the specified tab class name and tab scope.</para
           >
         </summary>
@@ -218,8 +242,12 @@
 
           
 
+          
+
           The assembly qualified name of the type of tab to create. For an example of this format convention, see <see
            cref="P:System.Type.AssemblyQualifiedName" />
+
+          
 
           
 
@@ -230,8 +258,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyTabScope" />
+
+          
 
           
 
@@ -240,13 +272,19 @@
 
           
 
+          
+
           , it is shown only for components with the corresponding <see
            cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
+          
+
           . If it is <see
            cref="F:System.ComponentModel.PropertyTabScope.Document" />
+
+          
 
           
 
@@ -284,11 +322,15 @@
 
             
 
+            
+
              class using the specified type of tab and tab scope.</para
           >
         </summary>
         <param name="tabClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,8 +341,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyTabScope" />
+
+          
 
           
 
@@ -309,13 +355,19 @@
 
           
 
+          
+
           , it is shown only for components with the corresponding <see
            cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
+          
+
           . If it is <see
            cref="F:System.ComponentModel.PropertyTabScope.Document" />
+
+          
 
           
 
@@ -358,6 +410,8 @@
 
             
 
+            
+
              instances are equal; otherwise, false.</para
           >
         </returns>
@@ -366,8 +420,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyTabAttribute" />
+
+          
 
           
 
@@ -407,8 +465,12 @@
 
             
 
+            
+
              refers to the same <see
              cref="T:System.ComponentModel.PropertyTabAttribute" />
+
+            
 
             
 
@@ -417,6 +479,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -482,8 +546,12 @@
 
             
 
+            
+
              provides a utility function that can be used to set the types of tab classes that this <see
              cref="T:System.ComponentModel.PropertyTabAttribute" />
+
+            
 
             
 
@@ -499,10 +567,14 @@
 
           
 
+          
+
           An array of fully qualified type names of the types to create for tabs on the Properties window. </param
         >
         <param name="tabScopes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -511,13 +583,19 @@
 
           
 
+          
+
           , it is shown only for components with the corresponding <see
            cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
+          
+
           . If it is <see
            cref="F:System.ComponentModel.PropertyTabScope.Document" />
+
+          
 
           
 
@@ -555,8 +633,12 @@
 
             
 
+            
+
              provides a utility function that can be used to set the types of tab classes that this <see
              cref="T:System.ComponentModel.PropertyTabAttribute" />
+
+            
 
             
 
@@ -572,10 +654,14 @@
 
           
 
+          
+
           The types of tabs to create. </param
         >
         <param name="tabScopes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,13 +670,19 @@
 
           
 
+          
+
           , it is shown only for components with the corresponding <see
            cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
+          
+
           . If it is <see
            cref="F:System.ComponentModel.PropertyTabScope.Document" />
+
+          
 
           
 
@@ -617,6 +709,8 @@
           <para
             >All specified types must be able to be assigned to a <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -676,6 +770,8 @@
           <para
             >Gets an array of tab scopes of each tab of this <see
              cref="T:System.ComponentModel.PropertyTabAttribute" />
+
+            
 
             
 

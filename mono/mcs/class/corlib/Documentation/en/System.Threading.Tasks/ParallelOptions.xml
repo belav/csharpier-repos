@@ -23,6 +23,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -48,13 +50,19 @@
 
             
 
+            
+
              is initialized to -1, signifying that there is no upper bound set on how much parallelism should be employed. <see
              cref="P:System.Threading.Tasks.ParallelOptions.CancellationToken" />
 
             
 
+            
+
              is initialized to a non-cancelable token, and <see
              cref="P:System.Threading.Tasks.ParallelOptions.TaskScheduler" />
+
+            
 
             
 
@@ -67,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.Tasks.ParallelOptions" />
+
+            
 
             
 
@@ -101,13 +111,19 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Threading.Tasks.Parallel" />
 
             
 
+            
+
              method enables the operation to be exited early. Code external to the operation may cancel the token, and if the operation observes the token being set, it may exit early by throwing an <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -122,8 +138,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Threading.Tasks.ParallelOptions" />
+
+            
 
             
 
@@ -152,13 +172,19 @@
 
             
 
+            
+
              property is positive, it limits the number of concurrent operations run by <see
              cref="T:System.Threading.Tasks.Parallel" />
 
             
 
+            
+
              method calls that are passed this <see
              cref="T:System.Threading.Tasks.ParallelOptions" />
+
+            
 
             
 
@@ -170,13 +196,19 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Threading.Tasks.Parallel.ForEach" />
 
             
 
+            
+
              will utilize however many threads the underlying scheduler provides, so changing <see
              cref="P:System.Threading.Tasks.ParallelOptions.MaxDegreeOfParallelism" />
+
+            
 
             
 
@@ -194,6 +226,8 @@
 
                 
 
+                
+
                  value for each.</para
               >
             </item>
@@ -207,6 +241,8 @@
           <para
             >Gets or sets the maximum degree of parallelism enabled by this <see
              cref="T:System.Threading.Tasks.ParallelOptions" />
+
+            
 
             
 
@@ -242,8 +278,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Threading.Tasks.ParallelOptions" />
+
+            
 
             
 

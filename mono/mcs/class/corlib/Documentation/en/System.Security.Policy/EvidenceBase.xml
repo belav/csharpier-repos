@@ -22,8 +22,12 @@
 
         
 
+        
+
          objects as evidence. The common language runtime (CLR) considered evidence objects as <see
          cref="T:System.Object" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          class, which all evidence objects must derive from, was introduced in the net_v40_short to enable constraints on the types of objects that can be used as evidence and to provide the ability to add new features and requirements to all evidence objects. The <see
          cref="T:System.Security.Policy.EvidenceBase" />
+
+        
 
         
 
@@ -46,6 +54,8 @@
       <para
         >All the types used by the CLR as evidence objects have been updated in the net_v40_short to derive from <see
          cref="T:System.Security.Policy.EvidenceBase" />
+
+        
 
         
 
@@ -79,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Policy.EvidenceBase" />
+
+            
 
             
 

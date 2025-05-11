@@ -44,8 +44,12 @@
 
         
 
+        
+
          interface is the base interface for classes in the <see
          cref="N:System.Collections" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          interface extends <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
         . An <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -87,13 +103,19 @@
 
         
 
+        
+
          class. An <see
          cref="T:System.Collections.IList" />
 
         
 
+        
+
          implementation is a collection of values and its members can be accessed by index, like the <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -105,13 +127,19 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Collections.Stack" />
 
         
 
+        
+
          class, directly implement the <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -123,8 +151,12 @@
 
         
 
+        
+
          interface nor the <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -133,11 +165,15 @@
 
         
 
+        
+
          interface instead for more flexibility.</para
       >
       <para
         >For the generic version of this interface, see <see
          cref="T:System.Collections.Generic.ICollection`1" />
+
+        
 
         
 
@@ -186,6 +222,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -195,8 +233,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -204,6 +246,8 @@
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="index" />
+
+          
 
           
 
@@ -215,6 +259,8 @@
 
             
 
+            
+
              has more than one dimension.</para
           >
           <para>-or-</para>
@@ -223,8 +269,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="array" />
+
+            
 
             
 
@@ -237,13 +287,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Collections.ICollection.Count" />
 
             
 
+            
+
              of the current instance is greater than <paramref
              name="array" />
+
+            
 
             
 
@@ -253,6 +309,8 @@
         <exception cref="T:System.InvalidCastException"
           >At least one element in the current instance is not assignment-compatible with the type of <paramref
            name="array" />
+
+          
 
           
 
@@ -266,13 +324,19 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -284,8 +348,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -294,8 +362,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -306,8 +378,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -341,6 +417,8 @@
 
             
 
+            
+
              that indicates the number of elements contained in the current
    instance.</para
           >
@@ -354,6 +432,8 @@
 
               
 
+              
+
                property
       is required to return the total number of elements contained in the current instance.</para
             >
@@ -364,6 +444,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -397,9 +479,13 @@
 
             
 
+            
+
              if access to
    the current instance is synchronized (thread-safe); otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -413,8 +499,12 @@
 
             
 
+            
+
              returns an object, which can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -423,6 +513,8 @@
           <para
             >Most collection classes in the <see
              cref="N:System.Collections" />
+
+            
 
             
 
@@ -435,6 +527,8 @@
 
             
 
+            
+
              property during the entire enumeration.</para
           >
           <para>code reference: System.Collections.ICollection#1</para>
@@ -444,6 +538,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -478,6 +574,8 @@
 
             
 
+            
+
              that can be
    used for thread-safe synchronized access to the current instance.</para
           >
@@ -491,8 +589,12 @@
 
             
 
+            
+
              namespace also implement a Synchronized method, which provides a synchronized wrapper around the underlying collection. However, derived classes can provide their own synchronized version of the collection using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -501,11 +603,15 @@
 
             
 
+            
+
              property of the collection, not directly on the collection. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the collection instance.</para
           >
           <para
             >In the absence of a Synchronized method on a collection, the expected usage for <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -519,6 +625,8 @@
 
             
 
+            
+
              property during the entire enumeration. </para
           >
           <para>code reference: System.Collections.ICollection#1</para>
@@ -528,6 +636,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 

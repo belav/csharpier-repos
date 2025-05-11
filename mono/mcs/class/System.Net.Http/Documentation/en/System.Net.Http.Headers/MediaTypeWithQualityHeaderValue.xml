@@ -28,8 +28,12 @@
 
         
 
+        
+
          class provides support for the media type and quality in a Content-Type header as defined in <see
          cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >This type derives from <see
          cref="T:System.Net.Http.Headers.MediaTypeHeaderValue" />
+
+        
 
         
 
@@ -77,6 +83,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -85,8 +93,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+
+          
 
           
 
@@ -121,6 +133,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -129,8 +143,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+
+          
 
           
 
@@ -138,6 +156,8 @@
         >
         <param name="quality">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -174,6 +194,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -185,6 +207,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -193,11 +217,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,6 +254,8 @@
           <para
             >Get or set the quality value for the <see
              cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+
+            
 
             
 

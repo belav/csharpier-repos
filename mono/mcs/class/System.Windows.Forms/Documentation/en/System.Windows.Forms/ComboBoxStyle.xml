@@ -18,8 +18,12 @@
 
         
 
+        
+
          property specifies whether the list is always displayed or whether the list is displayed in a drop-down. The <see
          cref="P:System.Windows.Forms.ComboBox.DropDownStyle" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >Specifies the <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -54,13 +60,19 @@
 
             
 
+            
+
              value of <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />
 
             
 
+            
+
              works the same as the <see
              cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" />
+
+            
 
             
 
@@ -88,13 +100,19 @@
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.AutoCompleteMode.Suggest" />
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" />
+
+            
 
             
 

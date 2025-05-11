@@ -44,7 +44,7 @@
       <Using Namespace="Microsoft.Build.Framework" />
       <Using Namespace="Microsoft.Build.Utilities" />
       <Code Type="Fragment" Language="cs">
-        <![CDATA[
+<![CDATA[
                 Version minimumRequiredVersion;
 
                 if (!Version.TryParse(MinimumVersion, out minimumRequiredVersion))
@@ -137,7 +137,7 @@
       <Using Namespace="Microsoft.Build.Framework" />
       <Using Namespace="Microsoft.Build.Utilities" />
       <Code Type="Fragment" Language="cs">
-        <![CDATA[
+<![CDATA[
                 try
                 {
                     string[] testResultFiles = Directory.GetFiles(TestResultsDirectory);

@@ -26,13 +26,19 @@
 
         
 
+        
+
          abstract class is parsed and a design-time version of the control is created on the design surface. When the user switches back to Source view, the design-time control is persisted to markup source code and edited into the markup for the Web page. The <see
          cref="T:System.Web.UI.Design.WebControls.BaseDataListDesigner" />
 
         
 
+        
+
          abstract class serves as a base class for components that provide design-time support for controls that are derived from the <see
          cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+        
 
         
 
@@ -44,6 +50,8 @@
 
         
 
+        
+
          class properties provide the following functionality:</para
       >
       <para
@@ -52,13 +60,19 @@
 
         
 
+        
+
          property returns a <see
          cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
         
 
+        
+
           object, which typically contains an object that is derived from the <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.Design.WebControls.BaseDataListDesigner.DataMember" />
+
+            
 
             
 
@@ -82,8 +100,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.Design.WebControls.BaseDataListDesigner.DataSourceID" />
+
+            
 
             
 
@@ -97,8 +119,12 @@
 
             
 
+            
+
              property provides access to the designer of the data source of the associated control. The <see
              cref="P:System.Web.UI.Design.WebControls.BaseDataListDesigner.DesignerView" />
+
+            
 
             
 
@@ -112,6 +138,8 @@
 
         
 
+        
+
          class methods provide the following functionality:</para
       >
       <list type="bullet">
@@ -122,13 +150,19 @@
 
             
 
+            
+
              method prepares the designer to view, edit, and design the associated control. The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.InvokePropertyBuilder(System.Int32)" />
 
             
 
+            
+
              method invokes a component editor for the control. The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.PreFilterProperties(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -142,8 +176,12 @@
 
             
 
+            
+
              method generates an object that can be used as a data source at design time. The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.GetSelectedDataSource" />
+
+            
 
             
 
@@ -152,8 +190,12 @@
 
             
 
+            
+
              method gets the data source from the control container, resolved to a specific data member. The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.GetTemplateContainerDataSource(System.String)" />
+
+            
 
             
 
@@ -167,8 +209,12 @@
 
             
 
+            
+
              method is called when there is a change to the associated control. The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.OnDataSourceChanged" />
+
+            
 
             
 
@@ -177,8 +223,12 @@
 
             
 
+            
+
              method is called when the schema of the associated control data source changes. The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.OnAutoFormatApplied(System.Web.UI.Design.DesignerAutoFormat)" />
+
+            
 
             
 
@@ -192,13 +242,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.OnTemplateEditingVerbsChanged" />
 
             
 
+            
+
              methods can be overridden to implement functionality that should occur when an associated control style has changed or when the designer template-editing verbs have changed, respectively. The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.OnPropertyBuilder(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -212,6 +268,8 @@
       <para
         >Provides a base class for components that provide design-time support in a designer host for Web server controls that are derived from the <see
          cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+        
 
         
 
@@ -233,8 +291,12 @@
 
             
 
+            
+
              class when it creates the associated control that is derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -246,6 +308,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.BaseDataListDesigner" />
+
+            
 
             
 
@@ -274,8 +338,12 @@
 
             
 
+            
+
              property provides access from the designer to the <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
+
+            
 
             
 
@@ -284,8 +352,12 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
+
+            
 
             
 
@@ -318,8 +390,12 @@
 
             
 
+            
+
              property provides access from the designer to the <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+
+            
 
             
 
@@ -328,8 +404,12 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+
+            
 
             
 
@@ -362,13 +442,19 @@
 
             
 
+            
+
              property provides access from the designer to the <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
+            
+
              property of the associated control that is derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -422,8 +508,12 @@
 
             
 
+            
+
              class has a <see
              cref="P:System.ComponentModel.IComponent.Site" />
+
+            
 
             
 
@@ -432,8 +522,12 @@
 
             
 
+            
+
              interface, the <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -442,8 +536,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+
+            
 
             
 
@@ -455,8 +553,12 @@
 
             
 
+            
+
              implements the <see
              cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+            
 
             
 
@@ -465,8 +567,12 @@
 
             
 
+            
+
              disconnects the <see
              cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentAdded" />
+
+            
 
             
 
@@ -475,8 +581,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRemoved" />
+
+            
 
             
 
@@ -485,8 +595,12 @@
 
             
 
+            
+
              also disconnects the <see
              cref="E:System.Web.UI.Design.DataSourceDesigner.DataSourceChanged" />
+
+            
 
             
 
@@ -495,13 +609,19 @@
 
             
 
+            
+
              events of the <see
              cref="T:System.Web.UI.Design.WebControls.BaseDataListDesigner" />
 
             
 
+            
+
              object. It finally calls the <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -514,6 +634,8 @@
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -596,8 +718,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Design.DesignTimeData.GetSelectedDataSource(System.ComponentModel.IComponent,System.String,System.String)" />
+
+            
 
             
 
@@ -606,13 +732,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
 
             
 
+            
+
              properties of the associated control derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -631,13 +763,19 @@
 
             
 
+            
+
              interface containing the design-time <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
+            
+
              of the associated control, resolved to the <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+
+            
 
             
 
@@ -666,8 +804,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Design.DesignTimeData.GetSelectedDataSource(System.ComponentModel.IComponent,System.String)" />
+
+            
 
             
 
@@ -676,8 +818,12 @@
 
             
 
+            
+
              property of the associated control derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -696,8 +842,12 @@
 
             
 
+            
+
              interface containing the design-time <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+
+            
 
             
 
@@ -732,8 +882,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.GetResolvedSelectedDataSource" />
+
+            
 
             
 
@@ -742,13 +896,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
 
             
 
+            
+
              properties of the associated control derived from <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -767,8 +927,12 @@
 
             
 
+            
+
              interface containing a design-time <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+
+            
 
             
 
@@ -802,13 +966,19 @@
 
             
 
+            
+
              method when it is ready to use the designer to render the control that is derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
+            
+
              class. The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.Initialize(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -820,8 +990,12 @@
 
             
 
+            
+
              connects to the design-time data source and updates the design-time markup. If the <see
              cref="P:System.ComponentModel.IComponent.Site" />
+
+            
 
             
 
@@ -830,8 +1004,12 @@
 
             
 
+            
+
              interface, the <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.Initialize(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -840,13 +1018,19 @@
 
             
 
+            
+
             , <see
              cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRemoving" />
 
             
 
+            
+
             , and <see
              cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRemoved" />
+
+            
 
             
 
@@ -858,8 +1042,12 @@
 
             
 
+            
+
              parameter is the control, derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -875,13 +1063,19 @@
 
           
 
+          
+
           A control derived from the <see
            cref="T:System.Web.UI.WebControls.BaseDataList" />
 
           
 
+          
+
           , which implements an <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -919,8 +1113,12 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.Web.UI.Design.WebControls.DataGridComponentEditor" />
+
+            
 
             
 
@@ -929,8 +1127,12 @@
 
             
 
+            
+
              object, and then invokes the <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.EditComponent(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -965,6 +1167,8 @@
 
             
 
+            
+
              method is obsolete and has no functionality.</para
           >
         </remarks>
@@ -977,8 +1181,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -989,8 +1197,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1024,8 +1236,12 @@
 
             
 
+            
+
              method is called when the <see
              cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+            
 
             
 
@@ -1034,13 +1250,19 @@
 
             
 
+            
+
              class executes. Typically, this is in response to a property change on the control (for example, a <ui
             >Properties</ui>
 
             
 
+            
+
              grid change). If the <see
              cref="P:System.Web.UI.Design.WebControls.BaseDataListDesigner.DataSource" />
+
+            
 
             
 
@@ -1056,8 +1278,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1068,8 +1294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
+
+          
 
           
 
@@ -1101,8 +1331,12 @@
 
             
 
+            
+
              base method connects the associated control that is derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -1137,8 +1371,12 @@
 
             
 
+            
+
              method invokes a component editor for the associated control that is derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -1147,13 +1385,19 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.Design.WebControls.DataListComponentEditor" />
 
             
 
+            
+
              object, and then invokes the <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.EditComponent(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -1169,8 +1413,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1181,8 +1429,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1214,8 +1466,12 @@
 
             
 
+            
+
              method can serve as notification that a style of the associated control that is derived from the <see
              cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+            
 
             
 
@@ -1244,6 +1500,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.OnTemplateEditingVerbsChanged" />
+
+            
 
             
 
@@ -1281,8 +1539,12 @@
 
             
 
+            
+
              method to shadow various control properties with corresponding design-time properties that the designer implements, and to add properties to or remove properties from the <ui
             >Properties</ui>
+
+            
 
             
 
@@ -1294,8 +1556,12 @@
 
             
 
+            
+
              class, the <see
              cref="M:System.Web.UI.Design.WebControls.BaseDataListDesigner.PreFilterProperties(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1304,8 +1570,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+
+            
 
             
 
@@ -1314,8 +1584,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+
+            
 
             
 
@@ -1330,6 +1604,8 @@
 
             
 
+            
+
              grid or to shadow properties of the associated control. </para
           >
         </summary>
@@ -1338,8 +1614,12 @@
 
           
 
+          
+
           A collection implementing an <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 

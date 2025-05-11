@@ -27,6 +27,8 @@
 
         
 
+        
+
          structure.</para
       >
     </summary>
@@ -68,6 +70,8 @@
 
             
 
+            
+
              comparisons must ignore case.</para
           >
         </summary>
@@ -91,6 +95,8 @@
           <para
             >Specifies that <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -120,6 +126,8 @@
 
             
 
+            
+
              comparisons must ignore nonspace combining characters, such as diacritics. The Unicode Standard defines combining characters as characters that are combined with base characters to produce a new character. Non-space combining characters do not use character space by themselves when rendered. For more information about non-space combining characters, see the Unicode Standard at http://www.unicode.org.</para
           >
         </summary>
@@ -146,6 +154,8 @@
 
             
 
+            
+
              comparisons must ignore the character width. For example, Japanese katakana characters can be written as full-width or half-width and, if this value is selected, the katakana characters written as full-width are considered equal to the same characters written in half-width.</para
           >
         </summary>
@@ -169,6 +179,8 @@
           <para
             >Specifies the default option settings for <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 

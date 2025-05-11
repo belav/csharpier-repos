@@ -23,6 +23,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -54,6 +56,8 @@
 
             
 
+            
+
              object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para
           >
         </remarks>
@@ -62,6 +66,8 @@
           <para
             >Specifies the algorithm suite to use with <see
              cref="T:System.ServiceModel.BasicHttpMessageSecurity" />
+
+            
 
             
 

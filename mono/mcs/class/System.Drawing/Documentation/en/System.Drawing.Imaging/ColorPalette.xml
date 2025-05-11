@@ -22,8 +22,12 @@
 
         
 
+        
+
          object directly. If you created a <see
          cref="T:System.Drawing.Imaging.ColorPalette" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          property to obtain a <see
          cref="T:System.Drawing.Imaging.ColorPalette" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
           <para
             >Gets an array of <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 

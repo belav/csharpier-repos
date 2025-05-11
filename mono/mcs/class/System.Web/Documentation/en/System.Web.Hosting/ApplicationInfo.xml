@@ -19,8 +19,12 @@
 
         
 
+        
+
          object is used by the <see
          cref="T:System.Web.Hosting.ApplicationManager" />
+
+        
 
         
 
@@ -72,8 +76,12 @@
 
             
 
+            
+
              property is the path that was passed to the <see
              cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -106,8 +114,12 @@
 
             
 
+            
+
              property is the virtual path that was passed to the <see
              cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
+
+            
 
             
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          object is used at the beginning of the ASP.NET pipeline model that processes HTTP requests. The <see
          cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          class properties to find out information about the current application domain for diagnostic purposes, for example. Developers creating custom process pipeline or a custom hosting environment should call the <see
          cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
+
+        
 
         
 
@@ -44,8 +52,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.Hosting.SimpleWorkerRequest" />
+
+        
 
         
 
@@ -70,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.HttpRuntime" />
+
+            
 
             
 
@@ -99,6 +113,8 @@
           <para
             >Gets the application identification of the application domain where the <see
              cref="T:System.Web.HttpRuntime" />
+
+            
 
             
 
@@ -172,6 +188,8 @@
 
             
 
+            
+
              instance exists.</para
           >
         </summary>
@@ -235,6 +253,8 @@
 
           
 
+          
+
            object.</value
         >
         <remarks>
@@ -242,6 +262,8 @@
           <para
             >For more information, see the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -253,6 +275,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -282,6 +306,8 @@
           <para
             >Shuts down the <see
              cref="T:System.Web.HttpRuntime" />
+
+            
 
             
 
@@ -394,6 +420,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -406,8 +434,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpWorkerRequest" />
+
+          
 
           
 

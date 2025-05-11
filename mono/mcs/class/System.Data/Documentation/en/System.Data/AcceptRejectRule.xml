@@ -21,8 +21,12 @@
 
         
 
+        
+
          are not final until you call the <see
          cref="M:System.Data.DataTable.AcceptChanges" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          or <see
          cref="M:System.Data.DataTable.RejectChanges" />
 
         
 
+        
+
          is called on a row in the parent table, the <see
          cref="T:System.Data.AcceptRejectRule" />
+
+        
 
         
 
@@ -52,8 +62,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Data.DataTable.RejectChanges" />
+
+        
 
         
 
@@ -62,8 +76,12 @@
 
         
 
+        
+
          with a <see
          cref="T:System.Data.ForeignKeyConstraint" />
+
+        
 
         
 

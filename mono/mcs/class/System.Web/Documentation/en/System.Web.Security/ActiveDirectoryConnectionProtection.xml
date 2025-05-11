@@ -21,8 +21,12 @@
 
         
 
+        
+
          enumeration is used in an application's configuration file to set the protocol used to secure communications between an <see
          cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
+
+        
 
         
 
@@ -30,6 +34,8 @@
          type="text/html">
           <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
         </format>
+
+        
 
         
 
@@ -41,6 +47,8 @@
       <para
         >Specifies the connection protection options supported by the <see
          cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
+
+        
 
         
 

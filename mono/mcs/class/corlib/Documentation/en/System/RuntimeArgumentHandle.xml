@@ -31,13 +31,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.ValueType" />
 
         
 
+        
+
          classes. It exists only to support C/C++ programming language functions that take a variable number of parameters. An instance of the structure is passed to the <see
          cref="T:System.ArgIterator" />
+
+        
 
         
 

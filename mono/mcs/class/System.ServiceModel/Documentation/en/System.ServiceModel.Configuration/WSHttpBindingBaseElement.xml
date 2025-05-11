@@ -29,8 +29,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingElement" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.WSHttpBindingBaseElement" />
+
+            
 
             
 
@@ -88,11 +94,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,11 +277,15 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,13 +320,19 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -343,6 +363,8 @@
           <para
             >If the <see
              cref="P:System.ServiceModel.Configuration.WSHttpBindingBaseElement.UseDefaultWebProxy" />
+
+            
 
             
 

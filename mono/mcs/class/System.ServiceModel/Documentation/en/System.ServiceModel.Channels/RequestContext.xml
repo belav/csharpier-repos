@@ -26,8 +26,12 @@
 
         
 
+        
+
         . Each <see
          cref="T:System.ServiceModel.Channels.RequestContext" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          object is the link between the request that comes in and the reply that goes out. When the server receives a request, it provides a <see
          cref="T:System.ServiceModel.Channels.RequestContext" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          for retrieval by your service. You typically use the <see
          cref="P:System.ServiceModel.OperationContext.Current" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
          can be null. Because the role of the request context is to link requests to replies, it does not make sense to have a request context when you do not have a reply, and so in this case the context is set to null. For a one-way operation on top of the request/reply model, the server receives requests but does not send back a response to the client. So if the <see
          cref="T:System.ServiceModel.Channels.RequestContext" />
+
+        
 
         
 
@@ -81,6 +97,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -88,6 +106,8 @@
           <para
             >Avoid non-reference members: they can cause the compiler to auto-generate <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -101,8 +121,12 @@
 
             
 
+            
+
              and the finalizer itself from (On)(Begin)Close (and/or OnAbort) to emulate what would have been the auto-generated <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -135,6 +159,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.RequestContext" />
+
+            
 
             
 
@@ -195,8 +221,12 @@
 
             
 
+            
+
              method when the application processing must continue without waiting. Use one of the synchronous <see
              cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
+
+            
 
             
 
@@ -216,6 +246,8 @@
 
             
 
+            
+
              that references the asynchronous reply operation.</para
           >
         </returns>
@@ -224,8 +256,12 @@
 
           
 
+          
+
           The incoming <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -236,8 +272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -245,6 +285,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,11 +325,15 @@
 
             
 
+            
+
              method to allow the application processing to continue without waiting for the request to complete. </para
           >
           <para
             >Use one of the synchronous <see
              cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
+
+            
 
             
 
@@ -306,6 +352,8 @@
 
             
 
+            
+
              that references the asynchronous reply operation.</para
           >
         </returns>
@@ -314,8 +362,12 @@
 
           
 
+          
+
           The incoming <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -326,8 +378,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -338,8 +394,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -347,6 +407,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -403,8 +465,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -439,6 +505,8 @@
 
           
 
+          
+
           true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
         >
       </Docs>
@@ -470,13 +538,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to one of the <see
            cref="Overload:System.ServiceModel.Channels.RequestContext.BeginReply" />
+
+          
 
           
 
@@ -512,8 +586,12 @@
 
             
 
+            
+
              when it is acceptable for the current thread to be blocked while it replies to the request message. The thread is blocked up to the specified <paramref
              name="timeout" />
+
+            
 
             
 
@@ -522,6 +600,8 @@
           <para
             >If the application processing must continue without waiting for the reply to complete, use the asynchronous <see
              cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
+
+            
 
             
 
@@ -537,8 +617,12 @@
 
           
 
+          
+
           The incoming <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -575,8 +659,12 @@
 
             
 
+            
+
              when it is acceptable for the current thread to be blocked while it replies to the request message. The thread is blocked up to the specified <paramref
              name="timeout" />
+
+            
 
             
 
@@ -585,6 +673,8 @@
           <para
             >If the application processing must continue without waiting for the reply to complete, use the asynchronous <see
              cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
+
+            
 
             
 
@@ -600,8 +690,12 @@
 
           
 
+          
+
           The incoming <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -612,8 +706,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 

@@ -36,6 +36,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -61,11 +63,15 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              class with the values specified.</para
           >
         </summary>
@@ -105,8 +113,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -117,8 +129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -150,11 +166,15 @@
 
             
 
+            
+
              class with the values specified.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,8 +185,12 @@
 
           
 
+          
+
           The exception that is the cause of the current excpetion. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -200,11 +224,15 @@
 
             
 
+            
+
              class with the values specified.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,8 +243,12 @@
 
           
 
+          
+
           The exception that is the cause of the current excpetion. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -227,10 +259,14 @@
 
           
 
+          
+
           The error code associated with the exception's message.</param
         >
         <param name="helpKeyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,6 +322,8 @@
 
             
 
+            
+
              with information about the exception.</para
           >
         </summary>
@@ -294,8 +332,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -306,8 +348,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

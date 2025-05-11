@@ -36,6 +36,8 @@
 
         
 
+        
+
         . This class defines a simple type. Simple types can specify information and constraints for the value of attributes or elements with text-only content.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+
+            
 
             
 
@@ -151,13 +155,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleTypeList" />
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleTypeRestriction" />
+
+            
 
             
 

@@ -12,6 +12,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -23,8 +25,7 @@
     <remarks>
       <para>Converting private keys into byte arrays may cause security risks. You should always zeroize buffers with sensitive informations after their use.</para>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 	// create a 1024 bits key pair
 	RSA rsa = RSA.Create ();
 	// convert the key pair into a CryptoAPI PRIVATEKEYBLOB
@@ -65,6 +66,8 @@
 
           
 
+          
+
            instance containing the decoded key.</returns
         >
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
@@ -97,12 +100,16 @@
 
           
 
+          
+
            representing the offset where the key blob starts in the specified buffer.</param
         >
         <summary>Convert the key from either a CryptoAPI PUBLICKEYBLOB structure or PRIVATEKEYBLOB structure to a RSA instance. </summary>
         <returns
           >a <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -184,6 +191,8 @@
 
           
 
+          
+
            instance containing the decoded key.</returns
         >
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
@@ -214,12 +223,16 @@
 
           
 
+          
+
            representing the offset where the key blob starts in the specified buffer.</param
         >
         <summary>Convert the key from the CryptoAPI PRIVATEKEYBLOB structure to a RSA instance.</summary>
         <returns
           >a <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -301,6 +314,8 @@
 
           
 
+          
+
            instance containing the decoded key.</returns
         >
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
@@ -331,12 +346,16 @@
 
           
 
+          
+
            representing the offset where the key blob starts in the specified buffer.</param
         >
         <summary>Convert the public key from the CryptoAPI PUBLICKEYBLOB structure to a RSA instance.</summary>
         <returns
           >a <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -413,6 +432,8 @@
 
           
 
+          
+
            without any separator. The string length must be a multiple of 2.</param
         >
         <summary>Convert an hexadecimal string to an array of bytes.</summary>
@@ -421,7 +442,8 @@
           <example>
             <code lang="C#">
 	byte[] data = CryptoConvert.FromHex ("DEADC0DE");
-  </code>
+  </code
+            >
           </example>
         </remarks>
       </Docs>
@@ -447,6 +469,8 @@
         <param name="keypair"
           >the <see
            cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+          
 
           
 
@@ -512,6 +536,8 @@
 
           
 
+          
+
            instance to be converted.</param
         >
         <param name="includePrivateKey"
@@ -568,6 +594,8 @@
 
           
 
+          
+
            instance to be converted.</param
         >
         <summary>Convert an RSA instance to a CryptoAPI PRIVATEKEYBLOB structure.</summary>
@@ -621,6 +649,8 @@
 
           
 
+          
+
            instance to be converted.</param
         >
         <summary>Convert an RSA instance to a CryptoAPI PUBLICKEYBLOB structure.</summary>
@@ -653,12 +683,13 @@
 
           
 
+          
+
            representing the specified data in hexadecimal. No separator is used.</returns
         >
         <remarks>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	byte[] data = new byte[] { 0xDE, 0xAD, 0xC0, 0xDE };
 	string s = CryptoConvert.ToHex (data);
 	// s == "DEADC0DE"

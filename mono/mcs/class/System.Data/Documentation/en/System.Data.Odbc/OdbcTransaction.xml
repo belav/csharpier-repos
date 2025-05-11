@@ -22,8 +22,12 @@
 
         
 
+        
+
          object by calling <see
          cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction) are performed on the <see
          cref="T:System.Data.Odbc.OdbcTransaction" />
+
+        
 
         
 
@@ -84,6 +92,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -92,6 +102,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -161,6 +173,8 @@
 
             
 
+            
+
              applies to the whole transaction.</para
           >
         </remarks>
@@ -169,6 +183,8 @@
           <para
             >Specifies the <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 
@@ -197,8 +213,12 @@
 
             
 
+            
+
              has been called, but before <see
              cref="M:System.Data.Odbc.OdbcTransaction.Commit" />
+
+            
 
             
 

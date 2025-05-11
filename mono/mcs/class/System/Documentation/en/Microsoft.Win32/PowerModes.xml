@@ -23,8 +23,12 @@
 
         
 
+        
+
          to indicate the type of a <see
          cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" />
+
+        
 
         
 

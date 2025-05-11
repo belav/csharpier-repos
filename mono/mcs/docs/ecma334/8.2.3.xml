@@ -4,7 +4,7 @@
   <paragraph
     >Single-dimensional arrays are the most common type. The example <code_example
     >
-      <![CDATA[
+<![CDATA[
 using System;  
 class Test  
 {  
@@ -21,14 +21,18 @@ class Test
 
     
 
+    
+
     creates a single-dimensional array of <keyword
     >int</keyword>
 
     
 
+    
+
      values, initializes the array elements, and then prints each of them out. The output produced is: <code_example
     >
-      <![CDATA[
+<![CDATA[
 arr[0] = 0  
 arr[1] = 1  
 arr[2] = 4  
@@ -43,9 +47,11 @@ arr[4] = 16
 
     
 
+    
+
      followed by one or more rank specifiers. The example <code_example
     >
-      <![CDATA[
+<![CDATA[
 class Test  
 {  
    static void Main() {  
@@ -61,8 +67,12 @@ class Test
 
     
 
+    
+
     shows a variety of local variable declarations that use array types with <keyword
     >int</keyword>
+
+    
 
     
 
@@ -71,7 +81,7 @@ class Test
   <paragraph
     >Array types are reference types, and so the declaration of an array variable merely sets aside space for the reference to the array. Array instances are actually created via array initializers and array creation expressions. The example <code_example
     >
-      <![CDATA[
+<![CDATA[
 class Test  
 {  
    static void Main() {  
@@ -89,11 +99,15 @@ class Test
 
     
 
+    
+
     shows a variety of array creation expressions. The variables a1, a2 and a3 denote rectangular arrays, and the variable j2 denotes a jagged array. It should be no surprise that these terms are based on the shapes of the arrays. Rectangular arrays always have a rectangular shape. Given the length of each dimension of the array, its rectangular shape is clear. For example, the lengths of a3's three dimensions are 10, 20, and 30, respectively, and it is easy to see that this array contains 10*20*30 elements. </paragraph
   >
   <paragraph
     >In contrast, the variable j2 denotes a "jagged" array, or an "array of arrays". Specifically, j2 denotes an array of an array of <keyword
     >int</keyword>
+
+    
 
     
 
@@ -106,16 +120,20 @@ class Test
 
       
 
+      
+
        x[3][5][7] would be considered a three dimensional rectangular array, while in C#, the declaration int[][][] declares a jagged array type. end note]</note
     >
   </paragraph>
   <paragraph
     >The element type and shape of an array-including whether it is jagged or rectangular, and the number of dimensions it has-are part of its type. On the other hand, the size of the array-as represented by the length of each of its dimensions-is not part of an array's type. This split is made clear in the language syntax, as the length of each dimension is specified in the array creation expression rather than in the array type. For instance the declaration <code_example
     >
-      <![CDATA[
+<![CDATA[
 int[,,] a3 = new int[10, 20, 30];  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -124,19 +142,23 @@ int[,,] a3 = new int[10, 20, 30];
   <paragraph
     >For local variable and field declarations, a shorthand form is permitted so that it is not necessary to re-state the array type. For instance, the example <code_example
     >
-      <![CDATA[
+<![CDATA[
 int[] a1 = new int[] {1, 2, 3};  
 ]]>
     </code_example>
 
     
 
+    
+
     can be shortened to <code_example
     >
-      <![CDATA[
+<![CDATA[
 int[] a1 = {1, 2, 3};  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -145,7 +167,7 @@ int[] a1 = {1, 2, 3};
   <paragraph
     >The context in which an array initializer such as {1, 2, 3} is used determines the type of the array being initialized. The example <code_example
     >
-      <![CDATA[
+<![CDATA[
 class Test  
 {  
    static void Main() {  
@@ -156,6 +178,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

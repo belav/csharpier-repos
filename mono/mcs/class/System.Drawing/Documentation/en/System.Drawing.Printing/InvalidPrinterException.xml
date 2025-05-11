@@ -27,6 +27,8 @@
 
         
 
+        
+
          namespace overview.</para
       >
     </remarks>
@@ -56,6 +58,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -64,8 +68,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrinterSettings" />
+
+          
 
           
 
@@ -101,6 +109,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -109,8 +119,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -121,8 +135,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -156,13 +174,19 @@
 
             
 
+            
+
              method sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -177,6 +201,8 @@
 
             
 
+            
+
              with information about the exception.</para
           >
         </summary>
@@ -185,8 +211,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -197,8 +227,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

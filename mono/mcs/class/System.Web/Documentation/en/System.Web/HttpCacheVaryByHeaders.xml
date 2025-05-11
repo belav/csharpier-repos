@@ -25,6 +25,8 @@
 
         
 
+        
+
          property identifies which request header parameters ASP.NET uses to uniquely identify a variation of the response when there are multiple cached responses for a resource. This is useful when a response depends on a set of client inputs, such as headers or parameters.</para
       >
       <para
@@ -33,10 +35,14 @@
 
         
 
+        
+
          is not directly related to HTTP cache-control headers, but helps ensure that a client or proxy varies by the specified headers. For more information about VaryByHeaders, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
          cref="http://go.microsoft.com/fwlink/?linkid=37125"
           >World Wide Web Consortium (W3C) Web site</see
         >
+
+        
 
         
 
@@ -48,6 +54,8 @@
       <para
         >Provides a type-safe way to set the <see
          cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -129,6 +139,8 @@
 
             
 
+            
+
             . See section 14, "Header Field Definitions", for complete details.</para
           >
         </remarks>
@@ -159,6 +171,8 @@
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -195,6 +209,8 @@
 
             
 
+            
+
             . See section 14, "Header Field Definitions", for complete details.</para
           >
         </remarks>
@@ -224,6 +240,8 @@
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 

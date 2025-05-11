@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.</para
       >
     </summary>
@@ -17,6 +19,8 @@
       <para
         >The following table shows the classes in <see
          cref="N:System.Windows.Forms" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
               
 
+              
+
                namespace derive from the <see
                cref="T:System.Windows.Forms.Control" />
+
+              
 
               
 
@@ -58,8 +66,12 @@
 
               
 
+              
+
                class provides the base functionality for all controls that are displayed on a <see
                cref="T:System.Windows.Forms.Form" />
+
+              
 
               
 
@@ -68,8 +80,12 @@
 
               
 
+              
+
                class represents a window within an application. This includes dialog boxes, modeless windows, and Multiple Document Interface (MDI) client and parent windows. You can also create your own controls by deriving from the <see
                cref="T:System.Windows.Forms.UserControl" />
+
+              
 
               
 
@@ -92,8 +108,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Windows.Forms.MenuStrip" />
+
+              
 
               
 
@@ -102,8 +122,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Windows.Forms.StatusStrip" />
+
+              
 
               
 
@@ -126,8 +150,12 @@
 
               
 
+              
+
                namespace provides a variety of control classes that you can use to create rich user interfaces. Some controls are designed for data entry within the application, such as <see
                cref="T:System.Windows.Forms.TextBox" />
+
+              
 
               
 
@@ -136,8 +164,12 @@
 
               
 
+              
+
                controls. Other controls display application data, such as <see
                cref="T:System.Windows.Forms.Label" />
+
+              
 
               
 
@@ -146,8 +178,12 @@
 
               
 
+              
+
               . The namespace also provides controls for invoking commands within the application, such as <see
                cref="T:System.Windows.Forms.Button" />
+
+              
 
               
 
@@ -156,8 +192,12 @@
 
               
 
+              
+
                control and managed HTML classes, such as <see
                cref="T:System.Windows.Forms.HtmlDocument" />
+
+              
 
               
 
@@ -166,8 +206,12 @@
 
               
 
+              
+
                control is an advanced data entry control that lets you define masks that automatically accept or reject user input. Additionally, you can use the <see
                cref="T:System.Windows.Forms.PropertyGrid" />
+
+              
 
               
 
@@ -190,13 +234,19 @@
 
               
 
+              
+
                lays out all the controls it contains in a serial manner, and <see
                cref="T:System.Windows.Forms.TableLayoutPanel" />
 
               
 
+              
+
                lets you define cells and rows for laying out controls in a fixed grid. <see
                cref="T:System.Windows.Forms.SplitContainer" />
+
+              
 
               
 
@@ -219,8 +269,12 @@
 
               
 
+              
+
                control provides a customizable table for displaying data, and lets you customize cells, rows, columns, and borders. The <see
                cref="T:System.Windows.Forms.BindingNavigator" />
+
+              
 
               
 
@@ -229,8 +283,12 @@
 
               
 
+              
+
                is frequently paired with the <see
                cref="T:System.Windows.Forms.BindingSource" />
+
+              
 
               
 
@@ -253,8 +311,12 @@
 
               
 
+              
+
                namespace provides other classes that do not derive from the <see
                cref="T:System.Windows.Forms.Control" />
+
+              
 
               
 
@@ -263,8 +325,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Windows.Forms.ErrorProvider" />
+
+              
 
               
 
@@ -273,8 +339,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Windows.Forms.HelpProvider" />
+
+              
 
               
 
@@ -297,8 +367,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Windows.Forms.SaveFileDialog" />
+
+              
 
               
 
@@ -307,8 +381,12 @@
 
               
 
+              
+
                class displays a dialog box to change elements of the <see
                cref="T:System.Drawing.Font" />
+
+              
 
               
 
@@ -317,8 +395,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+              
 
               
 
@@ -327,8 +409,12 @@
 
               
 
+              
+
                classes display dialog boxes that enable the user to control aspects of printing documents. For more information about printing from a Windows-based application, see the <see
                cref="N:System.Drawing.Printing" />
+
+              
 
               
 
@@ -337,8 +423,12 @@
 
               
 
+              
+
                namespace provides the <see
                cref="T:System.Windows.Forms.MessageBox" />
+
+              
 
               
 
@@ -353,6 +443,8 @@
 
         
 
+        
+
          namespace that provide support to the classes mentioned in the previous summary. Examples of the supporting classes are enumerations, event argument classes, and delegates used by events within controls and components.</para
       >
       <block subset="none" type="note">
@@ -363,8 +455,12 @@
 
           
 
+          
+
            and include a manifest with your executable file. A manifest is an XML file that is included either as a resource within your application executable file or as a separate file that resides in the same directory as the executable file. For an example of a manifest, see the Example section for the <see
            cref="T:System.Windows.Forms.FlatStyle" />
+
+          
 
           
 

@@ -33,8 +33,10 @@ Copyright (c) .NET Foundation. All rights reserved.
     <MicrosoftNETCoreILAsmVersion Condition="'$(MicrosoftNETCoreILAsmVersion)' == ''"
       >6.0.0</MicrosoftNETCoreILAsmVersion
     >
-    <MicrosoftNetCoreIlasmPackageName>runtime.$(MicrosoftNetCoreIlasmPackageRuntimeId).microsoft.netcore.ilasm</MicrosoftNetCoreIlasmPackageName>
-    <MicrosoftNetCoreIldasmPackageName>runtime.$(MicrosoftNetCoreIlasmPackageRuntimeId).microsoft.netcore.ildasm</MicrosoftNetCoreIldasmPackageName>
+    <MicrosoftNetCoreIlasmPackageName
+>runtime.$(MicrosoftNetCoreIlasmPackageRuntimeId).microsoft.netcore.ilasm</MicrosoftNetCoreIlasmPackageName>
+    <MicrosoftNetCoreIldasmPackageName
+>runtime.$(MicrosoftNetCoreIlasmPackageRuntimeId).microsoft.netcore.ildasm</MicrosoftNetCoreIldasmPackageName>
     <!-- If ILAsmToolPath is specified, it will be used and no packages will be restored
          Otherwise packages will be restored and ilasm and ildasm will be referenced from their packages.  -->
     <_IlasmDir Condition="'$(ILAsmToolPath)' != ''"

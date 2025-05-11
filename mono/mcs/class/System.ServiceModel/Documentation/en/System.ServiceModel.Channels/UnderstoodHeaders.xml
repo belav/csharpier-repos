@@ -61,6 +61,8 @@
 
             
 
+            
+
              to this collection. This implies that the specific header has been understood.</para
           >
         </summary>
@@ -96,6 +98,8 @@
 
             
 
+            
+
              is present in this collection.</para
           >
         </summary>
@@ -104,6 +108,8 @@
           <para
             >true if the specified <see
              cref="T:System.ServiceModel.Channels.MessageHeaderInfo" />
+
+            
 
             
 
@@ -143,6 +149,8 @@
 
             
 
+            
+
              object that can be used to iterate through the collection.</para
           >
         </returns>
@@ -175,6 +183,8 @@
           <para
             >Removes the specified <see
              cref="T:System.ServiceModel.Channels.MessageHeaderInfo" />
+
+            
 
             
 
@@ -211,6 +221,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

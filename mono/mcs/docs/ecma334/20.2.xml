@@ -8,8 +8,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -26,6 +30,8 @@
       <name>
         <non_terminal where="20.2">interface-member-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -50,7 +56,7 @@
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 public delegate void StringListEvent(IStringList sender);  
 public interface IStringList  
 {  
@@ -64,6 +70,8 @@ public interface IStringList
 
       
 
+      
+
       declares an interface that contains one each of the possible kinds of members: A method, a property, an event, and an indexer. end example]</example
     >
   </paragraph>
@@ -73,8 +81,12 @@ public interface IStringList
 
     
 
+    
+
      creates a new declaration space (<hyperlink
     >10.3</hyperlink>
+
+    
 
     
 
@@ -83,8 +95,12 @@ public interface IStringList
 
     
 
+    
+
     s immediately contained by the <non_terminal
      where="20.1">interface-declaration</non_terminal>
+
+    
 
     
 
@@ -93,6 +109,8 @@ public interface IStringList
       <list_item
         > The name of a method must differ from the names of all properties and events declared in the same interface. In addition, the signature (<hyperlink
         >10.6</hyperlink>
+
+        
 
         
 
@@ -105,6 +123,8 @@ public interface IStringList
   <paragraph
     >The inherited members of an interface are specifically not part of the declaration space of the interface. Thus, an interface is allowed to declare a member with the same name or signature as an inherited member. When this occurs, the derived interface member is said to hide the base interface member. Hiding an inherited member is not considered an error, but it does cause the compiler to issue a warning. To suppress the warning, the declaration of the derived interface member must include a new modifier to indicate that the derived member is intended to hide the base member. This topic is discussed further in <hyperlink
     >10.7.1.2</hyperlink>
+
+    
 
     
 

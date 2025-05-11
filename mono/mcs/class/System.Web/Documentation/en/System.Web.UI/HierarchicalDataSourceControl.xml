@@ -41,8 +41,12 @@
 
         
 
+        
+
          class, while data source controls that represent lists or tables of data derive from the <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -51,13 +55,19 @@
 
         
 
+        
+
          class is the base implementation of the <see
          cref="T:System.Web.UI.IHierarchicalDataSource" />
 
         
 
+        
+
          interface, which defines a single method to retrieve hierarchical data source view objects associated with the data source control, <see
          cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />
+
+        
 
         
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
          object and its associated views on the underlying data, called data source view objects. While data source controls that represent tabular data are typically associated with only one named view, the <see
          cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+        
 
         
 
@@ -79,13 +93,19 @@
 
         
 
+        
+
          method in the <paramref
          name="viewPath" />
 
         
 
+        
+
          parameter. Each <see
          cref="T:System.Web.UI.HierarchicalDataSourceView" />
+
+        
 
         
 
@@ -97,8 +117,12 @@
 
         
 
+        
+
          class, such as <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -124,6 +148,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+            
 
             
 
@@ -155,8 +181,12 @@
 
             
 
+            
+
              method is overridden by the <see
              cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+            
 
             
 
@@ -171,6 +201,8 @@
 
             
 
+            
+
              object to hold the child controls (both literal and server) of the server control.</para
           >
         </summary>
@@ -179,6 +211,8 @@
           <para
             >An <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -218,6 +252,8 @@
 
             
 
+            
+
              class has no visual rendering, it does not support themes.</para
           >
         </remarks>
@@ -253,6 +289,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -262,6 +300,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -294,13 +334,19 @@
 
             
 
+            
+
              class has no visual rendering, calling the <see
              cref="M:System.Web.UI.HierarchicalDataSourceControl.Focus" />
 
             
 
+            
+
              method on it throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -343,8 +389,12 @@
 
             
 
+            
+
              method provides the default implementation for the <see
              cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+            
 
             
 
@@ -353,8 +403,12 @@
 
             
 
+            
+
              class override this method and provide an implementation to return a strongly typed view that derives from <see
              cref="T:System.Web.UI.HierarchicalDataSourceView" />
+
+            
 
             
 
@@ -369,6 +423,8 @@
 
             
 
+            
+
              interface for the specified path.</para
           >
         </summary>
@@ -380,8 +436,12 @@
 
             
 
+            
+
              that represents a single view of the data at the hierarchical level identified by the <paramref
              name="viewPath" />
+
+            
 
             
 
@@ -390,6 +450,8 @@
         </returns>
         <param name="viewPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -450,6 +512,8 @@
 
             
 
+            
+
              method notifies a data-bound control that the underlying data source or the data cached in memory has changed, that the control should rebind, and that any necessary work should be performed.</para
           >
           <para
@@ -460,11 +524,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HierarchicalDataSourceControl.OnDataSourceChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -479,6 +547,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -487,8 +557,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -517,6 +591,8 @@
         <since version=".NET 2.0" />
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,6 +636,8 @@
 
             
 
+            
+
              has no visual rendering, it does not support themes or skins.</para
           >
         </remarks>
@@ -568,6 +646,8 @@
           <para
             >Gets or sets the skin to apply to the <see
              cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+            
 
             
 
@@ -603,8 +683,12 @@
 
             
 
+            
+
              method is called by clients when a <see
              cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+            
 
             
 
@@ -613,13 +697,19 @@
 
             
 
+            
+
              interface. It delegates to the <see
              cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" />
 
             
 
+            
+
              method, which derived classes override to return strongly typed <see
              cref="T:System.Web.UI.HierarchicalDataSourceView" />
+
+            
 
             
 
@@ -634,6 +724,8 @@
 
             
 
+            
+
              interface for the specified path.</para
           >
         </summary>
@@ -645,8 +737,12 @@
 
             
 
+            
+
              that represents a single view of the data at the hierarchical level identified by the <paramref
              name="viewPath" />
+
+            
 
             
 
@@ -655,6 +751,8 @@
         </returns>
         <param name="viewPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -690,8 +788,12 @@
 
             
 
+            
+
              class has no visual rendering, <see
              cref="P:System.Web.UI.HierarchicalDataSourceControl.Visible" />
+
+            
 
             
 

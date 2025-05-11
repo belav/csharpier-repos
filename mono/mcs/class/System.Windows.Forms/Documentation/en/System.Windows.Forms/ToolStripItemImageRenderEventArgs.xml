@@ -26,6 +26,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -53,8 +55,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -66,8 +72,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -78,8 +88,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -87,6 +101,8 @@
         >
         <param name="imageRectangle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,8 +136,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -133,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -145,8 +169,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -157,8 +185,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -166,6 +198,8 @@
         >
         <param name="imageRectangle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,6 +225,8 @@
           <para
             >Gets the image painted on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

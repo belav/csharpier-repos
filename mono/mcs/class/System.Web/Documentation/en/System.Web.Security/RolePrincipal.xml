@@ -26,8 +26,12 @@
 
         
 
+        
+
          object implements the <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
         ), the <see
          cref="T:System.Web.Security.RoleManagerModule" />
+
+        
 
         
 
@@ -49,14 +57,20 @@
 
         
 
+        
+
          object to the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
          property of the <see
          cref="P:System.Web.HttpContext.Current" />
         <see cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -68,8 +82,12 @@
 
         
 
+        
+
          class exposes the security identity for the current HTTP request and additionally performs checks for role membership. If <see
          cref="P:System.Web.Security.Roles.CacheRolesInCookie" />
+
+        
 
         
 
@@ -78,8 +96,12 @@
 
         
 
+        
+
          object manages the cached list of roles and looks up role membership for the current user in the cached list first, then the role <see
          cref="P:System.Web.Security.Roles.Provider" />
+
+        
 
         
 
@@ -88,8 +110,12 @@
 
         
 
+        
+
          is false, the <see
          cref="T:System.Web.Security.RolePrincipal" />
+
+        
 
         
 
@@ -101,13 +127,19 @@
 
         
 
+        
+
          object encrypts and decrypts role information cached in the cookie identified by the <see
          cref="P:System.Web.Security.Roles.CookieName" />
 
         
 
+        
+
          based on the <see
          cref="P:System.Web.Security.Roles.CookieProtectionValue" />
+
+        
 
         
 
@@ -139,8 +171,12 @@
 
             
 
+            
+
              constructor creates a new <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -149,8 +185,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.Security.RolePrincipal.ProviderName" />
+
+            
 
             
 
@@ -159,11 +199,15 @@
 
             
 
+            
+
              of the default role provider.</para
           >
           <para
             >For information on enabling role management, see the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -178,8 +222,12 @@
 
             
 
+            
+
              object for the specified <paramref
              name="identity" />
+
+            
 
             
 
@@ -191,8 +239,12 @@
 
           
 
+          
+
           The user identity to create the <see
            cref="T:System.Web.Security.RolePrincipal" />
+
+          
 
           
 
@@ -223,8 +275,12 @@
 
             
 
+            
+
              constructor creates a new <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -233,8 +289,12 @@
 
             
 
+            
+
              and cached with the <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -243,8 +303,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="P:System.Configuration.Provider.ProviderBase.Name" />
+
+            
 
             
 
@@ -253,6 +317,8 @@
           <para
             >For information on enabling role management, see the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -267,13 +333,19 @@
 
             
 
+            
+
              object for the specified <paramref
              name="identity" />
 
             
 
+            
+
              with role information from the specified <paramref
              name="encryptedTicket" />
+
+            
 
             
 
@@ -285,8 +357,12 @@
 
           
 
+          
+
           The user identity to create the <see
            cref="T:System.Web.Security.RolePrincipal" />
+
+          
 
           
 
@@ -294,6 +370,8 @@
         >
         <param name="encryptedTicket">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -324,8 +402,12 @@
 
             
 
+            
+
              constructor creates a new <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -334,8 +416,12 @@
 
             
 
+            
+
              property is set to the value specified in the <paramref
              name="providerName" />
+
+            
 
             
 
@@ -344,6 +430,8 @@
           <para
             >For information on enabling role management, see the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -358,13 +446,19 @@
 
             
 
+            
+
              object for the specified <paramref
              name="identity" />
 
             
 
+            
+
              using the specified <paramref
              name="providerName" />
+
+            
 
             
 
@@ -376,6 +470,8 @@
 
           
 
+          
+
           The name of the role provider for the user.</param
         >
         <param name="identity">
@@ -383,8 +479,12 @@
 
           
 
+          
+
           The user identity to create the <see
            cref="T:System.Web.Security.RolePrincipal" />
+
+          
 
           
 
@@ -416,8 +516,12 @@
 
             
 
+            
+
              constructor creates a new <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -426,8 +530,12 @@
 
             
 
+            
+
              and cached with the <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -436,8 +544,12 @@
 
             
 
+            
+
              property is set to the value specified in the <paramref
              name="providerName" />
+
+            
 
             
 
@@ -446,6 +558,8 @@
           <para
             >For information on enabling role management, see the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -460,8 +574,12 @@
 
             
 
+            
+
              object for the specified <paramref
              name="identity" />
+
+            
 
             
 
@@ -470,8 +588,12 @@
 
             
 
+            
+
              and role information from the specified <paramref
              name="encryptedTicket" />
+
+            
 
             
 
@@ -483,10 +605,14 @@
 
           
 
+          
+
           The name of the role provider for the user.</param
         >
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,10 +621,14 @@
 
           
 
+          
+
            for.</param
         >
         <param name="encryptedTicket">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,8 +656,12 @@
 
             
 
+            
+
              property will return true after role names have been retrieved from the default role <see
              cref="P:System.Web.Security.Roles.Provider" />
+
+            
 
             
 
@@ -536,8 +670,12 @@
 
             
 
+            
+
              method, or when the <see
              cref="M:System.Web.Security.RolePrincipal.IsInRole(System.String)" />
+
+            
 
             
 
@@ -546,8 +684,12 @@
 
             
 
+            
+
              method of the default role provider and then receives a response of true, resulting in the role name passed to the <see
              cref="M:System.Web.Security.RolePrincipal.IsInRole(System.String)" />
+
+            
 
             
 
@@ -559,8 +701,12 @@
 
             
 
+            
+
              property will also return true if <see
              cref="P:System.Web.Security.Roles.CookieSlidingExpiration" />
+
+            
 
             
 
@@ -569,8 +715,12 @@
 
             
 
+            
+
              has passed, resulting in a new <see
              cref="P:System.Web.Security.RolePrincipal.ExpireDate" />
+
+            
 
             
 
@@ -582,6 +732,8 @@
           <para
             >Gets a value indicating whether the list of role names cached with the <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -610,8 +762,12 @@
 
             
 
+            
+
              property returns the value of the cookiePath attribute from the Web.config file for your ASP.NET application. For more information on cookie paths, see <see
              cref="P:System.Web.HttpCookie.Path" />
+
+            
 
             
 
@@ -644,8 +800,12 @@
 
             
 
+            
+
              property returns a Boolean value indicating whether the roles cookie has expired based on the <see
              cref="P:System.Web.Security.RolePrincipal.ExpireDate" />
+
+            
 
             
 
@@ -697,8 +857,12 @@
 
             
 
+            
+
              is true and role names have been cached for the user represented by the <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -707,8 +871,12 @@
 
             
 
+            
+
              method will return the list of role names in the cache that the user is a member of. If role names have not been cached, then the <see
              cref="M:System.Web.Security.RolePrincipal.GetRoles" />
+
+            
 
             
 
@@ -717,8 +885,12 @@
 
             
 
+            
+
             . Only role names for the current <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -727,8 +899,12 @@
 
             
 
+            
+
              object, check the <see
              cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" />
+
+            
 
             
 
@@ -743,6 +919,8 @@
 
             
 
+            
+
              is a member of.</para
           >
         </summary>
@@ -751,6 +929,8 @@
           <para
             >The list of roles that the <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -782,13 +962,19 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Web.Security.RolePrincipal" />
 
             
 
+            
+
              object is set when the <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -822,8 +1008,12 @@
 
             
 
+            
+
              first checks the <see
              cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" />
+
+            
 
             
 
@@ -832,8 +1022,12 @@
 
             
 
+            
+
              property is true, the cached list is checked for the specified role. If the <see
              cref="M:System.Web.Security.RolePrincipal.IsInRole(System.String)" />
+
+            
 
             
 
@@ -845,8 +1039,12 @@
 
             
 
+            
+
              does not find the specified role, it calls the <see
              cref="M:System.Web.Security.RoleProvider.GetRolesForUser(System.String)" />
+
+            
 
             
 
@@ -855,8 +1053,12 @@
 
             
 
+            
+
              instance to determine whether the user name is associated with a role from the data source for the configured <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -871,6 +1073,8 @@
 
             
 
+            
+
              is in the specified role.</para
           >
         </summary>
@@ -882,11 +1086,15 @@
 
             
 
+            
+
              is in the specified role; otherwise, false.</para
           >
         </returns>
         <param name="role">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -914,13 +1122,19 @@
 
             
 
+            
+
              property indicates whether role names have been written to the cookie. Note that, even though the cacheRolesInCookie configuration attribute may be true, the <see
              cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" />
 
             
 
+            
+
              property does not return true until after role information has been written to the cookie. If no role checks are performed for a user, <see
              cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" />
+
+            
 
             
 
@@ -972,8 +1186,12 @@
 
             
 
+            
+
              property exposes the name of the role provider that manages the role information for the user represented by the <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -982,8 +1200,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -992,8 +1214,12 @@
 
             
 
+            
+
              as input and returns the list of roles for the represented user. You can ensure that the appropriate role provider is used to return the list of roles for the <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -1002,13 +1228,19 @@
 
             
 
+            
+
              method of the role provider from the <see
              cref="P:System.Web.Security.Roles.Providers" />
 
             
 
+            
+
              collection that is indexed by the <see
              cref="P:System.Web.Security.RolePrincipal.ProviderName" />
+
+            
 
             
 
@@ -1020,8 +1252,12 @@
 
             
 
+            
+
              object for each request, you must use a <see
              cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+
+            
 
             
 
@@ -1054,13 +1290,19 @@
 
             
 
+            
+
              method marks the cached role list as having been changed by setting <see
              cref="P:System.Web.Security.RolePrincipal.CachedListChanged" />
 
             
 
+            
+
              to true and <see
              cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" />
+
+            
 
             
 
@@ -1093,8 +1335,12 @@
 
             
 
+            
+
              method is stored in the roles cookie when <see
              cref="P:System.Web.Security.Roles.CacheRolesInCookie" />
+
+            
 
             
 
@@ -1109,8 +1355,12 @@
 
             
 
+            
+
              object encrypted based on the <see
              cref="P:System.Web.Security.Roles.CookieProtectionValue" />
+
+            
 
             
 
@@ -1125,8 +1375,12 @@
 
             
 
+            
+
              object encrypted based on the <see
              cref="P:System.Web.Security.Roles.CookieProtectionValue" />
+
+            
 
             
 
@@ -1152,6 +1406,8 @@
           <para
             >By including a version number in the roles cookie, future releases of ASP.NET can modify the format of the roles cookie and use the <see
              cref="P:System.Web.Security.RolePrincipal.Version" />
+
+            
 
             
 

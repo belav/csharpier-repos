@@ -32,8 +32,12 @@
 
         
 
+        
+
          delegate, in combination with the <see
          cref="M:System.Web.HttpResponse.WriteSubstitution(System.Web.HttpResponseSubstitutionCallback)" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.AdRotator" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          control, use the <see
          cref="P:System.Web.UI.WebControls.Substitution.MethodName" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          control executes. The callback method that you specify must be a static method on the page or on the user control that contains the <see
          cref="T:System.Web.UI.WebControls.Substitution" />
+
+        
 
         
 
@@ -75,8 +91,12 @@
 
         
 
+        
+
          delegate that takes an <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -88,8 +108,12 @@
 
         
 
+        
+
          control, rendering is independent of the page caching unless an event handler is provided for the <see
          cref="E:System.Web.UI.WebControls.AdRotator.AdCreated" />
+
+        
 
         
 
@@ -98,8 +122,12 @@
 
         
 
+        
+
          event handler is present, post-cache substitution is used to render the <see
          cref="T:System.Web.UI.WebControls.AdRotator" />
+
+        
 
         
 

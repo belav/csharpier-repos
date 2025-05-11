@@ -27,11 +27,15 @@
 
         
 
+        
+
          class can be used to create extensions that are associated with a certificate but are not part of a certificate as issued by a certification authority (CA).</para
       >
       <para
         >In its most basic form, an X509 extension has an object identifier (OID), a Boolean value describing whether the extension is considered critical or not, and ASN-encoded data. Custom extensions can be registered in a <see
          cref="T:System.Security.Cryptography.CryptoConfig" />
+
+        
 
         
 
@@ -45,12 +49,16 @@
 
             
 
+            
+
             . Describes the key usages of a certificate.</para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
+
+            
 
             
 
@@ -63,12 +71,16 @@
 
             
 
+            
+
             . Describes the enhanced key usages of a certificate.</para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension" />
+
+            
 
             
 
@@ -105,6 +117,8 @@
 
             
 
+            
+
              object, unlike the other constructors for this class that use certificate information from either a byte array, a pointer or a certificate file to create the object.</para
           >
         </remarks>
@@ -113,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+
+            
 
             
 
@@ -149,6 +165,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -160,6 +178,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -168,10 +188,14 @@
 
           
 
+          
+
           The encoded data to be used to create the extension.</param
         >
         <param name="critical">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,6 +232,8 @@
 
             
 
+            
+
              parameter to provide an object identifier for the extension. </para
           >
         </remarks>
@@ -219,11 +245,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="oid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,10 +264,14 @@
 
           
 
+          
+
           The encoded data used to create the extension.</param
         >
         <param name="critical">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,6 +308,8 @@
 
             
 
+            
+
              parameter to provide an object identifier for the extension. </para
           >
         </remarks>
@@ -285,11 +321,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="oid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,10 +340,14 @@
 
           
 
+          
+
           The encoded data used to create the extension.</param
         >
         <param name="critical">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,8 +385,12 @@
 
             
 
+            
+
              and add them to the instance of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+
+            
 
             
 
@@ -357,6 +405,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -365,8 +415,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 

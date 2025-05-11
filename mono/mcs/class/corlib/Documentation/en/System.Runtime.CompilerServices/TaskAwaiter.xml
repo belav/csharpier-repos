@@ -107,11 +107,15 @@
 
             
 
+            
+
              object stops waiting for the asynchronous task to complete.</para
           >
         </summary>
         <param name="continuation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,6 +147,8 @@
         </summary>
         <param name="continuation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

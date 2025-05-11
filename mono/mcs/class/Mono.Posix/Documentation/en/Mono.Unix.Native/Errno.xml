@@ -16,11 +16,12 @@
   <Docs>
     <summary>Error values.</summary>
     <remarks>
-      <para
-        >
+      <para>
         Various error numbers that can be signaled by 
         <see
          cref="T:Mono.Unix.Native.Syscall" />
+
+        
 
         
 
@@ -31,13 +32,16 @@
 
         
 
+        
+
         .
       </para
       >
-      <para
-        >
+      <para>
         The value of these members may not match the actual <c
         >errno</c>
+
+        
 
         
 
@@ -48,15 +52,21 @@
 
         
 
+        
+
          to convert between the
         native <c
         >errno</c>
 
         
 
+        
+
          value and an 
         <see
          cref="T:Mono.Unix.Native.Errno" />
+
+        
 
         
 
@@ -90,8 +100,12 @@
 
           
 
+          
+
           .  The number of bytes used for the argument and environment list of the new process exceeded the current limit of 65536 bytes (NCARGS in <c
           >sys/param.h</c>
+
+          
 
           
 
@@ -120,6 +134,8 @@
 
           
 
+          
+
           .  An attempt was made to access a file in a way forbidden by its file access permissions.</summary
         >
       </Docs>
@@ -145,6 +161,8 @@
 
           
 
+          
+
           .  Only one usage of each address is normally permitted.</summary
         >
       </Docs>
@@ -167,6 +185,8 @@
       <Docs>
         <summary>
           <i>Cannot assign requested address</i>
+
+          
 
           
 
@@ -214,6 +234,8 @@
 
           
 
+          
+
           .  An address incompatible with the requested protocol was used.  For example, you shouldn’t necessarily expect to be able to use NS addresses with ARPA Internet protocols.</summary
         >
       </Docs>
@@ -239,6 +261,8 @@
 
           
 
+          
+
           .  This is a temporary condition and later calls to the same routine may complete normally.</summary
         >
       </Docs>
@@ -261,6 +285,8 @@
       <Docs>
         <summary>
           <i>Operation already in progress</i>
+
+          
 
           
 
@@ -308,6 +334,8 @@
 
           
 
+          
+
           .  A file descriptor argument was out of range, referred to no open file, or a read (write) request was made to a file that was only open for writing (reading).</summary
         >
       </Docs>
@@ -330,6 +358,8 @@
       <Docs>
         <summary>
           <i>Bad file descriptor</i>
+
+          
 
           
 
@@ -453,6 +483,8 @@
 
           
 
+          
+
           .  An attempt to use a system resource which was in use at the time in a manner which would have conflicted with the request.</summary
         >
       </Docs>
@@ -478,15 +510,21 @@
 
           
 
+          
+
           .  A 
 				<see
            cref="M:Mono.Unix.Native.Syscall.wait" />
 
           
 
+          
+
           (2) or 
 				<see
            cref="M:Mono.Unix.Native.Syscall.waitpid" />
+
+          
 
           
 
@@ -554,6 +592,8 @@
 
           
 
+          
+
           .  A connection abort was caused internal to your host machine.</summary
         >
       </Docs>
@@ -576,6 +616,8 @@
       <Docs>
         <summary>
           <i>Connection refused</i>
+
+          
 
           
 
@@ -604,6 +646,8 @@
 
           
 
+          
+
           .  A connection was forcibly closed by a peer.  This normally results from a loss of the connection on the remote socket due to a timeout or a reboot.</summary
         >
       </Docs>
@@ -626,6 +670,8 @@
       <Docs>
         <summary>
           <i>Resource deadlock avoided</i>
+
+          
 
           
 
@@ -673,6 +719,8 @@
 
           
 
+          
+
           .  A required address was omitted from an operation on a socket.</summary
         >
       </Docs>
@@ -695,6 +743,8 @@
       <Docs>
         <summary>
           <i>Numerical argument out of domain</i>
+
+          
 
           
 
@@ -742,9 +792,13 @@
 
           
 
+          
+
           .  A 
 				<see
            cref="M:Mono.Unix.Native.Syscall.write" />
+
+          
 
           
 
@@ -774,9 +828,13 @@
 
           
 
+          
+
           .  An existing file was mentioned in an inappropriate context, for instance, as the new link name in a 
 				<see
            cref="M:Mono.Unix.Native.Syscall.link" />
+
+          
 
           
 
@@ -805,6 +863,8 @@
 
           
 
+          
+
           .  The system detected an invalid address in attempting to use an argument of a call.</summary
         >
       </Docs>
@@ -827,6 +887,8 @@
       <Docs>
         <summary>
           <i>File too large</i>
+
+          
 
           
 
@@ -855,6 +917,8 @@
 
           
 
+          
+
           .  A socket operation failed because the destination host was down.</summary
         >
       </Docs>
@@ -877,6 +941,8 @@
       <Docs>
         <summary>
           <i>No route to host</i>
+
+          
 
           
 
@@ -905,6 +971,8 @@
 
           
 
+          
+
           .  An IPC identifier was removed while the current process was waiting on it.</summary
         >
       </Docs>
@@ -927,6 +995,8 @@
       <Docs>
         <summary>
           <i>Illegal byte sequence</i>
+
+          
 
           
 
@@ -955,15 +1025,21 @@
 
           
 
+          
+
           .  An operation that takes a long time to complete (such as a 
 				<see
            cref="M:Mono.Unix.Native.Syscall.connect" />
 
           
 
+          
+
           (2)) was attempted on a non-blocking object (see 
 				<see
            cref="M:Mono.Unix.Native.Syscall.fcntl" />
+
+          
 
           
 
@@ -992,15 +1068,21 @@
 
           
 
+          
+
           .  An asynchronous signal 
 				(such as <see
            cref="F:Mono.Unix.Native.Signum.SIGINT" />
 
           
 
+          
+
            or 
 				<see
            cref="F:Mono.Unix.Native.Signum.SIGQUIT" />
+
+          
 
           
 
@@ -1033,6 +1115,8 @@
 
           
 
+          
+
           .  Some invalid argument was supplied.  
 				(For example, specifying an undefined signal to a 
 				<see
@@ -1040,9 +1124,13 @@
 
           
 
+          
+
           (3) function or a 
 				<see
            cref="M:Mono.Unix.Native.Syscall.kill" />
+
+          
 
           
 
@@ -1071,6 +1159,8 @@
 
           
 
+          
+
           .  Some physical input or output error occurred.  This error will not be reported until a subsequent operation on the same file descriptor and may be lost (over written) by any subsequent errors.</summary
         >
       </Docs>
@@ -1096,9 +1186,13 @@
 
           
 
+          
+
           .  A 
              <see
            cref="M:Mono.Unix.Native.Syscall.connect" />
+
+          
 
           
 
@@ -1109,9 +1203,13 @@
 
           
 
+          
+
           (2) or 
 						 <see
            cref="M:Mono.Unix.Native.Syscall.sendmsg" />
+
+          
 
           
 
@@ -1138,6 +1236,8 @@
       <Docs>
         <summary>
           <i>Is a directory</i>
+
+          
 
           
 
@@ -1375,6 +1475,8 @@
 
           
 
+          
+
           .  
 				A path name lookup involved more than 32 (MAXSYMLINKS) symbolic links</summary
         >
@@ -1420,6 +1522,8 @@
 
           
 
+          
+
           .</summary
         >
       </Docs>
@@ -1445,6 +1549,8 @@
 
           
 
+          
+
           .  Maximum allowable hard links to a single file has been exceeded.</summary
         >
       </Docs>
@@ -1467,6 +1573,8 @@
       <Docs>
         <summary>
           <i>Message too long</i>
+
+          
 
           
 
@@ -1514,13 +1622,19 @@
 
           
 
+          
+
           .  A component of a path name exceeded <c
           >{NAME_MAX}</c>
 
           
 
+          
+
            characters, or an entire path name exceeded <c
           >{PATH_MAX}</c>
+
+          
 
           
 
@@ -1530,9 +1644,13 @@
 
           
 
+          
+
            in 
 				<see
            cref="M:Mono.Unix.Native.Syscall.pathconf" />
+
+          
 
           
 
@@ -1580,6 +1698,8 @@
 
           
 
+          
+
           .  A socket operation encountered a dead network.</summary
         >
       </Docs>
@@ -1602,6 +1722,8 @@
       <Docs>
         <summary>
           <i>Network dropped connection on reset</i>
+
+          
 
           
 
@@ -1630,6 +1752,8 @@
 
           
 
+          
+
           .  A socket operation was attempted to an unreachable network.</summary
         >
       </Docs>
@@ -1652,6 +1776,8 @@
       <Docs>
         <summary>
           <i>Too many open files in system</i>
+
+          
 
           
 
@@ -1696,6 +1822,8 @@
       <Docs>
         <summary>
           <i>No buffer space available</i>
+
+          
 
           
 
@@ -1762,6 +1890,8 @@
 
           
 
+          
+
           .  An attempt was made to apply an inappropriate function to a device, for example, trying to read a write-only device such as a printer.</summary
         >
       </Docs>
@@ -1784,6 +1914,8 @@
       <Docs>
         <summary>
           <i>No such file or directory</i>
+
+          
 
           
 
@@ -1812,6 +1944,8 @@
 
           
 
+          
+
           .  A request was made to execute a file that, although it has the appropriate permissions, was not in the format required for an executable file.</summary
         >
       </Docs>
@@ -1837,6 +1971,8 @@
 
           
 
+          
+
           .  A system-imposed limit on the number of simultaneous file locks was reached.</summary
         >
       </Docs>
@@ -1859,6 +1995,8 @@
       <Docs>
         <summary>
           <i>No locks available</i>
+
+          
 
           
 
@@ -1906,6 +2044,8 @@
 
           
 
+          
+
           .  The new process image required more memory than was allowed by the hardware or by system-imposed memory management constraints.  A lack of swap space is normally temporary; however, a lack of core is not.  Soft limits may be increased to their corresponding hard limits.</summary
         >
       </Docs>
@@ -1928,6 +2068,8 @@
       <Docs>
         <summary>
           <i>No message of desired type</i>
+
+          
 
           
 
@@ -1994,15 +2136,21 @@
 
           
 
+          
+
           .  A bad option or level was specified in a
              <see
            cref="M:Mono.Unix.Native.Syscall.getsockopt" />
 
           
 
+          
+
           (2) or 
 						 <see
            cref="M:Mono.Unix.Native.Syscall.setsockopt" />
+
+          
 
           
 
@@ -2031,9 +2179,13 @@
 
           
 
+          
+
           .  A 
 				<see
            cref="M:Mono.Unix.Native.Syscall.write" />
+
+          
 
           
 
@@ -2101,6 +2253,8 @@
 
           
 
+          
+
           .  Attempted a system call that is not available on this system.</summary
         >
       </Docs>
@@ -2123,6 +2277,8 @@
       <Docs>
         <summary>
           <i>Block device required</i>
+
+          
 
           
 
@@ -2151,6 +2307,8 @@
 
           
 
+          
+
           .  An request to send or receive data was disallowed because the socket was not connected and (when sending on a datagram socket) no address was supplied.</summary
         >
       </Docs>
@@ -2176,6 +2334,8 @@
 
           
 
+          
+
           .  A component of the specified pathname existed, but it was not a directory, when a directory was expected.</summary
         >
       </Docs>
@@ -2198,6 +2358,8 @@
       <Docs>
         <summary>
           <i>Directory not empty</i>
+
+          
 
           
 
@@ -2245,6 +2407,8 @@
 
           
 
+          
+
           .  Self-explanatory</summary
         >
       </Docs>
@@ -2270,9 +2434,13 @@
 
           
 
+          
+
           .  A control function 
 				(see <see
            cref="M:Mono.Unix.Native.Syscall.ioctl" />
+
+          
 
           
 
@@ -2321,6 +2489,8 @@
 
           
 
+          
+
           .  Input or output on a special file referred to a device that did not exist, or made a request beyond the limits of the device.  This error may also occur when, for example, a tape drive is not online or no disk pack is loaded on a drive.</summary
         >
       </Docs>
@@ -2343,6 +2513,8 @@
       <Docs>
         <summary>
           <i>Operation not supported</i>
+
+          
 
           
 
@@ -2371,6 +2543,8 @@
 
           
 
+          
+
           .  A numerical result of the function was too large to be stored in the caller provided space.</summary
         >
       </Docs>
@@ -2393,6 +2567,8 @@
       <Docs>
         <summary>
           <i>Operation not permitted</i>
+
+          
 
           
 
@@ -2421,6 +2597,8 @@
 
           
 
+          
+
           .  The protocol family has not been configured into the system or no implementation for it exists.</summary
         >
       </Docs>
@@ -2443,6 +2621,8 @@
       <Docs>
         <summary>
           <i>Broken pipe</i>
+
+          
 
           
 
@@ -2490,6 +2670,8 @@
 
           
 
+          
+
           .  The protocol has not been configured into the system or no implementation for it exists.</summary
         >
       </Docs>
@@ -2515,6 +2697,8 @@
 
           
 
+          
+
           .  A protocol was specified that does not support the semantics of the socket type requested.  For example, you cannot use the ARPA Internet UDP protocol with type SOCK_STREAM.</summary
         >
       </Docs>
@@ -2537,6 +2721,8 @@
       <Docs>
         <summary>
           <i>Result too large</i>
+
+          
 
           
 
@@ -2641,6 +2827,8 @@
 
           
 
+          
+
            file system.  An attempt was made to modify a file or directory on a file system that was read-only at the time.</summary
         >
       </Docs>
@@ -2666,9 +2854,13 @@
 
           
 
+          
+
           .  A request to send data was disallowed because the socket had already been shut down with a previous 
 				<see
            cref="M:Mono.Unix.Native.Syscall.shutdown" />
+
+          
 
           
 
@@ -2697,6 +2889,8 @@
 
           
 
+          
+
           .  The support for the socket type has not been configured into the system or no implementation for it exists.</summary
         >
       </Docs>
@@ -2722,9 +2916,13 @@
 
           
 
+          
+
           .  An 
 				<see
            cref="M:Mono.Unix.Native.Syscall.lseek" />
+
+          
 
           
 
@@ -2751,6 +2949,8 @@
       <Docs>
         <summary>
           <i>No such process</i>
+
+          
 
           
 
@@ -2795,6 +2995,8 @@
       <Docs>
         <summary>
           <i>Stale NFS file handle</i>
+
+          
 
           
 
@@ -2861,15 +3063,21 @@
 
           
 
+          
+
           .  A 
 				<see
            cref="M:Mono.Unix.Native.Syscall.connect" />
 
           
 
+          
+
           (2) or 
 				<see
            cref="M:Mono.Unix.Native.Syscall.send" />
+
+          
 
           
 
@@ -2918,9 +3126,13 @@
 
           
 
+          
+
           .  The new process was a pure procedure (shared text) file which was open for writing by another process, or while the pure procedure file was being executed an 
 				<see
            cref="M:Mono.Unix.Native.Syscall.open" />
+
+          
 
           
 
@@ -2987,6 +3199,8 @@
 
           
 
+          
+
           .  The quota system ran out of table entries.</summary
         >
       </Docs>
@@ -3028,6 +3242,8 @@
       <Docs>
         <summary>
           <i>Cross-device link</i>
+
+          
 
           
 

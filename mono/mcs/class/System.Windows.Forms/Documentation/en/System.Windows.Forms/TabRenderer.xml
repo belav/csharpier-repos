@@ -19,13 +19,19 @@
 
         
 
+        
+
          class provides a set of static methods that can be used to render a tab control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style. To draw a tab control, use the <see
          cref="M:System.Windows.Forms.TabRenderer.DrawTabPage(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
         
 
+        
+
          method to draw the page, and use the <see
          cref="Overload:System.Windows.Forms.TabRenderer.DrawTabItem" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
         . To determine whether the members of this class can be used, check the value of the <see
          cref="P:System.Windows.Forms.TabRenderer.IsSupported" />
+
+        
 
         
 
@@ -50,8 +60,12 @@
 
         
 
+        
+
          that is set to one of the elements exposed by the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Tab" />
+
+        
 
         
 
@@ -59,6 +73,8 @@
          type="text/html">
           <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
         </format>
+
+        
 
         
 
@@ -95,6 +111,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -107,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -119,8 +141,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -131,8 +157,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+
+          
 
           
 
@@ -168,6 +198,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -180,8 +212,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -192,8 +228,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -204,6 +244,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -211,8 +253,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+
+          
 
           
 
@@ -249,6 +295,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -261,8 +309,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -273,8 +325,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -285,8 +341,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -297,13 +357,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="tabItemText" />
+
+          
 
           
 
@@ -314,8 +380,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+
+          
 
           
 
@@ -353,6 +423,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -365,8 +437,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -377,8 +453,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -389,8 +469,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -401,13 +485,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that specifies the bounds of <paramref
            name="image" />
+
+          
 
           
 
@@ -418,6 +508,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -425,8 +517,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+
+          
 
           
 
@@ -464,6 +560,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -476,8 +574,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -488,8 +590,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -500,8 +606,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -512,13 +622,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="tabItemText" />
+
+          
 
           
 
@@ -529,6 +645,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -536,8 +654,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+
+          
 
           
 
@@ -576,6 +698,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -588,8 +712,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -600,8 +728,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -612,8 +744,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -624,13 +760,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="tabItemText" />
+
+          
 
           
 
@@ -641,8 +783,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -653,6 +799,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -660,8 +808,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+
+          
 
           
 
@@ -701,6 +853,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -713,8 +867,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -725,8 +883,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -737,8 +899,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -749,13 +915,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="tabItemText" />
+
+          
 
           
 
@@ -766,8 +938,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -778,13 +954,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that specifies the bounds of <paramref
            name="image" />
+
+          
 
           
 
@@ -795,6 +977,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -802,8 +986,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+
+          
 
           
 
@@ -844,6 +1032,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -856,8 +1046,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -868,8 +1062,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -880,8 +1078,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -892,13 +1094,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="tabItemText" />
+
+          
 
           
 
@@ -909,8 +1117,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -921,8 +1133,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -933,13 +1149,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that specifies the bounds of <paramref
            name="image" />
+
+          
 
           
 
@@ -950,6 +1172,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -957,8 +1181,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+
+          
 
           
 
@@ -992,6 +1220,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -1004,8 +1234,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1016,8 +1250,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1045,13 +1283,19 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Windows.Forms.TabRenderer.DrawTabItem" />
 
             
 
+            
+
              methods will throw an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1063,6 +1307,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.TabRenderer" />
+
+            
 
             
 

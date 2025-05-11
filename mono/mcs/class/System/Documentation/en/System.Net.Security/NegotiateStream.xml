@@ -27,8 +27,12 @@
 
         
 
+        
+
          class for authentication and to help secure information transmitted between a client and a server. Using <see
          cref="T:System.Net.Security.NegotiateStream" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          methods, which block until the authentication completes, or the asynchronous <see
          cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+        
 
         
 
@@ -61,13 +69,19 @@
 
         
 
+        
+
          or asynchronous <see
          cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
         
 
+        
+
          methods. The client, and optionally the server, is authenticated using the Negotiate security protocol. On Windows 95/98 systems, Windows NT LAN Manager (NTLM) is the protocol used for authentication. On other platforms the Kerberos protocol is used for authentication if both client and server support it; otherwise NTLM is used. For detailed descriptions of these protocols, see the Platform SDK documentation on MSDN, at msdn.microsoft.com/library/. The <see
          cref="T:System.Net.Security.NegotiateStream" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+
+        
 
         
 
@@ -89,13 +107,19 @@
 
         
 
+        
+
          to help secure your data during transmission. Check the <see
          cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
         
 
+        
+
          property to determine whether mutual authentication occurred. You can get information about the remote client or server using the <see
          cref="P:System.Net.Security.NegotiateStream.RemoteIdentity" />
+
+        
 
         
 
@@ -107,8 +131,12 @@
 
         
 
+        
+
          or a <see
          cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+        
 
         
 
@@ -120,8 +148,12 @@
 
         
 
+        
+
          or asynchronous <see
          cref="M:System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+        
 
         
 
@@ -130,13 +162,19 @@
 
         
 
+        
+
          or asynchronous <see
          cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
         
 
+        
+
          methods. If security services such as encryption or signing are enabled, these are automatically applied to your data by the <see
          cref="T:System.Net.Security.NegotiateStream" />
+
+        
 
         
 
@@ -148,13 +186,19 @@
 
         
 
+        
+
          transmits data using a stream that you supply when creating the <see
          cref="T:System.Net.Security.NegotiateStream" />
 
         
 
+        
+
         . When you supply this underlying stream, you have the option to specify whether closing the <see
          cref="T:System.Net.Security.NegotiateStream" />
+
+        
 
         
 
@@ -200,8 +244,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -213,13 +261,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.NegotiateStream" />
+
+          
 
           
 
@@ -260,8 +314,12 @@
 
             
 
+            
+
              parameter, closing the <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -270,8 +328,12 @@
 
             
 
+            
+
              stream; you must explicitly close <paramref
              name="innerStream" />
+
+            
 
             
 
@@ -286,8 +348,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -299,13 +365,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.NegotiateStream" />
+
+          
 
           
 
@@ -316,8 +388,12 @@
 
           
 
+          
+
           true to indicate that closing this <see
            cref="T:System.Net.Security.NegotiateStream" />
+
+          
 
           
 
@@ -326,13 +402,19 @@
 
           
 
+          
+
           ; false to indicate that closing this <see
            cref="T:System.Net.Security.NegotiateStream" />
 
           
 
+          
+
            also closes <paramref
            name="innerStream" />
+
+          
 
           
 
@@ -370,8 +452,12 @@
 
             
 
+            
+
             . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see
              cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+
+            
 
             
 
@@ -380,8 +466,12 @@
 
             
 
+            
+
             , and mutual authentication is requested. The <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -393,8 +483,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+
+            
 
             
 
@@ -403,8 +497,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -416,8 +514,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -466,13 +568,19 @@
 
             
 
+            
+
             , the security level is <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
+            
+
             , and mutual authentication is requested. The <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -484,8 +592,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+
+            
 
             
 
@@ -494,8 +606,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -511,8 +627,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkCredential" />
+
+          
 
           
 
@@ -520,6 +640,8 @@
         >
         <param name="targetName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -568,8 +690,12 @@
 
             
 
+            
+
              parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+            
 
             
 
@@ -578,8 +704,12 @@
 
             
 
+            
+
              has been granted. You must check the <see
              cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+
+            
 
             
 
@@ -588,8 +718,12 @@
 
             
 
+            
+
              properties to determine what security services are used by the <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -601,8 +735,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -618,8 +756,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkCredential" />
+
+          
 
           
 
@@ -630,6 +772,8 @@
 
           
 
+          
+
           The Service Principal Name (SPN) that uniquely identifies the server to authenticate.</param
         >
         <param name="requiredProtectionLevel">
@@ -637,8 +781,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.Security.ProtectionLevel" />
+
+          
 
           
 
@@ -649,8 +797,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Principal.TokenImpersonationLevel" />
+
+          
 
           
 
@@ -688,13 +840,19 @@
 
             
 
+            
+
             . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see
              cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
 
             
 
+            
+
             , and the security level is <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+            
 
             
 
@@ -706,8 +864,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+
+            
 
             
 
@@ -716,8 +878,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -729,6 +895,8 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
@@ -737,8 +905,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -791,8 +963,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+
+            
 
             
 
@@ -801,8 +977,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -814,6 +994,8 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
@@ -822,8 +1004,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -839,8 +1025,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkCredential" />
+
+          
 
           
 
@@ -851,8 +1041,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.Security.ProtectionLevel" />
+
+          
 
           
 
@@ -863,8 +1057,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Principal.TokenImpersonationLevel" />
+
+          
 
           
 
@@ -908,8 +1106,12 @@
 
             
 
+            
+
             . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see
              cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+
+            
 
             
 
@@ -918,8 +1120,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -931,6 +1137,8 @@
 
             
 
+            
+
              method overloads. </para
           >
           <para
@@ -939,8 +1147,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -955,8 +1167,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -975,6 +1191,8 @@
 
             
 
+            
+
              object indicating the status of the asynchronous operation. </para
           >
         </returns>
@@ -983,8 +1201,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -995,8 +1217,12 @@
 
           
 
+          
+
           A user-defined object containing information about the operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -1042,6 +1268,8 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
@@ -1050,8 +1278,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -1066,8 +1298,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -1086,6 +1322,8 @@
 
             
 
+            
+
              object indicating the status of the asynchronous operation. </para
           >
         </returns>
@@ -1094,8 +1332,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkCredential" />
+
+          
 
           
 
@@ -1106,6 +1348,8 @@
 
           
 
+          
+
           The Service Principal Name (SPN) that uniquely identifies the server to authenticate.</param
         >
         <param name="asyncCallback">
@@ -1113,8 +1357,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1125,8 +1373,12 @@
 
           
 
+          
+
           A user-defined object containing information about the write operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -1177,8 +1429,12 @@
 
             
 
+            
+
              parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+            
 
             
 
@@ -1187,8 +1443,12 @@
 
             
 
+            
+
              has been granted. You must check the <see
              cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+
+            
 
             
 
@@ -1197,8 +1457,12 @@
 
             
 
+            
+
              properties to determine what security services are used by the <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -1210,6 +1474,8 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
@@ -1218,8 +1484,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -1234,8 +1504,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -1254,6 +1528,8 @@
 
             
 
+            
+
              object indicating the status of the asynchronous operation. </para
           >
         </returns>
@@ -1262,8 +1538,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkCredential" />
+
+          
 
           
 
@@ -1274,6 +1554,8 @@
 
           
 
+          
+
           The Service Principal Name (SPN) that uniquely identifies the server to authenticate.</param
         >
         <param name="requiredProtectionLevel">
@@ -1281,8 +1563,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.Security.ProtectionLevel" />
+
+          
 
           
 
@@ -1293,8 +1579,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Principal.TokenImpersonationLevel" />
+
+          
 
           
 
@@ -1305,8 +1595,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1317,8 +1611,12 @@
 
           
 
+          
+
           A user-defined object containing information about the write operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -1362,13 +1660,19 @@
 
             
 
+            
+
             . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see
              cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
 
             
 
+            
+
             , the security level is <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+            
 
             
 
@@ -1380,8 +1684,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+
+            
 
             
 
@@ -1390,8 +1698,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -1403,6 +1715,8 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
@@ -1411,8 +1725,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -1431,6 +1749,8 @@
 
             
 
+            
+
              object indicating the status of the asynchronous operation. </para
           >
         </returns>
@@ -1439,8 +1759,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1451,8 +1775,12 @@
 
           
 
+          
+
           A user-defined object containing information about the operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -1502,8 +1830,12 @@
 
             
 
+            
+
              parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+            
 
             
 
@@ -1512,8 +1844,12 @@
 
             
 
+            
+
              has been granted. You must check the <see
              cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+
+            
 
             
 
@@ -1522,8 +1858,12 @@
 
             
 
+            
+
              properties to determine what security services are used by the <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -1535,6 +1875,8 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
@@ -1543,8 +1885,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -1559,8 +1905,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -1579,6 +1929,8 @@
 
             
 
+            
+
              object indicating the status of the asynchronous operation. </para
           >
         </returns>
@@ -1587,8 +1939,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkCredential" />
+
+          
 
           
 
@@ -1599,8 +1955,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.Security.ProtectionLevel" />
+
+          
 
           
 
@@ -1611,8 +1971,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Principal.TokenImpersonationLevel" />
+
+          
 
           
 
@@ -1623,8 +1987,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1635,8 +2003,12 @@
 
           
 
+          
+
           A user-defined object containing information about the operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -1684,6 +2056,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1692,8 +2066,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -1708,8 +2086,12 @@
 
             
 
+            
+
              class does not support multiple simultaneous read operations. If you attempt to start a read operation while another read operation is already executing on the same stream, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1721,8 +2103,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -1731,8 +2117,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -1751,6 +2141,8 @@
 
             
 
+            
+
              object indicating the status of the asynchronous operation. </para
           >
         </returns>
@@ -1759,8 +2151,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1771,8 +2167,12 @@
 
           
 
+          
+
           The zero-based location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1783,6 +2183,8 @@
 
           
 
+          
+
           The maximum number of bytes to read from the stream.</param
         >
         <param name="asyncCallback">
@@ -1790,8 +2192,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1802,8 +2208,12 @@
 
           
 
+          
+
           A user-defined object containing information about the read operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -1851,6 +2261,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1859,8 +2271,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -1875,8 +2291,12 @@
 
             
 
+            
+
              class does not support multiple simultaneous write operations. If you attempt to start a write operation while another write operation is already executing on the same stream, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1888,8 +2308,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -1898,8 +2322,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -1914,6 +2342,8 @@
 
             
 
+            
+
             s from the specified buffer to the stream.</para
           >
         </summary>
@@ -1925,6 +2355,8 @@
 
             
 
+            
+
              object indicating the status of the asynchronous operation. </para
           >
         </returns>
@@ -1933,8 +2365,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1945,8 +2381,12 @@
 
           
 
+          
+
           The zero-based location in<paramref
            name=" buffer" />
+
+          
 
           
 
@@ -1957,13 +2397,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
 
           
 
+          
+
            value that specifies the number of bytes to read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1974,8 +2420,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1986,8 +2436,12 @@
 
           
 
+          
+
           A user-defined object containing information about the write operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -2017,8 +2471,12 @@
 
             
 
+            
+
              property on the underlying stream. The underlying stream is specified when you create an instance of the <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -2030,6 +2488,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -2060,8 +2520,12 @@
 
             
 
+            
+
              object or its underlying stream. The underlying stream is specified when you create an instance of the <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -2073,6 +2537,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -2108,8 +2574,12 @@
 
             
 
+            
+
              property on the underlying stream. The underlying stream is specified when you create an instance of the <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -2121,6 +2591,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -2151,8 +2623,12 @@
 
             
 
+            
+
              property on the underlying stream. The underlying stream is specified when you create an instance of the <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -2164,6 +2640,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -2204,8 +2682,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2214,8 +2696,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2227,8 +2713,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -2243,11 +2733,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2290,8 +2784,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+
+            
 
             
 
@@ -2300,8 +2798,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -2313,8 +2815,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -2323,6 +2829,8 @@
           <para
             >To perform this operation synchronously, use one of the <see
              cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -2337,6 +2845,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2345,13 +2855,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            instance returned by a call to <see
            cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+          
 
           
 
@@ -2395,8 +2911,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+
+            
 
             
 
@@ -2405,8 +2925,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -2418,8 +2942,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Authentication.InvalidCredentialException" />
+
+            
 
             
 
@@ -2428,6 +2956,8 @@
           <para
             >To perform this operation synchronously, use the <see
              cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+
+            
 
             
 
@@ -2442,6 +2972,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2450,13 +2982,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            instance returned by a call to <see
            cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+          
 
           
 
@@ -2500,6 +3038,8 @@
 
             
 
+            
+
              method. </para
           >
           <para
@@ -2508,8 +3048,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -2518,8 +3062,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -2534,6 +3082,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2545,6 +3095,8 @@
 
             
 
+            
+
              value that specifies the number of bytes read from the underlying stream.</para
           >
         </returns>
@@ -2553,8 +3105,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -2599,8 +3155,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -2609,8 +3169,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -2619,6 +3183,8 @@
           <para
             >To perform this operation synchronously, use the <see
              cref="M:System.Net.Security.NegotiateStream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2633,6 +3199,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2641,8 +3209,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -2678,6 +3250,8 @@
           <para
             >This method invokes <see
              cref="M:System.IO.Stream.Flush" />
+
+            
 
             
 
@@ -2723,8 +3297,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -2733,8 +3311,12 @@
 
             
 
+            
+
              , <see
              cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+
+            
 
             
 
@@ -2774,8 +3356,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -2784,8 +3370,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -2797,6 +3387,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -2836,8 +3428,12 @@
 
             
 
+            
+
              value that indicates whether this <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -2881,6 +3477,8 @@
 
             
 
+            
+
              value that indicates whether both the server and the client have been authenticated.</para
           >
         </summary>
@@ -2914,8 +3512,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -2930,8 +3532,12 @@
 
             
 
+            
+
              value that indicates whether the local side of the connection used by this <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -2971,6 +3577,8 @@
 
             
 
+            
+
              value that indicates whether the data sent using this stream is signed.</para
           >
         </summary>
@@ -2995,6 +3603,8 @@
           <para
             >This property returns the value returned by invoking the <see
              cref="P:System.IO.Stream.Length" />
+
+            
 
             
 
@@ -3026,6 +3636,8 @@
           <para
             >This property returns the value returned by invoking the <see
              cref="P:System.IO.Stream.Position" />
+
+            
 
             
 
@@ -3075,13 +3687,19 @@
 
             
 
+            
+
              bytes from the current stream and stores them in <paramref
              name="buffer" />
 
             
 
+            
+
              beginning at <paramref
              name="offset" />
+
+            
 
             
 
@@ -3093,8 +3711,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -3103,8 +3725,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -3113,6 +3739,8 @@
           <para
             >To perform this operation asynchronously, use the <see
              cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -3131,6 +3759,8 @@
 
             
 
+            
+
              value that specifies the number of bytes read from the underlying stream. When there is no more data to be read, returns 0.</para
           >
         </returns>
@@ -3139,8 +3769,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -3151,13 +3785,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
 
           
 
+          
+
            containing the zero-based location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3168,8 +3808,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -3199,8 +3843,12 @@
 
             
 
+            
+
              property on the underlying stream. When you set this property, the <see
              cref="P:System.IO.Stream.ReadTimeout" />
+
+            
 
             
 
@@ -3212,13 +3860,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Security.NegotiateStream.ReadTimeout" />
 
             
 
+            
+
              is in milliseconds and is set to <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -3264,8 +3918,12 @@
 
             
 
+            
+
              containing the Service Principal Name (SPN) of the server and the authentication protocol used. When accessed by the server, this property returns a <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -3274,8 +3932,12 @@
 
             
 
+            
+
              is not available, client information is returned to the server in a <see
              cref="T:System.Security.Principal.GenericIdentity" />
+
+            
 
             
 
@@ -3324,6 +3986,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3332,6 +3996,8 @@
           <para
             >Throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3346,6 +4012,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3354,10 +4022,14 @@
 
           
 
+          
+
           This value is ignored.</param
         >
         <param name="origin">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3399,8 +4071,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -3445,11 +4121,15 @@
 
             
 
+            
+
              on the underlying stream.</para
           >
           <para
             >This method blocks while the write operation completes. To prevent blocking while the operation completes, use the <see
              cref="M:System.Net.Security.NegotiateStream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -3461,8 +4141,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -3471,8 +4155,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -3484,8 +4172,12 @@
 
             
 
+            
+
              class does not support multiple simultaneous write operations. If you attempt to start a write operation while another write operation is already executing on the same stream, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3500,6 +4192,8 @@
 
             
 
+            
+
             s to the underlying stream using the specified buffer and offset.</para
           >
         </summary>
@@ -3508,8 +4202,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -3520,13 +4218,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
 
           
 
+          
+
            containing the zero-based location in<paramref
            name=" buffer" />
+
+          
 
           
 
@@ -3537,13 +4241,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
 
           
 
+          
+
            containing the number of bytes to read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3573,8 +4283,12 @@
 
             
 
+            
+
              property on the underlying stream. For set operations, the specified value sets the <see
              cref="P:System.IO.Stream.WriteTimeout" />
+
+            
 
             
 
@@ -3586,13 +4300,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Security.NegotiateStream.WriteTimeout" />
 
             
 
+            
+
              is in milliseconds and is set to <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 

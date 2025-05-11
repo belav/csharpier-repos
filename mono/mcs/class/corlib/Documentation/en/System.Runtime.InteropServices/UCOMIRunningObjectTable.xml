@@ -41,6 +41,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -174,6 +176,8 @@
 
           
 
+          
+
           Reference to the moniker to search for in the Running Object Table. </param
         >
       </Docs>
@@ -273,6 +277,8 @@
         </summary>
         <param name="dwRegister">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

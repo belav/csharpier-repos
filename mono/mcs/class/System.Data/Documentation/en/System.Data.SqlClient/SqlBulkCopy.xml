@@ -22,8 +22,12 @@
 
         
 
+        
+
          class lets you write managed code solutions that provide similar functionality. There are other ways to load data into a SQL Server table (INSERT statements, for example), but <see
          cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          class can be used to write data only to SQL Server tables. However, the data source is not limited to SQL Server; any data source can be used, as long as the data can be loaded to a <see
          cref="T:System.Data.DataTable" />
 
         
 
+        
+
          instance or read with a <see
          cref="T:System.Data.IDataReader" />
+
+        
 
         
 
@@ -52,13 +62,19 @@
 
         
 
+        
+
          will fail when bulk loading a <see
          cref="T:System.Data.DataTable" />
 
         
 
+        
+
          column of type <see
          cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
             
 
+            
+
              instance is initialized, the connection remains open after the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -105,8 +125,12 @@
 
             
 
+            
+
              argument is null, an <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -121,8 +145,12 @@
 
             
 
+            
+
              class using the specified open instance of <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -134,13 +162,19 @@
 
           
 
+          
+
           The already open <see
            cref="T:System.Data.SqlClient.SqlConnection" />
 
           
 
+          
+
            instance that will be used to perform the bulk copy operation. If your connection string does not use Integrated Security = true, you can use <see
            cref="T:System.Data.SqlClient.SqlCredential" />
+
+          
 
           
 
@@ -167,8 +201,12 @@
 
             
 
+            
+
              is null, an <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -177,8 +215,12 @@
 
             
 
+            
+
              is an empty string, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -193,8 +235,12 @@
 
             
 
+            
+
              based on the supplied <paramref
              name="connectionString" />
+
+            
 
             
 
@@ -203,8 +249,12 @@
 
             
 
+            
+
              to initialize a new instance of the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -216,8 +266,12 @@
 
           
 
+          
+
           The string defining the connection that will be opened for use by the <see
            cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+          
 
           
 
@@ -226,13 +280,19 @@
 
           
 
+          
+
            or <see
            cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlBulkCopyOptions,System.Data.SqlClient.SqlTransaction)" />
 
           
 
+          
+
            and <see
            cref="T:System.Data.SqlClient.SqlCredential" />
+
+          
 
           
 
@@ -262,6 +322,8 @@
 
             
 
+            
+
              topic.</para
           >
         </remarks>
@@ -273,8 +335,12 @@
 
             
 
+            
+
              based on the supplied <paramref
              name="connectionString" />
+
+            
 
             
 
@@ -283,8 +349,12 @@
 
             
 
+            
+
              to initialize a new instance of the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -293,8 +363,12 @@
 
             
 
+            
+
              instance behaves according to options supplied in the <paramref
              name="copyOptions" />
+
+            
 
             
 
@@ -306,8 +380,12 @@
 
           
 
+          
+
           The string defining the connection that will be opened for use by the <see
            cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+          
 
           
 
@@ -316,13 +394,19 @@
 
           
 
+          
+
            or <see
            cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlBulkCopyOptions,System.Data.SqlClient.SqlTransaction)" />
 
           
 
+          
+
            and <see
            cref="T:System.Data.SqlClient.SqlCredential" />
+
+          
 
           
 
@@ -333,8 +417,12 @@
 
           
 
+          
+
           A combination of values from the <see
            cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
+
+          
 
           
 
@@ -365,6 +453,8 @@
 
             
 
+            
+
              argument is not null, an InvalidArgumentException is thrown.</para
           >
           <para
@@ -374,6 +464,8 @@
                 >Performing a Bulk Copy Operation in a Transaction</a
               >
             </format>
+
+            
 
             
 
@@ -388,8 +480,12 @@
 
             
 
+            
+
              class using the supplied existing open instance of <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -398,13 +494,19 @@
 
             
 
+            
+
              instance behaves according to options supplied in the <paramref
              name="copyOptions" />
 
             
 
+            
+
              parameter. If a non-null <see
              cref="T:System.Data.SqlClient.SqlTransaction" />
+
+            
 
             
 
@@ -416,13 +518,19 @@
 
           
 
+          
+
           The already open <see
            cref="T:System.Data.SqlClient.SqlConnection" />
 
           
 
+          
+
            instance that will be used to perform the bulk copy. If your connection string does not use Integrated Security = true, you can use <see
            cref="T:System.Data.SqlClient.SqlCredential" />
+
+          
 
           
 
@@ -433,8 +541,12 @@
 
           
 
+          
+
           A combination of values from the <see
            cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
+
+          
 
           
 
@@ -445,8 +557,12 @@
 
           
 
+          
+
           An existing <see
            cref="T:System.Data.SqlClient.SqlTransaction" />
+
+          
 
           
 
@@ -473,11 +589,15 @@
 
             
 
+            
+
              rows have been processed or there are no more rows to send to the destination data source.</para
           >
           <para
             >Zero (the default) indicates that each <see
              cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+
+            
 
             
 
@@ -489,8 +609,12 @@
 
             
 
+            
+
              instance has been declared without the <see
              cref="F:System.Data.SqlClient.SqlBulkCopyOptions.UseInternalTransaction" />
+
+            
 
             
 
@@ -499,8 +623,12 @@
 
             
 
+            
+
              rows at a time, but no transaction-related action is taken. If <see
              cref="F:System.Data.SqlClient.SqlBulkCopyOptions.UseInternalTransaction" />
+
+            
 
             
 
@@ -512,8 +640,12 @@
 
             
 
+            
+
              property can be set at any time. If a bulk copy is already in progress, the current batch is sized according to the previous batch size. Subsequent batches use the new size. If the <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
+
+            
 
             
 
@@ -522,8 +654,12 @@
 
             
 
+            
+
              operation is already in progress, that operation loads the data as a single batch. Any subsequent <see
              cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+
+            
 
             
 
@@ -532,8 +668,12 @@
 
             
 
+            
+
              instance use the new <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
+
+            
 
             
 
@@ -586,8 +726,12 @@
 
             
 
+            
+
              on the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -596,8 +740,12 @@
 
             
 
+            
+
              method will throw an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -609,13 +757,19 @@
 
             
 
+            
+
              method from the <see
              cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
 
             
 
+            
+
              event causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -627,6 +781,8 @@
 
             
 
+            
+
              instances are closed implicitly at the end of a using block.</para
           >
         </remarks>
@@ -635,6 +791,8 @@
           <para
             >Closes the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -665,8 +823,12 @@
 
             
 
+            
+
              collection is unnecessary. However, if the column counts differ, or the ordinal positions are not consistent, you must use <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+
+            
 
             
 
@@ -678,6 +840,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -686,6 +850,8 @@
           <para
             >Returns a collection of <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+            
 
             
 
@@ -713,13 +879,19 @@
 
             
 
+            
+
              has not been set when <see
              cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
             
 
+            
+
              is called, an <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -731,8 +903,12 @@
 
             
 
+            
+
              is modified while a <see
              cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+
+            
 
             
 
@@ -741,8 +917,12 @@
 
             
 
+            
+
              value is used the next time a <see
              cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+
+            
 
             
 
@@ -753,11 +933,15 @@
 
             
 
+            
+
              is a three-part name (&lt;database&gt;.&lt;owningschema&gt;.&lt;name&gt;). You can qualify the table name with its database and owning schema if you choose. However, if the table name uses an underscore ("_") or any other special characters, you must escape the name using surrounding brackets as in ([&lt;database&gt;.&lt;owningschema&gt;.&lt;name_01&gt;]). For more information, see "Identifiers" in SQL Server Books Online.</para
           >
           <para
             >You can bulk-copy data to a temporary table by using a value such as tempdb..#table or tempdb.&lt;owner&gt;.#table for the <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+
+            
 
             
 
@@ -789,6 +973,8 @@
 
             
 
+            
+
              property can be set at any time, even while a bulk copy operation is underway. Changes made during a bulk copy operation take effect after the next notification. The new setting applies to all subsequent operations on the same instance.</para
           >
           <para
@@ -797,8 +983,12 @@
 
             
 
+            
+
              is set to a number less than zero, an <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -832,13 +1022,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
 
             
 
+            
+
              are independent. Receipt of a <see
              cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
+
+            
 
             
 
@@ -850,8 +1046,12 @@
 
             
 
+            
+
             ) or SqlConnection.Close (<see
              cref="M:System.Data.SqlClient.SqlConnection.Close" />
+
+            
 
             
 
@@ -860,8 +1060,12 @@
 
             
 
+            
+
              being thrown, and the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -870,8 +1074,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlClient.SqlRowsCopiedEventArgs" />
+
+            
 
             
 
@@ -884,8 +1092,12 @@
 
             
 
+            
+
              for examples that use the <see
              cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
+
+            
 
             
 
@@ -897,6 +1109,8 @@
 
             
 
+            
+
              event. However, you can open a different connection.</para
           >
         </remarks>
@@ -905,6 +1119,8 @@
           <para
             >Occurs every time that the number of rows specified by the <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
+
+            
 
             
 
@@ -932,8 +1148,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -942,8 +1162,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -957,10 +1181,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -973,8 +1201,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+              
 
               
 
@@ -987,6 +1219,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -1019,6 +1253,8 @@
 
             
 
+            
+
              is busy serving it, and no other operations can be performed on the connection.</para
           >
           <para
@@ -1027,8 +1263,12 @@
 
             
 
+            
+
              collection maps from the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -1043,13 +1283,19 @@
 
             
 
+            
+
              array to a destination table specified by the <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -1061,8 +1307,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -1094,11 +1344,15 @@
 
             
 
+            
+
              are copied to the destination table except those that have been deleted.</para
           >
           <para
             >While the bulk copy operation is in progress, the associated destination <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -1110,8 +1364,12 @@
 
             
 
+            
+
              collection maps from the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1126,13 +1384,19 @@
 
             
 
+            
+
              to a destination table specified by the <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -1144,8 +1408,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -1177,13 +1445,19 @@
 
             
 
+            
+
              or a similar call, so the next available row is the first row. To process multiple results, call <see
              cref="M:System.Data.IDataReader.NextResult" />
 
             
 
+            
+
              on the data reader and call <see
              cref="M:System.Data.SqlClient.SqlBulkCopy.WriteToServer(System.Data.IDataReader)" />
+
+            
 
             
 
@@ -1195,13 +1469,19 @@
 
             
 
+            
+
              modifies the state of the reader. The method will call <see
              cref="M:System.Data.IDataReader.Read" />
 
             
 
+            
+
              until it returns false, the operation is aborted, or an error occurs. This means that the data reader will be in a different state, probably at the end of the result set, when the <see
              cref="M:System.Data.SqlClient.SqlBulkCopy.WriteToServer(System.Data.IDataReader)" />
+
+            
 
             
 
@@ -1213,11 +1493,15 @@
 
             
 
+            
+
              is busy serving it, and no other operations can be performed on the connection.</para
           >
           <para
             >The <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+
+            
 
             
 
@@ -1232,13 +1516,19 @@
 
             
 
+            
+
              to a destination table specified by the <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -1250,8 +1540,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.IDataReader" />
+
+          
 
           
 
@@ -1284,8 +1578,12 @@
 
             
 
+            
+
              that are in the states indicated in the <paramref
              name="rowState" />
+
+            
 
             
 
@@ -1298,8 +1596,12 @@
 
               
 
+              
+
                is specified, any <see
                cref="F:System.Data.DataRowState.Unchanged" />
+
+              
 
               
 
@@ -1308,8 +1610,12 @@
 
               
 
+              
+
               , and <see
                cref="F:System.Data.DataRowState.Modified" />
+
+              
 
               
 
@@ -1322,6 +1628,8 @@
 
             
 
+            
+
              is busy serving it, and no other operations can be performed on the connection.</para
           >
           <para
@@ -1330,8 +1638,12 @@
 
             
 
+            
+
              collection maps from the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1346,13 +1658,19 @@
 
             
 
+            
+
              to a destination table specified by the <see
              cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -1364,8 +1682,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -1376,8 +1698,12 @@
 
           
 
+          
+
           A value from the <see
            cref="T:System.Data.DataRowState" />
+
+          
 
           
 

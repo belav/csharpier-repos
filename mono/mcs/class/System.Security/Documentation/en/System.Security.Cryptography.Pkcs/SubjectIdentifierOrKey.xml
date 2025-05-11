@@ -28,13 +28,19 @@
 
         
 
+        
+
          class defines the type of the identifier of a subject, such as a <see
          cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
         
 
+        
+
          or a <see
          cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+        
 
         
 
@@ -72,6 +78,8 @@
 
             
 
+            
+
              property retrieves the type of subject identifier or key. The subject can be identified by the certificate issuer and serial number, the hash of the subject key, or the subject key.</para
           >
         </summary>
@@ -100,13 +108,19 @@
 
             
 
+            
+
              property retrieves the value of the subject identifier or  key. Use the <see
              cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Type" />
 
             
 
+            
+
              property to determine the type of subject identifier or key, and use the <see
              cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Value" />
+
+            
 
             
 

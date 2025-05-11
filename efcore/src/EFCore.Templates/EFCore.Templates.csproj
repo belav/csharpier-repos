@@ -46,7 +46,7 @@
     <Task>
       <Using Namespace="System.IO" />
       <Code Type="Fragment" Language="cs">
-        <![CDATA[
+<![CDATA[
 const string importLine = @"<#@ import namespace=""Microsoft.EntityFrameworkCore.Infrastructure"" #>";
 
 var linePragmasRemoved = false;

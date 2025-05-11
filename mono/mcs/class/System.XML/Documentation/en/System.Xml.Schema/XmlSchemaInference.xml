@@ -24,13 +24,19 @@
 
         
 
+        
+
          class in the <see
          cref="N:System.Xml.Schema" />
 
         
 
+        
+
          namespace allows you to infer an XML Schema Definition Language (XSD) schema from the structure of an XML document. The <see
          cref="T:System.Xml.Schema.XmlSchemaInference" />
+
+        
 
         
 
@@ -42,6 +48,8 @@
 
         
 
+        
+
          class supports the W3C XML and XML Schemas standards. It can be used to infer a new schema or to refine an existing schema.</para
       >
     </remarks>
@@ -50,6 +58,8 @@
       <para
         >Infers an XML Schema Definition Language (XSD) schema from an XML document. The <see
          cref="T:System.Xml.Schema.XmlSchemaInference" />
+
+        
 
         
 
@@ -78,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaInference" />
+
+            
 
             
 
@@ -116,8 +128,12 @@
 
             
 
+            
+
              method infers one or more W3C XML Schema Definition Language (XSD) schemas from the XML instance document contained in the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -126,6 +142,8 @@
           <para
             >The following are important notes to consider when using the <see
              cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -139,6 +157,8 @@
 
                 
 
+                
+
                  method ignores any xsi:type, xsi:schemaLocation, or xsi:noNamespaceSchemaLocation attributes in the XML document.</para
               >
             </item>
@@ -146,6 +166,8 @@
               <para
                 >If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -159,8 +181,12 @@
 
                 
 
+                
+
                  object is positioned on an element that is not the root element of the XML document, a schema is inferred for only that element. If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -169,8 +195,12 @@
 
                 
 
+                
+
                  method is called on the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -179,13 +209,19 @@
 
                 
 
+                
+
                  is <see
                  cref="F:System.Xml.XmlNodeType.Element" />
 
                 
 
+                
+
                 ). At this point, the inference process starts from that element. If no element is encountered until the end of the document, an <see
                  cref="T:System.ArgumentException" />
+
+                
 
                 
 
@@ -202,6 +238,8 @@
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -213,6 +251,8 @@
 
             
 
+            
+
              object containing the inferred schemas.</para
           >
         </returns>
@@ -221,8 +261,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -261,8 +305,12 @@
 
             
 
+            
+
              method infers one or more W3C XML Schema Definition Language (XSD) schemas from the XML instance document contained in the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -271,6 +319,8 @@
           <para
             >The following are important notes to consider when using the <see
              cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)" />
+
+            
 
             
 
@@ -284,6 +334,8 @@
 
                 
 
+                
+
                  method ignores any xsi:type, xsi:schemaLocation, or xsi:noNamespaceSchemaLocation attributes in the XML document.</para
               >
             </item>
@@ -291,6 +343,8 @@
               <para
                 >If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -304,8 +358,12 @@
 
                 
 
+                
+
                  object is positioned on an element that is not the root element of the XML document, a schema is inferred for only that element. If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -314,8 +372,12 @@
 
                 
 
+                
+
                  method is called on the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -324,13 +386,19 @@
 
                 
 
+                
+
                  is <see
                  cref="F:System.Xml.XmlNodeType.Element" />
 
                 
 
+                
+
                 ). At this point, the inference process starts from that element. If no element is encountered until the end of the document, an <see
                  cref="T:System.ArgumentException" />
+
+                
 
                 
 
@@ -344,8 +412,12 @@
 
                 
 
+                
+
                  object is passed as a parameter and the element upon which the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -354,8 +426,12 @@
 
                 
 
+                
+
                 , the inferred schema is used to refine an existing schema in the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -372,8 +448,12 @@
 
             
 
+            
+
              object specified, and refines the inferred schema using an existing schema in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -388,6 +468,8 @@
 
             
 
+            
+
              object containing the inferred schemas.</para
           >
         </returns>
@@ -396,8 +478,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -408,8 +494,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -445,8 +535,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
+
+            
 
             
 
@@ -458,8 +552,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Relaxed" />
+
+            
 
             
 
@@ -471,8 +569,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
+
+            
 
             
 
@@ -484,6 +586,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Schema.XmlSchemaInference.InferenceOption" />
+
+            
 
             
 
@@ -520,8 +624,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Relaxed" />
+
+            
 
             
 
@@ -530,8 +638,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
+
+            
 
             
 
@@ -543,8 +655,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
+
+            
 
             
 
@@ -556,6 +672,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Schema.XmlSchemaInference.InferenceOption" />
+
+            
 
             
 

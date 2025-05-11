@@ -48,7 +48,8 @@
         <ReturnType>Cairo.LineJoin</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>rounded join</summary>
+        <summary
+>rounded join</summary>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

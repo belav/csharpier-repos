@@ -50,11 +50,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="operation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -96,6 +100,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -104,10 +110,14 @@
 
           
 
+          
+
           The target of the dynamic operation.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,6 +159,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -157,10 +169,14 @@
 
           
 
+          
+
           The target of the dynamic binary operation.</param
         >
         <param name="arg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,11 +219,15 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,10 +238,14 @@
 
           
 
+          
+
           The right hand side operand of the dynamic binary operation.</param
         >
         <param name="errorSuggestion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

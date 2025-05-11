@@ -73,8 +73,12 @@
 
         
 
+        
+
          does not have any user interface (UI) specific features. If you are authoring a control that does not have a UI, or combines other controls that render their own UI, derive from <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -83,8 +87,12 @@
 
         
 
+        
+
          or any control in the <see
          cref="N:System.Web.UI.WebControls" />
+
+        
 
         
 
@@ -96,8 +104,12 @@
 
         
 
+        
+
          class is the base class for all ASP.NET server controls, including custom controls, user controls, and pages. ASP.NET pages are instances of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -106,11 +118,15 @@
 
         
 
+        
+
          class, and that handle requests for files that have an .aspx extension. </para
       >
       <para
         >The <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -126,10 +142,14 @@
 
         
 
+        
+
         , <format
          type="text/html">
           <a href="d49bc4d5-efb7-4caa-a2fe-e4d3cec63c05">Security Policy Best Practices</a>
         </format>
+
+        
 
         
 
@@ -140,6 +160,8 @@
 
         
 
+        
+
         . For more specific information, see <format
          type="text/html">
           <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
@@ -147,10 +169,14 @@
 
         
 
+        
+
         , <format
          type="text/html">
           <a href="6f70ac33-6e11-4e98-ab7d-bae9c0e7eefa">How to: Display Safe Error Messages</a>
         </format>
+
+        
 
         
 
@@ -163,10 +189,14 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="3c0e7514-cff2-4bed-936d-ee3f7b740190">Introduction to the Validation Controls</a>
         </format>
+
+        
 
         
 
@@ -191,6 +221,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -225,8 +257,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.Web.UI.Adapters.ControlAdapter" />
+
+            
 
             
 
@@ -239,6 +275,8 @@
                 >Architectural Overview of Adaptive Control Behavior</a
               >
             </format>
+
+            
 
             
 
@@ -277,8 +315,12 @@
 
             
 
+            
+
              method is called immediately after a control is added to the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -293,8 +335,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -306,8 +352,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -318,8 +368,12 @@
 
           
 
+          
+
           The index of the control in the <see
            cref="P:System.Web.UI.Control.Controls" />
+
+          
 
           
 
@@ -348,13 +402,19 @@
 
             
 
+            
+
              objects to the server control's <see
              cref="T:System.Web.UI.ControlCollection" />
 
             
 
+            
+
              object. This collection is accessible through <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -369,6 +429,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -377,8 +439,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -419,8 +485,12 @@
 
             
 
+            
+
              method sets style properties on the control based on skin properties defined in a theme directory. The skin applied is either the default skin for the control or the skin specified in the <see
              cref="P:System.Web.UI.Control.SkinID" />
+
+            
 
             
 
@@ -429,8 +499,12 @@
 
             
 
+            
+
              method is called by ASP.NET for declarative controls placed on a page. You must call the <see
              cref="M:System.Web.UI.Control.ApplyStyleSheetSkin(System.Web.UI.Page)" />
+
+            
 
             
 
@@ -438,6 +512,8 @@
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -453,8 +529,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -495,8 +575,12 @@
 
             
 
+            
+
              property contains the application-relative path to the page or user control that contains the current control. For example, if the Web page resides at http://www.contoso.com/application/subdirectory, the <see
              cref="P:System.Web.UI.Control.AppRelativeTemplateSourceDirectory" />
+
+            
 
             
 
@@ -505,6 +589,8 @@
           <para
             >To return the virtual path ("application/subdirectory"), use the <see
              cref="P:System.Web.UI.Control.TemplateSourceDirectory" />
+
+            
 
             
 
@@ -519,8 +605,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -548,8 +638,12 @@
 
             
 
+            
+
              property contains a reference to the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -561,8 +655,12 @@
 
             
 
+            
+
              property is the same as the <see
              cref="P:System.Web.UI.Control.NamingContainer" />
+
+            
 
             
 
@@ -571,8 +669,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -624,10 +726,14 @@
 
             
 
+            
+
              property. When you enable tracing, either for a page or for your application, this information is displayed in the Control Tree section of the trace output. Trace output for a page is appended to the end of the page; while trace output for an application can be viewed from the trace viewer (trace.axd file) which is stored in the application's root directory. For more information about tracing, see <format
              type="text/html">
               <a href="1552561d-887c-4002-8770-f92662cdf416">ASP.NET Tracing Overview</a>
             </format>
+
+            
 
             
 
@@ -642,6 +748,8 @@
 
             
 
+            
+
              property to be displayed when tracing is enabled for the page.</para
           >
         </summary>
@@ -650,10 +758,14 @@
 
           
 
+          
+
           The identifier of the control's parent. </param
         >
         <param name="calcViewState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -703,13 +815,19 @@
 
             
 
+            
+
              method is used when child control-state information written to the parent control's control state is overridden as new child controls are created, such as when data-binding child controls in a templated data-bound server control. Calling the <see
              cref="M:System.Web.UI.Control.ClearChildControlState" />
 
             
 
+            
+
              method to empty child controls before calling the <see
              cref="M:System.Web.UI.Control.SaveControlState" />
+
+            
 
             
 
@@ -721,8 +839,12 @@
 
             
 
+            
+
              object, use the <see
              cref="M:System.Web.UI.Control.ClearChildControlState" />
+
+            
 
             
 
@@ -731,6 +853,8 @@
           <para
             >To clear both the child control state and view state, use the <see
              cref="M:System.Web.UI.Control.ClearChildState" />
+
+            
 
             
 
@@ -762,13 +886,19 @@
 
             
 
+            
+
              method clears all view-state and control-state information for child controls. It is equivalent to calling both the <see
              cref="M:System.Web.UI.Control.ClearChildViewState" />
 
             
 
+            
+
              method and the <see
              cref="M:System.Web.UI.Control.ClearChildControlState" />
+
+            
 
             
 
@@ -780,8 +910,12 @@
 
             
 
+            
+
              object, use the <see
              cref="M:System.Web.UI.Control.ClearChildState" />
+
+            
 
             
 
@@ -810,6 +944,8 @@
 
             
 
+            
+
              method when developing templated data-bound server controls. If you do not call this method, child control view–state information can be written to a parent server control, only to be overridden when the data is bound.</para
           >
           <para
@@ -818,8 +954,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Web.UI.Control.ClearChildViewState" />
+
+            
 
             
 
@@ -832,6 +972,8 @@
                 >How to: Create Templated User Controls</a
               >
             </format>
+
+            
 
             
 
@@ -864,8 +1006,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.UI.Control.ClientID" />
+
+            
 
             
 
@@ -878,13 +1024,19 @@
 
             
 
+            
+
              property value. You select which algorithm to use for a control by setting its <see
              cref="P:System.Web.UI.Control.ClientIDMode" />
 
             
 
+            
+
              property. The algorithms are identified by the <see
              cref="T:System.Web.UI.ClientIDMode" />
+
+            
 
             
 
@@ -914,8 +1066,12 @@
 
                   
 
+                  
+
                    value is generated by concatenating the <see
                    cref="P:System.Web.UI.Control.ID" />
+
+                  
 
                   
 
@@ -924,8 +1080,12 @@
 
                   
 
+                  
+
                    value of the control. In data-binding scenarios where multiple instances of a control are rendered, an incrementing value is inserted in front of the control's <see
                    cref="P:System.Web.UI.Control.ID" />
+
+                  
 
                   
 
@@ -946,8 +1106,12 @@
 
                   
 
+                  
+
                    value is set to the value of the <see
                    cref="P:System.Web.UI.Control.ID" />
+
+                  
 
                   
 
@@ -968,8 +1132,12 @@
 
                   
 
+                  
+
                    value is generated by concatenating the <see
                    cref="P:System.Web.UI.Control.ClientID" />
+
+                  
 
                   
 
@@ -978,8 +1146,12 @@
 
                   
 
+                  
+
                    value of the control. If the control is a data-bound control that generates multiple rows, the value of the data field specified in the <see
                    cref="P:System.Web.UI.WebControls.IDataBoundListControl.ClientIDRowSuffix" />
+
+                  
 
                   
 
@@ -988,8 +1160,12 @@
 
                   
 
+                  
+
                    control, multiple data fields can be specified. If the <see
                    cref="P:System.Web.UI.WebControls.IDataBoundListControl.ClientIDRowSuffix" />
+
+                  
 
                   
 
@@ -1010,8 +1186,12 @@
 
                   
 
+                  
+
                    setting of its <see
                    cref="P:System.Web.UI.Control.NamingContainer" />
+
+                  
 
                   
 
@@ -1026,8 +1206,12 @@
 
             
 
+            
+
              for a page is <see
              cref="F:System.Web.UI.ClientIDMode.Predictable" />
+
+            
 
             
 
@@ -1036,8 +1220,12 @@
 
             
 
+            
+
              for a control is <see
              cref="F:System.Web.UI.ClientIDMode.Inherit" />
+
+            
 
             
 
@@ -1046,13 +1234,19 @@
 
             
 
+            
+
             , the default generation mode is <see
              cref="F:System.Web.UI.ClientIDMode.Predictable" />
 
             
 
+            
+
             . (However, if you use Visual Studio to convert a Web project to ASP.NET 4 from an earlier version, Visual Studio automatically sets the site default to <see
              cref="F:System.Web.UI.ClientIDMode.AutoID" />
+
+            
 
             
 
@@ -1063,6 +1257,8 @@
              type="text/html">
               <a href="45a8c3ef-5ac7-48f1-862a-0cd5073742e7">ASP.NET Control Identification</a>
             </format>
+
+            
 
             
 
@@ -1106,8 +1302,12 @@
 
             
 
+            
+
              value is generated by concatenating the <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -1116,13 +1316,19 @@
 
             
 
+            
+
              value of its parent control. Each part of the generated <see
              cref="P:System.Web.UI.Control.ID" />
 
             
 
+            
+
              property is separated by the <see
              cref="P:System.Web.UI.Control.ClientIDSeparator" />
+
+            
 
             
 
@@ -1134,6 +1340,8 @@
           <para
             >Gets a character value representing the separator character used in the <see
              cref="P:System.Web.UI.Control.ClientID" />
+
+            
 
             
 
@@ -1165,8 +1373,12 @@
 
             
 
+            
+
              object for the current Web request. The object provides properties that access the <see
              cref="P:System.Web.HttpContext.Application" />
+
+            
 
             
 
@@ -1175,13 +1387,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.HttpContext.Request" />
 
             
 
+            
+
             , <see
              cref="P:System.Web.HttpContext.Response" />
+
+            
 
             
 
@@ -1193,6 +1411,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -1232,8 +1452,12 @@
 
             
 
+            
+
             . Any HTML tags or text strings that are not processed on the server are treated as <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -1245,8 +1469,12 @@
 
             
 
+            
+
              property allows you programmatic access to the instance of the <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -1258,6 +1486,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -1294,8 +1524,12 @@
 
             
 
+            
+
              method should implement the <see
              cref="T:System.Web.UI.INamingContainer" />
+
+            
 
             
 
@@ -1311,12 +1545,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fbe26c16-cff4-4089-b3dd-877411f0c0ef"
                 >Developing Custom ASP.NET Server Controls</a
               >
             </format>
+
+            
 
             
 
@@ -1352,6 +1590,8 @@
 
             
 
+            
+
              class. You can then instantiate that collection class in the override of this method.</para
           >
         </remarks>
@@ -1363,6 +1603,8 @@
 
             
 
+            
+
              object to hold the child controls (both literal and server) of the server control.</para
           >
         </summary>
@@ -1371,6 +1613,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -1404,12 +1648,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="88fe02a3-957f-4ff7-84f5-2d7ab78db4c1"
                 >Developing Custom Data-Bound Web Server Controls</a
               >
             </format>
+
+            
 
             
 
@@ -1450,8 +1698,12 @@
 
             
 
+            
+
              method in a scenario when your custom control overrides the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -1460,8 +1712,12 @@
 
             
 
+            
+
              interface. In this scenario, the custom control calls the <see
              cref="M:System.Web.UI.Control.DataBind(System.Boolean)" />
+
+            
 
             
 
@@ -1470,8 +1726,12 @@
 
             
 
+            
+
              set to false to ensure that the base class's <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -1483,13 +1743,19 @@
 
             
 
+            
+
              method invokes the <see
              cref="M:System.Web.UI.Control.DataBind(System.Boolean)" />
 
             
 
+            
+
              method with <paramref
              name="raiseOnDataBinding" />
+
+            
 
             
 
@@ -1502,13 +1768,19 @@
 
               
 
+              
+
                method with <paramref
                name="raiseOnDataBinding" />
 
               
 
+              
+
                set to false causes any child controls to be data bound with the <see
                cref="M:System.Web.UI.Control.DataBind" />
+
+              
 
               
 
@@ -1524,6 +1796,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1532,8 +1806,12 @@
 
           
 
+          
+
           true if the <see
            cref="E:System.Web.UI.Control.DataBinding" />
+
+          
 
           
 
@@ -1560,12 +1838,16 @@
 
             
 
+            
+
              method to bind a data source to the child controls of a server control.</para
           >
           <block subset="none" type="note">
             <para
               >When called on a server control, this method does not bind data to the control. To bind a server control and all its child controls, call the <see
                cref="M:System.Web.UI.Control.DataBind" />
+
+              
 
               
 
@@ -1620,6 +1902,8 @@
 
             
 
+            
+
              property returns true to indicate that the control is being used in the context of a designer. Your custom controls can use this property when design-time behavior is different than run-time behavior.</para
           >
         </remarks>
@@ -1645,8 +1929,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1655,8 +1943,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1725,8 +2017,12 @@
 
             
 
+            
+
              property indicates whether themes are enabled for a specified control. When the <see
              cref="P:System.Web.UI.Control.EnableTheming" />
+
+            
 
             
 
@@ -1738,8 +2034,12 @@
 
             
 
+            
+
              property is false, the theme directory is not searched and the content of the <see
              cref="P:System.Web.UI.Control.SkinID" />
+
+            
 
             
 
@@ -1748,6 +2048,8 @@
           <para
             >Themes can be enabled at the page, container, or control level. A control can override the <see
              cref="P:System.Web.UI.Control.EnableTheming" />
+
+            
 
             
 
@@ -1780,6 +2082,8 @@
 
                 
 
+                
+
                  property for the page is set to true.</para
               >
             </item>
@@ -1787,6 +2091,8 @@
               <para
                 >The <see
                  cref="P:System.Web.UI.Control.EnableViewState" />
+
+                
 
                 
 
@@ -1800,13 +2106,19 @@
 
                 
 
+                
+
                  property for the control is set to <see
                  cref="F:System.Web.UI.ViewStateMode.Enabled" />
 
                 
 
+                
+
                  or inherits the <see
                  cref="F:System.Web.UI.ViewStateMode.Enabled" />
+
+                
 
                 
 
@@ -1820,11 +2132,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >A server control's view state is the accumulation of all its property values. In order to preserve these values across HTTP requests, ASP.NET uses an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1835,11 +2151,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >There are times when it is appropriate to disable view state, particularly to improve application performance. For example, if you are loading a database request into a server control, set this property to false. If you do not, processor time will be wasted loading view state into the server control that will only be overridden by the database query. If <see
              cref="P:System.Web.UI.Control.EnableViewState" />
+
+            
 
             
 
@@ -1852,6 +2172,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -1859,6 +2181,8 @@
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -1899,8 +2223,12 @@
 
             
 
+            
+
              property. If this value is false, the <see
              cref="M:System.Web.UI.Control.CreateChildControls" />
+
+            
 
             
 
@@ -1912,8 +2240,12 @@
 
             
 
+            
+
              method is typically used in composite controls, which are controls that use child controls for some or all their functionality. The <see
              cref="M:System.Web.UI.Control.EnsureChildControls" />
+
+            
 
             
 
@@ -1925,8 +2257,12 @@
 
             
 
+            
+
              control is an example of a composite control. It creates child controls such as <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1935,8 +2271,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -1945,13 +2285,19 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.WebControls.TextBox" />
 
             
 
+            
+
              controls, which are used to render the HTML table that the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -1988,8 +2334,12 @@
 
             
 
+            
+
              method generates an identifier for controls that are contained in another control. Identifiers are generated only for controls that do not have a value assigned to the <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -2022,6 +2372,8 @@
           <para
             >This property is of type <see
              cref="T:System.ComponentModel.EventHandlerList" />
+
+            
 
             
 
@@ -2059,12 +2411,16 @@
 
             
 
+            
+
              to access a control from a function in a code-behind page, to access a control that is inside another container, or in other circumstances where the target control is not directly accessible to the caller. This method will find a control only if the control is directly contained by the specified container; that is, the method does not search throughout a hierarchy of controls within controls. For information about how to find a control when you do not know its immediate container, see <format
              type="text/html">
               <a href="59964ef8-72ef-4159-9f1a-5b230ff46fb3"
                 >How to: Access Server Controls by ID</a
               >
             </format>
+
+            
 
             
 
@@ -2079,6 +2435,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -2088,6 +2446,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2122,13 +2482,19 @@
 
             
 
+            
+
              and an integer, specified in the <paramref
              name="pathOffset" />
 
             
 
+            
+
              parameter, which aids in the search. You should not override this version of the <see
              cref="Overload:System.Web.UI.Control.FindControl" />
+
+            
 
             
 
@@ -2144,10 +2510,14 @@
 
           
 
+          
+
           The identifier for the control to be found. </param
         >
         <param name="pathOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2178,6 +2548,8 @@
 
             
 
+            
+
              method to set the initial focus of the Web page to the control. The page will be opened in the browser with the control selected.</para
           >
           <para
@@ -2186,8 +2558,12 @@
 
             
 
+            
+
              method causes a call to the page focus script to be emitted on the rendered page. If the page does not contain a control with an HTML ID attribute that matches the control that the <see
              cref="M:System.Web.UI.Control.Focus" />
+
+            
 
             
 
@@ -2196,8 +2572,12 @@
 
             
 
+            
+
              method to find the child control of the user control and invoke its <see
              cref="M:System.Web.UI.Control.Focus" />
+
+            
 
             
 
@@ -2232,6 +2612,8 @@
 
             
 
+            
+
              method returns design-time data for a control.</para
           >
         </remarks>
@@ -2244,6 +2626,8 @@
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -2265,6 +2649,8 @@
           <para
             >You can avoid unnecessary calls to the <see
              cref="M:System.Web.UI.Control.ClearChildViewState" />
+
+            
 
             
 
@@ -2297,8 +2683,12 @@
 
             
 
+            
+
              property call. Calls to this property require a <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -2358,11 +2748,15 @@
 
             
 
+            
+
              attribute in the opening tag of an ASP.NET server control.</para
           >
           <para
             >If this property is not specified for a server control, either declaratively or programmatically, you can obtain a reference to the control through its parent control's <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -2415,8 +2809,12 @@
 
             
 
+            
+
              property is used to separate the control identifiers for child controls. The ID separator character is appended to the <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -2446,6 +2844,8 @@
                 >ASP.NET Web Server Control Event Model</a
               >
             </format>
+
+            
 
             
 
@@ -2554,6 +2954,8 @@
 
             
 
+            
+
              property indicates whether view state is enabled by pages, containers, or controls.</para
           >
           <para
@@ -2562,8 +2964,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.Control.IsViewStateEnabled" />
+
+            
 
             
 
@@ -2572,13 +2978,19 @@
 
             
 
+            
+
              containing the control has view state disabled, the <see
              cref="P:System.Web.UI.Control.EnableViewState" />
 
             
 
+            
+
              property can be true while the <see
              cref="P:System.Web.UI.Control.IsViewStateEnabled" />
+
+            
 
             
 
@@ -2611,6 +3023,8 @@
           <para
             >Occurs when the server control is loaded into the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -2650,6 +3064,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2658,6 +3074,8 @@
           <para
             >Restores control-state information from a previous page request that was saved by the <see
              cref="M:System.Web.UI.Control.SaveControlState" />
+
+            
 
             
 
@@ -2689,6 +3107,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2700,6 +3120,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -2708,8 +3130,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2740,6 +3166,8 @@
 
             
 
+            
+
              collection. When view state is initially applied, all child controls might not have been created. In this case, the view state for controls not yet created is saved, and applied when the child controls are created later.</para
           >
           <para>For a parent control to apply view state to its child controls, two conditions must be met:</para>
@@ -2754,6 +3182,8 @@
 
                 
 
+                
+
                  collection.</para
               >
             </item>
@@ -2764,13 +3194,19 @@
 
             
 
+            
+
             . To set the <see
              cref="P:System.Web.UI.Control.LoadViewStateByID" />
 
             
 
+            
+
              property to true, use the <see
              cref="T:System.Web.UI.ViewStateModeByIdAttribute" />
+
+            
 
             
 
@@ -2782,6 +3218,8 @@
           <para
             >Gets a value indicating whether the control participates in loading its view state by <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -2817,6 +3255,8 @@
 
           
 
+          
+
           A relative or root relative URL. </param
         >
       </Docs>
@@ -2844,13 +3284,19 @@
 
             
 
+            
+
              interface. A server control that implements this interface creates a unique namespace for the <see
              cref="P:System.Web.UI.Control.ID" />
 
             
 
+            
+
              property values of its child server controls. You can use the <see
              cref="P:System.Web.UI.Control.NamingContainer" />
+
+            
 
             
 
@@ -2862,8 +3308,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2872,8 +3322,12 @@
 
             
 
+            
+
              property values that do not conflict. The default naming container for a page is the instance of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -2885,8 +3339,12 @@
 
             
 
+            
+
              property contains the value that is rendered as the element's id attribute in the HTML markup. Depending on the value that you assign to the <see
              cref="P:System.Web.UI.Control.ClientIDMode" />
+
+            
 
             
 
@@ -2895,13 +3353,19 @@
 
             
 
+            
+
              property might include the ID of the <see
              cref="P:System.Web.UI.Control.NamingContainer" />
 
             
 
+            
+
              object. When you set <see
              cref="P:System.Web.UI.Control.ClientIDMode" />
+
+            
 
             
 
@@ -2910,8 +3374,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.Control.ClientID" />
+
+            
 
             
 
@@ -2920,8 +3388,12 @@
 
             
 
+            
+
              object. When you set <see
              cref="P:System.Web.UI.Control.ClientIDMode" />
+
+            
 
             
 
@@ -2930,8 +3402,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.ClientIDMode.Predictable" />
+
+            
 
             
 
@@ -2940,8 +3416,12 @@
 
             
 
+            
+
              value will include the ID from the <see
              cref="P:System.Web.UI.Control.NamingContainer" />
+
+            
 
             
 
@@ -2949,6 +3429,8 @@
              type="text/html">
               <a href="45a8c3ef-5ac7-48f1-862a-0cd5073742e7">ASP.NET Control Identification</a>
             </format>
+
+            
 
             
 
@@ -2960,6 +3442,8 @@
           <para
             >Gets a reference to the server control's naming container, which creates a unique namespace for differentiating between server controls with the same <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -3002,8 +3486,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3012,13 +3500,19 @@
 
             
 
+            
+
              Web controls can contain child controls that raise events. For example, each row in a <see
              cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
+            
+
              control can contain one or more buttons created dynamically by templates. Rather than each button raising an event individually, events from the nested controls are "bubbled"—that is, they are sent to the naming container. The naming container in turn raises a generic event called <see
              cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
+
+            
 
             
 
@@ -3038,6 +3532,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="args">
@@ -3045,8 +3541,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3077,8 +3577,12 @@
 
             
 
+            
+
              event, you should override this event-handling method. This ensures that all delegates attached to the <see
              cref="E:System.Web.UI.Control.DataBinding" />
+
+            
 
             
 
@@ -3093,6 +3597,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3101,8 +3607,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3132,8 +3642,12 @@
 
             
 
+            
+
              event. If you are developing a custom control, you can override this method in order to provide additional processing. If you override this method, call the base control's <see
              cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -3148,6 +3662,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3156,8 +3672,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3187,8 +3707,12 @@
 
             
 
+            
+
              event. If you are developing a custom control, you can override this method in order to provide additional processing. If you override this method, call the base control's <see
              cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -3203,6 +3727,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3211,8 +3737,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3242,8 +3772,12 @@
 
             
 
+            
+
              event. If you are developing a custom control, you can override this method in order to provide additional processing. If you override this method, call the base control's <see
              cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -3258,6 +3792,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3266,8 +3802,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3297,8 +3837,12 @@
 
             
 
+            
+
              event. If you are developing a custom control, you can override this method in order to provide additional processing. If you override this method, call the base control's <see
              cref="M:System.Web.UI.Control.OnUnload(System.EventArgs)" />
+
+            
 
             
 
@@ -3313,6 +3857,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3321,8 +3867,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3355,13 +3905,19 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.IO.Stream" />
 
             
 
+            
+
              object that can be used to read the contents of the file specified in the <paramref
              name="path" />
+
+            
 
             
 
@@ -3373,13 +3929,19 @@
 
             
 
+            
+
              method uses file access security to control access to the specified file. If the current ASP.NET user does not have access to the file, then the file is not opened and an <see
              cref="T:System.Web.HttpException" />
 
             
 
+            
+
              exception is thrown to indicate that access was denied. If the <paramref
              name="path" />
+
+            
 
             
 
@@ -3394,6 +3956,8 @@
 
             
 
+            
+
              used to read a file.</para
           >
         </summary>
@@ -3405,11 +3969,15 @@
 
             
 
+            
+
              that references the desired file.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3435,6 +4003,8 @@
           <para
             >Gets a reference to the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -3508,6 +4078,8 @@
 
             
 
+            
+
              object is loaded but prior to rendering.</para
           >
         </summary>
@@ -3539,8 +4111,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3549,8 +4125,12 @@
 
             
 
+            
+
              Web controls can contain child controls that raise events. For example, each row in a <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -3559,11 +4139,15 @@
 
             
 
+            
+
              with parameter values. These values allow you to determine which individual control that raised the original event. By responding to this single event, you can avoid having to write individual event-handling methods for child controls.</para
           >
           <para
             >While you cannot override this method, controls you author can handle or raise bubbled events by overriding the <see
              cref="M:System.Web.UI.Control.OnBubbleEvent(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -3579,6 +4163,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="args">
@@ -3586,8 +4172,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3624,8 +4214,12 @@
 
             
 
+            
+
              method is called immediately after a control is removed from the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -3640,8 +4234,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -3653,8 +4251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -3687,6 +4289,8 @@
 
             
 
+            
+
              object, which writes the content to be rendered on the client.</para
           >
         </summary>
@@ -3695,8 +4299,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -3729,6 +4337,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -3740,6 +4350,8 @@
 
             
 
+            
+
              object, which writes the content to be rendered on the client.</para
           >
         </summary>
@@ -3748,8 +4360,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -3782,6 +4398,8 @@
 
             
 
+            
+
              property is set to true, this method determines whether tracing is enabled for the page. If so, it stores trace information associated with the control, and renders the server control content to the page.</para
           >
           <para>This method is automatically called by the page during the rendering, but can be overridden by custom control developers.</para>
@@ -3794,6 +4412,8 @@
 
             
 
+            
+
              object and stores tracing information about the control if tracing is enabled.</para
           >
         </summary>
@@ -3802,8 +4422,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -3840,8 +4464,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.Web.UI.Adapters.ControlAdapter" />
+
+            
 
             
 
@@ -3857,11 +4485,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If a server control's <see
              cref="P:System.Web.UI.Control.Visible" />
+
+            
 
             
 
@@ -3876,8 +4508,12 @@
 
             
 
+            
+
              object using a provided <see
              cref="T:System.Web.UI.Adapters.ControlAdapter" />
+
+            
 
             
 
@@ -3889,8 +4525,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -3901,8 +4541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Adapters.ControlAdapter" />
+
+          
 
           
 
@@ -3932,11 +4576,15 @@
 
             
 
+            
+
              method returns the control adapter responsible for rendering the control on the specific browser or device that requested the ASP.NET page. </para
           >
           <para
             >The specific adapter type returned depends on the descendent type of the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -3952,6 +4600,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3964,6 +4614,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.Adapters.ControlAdapter" />
+
+            
 
             
 
@@ -3993,6 +4645,8 @@
 
             
 
+            
+
              method to return a URL string suitable for use by the client to access resources on the Web server, such as image files, links to additional pages, and so on.</para
           >
           <block subset="none" type="note">
@@ -4002,8 +4656,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Web.UI.MasterPage" />
+
+              
 
               
 
@@ -4021,6 +4679,8 @@
         </returns>
         <param name="relativeUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4046,8 +4706,12 @@
 
             
 
+            
+
              parameter contains an absolute URL, the URL is returned unchanged. If the <paramref
              name="relativeUrl" />
+
+            
 
             
 
@@ -4074,11 +4738,15 @@
 
             
 
+            
+
              method, the method will return the value /Images/Image1.jpg.</para
           >
           <para
             >This method uses the <see
              cref="P:System.Web.UI.Control.TemplateSourceDirectory" />
+
+            
 
             
 
@@ -4092,12 +4760,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >For mobile Web pages only, if your application relies on cookieless sessions or might receive requests from mobile browsers that require cookieless sessions, using a tilde ("~") in a path can result in inadvertently creating a new session and potentially losing session data. To set a property with a path such as "~/path", resolve the path by calling the <see
                cref="M:System.Web.UI.MobileControls.MobileControl.ResolveUrl(System.String)" />
+
+              
 
               
 
@@ -4118,8 +4790,12 @@
 
           
 
+          
+
           The URL associated with the <see
            cref="P:System.Web.UI.Control.TemplateSourceDirectory" />
+
+          
 
           
 
@@ -4150,6 +4826,8 @@
 
             
 
+            
+
              method to save state information required for the operation of a specific control. This control-state data is stored separately from the control's view-state data.</para
           >
           <para
@@ -4158,8 +4836,12 @@
 
             
 
+            
+
              method on the <see
              cref="P:System.Web.UI.Control.Page" />
+
+            
 
             
 
@@ -4192,8 +4874,12 @@
 
             
 
+            
+
              property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -4206,6 +4892,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4214,8 +4902,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Control.LoadViewState(System.Object)" />
+
+            
 
             
 
@@ -4226,12 +4918,16 @@
 
             
 
+            
+
             . For information on implementing a custom session-state provider, see <format
              type="text/html">
               <a href="baadfec5-c881-468a-9681-7d8796b05a66"
                 >Implementing a Session-State Store Provider</a
               >
             </format>
+
+            
 
             
 
@@ -4276,6 +4972,8 @@
 
             
 
+            
+
              method saves design-time data for a control.</para
           >
         </remarks>
@@ -4288,8 +4986,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -4320,6 +5022,8 @@
         </summary>
         <param name="renderMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4359,8 +5063,12 @@
 
             
 
+            
+
              object to a <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -4418,6 +5126,8 @@
 
             
 
+            
+
              property specifies which of these skins to apply to the control. A skin is specific to a particular control; you cannot share skin settings between controls of different types.</para
           >
           <para
@@ -4426,8 +5136,12 @@
 
             
 
+            
+
              property, a control uses the default skin if one is defined. For example, if a skin without an ID is defined for an <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -4436,8 +5150,12 @@
 
             
 
+            
+
              controls that do not explicitly reference a skin by ID and that are not set to disable themes. If a skin with an ID is defined for an <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -4446,8 +5164,12 @@
 
             
 
+            
+
              controls whose <see
              cref="P:System.Web.UI.Control.SkinID" />
+
+            
 
             
 
@@ -4459,8 +5181,12 @@
 
             
 
+            
+
              property, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -4495,8 +5221,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IControlBuilderAccessor" />
+
+            
 
             
 
@@ -4508,6 +5238,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IControlBuilderAccessor.ControlBuilder" />
+
+            
 
             
 
@@ -4538,8 +5270,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IControlDesignerAccessor" />
+
+            
 
             
 
@@ -4554,6 +5290,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4562,6 +5300,8 @@
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -4595,8 +5335,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IControlDesignerAccessor" />
+
+            
 
             
 
@@ -4608,6 +5352,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IControlDesignerAccessor.SetDesignModeState(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -4641,8 +5387,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IControlDesignerAccessor" />
+
+            
 
             
 
@@ -4654,6 +5404,8 @@
 
             
 
+            
+
              interface is used by a control designer to perform design-time actions on the control.</para
           >
         </remarks>
@@ -4662,6 +5414,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IControlDesignerAccessor.SetOwnerControl(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -4692,8 +5446,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IControlDesignerAccessor" />
+
+            
 
             
 
@@ -4705,6 +5463,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IControlDesignerAccessor.UserData" />
+
+            
 
             
 
@@ -4736,8 +5496,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataBindingsAccessor" />
+
+            
 
             
 
@@ -4749,6 +5513,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataBindingsAccessor.DataBindings" />
+
+            
 
             
 
@@ -4780,8 +5546,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataBindingsAccessor" />
+
+            
 
             
 
@@ -4793,6 +5563,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataBindingsAccessor.HasDataBindings" />
+
+            
 
             
 
@@ -4823,8 +5595,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IExpressionsAccessor" />
+
+            
 
             
 
@@ -4836,6 +5612,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IExpressionsAccessor.Expressions" />
+
+            
 
             
 
@@ -4866,8 +5644,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IExpressionsAccessor" />
+
+            
 
             
 
@@ -4879,6 +5661,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IExpressionsAccessor.HasExpressions" />
+
+            
 
             
 
@@ -4912,8 +5696,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IParserAccessor" />
+
+            
 
             
 
@@ -4928,11 +5716,15 @@
 
             
 
+            
+
             . </para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4970,13 +5762,19 @@
 
             
 
+            
+
              instance is part of a control template, the <see
              cref="P:System.Web.UI.Control.TemplateControl" />
 
             
 
+            
+
              property contains a reference to the containing control. For more information, see the <see
              cref="T:System.Web.UI.TemplateControl" />
+
+            
 
             
 
@@ -5008,8 +5806,12 @@
 
             
 
+            
+
              property specifies the path to the page or user control that contains the current control. For example, if the Web page resides at http://www.contoso.com/application/subdirectory, the <see
              cref="P:System.Web.UI.Control.TemplateSourceDirectory" />
+
+            
 
             
 
@@ -5018,6 +5820,8 @@
           <para
             >To return the application-relative virtual path ("~/subdirectory"), use the <see
              cref="P:System.Web.UI.Control.AppRelativeTemplateSourceDirectory" />
+
+            
 
             
 
@@ -5032,8 +5836,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -5070,11 +5878,15 @@
 
             
 
+            
+
              event in the server control's lifecycle.</para
           >
           <para
             >Invoke this method when you develop templated data-bound controls. This method alerts ASP.NET to monitor changes to a server control's view state, which is required when you override the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -5089,8 +5901,12 @@
 
             
 
+            
+
              object. This object is accessible through the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -5119,8 +5935,12 @@
 
             
 
+            
+
              property, in that the <see
              cref="P:System.Web.UI.Control.UniqueID" />
+
+            
 
             
 
@@ -5132,8 +5952,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5142,8 +5966,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5152,8 +5980,12 @@
 
             
 
+            
+
              Web server controls (or any custom server controls that you create that include repeating functionality when data bound), serves as the naming container for its child controls. This means that it creates a unique namespace for its child controls so that their <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -5165,8 +5997,12 @@
 
             
 
+            
+
              Web server control in a <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -5175,8 +6011,12 @@
 
             
 
+            
+
              control an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -5185,8 +6025,12 @@
 
             
 
+            
+
              an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -5195,8 +6039,12 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5205,8 +6053,12 @@
 
             
 
+            
+
              properties for each instance of the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -5272,10 +6124,14 @@
 
             
 
+            
+
              class, to store the property values. The values are then passed as a variable to an HTML hidden input element when subsequent requests are processed. For more information about saving server control view state, see <format
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -5289,6 +6145,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -5296,6 +6154,8 @@
              type="text/html">
               <a href="60CC581F-1DB5-445B-BA04-A173396BF872">Collections and Data Structures</a>
             </format>
+
+            
 
             
 
@@ -5336,8 +6196,12 @@
 
             
 
+            
+
              associated with the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -5349,6 +6213,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -5388,8 +6254,12 @@
 
               
 
+              
+
                property of an individual control to true. In that case, the individual control returns false for the <see
                cref="P:System.Web.UI.Control.Visible" />
+
+              
 
               
 

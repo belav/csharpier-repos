@@ -19,8 +19,12 @@
 
         
 
+        
+
         . You can use a <see
          cref="T:System.Windows.Forms.GridItem" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          objects should not be cached because they represent a snapshot of the state of the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          often recreates <see
          cref="T:System.Windows.Forms.GridItem" />
+
+        
 
         
 
@@ -54,6 +66,8 @@
       <para
         >Implements one row in a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -73,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -98,6 +114,8 @@
           <para
             >If a property is expandable, a plus (+) sign is displayed by the property name in the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -131,6 +149,8 @@
 
             
 
+            
+
              is in an expanded state.</para
           >
         </summary>
@@ -160,8 +180,12 @@
 
             
 
+            
+
              objects, if any, associated as a child of this <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -193,8 +217,12 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Windows.Forms.GridItemType.Property" />
+
+            
 
             
 
@@ -203,8 +231,12 @@
 
             
 
+            
+
              has a valid value. For a <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -213,8 +245,12 @@
 
             
 
+            
+
              the <see
              cref="P:System.Windows.Forms.GridItem.Parent" />
+
+            
 
             
 
@@ -226,6 +262,8 @@
           <para
             >When overridden in a derived class, gets the type of this <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -254,8 +292,12 @@
 
             
 
+            
+
             . You can get the name for a <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -264,13 +306,19 @@
 
             
 
+            
+
              by retrieving the <see
              cref="P:System.Windows.Forms.GridItem.PropertyDescriptor" />
 
             
 
+            
+
              and checking its <see
              cref="P:System.ComponentModel.MemberDescriptor.Name" />
+
+            
 
             
 
@@ -282,6 +330,8 @@
           <para
             >When overridden in a derived class, gets the text of this <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -313,13 +363,19 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.GridItem" />
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.GridItemType.Root" />
+
+            
 
             
 
@@ -334,8 +390,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -367,8 +427,12 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Windows.Forms.GridItemType.Property" />
+
+            
 
             
 
@@ -384,8 +448,12 @@
 
             
 
+            
+
              that is associated with this <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -415,8 +483,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -467,6 +539,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -486,6 +560,8 @@
           <para
             >When overridden in a derived class, gets the current value of this <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 

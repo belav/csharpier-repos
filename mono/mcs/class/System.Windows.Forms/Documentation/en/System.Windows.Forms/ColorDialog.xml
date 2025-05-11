@@ -27,13 +27,19 @@
 
         
 
+        
+
          must be invoked to create this specific common dialog box. <see
          cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
 
         
 
+        
+
          can be overridden to implement specific dialog box hook functionality. Use <see
          cref="P:System.Windows.Forms.ColorDialog.Color" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
         , some of the read/write properties are set to initial values. For a list of these values, see the <see
          cref="M:System.Windows.Forms.ColorDialog.#ctor" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
           <para
             >When you create an instance of <see
              cref="T:System.Windows.Forms.ColorDialog" />
+
+            
 
             
 
@@ -166,6 +178,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -242,6 +256,8 @@
 
             
 
+            
+
              structure.</para
           >
         </remarks>
@@ -279,8 +295,12 @@
 
             
 
+            
+
              composed of the BGR (blue, green, red) values necessary to create the color. For more information on the structure of this data, see <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -289,6 +309,8 @@
           <para
             >Custom colors can only be defined if <see
              cref="P:System.Windows.Forms.ColorDialog.AllowFullOpen" />
+
+            
 
             
 
@@ -328,8 +350,12 @@
 
               
 
+              
+
                is false, then <see
                cref="P:System.Windows.Forms.ColorDialog.FullOpen" />
+
+              
 
               
 
@@ -364,13 +390,19 @@
 
               
 
+              
+
                to prevent it from being called from untrusted code; only the immediate caller is required to have <see
                cref="P:System.Security.Permissions.SecurityPermissionAttribute.UnmanagedCode" />
 
               
 
+              
+
                permission. If your code can be called from partially trusted code, do not pass user input to <see
                cref="T:System.Runtime.InteropServices.Marshal" />
+
+              
 
               
 
@@ -381,12 +413,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >This property also uses the <see
              cref="F:System.Security.Permissions.SecurityAction.InheritanceDemand" />
+
+            
 
             
 
@@ -419,8 +455,12 @@
 
             
 
+            
+
              property corresponds to the flags used to initialize a color dialog box using Win32. Use the properties of the <see
              cref="T:System.Windows.Forms.ColorDialog" />
+
+            
 
             
 
@@ -432,6 +472,8 @@
           <para
             >Gets values to initialize the <see
              cref="T:System.Windows.Forms.ColorDialog" />
+
+            
 
             
 
@@ -553,6 +595,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -561,6 +605,8 @@
           <para
             >Returns a string that represents the <see
              cref="T:System.Windows.Forms.ColorDialog" />
+
+            
 
             
 
@@ -575,8 +621,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Windows.Forms.ColorDialog" />
+
+            
 
             
 

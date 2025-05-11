@@ -36,13 +36,19 @@
 
         
 
+        
+
          interface allows the implementing formatter to send and receive remote procedure calls (RPCs). For more information, see <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
         
 
+        
+
         . This interface is derived from <see
          cref="T:System.RuntimeSerialization.IFormatter" />
+
+        
 
         
 
@@ -85,6 +91,8 @@
 
             
 
+            
+
              objects contain information about a remote function call (for example, transaction ID or a method signature).</para
           >
           <block subset="none" type="note">
@@ -104,8 +112,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -116,8 +128,12 @@
 
           
 
+          
+
           The delegate designed to handle <see
            cref="T:System.Runtime.Remoting.Messaging.Header" />
+
+          
 
           
 
@@ -156,6 +172,8 @@
 
             
 
+            
+
              objects contain information about a remote function call (for example, transaction ID or a method signature).</para
           >
           <block subset="none" type="note">
@@ -171,8 +189,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -183,10 +205,14 @@
 
           
 
+          
+
           The root of the object graph to be serialized. </param
         >
         <param name="headers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,8 +221,12 @@
 
           
 
+          
+
            objects to transmit with the graph specified by the <paramref
            name="graph" />
+
+          
 
           
 

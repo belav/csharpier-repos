@@ -6,8 +6,12 @@
 
     
 
+    
+
      and <keyword
     >double</keyword>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
      and <keyword
     >double</keyword>
+
+    
 
     
 
@@ -26,6 +34,8 @@
       <list_item
         > Positive zero and negative zero. In most situations, positive zero and negative zero behave identically as the simple value zero, but certain operations distinguish between the two (<hyperlink
         >14.7.2</hyperlink>
+
+        
 
         
 
@@ -42,8 +52,12 @@
 
         
 
+        
+
          m <unicode
         >215</unicode>
+
+        
 
         
 
@@ -52,8 +66,12 @@
 
         
 
+        
+
         , where s is 1 or <unicode
         >8722</unicode>
+
+        
 
         
 
@@ -62,13 +80,19 @@
 
         
 
+        
+
         , 0 &lt; m &lt; 2<super
         >24</super>
 
         
 
+        
+
          and <unicode
         >8722</unicode>
+
+        
 
         
 
@@ -77,8 +101,12 @@
 
         
 
+        
+
          e <unicode
         >8804</unicode>
+
+        
 
         
 
@@ -87,8 +115,12 @@
 
         
 
+        
+
         , 0 &lt; m &lt; 2<super
         >53</super>
+
+        
 
         
 
@@ -97,13 +129,19 @@
 
         
 
+        
+
         1075 <unicode
         >8804</unicode>
 
         
 
+        
+
          e <unicode
         >8804</unicode>
+
+        
 
         
 
@@ -117,8 +155,12 @@
 
     
 
+    
+
      type can represent values ranging from approximately 1.5 <unicode
     >215</unicode>
+
+    
 
     
 
@@ -127,13 +169,19 @@
 
     
 
+    
+
      to 3.4 <unicode
     >215</unicode>
 
     
 
+    
+
      10<super
     >38</super>
+
+    
 
     
 
@@ -145,8 +193,12 @@
 
     
 
+    
+
      type can represent values ranging from approximately 5.0 <unicode
     >215</unicode>
+
+    
 
     
 
@@ -155,13 +207,19 @@
 
     
 
+    
+
      to 1.7 <unicode
     >215</unicode>
 
     
 
+    
+
      10<super
     >308</super>
+
+    
 
     
 
@@ -177,8 +235,12 @@
 
         
 
+        
+
         , the other operand is converted to <keyword
         >double</keyword>
+
+        
 
         
 
@@ -187,13 +249,19 @@
 
         
 
+        
+
          range and precision, and the type of the result is <keyword
         >double</keyword>
 
         
 
+        
+
          (or <keyword
         >bool</keyword>
+
+        
 
         
 
@@ -205,13 +273,19 @@
 
         
 
+        
+
          range and precision, and the type of the result is <keyword
         >float</keyword>
 
         
 
+        
+
          (or <keyword
         >bool</keyword>
+
+        
 
         
 
@@ -236,13 +310,19 @@
 
       
 
+      
+
        type, and implicitly perform all floating-point operations using this higher precision type. Only at excessive cost in performance can such hardware architectures be made to perform floating-point operations with less precision, and rather than require an implementation to forfeit both performance and precision, C# allows a higher precision type to be used for all floating-point operations. Other than delivering more precise results, this rarely has any measurable effects. However, in expressions of the form x * y / z, where the multiplication produces a result that is outside the <keyword
       >double</keyword>
 
       
 
+      
+
        range, but the subsequent division brings the temporary result back into the <keyword
       >double</keyword>
+
+      
 
       
 

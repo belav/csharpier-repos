@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface with the <see
          cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
 
             
 
+            
+
              method decrypts an XrML &lt;encryptedGrant&gt; element and returns a plaintext stream.</para
           >
         </remarks>
@@ -78,6 +84,8 @@
           <para
             >Decrypts an XrML &lt;encryptedGrant&gt; element that is contained within a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -92,6 +100,8 @@
 
             
 
+            
+
              object that contains a decrypted &lt;encryptedGrant&gt; element.</para
           >
         </returns>
@@ -100,8 +110,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
+
+          
 
           
 
@@ -112,8 +126,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+          
 
           
 
@@ -121,6 +139,8 @@
         >
         <param name="toDecrypt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

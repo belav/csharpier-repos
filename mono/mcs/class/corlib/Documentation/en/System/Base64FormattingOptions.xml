@@ -28,8 +28,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Convert.ToBase64String" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Base64FormattingOptions.InsertLineBreaks" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          enumeration is marked with the <see
          cref="T:System.FlagsAttribute" />
+
+        
 
         
 
@@ -67,8 +79,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Convert.ToBase64String" />
+
+        
 
         
 

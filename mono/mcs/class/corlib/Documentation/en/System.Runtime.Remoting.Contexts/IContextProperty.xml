@@ -28,13 +28,19 @@
 
         
 
+        
+
          interface is exposed by the property contributed to a context by an attribute. By default, it is also implemented by the <see
          cref="T:System.Runtime.Remoting.Contexts.ContextAttribute" />
 
         
 
+        
+
          base class, from which <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+        
 
         
 
@@ -82,6 +88,8 @@
 
           
 
+          
+
           The context to freeze. </param
         >
       </Docs>
@@ -116,6 +124,8 @@
 
             
 
+            
+
              and determine whether it is compatible with these other context properties. </para
           >
         </remarks>
@@ -132,8 +142,12 @@
 
           
 
+          
+
           The new context in which the <see
            cref="T:System.Runtime.Remoting.Contexts.ContextProperty" />
+
+          
 
           
 

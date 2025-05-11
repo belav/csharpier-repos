@@ -18,8 +18,12 @@
 
         
 
+        
+
          object is used by the <see
          cref="T:System.Windows.Forms.NumericUpDown" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -63,10 +69,14 @@
 
           
 
+          
+
           The number of seconds the up or down button is pressed before the acceleration starts. </param
         >
         <param name="increment">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

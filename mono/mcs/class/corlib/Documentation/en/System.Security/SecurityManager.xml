@@ -31,6 +31,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -70,11 +72,15 @@
 
             
 
+            
+
              can execute. Execution checking is expensive and can eliminate the advantages of lazy policy resolution. This property is provided to disable execution checking when needed.</para
           >
           <para
             >A change to this property is not persisted until <see
              cref="M:System.Security.SecurityManager.SavePolicy" />
+
+            
 
             
 
@@ -86,6 +92,8 @@
           <para
             >Gets or sets a value indicating whether code must have <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
+
+            
 
             
 
@@ -120,6 +128,8 @@
 
             
 
+            
+
              method before you cache sensitive data that is obtained after successful security demands. </para
           >
           <para
@@ -128,13 +138,19 @@
 
             
 
+            
+
              method has been called higher on the stack, the data should not be cached without capturing the corresponding security context. Otherwise, sensitive data that is obtained under an <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
+            
+
              may become available to code that is no longer be running with that <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -145,6 +161,8 @@
           </block>
           <para>
             <see cref="M:System.Security.SecurityManager.CurrentThreadRequiresSecurityContextCapture" />
+
+            
 
             
 
@@ -163,8 +181,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -202,8 +224,12 @@
 
               
 
+              
+
                must contain <see
                cref="T:System.Security.Policy.Zone" />
+
+              
 
               
 
@@ -289,8 +315,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Policy.Site" />
+
+            
 
             
 
@@ -308,6 +338,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,6 +411,8 @@
 
             
 
+            
+
              only tests the grant of the calling code assembly, independent of other callers on the stack.</para
           >
         </remarks>
@@ -394,11 +428,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="perm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -443,6 +481,8 @@
 
             
 
+            
+
              from the specified file.</para
           >
         </summary>
@@ -455,10 +495,14 @@
 
           
 
+          
+
           The physical file path to a file containing the security policy information. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -503,6 +547,8 @@
 
             
 
+            
+
              from the specified string.</para
           >
         </summary>
@@ -515,10 +561,14 @@
 
           
 
+          
+
           The XML representation of a security policy level in the same form in which it appears in a configuration file. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -559,6 +609,8 @@
 
             
 
+            
+
              objects that represent the policy at the respective (machine, user, enterprise, application domain) level of the hierarchy. These objects are the live policy objects; altering these objects can have unpredictable results.</para
           >
           <para>Minimum policy hierarchy consists of a machine level, an enterprise level, and a user level. However, the hierarchy can include additional levels.</para>
@@ -572,6 +624,8 @@
           <para
             >An enumerator for <see
              cref="T:System.Security.Policy.PolicyLevel" />
+
+            
 
             
 
@@ -624,6 +678,8 @@
 
           
 
+          
+
           The evidence set used to evaluate policy. </param
         >
       </Docs>
@@ -663,8 +719,12 @@
 
             
 
+            
+
              objects. The returned permission set represents only those permissions that apply to every evidence in the array. These permissions are either equivalent to, or a subset of the permissions that policy would have granted to each individual evidence. This method behaves as if you were performing an intersection on the results of resolving policy on each of the <see
              cref="T:System.Security.Policy.Evidence" />
+
+            
 
             
 
@@ -681,6 +741,8 @@
         </returns>
         <param name="evidences">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -765,6 +827,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -778,6 +842,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -820,6 +886,8 @@
 
             
 
+            
+
              policy.</para
           >
         </remarks>
@@ -828,6 +896,8 @@
           <para
             >Determines which permissions to grant to code based on the specified evidence, excluding the policy for the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -840,6 +910,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -877,8 +949,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Security.Policy.PolicyLevel" />
+
+            
 
             
 
@@ -926,6 +1002,8 @@
 
             
 
+            
+
              will be saved to the same location from which it loaded.</para
           >
         </remarks>
@@ -937,11 +1015,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -984,8 +1066,12 @@
 
             
 
+            
+
              provides a way for administrators to disable code access security. When code access security is disabled, all code access demands succeed. Effectively, this grants all code FullTrust. Disabling code access security bypasses the security system so that code might perform slightly better than the equivalent security policy granting FullTrust to all code. This property does not disable role-based security; therefore, <see
              cref="T:System.Security.Permissions.PrincipalPermission" />
+
+            
 
             
 
@@ -1000,8 +1086,12 @@
 
             
 
+            
+
              is called. New processes will not be affected by the change until it is persisted in the registry. Changing the value of this property in a running process does not necessarily change the state in the expected manner. To ensure changes have taken effect, you must call <see
              cref="M:System.Security.SecurityManager.SavePolicy" />
+
+            
 
             
 

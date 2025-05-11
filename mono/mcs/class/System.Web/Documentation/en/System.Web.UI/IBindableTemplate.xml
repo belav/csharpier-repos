@@ -23,8 +23,12 @@
 
         
 
+        
+
          interface provides a way for ASP.NET data-bound controls, such as <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -43,8 +51,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -57,8 +69,12 @@
 
           
 
+          
+
            interface. Developers creating custom data-bound controls might manipulate <see
            cref="T:System.Web.UI.IBindableTemplate" />
+
+          
 
           
 
@@ -67,13 +83,19 @@
 
           
 
+          
+
            and <see
            cref="M:System.Web.UI.WebControls.GridView.ExtractRowValues(System.Collections.Specialized.IOrderedDictionary,System.Web.UI.WebControls.GridViewRow,System.Boolean,System.Boolean)" />
 
           
 
+          
+
            methods, but do not implement their own <see
            cref="T:System.Web.UI.IBindableTemplate" />
+
+          
 
           
 
@@ -86,8 +108,12 @@
 
         
 
+        
+
          typically are aware of their child control trees, and can therefore bind values to them, extract values from them, and pass these values between the data-bound control and a data source control whenever data binding occurs. However, when a page developer defines templated content for a data-bound control, the child controls within the template are not visible to the parent data-bound control: the parent can render the child content (because controls effectively render themselves), but it cannot extract the values of these child controls to pass to an associated data source control's update, insert, or delete operation. In data-binding scenarios, templated content is opaque to a parent data-bound control. The Bind syntax makes it possible for the data-bound control to extract the values from a control data-bound inside an <see
          cref="T:System.Web.UI.IBindableTemplate" />
+
+        
 
         
 
@@ -99,8 +125,12 @@
 
         
 
+        
+
          enumeration.) One-way data binding is any data binding performed in an outbound direction, from data source control to data-bound control; for example, any data-reading scenario involves one-way data binding. For one-way data binding, you can use one-way data binding syntax (&lt;%# Eval("fieldname") %&gt;) inside templated content, and do not need to use two-way ASP.NET data-binding syntax. Two-way data-binding describes data-binding in the inbound direction, from the data-bound control to the data source control. Automatic edit, insert, and delete scenarios using ASP.NET data-bound and data source controls are two-way data-binding scenarios. These scenarios use two-way data-binding expressions (&lt;%# Bind("fieldname") %&gt;). The <see
          cref="T:System.Web.UI.IBindableTemplate" />
+
+        
 
         
 
@@ -111,10 +141,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="14cdd57d-0f82-4667-b503-73e1a96f136a">Data-Binding Expression Syntax</a>
         </format>
+
+        
 
         
 
@@ -145,13 +179,19 @@
 
               
 
+              
+
               , <see
                cref="P:System.Web.UI.WebControls.TemplateField.EditItemTemplate" />
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TemplateField.InsertItemTemplate" />
+
+              
 
               
 
@@ -172,13 +212,19 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TemplateField.EditItemTemplate" />
 
               
 
+              
+
                property. The <see
                cref="T:System.Web.UI.WebControls.GridView" />
+
+              
 
               
 
@@ -199,8 +245,12 @@
 
               
 
+              
+
               , <see
                cref="P:System.Web.UI.WebControls.FormView.InsertItemTemplate" />
+
+              
 
               
 
@@ -209,8 +259,12 @@
 
               
 
+              
+
                property, or in a <see
                cref="T:System.Web.UI.WebControls.TemplateField" />
+
+              
 
               
 
@@ -225,8 +279,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -238,13 +296,19 @@
 
         
 
+        
+
          object when templated content that binds to an ASP.NET data source control within the template is parsed. Specifically, the ASP.NET parser creates an instance of the <see
          cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
 
         
 
+        
+
          class when it parses templated content that uses ASP.NET data-binding syntax and contains ASP.NET Web server controls that support data binding. These ASP.NET sever controls are marked by the <see
          cref="T:System.ComponentModel.BindableAttribute" />
+
+        
 
         
 
@@ -256,8 +320,12 @@
 
         
 
+        
+
          interface defines one method, <see
          cref="M:System.Web.UI.IBindableTemplate.ExtractValues(System.Web.UI.Control)" />
+
+        
 
         
 
@@ -266,13 +334,19 @@
 
         
 
+        
+
          method must match parameter names in an associated data source control. Control developers call the <see
          cref="M:System.Web.UI.IBindableTemplate.ExtractValues(System.Web.UI.Control)" />
 
         
 
+        
+
          method explicitly only within their implementations of <see
          cref="M:System.Web.UI.WebControls.FormView.ExtractRowValues(System.Collections.Specialized.IOrderedDictionary,System.Boolean)" />
+
+        
 
         
 
@@ -287,8 +361,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -322,6 +400,8 @@
           <para
             >An <see
              cref="T:System.Collections.Specialized.IOrderedDictionary" />
+
+            
 
             
 

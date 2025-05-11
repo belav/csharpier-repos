@@ -20,6 +20,8 @@
 
         
 
+        
+
          method.</para
       >
     </summary>
@@ -43,6 +45,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.DataTableClearEventArgs" />
+
+            
 
             
 

@@ -42,10 +42,14 @@
 
           
 
+          
+
            attribute (see <format
            type="text/html">
             <a href="4d05610a-0da6-4f08-acea-d54c9d6143c0">Security-Transparent Code, Level 2</a>
           </format>
+
+          
 
           
 
@@ -55,6 +59,8 @@
               >Security Changes in the .NET Framework Version 4</a
             >
           </format>
+
+          
 
           
 
@@ -69,8 +75,12 @@
 
         
 
+        
+
         ) assemblies must be strong-named to effectively use the <see
          cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
+
+        
 
         
 
@@ -81,10 +91,14 @@
 
         
 
+        
+
         ) assemblies do not have to be strong-named for the APTCA attribute to be effective, and they can contain transparent, security-critical and security-safe-critical code. For more information about applying attributes at the assembly level, see <format
          type="text/html">
           <a href="dd7604eb-9fa3-4b60-b2dd-b47739fa3148">Applying Attributes</a>
         </format>
+
+        
 
         
 
@@ -98,13 +112,19 @@
 
         
 
+        
+
          assembly does not explicitly apply this attribute at the assembly level, it can be called only by other assemblies that are granted full trust. This restriction is enforced by placing a <see
          cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
 
         
 
+        
+
          for FullTrust on every public or protected method on every publicly accessible class in the assembly. Assemblies that are intended to be called by partially trusted code can declare their intent through the use of <see
          cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
+
+        
 
         
 
@@ -114,6 +134,8 @@
         <para
           >The presence of this assembly-level attribute prevents the default behavior of placing FullTrust <see
            cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+
+          
 
           
 
@@ -127,8 +149,12 @@
 
         
 
+        
+
         , not from <see
          cref="T:System.Security.Permissions.SecurityAttribute" />
+
+        
 
         
 
@@ -141,6 +167,8 @@
             >Using Libraries from Partially Trusted Code</a
           >
         </format>
+
+        
 
         
 
@@ -177,6 +205,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
+
+            
 
             
 

@@ -55,8 +55,7 @@
         >$(TargetOS)-</WorkItemPrefix
       >
       <CMakeUrl>https://netcorenativeassets.blob.core.windows.net/resource-packages/external/macos/cmake/cmake-3.16.4-Darwin-x86_64.tar.gz</CMakeUrl>
-      <_XHarnessAppleCustomCommand Condition="'$(NeedsiOSSDK)' == 'true'"
-        >
+      <_XHarnessAppleCustomCommand Condition="'$(NeedsiOSSDK)' == 'true'">
         source build-apple-app.sh
       </_XHarnessAppleCustomCommand
       >

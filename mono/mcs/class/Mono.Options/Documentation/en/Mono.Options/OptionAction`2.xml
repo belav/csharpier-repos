@@ -40,6 +40,8 @@
 
       
 
+      
+
       .</param
     >
     <param name="value"
@@ -48,13 +50,16 @@
 
       
 
+      
+
       .</param
     >
-    <summary
-      >
+    <summary>
       A delegate that can refer to any method taking two arguments and
       returning <see
        cref="T:System.Void" />
+
+      
 
       
 
@@ -62,10 +67,11 @@
     </summary
     >
     <remarks>
-      <para
-        >
+      <para>
         Use this to support <see
          cref="T:Mono.Options.Option" />
+
+        
 
         
 

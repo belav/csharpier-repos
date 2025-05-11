@@ -29,10 +29,14 @@
 
         
 
+        
+
          exception is thrown, consult the documentation for the type whose method timed out. For information about handling the time-out, see the documentation for the method that threw the exception. </para
       >
       <para>
         <see cref="T:System.TimeoutException" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
         , see the <see
          cref="Overload:System.TimeoutException.#ctor" />
+
+        
 
         
 
@@ -80,11 +88,15 @@
 
             
 
+            
+
              property of the new instance with a system-supplied error message. This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.TimeoutException" />
+
+            
 
             
 
@@ -131,6 +143,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -160,8 +174,12 @@
 
             
 
+            
+
              property of the new instance using the value of the <paramref
              name="message" />
+
+            
 
             
 
@@ -170,6 +188,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.TimeoutException" />
+
+            
 
             
 
@@ -216,11 +236,15 @@
 
             
 
+            
+
              class with the specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,6 +282,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -269,6 +295,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -277,8 +305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -289,13 +321,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            object that contains contextual information about the source or destination. The <paramref
            name="context" />
+
+          
 
           
 
@@ -331,8 +369,12 @@
 
             
 
+            
+
              property of the new instance using the value of the <paramref
              name="message" />
+
+            
 
             
 
@@ -344,8 +386,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -354,11 +400,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.TimeoutException" />
+
+            
 
             
 
@@ -405,11 +455,15 @@
 
             
 
+            
+
              class with the specified error message and inner exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +474,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

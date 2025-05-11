@@ -23,8 +23,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Diagnostics.TraceSource" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          object. The <see
          cref="T:System.Diagnostics.SourceSwitch" />
+
+        
 
         
 
@@ -43,13 +51,19 @@
 
         
 
+        
+
          property to test the event level of the switch. The <see
          cref="P:System.Diagnostics.SourceSwitch.Level" />
 
         
 
+        
+
          property gets or sets the switch's <see
          cref="T:System.Diagnostics.TraceLevel" />
+
+        
 
         
 
@@ -61,8 +75,12 @@
 
         
 
+        
+
          through the application configuration file and then use the configured <see
          cref="T:System.Diagnostics.SourceSwitch" />
+
+        
 
         
 
@@ -71,11 +89,15 @@
 
         
 
+        
+
          in your code and set the level directly, to instrument a specific section of code.</para
       >
       <para
         >To configure a <see
          cref="T:System.Diagnostics.SourceSwitch" />
+
+        
 
         
 
@@ -90,8 +112,12 @@
 
         
 
+        
+
          trace method calls the <see
          cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" />
+
+        
 
         
 
@@ -100,8 +126,12 @@
 
         
 
+        
+
          method returns false, the trace is ignored and the trace method exits. If the <see
          cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" />
+
+        
 
         
 
@@ -138,8 +168,12 @@
 
             
 
+            
+
              parameter is used to set the value of the <see
              cref="P:System.Diagnostics.Switch.DisplayName" />
+
+            
 
             
 
@@ -148,6 +182,8 @@
           <para
             >To set the level of your <see
              cref="T:System.Diagnostics.SourceSwitch" />
+
+            
 
             
 
@@ -166,6 +202,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.SourceSwitch" />
+
+            
 
             
 
@@ -201,8 +239,12 @@
 
             
 
+            
+
              parameter is used to set the value of the <see
              cref="P:System.Diagnostics.Switch.DisplayName" />
+
+            
 
             
 
@@ -211,8 +253,12 @@
 
             
 
+            
+
              parameter is saved as a field and used to initialize the <see
              cref="P:System.Diagnostics.Switch.Value" />
+
+            
 
             
 
@@ -225,12 +271,16 @@
 
               
 
+              
+
                is ignored.</para
             >
           </block>
           <para
             >To set the level of your <see
              cref="T:System.Diagnostics.SourceSwitch" />
+
+            
 
             
 
@@ -252,6 +302,8 @@
 
             
 
+            
+
              class, specifying the display name and the default value for the source switch.</para
           >
         </summary>
@@ -260,10 +312,14 @@
 
           
 
+          
+
           The name of the source switch. </param
         >
         <param name="defaultSwitchValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -298,8 +354,12 @@
 
             
 
+            
+
              property. Setting this property also modifies the <see
              cref="P:System.Diagnostics.Switch.SwitchSetting" />
+
+            
 
             
 
@@ -312,8 +372,12 @@
 
               
 
+              
+
                property can be set to any integer, rather than being limited to a <see
                cref="T:System.Diagnostics.SourceLevels" />
+
+              
 
               
 
@@ -351,8 +415,12 @@
 
             
 
+            
+
              method converts the new value of the <see
              cref="P:System.Diagnostics.Switch.Value" />
+
+            
 
             
 
@@ -361,8 +429,12 @@
 
             
 
+            
+
              enumeration, and then uses this integer to set the <see
              cref="P:System.Diagnostics.Switch.SwitchSetting" />
+
+            
 
             
 
@@ -374,6 +446,8 @@
           <para
             >Invoked when the value of the <see
              cref="P:System.Diagnostics.Switch.Value" />
+
+            
 
             
 
@@ -411,12 +485,16 @@
 
             
 
+            
+
              class to determine whether listeners should be called to write a trace.</para
           >
           <block subset="none" type="note">
             <para
               >Application code should not call this method; it is intended to be called only by methods in the <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -437,8 +515,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 

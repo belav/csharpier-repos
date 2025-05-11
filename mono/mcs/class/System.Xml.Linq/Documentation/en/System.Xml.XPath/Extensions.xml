@@ -54,8 +54,12 @@
 
             
 
+            
+
              that is returned by this method. The <see
              cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
+
+            
 
             
 
@@ -67,8 +71,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Xml.Linq.XDocumentType" />
+
+            
 
             
 
@@ -80,11 +88,15 @@
 
             
 
+            
+
              namespaces are reported from right to left. This is conformant behavior because namespace declarations are not ordered in the XPath data model.</para
           >
           <para
             >The method <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToId(System.String)" />
+
+            
 
             
 
@@ -96,8 +108,12 @@
 
             
 
+            
+
              from the XML tree, create a new document, and create a <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -106,8 +122,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -119,8 +139,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -129,8 +153,12 @@
 
             
 
+            
+
             , and others will execute faster when using a <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -145,8 +173,12 @@
 
             
 
+            
+
              for an <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -161,6 +193,8 @@
 
             
 
+            
+
              that can process XPath queries.</para
           >
         </returns>
@@ -169,8 +203,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -207,8 +245,12 @@
 
             
 
+            
+
              that is returned by this method. The <see
              cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
+
+            
 
             
 
@@ -220,8 +262,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Xml.Linq.XDocumentType" />
+
+            
 
             
 
@@ -233,11 +279,15 @@
 
             
 
+            
+
              namespaces are reported from right to left. This is conformant behavior because namespace declarations are not ordered in the XPath data model.</para
           >
           <para
             >The method <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToId(System.String)" />
+
+            
 
             
 
@@ -249,8 +299,12 @@
 
             
 
+            
+
              with this method to create the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -265,13 +319,19 @@
 
             
 
+            
+
              for an <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -286,6 +346,8 @@
 
             
 
+            
+
              that can process XPath queries.</para
           >
         </returns>
@@ -294,8 +356,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -306,13 +372,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlNameTable" />
 
           
 
+          
+
            to be used by <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -349,8 +421,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Linq.XAttribute" />
+
+            
 
             
 
@@ -371,6 +447,8 @@
 
             
 
+            
+
             . </para
           >
         </returns>
@@ -379,8 +457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -391,8 +473,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -436,6 +522,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -447,6 +535,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -455,8 +545,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -467,8 +561,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -479,8 +577,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -518,6 +620,8 @@
 
             
 
+            
+
              using a XPath expression.</para
           >
         </summary>
@@ -529,6 +633,8 @@
 
             
 
+            
+
             , or null.</para
           >
         </returns>
@@ -537,8 +643,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -549,8 +659,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -592,8 +706,12 @@
 
             
 
+            
+
              using a XPath expression, resolving namespace prefixes using the specified <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -608,6 +726,8 @@
 
             
 
+            
+
             , or null.</para
           >
         </returns>
@@ -616,8 +736,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -628,8 +752,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -640,8 +768,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -687,8 +819,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -700,8 +836,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -712,8 +852,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -757,6 +901,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -768,8 +914,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -781,8 +931,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -793,8 +947,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -805,8 +963,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 

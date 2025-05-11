@@ -19,6 +19,8 @@
 
       
 
+      
+
       .</remarks
     >
   </Docs>
@@ -62,11 +64,15 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.NestedClass.M(System.Int32)</c>
+
+          
 
           
 
@@ -88,6 +94,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>F:Mono.DocTest.Widget.NestedClass.value</c>
+
+          
 
           
 

@@ -52,8 +52,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.Never" />
+
+                
 
                 
 
@@ -66,8 +70,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -77,6 +85,8 @@
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                
 
                 
 
@@ -90,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.RsaSecurityTokenParameters" />
+
+            
 
             
 
@@ -127,13 +139,19 @@
 
             
 
+            
+
             . <see
              cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" />
 
             
 
+            
+
              is set to <see
              cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.Never" />
+
+            
 
             
 
@@ -145,6 +163,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.RsaSecurityTokenParameters" />
+
+            
 
             
 
@@ -179,8 +199,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -191,8 +215,12 @@
 
             
 
+            
+
              is an abstract class that is overridden by <see
              cref="M:System.ServiceModel.Security.Tokens.RsaSecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -204,8 +232,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.RsaSecurityTokenParameters)" />
+
+            
 
             
 
@@ -221,6 +253,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            
 
             
 
@@ -267,10 +301,14 @@
 
           
 
+          
+
           The token.</param
         >
         <param name="referenceStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,6 +370,8 @@
 
             
 
+            
+
              are initialized:</para
           >
           <list type="bullet">
@@ -341,8 +381,12 @@
 
                 
 
+                
+
                  = <see
                  cref="P:System.IdentityModel.Tokens.SecurityTokenTypes.Rsa" />
+
+                
 
                 
 
@@ -355,6 +399,8 @@
 
                 
 
+                
+
                  = true.</para
               >
             </item>
@@ -364,8 +410,12 @@
 
                 
 
+                
+
                  = <see
                  cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />
+
+                
 
                 
 
@@ -380,6 +430,8 @@
         </summary>
         <param name="requirement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

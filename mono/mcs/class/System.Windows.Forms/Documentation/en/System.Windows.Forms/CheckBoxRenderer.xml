@@ -19,8 +19,12 @@
 
         
 
+        
+
          class provides a set of static methods that can be used to render a check box control. Rendering a control refers to drawing the user interface of a control. To draw a check box, use one of the <see
          cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          will draw the check box with the current visual style. Otherwise, <see
          cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          that is set to one of the elements exposed by the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.CheckBox" />
+
+        
 
         
 
@@ -54,6 +66,8 @@
          type="text/html">
           <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
         </format>
+
+        
 
         
 
@@ -95,8 +109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -107,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -119,8 +141,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+          
 
           
 
@@ -164,8 +190,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -176,8 +206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -188,13 +222,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            to draw <paramref
            name="checkBoxText" />
+
+          
 
           
 
@@ -205,8 +245,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -217,13 +261,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="checkBoxText" />
+
+          
 
           
 
@@ -234,6 +284,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -241,8 +293,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+          
 
           
 
@@ -287,8 +343,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -299,8 +359,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -311,13 +375,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            to draw <paramref
            name="checkBoxText" />
+
+          
 
           
 
@@ -328,8 +398,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -340,13 +414,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="checkBoxText" />
+
+          
 
           
 
@@ -357,8 +437,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -369,6 +453,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -376,8 +462,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+          
 
           
 
@@ -423,8 +513,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -435,8 +529,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -447,13 +545,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            to draw <paramref
            name="checkBoxText" />
+
+          
 
           
 
@@ -464,8 +568,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -476,13 +584,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="checkBoxText" />
+
+          
 
           
 
@@ -493,8 +607,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -505,13 +623,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the dimensions of <paramref
            name="image" />
+
+          
 
           
 
@@ -522,6 +646,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -529,8 +655,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+          
 
           
 
@@ -577,8 +707,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -589,8 +723,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -601,13 +739,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            to draw <paramref
            name="checkBoxText" />
+
+          
 
           
 
@@ -618,8 +762,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -630,13 +778,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="checkBoxText" />
+
+          
 
           
 
@@ -647,8 +801,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -659,8 +817,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -671,13 +833,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the dimensions of <paramref
            name="image" />
+
+          
 
           
 
@@ -688,6 +856,8 @@
 
           
 
+          
+
           true to draw a focus rectangle; otherwise, false.</param
         >
         <param name="state">
@@ -695,8 +865,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+          
 
           
 
@@ -733,13 +907,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
           
 
+          
+
            used to draw the background of the parent of <paramref
            name="childControl" />
+
+          
 
           
 
@@ -750,8 +930,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -759,6 +943,8 @@
         >
         <param name="childControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -800,6 +986,8 @@
 
             
 
+            
+
              that represents the size of the check box glyph.</para
           >
         </returns>
@@ -808,8 +996,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -820,8 +1012,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+          
 
           
 
@@ -860,8 +1056,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+          
 
           
 
@@ -892,8 +1092,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="T:System.Windows.Forms.CheckBoxRenderer" />
+
+            
 
             
 
@@ -902,8 +1106,12 @@
 
             
 
+            
+
              property to determine the rendering style. If <see
              cref="P:System.Windows.Forms.CheckBoxRenderer.RenderMatchingApplicationState" />
+
+            
 
             
 

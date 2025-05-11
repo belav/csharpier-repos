@@ -18,6 +18,8 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
@@ -29,6 +31,8 @@
       <para
         >Specifies the date and time format the <see
          cref="T:System.Windows.Forms.DateTimePicker" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
             
 
+            
+
              control displays the date/time value in a custom format. For more information, see <see
              cref="P:System.Windows.Forms.DateTimePicker.CustomFormat" />
+
+            
 
             
 
@@ -81,6 +89,8 @@
 
             
 
+            
+
              control displays the date/time value in the long date format set by the user's operating system.</para
           >
         </summary>
@@ -105,6 +115,8 @@
 
             
 
+            
+
              control displays the date/time value in the short date format set by the user's operating system.</para
           >
         </summary>
@@ -126,6 +138,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 

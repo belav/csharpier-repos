@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          or an <see
          cref="T:System.Drawing.Icon" />
+
+        
 
         
 
@@ -42,13 +50,19 @@
 
         
 
+        
+
          property. Typically, the <see
          cref="P:System.Windows.Forms.DataGridViewCell.ReadOnly" />
 
         
 
+        
+
          property of a <see
          cref="T:System.Windows.Forms.DataGridViewImageCell" />
+
+        
 
         
 
@@ -60,8 +74,12 @@
 
         
 
+        
+
          is the column type specialized to hold cells of this type. By default, the <see
          cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
+
+        
 
         
 
@@ -70,13 +88,19 @@
 
         
 
+        
+
         . To pattern the cells within a column after an existing <see
          cref="T:System.Windows.Forms.DataGridViewImageCell" />
 
         
 
+        
+
         , set the column's <see
          cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
+
+        
 
         
 
@@ -89,6 +113,8 @@
       <para
         >Displays a graphic in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -111,8 +137,12 @@
 
             
 
+            
+
              with a <paramref
              name="valueIsIcon" />
+
+            
 
             
 
@@ -127,8 +157,12 @@
 
             
 
+            
+
              class, configuring it for use with cell values other than <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -156,8 +190,12 @@
 
             
 
+            
+
              property is set to the value of the <paramref
              name="valueIsIcon" />
+
+            
 
             
 
@@ -169,8 +207,12 @@
 
             
 
+            
+
              values is painted correctly, use this constructor with a <paramref
              name="valueIsIcon" />
+
+            
 
             
 
@@ -182,8 +224,12 @@
 
             
 
+            
+
              parameter is true, the <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.FormattedValueType" />
+
+            
 
             
 
@@ -192,13 +238,19 @@
 
             
 
+            
+
              properties return a <see
              cref="T:System.Type" />
 
             
 
+            
+
              object representing the <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -213,8 +265,12 @@
 
             
 
+            
+
              class, optionally configuring it for use with <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -226,8 +282,12 @@
 
           
 
+          
+
           The cell will display an <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -255,8 +315,12 @@
 
             
 
+            
+
              method whenever you derive from <see
              cref="T:System.Windows.Forms.DataGridViewImageCell" />
+
+            
 
             
 
@@ -275,8 +339,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewImageCell" />
+
+            
 
             
 
@@ -308,8 +376,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+            
 
             
 
@@ -319,6 +391,8 @@
             <para
               >To get or set <see
                cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+              
 
               
 
@@ -334,6 +408,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -345,8 +421,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.DataGridViewImageCell" />
+
+            
 
             
 
@@ -375,8 +455,12 @@
 
             
 
+            
+
              or type <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -385,11 +469,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >Whenever a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -423,8 +511,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.Description" />
+
+            
 
             
 
@@ -462,6 +554,8 @@
 
             
 
+            
+
              property is always null because there is no associated Windows Forms control for editing an image.</para
           >
         </remarks>
@@ -491,8 +585,12 @@
 
             
 
+            
+
              object representing either the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -501,8 +599,12 @@
 
             
 
+            
+
              type because a <see
              cref="T:System.Windows.Forms.DataGridViewImageCell" />
+
+            
 
             
 
@@ -679,8 +781,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.ImageLayout" />
+
+            
 
             
 
@@ -737,6 +843,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -745,8 +853,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -757,13 +869,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -774,8 +892,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -786,6 +908,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="elementState">
@@ -793,8 +917,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -805,10 +933,14 @@
 
           
 
+          
+
           The data of the cell that is being painted.</param
         >
         <param name="formattedValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -819,6 +951,8 @@
 
           
 
+          
+
           An error message that is associated with the cell.</param
         >
         <param name="cellStyle">
@@ -826,8 +960,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -838,8 +976,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -850,8 +992,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -896,8 +1042,12 @@
 
             
 
+            
+
              values is painted correctly, set this property to true. When this property is true, the <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.FormattedValueType" />
+
+            
 
             
 
@@ -906,13 +1056,19 @@
 
             
 
+            
+
              properties return a <see
              cref="T:System.Type" />
 
             
 
+            
+
              object representing the <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -924,8 +1080,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+
+            
 
             
 
@@ -937,6 +1097,8 @@
 
             
 
+            
+
              property. </para
           >
           <para
@@ -945,8 +1107,12 @@
 
             
 
+            
+
              property, the cell <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+
+            
 
             
 
@@ -955,8 +1121,12 @@
 
             
 
+            
+
              property of the associated cell style when you change its value. When you change the cell <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+
+            
 
             
 
@@ -965,8 +1135,12 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+
+            
 
             
 
@@ -975,8 +1149,12 @@
 
             
 
+            
+
             . When you change the <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+
+            
 
             
 
@@ -985,8 +1163,12 @@
 
             
 
+            
+
              property to a valid <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -998,6 +1180,8 @@
           <para
             >Gets or sets a value indicating whether this cell displays an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -1031,8 +1215,12 @@
 
             
 
+            
+
              for the cell has not been set, then the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.ValueType" />
+
+            
 
             
 
@@ -1041,13 +1229,19 @@
 
             
 
+            
+
              type if the <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
+            
+
              property is set to false and the <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -1059,8 +1253,12 @@
 
             
 
+            
+
              is the actual data object contained in the cell, whereas the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
+
+            
 
             
 
@@ -1069,8 +1267,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewImageCell.FormattedValueType" />
+
+            
 
             
 

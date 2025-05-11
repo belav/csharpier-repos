@@ -39,6 +39,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -67,8 +69,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -80,8 +86,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Resources.ResourceManager" />
+
+          
 
           
 
@@ -113,8 +123,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -126,8 +140,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Resources.ResourceManager" />
+
+          
 
           
 
@@ -135,6 +153,8 @@
         >
         <param name="helpKeywordPrefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,6 +265,8 @@
 
           
 
+          
+
           The path to the executable file.</param
         >
         <param name="responseFileCommands">
@@ -252,10 +274,14 @@
 
           
 
+          
+
           The command line arguments to place in the .rsp file.</param
         >
         <param name="commandLineCommands">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,8 +336,12 @@
 
             
 
+            
+
              and <see
              cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" />
+
+            
 
             
 
@@ -345,6 +375,8 @@
           <para
             >This method returns the value of the <see
              cref="P:Microsoft.Build.Utilities.ToolTask.ToolName" />
+
+            
 
             
 
@@ -384,8 +416,12 @@
 
             
 
+            
+
              and <see
              cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" />
+
+            
 
             
 
@@ -427,6 +463,8 @@
 
             
 
+            
+
              returns a non-empty string value.</para
           >
           <para
@@ -435,13 +473,19 @@
 
             
 
+            
+
             , <see
              cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" />
 
             
 
+            
+
              and <see
              cref="M:Microsoft.Build.Utilities.ToolTask.GenerateResponseFileCommands" />
+
+            
 
             
 
@@ -458,6 +502,8 @@
         </returns>
         <param name="responseFilePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -546,6 +592,8 @@
 
             
 
+            
+
              of the host object.</para
           >
         </returns>
@@ -577,6 +625,8 @@
         </summary>
         <param name="singleLine">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,10 +662,14 @@
 
           
 
+          
+
           The executable file name.</param
         >
         <param name="pathToTool">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -650,6 +704,8 @@
 
           
 
+          
+
           A descriptive message to provide loggers, usually the command line and switches.</param
         >
       </Docs>
@@ -677,6 +733,8 @@
 
             
 
+            
+
              by default.</para
           >
         </remarks>
@@ -685,6 +743,8 @@
           <para
             >Gets the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -710,6 +770,8 @@
           <para
             >This method is called after <see
              cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" />
+
+            
 
             
 
@@ -753,6 +815,8 @@
 
             
 
+            
+
              of the standard error stream of the task.</para
           >
         </summary>
@@ -779,6 +843,8 @@
           <para
             >Gets the <see
              cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+            
 
             
 
@@ -814,6 +880,8 @@
 
             
 
+            
+
              of the standard output stream of the task.</para
           >
         </summary>
@@ -840,6 +908,8 @@
           <para
             >Gets the <see
              cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+            
 
             
 

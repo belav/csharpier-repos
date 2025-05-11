@@ -46,8 +46,12 @@
 
         
 
+        
+
          is a scrollable control similar to the <see
          cref="T:System.Windows.Forms.ScrollBar" />
+
+        
 
         
 
@@ -56,13 +60,19 @@
 
         
 
+        
+
          property of a track bar scrolls by setting the <see
          cref="P:System.Windows.Forms.TrackBar.Minimum" />
 
         
 
+        
+
          property to specify the lower end of the range and the <see
          cref="P:System.Windows.Forms.TrackBar.Maximum" />
+
+        
 
         
 
@@ -74,8 +84,12 @@
 
         
 
+        
+
          property defines the increment to add or subtract from the <see
          cref="P:System.Windows.Forms.TrackBar.Value" />
+
+        
 
         
 
@@ -84,6 +98,8 @@
       <para
         >You can use this control to input numeric data obtained through the <see
          cref="P:System.Windows.Forms.TrackBar.Value" />
+
+        
 
         
 
@@ -109,6 +125,8 @@
 
             
 
+            
+
              is created with a default horizontal orientation and a range of 0 to 10, with a tick mark shown for every value.</para
           >
         </remarks>
@@ -117,6 +135,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -159,8 +179,12 @@
 
             
 
+            
+
              property to true to cause the track bar to adjust its height (if horizontally aligned) or width (if vertically aligned). The height or width is adjusted to a standard size based on the screen resolution on which the track bar is displayed. Set the <see
              cref="P:System.Windows.Forms.TrackBar.AutoSize" />
+
+            
 
             
 
@@ -205,6 +229,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -213,6 +239,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TrackBar.AutoSize" />
+
+            
 
             
 
@@ -248,8 +276,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -261,6 +293,8 @@
           <para
             >Gets or sets the background image for the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -296,8 +330,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -309,6 +347,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.TrackBar.BackgroundImage" />
+
+            
 
             
 
@@ -351,8 +391,12 @@
 
             
 
+            
+
              property will have no effect on the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -367,8 +411,12 @@
 
             
 
+            
+
              value; however, setting this property has no effect on the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -406,8 +454,12 @@
 
             
 
+            
+
              property will have no effect on the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -419,6 +471,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.TrackBar.BackgroundImageLayout" />
+
+            
 
             
 
@@ -443,13 +497,19 @@
 
             
 
+            
+
              method ends the initialization. Using <see
              cref="M:System.Windows.Forms.TrackBar.BeginInit" />
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.TrackBar.EndInit" />
+
+            
 
             
 
@@ -461,6 +521,8 @@
           <para
             >Begins the initialization of a <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -497,6 +559,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -520,6 +584,8 @@
           <para
             >Overrides the <see
              cref="M:System.Windows.Forms.Control.CreateHandle" />
+
+            
 
             
 
@@ -552,6 +618,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -578,6 +646,8 @@
           <para
             >Gets a value indicating the mode for the Input Method Editor (IME) for the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -610,6 +680,8 @@
           <para
             >Gets the default size of the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -646,6 +718,8 @@
 
             
 
+            
+
              control; therefore, it is not shown in the designer or by IntelliSense.</para
           >
         </remarks>
@@ -654,6 +728,8 @@
           <para
             >Gets or sets a value indicating whether this control should redraw its surface using a secondary buffer to reduce or prevent flicker; however, this property has no effect on the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -686,6 +762,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -711,13 +789,19 @@
 
             
 
+            
+
              method starts the initialization. Using the <see
              cref="M:System.Windows.Forms.TrackBar.BeginInit" />
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.TrackBar.EndInit" />
+
+            
 
             
 
@@ -729,6 +813,8 @@
           <para
             >Ends the initialization of a <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -801,6 +887,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -861,6 +949,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.TrackBar.ForeColor" />
+
+            
 
             
 
@@ -927,6 +1017,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -983,8 +1075,12 @@
 
             
 
+            
+
              property changes according to the value set in the <see
              cref="P:System.Windows.Forms.TrackBar.LargeChange" />
+
+            
 
             
 
@@ -993,13 +1089,19 @@
 
             
 
+            
+
              value to a percentage of the <see
              cref="P:System.Windows.Forms.Control.Height" />
 
             
 
+            
+
              (for a vertically oriented track bar) or <see
              cref="P:System.Windows.Forms.Control.Width" />
+
+            
 
             
 
@@ -1011,6 +1113,8 @@
           <para
             >Gets or sets a value to be added to or subtracted from the <see
              cref="P:System.Windows.Forms.TrackBar.Value" />
+
+            
 
             
 
@@ -1047,13 +1151,19 @@
 
             
 
+            
+
              method to set both the <see
              cref="P:System.Windows.Forms.TrackBar.Maximum" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TrackBar.Minimum" />
+
+            
 
             
 
@@ -1065,6 +1175,8 @@
           <para
             >Gets or sets the upper limit of the range this <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -1101,13 +1213,19 @@
 
             
 
+            
+
              method to set both the <see
              cref="P:System.Windows.Forms.TrackBar.Maximum" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TrackBar.Minimum" />
+
+            
 
             
 
@@ -1119,6 +1237,8 @@
           <para
             >Gets or sets the lower limit of the range this <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -1161,6 +1281,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1193,6 +1315,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -1248,6 +1372,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1256,8 +1382,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1327,11 +1457,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TrackBar.OnRightToLeftLayoutChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1346,6 +1480,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1354,8 +1490,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1381,6 +1521,8 @@
 
             
 
+            
+
              event to update other controls as the position of the scroll box changes.</para
           >
           <para
@@ -1391,11 +1533,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TrackBar.OnScroll(System.EventArgs)" />
+
+            
 
             
 
@@ -1410,6 +1556,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1418,8 +1566,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1458,11 +1610,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TrackBar.OnSystemColorsChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1477,6 +1633,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1485,8 +1643,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1513,6 +1675,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1521,8 +1685,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1561,8 +1729,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.Orientation.Horizontal" />
+
+            
 
             
 
@@ -1571,8 +1743,12 @@
 
             
 
+            
+
              increases. When the <see
              cref="P:System.Windows.Forms.TrackBar.Orientation" />
+
+            
 
             
 
@@ -1581,8 +1757,12 @@
 
             
 
+            
+
             , the scroll box moves from bottom to top as the <see
              cref="P:System.Windows.Forms.TrackBar.Value" />
+
+            
 
             
 
@@ -1632,8 +1812,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -1645,6 +1829,8 @@
           <para
             >Gets or sets the space between the edges of a <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -1681,6 +1867,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1689,6 +1877,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TrackBar.Padding" />
+
+            
 
             
 
@@ -1721,6 +1911,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -1760,8 +1952,12 @@
 
             
 
+            
+
              property is used with the <see
              cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+            
 
             
 
@@ -1773,6 +1969,8 @@
           <para
             >Gets or sets a value indicating whether the contents of the <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -1801,6 +1999,8 @@
 
             
 
+            
+
             .</para
           >
           <para>Example</para>
@@ -1810,6 +2010,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TrackBar.RightToLeftLayout" />
+
+            
 
             
 
@@ -1832,6 +2034,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1900,8 +2104,12 @@
 
             
 
+            
+
              at the same time. To set the minimum or maximum values individually, use the <see
              cref="P:System.Windows.Forms.TrackBar.Minimum" />
+
+            
 
             
 
@@ -1910,8 +2118,12 @@
 
             
 
+            
+
              properties. If the <paramref
              name="minValue" />
+
+            
 
             
 
@@ -1920,13 +2132,19 @@
 
             
 
+            
+
              parameter, <paramref
              name="maxValue" />
 
             
 
+            
+
              is set equal to <paramref
              name="minValue" />
+
+            
 
             
 
@@ -1941,6 +2159,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1949,10 +2169,14 @@
 
           
 
+          
+
           The lower limit of the range of the track bar. </param
         >
         <param name="maxValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1985,8 +2209,12 @@
 
             
 
+            
+
              property changes according to the value set in the <see
              cref="P:System.Windows.Forms.TrackBar.SmallChange" />
+
+            
 
             
 
@@ -1998,13 +2226,19 @@
 
             
 
+            
+
              to a percentage of the value of the <see
              cref="P:System.Windows.Forms.Control.Height" />
 
             
 
+            
+
              (for a vertically oriented track bar) or <see
              cref="P:System.Windows.Forms.Control.Width" />
+
+            
 
             
 
@@ -2016,6 +2250,8 @@
           <para
             >Gets or sets the value added to or subtracted from the <see
              cref="P:System.Windows.Forms.TrackBar.Value" />
+
+            
 
             
 
@@ -2059,6 +2295,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2092,6 +2330,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -2122,13 +2362,19 @@
 
             
 
+            
+
              with a large range of values between the <see
              cref="P:System.Windows.Forms.TrackBar.Minimum" />
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.TrackBar.Maximum" />
+
+            
 
             
 
@@ -2169,6 +2415,8 @@
 
             
 
+            
+
              property to modify the manner in which the tick marks are displayed on the track bar.</para
           >
         </remarks>
@@ -2198,8 +2446,12 @@
 
             
 
+            
+
              method returns a string that includes the type and the values for the <see
              cref="P:System.Windows.Forms.TrackBar.Minimum" />
+
+            
 
             
 
@@ -2208,8 +2460,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.TrackBar.Value" />
+
+            
 
             
 
@@ -2224,6 +2480,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -2232,6 +2490,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.TrackBar" />
+
+            
 
             
 
@@ -2268,6 +2528,8 @@
 
             
 
+            
+
              property contains the number that represents the current position of the scroll box on the track bar.</para
           >
         </remarks>
@@ -2299,6 +2561,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2307,6 +2571,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.TrackBar.Value" />
+
+            
 
             
 

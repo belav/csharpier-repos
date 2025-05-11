@@ -28,8 +28,12 @@
 
         
 
+        
+
          is called by remoting when an object or proxy in the current <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
            type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
+
+          
 
           
 
@@ -84,6 +90,8 @@
 
           
 
+          
+
           The disconnected object. </param
         >
       </Docs>
@@ -121,6 +129,8 @@
 
           
 
+          
+
           The object that has been marshaled. </param
         >
         <param name="or">
@@ -128,8 +138,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -170,6 +184,8 @@
 
           
 
+          
+
           The unmarshaled object. </param
         >
         <param name="or">
@@ -177,8 +193,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 

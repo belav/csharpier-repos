@@ -22,6 +22,8 @@
 
         
 
+        
+
          control allows text to be displayed programmatically on a Web page.</para
       >
       <para
@@ -30,13 +32,19 @@
 
         
 
+        
+
          control is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control is persisted to the markup source code and edited into the markup for the Web page. The <see
          cref="T:System.Web.UI.Design.WebControls.LabelDesigner" />
 
         
 
+        
+
          class provides design-time support for the <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          method is called when there is a change to the associated <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -61,6 +73,8 @@
       <para
         >Provides design-time support in a visual designer for the <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -82,13 +96,19 @@
 
             
 
+            
+
              class when it creates the associated <see
              cref="T:System.Web.UI.WebControls.Label" />
 
             
 
+            
+
              control or a copy of the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -100,6 +120,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.LabelDesigner" />
+
+            
 
             
 

@@ -42,6 +42,8 @@
         
 
         
+
+        
       is thrown.</para
       >
       <para>The following code contains a class with a public method (MyMethod). This
@@ -121,6 +123,8 @@ namespace TestNameSpace
 
           
 
+          
+
            or the <format
            type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
@@ -128,8 +132,12 @@ namespace TestNameSpace
 
           
 
+          
+
           , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
            cref="T:System.MemberAccessException" />
+
+          
 
           
 
@@ -159,11 +167,15 @@ namespace TestNameSpace
 
           
 
+          
+
           .</para
         >
       </block>
       <para>
         <see cref="T:System.MethodAccessException" />
+
+        
 
         
 
@@ -175,8 +187,12 @@ namespace TestNameSpace
 
         
 
+        
+
         , see the <see
          cref="M:System.MethodAccessException.#ctor" />
+
+        
 
         
 
@@ -213,6 +229,8 @@ namespace TestNameSpace
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.MethodAccessException" />
+
+            
 
             
 
@@ -259,8 +277,12 @@ namespace TestNameSpace
 
             
 
+            
+
              class, setting the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -299,11 +321,15 @@ namespace TestNameSpace
 
             
 
+            
+
              should be understandable to the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.MethodAccessException" />
+
+            
 
             
 
@@ -350,6 +376,8 @@ namespace TestNameSpace
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
@@ -358,8 +386,12 @@ namespace TestNameSpace
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -398,6 +430,8 @@ namespace TestNameSpace
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -409,6 +443,8 @@ namespace TestNameSpace
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -417,10 +453,14 @@ namespace TestNameSpace
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,8 +501,12 @@ namespace TestNameSpace
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -471,11 +515,15 @@ namespace TestNameSpace
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.MethodAccessException" />
+
+            
 
             
 
@@ -522,11 +570,15 @@ namespace TestNameSpace
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,8 +589,12 @@ namespace TestNameSpace
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

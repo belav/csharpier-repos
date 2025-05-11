@@ -55,8 +55,12 @@
 
               
 
+              
+
                flag provides temporary keys with more reliable cleanup. If this flag is not used, the common language runtime (CLR) generates a randomly named key when an RSA object is created. When the object is finalized or disposed of, the key is deleted. When impersonation is in effect, not explicitly calling Dispose can potentially create a problem. For example, if you use impersonation, create an RSA object, and do not dispose of it, the finalizer thread (which is not impersonating) can fail to delete the key, and then throws an exception. This exception is unhandled and can terminate the process. The resources allocated to the key are not recovered, resulting in a memory leak. The <see
                cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+              
 
               
 
@@ -249,6 +253,8 @@
           <para
             >Notify the user through a dialog box or another method when certain actions are attempting to use a key.  This flag is not compatible with the <see
              cref="F:System.Security.Cryptography.CspProviderFlags.NoPrompt" />
+
+            
 
             
 

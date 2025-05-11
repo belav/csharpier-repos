@@ -38,11 +38,15 @@
 
         
 
+        
+
          can be used to reference a particular data type.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeTypeReferenceExpression.Type" />
+
+        
 
         
 
@@ -76,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeReferenceExpression" />
+
+            
 
             
 
@@ -113,6 +119,8 @@
 
             
 
+            
+
              class using the specified type.</para
           >
         </summary>
@@ -121,8 +129,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -156,11 +168,15 @@
 
             
 
+            
+
              class using the specified data type name.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,11 +210,15 @@
 
             
 
+            
+
              class using the specified data type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

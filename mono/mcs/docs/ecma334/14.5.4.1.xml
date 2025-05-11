@@ -6,8 +6,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.2</hyperlink>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
      (<hyperlink
     >10.8</hyperlink>
+
+    
 
     
 
@@ -27,7 +35,7 @@
     <example
       >[Example: For example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 struct Color  
 {  
    public static readonly Color White = new Color(...);  

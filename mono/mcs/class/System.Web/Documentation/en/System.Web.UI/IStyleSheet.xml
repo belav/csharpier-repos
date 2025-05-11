@@ -18,8 +18,12 @@
 
         
 
+        
+
          class implements this interface for use by ASP.NET through the <see
          cref="P:System.Web.UI.Page.Header" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
            type="text/html">
             <a href="be84d9b3-b7cd-47d7-8494-be4abfaad9cb">ASP.NET AJAX Overview</a>
           </format>
+
+          
 
           
 
@@ -69,6 +75,8 @@
 
             
 
+            
+
              method creates a style rule for the specified selector. Multiple style rules can be created for the same selector.</para
           >
           <para
@@ -77,8 +85,12 @@
 
             
 
+            
+
              is set to null, the URL of the current <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -90,6 +102,8 @@
                type="text/html">
                 <a href="be84d9b3-b7cd-47d7-8494-be4abfaad9cb">ASP.NET AJAX Overview</a>
               </format>
+
+              
 
               
 
@@ -106,6 +120,8 @@
 
           
 
+          
+
           The style rule to be added to the embedded style sheet.</param
         >
         <param name="urlResolver">
@@ -113,8 +129,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.IUrlResolutionService" />
+
+          
 
           
 
@@ -148,8 +168,12 @@
 
             
 
+            
+
              property name to the embedded style sheet within the &lt;head&gt; section of a <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -158,8 +182,12 @@
 
             
 
+            
+
              object is rendered using the specified <paramref
              name="urlResolver" />
+
+            
 
             
 
@@ -171,8 +199,12 @@
 
             
 
+            
+
              is set to null, the URL of the current <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -184,6 +216,8 @@
 
             
 
+            
+
              object is already registered, it is not added multiple times.</para
           >
           <block subset="none" type="note">
@@ -192,6 +226,8 @@
                type="text/html">
                 <a href="be84d9b3-b7cd-47d7-8494-be4abfaad9cb">ASP.NET AJAX Overview</a>
               </format>
+
+              
 
               
 
@@ -208,6 +244,8 @@
 
           
 
+          
+
           The style rule to be added to the embedded style sheet.</param
         >
         <param name="urlResolver">
@@ -215,8 +253,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.IUrlResolutionService" />
+
+          
 
           
 

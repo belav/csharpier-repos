@@ -30,8 +30,12 @@
 
         
 
+        
+
          extends a <see
          cref="T:System.IO.TextWriter" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
@@ -52,10 +58,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -98,6 +108,8 @@
 
             
 
+            
+
              class using the specified text writer and default tab string.</para
           >
         </summary>
@@ -106,8 +118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -145,6 +161,8 @@
 
             
 
+            
+
              class using the specified text writer and tab string.</para
           >
         </summary>
@@ -153,8 +171,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -162,6 +184,8 @@
         >
         <param name="tabString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +346,8 @@
 
             
 
+            
+
              to use.</para
           >
         </summary>
@@ -375,6 +401,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -409,6 +437,8 @@
 
           
 
+          
+
           The Boolean value to write. </param
         >
       </Docs>
@@ -439,6 +469,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -502,6 +534,8 @@
 
           
 
+          
+
           The double to write. </param
         >
       </Docs>
@@ -532,6 +566,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -568,6 +604,8 @@
 
           
 
+          
+
           The 8-byte integer to write. </param
         >
       </Docs>
@@ -601,6 +639,8 @@
 
           
 
+          
+
           The object to write. </param
         >
       </Docs>
@@ -631,6 +671,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -699,6 +741,8 @@
 
           
 
+          
+
           The formatting string. </param
         >
       </Docs>
@@ -743,6 +787,8 @@
 
           
 
+          
+
           The formatting string to use. </param
         >
       </Docs>
@@ -781,6 +827,8 @@
 
           
 
+          
+
           The character array to write data from. </param
         >
         <param name="index">
@@ -788,10 +836,14 @@
 
           
 
+          
+
           Starting index in the buffer. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -833,6 +885,8 @@
 
           
 
+          
+
           The formatting string to use. </param
         >
         <param name="arg0">
@@ -840,10 +894,14 @@
 
           
 
+          
+
           The first object to write into the formatted string. </param
         >
         <param name="arg1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -904,6 +962,8 @@
 
           
 
+          
+
           The Boolean to write. </param
         >
       </Docs>
@@ -934,6 +994,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -997,6 +1059,8 @@
 
           
 
+          
+
           The double to write. </param
         >
       </Docs>
@@ -1027,6 +1091,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1063,6 +1129,8 @@
 
           
 
+          
+
           The 8-byte integer to write. </param
         >
       </Docs>
@@ -1096,6 +1164,8 @@
 
           
 
+          
+
           The object to write. </param
         >
       </Docs>
@@ -1126,6 +1196,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1194,6 +1266,8 @@
 
           
 
+          
+
           A UInt32 to output. </param
         >
       </Docs>
@@ -1229,6 +1303,8 @@
         </summary>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1276,6 +1352,8 @@
 
           
 
+          
+
           The formatting string to use. </param
         >
       </Docs>
@@ -1314,6 +1392,8 @@
 
           
 
+          
+
           The character array to write data from. </param
         >
         <param name="index">
@@ -1321,10 +1401,14 @@
 
           
 
+          
+
           Starting index in the buffer. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1366,6 +1450,8 @@
 
           
 
+          
+
           The formatting string to use. </param
         >
         <param name="arg0">
@@ -1373,10 +1459,14 @@
 
           
 
+          
+
           The first object to write into the formatted string. </param
         >
         <param name="arg1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

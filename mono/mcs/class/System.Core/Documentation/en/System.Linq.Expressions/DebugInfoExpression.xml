@@ -57,8 +57,12 @@
 
             
 
+            
+
              nodes calls <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -67,8 +71,12 @@
 
             
 
+            
+
              class. However, it should still support unknown visitors by calling <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -83,8 +91,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
+
+            
 
             
 
@@ -97,6 +109,8 @@
         </returns>
         <param name="visitor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,6 +145,8 @@
 
             
 
+            
+
              that represents the source file.</para
           >
         </summary>
@@ -154,6 +170,8 @@
           <para
             >Gets the end column of this <see
              cref="T:System.Linq.Expressions.DebugInfoExpression" />
+
+            
 
             
 
@@ -183,6 +201,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -206,6 +226,8 @@
           <para
             >Gets the value to indicate if the <see
              cref="T:System.Linq.Expressions.DebugInfoExpression" />
+
+            
 
             
 
@@ -241,6 +263,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -264,6 +288,8 @@
           <para
             >Gets the start column of this <see
              cref="T:System.Linq.Expressions.DebugInfoExpression" />
+
+            
 
             
 
@@ -293,6 +319,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -316,6 +344,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 

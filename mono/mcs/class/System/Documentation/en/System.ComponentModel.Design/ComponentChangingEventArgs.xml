@@ -38,8 +38,12 @@
 
         
 
+        
+
          provides data about a <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          event notifies the <see
          cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          event is raised before a component is changed. This event provides an opportunity for a designer to abort the change. Component designers typically raise the <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+
+        
 
         
 
@@ -71,6 +83,8 @@
       <para
         >A <see
          cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" />
+
+        
 
         
 
@@ -90,6 +104,8 @@
       <para
         >Provides data for the <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+
+        
 
         
 
@@ -127,6 +143,8 @@
 
             
 
+            
+
              indicates the component and member that are about to be changed.</para
           >
         </remarks>
@@ -138,11 +156,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,8 +175,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.MemberDescriptor" />
+
+          
 
           
 

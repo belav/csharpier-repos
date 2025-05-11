@@ -21,8 +21,12 @@
 
         
 
+        
+
          is used by the <see
          cref="M:System.Windows.Forms.ListView.AutoResizeColumn(System.Int32,System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.ColumnHeader.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+
+        
 
         
 
@@ -44,6 +52,8 @@
       <para
         >Specifies how a column contained in a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          is used to create Web Services Description Language (WSDL) schema in situations where the URL ends with the string "?wsdl", for example, http://localhost/longbeard?wsdl.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Provides the implementation for the server channel sink provider that creates <see
          cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSink" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider" />
+
+            
 
             
 
@@ -94,6 +100,8 @@
 
             
 
+            
+
              class with specified properties and provider data.</para
           >
         </summary>
@@ -102,13 +110,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of configuration properties to use with the new instance of <see
            cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider" />
+
+          
 
           
 
@@ -119,8 +133,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -129,8 +147,12 @@
 
           
 
+          
+
            instances to use with the new instance of <see
            cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+
+          
 
           
 
@@ -169,6 +191,8 @@
 
           
 
+          
+
           The channel for which to create the channel sink chain. </param
         >
       </Docs>
@@ -203,8 +227,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" />
+
+          
 
           
 
@@ -234,6 +262,8 @@
           <para
             >Gets or sets the next <see
              cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+            
 
             
 

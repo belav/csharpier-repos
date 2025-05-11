@@ -58,6 +58,8 @@
 
         
 
+        
+
          value type represents unsigned integers with values ranging from 0 to 18,446,744,073,709,551,615.</para
       >
       <block subset="none" type="note">
@@ -67,8 +69,12 @@
 
           
 
+          
+
            type is not CLS-compliant. The CLS-compliant alternative type is <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -77,13 +83,19 @@
 
           
 
+          
+
            can be used instead to replace a <see
            cref="T:System.UInt64" />
 
           
 
+          
+
            value that ranges from zero to <see
            cref="F:System.Int64.MaxValue" />
+
+          
 
           
 
@@ -94,11 +106,15 @@
 
           
 
+          
+
           . </para
         >
       </block>
       <para>
         <see cref="T:System.UInt64" />
+
+        
 
         
 
@@ -139,8 +155,12 @@
 
           
 
+          
+
            is not a <see
            cref="T:System.UInt64" />
+
+          
 
           
 
@@ -154,6 +174,8 @@
 
             
 
+            
+
             , regardless of its value, is considered greater than null.</para
           >
           <para>
@@ -161,8 +183,12 @@
 
             
 
+            
+
              must be null or an instance of <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -178,6 +204,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -205,6 +233,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -217,6 +247,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -235,11 +267,15 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -251,6 +287,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,13 +324,19 @@
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.UInt64.CompareTo(System.Object)" />
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -304,6 +348,8 @@
 
             
 
+            
+
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
@@ -312,8 +358,12 @@
 
             
 
+            
+
              and the parameter type is <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -322,8 +372,12 @@
 
             
 
+            
+
              object, then generates a <see
              cref="M:System.Int32.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -332,8 +386,12 @@
 
             
 
+            
+
              instance and the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -350,6 +408,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -377,6 +437,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -389,6 +451,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -407,6 +471,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -415,6 +481,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,6 +522,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -470,8 +540,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -480,6 +554,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -515,13 +591,19 @@
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.UInt64.Equals(System.Object)" />
 
             
 
+            
+
              because it does not have to convert the <paramref
              name="obj" />
+
+            
 
             
 
@@ -536,6 +618,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -547,6 +631,8 @@
 
             
 
+            
+
              has the same value as this instance; otherwise, false.</para
           >
         </returns>
@@ -555,8 +641,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.UInt64" />
+
+          
 
           
 
@@ -593,6 +683,8 @@
               >This method
       overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -637,8 +729,12 @@
 
             
 
+            
+
              for value type <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -650,6 +746,8 @@
           <para
             >The enumerated constant, <see
              cref="F:System.TypeCode.UInt64" />
+
+            
 
             
 
@@ -689,6 +787,8 @@
           <para
             >Represents the largest possible value of <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -732,6 +832,8 @@
 
             
 
+            
+
             . This field is constant.</para
           >
         </summary>
@@ -771,10 +873,14 @@
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -786,13 +892,19 @@
 
             
 
+            
+
              represents a number greater than <see
              cref="F:System.UInt64.MaxValue" />
 
             
 
+            
+
              or less than <see
              cref="F:System.UInt64.MinValue" />
+
+            
 
             
 
@@ -803,6 +915,8 @@
           <para
             >This example demonstrates parsing a string to a <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -829,6 +943,8 @@ public class UInt64ParseClass {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -866,13 +982,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
 
                   
 
+                  
+
                    properties of the current culture. However, the negative sign symbol can be used only with zero; otherwise, the method throws an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -896,8 +1018,12 @@ public class UInt64ParseClass {
 
               
 
+              
+
                parameter is interpreted by using the <see
                cref="F:System.Globalization.NumberStyles.Integer" />
+
+              
 
               
 
@@ -910,8 +1036,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter is parsed by using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -920,8 +1050,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . To parse a string by using the formatting information of a specific culture, use the <see
              cref="M:System.UInt64.Parse(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -940,11 +1074,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -990,10 +1128,14 @@ public class UInt64ParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1005,13 +1147,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              represents a number greater than <see
              cref="F:System.UInt64.MaxValue" />
 
             
 
+            
+
              or less than <see
              cref="F:System.UInt64.MinValue" />
+
+            
 
             
 
@@ -1023,8 +1171,12 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. The string is interpreted by using the style specified by the <paramref
            name="style" />
+
+          
 
           
 
@@ -1035,13 +1187,19 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A bitwise combination of the enumeration values that specifies the permitted format of <paramref
            name="s" />
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -1055,8 +1213,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter defines the style elements (such as white space, the positive or negative sign symbol, the group separator symbol, or the decimal point symbol) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -1065,8 +1227,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              must be a combination of bit flags from the <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -1075,8 +1241,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter makes this method overload useful when <paramref
              name="s" />
+
+            
 
             
 
@@ -1085,8 +1255,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              is known only at run time, or when you want to disallow white space or a sign symbol in <paramref
              name="s" />
+
+            
 
             
 
@@ -1098,8 +1272,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -1112,13 +1290,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -1148,8 +1332,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1158,8 +1346,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1168,8 +1360,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -1188,8 +1384,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+
+                  
 
                   
 
@@ -1198,13 +1398,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -1223,8 +1429,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1233,8 +1443,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1243,8 +1457,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -1253,8 +1471,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1263,8 +1485,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    flag. However, the negative sign symbol can be used only with zero; otherwise, the method throws an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -1293,13 +1519,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -1318,8 +1550,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1328,8 +1564,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    flag. Only the digit 0 can appear as a fractional digit for the parse operation to succeed; if fractional_digits includes any other digit, a <see
                    cref="T:System.FormatException" />
+
+                  
 
                   
 
@@ -1348,13 +1588,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -1377,8 +1623,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -1387,8 +1637,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -1404,6 +1658,8 @@ public class UInt64ParseClass {
                   <para
                     >Elements permitted in <paramref
                      name="s" />
+
+                    
 
                     
 
@@ -1455,6 +1711,8 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1469,6 +1727,8 @@ public class UInt64ParseClass {
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1489,6 +1749,8 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -1503,6 +1765,8 @@ public class UInt64ParseClass {
                 <para
                   >The sign element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1553,6 +1817,8 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    cannot represent a hexadecimal number or a number in exponential notation.</para
                 >
               </description>
@@ -1570,13 +1836,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                   , sign at the start of <paramref
                    name="s" />
 
                   
 
+                  
+
                   , and the decimal point (.) symbol. The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1597,8 +1869,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                   , <paramref
                    name="sign" />
+
+                  
 
                   
 
@@ -1619,6 +1895,8 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    cannot represent a hexadecimal number.</para
                 >
               </description>
@@ -1630,8 +1908,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              values, which allow for, but do not require, the presence of particular style elements in <paramref
              name="s" />
+
+            
 
             
 
@@ -1640,8 +1922,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              style value means that the individual numeric characters in <paramref
              name="s" />
+
+            
 
             
 
@@ -1650,8 +1936,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter are <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -1660,13 +1950,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . (The <see
              cref="T:System.Globalization.NumberStyles" />
 
             
 
+            
+
              enumeration includes a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -1679,6 +1975,8 @@ public class UInt64ParseClass {
 
               
 
+              
+
                is the string representation of a hexadecimal number, it cannot be preceded by any decoration (such as 0x or &amp;h) that differentiates it as a hexadecimal number. This causes the conversion to fail.</para
             >
           </block>
@@ -1688,13 +1986,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter is parsed by using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
+            
+
              object that is initialized for the current system culture. To specify the culture whose formatting information is used for the parse operation, call the <see
              cref="M:System.UInt64.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -1713,6 +2017,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1721,8 +2027,12 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. The string is interpreted by using the style specified by the <paramref
            name="style" />
+
+          
 
           
 
@@ -1733,13 +2043,19 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A bitwise combination of the enumeration values that specifies the permitted format of <paramref
            name="s" />
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -1785,10 +2101,14 @@ public class UInt64ParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1799,13 +2119,19 @@ public class UInt64ParseClass {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.UInt64.MaxValue" />
 
           
 
+          
+
            or less than <see
            cref="F:System.UInt64.MinValue" />
+
+          
 
           
 
@@ -1816,6 +2142,8 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. </param
         >
         <param name="provider">
@@ -1823,8 +2151,12 @@ public class UInt64ParseClass {
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -1838,8 +2170,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              method is typically used to convert text that can be formatted in a variety of ways to a <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -1848,6 +2184,8 @@ public class UInt64ParseClass {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -1885,6 +2223,8 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    represents the value zero.</para
                 >
               </description>
@@ -1904,8 +2244,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              style. In addition to the unsigned integer value's decimal digits, only leading and trailing spaces along with a leading sign is allowed. (If the negative sign is present, <paramref
              name="s" />
+
+            
 
             
 
@@ -1914,13 +2258,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .) To explicitly define the style elements together with the culture-specific formatting information that can be present in <paramref
              name="s" />
 
             
 
+            
+
             , use the <see
              cref="M:System.UInt64.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -1932,8 +2282,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -1942,8 +2296,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -1952,8 +2310,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . There are three ways to use the <paramref
              name="provider" />
+
+            
 
             
 
@@ -1967,8 +2329,12 @@ public class UInt64ParseClass {
 
                 
 
+                
+
                  object that provides formatting information. (Its implementation of <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -1982,8 +2348,12 @@ public class UInt64ParseClass {
 
                 
 
+                
+
                  object that specifies the culture whose formatting is to be used. Its <see
                  cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+                
 
                 
 
@@ -1997,13 +2367,19 @@ public class UInt64ParseClass {
 
                 
 
+                
+
                  implementation. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method must instantiate and return the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -2017,8 +2393,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2037,11 +2417,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2052,8 +2436,12 @@ public class UInt64ParseClass {
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -2100,10 +2488,14 @@ public class UInt64ParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2115,13 +2507,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              represents a number greater than <see
              cref="F:System.UInt64.MaxValue" />
 
             
 
+            
+
              or less than <see
              cref="F:System.UInt64.MinValue" />
+
+            
 
             
 
@@ -2133,8 +2531,12 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. The string is interpreted by using the style specified by the <paramref
            name="style" />
+
+          
 
           
 
@@ -2145,13 +2547,19 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2165,13 +2573,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter defines the style elements (such as white space or the positive or negative sign symbol) that are allowed in the <paramref
              name="s" />
 
             
 
+            
+
              parameter for the parse operation to succeed. It must be a combination of bit flags from the <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -2183,8 +2597,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -2197,13 +2615,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -2233,8 +2657,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2243,8 +2671,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2253,8 +2685,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -2273,8 +2709,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Globalization.NumberFormatInfo" />
+
+                  
 
                   
 
@@ -2283,8 +2723,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    method of the <paramref
                    name="provider" />
+
+                  
 
                   
 
@@ -2293,13 +2737,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -2318,8 +2768,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2328,8 +2782,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2338,8 +2796,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2348,8 +2810,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -2358,13 +2824,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -2391,13 +2863,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -2416,8 +2894,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -2426,13 +2908,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    only if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -2451,13 +2939,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -2476,13 +2970,19 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -2505,8 +3005,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -2515,8 +3019,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -2532,6 +3040,8 @@ public class UInt64ParseClass {
                   <para
                     >Elements permitted in <paramref
                      name="s" />
+
+                    
 
                     
 
@@ -2563,8 +3073,12 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                    flag, fractional_digits must consist of only one or more 0 digits; otherwise, an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -2595,6 +3109,8 @@ public class UInt64ParseClass {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -2609,6 +3125,8 @@ public class UInt64ParseClass {
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2673,8 +3191,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              flag is used, <paramref
              name="s" />
+
+            
 
             
 
@@ -2683,8 +3205,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+            
 
             
 
@@ -2693,8 +3219,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              enumeration includes a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -2707,6 +3237,8 @@ public class UInt64ParseClass {
 
               
 
+              
+
                parameter is the string representation of a hexadecimal number, it cannot be preceded by any decoration (such as 0x or &amp;h) that differentiates it as a hexadecimal number. This causes the parse operation to throw an exception.</para
             >
           </block>
@@ -2716,8 +3248,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -2726,8 +3262,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2736,8 +3276,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . There are three ways to use the <paramref
              name="provider" />
+
+            
 
             
 
@@ -2751,8 +3295,12 @@ public class UInt64ParseClass {
 
                 
 
+                
+
                  object that provides formatting information. (Its implementation of <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -2766,8 +3314,12 @@ public class UInt64ParseClass {
 
                 
 
+                
+
                  object that specifies the culture whose formatting is to be used. Its <see
                  cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+                
 
                 
 
@@ -2781,13 +3333,19 @@ public class UInt64ParseClass {
 
                 
 
+                
+
                  implementation. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method must instantiate and return the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -2801,8 +3359,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2821,6 +3383,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2829,8 +3393,12 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. The string is interpreted by using the style specified by the <paramref
            name="style" />
+
+          
 
           
 
@@ -2841,13 +3409,19 @@ public class UInt64ParseClass {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2858,8 +3432,12 @@ public class UInt64ParseClass {
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -2898,13 +3476,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToBoolean(System.UInt64)" />
+
+            
 
             
 
@@ -2919,6 +3503,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2928,6 +3514,8 @@ public class UInt64ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2962,13 +3550,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToByte(System.UInt64)" />
+
+            
 
             
 
@@ -2983,6 +3577,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2994,11 +3590,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3033,13 +3633,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToChar(System.UInt64)" />
+
+            
 
             
 
@@ -3054,6 +3660,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3065,11 +3673,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3108,6 +3720,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3117,6 +3731,8 @@ public class UInt64ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3154,13 +3770,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDecimal(System.UInt64)" />
+
+            
 
             
 
@@ -3175,6 +3797,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3186,11 +3810,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3228,13 +3856,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDouble(System.UInt64)" />
+
+            
 
             
 
@@ -3249,6 +3883,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3260,11 +3896,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3302,13 +3942,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt16(System.UInt64)" />
+
+            
 
             
 
@@ -3323,6 +3969,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3334,11 +3982,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3373,13 +4025,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt32(System.UInt64)" />
+
+            
 
             
 
@@ -3394,6 +4052,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3405,11 +4065,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3447,13 +4111,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt64(System.UInt64)" />
+
+            
 
             
 
@@ -3468,6 +4138,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3479,11 +4151,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3521,13 +4197,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSByte(System.UInt64)" />
+
+            
 
             
 
@@ -3542,6 +4224,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3553,11 +4237,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3595,13 +4283,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSingle(System.UInt64)" />
+
+            
 
             
 
@@ -3616,6 +4310,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3627,11 +4323,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3671,13 +4371,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the static (Shared in Visual Basic) <see
              cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -3692,6 +4398,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3703,6 +4411,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3711,8 +4421,12 @@ public class UInt64ParseClass {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -3750,13 +4464,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt16(System.UInt64)" />
+
+            
 
             
 
@@ -3771,6 +4491,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3782,11 +4504,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3824,13 +4550,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt32(System.UInt64)" />
+
+            
 
             
 
@@ -3845,6 +4577,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3856,11 +4590,15 @@ public class UInt64ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3898,8 +4636,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -3914,6 +4656,8 @@ public class UInt64ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3923,6 +4667,8 @@ public class UInt64ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3959,8 +4705,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              method formats a <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -3969,8 +4719,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              object of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.UInt64.ToString(System.String)" />
+
+            
 
             
 
@@ -4074,8 +4828,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              method formats a <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4084,8 +4842,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              object of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see
              cref="M:System.UInt64.ToString(System.String)" />
+
+            
 
             
 
@@ -4152,8 +4914,12 @@ public class UInt64ParseClass {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4162,13 +4928,19 @@ public class UInt64ParseClass {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
+            
+
              object that provides culture-specific formatting information. However, none of the properties of the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4185,6 +4957,8 @@ public class UInt64ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4221,12 +4995,16 @@ public class UInt64ParseClass {
 
           
 
+          
+
            is invalid.</exception
         >
         <example>
           <para
             >This example demonstrates converting a <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4266,8 +5044,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              method formats a <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4276,8 +5058,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              object that represents the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see
              cref="M:System.UInt64.ToString(System.String)" />
+
+            
 
             
 
@@ -4344,10 +5130,14 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              parameter can be any valid <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
+
+            
 
             
 
@@ -4358,8 +5148,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
             . If <paramref
              name="format" />
+
+            
 
             
 
@@ -4368,8 +5162,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              or is null, the return value of the current <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4378,8 +5176,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -4396,10 +5198,14 @@ public class UInt64ToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4415,6 +5221,8 @@ public class UInt64ToStringExample {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -4425,13 +5233,19 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              object for the current culture. Depending on the <paramref
              name="format" />
 
             
 
+            
+
              parameter, this object controls symbols such as the group separator and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see
              cref="M:System.UInt64.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -4450,11 +5264,15 @@ public class UInt64ToStringExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4495,10 +5313,14 @@ public class UInt64ToStringExample {
 
           
 
+          
+
            is invalid.</exception
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4512,8 +5334,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              method formats a <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4522,8 +5348,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              object of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see
              cref="M:System.UInt64.ToString(System.String)" />
+
+            
 
             
 
@@ -4590,10 +5420,14 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              parameter can be any valid <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
+
+            
 
             
 
@@ -4604,8 +5438,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
             . If <paramref
              name="format" />
+
+            
 
             
 
@@ -4614,8 +5452,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              or is null, the return value of the current <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4624,8 +5466,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -4642,10 +5488,14 @@ public class UInt64ToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4661,6 +5511,8 @@ public class UInt64ToStringExample {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -4671,8 +5523,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4681,8 +5537,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4691,8 +5551,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              method is invoked, it calls the <paramref
              name="provider" />
+
+            
 
             
 
@@ -4701,8 +5565,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              method and passes it a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -4711,8 +5579,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              type. The <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -4721,8 +5593,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              object that provides information for formatting the current <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4731,8 +5607,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              parameter to supply formatting information to the <see
              cref="M:System.UInt64.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -4746,13 +5626,19 @@ public class UInt64ToStringExample {
 
                 
 
+                
+
                  object that represents the culture that supplies formatting information. Its <see
                  cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -4766,8 +5652,12 @@ public class UInt64ToStringExample {
 
                 
 
+                
+
                  object that provides numeric formatting information. (Its implementation of <see
                  cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -4781,13 +5671,19 @@ public class UInt64ToStringExample {
 
                 
 
+                
+
                 . Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method instantiates and returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -4801,8 +5697,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              is null, the formatting of the returned string is based on the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4821,8 +5721,12 @@ public class UInt64ToStringExample {
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -4834,10 +5738,14 @@ public class UInt64ToStringExample {
 
           
 
+          
+
           A numeric format string.</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

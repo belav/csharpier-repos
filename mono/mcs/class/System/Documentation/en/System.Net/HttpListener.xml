@@ -28,8 +28,12 @@
 
         
 
+        
+
          class, you can create a simple HTTP protocol listener that responds to HTTP requests. The listener is active for the lifetime of the <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
           
 
+          
+
            object on a computer that is running an earlier operating system, the constructor throws a <see
            cref="T:System.PlatformNotSupportedException" />
+
+          
 
           
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
         , create a new instance of the class using the <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          property to gain access to the collection that holds the strings that specify which Uniform Resource Identifier (URI) prefixes the <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -79,8 +95,12 @@
 
         
 
+        
+
          object with the prefix that most closely matches a requested URI responds to the request. Multiple <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -89,8 +109,12 @@
 
         
 
+        
+
          exception is thrown if a <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -102,13 +126,19 @@
 
         
 
+        
+
          accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any <see
          cref="T:System.Net.HttpListener" />
 
         
 
+        
+
         , the prefix is "http://*:8080/". Similarly, to specify that the <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -120,8 +150,12 @@
 
         
 
+        
+
          method. <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -130,8 +164,12 @@
 
         
 
+        
+
          object returned by the <see
          cref="M:System.Net.HttpListener.GetContext" />
+
+        
 
         
 
@@ -140,8 +178,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+
+        
 
         
 
@@ -153,8 +195,12 @@
 
         
 
+        
+
          method, which waits for a client to send a request. The method returns an <see
          cref="T:System.Net.HttpListenerContext" />
+
+        
 
         
 
@@ -166,8 +212,12 @@
 
         
 
+        
+
          method to specify an application-defined method to be called for each incoming request. Within that method, call the <see
          cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+
+        
 
         
 
@@ -179,8 +229,12 @@
 
         
 
+        
+
          property and are represented by <see
          cref="T:System.Net.HttpListenerRequest" />
+
+        
 
         
 
@@ -189,8 +243,12 @@
 
         
 
+        
+
          property and are represented by <see
          cref="T:System.Net.HttpListenerResponse" />
+
+        
 
         
 
@@ -199,13 +257,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.HttpWebResponse" />
 
         
 
+        
+
          objects, but the latter objects cannot be used in conjunction with <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -217,8 +281,12 @@
 
         
 
+        
+
          can require client authentication. You can either specify a particular scheme to use for authentication, or you can specify a delegate that determines the scheme to use. You must require some form of authentication to obtain information about the client's identity. For additional information, see the <see
          cref="P:System.Net.HttpListenerContext.User" />
+
+        
 
         
 
@@ -227,8 +295,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+
+        
 
         
 
@@ -241,13 +313,19 @@
 
           
 
+          
+
            using https, you must select a Server Certificate for that listener. Otherwise, an <see
            cref="T:System.Net.HttpWebRequest" />
 
           
 
+          
+
            query of this <see
            cref="T:System.Net.HttpListener" />
+
+          
 
           
 
@@ -264,6 +342,8 @@
 
           
 
+          
+
            for more details. The executable is shipped with Windows Server 2003, or can be built from source code available in the Platform SDK.</para
         >
       </block>
@@ -271,6 +351,8 @@
         <para
           >If you specify multiple authentication schemes for the <see
            cref="T:System.Net.HttpListener" />
+
+          
 
           
 
@@ -306,6 +388,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -314,6 +398,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -348,8 +434,12 @@
 
             
 
+            
+
              if you attempt to use this <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -361,6 +451,8 @@
           <para
             >Shuts down the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -397,8 +489,12 @@
 
             
 
+            
+
              uses the specified scheme to authenticate all incoming requests. The <see
              cref="M:System.Net.HttpListener.GetContext" />
+
+            
 
             
 
@@ -407,8 +503,12 @@
 
             
 
+            
+
              methods return an incoming client request only if the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -420,6 +520,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -428,8 +530,12 @@
 
             
 
+            
+
              object to use different authentication mechanisms based on characteristics of the requests it receives (for example, the request's <see
              cref="P:System.Net.HttpListenerRequest.Url" />
+
+            
 
             
 
@@ -438,8 +544,12 @@
 
             
 
+            
+
              property), you must implement a method that chooses the authentication scheme. For instructions about how to do this, see the <see
              cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+
+            
 
             
 
@@ -452,8 +562,12 @@
 
               
 
+              
+
               , <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlPrincipal" />
+
+              
 
               
 
@@ -496,8 +610,12 @@
 
               
 
+              
+
               , you do not need to set this property. To specify a protocol to be used for all client requests, use the <see
                cref="P:System.Net.HttpListener.AuthenticationSchemes" />
+
+              
 
               
 
@@ -510,8 +628,12 @@
 
             
 
+            
+
              calls the specified delegate for each unauthenticated incoming request to determine which, if any, protocol to use to authenticate the client. The <see
              cref="M:System.Net.HttpListener.GetContext" />
+
+            
 
             
 
@@ -520,8 +642,12 @@
 
             
 
+            
+
              methods return an incoming request only if the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -530,8 +656,12 @@
 
             
 
+            
+
              automatically sends back a 401 response. You can get the identity of a successfully authenticated client using the <see
              cref="P:System.Web.HttpRequest.LogonUserIdentity" />
+
+            
 
             
 
@@ -543,13 +673,19 @@
 
             
 
+            
+
              to use different authentication protocols depending on the characteristics of the requests it receives (for example, the request's <see
              cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
+            
+
              or <see
              cref="P:System.Net.HttpListenerRequest.UserHostAddress" />
+
+            
 
             
 
@@ -562,8 +698,12 @@
 
               
 
+              
+
               , <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlPrincipal" />
+
+              
 
               
 
@@ -608,8 +748,12 @@
 
             
 
+            
+
              method begins an asynchronous (non-blocking) call to receive incoming client requests. Before calling this method, you must call the <see
              cref="M:System.Net.HttpListener.Start" />
+
+            
 
             
 
@@ -618,8 +762,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Net.HttpListener.Prefixes" />
+
+            
 
             
 
@@ -631,8 +779,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="callback" />
+
+            
 
             
 
@@ -641,6 +793,8 @@
           <para
             >This method does not block while the operation completes. To get an incoming request and block until the operation completes, call the <see
              cref="M:System.Net.HttpListener.GetContext" />
+
+            
 
             
 
@@ -665,6 +819,8 @@
 
             
 
+            
+
              object that indicates the status of the asynchronous operation.</para
           >
         </returns>
@@ -673,8 +829,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -685,8 +845,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="callback" />
+
+          
 
           
 
@@ -719,13 +883,19 @@
 
             
 
+            
+
              object. To temporarily pause an <see
              cref="T:System.Net.HttpListener" />
 
             
 
+            
+
              object, use the <see
              cref="M:System.Net.HttpListener.Stop" />
+
+            
 
             
 
@@ -737,6 +907,8 @@
 
             
 
+            
+
              object without processing queued requests. Any pending requests are unable to complete.</para
           >
         </remarks>
@@ -745,6 +917,8 @@
           <para
             >Shuts down the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -783,13 +957,19 @@
 
             
 
+            
+
              method is called, usually within an application-defined callback method invoked by a delegate, to obtain the <see
              cref="T:System.Net.HttpListenerContext" />
 
             
 
+            
+
              object that contains an incoming client request and its associated response. This method completes an operation previously started by calling the <see
              cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -801,8 +981,12 @@
 
             
 
+            
+
              method requires the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -811,13 +995,19 @@
 
             
 
+            
+
              method. You can obtain this state object by using the <see
              cref="P:System.IAsyncResult.AsyncState" />
 
             
 
+            
+
              property of the <paramref
              name="asyncResult" />
+
+            
 
             
 
@@ -842,6 +1032,8 @@
 
             
 
+            
+
              object that represents the client request.</para
           >
         </returns>
@@ -850,8 +1042,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -884,8 +1080,12 @@
 
             
 
+            
+
              method and add at least one URI prefix to listen for by adding the URI strings to the <see
              cref="T:System.Net.HttpListenerPrefixCollection" />
+
+            
 
             
 
@@ -894,8 +1094,12 @@
 
             
 
+            
+
              property. For a detailed description of prefixes, see the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -904,6 +1108,8 @@
           <para
             >This method blocks while waiting for an incoming request. If you want incoming requests to be processed asynchronously (on separate threads) so that your application does not block, use the <see
              cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -919,6 +1125,8 @@
           <para
             >An <see
              cref="T:System.Net.HttpListenerContext" />
+
+            
 
             
 
@@ -953,6 +1161,8 @@
 
             
 
+            
+
              object will complete when the incoming request has been received.</para
           >
           <para
@@ -961,8 +1171,12 @@
 
             
 
+            
+
              method and add at least one URI prefix to listen for by adding the URI strings to the <see
              cref="T:System.Net.HttpListenerPrefixCollection" />
+
+            
 
             
 
@@ -971,8 +1185,12 @@
 
             
 
+            
+
              property. For a detailed description of prefixes, see the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -991,6 +1209,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -999,8 +1219,12 @@
 
             
 
+            
+
              property on the task object returns an <see
              cref="T:System.Net.HttpListenerContext" />
+
+            
 
             
 
@@ -1035,8 +1259,12 @@
 
             
 
+            
+
              value that specifies whether your application receives exceptions that occur when an <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -1067,8 +1295,12 @@
 
             
 
+            
+
             , call the <see
              cref="M:System.Net.HttpListener.Start" />
+
+            
 
             
 
@@ -1080,6 +1312,8 @@
           <para
             >Gets a value that indicates whether <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -1111,6 +1345,8 @@
           <para
             >Gets a value that indicates whether <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -1147,6 +1383,8 @@
 
             
 
+            
+
              class overview.</para
           >
         </remarks>
@@ -1155,6 +1393,8 @@
           <para
             >Gets the Uniform Resource Identifier (URI) prefixes handled by this <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -1185,11 +1425,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >An instance of <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -1201,6 +1445,8 @@
           <para
             >Gets or sets the realm, or resource partition, associated with this <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -1234,8 +1480,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1247,8 +1497,12 @@
 
             
 
+            
+
              object, you can use the <see
              cref="M:System.Net.HttpListener.Stop" />
+
+            
 
             
 
@@ -1261,8 +1515,12 @@
 
               
 
+              
+
                query of this <see
                cref="T:System.Net.HttpListener" />
+
+              
 
               
 
@@ -1271,6 +1529,8 @@
                 cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/http/http/httpcfg_exe.asp"
                 >http://msdn.microsoft.com/library/default.asp?url=/library/en-us/http/http/httpcfg_exe.asp</see
               >
+
+              
 
               
 
@@ -1310,8 +1570,12 @@
 
             
 
+            
+
              object, you can use the <see
              cref="M:System.Net.HttpListener.Start" />
+
+            
 
             
 
@@ -1348,6 +1612,8 @@
 
             
 
+            
+
              method instead of calling this method.</para
           >
         </remarks>
@@ -1356,6 +1622,8 @@
           <para
             >Releases the resources held by this <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -1397,6 +1665,8 @@
 
             
 
+            
+
             ) of the initial request.</para
           >
           <para>This property has no effect when NTLM is not the authentication protocol. When Negotiate is specified as the authentication protocol, this property has an effect only if NTLM is the actual protocol used for authentication. </para>
@@ -1404,6 +1674,8 @@
             <para
               >While setting this property to true increases performance because the <see
                cref="T:System.Net.HttpListener" />
+
+              
 
               
 
@@ -1416,6 +1688,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

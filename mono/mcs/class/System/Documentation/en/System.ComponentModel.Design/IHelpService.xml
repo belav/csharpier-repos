@@ -22,13 +22,19 @@
 
         
 
+        
+
          can be used to invoke the help service with a specified keyword using the <see
          cref="M:System.ComponentModel.Design.IHelpService.ShowHelpFromKeyword(System.String)" />
 
         
 
+        
+
          method, or to invoke a help topic from a specified URL using the <see
          cref="M:System.ComponentModel.Design.IHelpService.ShowHelpFromUrl(System.String)" />
+
+        
 
         
 
@@ -40,11 +46,15 @@
 
         
 
+        
+
          can also be used to add or remove Help keywords at design time. Selecting a component or property at design time sets a default context keyword consisting of the fully qualified type or member name of the selection, and removes the keywords for any previously selected and no longer selected components or properties.</para
       >
       <para
         >Because the Help system does not automatically remove custom Help keywords, you must explicitly remove a custom keyword when it no longer applies. You can monitor the events defined by the <see
          cref="T:System.ComponentModel.Design.ISelectionService" />
+
+        
 
         
 
@@ -94,10 +104,14 @@
 
           
 
+          
+
           The name of the attribute to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,8 +122,12 @@
 
           
 
+          
+
           The type of the keyword, from the enumeration <see
            cref="T:System.ComponentModel.Design.HelpKeywordType" />
+
+          
 
           
 
@@ -172,6 +190,8 @@
 
             
 
+            
+
              to manage subcontexts.</para
           >
         </summary>
@@ -183,11 +203,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="contextType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,10 +252,14 @@
 
           
 
+          
+
           The name of the attribute to remove. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,6 +298,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -278,8 +308,12 @@
 
           
 
+          
+
           The local context <see
            cref="T:System.ComponentModel.Design.IHelpService" />
+
+          
 
           
 
@@ -322,6 +356,8 @@
 
           
 
+          
+
           The keyword of the Help topic to display. </param
         >
       </Docs>
@@ -355,6 +391,8 @@
         </summary>
         <param name="helpUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

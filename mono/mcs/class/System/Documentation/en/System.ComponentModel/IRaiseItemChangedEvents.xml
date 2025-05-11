@@ -21,13 +21,19 @@
 
         
 
+        
+
          interface is typically implemented together with the <see
          cref="T:System.ComponentModel.IBindingList" />
 
         
 
+        
+
          interface and indicates that the list converts property change events to <see
          cref="E:System.ComponentModel.IBindingList.ListChanged" />
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
          interface. However, for performance purposes, your data source should implement <see
          cref="T:System.ComponentModel.IRaiseItemChangedEvents" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          component, because this functionality is built into the <see
          cref="T:System.Windows.Forms.BindingSource" />
+
+        
 
         
 
@@ -62,6 +76,8 @@
       <para
         >Indicates whether a class converts property change events to <see
          cref="E:System.ComponentModel.IBindingList.ListChanged" />
+
+        
 
         
 
@@ -93,8 +109,12 @@
 
             
 
+            
+
              object raises <see
              cref="E:System.ComponentModel.IBindingList.ListChanged" />
+
+            
 
             
 

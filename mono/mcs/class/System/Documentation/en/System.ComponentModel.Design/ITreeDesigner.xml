@@ -30,8 +30,12 @@
 
         
 
+        
+
          interface derives from the <see
          cref="T:System.ComponentModel.Design.IDesigner" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ComponentModel.Design.ITreeDesigner.Parent" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -94,8 +104,12 @@
 
             
 
+            
+
              property will return an empty collection if the <see
              cref="T:System.ComponentModel.Design.ITreeDesigner" />
+
+            
 
             
 

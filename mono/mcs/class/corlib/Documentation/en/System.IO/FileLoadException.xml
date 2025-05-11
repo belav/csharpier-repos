@@ -41,6 +41,8 @@
 
         
 
+        
+
          file is found but cannot be loaded.</para
       >
       <para
@@ -49,8 +51,12 @@
 
         
 
+        
+
          exception is thrown when the file fails to load because it cannot be located. If the file is located, but cannot be loaded due to insufficient permissions, a <see
          cref="T:System.Security.SecurityException" />
+
+        
 
         
 
@@ -63,12 +69,16 @@
 
         
 
+        
+
          permission, the error message for this exception may only contain file or directory names instead of fully qualified paths.</para
       >
       <block subset="none" type="note">
         <para
           >This exception is not included in the <see
            cref="http://go.microsoft.com/fwlink/?LinkID=247912">.NET for Windows Store apps</see>
+
+          
 
           
 
@@ -79,8 +89,12 @@
 
           
 
+          
+
           , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
            cref="T:System.IO.IOException" />
+
+          
 
           
 
@@ -121,8 +135,12 @@
 
             
 
+            
+
              property and <see
              cref="P:System.IO.FileLoadException.FileName" />
+
+            
 
             
 
@@ -137,8 +155,12 @@
 
             
 
+            
+
              class, setting the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -177,8 +199,12 @@
 
             
 
+            
+
              property of the new instance using <paramref
              name="message" />
+
+            
 
             
 
@@ -187,8 +213,12 @@
 
             
 
+            
+
              property and <see
              cref="P:System.IO.FileLoadException.FileName" />
+
+            
 
             
 
@@ -203,6 +233,8 @@
 
             
 
+            
+
              class with the specified error message.</para
           >
         </summary>
@@ -211,13 +243,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -255,6 +293,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -263,8 +303,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -275,8 +319,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -314,8 +362,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -329,11 +381,15 @@
 
             
 
+            
+
              property. The InnerException property returns the same value that is passed into the constructor, or null if the InnerException property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.IO.FileLoadException" />
+
+            
 
             
 
@@ -377,6 +433,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -388,6 +446,8 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
@@ -396,13 +456,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -413,8 +479,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -456,8 +526,12 @@
 
             
 
+            
+
              property of the new instance using <paramref
              name="message" />
+
+            
 
             
 
@@ -466,8 +540,12 @@
 
             
 
+            
+
              property using <paramref
              name="fileName" />
+
+            
 
             
 
@@ -476,10 +554,14 @@
 
             
 
+            
+
              property of the new instance is initialized to null.</para
           >
           <para>
             <see cref="P:System.IO.FileLoadException.FileName" />
+
+            
 
             
 
@@ -494,6 +576,8 @@
 
             
 
+            
+
              class with a specified error message and the name of the file that could not be loaded.</para
           >
         </summary>
@@ -502,13 +586,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -519,8 +609,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -560,8 +654,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -575,10 +673,14 @@
 
             
 
+            
+
              property. The InnerException property returns the same value that is passed into the constructor, or null if the InnerException property does not supply the inner exception value to the constructor.</para
           >
           <para>
             <see cref="P:System.IO.FileLoadException.FileName" />
+
+            
 
             
 
@@ -587,6 +689,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.IO.FileLoadException" />
+
+            
 
             
 
@@ -630,6 +734,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -641,6 +747,8 @@
 
             
 
+            
+
              class with a specified error message, the name of the file that could not be loaded, and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
@@ -649,13 +757,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -666,8 +780,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -678,8 +796,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -710,6 +832,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -782,6 +906,8 @@
 
             
 
+            
+
              with the file name and additional exception information.</para
           >
         </summary>
@@ -790,8 +916,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -802,8 +932,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -836,6 +970,8 @@
 
             
 
+            
+
              containing a
    message that describes the error that caused the current exception.</para
           >
@@ -848,6 +984,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -856,8 +994,12 @@
 
             
 
+            
+
              property is not a null reference, the message includes the file name, for example, "Unable to load file a <paramref
              name="FileName" />
+
+            
 
             
 
@@ -866,13 +1008,19 @@
 
             
 
+            
+
              represents the value returned by <see
              cref="P:System.IO.FileLoadException.FileName" />
 
             
 
+            
+
             .) If <see
              cref="P:System.IO.FileLoadException.FileName" />
+
+            
 
             
 
@@ -916,6 +1064,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -924,13 +1074,19 @@
 
             
 
+            
+
              the value of the <see
              cref="P:System.IO.FileLoadException.FileName" />
 
             
 
+            
+
              property, and the result of calling <see
              cref="P:System.Environment.StackTrace" />
+
+            
 
             
 
@@ -946,6 +1102,8 @@
           <para
             >A string containing the fully qualified name of this exception, and possibly the error message, the name of the inner exception, and the stack trace, depending on which <see
              cref="T:System.IO.FileLoadException" />
+
+            
 
             
 

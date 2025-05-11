@@ -41,8 +41,12 @@
 
         
 
+        
+
          does not provide information as to the cause of the <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          is thrown by the common language runtime when errors occur that are nonfatal and recoverable by user programs. These errors result from failed runtime check (such as an array out-of-bound error), and can occur during the execution of any method. <see
          cref="T:System.SystemException" />
+
+        
 
         
 
@@ -63,10 +71,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.SystemException" />
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.SystemException.#ctor" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -99,6 +117,8 @@
       <para
         >Defines the base class for predefined exceptions in the <see
          cref="N:System" />
+
+        
 
         
 
@@ -134,11 +154,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "A system error has occurred." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.SystemException" />
+
+            
 
             
 
@@ -185,6 +209,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -220,11 +246,15 @@
 
             
 
+            
+
              parameter should be understandable to the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.SystemException" />
+
+            
 
             
 
@@ -271,11 +301,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,6 +348,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -325,6 +361,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -333,10 +371,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -377,8 +419,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -387,11 +433,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.SystemException" />
+
+            
 
             
 
@@ -438,11 +488,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -453,8 +507,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

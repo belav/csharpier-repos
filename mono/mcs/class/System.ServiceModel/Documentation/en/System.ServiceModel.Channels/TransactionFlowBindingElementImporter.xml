@@ -33,8 +33,12 @@
 
         
 
+        
+
          method adds a <see
          cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          collection of binding elements. This also adds <see
          cref="T:System.ServiceModel.TransactionFlowAttribute" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.TransactionFlowBindingElementImporter" />
+
+            
 
             
 
@@ -175,8 +185,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+          
 
           
 
@@ -187,8 +201,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 

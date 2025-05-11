@@ -37,13 +37,19 @@
 
         
 
+        
+
          control to create a radio button on a Web page. The <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
 
         
 
+        
+
          control does not provide built-in functionality to display a caption for the radio button. To create a caption, use literal text in the Web page at the desired location. This allows you to determine where the caption is displayed relative to the radio button. For example, if you want to display the caption on the right side of the radio button, declare an <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+        
 
         
 
@@ -60,8 +66,12 @@
 
         
 
+        
+
          control by setting the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Value" />
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          controls can be grouped together by specifying a common value for the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Name" />
+
+        
 
         
 
@@ -86,6 +100,8 @@
 
           
 
+          
+
            controls together, only one radio button in the group can be selected at a time.</para
         >
       </block>
@@ -95,8 +111,12 @@
 
         
 
+        
+
          control is selected, test the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Checked" />
+
+        
 
         
 
@@ -105,8 +125,12 @@
 
         
 
+        
+
          controls, you must iterate through the controls and test the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Checked" />
+
+        
 
         
 
@@ -118,13 +142,19 @@
 
         
 
+        
+
          control provides a <see
          cref="E:System.Web.UI.HtmlControls.HtmlInputRadioButton.ServerChange" />
 
         
 
+        
+
          event that is raised when the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Checked" />
+
+        
 
         
 
@@ -136,8 +166,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputRadioButton.#ctor" />
+
+        
 
         
 
@@ -164,11 +198,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -205,6 +243,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -231,8 +271,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -241,8 +285,12 @@
 
             
 
+            
+
              controls, you must iterate through the controls and test the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Checked" />
+
+            
 
             
 
@@ -254,8 +302,12 @@
 
             
 
+            
+
              controls together by specifying a common value for the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Name" />
+
+            
 
             
 
@@ -268,8 +320,12 @@
 
               
 
+              
+
                controls, only one radio button in the group can be selected at a time. The <see
                cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Checked" />
+
+              
 
               
 
@@ -282,6 +338,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -330,8 +388,12 @@
 
             
 
+            
+
              method checks to see whether the postback value of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -343,8 +405,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -359,6 +425,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -370,6 +438,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -378,10 +448,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,8 +483,12 @@
 
             
 
+            
+
              controls by specifying a common value for the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Name" />
+
+            
 
             
 
@@ -419,8 +497,12 @@
 
             
 
+            
+
              controls, only one radio button in the group can be selected at a time. The <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Checked" />
+
+            
 
             
 
@@ -432,6 +514,8 @@
           <para
             >Gets or sets the name of the group that the instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -462,8 +546,12 @@
 
             
 
+            
+
              method is called just prior to rendering the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -475,8 +563,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -491,8 +583,12 @@
 
             
 
+            
+
              event and registers the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -504,8 +600,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -535,13 +635,19 @@
 
             
 
+            
+
              event is raised when the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Checked" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -554,13 +660,19 @@
 
               
 
+              
+
                event to work correctly. To enable view state for all controls on the Web Forms page, set the <see
                cref="P:System.Web.UI.Page.EnableViewState" />
 
               
 
+              
+
                property to true. You can also enable view state for an individual control by setting the <see
                cref="P:System.Web.UI.Control.EnableViewState" />
+
+              
 
               
 
@@ -575,11 +687,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputRadioButton.OnServerChange(System.EventArgs)" />
+
+            
 
             
 
@@ -594,6 +710,8 @@
 
             
 
+            
+
              event. This allows you to create a custom event handler when the event is raised.</para
           >
         </summary>
@@ -602,8 +720,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -634,8 +756,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -650,8 +776,12 @@
 
             
 
+            
+
              method to signal the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -681,8 +811,12 @@
 
             
 
+            
+
              method writes the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Value" />
+
+            
 
             
 
@@ -691,8 +825,12 @@
 
             
 
+            
+
              control and then calls the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -704,8 +842,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -720,8 +862,12 @@
 
             
 
+            
+
              control attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -733,8 +879,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -762,13 +912,19 @@
 
             
 
+            
+
              event is raised when the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Checked" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -781,13 +937,19 @@
 
               
 
+              
+
                event to work correctly. To enable view state for all controls on the Web Forms page, set the <see
                cref="P:System.Web.UI.Page.EnableViewState" />
 
               
 
+              
+
                property to true. You can also enable view state for an individual control by setting the <see
                cref="P:System.Web.UI.Control.EnableViewState" />
+
+              
 
               
 
@@ -802,6 +964,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -813,8 +977,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 
@@ -856,8 +1024,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -872,8 +1044,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputRadioButton.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -888,6 +1064,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -896,10 +1074,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -930,8 +1112,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -946,8 +1132,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputRadioButton.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -976,13 +1166,19 @@
 
             
 
+            
+
              property to specify or determine the value associated with the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
 
             
 
+            
+
              control. The value can be any valid string that you want to associate with the control. This is useful when you have multiple radio buttons and need to perform a calculation based on the selection. For example, you can have radio buttons that represent different shipping methods. You can store the shipping cost in the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputRadioButton.Value" />
+
+            
 
             
 
@@ -994,6 +1190,8 @@
           <para
             >Gets or sets the value associated with the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+            
 
             
 

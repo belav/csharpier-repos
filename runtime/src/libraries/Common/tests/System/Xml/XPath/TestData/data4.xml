@@ -17,8 +17,7 @@
     <author id="2">
       <first-name>Mary</first-name>
       <last-name>Bob</last-name>
-      <publication
-        >
+      <publication>
 				Publication 1
 				<first-name
         >Mary</first-name>
@@ -79,8 +78,7 @@
     <author>
       <first.name>Mary F</first.name>
       <last-name>Robinson</last-name>
-      <publication
-        >
+      <publication>
 				Publication 2
 				<first.name
         >Mary F</first.name>
@@ -101,8 +99,7 @@
       <first-name>Mary F</first-name>
       <last-name>Robinson</last-name>
       <award>Pulizer</award>
-      <publication
-        >
+      <publication>
 				Selected Short Stories of
 				<first-name
         >Mary F</first-name>
@@ -151,6 +148,8 @@
 			stormy to someone who has gone through what
 			<emph
         >I</emph>
+
+        
 
         
 

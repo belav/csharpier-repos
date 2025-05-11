@@ -48,6 +48,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -81,11 +83,15 @@
 
             
 
+            
+
              class with a specified scheme type, binding, and binding configuration.</para
           >
         </summary>
         <param name="schemeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -96,10 +102,14 @@
 
           
 
+          
+
           A communications protocol message format style.</param
         >
         <param name="bindingConfiguration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

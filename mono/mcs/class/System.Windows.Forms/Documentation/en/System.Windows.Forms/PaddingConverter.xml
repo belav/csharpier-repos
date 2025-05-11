@@ -22,6 +22,8 @@
 
         
 
+        
+
          values to and from various other representations.</para
       >
     </summary>
@@ -41,6 +43,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.PaddingConverter" />
+
+            
 
             
 
@@ -80,8 +84,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -92,8 +100,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -130,6 +142,8 @@
         </returns>
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,6 +231,8 @@
 
             
 
+            
+
              is associated with, using the specified context, given a set of property values for the object.</para
           >
         </summary>
@@ -228,8 +244,12 @@
 
             
 
+            
+
              representing the given <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -241,8 +261,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -253,8 +277,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -286,8 +314,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

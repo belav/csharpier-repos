@@ -52,11 +52,15 @@
 
             
 
+            
+
              class for the given code identifiers, with the given type-sharing option.</para
           >
         </summary>
         <param name="identifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -67,8 +71,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 

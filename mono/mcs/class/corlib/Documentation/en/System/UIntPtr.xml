@@ -46,6 +46,8 @@
 
         
 
+        
+
          type is designed to be an integer whose size is platform-specific. That is, an instance of this type is expected to be 32-bits on 32-bit hardware and operating systems, and 64-bits on 64-bit hardware and operating systems.</para
       >
       <block subset="none" type="note">
@@ -55,8 +57,12 @@
 
           
 
+          
+
            type is CLS-compliant, while the <see
            cref="T:System.UIntPtr" />
+
+          
 
           
 
@@ -65,13 +71,19 @@
 
           
 
+          
+
            type is used in the common language runtime. The <see
            cref="T:System.UIntPtr" />
 
           
 
+          
+
            type is provided mostly to maintain architectural symmetry with the <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -84,8 +96,12 @@
 
         
 
+        
+
          type can be used by languages that support pointers, and as a common means of referring to data between languages that do and do not support pointers. <see
          cref="T:System.UIntPtr" />
+
+        
 
         
 
@@ -94,6 +110,8 @@
       <para
         >This type implements the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -136,11 +154,15 @@
 
             
 
+            
+
              structure using the specified 32-bit pointer or handle.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,6 +198,8 @@
 
           
 
+          
+
           .</exception
         >
         <remarks>
@@ -183,6 +207,8 @@
           <para
             >An exception is only thrown if the value of <paramref
              name="value" />
+
+            
 
             
 
@@ -197,11 +223,15 @@
 
             
 
+            
+
              using the specified 64-bit pointer or handle.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -240,11 +270,15 @@
 
             
 
+            
+
              using the specified pointer to an unspecified type.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,6 +315,8 @@
 
             
 
+            
+
              method does not throw an exception if the result is too large to represent as a pointer on the specified platform. Instead, the addition operation is performed in an unchecked context.</para
           >
           <para>Languages that do not support operator overloading or custom operators can use this method to add an offset to the value of an unsigned pointer.</para>
@@ -297,8 +333,12 @@
 
             
 
+            
+
              to <paramref
              name="pointer" />
+
+            
 
             
 
@@ -310,10 +350,14 @@
 
           
 
+          
+
           The unsigned pointer to add the offset to.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -352,12 +396,16 @@
 
               
 
+              
+
               .</block
             >
           </para>
         </remarks>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -375,8 +423,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 
@@ -385,6 +437,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -425,6 +479,8 @@
             <block subset="none" type="note"
               >This method overrides <see
                cref="M:System.Object.GetHashCode" qualify="true" />
+
+              
 
               
 
@@ -472,8 +528,12 @@
 
             
 
+            
+
              method defines the addition operation for <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 
@@ -483,6 +543,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.UIntPtr.Add(System.UIntPtr,System.Int32)" />
+
+            
 
             
 
@@ -502,8 +564,12 @@
 
             
 
+            
+
              to <paramref
              name="pointer" />
+
+            
 
             
 
@@ -515,10 +581,14 @@
 
           
 
+          
+
           The unsigned pointer to add the offset to.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,6 +630,8 @@
 
           
 
+          
+
           The second pointer or handle to compare. </param
         >
         <summary>
@@ -567,6 +639,8 @@
           <para
             >Determines whether two specified instances of <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 
@@ -581,8 +655,12 @@
 
             
 
+            
+
              equals <paramref
              name="value2" />
+
+            
 
             
 
@@ -594,10 +672,14 @@
 
           
 
+          
+
           The first pointer or handle to compare. </param
         >
         <param name="value2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -800,6 +882,8 @@
 
           
 
+          
+
           The second pointer or handle to compare. </param
         >
         <summary>
@@ -807,6 +891,8 @@
           <para
             >Determines whether two specified instances of <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 
@@ -821,8 +907,12 @@
 
             
 
+            
+
              does not equal <paramref
              name="value2" />
+
+            
 
             
 
@@ -834,10 +924,14 @@
 
           
 
+          
+
           The first pointer or handle to compare. </param
         >
         <param name="value2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -875,8 +969,12 @@
 
             
 
+            
+
              method defines the subtraction operation for <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 
@@ -886,6 +984,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.UIntPtr.Subtract(System.UIntPtr,System.Int32)" />
+
+            
 
             
 
@@ -905,8 +1005,12 @@
 
             
 
+            
+
              from <paramref
              name="pointer" />
+
+            
 
             
 
@@ -918,10 +1022,14 @@
 
           
 
+          
+
           The unsigned pointer to subtract the offset from.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -955,10 +1063,14 @@
 
             
 
+            
+
              containing the 
    number of bytes of a pointer or handle for the current implementation. The value
    of this property is equal to the number of bytes contained by the <see
              langword="native unsigned int" />
+
+            
 
             
 
@@ -971,6 +1083,8 @@
             >For more information on the 
    <see
              langword="native unsigned int" />
+
+            
 
             
 
@@ -1014,6 +1128,8 @@
 
             
 
+            
+
              method does not throw an exception if the result is too small to represent as a pointer on the specified platform. Instead, the subtraction operation is performed in an unchecked context.</para
           >
           <para>Languages that do not support operator overloading or custom operators can use this method to subtract an offset from the value of an unsigned pointer.</para>
@@ -1030,8 +1146,12 @@
 
             
 
+            
+
              from <paramref
              name="pointer" />
+
+            
 
             
 
@@ -1043,10 +1163,14 @@
 
           
 
+          
+
           The unsigned pointer to subtract the offset from.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1085,8 +1209,12 @@
 
             
 
+            
+
              parameter with the value of the current <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 
@@ -1101,8 +1229,12 @@
 
             
 
+            
+
              object with the data needed to serialize the current <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 
@@ -1114,8 +1246,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1123,6 +1259,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1165,6 +1303,8 @@
               
 
               
+
+              
 points to memory containing data of an unspecified type.</block
             >
           </para>
@@ -1172,6 +1312,8 @@ points to memory containing data of an unspecified type.</block
             >This method is not CLS-compliant. For a CLS-compliant
    alternative use <see
              cref="M:System.IntPtr.ToPointer" />
+
+            
 
             
 
@@ -1187,6 +1329,8 @@ points to memory containing data of an unspecified type.</block
           <para
             >A pointer to <see
              cref="T:System.Void" />
+
+            
 
             
 
@@ -1225,13 +1369,19 @@ points to memory containing data of an unspecified type.</block
 
             
 
+            
+
              property for this instance is 4, then this method is equivalent to <see
              cref="M:System.UInt32.ToString" />
 
             
 
+            
+
             ; otherwise, this method is equivalent to <see
              cref="M:System.UInt64.ToString" />
+
+            
 
             
 
@@ -1276,6 +1426,8 @@ points to memory containing data of an unspecified type.</block
 
           
 
+          
+
            .</exception
         >
         <remarks>
@@ -1283,6 +1435,8 @@ points to memory containing data of an unspecified type.</block
           <para
             >An exception is only thrown if the value of <paramref
              name="value" />
+
+            
 
             
 
@@ -1363,11 +1517,15 @@ points to memory containing data of an unspecified type.</block
 
             
 
+            
+
              has been set to a value other than zero.</para
           >
           <para
             >For example, assume the variable, uip, is an instance of <see
              cref="T:System.UIntPtr" />
+
+            
 
             
 

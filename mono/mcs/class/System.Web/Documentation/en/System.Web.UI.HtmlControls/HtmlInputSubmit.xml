@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          control is often used with the <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputSubmit.#ctor" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+
+            
 
             
 
@@ -114,6 +128,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -135,6 +151,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+
+            
 
             
 
@@ -164,6 +182,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -178,11 +198,15 @@
 
             
 
+            
+
              class using the specified type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

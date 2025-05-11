@@ -26,8 +26,12 @@
 
         
 
+        
+
          class collects and manages the characteristics associated with the table layout scheme. This class is used internally by the <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          classes, as well as the table layout engine. The <see
          cref="T:System.Windows.Forms.TableLayoutSettings" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
 
         
 
+        
+
          class manages the following information:</para
       >
       <list type="bullet">
@@ -56,6 +66,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.TableLayoutPanelGrowStyle" />
+
+            
 
             
 
@@ -90,6 +102,8 @@
           <para
             >Setting the <see
              cref="P:System.Windows.Forms.TableLayoutSettings.ColumnCount" />
+
+            
 
             
 
@@ -138,8 +152,12 @@
 
             
 
+            
+
              property to access the style properties of specific columns. The order of the styles in a <see
              cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+            
 
             
 
@@ -182,6 +200,8 @@
 
             
 
+            
+
              that represents the row and the column of the cell.</para
           >
         </summary>
@@ -193,11 +213,15 @@
 
             
 
+            
+
              that represents the cell position.</para
           >
         </returns>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,6 +261,8 @@
 
           
 
+          
+
           A control contained within a cell.</param
         >
       </Docs>
@@ -265,6 +291,8 @@
         </returns>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,6 +332,8 @@
 
           
 
+          
+
           A control contained within a cell.</param
         >
       </Docs>
@@ -335,6 +365,8 @@
 
           
 
+          
+
           A control contained within a cell.</param
         >
       </Docs>
@@ -359,8 +391,12 @@
 
             
 
+            
+
              property determines how the layout engine should add a new cell to a full table. This property can be set to <see
              cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.AddRows" />
+
+            
 
             
 
@@ -369,8 +405,12 @@
 
             
 
+            
+
              to indicate that columns should be added, or <see
              cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize" />
+
+            
 
             
 
@@ -411,6 +451,8 @@
 
             
 
+            
+
              property is typically used in two contexts:</para
           >
           <list type="bullet">
@@ -421,6 +463,8 @@
               <para
                 >A control contained within a table layout container, such as a button contained in a cell of a <see
                  cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+                
 
                 
 
@@ -452,6 +496,8 @@
           <para
             >Setting the <see
              cref="P:System.Windows.Forms.TableLayoutSettings.RowCount" />
+
+            
 
             
 
@@ -500,8 +546,12 @@
 
             
 
+            
+
              property to access the style properties of specific rows. The order of the styles in a <see
              cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+            
 
             
 
@@ -545,11 +595,15 @@
 
             
 
+            
+
              that represents the row and the column of the cell.</para
           >
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,8 +614,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+          
 
           
 
@@ -593,10 +651,14 @@
 
           
 
+          
+
           A control contained within a cell.</param
         >
         <param name="column">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -631,10 +693,14 @@
 
           
 
+          
+
           A control contained within a cell.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -666,10 +732,14 @@
 
           
 
+          
+
           A control contained within a cell.</param
         >
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -701,10 +771,14 @@
 
           
 
+          
+
           A control contained within a cell.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -737,8 +811,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 
@@ -753,6 +831,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -761,10 +841,14 @@
 
           
 
+          
+
           The object to be populated with serialization information. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

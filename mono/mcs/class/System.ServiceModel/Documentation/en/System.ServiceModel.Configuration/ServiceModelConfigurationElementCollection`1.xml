@@ -38,8 +38,12 @@
 
         
 
+        
+
          used within the <see
          cref="N:System.ServiceModel.Configuration" />
+
+        
 
         
 
@@ -99,11 +103,15 @@
 
             
 
+            
+
              object to this collection.</para
           >
         </summary>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,6 +197,8 @@
 
           
 
+          
+
           The configuration element to search for in the collection.</param
         >
       </Docs>
@@ -247,8 +257,12 @@
 
             
 
+            
+
              instance of type <paramref
              name="ConfigurationElementType" />
+
+            
 
             
 
@@ -263,8 +277,12 @@
 
             
 
+            
+
              instance of type <paramref
              name="ConfigurationElementType" />
+
+            
 
             
 
@@ -413,6 +431,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

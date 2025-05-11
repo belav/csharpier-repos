@@ -6,8 +6,12 @@
 
     
 
+    
+
      is either a <non_terminal
      where="16.2">namespace-declaration</non_terminal>
+
+    
 
     
 
@@ -16,13 +20,19 @@
 
     
 
+    
+
     ) or a <non_terminal
      where="16.5">type-declaration</non_terminal>
 
     
 
+    
+
      (<hyperlink
     >16.5</hyperlink>
+
+    
 
     
 
@@ -33,8 +43,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -54,6 +68,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="16.2">namespace-declaration</non_terminal>
@@ -66,6 +82,8 @@
   <paragraph
     >A compilation unit or a namespace body can contain <non_terminal
      where="16.4">namespace-member-declaration</non_terminal>
+
+    
 
     
 

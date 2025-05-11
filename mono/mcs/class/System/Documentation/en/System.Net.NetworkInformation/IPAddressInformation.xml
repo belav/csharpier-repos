@@ -24,6 +24,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -55,6 +57,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -63,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IPAddressInformation" />
+
+            
 
             
 
@@ -127,6 +133,8 @@
 
             
 
+            
+
              value that indicates whether the Internet Protocol (IP) address is valid to appear in a Domain Name System (DNS) server database.</para
           >
         </summary>
@@ -155,6 +163,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

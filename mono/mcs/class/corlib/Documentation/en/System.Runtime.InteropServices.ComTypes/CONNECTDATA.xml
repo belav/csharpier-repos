@@ -24,6 +24,8 @@
 
         
 
+        
+
          method.</para
       >
       <para>For more information about CONNECTDATA, see the MSDN Library.</para>
@@ -32,6 +34,8 @@
          type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
+
+        
 
         
 
@@ -63,6 +67,8 @@
           <para
             >Represents a connection token that is returned from a call to <see
              cref="M:System.Runtime.InteropServices.ComTypes.IConnectionPoint.Advise(System.Object,System.Int32@)" />
+
+            
 
             
 

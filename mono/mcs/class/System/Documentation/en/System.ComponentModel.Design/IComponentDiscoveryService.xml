@@ -23,6 +23,8 @@
 
         
 
+        
+
          interface enables design-time enumeration of components in the Toolbox.</para
       >
       <para>You could provide a custom implementation that enumerates across other types available at design time. For example, your implementation could enumerate the components that are present in a particular designer.</para>
@@ -63,8 +65,12 @@
 
             
 
+            
+
              method retrieves the list of available component types, which are types implementing the <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -73,8 +79,12 @@
 
             
 
+            
+
              parameter is null, all components are retrieved; otherwise, only component types derived from <paramref
              name="baseType" />
+
+            
 
             
 
@@ -86,8 +96,12 @@
 
             
 
+            
+
              parameter, type resolution is scoped to <paramref
              name="designerHost" />
+
+            
 
             
 
@@ -96,8 +110,12 @@
 
             
 
+            
+
              whose type is on disk, and not in the global assembly cache, its type will fail to load through <paramref
              name="designerHost" />
+
+            
 
             
 
@@ -109,8 +127,12 @@
 
             
 
+            
+
             , it returns all types that can be queried from the global assembly cache or the <see
              cref="Overload:System.Reflection.Assembly.LoadFrom" />
+
+            
 
             
 
@@ -130,10 +152,14 @@
 
           
 
+          
+
           The designer host providing design-time services. Can be null.</param
         >
         <param name="baseType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

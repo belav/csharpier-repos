@@ -14,6 +14,8 @@
 
         
 
+        
+
          namespace contains classes that are used to serialize objects into XML format documents or streams.</para
       >
     </summary>
@@ -25,8 +27,12 @@
 
         
 
+        
+
          class. To use this class, use the <see
          cref="M:System.Xml.Serialization.XmlSerializer.#ctor" />
+
+        
 
         
 
@@ -35,8 +41,12 @@
 
         
 
+        
+
          is created, create an instance of the object to serialize. You must also create an object to write the file to a document or stream, such as a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -45,13 +55,19 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Xml.XmlWriter" />
 
         
 
+        
+
         . You can then call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Serialize" />
+
+        
 
         
 
@@ -63,8 +79,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.TextWriter" />
+
+        
 
         
 
@@ -73,8 +93,12 @@
 
         
 
+        
+
         ). Invoke the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize" />
+
+        
 
         
 
@@ -86,8 +110,12 @@
 
         
 
+        
+
          namespace contains several <see
          cref="T:System.Attribute" />
+
+        
 
         
 
@@ -96,13 +124,19 @@
 
         
 
+        
+
          attribute to the member. When applying the attribute, you can specify details such as the actual XML element name using the <see
          cref="P:System.Xml.Serialization.XmlElementAttribute.ElementName" />
 
         
 
+        
+
          property. For a complete list of all the attributes, see the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 

@@ -41,8 +41,12 @@
 
         
 
+        
+
          is the base class for objects that communicate across application domain boundaries by exchanging messages using a proxy. Objects that do not inherit from <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          objects are accessed directly within the boundaries of the local application domain. The first time an application in a remote application domain accesses a <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
       <para
         >Types must inherit from <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -95,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -133,13 +145,19 @@
 
             
 
+            
+
              method is called by remote object creation methods such as <see
              cref="M:System.AppDomain.CreateInstance(System.String,System.String)" />
 
             
 
+            
+
              and <see
              cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" />
+
+            
 
             
 
@@ -159,13 +177,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            of the object that the new <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -198,6 +222,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -210,6 +236,8 @@
           <para
             >An object of type <see
              cref="T:System.Runtime.Remoting.Lifetime.ILease" />
+
+            
 
             
 
@@ -243,6 +271,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -258,8 +288,12 @@
 
             
 
+            
+
              used to control the lifetime policy for this instance. This is the current lifetime service object for this instance if one exists; otherwise, a new lifetime service object initialized to the value of the <see
              cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseManagerPollTime" />
+
+            
 
             
 
@@ -297,13 +331,19 @@
 
             
 
+            
+
              method creates a shallow copy by creating a new <see
              cref="T:System.MarshalByRefObject" />
 
             
 
+            
+
              object, and then copying the nonstatic fields of the current <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -315,8 +355,12 @@
 
             
 
+            
+
              object called X that references objects A and B. Object B, in turn, references object C. A shallow copy of X creates new object X2 that also references objects A and B. In contrast, a deep copy of X creates a new object X2 that references the new objects A2 and B2, which are copies of A and B. B2, in turn, references the new object C2, which is a copy C. Use a class that implements the <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -328,8 +372,12 @@
 
             
 
+            
+
              object is defined as the remote server object that is the target of a remoting client call. By default, the memberwise clone of a <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -338,8 +386,12 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.MarshalByRefObject.MemberwiseClone(System.Boolean)" />
+
+            
 
             
 
@@ -354,6 +406,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -365,6 +419,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -373,13 +429,19 @@
 
           
 
+          
+
           false to delete the current <see
            cref="T:System.MarshalByRefObject" />
 
           
 
+          
+
            object's identity, which will cause the object to be assigned a new identity when it is marshaled across a remoting boundary. A value of false is usually appropriate. true to copy the current <see
            cref="T:System.MarshalByRefObject" />
+
+          
 
           
 

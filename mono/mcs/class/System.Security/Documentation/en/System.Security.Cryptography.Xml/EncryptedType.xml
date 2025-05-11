@@ -24,13 +24,19 @@
 
         
 
+        
+
          class represents the abstract base class from which the classes <see
          cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -78,13 +88,19 @@
 
             
 
+            
+
              class. This class represents the abstract base class from which the classes <see
              cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -96,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+
+            
 
             
 
@@ -138,6 +156,8 @@
 
             
 
+            
+
              object in XML encryption.</para
           >
         </summary>
@@ -146,8 +166,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+          
 
           
 
@@ -183,8 +207,12 @@
 
             
 
+            
+
              property, or provide a reference to an external location containing the encrypted octet sequence using the <see
              cref="P:System.Security.Cryptography.Xml.CipherData.CipherReference" />
+
+            
 
             
 
@@ -193,6 +221,8 @@
           <para
             >For more information about this element, see <see
              cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+            
 
             
 
@@ -207,8 +237,12 @@
 
             
 
+            
+
              value for an instance of an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+
+            
 
             
 
@@ -240,6 +274,8 @@
           <para
             >Gets or sets the Encoding attribute of an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+
+            
 
             
 
@@ -306,6 +342,8 @@
 
             
 
+            
+
              instance, such as a date and time stamp or the serial number of cryptographic hardware used during encryption.</para
           >
         </remarks>
@@ -344,6 +382,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -352,6 +392,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -383,6 +425,8 @@
           <para
             >Gets or sets the Id attribute of an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+
+            
 
             
 
@@ -451,6 +495,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -463,8 +509,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -496,6 +546,8 @@
 
             
 
+            
+
             . For example, if the data that is encrypted is a base64-encoded PNG, the Encoding attribute would be 'http://www.w3.org/2000/09/xmldsig#base64' and the MimeType would be 'image/png'. This attribute is optional and no validation of the MimeType information is required. The attribute does not indicate that the encryption application must do any additional processing. Note that this information may not be necessary if it is already bound to the identifier in the Type attribute.</para
           >
         </remarks>
@@ -504,6 +556,8 @@
           <para
             >Gets or sets the MimeType attribute of an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+
+            
 
             
 
@@ -534,6 +588,8 @@
 
             
 
+            
+
              (section 4.2) of the XML Encryption Syntax and Processing specification (http://www.w3.org/TR/xmlenc-core/). If the &lt;EncryptedData&gt; element contains data of type 'element' or element 'content', and replaces that data in an XML document, it is strongly recommended that the Type attribute be provided. Without this information, the application attempting to decrypt the information will be unable to automatically restore the XML document to its original text form.</para
           >
         </remarks>
@@ -542,6 +598,8 @@
           <para
             >Gets or sets the Type attribute of an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+
+            
 
             
 

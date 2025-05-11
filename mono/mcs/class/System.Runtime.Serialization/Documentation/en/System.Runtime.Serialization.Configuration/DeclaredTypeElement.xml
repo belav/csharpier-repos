@@ -31,6 +31,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -39,6 +41,8 @@
       <para
         >Handles the XML elements used to add known types that are used for serialization by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -65,6 +69,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" />
+
+            
 
             
 
@@ -96,11 +102,15 @@
 
             
 
+            
+
              class with the specified type name.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

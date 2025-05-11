@@ -26,8 +26,12 @@
 
         
 
+        
+
          class to configure and expose a service for use by client applications when you are not using Internet Information Services (IIS) or Windows Activation Services (WAS) to expose a service. Both IIS and WAS interact with a <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          class). The <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          from the service type and configuration information and then uses that description to create <see
          cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+        
 
         
 
@@ -59,6 +71,8 @@
       <para
         >Use a <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -91,13 +105,19 @@
 
             
 
+            
+
              class. Use the <see
              cref="M:System.ServiceModel.ServiceHost.#ctor(System.Type,System.Uri[])" />
 
             
 
+            
+
              constructor which takes the service type as an input parameter, most of the time. The host can use this to create new services as needed. Use the <see
              cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+
+            
 
             
 
@@ -109,6 +129,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -150,6 +172,8 @@
 
             
 
+            
+
              when you want to provide a specific object instance for use by a singleton service. You may want to use this overload when your service implementation type is difficult to construct (for example, if it does not implement a default public constructor that has no parameters). </para
           >
           <para
@@ -158,8 +182,12 @@
 
             
 
+            
+
              have no effect when a well-known object instance is provided using this constructor overload. Similarly, any other instance release mechanism is ignored. The <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -168,8 +196,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+
+            
 
             
 
@@ -184,6 +216,8 @@
 
             
 
+            
+
              class with the instance of the service and its base addresses specified.</para
           >
         </summary>
@@ -192,13 +226,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
 
           
 
+          
+
            of type <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -238,6 +278,8 @@
 
             
 
+            
+
              constructor instead only when you want the service host to use a specific singleton instance of the service.</para
           >
         </remarks>
@@ -249,11 +291,15 @@
 
             
 
+            
+
              class with the type of service and its base addresses specified.</para
           >
         </summary>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,8 +310,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -308,6 +358,8 @@
 
             
 
+            
+
              added to the hosted service.</para
           >
         </returns>
@@ -316,8 +368,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -328,8 +384,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -337,6 +397,8 @@
         >
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,6 +441,8 @@
 
             
 
+            
+
              added to the hosted service.</para
           >
         </returns>
@@ -387,8 +451,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -399,8 +467,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -411,8 +483,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -459,6 +535,8 @@
 
             
 
+            
+
              added to the hosted service.</para
           >
         </returns>
@@ -467,8 +545,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -479,8 +561,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -491,6 +577,8 @@
 
           
 
+          
+
           The endpoint address for the service.</param
         >
         <param name="listenUri">
@@ -498,8 +586,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -546,6 +638,8 @@
 
             
 
+            
+
              added to the hosted service.</para
           >
         </returns>
@@ -554,8 +648,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -566,8 +664,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -578,8 +680,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -590,8 +696,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -661,8 +771,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
+
+          
 
           
 
@@ -701,8 +815,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -713,8 +831,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
+
+          
 
           
 
@@ -739,6 +861,8 @@
           <para
             >Use the <see
              cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+
+            
 
             
 

@@ -18,8 +18,12 @@
 
         
 
+        
+
          provides a base class for data-binding handlers. A data-binding handler can be used within a designer to perform data-binding to enable a meaningful display of the control on the design surface. Typically a control's designer is responsible for this functionality. However, when a control is not live on the design surface, such as within the template of another control, it does not have a designer, and this functionality is provided by a data-binding handler if one has been specified with a <see
          cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
 
         
 
+        
+
          specified within its code that indicates the type of data-binding handler to use.</para
       >
       <para
@@ -39,8 +45,12 @@
 
         
 
+        
+
          control is associated with the <see
          cref="T:System.Web.UI.Design.TextDataBindingHandler" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          in the code for the <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -59,8 +73,12 @@
 
         
 
+        
+
         , a <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -69,6 +87,8 @@
       <para
         >To implement a data-binding handler, define a new class that derives from this class and implement the <see
          cref="M:System.Web.UI.Design.DataBindingHandler.DataBindControl(System.ComponentModel.Design.IDesignerHost,System.Web.UI.Control)" />
+
+        
 
         
 
@@ -92,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.DataBindingHandler" />
+
+            
 
             
 
@@ -131,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -143,8 +169,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 

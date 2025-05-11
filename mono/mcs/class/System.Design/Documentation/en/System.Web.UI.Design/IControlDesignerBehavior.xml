@@ -17,13 +17,19 @@
 
           
 
+          
+
            interface is obsolete. Use the <see
            cref="T:System.Web.UI.Design.IControlDesignerTag" />
 
           
 
+          
+
            and <see
            cref="T:System.Web.UI.Design.IControlDesignerView" />
+
+          
 
           
 
@@ -54,13 +60,19 @@
 
               
 
+              
+
                interface is obsolete. Use the <see
                cref="T:System.Web.UI.Design.IControlDesignerTag" />
 
               
 
+              
+
                and <see
                cref="T:System.Web.UI.Design.IControlDesignerView" />
+
+              
 
               
 
@@ -95,13 +107,19 @@
 
               
 
+              
+
                interface is obsolete. Use the <see
                cref="T:System.Web.UI.Design.IControlDesignerTag" />
 
               
 
+              
+
                and <see
                cref="T:System.Web.UI.Design.IControlDesignerView" />
+
+              
 
               
 
@@ -137,11 +155,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Design.IControlDesignerBehavior.OnTemplateModeChanged" />
+
+            
 
             
 

@@ -30,11 +30,15 @@
 
         
 
+        
+
          class provides a transform that determines the order of XML Digital Signature and XML Encryption operations when both are performed on the same document.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          object to the <see
          cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.EncryptedXml" />
+
+        
 
         
 
@@ -80,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+            
 
             
 
@@ -117,6 +127,8 @@
 
           
 
+          
+
           A Uniform Resource Identifier (URI) to exclude from processing</param
         >
       </Docs>
@@ -149,8 +161,12 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.EncryptedXml" />
+
+            
 
             
 
@@ -162,6 +178,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+            
 
             
 
@@ -199,6 +217,8 @@
 
             
 
+            
+
              object that are suitable to be included as subelements of an XMLDSIG &lt;Transform&gt; element.</para
           >
         </summary>
@@ -207,6 +227,8 @@
           <para
             >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+            
 
             
 
@@ -241,6 +263,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -249,6 +273,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+            
 
             
 
@@ -285,6 +311,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -296,6 +324,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -304,8 +334,12 @@
 
           
 
+          
+
           The type of the output to return. <see
            cref="T:System.Xml.XmlNodeList" />
+
+          
 
           
 
@@ -335,8 +369,12 @@
 
             
 
+            
+
              property must contain at least one element because every <see
              cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+            
 
             
 
@@ -348,8 +386,12 @@
 
             
 
+            
+
              object typically accepts one or more of the following types as input: <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -358,8 +400,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -374,8 +420,12 @@
 
             
 
+            
+
              method of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+            
 
             
 
@@ -416,6 +466,8 @@
 
             
 
+            
+
              object matches a specified value.</para
           >
         </summary>
@@ -427,8 +479,12 @@
 
             
 
+            
+
              parameter matches the <paramref
              name="idValue" />
+
+            
 
             
 
@@ -440,13 +496,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
 
           
 
+          
+
            object with an ID attribute to compare with <paramref
            name="idValue" />
+
+          
 
           
 
@@ -457,8 +519,12 @@
 
           
 
+          
+
           The value to compare with the ID attribute of <paramref
            name="inputElement" />
+
+          
 
           
 
@@ -500,8 +566,12 @@
 
             
 
+            
+
              object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+            
 
             
 
@@ -513,13 +583,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNodeList" />
 
           
 
+          
+
            object that specifies transform-specific content for the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+          
 
           
 
@@ -554,6 +630,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -565,6 +643,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -573,8 +653,12 @@
 
           
 
+          
+
           The input to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+          
 
           
 
@@ -607,6 +691,8 @@
 
             
 
+            
+
              property must contain at least one element because every transform must generate at least one type as output.</para
           >
         </remarks>
@@ -618,8 +704,12 @@
 
             
 
+            
+
              methods of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+
+            
 
             
 

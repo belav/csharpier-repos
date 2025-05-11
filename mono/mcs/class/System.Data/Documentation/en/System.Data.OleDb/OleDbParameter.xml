@@ -50,8 +50,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
         
 
+        
+
          and optionally its mapping to a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -72,6 +76,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -104,13 +110,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbParameter.Precision" />
 
             
 
+            
+
              are inferred from the value of the <paramref
              name="dataType" />
+
+            
 
             
 
@@ -125,11 +137,15 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              class that uses the parameter name and data type.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +156,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbType" />
+
+          
 
           
 
@@ -170,8 +190,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              constructor to specify integer parameter values. Because this overload takes a <paramref
              name="value" />
+
+            
 
             
 
@@ -180,8 +204,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
             , you must convert the integral value to an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -191,6 +219,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >If you do not perform this conversion, the compiler assumes that you are trying to call the <see
              cref="M:System.Data.OleDb.OleDbParameter.#ctor(System.String,System.Data.OleDb.OleDbType)" />
+
+            
 
             
 
@@ -205,8 +235,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              class that uses the parameter name and the value of the new <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -218,6 +252,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The name of the parameter to map. </param
         >
         <param name="value">
@@ -225,8 +261,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The value of the new <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -259,13 +299,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is inferred from the value of the <paramref
              name="dataType" />
 
             
 
+            
+
              parameter if it is not explicitly set in the <paramref
              name="size" />
+
+            
 
             
 
@@ -280,11 +326,15 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              class that uses the parameter name, data type, and length.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,8 +345,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbType" />
+
+          
 
           
 
@@ -304,6 +358,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,13 +393,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is inferred from the value of the <paramref
              name="dataType" />
 
             
 
+            
+
              parameter if it is not explicitly set in the <paramref
              name="size" />
+
+            
 
             
 
@@ -358,11 +420,15 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              class that uses the parameter name, data type, length, and source column name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -373,8 +439,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbType" />
+
+          
 
           
 
@@ -385,10 +455,14 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The length of the parameter. </param
         >
         <param name="srcColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -428,8 +502,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbParameter.Precision" />
+
+            
 
             
 
@@ -438,13 +516,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              parameter if they are not explicitly set in the <paramref
              name="size" />
 
             
 
+            
+
              and <paramref
              name="precision" />
+
+            
 
             
 
@@ -459,11 +543,15 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              class that uses the parameter name, data type, length, source column name, parameter direction, numeric precision, and other properties.</para
           >
         </summary>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,8 +562,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbType" />
+
+          
 
           
 
@@ -486,6 +578,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The length of the parameter. </param
         >
         <param name="direction">
@@ -493,8 +587,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.ParameterDirection" />
+
+          
 
           
 
@@ -505,6 +603,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           true if the value of the field can be null; otherwise false. </param
         >
         <param name="precision">
@@ -512,8 +612,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The total number of digits to the left and right of the decimal point to which <see
            cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+          
 
           
 
@@ -524,8 +628,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The total number of decimal places to which <see
            cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+          
 
           
 
@@ -536,6 +644,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The name of the source column. </param
         >
         <param name="srcVersion">
@@ -543,8 +653,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataRowVersion" />
+
+          
 
           
 
@@ -555,13 +669,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that is the value of the <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -613,8 +733,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbParameter.Precision" />
+
+            
 
             
 
@@ -623,13 +747,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              parameter if they are not explicitly set in the <paramref
              name="size" />
 
             
 
+            
+
              and <paramref
              name="precision" />
+
+            
 
             
 
@@ -644,11 +774,15 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              class that uses the parameter name, data type, length, source column name, parameter direction, numeric precision, and other properties.</para
           >
         </summary>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,8 +793,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbType" />
+
+          
 
           
 
@@ -671,6 +809,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The length of the parameter. </param
         >
         <param name="direction">
@@ -678,8 +818,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.ParameterDirection" />
+
+          
 
           
 
@@ -690,8 +834,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The total number of digits to the left and right of the decimal point to which <see
            cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+          
 
           
 
@@ -702,8 +850,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The total number of decimal places to which <see
            cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+          
 
           
 
@@ -714,6 +866,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           The name of the source column.</param
         >
         <param name="sourceVersion">
@@ -721,8 +875,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataRowVersion" />
+
+          
 
           
 
@@ -733,10 +891,14 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
           true if the source column is nullable; false if it is not.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -745,8 +907,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
           
 
+          
+
            that is the value of the <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -774,8 +940,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbParameter.DbType" />
+
+            
 
             
 
@@ -784,13 +954,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              changes the <see
              cref="P:System.Data.OleDb.OleDbParameter.OleDbType" />
 
             
 
+            
+
              to a supporting <see
              cref="P:System.Data.OleDb.OleDbParameter.OleDbType" />
+
+            
 
             
 
@@ -802,10 +978,14 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              member. For more information, see <format
              type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
+
+            
 
             
 
@@ -817,6 +997,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >Gets or sets the <see
              cref="T:System.Data.DbType" />
+
+            
 
             
 
@@ -849,13 +1031,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is output, and execution of the associated <see
              cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
+            
+
              does not return a value, the <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -867,13 +1055,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              cannot be accessed until you call <see
              cref="M:System.Data.OleDb.OleDbDataReader.Close" />
 
             
 
+            
+
              or Dispose on the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -912,6 +1106,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -945,8 +1141,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbParameter.DbType" />
+
+            
 
             
 
@@ -955,13 +1155,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              changes the <see
              cref="P:System.Data.OleDb.OleDbParameter.OleDbType" />
 
             
 
+            
+
              to a supporting <see
              cref="T:System.Data.OleDb.OleDbType" />
+
+            
 
             
 
@@ -973,10 +1179,14 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              member. For more information, see <format
              type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
+
+            
 
             
 
@@ -988,6 +1198,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >Gets or sets the <see
              cref="T:System.Data.OleDb.OleDbType" />
+
+            
 
             
 
@@ -1029,6 +1241,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1055,6 +1269,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property is only used for decimal and numeric input parameters. </para
           >
           <para
@@ -1063,13 +1279,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property should be set only for Decimal and Numeric parameters prior to calling the <see
              cref="M:System.Data.OleDb.OleDbCommand.Prepare" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -1082,12 +1304,16 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is Decimal, Numeric, or VarNumeric. For other data types, Precision is ignored.</para
           >
           <block subset="none" type="note">
             <para
               >Use of this property to coerce data passed to the database is not supported. To round, truncate, or otherwise coerce data before passing it to the database, use the <see
                cref="T:System.Math" />
+
+              
 
               
 
@@ -1101,13 +1327,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
               
 
+              
+
                or <see
                cref="P:System.Data.OleDb.OleDbParameter.Scale" />
 
               
 
+              
+
                of <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1116,8 +1348,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
               
 
+              
+
                and <see
                cref="P:System.Data.OleDb.OleDbParameter.Scale" />
+
+              
 
               
 
@@ -1126,13 +1362,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
               
 
+              
+
                values before setting the parameter value. <see
                cref="P:System.Data.OleDb.OleDbParameter.Scale" />
 
               
 
+              
+
                values that exceed the <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1145,6 +1387,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >Gets or sets the maximum number of digits used to represent the <see
              cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+            
 
             
 
@@ -1181,13 +1425,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbParameter.OleDbType" />
 
             
 
+            
+
              properties of the <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -1199,6 +1449,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >Resets the type associated with this <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -1226,13 +1478,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbParameter.OleDbType" />
 
             
 
+            
+
              properties of the <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -1244,6 +1502,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >Resets the type associated with this <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -1269,13 +1529,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property is only used for decimal and numeric input parameters before calling the <see
              cref="M:System.Data.OleDb.OleDbCommand.Prepare" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -1290,6 +1556,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
               
 
+              
+
                class that is part of the System namespace prior to assigning a value to the parameter's Value property.</para
             >
           </block>
@@ -1300,13 +1568,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
               
 
+              
+
                or <see
                cref="P:System.Data.OleDb.OleDbParameter.Scale" />
 
               
 
+              
+
                of <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1315,8 +1589,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
               
 
+              
+
                and <see
                cref="T:System.Data.OleDb.OleDbParameter" />
+
+              
 
               
 
@@ -1325,13 +1603,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
               
 
+              
+
                values before setting the parameter value. <see
                cref="P:System.Data.OleDb.OleDbParameter.Scale" />
 
               
 
+              
+
                values that exceed the <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1344,6 +1628,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >Gets or sets the number of decimal places to which <see
              cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+            
 
             
 
@@ -1378,6 +1664,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property is used for binary and string types.</para
           >
           <para
@@ -1386,8 +1674,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property refers to the number of bytes. For Unicode string data, <see
              cref="P:System.Data.OleDb.OleDbParameter.Size" />
+
+            
 
             
 
@@ -1399,8 +1691,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              describes the maximum amount of data to transmit to the server. For example, for a Unicode string value, <see
              cref="P:System.Data.OleDb.OleDbParameter.Size" />
+
+            
 
             
 
@@ -1412,6 +1708,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
             . This is not required for input parameters, and if not explicitly set, the value of is inferred from the actual size of the specified parameter when a parameterized statement is executed.</para
           >
           <para
@@ -1420,8 +1718,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
             , <see
              cref="P:System.Data.OleDb.OleDbParameter.OleDbType" />
+
+            
 
             
 
@@ -1430,8 +1732,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              properties of a parameter can be inferred by setting <see
              cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+            
 
             
 
@@ -1440,8 +1746,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property settings. For example, if the size of the parameter has been inferred, <see
              cref="P:System.Data.OleDb.OleDbParameter.Size" />
+
+            
 
             
 
@@ -1453,6 +1763,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is ignored. It can be retrieved for informational purposes, and returns the maximum amount of bytes the provider uses when transmitting the value of the parameter to the server.</para
           >
           <para
@@ -1461,8 +1773,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              exceeds the specified <see
              cref="P:System.Data.OleDb.OleDbParameter.Size" />
+
+            
 
             
 
@@ -1471,13 +1787,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              of the <see
              cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
+            
+
              contains the specified value, truncated to the size of the <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -1511,8 +1833,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is set to anything other than an empty string, the value of the parameter is retrieved from the column with the <see
              cref="P:System.Data.OleDb.OleDbParameter.SourceColumn" />
+
+            
 
             
 
@@ -1521,8 +1847,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is set to Input, the value is taken from the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1531,8 +1861,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is set to Output, the value is taken from the data source. A <see
              cref="P:System.Data.OleDb.OleDbParameter.Direction" />
+
+            
 
             
 
@@ -1544,10 +1878,14 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property, see <format
              type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
+
+            
 
             
 
@@ -1557,6 +1895,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
                 >Updating the Database with a DataAdapter and the DataSet</a
               >
             </format>
+
+            
 
             
 
@@ -1571,8 +1911,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and used for loading or returning the <see
              cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+            
 
             
 
@@ -1606,8 +1950,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is used by the <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -1616,8 +1964,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              is limited to developers inheriting from <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -1628,8 +1980,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              uses this property to determine whether the source column is nullable, and sets this property to true if it is nullable, and false if it is not. When <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -1638,8 +1994,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              for each parameter. If the property is true, <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -1653,8 +2013,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              for the field is false, <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -1668,6 +2032,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >Sets or gets a value which indicates whether the source column is nullable. This allows <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -1696,8 +2062,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              during an update operation to determine whether the parameter value is set to Current or Original. This lets primary keys be updated. This property is set to the version of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -1706,13 +2076,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property, or the <see
              cref="M:System.Data.DataRow.GetChildRows(System.String,System.Data.DataRowVersion)" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -1727,8 +2103,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              to use when you load <see
              cref="P:System.Data.OleDb.OleDbParameter.Value" />
+
+            
 
             
 
@@ -1761,8 +2141,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -1777,6 +2161,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1785,6 +2171,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >A new <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1810,6 +2198,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1818,6 +2208,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <para
             >A string that contains the <see
              cref="P:System.Data.OleDb.OleDbParameter.ParameterName" />
+
+            
 
             
 
@@ -1847,13 +2239,19 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              that is sent to the server. For output and return value parameters, the value is set on completion of the <see
              cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
+            
+
              and after the <see
              cref="T:System.Data.OleDb.OleDbDataReader" />
+
+            
 
             
 
@@ -1865,8 +2263,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
             , not null. The null value in the system is an empty object that has no value. <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1878,6 +2280,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              interface. Conversion errors may result if the specified type is not compatible with the value.</para
           >
           <para
@@ -1886,8 +2290,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              and <see
              cref="P:System.Data.OleDb.OleDbParameter.OleDbType" />
+
+            
 
             
 
@@ -1899,8 +2307,12 @@ OleDbDataReader reader = command.ExecuteReader();</code>
 
             
 
+            
+
              property is overwritten by the Update method of <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 

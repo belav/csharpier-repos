@@ -35,8 +35,12 @@
 
         
 
+        
+
          interface. All the remoting client channels provide constructors that take a <see
          cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          provides a property called <see
          cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
       <para
         >When multiple channel sink providers are specified in a configuration file, the remoting infrastructure will chain them together in the order they are found in the configuration file. The channel sink providers will be created when the channel is created during the <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
+
+        
 
         
 
@@ -102,8 +112,12 @@
 
             
 
+            
+
              method is called, it creates its own channel sink, forwards the <see
              cref="M:System.Runtime.Remoting.Channels.IClientChannelSinkProvider.CreateSink(System.Runtime.Remoting.Channels.IChannelSender,System.String,System.Object)" />
+
+            
 
             
 
@@ -123,10 +137,14 @@
 
           
 
+          
+
           Channel for which the current sink chain is being constructed. </param
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -135,10 +153,14 @@
 
           
 
+          
+
            parameter. </param
         >
         <param name="remoteChannelData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

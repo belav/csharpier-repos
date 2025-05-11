@@ -23,6 +23,8 @@
 
         
 
+        
+
         . Not inheritable.</para
       >
     </summary>
@@ -45,8 +47,12 @@
 
             
 
+            
+
              that bounds the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -76,6 +82,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -99,6 +107,8 @@
           <para
             >Gets the vertical resolution, in dots per inch, of the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -147,6 +157,8 @@
 
             
 
+            
+
              is device dependent.</para
           >
         </summary>
@@ -155,6 +167,8 @@
           <para
             >true if the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -184,6 +198,8 @@
 
             
 
+            
+
              is in the Windows enhanced metafile format.</para
           >
         </summary>
@@ -192,6 +208,8 @@
           <para
             >true if the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -221,6 +239,8 @@
 
             
 
+            
+
              is in the Windows enhanced metafile format or the Windows enhanced metafile plus format.</para
           >
         </summary>
@@ -229,6 +249,8 @@
           <para
             >true if the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -258,6 +280,8 @@
 
             
 
+            
+
              is in the Windows enhanced metafile plus format.</para
           >
         </summary>
@@ -266,6 +290,8 @@
           <para
             >true if the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -295,6 +321,8 @@
 
             
 
+            
+
              is in the Dual enhanced metafile format. This format supports both the enhanced and the enhanced plus format.</para
           >
         </summary>
@@ -303,6 +331,8 @@
           <para
             >true if the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -332,6 +362,8 @@
 
             
 
+            
+
              supports only the Windows enhanced metafile plus format.</para
           >
         </summary>
@@ -340,6 +372,8 @@
           <para
             >true if the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -369,6 +403,8 @@
 
             
 
+            
+
              is in the Windows metafile format.</para
           >
         </summary>
@@ -377,6 +413,8 @@
           <para
             >true if the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -406,6 +444,8 @@
 
             
 
+            
+
              is in the Windows placeable metafile format.</para
           >
         </summary>
@@ -414,6 +454,8 @@
           <para
             >true if the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -443,6 +485,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -469,6 +513,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -492,6 +538,8 @@
           <para
             >Gets the size, in bytes, of the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -524,6 +572,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -547,6 +597,8 @@
           <para
             >Gets the version number of the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -576,6 +628,8 @@
           <para
             >Gets the Windows metafile (WMF) header file for the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 

@@ -22,6 +22,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -41,6 +43,8 @@
 
         
 
+        
+
          class represents the &lt;SignedInfo&gt; element of an XML signature defined by the XML digital signature specification. The &lt;SignedInfo&gt; element, which is a subelement of the &lt;Signature&gt; element, contains the canonicalization method used for signing, the algorithm used for signing and validation, and references that describe a digital signature.</para
       >
       <para
@@ -49,8 +53,12 @@
 
         
 
+        
+
          class available from the <see
          cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+        
 
         
 
@@ -85,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+            
 
             
 
@@ -123,13 +133,19 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
 
             
 
+            
+
              object to a collection that is accessible using the <see
              cref="P:System.Security.Cryptography.Xml.SignedInfo.References" />
+
+            
 
             
 
@@ -144,11 +160,15 @@
 
             
 
+            
+
              object to the list of references to digest and sign.</para
           >
         </summary>
         <param name="reference">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +202,8 @@
 
             
 
+            
+
              property uses a string Uniform Resource Identifier (URI) to represent the &lt;Canonicalization&gt; element of an XML digital signature.</para
           >
           <para
@@ -190,8 +212,12 @@
 
             
 
+            
+
              property to specify the canonicalization algorithm applied to the XML output of the <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+            
 
             
 
@@ -280,6 +306,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -317,13 +345,19 @@
 
             
 
+            
+
              property contains the <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
 
             
 
+            
+
              object used by the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -335,13 +369,19 @@
 
             
 
+            
+
              property is read-only. You can modify the <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
 
             
 
+            
+
              object within this property by passing the desired transform Uniform Resource Identifier (URI) to the <see
              cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
+
+            
 
             
 
@@ -353,6 +393,8 @@
           <para
             >Gets a <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -390,6 +432,8 @@
 
             
 
+            
+
              object, starting at a specified index in the array.</para
           >
         </summary>
@@ -398,8 +442,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -407,6 +455,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -438,6 +488,8 @@
           <para
             >Gets the number of references in the current <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+            
 
             
 
@@ -503,6 +555,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -511,6 +565,8 @@
           <para
             >The XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+            
 
             
 
@@ -545,13 +601,19 @@
 
             
 
+            
+
              property to add a string ID to the XML representation of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
+            
+
              element. The ID is used to reference the <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+            
 
             
 
@@ -563,6 +625,8 @@
           <para
             >Gets or sets the ID of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+            
 
             
 
@@ -649,6 +713,8 @@
 
             
 
+            
+
              state from an XML element.</para
           >
         </summary>
@@ -657,8 +723,12 @@
 
           
 
+          
+
           The XML element from which to load the <see
            cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+          
 
           
 
@@ -698,8 +768,12 @@
 
             
 
+            
+
              property uses a list of <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
+
+            
 
             
 
@@ -708,6 +782,8 @@
           <para
             >Use the <see
              cref="P:System.Security.Cryptography.Xml.SignedInfo.References" />
+
+            
 
             
 
@@ -723,8 +799,12 @@
 
             
 
+            
+
              objects of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+            
 
             
 
@@ -760,6 +840,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -791,11 +873,15 @@
 
             
 
+            
+
              property uses a string Uniform Resource Identifier (URI) to represents the &lt;SignatureMethod&gt; element of an XML digital signature.</para
           >
           <para
             >Use the <see
              cref="P:System.Security.Cryptography.Xml.SignedInfo.SignatureMethod" />
+
+            
 
             
 
@@ -857,6 +943,8 @@
           <para
             >Gets or sets the name of the algorithm used for signature generation and validation for the current <see
              cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+
+            
 
             
 

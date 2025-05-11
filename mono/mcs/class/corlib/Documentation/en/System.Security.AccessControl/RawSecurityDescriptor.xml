@@ -51,6 +51,8 @@
 
             
 
+            
+
              class from the specified Security Descriptor Definition Language (SDDL) string.</para
           >
         </summary>
@@ -59,8 +61,12 @@
 
           
 
+          
+
           The SDDL string from which to create the new <see
            cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+          
 
           
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              class from the specified array of byte values.</para
           >
         </summary>
@@ -105,8 +113,12 @@
 
           
 
+          
+
           The array of byte values from which to create the new <see
            cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+          
 
           
 
@@ -117,8 +129,12 @@
 
           
 
+          
+
           The offset in the  <paramref
            name="binaryForm" />
+
+          
 
           
 
@@ -158,6 +174,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -166,8 +184,12 @@
 
           
 
+          
+
           Flags that specify behavior of the new <see
            cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+          
 
           
 
@@ -178,8 +200,12 @@
 
           
 
+          
+
           The owner for the new <see
            cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+          
 
           
 
@@ -190,8 +216,12 @@
 
           
 
+          
+
           The primary group for the new <see
            cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+          
 
           
 
@@ -202,8 +232,12 @@
 
           
 
+          
+
           The System Access Control List (SACL) for the new <see
            cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+          
 
           
 
@@ -214,8 +248,12 @@
 
           
 
+          
+
           The Discretionary Access Control List (DACL) for the new <see
            cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+          
 
           
 
@@ -249,6 +287,8 @@
           <para
             >Gets values that specify behavior of the <see
              cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+            
 
             
 
@@ -286,6 +326,8 @@
 
             
 
+            
+
              object. The DACL contains access rules.</para
           >
         </summary>
@@ -317,6 +359,8 @@
           <para
             >Gets or sets the primary group for this <see
              cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+            
 
             
 
@@ -354,6 +398,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -385,6 +431,8 @@
           <para
             >Gets or sets a byte value that represents the resource manager control bits associated with this <see
              cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+            
 
             
 
@@ -424,8 +472,12 @@
 
             
 
+            
+
              property of this <see
              cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+            
 
             
 
@@ -437,8 +489,12 @@
 
           
 
+          
+
           One or more values of the <see
            cref="T:System.Security.AccessControl.ControlFlags" />
+
+          
 
           
 
@@ -472,6 +528,8 @@
           <para
             >Gets or sets the System Access Control List (SACL) for this <see
              cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+            
 
             
 

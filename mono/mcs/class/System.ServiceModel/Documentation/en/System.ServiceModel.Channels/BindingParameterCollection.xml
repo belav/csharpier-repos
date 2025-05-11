@@ -31,8 +31,12 @@
 
         
 
+        
+
          is a collection of objects that is used when a custom binding needs to provide additional parameters to another binding. For example, the <see
          cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          in the <see
          cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+
+            
 
             
 
@@ -111,8 +121,12 @@
 
             
 
+            
+
              object that represents the key of the specified <paramref
              name="item" />
+
+            
 
             
 
@@ -121,6 +135,8 @@
         </returns>
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -159,8 +175,12 @@
 
           
 
+          
+
           The zero-based index in the collection at which <paramref
            name="item" />
+
+          
 
           
 
@@ -168,6 +188,8 @@
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,8 +228,12 @@
 
           
 
+          
+
           The zero-based index at which to set the new <paramref
            name="item" />
+
+          
 
           
 
@@ -215,6 +241,8 @@
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -22,13 +22,19 @@
 
         
 
+        
+
          event is raised when a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
+        
+
          control attempts to change between edit, insert, and read-only mode, but before the mode actually changes. This allows you to provide an event handler that performs a custom routine, such as configuring the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
          object is passed to the event handler, which allows you to determine the mode to which the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -50,8 +60,12 @@
 
         
 
+        
+
          event was raised as a result of the user canceling an edit operation, or to indicate that an insert operation should be canceled. To determine the new mode, use the <see
          cref="P:System.Web.UI.WebControls.DetailsViewModeEventArgs.NewMode" />
+
+        
 
         
 
@@ -60,8 +74,12 @@
 
         
 
+        
+
          property to change to an alternate mode by setting it to one of the <see
          cref="T:System.Web.UI.WebControls.DetailsViewMode" />
+
+        
 
         
 
@@ -70,8 +88,12 @@
 
         
 
+        
+
          property to determine whether the user canceled an edit operation. To cancel an insert operation, set the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -85,6 +107,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -93,8 +117,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.DetailsViewModeEventArgs.#ctor(System.Web.UI.WebControls.DetailsViewMode,System.Boolean)" />
+
+        
 
         
 
@@ -106,6 +134,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.DetailsView.ModeChanging" />
+
+        
 
         
 
@@ -134,11 +164,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.DetailsViewModeEventArgs" />
+
+            
 
             
 
@@ -168,6 +202,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -182,6 +218,8 @@
                 <para
                   >The value of the <paramref
                    name="mode" />
+
+                  
 
                   
 
@@ -202,6 +240,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -210,8 +250,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DetailsViewMode" />
+
+          
 
           
 
@@ -222,8 +266,12 @@
 
           
 
+          
+
           true to indicate the <see
            cref="E:System.Web.UI.WebControls.DetailsView.ModeChanging" />
+
+          
 
           
 
@@ -251,8 +299,12 @@
 
             
 
+            
+
              event is raised when a <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -261,13 +313,19 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="E:System.Web.UI.WebControls.DetailsView.ModeChanging" />
 
             
 
+            
+
              event was raised as a result of the user canceling an edit operation. For example, you might want to reset the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -279,6 +337,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="E:System.Web.UI.WebControls.DetailsView.ModeChanging" />
+
+            
 
             
 
@@ -310,8 +370,12 @@
 
             
 
+            
+
              property to determine the mode to which the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -320,13 +384,19 @@
 
             
 
+            
+
              control based on the mode to which it changes. You can also use this property to specify the mode to which the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
+            
+
              control changes by setting it to one of the <see
              cref="T:System.Web.UI.WebControls.DetailsViewMode" />
+
+            
 
             
 
@@ -338,6 +408,8 @@
           <para
             >Gets or sets the mode to which the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 

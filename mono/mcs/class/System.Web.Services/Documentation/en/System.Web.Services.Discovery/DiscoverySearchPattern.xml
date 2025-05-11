@@ -25,13 +25,19 @@
 
         
 
+        
+
          property to add a discoverable file type to a Web services document. While a discovery document is usually serialized as a file using a .disco extension, you can add multiple files to the <see
          cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
 
         
 
+        
+
          property, and those files can have other extensions, represented by implementations of <see
          cref="T:System.Web.Services.Discovery.DiscoverySearchPattern" />
+
+        
 
         
 
@@ -43,13 +49,19 @@
 
         
 
+        
+
           class and its concrete derived classes are employed by the <see
          cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
 
         
 
+        
+
          class's <see
          cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
+
+        
 
         
 
@@ -74,6 +86,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoverySearchPattern" />
+
+            
 
             
 
@@ -107,13 +121,19 @@
 
             
 
+            
+
              implements the <see
              cref="M:System.Web.Services.Discovery.DiscoverySearchPattern.GetDiscoveryReference(System.String)" />
 
             
 
+            
+
              method by returning its associated concrete class derived from <see
              cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+            
 
             
 
@@ -125,8 +145,12 @@
 
             
 
+            
+
              class returns a <see
              cref="T:System.Web.Services.Discovery.ContractReference" />
+
+            
 
             
 
@@ -141,6 +165,8 @@
 
             
 
+            
+
              object for a given file name.</para
           >
         </summary>
@@ -150,6 +176,8 @@
         </returns>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -22,13 +22,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGridView.RowHeadersBorderStyle" />
 
         
 
+        
+
          properties of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

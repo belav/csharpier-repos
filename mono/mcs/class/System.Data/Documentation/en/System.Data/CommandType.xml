@@ -21,13 +21,19 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Data.CommandType.StoredProcedure" />
 
         
 
+        
+
         , the <see
          cref="P:System.Data.IDbCommand.CommandText" />
+
+        
 
         
 
@@ -39,13 +45,19 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Data.CommandType.TableDirect" />
 
         
 
+        
+
         , the <see
          cref="P:System.Data.IDbCommand.CommandText" />
+
+        
 
         
 
@@ -56,6 +68,8 @@
         <para
           >TableDirect is only supported by the .NET Framework Data Provider for OLE DB. Multiple table access is not supported when <see
            cref="T:System.Data.CommandType" />
+
+          
 
           
 

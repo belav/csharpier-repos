@@ -22,8 +22,12 @@
 
         
 
+        
+
          derives from the abstract class <see
          cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          contains check boxes in each cell that have three states by default: checked (true), unchecked (false), and <see
          cref="F:System.DBNull.Value" />
 
         
 
+        
+
         . To use two-state check boxes, set the <see
          cref="P:System.Windows.Forms.DataGridBoolColumn.AllowNull" />
+
+        
 
         
 
@@ -50,13 +60,19 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGridBoolColumn.NullValue" />
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.DataGridBoolColumn.TrueValue" />
+
+        
 
         
 
@@ -82,8 +98,12 @@
 
             
 
+            
+
             , be sure to set the <see
              cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+
+            
 
             
 
@@ -92,8 +112,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -105,6 +129,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridBoolColumn" />
+
+            
 
             
 
@@ -135,8 +161,12 @@
 
             
 
+            
+
              must be associated with a data source that contains <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -148,8 +178,12 @@
 
             
 
+            
+
             , first use the <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -158,8 +192,12 @@
 
             
 
+            
+
             . Then use the <see
              cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
+
+            
 
             
 
@@ -168,8 +206,12 @@
 
             
 
+            
+
              to return a <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -178,13 +220,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
+            
+
              to return the specific <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -199,8 +247,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -212,8 +264,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -244,8 +300,12 @@
 
             
 
+            
+
             , first use the <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -254,8 +314,12 @@
 
             
 
+            
+
             . Then use the <see
              cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
+
+            
 
             
 
@@ -264,8 +328,12 @@
 
             
 
+            
+
              to return a <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -274,13 +342,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
+            
+
              to return the specific <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -295,8 +369,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -308,8 +386,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -317,6 +399,8 @@
         >
         <param name="isDefault">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,6 +433,8 @@
         </summary>
         <param name="rowNum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -399,6 +485,8 @@
 
             
 
+            
+
              property is changed.</para
           >
         </summary>
@@ -440,8 +528,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataView" />
+
+          
 
           
 
@@ -449,6 +541,8 @@
         >
         <param name="rowNum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -502,13 +596,19 @@
 
             
 
+            
+
              class), the <see
              cref="M:System.Windows.Forms.DataGridBoolColumn.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean,System.String,System.Boolean)" />
 
             
 
+            
+
              method does not site a control for editing the cell value. Instead, a check box is drawn when the <see
              cref="M:System.Windows.Forms.DataGridBoolColumn.Paint(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.CurrencyManager,System.Int32)" />
+
+            
 
             
 
@@ -524,8 +624,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataView" />
+
+          
 
           
 
@@ -536,6 +640,8 @@
 
           
 
+          
+
           The row number of the edited cell. </param
         >
         <param name="bounds">
@@ -543,8 +649,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -555,6 +665,8 @@
 
           
 
+          
+
           true if the value is read only; otherwise, false. </param
         >
         <param name="displayText">
@@ -562,10 +674,14 @@
 
           
 
+          
+
           The text to display in the cell. </param
         >
         <param name="cellIsVisible">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -593,6 +709,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -601,6 +719,8 @@
           <para
             >Enters a <see
              cref="F:System.DBNull.Value" />
+
+            
 
             
 
@@ -633,13 +753,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.NullValue" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.TrueValue" />
+
+            
 
             
 
@@ -669,6 +795,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.FalseValue" />
+
+            
 
             
 
@@ -712,6 +840,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -720,8 +850,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -729,6 +863,8 @@
         >
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -791,8 +927,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -803,8 +943,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -838,8 +982,12 @@
 
             
 
+            
+
              method allows you to resize the column based on the value displayed. For example, if a cell contains an especially large value, you can use the <see
              cref="M:System.Windows.Forms.DataGridBoolColumn.GetPreferredSize(System.Drawing.Graphics,System.Object)" />
+
+            
 
             
 
@@ -858,6 +1006,8 @@
 
             
 
+            
+
              that contains the drawing information for the cell.</para
           >
         </returns>
@@ -866,8 +1016,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -875,6 +1029,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -903,11 +1059,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.AllowNull" />
+
+            
 
             
 
@@ -919,13 +1079,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.NullValue" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.TrueValue" />
+
+            
 
             
 
@@ -937,6 +1103,8 @@
           <para
             >Gets or sets the actual value used when setting the value of the column to <see
              cref="F:System.DBNull.Value" />
+
+            
 
             
 
@@ -981,13 +1149,19 @@
 
             
 
+            
+
              with the given <see
              cref="T:System.Drawing.Graphics" />
 
             
 
+            
+
             , <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -999,8 +1173,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1011,8 +1189,12 @@
 
           
 
+          
+
           The bounding <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1023,8 +1205,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -1032,6 +1218,8 @@
         >
         <param name="rowNum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1069,13 +1257,19 @@
 
             
 
+            
+
              with the given <see
              cref="T:System.Drawing.Graphics" />
 
             
 
+            
+
             , <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1087,8 +1281,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1099,8 +1297,12 @@
 
           
 
+          
+
           The bounding <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1111,8 +1313,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -1123,10 +1329,14 @@
 
           
 
+          
+
           The number of the row in the underlying data table being referred to. </param
         >
         <param name="alignToRight">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1169,8 +1379,12 @@
 
             
 
+            
+
              with the given <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1179,13 +1393,19 @@
 
             
 
+            
+
             , row number, <see
              cref="T:System.Drawing.Brush" />
 
             
 
+            
+
             , and <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -1197,8 +1417,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1209,8 +1433,12 @@
 
           
 
+          
+
           The bounding <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1221,8 +1449,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -1233,6 +1465,8 @@
 
           
 
+          
+
           The number of the row in the underlying data table being referred to. </param
         >
         <param name="backBrush">
@@ -1240,8 +1474,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Brush" />
+
+          
 
           
 
@@ -1252,8 +1490,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1261,6 +1503,8 @@
         >
         <param name="alignToRight">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1297,8 +1541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -1309,6 +1557,8 @@
 
           
 
+          
+
           The row number. </param
         >
         <param name="value">
@@ -1316,8 +1566,12 @@
 
           
 
+          
+
           The value to set, typed as <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1349,13 +1603,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.NullValue" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.TrueValue" />
+
+            
 
             
 
@@ -1391,6 +1651,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1399,6 +1661,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGridBoolColumn.TrueValue" />
+
+            
 
             
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -63,6 +65,8 @@
           <para
             >Specifies that all EMF+ records in the metafile are associated with an alternate EMF record. Metafiles of type <see
              cref="F:System.Drawing.Imaging.EmfType.EmfPlusDual" />
+
+            
 
             
 

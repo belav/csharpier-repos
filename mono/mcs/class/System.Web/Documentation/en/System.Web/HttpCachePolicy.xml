@@ -23,6 +23,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -54,6 +56,8 @@
 
             
 
+            
+
              method provides a mechanism to check the response programmatically in the cache before the response is returned to the client by the output cache.</para
           >
           <para>Before the response is served from the Web server cache, all registered handlers are queried to ensure resource validity. If any handler sets a flag indicating that the cached response is not valid, the entry is marked as not valid and expelled from the cache. In this case, as well as when any handler indicates that the cached response should be ignored for this request, the request is then handled as if it were a cache miss.</para>
@@ -62,10 +66,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -82,8 +90,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpCacheValidateHandler" />
+
+          
 
           
 
@@ -94,8 +106,12 @@
 
           
 
+          
+
           The arbitrary user-supplied data that is passed back to the <see
            cref="M:System.Web.HttpCachePolicy.AddValidationCallback(System.Web.HttpCacheValidateHandler,System.Object)" />
+
+          
 
           
 
@@ -127,6 +143,8 @@
 
             
 
+            
+
             . </para
           >
           <para>
@@ -134,10 +152,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -150,6 +172,8 @@
         </summary>
         <param name="extension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,8 +206,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Web.HttpCacheability.NoCache" />
+
+            
 
             
 
@@ -192,13 +220,19 @@
 
             
 
+            
+
              the Expires HTTP header is by default set to -1; this tells the client not to cache responses in the History folder, so that when you use the back/forward buttons the client requests a new version of the response each time. You can override this behavior by calling the <see
              cref="M:System.Web.HttpCachePolicy.SetAllowResponseInBrowserHistory(System.Boolean)" />
 
             
 
+            
+
              method with the <paramref
              name="allow" />
+
+            
 
             
 
@@ -210,8 +244,12 @@
 
             
 
+            
+
              is set to values other than <see
              cref="F:System.Web.HttpCacheability.NoCache" />
+
+            
 
             
 
@@ -220,13 +258,19 @@
 
             
 
+            
+
             , calling the <see
              cref="M:System.Web.HttpCachePolicy.SetAllowResponseInBrowserHistory(System.Boolean)" />
 
             
 
+            
+
              method with either value for <paramref
              name="allow" />
+
+            
 
             
 
@@ -237,10 +281,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -255,8 +303,12 @@
 
             
 
+            
+
              setting made on the server, when the <paramref
              name="allow" />
+
+            
 
             
 
@@ -265,6 +317,8 @@
         </summary>
         <param name="allow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -296,10 +350,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -314,6 +372,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -322,8 +382,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpCacheability" />
+
+          
 
           
 
@@ -359,6 +423,8 @@
 
             
 
+            
+
             . </para
           >
           <para>This method will throw an invalid argument exception if incompatible directives and extensions are combined.</para>
@@ -367,10 +433,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -385,6 +455,8 @@
 
             
 
+            
+
              and appends an extension to the directive.</para
           >
         </summary>
@@ -393,8 +465,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpCacheability" />
+
+          
 
           
 
@@ -402,6 +478,8 @@
         >
         <param name="field">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -431,10 +509,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -447,6 +529,8 @@
         </summary>
         <param name="etag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,6 +558,8 @@
 
             
 
+            
+
              method sets the ETag header by retrieving the last modified time stamps of all files on which the handler is dependent, combining all file names and time stamps into a single string, then hashing that string into a single digest that is used as the ETag.</para
           >
           <para>
@@ -481,10 +567,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -524,8 +614,12 @@
 
           
 
+          
+
           The absolute <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -556,10 +650,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -574,6 +672,8 @@
 
             
 
+            
+
              value supplied.</para
           >
         </summary>
@@ -582,8 +682,12 @@
 
           
 
+          
+
           The new <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -610,10 +714,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -653,10 +761,14 @@
 
             
 
+            
+
              method does not use sliding expiration and will fail if the expiration date violates the principle of restrictiveness.</para
           >
           <para>
             <see cref="M:System.Web.HttpCachePolicy.SetMaxAge(System.TimeSpan)" />
+
+            
 
             
 
@@ -667,12 +779,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >If the <see
                cref="M:System.Web.HttpCachePolicy.SetMaxAge(System.TimeSpan)" />
+
+              
 
               
 
@@ -706,10 +822,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -763,8 +883,12 @@
 
             
 
+            
+
              is called, the Cache-Control: no-transform HTTP header cannot be disabled through the <see
              cref="T:System.Web.HttpCachePolicy" />
+
+            
 
             
 
@@ -775,10 +899,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -820,13 +948,19 @@
 
             
 
+            
+
              property. Passing true to the method directs the <see
              cref="T:System.Web.HttpCachePolicy" />
 
             
 
+            
+
              to ignore the * value for the <see
              cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+
+            
 
             
 
@@ -837,10 +971,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -856,13 +994,19 @@
 
           
 
+          
+
           true to direct the <see
            cref="T:System.Web.HttpCachePolicy" />
 
           
 
+          
+
            to not use the * value for its <see
            cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+
+          
 
           
 
@@ -888,6 +1032,8 @@
 
             
 
+            
+
              method does not use sliding expiration and will fail if the expiration date violates the principle of restrictiveness.</para
           >
           <para>
@@ -895,10 +1041,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -911,6 +1061,8 @@
         </summary>
         <param name="delta">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -943,6 +1095,8 @@
 
             
 
+            
+
             , is to send neither directive in a header unless explicitly specified by this method.</para
           >
           <para>
@@ -950,10 +1104,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -969,8 +1127,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpCacheRevalidation" />
+
+          
 
           
 
@@ -1001,10 +1163,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1017,6 +1183,8 @@
         </summary>
         <param name="slide">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1049,11 +1217,15 @@
 
             
 
+            
+
              method is set to true automatically when the high-level &lt;%@ OutputCache … %&gt; page directive is used.</para
           >
           <para
             >This method is provided because some browsers, when refreshing a page view, send HTTP cache invalidation headers to the Web server and evict the page from the cache. When the <paramref
              name="validUntilExpires" />
+
+            
 
             
 
@@ -1064,10 +1236,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1080,6 +1256,8 @@
         </summary>
         <param name="validUntilExpires">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1108,10 +1286,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1124,6 +1306,8 @@
         </summary>
         <param name="custom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1157,11 +1341,15 @@
 
             
 
+            
+
              property returns a list of Content-Encoding headers that represent compression schemes to vary the output cache by. Caching dynamically compressed responses means that the cost of compression is incurred only one time, during the first request for the resource.</para
           >
           <para
             >The <see
              cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+
+            
 
             
 
@@ -1176,6 +1364,8 @@
 
                 
 
+                
+
                  list and a cached response exists, the cached response is sent.</para
               >
             </item>
@@ -1183,6 +1373,8 @@
               <para
                 >If a matching encoding is found in the <see
                  cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+
+                
 
                 
 
@@ -1196,6 +1388,8 @@
 
                 
 
+                
+
                  list, the cache is searched for a non-encoded response, also referred to as the identity response. If the non-encoded response is found, it is sent. Otherwise, a new non-encoded response is generated, sent, and stored in the cache.</para
               >
             </item>
@@ -1206,10 +1400,14 @@
 
             
 
+            
+
              property, see "RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1," which is available on the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -1221,10 +1419,14 @@
 
             
 
+            
+
              property by using the VaryByContentEncodings attribute of the <format
              type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
+
+            
 
             
 
@@ -1235,6 +1437,8 @@
 
             
 
+            
+
              element in the Web.config file.</para
           >
           <para>
@@ -1242,10 +1446,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1277,10 +1485,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1316,6 +1528,8 @@
 
             
 
+            
+
              collection.</para
           >
           <para>
@@ -1323,10 +1537,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 

@@ -3,7 +3,7 @@
   <paragraph
     >The predefined integer comparison operators are: <code_example
     >
-      <![CDATA[
+<![CDATA[
 bool operator ==(int x, int y);  
 bool operator ==(uint x, uint y);  
 bool operator ==(long x, long y);  
@@ -34,6 +34,8 @@ bool operator >=(ulong x, ulong y);
   <paragraph
     >Each of these operators compares the numeric values of the two integer operands and returns a <keyword
     >bool</keyword>
+
+    
 
     
 

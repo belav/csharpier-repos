@@ -23,6 +23,8 @@
 
         
 
+        
+
          class represents the type on which the XML Web service is based.</para
       >
     </summary>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -60,8 +64,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -72,8 +80,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Configuration.WebServiceProtocols" />
+
+          
 
           
 
@@ -107,6 +119,8 @@
 
             
 
+            
+
              associated with the specified key.</para
           >
         </summary>
@@ -118,6 +132,8 @@
 
             
 
+            
+
              associated with the specified key.</para
           >
         </returns>
@@ -126,8 +142,12 @@
 
           
 
+          
+
           The key associated with the desired duplicate <see
            cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+
+          
 
           
 
@@ -161,6 +181,8 @@
 
             
 
+            
+
              associated with the specified key.</para
           >
         </summary>
@@ -172,6 +194,8 @@
 
             
 
+            
+
              associated with the specified key.</para
           >
         </returns>
@@ -180,8 +204,12 @@
 
           
 
+          
+
           The key associated with the desired <see
            cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+
+          
 
           
 
@@ -207,6 +235,8 @@
           <para
             >Returns a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -236,6 +266,8 @@
 
             
 
+            
+
              that contains the namespace to which this XML Web service belongs.</para
           >
         </summary>
@@ -259,6 +291,8 @@
           <para
             >Returns a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

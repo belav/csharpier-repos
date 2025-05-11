@@ -22,8 +22,12 @@
 
         
 
+        
+
          class contains a set of <see
          cref="T:System.ServiceModel.FaultReasonText" />
+
+        
 
         
 
@@ -65,6 +69,8 @@
 
             
 
+            
+
              class using the specified list of fault translations. </para
           >
         </summary>
@@ -73,8 +79,12 @@
 
           
 
+          
+
           A list of <see
            cref="T:System.ServiceModel.FaultReasonText" />
+
+          
 
           
 
@@ -108,6 +118,8 @@
 
             
 
+            
+
              class using the specified text element that describes the fault in a specific language. </para
           >
         </summary>
@@ -116,8 +128,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ServiceModel.FaultReasonText" />
+
+          
 
           
 
@@ -148,11 +164,15 @@
 
             
 
+            
+
              class using the specified fault description. </para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,6 +212,8 @@
 
                 
 
+                
+
                 , that is returned.</para
               >
             </item>
@@ -199,6 +221,8 @@
               <para
                 >If there is a translation for a parent language of <see
                  cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+                
 
                 
 
@@ -219,6 +243,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.FaultReasonText" />
+
+            
 
             
 
@@ -261,6 +287,8 @@
 
                 
 
+                
+
                 , that is returned.</para
               >
             </item>
@@ -268,6 +296,8 @@
               <para
                 >If there is a translation for a parent language of <see
                  cref="T:System.Globalization.CultureInfo" />
+
+                
 
                 
 
@@ -293,8 +323,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 

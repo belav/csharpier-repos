@@ -39,8 +39,12 @@
 
         
 
+        
+
          class can be used to represent the declaration for a member of a type. <see
          cref="T:System.CodeDom.CodeTypeMember" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.CodeDom.CodeMemberMethod" />
+
+        
 
         
 
@@ -84,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeMember" />
+
+            
 
             
 
@@ -122,8 +132,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.CodeDom.MemberAttributes.Final" />
+
+            
 
             
 
@@ -132,8 +146,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.CodeDom.MemberAttributes.Override" />
+
+            
 
             
 
@@ -142,8 +160,12 @@
 
             
 
+            
+
             . The <see
              cref="F:System.CodeDom.MemberAttributes.AccessMask" />
+
+            
 
             
 
@@ -152,8 +174,12 @@
 
             
 
+            
+
              mask identifies the scope attributes. The default value for the <see
              cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+
+            
 
             
 

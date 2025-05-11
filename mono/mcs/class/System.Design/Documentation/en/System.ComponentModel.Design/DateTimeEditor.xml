@@ -23,8 +23,12 @@
 
         
 
+        
+
          suitable for visually editing <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.DateTimeEditor" />
+
+            
 
             
 
@@ -85,6 +91,8 @@
 
           
 
+          
+
           A type descriptor context that can be used to provide additional context information. </param
         >
         <param name="provider">
@@ -92,10 +100,14 @@
 
           
 
+          
+
           A service provider object through which editing services may be obtained. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,6 +141,8 @@
 
             
 
+            
+
              method. If the method is not supported, this will return None.</para
           >
         </summary>
@@ -138,6 +152,8 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

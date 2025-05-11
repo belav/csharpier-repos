@@ -29,8 +29,12 @@
 
         
 
+        
+
          implementation is fast and non-blocking. These behaviors can be overridden by this enumeration by using the <see
          cref="M:System.Collections.Concurrent.Partitioner.Create``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Concurrent.EnumerablePartitionerOptions)" />
+
+        
 
         
 

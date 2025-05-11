@@ -32,6 +32,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -43,8 +45,12 @@
 
         
 
+        
+
         . It provides a way for an application to access the <see
          cref="M:System.Web.Security.PassportIdentity.Ticket(System.String)" />
+
+        
 
         
 
@@ -67,6 +73,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -75,6 +83,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Security.PassportIdentity" />
+
+            
 
             
 
@@ -100,6 +110,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -129,6 +141,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -167,6 +181,8 @@
 
             
 
+            
+
             .</para
           >
           <para />
@@ -181,6 +197,8 @@
         </returns>
         <param name="strReturnUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,6 +238,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -236,10 +256,14 @@
 
           
 
+          
+
           Sets the URL of the location that the Login server should redirect to after logon is complete. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,8 +274,12 @@
 
           
 
+          
+
           Determines how the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -262,10 +290,14 @@
 
           
 
+          
+
           Specifies variables to be appended to the URL of the Cobranding Template script page that was specified at initial participant registration. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,6 +308,8 @@
 
           
 
+          
+
           Specifies the domain in which the Passport should be created. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iKPP">
@@ -283,10 +317,14 @@
 
           
 
+          
+
           Specifies data collection policies for purposes of Children's Online Privacy Protection Act (COPPA) compliance. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="bUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,6 +364,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -342,10 +382,14 @@
 
           
 
+          
+
           Sets the URL of the location that the Login server should redirect to after logon is complete. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,8 +400,12 @@
 
           
 
+          
+
           Determines how the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -368,10 +416,14 @@
 
           
 
+          
+
           Specifies variables to be appended to the URL of the Cobranding Template script page that was specified at initial participant registration. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -382,6 +434,8 @@
 
           
 
+          
+
           Specifies the domain in which the Passport should be created. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iKPP">
@@ -389,10 +443,14 @@
 
           
 
+          
+
           Specifies data collection policies for purposes of Children's Online Privacy Protection Act (COPPA) compliance. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="iUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,6 +475,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -455,6 +515,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -468,6 +530,8 @@
         </returns>
         <param name="strReturnUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -507,6 +571,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -523,10 +589,14 @@
 
           
 
+          
+
           Sets the URL of the location that the Login server should redirect to after logon is complete. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,8 +607,12 @@
 
           
 
+          
+
           Determines how the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -549,10 +623,14 @@
 
           
 
+          
+
           Specifies variables to be appended to the URL of the Cobranding Template script page that was specified at initial participant registration. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -563,6 +641,8 @@
 
           
 
+          
+
           Specifies the domain in which the Passport should be created. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iKPP">
@@ -570,10 +650,14 @@
 
           
 
+          
+
           Specifies data collection policies for purposes of Children's Online Privacy Protection Act (COPPA) compliance. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="bUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -613,6 +697,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -629,10 +715,14 @@
 
           
 
+          
+
           Sets the URL of the location that the Login server should redirect to after logon is complete. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -643,8 +733,12 @@
 
           
 
+          
+
           Determines how the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -655,10 +749,14 @@
 
           
 
+          
+
           Specifies variables to be appended to the URL of the Cobranding Template script page that was specified at initial participant registration. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -669,6 +767,8 @@
 
           
 
+          
+
           Specifies the domain in which the Passport should be created. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iKPP">
@@ -676,10 +776,14 @@
 
           
 
+          
+
           Specifies data collection policies for purposes of Children's Online Privacy Protection Act (COPPA) compliance. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="iUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -709,6 +813,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -722,6 +828,8 @@
         </returns>
         <param name="strData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -746,6 +854,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -784,6 +894,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -797,6 +909,8 @@
         </returns>
         <param name="strHost">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -826,6 +940,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -839,6 +955,8 @@
         </returns>
         <param name="strSite">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -868,6 +986,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -876,6 +996,8 @@
           <para
             >Decompresses data that has been compressed by the <see
              cref="M:System.Web.Security.PassportIdentity.Compress(System.String)" />
+
+            
 
             
 
@@ -888,6 +1010,8 @@
         </returns>
         <param name="strData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -917,6 +1041,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -930,6 +1056,8 @@
         </returns>
         <param name="strData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -959,6 +1087,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -972,6 +1102,8 @@
         </returns>
         <param name="strData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -996,6 +1128,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -1049,6 +1183,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1062,6 +1198,8 @@
         </returns>
         <param name="strAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1096,6 +1234,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1112,6 +1252,8 @@
 
           
 
+          
+
           The name of the attribute value to retrieve. </param
         >
         <param name="iLCID">
@@ -1119,10 +1261,14 @@
 
           
 
+          
+
           The language in which various Passport network pages should be displayed to the member. </param
         >
         <param name="strDomain">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1155,6 +1301,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1168,6 +1316,8 @@
         </returns>
         <param name="strMemberName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1192,6 +1342,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -1231,6 +1383,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1247,10 +1401,14 @@
 
           
 
+          
+
           Specifies the interval during which members must have last logged on to the calling domain. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="bForceLogin">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1259,10 +1417,14 @@
 
           
 
+          
+
            parameter is used. </param
         >
         <param name="bCheckSecure">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1297,6 +1459,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1313,10 +1477,14 @@
 
           
 
+          
+
           Specifies the interval during which members must have last logged on to the calling domain. A value of -1 indicates that Passport should use the default value, 0 represents false, and 1 represents true. </param
         >
         <param name="iForceLogin">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1325,10 +1493,14 @@
 
           
 
+          
+
            parameter is used. A value of -1 indicates that Passport should use the default value, 0 represents false, and 1 represents true. </param
         >
         <param name="iCheckSecure">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1353,6 +1525,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -1394,6 +1568,8 @@
 
             
 
+            
+
             .</para
           >
           <para />
@@ -1408,6 +1584,8 @@
         </returns>
         <param name="strReturnUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1448,6 +1626,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1464,10 +1644,14 @@
 
           
 
+          
+
           See Passport documentation for IPassportManager3.GetLoginChallenge. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1478,10 +1662,14 @@
 
           
 
+          
+
           See Passport documentation for IPassportManager3.GetLoginChallenge. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="szCOBrandArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1492,10 +1680,14 @@
 
           
 
+          
+
           See Passport documentation for IPassportManager3.GetLoginChallenge. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="strNameSpace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1506,6 +1698,8 @@
 
           
 
+          
+
           See Passport documentation for IPassportManager3.GetLoginChallenge. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="iUseSecureAuth">
@@ -1513,10 +1707,14 @@
 
           
 
+          
+
           See Passport documentation for IPassportManager3.GetLoginChallenge. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="oExtraParams">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1546,6 +1744,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1561,11 +1761,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="strOpt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1598,6 +1802,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1613,11 +1819,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="strProfileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1647,6 +1857,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1662,11 +1874,15 @@
 
             
 
+            
+
              is set in this user's profile; otherwise, false.</para
           >
         </returns>
         <param name="iFlagMask">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1696,6 +1912,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1711,11 +1929,15 @@
 
             
 
+            
+
              exists in this user's profile; otherwise, false.</para
           >
         </returns>
         <param name="strProfile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1740,6 +1962,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -1769,6 +1993,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -1807,6 +2033,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1823,10 +2051,14 @@
 
           
 
+          
+
           true to indicate full consent is required for Passport Authentication; otherwise, false. </param
         >
         <param name="bNeedBirthdate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1851,6 +2083,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -1880,6 +2114,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -1932,6 +2168,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1967,6 +2205,8 @@
 
             
 
+            
+
             .</para
           >
           <para />
@@ -1981,6 +2221,8 @@
         </returns>
         <param name="strReturnUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2021,6 +2263,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2037,10 +2281,14 @@
 
           
 
+          
+
           The URL to which the Login server should redirect users after sign in is complete. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2051,13 +2299,19 @@
 
           
 
+          
+
           true to have the Login server compare the <paramref
            name="iTimeWindow" />
 
           
 
+          
+
            parameter against the time since the user last signed in; false to have the Login server compare <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -2068,10 +2322,14 @@
 
           
 
+          
+
           A string specifying variables to be appended as query string variables to the URL of the participant's Cobranding Template script page. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2082,10 +2340,14 @@
 
           
 
+          
+
           A domain name space to which you want to direct users without Passports to register. The specified name space must appear as a "domain name" entry in the Partner.xml Component Configuration Document (CCD). The typical default name space is "passport.com". Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iKPP">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2096,10 +2358,14 @@
 
           
 
+          
+
           SSL sign-in is not available as an option in the current version Login servers. Passport Manager methods include SSL sign-in parameters and they may be required for syntax, but they are currently ignored at the server. Check the Passport Web site for updates on the status of SSL sign-in. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="oExtraParams">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2140,6 +2406,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2156,10 +2424,14 @@
 
           
 
+          
+
           The URL to which the Login server should redirect users after sign in is complete. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2170,8 +2442,12 @@
 
           
 
+          
+
           Indicates whether the Login server should compare the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -2182,10 +2458,14 @@
 
           
 
+          
+
           A string specifying variables to be appended as query string variables to the URL of the participant's Cobranding Template script page. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2196,10 +2476,14 @@
 
           
 
+          
+
           A domain name space to which you want to direct users without Passports to register. The specified name space must appear as a "domain name" entry in the Partner.xml Component Configuration Document (CCD). The typical default name space is "passport.com". Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iKPP">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2210,10 +2494,14 @@
 
           
 
+          
+
           SSL sign-in is not available as an option in the current version Login servers. Passport Manager methods include SSL sign-in parameters and they may be required for syntax, but they are currently ignored at the server. Check the Passport Web site for updates on the status of SSL sign-in. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="oExtraParams">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2238,6 +2526,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -2276,6 +2566,8 @@
 
             
 
+            
+
             .</para
           >
           <para />
@@ -2290,6 +2582,8 @@
         </returns>
         <param name="strReturnUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2330,6 +2624,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2346,10 +2642,14 @@
 
           
 
+          
+
           Sets the URL of the location to which the Login server should redirect members after they log on. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2360,8 +2660,12 @@
 
           
 
+          
+
           Determines how the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -2372,10 +2676,14 @@
 
           
 
+          
+
           Specifies variables to be appended as query string variables to the URL of the participant's Cobranding Template script page. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2386,10 +2694,14 @@
 
           
 
+          
+
           Declares whether this method is being called from an HTTPS (SSL) page. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="strNameSpace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2400,10 +2712,14 @@
 
           
 
+          
+
           Specifies data collection policies for purposes of Children's Online Privacy Protection Act (COPPA) compliance. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="bUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2444,6 +2760,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2460,10 +2778,14 @@
 
           
 
+          
+
           Sets the URL of the location to which the Login server should redirect members after they log on. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2474,8 +2796,12 @@
 
           
 
+          
+
           Determines how the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -2486,10 +2812,14 @@
 
           
 
+          
+
           Specifies variables to be appended as query string variables to the URL of the participant's Cobranding Template script page. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2500,10 +2830,14 @@
 
           
 
+          
+
           Declares whether this method is being called from an HTTPS (SSL) page. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="strNameSpace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2514,10 +2848,14 @@
 
           
 
+          
+
           Specifies data collection policies for purposes of Children's Online Privacy Protection Act (COPPA) compliance. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="iUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2542,6 +2880,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -2580,6 +2920,8 @@
 
             
 
+            
+
             .</para
           >
           <para />
@@ -2594,6 +2936,8 @@
         </returns>
         <param name="strReturnUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2634,6 +2978,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2650,10 +2996,14 @@
 
           
 
+          
+
           Sets the URL of the location to which the Login server should redirect members after they log on. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2664,8 +3014,12 @@
 
           
 
+          
+
           Determines how the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -2676,10 +3030,14 @@
 
           
 
+          
+
           Specifies variables to be appended as query string variables to the URL of the participant's Cobranding Template script page. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2690,10 +3048,14 @@
 
           
 
+          
+
           Declares whether this method is being called from an HTTPS (SSL) page. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="strNameSpace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2704,10 +3066,14 @@
 
           
 
+          
+
           Specifies data collection policies for purposes of Children's Online Privacy Protection Act (COPPA) compliance. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="bUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2748,6 +3114,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2764,10 +3132,14 @@
 
           
 
+          
+
           Sets the URL of the location to which the Login server should redirect members after they log on. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iTimeWindow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2778,8 +3150,12 @@
 
           
 
+          
+
           Determines how the <paramref
            name="iTimeWindow" />
+
+          
 
           
 
@@ -2790,10 +3166,14 @@
 
           
 
+          
+
           Specifies variables to be appended as query string variables to the URL of the participant's Cobranding Template script page. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iLangID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2804,10 +3184,14 @@
 
           
 
+          
+
           Declares whether this method is being called from an HTTPS (SSL) page. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="strNameSpace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2818,10 +3202,14 @@
 
           
 
+          
+
           Specifies data collection policies for purposes of Children's Online Privacy Protection Act (COPPA) compliance. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="iUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2846,6 +3234,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -2891,6 +3281,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2907,10 +3299,14 @@
 
           
 
+          
+
           See IPassportManager3.LogoutUrl for more details. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="szCOBrandArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2921,6 +3317,8 @@
 
           
 
+          
+
           See IPassportManager3.LogoutUrl for more details. Pass -1 to indicate that Passport should use the default value. </param
         >
         <param name="strDomain">
@@ -2928,10 +3326,14 @@
 
           
 
+          
+
           See IPassportManager3.LogoutUrl for more details. Pass null to indicate that Passport should use the default value. </param
         >
         <param name="iUseSecureAuth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2956,6 +3358,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -2991,6 +3395,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3003,10 +3409,14 @@
 
           
 
+          
+
           The option to set. </param
         >
         <param name="vOpt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3039,6 +3449,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3048,6 +3460,8 @@
         </summary>
         <param name="strSignOutDotGifFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3078,6 +3492,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3086,6 +3502,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Web.Security.PassportIdentity" />
+
+            
 
             
 
@@ -3112,6 +3530,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3125,6 +3545,8 @@
         </returns>
         <param name="strAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3149,6 +3571,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -3178,6 +3602,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 

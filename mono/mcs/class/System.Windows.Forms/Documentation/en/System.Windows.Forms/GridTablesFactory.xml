@@ -20,6 +20,8 @@
 
         
 
+        
+
          method.</para
       >
     </summary>
@@ -50,6 +52,8 @@
 
             
 
+            
+
              in a one-element array.</para
           >
         </summary>
@@ -61,6 +65,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -69,8 +75,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+          
 
           
 
@@ -81,8 +91,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -93,8 +107,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -105,8 +123,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BindingContext" />
+
+          
 
           
 

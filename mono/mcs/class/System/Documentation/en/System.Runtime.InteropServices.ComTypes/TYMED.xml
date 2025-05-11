@@ -30,6 +30,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -63,6 +65,8 @@
 
             
 
+            
+
              member is null, the destination process should use DeleteEnhMetaFile to delete the bitmap.</para
           >
         </summary>
@@ -88,6 +92,8 @@
           <para
             >The storage medium is a disk file identified by a path. If the STGMEDIUM <see
              cref="F:System.Runtime.InteropServices.ComTypes.STGMEDIUM.pUnkForRelease" />
+
+            
 
             
 
@@ -120,6 +126,8 @@
 
             
 
+            
+
              member is null, the destination process should use DeleteObject to delete the bitmap.</para
           >
         </summary>
@@ -146,6 +154,8 @@
             >The storage medium is a global memory handle (HGLOBAL). Allocate the global handle with the GMEM_SHARE flag. If the <see
              cref="T:System.Runtime.InteropServices.ComTypes.STGMEDIUM" />
             <see cref="F:System.Runtime.InteropServices.ComTypes.STGMEDIUM.pUnkForRelease" />
+
+            
 
             
 
@@ -178,6 +188,8 @@
 
             
 
+            
+
              member is not null, the destination process should use IStorage::Release to release the storage component.</para
           >
         </summary>
@@ -207,6 +219,8 @@
 
             
 
+            
+
              member is not null, the destination process should use IStream::Release to release the stream component.</para
           >
         </summary>
@@ -233,6 +247,8 @@
             >The storage medium is a metafile (HMETAFILE). Use the Windows or WIN32 functions to access the metafile's data. If the <see
              cref="T:System.Runtime.InteropServices.ComTypes.STGMEDIUM" />
             <see cref="F:System.Runtime.InteropServices.ComTypes.STGMEDIUM.pUnkForRelease" />
+
+            
 
             
 

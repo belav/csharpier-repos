@@ -24,8 +24,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.ComponentModel.IEditableObject.EndEdit" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          semantics of a <see
          cref="T:System.Data.DataRowView" />
+
+        
 
         
 
@@ -73,8 +81,12 @@
 
             
 
+            
+
              semantics of a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -83,6 +95,8 @@
           <para
             >If <see
              cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
+
+            
 
             
 
@@ -120,8 +134,12 @@
 
             
 
+            
+
              semantics of a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -135,13 +153,19 @@
 
               
 
+              
+
               , calling <see
                cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
 
               
 
+              
+
                on an object created using <see
                cref="M:System.ComponentModel.IBindingList.AddNew" />
+
+              
 
               
 
@@ -154,6 +178,8 @@
           <para
             >Discards changes since the last <see
              cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
+
+            
 
             
 
@@ -187,8 +213,12 @@
 
             
 
+            
+
              semantics of a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -204,8 +234,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.ComponentModel.IBindingList.AddNew" />
+
+            
 
             
 

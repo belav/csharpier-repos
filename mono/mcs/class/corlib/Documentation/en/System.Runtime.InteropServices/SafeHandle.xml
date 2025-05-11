@@ -31,8 +31,12 @@
 
         
 
+        
+
          class provides critical finalization of handle resources, preventing handles from being reclaimed prematurely by garbage collection and from being recycled by Windows to reference unintended unmanaged objects. Before the .NET Framework version 2.0, all operating system handles could only be encapsulated in the <see
          cref="T:System.IntPtr" />
+
+        
 
         
 
@@ -44,13 +48,19 @@
 
         
 
+        
+
          class contains a finalizer that ensures that the handle is closed and is guaranteed to run, even during unexpected <see
          cref="T:System.AppDomain" />
 
         
 
+        
+
          unloads when a host may not trust the consistency of the state of the <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -62,10 +72,14 @@
 
         
 
+        
+
         , see <format
          type="text/html">
           <a href="3c515c3e-6f52-4a6a-883d-82cacad23478">Safe Handles and Critical Finalization</a>
         </format>
+
+        
 
         
 
@@ -77,8 +91,12 @@
 
         
 
+        
+
         , you must create a derived class. To create <see
          cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+        
 
         
 
@@ -87,8 +105,12 @@
 
         
 
+        
+
          for each operating system handle type; such as MySafeRegistryHandle, MySafeFileHandle, and MySpecialSafeFileHandle. Some of these derived classes are prewritten and provided for you in the <see
          cref="N:Microsoft.Win32.SafeHandles" />
+
+        
 
         
 
@@ -101,13 +123,19 @@
 
           
 
+          
+
            is an advanced programming feature. A set of prewritten classes derived from <see
            cref="T:System.Runtime.InteropServices.SafeHandle" />
 
           
 
+          
+
            is provided as abstract derivations, and this set is located in the <see
            cref="N:Microsoft.Win32.SafeHandles" />
+
+          
 
           
 
@@ -153,8 +181,12 @@
 
             
 
+            
+
              parameter is false, <see
              cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+
+            
 
             
 
@@ -169,6 +201,8 @@
 
             
 
+            
+
              class with the specified invalid handle value.</para
           >
         </summary>
@@ -177,8 +211,12 @@
 
           
 
+          
+
           The value of an invalid handle (usually 0 or -1).  Your implementation of <see
            cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+
+          
 
           
 
@@ -189,8 +227,12 @@
 
           
 
+          
+
           true to reliably let <see
            cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+          
 
           
 
@@ -227,8 +269,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+
+            
 
             
 
@@ -237,8 +283,12 @@
 
             
 
+            
+
              class do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, the class can provide a finalizer that is guaranteed to run before the <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -250,13 +300,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
 
             
 
+            
+
              method when you are finished using the <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -269,8 +325,12 @@
 
               
 
+              
+
                or <see
                cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+
+              
 
               
 
@@ -279,13 +339,19 @@
 
               
 
+              
+
                object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Runtime.InteropServices.SafeHandle" />
 
               
 
+              
+
                object's <see
                cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" />
+
+              
 
               
 
@@ -356,6 +422,8 @@
 
             
 
+            
+
              derived class. This method is needed for backwards compatibility because many properties in the .NET Framework return IntPtr handle types. IntPtr handle types are platform-specific types used to represent a pointer or a handle.</para
           >
           <block subset="none" type="note">
@@ -365,8 +433,12 @@
 
               
 
+              
+
                method can pose security risks because, if the handle has been marked as invalid with <see
                cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
+
+              
 
               
 
@@ -375,8 +447,12 @@
 
               
 
+              
+
                still returns the original, potentially stale handle value. The returned handle can also be recycled at any point. At best, this means the handle might suddenly stop working. At worst, if the handle or the resource that the handle represents is exposed to untrusted code, this can lead to a recycling security attack on the reused or returned handle. For example, an untrusted caller can query data on the handle just returned and receive information for an entirely unrelated resource. See the <see
                cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
+
+              
 
               
 
@@ -385,8 +461,12 @@
 
               
 
+              
+
                methods for more information about using the <see
                cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
+
+              
 
               
 
@@ -402,6 +482,8 @@
 
             
 
+            
+
              field.</para
           >
         </summary>
@@ -413,8 +495,12 @@
 
             
 
+            
+
              field. If the handle has been marked invalid with <see
              cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
+
+            
 
             
 
@@ -452,8 +538,12 @@
 
             
 
+            
+
              method is the counterpart to <see
              cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
+
+            
 
             
 
@@ -462,8 +552,12 @@
 
             
 
+            
+
              method with a successful call to <see
              cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
+
+            
 
             
 
@@ -476,8 +570,12 @@
 
               
 
+              
+
                calls can cause resource leaks, unmatched <see
                cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
+
+              
 
               
 
@@ -486,8 +584,12 @@
 
               
 
+              
+
                or <see
                cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
+
+              
 
               
 
@@ -500,6 +602,8 @@
           <para
             >Manually decrements the reference counter on a <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -537,8 +641,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+
+            
 
             
 
@@ -547,8 +655,12 @@
 
             
 
+            
+
              do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, they can provide a finalizer that is guaranteed to run before the <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -560,8 +672,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+
+            
 
             
 
@@ -570,13 +686,19 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -589,8 +711,12 @@
 
               
 
+              
+
                or <see
                cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+
+              
 
               
 
@@ -599,13 +725,19 @@
 
               
 
+              
+
                object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Runtime.InteropServices.SafeHandle" />
 
               
 
+              
+
                object's <see
                cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" />
+
+              
 
               
 
@@ -618,6 +750,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -657,8 +791,12 @@
 
             
 
+            
+
              method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -673,11 +811,15 @@
 
             
 
+            
+
              class specifying whether to perform a normal dispose operation.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -710,8 +852,12 @@
 
             
 
+            
+
              method is the destructor for the <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -772,8 +918,12 @@
 
             
 
+            
+
              method returns a value indicating whether the <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -782,8 +932,12 @@
 
             
 
+            
+
              property, which computes whether a given handle is always considered invalid. The <see
              cref="P:System.Runtime.InteropServices.SafeHandle.IsClosed" />
+
+            
 
             
 
@@ -797,6 +951,8 @@
 
                 
 
+                
+
                  method was called.</para
               >
             </item>
@@ -807,13 +963,19 @@
 
                 
 
+                
+
                  method or <see
                  cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
                 
 
+                
+
                  method was called and there are no references to the <see
                  cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+                
 
                 
 
@@ -854,6 +1016,8 @@
 
             
 
+            
+
              property so that the common language runtime can determine whether critical finalization is required. Derived classes must provide an implementation that suits the general type of handle they support (0 or -1 is invalid). These classes can then be further derived for specific safe handle types.</para
           >
           <para
@@ -862,8 +1026,12 @@
 
             
 
+            
+
              property, which reports whether the <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -872,8 +1040,12 @@
 
             
 
+            
+
              property calculates whether the given handle value is always considered invalid. Therefore, the <see
              cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+
+            
 
             
 
@@ -915,8 +1087,12 @@
 
             
 
+            
+
              method is guaranteed to be called only once and only if the handle is valid as defined by the <see
              cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+
+            
 
             
 
@@ -925,8 +1101,12 @@
 
             
 
+            
+
              derived classes to execute any code that is required to free the handle. Because one of the functions of <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -935,8 +1115,12 @@
 
             
 
+            
+
              must never fail. The garbage collector calls <see
              cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+
+            
 
             
 
@@ -945,13 +1129,19 @@
 
             
 
+            
+
              method. In particular, apply the <see
              cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
 
             
 
+            
+
              attribute to any methods you call from <see
              cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+
+            
 
             
 
@@ -965,10 +1155,14 @@
 
             
 
+            
+
              returns false for any reason, it generates a <format
              type="text/html">
               <a href="44cd98ba-95e5-40a1-874d-e8e163612c51">ReleaseHandleFailed</a>
             </format>
+
+            
 
             
 
@@ -986,6 +1180,8 @@
              type="text/html">
               <a href="44cd98ba-95e5-40a1-874d-e8e163612c51">ReleaseHandleFailed</a>
             </format>
+
+            
 
             
 
@@ -1025,6 +1221,8 @@
 
             
 
+            
+
              method only if you need to support a pre-existing handle (for example, if the handle is returned in a structure) because the .NET Framework COM interop infrastructure does not support marshaling output handles in a structure.</para
           >
         </remarks>
@@ -1034,6 +1232,8 @@
         </summary>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1070,8 +1270,12 @@
 
             
 
+            
+
              method only when you know that your handle no longer references a resource. Doing so does not change the value of the <see
              cref="F:System.Runtime.InteropServices.SafeHandle.handle" />
+
+            
 
             
 
@@ -1083,8 +1287,12 @@
 
             
 
+            
+
              method, use <see
              cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
+
+            
 
             
 

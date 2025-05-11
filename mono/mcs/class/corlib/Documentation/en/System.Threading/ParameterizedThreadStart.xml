@@ -35,8 +35,12 @@
 
         
 
+        
+
          delegate or a <see
          cref="T:System.Threading.ParameterizedThreadStart" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          constructor. The thread does not begin executing until the <see
          cref="Overload:System.Threading.Thread.Start" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Threading.ParameterizedThreadStart" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          delegate, the object that is passed to the <see
          cref="M:System.Threading.Thread.Start(System.Object)" />
+
+        
 
         
 
@@ -79,13 +95,19 @@
 
           
 
+          
+
            or <see
            cref="T:System.Threading.ParameterizedThreadStart" />
 
           
 
+          
+
            delegate constructor when creating a thread. In Visual Basic, use the AddressOf operator when passing your method to the <see
            cref="Overload:System.Threading.Thread.#ctor" />
+
+          
 
           
 
@@ -99,6 +121,8 @@
 
           
 
+          
+
            delegate for an instance method in C++, the first parameter of the constructor is the instance variable. For a static method, the first parameter of the constructor is zero. For a static method, the delegate constructor requires only one parameter: the address of the callback method, qualified by the class name.</para
         >
       </block>
@@ -108,8 +132,12 @@
 
         
 
+        
+
          delegate and the <see
          cref="M:System.Threading.Thread.Start(System.Object)" />
+
+        
 
         
 
@@ -118,10 +146,14 @@
 
         
 
+        
+
         . A more robust way to pass data to a thread procedure is to put both the thread procedure and the data fields into a worker object. For more information, see <format
          type="text/html">
           <a href="52b32222-e185-4f42-91a7-eaca65c0ab6d">Creating Threads</a>
         </format>
+
+        
 
         
 
@@ -133,6 +165,8 @@
       <para
         >Represents the method that executes on a <see
          cref="T:System.Threading.Thread" />
+
+        
 
         
 

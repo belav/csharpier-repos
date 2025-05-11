@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Windows.Forms.ListViewHitTestInfo" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
           <para
             >A position above the client portion of a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -89,6 +99,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -113,8 +125,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -142,8 +158,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -168,6 +188,8 @@
           <para
             >A position to the left of the client portion of a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -215,6 +237,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -236,6 +260,8 @@
           <para
             >A position within the bounds of an image associated with a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 

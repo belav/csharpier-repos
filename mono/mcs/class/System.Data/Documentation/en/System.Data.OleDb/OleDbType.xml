@@ -21,8 +21,12 @@
 
         
 
+        
+
          data types, OLE DB data types (shown in parentheses), and the .NET Framework types. The <see
          cref="T:System.Data.OleDb.OleDbType" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
       <para
         >Specifies the data type of a field, a property, for use in an <see
          cref="T:System.Data.OleDb.OleDbParameter" />
+
+        
 
         
 
@@ -56,6 +62,8 @@
           <para
             >A 64-bit signed integer (DBTYPE_I8). This maps to <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -85,8 +93,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -116,6 +128,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -139,6 +153,8 @@
           <para
             >A null-terminated character string of Unicode characters (DBTYPE_BSTR). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -168,6 +184,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -194,13 +212,19 @@
 
             
 
+            
+
              (or -922,337,203,685,477.5808) to 2 <superscript
             >63</superscript>
 
             
 
+            
+
              -1 (or +922,337,203,685,477.5807) with an accuracy to a ten-thousandth of a currency unit (DBTYPE_CY). This maps to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -230,6 +254,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -253,6 +279,8 @@
           <para
             >Date data in the format yyyymmdd (DBTYPE_DBDATE). This maps to <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -282,6 +310,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -305,6 +335,8 @@
           <para
             >Data and time data in the format yyyymmddhhmmss (DBTYPE_DBTIMESTAMP). This maps to <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -334,13 +366,19 @@
 
             
 
+            
+
              -1 and 10 <superscript
             >38</superscript>
 
             
 
+            
+
              -1 (DBTYPE_DECIMAL). This maps to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -367,6 +405,8 @@
           <para
             >A floating-point number within the range of -1.79E +308 through 1.79E +308 (DBTYPE_R8). This maps to <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -415,6 +455,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -441,6 +483,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -464,6 +508,8 @@
           <para
             >A globally unique identifier (or GUID) (DBTYPE_GUID). This maps to <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -496,6 +542,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -519,6 +567,8 @@
           <para
             >A 32-bit signed integer (DBTYPE_I4). This maps to <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -551,6 +601,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -577,13 +629,19 @@
 
             
 
+            
+
              only). This maps to an <see
              cref="T:System.Array" />
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -613,8 +671,12 @@
 
             
 
+            
+
              only). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -644,8 +706,12 @@
 
             
 
+            
+
              only). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -675,6 +741,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -698,6 +766,8 @@
           <para
             >An automation PROPVARIANT (DBTYPE_PROP_VARIANT). This maps to <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -727,6 +797,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -750,6 +822,8 @@
           <para
             >A 16-bit signed integer (DBTYPE_I2). This maps to <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -779,6 +853,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -802,6 +878,8 @@
           <para
             >A 64-bit unsigned integer (DBTYPE_UI8). This maps to <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -831,6 +909,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -854,6 +934,8 @@
           <para
             >A 16-bit unsigned integer (DBTYPE_UI2). This maps to <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -883,6 +965,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -909,13 +993,19 @@
 
             
 
+            
+
              only). This maps to an <see
              cref="T:System.Array" />
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -945,8 +1035,12 @@
 
             
 
+            
+
              only). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -976,6 +1070,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1002,8 +1098,12 @@
 
             
 
+            
+
              only). This maps to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -1033,8 +1133,12 @@
 
             
 
+            
+
              only). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1061,6 +1165,8 @@
           <para
             >A null-terminated stream of Unicode characters (DBTYPE_WSTR). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 

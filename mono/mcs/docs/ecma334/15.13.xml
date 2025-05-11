@@ -9,19 +9,27 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>using</keyword>
         <terminal>(</terminal>
-        <non_terminal where="15.13">resource-acquisition</non_terminal>
+        <non_terminal where="15.13"
+>resource-acquisition</non_terminal
+        >
         <terminal>)</terminal>
         <non_terminal where="15">embedded-statement</non_terminal>
       </rhs>
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="15.13">resource-acquisition</non_terminal>
+        <non_terminal where="15.13"
+>resource-acquisition</non_terminal
+        >
       </name>
+
+      
 
       
 
@@ -37,7 +45,11 @@
   <paragraph>A resource is a class or struct that implements System.IDisposable, which includes a single parameterless method named Dispose. Code that is using a resource can call Dispose to indicate that the resource is no longer needed. If Dispose is not called, then automatic disposal eventually occurs as a consequence of garbage collection. </paragraph>
   <paragraph
     >If the form of <non_terminal
-     where="15.13">resource-acquisition</non_terminal>
+     where="15.13"
+>resource-acquisition</non_terminal
+    >
+
+    
 
     
 
@@ -46,13 +58,21 @@
 
     
 
+    
+
      then the type of the  <non_terminal
      where="15.5.1">local-variable-declaration</non_terminal>
 
     
 
+    
+
      must be System.IDisposable or a type that can be implicitly converted to System.IDisposable. If the form of <non_terminal
-     where="15.13">resource-acquisition</non_terminal>
+     where="15.13"
+>resource-acquisition</non_terminal
+    >
+
+    
 
     
 
@@ -60,7 +80,11 @@
   >
   <paragraph
     >Local variables declared in a <non_terminal
-     where="15.13">resource-acquisition</non_terminal>
+     where="15.13"
+>resource-acquisition</non_terminal
+    >
+
+    
 
     
 
@@ -70,7 +94,7 @@
   <paragraph
     >A using statement of the form <code_example
     >
-      <![CDATA[
+<![CDATA[
 using (R r1 = new R()) {  
    r1.F();  
 }  
@@ -79,9 +103,11 @@ using (R r1 = new R()) {
 
     
 
+    
+
     is precisely equivalent to <code_example
     >
-      <![CDATA[
+<![CDATA[
 R r1 = new R();  
 try {  
    r1.F();  
@@ -94,13 +120,17 @@ finally {
   </paragraph>
   <paragraph
     >A <non_terminal
-     where="15.13">resource-acquisition</non_terminal>
+     where="15.13"
+>resource-acquisition</non_terminal
+    >
+
+    
 
     
 
      may acquire multiple resources of a given type. This is equivalent to nested using statements. A using statement of the form <code_example
     >
-      <![CDATA[
+<![CDATA[
 using (R r1 = new R(), r2 = new R()) {  
    r1.F();  
    r2.F();  
@@ -110,9 +140,11 @@ using (R r1 = new R(), r2 = new R()) {
 
     
 
+    
+
     is precisely equivalent to: <code_example
     >
-      <![CDATA[
+<![CDATA[
 using (R r1 = new R())  
 using (R r2 = new R()) {  
    r1.F();  
@@ -123,9 +155,11 @@ using (R r2 = new R()) {
 
     
 
+    
+
     which is, by expansion, precisely equivalent to: <code_example
     >
-      <![CDATA[
+<![CDATA[
 R r1 = new R();  
 try {  
    R r2 = new R();  

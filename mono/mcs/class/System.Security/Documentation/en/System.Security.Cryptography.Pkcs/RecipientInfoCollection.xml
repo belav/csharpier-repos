@@ -34,6 +34,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -45,8 +47,12 @@
 
         
 
+        
+
          class represents a collection of <see
          cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -94,8 +104,12 @@
 
             
 
+            
+
              method copies the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -107,13 +121,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
 
           
 
+          
+
            object to which  the <see
            cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+          
 
           
 
@@ -124,13 +144,19 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
 
           
 
+          
+
            where the <see
            cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+          
 
           
 
@@ -170,13 +196,19 @@
 
             
 
+            
+
              method copies the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
 
             
 
+            
+
              collection to a <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+            
 
             
 
@@ -188,13 +220,19 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
 
           
 
+          
+
            objects where the <see
            cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+          
 
           
 
@@ -205,13 +243,19 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
 
           
 
+          
+
            where the <see
            cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+          
 
           
 
@@ -242,8 +286,12 @@
 
             
 
+            
+
              property retrieves the number of items in the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -281,13 +329,19 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoEnumerator" />
 
             
 
+            
+
              object for the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -302,8 +356,12 @@
 
             
 
+            
+
              object that can be used to enumerate the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -332,6 +390,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.RecipientInfoCollection.IsSynchronized" />
+
+            
 
             
 
@@ -391,13 +451,19 @@
 
             
 
+            
+
              property retrieves an <see
              cref="T:System.Object" />
 
             
 
+            
+
              object used to synchronize access to the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -434,13 +500,19 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoEnumerator" />
 
             
 
+            
+
              object for the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -455,8 +527,12 @@
 
             
 
+            
+
              object that can be used to enumerate the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 

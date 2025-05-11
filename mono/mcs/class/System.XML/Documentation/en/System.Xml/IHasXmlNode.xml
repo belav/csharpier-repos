@@ -20,8 +20,12 @@
 
         
 
+        
+
          from the current context or position. It is implemented by <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -30,13 +34,19 @@
 
         
 
+        
+
          nodes. For example, if the XPathNavigator object is created by an <see
          cref="T:System.Xml.XmlDocument" />
 
         
 
+        
+
         , you can use the <see
          cref="M:System.Xml.IHasXmlNode.GetNode" />
+
+        
 
         
 
@@ -48,6 +58,8 @@
       <para
         >Enables a class to return an <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
 
             
 
+            
+
              is currently positioned on.</para
           >
           <code> XmlDocument doc = new XmlDocument();
@@ -95,6 +109,8 @@
           <para
             >Returns the <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 

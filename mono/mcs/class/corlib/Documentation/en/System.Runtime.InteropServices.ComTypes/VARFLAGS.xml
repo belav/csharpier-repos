@@ -31,6 +31,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -127,6 +129,8 @@
           <para
             >The variable is displayed to the user as bindable. <see
              cref="F:System.Runtime.InteropServices.VARFLAGS.VARFLAG_FBINDABLE" />
+
+            
 
             
 

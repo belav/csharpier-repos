@@ -42,8 +42,12 @@
 
         
 
+        
+
          class is used to pass an object (in a wrapped state) between multiple application domains without loading the metadata for the wrapped object in each <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -52,13 +56,19 @@
 
         
 
+        
+
          travels. Thus, the <see
          cref="T:System.Runtime.Remoting.ObjectHandle" />
 
         
 
+        
+
          class gives the caller control of when the <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -97,8 +107,12 @@
 
             
 
+            
+
              class, wrapping the given object <paramref
              name="o" />
+
+            
 
             
 
@@ -110,8 +124,12 @@
 
           
 
+          
+
           The object that is wrapped by the new <see
            cref="T:System.Runtime.Remoting.ObjectHandle" />
+
+          
 
           
 
@@ -146,6 +164,8 @@
           <para
             >An initialized <see
              cref="T:System.Runtime.Remoting.Lifetime.ILease" />
+
+            
 
             
 

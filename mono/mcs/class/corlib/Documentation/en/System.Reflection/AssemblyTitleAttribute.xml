@@ -39,8 +39,12 @@
 
         
 
+        
+
          tab of the <ui
         >Windows File Properties</ui>
+
+        
 
         
 
@@ -49,13 +53,19 @@
 
         
 
+        
+
         . In Windows XP, this information appears on the <ui
         >Version</ui>
 
         
 
+        
+
          tab of the <ui
         >Windows File Properties</ui>
+
+        
 
         
 
@@ -93,13 +103,19 @@
 
             
 
+            
+
              parameter appears on the <ui
             >Details</ui>
 
             
 
+            
+
              tab of the <ui
             >Windows File Properties</ui>
+
+            
 
             
 
@@ -108,13 +124,19 @@
 
             
 
+            
+
             . In Windows XP, this string appears on the <ui
             >Version</ui>
 
             
 
+            
+
              tab of the <ui
             >Windows File Properties</ui>
+
+            
 
             
 
@@ -129,11 +151,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="title">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -163,13 +189,19 @@
 
             
 
+            
+
              property appears on the <ui
             >Details</ui>
 
             
 
+            
+
              tab of the <ui
             >Windows File Properties</ui>
+
+            
 
             
 
@@ -178,13 +210,19 @@
 
             
 
+            
+
             . In Windows XP, this property appears on the <ui
             >Version</ui>
 
             
 
+            
+
              tab of the <ui
             >Windows File Properties</ui>
+
+            
 
             
 

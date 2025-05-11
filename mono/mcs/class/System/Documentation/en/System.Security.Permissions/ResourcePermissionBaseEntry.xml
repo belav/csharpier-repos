@@ -52,6 +52,8 @@
 
             
 
+            
+
              property is set to zero.</para
           >
         </remarks>
@@ -60,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+
+            
 
             
 
@@ -98,6 +102,8 @@
 
             
 
+            
+
              class with the specified permission access and permission access path.</para
           >
         </summary>
@@ -106,8 +112,12 @@
 
           
 
+          
+
           The integer representation of the permission access level enumeration value. The <see
            cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" />
+
+          
 
           
 
@@ -118,8 +128,12 @@
 
           
 
+          
+
           The array of strings that identify the resource you are protecting. The <see
            cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" />
+
+          
 
           
 
@@ -169,8 +183,12 @@
 
             
 
+            
+
              has two properties, <see
              cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" />
+
+            
 
             
 
@@ -179,8 +197,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" />
+
+            
 
             
 
@@ -189,13 +211,19 @@
 
             
 
+            
+
              returns <see
              cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" />
 
             
 
+            
+
              + "\\" + <see
              cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" />
+
+            
 
             
 

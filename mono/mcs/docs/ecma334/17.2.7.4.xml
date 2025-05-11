@@ -6,9 +6,11 @@
 
     
 
+    
+
     ), the following signature is reserved: <code_example
     >
-      <![CDATA[
+<![CDATA[
 void Finalize();  
 ]]>
     </code_example>

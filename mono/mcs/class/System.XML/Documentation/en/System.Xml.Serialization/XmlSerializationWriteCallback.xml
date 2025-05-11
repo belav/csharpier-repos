@@ -39,8 +39,12 @@
 
         
 
+        
+
          class. During this process, the .NET Framework generates write methods that implement the <see
          cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
       <para
         >You should not directly instantiate <see
          cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+        
 
         
 
@@ -61,6 +67,8 @@
       <para
         >Delegate that is used by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 

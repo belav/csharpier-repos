@@ -34,8 +34,12 @@
 
         
 
+        
+
          attribute to indicate what operation-specific execution behavior the operation has when executed. (To specify execution behavior at the service level, use the <see
          cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
           
 
+          
+
            to configure a callback contract operation in a duplex client application. When used on a callback operation, the <see
            cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+
+          
 
           
 
@@ -58,8 +66,12 @@
 
           
 
+          
+
            or an <see
            cref="T:System.InvalidOperationException" />
+
+          
 
           
 
@@ -69,6 +81,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+        
 
         
 
@@ -82,6 +96,8 @@
 
             
 
+            
+
              property controls whether parameter objects passed to an operation are disposed when the operation completes.</para
           >
         </item>
@@ -89,6 +105,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
+
+            
 
             
 
@@ -102,6 +120,8 @@
 
             
 
+            
+
              property specifies whether a method must execute within a transaction.</para
           >
         </item>
@@ -112,6 +132,8 @@
 
             
 
+            
+
              property specifies whether the service operation can, must, or cannot impersonate the caller's identity.</para
           >
         </item>
@@ -119,6 +141,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+
+            
 
             
 
@@ -156,6 +180,8 @@
 
                 
 
+                
+
                  property is true.</para
               >
             </item>
@@ -163,6 +189,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+
+                
 
                 
 
@@ -176,8 +204,12 @@
 
                 
 
+                
+
                  property is <see
                  cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+
+                
 
                 
 
@@ -191,8 +223,12 @@
 
                 
 
+                
+
                  is <see
                  cref="F:System.ServiceModel.ImpersonationOption.NotAllowed" />
+
+                
 
                 
 
@@ -206,6 +242,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+            
 
             
 
@@ -232,6 +270,8 @@
           <para
             >For example, if <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
+
+            
 
             
 
@@ -270,8 +310,12 @@
 
             
 
+            
+
              property (together with a binding configuration that supports impersonation) to enable specified methods (those marked with the <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
+
+            
 
             
 
@@ -280,8 +324,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.ServiceModel.ImpersonationOption.Required" />
+
+            
 
             
 
@@ -290,8 +338,12 @@
 
             
 
+            
+
              together with the <see
              cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.ImpersonateCallerForAllOperations" />
+
+            
 
             
 
@@ -304,12 +356,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="431db851-a75b-4009-9fe2-247243d810d3"
                 >How To: Impersonate a Client on a Service</a
               >
             </format>
+
+            
 
             
 
@@ -322,13 +378,19 @@
 
               
 
+              
+
                methods or the <see
                cref="M:System.ServiceModel.Description.ContractDescription.GetContract(System.Type,System.Type)" />
 
               
 
+              
+
                method to properly load the contract into a new <see
                cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+              
 
               
 
@@ -340,6 +402,8 @@
              type="text/html">
               <a href="72027d0f-146d-40c5-9d72-e94392c8bb40">Unsupported Scenarios</a>
             </format>
+
+            
 
             
 
@@ -378,13 +442,19 @@
 
             
 
+            
+
              property to specify when indigo1 recycles a service object in the course of executing a method. The default behavior is to recycle a service object according to the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
+            
+
              value. Setting the <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+
+            
 
             
 
@@ -396,13 +466,19 @@
 
             
 
+            
+
              makes no threading guarantees. If you must have a new, unmodified object when your service runs, set the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
+            
+
              property to <see
              cref="F:System.ServiceModel.InstanceContextMode.PerCall" />
+
+            
 
             
 
@@ -414,8 +490,12 @@
 
             
 
+            
+
              property is often used to ensure that old data associated with the service object is cleaned up prior to processing a method call. You can also ensure that service objects associated with transactions are recycled after the transaction successfully completes by setting the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+
+            
 
             
 
@@ -442,8 +522,12 @@
 
             
 
+            
+
              to configure a callback contract operation in a duplex client application. When used on a callback operation, the <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+
+            
 
             
 
@@ -452,8 +536,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -465,8 +553,12 @@
 
             
 
+            
+
              constructor, the value of this property is treated as if it were <see
              cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+
+            
 
             
 
@@ -512,6 +604,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -520,8 +614,12 @@
 
           
 
+          
+
           The operation description modified to support <see
            cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+          
 
           
 
@@ -529,6 +627,8 @@
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -567,8 +667,12 @@
 
           
 
+          
+
           The operation description modified to support <see
            cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+          
 
           
 
@@ -576,6 +680,8 @@
         >
         <param name="proxy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,8 +720,12 @@
 
           
 
+          
+
           The operation description modified to support <see
            cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+          
 
           
 
@@ -623,6 +733,8 @@
         >
         <param name="dispatch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -660,6 +772,8 @@
 
           
 
+          
+
           The operation description to validate.</param
         >
       </Docs>
@@ -681,6 +795,8 @@
           <para
             >Set the <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
+
+            
 
             
 
@@ -714,8 +830,12 @@
 
             
 
+            
+
              to true to require your operation to execute within a transaction scope. If a flowed transaction is available, the operation executes within that transaction. If one is not available, a new transaction is created and used for the operation execution. The binding specified in the endpoint controls whether flowed transactions are supported. Therefore, to obtain the proper behavior you must understand the interaction between whether transaction flow is permitted by the binding and the <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+
+            
 
             
 

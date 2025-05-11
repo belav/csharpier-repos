@@ -35,8 +35,12 @@
 
         
 
+        
+
          delegate to specify the callback method to invoke when an instance of the <see
          cref="T:System.AppDomain" />
+
+        
 
         
 

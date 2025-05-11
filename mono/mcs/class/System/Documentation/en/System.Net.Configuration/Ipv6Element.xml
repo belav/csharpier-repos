@@ -29,6 +29,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para>This class is used to specify whether the IPv6 protocol is supported on the local computer. IPv6 is disabled by default. </para>
@@ -62,8 +64,12 @@
 
             
 
+            
+
              property to the <see
              cref="P:System.Configuration.ConfigurationElement.Properties" />
+
+            
 
             
 
@@ -75,6 +81,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.Ipv6Element" />
+
+            
 
             
 
@@ -134,6 +142,8 @@
           <para
             >The collection contains one element, which corresponds to the <see
              cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
+
+            
 
             
 

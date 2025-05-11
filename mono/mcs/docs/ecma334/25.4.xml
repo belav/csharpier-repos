@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) is extended to include the following implicit pointer conversions: <list
     >
       <list_item
@@ -14,11 +16,15 @@
 
         
 
+        
+
          to the type void*. </list_item
       >
       <list_item
         > From the null type to any <non_terminal
          where="25.2">pointer-type</non_terminal>
+
+        
 
         
 
@@ -32,6 +38,8 @@
 
     
 
+    
+
     ) is extended to include the following explicit pointer conversions: <list
     >
       <list_item
@@ -40,8 +48,12 @@
 
         
 
+        
+
          to any other <non_terminal
          where="25.2">pointer-type</non_terminal>
+
+        
 
         
 
@@ -53,8 +65,12 @@
 
         
 
+        
+
         , <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -63,8 +79,12 @@
 
         
 
+        
+
         , <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -73,8 +93,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -83,13 +107,19 @@
 
         
 
+        
+
         , or <keyword
         >ulong</keyword>
 
         
 
+        
+
          to any <non_terminal
          where="25.2">pointer-type</non_terminal>
+
+        
 
         
 
@@ -101,8 +131,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -111,8 +145,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -121,8 +159,12 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
+
+        
 
         
 
@@ -131,13 +173,19 @@
 
         
 
+        
+
         , <keyword
         >long</keyword>
 
         
 
+        
+
         , or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -151,11 +199,15 @@
 
     
 
+    
+
     ) includes the following pointer conversion: <list
     >
       <list_item
         > From any <non_terminal
          where="25.2">pointer-type</non_terminal>
+
+        
 
         
 
@@ -169,7 +221,7 @@
     <example
       >[Example: Consider the following case in which a variable having one type is accessed via a pointer to a different type: <code_example
       >
-        <![CDATA[
+<![CDATA[
 char c = 'A';  
 char* pc = &c;  
 void* pv = pc;  
@@ -178,6 +230,8 @@ int i = *pi;    // undefined
 *pi = 123456;    // undefined  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -190,8 +244,12 @@ int i = *pi;    // undefined
 
     
 
+    
+
     , the result points to the lowest addressed <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -202,9 +260,11 @@ int i = *pi;    // undefined
 
       
 
+      
+
        as a hexadecimal value: <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 class Test  
 {  
@@ -234,8 +294,12 @@ class Test
 
       
 
+      
+
        or <keyword
       >ulong</keyword>
+
+      
 
       
 

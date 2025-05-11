@@ -33,8 +33,12 @@
 
         
 
+        
+
          to be displayed, you must add it to a <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
         . To create submenus, you can add <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          property of the parent <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          class provides properties that enable you to configure the appearance and functionality of a menu item. To display a check mark next to a menu item, use the <see
          cref="P:System.Windows.Forms.MenuItem.Checked" />
+
+        
 
         
 
@@ -76,13 +92,19 @@
 
         
 
+        
+
          control, you can use the <see
          cref="P:System.Windows.Forms.MenuItem.Checked" />
 
         
 
+        
+
          property to identify which color is currently selected. The <see
          cref="P:System.Windows.Forms.MenuItem.Shortcut" />
+
+        
 
         
 
@@ -94,8 +116,12 @@
 
         
 
+        
+
          objects displayed in a Multiple Document Interface (MDI) application, you can use the <see
          cref="M:System.Windows.Forms.MenuItem.MergeMenu" />
+
+        
 
         
 
@@ -104,8 +130,12 @@
 
         
 
+        
+
          cannot be reused in multiple locations at the same time, such as in a <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -114,13 +144,19 @@
 
         
 
+        
+
         , you can use the <see
          cref="M:System.Windows.Forms.MenuItem.CloneMenu" />
 
         
 
+        
+
          method to create a copy of a <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -132,8 +168,12 @@
 
         
 
+        
+
          event enables you to perform tasks before a menu is displayed. For example, you can create an event handler for this event to display or hide menu items based on the state of your code. The <see
          cref="E:System.Windows.Forms.MenuItem.Select" />
+
+        
 
         
 
@@ -148,8 +188,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.ContextMenu" />
+
+        
 
         
 
@@ -158,13 +202,19 @@
 
         
 
+        
+
          replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.MenuItem" />
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -186,13 +236,19 @@
 
             
 
+            
+
              using this constructor, you can use the properties and methods of the <see
              cref="T:System.Windows.Forms.MenuItem" />
 
             
 
+            
+
              class to specify the appearance and behavior of your <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -204,6 +260,8 @@
           <para
             >Initializes a <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -231,11 +289,15 @@
 
             
 
+            
+
              parameter, you can also specify an access key by placing an '&amp;' character before the character to be used as the access key. For example, to specify the "F" in "File" as an access key, you would specify the caption for the menu item as "&amp;File". You can use this feature to provide keyboard navigation for your menus.</para
           >
           <para
             >Setting the <paramref
              name="text" />
+
+            
 
             
 
@@ -250,11 +312,15 @@
 
             
 
+            
+
              class with a specified caption for the menu item.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,11 +348,15 @@
 
             
 
+            
+
              parameter, you can also specify an access key by placing an '&amp;' before the character to be used as the access key. For example, to specify the "F" in "File" as an access key, you would specify the caption for the menu item as "&amp;File". You can use this feature to provide keyboard navigation for your menus.</para
           >
           <para
             >Setting the <paramref
              name="text" />
+
+            
 
             
 
@@ -298,8 +368,12 @@
 
             
 
+            
+
              event for the menu item being created. The <see
              cref="T:System.EventHandler" />
+
+            
 
             
 
@@ -308,10 +382,14 @@
 
             
 
+            
+
              event. For more information on handling events, see <format
              type="text/html">
               <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -326,11 +404,15 @@
 
             
 
+            
+
              event of the menu item.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,13 +423,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventHandler" />
 
           
 
+          
+
            that handles the <see
            cref="E:System.Windows.Forms.MenuItem.Click" />
+
+          
 
           
 
@@ -378,11 +466,15 @@
 
             
 
+            
+
              parameter, you can also specify an access key by placing an '&amp;' before the character to be used as the access key. For example, to specify the "F" in "File" as an access key, you would specify the caption for the menu item as "&amp;File". You can use this feature to provide keyboard navigation for your menus.</para
           >
           <para
             >Setting the <paramref
              name="text" />
+
+            
 
             
 
@@ -394,6 +486,8 @@
 
             
 
+            
+
              parameter enables you to assign an array of menu items to define a submenu of this menu item. Each item in the array can also have an array of menu items assigned to it. This enables you to create complete menu structures and assign them to the constructor for the menu item.</para
           >
           <para
@@ -401,6 +495,8 @@
              type="text/html">
               <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -416,6 +512,8 @@
 
           
 
+          
+
           The caption for the menu item. </param
         >
         <param name="items">
@@ -423,8 +521,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -456,11 +558,15 @@
 
             
 
+            
+
              parameter, you can also specify an access key by placing an '&amp;' before the character to be used as the access key. For example, to specify the "F" in "File" as an access key, you would specify the caption for the menu item as "&amp;File". You can use this feature to provide keyboard navigation for your menus. This constructor also enables you to specify a shortcut key in addition to an access key to provide keyboard navigation. Shortcut keys allow you to specify a combination of keys that can be used to activate the menu item.</para
           >
           <para
             >Setting the <paramref
              name="text" />
+
+            
 
             
 
@@ -472,8 +578,12 @@
 
             
 
+            
+
              event for the menu item being created. The <see
              cref="T:System.EventHandler" />
+
+            
 
             
 
@@ -482,10 +592,14 @@
 
             
 
+            
+
              event. For more information on handling events, see <format
              type="text/html">
               <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -501,10 +615,14 @@
 
           
 
+          
+
           The caption for the menu item. </param
         >
         <param name="onClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -513,8 +631,12 @@
 
           
 
+          
+
            that handles the <see
            cref="E:System.Windows.Forms.MenuItem.Click" />
+
+          
 
           
 
@@ -525,8 +647,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Shortcut" />
+
+          
 
           
 
@@ -563,11 +689,15 @@
 
             
 
+            
+
              parameter, you can also specify an access key by placing an '&amp;' before the character to be used as the access key. For example, to specify the "F" in "File" as an access key, you would specify the caption for the menu item as "&amp;File". You can use this feature to provide keyboard navigation for your menus.</para
           >
           <para
             >Setting the <paramref
              name="text" />
+
+            
 
             
 
@@ -579,6 +709,8 @@
 
             
 
+            
+
              parameter enables you to assign an array of menu items to define a submenu of this menu item. Each item in the array can also have an array of menu items assigned to it. This enables you to create complete menu structures and assign them to the constructor for the menu item.</para
           >
           <para
@@ -587,8 +719,12 @@
 
             
 
+            
+
              and <paramref
              name="mergeOrder" />
+
+            
 
             
 
@@ -597,8 +733,12 @@
 
             
 
+            
+
              parameter, you can either add, remove, replace, or merge the menu item and its submenu items with the menu that it is merging with. The <paramref
              name="mergeOrder" />
+
+            
 
             
 
@@ -610,8 +750,12 @@
 
             
 
+            
+
              and have it connected to an event handler in your code that will process the click of the menu item. The <see
              cref="T:System.EventHandler" />
+
+            
 
             
 
@@ -620,13 +764,19 @@
 
             
 
+            
+
              event. By using this constructor version, you can also connect the <see
              cref="E:System.Windows.Forms.MenuItem.Popup" />
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.MenuItem.Select" />
+
+            
 
             
 
@@ -635,8 +785,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.MenuItem.Click" />
+
+            
 
             
 
@@ -645,10 +799,14 @@
 
             
 
+            
+
              objects that are not parent menu items. For more information on handling events, see <format
              type="text/html">
               <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -663,8 +821,12 @@
 
             
 
+            
+
              class with a specified caption; defined event-handlers for the <see
              cref="E:System.Windows.Forms.MenuItem.Click" />
+
+            
 
             
 
@@ -673,8 +835,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.MenuItem.Popup" />
+
+            
 
             
 
@@ -686,8 +852,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MenuMerge" />
+
+          
 
           
 
@@ -698,6 +868,8 @@
 
           
 
+          
+
           The relative position that this menu item will take in a merged menu. </param
         >
         <param name="shortcut">
@@ -705,8 +877,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Shortcut" />
+
+          
 
           
 
@@ -717,10 +893,14 @@
 
           
 
+          
+
           The caption for the menu item. </param
         >
         <param name="onClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -729,8 +909,12 @@
 
           
 
+          
+
            that handles the <see
            cref="E:System.Windows.Forms.MenuItem.Click" />
+
+          
 
           
 
@@ -741,13 +925,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventHandler" />
 
           
 
+          
+
            that handles the <see
            cref="E:System.Windows.Forms.MenuItem.Popup" />
+
+          
 
           
 
@@ -758,13 +948,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventHandler" />
 
           
 
+          
+
            that handles the <see
            cref="E:System.Windows.Forms.MenuItem.Select" />
+
+          
 
           
 
@@ -775,8 +971,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -812,6 +1012,8 @@
 
             
 
+            
+
              property to create a menu where each menu item is placed next to each other horizontally instead of in a vertical list. You can also use this property to create a menu bar that contains multiple rows of top-level menu items.</para
           >
           <para
@@ -820,8 +1022,12 @@
 
             
 
+            
+
              property in that a bar is displayed on the left edge of each menu item that has the <see
              cref="P:System.Windows.Forms.MenuItem.Break" />
+
+            
 
             
 
@@ -836,13 +1042,19 @@
 
             
 
+            
+
              is placed on a new line (for a menu item added to a <see
              cref="T:System.Windows.Forms.MainMenu" />
 
             
 
+            
+
              object) or in a new column (for a submenu item or menu item displayed in a <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -879,6 +1091,8 @@
 
             
 
+            
+
              property to create a menu where each menu is placed next to each other horizontally instead of in a vertical list. You can also use this property to create a menu bar that contains multiple rows of top-level menu items.</para
           >
         </remarks>
@@ -890,8 +1104,12 @@
 
             
 
+            
+
              object) or in a new column (for a menu item or submenu item displayed in a <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -925,8 +1143,12 @@
 
             
 
+            
+
              property in combination with other menu items in a menu to provide state for an application. For example, you can place a check mark on a menu item in a group of items to identify the size of the font to be displayed for the text in an application. You can also use the <see
              cref="P:System.Windows.Forms.MenuItem.Checked" />
+
+            
 
             
 
@@ -961,8 +1183,12 @@
 
             
 
+            
+
              event occurs when this <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -971,10 +1197,14 @@
 
             
 
+            
+
             . For more information about handling events, see <format
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -987,8 +1217,12 @@
 
               
 
+              
+
                property for the <see
                cref="T:System.Windows.Forms.MenuItem" />
+
+              
 
               
 
@@ -1024,8 +1258,12 @@
 
             
 
+            
+
              objects cannot be used in more than one place unless you obtain a copy of the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1034,8 +1272,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -1044,13 +1286,19 @@
 
             
 
+            
+
              within your application. When a menu item is cloned, any event handlers specified in the original menu item will continue to function in the cloned version of the menu item. For example, if you created a <see
              cref="T:System.Windows.Forms.MenuItem" />
 
             
 
+            
+
              and connected its <see
              cref="E:System.Windows.Forms.MenuItem.Click" />
+
+            
 
             
 
@@ -1065,6 +1313,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1073,6 +1323,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1106,8 +1358,12 @@
 
             
 
+            
+
              allows you to specify a specific <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1116,8 +1372,12 @@
 
             
 
+            
+
              object with a copy of another <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1126,8 +1386,12 @@
 
             
 
+            
+
              and connected its <see
              cref="E:System.Windows.Forms.MenuItem.Click" />
+
+            
 
             
 
@@ -1142,6 +1406,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1153,6 +1419,8 @@
 
             
 
+            
+
              that represents the duplicated menu item.</para
           >
         </returns>
@@ -1161,8 +1429,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -1192,6 +1464,8 @@
           <para
             >The default menu item for a menu is boldfaced. When the user double-clicks a submenu that contains a default item, the default item is selected, and the submenu is closed. You can use the <see
              cref="P:System.Windows.Forms.MenuItem.DefaultItem" />
+
+            
 
             
 
@@ -1226,8 +1500,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1236,8 +1514,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1246,8 +1528,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1260,8 +1546,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.MenuItem" />
+
+              
 
               
 
@@ -1270,8 +1560,12 @@
 
               
 
+              
+
                is using will not be freed until garbage collection calls the <see
                cref="T:System.Windows.Forms.MenuItem" />
+
+              
 
               
 
@@ -1287,11 +1581,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1321,8 +1619,12 @@
 
             
 
+            
+
              argument passed to a <see
              cref="E:System.Windows.Forms.MenuItem.DrawItem" />
+
+            
 
             
 
@@ -1331,10 +1633,14 @@
 
             
 
+            
+
              object that enables you to perform drawing and other graphical operations on the surface of the menu item. You can use this event handler to create custom menus that meet the needs of your application. For more information about handling events, see <format
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1346,6 +1652,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.MenuItem.OwnerDraw" />
+
+            
 
             
 
@@ -1379,6 +1687,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1416,6 +1726,8 @@
 
             
 
+            
+
              to specify its position in a menu structure at the time of creation.</para
           >
         </remarks>
@@ -1447,6 +1759,8 @@
           <para
             >You can use this property with the <see
              cref="P:System.Windows.Forms.MenuItem.Parent" />
+
+            
 
             
 
@@ -1508,10 +1822,14 @@
 
             
 
+            
+
              property of the menu item set to true. This event is raised before owner drawn menus are drawn to allow for the size of the menu item to be drawn to be specified. For more information about handling events, see <format
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1566,8 +1884,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1576,8 +1898,12 @@
 
             
 
+            
+
              method is similar to calling the <see
              cref="M:System.Windows.Forms.MenuItem.CloneMenu" />
+
+            
 
             
 
@@ -1592,13 +1918,19 @@
 
             
 
+            
+
              with another <see
              cref="T:System.Windows.Forms.MenuItem" />
 
             
 
+            
+
              and returns the resulting merged <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1610,6 +1942,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1643,8 +1977,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.MenuItem.MergeOrder" />
+
+            
 
             
 
@@ -1653,8 +1991,12 @@
 
             
 
+            
+
              method enables you to merge two <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1663,8 +2005,12 @@
 
             
 
+            
+
              objects (and their submenu items) located in a <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -1673,8 +2019,12 @@
 
             
 
+            
+
             . For example, you can call this version of the <see
              cref="M:System.Windows.Forms.MenuItem.MergeMenu" />
+
+            
 
             
 
@@ -1683,8 +2033,12 @@
 
             
 
+            
+
              that can then be added to and displayed by a <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -1700,8 +2054,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -1731,6 +2089,8 @@
           <para
             >The merge order of a menu item specifies the relative position that this menu item will take if the menu structure that the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1798,8 +2158,12 @@
 
             
 
+            
+
             . This property will not return a mnemonic if two ampersand characters are placed together as the ampersands are used to display an ampersand in the text of the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1836,6 +2200,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1847,6 +2213,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1855,8 +2223,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1891,6 +2263,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1902,6 +2276,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1910,8 +2286,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DrawItemEventArgs" />
+
+          
 
           
 
@@ -1945,6 +2325,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1953,8 +2335,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1989,6 +2375,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2000,6 +2388,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2008,8 +2398,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MeasureItemEventArgs" />
+
+          
 
           
 
@@ -2041,6 +2435,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2052,6 +2448,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2060,8 +2458,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2093,6 +2495,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2104,6 +2508,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2112,8 +2518,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2143,6 +2553,8 @@
           <para
             >When the <see
              cref="P:System.Windows.Forms.MenuItem.OwnerDraw" />
+
+            
 
             
 
@@ -2180,13 +2592,19 @@
 
             
 
+            
+
              object for a submenu. You can cast the <see
              cref="T:System.Windows.Forms.Menu" />
 
             
 
+            
+
              object returned by this property to a <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -2219,8 +2637,12 @@
 
             
 
+            
+
              method for that <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -2235,8 +2657,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -2265,6 +2691,8 @@
 
             
 
+            
+
              event without passing any event information to the event handler.</para
           >
         </remarks>
@@ -2273,6 +2701,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.MenuItem.Select" />
+
+            
 
             
 
@@ -2299,6 +2729,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2340,6 +2772,8 @@
 
             
 
+            
+
             , if checked, displays a radio-button instead of a check mark.</para
           >
         </summary>
@@ -2366,6 +2800,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -2375,8 +2811,12 @@
 
               
 
+              
+
                property for the <see
                cref="T:System.Windows.Forms.MenuItem" />
+
+              
 
               
 
@@ -2502,6 +2942,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2513,8 +2955,12 @@
 
             
 
+            
+
             . The string includes the type and the <see
              cref="P:System.Windows.Forms.MenuItem.Text" />
+
+            
 
             
 

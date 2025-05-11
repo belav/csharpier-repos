@@ -45,6 +45,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -53,8 +55,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ScrollableControl" />
+
+          
 
           
 

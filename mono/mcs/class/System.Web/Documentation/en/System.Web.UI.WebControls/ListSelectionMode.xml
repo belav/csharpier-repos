@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the selection mode of the <see
          cref="T:System.Web.UI.WebControls.ListBox" />
+
+        
 
         
 
@@ -33,6 +37,8 @@
       <para
         >Specifies the selection mode of the <see
          cref="T:System.Web.UI.WebControls.ListBox" />
+
+        
 
         
 

@@ -35,6 +35,8 @@
 
         
 
+        
+
          event occurs when settings are retrieved from a provider. This event fires once for each provider.</para
       >
     </remarks>
@@ -43,6 +45,8 @@
       <para
         >Represents the method that will handle the <see
          cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
+
+        
 
         
 

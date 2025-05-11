@@ -35,8 +35,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.ServiceModel.Channels.PeerTransportBindingElement" />
+
+        
 
         
 
@@ -78,6 +94,8 @@
 
         
 
+        
+
          types are imported, the TransportBindingElementImporter type also imports the addressing information from the WSDL metadata.</para
       >
     </remarks>
@@ -86,6 +104,8 @@
       <para
         >Imports standard transport binding elements from <see
          cref="http://go.microsoft.com/fwlink/?LinkId=96160">Web Services Description Language</see>
+
+        
 
         
 
@@ -112,6 +132,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.TransportBindingElementImporter" />
+
+            
 
             
 

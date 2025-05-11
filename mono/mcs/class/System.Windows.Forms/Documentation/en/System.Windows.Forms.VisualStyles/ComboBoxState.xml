@@ -18,8 +18,12 @@
 
         
 
+        
+
          values correspond to the states of the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Windows.Forms.ComboBoxRenderer.DrawTextBox" />
+
+        
 
         
 

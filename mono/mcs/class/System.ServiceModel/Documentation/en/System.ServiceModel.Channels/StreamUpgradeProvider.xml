@@ -25,6 +25,8 @@
 
         
 
+        
+
         . You can implement multiple upgrades, each wrapping the preceding one.</para
       >
       <para>The upgrade process has the following steps:</para>
@@ -33,6 +35,8 @@
           <para
             >Implement a class that derives from <see
              cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+            
 
             
 
@@ -49,6 +53,8 @@
 
             
 
+            
+
             , which at run time initiates a request to the other end of its connection to upgrade the channel transport layer.</para
           >
         </item>
@@ -56,6 +62,8 @@
           <para
             >The derived class that you implement creates an instance of <see
              cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+
+            
 
             
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -129,6 +139,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+            
 
             
 
@@ -167,6 +179,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -175,6 +189,8 @@
           <para
             >Returns an instance of <see
              cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+
+            
 
             
 
@@ -214,8 +230,12 @@
 
             
 
+            
+
              for this upgrade provider that creates upgrade requests for the matching <see
              cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+
+            
 
             
 
@@ -230,6 +250,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -238,6 +260,8 @@
           <para
             >Returns an instance of <see
              cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+
+            
 
             
 

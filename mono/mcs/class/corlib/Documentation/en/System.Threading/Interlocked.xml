@@ -34,8 +34,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Threading.Interlocked.Decrement(System.Int32@)" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Threading.Interlocked.Decrement(System.Int32@)" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
         
 
+        
+
          method atomically exchanges the values of the specified variables. The <see
          cref="M:System.Threading.Interlocked.CompareExchange(System.Int32@,System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -226,8 +238,12 @@
 
           
 
+          
+
            reference whose value is updated with <paramref
            name="value" />
+
+          
 
           
 
@@ -236,8 +252,12 @@
 
           
 
+          
+
            is equal to <paramref
            name="comparand" />
+
+          
 
           
 
@@ -249,8 +269,12 @@
 
           
 
+          
+
            whose value will replace the value of <paramref
            name="location1" />
+
+          
 
           
 
@@ -259,8 +283,12 @@
 
           
 
+          
+
            and <paramref
            name="comparand " />
+
+          
 
           
 
@@ -269,6 +297,8 @@
         <param name="comparand"
           >A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -282,6 +312,8 @@
 
             
 
+            
+
              values for equality and stores a
    specified value if they are equal.</para
           >
@@ -290,6 +322,8 @@
           <para
             > The original value of <paramref
              name="location1" />
+
+            
 
             
 
@@ -412,13 +446,19 @@
 
           
 
+          
+
            reference that is set to <paramref
            name="value" />
 
           
 
+          
+
            if the object to which it refers is equal to <paramref
            name="comparand" />
+
+          
 
           
 
@@ -430,13 +470,19 @@
 
           
 
+          
+
            if <paramref
            name="location1" />
 
           
 
+          
+
            and <paramref
            name="comparand" />
+
+          
 
           
 
@@ -453,6 +499,8 @@
 
             
 
+            
+
              variables for equality and stores a specified object
    if they are equal.</para
           >
@@ -464,8 +512,12 @@
 
             
 
+            
+
              containing the original value of <paramref
              name="location1" />
+
+            
 
             
 
@@ -483,8 +535,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -527,13 +583,19 @@
 
           
 
+          
+
            whose value is updated with <paramref
            name="value" />
 
           
 
+          
+
            if its original value is equal to <paramref
            name="comparand" />
+
+          
 
           
 
@@ -545,8 +607,12 @@
 
           
 
+          
+
            value that will replace value of <paramref
            name="location1" />
+
+          
 
           
 
@@ -555,8 +621,12 @@
 
           
 
+          
+
            and <paramref
            name="comparand " />
+
+          
 
           
 
@@ -568,6 +638,8 @@
 
           
 
+          
+
            to be compared to <paramref
            name="location1." />
         </param>
@@ -575,6 +647,8 @@
           <para
             >Compares two <see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -589,8 +663,12 @@
 
             
 
+            
+
              containing the original value of <paramref
              name="location1" />
+
+            
 
             
 
@@ -608,8 +686,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -701,6 +783,8 @@
 
           
 
+          
+
            containing the variable whose value is to be decremented. </param
         >
         <summary>
@@ -711,6 +795,8 @@
           <para
             > A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -727,8 +813,12 @@
 
             
 
+            
+
              = <see
              cref="F:System.Int32.MinValue" />
+
+            
 
             
 
@@ -737,9 +827,13 @@
 
             
 
+            
+
              - 1 =
    <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -779,6 +873,8 @@
 
           
 
+          
+
            containing the variable whose value is to be decremented. </param
         >
         <summary>
@@ -793,6 +889,8 @@
             
 
             
+
+            
 containing the decremented value. </para
           >
         </returns>
@@ -803,9 +901,13 @@ containing the decremented value. </para
 
             
 
+            
+
              = 
 <see
              cref="F:System.Int64.MinValue" />
+
+            
 
             
 
@@ -815,8 +917,12 @@ containing the decremented value. </para
 
             
 
+            
+
              - 1 = <see
              cref="F:System.Int64.MaxValue" />
+
+            
 
             
 
@@ -829,14 +935,20 @@ containing the decremented value. </para
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Interlocked.Decrement(System.Int32@)" />
+
+            
 
             
 
              are truly atomic only on systems where
    a <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -916,6 +1028,8 @@ containing the decremented value. </para
 
           
 
+          
+
            variable to set to the supplied value as an atomic operation. </param
         >
         <param name="value"
@@ -924,8 +1038,12 @@ containing the decremented value. </para
 
           
 
+          
+
            value to which <paramref
            name="location1" />
+
+          
 
           
 
@@ -935,6 +1053,8 @@ containing the decremented value. </para
           <para
             > Sets a <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -950,8 +1070,12 @@ containing the decremented value. </para
 
             
 
+            
+
              containing the value of <paramref
              name="location1" />
+
+            
 
             
 
@@ -1067,12 +1191,16 @@ before the exchange.</para
 
           
 
+          
+
            is set. </param
         >
         <summary>
           <para
             > Sets a <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1088,6 +1216,8 @@ before the exchange.</para
 
             
 
+            
+
              .
    </para
           >
@@ -1099,8 +1229,12 @@ before the exchange.</para
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1142,6 +1276,8 @@ before the exchange.</para
 
           
 
+          
+
            variable to set to the supplied value as an atomic operation. </param
         >
         <param name="value"
@@ -1150,8 +1286,12 @@ before the exchange.</para
 
           
 
+          
+
            value to which <paramref
            name="location1" />
+
+          
 
           
 
@@ -1161,6 +1301,8 @@ before the exchange.</para
           <para
             > Sets a <see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -1176,8 +1318,12 @@ before the exchange.</para
 
             
 
+            
+
              containing the value of <paramref
              name="location1" />
+
+            
 
             
 
@@ -1270,6 +1416,8 @@ before the exchange.</para
 
           
 
+          
+
            containing the variable whose value is to be incremented.</param
         >
         <summary>
@@ -1280,6 +1428,8 @@ before the exchange.</para
           <para
             > A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1294,9 +1444,13 @@ before the exchange.</para
 
             
 
+            
+
              = 
 <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -1306,8 +1460,12 @@ before the exchange.</para
 
             
 
+            
+
              + 1 = <see
              cref="F:System.Int32.MinValue" />
+
+            
 
             
 
@@ -1351,6 +1509,8 @@ before the exchange.</para
 
           
 
+          
+
            containing the variable whose value is to be incremented. </param
         >
         <summary>
@@ -1365,6 +1525,8 @@ before the exchange.</para
             
 
             
+
+            
 containing the incremented value. </para
           >
         </returns>
@@ -1375,9 +1537,13 @@ containing the incremented value. </para
 
             
 
+            
+
              = 
 <see
              cref="F:System.Int64.MaxValue" />
+
+            
 
             
 
@@ -1387,8 +1553,12 @@ containing the incremented value. </para
 
             
 
+            
+
              + 1 = <see
              cref="F:System.Int64.MinValue" />
+
+            
 
             
 
@@ -1401,13 +1571,19 @@ containing the incremented value. </para
             
 
             
+
+            
 and <see
              cref="M:System.Threading.Interlocked.Decrement(System.Int32@)" />
 
             
 
+            
+
              are truly atomic only on systems where a <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -1442,8 +1618,12 @@ other, but not with respect to other means of accessing the data.</para
 
             
 
+            
+
              class in the net_v45 as a convenience; it's a wrapper for the <see
              cref="M:System.Threading.Thread.MemoryBarrier" />
+
+            
 
             
 
@@ -1454,11 +1634,15 @@ other, but not with respect to other means of accessing the data.</para
 
             
 
+            
+
              is required only on multiprocessor systems that have weak memory ordering (for example, a system that employs multiple Intel Itanium processors).</para
           >
           <para
             >For most purposes, the C# lock statement, the Visual Basic SyncLock statement, or the <see
              cref="T:System.Threading.Monitor" />
+
+            
 
             
 
@@ -1473,8 +1657,12 @@ other, but not with respect to other means of accessing the data.</para
 
             
 
+            
+
              execute after memory accesses that follow the call to <see
              cref="M:System.Threading.Interlocked.MemoryBarrier" />
+
+            
 
             
 

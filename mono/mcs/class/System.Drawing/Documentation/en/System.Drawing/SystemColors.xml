@@ -22,8 +22,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Drawing.SystemBrushes" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         . For example, if you wanted to get a brush for the face color of a 3-D element, use the <see
          cref="P:System.Drawing.SystemBrushes.Control" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          constructor with a parameter value of <see
          cref="P:System.Drawing.SystemColors.Control" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
          class is a <see
          cref="T:System.Drawing.Color" />
+
+        
 
         
 
@@ -85,6 +101,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -117,6 +135,8 @@
 
             
 
+            
+
              structure that is the color of the background of the active window's title bar.</para
           >
         </summary>
@@ -143,6 +163,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -178,6 +200,8 @@
 
             
 
+            
+
              structure that is the color of the application workspace. </para
           >
         </summary>
@@ -207,6 +231,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -241,6 +267,8 @@
 
             
 
+            
+
              structure that is the highlight color of a 3-D element. </para
           >
         </summary>
@@ -272,6 +300,8 @@
 
             
 
+            
+
              structure that is the shadow color of a 3-D element. </para
           >
         </summary>
@@ -291,6 +321,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -326,6 +358,8 @@
 
             
 
+            
+
              structure that is the shadow color of a 3-D element. </para
           >
         </summary>
@@ -355,6 +389,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -390,6 +426,8 @@
 
             
 
+            
+
              structure that is the light color of a 3-D element. </para
           >
         </summary>
@@ -422,6 +460,8 @@
 
             
 
+            
+
              structure that is the highlight color of a 3-D element. </para
           >
         </summary>
@@ -451,6 +491,8 @@
 
             
 
+            
+
              structure that is the color of text in a 3-D element.</para
           >
         </summary>
@@ -474,6 +516,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -509,6 +553,8 @@
 
             
 
+            
+
              structure that is the lightest color in the color gradient of an active window's title bar.</para
           >
         </summary>
@@ -537,6 +583,8 @@
 
             
 
+            
+
              structure that is the lightest color in the color gradient of an inactive window's title bar.</para
           >
         </summary>
@@ -559,6 +607,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -590,6 +640,8 @@
 
             
 
+            
+
              structure may be the color used for the background of selected items in a list box.</para
           >
         </remarks>
@@ -598,6 +650,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -633,6 +687,8 @@
 
             
 
+            
+
              structure that is the color of the text of selected items.</para
           >
         </summary>
@@ -659,6 +715,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -691,6 +749,8 @@
 
             
 
+            
+
              structure that is the color of an inactive window's border.</para
           >
         </summary>
@@ -717,6 +777,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -749,6 +811,8 @@
 
             
 
+            
+
              structure that is the color of the text in an inactive window's title bar.</para
           >
         </summary>
@@ -772,6 +836,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -801,6 +867,8 @@
 
             
 
+            
+
              structure that is the color of the text of a ToolTip.</para
           >
         </summary>
@@ -824,6 +892,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -856,6 +926,8 @@
 
             
 
+            
+
              structure that is the color of the background of a menu bar.</para
           >
         </summary>
@@ -884,6 +956,8 @@
 
             
 
+            
+
              structure that is the color used to highlight menu items when the menu appears as a flat menu.</para
           >
         </summary>
@@ -903,6 +977,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -935,6 +1011,8 @@
 
             
 
+            
+
              structure that is the color of the background of a scroll bar.</para
           >
         </summary>
@@ -958,6 +1036,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -990,6 +1070,8 @@
 
             
 
+            
+
              structure that is the color of a window frame.</para
           >
         </summary>
@@ -1016,6 +1098,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 

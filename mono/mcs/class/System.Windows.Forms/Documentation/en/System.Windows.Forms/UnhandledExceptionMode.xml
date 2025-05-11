@@ -18,6 +18,8 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
@@ -26,6 +28,8 @@
            type="text/html">
             <a href="11294769-2e89-43cb-890e-ad4ad79cfbee">Exceptions in Managed Threads</a>
           </format>
+
+          
 
           
 
@@ -56,6 +60,8 @@
 
             
 
+            
+
              handler, unless the application's configuration file specifies otherwise.</para
           >
         </summary>
@@ -80,6 +86,8 @@
 
             
 
+            
+
              handler. Ignore the application configuration file.</para
           >
         </summary>
@@ -101,6 +109,8 @@
           <para
             >Never route exceptions to the <see
              cref="E:System.Windows.Forms.Application.ThreadException" />
+
+            
 
             
 

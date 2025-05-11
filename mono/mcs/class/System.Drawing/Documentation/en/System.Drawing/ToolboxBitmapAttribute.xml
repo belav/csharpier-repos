@@ -31,13 +31,19 @@
 
         
 
+        
+
          to a control so that containers, such as Microsoft Visual Studio Form Designer, can retrieve an icon that represents the control. The bitmap for the icon can be in a file by itself or embedded in the assembly that contains the control. The size of the bitmap that you embed in the control's assembly (or store in a separate file) should be 16 by 16. The <see
          cref="M:System.Drawing.ToolboxBitmapAttribute.GetImage(System.Type,System.Boolean)" />
 
         
 
+        
+
          method of a <see
          cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+        
 
         
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          for each version. Instead, you can declare the assembly with a <see
          cref="T:System.Drawing.BitmapSuffixInSameAssemblyAttribute" />
+
+        
 
         
 
@@ -59,13 +69,19 @@
 
         
 
+        
+
         , and specify a <see
          cref="P:System.Drawing.Configuration.SystemDrawingSection.BitmapSuffix" />
 
         
 
+        
+
          configuration value for each assembly version. In this case, a file name indicated by a <see
          cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+        
 
         
 
@@ -95,11 +111,15 @@
 
             
 
+            
+
              object with an image from a specified file.</para
           >
         </summary>
         <param name="imageFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,8 +147,12 @@
 
             
 
+            
+
              parameter. The constructor searches for a resource named namespace.classname.bmp, where namespace is the namespace containing the definition of the class specified by the <paramref
              name="t" />
+
+            
 
             
 
@@ -143,6 +167,8 @@
 
             
 
+            
+
              object based on a 16 x 16 bitmap that is embedded as a resource in a specified assembly.</para
           >
         </summary>
@@ -151,8 +177,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -181,13 +211,19 @@
 
             
 
+            
+
              parameter. The constructor searches for a resource named namespace.name, where namespace is the namespace containing the definition of the class specified by the <paramref
              name="t" />
 
             
 
+            
+
              parameter. For example, suppose that ControlA is a class in NamespaceA in AssemblyA.dll and that you passed "MyBitmap.bmp" to the <paramref
              name="name" />
+
+            
 
             
 
@@ -202,6 +238,8 @@
 
             
 
+            
+
              object based on a 16 by 16 bitmap that is embedded as a resource in a specified assembly.</para
           >
         </summary>
@@ -210,8 +248,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -219,6 +261,8 @@
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,6 +294,8 @@
 
             
 
+            
+
              object that has its small image and its large image set to null.</para
           >
         </summary>
@@ -278,8 +324,12 @@
 
             
 
+            
+
              object and is identical to this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -294,13 +344,19 @@
 
             
 
+            
+
              is both a <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
 
             
 
+            
+
              object and is identical to this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -312,8 +368,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -342,6 +402,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -350,6 +412,8 @@
           <para
             >The hash code for this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -383,8 +447,12 @@
 
             
 
+            
+
              parameter. For example, suppose you pass an object of type ControlA to the <paramref
              name="component" />
+
+            
 
             
 
@@ -399,8 +467,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -415,8 +487,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -428,8 +504,12 @@
 
           
 
+          
+
           If this <see
            cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+          
 
           
 
@@ -459,8 +539,12 @@
 
             
 
+            
+
              parameter. For example, suppose you pass typeof(ControlA) to the <paramref
              name="type" />
+
+            
 
             
 
@@ -475,8 +559,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -491,8 +579,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -504,8 +596,12 @@
 
           
 
+          
+
           If this <see
            cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+          
 
           
 
@@ -539,8 +635,12 @@
 
             
 
+            
+
              parameter. For example, suppose you pass an object of type ControlA to the <paramref
              name="component" />
+
+            
 
             
 
@@ -549,6 +649,8 @@
           <para
             >If this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -563,8 +665,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -579,8 +685,12 @@
 
             
 
+            
+
              object associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -592,8 +702,12 @@
 
           
 
+          
+
           If this <see
            cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+          
 
           
 
@@ -601,6 +715,8 @@
         >
         <param name="large">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -634,8 +750,12 @@
 
             
 
+            
+
              parameter. For example, suppose you pass an typeof(ControlA) to the <paramref
              name="type" />
+
+            
 
             
 
@@ -644,6 +764,8 @@
           <para
             >If this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -658,8 +780,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -674,8 +800,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -687,8 +817,12 @@
 
           
 
+          
+
           If this <see
            cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+          
 
           
 
@@ -696,6 +830,8 @@
         >
         <param name="large">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -730,8 +866,12 @@
 
             
 
+            
+
              parameter. For example, suppose you pass typeof(ControlA) to the <paramref
              name="type" />
+
+            
 
             
 
@@ -740,6 +880,8 @@
           <para
             >If this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -754,8 +896,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -770,8 +916,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+            
 
             
 
@@ -783,8 +933,12 @@
 
           
 
+          
+
           If this <see
            cref="T:System.Drawing.ToolboxBitmapAttribute" />
+
+          
 
           
 
@@ -795,10 +949,14 @@
 
           
 
+          
+
           The name of the embedded bitmap resource. </param
         >
         <param name="large">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -833,8 +991,12 @@
 
             
 
+            
+
              parameter. For example, suppose you pass typeof(ControlA) to the <paramref
              name="t" />
+
+            
 
             
 
@@ -850,6 +1012,8 @@
 
             
 
+            
+
              object based on a bitmap resource that is embedded in an assembly.</para
           >
         </summary>
@@ -861,11 +1025,15 @@
 
             
 
+            
+
              object based on the retrieved bitmap.</para
           >
         </returns>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -876,10 +1044,14 @@
 
           
 
+          
+
           The name of the embedded bitmap resource. </param
         >
         <param name="large">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

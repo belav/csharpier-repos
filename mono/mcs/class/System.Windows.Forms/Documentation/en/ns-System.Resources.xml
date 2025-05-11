@@ -9,13 +9,19 @@
 
         
 
+        
+
          namespace provides classes and interfaces that allow developers to create, store, and manage various culture-specific resources used in an application. One of the most important classes of the <see
          cref="N:System.Resources" />
 
         
 
+        
+
          namespace is the <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -30,13 +36,19 @@
 
         
 
+        
+
          class allows the user to access and control resources stored in the main assembly or in resource satellite assemblies. Use the <see
          cref="M:System.Resources.ResourceManager.GetObject(System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+
+        
 
         
 

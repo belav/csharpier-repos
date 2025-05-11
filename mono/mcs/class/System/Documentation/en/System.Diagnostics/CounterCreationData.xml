@@ -55,6 +55,8 @@
 
             
 
+            
+
              class, to a counter of type NumberOfItems32, and with empty name and help strings.</para
           >
         </summary>
@@ -91,11 +93,15 @@
 
             
 
+            
+
              class, to a counter of the specified type, using the specified counter name and Help strings.</para
           >
         </summary>
         <param name="counterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -106,6 +112,8 @@
 
           
 
+          
+
           The text that describes the counter's behavior. </param
         >
         <param name="counterType">
@@ -113,8 +121,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.PerformanceCounterType" />
+
+          
 
           
 

@@ -136,6 +136,8 @@ class AuthorInfo
 
         
 
+        
+
          class associates predefined system information or user-defined custom information with a target element. A target element can be an assembly, class, constructor, delegate, enum, event, field, interface, method, portable executable file module, parameter, property, return value, struct, or another attribute.</para
       >
       <para>Information provided by an attribute is also known as metadata. Metadata can be examined at run time by your application to control how your program processes data, or before run time by external tools to control how your application itself is processed or maintained. For example, the .NET Framework predefines and uses attribute types to control run-time behavior, and some programming languages use attribute types to represent language features not directly supported by the .NET Framework common type system. </para>
@@ -145,8 +147,12 @@ class AuthorInfo
 
         
 
+        
+
          class. Attributes can be applied to any target element; multiple attributes can be applied to the same target element; and attributes can be inherited by an element derived from a target element. Use the <see
          cref="T:System.AttributeTargets" />
+
+        
 
         
 
@@ -158,6 +164,8 @@ class AuthorInfo
 
         
 
+        
+
          class provides convenient methods to retrieve and test custom attributes. For more information about using attributes, see <format
          type="text/html">
           <a href="dd7604eb-9fa3-4b60-b2dd-b47739fa3148">Applying Attributes</a>
@@ -165,10 +173,14 @@ class AuthorInfo
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -208,6 +220,8 @@ class AuthorInfo
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -216,6 +230,8 @@ class AuthorInfo
           <para
             >Initializes a new instance of the <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -256,6 +272,8 @@ class AuthorInfo
 
               
 
+              
+
               .</para
             >
           </block>
@@ -265,8 +283,12 @@ class AuthorInfo
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -284,6 +306,8 @@ class AuthorInfo
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
@@ -292,8 +316,12 @@ class AuthorInfo
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -334,13 +362,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -351,8 +385,12 @@ class AuthorInfo
 
           
 
+          
+
            is not a type derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -369,8 +407,12 @@ class AuthorInfo
 
             
 
+            
+
              method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -384,6 +426,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -403,8 +447,12 @@ class AuthorInfo
 
             
 
+            
+
              that is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -416,8 +464,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -425,6 +477,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -467,13 +521,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -484,8 +544,12 @@ class AuthorInfo
 
           
 
+          
+
            is not a type derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -493,6 +557,8 @@ class AuthorInfo
         >
         <exception cref="T:System.NotSupportedException">
           <paramref name="element" />
+
+          
 
           
 
@@ -509,6 +575,8 @@ class AuthorInfo
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -519,6 +587,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -538,8 +608,12 @@ class AuthorInfo
 
             
 
+            
+
              that is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -551,8 +625,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -560,6 +638,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -604,14 +684,20 @@ class AuthorInfo
 
               
 
+              
+
                can be
    applied to <paramref
                name="element" />
 
               
 
+              
+
               , use <see
                cref="M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)" />
+
+              
 
               
 
@@ -624,13 +710,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -641,8 +733,12 @@ class AuthorInfo
 
           
 
+          
+
            is not a type derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -663,8 +759,12 @@ class AuthorInfo
 
             
 
+            
+
              that is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -676,8 +776,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -685,6 +789,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -726,13 +832,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -743,8 +855,12 @@ class AuthorInfo
 
           
 
+          
+
            is not a type derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -758,6 +874,8 @@ class AuthorInfo
           <para
             >If <paramref
              name="element" />
+
+            
 
             
 
@@ -776,8 +894,12 @@ class AuthorInfo
 
             
 
+            
+
              that is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -789,8 +911,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -798,6 +924,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -844,6 +972,8 @@ class AuthorInfo
 
               
 
+              
+
               .</para
             >
           </block>
@@ -860,8 +990,12 @@ class AuthorInfo
 
             
 
+            
+
              that is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -873,8 +1007,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -885,10 +1023,14 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -933,6 +1075,8 @@ class AuthorInfo
 
               
 
+              
+
               .</para
             >
           </block>
@@ -949,8 +1093,12 @@ class AuthorInfo
 
             
 
+            
+
              that is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -962,8 +1110,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -974,6 +1126,8 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
@@ -981,8 +1135,12 @@ class AuthorInfo
 
           
 
+          
+
           If true, specifies to also search the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -1027,8 +1185,12 @@ class AuthorInfo
 
             
 
+            
+
              that is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1040,8 +1202,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -1052,10 +1218,14 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1095,6 +1265,8 @@ class AuthorInfo
 
             
 
+            
+
              represents a parameter in a method of a derived type, the return value includes the inheritable custom attributes applied to the same parameter in the overridden base methods.</para
           >
         </remarks>
@@ -1110,8 +1282,12 @@ class AuthorInfo
 
             
 
+            
+
              that is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1123,8 +1299,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -1135,6 +1315,8 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
@@ -1142,8 +1324,12 @@ class AuthorInfo
 
           
 
+          
+
           If true, specifies to also search the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -1182,8 +1368,12 @@ class AuthorInfo
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1199,6 +1389,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1218,8 +1410,12 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1231,8 +1427,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -1274,8 +1474,12 @@ class AuthorInfo
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1283,6 +1487,8 @@ class AuthorInfo
         >
         <exception cref="T:System.NotSupportedException">
           <paramref name="element" />
+
+          
 
           
 
@@ -1296,6 +1502,8 @@ class AuthorInfo
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -1306,6 +1514,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1325,8 +1535,12 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1338,8 +1552,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -1381,8 +1599,12 @@ class AuthorInfo
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1400,8 +1622,12 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1413,8 +1639,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -1455,8 +1685,12 @@ class AuthorInfo
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1467,6 +1701,8 @@ class AuthorInfo
           <para
             >If <paramref
              name="element" />
+
+            
 
             
 
@@ -1485,8 +1721,12 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1498,8 +1738,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -1545,6 +1789,8 @@ class AuthorInfo
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1561,8 +1807,12 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1574,8 +1824,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -1583,6 +1837,8 @@ class AuthorInfo
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1622,13 +1878,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="type" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1639,8 +1901,12 @@ class AuthorInfo
 
           
 
+          
+
            is not a type derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -1656,6 +1922,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1675,13 +1943,19 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes of type <paramref
              name="attributeType" />
 
             
 
+            
+
              applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1693,8 +1967,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -1702,6 +1980,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1743,8 +2023,12 @@ class AuthorInfo
 
             
 
+            
+
              if <paramref
              name="inherit" />
+
+            
 
             
 
@@ -1758,6 +2042,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1777,8 +2063,12 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1790,8 +2080,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -1802,8 +2096,12 @@ class AuthorInfo
 
           
 
+          
+
           If true, specifies to also search the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -1843,13 +2141,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="type" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1860,8 +2164,12 @@ class AuthorInfo
 
           
 
+          
+
            is not a type derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -1869,6 +2177,8 @@ class AuthorInfo
         >
         <exception cref="T:System.NotSupportedException">
           <paramref name="element" />
+
+          
 
           
 
@@ -1882,6 +2192,8 @@ class AuthorInfo
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -1892,6 +2204,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1911,13 +2225,19 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes of type <paramref
              name="type" />
 
             
 
+            
+
              applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -1929,8 +2249,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -1938,6 +2262,8 @@ class AuthorInfo
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1978,8 +2304,12 @@ class AuthorInfo
 
             
 
+            
+
              if <paramref
              name="inherit" />
+
+            
 
             
 
@@ -1998,8 +2328,12 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2011,8 +2345,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -2020,6 +2358,8 @@ class AuthorInfo
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2060,13 +2400,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="type" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2077,8 +2423,12 @@ class AuthorInfo
 
           
 
+          
+
            is not a type derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -2096,13 +2446,19 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes of type <paramref
              name="attributeType" />
 
             
 
+            
+
              applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2114,8 +2470,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -2123,6 +2483,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2163,6 +2525,8 @@ class AuthorInfo
 
             
 
+            
+
              represents a parameter in a method of a derived type, the return value includes the inheritable custom attributes applied to the same parameter in the overridden base methods.</para
           >
         </remarks>
@@ -2178,8 +2542,12 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2191,8 +2559,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -2203,8 +2575,12 @@ class AuthorInfo
 
           
 
+          
+
           If true, specifies to also search the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -2244,13 +2620,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2261,8 +2643,12 @@ class AuthorInfo
 
           
 
+          
+
            is not a type derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -2273,6 +2659,8 @@ class AuthorInfo
           <para
             >If <paramref
              name="element" />
+
+            
 
             
 
@@ -2291,13 +2679,19 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes of type <paramref
              name="attributeType" />
 
             
 
+            
+
              applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2309,8 +2703,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -2318,6 +2716,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2364,6 +2764,8 @@ class AuthorInfo
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2380,13 +2782,19 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes of type <paramref
              name="attributeType" />
 
             
 
+            
+
              applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2398,8 +2806,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -2410,10 +2822,14 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2453,8 +2869,12 @@ class AuthorInfo
 
             
 
+            
+
              if <paramref
              name="inherit" />
+
+            
 
             
 
@@ -2468,6 +2888,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2487,13 +2909,19 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes of type <paramref
              name="type" />
 
             
 
+            
+
              applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2505,8 +2933,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -2517,6 +2949,8 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
@@ -2524,8 +2958,12 @@ class AuthorInfo
 
           
 
+          
+
           If true, specifies to also search the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -2565,8 +3003,12 @@ class AuthorInfo
 
             
 
+            
+
              if <paramref
              name="inherit" />
+
+            
 
             
 
@@ -2585,13 +3027,19 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes of type <paramref
              name="attributeType" />
 
             
 
+            
+
              applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2603,8 +3051,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -2615,10 +3067,14 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2658,6 +3114,8 @@ class AuthorInfo
 
             
 
+            
+
              represents a parameter in a method of a derived type, the return value includes the inheritable custom attributes applied to the same parameter in the overridden base methods.</para
           >
         </remarks>
@@ -2673,13 +3131,19 @@ class AuthorInfo
 
             
 
+            
+
              array that contains the custom attributes of type <paramref
              name="attributeType" />
 
             
 
+            
+
              applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2691,8 +3155,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -2703,6 +3171,8 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
@@ -2710,8 +3180,12 @@ class AuthorInfo
 
           
 
+          
+
           If true, specifies to also search the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -2746,10 +3220,11 @@ class AuthorInfo
       unspecified.
    </para>
           <para>
-            <block subset="none" type="note"
-              >
+            <block subset="none" type="note">
       This method overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -2833,13 +3308,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2850,8 +3331,12 @@ class AuthorInfo
 
           
 
+          
+
            is not derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -2867,6 +3352,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2886,8 +3373,12 @@ class AuthorInfo
 
             
 
+            
+
              is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -2899,8 +3390,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -2908,6 +3403,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2950,13 +3447,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2967,8 +3470,12 @@ class AuthorInfo
 
           
 
+          
+
            is not derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -2976,6 +3483,8 @@ class AuthorInfo
         >
         <exception cref="T:System.NotSupportedException">
           <paramref name="element" />
+
+          
 
           
 
@@ -2989,6 +3498,8 @@ class AuthorInfo
 
             
 
+            
+
              are searched for custom attributes.</para
           >
           <block subset="none" type="note">
@@ -2999,6 +3510,8 @@ class AuthorInfo
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -3018,8 +3531,12 @@ class AuthorInfo
 
             
 
+            
+
              is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -3031,8 +3548,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -3040,6 +3561,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3081,13 +3604,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3098,8 +3627,12 @@ class AuthorInfo
 
           
 
+          
+
            is not derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -3110,6 +3643,8 @@ class AuthorInfo
           <para
             >The ancestors of <paramref
              name="element" />
+
+            
 
             
 
@@ -3128,8 +3663,12 @@ class AuthorInfo
 
             
 
+            
+
              is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -3141,8 +3680,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -3150,6 +3693,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3191,13 +3736,19 @@ class AuthorInfo
 
           
 
+          
+
            or <paramref
            name="attributeType" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3208,8 +3759,12 @@ class AuthorInfo
 
           
 
+          
+
            is not derived from <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -3220,6 +3775,8 @@ class AuthorInfo
           <para
             >The ancestors of <paramref
              name="element" />
+
+            
 
             
 
@@ -3238,8 +3795,12 @@ class AuthorInfo
 
             
 
+            
+
              is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -3251,8 +3812,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -3260,6 +3825,8 @@ class AuthorInfo
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3306,6 +3873,8 @@ class AuthorInfo
 
               
 
+              
+
               .</para
             >
           </block>
@@ -3322,8 +3891,12 @@ class AuthorInfo
 
             
 
+            
+
              is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -3335,8 +3908,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -3347,10 +3924,14 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3395,6 +3976,8 @@ class AuthorInfo
 
               
 
+              
+
               .</para
             >
           </block>
@@ -3411,8 +3994,12 @@ class AuthorInfo
 
             
 
+            
+
              is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -3424,8 +4011,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -3436,6 +4027,8 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
@@ -3443,8 +4036,12 @@ class AuthorInfo
 
           
 
+          
+
           If true, specifies to also search the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -3484,8 +4081,12 @@ class AuthorInfo
 
             
 
+            
+
              parameter and does not search the ancestors of <paramref
              name="element" />
+
+            
 
             
 
@@ -3504,8 +4105,12 @@ class AuthorInfo
 
             
 
+            
+
              is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -3517,8 +4122,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -3529,10 +4138,14 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3577,8 +4190,12 @@ class AuthorInfo
 
             
 
+            
+
              is applied to <paramref
              name="element" />
+
+            
 
             
 
@@ -3590,8 +4207,12 @@ class AuthorInfo
 
           
 
+          
+
           An object derived from the <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -3602,6 +4223,8 @@ class AuthorInfo
 
           
 
+          
+
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
@@ -3609,8 +4232,12 @@ class AuthorInfo
 
           
 
+          
+
           If true, specifies to also search the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -3645,8 +4272,12 @@ class AuthorInfo
 
             
 
+            
+
              equals another. Its default implementation is the same as <see
              cref="M:System.Attribute.Equals(System.Object)" />
+
+            
 
             
 
@@ -3658,8 +4289,12 @@ class AuthorInfo
 
             
 
+            
+
              method cannot determine that the two instances have the same flag set, but the <see
              cref="M:System.Attribute.Match(System.Object)" />
+
+            
 
             
 
@@ -3678,6 +4313,8 @@ class AuthorInfo
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -3686,13 +4323,19 @@ class AuthorInfo
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            to compare with this instance of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -3767,6 +4410,8 @@ class AuthorInfo
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -3779,6 +4424,8 @@ class AuthorInfo
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -3786,10 +4433,14 @@ class AuthorInfo
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3884,6 +4535,8 @@ class AuthorInfo
 
             
 
+            
+
              of the attribute. However, it is intended that the unique identifier be used to identify two attributes of the same type.</para
           >
         </remarks>
@@ -3892,6 +4545,8 @@ class AuthorInfo
           <para
             >When implemented in a derived class, gets a unique identifier for this <see
              cref="T:System.Attribute" />
+
+            
 
             
 

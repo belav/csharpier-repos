@@ -24,6 +24,8 @@
 
         
 
+        
+
          method to return ICMPV6 traffic information.</para
       >
       <para>The properties in this class correlate to the Management Information Base objects for ICMPv6 defined in IETF RFC 2466. ICMPv6 is defined in RFC 2463.</para>
@@ -56,6 +58,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -64,6 +68,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
+
+            
 
             
 

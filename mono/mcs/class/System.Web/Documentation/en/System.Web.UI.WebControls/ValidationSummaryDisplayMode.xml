@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration represents the different display formats of a <see
          cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+        
 
         
 
@@ -36,6 +40,8 @@
       <para
         >Specifies the validation summary display mode used by the <see
          cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+        
 
         
 

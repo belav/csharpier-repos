@@ -22,13 +22,19 @@
 
         
 
+        
+
          is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see
          cref="P:System.ServiceModel.Channels.AddressHeader.Name" />
 
         
 
+        
+
          property and the namespace by the <see
          cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
             
 
+            
+
              to create new <see
              cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+            
 
             
 
@@ -74,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+            
 
             
 
@@ -111,6 +123,8 @@
 
             
 
+            
+
              class with a specified value.</para
           >
         </summary>
@@ -122,8 +136,12 @@
 
             
 
+            
+
              that contains the information item specified by the <paramref
              name="value" />
+
+            
 
             
 
@@ -132,6 +150,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -170,6 +190,8 @@
 
             
 
+            
+
              class using a specified formatter to serialize the information item from a specified object.</para
           >
         </summary>
@@ -181,11 +203,15 @@
 
             
 
+            
+
              that contains the information item specified by the value parameter.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -224,6 +250,8 @@
 
             
 
+            
+
              class with a specified value, name and namespace.</para
           >
         </summary>
@@ -235,8 +263,12 @@
 
             
 
+            
+
              with the specified <paramref
              name="name" />
+
+            
 
             
 
@@ -245,8 +277,12 @@
 
             
 
+            
+
              that contains the information item specified by <paramref
              name="value" />
+
+            
 
             
 
@@ -258,6 +294,8 @@
 
           
 
+          
+
           The name of the address header.</param
         >
         <param name="ns">
@@ -265,10 +303,14 @@
 
           
 
+          
+
           The namespace of the address header.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,6 +351,8 @@
 
             
 
+            
+
              class with a specified name and namespace that uses a specified formatter to serialize the information item from a specified object.</para
           >
         </summary>
@@ -320,8 +364,12 @@
 
             
 
+            
+
              with the specified <paramref
              name="name" />
+
+            
 
             
 
@@ -330,8 +378,12 @@
 
             
 
+            
+
              that contains the information item specified by <paramref
              name="value" />
+
+            
 
             
 
@@ -343,6 +395,8 @@
 
           
 
+          
+
           The name of the address header.</param
         >
         <param name="ns">
@@ -350,10 +404,14 @@
 
           
 
+          
+
           The namespace of the address header.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,8 +452,12 @@
 
             
 
+            
+
              is equivalent to the information item contained in the current address header; otherwise, false. In particular, returns false if <paramref
              name="obj" />
+
+            
 
             
 
@@ -407,8 +469,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -447,6 +513,8 @@
 
             
 
+            
+
              that can serialize the current address header object.</para
           >
         </returns>
@@ -472,6 +540,8 @@
           <para>This is the string-based implementation.</para>
           <para>
             <see cref="M:System.ServiceModel.Channels.AddressHeader.GetHashCode" />
+
+            
 
             
 
@@ -514,11 +584,15 @@
 
             
 
+            
+
             . The type of the return value is determined by the generic type parameter. </para
           >
           <para
             >Use the <see
              cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1(System.Runtime.Serialization.XmlObjectSerializer)" />
+
+            
 
             
 
@@ -537,6 +611,8 @@
 
             
 
+            
+
              with its fields and properties set to the values supplied by the current address header object.</para
           >
         </returns>
@@ -545,8 +621,12 @@
 
           
 
+          
+
           A class of type <paramref
            name="T" />
+
+          
 
           
 
@@ -586,11 +666,15 @@
 
             
 
+            
+
             . The type of the return value is determined by the generic type parameter.</para
           >
           <para
             >Use this overload only if you want to use a customized XML formatter; otherwise use the <see
              cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1" />
+
+            
 
             
 
@@ -609,6 +693,8 @@
 
             
 
+            
+
              with its fields and properties set to the values supplied by the current address header object.</para
           >
         </returns>
@@ -617,8 +703,12 @@
 
           
 
+          
+
           A class of type <paramref
            name="T" />
+
+          
 
           
 
@@ -694,8 +784,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -733,8 +827,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -773,6 +871,8 @@
 
             
 
+            
+
              that wraps the current address header.</para
           >
         </returns>
@@ -806,6 +906,8 @@
 
             
 
+            
+
              method, so users must provide an implementation of that method to use this method. </para
           >
         </remarks>
@@ -817,6 +919,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -825,8 +929,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -862,8 +970,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.Xml.XmlDictionaryWriter" />
+
+            
 
             
 
@@ -871,6 +983,8 @@
           >
           <para>
             <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" />
+
+            
 
             
 
@@ -885,6 +999,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -893,8 +1009,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -932,8 +1052,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -971,8 +1095,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 

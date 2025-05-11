@@ -28,6 +28,8 @@
 
         
 
+        
+
          enumeration specifies which file system actions are allowed for a particular user account and which file system actions are audited for a particular user account.      </para
       >
       <para
@@ -36,13 +38,19 @@
 
         
 
+        
+
          enumeration when creating an access rule with the <see
          cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
         
 
+        
+
          class or when creating an audit rule with the <see
          cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+        
 
         
 
@@ -54,13 +62,19 @@
 
         
 
+        
+
         , <see
          cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
         
 
+        
+
         , and <see
          cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+
+        
 
         
 
@@ -141,13 +155,19 @@
 
             
 
+            
+
              value.  Note that if you do not explicitly set the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
+            
+
              value when creating a file or folder, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+
+            
 
             
 
@@ -184,13 +204,19 @@
 
             
 
+            
+
              value.  Note that if you do not explicitly set the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
+            
+
              value when creating a file or folder, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+
+            
 
             
 
@@ -337,13 +363,19 @@
 
             
 
+            
+
              right, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Write" />
 
             
 
+            
+
              right, and the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Delete" />
+
+            
 
             
 
@@ -376,8 +408,12 @@
 
             
 
+            
+
              right, <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+
+            
 
             
 
@@ -386,8 +422,12 @@
 
             
 
+            
+
              right, and <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadPermissions" />
+
+            
 
             
 
@@ -420,8 +460,12 @@
 
             
 
+            
+
              right and the <see
              cref="F:System.Security.AccessControl.FileSystemRights.ExecuteFile" />
+
+            
 
             
 
@@ -542,6 +586,8 @@
 
             
 
+            
+
              value is automatically set when allowing access, and automatically excluded when denying access.</para
           >
           <para>The right to create a file or folder requires this value.  Note that if you do not explicitly set this value when creating a file, the value will be set automatically for you.</para>
@@ -620,8 +666,12 @@
 
             
 
+            
+
              right, <see
              cref="F:System.Security.AccessControl.FileSystemRights.AppendData" />
+
+            
 
             
 
@@ -630,8 +680,12 @@
 
             
 
+            
+
              right, and <see
              cref="F:System.Security.AccessControl.FileSystemRights.WriteAttributes" />
+
+            
 
             
 

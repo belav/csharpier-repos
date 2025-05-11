@@ -24,6 +24,8 @@
 
         
 
+        
+
          class encapsulates the &lt;EncryptionProperty&gt; element defined by the World Wide Web Consortium XML Encryption specification located at http://www.w3.org/TR/xmlenc-core/.</para
       >
       <para
@@ -32,13 +34,19 @@
 
         
 
+        
+
          class to provide additional encryption information related to the <see
          cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -108,8 +118,12 @@
 
             
 
+            
+
              class using an <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -143,6 +157,8 @@
 
             
 
+            
+
              method returns a representation of the &lt;EncryptionProperty&gt; element. </para
           >
         </remarks>
@@ -154,8 +170,12 @@
 
             
 
+            
+
              object that encapsulates an instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -170,8 +190,12 @@
 
             
 
+            
+
              object that encapsulates an instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -202,6 +226,8 @@
 
             
 
+            
+
              object from another location. </para
           >
         </remarks>
@@ -210,6 +236,8 @@
           <para
             >Gets the ID of the current <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -245,13 +273,19 @@
 
             
 
+            
+
              method configures the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
+            
+
              object to match the state of an <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -266,8 +300,12 @@
 
             
 
+            
+
              and configures the internal state of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -279,8 +317,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -317,8 +359,12 @@
 
             
 
+            
+
              object that represents an <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -347,6 +393,8 @@
           <para
             >Gets the target of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 

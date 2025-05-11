@@ -7,6 +7,8 @@
 
     
 
+    
+
     , the value returned serves as the application's termination status code. The purpose of this code is to allow communication of success or failure to the execution environment. </paragraph
   >
   <paragraph
@@ -15,8 +17,12 @@
 
     
 
+    
+
     , reaching the right brace (<symbol
     >}</symbol>
+
+    
 
     
 

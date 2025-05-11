@@ -33,12 +33,16 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with the event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate from the event. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="765bfc89-33ee-4d0d-bbe6-3b172c06def9"
             >Server Event Handling in ASP.NET Web Pages</a
           >
         </format>
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          event, or if you create an event handler but leave the <see
          cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          method also allows derived classes to handle the event instead of the <see
          cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -102,13 +120,19 @@
 
         
 
+        
+
          control, the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
+        
+
          control, and the <see
          cref="T:System.Web.UI.WebControls.PasswordRecovery" />
+
+        
 
         
 

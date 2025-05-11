@@ -39,6 +39,8 @@
 
           
 
+          
+
            class.</para
         >
       </block>
@@ -48,8 +50,12 @@
 
         
 
+        
+
          control is clicked, provide a custom event handler for the <see
          cref="E:System.Web.UI.HtmlControls.HtmlButton.ServerClick" />
+
+        
 
         
 
@@ -62,10 +68,14 @@
 
           
 
+          
+
            control renders ECMAScript to the client browser. The client browser must have ECMAScript enabled for this control to function properly. For more information on client script, see <format
            type="text/html">
             <a href="13edb6b9-2dea-43c6-b8c1-a47207de19aa">Client Script in ASP.NET Web Pages</a>
           </format>
+
+          
 
           
 
@@ -78,8 +88,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlButton.#ctor" />
+
+        
 
         
 
@@ -91,6 +105,8 @@
            type="text/html">
             <a href="96D2C59E-693C-4079-9B53-B3FF0D9E9133">Validation Server Controls</a>
           </format>
+
+          
 
           
 
@@ -118,11 +134,15 @@
 
             
 
+            
+
              control.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -159,6 +179,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -185,6 +207,8 @@
 
             
 
+            
+
              control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control.</para
           >
           <para
@@ -193,13 +217,19 @@
 
             
 
+            
+
              control is clicked by using the <see
              cref="P:System.Web.UI.HtmlControls.HtmlButton.CausesValidation" />
 
             
 
+            
+
              property. To prevent validation from being performed, set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlButton.CausesValidation" />
+
+            
 
             
 
@@ -211,6 +241,8 @@
 
             
 
+            
+
              event to prevent page validation from occurring when a Cancel or Reset button is clicked.</para
           >
         </remarks>
@@ -219,6 +251,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -254,8 +288,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -270,6 +308,8 @@
 
             
 
+            
+
              event and registers client script for generating a postback.</para
           >
         </summary>
@@ -278,8 +318,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -309,13 +353,19 @@
 
             
 
+            
+
              event is raised when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
 
             
 
+            
+
              control is clicked. This event causes a round trip to occur from the client to the server and back. It is deliberately different from the client-side OnClick event. If a conflict exists between code run with a <see
              cref="E:System.Web.UI.HtmlControls.HtmlButton.ServerClick" />
+
+            
 
             
 
@@ -329,11 +379,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlButton.OnServerClick(System.EventArgs)" />
+
+            
 
             
 
@@ -348,6 +402,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -356,8 +412,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -393,13 +453,19 @@
 
             
 
+            
+
              method is used by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
 
             
 
+            
+
              control, when it is clicked, to raise a <see
              cref="E:System.Web.UI.HtmlControls.HtmlButton.ServerClick" />
+
+            
 
             
 
@@ -411,8 +477,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="M:System.Web.UI.Page.Validate(System.String)" />
+
+            
 
             
 
@@ -421,11 +491,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >This method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -440,11 +514,15 @@
 
             
 
+            
+
              control when it posts back to the server. </para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -473,13 +551,19 @@
 
             
 
+            
+
              method writes the onclick attribute of the rendered <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
 
             
 
+            
+
              control, and then calls the base <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -491,8 +575,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -507,8 +595,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -520,8 +612,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -549,13 +645,19 @@
 
             
 
+            
+
              event is raised when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
 
             
 
+            
+
              control is clicked. This server event causes a round trip to occur from the client to the server and back. It is deliberately different from the client-side OnClick event. If a conflict exists between code run with a <see
              cref="E:System.Web.UI.HtmlControls.HtmlButton.ServerClick" />
+
+            
 
             
 
@@ -569,6 +671,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -577,6 +681,8 @@
           <para
             >Occurs when the user clicks an <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -615,11 +721,15 @@
 
             
 
+            
+
              control when it posts back to the server.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -651,8 +761,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -664,8 +778,12 @@
 
             
 
+            
+
              property is set to true. When you specify a value for the <see
              cref="P:System.Web.UI.HtmlControls.HtmlButton.ValidationGroup" />
+
+            
 
             
 
@@ -674,8 +792,12 @@
 
             
 
+            
+
              control posts back to the server. If you do not specify a value for this property and the <see
              cref="P:System.Web.UI.HtmlControls.HtmlButton.CausesValidation" />
+
+            
 
             
 
@@ -687,6 +809,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 

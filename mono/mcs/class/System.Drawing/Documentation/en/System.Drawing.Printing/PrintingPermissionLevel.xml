@@ -21,6 +21,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -66,8 +68,12 @@
 
             
 
+            
+
              is a subset of <see
              cref="F:System.Drawing.Printing.PrintingPermissionLevel.AllPrinting" />
+
+            
 
             
 
@@ -97,8 +103,12 @@
 
             
 
+            
+
              is a subset of <see
              cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />
+
+            
 
             
 
@@ -128,8 +138,12 @@
 
             
 
+            
+
              is a subset of <see
              cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />
+
+            
 
             
 

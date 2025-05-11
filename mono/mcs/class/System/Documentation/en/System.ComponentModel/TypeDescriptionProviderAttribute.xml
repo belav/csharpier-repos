@@ -34,12 +34,16 @@
 
         
 
+        
+
          class, which by default only obtains type information directly from metadata of the compiled classes.</para
       >
       <block subset="none" type="note">
         <para
           >For a more dynamic way to provide custom metadata for your authored classes, see the <see
            cref="Overload:System.ComponentModel.TypeDescriptor.AddProvider" />
+
+          
 
           
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          will associate a <see
          cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          provides supplemental metadata information about the tagged class. For example, the <see
          cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetTypeDescriptor" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          that defines additional type information, such as attributes, events, and properties. Subsequently, if a <see
          cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+        
 
         
 
@@ -86,6 +102,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -124,8 +142,12 @@
 
             
 
+            
+
              constructor associates the specified <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+            
 
             
 
@@ -140,11 +162,15 @@
 
             
 
+            
+
              class using the specified type name.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,8 +201,12 @@
 
             
 
+            
+
              constructor associates the specified <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+            
 
             
 
@@ -191,11 +221,15 @@
 
             
 
+            
+
              class using the specified type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

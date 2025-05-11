@@ -41,8 +41,12 @@
 
         
 
+        
+
          enables you to add code that reverses the operations performed by a registration method. If you apply the <see
          cref="T:System.Runtime.InteropServices.ComRegisterFunctionAttribute" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          or through the <see
          cref="M:System.Runtime.InteropServices.RegistrationServices.UnregisterAssembly(System.Reflection.Assembly)" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          parameter for the <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -103,6 +115,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.ComUnregisterFunctionAttribute" />
+
+            
 
             
 

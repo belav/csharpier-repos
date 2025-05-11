@@ -539,7 +539,8 @@
       <LogicalName>xhtml-symbol.ent</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\DTDs\RSS091\no_comments\rss-0.91.dtd">
-      <LogicalName>rss-0.91.dtd</LogicalName>
+      <LogicalName
+>rss-0.91.dtd</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -19,13 +19,19 @@
 
         
 
+        
+
          class when you want to create custom layout behavior at run time. Derive your own class from the <see
          cref="T:System.Windows.Forms.Layout.LayoutEngine" />
 
         
 
+        
+
          class and override the <see
          cref="M:System.Windows.Forms.Layout.LayoutEngine.Layout(System.Object,System.Windows.Forms.LayoutEventArgs)" />
+
+        
 
         
 
@@ -50,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Layout.LayoutEngine" />
+
+            
 
             
 
@@ -84,6 +92,8 @@
 
             
 
+            
+
              method. </para
           >
         </remarks>
@@ -96,10 +106,14 @@
 
           
 
+          
+
           The container on which the layout engine will operate.</param
         >
         <param name="specified">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,8 +147,12 @@
 
             
 
+            
+
              parameter. You can check the value of the <see
              cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />
+
+            
 
             
 
@@ -143,13 +161,19 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" />
 
             
 
+            
+
              properties on <paramref
              name="layoutEventArgs" />
+
+            
 
             
 
@@ -168,11 +192,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,8 +211,12 @@
 
           
 
+          
+
           An event argument from a <see
            cref="E:System.Windows.Forms.Control.Layout" />
+
+          
 
           
 

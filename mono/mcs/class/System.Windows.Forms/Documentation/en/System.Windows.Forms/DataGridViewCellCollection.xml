@@ -30,8 +30,12 @@
 
         
 
+        
+
          objects are retrieved by the <see
          cref="P:System.Windows.Forms.DataGridViewRow.Cells" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >Represents a collection of cells in a <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -71,6 +77,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -79,8 +87,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -113,8 +125,12 @@
 
             
 
+            
+
              with cells before you add the row to a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -134,8 +150,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -174,8 +194,12 @@
 
             
 
+            
+
              with cells before you add the row to a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -191,8 +215,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -222,6 +250,8 @@
           <para
             >Use this method to alter the collection before you add the containing row to a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -285,6 +315,8 @@
 
             
 
+            
+
              is in the collection; otherwise, false.</para
           >
         </returns>
@@ -293,8 +325,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -330,6 +366,8 @@
 
           
 
+          
+
           The destination array to which the contents will be copied.</param
         >
         <param name="index">
@@ -337,8 +375,12 @@
 
           
 
+          
+
           The index of the element in <paramref
            name="array" />
+
+          
 
           
 
@@ -376,11 +418,15 @@
 
             
 
+            
+
              parameter, if it is found in the collection; otherwise, -1.</para
           >
         </returns>
         <param name="dataGridViewCell">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,6 +460,8 @@
 
             
 
+            
+
              control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
           >
         </remarks>
@@ -426,8 +474,12 @@
 
           
 
+          
+
           The zero-based index at which to place <paramref
            name="dataGridViewCell" />
+
+          
 
           
 
@@ -438,8 +490,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -517,8 +573,12 @@
 
             
 
+            
+
              containing <see
              cref="T:System.Windows.Forms.DataGridViewCellCollection" />
+
+            
 
             
 
@@ -554,11 +614,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGridViewCellCollection.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" />
+
+            
 
             
 
@@ -573,6 +637,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -581,8 +647,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -615,6 +685,8 @@
 
             
 
+            
+
              control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
           >
         </remarks>
@@ -627,8 +699,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -658,6 +734,8 @@
 
             
 
+            
+
              control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
           >
         </remarks>
@@ -670,8 +748,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -704,8 +786,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -725,8 +811,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -755,8 +845,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -775,8 +869,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Windows.Forms.DataGridViewCellCollection" />
+
+            
 
             
 
@@ -788,8 +886,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewCellCollection" />
+
+          
 
           
 
@@ -818,8 +920,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -839,8 +945,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewCellCollection" />
+
+          
 
           
 
@@ -871,8 +981,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -888,10 +1002,14 @@
 
           
 
+          
+
           The zero-based index at which value should be inserted. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -900,8 +1018,12 @@
 
           
 
+          
+
            to insert into the <see
            cref="M:System.Windows.Forms.DataGridViewCellCollection.System#Collections#IList#Insert(System.Int32,System.Object)" />
+
+          
 
           
 
@@ -928,8 +1050,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -986,8 +1112,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1003,8 +1133,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 

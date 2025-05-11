@@ -24,8 +24,12 @@
 
         
 
+        
+
          interface is used to provide custom security certificate validation for an application. The default policy is to allow valid certificates, as well as valid certificates that have expired. To change this policy, implement the <see
          cref="T:System.Net.ICertificatePolicy" />
+
+        
 
         
 
@@ -34,10 +38,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.Net.ICertificatePolicy" />
+
+        
 
         
 
@@ -86,8 +94,12 @@
 
             
 
+            
+
              method implements the application certificate validation policy. The method can examine the <paramref
              name="srvPoint" />
+
+            
 
             
 
@@ -96,8 +108,12 @@
 
             
 
+            
+
             , <paramref
              name="request" />
+
+            
 
             
 
@@ -106,11 +122,15 @@
 
             
 
+            
+
              parameters to determine whether the certificate should be honored.</para
           >
           <para
             >The <paramref
              name="certificateProblem" />
+
+            
 
             
 
@@ -130,8 +150,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.ServicePoint" />
+
+          
 
           
 
@@ -142,6 +166,8 @@
 
           
 
+          
+
           The certificate to validate. </param
         >
         <param name="request">
@@ -149,10 +175,14 @@
 
           
 
+          
+
           The request that received the certificate. </param
         >
         <param name="certificateProblem">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

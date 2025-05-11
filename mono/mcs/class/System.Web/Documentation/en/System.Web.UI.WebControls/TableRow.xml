@@ -65,8 +65,12 @@
 
         
 
+        
+
          class represents a row in a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -78,8 +82,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" />
+
+        
 
         
 
@@ -91,13 +99,19 @@
 
         
 
+        
+
          collection. The <see
          cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
         
 
+        
+
          collection is a collection of <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -110,10 +124,14 @@
 
           
 
+          
+
            control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
            type="text/html">
             <a href="fa2aa14d-a461-492e-9a79-c990904613ef">Validation ASP.NET Controls</a>
           </format>
+
+          
 
           
 
@@ -136,6 +154,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -145,9 +165,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -157,9 +181,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -169,10 +197,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -184,9 +216,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -195,6 +231,8 @@
     Height="size"
     HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -215,6 +253,8 @@
 
         
 
+        
+
         |TableFooter"
     ToolTip="string"
     VerticalAlign="<codeFeaturedElement
@@ -222,9 +262,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -241,6 +285,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
@@ -251,9 +297,13 @@
 
         
 
+        
+
         |False"
             EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -263,9 +313,13 @@
 
         
 
+        
+
         |False"
             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -275,10 +329,14 @@
 
         
 
+        
+
         "
             Font-Names="string"
             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -290,9 +348,13 @@
 
         
 
+        
+
         "
             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -301,6 +363,8 @@
             Height="size"
             HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -324,9 +388,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
             Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -334,6 +402,8 @@
             Width="size"
             Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -350,6 +420,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
@@ -361,9 +433,13 @@
 
         
 
+        
+
         |False"
             EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -373,9 +449,13 @@
 
         
 
+        
+
         |False"
             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -385,10 +465,14 @@
 
         
 
+        
+
         "
             Font-Names="string"
             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -400,9 +484,13 @@
 
         
 
+        
+
         "
             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -411,6 +499,8 @@
             Height="size"
             HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -429,6 +519,8 @@
 
         
 
+        
+
         |Row|Column"
             SkinID="string"
             Style="string"
@@ -440,9 +532,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
             Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -450,6 +546,8 @@
             Width="size"
             Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -463,6 +561,8 @@
       <para
         >Represents a row in a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -485,6 +585,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -493,6 +595,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -524,13 +628,19 @@
 
             
 
+            
+
              objects that represent the cells from a row of the <see
              cref="T:System.Web.UI.WebControls.Table" />
 
             
 
+            
+
              control. You can programmatically add, insert, or remove a <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -543,8 +653,12 @@
 
               
 
+              
+
                controls programmatically. At design time, this property is set by declaring <see
                cref="T:System.Web.UI.WebControls.TableCell" />
+
+              
 
               
 
@@ -560,8 +674,12 @@
 
             
 
+            
+
              objects that represent the cells of a row in a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -601,13 +719,19 @@
 
             
 
+            
+
              method creates a new <see
              cref="T:System.Web.UI.ControlCollection" />
 
             
 
+            
+
              object that holds the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -619,8 +743,12 @@
 
             
 
+            
+
              method is primarily of interest to control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -635,8 +763,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -651,8 +783,12 @@
 
             
 
+            
+
              object that contains the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -685,8 +821,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -701,8 +841,12 @@
 
             
 
+            
+
              object that specifies the style properties for the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -714,8 +858,12 @@
 
             
 
+            
+
              method is primarily of interest to control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -745,6 +893,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" />
+
+            
 
             
 
@@ -855,8 +1005,12 @@
 
             
 
+            
+
              property to get or set where the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -865,8 +1019,12 @@
 
             
 
+            
+
              control. For the available table locations, see <see
              cref="T:System.Web.UI.WebControls.TableRowSection" />
+
+            
 
             
 
@@ -921,8 +1079,12 @@
 
             
 
+            
+
              enumeration enables you to build accessible Web sites using the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -938,8 +1100,12 @@
 
             
 
+            
+
              object in a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -965,6 +1131,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" />
+
+            
 
             
 

@@ -6,8 +6,12 @@
 
     
 
+    
+
      or from any <non_terminal
      where="11.2">interface-type</non_terminal>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
      that implements the <non_terminal
      where="11.2">interface-type</non_terminal>
+
+    
 
     
 
@@ -26,11 +34,15 @@
 
     
 
+    
+
     , and then copying the value out of the instance. </paragraph
   >
   <paragraph
     >Unboxing conversions are described further in <hyperlink
     >11.3.2</hyperlink>
+
+    
 
     
 

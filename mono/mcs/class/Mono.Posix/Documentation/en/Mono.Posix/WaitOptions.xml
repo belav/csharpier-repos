@@ -17,6 +17,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -43,6 +45,8 @@
 
         
 
+        
+
          instead.</para
       >
     </remarks>
@@ -66,7 +70,8 @@
       </ReturnValue>
       <Parameters></Parameters>
       <Docs>
-        <summary>return immediately if no child has exited.</summary>
+        <summary
+>return immediately if no child has exited.</summary>
         <remarks>To be added</remarks>
       </Docs>
     </Member>

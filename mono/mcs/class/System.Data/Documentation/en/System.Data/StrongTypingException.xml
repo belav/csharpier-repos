@@ -26,6 +26,8 @@
 
         
 
+        
+
          class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >The exception that is thrown by a strongly typed <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -64,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.StrongTypingException" />
+
+            
 
             
 
@@ -94,6 +102,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality. </para
           >
         </remarks>
@@ -105,11 +115,15 @@
 
             
 
+            
+
              class with the specified string.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,6 +151,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -148,6 +164,8 @@
 
             
 
+            
+
              class using the specified serialization information and streaming context.</para
           >
         </summary>
@@ -156,8 +174,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -168,8 +190,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -201,6 +227,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -212,6 +240,8 @@
 
             
 
+            
+
              class with the specified string and inner exception.</para
           >
         </summary>
@@ -220,10 +250,14 @@
 
           
 
+          
+
           The string to display when the exception is thrown. </param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

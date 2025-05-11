@@ -33,6 +33,8 @@
 
         
 
+        
+
          class members that can be accessed by unmanaged COM objects.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Exposes the public members of the <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -77,13 +81,19 @@
 
             
 
+            
+
              method determines whether the specified <see
              cref="T:System.Object" />
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -98,6 +108,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -109,8 +121,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -122,13 +138,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -162,8 +184,12 @@
 
             
 
+            
+
              method returns the <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -178,6 +204,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -186,6 +214,8 @@
           <para
             >The first exception thrown in a chain of exceptions. If the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -220,8 +250,12 @@
 
             
 
+            
+
              method serves as a hash function for a particular type. <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -233,6 +267,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -277,8 +313,12 @@
 
             
 
+            
+
              method sets the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -293,6 +333,8 @@
 
             
 
+            
+
              method</para
           >
         </summary>
@@ -301,8 +343,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -313,8 +359,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -348,6 +398,8 @@
 
             
 
+            
+
              method gets the runtime type of the current instance.</para
           >
         </remarks>
@@ -359,6 +411,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -367,6 +421,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -398,6 +454,8 @@
 
             
 
+            
+
              property gets or sets a link to the help file associated with this exception.</para
           >
         </remarks>
@@ -406,6 +464,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Exception.HelpLink" />
+
+            
 
             
 
@@ -440,8 +500,12 @@
 
             
 
+            
+
              property gets the <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -453,6 +517,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -484,6 +550,8 @@
 
             
 
+            
+
              property gets a message that describes the current exception.</para
           >
         </remarks>
@@ -492,6 +560,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -523,6 +593,8 @@
 
             
 
+            
+
              property gets or sets the name of the application or the object that causes the error.</para
           >
         </remarks>
@@ -531,6 +603,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Exception.Source" />
+
+            
 
             
 
@@ -562,6 +636,8 @@
 
             
 
+            
+
              property gets a string representation of the frames on the call stack at the time the current exception was thrown.</para
           >
         </remarks>
@@ -570,6 +646,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Exception.StackTrace" />
+
+            
 
             
 
@@ -607,6 +685,8 @@
 
             
 
+            
+
              property gets the method that throws the current exception.</para
           >
         </remarks>
@@ -615,6 +695,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Exception.TargetSite" />
+
+            
 
             
 
@@ -649,6 +731,8 @@
 
             
 
+            
+
              method creates and returns a string representation of the current exception.</para
           >
         </remarks>
@@ -660,6 +744,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -668,6 +754,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Exception" />
+
+            
 
             
 

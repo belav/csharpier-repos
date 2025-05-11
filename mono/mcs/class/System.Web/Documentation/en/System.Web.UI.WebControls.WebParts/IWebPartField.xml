@@ -16,8 +16,12 @@
 
         
 
+        
+
          zone establish a connection and share data, with one control acting as the consumer and the other control acting as a provider. The mechanism for sharing data in a Web Parts connection is an interface instance, which the provider serves to the consumer by means of a callback method. To establish a connection, the consumer and provider must both work with the same interface type for sharing data. If the consumer does not recognize the interface type sent by the provider, it is still possible to connect the controls by means of a transformer (a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartTransformer" />
+
+        
 
         
 
@@ -26,10 +30,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="d98cfd0f-ebd6-4871-89d5-abbd2cdef67b">Web Parts Connections Overview</a>
         </format>
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          interface is a provider interface included with the Web Parts control set as a standard interface for creating connections based on a data field. You can also create custom interfaces to use with Web Parts connections, but in many data-driven Web applications, it is useful to create connections based on a common row (for details, see the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPartRow" />
+
+        
 
         
 
@@ -51,8 +63,12 @@
 
         
 
+        
+
          interface), or field from the data source, using the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPartField" />
+
+        
 
         
 
@@ -61,8 +77,12 @@
 
         
 
+        
+
          control acting as a provider would implement the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPartField" />
+
+        
 
         
 
@@ -71,8 +91,12 @@
 
         
 
+        
+
          interface for a field in your user information table that contains a Web user's postal code data. Another <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -84,8 +108,12 @@
 
         
 
+        
+
          interface has two exposed members. The <see
          cref="P:System.Web.UI.WebControls.WebParts.IWebPartField.Schema" />
+
+        
 
         
 
@@ -94,8 +122,12 @@
 
         
 
+        
+
          object. The <see
          cref="M:System.Web.UI.WebControls.WebParts.IWebPartField.GetFieldValue(System.Web.UI.WebControls.WebParts.FieldCallback)" />
+
+        
 
         
 
@@ -134,6 +166,8 @@
 
             
 
+            
+
              controls.</para
           >
         </summary>
@@ -142,8 +176,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WebParts.FieldCallback" />
+
+          
 
           
 
@@ -174,6 +212,8 @@
 
             
 
+            
+
              interface instance sent by a provider.</para
           >
         </remarks>
@@ -182,6 +222,8 @@
           <para
             >Gets the schema information for a data field that is used to share data between two <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 

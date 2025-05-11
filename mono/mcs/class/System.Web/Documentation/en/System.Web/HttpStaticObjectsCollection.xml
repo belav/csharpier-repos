@@ -30,6 +30,8 @@
 
         
 
+        
+
          property.</para
       >
     </summary>
@@ -47,6 +49,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
+
+            
 
             
 
@@ -79,6 +83,8 @@
 
             
 
+            
+
              into an array.</para
           >
         </summary>
@@ -87,8 +93,12 @@
 
           
 
+          
+
           The array to copy the <see
            cref="T:System.Web.HttpStaticObjectsCollection" />
+
+          
 
           
 
@@ -96,6 +106,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -150,8 +162,12 @@
 
             
 
+            
+
              method is used to read the contents of a <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
+
+            
 
             
 
@@ -160,13 +176,19 @@
 
             
 
+            
+
              method. To serialize an <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
+            
+
             , use the <see
              cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
+
+            
 
             
 
@@ -181,8 +203,12 @@
 
             
 
+            
+
              object from a binary file that was written by using the <see
              cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
+
+            
 
             
 
@@ -197,8 +223,12 @@
 
             
 
+            
+
              populated with the contents from a binary file written using the <see
              cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
+
+            
 
             
 
@@ -210,8 +240,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.BinaryReader" />
+
+          
 
           
 
@@ -266,6 +300,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -377,8 +413,12 @@
 
             
 
+            
+
              method to write the contents of a <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
+
+            
 
             
 
@@ -387,13 +427,19 @@
 
             
 
+            
+
              object. To retrieve a serialized <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
+            
+
              object, use the <see
              cref="M:System.Web.HttpStaticObjectsCollection.Deserialize(System.IO.BinaryReader)" />
+
+            
 
             
 
@@ -408,6 +454,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -416,8 +464,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.BinaryWriter" />
+
+          
 
           
 
@@ -441,11 +493,15 @@
 
             
 
+            
+
              of a collection, not directly on the collection itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the collection object.</para
           >
           <para
             >The object returned in this implementation is the <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
+
+            
 
             
 

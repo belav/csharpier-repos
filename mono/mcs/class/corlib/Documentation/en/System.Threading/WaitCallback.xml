@@ -40,13 +40,19 @@
 
         
 
+        
+
          represents a callback method that you want to execute on a <see
          cref="T:System.Threading.ThreadPool" />
 
         
 
+        
+
          thread. Create the delegate by passing your callback method to the <see
          cref="T:System.Threading.WaitCallback" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          delegate to <see
          cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
           
 
+          
+
            constructor, and simply use the AddressOf operator when passing the callback method to <see
            cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+
+          
 
           
 
@@ -87,8 +101,12 @@
 
         
 
+        
+
          when you queue your task for execution. Each time your callback method executes, the <paramref
          name="state" />
+
+        
 
         
 
@@ -99,6 +117,8 @@
          type="text/html">
           <a href="2BE05B06-A42E-4C9D-A739-96C21D673927">[&lt;topic://cpconthreadpooling&gt;]</a>
         </format>
+
+        
 
         
 

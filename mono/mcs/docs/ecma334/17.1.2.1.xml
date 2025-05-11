@@ -6,8 +6,12 @@
 
     
 
+    
+
      is included in the <non_terminal
      where="17.1.2">class-base</non_terminal>
+
+    
 
     
 
@@ -16,13 +20,19 @@
 
     
 
+    
+
     , or if the <non_terminal
      where="17.1.2">class-base</non_terminal>
 
     
 
+    
+
      lists only interface types, the direct base class is assumed to be object. A class inherits members from its direct base class, as described in <hyperlink
     >17.2.1</hyperlink>
+
+    
 
     
 
@@ -32,11 +42,13 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A {}  
 class B: A {}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -46,6 +58,8 @@ class B: A {}
   <paragraph
     >The direct base class of a class type must be at least as accessible as the class type itself (<hyperlink
     >10.5.4</hyperlink>
+
+    
 
     
 
@@ -62,7 +76,7 @@ class B: A {}
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A: B {}  
 class B: C {}  
 class C: A {}  
@@ -71,9 +85,11 @@ class C: A {}
 
       
 
+      
+
       is in error because the classes circularly depend on themselves. Likewise, the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A: B.C {}  
 class B: A  
 {  
@@ -81,6 +97,8 @@ class B: A
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -92,7 +110,7 @@ class B: A
 
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A  
 {  
    class B: A {}  
@@ -109,11 +127,13 @@ class A
 
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 sealed class A {}  
 class B: A {}      // Error, cannot derive from a sealed class  
 ]]>
       </code_example>
+
+      
 
       
 

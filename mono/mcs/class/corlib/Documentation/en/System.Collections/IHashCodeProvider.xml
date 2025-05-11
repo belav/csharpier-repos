@@ -37,8 +37,12 @@
 
         
 
+        
+
          interface is used in conjunction with the <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          object must override the <see
          cref="M:System.Object.GetHashCode" />
+
+        
 
         
 
@@ -57,13 +65,19 @@
 
         
 
+        
+
          methods. <see
          cref="M:System.Object.GetHashCode" />
 
         
 
+        
+
          or the key's implementation of <see
          cref="M:System.Object.GetHashCode" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
          or the key's implementation of <see
          cref="M:System.Object.Equals(System.Object)" />
+
+        
 
         
 
@@ -85,8 +103,12 @@
 
         
 
+        
+
          constructor take a parameter that is an <see
          cref="T:System.Collections.IHashCodeProvider" />
+
+        
 
         
 
@@ -95,8 +117,12 @@
 
         
 
+        
+
          implementation, or both. If an <see
          cref="T:System.Collections.IHashCodeProvider" />
+
+        
 
         
 
@@ -105,13 +131,19 @@
 
         
 
+        
+
          method of that implementation is used as the hash code provider. If an <see
          cref="T:System.Collections.IComparer" />
 
         
 
+        
+
          implementation is passed to the constructor, the <see
          cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+
+        
 
         
 
@@ -152,8 +184,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -176,8 +212,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace provides classes and interfaces that enable you to create ASP.NET server controls and ASP.NET Web pages for the user interface of your ASP.NET Web applications. </para
       >
     </summary>
@@ -20,8 +22,12 @@
 
         
 
+        
+
          class, which provides a common set of functionality for all server controls, which includes HTML server controls, Web server controls, and user controls. It also includes the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 

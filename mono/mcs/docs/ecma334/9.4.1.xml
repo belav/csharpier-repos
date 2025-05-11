@@ -6,8 +6,12 @@
 
     
 
+    
+
     ), regular string literals (<hyperlink
     >9.4.4.5</hyperlink>
+
+    
 
     
 
@@ -16,11 +20,15 @@
 
     
 
+    
+
     ). A Unicode character escape is not processed in any other location (for example, to form an operator, punctuator, or keyword). <grammar_production
     >
       <name>
         <non_terminal where="9.4.1">unicode-escape-sequence</non_terminal>
       </name>
+
+      
 
       
 
@@ -54,7 +62,7 @@
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Class1  
 {  
    static void Test(bool \u0066) {  
@@ -68,9 +76,11 @@ class Class1
 
       
 
+      
+
       shows several uses of \u0066, which is the escape sequence for the letter "f". The program is equivalent to <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Class1  
 {  
    static void Test(bool f) {  
@@ -81,6 +91,8 @@ class Class1
 }  
 ]]>
       </code_example>
+
+      
 
       
 

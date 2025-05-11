@@ -45,6 +45,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -79,6 +81,8 @@
           <para
             >Gets the End-to-End tracing configuration settings specified in a <see
              cref="T:System.ServiceModel.Configuration.EndToEndTracingElement" />
+
+            
 
             
 

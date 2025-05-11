@@ -21,8 +21,12 @@
 
         
 
+        
+
          enumerates the values to use when you set the <see
          cref="P:System.Web.Configuration.ProcessModelSection.ComAuthenticationLevel" />
+
+        
 
         
 
@@ -34,12 +38,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="T:System.Web.Configuration.ProcessModelComAuthenticationLevel" />
+
+          
 
           
 

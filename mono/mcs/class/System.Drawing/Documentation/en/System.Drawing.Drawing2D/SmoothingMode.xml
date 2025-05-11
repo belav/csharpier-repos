@@ -20,13 +20,19 @@
 
         
 
+        
+
         , <see
          cref="F:System.Drawing.Drawing2D.SmoothingMode.None" />
 
         
 
+        
+
         , and <see
          cref="F:System.Drawing.Drawing2D.SmoothingMode.HighSpeed" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Drawing.Drawing2D.SmoothingMode.HighQuality" />
+
+        
 
         
 
@@ -51,8 +61,12 @@
 
           
 
+          
+
            property is specified by using the <see
            cref="T:System.Drawing.Drawing2D.SmoothingMode" />
+
+          
 
           
 
@@ -61,8 +75,12 @@
 
           
 
+          
+
            property and the <see
            cref="T:System.Drawing.Text.TextRenderingHint" />
+
+          
 
           
 
@@ -76,8 +94,12 @@
 
           
 
+          
+
            property is specified by using the <see
            cref="T:System.Drawing.Drawing2D.SmoothingMode" />
+
+          
 
           
 
@@ -86,8 +108,12 @@
 
           
 
+          
+
            object are rendered the same way (aliased) regardless of the setting for the <see
            cref="P:System.Drawing.Graphics.SmoothingMode" />
+
+          
 
           
 

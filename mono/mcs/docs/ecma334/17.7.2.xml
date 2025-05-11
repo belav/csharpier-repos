@@ -7,8 +7,12 @@
 
       
 
+      
+
       , as in the Button example above. One situation for doing so involves the case in which the storage cost of one field per event is not acceptable. In such cases, a class can include <non_terminal
        where="17.7">event-accessor-declarations</non_terminal>
+
+      
 
       
 
@@ -21,6 +25,8 @@
 
     
 
+    
+
      of an event specify the executable statements associated with adding and removing event handlers. </paragraph
   >
   <paragraph
@@ -29,8 +35,14 @@
 
     
 
+    
+
      and a <non_terminal
-     where="17.7">remove-accessor-declaration</non_terminal>
+     where="17.7"
+>remove-accessor-declaration</non_terminal
+    >
+
+    
 
     
 
@@ -39,8 +51,14 @@
 
     
 
+    
+
      specifies the statements to execute when an event handler is added, and the block associated with a <non_terminal
-     where="17.7">remove-accessor-declaration</non_terminal>
+     where="17.7"
+>remove-accessor-declaration</non_terminal
+    >
+
+    
 
     
 
@@ -52,8 +70,14 @@
 
     
 
+    
+
      and <non_terminal
-     where="17.7">remove-accessor-declaration</non_terminal>
+     where="17.7"
+>remove-accessor-declaration</non_terminal
+    >
+
+    
 
     
 
@@ -62,13 +86,21 @@
 
     
 
+    
+
      return type. The implicit parameter of an event accessor is named value. When an event is used in an event assignment, the appropriate event accessor is used. Specifically, if the assignment operator is += then the add accessor is used, and if the assignment operator is -= then the remove accessor is used. In either case, the right-hand operand of the assignment operator is used as the argument to the event accessor. The block of an <non_terminal
      where="17.7">add-accessor-declaration</non_terminal>
 
     
 
+    
+
      or a  <non_terminal
-     where="17.7">remove-accessor-declaration</non_terminal>
+     where="17.7"
+>remove-accessor-declaration</non_terminal
+    >
+
+    
 
     
 
@@ -77,8 +109,12 @@
 
     
 
+    
+
      methods described in <hyperlink
     >17.5.8</hyperlink>
+
+    
 
     
 
@@ -89,7 +125,7 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Control: Component  
 {  
    // Unique keys for events  
@@ -121,6 +157,8 @@ class Control: Component
 }  
 ]]>
       </code_example>
+
+      
 
       
 

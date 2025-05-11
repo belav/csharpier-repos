@@ -22,13 +22,19 @@
 
         
 
+        
+
          returns true, then the loop ran to completion, such that all iterations of the loop were executed. If <see
          cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
 
         
 
+        
+
          returns false and <see
          cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
          was used to end the loop prematurely. If <see
          cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
+
+        
 
         
 
@@ -47,8 +57,12 @@
 
         
 
+        
+
          returns a non-null integral value, <see
          cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+        
 
         
 
@@ -60,6 +74,8 @@
       <para
         >Provides completion status on the execution of a <see
          cref="T:System.Threading.Tasks.Parallel" />
+
+        
 
         
 
@@ -113,6 +129,8 @@
 
             
 
+            
+
              was not employed, this property will return null.</para
           >
         </remarks>
@@ -121,6 +139,8 @@
           <para
             >Gets the index of the lowest iteration from which <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 

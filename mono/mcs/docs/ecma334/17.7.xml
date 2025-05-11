@@ -10,6 +10,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -40,8 +42,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -58,6 +64,8 @@
       <name>
         <non_terminal where="17.7">event-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -103,13 +111,19 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="17.7">add-accessor-declaration</non_terminal>
-        <non_terminal where="17.7">remove-accessor-declaration</non_terminal>
+        <non_terminal where="17.7"
+>remove-accessor-declaration</non_terminal
+        >
       </rhs>
       <rhs>
-        <non_terminal where="17.7">remove-accessor-declaration</non_terminal>
+        <non_terminal where="17.7"
+>remove-accessor-declaration</non_terminal
+        >
         <non_terminal where="17.7">add-accessor-declaration</non_terminal>
       </rhs>
     </grammar_production>
@@ -117,6 +131,8 @@
       <name>
         <non_terminal where="17.7">add-accessor-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -130,8 +146,12 @@
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="17.7">remove-accessor-declaration</non_terminal>
+        <non_terminal where="17.7"
+>remove-accessor-declaration</non_terminal
+        >
       </name>
+
+      
 
       
 
@@ -139,7 +159,8 @@
       >
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
-        <terminal>remove</terminal>
+        <terminal
+>remove</terminal>
         <non_terminal where="15.2">block</non_terminal>
       </rhs>
     </grammar_production>
@@ -150,8 +171,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -160,8 +185,12 @@
 
     
 
+    
+
     ), the new (<hyperlink
     >17.2.2</hyperlink>
+
+    
 
     
 
@@ -170,8 +199,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.7.3</hyperlink>
+
+    
 
     
 
@@ -180,8 +213,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.7.4</hyperlink>
+
+    
 
     
 
@@ -190,8 +227,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.7.4</hyperlink>
+
+    
 
     
 
@@ -200,13 +241,19 @@
 
     
 
+    
+
     ), abstract (<hyperlink
     >17.5.6</hyperlink>
 
     
 
+    
+
     , <hyperlink
     >17.7.4</hyperlink>
+
+    
 
     
 
@@ -218,6 +265,8 @@
 
     
 
+    
+
     ) with regard to valid combinations of modifiers. </paragraph
   >
   <paragraph
@@ -226,8 +275,12 @@
 
     
 
+    
+
      (<hyperlink
     >11.2</hyperlink>
+
+    
 
     
 
@@ -236,8 +289,12 @@
 
     
 
+    
+
      must be at least as accessible as the event itself (<hyperlink
     >10.5.4</hyperlink>
+
+    
 
     
 
@@ -249,8 +306,12 @@
 
     
 
+    
+
     . However, if it does not, for non-extern,  non-abstract events, the compiler shall supply them automatically (<hyperlink
     >17.7.1</hyperlink>
+
+    
 
     
 
@@ -262,13 +323,19 @@
 
     
 
+    
+
      defines one or more events-one for each of the <non_terminal
      where="17.4">variable-declarator</non_terminal>
 
     
 
+    
+
     s. The attributes and modifiers apply to all of the members declared by such an  <non_terminal
      where="17.7">event-declaration</non_terminal>
+
+    
 
     
 
@@ -280,8 +347,12 @@
 
     
 
+    
+
      to include both the abstract modifier and  brace-delimited <non_terminal
      where="17.7">event-accessor-declarations</non_terminal>
+
+    
 
     
 
@@ -293,11 +364,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >An event can be used as the left-hand operand of the += and -= operators (<hyperlink
     >14.13.3</hyperlink>
+
+    
 
     
 
@@ -310,13 +385,15 @@
 
     
 
+    
+
      (as opposed to having the type of x, with the value of x after the assignment). This rule prohibits external code from indirectly examining the underlying delegate of an event. </paragraph
   >
   <paragraph>
     <example
       >[Example: The following example shows how event handlers are attached to instances of the Button class: <code_example
       >
-        <![CDATA[
+<![CDATA[
 public delegate void EventHandler(object sender, EventArgs e);  
 public class Button: Control  
 {  

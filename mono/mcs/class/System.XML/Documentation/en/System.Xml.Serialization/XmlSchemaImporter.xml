@@ -30,6 +30,8 @@
 
         
 
+        
+
          class is used by the <format
          type="text/html">
           <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
@@ -39,8 +41,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -53,11 +59,15 @@
 
         
 
+        
+
          while generating classes from XML Schema Definition (XSD) documents. Instead of using this class directly, use Wsdl.exe or Xsd.exe. </para
       >
       <para
         >The <see
          cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+        
 
         
 
@@ -107,6 +117,8 @@
 
             
 
+            
+
              class, use Wsdl.exe or Xsd.exe.</para
           >
         </remarks>
@@ -118,8 +130,12 @@
 
             
 
+            
+
              class, taking a collection of <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -131,8 +147,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -170,6 +190,8 @@
 
             
 
+            
+
              class, use Wsdl.exe or Xsd.exe.</para
           >
         </remarks>
@@ -181,8 +203,12 @@
 
             
 
+            
+
              class, taking a collection of <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -194,8 +220,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlSchemas" />
+
+          
 
           
 
@@ -206,8 +236,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeIdentifiers" />
+
+          
 
           
 
@@ -245,6 +279,8 @@
 
             
 
+            
+
              class for a collection of XML schemas, using the specified code generation options and import context.</para
           >
         </summary>
@@ -253,8 +289,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -265,8 +305,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -277,8 +321,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.ImportContext" />
+
+          
 
           
 
@@ -320,13 +368,19 @@
 
             
 
+            
+
              class, taking a collection of <see
              cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
+            
+
              objects that represents the XML schemas used by SOAP literal messages, plus classes being generated for bindings defined in a WSDL document, and a <see
              cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+            
 
             
 
@@ -338,8 +392,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -350,8 +408,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeIdentifiers" />
+
+          
 
           
 
@@ -362,8 +424,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -402,6 +468,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -410,8 +478,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -422,8 +494,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -434,8 +510,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -446,8 +526,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.ImportContext" />
+
+          
 
           
 
@@ -486,6 +570,8 @@
 
             
 
+            
+
              method is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe or Xsd.exe.</para
           >
           <para
@@ -494,8 +580,12 @@
 
             
 
+            
+
              class is used only when a WSDL document specifies literal use. The <see
              cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportAnyType(System.Xml.XmlQualifiedName,System.String)" />
+
+            
 
             
 
@@ -514,6 +604,8 @@
 
             
 
+            
+
              representing the .NET Framework type mapping for a single element part of a WSDL message definition.</para
           >
         </returns>
@@ -522,8 +614,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -531,6 +627,8 @@
         >
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -569,6 +667,8 @@
 
             
 
+            
+
              method is used by the Xsd.exe tool to generate classes from an XML Schema Definition (XSD) document. Instead of calling this method directly, use Xsd.exe.</para
           >
         </remarks>
@@ -584,6 +684,8 @@
 
             
 
+            
+
              representing the.NET Framework type mapping information for an XML schema element.</para
           >
         </returns>
@@ -592,8 +694,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -601,6 +707,8 @@
         >
         <param name="baseType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -640,6 +748,8 @@
 
             
 
+            
+
              method is used by the Xsd.exe tool to generate classes from an XML Schema Definition (XSD) document. It also is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe or Xsd.exe.</para
           >
         </remarks>
@@ -656,8 +766,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -668,10 +782,14 @@
 
           
 
+          
+
           A base type for the .NET Framework type that is generated to correspond to an XSD element's type.</param
         >
         <param name="baseTypeCanBeIndirect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -709,8 +827,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+            
 
             
 
@@ -719,6 +841,8 @@
           <para
             >The <see
              cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+            
 
             
 
@@ -738,8 +862,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -777,6 +905,8 @@
 
             
 
+            
+
              method is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe or Xsd.exe.</para
           >
           <para
@@ -785,8 +915,12 @@
 
             
 
+            
+
              class is used only when a WSDL document specifies literal use. The value of the <paramref
              name="names" />
+
+            
 
             
 
@@ -806,6 +940,8 @@
 
             
 
+            
+
              that represents the .NET Framework type mappings for the element parts of a WSDL message definition.</para
           >
         </returns>
@@ -814,8 +950,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -860,11 +1000,15 @@
 
             
 
+            
+
              that contains type mapping information.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -875,6 +1019,8 @@
 
           
 
+          
+
           The namespace of the element for which to generate a mapping.</param
         >
         <param name="members">
@@ -882,8 +1028,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Xml.Serialization.SoapSchemaMember" />
+
+          
 
           
 
@@ -923,6 +1073,8 @@
 
             
 
+            
+
              method is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe or Xsd.exe.</para
           >
           <para
@@ -931,8 +1083,12 @@
 
             
 
+            
+
              class is used only when a WSDL document specifies literal use. The value of the <paramref
              name="names" />
+
+            
 
             
 
@@ -953,8 +1109,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -965,10 +1125,14 @@
 
           
 
+          
+
           A base type for all .NET Framework types that are generated to correspond to message parts.</param
         >
         <param name="baseTypeCanBeIndirect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1011,6 +1175,8 @@
 
             
 
+            
+
              object that describes a type mapping.</para
           >
         </returns>
@@ -1019,8 +1185,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -1064,6 +1234,8 @@
 
             
 
+            
+
              object that describes a type mapping.</para
           >
         </returns>
@@ -1072,8 +1244,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -1084,8 +1260,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1130,6 +1310,8 @@
 
             
 
+            
+
              object that describes a type mapping.</para
           >
         </returns>
@@ -1138,8 +1320,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -1150,8 +1336,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1162,13 +1352,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
 
           
 
+          
+
            value that specifies whether the generated type can indirectly inherit the <paramref
            name="baseType" />
+
+          
 
           
 
@@ -1206,6 +1402,8 @@
 
             
 
+            
+
              method is used by the Xsd.exe tool while generating classes XML Schema Definition (XSD) document. Instead of calling this method directly, use Xsd.exe.</para
           >
           <para>This method does not account for the XML schema element's type.</para>
@@ -1223,8 +1421,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 

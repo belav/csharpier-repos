@@ -6,8 +6,12 @@
 
     
 
+    
+
      is a <non_terminal
      where="16.5">type-declaration</non_terminal>
+
+    
 
     
 
@@ -16,11 +20,15 @@
 
     
 
+    
+
     ) that declares a new struct: <grammar_production
     >
       <name>
         <non_terminal where="18.1">struct-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -46,8 +54,12 @@
 
     
 
+    
+
      consists of an optional set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -56,8 +68,12 @@
 
     
 
+    
+
     s (<hyperlink
     >18.1.1</hyperlink>
+
+    
 
     
 
@@ -66,8 +82,12 @@
 
     
 
+    
+
      specification (<hyperlink
     >18.1.2</hyperlink>
+
+    
 
     
 
@@ -76,8 +96,12 @@
 
     
 
+    
+
      (<hyperlink
     >18.1.3</hyperlink>
+
+    
 
     
 

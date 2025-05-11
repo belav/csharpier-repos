@@ -31,6 +31,8 @@
 
         
 
+        
+
         s.</para
       >
     </summary>
@@ -87,6 +89,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -95,8 +99,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -136,8 +144,12 @@
 
             
 
+            
+
              method expects only <see
              cref="T:System.Xml.Schema.XmlSchemaExternal" />
+
+            
 
             
 
@@ -146,8 +158,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaInclude" />
+
+            
 
             
 
@@ -156,13 +172,19 @@
 
             
 
+            
+
             ) as parameters. The following example illustrates adding an included schema to the <see
              cref="P:System.Xml.Schema.XmlSchema.Includes" />
 
             
 
+            
+
              collection of an existing <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -193,6 +215,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              to the XmlSchemaObjectCollection.</para
           >
         </summary>
@@ -205,8 +229,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -245,6 +273,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              is in the XmlSchemaObjectCollection.</para
           >
         </summary>
@@ -257,8 +287,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -298,6 +332,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              to copy the elements.</para
           >
         </remarks>
@@ -309,6 +345,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             s from the collection into the given array, starting at the given index.</para
           >
         </summary>
@@ -317,10 +355,14 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from the XmlSchemaObjectCollection. The array must have zero-based indexing. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -361,6 +403,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -397,6 +441,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -408,6 +454,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -416,8 +464,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -457,8 +509,12 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              is equal to Count, <paramref
              name="value" />
+
+            
 
             
 
@@ -474,11 +530,15 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              to the XmlSchemaObjectCollection.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,8 +549,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -552,6 +616,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -589,6 +655,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -597,8 +665,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The index of <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -606,6 +678,8 @@ schema.Includes.Add(include);</code>
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -645,6 +719,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -653,8 +729,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The index of <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -662,6 +742,8 @@ schema.Includes.Add(include);</code>
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -702,6 +784,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -710,8 +794,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The index of <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -722,10 +810,14 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The old value. </param
         >
         <param name="newValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -763,8 +855,12 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             . That is, this method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -773,8 +869,12 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -783,6 +883,8 @@ schema.Includes.Add(include);</code>
           <para
             >This method determines equality by calling <see
              cref="M:System.Object.Equals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -798,6 +900,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              from the XmlSchemaObjectCollection.</para
           >
         </summary>
@@ -806,8 +910,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 

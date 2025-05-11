@@ -6,11 +6,15 @@
 
     
 
+    
+
      for detailed information on delegate invocation.) If an exception occurs during the invocation of such a delegate, and that exception is not caught within the method that was invoked, the search for an exception catch clause continues in the method that called the delegate, as if that method had directly called the method to which that delegate referred. </paragraph
   >
   <paragraph
     >Invocation of a delegate instance whose invocation list contains multiple entries, proceeds by invoking each of the methods in the invocation list, synchronously, in order. Each method so called is passed the same set of arguments as was given to the delegate instance. If such a delegate invocation includes reference parameters (<hyperlink
     >17.5.1.2</hyperlink>
+
+    
 
     
 
@@ -21,7 +25,7 @@
     <example
       >[Example: The following example shows how to instantiate, combine, remove, and invoke delegates: <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 delegate void D(int x);  
 class Test  
@@ -79,7 +83,7 @@ class Demo
     <example
       >The output produced is: <code_example
       >
-        <![CDATA[
+<![CDATA[
 Test.M1: -1  
 Test.M2: -2  
 Test.M1: 10  
@@ -100,6 +104,8 @@ Test.M1: 60
 Test.M1: 60  
 ]]>
       </code_example>
+
+      
 
       
 

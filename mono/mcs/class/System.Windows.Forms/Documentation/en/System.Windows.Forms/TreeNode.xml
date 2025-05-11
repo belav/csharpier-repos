@@ -37,8 +37,12 @@
 
         
 
+        
+
          collection holds all the child <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         . You can add, remove, or clone a <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          can contain a collection of other <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -67,8 +79,12 @@
 
         
 
+        
+
          when iterating through the collection. To determine your location in a tree structure, use the <see
          cref="P:System.Windows.Forms.TreeNode.FullPath" />
+
+        
 
         
 
@@ -77,13 +93,19 @@
 
         
 
+        
+
          string can be parsed using the <see
          cref="P:System.Windows.Forms.TreeView.PathSeparator" />
 
         
 
+        
+
          string value to determine where a <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -95,8 +117,12 @@
 
         
 
+        
+
          label is set by setting the <see
          cref="P:System.Windows.Forms.TreeNode.Text" />
+
+        
 
         
 
@@ -105,13 +131,19 @@
 
         
 
+        
+
          constructors that has a string parameter that represents the <see
          cref="P:System.Windows.Forms.TreeNode.Text" />
 
         
 
+        
+
          property. The label is displayed next to the <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -123,8 +155,12 @@
 
         
 
+        
+
          to the <see
          cref="P:System.Windows.Forms.TreeView.ImageList" />
+
+        
 
         
 
@@ -133,8 +169,12 @@
 
         
 
+        
+
          control and assign an <see
          cref="T:System.Drawing.Image" />
+
+        
 
         
 
@@ -143,8 +183,12 @@
 
         
 
+        
+
          property. Set the <see
          cref="P:System.Windows.Forms.TreeNode.ImageIndex" />
+
+        
 
         
 
@@ -153,8 +197,12 @@
 
         
 
+        
+
          you want to display when the <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -163,13 +211,19 @@
 
         
 
+        
+
          property to the index value of the <see
          cref="T:System.Drawing.Image" />
 
         
 
+        
+
          you want to display when the <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -181,8 +235,12 @@
 
         
 
+        
+
          collection can be achieved by using the following property values: <see
          cref="P:System.Windows.Forms.TreeNode.FirstNode" />
+
+        
 
         
 
@@ -191,8 +249,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.TreeNode.NextNode" />
+
+        
 
         
 
@@ -201,8 +263,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.TreeNode.NextVisibleNode" />
+
+        
 
         
 
@@ -211,8 +277,12 @@
 
         
 
+        
+
         . Assign the <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -221,8 +291,12 @@
 
         
 
+        
+
          property to select that tree node in the <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -234,8 +308,12 @@
 
         
 
+        
+
          by pressing the plus (+) button next to the <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -244,8 +322,12 @@
 
         
 
+        
+
          by calling the <see
          cref="M:System.Windows.Forms.TreeNode.Expand" />
+
+        
 
         
 
@@ -254,8 +336,12 @@
 
         
 
+        
+
          collection, call the <see
          cref="M:System.Windows.Forms.TreeNode.ExpandAll" />
+
+        
 
         
 
@@ -264,8 +350,12 @@
 
         
 
+        
+
          level by calling the <see
          cref="M:System.Windows.Forms.TreeNode.Collapse" />
+
+        
 
         
 
@@ -274,13 +364,19 @@
 
         
 
+        
+
         , if one is displayed. You can also call the <see
          cref="M:System.Windows.Forms.TreeNode.Toggle" />
 
         
 
+        
+
          method to alternate the <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -292,13 +388,19 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.TreeView" />
 
         
 
+        
+
          to true. The <see
          cref="P:System.Windows.Forms.TreeNode.Checked" />
+
+        
 
         
 
@@ -310,6 +412,8 @@
       <para
         >Represents a node of a <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -329,6 +433,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -356,8 +462,12 @@
 
             
 
+            
+
              parameter value is assigned to the node's <see
              cref="P:System.Windows.Forms.TreeNode.Text" />
+
+            
 
             
 
@@ -372,6 +482,8 @@
 
             
 
+            
+
              class with the specified label text.</para
           >
         </summary>
@@ -380,8 +492,12 @@
 
           
 
+          
+
           The label <see
            cref="P:System.Windows.Forms.TreeNode.Text" />
+
+          
 
           
 
@@ -416,6 +532,8 @@
 
             
 
+            
+
              class using the specified serialization information and context.</para
           >
         </summary>
@@ -424,8 +542,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -436,8 +558,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -464,8 +590,12 @@
 
             
 
+            
+
              parameter value is assigned to the node's <see
              cref="P:System.Windows.Forms.TreeNode.Text" />
+
+            
 
             
 
@@ -474,13 +604,19 @@
 
             
 
+            
+
              array are added to the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
 
             
 
+            
+
              that is stored in the <see
              cref="P:System.Windows.Forms.TreeNode.Nodes" />
+
+            
 
             
 
@@ -495,6 +631,8 @@
 
             
 
+            
+
              class with the specified label text and child tree nodes.</para
           >
         </summary>
@@ -503,8 +641,12 @@
 
           
 
+          
+
           The label <see
            cref="P:System.Windows.Forms.TreeNode.Text" />
+
+          
 
           
 
@@ -515,8 +657,12 @@
 
           
 
+          
+
           An array of child <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -548,8 +694,12 @@
 
             
 
+            
+
              parameter value is assigned to the node's <see
              cref="P:System.Windows.Forms.TreeNode.Text" />
+
+            
 
             
 
@@ -558,8 +708,12 @@
 
             
 
+            
+
              and <paramref
              name="selectedImageIndex" />
+
+            
 
             
 
@@ -568,8 +722,12 @@
 
             
 
+            
+
              stored in the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -578,13 +736,19 @@
 
             
 
+            
+
              property. The image referenced in the <paramref
              name="imageIndex" />
 
             
 
+            
+
              property is displayed when the tree node is not selected. Likewise, the image referenced in the <paramref
              name="selectedImageIndex" />
+
+            
 
             
 
@@ -599,6 +763,8 @@
 
             
 
+            
+
              class with the specified label text and images to display when the tree node is in a selected and unselected state.</para
           >
         </summary>
@@ -607,8 +773,12 @@
 
           
 
+          
+
           The label <see
            cref="P:System.Windows.Forms.TreeNode.Text" />
+
+          
 
           
 
@@ -619,8 +789,12 @@
 
           
 
+          
+
           The index value of <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -631,8 +805,12 @@
 
           
 
+          
+
           The index value of <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -665,8 +843,12 @@
 
             
 
+            
+
              parameter value is assigned to the node's <see
              cref="P:System.Windows.Forms.TreeNode.Text" />
+
+            
 
             
 
@@ -675,8 +857,12 @@
 
             
 
+            
+
              and <paramref
              name="selectedImageIndex" />
+
+            
 
             
 
@@ -685,8 +871,12 @@
 
             
 
+            
+
              stored in the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -695,8 +885,12 @@
 
             
 
+            
+
              property. The image referenced in the <paramref
              name="imageIndex" />
+
+            
 
             
 
@@ -705,8 +899,12 @@
 
             
 
+            
+
              parameter is displayed when the tree node is in a selected state. The tree nodes that are contained in the <paramref
              name="children" />
+
+            
 
             
 
@@ -715,8 +913,12 @@
 
             
 
+            
+
              that is stored in the <see
              cref="P:System.Windows.Forms.TreeNode.Nodes" />
+
+            
 
             
 
@@ -731,6 +933,8 @@
 
             
 
+            
+
              class with the specified label text, child tree nodes, and images to display when the tree node is in a selected and unselected state.</para
           >
         </summary>
@@ -739,8 +943,12 @@
 
           
 
+          
+
           The label <see
            cref="P:System.Windows.Forms.TreeNode.Text" />
+
+          
 
           
 
@@ -751,8 +959,12 @@
 
           
 
+          
+
           The index value of <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -763,8 +975,12 @@
 
           
 
+          
+
           The index value of <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -775,8 +991,12 @@
 
           
 
+          
+
           An array of child <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -804,8 +1024,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Drawing.Color.Empty" />
+
+            
 
             
 
@@ -814,13 +1038,19 @@
 
             
 
+            
+
              used is the <see
              cref="P:System.Windows.Forms.Control.BackColor" />
 
             
 
+            
+
              property value of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -853,13 +1083,19 @@
 
             
 
+            
+
              event of a <see
              cref="T:System.Windows.Forms.MenuItem" />
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -872,13 +1108,19 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Windows.Forms.TreeView" />
 
               
 
+              
+
                is set to true. If <see
                cref="P:System.Windows.Forms.TreeView.LabelEdit" />
+
+              
 
               
 
@@ -909,6 +1151,8 @@
           <para
             >The coordinates are relative to the upper-left corner of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -970,6 +1214,8 @@
 
             
 
+            
+
              being cloned are included in the new tree node and subtree.</para
           >
           <para
@@ -978,13 +1224,19 @@
 
             
 
+            
+
              method performs a shallow copy of the node. If the value of the <see
              cref="P:System.Windows.Forms.TreeNode.Tag" />
 
             
 
+            
+
              property is a reference type, both the original and cloned copy will point to the same single instance of the <see
              cref="P:System.Windows.Forms.TreeNode.Tag" />
+
+            
 
             
 
@@ -1003,8 +1255,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -1033,8 +1289,12 @@
 
             
 
+            
+
              method collapses the current <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -1043,8 +1303,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.TreeNode.Collapse(System.Boolean)" />
+
+            
 
             
 
@@ -1057,8 +1321,12 @@
 
               
 
+              
+
                is persisted. For example, if the next level of child nodes was not collapsed previously, when the <see
                cref="M:System.Windows.Forms.TreeNode.Expand" />
+
+              
 
               
 
@@ -1097,6 +1365,8 @@
 
             
 
+            
+
              method, passing true, when you want to collapse a node but leave its child nodes in their expanded state.</para
           >
         </remarks>
@@ -1108,11 +1378,15 @@
 
             
 
+            
+
              and optionally collapses its children.</para
           >
         </summary>
         <param name="ignoreChildren">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1144,6 +1418,8 @@
           <para
             >The preferred way to associate a shortcut menu with a tree node is with the <see
              cref="P:System.Windows.Forms.TreeNode.ContextMenuStrip" />
+
+            
 
             
 
@@ -1211,8 +1487,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1224,13 +1504,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that describes the <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -1241,8 +1527,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1270,6 +1560,8 @@
 
           
 
+          
+
           true if the editing of the tree node label text was canceled without being saved; otherwise, false. </param
         >
       </Docs>
@@ -1294,8 +1586,12 @@
 
             
 
+            
+
              method is called, the tree is expanded and scrolled to ensure that the current tree node is visible in the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1305,6 +1601,8 @@
             <para
               >If the <see
                cref="P:System.Windows.Forms.TreeView.ItemHeight" />
+
+              
 
               
 
@@ -1338,8 +1636,12 @@
 
             
 
+            
+
              method expands the current <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -1352,8 +1654,12 @@
 
               
 
+              
+
                is persisted. For example, if the next level of child nodes was not collapsed previously, when the <see
                cref="M:System.Windows.Forms.TreeNode.Expand" />
+
+              
 
               
 
@@ -1387,8 +1693,12 @@
 
             
 
+            
+
              method expands all the child tree nodes assigned to the <see
              cref="P:System.Windows.Forms.TreeNode.Nodes" />
+
+            
 
             
 
@@ -1401,8 +1711,12 @@
 
               
 
+              
+
                is persisted. For example, if the next level of child nodes was not collapsed previously, when the <see
                cref="M:System.Windows.Forms.TreeNode.Expand" />
+
+              
 
               
 
@@ -1439,8 +1753,12 @@
 
             
 
+            
+
              is the first child <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -1449,8 +1767,12 @@
 
             
 
+            
+
              stored in the <see
              cref="P:System.Windows.Forms.TreeNode.Nodes" />
+
+            
 
             
 
@@ -1459,8 +1781,12 @@
 
             
 
+            
+
              has no child tree node, the <see
              cref="P:System.Windows.Forms.TreeNode.FirstNode" />
+
+            
 
             
 
@@ -1498,13 +1824,19 @@
 
             
 
+            
+
              used is the <see
              cref="P:System.Windows.Forms.Control.ForeColor" />
 
             
 
+            
+
              property value of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1543,8 +1875,12 @@
 
             
 
+            
+
              collection, the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1553,8 +1889,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1573,8 +1913,12 @@
 
             
 
+            
+
              that represents the tree node assigned to the specified <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1586,8 +1930,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeView" />
+
+          
 
           
 
@@ -1595,6 +1943,8 @@
         >
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1622,13 +1972,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.TreeView" />
 
             
 
+            
+
              control that contains this node. For example, if the delimiter character of the tree view control named "Location" is set to the backslash character, (\), the <see
              cref="P:System.Windows.Forms.TreeNode.FullPath" />
+
+            
 
             
 
@@ -1673,11 +2029,15 @@
 
             
 
+            
+
              collection.</para
           >
         </returns>
         <param name="includeSubTrees">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1702,6 +2062,8 @@
           <para
             >If a handle is not already created when the <see
              cref="P:System.Windows.Forms.TreeNode.Handle" />
+
+            
 
             
 
@@ -1759,8 +2121,12 @@
 
             
 
+            
+
              value is the index value of an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -1769,8 +2135,12 @@
 
             
 
+            
+
              assigned to the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
+
+            
 
             
 
@@ -1783,8 +2153,12 @@
 
               
 
+              
+
                property is the same as the <see
                cref="P:System.Windows.Forms.TreeView.ImageIndex" />
+
+              
 
               
 
@@ -1793,8 +2167,12 @@
 
               
 
+              
+
                control that the <see
                cref="T:System.Windows.Forms.TreeNode" />
+
+              
 
               
 
@@ -1807,8 +2185,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TreeNode.ImageIndex" />
+
+            
 
             
 
@@ -1817,8 +2199,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.TreeNode.ImageIndex" />
+
+            
 
             
 
@@ -1827,8 +2213,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.TreeNode.ImageKey" />
+
+            
 
             
 
@@ -1884,8 +2274,12 @@
 
             
 
+            
+
              property of the containing <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1897,6 +2291,8 @@
 
             
 
+            
+
              is case-insensitive.</para
           >
           <para
@@ -1905,8 +2301,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TreeNode.ImageIndex" />
+
+            
 
             
 
@@ -1915,8 +2315,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.TreeNode.ImageIndex" />
+
+            
 
             
 
@@ -1925,8 +2329,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.TreeNode.ImageKey" />
+
+            
 
             
 
@@ -2073,8 +2481,12 @@
 
             
 
+            
+
              is the last child <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2083,8 +2495,12 @@
 
             
 
+            
+
              stored in the <see
              cref="P:System.Windows.Forms.TreeNode.Nodes" />
+
+            
 
             
 
@@ -2093,8 +2509,12 @@
 
             
 
+            
+
              has no child tree node, the <see
              cref="P:System.Windows.Forms.TreeNode.LastNode" />
+
+            
 
             
 
@@ -2140,6 +2560,8 @@
 
             
 
+            
+
              property, the root node is considered the first level of nesting and returns 0.</para
           >
         </remarks>
@@ -2148,6 +2570,8 @@
           <para
             >Gets the zero-based depth of the tree node in the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2175,8 +2599,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2185,8 +2613,12 @@
 
             
 
+            
+
             . If the node does not have a name, <see
              cref="P:System.Windows.Forms.TreeNode.Name" />
+
+            
 
             
 
@@ -2218,8 +2650,12 @@
 
             
 
+            
+
              is the next sibling <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2228,8 +2664,12 @@
 
             
 
+            
+
              stored in the <see
              cref="P:System.Windows.Forms.TreeNode.Nodes" />
+
+            
 
             
 
@@ -2238,8 +2678,12 @@
 
             
 
+            
+
             . If there is no next tree node, the <see
              cref="P:System.Windows.Forms.TreeNode.NextNode" />
+
+            
 
             
 
@@ -2280,8 +2724,12 @@
 
             
 
+            
+
              can be a child, sibling, or a tree node from another branch. If there is no next tree node, the <see
              cref="P:System.Windows.Forms.TreeNode.NextVisibleNode" />
+
+            
 
             
 
@@ -2327,13 +2775,19 @@
 
             
 
+            
+
              used is the <see
              cref="P:System.Windows.Forms.Control.Font" />
 
             
 
+            
+
              property value of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2346,8 +2800,12 @@
 
               
 
+              
+
                property value that is set in the <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -2392,8 +2850,12 @@
 
             
 
+            
+
              property can hold a collection of other <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2402,13 +2864,19 @@
 
             
 
+            
+
              property that can contain its own <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
 
             
 
+            
+
             . This nesting of tree nodes can make it difficult to navigate a tree structure. The <see
              cref="P:System.Windows.Forms.TreeNode.FullPath" />
+
+            
 
             
 
@@ -2420,6 +2888,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2445,6 +2915,8 @@
           <para
             >If the tree node is at the root level, the <see
              cref="P:System.Windows.Forms.TreeNode.Parent" />
+
+            
 
             
 
@@ -2485,8 +2957,12 @@
 
             
 
+            
+
              is the previous sibling <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2495,8 +2971,12 @@
 
             
 
+            
+
              stored in the <see
              cref="P:System.Windows.Forms.TreeNode.Nodes" />
+
+            
 
             
 
@@ -2505,8 +2985,12 @@
 
             
 
+            
+
             . If there is no previous tree node, the <see
              cref="P:System.Windows.Forms.TreeNode.PrevNode" />
+
+            
 
             
 
@@ -2547,8 +3031,12 @@
 
             
 
+            
+
              can be a child, sibling, or a tree node from another branch. If there is no previous tree node, the <see
              cref="P:System.Windows.Forms.TreeNode.PrevVisibleNode" />
+
+            
 
             
 
@@ -2586,8 +3074,12 @@
 
             
 
+            
+
              method is called, the tree node, and any child tree nodes that are assigned to the <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2596,8 +3088,12 @@
 
             
 
+            
+
             . The removed child nodes are removed from the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2650,8 +3146,12 @@
 
             
 
+            
+
              value is the index value of an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -2660,8 +3160,12 @@
 
             
 
+            
+
              assigned to the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
+
+            
 
             
 
@@ -2674,8 +3178,12 @@
 
               
 
+              
+
                property is the same as the <see
                cref="P:System.Windows.Forms.TreeView.SelectedImageIndex" />
+
+              
 
               
 
@@ -2684,8 +3192,12 @@
 
               
 
+              
+
                control that the <see
                cref="T:System.Windows.Forms.TreeNode" />
+
+              
 
               
 
@@ -2742,8 +3254,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2782,8 +3298,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2795,13 +3315,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that describes the <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -2812,8 +3338,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -2860,8 +3390,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2873,8 +3407,12 @@
 
             
 
+            
+
              has check boxes enabled, the <see
              cref="P:System.Windows.Forms.TreeNode.StateImageIndex" />
+
+            
 
             
 
@@ -2883,8 +3421,12 @@
 
             
 
+            
+
              set on the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2893,8 +3435,12 @@
 
             
 
+            
+
              property does not affect the value of the <see
              cref="P:System.Windows.Forms.TreeNode.StateImageIndex" />
+
+            
 
             
 
@@ -2906,8 +3452,12 @@
 
             
 
+            
+
              returns -1 when not set. The <see
              cref="P:System.Windows.Forms.TreeNode.StateImageKey" />
+
+            
 
             
 
@@ -2916,8 +3466,12 @@
 
             
 
+            
+
              properties are mutually exclusive, meaning if one is set, the other is ignored. If you set the <see
              cref="P:System.Windows.Forms.TreeNode.StateImageKey" />
+
+            
 
             
 
@@ -2926,13 +3480,19 @@
 
             
 
+            
+
              property is automatically set to -1. Alternatively, if you set <see
              cref="P:System.Windows.Forms.TreeNode.StateImageIndex" />
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.TreeNode.StateImageKey" />
+
+            
 
             
 
@@ -2947,13 +3507,19 @@
 
             
 
+            
+
              when the parent <see
              cref="T:System.Windows.Forms.TreeView" />
 
             
 
+            
+
              has its <see
              cref="P:System.Windows.Forms.TreeView.CheckBoxes" />
+
+            
 
             
 
@@ -3001,8 +3567,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -3014,8 +3584,12 @@
 
             
 
+            
+
              has check boxes enabled, the <see
              cref="P:System.Windows.Forms.TreeNode.StateImageKey" />
+
+            
 
             
 
@@ -3024,8 +3598,12 @@
 
             
 
+            
+
              set on the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -3034,8 +3612,12 @@
 
             
 
+            
+
              property does not affect the value of the <see
              cref="P:System.Windows.Forms.TreeNode.StateImageKey" />
+
+            
 
             
 
@@ -3047,8 +3629,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TreeNode.StateImageIndex" />
+
+            
 
             
 
@@ -3057,8 +3643,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.TreeNode.StateImageIndex" />
+
+            
 
             
 
@@ -3067,8 +3657,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.TreeNode.StateImageKey" />
+
+            
 
             
 
@@ -3077,8 +3671,12 @@
 
             
 
+            
+
              to an image with a corresponding index between 0 and 14. You can set the <see
              cref="P:System.Windows.Forms.TreeNode.StateImageKey" />
+
+            
 
             
 
@@ -3093,13 +3691,19 @@
 
             
 
+            
+
              when the parent <see
              cref="T:System.Windows.Forms.TreeView" />
 
             
 
+            
+
              has its <see
              cref="P:System.Windows.Forms.TreeView.CheckBoxes" />
+
+            
 
             
 
@@ -3135,6 +3739,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3143,13 +3749,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that contains the data to serialize the <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -3160,8 +3772,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -3199,6 +3815,8 @@
 
             
 
+            
+
              derived type can be assigned to this property. If this property is being set through the Windows Forms designer, only text can be assigned.</para
           >
           <block subset="none" type="note">
@@ -3208,13 +3826,19 @@
 
               
 
+              
+
                method performs a shallow copy of the node. If the value of the <see
                cref="P:System.Windows.Forms.TreeNode.Tag" />
 
               
 
+              
+
                property is a reference type, both the original and cloned copy will point to the same single instance of the <see
                cref="P:System.Windows.Forms.TreeNode.Tag" />
+
+              
 
               
 
@@ -3253,8 +3877,12 @@
 
             
 
+            
+
              can display is 259. If a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3266,8 +3894,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -3276,13 +3908,19 @@
 
             
 
+            
+
              constructors that has a string parameter that represents the <see
              cref="P:System.Windows.Forms.TreeNode.Text" />
 
             
 
+            
+
              property. The label is displayed next to the <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3317,8 +3955,12 @@
 
               
 
+              
+
                is persisted. For example, if the next level of child nodes was not collapsed previously, when the <see
                cref="M:System.Windows.Forms.TreeNode.Expand" />
+
+              
 
               
 
@@ -3363,13 +4005,19 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
 
             
 
+            
+
              to true for the <see
              cref="P:System.Windows.Forms.TreeNode.ToolTipText" />
+
+            
 
             
 
@@ -3381,8 +4029,12 @@
 
             
 
+            
+
              control has a ToolTip and also contains a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3391,8 +4043,12 @@
 
             
 
+            
+
             , only the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -3404,6 +4060,8 @@
           <para
             >Gets or sets the text that appears when the mouse pointer hovers over a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 

@@ -28,13 +28,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.IdentityModel.Selectors.SecurityTokenAuthenticator" />
 
         
 
+        
+
          can be created to provide security tokens for outgoing SOAP messages and to authenticate security tokens for incoming SOAP messages, respectively. For example, the default security token manager for outgoing SOAP messages has the CreateSecurityTokenProvider method that takes a <see
          cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+        
 
         
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
         , contains a dictionary, <see
          cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
+
+        
 
         
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
          is the key for the value of the <see
          cref="P:System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement.AuditLogLocation" />
+
+        
 
         
 
@@ -90,6 +104,8 @@
 
             
 
+            
+
              is set to false.</para
           >
         </remarks>
@@ -98,6 +114,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement" />
+
+            
 
             
 
@@ -129,12 +147,16 @@
 
             
 
+            
+
             , which is an enumeration with the following members:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="F:System.ServiceModel.AuditLogLocation.Application" />
+
+                
 
                 
 
@@ -147,12 +169,16 @@
 
                 
 
+                
+
                 : The default location, which is determined by the operating system.</para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.ServiceModel.AuditLogLocation.Security" />
+
+                
 
                 
 
@@ -193,6 +219,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -229,6 +257,8 @@
 
             
 
+            
+
              collection for the DuplexClientLocalAddress property.</para
           >
         </summary>
@@ -257,8 +287,12 @@
 
             
 
+            
+
             ,where the generic type is <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -313,6 +347,8 @@
           <para
             >The value that corresponds to this key is of type <see
              cref="T:System.Net.AuthenticationSchemes" />
+
+            
 
             
 
@@ -414,6 +450,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -422,6 +460,8 @@
           <para
             >Gets the key for the token requirement property whose value is the <see
              cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+            
 
             
 
@@ -475,6 +515,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -483,6 +525,8 @@
           <para
             >Gets the key for the token requirement property whose value is the <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -542,6 +586,8 @@
 
             
 
+            
+
             . This property is added to the token requirements relating to secure conversation and SPNEGO/TLSNEGO authentication.</para
           >
         </remarks>
@@ -550,6 +596,8 @@
           <para
             >Gets the key for the token requirement property whose value is the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -575,6 +623,8 @@
           <para
             >The value corresponding to this key is of type <see
              cref="T:System.ServiceModel.Channels.Binding" />
+
+            
 
             
 
@@ -632,12 +682,16 @@
 
             
 
+            
+
             , which is an enumeration with the following members:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="F:System.ServiceModel.AuditLevel.Failure" />
+
+                
 
                 
 
@@ -650,6 +704,8 @@
 
                 
 
+                
+
                 : No events are recorded.</para
               >
             </item>
@@ -659,12 +715,16 @@
 
                 
 
+                
+
                 : Only successful security-related events are recorded.</para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />
+
+                
 
                 
 
@@ -702,6 +762,8 @@
 
             
 
+            
+
             . This property can be used by credential implementations to provide different tokens for processing the request and the response. An example is a credential implementation where the endpoint can specify a different certificate that it signs outgoing messages with and a different certificate to be used by other parties to encrypt messages for it. </para
           >
         </remarks>
@@ -710,6 +772,8 @@
           <para
             >Gets the key for the token requirement property whose value is the member of the <see
              cref="T:System.ServiceModel.Description.MessageDirection" />
+
+            
 
             
 
@@ -741,6 +805,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.MessageSecurityVersion" />
+
+            
 
             
 
@@ -776,8 +842,12 @@
 
             
 
+            
+
              contains numerous properties that specify version numbers of different components of a message. The <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+            
 
             
 
@@ -789,6 +859,8 @@
           <para
             >Gets the key for the token requirement property whose value is the <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+            
 
             
 
@@ -838,6 +910,8 @@
 
             
 
+            
+
             . This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para
           >
         </remarks>
@@ -867,6 +941,8 @@
           <para
             >The value that corresponds to this key is of type <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -933,6 +1009,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -965,6 +1043,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -1075,6 +1155,8 @@
 
             
 
+            
+
              enumeration member if the request is for a supporting token. Supporting tokens provide additional claims beyond those contained in the principal tokens for the binding.</para
           >
         </remarks>
@@ -1083,6 +1165,8 @@
           <para
             >Gets the key for the token requirement property whose value is the associated <see
              cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" />
+
+            
 
             
 
@@ -1221,6 +1305,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Security.Tokens.InitiatorServiceModelSecurityTokenRequirement.Via" />
+
+            
 
             
 

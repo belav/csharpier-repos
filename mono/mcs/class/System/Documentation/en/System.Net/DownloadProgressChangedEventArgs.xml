@@ -30,6 +30,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -41,8 +43,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -70,6 +76,8 @@
           <para
             >To determine what percentage of the transfer has occurred, use the <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+
+            
 
             
 
@@ -104,11 +112,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >To determine what percentage of the transfer has occurred, use the <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+
+            
 
             
 
@@ -120,6 +132,8 @@
           <para
             >Gets the total number of bytes in a <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 

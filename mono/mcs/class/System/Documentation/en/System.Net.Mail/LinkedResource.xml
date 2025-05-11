@@ -54,8 +54,12 @@
 
             
 
+            
+
              using the supplied <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -64,6 +68,8 @@
         </summary>
         <param name="contentStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -96,11 +102,15 @@
 
             
 
+            
+
              using the specified file name.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,13 +147,19 @@
 
             
 
+            
+
              with the values supplied by <see
              cref="T:System.IO.Stream" />
 
             
 
+            
+
              and <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 
@@ -155,10 +171,14 @@
 
           
 
+          
+
           A stream that contains the content for this embedded resource.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,8 +215,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -208,10 +232,14 @@
 
           
 
+          
+
           A stream that contains the content for this embedded resource.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,6 +276,8 @@
 
             
 
+            
+
              with the specified file name and content type.</para
           >
         </summary>
@@ -256,10 +286,14 @@
 
           
 
+          
+
           The file name that holds the content for this embedded resource.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -296,6 +330,8 @@
 
             
 
+            
+
              with the specified file name and media type.</para
           >
         </summary>
@@ -304,10 +340,14 @@
 
           
 
+          
+
           The file name that holds the content for this embedded resource.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -367,6 +407,8 @@
 
             
 
+            
+
              object from a string to be included in an email attachment as an embedded resource. The default media type is plain text, and the default content type is ASCII.</para
           >
         </summary>
@@ -378,11 +420,15 @@
 
             
 
+            
+
              object that contains the embedded resource to be included in the email attachment.</para
           >
         </returns>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -422,6 +468,8 @@
 
             
 
+            
+
              object from a string to be included in an email attachment as an embedded resource, with the specified content type, and media type as plain text.</para
           >
         </summary>
@@ -433,6 +481,8 @@
 
             
 
+            
+
              object that contains the embedded resource to be included in the email attachment.</para
           >
         </returns>
@@ -441,10 +491,14 @@
 
           
 
+          
+
           A string that contains the embedded resource to be included in the email attachment.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,6 +539,8 @@
 
             
 
+            
+
              object from a string to be included in an email attachment as an embedded resource, with the specified content type, and media type.</para
           >
         </summary>
@@ -496,11 +552,15 @@
 
             
 
+            
+
              object that contains the embedded resource to be included in the email attachment.</para
           >
         </returns>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -511,10 +571,14 @@
 
           
 
+          
+
           The type of the content.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

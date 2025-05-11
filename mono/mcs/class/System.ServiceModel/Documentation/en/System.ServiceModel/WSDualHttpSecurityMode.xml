@@ -21,6 +21,8 @@
 
         
 
+        
+
          supports.</para
       >
     </remarks>
@@ -29,6 +31,8 @@
       <para
         >Specifies the different security modes for <see
          cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
           <para
             >SOAP message-level security is used and the settings in the <see
              cref="P:System.ServiceModel.WsDualHttpSecurity.Message" />
+
+            
 
             
 

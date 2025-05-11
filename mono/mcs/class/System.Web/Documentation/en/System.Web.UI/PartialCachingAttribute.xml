@@ -30,8 +30,12 @@
 
         
 
+        
+
          attribute class marks user controls (.ascx files) that support fragment caching, and encapsulates the cache settings that ASP.NET uses when caching the control. Page and controls developers use the <see
          cref="T:System.Web.UI.PartialCachingAttribute" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
       <para
         >Using the <see
          cref="T:System.Web.UI.PartialCachingAttribute" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
 
             
 
+            
+
              directive to enable output caching in declarative scenarios.</para
           >
         </item>
@@ -62,6 +70,8 @@
           <para
             >Use the <see
              cref="T:System.Web.UI.PartialCachingAttribute" />
+
+            
 
             
 
@@ -75,8 +85,12 @@
 
             
 
+            
+
              class to programmatically specify cache settings in programmatic scenarios in which you are working with <see
              cref="T:System.Web.UI.BasePartialCachingControl" />
+
+            
 
             
 
@@ -92,13 +106,19 @@
 
         
 
+        
+
          directive or has a <see
          cref="T:System.Web.UI.PartialCachingAttribute" />
 
         
 
+        
+
          applied, the ASP.NET parser generates an instance of the <see
          cref="T:System.Web.UI.PartialCachingControl" />
+
+        
 
         
 
@@ -112,10 +132,14 @@
 
         
 
+        
+
         . For more information about using attributes, see <format
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -145,11 +169,15 @@
 
             
 
+            
+
              class with the specified duration assigned to the user control to be cached.</para
           >
         </summary>
         <param name="duration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,11 +212,15 @@
 
             
 
+            
+
              class, specifying the caching duration, any GET and POST values, control names, and custom output caching requirements used to vary the cache.</para
           >
         </summary>
         <param name="duration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,10 +231,14 @@
 
           
 
+          
+
           A semicolon-separated list of strings used to vary the output cache. By default, these strings correspond to a query string value sent with GET method attributes or to a parameter sent using the POST method. When this attribute is set to multiple parameters, the output cache contains a different version of the requested document for each specified parameter. Possible values include "none", "*", and any valid query string or POST parameter name. </param
         >
         <param name="varyByControls">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,8 +249,12 @@
 
           
 
+          
+
           Any text that represents custom output caching requirements. If this parameter is given a value of "browser", the cache is varied by browser name and major version information. If a custom string is entered, you must override the <see
            cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
+
+          
 
           
 
@@ -249,11 +289,15 @@
 
             
 
+            
+
              class, specifying the caching duration, any GET and POST values, control names, custom output caching requirements used to vary the cache, and whether the user control output can be shared with multiple pages.</para
           >
         </summary>
         <param name="duration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,10 +308,14 @@
 
           
 
+          
+
           A semicolon-separated list of strings used to vary the output cache. By default, these strings correspond to a query string value sent with GET method attributes, or a parameter sent using the POST method. When this attribute is set to multiple parameters, the output cache contains a different version of the requested document for each specified parameter. Possible values include "none", "*", and any valid query string or POST parameter name.</param
         >
         <param name="varyByControls">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,8 +326,12 @@
 
           
 
+          
+
           Any text that represents custom output caching requirements. If this parameter is given a value of "browser", the cache is varied by browser name and major version information. If a custom string is entered, you must override the <see
            cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
+
+          
 
           
 
@@ -287,6 +339,8 @@
         >
         <param name="shared">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -325,11 +379,15 @@
 
             
 
+            
+
              class, specifying the caching duration, any GET and POST values, control names, custom output caching requirements used to vary the cache, the database dependencies, and whether the user control output can be shared with multiple pages. </para
           >
         </summary>
         <param name="duration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -340,10 +398,14 @@
 
           
 
+          
+
           A semicolon-separated list of strings used to vary the output cache. By default, these strings correspond to a query string value sent with GET method attributes, or a parameter sent using the POST method. When this attribute is set to multiple parameters, the output cache contains a different version of the requested document for each specified parameter. Possible values include "none", "*", and any valid query string or POST parameter name.</param
         >
         <param name="varyByControls">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,8 +416,12 @@
 
           
 
+          
+
           Any text that represents custom output caching requirements. If this parameter is given a value of "browser", the cache is varied by browser name and major version information. If a custom string is entered, you must override the <see
            cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
+
+          
 
           
 
@@ -366,10 +432,14 @@
 
           
 
+          
+
           A delimited list of database names and table names that, when changed, explicitly expire a cache entry in the ASP.NET cache. These database names match those SQL Server cache dependencies identified in your Web configuration section.</param
         >
         <param name="shared">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -437,8 +507,12 @@
 
             
 
+            
+
              string identifies databases and table names according to the name of a SQL Server cache dependency in your configuration (typically added using the sqlcachedependency configuration elements). If you use SQL Server 2005, you can set the <see
              cref="P:System.Web.UI.PartialCachingAttribute.SqlDependency" />
+
+            
 
             
 

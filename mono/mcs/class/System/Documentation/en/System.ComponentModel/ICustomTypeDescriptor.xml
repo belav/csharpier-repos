@@ -24,8 +24,12 @@
 
         
 
+        
+
          interface allows an object to provide type information about itself. Typically, this interface is used when an object needs dynamic type information. In contrast, the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          is used in the dnprdnshort to provide type information for COM objects. COM objects do not support properties or attributes. Therefore, the dnprdnshort uses <see
          cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          or derive from the <see
          cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+        
 
         
 
@@ -64,8 +76,12 @@
 
           
 
+          
+
            interface. In addition, when binding to a runtime instance of <see
            cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+          
 
           
 
@@ -108,6 +124,8 @@
 
             
 
+            
+
              if no custom attributes are specified for an object.</para
           >
         </remarks>
@@ -120,6 +138,8 @@
           <para
             >An <see
              cref="T:System.ComponentModel.AttributeCollection" />
+
+            
 
             
 
@@ -150,6 +170,8 @@
           <para
             >If null is returned, use the type name from the <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
+
+            
 
             
 
@@ -225,6 +247,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -240,8 +264,12 @@
 
             
 
+            
+
              that is the converter for this object, or null if there is no <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -283,6 +311,8 @@
 
             
 
+            
+
              that represents the default event for this object, or null if this object does not have events.</para
           >
         </returns>
@@ -321,6 +351,8 @@
 
             
 
+            
+
              that represents the default property for this object, or null if this object does not have properties.</para
           >
         </returns>
@@ -353,8 +385,12 @@
 
             
 
+            
+
              parameter is usually <see
              cref="T:System.Drawing.Design.UITypeEditor" />
+
+            
 
             
 
@@ -363,8 +399,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.InstanceCreationEditor" />
+
+            
 
             
 
@@ -383,6 +423,8 @@
 
             
 
+            
+
              of the specified type that is the editor for this object, or null if the editor cannot be found.</para
           >
         </returns>
@@ -391,8 +433,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -429,6 +475,8 @@
 
             
 
+            
+
              if no properties are specified. This method should never return null.</para
           >
         </remarks>
@@ -441,6 +489,8 @@
           <para
             >An <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -481,13 +531,19 @@
 
             
 
+            
+
              is specified in the <paramref
              name="attributes" />
 
             
 
+            
+
              array and the event does not have an instance of the class for that attribute, the returned array includes the event if the <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -503,6 +559,8 @@
           <para
             >An <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -540,6 +598,8 @@
 
             
 
+            
+
              if no properties are specified. This method should never return null.</para
           >
         </remarks>
@@ -552,6 +612,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -592,8 +654,12 @@
 
             
 
+            
+
              is specified in the <paramref
              name="attributes" />
+
+            
 
             
 
@@ -602,11 +668,15 @@
 
             
 
+            
+
              is the default property.</para
           >
           <para
             >For filtering rules, see <see
              cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />
+
+            
 
             
 
@@ -622,6 +692,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -660,8 +732,12 @@
 
             
 
+            
+
              method retrieves the object that contains the property member that is described by <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -670,8 +746,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" />
+
+            
 
             
 
@@ -682,6 +762,8 @@
           <para
             >If myPd is null, your implementation of the <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -700,6 +782,8 @@
 
             
 
+            
+
              that represents the owner of the specified property.</para
           >
         </returns>
@@ -708,8 +792,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 

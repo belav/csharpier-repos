@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is the location for run-time modifications and insertion point for custom extensions that are scoped to only one service operation. (To modify service run-time behavior for all messages in a contract, use the <see
          cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          modifications using a custom operation behavior object or a behavior at a larger scope in order to modify operations across a contract. </para
       >
       <para
@@ -43,8 +49,12 @@
 
         
 
+        
+
          property to locate the <see
          cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ReplyAction" />
+
+            
 
             
 
@@ -68,8 +82,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.IsOneWay" />
+
+            
 
             
 
@@ -78,8 +96,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Name" />
+
+            
 
             
 
@@ -93,8 +115,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.TransactionRequired" />
+
+            
 
             
 
@@ -108,13 +134,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ReleaseInstanceAfterCall" />
 
             
 
+            
+
              properties control the lifetime of the user-defined service object relative to the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -128,13 +160,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.SerializeReply" />
 
             
 
+            
+
             , and the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
+
+            
 
             
 
@@ -148,6 +186,8 @@
 
             
 
+            
+
              property specifies the operation impersonation level.</para
           >
         </item>
@@ -158,8 +198,12 @@
 
             
 
+            
+
              property inserts custom call context extensions for the operation. For more information, see <see
              cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
+
+            
 
             
 
@@ -173,6 +217,8 @@
 
             
 
+            
+
              property controls whether parameter objects are disposed when the service operation is completed.</para
           >
         </item>
@@ -183,6 +229,8 @@
 
             
 
+            
+
              property to insert a custom invoker object.</para
           >
         </item>
@@ -190,6 +238,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ParameterInspectors" />
+
+            
 
             
 
@@ -238,6 +288,8 @@
 
             
 
+            
+
              class using the specified dispatch run-time, name, and action values.</para
           >
         </summary>
@@ -276,6 +328,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -323,8 +377,12 @@
 
             
 
+            
+
              parameters (input, output or reference parameters) that were created while processing a message. The default value is true. Set this property to false to prevent the system from disposing resources. In this case, you are responsible for the parameter lifetimes. See the <see
              cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+
+            
 
             
 
@@ -363,8 +421,12 @@
 
             
 
+            
+
              property to add custom <see
              cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
+
+            
 
             
 
@@ -376,6 +438,8 @@
           <para
             >A collection of <see
              cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
+
+            
 
             
 
@@ -404,6 +468,8 @@
 
             
 
+            
+
              property to control whether the formatter deserializes the return value from an inbound message or whether the inbound message is returned directly as the return value.</para
           >
           <list type="bullet">
@@ -414,8 +480,12 @@
 
                 
 
+                
+
                  and there can be no out parameters or an <see
                  cref="T:System.InvalidCastException" />
+
+                
 
                 
 
@@ -429,6 +499,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
+
+            
 
             
 
@@ -463,6 +535,8 @@
 
             
 
+            
+
              property to get a collection of all contractually specified SOAP faults.</para
           >
         </remarks>
@@ -471,6 +545,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.FaultContractInfo" />
+
+            
 
             
 
@@ -505,8 +581,12 @@
 
             
 
+            
+
              property to insert a custom <see
              cref="T:System.ServiceModel.Dispatcher.IDispatchMessageFormatter" />
+
+            
 
             
 
@@ -515,8 +595,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.DeserializeRequest" />
+
+            
 
             
 
@@ -528,13 +612,19 @@
 
             
 
+            
+
              interface defines the <see
              cref="M:System.ServiceModel.Dispatcher.IDispatchMessageFormatter.SerializeReply(System.ServiceModel.Channels.MessageVersion,System.Object[],System.Object)" />
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Dispatcher.IDispatchMessageFormatter.DeserializeRequest(System.ServiceModel.Channels.Message,System.Object[])" />
+
+            
 
             
 
@@ -598,6 +688,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -606,6 +698,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
+
+            
 
             
 
@@ -697,8 +791,12 @@
 
             
 
+            
+
              property to insert a custom <see
              cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+
+            
 
             
 
@@ -710,6 +808,8 @@
           <para
             >Gets or sets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+
+            
 
             
 
@@ -742,6 +842,8 @@
           <para
             >Gets the associated <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+            
 
             
 
@@ -827,12 +929,16 @@
 
             
 
+            
+
              property to indicate whether the formatter serializes operation parameters into a reply message or whether the first parameter is sent as the outbound message. </para
           >
           <block subset="none" type="note">
             <para
               >If set to false, the return value of the operation must be of type <see
                cref="T:System.ServiceModel.Channels.Message" />
+
+              
 
               
 
@@ -845,6 +951,8 @@
           <para
             >Gets or sets a value that specifies whether the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
+
+            
 
             
 
@@ -889,6 +997,8 @@
           <para
             >If the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.TransactionRequired" />
+
+            
 
             
 

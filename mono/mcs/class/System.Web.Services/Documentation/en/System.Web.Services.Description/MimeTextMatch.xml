@@ -25,6 +25,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -46,6 +48,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+            
 
             
 
@@ -75,8 +79,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Description.MimeTextMatch.Matches" />
+
+            
 
             
 
@@ -88,6 +96,8 @@
           <para
             >Gets or sets a value indicating the zero-based index of a <see
              cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+            
 
             
 
@@ -122,6 +132,8 @@
           <para
             >The value of this property must be less than or equal to the value of the <see
              cref="P:System.Web.Services.Description.MimeTextMatch.Repeats" />
+
+            
 
             
 
@@ -216,6 +228,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -275,11 +289,15 @@
 
             
 
+            
+
              will return all matches.</para
           >
           <para
             >This property returns the same information as the <see
              cref="P:System.Web.Services.Description.MimeTextMatch.RepeatsString" />
+
+            
 
             
 
@@ -318,8 +336,12 @@
 
             
 
+            
+
              property, but as a string rather than as a 32-bit signed integer. A value of "*" corresponds to <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 

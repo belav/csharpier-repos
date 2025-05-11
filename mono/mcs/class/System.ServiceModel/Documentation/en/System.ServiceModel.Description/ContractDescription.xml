@@ -28,8 +28,12 @@
 
         
 
+        
+
          object is used to describe indigo2 contracts and their operations. Within a <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          that describes aspects of the each operation that is part of the contract, such as whether the operation is one-way or request/reply. Each <see
          cref="T:System.ServiceModel.Description.OperationDescription" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         . <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
          and its methods that correspond to endpoint operations are marked with the <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -68,6 +84,8 @@
       <para
         >A <newTerm
         >duplex</newTerm>
+
+        
 
         
 
@@ -87,6 +105,8 @@
 
         
 
+        
+
          contains a reference to each of the interfaces that groups them into one duplex contract. </para
       >
       <para
@@ -95,8 +115,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Description.ContractDescription.Namespace" />
+
+        
 
         
 
@@ -132,11 +156,15 @@
 
             
 
+            
+
              class with a specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,6 +199,8 @@
 
             
 
+            
+
              class with a namespace-qualified name specified.</para
           >
         </summary>
@@ -179,10 +209,14 @@
 
           
 
+          
+
           The name of the contract.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,6 +269,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Description.ContractDescription.CallbackContractType" />
+
+            
 
             
 
@@ -311,6 +347,8 @@
 
             
 
+            
+
              property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para
           >
         </remarks>
@@ -348,8 +386,12 @@
 
             
 
+            
+
              overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see
              cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+            
 
             
 
@@ -368,6 +410,8 @@
 
             
 
+            
+
              for the specified type of contract.</para
           >
         </returns>
@@ -376,8 +420,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -414,8 +462,12 @@
 
             
 
+            
+
              overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see
              cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+            
 
             
 
@@ -434,6 +486,8 @@
 
             
 
+            
+
              for the specified type of contract and service implementation.</para
           >
         </returns>
@@ -442,8 +496,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -454,8 +512,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -492,8 +554,12 @@
 
             
 
+            
+
              overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see
              cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+            
 
             
 
@@ -512,6 +578,8 @@
 
             
 
+            
+
              for the specified type of contract and type of service.</para
           >
         </returns>
@@ -520,8 +588,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -532,8 +604,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -572,8 +648,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -602,8 +682,12 @@
 
             
 
+            
+
              is set, the <see
              cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" />
+
+            
 
             
 
@@ -708,8 +792,12 @@
 
             
 
+            
+
              is set, the <see
              cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" />
+
+            
 
             
 
@@ -745,6 +833,8 @@
           <para
             >A reliable session is a way of correlating a set of messages exchanged between two or more endpoints (using the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96680">WS-ReliableMessaging</see>
+
+            
 
             
 

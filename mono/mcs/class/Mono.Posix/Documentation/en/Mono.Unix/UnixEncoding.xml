@@ -22,6 +22,8 @@
 
       
 
+      
+
       .</summary
     >
     <remarks>
@@ -36,8 +38,12 @@
 
         
 
+        
+
         (1) accident (try <c
         >touch "$(printf "test\xffname")"</c>
+
+        
 
         
 
@@ -47,12 +53,16 @@
 
         
 
+        
+
         (1) shell for an example).</para
       >
       <para
         >On the other hand, developers and users expect filenames to be
     strings, and the <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          and <see
          cref="N:Mono.Unix.Native" />
+
+        
 
         
 
@@ -79,9 +93,13 @@
 
         
 
+        
+
         .
     <c
         >UnixEncoding</c>
+
+        
 
         
 
@@ -97,9 +115,13 @@
 
               
 
+              
+
               ),
       <c
               >UnixEncoding</c>
+
+              
 
               
 
@@ -113,9 +135,13 @@
 
               
 
+              
+
                sequence of 
       <see
                cref="F:Mono.Unix.UnixEncoding.EscapeByte" />
+
+              
 
               
 
@@ -125,17 +151,20 @@
           </term>
         </item>
         <item>
-          <term
-            >
+          <term>
       When marshaling a filename from managed to unmanaged code (such as
       via <see
              cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
+            
+
              or 
       <see
              cref="M:Mono.Unix.Native.Syscall.stat" />
+
+            
 
             
 
@@ -146,9 +175,13 @@
 
             
 
+            
+
              is encountered, 
       in which case the <c
             >EscapeByte</c>
+
+            
 
             
 
@@ -164,9 +197,13 @@
 
         
 
+        
+
          and
     <c
         >Mono.Unix.Native</c>
+
+        
 
         
 
@@ -180,8 +217,12 @@
 
         
 
+        
+
          and <c
         >Mono.Unix.Native</c>
+
+        
 
         
 
@@ -192,16 +233,19 @@
       <para>What this means:</para>
       <list type="bullet">
         <item>
-          <term
-            >
+          <term>
       Any filename on disk, in any encoding (or lack thereof), can be
       found and used with the <c
             >Mono.Unix</c>
 
             
 
+            
+
              and <c
             >Mono.Unix.Native</c>
+
+            
 
             
 
@@ -218,8 +262,7 @@
       </term>
         </item>
         <item>
-          <term
-            >
+          <term>
       Printing or otherwise saving/displaying the filename may be 
       incorrect, since it contains extra escaping that's relevant only to 
       the <c
@@ -227,8 +270,12 @@
 
             
 
+            
+
              and <c
             >Mono.Unix.Native</c>
+
+            
 
             
 
@@ -247,14 +294,20 @@
 
               
 
+              
+
                classes to use a file 
       obtained via <c
               >Mono.Unix</c>
 
               
 
+              
+
                and <c
               >Mono.Unix.Native</c>
+
+              
 
               
 
@@ -265,8 +318,12 @@
               
 
               
+
+              
       doesn't know about <c
               >UnixEncoding</c>
+
+              
 
               
 
@@ -276,10 +333,14 @@
 
               
 
+              
+
                classes 
       couldn't open these files anyway -- they weren't returned by
       <see
                cref="M:System.IO.Directory.GetFiles" />
+
+              
 
               
 
@@ -292,9 +353,13 @@
 
               
 
+              
+
               , 
       then you won't be able to use <c
               >System.IO</c>
+
+              
 
               
 
@@ -304,9 +369,13 @@
 
               
 
+              
+
               , it can be used with 
       <c
               >System.IO</c>
+
+              
 
               
 
@@ -315,13 +384,14 @@
           </term>
         </item>
         <item>
-          <term
-            >
+          <term>
       You still can't specify filenames in arbitrary encodings on the 
       mono command line.  Mono will still try to decode these as either
       UTF-8 strings or as an encoding listed in the 
       <c
             >MONO_EXTERNAL_ENCODINGS</c>
+
+            
 
             
 
@@ -342,6 +412,8 @@
             >Why UTF-8?  Why not use 
         <see
              cref="M:System.Text.Encoding.Default" />
+
+            
 
             
 
@@ -376,6 +448,8 @@
 
             
 
+            
+
             ?</description
           >
         </item>
@@ -388,10 +462,11 @@
         </item>
         <item>
           <term>Q</term>
-          <description
-            >
+          <description>
         Why not use <c
             >byte[]</c>
+
+            
 
             
 
@@ -401,15 +476,21 @@
 
             
 
+            
+
             s for filenames in 
         <see
              cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
+            
+
             , 
         <see
              cref="M:Mono.Unix.Native.Syscall.stat" />
+
+            
 
             
 
@@ -426,14 +507,15 @@
 
               
 
+              
+
                is fugly to work with, so it would need to 
         be offered in addition to the string versions, which would double all 
         the file-related APIs.  Do you really want to explain the difference
         between these APIs?</para
             >
             <example>
-              <code lang="C#"
-                >
+              <code lang="C#">
 public static int open (string pathname, OpenFlags flags);
 public static int open (byte[] pathname, OpenFlags flags);
         </code
@@ -448,9 +530,13 @@ public static int open (byte[] pathname, OpenFlags flags);
 
               
 
+              
+
                be (or
         <see
                cref="F:Mono.Unix.Native.Fstab.fs_file" />
+
+              
 
               
 
@@ -460,12 +546,16 @@ public static int open (byte[] pathname, OpenFlags flags);
 
               
 
+              
+
               , developers 
         will still need a way to convert it to a string for debugging and 
         display to the user, but the developer can't know what encoding to use 
         (it could be anything), so this becomes an impossible problem.  
         <c
               >UnixEncoding</c>
+
+              
 
               
 
@@ -533,6 +623,8 @@ public static int open (byte[] pathname, OpenFlags flags);
           >Constructs a new instance of the 
         <see
            cref="T:Mono.Unix.UnixEncoding" />
+
+          
 
           
 
@@ -969,12 +1061,16 @@ public static int open (byte[] pathname, OpenFlags flags);
 
           
 
+          
+
            instance.</summary
         >
         <remarks
           >This member can be used instead of constructing a new
         <see
            cref="T:Mono.Unix.UnixEncoding" />
+
+          
 
           
 

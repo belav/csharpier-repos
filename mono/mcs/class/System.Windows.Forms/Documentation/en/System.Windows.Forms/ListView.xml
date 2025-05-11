@@ -39,8 +39,12 @@
 
         
 
+        
+
          control allows you to display a list of items with item text and, optionally, an icon to identify the type of item. For example, the Windows Explorer list of files is similar in appearance to a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          class represents an item within a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          supports single or multiple selection. The multiple selection feature lets the user select from a list of items in a way similar to a <see
          cref="T:System.Windows.Forms.ListBox" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          control to display a list of files that the application can then open and utilize. The user can select the files to open and then double-click them to activate the items and open the files in the application. The <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -79,13 +95,19 @@
 
         
 
+        
+
          property, to allow the user to check the items that they want to perform an action on. You can use the <see
          cref="T:System.Windows.Forms.ListView" />
 
         
 
+        
+
          control in a variety of ways. The control can be used to display information from an application, a database, or a text file. The <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -96,8 +118,12 @@
 
         
 
+        
+
          provides a large number of properties that provide flexibility in appearance and behavior. The <see
          cref="P:System.Windows.Forms.ListView.View" />
+
+        
 
         
 
@@ -106,8 +132,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+        
 
         
 
@@ -116,8 +146,12 @@
 
         
 
+        
+
          properties allow you to specify the <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -126,8 +160,12 @@
 
         
 
+        
+
         , the check boxes that are displayed when the <see
          cref="P:System.Windows.Forms.ListView.CheckBoxes" />
+
+        
 
         
 
@@ -136,8 +174,12 @@
 
         
 
+        
+
          property to access the <see
          cref="T:System.Windows.Forms.ListView.CheckedListViewItemCollection" />
+
+        
 
         
 
@@ -146,8 +188,12 @@
 
         
 
+        
+
          property allows access to the <see
          cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+
+        
 
         
 
@@ -156,8 +202,12 @@
 
         
 
+        
+
          property of the control is set to <see
          cref="F:System.Windows.Forms.View.Details" />
+
+        
 
         
 
@@ -166,8 +216,12 @@
 
         
 
+        
+
          through the <see
          cref="P:System.Windows.Forms.ListView.Items" />
+
+        
 
         
 
@@ -176,8 +230,12 @@
 
         
 
+        
+
          property allows you to access the <see
          cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+        
 
         
 
@@ -186,8 +244,12 @@
 
         
 
+        
+
          property. When your control contains a large number of items, it is often easier for the user to see them in a sorted list. You can use the <see
          cref="P:System.Windows.Forms.ListView.Sorting" />
+
+        
 
         
 
@@ -196,8 +258,12 @@
 
         
 
+        
+
          control. To do this, set the <see
          cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+        
 
         
 
@@ -206,13 +272,19 @@
 
         
 
+        
+
         , <see
          cref="E:System.Windows.Forms.ListView.DrawSubItem" />
 
         
 
+        
+
         , <see
          cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+        
 
         
 
@@ -224,8 +296,12 @@
 
         
 
+        
+
          control are used when the <see
          cref="P:System.Windows.Forms.ListView.View" />
+
+        
 
         
 
@@ -234,8 +310,12 @@
 
         
 
+        
+
         . The <see
          cref="P:System.Windows.Forms.ListView.AllowColumnReorder" />
+
+        
 
         
 
@@ -244,8 +324,12 @@
 
         
 
+        
+
          control to reconfigure the order of columns at run time. The <see
          cref="P:System.Windows.Forms.ListView.FullRowSelect" />
+
+        
 
         
 
@@ -254,13 +338,19 @@
 
         
 
+        
+
         , you can use the <see
          cref="P:System.Windows.Forms.ListView.GridLines" />
 
         
 
+        
+
          property. The <see
          cref="P:System.Windows.Forms.ListView.HeaderStyle" />
+
+        
 
         
 
@@ -272,8 +362,12 @@
 
         
 
+        
+
          control can operate in virtual mode, where <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -282,8 +376,12 @@
 
         
 
+        
+
          collection. This can be useful for dealing with very large lists or lists whose contents frequently change. To enable Virtual mode, set the <see
          cref="P:System.Windows.Forms.ListView.VirtualMode" />
+
+        
 
         
 
@@ -292,13 +390,19 @@
 
         
 
+        
+
         , <see
          cref="E:System.Windows.Forms.ListView.CacheVirtualItems" />
 
         
 
+        
+
         , and <see
          cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" />
+
+        
 
         
 
@@ -310,8 +414,12 @@
 
         
 
+        
+
          control, there are methods and events that your application can use to provide additional capabilities to the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -320,8 +428,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.ListView.EndUpdate" />
+
+        
 
         
 
@@ -330,8 +442,12 @@
 
         
 
+        
+
          by preventing the control from repainting every time that an item is added. If your <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -340,8 +456,12 @@
 
         
 
+        
+
          method. When performing validation of the items after the user has edited them, you may want to display a specific item to the user to change. The <see
          cref="M:System.Windows.Forms.ListView.EnsureVisible(System.Int32)" />
+
+        
 
         
 
@@ -353,8 +473,12 @@
 
         
 
+        
+
          property set to true, you can perform tasks such as validating the text being edited before and after the text changed by creating an event handler for the <see
          cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
+
+        
 
         
 
@@ -363,8 +487,12 @@
 
         
 
+        
+
          events. To perform tasks such as opening a file or displaying a dialog box to edit an item displayed in a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -373,8 +501,12 @@
 
         
 
+        
+
          event. If you allow the user to sort the items in a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -383,13 +515,19 @@
 
         
 
+        
+
          event to perform the sorting. When the <see
          cref="P:System.Windows.Forms.ListView.CheckBoxes" />
 
         
 
+        
+
          property is set to true, you can determine when a change in an item's check state has occurred by handling the <see
          cref="E:System.Windows.Forms.ListView.ItemCheck" />
+
+        
 
         
 
@@ -401,8 +539,12 @@
 
         
 
+        
+
          with the <see
          cref="P:System.Windows.Forms.Control.BackgroundImage" />
+
+        
 
         
 
@@ -411,13 +553,19 @@
 
         
 
+        
+
          on its Main method to correctly display the background image for the <see
          cref="T:System.Windows.Forms.ListView" />
 
         
 
+        
+
          control. In addition, if a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -430,8 +578,12 @@
 
           
 
+          
+
            property for a <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -444,8 +596,12 @@
 
         
 
+        
+
          control when your application calls the <see
          cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+        
 
         
 
@@ -457,8 +613,12 @@
 
         
 
+        
+
          property to <see
          cref="F:System.Windows.Forms.View.Tile" />
+
+        
 
         
 
@@ -470,8 +630,12 @@
 
         
 
+        
+
          property to add <see
          cref="T:System.Windows.Forms.ListViewGroup" />
+
+        
 
         
 
@@ -480,8 +644,12 @@
 
         
 
+        
+
          control when you want to enable this feature. To temporarily disable the feature, set the <see
          cref="P:System.Windows.Forms.ListView.ShowGroups" />
+
+        
 
         
 
@@ -493,8 +661,12 @@
 
         
 
+        
+
          object retrieved through the <see
          cref="P:System.Windows.Forms.ListView.InsertionMark" />
+
+        
 
         
 
@@ -506,8 +678,12 @@
 
         
 
+        
+
          method overload and pass in the <see
          cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+        
 
         
 
@@ -516,6 +692,8 @@
       <para
         >The following table shows some of the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -539,12 +717,16 @@
 
               
 
+              
+
                property</para
             >
           </term>
           <description>
             <para>
               <see cref="F:System.Windows.Forms.View.SmallIcon" />
+
+              
 
               
 
@@ -560,12 +742,16 @@
 
               
 
+              
+
                property</para
             >
           </term>
           <description>
             <para>
               <see cref="F:System.Windows.Forms.View.SmallIcon" />
+
+              
 
               
 
@@ -578,6 +764,8 @@
           <term>
             <para>
               <see cref="M:System.Windows.Forms.ListView.AutoResizeColumn(System.Int32,System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+
+              
 
               
 
@@ -597,12 +785,16 @@
 
               
 
+              
+
                property</para
             >
           </term>
           <description>
             <para>
               <see cref="F:System.Windows.Forms.View.Details" />
+
+              
 
               
 
@@ -615,6 +807,8 @@
           <term>
             <para>
               <see cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+              
 
               
 
@@ -634,6 +828,8 @@
 
               
 
+              
+
                method</para
             >
           </term>
@@ -643,8 +839,12 @@
 
               
 
+              
+
               , <see
                cref="F:System.Windows.Forms.View.List" />
+
+              
 
               
 
@@ -660,12 +860,16 @@
 
               
 
+              
+
                method</para
             >
           </term>
           <description>
             <para>
               <see cref="F:System.Windows.Forms.View.SmallIcon" />
+
+              
 
               
 
@@ -681,12 +885,16 @@
 
               
 
+              
+
                method</para
             >
           </term>
           <description>
             <para>
               <see cref="F:System.Windows.Forms.View.Details" />
+
+              
 
               
 
@@ -699,6 +907,8 @@
           <term>
             <para>
               <see cref="P:System.Windows.Forms.ListView.Groups" />
+
+              
 
               
 
@@ -719,6 +929,8 @@
 
               
 
+              
+
                property</para
             >
           </term>
@@ -735,6 +947,8 @@
 
               
 
+              
+
                property</para
             >
           </term>
@@ -744,8 +958,12 @@
 
               
 
+              
+
               , <see
                cref="F:System.Windows.Forms.View.SmallIcon" />
+
+              
 
               
 
@@ -773,6 +991,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -809,8 +1029,12 @@
 
             
 
+            
+
              property allows you to specify how the user will activate an item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -819,8 +1043,12 @@
 
             
 
+            
+
              differs from just selecting an item. When an item is activated, an action is typically performed in an event handler for the <see
              cref="E:System.Windows.Forms.ListView.ItemActivate" />
+
+            
 
             
 
@@ -829,8 +1057,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.ItemActivation.OneClick" />
+
+            
 
             
 
@@ -839,8 +1071,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.ItemActivation.TwoClick" />
+
+            
 
             
 
@@ -853,8 +1089,12 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.Windows.Forms.ItemActivation.OneClick" />
+
+              
 
               
 
@@ -863,8 +1103,12 @@
 
               
 
+              
+
               , label editing will not be allowed regardless of the value of the <see
                cref="P:System.Windows.Forms.ListView.LabelEdit" />
+
+              
 
               
 
@@ -900,6 +1144,8 @@
 
             
 
+            
+
              event occurs when the user finishes modifying the text for an item. The new string that the user types for the item is passed to the event, and the event handler can reject the change. If the event handler rejects the change, the text reverts to the text as it was before the user began editing the item. </para
           >
           <block subset="none" type="note">
@@ -909,8 +1155,12 @@
 
               
 
+              
+
                event takes place before the label edit is committed, calling the <see
                cref="M:System.Windows.Forms.ListView.Sort" />
+
+              
 
               
 
@@ -923,13 +1173,19 @@
 
             
 
+            
+
              event to be raised, the <see
              cref="P:System.Windows.Forms.ListView.LabelEdit" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -941,6 +1197,8 @@
 
             
 
+            
+
              event to perform tasks before the user edits the text of an item.</para
           >
           <para
@@ -948,6 +1206,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -991,8 +1251,12 @@
 
             
 
+            
+
              property only affects alignment when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -1001,8 +1265,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.View.SmallIcon" />
+
+            
 
             
 
@@ -1015,8 +1283,12 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.Windows.Forms.View.List" />
+
+              
 
               
 
@@ -1055,8 +1327,12 @@
 
             
 
+            
+
              property has no effect unless the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -1065,8 +1341,12 @@
 
             
 
+            
+
             . You can use this property to allow users to reposition columns in the control at run time. When the <see
              cref="P:System.Windows.Forms.ListView.AllowColumnReorder" />
+
+            
 
             
 
@@ -1099,8 +1379,12 @@
 
             
 
+            
+
              method is only useful when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -1109,8 +1393,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.View.SmallIcon" />
+
+            
 
             
 
@@ -1119,8 +1407,12 @@
 
             
 
+            
+
              method arranges the items based on the value of the <see
              cref="P:System.Windows.Forms.ListView.Alignment" />
+
+            
 
             
 
@@ -1129,8 +1421,12 @@
 
             
 
+            
+
              property, use the other version of the <see
              cref="M:System.Windows.Forms.ListView.ArrangeIcons(System.Windows.Forms.ListViewAlignment)" />
+
+            
 
             
 
@@ -1142,6 +1438,8 @@
           <para
             >Arranges items in the control when they are displayed as icons based on the value of the <see
              cref="P:System.Windows.Forms.ListView.Alignment" />
+
+            
 
             
 
@@ -1175,8 +1473,12 @@
 
             
 
+            
+
              method is only useful when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -1185,8 +1487,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.View.SmallIcon" />
+
+            
 
             
 
@@ -1195,8 +1501,12 @@
 
             
 
+            
+
              method arranges the icons in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1205,8 +1515,12 @@
 
             
 
+            
+
              value specified in the <paramref
              name="value" />
+
+            
 
             
 
@@ -1215,8 +1529,12 @@
 
             
 
+            
+
              property of the control. This method is used to arrange icons on the control using a different value than that of the <see
              cref="P:System.Windows.Forms.ListView.Alignment" />
+
+            
 
             
 
@@ -1225,8 +1543,12 @@
 
             
 
+            
+
              property, use the other version of the <see
              cref="M:System.Windows.Forms.ListView.ArrangeIcons(System.Windows.Forms.ListViewAlignment)" />
+
+            
 
             
 
@@ -1242,8 +1564,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ListViewAlignment" />
+
+          
 
           
 
@@ -1276,8 +1602,12 @@
 
             
 
+            
+
              property only arranges items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1286,8 +1616,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.LargeIcon" />
+
+            
 
             
 
@@ -1296,8 +1630,12 @@
 
             
 
+            
+
             . To change the alignment of items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1306,13 +1644,19 @@
 
             
 
+            
+
              property. You can use <see
              cref="P:System.Windows.Forms.ListView.AutoArrange" />
 
             
 
+            
+
              to ensure that all items in your <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1357,8 +1701,12 @@
 
             
 
+            
+
              and containing <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -1367,13 +1715,19 @@
 
             
 
+            
+
              column headers and columns are populated with items. If new items are added to the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
             , the columns will not resize unless <see
              cref="M:System.Windows.Forms.ListView.AutoResizeColumn(System.Int32,System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+
+            
 
             
 
@@ -1389,6 +1743,8 @@
 
           
 
+          
+
           The zero-based index of the column to resize.</param
         >
         <param name="headerAutoResize">
@@ -1396,8 +1752,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ColumnHeaderAutoResizeStyle" />
+
+          
 
           
 
@@ -1432,8 +1792,12 @@
 
             
 
+            
+
              and containing <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -1442,13 +1806,19 @@
 
             
 
+            
+
              column headers and columns are populated with items. If new items are added to the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
             , the columns will not resize unless <see
              cref="M:System.Windows.Forms.ListView.AutoResizeColumns(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+
+            
 
             
 
@@ -1464,8 +1834,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ColumnHeaderAutoResizeStyle" />
+
+          
 
           
 
@@ -1574,6 +1948,8 @@
 
             
 
+            
+
              control, therefore it is not shown in the designer or by IntelliSense. </para
           >
         </remarks>
@@ -1582,6 +1958,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.Windows.Forms.ImageLayout" />
+
+            
 
             
 
@@ -1620,6 +1998,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1649,6 +2029,8 @@
 
             
 
+            
+
              property returns false if an image is not set.</para
           >
         </remarks>
@@ -1657,6 +2039,8 @@
           <para
             >Gets or sets a value indicating whether the background image of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1683,8 +2067,12 @@
 
             
 
+            
+
              event occurs when the user starts modifying the text for an item. If the event handler cancels this event, the user cannot edit the text. You can use this event to prevent the user from editing specific items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1693,13 +2081,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              control is set to false, the <see
              cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
+
+            
 
             
 
@@ -1710,6 +2104,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1742,13 +2138,19 @@
 
             
 
+            
+
              is to use the <see
              cref="M:System.Windows.Forms.ListView.ListViewItemCollection.AddRange(System.Windows.Forms.ListViewItem[])" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+            
 
             
 
@@ -1757,8 +2159,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1767,8 +2173,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+            
 
             
 
@@ -1777,8 +2187,12 @@
 
             
 
+            
+
              method to prevent the control from repainting the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1787,13 +2201,19 @@
 
             
 
+            
+
              method to enable the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              to repaint. This way of adding items can prevent flickered drawing of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1805,8 +2225,12 @@
 
             
 
+            
+
              is called more than once, <see
              cref="M:System.Windows.Forms.ListView.EndUpdate" />
+
+            
 
             
 
@@ -1815,13 +2239,19 @@
 
             
 
+            
+
              the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              will not repaint. Other than this, multiple calls to <see
              cref="M:System.Windows.Forms.ListView.BeginUpdate" />
+
+            
 
             
 
@@ -1833,6 +2263,8 @@
           <para
             >Prevents the control from drawing until the <see
              cref="M:System.Windows.Forms.ListView.EndUpdate" />
+
+            
 
             
 
@@ -1872,8 +2304,12 @@
 
             
 
+            
+
              property to change the border style of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1882,13 +2318,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              control to <see
              cref="F:System.Windows.Forms.BorderStyle.None" />
+
+            
 
             
 
@@ -1926,8 +2368,12 @@
 
             
 
+            
+
              is true. Handling this event allows the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1938,6 +2384,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1952,8 +2400,12 @@
 
             
 
+            
+
              in virtual mode has changed, and the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1983,8 +2435,12 @@
 
             
 
+            
+
              property allows you to display a check box next to each item in the list. This enables your application to display a list of items (and subitems if the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -1993,8 +2449,12 @@
 
             
 
+            
+
              property offers a way to select multiple items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2003,8 +2463,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2016,8 +2480,12 @@
 
             
 
+            
+
              event. To get all the items that are checked in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2026,8 +2494,12 @@
 
             
 
+            
+
              property to access the <see
              cref="T:System.Windows.Forms.ListView.CheckedIndexCollection" />
+
+            
 
             
 
@@ -2036,8 +2508,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.ListView.CheckedIndices" />
+
+            
 
             
 
@@ -2049,13 +2525,19 @@
 
             
 
+            
+
              is specified in the <see
              cref="P:System.Windows.Forms.ListView.StateImageList" />
 
             
 
+            
+
              property, the images at index positions 0 and 1 in the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -2068,6 +2550,8 @@
 
               
 
+              
+
                event occurs.</para
             >
             <para
@@ -2076,8 +2560,12 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.Windows.Forms.View.Tile" />
+
+              
 
               
 
@@ -2122,8 +2610,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2132,13 +2624,19 @@
 
             
 
+            
+
              property returns a collection that contains the index positions in the <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
 
             
 
+            
+
              of all items that are checked in the control. For more information about how to manipulate the items in the collection, see <see
              cref="T:System.Windows.Forms.ListView.CheckedIndexCollection" />
+
+            
 
             
 
@@ -2150,8 +2648,12 @@
 
             
 
+            
+
              control, instead of the index positions of the items that are checked, use the <see
              cref="P:System.Windows.Forms.ListView.CheckedItems" />
+
+            
 
             
 
@@ -2195,8 +2697,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2205,8 +2711,12 @@
 
             
 
+            
+
              property returns a collection that contains all items that are checked in the control. For more information about how to manipulate the items in the collection, see <see
              cref="T:System.Windows.Forms.ListView.CheckedListViewItemCollection" />
+
+            
 
             
 
@@ -2218,13 +2728,19 @@
 
             
 
+            
+
              of the items that are checked in the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              control, instead of the items that are checked, use the <see
              cref="P:System.Windows.Forms.ListView.CheckedIndices" />
+
+            
 
             
 
@@ -2257,13 +2773,19 @@
 
             
 
+            
+
              control without having to call the individual Clear methods from the <see
              cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+            
 
             
 
@@ -2276,8 +2798,12 @@
 
               
 
+              
+
                method does not clear <see
                cref="P:System.Windows.Forms.ListView.Groups" />
+
+              
 
               
 
@@ -2286,13 +2812,19 @@
 
               
 
+              
+
                control. To clear <see
                cref="P:System.Windows.Forms.ListView.Groups" />
 
               
 
+              
+
                call <see
                cref="M:System.Windows.Forms.ListViewGroupCollection.Clear" />
+
+              
 
               
 
@@ -2328,8 +2860,12 @@
 
             
 
+            
+
              event occurs when the user clicks one of the column headers in a details view of the items in a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2338,8 +2874,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -2348,8 +2888,12 @@
 
             
 
+            
+
              event is typically handled to sort the items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2360,6 +2904,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2397,8 +2943,12 @@
 
             
 
+            
+
              event is a cancelable event and can be canceled by handling the event and setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -2407,13 +2957,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.ColumnReorderedEventArgs" />
 
             
 
+            
+
              will not change to the <see
              cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" />
+
+            
 
             
 
@@ -2424,6 +2980,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2469,8 +3027,12 @@
 
             
 
+            
+
              property returns a collection that contains the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -2479,8 +3041,12 @@
 
             
 
+            
+
              control. <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -2489,8 +3055,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -2499,13 +3069,19 @@
 
             
 
+            
+
             . Each column is used to display subitem information for each item in the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
             . For more information about how to manipulate the items in the collection, see <see
              cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+
+            
 
             
 
@@ -2518,8 +3094,12 @@
 
               
 
+              
+
                control does not have any column headers specified and you set the <see
                cref="P:System.Windows.Forms.ListView.View" />
+
+              
 
               
 
@@ -2528,8 +3108,12 @@
 
               
 
+              
+
               , the <see
                cref="T:System.Windows.Forms.ListView" />
+
+              
 
               
 
@@ -2568,6 +3152,8 @@
 
             
 
+            
+
              event</para
           >
           <para
@@ -2575,6 +3161,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2608,8 +3196,12 @@
 
             
 
+            
+
              property, and cancel the event if you choose by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -2620,6 +3212,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2716,6 +3310,8 @@
 
             
 
+            
+
              method when the component is no longer needed. This method removes the component from its container (if the component has a site) and triggers the dispose event.</para
           >
         </remarks>
@@ -2727,11 +3323,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2782,8 +3382,12 @@
 
             
 
+            
+
              control using owner drawing. It is raised only when the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -2792,13 +3396,19 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.Details" />
 
             
 
+            
+
             . This event can occur for each column header in the control. For more information on owner drawing, see the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -2809,6 +3419,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2823,8 +3435,12 @@
 
             
 
+            
+
              is drawn and the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -2854,13 +3470,19 @@
 
             
 
+            
+
              control using owner drawing. It is raised only when the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
 
             
 
+            
+
              property is set to true. For more information about owner drawing, see the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -2872,8 +3494,12 @@
 
             
 
+            
+
              event can occur for each <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2882,8 +3508,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -2892,8 +3522,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+            
 
             
 
@@ -2902,8 +3536,12 @@
 
             
 
+            
+
              event to draw elements common to all items, such as the background, and handle the <see
              cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+            
 
             
 
@@ -2912,8 +3550,12 @@
 
             
 
+            
+
              control using only one of the two events, although this may be less convenient. To draw column headers in the details view, you must handle the <see
              cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+            
 
             
 
@@ -2926,8 +3568,12 @@
 
               
 
+              
+
                event occurs without accompanying <see
                cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+              
 
               
 
@@ -2936,8 +3582,12 @@
 
               
 
+              
+
                event handler to be painted over by a custom background drawn in a <see
                cref="E:System.Windows.Forms.ListView.DrawItem" />
+
+              
 
               
 
@@ -2946,13 +3596,19 @@
 
               
 
+              
+
                reference topic for a workaround that invalidates each row when the extra event occurs. An alternative workaround is to put all your custom drawing code in a <see
                cref="E:System.Windows.Forms.ListView.DrawSubItem" />
 
               
 
+              
+
                event handler and paint the background for the entire item (including subitems) only when the <see
                cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ColumnIndex" />
+
+              
 
               
 
@@ -2967,6 +3623,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2978,8 +3636,12 @@
 
             
 
+            
+
              is drawn and the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -3009,8 +3671,12 @@
 
             
 
+            
+
              control using owner drawing. It is raised only when the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -3019,13 +3685,19 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.Details" />
 
             
 
+            
+
             . For more information on owner drawing, see the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -3038,6 +3710,8 @@
 
               
 
+              
+
                event.</para
             >
           </block>
@@ -3047,8 +3721,12 @@
 
             
 
+            
+
              event can occur for each <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3057,8 +3735,12 @@
 
             
 
+            
+
              event to draw elements common to all subitems, such as the background, and handle the <see
              cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+            
 
             
 
@@ -3067,8 +3749,12 @@
 
             
 
+            
+
              control using only one of the two events, although this may be less convenient. To draw column headers in the details view, you must handle the <see
              cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+            
 
             
 
@@ -3081,8 +3767,12 @@
 
               
 
+              
+
                event does not occur for any subitems for which no <see
                cref="T:System.Windows.Forms.ColumnHeader" />
+
+              
 
               
 
@@ -3091,8 +3781,12 @@
 
               
 
+              
+
                collection. Note also that the first subitem of each <see
                cref="T:System.Windows.Forms.ListViewItem" />
+
+              
 
               
 
@@ -3107,6 +3801,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3118,8 +3814,12 @@
 
             
 
+            
+
              is drawn and the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -3144,13 +3844,19 @@
 
             
 
+            
+
              is to use the <see
              cref="M:System.Windows.Forms.ListView.ListViewItemCollection.AddRange(System.Windows.Forms.ListViewItem[])" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+            
 
             
 
@@ -3159,8 +3865,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3169,8 +3879,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+            
 
             
 
@@ -3179,8 +3893,12 @@
 
             
 
+            
+
              method to prevent the control from repainting the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3189,13 +3907,19 @@
 
             
 
+            
+
              method to enable the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              to repaint. This way of adding items can prevent flickered drawing of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3207,8 +3931,12 @@
 
             
 
+            
+
              is called more than once, <see
              cref="M:System.Windows.Forms.ListView.EndUpdate" />
+
+            
 
             
 
@@ -3217,13 +3945,19 @@
 
             
 
+            
+
              the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              will not repaint. Other than this, multiple calls to <see
              cref="M:System.Windows.Forms.ListView.BeginUpdate" />
+
+            
 
             
 
@@ -3235,6 +3969,8 @@
           <para
             >Resumes drawing of the list view control after drawing is suspended by the <see
              cref="M:System.Windows.Forms.ListView.BeginUpdate" />
+
+            
 
             
 
@@ -3265,8 +4001,12 @@
 
             
 
+            
+
              control. When performing validation on the items in a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3275,8 +4015,12 @@
 
             
 
+            
+
              method to ensure that an item that failed validation is displayed in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3285,8 +4029,12 @@
 
             
 
+            
+
              control, calling the <see
              cref="M:System.Windows.Forms.ListView.EnsureVisible(System.Int32)" />
+
+            
 
             
 
@@ -3295,13 +4043,19 @@
 
             
 
+            
+
              control, calling the <see
              cref="M:System.Windows.Forms.ListView.EnsureVisible(System.Int32)" />
 
             
 
+            
+
              method will scroll the contents of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3313,8 +4067,12 @@
 
             
 
+            
+
              control, use the <see
              cref="P:System.Windows.Forms.ListView.TopItem" />
+
+            
 
             
 
@@ -3327,6 +4085,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3363,8 +4123,12 @@
 
             
 
+            
+
              parameter can specify a substring of the desired matching text. In addition, this method will return the first item that starts with the specified text. For example, if a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3373,8 +4137,12 @@
 
             
 
+            
+
              passing <paramref
              name="brack" />
+
+            
 
             
 
@@ -3383,6 +4151,8 @@
           <para
             >The <see
              cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+            
 
             
 
@@ -3397,6 +4167,8 @@
 
             
 
+            
+
              that begins with the specified text value.</para
           >
         </summary>
@@ -3408,11 +4180,15 @@
 
             
 
+            
+
              that begins with the specified text value.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3447,8 +4223,12 @@
 
             
 
+            
+
              parameter can specify a substring of the desired matching text. In addition, this method will return the first item that starts with the specified text. For example, if a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3457,11 +4237,15 @@
 
             
 
+            
+
              passing "brack" as the parameter will return the item whose text is "bracket".</para
           >
           <para
             >The <see
              cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+            
 
             
 
@@ -3476,8 +4260,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -3492,11 +4280,15 @@
 
             
 
+            
+
              that begins with the specified text value.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3507,10 +4299,14 @@
 
           
 
+          
+
           true to include subitems in the search; otherwise, false. </param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3545,6 +4341,8 @@
 
             
 
+            
+
              method returns null if the list is empty or there is no matching item.</para
           >
           <para>The search is case-insensitive.</para>
@@ -3554,8 +4352,12 @@
 
             
 
+            
+
              parameter can specify a substring of the desired matching text. This method will return the first item that starts with the specified text, unless false is passed in for <paramref
              name="isPrefixSearch" />
+
+            
 
             
 
@@ -3564,13 +4366,19 @@
 
             
 
+            
+
              contains two list items—the first item's text set to "angle bracket" and the second item's text set to "bracket"—a call to <see
              cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
 
             
 
+            
+
              passing "brack" as the search text will return the item whose text is "bracket". If <paramref
              name="isPrefixSearch" />
+
+            
 
             
 
@@ -3585,8 +4393,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -3601,11 +4413,15 @@
 
             
 
+            
+
              that begins with the specified text value.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3616,6 +4432,8 @@
 
           
 
+          
+
           true to include subitems in the search; otherwise, false. </param
         >
         <param name="startIndex">
@@ -3623,10 +4441,14 @@
 
           
 
+          
+
           The index of the item at which to start the search.</param
         >
         <param name="isPrefixSearch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3659,8 +4481,12 @@
 
             
 
+            
+
              method returns null if no item is found in the given direction. Identifying the nearest item can vary depending on the operating system the application is running on, and will affect the results of <see
              cref="M:System.Windows.Forms.ListView.FindNearestItem(System.Windows.Forms.SearchDirectionHint,System.Drawing.Point)" />
+
+            
 
             
 
@@ -3679,6 +4505,8 @@
 
             
 
+            
+
              that is closest to the given point, searching in the specified direction.</para
           >
         </returns>
@@ -3687,8 +4515,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.SearchDirectionHint" />
+
+          
 
           
 
@@ -3696,6 +4528,8 @@
         >
         <param name="point">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3729,8 +4563,12 @@
 
             
 
+            
+
              method returns null if no item is found in the given direction. Identifying the nearest item can vary depending on the operating system the application is running on, and will affect the results of <see
              cref="M:System.Windows.Forms.ListView.FindNearestItem(System.Windows.Forms.SearchDirectionHint,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -3749,6 +4587,8 @@
 
             
 
+            
+
              that is closest to the given coordinates, searching in the specified direction.</para
           >
         </returns>
@@ -3757,8 +4597,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.SearchDirectionHint" />
+
+          
 
           
 
@@ -3769,10 +4613,14 @@
 
           
 
+          
+
           The x-coordinate for the point at which to begin searching.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3807,8 +4655,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -3817,8 +4669,12 @@
 
             
 
+            
+
              control. Because a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3827,8 +4683,12 @@
 
             
 
+            
+
              control has focus, an item within the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3837,8 +4697,12 @@
 
             
 
+            
+
              control is the item with focus. Although an item may be the one displaying the focus reticle, it may not actually be a selected item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3847,8 +4711,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.ListView.SelectedIndices" />
+
+            
 
             
 
@@ -3857,8 +4725,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Windows.Forms.ListView.FocusedItem" />
+
+            
 
             
 
@@ -3867,8 +4739,12 @@
 
             
 
+            
+
              property to determine which item was last clicked in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3928,8 +4804,12 @@
 
             
 
+            
+
              property has no effect unless the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -3938,8 +4818,12 @@
 
             
 
+            
+
              control is set to <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -3948,8 +4832,12 @@
 
             
 
+            
+
              property is typically used when a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3962,13 +4850,19 @@
 
               
 
+              
+
                is set to true, ToolTips for a <see
                cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
 
               
 
+              
+
                will not be shown; only the ToolTip for the parent <see
                cref="T:System.Windows.Forms.ListViewItem" />
+
+              
 
               
 
@@ -4008,13 +4902,19 @@
 
             
 
+            
+
              method lets you determine which item is located at a specific location within the client region of the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              control. You can use this method when the user clicks or right-clicks a subitem (when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -4027,13 +4927,19 @@
 
               
 
+              
+
                property value is false, this method returns an item only when the specified location is within the bounds of the parent item (which is displayed in the first column when the control is in details mode). You must set the <see
                cref="P:System.Windows.Forms.ListView.FullRowSelect" />
 
               
 
+              
+
                property to true to retrieve an item with this method given a location within the bounds of a subitem. You can also use the <see
                cref="Overload:System.Windows.Forms.ListView.HitTest" />
+
+              
 
               
 
@@ -4046,8 +4952,12 @@
 
             
 
+            
+
             , you might want to use the <see
              cref="M:System.Windows.Forms.ListViewInsertionMark.NearestIndex(System.Drawing.Point)" />
+
+            
 
             
 
@@ -4056,13 +4966,19 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.Windows.Forms.ListViewInsertionMark.NearestIndex(System.Drawing.Point)" />
 
             
 
+            
+
              method finds the closest item regardless of where the mouse pointer is located. The <see
              cref="M:System.Windows.Forms.ListView.GetItemAt(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4075,8 +4991,12 @@
 
               
 
+              
+
                class is supported only on Windows XP and Windows Server 2003 when your application calls the <see
                cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+              
 
               
 
@@ -4096,6 +5016,8 @@
 
             
 
+            
+
              that represents the item at the specified position. If there is no item at the specified location, the method returns null.</para
           >
         </returns>
@@ -4104,10 +5026,14 @@
 
           
 
+          
+
           The x-coordinate of the location to search for an item (expressed in client coordinates). </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4140,8 +5066,12 @@
 
             
 
+            
+
              method represents the entire item, including the icon, item text, and subitem text. To specify a specific portion of the item's bounding rectangle, use the other version of the <see
              cref="M:System.Windows.Forms.ListView.GetItemRect(System.Int32)" />
+
+            
 
             
 
@@ -4160,8 +5090,12 @@
 
             
 
+            
+
              that represents the bounding rectangle of the specified <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -4173,8 +5107,12 @@
 
           
 
+          
+
           The zero-based index of the item within the <see
            cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+          
 
           
 
@@ -4208,13 +5146,19 @@
 
             
 
+            
+
              method represents only the section of the item specified in the <paramref
              name="portion" />
 
             
 
+            
+
              parameter. To return the bounding rectangle of the entire item, use the other version of the <see
              cref="M:System.Windows.Forms.ListView.GetItemRect(System.Int32)" />
+
+            
 
             
 
@@ -4233,8 +5177,12 @@
 
             
 
+            
+
              that represents the bounding rectangle for the specified portion of the specified <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -4246,8 +5194,12 @@
 
           
 
+          
+
           The zero-based index of the item within the <see
            cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+          
 
           
 
@@ -4258,13 +5210,19 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ItemBoundsPortion" />
 
           
 
+          
+
            values that represents a portion of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -4297,8 +5255,12 @@
 
             
 
+            
+
              property has no effect unless the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -4307,8 +5269,12 @@
 
             
 
+            
+
              control is set to <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -4317,8 +5283,12 @@
 
             
 
+            
+
              property allows you to display lines to identify the rows and columns that are displayed in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -4369,8 +5339,12 @@
 
             
 
+            
+
              grouping feature lets you create visual groups of logically related <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -4379,8 +5353,12 @@
 
             
 
+            
+
              control appear whenever the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -4389,10 +5367,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -4404,8 +5386,12 @@
 
             
 
+            
+
              objects to the <see
              cref="P:System.Windows.Forms.ListView.Groups" />
+
+            
 
             
 
@@ -4414,8 +5400,12 @@
 
             
 
+            
+
              control. Set the group header text and header alignment in the <see
              cref="M:System.Windows.Forms.ListViewGroup.#ctor" />
+
+            
 
             
 
@@ -4424,8 +5414,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewGroup.HeaderAlignment" />
+
+            
 
             
 
@@ -4437,6 +5431,8 @@
 
             
 
+            
+
              property to false.</para
           >
           <para
@@ -4445,8 +5441,12 @@
 
             
 
+            
+
              constructor, by setting the <see
              cref="P:System.Windows.Forms.ListViewItem.Group" />
+
+            
 
             
 
@@ -4455,8 +5455,12 @@
 
             
 
+            
+
              collection of a group. All items should be assigned to groups before they are displayed. Any items that are not assigned to a group will appear in the default group, which has the header label "DefaultGroup{0}". The default group is not contained in the <see
              cref="P:System.Windows.Forms.ListView.Groups" />
+
+            
 
             
 
@@ -4468,8 +5472,12 @@
 
             
 
+            
+
              property at run time or by adding it to the <see
              cref="P:System.Windows.Forms.ListViewGroup.Items" />
+
+            
 
             
 
@@ -4481,6 +5489,8 @@
 
             
 
+            
+
              control that does not already order its items.</para
           >
           <para>
@@ -4488,8 +5498,12 @@
 
             
 
+            
+
              groups are available only on Windows XP and Windows Server 2003 when your application calls the <see
              cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+            
 
             
 
@@ -4502,8 +5516,12 @@
 
             
 
+            
+
              method overload and pass in the <see
              cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+            
 
             
 
@@ -4515,6 +5533,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -4550,8 +5570,12 @@
 
             
 
+            
+
              property allows you to specify the type of column headers to display when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -4560,8 +5584,12 @@
 
             
 
+            
+
              control is set to <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -4570,8 +5598,12 @@
 
             
 
+            
+
              control has <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -4580,8 +5612,12 @@
 
             
 
+            
+
             . <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -4590,8 +5626,12 @@
 
             
 
+            
+
              control. Each column is used to display subitem information for each item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -4603,8 +5643,12 @@
 
             
 
+            
+
              property allows you to specify whether the column headers are visible or, if they are visible, whether they will function as clickable buttons. If the <see
              cref="P:System.Windows.Forms.ListView.HeaderStyle" />
+
+            
 
             
 
@@ -4613,8 +5657,12 @@
 
             
 
+            
+
             , the column headers are not displayed, although the items and subitems of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -4623,8 +5671,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.ColumnHeaderStyle.Clickable" />
+
+            
 
             
 
@@ -4633,8 +5685,12 @@
 
             
 
+            
+
              control using the items in the clicked column as a key. You can implement this behavior in a handler for the <see
              cref="E:System.Windows.Forms.ListView.ColumnClick" />
+
+            
 
             
 
@@ -4643,8 +5699,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.ColumnHeaderStyle.Nonclickable" />
+
+            
 
             
 
@@ -4682,8 +5742,12 @@
 
             
 
+            
+
              control remain highlighted in a different color than the current selection color specified by the operating system when the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -4693,6 +5757,8 @@
             <para
               >If you are concerned with the accessibility of your applications, it is recommended that you set the <see
                cref="P:System.Windows.Forms.ListView.HideSelection" />
+
+              
 
               
 
@@ -4734,8 +5800,12 @@
 
             
 
+            
+
              object has a <see
              cref="P:System.Windows.Forms.ListViewHitTestInfo.Location" />
+
+            
 
             
 
@@ -4744,8 +5814,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewHitTestInfo.SubItem" />
+
+            
 
             
 
@@ -4765,8 +5839,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -4799,8 +5877,12 @@
 
             
 
+            
+
              object has a <see
              cref="P:System.Windows.Forms.ListViewHitTestInfo.Location" />
+
+            
 
             
 
@@ -4809,8 +5891,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewHitTestInfo.SubItem" />
+
+            
 
             
 
@@ -4830,10 +5916,14 @@
 
           
 
+          
+
           The x-coordinate at which to retrieve the item information. The coordinate is relative to the upper-left corner of the control.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4865,13 +5955,19 @@
 
             
 
+            
+
              property to be set to <see
              cref="F:System.Windows.Forms.ItemActivation.OneClick" />
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.ListView.HoverSelection" />
+
+            
 
             
 
@@ -4905,13 +6001,19 @@
 
             
 
+            
+
              control to select the item. Multiple items can be selected (when the <see
              cref="P:System.Windows.Forms.ListView.MultiSelect" />
 
             
 
+            
+
              property is set to true) by holding down the CTRL key while pointing to each item. You can use this feature to provide an easier method for the user of your application to select items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -4958,8 +6060,12 @@
 
             
 
+            
+
              insertion mark feature lets you visually indicate the expected drop location in a drag-and-drop operation when an item is dragged to a new position. This feature works only when the <see
              cref="P:System.Windows.Forms.ListView.AutoArrange" />
+
+            
 
             
 
@@ -4968,8 +6074,12 @@
 
             
 
+            
+
              control does not sort the items automatically. To prevent automatic sorting, the <see
              cref="P:System.Windows.Forms.ListView.Sorting" />
+
+            
 
             
 
@@ -4978,8 +6088,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -4988,8 +6102,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.View.SmallIcon" />
+
+            
 
             
 
@@ -4998,8 +6116,12 @@
 
             
 
+            
+
             . Additionally, the insertion mark feature may not be visible with the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5011,8 +6133,12 @@
 
             
 
+            
+
              class is typically used in a handler for the <see
              cref="E:System.Windows.Forms.Control.DragOver" />
+
+            
 
             
 
@@ -5021,8 +6147,12 @@
 
             
 
+            
+
              event to update the position of the insertion mark as an item is dragged. It is also used in a handler for the <see
              cref="E:System.Windows.Forms.Control.DragDrop" />
+
+            
 
             
 
@@ -5031,8 +6161,12 @@
 
             
 
+            
+
              event to insert a dragged item at the correct location. For more information, see <see
              cref="T:System.Windows.Forms.ListViewInsertionMark" />
+
+            
 
             
 
@@ -5045,12 +6179,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >The insertion mark feature is available only on Windows XP and Windows Server 2003 when your application calls the <see
                cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+              
 
               
 
@@ -5062,8 +6200,12 @@
 
               
 
+              
+
                method overload and pass in the <see
                cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+              
 
               
 
@@ -5076,6 +6218,8 @@
           <para
             >Gets an object used to indicate the expected drop location when an item is dragged within a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5111,8 +6255,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -5139,8 +6287,12 @@
 
             
 
+            
+
              event occurs when the user activates one or more items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5149,8 +6301,12 @@
 
             
 
+            
+
              property, or with the keyboard. From within the event handler for the <see
              cref="E:System.Windows.Forms.ListView.ItemActivate" />
+
+            
 
             
 
@@ -5159,13 +6315,19 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.ListView.SelectedIndices" />
 
             
 
+            
+
              properties to access the collection of items selected in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5176,6 +6338,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5210,8 +6374,12 @@
 
             
 
+            
+
              property must be set to true in order for check boxes to be displayed next to each item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5220,8 +6388,12 @@
 
             
 
+            
+
              event occurs when the check state of an item changes or when the <see
              cref="P:System.Windows.Forms.ListView.CheckBoxes" />
+
+            
 
             
 
@@ -5230,8 +6402,12 @@
 
             
 
+            
+
              event to perform tasks such as changing the state of an item's icon or another application-specific task each time an item is checked in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5244,13 +6420,19 @@
 
               
 
+              
+
                event is raised, the event will be delayed. Once the window handle is created (when the form is shown), any delayed <see
                cref="E:System.Windows.Forms.ListView.ItemCheck" />
 
               
 
+              
+
                events will be raised. For more information, see <see
                cref="E:System.Windows.Forms.Control.HandleCreated" />
+
+              
 
               
 
@@ -5262,6 +6444,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5299,6 +6483,8 @@
 
             
 
+            
+
              event, but is raised after the item has been checked. </para
           >
           <para
@@ -5306,6 +6492,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5336,8 +6524,12 @@
 
             
 
+            
+
              event occurs when the user begins dragging an item. Typically the event handler for the <see
              cref="E:System.Windows.Forms.ListView.ItemDrag" />
+
+            
 
             
 
@@ -5346,8 +6538,12 @@
 
             
 
+            
+
              method. You can use this event to perform the tasks necessary to drag items into and out of your application's <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5358,6 +6554,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5394,6 +6592,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5439,8 +6639,12 @@
 
             
 
+            
+
              returned by this property, you can add items, remove items, and obtain a count of items. For more information on the tasks that can be performed with the items in the collection, see the <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+            
 
             
 
@@ -5478,11 +6682,15 @@
 
             
 
+            
+
              event will occur when the selection state of multiple items changes.</para
           >
           <para
             >The <see
              cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" />
+
+            
 
             
 
@@ -5493,6 +6701,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5526,13 +6736,19 @@
 
             
 
+            
+
              property is set to true, the user is able to modify the text of an item by clicking the item text to select it and then clicking the item text again to put the label text into edit mode. The user can then modify or replace the item's text label. You can use the <see
              cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+
+            
 
             
 
@@ -5545,8 +6761,12 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.Windows.Forms.ItemActivation.OneClick" />
+
+              
 
               
 
@@ -5555,8 +6775,12 @@
 
               
 
+              
+
               , label editing will not be allowed regardless of the value of the <see
                cref="P:System.Windows.Forms.ListView.LabelEdit" />
+
+              
 
               
 
@@ -5598,8 +6822,12 @@
 
             
 
+            
+
              property is set to true, the item text is wrapped to the next line of text if needed. If the text is longer than two lines of text, the text is shortened. If the user selects the item, all the item text is displayed. If the <see
              cref="P:System.Windows.Forms.ListView.LabelWrap" />
+
+            
 
             
 
@@ -5608,8 +6836,12 @@
 
             
 
+            
+
              is set to false. This property is only used when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -5618,8 +6850,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.View.SmallIcon" />
+
+            
 
             
 
@@ -5660,8 +6896,12 @@
 
             
 
+            
+
              property allows you to specify an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -5670,8 +6910,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.LargeIcon" />
+
+            
 
             
 
@@ -5680,8 +6924,12 @@
 
             
 
+            
+
              control can accept any graphics format that the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -5690,8 +6938,12 @@
 
             
 
+            
+
              control is not limited to .ico files. Once an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -5700,8 +6952,12 @@
 
             
 
+            
+
              property, you can set the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+
+            
 
             
 
@@ -5710,8 +6966,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5720,13 +6980,19 @@
 
             
 
+            
+
             . The size of the icons for the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
+            
+
              is specified by the <see
              cref="P:System.Windows.Forms.ImageList.ImageSize" />
+
+            
 
             
 
@@ -5738,8 +7004,12 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -5748,8 +7018,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -5758,8 +7032,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -5768,13 +7046,19 @@
 
             
 
+            
+
              objects specified in the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -5789,8 +7073,12 @@
 
             
 
+            
+
              to use when displaying items with small icons (all view modes other than <see
              cref="F:System.Windows.Forms.View.LargeIcon" />
+
+            
 
             
 
@@ -5799,8 +7087,12 @@
 
             
 
+            
+
              property. If you want to use images to display item state, use the <see
              cref="P:System.Windows.Forms.ListView.StateImageList" />
+
+            
 
             
 
@@ -5812,6 +7104,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -5851,13 +7145,19 @@
 
             
 
+            
+
              property allows you to specify the object that performs the sorting of items in a <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              control when the <see
              cref="M:System.Windows.Forms.ListView.Sort" />
+
+            
 
             
 
@@ -5869,8 +7169,12 @@
 
             
 
+            
+
              interface, which has a single method called <see
              cref="M:System.Collections.Comparer.Compare(System.Object,System.Object)" />
+
+            
 
             
 
@@ -5882,8 +7186,12 @@
 
             
 
+            
+
              interface and provides a constructor that accepts the index of a column to sort by. You can then implement a handler for the <see
              cref="E:System.Windows.Forms.ListView.ColumnClick" />
+
+            
 
             
 
@@ -5892,13 +7200,19 @@
 
             
 
+            
+
              property to the new instance, the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              control is automatically sorted using the specified object. Subsequent calls to the <see
              cref="M:System.Windows.Forms.ListView.Sort" />
+
+            
 
             
 
@@ -5911,8 +7225,12 @@
 
               
 
+              
+
                property, the <see
                cref="M:System.Windows.Forms.ListView.Sort" />
+
+              
 
               
 
@@ -5951,13 +7269,19 @@
 
             
 
+            
+
              property is set to true, multiple items can be selected in the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              control. To select multiple items, the user must hold down the CTRL key while clicking the items to select. Consecutive items can be selected by clicking the first item to select and then, while holding down the SHIFT key, clicking the last item to select. You can use the multiple selection feature to select multiple items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -5969,8 +7293,12 @@
 
             
 
+            
+
              control, use the <see
              cref="P:System.Windows.Forms.ListView.SelectedItems" />
+
+            
 
             
 
@@ -5979,8 +7307,12 @@
 
             
 
+            
+
              property allows you to access the <see
              cref="T:System.Windows.Forms.ListView.SelectedListViewItemCollection" />
+
+            
 
             
 
@@ -5989,13 +7321,19 @@
 
             
 
+            
+
              instead of the items, you can use the <see
              cref="P:System.Windows.Forms.ListView.SelectedIndices" />
 
             
 
+            
+
              property to access the <see
              cref="T:System.Windows.Forms.ListView.SelectedIndexCollection" />
+
+            
 
             
 
@@ -6007,8 +7345,12 @@
 
             
 
+            
+
             , yet still want to offer the user a way for multiple items to be chosen, you can display check boxes by setting the <see
              cref="P:System.Windows.Forms.ListView.CheckBoxes" />
+
+            
 
             
 
@@ -6048,11 +7390,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnAfterLabelEdit(System.Windows.Forms.LabelEditEventArgs)" />
+
+            
 
             
 
@@ -6067,6 +7413,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6075,8 +7423,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LabelEditEventArgs" />
+
+          
 
           
 
@@ -6114,11 +7466,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnBackgroundImageChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6133,6 +7489,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -6141,8 +7499,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6173,11 +7535,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnBeforeLabelEdit(System.Windows.Forms.LabelEditEventArgs)" />
+
+            
 
             
 
@@ -6192,6 +7558,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6200,8 +7568,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LabelEditEventArgs" />
+
+          
 
           
 
@@ -6239,11 +7611,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnCacheVirtualItems(System.Windows.Forms.CacheVirtualItemsEventArgs)" />
+
+            
 
             
 
@@ -6258,6 +7634,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -6266,8 +7644,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.CacheVirtualItemsEventArgs" />
+
+          
 
           
 
@@ -6298,11 +7680,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnColumnClick(System.Windows.Forms.ColumnClickEventArgs)" />
+
+            
 
             
 
@@ -6317,6 +7703,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6325,8 +7713,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ColumnClickEventArgs" />
+
+          
 
           
 
@@ -6364,11 +7756,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnColumnReordered(System.Windows.Forms.ColumnReorderedEventArgs)" />
+
+            
 
             
 
@@ -6383,6 +7779,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -6391,8 +7789,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ColumnReorderedEventArgs" />
+
+          
 
           
 
@@ -6426,11 +7828,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnColumnWidthChanged(System.Windows.Forms.ColumnWidthChangedEventArgs)" />
+
+            
 
             
 
@@ -6445,6 +7851,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -6453,8 +7861,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ColumnWidthChangedEventArgs" />
+
+          
 
           
 
@@ -6486,6 +7898,8 @@
 
             
 
+            
+
              event will not occur if the Window's full drag feature, the "Show Window Contents While Dragging" option, is disabled.</para
           >
           <para
@@ -6496,11 +7910,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnColumnWidthChanging(System.Windows.Forms.ColumnWidthChangingEventArgs)" />
+
+            
 
             
 
@@ -6515,6 +7933,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -6523,8 +7943,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ColumnWidthChangingEventArgs" />
+
+          
 
           
 
@@ -6558,11 +7982,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnDrawColumnHeader(System.Windows.Forms.DrawListViewColumnHeaderEventArgs)" />
+
+            
 
             
 
@@ -6577,6 +8005,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -6585,8 +8015,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DrawListViewColumnHeaderEventArgs" />
+
+          
 
           
 
@@ -6620,11 +8054,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnDrawItem(System.Windows.Forms.DrawListViewItemEventArgs)" />
+
+            
 
             
 
@@ -6639,6 +8077,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6647,8 +8087,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DrawListViewItemEventArgs" />
+
+          
 
           
 
@@ -6682,11 +8126,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnDrawSubItem(System.Windows.Forms.DrawListViewSubItemEventArgs)" />
+
+            
 
             
 
@@ -6701,6 +8149,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6709,8 +8159,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DrawListViewSubItemEventArgs" />
+
+          
 
           
 
@@ -6759,8 +8213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6794,6 +8252,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6802,8 +8262,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6837,6 +8301,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6845,8 +8311,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6878,11 +8348,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnItemActivate(System.EventArgs)" />
+
+            
 
             
 
@@ -6897,6 +8371,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6905,8 +8381,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6941,11 +8421,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnItemCheck(System.Windows.Forms.ItemCheckEventArgs)" />
+
+            
 
             
 
@@ -6960,6 +8444,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6968,8 +8454,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.ItemCheckEventArgs" />
+
+          
 
           
 
@@ -7007,11 +8497,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnItemChecked(System.Windows.Forms.ItemCheckedEventArgs)" />
+
+            
 
             
 
@@ -7026,6 +8520,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7034,8 +8530,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.ItemCheckedEventArgs" />
+
+          
 
           
 
@@ -7066,11 +8566,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnItemDrag(System.Windows.Forms.ItemDragEventArgs)" />
+
+            
 
             
 
@@ -7085,6 +8589,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7093,8 +8599,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.ItemDragEventArgs" />
+
+          
 
           
 
@@ -7132,11 +8642,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnItemMouseHover(System.Windows.Forms.ListViewItemMouseHoverEventArgs)" />
+
+            
 
             
 
@@ -7151,6 +8665,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -7159,8 +8675,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ListViewItemMouseHoverEventArgs" />
+
+          
 
           
 
@@ -7194,11 +8714,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnItemSelectionChanged(System.Windows.Forms.ListViewItemSelectionChangedEventArgs)" />
+
+            
 
             
 
@@ -7213,6 +8737,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -7221,8 +8747,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ListViewItemSelectionChangedEventArgs" />
+
+          
 
           
 
@@ -7251,13 +8781,19 @@
 
             
 
+            
+
              method is called when the mouse is hovering over a <see
              cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
+            
+
             , the method raises the <see
              cref="E:System.Windows.Forms.ListView.ItemMouseHover" />
+
+            
 
             
 
@@ -7271,11 +8807,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnMouseHover(System.EventArgs)" />
+
+            
 
             
 
@@ -7290,6 +8830,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -7298,8 +8840,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7327,6 +8873,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7335,8 +8883,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7372,6 +8924,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7380,8 +8934,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7409,6 +8967,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7417,8 +8977,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7455,11 +9019,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnRetrieveVirtualItem(System.Windows.Forms.RetrieveVirtualItemEventArgs)" />
+
+            
 
             
 
@@ -7474,6 +9042,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -7482,8 +9052,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.RetrieveVirtualItemEventArgs" />
+
+          
 
           
 
@@ -7522,11 +9096,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnRightToLeftLayoutChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -7541,6 +9119,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -7549,8 +9129,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7584,11 +9168,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnSearchForVirtualItem(System.Windows.Forms.SearchForVirtualItemEventArgs)" />
+
+            
 
             
 
@@ -7603,6 +9191,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -7611,8 +9201,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.SearchForVirtualItemEventArgs" />
+
+          
 
           
 
@@ -7643,11 +9237,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -7662,6 +9260,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7670,8 +9270,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7705,6 +9309,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7713,8 +9319,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7755,11 +9365,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListView.OnVirtualItemsSelectionRangeChanged(System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs)" />
+
+            
 
             
 
@@ -7774,6 +9388,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -7782,8 +9398,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" />
+
+          
 
           
 
@@ -7815,8 +9435,12 @@
 
             
 
+            
+
              control is normally drawn by the operating system. In order to customize the appearance of <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -7825,8 +9449,12 @@
 
             
 
+            
+
              property to true and provide a handler for one or more of the following events: <see
              cref="E:System.Windows.Forms.ListView.DrawItem" />
+
+            
 
             
 
@@ -7835,8 +9463,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+            
 
             
 
@@ -7845,13 +9477,19 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.Details" />
 
             
 
+            
+
             , all three events occur; otherwise, only the <see
              cref="E:System.Windows.Forms.ListView.DrawItem" />
+
+            
 
             
 
@@ -7864,8 +9502,12 @@
 
               
 
+              
+
                event. The <see
                cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+              
 
               
 
@@ -7874,13 +9516,19 @@
 
               
 
+              
+
                object has been added to the <see
                cref="P:System.Windows.Forms.ListView.Columns" />
 
               
 
+              
+
                collection. Note also that the first subitem of each <see
                cref="T:System.Windows.Forms.ListViewItem" />
+
+              
 
               
 
@@ -7893,8 +9541,12 @@
 
             
 
+            
+
              event to draw elements common to all subitems, such as the background, and handle the <see
              cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+            
 
             
 
@@ -7903,8 +9555,12 @@
 
             
 
+            
+
              control using only one of the two events, although this may be less convenient. To draw column headers in the details view, you must handle the <see
              cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+            
 
             
 
@@ -7917,8 +9573,12 @@
 
               
 
+              
+
                control and set the <see
                cref="P:System.Windows.Forms.ListView.DoubleBuffered" />
+
+              
 
               
 
@@ -7933,6 +9593,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7941,6 +9603,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -7986,6 +9650,8 @@
 
             
 
+            
+
              control and its contents.</para
           >
         </summary>
@@ -8019,6 +9685,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -8027,6 +9695,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ListView.Padding" />
+
+            
 
             
 
@@ -8061,13 +9731,19 @@
 
             
 
+            
+
              control is drawn by the operating system or is owner drawn, so the <see
              cref="E:System.Windows.Forms.ListView.Paint" />
 
             
 
+            
+
              event is never raised. For more information about owner-drawing, see the <see
              cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+
+            
 
             
 
@@ -8079,6 +9755,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8105,6 +9783,8 @@
           <para
             >Initializes the properties of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8148,8 +9828,12 @@
 
             
 
+            
+
              method can be used whether the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8161,8 +9845,12 @@
 
             
 
+            
+
              method has been called prior to the call to <see
              cref="M:System.Windows.Forms.ListView.RedrawItems(System.Int32,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -8177,11 +9865,15 @@
 
             
 
+            
+
              objects to be redrawn.</para
           >
         </summary>
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8192,10 +9884,14 @@
 
           
 
+          
+
           The index for the last item of the range to be redrawn.</param
         >
         <param name="invalidateOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8224,8 +9920,12 @@
 
             
 
+            
+
              object is in virtual mode, it creates <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -8234,8 +9934,12 @@
 
             
 
+            
+
              collection. This event is raised when the object must create a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -8244,8 +9948,12 @@
 
             
 
+            
+
              or retrieve it from the cache, and pass it back by way of the <see
              cref="P:System.Windows.Forms.RetrieveVirtualItemEventArgs.Item" />
+
+            
 
             
 
@@ -8256,6 +9964,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -8270,8 +9980,12 @@
 
             
 
+            
+
              is in virtual mode and requires a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -8307,13 +10021,19 @@
 
             
 
+            
+
              property is for use with international applications where the language is read from right to left. If you set <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.RightToLeft" />
+
+            
 
             
 
@@ -8346,6 +10066,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8354,6 +10076,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ListView.RightToLeftLayout" />
+
+            
 
             
 
@@ -8383,8 +10107,12 @@
 
             
 
+            
+
              displays a vertical scroll bar to use when the number of items exceeds the size of the client area of the control. You can use this property to ensure that the user can access all items that are available in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8397,8 +10125,12 @@
 
               
 
+              
+
                event handler and set it back to false in a <see
                cref="E:System.Windows.Forms.Form.ResizeEnd" />
+
+              
 
               
 
@@ -8437,8 +10169,12 @@
 
             
 
+            
+
              is in virtual mode and the <see
              cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
+
+            
 
             
 
@@ -8447,8 +10183,12 @@
 
             
 
+            
+
              method is called. When handling this event, you should calculate which item from the list of items supplied by the <see
              cref="P:System.Windows.Forms.ListView.Items" />
+
+            
 
             
 
@@ -8457,8 +10197,12 @@
 
             
 
+            
+
              property to the index of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -8467,8 +10211,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+            
 
             
 
@@ -8482,6 +10230,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -8490,6 +10240,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8513,13 +10265,19 @@
 
             
 
+            
+
              collection changes whenever the <see
              cref="P:System.Windows.Forms.ListViewItem.Selected" />
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -8531,8 +10289,12 @@
 
             
 
+            
+
              control, use the <see
              cref="P:System.Windows.Forms.ListView.SelectedItems" />
+
+            
 
             
 
@@ -8541,8 +10303,12 @@
 
             
 
+            
+
             . You can create an event handler for this event to perform tasks whenever there is a change to the selected items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8556,6 +10322,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8564,6 +10332,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ListView.SelectedIndices" />
+
+            
 
             
 
@@ -8603,8 +10373,12 @@
 
             
 
+            
+
              property will not contain any indexes if the property is accessed before the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8613,8 +10387,12 @@
 
             
 
+            
+
              is initially loaded for display in the form. You can check to see if the handle is created with the <see
              cref="P:System.Windows.Forms.Control.IsHandleCreated" />
+
+            
 
             
 
@@ -8623,8 +10401,12 @@
 
             
 
+            
+
              property is set to true, this property returns a collection containing the indexes of all items that are selected in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8633,13 +10415,19 @@
 
             
 
+            
+
             , this property returns a collection containing a single element containing the index of the only selected item in the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
             . For more information on the tasks that can be performed with the items in the collection, see <see
              cref="T:System.Windows.Forms.ListView.SelectedIndexCollection" />
+
+            
 
             
 
@@ -8651,8 +10439,12 @@
 
             
 
+            
+
              control, instead of the index positions of the items that are selected, use the <see
              cref="P:System.Windows.Forms.ListView.SelectedItems" />
+
+            
 
             
 
@@ -8696,8 +10488,12 @@
 
             
 
+            
+
              property will not contain any items if the property is accessed before the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8706,8 +10502,12 @@
 
             
 
+            
+
              is initially loaded for display in the form. You can check to see if the handle is created with the <see
              cref="P:System.Windows.Forms.Control.IsHandleCreated" />
+
+            
 
             
 
@@ -8716,8 +10516,12 @@
 
             
 
+            
+
              property is set to true, this property returns a collection containing the items that are selected in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8726,13 +10530,19 @@
 
             
 
+            
+
             , this property returns a collection containing the only selected item in the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
             . For more information on the tasks that can be performed with the items in the collection, see <see
              cref="T:System.Windows.Forms.ListView.SelectedListViewItemCollection" />
+
+            
 
             
 
@@ -8744,13 +10554,19 @@
 
             
 
+            
+
              of the items that are selected in the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              control, instead of the items that are selected, use the <see
              cref="P:System.Windows.Forms.ListView.SelectedIndices" />
+
+            
 
             
 
@@ -8789,8 +10605,12 @@
 
             
 
+            
+
              control appear whenever the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -8799,8 +10619,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8809,13 +10633,19 @@
 
             
 
+            
+
              items on Windows XP and Windows Server 2003. To enable this feature, your application must call the <see
              cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
 
             
 
+            
+
              method. For more information, see the <see
              cref="P:System.Windows.Forms.ListView.Groups" />
+
+            
 
             
 
@@ -8855,8 +10685,12 @@
 
             
 
+            
+
              property is set to true, any <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -8871,8 +10705,12 @@
 
             
 
+            
+
              objects contained in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8905,8 +10743,12 @@
 
             
 
+            
+
              property allows you to specify an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -8915,8 +10757,12 @@
 
             
 
+            
+
              property is set to any value other than <see
              cref="F:System.Windows.Forms.View.LargeIcon" />
+
+            
 
             
 
@@ -8925,8 +10771,12 @@
 
             
 
+            
+
              control can accept any graphics format that the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -8935,8 +10785,12 @@
 
             
 
+            
+
              control is not limited to .ico files. Once an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -8945,8 +10799,12 @@
 
             
 
+            
+
              property, you can set the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+
+            
 
             
 
@@ -8955,8 +10813,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -8965,13 +10827,19 @@
 
             
 
+            
+
             . The size of the icons for the <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
+            
+
              is specified by the <see
              cref="P:System.Windows.Forms.ImageList.ImageSize" />
+
+            
 
             
 
@@ -8983,8 +10851,12 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -8993,8 +10865,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -9003,8 +10879,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -9013,13 +10893,19 @@
 
             
 
+            
+
              objects specified in the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -9034,8 +10920,12 @@
 
             
 
+            
+
              to use when displaying items with large icons (when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -9044,13 +10934,19 @@
 
             
 
+            
+
             ), use the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
+            
+
              property. If you want to use images to display item state, use the <see
              cref="P:System.Windows.Forms.ListView.StateImageList" />
+
+            
 
             
 
@@ -9062,6 +10958,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -9090,8 +10988,12 @@
 
             
 
+            
+
              property, which sorts items based on the item text. To customize the sort order, you must write a class that implements the <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -9100,8 +11002,12 @@
 
             
 
+            
+
              property to an object of that class. This is useful, for example, when you want to sort items by subitem text. For more information on performing manual sorting of items, see the example for the <see
              cref="P:System.Windows.Forms.ListView.ListViewItemSorter" />
+
+            
 
             
 
@@ -9113,13 +11019,19 @@
 
             
 
+            
+
              property is set to a value other than <see
              cref="F:System.Windows.Forms.SortOrder.None" />
 
             
 
+            
+
              or if the <see
              cref="P:System.Windows.Forms.ListView.ListViewItemSorter" />
+
+            
 
             
 
@@ -9160,8 +11072,12 @@
 
             
 
+            
+
              property allows you to specify whether or not items are sorted in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9170,8 +11086,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.SortOrder.Ascending" />
+
+            
 
             
 
@@ -9180,8 +11100,12 @@
 
             
 
+            
+
             , the items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9190,13 +11114,19 @@
 
             
 
+            
+
             ) or descending alphabetical order (when the property is set to <see
              cref="F:System.Windows.Forms.SortOrder.Descending" />
 
             
 
+            
+
             ). You can use this property to automatically sort items that are displayed in your <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9208,13 +11138,19 @@
 
             
 
+            
+
              property, use the <see
              cref="P:System.Windows.Forms.ListView.ListViewItemSorter" />
 
             
 
+            
+
              property in combination with the <see
              cref="M:System.Windows.Forms.ListView.Sort" />
+
+            
 
             
 
@@ -9226,13 +11162,19 @@
 
             
 
+            
+
              property is set to a value other than <see
              cref="F:System.Windows.Forms.SortOrder.None" />
 
             
 
+            
+
              or if the <see
              cref="P:System.Windows.Forms.ListView.ListViewItemSorter" />
+
+            
 
             
 
@@ -9273,8 +11215,12 @@
 
             
 
+            
+
              property allows you to specify an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -9283,8 +11229,12 @@
 
             
 
+            
+
              control. State images are displayed to the left of an icon for the item. You can use state images, such as checked and unchecked check boxes, to indicate application-defined item states. State images are visible in all views of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9296,8 +11246,12 @@
 
             
 
+            
+
              is specified in the <see
              cref="P:System.Windows.Forms.ListView.StateImageList" />
+
+            
 
             
 
@@ -9306,8 +11260,12 @@
 
             
 
+            
+
              property is set to true, the images at index positions 0 and 1 in the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -9319,6 +11277,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -9388,6 +11348,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -9421,8 +11383,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.Tile" />
+
+            
 
             
 
@@ -9462,8 +11428,12 @@
 
             
 
+            
+
              control. If the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9472,8 +11442,12 @@
 
             
 
+            
+
              control. The value of the <see
              cref="P:System.Windows.Forms.ListView.TopItem" />
+
+            
 
             
 
@@ -9485,8 +11459,12 @@
 
             
 
+            
+
              control at any time depends on the height of the list view and the size of the items it contains. If the items exceed the height of the list view, the items will continue onto multiple pages, which the user can scroll through. If you set the <see
              cref="P:System.Windows.Forms.ListView.TopItem" />
+
+            
 
             
 
@@ -9495,8 +11473,12 @@
 
             
 
+            
+
             , the item will automatically be scrolled into view; however, <see
              cref="P:System.Windows.Forms.ListView.TopItem" />
+
+            
 
             
 
@@ -9508,12 +11490,16 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
             <para
               >Setting this property has no effect when the <see
                cref="P:System.Windows.Forms.ListView.Scrollable" />
+
+              
 
               
 
@@ -9549,6 +11535,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -9560,8 +11548,12 @@
 
             
 
+            
+
              control, and the type of the first item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9590,8 +11582,12 @@
 
             
 
+            
+
              method in your derived class to override the extended styles used by the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9600,11 +11596,15 @@
 
             
 
+            
+
              control are utilized in your derived version of the control.</para
           >
           <para
             >The following are the properties that apply an extended style to the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9684,13 +11684,19 @@
 
             
 
+            
+
              control in the dnprdnshort 2.0 enable custom state images to be set to indicate whether an item is checked or unchecked or in an indeterminate state. With the addition of this feature, the dnprdnshort 2.0 has different behavior than the .NET Framework 1.1. If you have created applications that depend on the behavior in the dnprdnshort 1.1, be sure that the <see
              cref="P:System.Windows.Forms.ListView.UseCompatibleStateImageBehavior" />
 
             
 
+            
+
              property is set to true, which is the default value. In order to fully take advantage of custom state images, set <see
              cref="P:System.Windows.Forms.ListView.UseCompatibleStateImageBehavior" />
+
+            
 
             
 
@@ -9703,6 +11709,8 @@
 
               
 
+              
+
                property will be set to false.</para
             >
           </block>
@@ -9712,6 +11720,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9744,8 +11754,12 @@
 
             
 
+            
+
              property allows you to specify the type of display the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9754,8 +11768,12 @@
 
             
 
+            
+
              property to display each item with large or small icons or display items in a vertical list. The richest option is the details view, which allows you to view not only the items but any subitems specified for each item. Each item is displayed in a grid, with each item listed vertically and the subitems for each item displayed in a column, with column headers. The details view is a perfect way to display database information to a user. With Windows XP and Windows Server 2003, you can also display items as tiles that balance graphical and textual information by showing a large icon along with subitem information of your choosing. To enable tile view, your application must call the <see
              cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+            
 
             
 
@@ -9764,8 +11782,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -9774,8 +11796,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
+
+            
 
             
 
@@ -9788,6 +11814,8 @@
 
               
 
+              
+
                control, you should place small and large versions of the image at the same index location in their respective image lists. When switching between views, the index location of the image in one list is used to locate the image in the other list, regardless of the key value specified. </para
             >
           </block>
@@ -9797,8 +11825,12 @@
 
             
 
+            
+
              control affect how the different views behave or are displayed. Some properties that affect the views of the items are only useful when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -9807,8 +11839,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListView.FullRowSelect" />
+
+            
 
             
 
@@ -9817,8 +11853,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -9827,8 +11867,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListView.CheckBoxes" />
+
+            
 
             
 
@@ -9837,6 +11881,8 @@
           <para
             >The following table shows some of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -9860,12 +11906,16 @@
 
                   
 
+                  
+
                    property</para
                 >
               </term>
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.View.SmallIcon" />
+
+                  
 
                   
 
@@ -9881,12 +11931,16 @@
 
                   
 
+                  
+
                    property</para
                 >
               </term>
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.View.SmallIcon" />
+
+                  
 
                   
 
@@ -9899,6 +11953,8 @@
               <term>
                 <para>
                   <see cref="M:System.Windows.Forms.ListView.AutoResizeColumn(System.Int32,System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+
+                  
 
                   
 
@@ -9931,12 +11987,16 @@
 
                   
 
+                  
+
                    property</para
                 >
               </term>
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.View.Details" />
+
+                  
 
                   
 
@@ -9949,6 +12009,8 @@
               <term>
                 <para>
                   <see cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+                  
 
                   
 
@@ -9968,6 +12030,8 @@
 
                   
 
+                  
+
                    method</para
                 >
               </term>
@@ -9977,8 +12041,12 @@
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Windows.Forms.View.List" />
+
+                  
 
                   
 
@@ -9994,12 +12062,16 @@
 
                   
 
+                  
+
                    method</para
                 >
               </term>
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.View.SmallIcon" />
+
+                  
 
                   
 
@@ -10015,12 +12087,16 @@
 
                   
 
+                  
+
                    method</para
                 >
               </term>
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.View.Details" />
+
+                  
 
                   
 
@@ -10033,6 +12109,8 @@
               <term>
                 <para>
                   <see cref="P:System.Windows.Forms.ListView.Groups" />
+
+                  
 
                   
 
@@ -10053,6 +12131,8 @@
 
                   
 
+                  
+
                    property</para
                 >
               </term>
@@ -10069,6 +12149,8 @@
 
                   
 
+                  
+
                    property</para
                 >
               </term>
@@ -10078,8 +12160,12 @@
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Windows.Forms.View.SmallIcon" />
+
+                  
 
                   
 
@@ -10095,13 +12181,19 @@
 
             
 
+            
+
              property to provide different views of data in your application, or to lock a specific view to utilize that view's benefits. For example, the <see
              cref="P:System.Windows.Forms.ListView.View" />
 
             
 
+            
+
              property is often set to <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -10114,8 +12206,12 @@
 
               
 
+              
+
                control does not have any column headers specified and you set the <see
                cref="P:System.Windows.Forms.ListView.View" />
+
+              
 
               
 
@@ -10124,8 +12220,12 @@
 
               
 
+              
+
               , the <see
                cref="T:System.Windows.Forms.ListView" />
+
+              
 
               
 
@@ -10134,8 +12234,12 @@
 
               
 
+              
+
                control does not have any column headers specified and you set the <see
                cref="P:System.Windows.Forms.ListView.View" />
+
+              
 
               
 
@@ -10144,8 +12248,12 @@
 
               
 
+              
+
               , the <see
                cref="T:System.Windows.Forms.ListView" />
+
+              
 
               
 
@@ -10158,8 +12266,12 @@
 
             
 
+            
+
              objects to the <see
              cref="P:System.Windows.Forms.ListView.Columns" />
+
+            
 
             
 
@@ -10168,13 +12280,19 @@
 
             
 
+            
+
              property for each item and the <see
              cref="P:System.Windows.Forms.ColumnHeader.Name" />
 
             
 
+            
+
              property for each header. You can then add, remove, and rearrange headers in the <see
              cref="P:System.Windows.Forms.ListView.Columns" />
+
+            
 
             
 
@@ -10186,11 +12304,15 @@
 
             
 
+            
+
              property. This is useful to prevent line-wrapping when subitem text is too long for a single line.</para
           >
           <para
             >For an example of the tile view, see the <see
              cref="P:System.Windows.Forms.ListView.TileSize" />
+
+            
 
             
 
@@ -10205,8 +12327,12 @@
 
             
 
+            
+
              method. On earlier operating systems, any code related to the tile view has no effect, and the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -10218,6 +12344,8 @@
 
             
 
+            
+
              items in the tile view, you might want to use drawing code appropriate to the large icon view when running on operating systems that do not support the tile view.</para
           >
           <para
@@ -10226,8 +12354,12 @@
 
             
 
+            
+
              method overload and pass in the <see
              cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+            
 
             
 
@@ -10265,8 +12397,12 @@
 
             
 
+            
+
              is not in virtual mode, the <see
              cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" />
+
+            
 
             
 
@@ -10280,6 +12416,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -10288,6 +12426,8 @@
           <para
             >Occurs when a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -10323,13 +12463,19 @@
 
             
 
+            
+
              property when <see
              cref="P:System.Windows.Forms.ListView.VirtualMode" />
 
             
 
+            
+
              set to false will have no effect on the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -10341,8 +12487,12 @@
 
             
 
+            
+
              is set to true, and the <see
              cref="P:System.Windows.Forms.ListView.VirtualListSize" />
+
+            
 
             
 
@@ -10351,8 +12501,12 @@
 
             
 
+            
+
              event, providing a valid <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -10364,6 +12518,8 @@
           <para
             >Gets or sets the number of <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -10399,8 +12555,12 @@
 
             
 
+            
+
              property to true puts the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -10409,13 +12569,19 @@
 
             
 
+            
+
              collection is unused. Instead, <see
              cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
+            
+
              objects are created dynamically as the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -10427,13 +12593,19 @@
 
             
 
+            
+
              object must be populated from a very large collection already in memory, creating a <see
              cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
+            
+
              object for each entry can be wasteful. In virtual mode, only the items required are created. In other cases, the values of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -10445,8 +12617,12 @@
 
             
 
+            
+
              event, which is raised every time the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -10455,8 +12631,12 @@
 
             
 
+            
+
              object that belongs at the specified index. In addition, the <see
              cref="P:System.Windows.Forms.ListView.VirtualListSize" />
+
+            
 
             
 
@@ -10468,13 +12648,19 @@
 
             
 
+            
+
              event enables searching in virtual mode. If this event is not handled, the <see
              cref="M:System.Windows.Forms.ListView.FindItemWithText(System.String)" />
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.ListView.FindNearestItem(System.Windows.Forms.SearchDirectionHint,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -10486,13 +12672,19 @@
 
             
 
+            
+
              event in order to maintain a cache of <see
              cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
+            
+
              objects. If the calculation or lookup to create a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -10504,8 +12696,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.Tile" />
+
+            
 
             
 
@@ -10514,8 +12710,12 @@
 
             
 
+            
+
              when <see
              cref="P:System.Windows.Forms.ListView.VirtualMode" />
+
+            
 
             
 
@@ -10527,8 +12727,12 @@
 
             
 
+            
+
              collection is disabled. Attempting to access it results in an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -10537,8 +12741,12 @@
 
             
 
+            
+
              collection and the <see
              cref="P:System.Windows.Forms.ListView.SelectedItems" />
+
+            
 
             
 
@@ -10547,8 +12755,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListView.CheckedIndices" />
+
+            
 
             
 
@@ -10560,6 +12772,8 @@
           <para
             >Gets or sets a value indicating whether you have provided your own data-management operations for the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 

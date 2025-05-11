@@ -23,6 +23,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -31,13 +33,19 @@
 
         
 
+        
+
          for this example would be <see
          cref="F:System.Windows.Forms.UICues.ShowKeyboard" />
 
         
 
+        
+
          and <see
          cref="F:System.Windows.Forms.UICues.ChangeKeyboard" />
+
+        
 
         
 

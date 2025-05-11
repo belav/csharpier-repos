@@ -32,8 +32,12 @@
 
         
 
+        
+
          class allows you to run an operation on a separate, dedicated thread. Time-consuming operations like downloads and database transactions can cause your user interface (UI) to seem as though it has stopped responding while they are running. When you want a responsive UI and you are faced with long delays associated with such operations, the <see
          cref="T:System.ComponentModel.BackgroundWorker" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          and listen for events that report the progress of your operation and signal when your operation is finished. You can create the <see
          cref="T:System.ComponentModel.BackgroundWorker" />
+
+        
 
         
 
@@ -55,13 +63,19 @@
 
         
 
+        
+
          tab of the <ui
         >Toolbox</ui>
 
         
 
+        
+
         . If you create the <see
          cref="T:System.ComponentModel.BackgroundWorker" />
+
+        
 
         
 
@@ -73,8 +87,12 @@
 
         
 
+        
+
          event. Call your time-consuming operation in this event handler. To start the operation, call <see
          cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+
+        
 
         
 
@@ -83,8 +101,12 @@
 
         
 
+        
+
          event. To receive a notification when the operation is completed, handle the <see
          cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+
+        
 
         
 
@@ -97,13 +119,19 @@
 
           
 
+          
+
            event handler. Instead, communicate to the user interface through the <see
            cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
           
 
+          
+
            and <see
            cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+
+          
 
           
 
@@ -114,8 +142,12 @@
 
           
 
+          
+
            events are not marshaled across <see
            cref="T:System.AppDomain" />
+
+          
 
           
 
@@ -124,8 +156,12 @@
 
           
 
+          
+
            component to perform multithreaded operations in more than one <see
            cref="T:System.AppDomain" />
+
+          
 
           
 
@@ -138,13 +174,19 @@
 
         
 
+        
+
          with your parameter. Inside the <see
          cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
         
 
+        
+
          event handler, you can extract the parameter from the <see
          cref="P:System.ComponentModel.DoWorkEventArgs.Argument" />
+
+        
 
         
 
@@ -156,12 +198,16 @@
 
         
 
+        
+
         , see <format
          type="text/html">
           <a href="5b56e2aa-dc05-444f-930c-2d7b23f9ad5b"
             >How to: Run an Operation in the Background</a
           >
         </format>
+
+        
 
         
 
@@ -196,6 +242,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -204,6 +252,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -236,8 +286,12 @@
 
             
 
+            
+
              submits a request to terminate the pending background operation and sets the <see
              cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+
+            
 
             
 
@@ -249,8 +303,12 @@
 
             
 
+            
+
             , your worker method has an opportunity to stop its execution and exit. The worker code should periodically check the <see
              cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+
+            
 
             
 
@@ -263,8 +321,12 @@
 
               
 
+              
+
                event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see
                cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+
+              
 
               
 
@@ -273,8 +335,12 @@
 
               
 
+              
+
                flag of <see
                cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+
+              
 
               
 
@@ -283,8 +349,13 @@
 
               
 
+              
+
                event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm
-              >race condition</newTerm>
+              
+>race condition</newTerm>
+
+              
 
               
 
@@ -292,6 +363,8 @@
                type="text/html">
                 <a href="e51988e7-7f4b-4646-a06d-1416cee8d557">Managed Threading Best Practices</a>
               </format>
+
+              
 
               
 
@@ -332,8 +405,12 @@
 
             
 
+            
+
              is true, then the <see
              cref="M:System.ComponentModel.BackgroundWorker.CancelAsync" />
+
+            
 
             
 
@@ -342,11 +419,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This property is meant for use by the worker thread, which should periodically check <see
              cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+
+            
 
             
 
@@ -386,6 +467,8 @@
 
             
 
+            
+
              method. This is where you start the operation that performs the potentially time-consuming work.</para
           >
           <para
@@ -394,8 +477,12 @@
 
             
 
+            
+
              event handler should periodically check the <see
              cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+
+            
 
             
 
@@ -404,8 +491,12 @@
 
             
 
+            
+
              flag of <see
              cref="T:System.ComponentModel.DoWorkEventArgs" />
+
+            
 
             
 
@@ -414,13 +505,19 @@
 
             
 
+            
+
              flag of <see
              cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
             
 
+            
+
              in your <see
              cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+
+            
 
             
 
@@ -433,8 +530,12 @@
 
               
 
+              
+
                event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see
                cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+
+              
 
               
 
@@ -443,8 +544,12 @@
 
               
 
+              
+
                flag of <see
                cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+
+              
 
               
 
@@ -453,8 +558,13 @@
 
               
 
+              
+
                event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm
-              >race condition</newTerm>
+              
+>race condition</newTerm>
+
+              
 
               
 
@@ -462,6 +572,8 @@
                type="text/html">
                 <a href="e51988e7-7f4b-4646-a06d-1416cee8d557">Managed Threading Best Practices</a>
               </format>
+
+              
 
               
 
@@ -474,13 +586,19 @@
 
             
 
+            
+
              property. This will be available to the <see
              cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
             
 
+            
+
              event handler in the <see
              cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+
+            
 
             
 
@@ -492,8 +610,12 @@
 
             
 
+            
+
              catches the exception and passes it into the <see
              cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+
+            
 
             
 
@@ -502,8 +624,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+
+            
 
             
 
@@ -512,8 +638,12 @@
 
             
 
+            
+
              event handler where the unhandled exception was raised. If you have more than one <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -522,8 +652,12 @@
 
             
 
+            
+
              event handler to a specific instance of <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -532,13 +666,19 @@
 
             
 
+            
+
              by casting the <paramref
              name="sender" />
 
             
 
+            
+
              parameter in your <see
              cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+
+            
 
             
 
@@ -550,8 +690,12 @@
 
             
 
+            
+
              event handler. Instead, communicate to the user interface through the <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -565,6 +709,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -573,6 +719,8 @@
           <para
             >Occurs when <see
              cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+
+            
 
             
 
@@ -608,8 +756,12 @@
 
             
 
+            
+
              starts an asynchronous operation when you call <see
              cref="Overload:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+
+            
 
             
 
@@ -621,6 +773,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -660,6 +814,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -668,8 +824,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -709,11 +869,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.ComponentModel.BackgroundWorker.OnProgressChanged(System.ComponentModel.ProgressChangedEventArgs)" />
+
+            
 
             
 
@@ -728,6 +892,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -736,8 +902,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -777,11 +947,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.ComponentModel.BackgroundWorker.OnRunWorkerCompleted(System.ComponentModel.RunWorkerCompletedEventArgs)" />
+
+            
 
             
 
@@ -796,6 +970,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -804,8 +980,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -840,6 +1020,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -847,6 +1029,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -858,6 +1042,8 @@
           <para
             >Occurs when <see
              cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
+
+            
 
             
 
@@ -893,8 +1079,12 @@
 
             
 
+            
+
              method to raise the <see
              cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+
+            
 
             
 
@@ -903,13 +1093,19 @@
 
             
 
+            
+
              property value must be true, or <see
              cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
+            
+
              will throw an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -922,13 +1118,19 @@
 
             
 
+            
+
              method is asynchronous and returns immediately. The <see
              cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
             
 
+            
+
              event handler executes on the thread that created the <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -943,11 +1145,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="percentProgress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -986,8 +1192,12 @@
 
             
 
+            
+
              method to raise the <see
              cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+
+            
 
             
 
@@ -996,13 +1206,19 @@
 
             
 
+            
+
              property value must true, or <see
              cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
+            
+
              will throw an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1018,11 +1234,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="percentProgress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1033,8 +1253,12 @@
 
           
 
+          
+
           The state object passed to <see
            cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync(System.Object)" />
+
+          
 
           
 
@@ -1067,8 +1291,12 @@
 
             
 
+            
+
              method submits a request to start the operation running asynchronously. When the request is serviced, the <see
              cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+
+            
 
             
 
@@ -1080,8 +1308,12 @@
 
             
 
+            
+
              again will raise an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1121,8 +1353,12 @@
 
             
 
+            
+
              method submits a request to start the operation running asynchronously. When the request is serviced, the <see
              cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+
+            
 
             
 
@@ -1134,8 +1370,12 @@
 
             
 
+            
+
              parameter to <see
              cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+
+            
 
             
 
@@ -1147,8 +1387,12 @@
 
             
 
+            
+
              again will raise an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1164,8 +1408,12 @@
 
           
 
+          
+
           A parameter for use by the background operation to be executed in the <see
            cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+
+          
 
           
 
@@ -1200,6 +1448,8 @@
 
             
 
+            
+
              event handler returns.</para
           >
           <para
@@ -1208,8 +1458,12 @@
 
             
 
+            
+
              event handler, you can access the result through the <see
              cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+
+            
 
             
 
@@ -1221,8 +1475,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+
+            
 
             
 
@@ -1234,8 +1492,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+
+            
 
             
 
@@ -1244,8 +1506,12 @@
 
             
 
+            
+
              event handler detects a cancellation request by checking the <see
              cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+
+            
 
             
 
@@ -1254,8 +1520,12 @@
 
             
 
+            
+
              flag of <see
              cref="T:System.ComponentModel.DoWorkEventArgs" />
+
+            
 
             
 
@@ -1264,8 +1534,12 @@
 
             
 
+            
+
              flag of <see
              cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+
+            
 
             
 
@@ -1278,8 +1552,12 @@
 
               
 
+              
+
                event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see
                cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+
+              
 
               
 
@@ -1288,8 +1566,12 @@
 
               
 
+              
+
                flag of <see
                cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+
+              
 
               
 
@@ -1298,8 +1580,13 @@
 
               
 
+              
+
                event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm
-              >race condition</newTerm>
+              
+>race condition</newTerm>
+
+              
 
               
 
@@ -1307,6 +1594,8 @@
                type="text/html">
                 <a href="e51988e7-7f4b-4646-a06d-1416cee8d557">Managed Threading Best Practices</a>
               </format>
+
+              
 
               
 
@@ -1319,8 +1608,12 @@
 
             
 
+            
+
              event handler should always check the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+
+            
 
             
 
@@ -1329,13 +1622,19 @@
 
             
 
+            
+
              properties before accessing the <see
              cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
 
             
 
+            
+
              property. If an exception was raised or if the operation was canceled, accessing the <see
              cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+
+            
 
             
 
@@ -1375,8 +1674,12 @@
 
             
 
+            
+
              property to true if you want the <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -1385,8 +1688,12 @@
 
             
 
+            
+
              method to raise the <see
              cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+
+            
 
             
 
@@ -1398,6 +1705,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -1436,13 +1745,19 @@
 
             
 
+            
+
              property to true if you want the <see
              cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
+            
+
              to support cancellation. When this property is true, you can call the <see
              cref="M:System.ComponentModel.BackgroundWorker.CancelAsync" />
+
+            
 
             
 
@@ -1454,6 +1769,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 

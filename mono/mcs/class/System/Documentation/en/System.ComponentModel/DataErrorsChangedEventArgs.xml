@@ -23,6 +23,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -54,6 +56,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -62,8 +66,12 @@
 
           
 
+          
+
           The name of the property that has an error.  null or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 

@@ -81,6 +81,8 @@
 
             
 
+            
+
              object.</para
           >
           <list type="table">
@@ -124,6 +126,8 @@
                 <para
                   >An empty <see
                    cref="T:System.Collections.Specialized.StringCollection" />
+
+                  
 
                   
 
@@ -153,6 +157,8 @@
 
             
 
+            
+
              class with default values.</para
           >
         </summary>
@@ -173,6 +179,8 @@
           <para
             >The following table shows the initial property values of the <see
              cref="T:System.DirectoryServices.DirectorySearcher" />
+
+            
 
             
 
@@ -212,6 +220,8 @@
 
                   
 
+                  
+
                    object </para
                 >
               </description>
@@ -238,6 +248,8 @@
 
             
 
+            
+
              class using the specified search root.</para
           >
         </summary>
@@ -246,8 +258,12 @@
 
           
 
+          
+
           The node in the Active Directory Domain Services hierarchy where the search starts. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+
+          
 
           
 
@@ -267,6 +283,8 @@
           <para
             >The following table shows the initial property values of the <see
              cref="T:System.DirectoryServices.DirectorySearcher" />
+
+            
 
             
 
@@ -303,6 +321,8 @@
                 <para
                   >An empty <see
                    cref="T:System.Collections.Specialized.StringCollection" />
+
+                  
 
                   
 
@@ -332,6 +352,8 @@
 
             
 
+            
+
              class with the specified search filter.  </para
           >
         </summary>
@@ -340,8 +362,12 @@
 
           
 
+          
+
           The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+
+          
 
           
 
@@ -365,6 +391,8 @@
           <para
             >The following table shows the initial property values of the <see
              cref="T:System.DirectoryServices.DirectorySearcher" />
+
+            
 
             
 
@@ -394,6 +422,8 @@
 
                   
 
+                  
+
                    object.</para
                 >
               </description>
@@ -420,6 +450,8 @@
 
             
 
+            
+
              class with the specified search root and search filter.  </para
           >
         </summary>
@@ -428,8 +460,12 @@
 
           
 
+          
+
           The node in the Active Directory Domain Services hierarchy where the search starts. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+
+          
 
           
 
@@ -440,8 +476,12 @@
 
           
 
+          
+
           The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+
+          
 
           
 
@@ -465,6 +505,8 @@
           <para
             >The following table shows the initial property values of the <see
              cref="T:System.DirectoryServices.DirectorySearcher" />
+
+            
 
             
 
@@ -513,6 +555,8 @@
 
             
 
+            
+
              class with the specified search filter and properties to retrieve. </para
           >
         </summary>
@@ -521,8 +565,12 @@
 
           
 
+          
+
           The search filter string in Lightweight Directory Access Protocol (LDAP) format. The  <see
            cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+
+          
 
           
 
@@ -533,8 +581,12 @@
 
           
 
+          
+
           The set of properties to retrieve during the search. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
+
+          
 
           
 
@@ -562,6 +614,8 @@
 
             
 
+            
+
              object.</para
           >
           <list type="table">
@@ -597,6 +651,8 @@
 
             
 
+            
+
              class with the specified search root, search filter, and properties to retrieve..</para
           >
         </summary>
@@ -605,8 +661,12 @@
 
           
 
+          
+
           The node in the Active Directory Domain Services hierarchy where the search starts. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+
+          
 
           
 
@@ -617,8 +677,12 @@
 
           
 
+          
+
           The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+
+          
 
           
 
@@ -629,8 +693,12 @@
 
           
 
+          
+
           The set of properties that are retrieved during the search. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
+
+          
 
           
 
@@ -655,6 +723,8 @@
           <para
             >The following table shows the initial property values of the <see
              cref="T:System.DirectoryServices.DirectorySearcher" />
+
+            
 
             
 
@@ -691,6 +761,8 @@
 
             
 
+            
+
              class with the specified search filter, properties to retrieve, and search scope. </para
           >
         </summary>
@@ -699,8 +771,12 @@
 
           
 
+          
+
           The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+
+          
 
           
 
@@ -711,8 +787,12 @@
 
           
 
+          
+
           The set of properties to retrieve during the search. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
+
+          
 
           
 
@@ -723,8 +803,12 @@
 
           
 
+          
+
           The scope of the search that is observed by the server. The <see
            cref="T:System.DirectoryServices.SearchScope" />
+
+          
 
           
 
@@ -754,6 +838,8 @@
 
             
 
+            
+
              class with the specified search root, search filter, properties to retrieve, and search scope. </para
           >
         </summary>
@@ -762,8 +848,12 @@
 
           
 
+          
+
           The node in the Active Directory Domain Services hierarchy where the search starts. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+
+          
 
           
 
@@ -774,8 +864,12 @@
 
           
 
+          
+
           The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+
+          
 
           
 
@@ -786,8 +880,12 @@
 
           
 
+          
+
           The set of properties to retrieve during the search. The <see
            cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
+
+          
 
           
 
@@ -798,8 +896,12 @@
 
           
 
+          
+
           The scope of the search that is observed by the server. The <see
            cref="T:System.DirectoryServices.SearchScope" />
+
+          
 
           
 
@@ -834,6 +936,8 @@
 
             
 
+            
+
              object that contains the first entry that is found during the search.</para
           >
         </returns>
@@ -858,13 +962,19 @@
 
             
 
+            
+
              class cannot release all of its unmanaged resources when it is garbage collected. To prevent a memory leak, you must call the <see
              cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
             
 
+            
+
              method when the <see
              cref="T:System.DirectoryServices.SearchResultCollection" />
+
+            
 
             
 
@@ -880,6 +990,8 @@
           <para
             >A <see
              cref="T:System.DirectoryServices.SearchResultCollection" />
+
+            
 
             
 
@@ -912,6 +1024,8 @@
 
             
 
+            
+
              object creates a new enumerator object each time it is called. </para
           >
         </remarks>
@@ -940,6 +1054,8 @@
           <para
             >If the <see
              cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+
+            
 
             
 
@@ -996,6 +1112,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1026,6 +1144,8 @@
           <para
             >After the server has found the number of objects that are specified by the <see
              cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
+
+            
 
             
 
@@ -1066,6 +1186,8 @@
           <para
             >The property "ADsPath" is always retrieved during the search. On Win2kFamily and earlier operating systems, the account that performs the search must be a member of the Administrators group to retrieve the ntSecurityDescriptor property. If this is not the case, the property value that is returned for ntSecurityDescriptor will be null. For more information, see the topic "NT-Security-Descriptor" in the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -1157,6 +1279,8 @@
 
             
 
+            
+
              is a null reference (Nothing in Visual Basic), the search root is set to the root of the domain that your server is currently using.</para
           >
           <para>There are several ways to search in the global catalog:</para>
@@ -1168,6 +1292,8 @@
               <para
                 >Specify the server name. Use the DsGetDcName function to find the global catalog.  For more information on the DsGetDcName function, see the topic "DsGetDcName" in the MSDN Library at <see
                  cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+                
 
                 
 
@@ -1252,6 +1378,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
               
 
+              
+
                is set to a value that is not the default of -1.</para
             >
           </block>
@@ -1284,8 +1412,12 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
             
 
+            
+
              property, the <see
              cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+
+            
 
             
 
@@ -1294,6 +1426,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
           <para
             >Set <see
              cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+
+            
 
             
 
@@ -1306,6 +1440,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
               
 
+              
+
                to a value that is larger than the server-determined default of 120 seconds, the server-determined default is used. After the server time limit is reached, you cannot continue a search from where it left off.</para
             >
           </block>
@@ -1315,6 +1451,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
           <para
             >The <see
              cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+
+            
 
             
 
@@ -1346,6 +1484,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
             <para
               >If you set <see
                cref="P:System.DirectoryServices.DirectorySearcher.SizeLimit" />
+
+              
 
               
 
@@ -1398,10 +1538,14 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
         
 
+        
+
          object to search and perform queries against an Active Directory Domain Services hierarchy using Lightweight Directory Access Protocol (LDAP). LDAP is the only system-supplied Active Directory Service Interfaces (ADSI) provider that supports directory searching. An administrator can make, alter, and delete objects that are found in the hierarchy. For more information, see <format
          type="text/html">
           <a href="ffa2f003-3a9a-4e2a-815e-825c8ddd7949">Using System.DirectoryServices</a>
         </format>
+
+        
 
         
 
@@ -1413,8 +1557,12 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
         
 
+        
+
         , you specify the root you want to retrieve, and an optional list of properties to retrieve. The <see
          cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+
+        
 
         
 
@@ -1428,8 +1576,12 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
             
 
+            
+
              property to true to store directory information on the local computer. Updates are made to this local cache and committed to Active Directory Domain Services only when the <see
              cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+            
 
             
 
@@ -1443,6 +1595,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
             
 
+            
+
              property. </para
           >
         </item>
@@ -1450,6 +1604,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
           <para
             >Retrieve attribute names only. Set the <see
              cref="P:System.DirectoryServices.DirectorySearcher.PropertyNamesOnly" />
+
+            
 
             
 
@@ -1463,8 +1619,12 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
             
 
+            
+
              property to specify the maximum number of objects that are returned in a paged search. If you do not want to perform a paged search, set the <see
              cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
+
+            
 
             
 
@@ -1478,8 +1638,12 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
             
 
+            
+
              property. If you set the <see
              cref="P:System.DirectoryServices.DirectorySearcher.SizeLimit" />
+
+            
 
             
 
@@ -1496,8 +1660,12 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
 
         
 
+        
+
          class, see the <see
          cref="M:System.DirectoryServices.DirectorySearcher.#ctor" />
+
+        
 
         
 
@@ -1507,6 +1675,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         <para
           >It is assumed that you have a general understanding of Active Directory Domain Services before using this class. For more information, see the <see
            cref="N:System.DirectoryServices" />
+
+          
 
           
 

@@ -15,10 +15,11 @@
             		another Java-style documentation style
             		</summary>
     </member>
-    <member name="T:Testing.Test4"
-      >
+    <member name="T:Testing.Test4">
             indentation level test <seealso
        cref="T:Testing.Test" />
+
+      
 
       
 

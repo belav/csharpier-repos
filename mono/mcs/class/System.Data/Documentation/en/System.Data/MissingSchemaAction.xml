@@ -21,8 +21,12 @@
 
         
 
+        
+
          values are used whenever an action is taken that could change the schema of the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -37,13 +41,19 @@
 
         
 
+        
+
          and the required <see
          cref="T:System.Data.DataTable" />
 
         
 
+        
+
          or <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -88,13 +98,19 @@
 
             
 
+            
+
             , see <see
              cref="M:System.Data.IDataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
 
             
 
+            
+
             .To function properly with the .NET Framework Data Provider for OLE DB, AddWithKey requires that the native OLE DB provider obtains necessary primary key information by setting the DBPROP_UNIQUEROWS property, and then determines which columns are primary key columns by examining DBCOLUMN_KEYCOLUMN in the IColumnsRowset. As an alternative, the user may explicitly set the primary key constraints on each <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -121,6 +137,8 @@
           <para
             >An <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 

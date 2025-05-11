@@ -33,6 +33,8 @@
 
             
 
+            
+
              representing the data passed in the SOAP header.</para
           >
         </item>
@@ -46,8 +48,12 @@
 
             
 
+            
+
              to the XML Web service method or the corresponding method in the proxy class, specifying the member created in step 2 in the <see
              cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+
+            
 
             
 
@@ -61,6 +67,8 @@
 
             
 
+            
+
              property to process the data sent in the SOAP header.</para
           >
         </item>
@@ -68,6 +76,8 @@
       <para
         >For more details, see the <see
          cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+
+        
 
         
 
@@ -96,8 +106,12 @@
 
             
 
+            
+
              to the XML Web service method in the XML Web service class or the corresponding method in the proxy class. In order for the XML Web service method to receive the contents of the SOAP header, a member is added to the XML Web service class of a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -106,8 +120,12 @@
 
             
 
+            
+
             . Likewise, an XML Web service client adds a member to the proxy class deriving from <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -116,8 +134,12 @@
 
             
 
+            
+
              deriving from <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -126,13 +148,19 @@
 
             
 
+            
+
              can be applied to the XML Web service method or corresponding method in the XML Web service client proxy class specifing the member to receive the SOAP header contents with the <paramref
              name="memberName" />
 
             
 
+            
+
              parameter to this constructor or the <see
              cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+
+            
 
             
 
@@ -144,6 +172,8 @@
 
             
 
+            
+
              attributes to the XML Web service method.</para
           >
           <para
@@ -152,13 +182,19 @@
 
             
 
+            
+
              of the member to be either <see
              cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
 
             
 
+            
+
             , <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -173,6 +209,8 @@
 
             
 
+            
+
              class, setting the member of the XML Web service class representing the SOAP header contents.</para
           >
         </summary>
@@ -181,8 +219,12 @@
 
           
 
+          
+
           The member of the XML Web service class representing the SOAP header contents. The <see
            cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+
+          
 
           
 
@@ -234,8 +276,12 @@
 
             
 
+            
+
              to the XML Web service method in the XML Web service class or the corresponding method in the proxy class. In order for the XML Web service method to receive the contents of the SOAP header, a member is added to the XML Web service class of a type derived from <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -244,8 +290,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -254,13 +304,19 @@
 
             
 
+            
+
              represents the contents of the SOAP header and is created by the developer of the XML Web service or XML Web service client that wants to receive the SOAP header. Once the class is created, a <see
              cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
+            
+
              can be applied to the XML Web service method or corresponding method in the XML Web service client proxy class specifying the member to receive the SOAP header contents with the <see
              cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+
+            
 
             
 
@@ -272,6 +328,8 @@
 
             
 
+            
+
              attributes to the XML Web service method.</para
           >
           <para
@@ -280,8 +338,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -315,11 +377,15 @@
 
             
 
+            
+
              property is null. If it is null, the SOAP header was not sent.</para
           >
           <para
             >In version 1.0 of the .NET Framework SDK, the <see
              cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.Required" />
+
+            
 
             
 

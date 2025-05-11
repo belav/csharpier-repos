@@ -28,8 +28,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          controls are rendered in the header of each column that has the <see
          cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          property contains the same value as the data field.) These links allow you to sort the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
          event is raised when a <see
          cref="T:System.Web.UI.WebControls.LinkButton" />
+
+        
 
         
 
@@ -71,8 +87,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.DataGridSortCommandEventArgs.#ctor(System.Object,System.Web.UI.WebControls.DataGridCommandEventArgs)" />
+
+        
 
         
 
@@ -83,6 +103,8 @@
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -97,8 +119,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -129,11 +155,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
+
+            
 
             
 
@@ -163,6 +193,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -180,6 +212,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -191,6 +225,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
+
+            
 
             
 
@@ -219,8 +255,12 @@
 
             
 
+            
+
              property to get the command source that raises the <see
              cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
+
+            
 
             
 
@@ -229,8 +269,12 @@
 
             
 
+            
+
              control, the returned source is a <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -263,8 +307,12 @@
 
             
 
+            
+
              property to determine which column the user selected to sort the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -276,6 +324,8 @@
           <para
             >Gets the expression used to sort the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 

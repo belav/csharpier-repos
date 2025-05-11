@@ -37,12 +37,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="T:System.Diagnostics.ConditionalAttribute" />
+
+          
 
           
 
@@ -54,8 +58,12 @@
 
           
 
+          
+
            and then click <ui
           >Suppress Message(s)</ui>
+
+          
 
           
 
@@ -63,6 +71,8 @@
            type="text/html">
             <a href="f1a2dc6a-a9eb-408c-9078-2571e57d207d">In Source Suppression Overview</a>
           </format>
+
+          
 
           
 
@@ -104,8 +114,12 @@
 
             
 
+            
+
              parameter value is specific to the analysis tool and categorizes the rule identified by the <paramref
              name="checkId" />
+
+            
 
             
 
@@ -123,6 +137,8 @@
 
             
 
+            
+
              class, specifying the category of the static analysis tool and the identifier for an analysis rule. </para
           >
         </summary>
@@ -131,10 +147,14 @@
 
           
 
+          
+
           The category for the attribute.</param
         >
         <param name="checkId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +181,8 @@
           <para
             >The <see
              cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Category" />
+
+            
 
             
 
@@ -195,8 +217,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.CheckId" />
+
+            
 
             
 
@@ -252,8 +278,12 @@
 
             
 
+            
+
              property is an optional argument that specifies additional exclusion where the literal metadata target is not sufficiently precise. For example, the <see
              cref="T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute" />
+
+            
 
             
 
@@ -288,6 +318,8 @@
 
             
 
+            
+
              property is an optional argument that specifies the metadata scope for which the attribute is relevant. Possible values for managed metadata include "member", "resource", "module", "type", "method", or "namespace".</para
           >
         </remarks>
@@ -316,6 +348,8 @@
           <para
             >The <see
              cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Target" />
+
+            
 
             
 

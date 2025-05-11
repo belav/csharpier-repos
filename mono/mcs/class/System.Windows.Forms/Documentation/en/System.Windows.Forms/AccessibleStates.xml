@@ -92,6 +92,8 @@
 
             
 
+            
+
              OR Animated. This state should not be used to indicate that the object's location is changing.</para
           >
         </summary>
@@ -201,13 +203,19 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
 
             
 
+            
+
             . This state does not change the focus or the selection anchor unless it is combined with <see
              cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+
+            
 
             
 

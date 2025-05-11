@@ -79,6 +79,8 @@
 
           
 
+          
+
           A MethodBuilder object that represents the other method. </param
         >
       </Docs>
@@ -221,6 +223,8 @@
 
           
 
+          
+
           Indicates whether non-public methods should be returned in the MethodInfo array. true if non-public methods are to be included; otherwise, false. </param
         >
       </Docs>
@@ -264,6 +268,8 @@
 
           
 
+          
+
           If true, walks up this property's inheritance chain to find the custom attributes </param
         >
       </Docs>
@@ -303,6 +309,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -315,10 +323,14 @@
 
           
 
+          
+
           An array of custom attributes identified by type. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,8 +376,12 @@
 
             
 
+            
+
              is true. Returns null if <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -374,11 +390,15 @@
 
             
 
+            
+
              is true but no get accessors exist.</para
           >
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,6 +491,8 @@
 
                   
 
+                  
+
                    object representing the Set method for this property. </para
                 >
               </term>
@@ -478,6 +500,8 @@
                 <para>The set accessor is public.</para>
                 <para>
                   <paramref name="nonPublic" />
+
+                  
 
                   
 
@@ -495,10 +519,14 @@
 
                   
 
+                  
+
                    is true, but the property is read-only.</para
                 >
                 <para>
                   <paramref name="nonPublic" />
+
+                  
 
                   
 
@@ -510,6 +538,8 @@
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -557,10 +587,14 @@
 
           
 
+          
+
           The object whose property value will be returned. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -610,11 +644,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -625,6 +663,8 @@
 
           
 
+          
+
           The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param
         >
         <param name="binder">
@@ -632,8 +672,12 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -644,10 +688,14 @@
 
           
 
+          
+
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -690,6 +738,8 @@
 
             
 
+            
+
              is defined on this property.</para
           >
         </summary>
@@ -701,6 +751,8 @@
 
             
 
+            
+
              is defined on this property; otherwise false.</para
           >
         </returns>
@@ -709,10 +761,14 @@
 
           
 
+          
+
           The Type object to which the custom attributes are applied. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -748,13 +804,19 @@
 
             
 
+            
+
              property to get the type in which the property is declared, and then calling the <see
              cref="P:System.Type.Module" />
 
             
 
+            
+
              property of the resulting <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -886,8 +948,12 @@
 
             
 
+            
+
              is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the property type is a reference type, CLS compliance requires <paramref
              name="defaultValue" />
+
+            
 
             
 
@@ -896,8 +962,12 @@
 
             
 
+            
+
              can be non-null for reference types as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a property of type <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -910,6 +980,8 @@
         </summary>
         <param name="defaultValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -946,6 +1018,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -989,6 +1063,8 @@
 
             
 
+            
+
             . The Partition II documentation is available online on MSDN (<see
              cref="http://go.microsoft.com/fwlink/?linkid=65555"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -996,10 +1072,14 @@
 
             
 
+            
+
              Web page) and on the ECMA Web site (<see
              cref="http://go.microsoft.com/fwlink/?linkid=65552"
               >Standard ECMA-335 Common Language Infrastructure</see
             >
+
+            
 
             
 
@@ -1015,10 +1095,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1058,6 +1142,8 @@
 
           
 
+          
+
           A MethodBuilder object that represents the method that gets the property value. </param
         >
       </Docs>
@@ -1091,6 +1177,8 @@
         </summary>
         <param name="mdBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1130,8 +1218,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Reflection.Assembly.GetType" />
+
+            
 
             
 
@@ -1140,8 +1232,12 @@
 
             
 
+            
+
              object from the type, and call <see
              cref="Overload:System.Reflection.PropertyInfo.SetValue" />
+
+            
 
             
 
@@ -1157,6 +1253,8 @@
 
           
 
+          
+
           The object whose property value will be set. </param
         >
         <param name="value">
@@ -1164,10 +1262,14 @@
 
           
 
+          
+
           The new value for this property. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1210,8 +1312,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Reflection.Assembly.GetType" />
+
+            
 
             
 
@@ -1220,8 +1326,12 @@
 
             
 
+            
+
              object from the type, and call <see
              cref="Overload:System.Reflection.PropertyInfo.SetValue" />
+
+            
 
             
 
@@ -1237,10 +1347,14 @@
 
           
 
+          
+
           The object whose property value will be returned. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1251,6 +1365,8 @@
 
           
 
+          
+
           The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param
         >
         <param name="binder">
@@ -1258,8 +1374,12 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1270,10 +1390,14 @@
 
           
 
+          
+
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1348,6 +1472,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1360,6 +1486,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1367,10 +1495,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

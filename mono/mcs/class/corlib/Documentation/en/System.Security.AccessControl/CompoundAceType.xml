@@ -24,6 +24,8 @@
 
         
 
+        
+
          object.</para
       >
     </summary>
@@ -50,6 +52,8 @@
           <para
             >The <see
              cref="T:System.Security.AccessControl.CompoundAce" />
+
+            
 
             
 

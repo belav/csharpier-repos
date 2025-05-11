@@ -79,6 +79,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -103,6 +105,8 @@
           <para
             >Gets or sets the maximum number of objects that exist in the <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 
@@ -153,6 +157,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -180,6 +186,8 @@
           <para
             >Gets or sets the type of the associated <see
              cref="T:System.Drawing.Imaging.Metafile" />
+
+            
 
             
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          class provides parser functionality for the <see
          cref="T:System.Web.UI.TemplateControl" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          classes. Because the <see
          cref="T:System.Web.UI.BaseTemplateParser" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.BaseTemplateParser" />
+
+            
 
             
 
@@ -110,8 +120,12 @@
 
             
 
+            
+
              object is defined and its <see
              cref="M:System.Web.UI.PageParserFilter.AllowVirtualReference(System.String,System.Web.UI.VirtualReferenceType)" />
+
+            
 
             
 
@@ -120,8 +134,12 @@
 
             
 
+            
+
              method raises an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -133,13 +151,19 @@
 
             
 
+            
+
              object that is referenced by the virtual path is marked as a no-compile control, an <see
              cref="T:System.Web.HttpException" />
 
             
 
+            
+
              exception will be thrown. To force a <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -150,8 +174,12 @@
 
             
 
+            
+
              directive to the <see
              cref="F:System.Web.UI.CompilationMode.Always" />
+
+            
 
             
 
@@ -164,6 +192,8 @@
 
             
 
+            
+
              in the Web.config file.</para
           >
         </remarks>
@@ -172,6 +202,8 @@
           <para
             >Compiles and returns the type of the <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -187,8 +219,12 @@
 
           
 
+          
+
           The virtual path of the <see
            cref="T:System.Web.UI.UserControl" />
+
+          
 
           
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetUdpIPv6Statistics" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
       <para
         >The information in this class correlates to the management information objects described in <see
          cref="http://www.ietf.org/rfc/rfc2013.txt">http://www.ietf.org/rfc/rfc2013.txt</see>
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -76,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.UdpStatistics" />
+
+            
 
             
 
@@ -157,6 +167,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -194,6 +206,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -225,8 +239,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 

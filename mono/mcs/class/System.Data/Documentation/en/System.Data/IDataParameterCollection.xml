@@ -27,10 +27,14 @@
 
         
 
+        
+
          interface allows an inheriting class to implement a Parameter collection. For more information about Parameter classes, see <format
          type="text/html">
           <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707">Using Stored Procedures with a Command</a>
         </format>
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IDataParameterCollection" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.IDataParameterCollection" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          method. In turn, the <see
          cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+        
 
         
 
@@ -78,6 +94,8 @@
       <para
         >Collects all parameters relevant to a Command object and their mappings to <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -110,6 +128,8 @@
 
           
 
+          
+
           The name of the parameter. </param
         >
       </Docs>
@@ -137,6 +157,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </summary>
@@ -148,11 +170,15 @@
 
             
 
+            
+
              within the collection.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,11 +232,15 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

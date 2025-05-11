@@ -36,6 +36,8 @@
 
         
 
+        
+
         . This class is for complex types with a complex content model derived by restriction. It restricts the contents of the complex type to a subset of the inherited complex type.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaComplexContentRestriction" />
+
+            
 
             
 
@@ -102,6 +106,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Schema.XmlSchemaAnyAttribute" />
+
+            
 
             
 
@@ -147,8 +153,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />
+
+            
 
             
 
@@ -237,8 +247,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaChoice" />
+
+            
 
             
 
@@ -247,8 +261,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.Schema.XmlSchemaSequence" />
+
+            
 
             
 

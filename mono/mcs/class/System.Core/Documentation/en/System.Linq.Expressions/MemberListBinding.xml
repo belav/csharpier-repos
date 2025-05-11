@@ -26,8 +26,12 @@
 
         
 
+        
+
          factory methods to create a <see
          cref="T:System.Linq.Expressions.MemberListBinding" />
+
+        
 
         
 
@@ -39,13 +43,19 @@
 
         
 
+        
+
          has the <see
          cref="P:System.Linq.Expressions.MemberBinding.BindingType" />
 
         
 
+        
+
          property equal to <see
          cref="F:System.Linq.Expressions.MemberBindingType.ListBinding" />
+
+        
 
         
 
@@ -121,8 +131,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.MemberListBinding.Initializers" />
+
+          
 
           
 

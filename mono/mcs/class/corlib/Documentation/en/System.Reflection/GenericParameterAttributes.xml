@@ -28,8 +28,12 @@
 
         
 
+        
+
          enumeration are divided into two groups, the variance group and the special constraints group. To test a <see
          cref="T:System.Reflection.GenericParameterAttributes" />
+
+        
 
         
 
@@ -38,13 +42,19 @@
 
         
 
+        
+
         . If the result is <see
          cref="F:System.Reflection.GenericParameterAttributes.None" />
 
         
 
+        
+
         , there are no variance flags. Similarly, use <see
          cref="F:System.Reflection.GenericParameterAttributes.SpecialConstraintMask" />
+
+        
 
         
 
@@ -213,13 +223,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Reflection.GenericParameterAttributes.ReferenceTypeConstraint" />
 
             
 
+            
+
             , and <see
              cref="F:System.Reflection.GenericParameterAttributes.NotNullableValueTypeConstraint" />
+
+            
 
             
 
@@ -252,8 +268,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.GenericParameterAttributes.Covariant" />
+
+            
 
             
 

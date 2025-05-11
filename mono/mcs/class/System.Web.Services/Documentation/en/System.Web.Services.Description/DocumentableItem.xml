@@ -79,6 +79,8 @@
 
         
 
+        
+
          property, which represents the text documentation for a specific WSDL (Web Services Description Language) element.</para
       >
       <para>For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para>
@@ -88,6 +90,8 @@
       <para
         >Represents the abstract base class from which several classes in the <see
          cref="N:System.Web.Services.Description" />
+
+        
 
         
 
@@ -108,6 +112,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.Services.Description.DocumentableItem" />
+
+            
 
             
 
@@ -138,6 +144,8 @@
           <para
             >Gets or sets the text documentation for the instance of the <see
              cref="T:System.Web.Services.Description.DocumentableItem" />
+
+            
 
             
 
@@ -190,6 +198,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -220,6 +230,8 @@
           <para
             >Gets or sets an array of type <see
              cref="T:System.Xml.XmlAttribute" />
+
+            
 
             
 
@@ -256,8 +268,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Web.Services.Description.DocumentableItem" />
+
+            
 
             
 
@@ -291,6 +307,8 @@
           <para
             >Gets or sets the dictionary of namespace prefixes and namespaces used to preserve namespace prefixes and namespaces when a <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 

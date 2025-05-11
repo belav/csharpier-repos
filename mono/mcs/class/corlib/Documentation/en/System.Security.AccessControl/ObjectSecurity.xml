@@ -25,8 +25,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -72,8 +78,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+          
 
           
 
@@ -84,8 +94,12 @@
 
           
 
+          
+
           True if the new <see
            cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+          
 
           
 
@@ -119,8 +133,12 @@
 
             
 
+            
+
              of the securable object associated with this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -165,6 +183,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -176,6 +196,8 @@
 
             
 
+            
+
              object that this method creates.</para
           >
         </returns>
@@ -184,8 +206,12 @@
 
           
 
+          
+
           The identity to which the access rule applies.  It must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -196,10 +222,14 @@
 
           
 
+          
+
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,10 +240,14 @@
 
           
 
+          
+
           Specifies the inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,8 +256,12 @@
 
           
 
+          
+
            is set to <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -231,6 +269,8 @@
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,6 +298,8 @@
           <para
             >Gets or sets a Boolean value that specifies whether the access rules associated with this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -292,8 +334,12 @@
 
             
 
+            
+
              of the object associated with the access rules of this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -302,8 +348,12 @@
 
             
 
+            
+
              object must be an object that can be cast as a <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -335,6 +385,8 @@
 
             
 
+            
+
              object are in canonical order.</para
           >
         </summary>
@@ -360,6 +412,8 @@
           <para
             >Gets a Boolean value that specifies whether the Discretionary Access Control List (DACL) associated with this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -391,6 +445,8 @@
 
             
 
+            
+
              object are in canonical order.</para
           >
         </summary>
@@ -416,6 +472,8 @@
           <para
             >Gets a Boolean value that specifies whether the System Access Control List (SACL) associated with this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -460,6 +518,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -471,6 +531,8 @@
 
             
 
+            
+
              object that this method creates.</para
           >
         </returns>
@@ -479,8 +541,12 @@
 
           
 
+          
+
           The identity to which the audit rule applies.  It must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -491,10 +557,14 @@
 
           
 
+          
+
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -505,10 +575,14 @@
 
           
 
+          
+
           Specifies the inheritance properties of the audit rule.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -517,8 +591,12 @@
 
           
 
+          
+
            is set to <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -526,6 +604,8 @@
         >
         <param name="flags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -553,6 +633,8 @@
           <para
             >Gets or sets a Boolean value that specifies whether the audit rules associated with this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -587,8 +669,12 @@
 
             
 
+            
+
              object associated with the audit rules of this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -597,8 +683,12 @@
 
             
 
+            
+
              object must be an object that can be cast as a <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -643,6 +733,8 @@
 
           
 
+          
+
           The owner for which to get the primary group. </param
         >
       </Docs>
@@ -683,6 +775,8 @@
 
           
 
+          
+
           The primary group for which to get the owner.</param
         >
       </Docs>
@@ -716,6 +810,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -727,8 +823,12 @@
 
             
 
+            
+
              object. This method returns null if there is no security information in this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -771,6 +871,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -782,11 +884,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includeSections">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -838,6 +944,8 @@
 
             
 
+            
+
              object is a container object.</para
           >
         </summary>
@@ -863,6 +971,8 @@
           <para
             >Gets a Boolean value that specifies whether this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -897,6 +1007,8 @@
 
             
 
+            
+
              object can be converted to the Security Descriptor Definition Language (SDDL) format.</para
           >
         </summary>
@@ -905,6 +1017,8 @@
           <para
             >true if the security descriptor associated with this  <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -1108,8 +1222,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1118,8 +1236,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1128,8 +1250,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -1138,8 +1264,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -1148,8 +1278,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1158,8 +1292,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -1174,8 +1312,12 @@
 
             
 
+            
+
              object to permanent storage. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1187,6 +1329,8 @@
 
           
 
+          
+
           The handle used to retrieve the persisted information.</param
         >
         <param name="includeSections">
@@ -1194,8 +1338,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -1237,8 +1385,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1247,8 +1399,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1257,8 +1413,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -1267,8 +1427,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -1277,8 +1441,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1287,8 +1455,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -1303,8 +1475,12 @@
 
             
 
+            
+
              object to permanent storage. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1316,6 +1492,8 @@
 
           
 
+          
+
           The name used to retrieve the persisted information.</param
         >
         <param name="includeSections">
@@ -1323,8 +1501,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -1372,8 +1554,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1382,8 +1568,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1392,8 +1582,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -1402,8 +1596,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -1412,8 +1610,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1422,8 +1624,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -1438,8 +1644,12 @@
 
             
 
+            
+
              object to permanent storage. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1451,10 +1661,14 @@
 
           
 
+          
+
           true to enable the privilege that allows the caller to take ownership of the object.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1465,8 +1679,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -1505,6 +1723,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1513,8 +1733,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -1553,6 +1777,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1561,8 +1787,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -1596,6 +1826,8 @@
 
             
 
+            
+
              object for read access.</para
           >
         </summary>
@@ -1624,6 +1856,8 @@
           <para
             >Unlocks this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 
@@ -1664,6 +1898,8 @@
 
             
 
+            
+
              object. Protected access rules cannot be modified by parent objects through inheritance.</para
           >
         </summary>
@@ -1672,8 +1908,12 @@
 
           
 
+          
+
           true to protect the access rules associated with this <see
            cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+          
 
           
 
@@ -1684,8 +1924,12 @@
 
           
 
+          
+
           true to preserve inherited access rules; false to remove inherited access rules. This parameter is ignored if <paramref
            name="isProtected" />
+
+          
 
           
 
@@ -1725,6 +1969,8 @@
 
             
 
+            
+
              object. Protected audit rules cannot be modified by parent objects through inheritance.</para
           >
         </summary>
@@ -1733,8 +1979,12 @@
 
           
 
+          
+
           true to protect the audit rules associated with this <see
            cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+          
 
           
 
@@ -1745,8 +1995,12 @@
 
           
 
+          
+
           true to preserve inherited audit rules; false to remove inherited audit rules. This parameter is ignored if <paramref
            name="isProtected" />
+
+          
 
           
 
@@ -1785,11 +2039,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1828,11 +2086,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1875,11 +2137,15 @@
 
             
 
+            
+
              object from the specified array of byte values.</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1926,6 +2192,8 @@
 
             
 
+            
+
              object from the specified array of byte values.</para
           >
         </summary>
@@ -1934,10 +2202,14 @@
 
           
 
+          
+
           The array of bytes from which to set the security descriptor.</param
         >
         <param name="includeSections">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1980,11 +2252,15 @@
 
             
 
+            
+
              object from the specified Security Descriptor Definition Language (SDDL) string.</para
           >
         </summary>
         <param name="sddlForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2031,6 +2307,8 @@
 
             
 
+            
+
              object from the specified Security Descriptor Definition Language (SDDL) string.</para
           >
         </summary>
@@ -2039,10 +2317,14 @@
 
           
 
+          
+
           The SDDL string from which to set the security descriptor.</param
         >
         <param name="includeSections">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2076,6 +2358,8 @@
 
             
 
+            
+
              object for write access.</para
           >
         </summary>
@@ -2104,6 +2388,8 @@
           <para
             >Unlocks this <see
              cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+            
 
             
 

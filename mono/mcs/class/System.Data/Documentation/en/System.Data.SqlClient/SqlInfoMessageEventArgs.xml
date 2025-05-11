@@ -26,8 +26,12 @@
 
         
 
+        
+
          event contains a <see
          cref="T:System.Data.SqlClient.SqlErrorCollection" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
          event is generated when a SQL Server message with a severity level of 10 or less occurs.</para
       >
     </remarks>
@@ -47,6 +53,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Data.SqlClient.SqlConnection.InfoMessage" />
+
+        
 
         
 
@@ -93,13 +101,19 @@
 
             
 
+            
+
              property of the first <see
              cref="T:System.Data.SqlClient.SqlError" />
 
             
 
+            
+
              in the <see
              cref="P:System.Data.SqlClient.SqlInfoMessageEventArgs.Errors" />
+
+            
 
             
 
@@ -132,13 +146,19 @@
 
             
 
+            
+
              property of the first <see
              cref="T:System.Data.SqlClient.SqlError" />
 
             
 
+            
+
              in the <see
              cref="P:System.Data.SqlClient.SqlInfoMessageEventArgs.Errors" />
+
+            
 
             
 
@@ -172,6 +192,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -180,6 +202,8 @@
           <para
             >A string representing the <see
              cref="E:System.Data.SqlClient.SqlConnection.InfoMessage" />
+
+            
 
             
 

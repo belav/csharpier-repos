@@ -25,6 +25,8 @@
 
         
 
+        
+
          instances are provided by message security channels (which use WS-SecureConversation) and by TCP secure transport channels.</para
       >
     </remarks>

@@ -6,8 +6,12 @@
 
     
 
+    
+
      consists of a <non_terminal
      where="14.5">primary-expression</non_terminal>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="25.5.2">pointer-member-access</non_terminal>
       </name>
+
+      
 
       
 
@@ -34,8 +40,12 @@
 
     
 
+    
+
     . For a description of the member access operator (.), see <hyperlink
     >14.5.4</hyperlink>
+
+    
 
     
 
@@ -45,7 +55,7 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 struct Point  
 {  
    public int x;  
@@ -72,9 +82,11 @@ class Test
 
       
 
+      
+
       the -&gt; operator is used to access fields and invoke a method of a struct through a pointer. Because the operation P-&gt;I is precisely equivalent to (*P).I, the Main method could equally well have been written: <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 class Test  
 {  
@@ -90,6 +102,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

@@ -44,10 +44,11 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary
-      >
+    <summary>
       A collection of <see
        cref="T:System.String" />
+
+      
 
       
 
@@ -57,14 +58,17 @@
 
       
 
+      
+
       .
     </summary
     >
     <remarks>
-      <para
-        >
+      <para>
         A <see
          cref="T:Mono.Options.OptionValueCollection" />
+
+        
 
         
 
@@ -75,9 +79,13 @@
         
 
         
+
+        
         instance, and its behavior is tied to the 
         <see
          cref="T:Mono.Options.Option" />
+
+        
 
         
 
@@ -87,13 +95,16 @@
 
         
 
+        
+
          property returns.
       </para
       >
-      <para
-        >
+      <para>
         If <see
          cref="P:Mono.Options.OptionContext.Option" />
+
+        
 
         
 
@@ -103,15 +114,21 @@
 
         
 
+        
+
          with an 
         <see
          cref="T:Mono.Options.OptionValueType" />
 
         
 
+        
+
          of
         <see
          cref="F:Mono.Options.OptionValueType.Optional" />
+
+        
 
         
 
@@ -122,8 +139,12 @@
         
 
         
+
+        
         indexer will return <see
          langword="null" />
+
+        
 
         
 
@@ -133,9 +154,13 @@
 
         
 
+        
+
          is less than 
         <see
          cref="P:Mono.Options.Option.MaxValueCount" />
+
+        
 
         
 
@@ -145,9 +170,13 @@
 
         
 
+        
+
          is otherwise invalid (i.e. there hasn't been
         a string <c
         >Add</c>
+
+        
 
         
 
@@ -156,14 +185,17 @@
 
         
 
+        
+
         .
       </para
       >
-      <para
-        >
+      <para>
         Otherwise, this instance behaves like
         <see
          cref="T:System.Collections.Generic.List{System.String}" />
+
+        
 
         
 

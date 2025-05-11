@@ -33,8 +33,12 @@
 
         
 
+        
+
          collection is a <see
          cref="T:System.Collections.Generic.LinkedListNode`1" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          contains a value, a reference to the <see
          cref="T:System.Collections.Generic.LinkedList`1" />
+
+        
 
         
 
@@ -56,6 +64,8 @@
       <para
         >Represents a node in a <see
          cref="T:System.Collections.Generic.LinkedList`1" />
+
+        
 
         
 
@@ -114,8 +124,12 @@
 
             
 
+            
+
              that the <see
              cref="T:System.Collections.Generic.LinkedListNode`1" />
+
+            
 
             
 
@@ -153,6 +167,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -187,6 +203,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -211,6 +229,8 @@
           <para
             >This property is set in the <see
              cref="M:System.Collections.Generic.LinkedListNode`1.#ctor(`0)" />
+
+            
 
             
 

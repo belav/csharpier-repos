@@ -32,8 +32,12 @@
 
         
 
+        
+
          class represents the collection of all the child controls in a <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          exposed by <see
          cref="P:System.Windows.Forms.TableLayoutPanel.Controls" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          class is a minor specialization of the <see
          cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+        
 
         
 
@@ -100,13 +116,19 @@
 
             
 
+            
+
              class. Instead, a reference to an existing <see
              cref="T:System.Windows.Forms.TableLayoutControlCollection" />
 
             
 
+            
+
              is returned by the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.Controls" />
+
+            
 
             
 
@@ -121,6 +143,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -129,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          
 
           
 
@@ -164,8 +192,12 @@
 
             
 
+            
+
             , you can specify the cell position of <paramref
              name="control" />
+
+            
 
             
 
@@ -174,8 +206,12 @@
 
             
 
+            
+
              to a specific cell by providing both the <paramref
              name="column" />
+
+            
 
             
 
@@ -184,8 +220,12 @@
 
             
 
+            
+
              parameters, or you can specify only the column or row value and let the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" />
+
+            
 
             
 
@@ -194,13 +234,19 @@
 
             
 
+            
+
              at the next open cell. This is known as letting the control <newTerm
             >flow</newTerm>
 
             
 
+            
+
              to its position in the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -212,8 +258,12 @@
 
             
 
+            
+
              to -1 if you want <paramref
              name="control" />
+
+            
 
             
 
@@ -225,8 +275,12 @@
 
             
 
+            
+
              to -1 if you want <paramref
              name="control" />
+
+            
 
             
 
@@ -238,8 +292,12 @@
 
             
 
+            
+
              nor <paramref
              name="row" />
+
+            
 
             
 
@@ -248,13 +306,19 @@
 
             
 
+            
+
              will be added at the absolute position given by (<paramref
              name="column" />
 
             
 
+            
+
             , <paramref
              name="row" />
+
+            
 
             
 
@@ -266,8 +330,12 @@
 
             
 
+            
+
              and <paramref
              name="row" />
+
+            
 
             
 
@@ -276,13 +344,19 @@
 
             
 
+            
+
              will flow to the first open position, with the specific flow behavior defined by the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
 
             
 
+            
+
              value. This is equivalent to using the <see
              cref="M:System.Windows.Forms.Control.ControlCollection.Add(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -294,13 +368,19 @@
 
             
 
+            
+
              method. This method takes into account the entire <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
+            
+
              control state, including column or row spanning and when the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" />
+
+            
 
             
 
@@ -316,6 +396,8 @@
 
           
 
+          
+
           The control to add.</param
         >
         <param name="column">
@@ -323,8 +405,12 @@
 
           
 
+          
+
           The column in which <paramref
            name="control" />
+
+          
 
           
 
@@ -335,8 +421,12 @@
 
           
 
+          
+
           The row in which <paramref
            name="control" />
+
+          
 
           
 
@@ -366,6 +456,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </remarks>
@@ -374,6 +466,8 @@
           <para
             >Gets the parent <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 

@@ -36,10 +36,14 @@
 
         
 
+        
+
          consists of a name, its attributes, the component that the event is bound to, the event delegate, the type of delegate, and whether the delegate is multicast.</para
       >
       <para>
         <see cref="T:System.ComponentModel.EventDescriptor" />
+
+        
 
         
 
@@ -52,12 +56,16 @@
 
             
 
+            
+
              contains the type of the component this event is declared on.</para
           >
         </item>
         <item>
           <para>
             <see cref="P:System.ComponentModel.EventDescriptor.EventType" />
+
+            
 
             
 
@@ -70,6 +78,8 @@
 
             
 
+            
+
              contains a value indicating whether the event delegate is a multicast delegate.</para
           >
         </item>
@@ -79,12 +89,16 @@
 
             
 
+            
+
              binds the event to a component.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.ComponentModel.EventDescriptor.RemoveEventHandler(System.Object,System.Delegate)" />
+
+            
 
             
 
@@ -100,10 +114,14 @@
 
         
 
+        
+
         . For more information about reflection, see the topics in <format
          type="text/html">
           <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">Reflection</a>
         </format>
+
+        
 
         
 
@@ -146,8 +164,12 @@
 
             
 
+            
+
              class with the name and attributes in the specified <see
              cref="T:System.ComponentModel.MemberDescriptor" />
+
+            
 
             
 
@@ -186,8 +208,12 @@
 
             
 
+            
+
              array to the attributes in the <see
              cref="T:System.ComponentModel.MemberDescriptor" />
+
+            
 
             
 
@@ -202,8 +228,12 @@
 
             
 
+            
+
              class with the name in the specified <see
              cref="T:System.ComponentModel.MemberDescriptor" />
+
+            
 
             
 
@@ -212,8 +242,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -225,8 +259,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -265,6 +303,8 @@
 
             
 
+            
+
              class with the specified name and attribute array.</para
           >
         </summary>
@@ -273,8 +313,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -315,6 +359,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -322,6 +368,8 @@
              type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -337,10 +385,14 @@
 
           
 
+          
+
           A component that provides events to the delegate. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -457,6 +509,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -464,6 +518,8 @@
              type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -479,10 +535,14 @@
 
           
 
+          
+
           The component that the delegate is bound to. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

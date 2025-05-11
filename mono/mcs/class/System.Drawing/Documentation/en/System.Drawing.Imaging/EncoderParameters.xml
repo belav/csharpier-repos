@@ -31,6 +31,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -50,8 +52,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Drawing.Image.SaveAdd" />
+
+            
 
             
 
@@ -60,13 +66,19 @@
 
             
 
+            
+
              object as an argument. The <see
              cref="M:System.Drawing.Image.GetEncoderParameterList(System.Guid)" />
 
             
 
+            
+
              method returns an <see
              cref="T:System.Drawing.Imaging.EncoderParameters" />
+
+            
 
             
 
@@ -81,8 +93,12 @@
 
             
 
+            
+
              class that can contain one <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -112,8 +128,12 @@
 
             
 
+            
+
              class that can contain the specified number of <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -125,13 +145,19 @@
 
           
 
+          
+
           An integer that specifies the number of <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
 
           
 
+          
+
            objects that the <see
            cref="T:System.Drawing.Imaging.EncoderParameters" />
+
+          
 
           
 
@@ -159,6 +185,8 @@
 
             
 
+            
+
              object to be reallocated for other purposes.</para
           >
         </remarks>
@@ -167,6 +195,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Imaging.EncoderParameters" />
+
+            
 
             
 
@@ -201,6 +231,8 @@
           <para
             >Gets or sets an array of <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 

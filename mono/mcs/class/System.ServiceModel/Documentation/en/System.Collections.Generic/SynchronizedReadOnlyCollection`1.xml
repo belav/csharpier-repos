@@ -50,8 +50,12 @@
 
         
 
+        
+
          stores data in an <see
          cref="T:System.Collections.Generic.IList`1" />
+
+        
 
         
 
@@ -60,8 +64,12 @@
 
         
 
+        
+
          container can be recovered using the <see
          cref="P:System.Collections.Generic.SynchronizedReadOnlyCollection`1.Items" />
+
+        
 
         
 
@@ -70,8 +78,12 @@
 
         
 
+        
+
          property. It can only be set using one of the constructors that take the <paramref
          name="syncRoot" />
+
+        
 
         
 
@@ -102,6 +114,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
+
+            
 
             
 
@@ -136,8 +150,12 @@
 
             
 
+            
+
              are created using the same <paramref
              name="syncRoot" />
+
+            
 
             
 
@@ -149,6 +167,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
+
+            
 
             
 
@@ -331,6 +351,8 @@
           <para
             >An <see
              cref="T:System.Collections.Generic.IEnumerator`1" />
+
+            
 
             
 
@@ -593,8 +615,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -602,6 +628,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -660,8 +688,12 @@
 
             
 
+            
+
              object can be set when creating the thread-safe collection using the <see
              cref="M:System.Collections.Generic.SynchronizedReadOnlyCollection`1.#ctor(System.Object)" />
+
+            
 
             
 
@@ -705,6 +737,8 @@
 
             
 
+            
+
             .  An enumerator that iterates through the synchronized, read-only collection.</para
           >
         </returns>
@@ -743,11 +777,15 @@
 
             
 
+            
+
             . The position into which the new element was inserted.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -805,6 +843,8 @@
 
             
 
+            
+
              is found in the collection; otherwise false.</para
           >
         </remarks>
@@ -820,12 +860,16 @@
 
             
 
+            
+
             .</para
           >
           <para>True if the object is located in the collection; otherwise false.</para>
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -863,6 +907,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -871,11 +917,15 @@
 
             
 
+            
+
              in the collection.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -909,6 +959,8 @@
 
             
 
+            
+
              if called.</para
           >
         </remarks>
@@ -921,8 +973,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -930,6 +986,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1032,6 +1090,8 @@
 
             
 
+            
+
              if called.</para
           >
         </remarks>
@@ -1041,6 +1101,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1073,6 +1135,8 @@
 
             
 
+            
+
              if called.</para
           >
         </remarks>
@@ -1082,6 +1146,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

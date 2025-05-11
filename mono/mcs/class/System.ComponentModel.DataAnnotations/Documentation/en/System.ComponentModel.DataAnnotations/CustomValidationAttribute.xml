@@ -33,8 +33,12 @@
 
         
 
+        
+
          attribute is used to perform custom validation when the  <see
          cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          method then redirects the call to the method that is identified by the <see
          cref="P:System.ComponentModel.DataAnnotations.CustomValidationAttribute.Method" />
+
+        
 
         
 
@@ -56,6 +64,8 @@
 
         
 
+        
+
          attribute can be applied to types, properties, fields, methods, and method parameters. When it is applied to a property, the attribute is invoked whenever a value is assigned to that property. When it is applied to a method, the attribute is invoked whenever the program calls that method. When it is applied to a method parameter, the attribute is invoked before the method is called.</para
       >
       <para
@@ -63,6 +73,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -105,6 +117,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -113,10 +127,14 @@
 
           
 
+          
+
           The type that contains the method that performs custom validation.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -152,6 +170,8 @@
 
             
 
+            
+
              value that is passed to this method.</para
           >
         </remarks>
@@ -165,6 +185,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,8 +247,12 @@
 
             
 
+            
+
              input value and a <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+            
 
             
 
@@ -235,8 +261,12 @@
 
             
 
+            
+
              parameter provides additional context information that the method can use to determine the context that it is used in. The <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+            
 
             
 
@@ -248,13 +278,19 @@
 
             
 
+            
+
              parameter or if it returns an empty value for the <see
              cref="P:System.ComponentModel.DataAnnotations.ValidationResult.ErrorMessage" />
 
             
 
+            
+
              property, the default <see
              cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.FormatErrorMessage(System.String)" />
+
+            
 
             
 
@@ -306,6 +342,8 @@
           <para
             >This property returns the type that is passed to the ctor <see
              cref="M:System.ComponentModel.DataAnnotations.CustomValidationAttribute.#ctor(System.Type,System.String)" />
+
+            
 
             
 

@@ -39,6 +39,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -47,8 +49,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -76,6 +82,8 @@
           <para
             >Gets the array of <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -110,8 +118,12 @@
 
             
 
+            
+
              with the data needed to serialize the <see
              cref="T:System.ComponentModel.Design.ExceptionCollection" />
+
+            
 
             
 
@@ -123,8 +135,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -135,8 +151,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          class is used by the <format
          type="text/html">
           <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
@@ -39,8 +41,12 @@
 
         
 
+        
+
         , and the <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
       <para
         >The <see
          cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+
+        
 
         
 
@@ -90,6 +98,8 @@
 
             
 
+            
+
              class directly, use Wsdl.exe.</para
           >
         </remarks>
@@ -101,8 +111,12 @@
 
             
 
+            
+
              class, specifying <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -114,8 +128,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -153,6 +171,8 @@
 
             
 
+            
+
              class directly, use Wsdl.exe.</para
           >
         </remarks>
@@ -164,8 +184,12 @@
 
             
 
+            
+
              class, specifying <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -177,8 +201,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -189,8 +217,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeIdentifiers" />
+
+          
 
           
 
@@ -228,6 +260,8 @@
 
             
 
+            
+
              class specifying the schemas, compiler options, and the context of the schemas.</para
           >
         </summary>
@@ -236,8 +270,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -248,8 +286,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -260,8 +302,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.ImportContext" />
+
+          
 
           
 
@@ -299,6 +345,8 @@
 
             
 
+            
+
              class specifying the schemas, compiler options, and names of related code entities.</para
           >
         </summary>
@@ -307,8 +355,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -319,8 +371,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeIdentifiers" />
+
+          
 
           
 
@@ -331,8 +387,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -371,6 +431,8 @@
 
             
 
+            
+
              class specifying the schemas, compiler options, and names of related code entities.</para
           >
         </summary>
@@ -379,13 +441,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
+          
+
             containing a collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -396,8 +464,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -408,8 +480,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -420,8 +496,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.ImportContext" />
+
+          
 
           
 
@@ -461,8 +541,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+
+            
 
             
 
@@ -475,11 +559,15 @@
 
             
 
+            
+
              while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe.</para
           >
           <para
             >The <see
              cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+
+            
 
             
 
@@ -499,8 +587,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -511,10 +603,14 @@
 
           
 
+          
+
           A base type for the .NET Framework type being generated.</param
         >
         <param name="baseTypeCanBeIndirect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -554,8 +650,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+
+            
 
             
 
@@ -567,8 +667,12 @@
 
             
 
+            
+
              class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. This signature of the <see
              cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember)" />
+
+            
 
             
 
@@ -588,10 +692,14 @@
 
           
 
+          
+
           The message name.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -602,8 +710,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.SoapSchemaMember" />
+
+          
 
           
 
@@ -643,8 +755,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+
+            
 
             
 
@@ -656,8 +772,12 @@
 
             
 
+            
+
              class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see
              cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])" />
+
+            
 
             
 
@@ -677,10 +797,14 @@
 
           
 
+          
+
           The message name.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -691,8 +815,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Xml.Serialization.SoapSchemaMember" />
+
+          
 
           
 
@@ -733,8 +861,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+
+            
 
             
 
@@ -746,8 +878,12 @@
 
             
 
+            
+
              class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see
              cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean)" />
+
+            
 
             
 
@@ -767,10 +903,14 @@
 
           
 
+          
+
           The message name.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -781,8 +921,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Xml.Serialization.SoapSchemaMember" />
+
+          
 
           
 
@@ -790,6 +934,8 @@
         >
         <param name="hasWrapperElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -832,8 +978,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+
+            
 
             
 
@@ -845,8 +995,12 @@
 
             
 
+            
+
              class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see
              cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean,System.Type,System.Boolean)" />
+
+            
 
             
 
@@ -866,10 +1020,14 @@
 
           
 
+          
+
           The message name.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -880,8 +1038,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Xml.Serialization.SoapSchemaMember" />
+
+          
 
           
 
@@ -892,6 +1054,8 @@
 
           
 
+          
+
           true to have elements defined by the parts enclosed in an extra, wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="baseType">
@@ -899,10 +1063,14 @@
 
           
 
+          
+
           A base type for all .NET Framework types that are generated to correspond to message parts.</param
         >
         <param name="baseTypeCanBeIndirect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

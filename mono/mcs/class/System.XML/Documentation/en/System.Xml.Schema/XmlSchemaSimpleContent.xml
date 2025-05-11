@@ -29,13 +29,19 @@
 
         
 
+        
+
          is used to indicate that the content model of the new type contains only character data and no elements. It does this through <see
          cref="T:System.Xml.Schema.XmlSchemaSimpleContentExtension" />
 
         
 
+        
+
          or <see
          cref="T:System.Xml.Schema.XmlSchemaSimpleContentRestriction" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
          type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
+
+        
 
         
 
@@ -78,6 +86,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleContent" />
+
+            
 
             
 
@@ -126,8 +136,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleContentExtension" />
+
+            
 
             
 

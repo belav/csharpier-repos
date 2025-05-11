@@ -10,7 +10,7 @@
   <Target Name="CreateXunitWrapper" DependsOnTargets="CreateXunitFacts">
     <PropertyGroup>
       <_XunitWrapperGen>
-        <![CDATA[
+<![CDATA[
 
 $(_XunitProlog)
 @(AllXUnitFacts)
@@ -19,7 +19,7 @@ $(_XunitEpilog)
 ]]>
       </_XunitWrapperGen>
       <XunitWrapperGenCsProj>
-        <![CDATA[
+<![CDATA[
 <Project>
 
   <Import Project="$(TestProjectDir)Common/dir.sdkbuild.props" />
@@ -55,7 +55,7 @@ $(_XunitEpilog)
 ]]>
       </XunitWrapperGenCsProj>
       <XunitRunnerConfig>
-        <![CDATA[
+<![CDATA[
 {
     "diagnosticMessages": true,
     "longRunningTestSeconds": 120,
@@ -115,7 +115,7 @@ $(_XunitEpilog)
     </PropertyGroup>
     <PropertyGroup>
       <_XunitProlog Condition=" '$(_XunitProlog)'=='' and '$(IsMobile)'=='false' ">
-        <![CDATA[
+<![CDATA[
 using Xunit%3B
 using Xunit.Abstractions%3B
 using System%3B
@@ -169,7 +169,7 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
 ]]>
       </_XunitProlog>
       <_XunitProlog Condition=" '$(_XunitProlog)'=='' and '$(IsMobile)'=='true' ">
-        <![CDATA[
+<![CDATA[
 using Xunit%3B
 using Xunit.Abstractions%3B
 using System%3B
@@ -244,7 +244,7 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
 ]]>
       </_XunitProlog>
       <_XunitEpilog Condition=" '$(_XunitEpilog)'=='' ">
-        <![CDATA[
+<![CDATA[
 }
 
 ]]>
@@ -300,7 +300,7 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
         >
         <TestGroup>%(AllCMDs.TestGroup)</TestGroup>
         <XUnitFact Condition=" '$(IsMobile)'=='false' ">
-          <![CDATA[
+<![CDATA[
 
         public class %(AllCommands.ClassName)
         {
@@ -405,7 +405,7 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
         ]]>
         </XUnitFact>
         <XUnitFact Condition=" '$(IsMobile)'=='true' ">
-          <![CDATA[
+<![CDATA[
         [Collection("Runtime test collection")]
         public class %(AllCommands.ClassName)
         {

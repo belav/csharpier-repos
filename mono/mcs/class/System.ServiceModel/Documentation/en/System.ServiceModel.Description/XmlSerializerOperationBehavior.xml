@@ -35,8 +35,12 @@
 
         
 
+        
+
          enables control of <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
       <para
         >Controls run-time behavior of the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -92,6 +102,8 @@
 
             
 
+            
+
              class with a specific operation.</para
           >
         </summary>
@@ -100,8 +112,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -137,6 +153,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -145,8 +163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -185,8 +207,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Serialization.XmlMapping" />
+
+            
 
             
 
@@ -232,8 +258,12 @@
 
           
 
+          
+
           The target <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -244,8 +274,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+
+          
 
           
 
@@ -287,8 +321,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -299,8 +337,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+          
 
           
 
@@ -342,8 +384,12 @@
 
           
 
+          
+
           The target <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -354,8 +400,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+          
 
           
 
@@ -396,8 +446,12 @@
 
           
 
+          
+
           The target <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -443,8 +497,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -490,8 +548,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 

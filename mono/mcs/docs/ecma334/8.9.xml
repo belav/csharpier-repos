@@ -4,7 +4,7 @@
   <paragraph
     >The example <code_example
     >
-      <![CDATA[
+<![CDATA[
 interface IExample  
 {  
    string this[int index] { get; set; }  
@@ -18,12 +18,14 @@ public delegate void EventHandler(object sender, EventArgs e);
 
     
 
+    
+
     shows an interface that contains an indexer, an event E, a method F, and a property P. </paragraph
   >
   <paragraph
     >Interfaces may employ multiple inheritance. In the example <code_example
     >
-      <![CDATA[
+<![CDATA[
 interface IControl  
 {  
    void Paint();  
@@ -42,12 +44,14 @@ interface IComboBox: ITextBox, IListBox {}
 
     
 
+    
+
     the interface IComboBox inherits from both ITextBox and IListBox. </paragraph
   >
   <paragraph
     >Classes and structs can implement multiple interfaces. In the example <code_example
     >
-      <![CDATA[
+<![CDATA[
 interface IDataBound  
 {  
    void Bind(Binder b);  
@@ -62,12 +66,14 @@ public class EditBox: Control, IControl, IDataBound
 
     
 
+    
+
     the class EditBox derives from the class Control and implements both IControl and IDataBound. </paragraph
   >
   <paragraph
     >In the previous example, the Paint method from the IControl interface and the Bind method from IDataBound interface are implemented using public members on the EditBox class. C# provides an alternative way of implementing these methods that allows the implementing class to avoid having these members be public. Interface members can be implemented using a qualified name. For example, the EditBox class could instead be implemented by providing IControl.Paint and IDataBound.Bind methods. <code_example
     >
-      <![CDATA[
+<![CDATA[
 public class EditBox: IControl, IDataBound  
 {  
    void IControl.Paint() {...}  
@@ -79,7 +85,7 @@ public class EditBox: IControl, IDataBound
   <paragraph
     >Interface members implemented in this way are called explicit interface members because each member explicitly designates the interface member being implemented. Explicit interface members can only be called via the interface. For example, the EditBox's implementation of the Paint method can be called only by casting to the IControl interface. <code_example
     >
-      <![CDATA[
+<![CDATA[
 class Test  
 {  
    static void Main() {  

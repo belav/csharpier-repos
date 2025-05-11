@@ -42,6 +42,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -72,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapNegativeInteger" />
+
+            
 
             
 
@@ -106,8 +110,12 @@
 
             
 
+            
+
              class with a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -119,8 +127,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -155,6 +167,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -194,8 +208,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapNegativeInteger" />
+
+            
 
             
 
@@ -210,8 +228,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -223,8 +245,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -258,8 +284,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -271,6 +301,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -36,6 +36,8 @@
 
         
 
+        
+
         . This class can be used to identify a unique constraint among a set of elements.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaUnique" />
+
+            
 
             
 

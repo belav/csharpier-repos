@@ -36,6 +36,8 @@
 
         
 
+        
+
         . This class can be used restricting simpleType element.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleTypeRestriction" />
+
+            
 
             
 
@@ -101,6 +105,8 @@
           <para
             >The use of <see
              cref="P:System.Xml.Schema.XmlSchemaSimpleTypeRestriction.BaseTypeName" />
+
+            
 
             
 
@@ -144,6 +150,8 @@
           <para
             >The use of BaseTypeName and <see
              cref="P:System.Xml.Schema.XmlSchemaSimpleTypeRestriction.BaseType" />
+
+            
 
             
 

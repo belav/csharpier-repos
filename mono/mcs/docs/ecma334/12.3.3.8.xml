@@ -3,7 +3,7 @@
   <paragraph
     >For a do statement stmt of the form: <code_example
     >
-      <![CDATA[
+<![CDATA[
 do do-body while (expr);   
 ]]>
     </code_example>

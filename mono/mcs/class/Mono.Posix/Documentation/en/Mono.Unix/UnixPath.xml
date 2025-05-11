@@ -16,10 +16,11 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary
-      >
+    <summary>
       Performs operations on <see
        cref="T:System.String" />
+
+      
 
       
 
@@ -28,14 +29,15 @@
     </summary
     >
     <remarks>
-      <para
-        >
+      <para>
         A path is a string that provides the location of a file or directory. 
         A path does not necessarily point to a location on disk; for example, 
         a path may map to a location in memory or on a device. Paths are
         composed of the components described below. Component names are shown 
         in <paramref
          name="italics " />
+
+        
 
         
 
@@ -84,10 +86,14 @@
 
         
 
+        
+
         : A string that specifies one or 
         more directory levels in a file system. If a directory name contains
         multiple levels, a <paramref
          name="directory separator character" />
+
+        
 
         
 
@@ -99,14 +105,20 @@
 
         
 
+        
+
         , the directory name is "<c
         >foo/bar</c>
+
+        
 
         
 
         ". 
         <see
          cref="M:Mono.Unix.UnixPath.GetDirectoryName(System.String)" />
+
+        
 
         
 
@@ -121,11 +133,15 @@
 
         
 
+        
+
         : An 
         implementation-defined constant string containing a single printable
         non-alphanumeric character used to separate levels in a file system. 
         In the example path <c
         >/foo/bar/bat.txt</c>
+
+        
 
         
 
@@ -135,15 +151,21 @@
 
         
 
+        
+
         ". 
         The <see
          cref="F:Mono.Unix.UnixPath.DirectorySeparatorChar" />
 
         
 
+        
+
          and 
         <see
          cref="F:Mono.Unix.UnixPath.AltDirectorySeparatorChar" />
+
+        
 
         
 
@@ -156,10 +178,14 @@
 
         
 
+        
+
         : A string that consists of the 
         characters at the end of a file name, from and including the last 
         <paramref
          name="extension separator character" />
+
+        
 
         
 
@@ -170,9 +196,13 @@
 
         
 
+        
+
         ", the 
         <paramref
          name="extension" />
+
+        
 
         
 
@@ -181,9 +211,13 @@
 
         
 
+        
+
         ". The 
         <see
          cref="M:System.IO.Path.GetExtension(System.String)" />
+
+        
 
         
 
@@ -196,11 +230,15 @@
 
         
 
+        
+
         : An 
         implementation-defined constant string composed of a single character 
         that appears after the last character in the 
         <paramref
          name="file base" />
+
+        
 
         
 
@@ -210,15 +248,21 @@
 
         
 
+        
+
          component. If the extension separator 
         character "<paramref
          name="." />
 
         
 
+        
+
         " is the first character in a 
         <paramref
          name="file name" />
+
+        
 
         
 
@@ -231,9 +275,13 @@
 
         
 
+        
+
         ", 
         the extension separator character is "<c
         >.</c>
+
+        
 
         
 
@@ -245,14 +293,20 @@
 
         
 
+        
+
         : A string containing the 
         <paramref
          name="file name" />
 
         
 
+        
+
          with the <paramref
          name="extension" />
+
+        
 
         
 
@@ -262,15 +316,21 @@
 
         
 
+        
+
         ", 
         the file base is "<c
         >bat</c>
 
         
 
+        
+
         ".  The 
         <see
          cref="M:System.IO.Path.GetFileNameWithoutExtension(System.String)" />
+
+        
 
         
 
@@ -283,6 +343,8 @@
 
         
 
+        
+
         : A string containing all information 
         required to uniquely identify a file within a directory. This 
         component is defined as follows:
@@ -291,11 +353,12 @@
       <para>
         <c>&lt;file base&gt;{+&lt;extension&gt;}?</c>
       </para>
-      <para
-        >
+      <para>
         The file name component is commonly referred to as a relative 
         file name. In the example path "<c
         >/foo/bar/bat.txt</c>
+
+        
 
         
 
@@ -305,9 +368,13 @@
 
         
 
+        
+
         ". The 
         <see
          cref="M:Mono.Unix.UnixPath.GetFileName(System.String)" />
+
+        
 
         
 
@@ -320,6 +387,8 @@
 
         
 
+        
+
         : A string containing all 
         information required to uniquely identify a directory within a file
         system. This component is defined as follows:
@@ -328,11 +397,12 @@
       <para>
         <c>&lt;path root&gt;+&lt;directory name&gt;</c>
       </para>
-      <para
-        >
+      <para>
         The full directory name component is commonly referred to as the 
         absolute directory name. In the example path "<c
         >/foo/bar/bat.txt</c>
+
+        
 
         
 
@@ -342,11 +412,15 @@
 
         
 
+        
+
         ".
       </para
       >
       <para>
         <paramref name="Full Path" />
+
+        
 
         
 
@@ -359,11 +433,12 @@
         <c>&lt;full directory name&gt;+&lt;directory separator 
         character&gt;+&lt;file name&gt;</c>
       </para>
-      <para
-        >
+      <para>
         The full path component is commonly referred to as the absolute 
         file name. In the example path "<c
         >/foo/bar/bat.txt</c>
+
+        
 
         
 
@@ -373,9 +448,13 @@
 
         
 
+        
+
         ". 
         The <see
          cref="M:Mono.Unix.UnixPath.GetFullPath(System.String)" />
+
+        
 
         
 
@@ -388,6 +467,8 @@
 
         
 
+        
+
         : A string containing all information 
         required to uniquely identify the highest level in a file system. 
         The component is defined as follows:
@@ -397,16 +478,19 @@
         <c>{&lt;volume identifier&gt;+&lt;volume separator 
         character&gt;}?+&lt;directory separator character&gt;</c>
       </para>
-      <para
-        >
+      <para>
         In the example path <c
         >/foo/bar/bat.txt</c>
+
+        
 
         
 
          , the path root is 
         "<c
         >/</c>
+
+        
 
         
 
@@ -417,16 +501,19 @@
         
 
         
+
+        
         method returns the <paramref
          name="path root" />
+
+        
 
         
 
          component.
       </para
       >
-      <para
-        >
+      <para>
         The exact format of a path is determined by the current platform. 
         On some systems, paths containing file names can contain extensions. 
         The format of an extension is platform dependent; for example, some 
@@ -440,9 +527,13 @@
 
         
 
+        
+
          class as well as the exact behavior
         of some members of the <see
          cref="T:Mono.Unix.UnixPath" />
+
+        
 
         
 
@@ -450,8 +541,7 @@
         determined by the current platform and/or file system.
       </para
       >
-      <para
-        >
+      <para>
         A path contains either absolute or relative location information. 
         Absolute paths fully specify a location: the file or directory can be 
         uniquely identified regardless of the current location. A full path or 
@@ -460,11 +550,12 @@
         directory is used as the starting point when locating a file specified 
         with a relative path.
         <block
-         subset="none" type="note"
-          >
+         subset="none" type="note">
           To determine the current working directory, call 
           <see
            cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
+
+          
 
           
 
@@ -472,10 +563,11 @@
         </block
         >
       </para>
-      <para
-        >
+      <para>
         Most members of the <see
          langword="UnixPath" />
+
+        
 
         
 
@@ -487,10 +579,14 @@
 
         
 
+        
+
          members that modify a path string, 
         such as 
         <see
          cref="M:Mono.Unix.UnixPath.Combine(System.String,System.String)" />
+
+        
 
         
 
@@ -501,10 +597,14 @@
 
         
 
+        
+
          members do, however, validate the 
         contents of a specified path string, and throw 
         <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -549,6 +649,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -583,10 +685,11 @@
         </Parameter>
       </Parameters>
       <Docs>
-        <param name="path1"
-          >
+        <param name="path1">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -594,10 +697,11 @@
           first path.
         </param
         >
-        <param name="paths"
-          >
+        <param name="paths">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -607,15 +711,18 @@
 
           
 
+          
+
           .
         </param
         >
         <summary>Concatentates multiple path strings.</summary>
         <returns>
-          <para
-            >
+          <para>
             A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -625,9 +732,13 @@
 
             
 
+            
+
              followed by each sequential element in
             <paramref
              name="paths" />
+
+            
 
             
 
@@ -666,6 +777,8 @@
           <para
             >This is the value <c
             >/</c>
+
+            
 
             
 
@@ -924,6 +1037,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1006,14 +1121,17 @@
 
             
 
+            
+
             .</para
           >
-          <para
-            >
+          <para>
             This field is basically useless, since Unix uses a
             singly-rooted file system, all volumes are sub-directories of the
             path <c
             >/</c>
+
+            
 
             
 

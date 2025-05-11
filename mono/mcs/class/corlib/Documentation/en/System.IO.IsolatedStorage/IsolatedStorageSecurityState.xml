@@ -28,6 +28,8 @@
 
         
 
+        
+
          method.</para
       >
     </remarks>
@@ -79,6 +81,8 @@
           <para
             >This property is equal to the <see
              cref="F:System.IO.IsolatedStorage.IsolatedStorageSecurityOptions.IncreaseQuotaForApplication" />
+
+            
 
             
 

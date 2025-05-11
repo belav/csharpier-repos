@@ -34,8 +34,12 @@
 
         
 
+        
+
          object represents an item in the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          control are stored in a <see
          cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
          object to programmatically access the properties of an item in the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -83,6 +99,8 @@
       <para
         >Represents an item in the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -111,6 +129,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -122,6 +142,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -130,13 +152,19 @@
 
           
 
+          
+
           The index of the item in the <see
            cref="T:System.Web.UI.WebControls.Repeater" />
 
           
 
+          
+
            control from the <see
            cref="P:System.Web.UI.WebControls.Repeater.Items" />
+
+          
 
           
 
@@ -147,8 +175,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -177,13 +209,19 @@
 
             
 
+            
+
              property to specify or determine the properties of a data item associated with the <see
              cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -196,8 +234,12 @@
 
               
 
+              
+
                control. The <see
                cref="P:System.Web.UI.WebControls.RepeaterItem.ItemType" />
+
+              
 
               
 
@@ -213,8 +255,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -243,13 +289,19 @@
 
             
 
+            
+
              property to determine the index number of the item in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
+            
+
              control from the <see
              cref="P:System.Web.UI.WebControls.Repeater.Items" />
+
+            
 
             
 
@@ -262,8 +314,12 @@
 
               
 
+              
+
                control. The <see
                cref="P:System.Web.UI.WebControls.RepeaterItem.ItemType" />
+
+              
 
               
 
@@ -279,8 +335,12 @@
 
             
 
+            
+
              control from the <see
              cref="P:System.Web.UI.WebControls.Repeater.Items" />
+
+            
 
             
 
@@ -312,8 +372,12 @@
 
             
 
+            
+
              property to determine the type of an item in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -341,6 +405,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -353,6 +419,8 @@
                 <para
                   >The footer section of the <see
                    cref="T:System.Web.UI.WebControls.Repeater" />
+
+                  
 
                   
 
@@ -371,6 +439,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -383,6 +453,8 @@
                 <para
                   >An alternating item in the <see
                    cref="T:System.Web.UI.WebControls.Repeater" />
+
+                  
 
                   
 
@@ -401,6 +473,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -413,6 +487,8 @@
                 <para
                   >The item selected for editing in the <see
                    cref="T:System.Web.UI.WebControls.Repeater" />
+
+                  
 
                   
 
@@ -431,6 +507,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -446,6 +524,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -457,6 +537,8 @@
           <para
             >Gets the type of the item in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -492,13 +574,19 @@
 
             
 
+            
+
              control, if the <see
              cref="T:System.EventArgs" />
 
             
 
+            
+
              parameter is an instance of <see
              cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+
+            
 
             
 
@@ -514,6 +602,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -521,8 +611,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -556,8 +650,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -569,6 +667,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+
+            
 
             
 
@@ -599,8 +699,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -612,6 +716,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+
+            
 
             
 

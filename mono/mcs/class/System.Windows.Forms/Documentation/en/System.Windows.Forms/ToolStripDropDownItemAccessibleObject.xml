@@ -25,6 +25,8 @@
 
         
 
+        
+
          for users with impairments.</para
       >
     </summary>
@@ -52,8 +54,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -65,13 +71,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripDropDownItem" />
 
           
 
+          
+
            that owns this <see
            cref="T:System.Windows.Forms.ToolStripDropDownItemAccessibleObject" />
+
+          
 
           
 
@@ -98,13 +110,19 @@
 
             
 
+            
+
              property. A client can use automation (if supported) instead of <see
              cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
 
             
 
+            
+
              to perform an object's default action. However, <see
              cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
+
+            
 
             
 
@@ -146,11 +164,15 @@
 
             
 
+            
+
              that represents the accessible child control corresponding to the specified index.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

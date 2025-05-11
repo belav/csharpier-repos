@@ -26,8 +26,12 @@
 
         
 
+        
+
          method of a <see
          cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.UnmanagedMemoryAccessor" />
+
+            
 
             
 
@@ -94,11 +100,15 @@
 
             
 
+            
+
              class with a specified buffer, offset, and capacity.</para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -109,10 +119,14 @@
 
           
 
+          
+
           The byte at which to start the accessor.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,11 +163,15 @@
 
             
 
+            
+
              class with a specified buffer, offset, capacity, and access right.</para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,10 +182,14 @@
 
           
 
+          
+
           The byte at which to start the accessor.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -178,8 +200,12 @@
 
           
 
+          
+
           The type of access allowed to the memory. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -268,6 +294,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -298,8 +326,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -308,8 +340,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -321,8 +357,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.UnmanagedMemoryAccessor" />
+
+            
 
             
 
@@ -337,11 +377,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -385,10 +429,14 @@
 
           
 
+          
+
           The buffer to contain the accessor.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -399,6 +447,8 @@
 
           
 
+          
+
           The size, in bytes, of memory to allocate.</param
         >
         <param name="access">
@@ -406,8 +456,12 @@
 
           
 
+          
+
           The type of access allowed to the memory. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -544,6 +598,8 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin reading. </param
         >
       </Docs>
@@ -576,6 +632,8 @@
         </returns>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,6 +672,8 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin reading.</param
         >
       </Docs>
@@ -646,6 +706,8 @@
         </returns>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -684,6 +746,8 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin reading.</param
         >
       </Docs>
@@ -716,6 +780,8 @@
         </returns>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -754,6 +820,8 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin reading.</param
         >
       </Docs>
@@ -786,6 +854,8 @@
         </returns>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -829,6 +899,8 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin reading.</param
         >
       </Docs>
@@ -861,6 +933,8 @@
         </returns>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -904,6 +978,8 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin reading.</param
         >
       </Docs>
@@ -941,6 +1017,8 @@
         </returns>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -984,6 +1062,8 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin reading.</param
         >
       </Docs>
@@ -1016,10 +1096,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1055,10 +1139,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1094,10 +1182,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1133,10 +1225,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1172,10 +1268,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1211,10 +1311,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1250,10 +1354,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1289,10 +1397,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1333,10 +1445,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1372,10 +1488,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1416,10 +1536,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1460,10 +1584,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1504,10 +1632,14 @@
 
           
 
+          
+
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

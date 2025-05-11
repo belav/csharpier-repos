@@ -29,6 +29,8 @@
 
         
 
+        
+
          is directed to examine the body of an unbuffered message.</para
       >
     </summary>
@@ -52,6 +54,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" />
+
+            
 
             
 
@@ -87,6 +91,8 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
@@ -119,6 +125,8 @@
 
             
 
+            
+
              class with data that specifies the source and destination of the stream and the information required to serialize the exception.</para
           >
         </summary>
@@ -127,8 +135,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -139,8 +151,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -174,6 +190,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" />
+
+            
 
             
 

@@ -75,6 +75,8 @@
 
         
 
+        
+
          control to allow the user to select a true or false state.</para
       >
       <para
@@ -83,13 +85,19 @@
 
         
 
+        
+
          controls, the <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
+        
+
          control is an alternative control that provides convenient data binding capabilities. However, individual <see
          cref="T:System.Web.UI.WebControls.CheckBox" />
+
+        
 
         
 
@@ -102,10 +110,14 @@
 
           
 
+          
+
            control accepts user input, which is a potential security threat. By default, ASP.NET mobile Web pages validate that user input does not include script or HTML elements. For more information, see <format
            type="text/html">
             <a href="772c7312-211a-4eb3-8d6e-eec0aa1dcc07">Script Exploits Overview</a>
           </format>
+
+          
 
           
 
@@ -126,11 +138,15 @@
 
         
 
+        
+
         "
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
     BorderStyle="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -142,9 +158,13 @@
 
         
 
+        
+
         "
     Checked="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -155,9 +175,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -167,9 +191,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -179,10 +207,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -194,9 +226,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -221,11 +257,15 @@
 
         
 
+        
+
         "
     ToolTip="string"
     ValidationGroup="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -254,6 +294,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -262,6 +304,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -298,8 +342,12 @@
 
             
 
+            
+
              method is used primarily by control developers to insert the additional attributes and styles in the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -308,13 +356,19 @@
 
             
 
+            
+
              control. The <see
              cref="M:System.Web.UI.WebControls.CheckBox.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -329,6 +383,8 @@
 
             
 
+            
+
              control to be rendered to the specified output stream.</para
           >
         </summary>
@@ -337,8 +393,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -363,6 +423,8 @@
 
             
 
+            
+
              control is posted back to the server when clicked.</para
           >
           <block subset="none" type="note">
@@ -374,10 +436,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -389,6 +455,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -436,8 +504,12 @@
 
             
 
+            
+
              property to determine whether validation is performed on both the client and the server when a <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -449,13 +521,19 @@
 
             
 
+            
+
              control does not cause page validation. To perform page validation when the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
 
             
 
+            
+
              control is clicked, set the <see
              cref="P:System.Web.UI.WebControls.CheckBox.CausesValidation" />
+
+            
 
             
 
@@ -467,13 +545,19 @@
 
             
 
+            
+
              property is set to true, you can also use the <see
              cref="P:System.Web.UI.WebControls.CheckBox.ValidationGroup" />
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -485,10 +569,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -500,6 +588,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -525,8 +615,12 @@
 
             
 
+            
+
              control is checked. This property can also be used to programmatically set the state of the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -538,10 +632,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -553,6 +651,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -592,13 +692,19 @@
 
             
 
+            
+
              event is raised when the value of the <see
              cref="P:System.Web.UI.WebControls.CheckBox.Checked" />
 
             
 
+            
+
              property changes between posts to the server. This event does not post the page back to the server unless the <see
              cref="P:System.Web.UI.WebControls.CheckBox.AutoPostBack" />
+
+            
 
             
 
@@ -608,6 +714,8 @@
             <para
               >A <see
                cref="T:System.Web.UI.WebControls.CheckBox" />
+
+              
 
               
 
@@ -624,6 +732,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -632,6 +742,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Web.UI.WebControls.CheckBox.Checked" />
+
+            
 
             
 
@@ -674,13 +786,19 @@
 
             
 
+            
+
              control is rendered and displayed using an HTML INPUT element. You can add additional attributes to the rendered INPUT element using the <see
              cref="M:System.Web.UI.AttributeCollection.Add(System.String,System.String)" />
 
             
 
+            
+
              method on the <see
              cref="P:System.Web.UI.WebControls.CheckBox.InputAttributes" />
+
+            
 
             
 
@@ -692,6 +810,8 @@
           <para
             >Gets a reference to the collection of attributes for the rendered input element of the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -730,8 +850,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -740,8 +864,12 @@
 
             
 
+            
+
              method on the <see
              cref="P:System.Web.UI.WebControls.CheckBox.LabelAttributes" />
+
+            
 
             
 
@@ -753,6 +881,8 @@
           <para
             >Gets a reference to the collection of attributes for the rendered LABEL element of the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -789,6 +919,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
           <para
@@ -797,8 +929,12 @@
 
             
 
+            
+
              method checks if the postback data of the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -810,6 +946,8 @@
           <para
             >Processes the postback data for the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -825,10 +963,14 @@
 
           
 
+          
+
           The index within the posted collection that references the content to load. </param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -862,6 +1004,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -870,13 +1014,19 @@
 
             
 
+            
+
              method restores view-state information for the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
 
             
 
+            
+
              object from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.CheckBox.SaveViewState" />
+
+            
 
             
 
@@ -891,11 +1041,15 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -924,8 +1078,12 @@
 
             
 
+            
+
              event is raised when the value of the <see
              cref="P:System.Web.UI.WebControls.CheckBox.Checked" />
+
+            
 
             
 
@@ -935,6 +1093,8 @@
             <para
               >A <see
                cref="T:System.Web.UI.WebControls.CheckBox" />
+
+              
 
               
 
@@ -955,6 +1115,8 @@
 
             
 
+            
+
              method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
         </remarks>
@@ -966,8 +1128,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -979,8 +1145,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1011,6 +1181,8 @@
 
             
 
+            
+
              is true.</para
           >
         </summary>
@@ -1019,8 +1191,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1051,6 +1227,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
           <para
@@ -1059,8 +1237,12 @@
 
             
 
+            
+
              method invokes the <see
              cref="M:System.Web.UI.WebControls.CheckBox.OnCheckedChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1069,13 +1251,19 @@
 
             
 
+            
+
              control has changed. If the <see
              cref="P:System.Web.UI.WebControls.CheckBox.CausesValidation" />
 
             
 
+            
+
              property is true, the controls that are set in the <see
              cref="P:System.Web.UI.WebControls.CheckBox.ValidationGroup" />
+
+            
 
             
 
@@ -1090,8 +1278,12 @@
 
             
 
+            
+
              method when the posted data for the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -1126,6 +1318,8 @@
 
             
 
+            
+
              on the client.</para
           >
         </summary>
@@ -1154,6 +1348,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
           <para
@@ -1162,8 +1358,12 @@
 
             
 
+            
+
              property for the server control, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1171,6 +1371,8 @@
              type="text/html">
               <a href="7949d756-1a79-464e-891f-904b1cfc7991">ASP.NET Page Life Cycle Overview</a>
             </format>
+
+            
 
             
 
@@ -1182,8 +1384,12 @@
 
             
 
+            
+
              and modifying the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -1196,10 +1402,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -1214,6 +1424,8 @@
 
             
 
+            
+
              view state since the time the page was posted back to the server.</para
           >
         </summary>
@@ -1222,6 +1434,8 @@
           <para
             >The object that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -1258,8 +1472,12 @@
 
             
 
+            
+
              determines the posted <see
              cref="P:System.Web.UI.WebControls.CheckBox.Checked" />
+
+            
 
             
 
@@ -1274,6 +1492,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1285,11 +1505,15 @@
 
             
 
+            
+
              has changed; otherwise false.</para
           >
         </returns>
         <param name="postDataKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1300,8 +1524,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -1331,6 +1559,8 @@
 
             
 
+            
+
              fires an CheckedChanged event.</para
           >
         </remarks>
@@ -1357,8 +1587,12 @@
 
             
 
+            
+
              control. This property can also be used to programmatically get the text label associated with the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -1375,12 +1609,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -1393,6 +1631,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1401,6 +1641,8 @@
           <para
             >Gets or sets the text label associated with the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -1444,8 +1686,12 @@
 
             
 
+            
+
              control. You can specify whether the text label appears to the right or left of the check box. Use the <see
              cref="P:System.Web.UI.WebControls.CheckBox.Text" />
+
+            
 
             
 
@@ -1457,6 +1703,8 @@
           <para
             >Gets or sets the alignment of the text label associated with the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -1493,8 +1741,12 @@
 
             
 
+            
+
              method when the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -1509,13 +1761,19 @@
 
             
 
+            
+
              control so that they can be stored in the control's <see
              cref="T:System.Web.UI.StateBag" />
 
             
 
+            
+
              object. This object is accessible through the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -1551,8 +1809,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -1564,8 +1826,12 @@
 
             
 
+            
+
              property has an effect only when the value of the <see
              cref="P:System.Web.UI.WebControls.CheckBox.CausesValidation" />
+
+            
 
             
 
@@ -1574,8 +1840,12 @@
 
             
 
+            
+
              property, only the validation controls that are part of the specified group are validated when the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -1584,8 +1854,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Web.UI.WebControls.CheckBox.CausesValidation" />
+
+            
 
             
 
@@ -1597,10 +1871,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1612,6 +1890,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 

@@ -34,6 +34,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -42,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -79,6 +85,8 @@
 
             
 
+            
+
              property to null.</para
           >
         </remarks>
@@ -87,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+
+            
 
             
 
@@ -122,6 +132,8 @@
 
             
 
+            
+
              parameter contains the fully qualified type name followed by a comma (,) and the assembly information. The elements of the assembly information are separated with commas, for example, Corp.Net.Authenticator, Corp, Version=1.0.5000.0, Culture=neutral, PublicKeyToken="00000000000000000".</para
           >
         </remarks>
@@ -133,11 +145,15 @@
 
             
 
+            
+
              class with the specified type information.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -170,6 +186,8 @@
           <para
             >The collection contains one element, which corresponds to the <see
              cref="P:System.Net.Configuration.AuthenticationModuleElement.Type" />
+
+            
 
             
 

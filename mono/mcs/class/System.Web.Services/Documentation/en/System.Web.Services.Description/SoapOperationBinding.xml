@@ -35,6 +35,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -43,6 +45,8 @@
       <para
         >Represents an extension added to an <see
          cref="T:System.Web.Services.Description.OperationBinding" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.SoapOperationBinding" />
+
+            
 
             
 
@@ -121,6 +127,8 @@
           <para
             >Gets or sets the type of SOAP binding used by the <see
              cref="T:System.Web.Services.Description.SoapOperationBinding" />
+
+            
 
             
 

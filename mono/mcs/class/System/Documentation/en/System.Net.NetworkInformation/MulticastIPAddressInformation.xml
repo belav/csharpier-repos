@@ -30,6 +30,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -61,6 +63,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -69,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" />
+
+            
 
             
 
@@ -99,6 +105,8 @@
           <para
             >Use the value returned by this property to determine how long the preferred address remains valid. Whenever possible, applications should use a preferred address. Use <see
              cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" />
+
+            
 
             
 
@@ -133,6 +141,8 @@
 
             
 
+            
+
              to determine the preferred address.</para
           >
         </remarks>
@@ -162,6 +172,8 @@
           <para
             >This property returns the number of seconds left in the lease lifetime for the IP address identified in the <see
              cref="P:System.Net.NetworkInformation.IPAddressInformation.Address" />
+
+            
 
             
 

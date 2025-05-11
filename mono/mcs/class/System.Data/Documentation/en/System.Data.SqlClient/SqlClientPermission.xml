@@ -26,8 +26,12 @@
 
         
 
+        
+
          property takes precedence over the <see
          cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          to false, you must also set <see
          cref="M:System.Data.Common.DBDataPermission.IsUnrestricted" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.SqlClient.SqlClientPermission" />
+
+            
 
             
 
@@ -102,6 +112,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -110,8 +122,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -143,8 +159,12 @@
 
             
 
+            
+
              enumeration takes precedence over the <see
              cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+
+            
 
             
 
@@ -153,8 +173,12 @@
 
             
 
+            
+
              to false, you must also set <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -162,6 +186,8 @@
              type="text/html">
               <a href="93e099eb-daa1-4f1e-b031-c1e10a996f88">Code Access Security and ADO.NET</a>
             </format>
+
+            
 
             
 
@@ -176,6 +202,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -184,8 +212,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -193,6 +225,8 @@
         >
         <param name="allowBlankPassword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,11 +282,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="connectionString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,6 +301,8 @@
 
           
 
+          
+
           The key restrictions.</param
         >
         <param name="behavior">
@@ -270,8 +310,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.KeyRestrictionBehavior" />
+
+          
 
           
 
@@ -300,8 +344,12 @@
 
             
 
+            
+
              as an <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 

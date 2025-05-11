@@ -31,8 +31,12 @@
 
         
 
+        
+
          interface enables you to provide a customized implementation that creates a copy of an existing object. The <see
          cref="T:System.ICloneable" />
+
+        
 
         
 
@@ -41,13 +45,19 @@
 
         
 
+        
+
          method, which is intended to provide cloning support beyond that supplied by <see
          cref="M:System.Object.MemberwiseClone" />
 
         
 
+        
+
         .  For more information about cloning, deep versus shallow copies, and examples, see the <see
          cref="M:System.Object.MemberwiseClone" />
+
+        
 
         
 
@@ -88,9 +98,13 @@
 
             
 
+            
+
              that
    uses the <see
              cref="M:System.Object.MemberwiseClone" />
+
+            
 
             
 
@@ -138,8 +152,12 @@ public class TestMyClass {
 
             
 
+            
+
              can perform either a deep copy or a shallow copy. In a deep copy, all objects are duplicated; in a shallow copy, only the top-level objects are duplicated and the lower levels contain references. Because callers of <see
              cref="M:System.ICloneable.Clone" />
+
+            
 
             
 
@@ -148,11 +166,15 @@ public class TestMyClass {
 
             
 
+            
+
              not be implemented in public APIs.  </para
           >
           <para
             >See <see
              cref="M:System.Object.MemberwiseClone" />
+
+            
 
             
 

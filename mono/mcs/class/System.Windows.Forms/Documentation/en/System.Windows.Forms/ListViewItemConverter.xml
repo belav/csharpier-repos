@@ -22,12 +22,16 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56"
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -50,8 +58,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -64,6 +76,8 @@
       <para
         >Provides a type converter to convert <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -83,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ListViewItemConverter" />
+
+            
 
             
 
@@ -117,6 +133,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -133,8 +151,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -145,8 +167,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -182,8 +208,12 @@
 
             
 
+            
+
              on the object if the object is valid and if the destination type is string. If this cannot convert to the destination type, this will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -203,10 +233,14 @@
 
           
 
+          
+
           A formatter context. This object can be used to extract additional information about the environment this converter is being invoked from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,10 +251,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

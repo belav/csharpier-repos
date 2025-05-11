@@ -12,6 +12,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -41,12 +43,16 @@
 
           
 
+          
+
            representing the CryptoAPI hash implementation to use.</param
         >
         <summary>Return a context to do a series of hashing operation with the default Cryptographic Service Provider (CSP).</summary>
         <remarks
           >A default <see
            cref="T:Mono.Security.Cryptography.CapiContext" />
+
+          
 
           
 
@@ -76,11 +82,15 @@
 
           
 
+          
+
            representing the Cryptographic Service Provider (CSP) to use.</param
         >
         <param name="hashAlgorithm"
           >a <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -112,11 +122,15 @@
 
           
 
+          
+
            containing the parameters to create the cryptographic context.</param
         >
         <param name="hashAlgorithm"
           >a <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -129,8 +143,12 @@
 
           
 
+          
+
            will be created with the specified <see
            cref="T:System.Security.Cryptography.CspParameters" />
+
+          
 
           
 
@@ -186,6 +204,8 @@
         <value
           >a <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -259,6 +279,8 @@
 
           
 
+          
+
            representing the number of bits in the hash result.</value
         >
         <remarks>To be added</remarks>
@@ -281,6 +303,8 @@
         <param name="algo"
           >a <see
            cref="T:System.Int32" />
+
+          
 
           
 

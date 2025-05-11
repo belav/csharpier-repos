@@ -22,6 +22,8 @@
 
         
 
+        
+
          class is used by ASP.NET to return a default instance of a user profile when the profile feature is enabled but no properties are defined.</para
       >
     </remarks>
@@ -45,6 +47,8 @@
 
             
 
+            
+
              class is used by ASP.NET to return a default instance of a user profile when the profile feature is enabled but no properties are defined.</para
           >
         </remarks>
@@ -53,6 +57,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.Profile.DefaultProfile" />
+
+            
 
             
 

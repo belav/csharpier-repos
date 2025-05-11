@@ -21,11 +21,13 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A {...}  
 public class B: A {...}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -36,7 +38,7 @@ public class B: A {...}
     <example
       >[Example: Likewise, in the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A {...}  
 public class B  
 {  
@@ -46,6 +48,8 @@ public class B
 }  
 ]]>
       </code_example>
+
+      
 
       
 

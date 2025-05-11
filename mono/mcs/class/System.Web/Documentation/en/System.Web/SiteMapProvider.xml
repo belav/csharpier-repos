@@ -22,8 +22,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -41,6 +49,8 @@
          type="text/html">
           <a href="6b85a558-1df8-44cf-bea6-62e61bcc8d20">ASP.NET Site Maps</a>
         </format>
+
+        
 
         
 
@@ -52,8 +62,12 @@
 
         
 
+        
+
          class supports the concept of a site map provider hierarchy, by declaring the <see
          cref="P:System.Web.SiteMapProvider.RootProvider" />
+
+        
 
         
 
@@ -62,8 +76,12 @@
 
         
 
+        
+
          properties. A <see
          cref="T:System.Web.SiteMapProvider" />
+
+        
 
         
 
@@ -75,13 +93,19 @@
 
         
 
+        
+
          objects are configured in the Web.config files. Any site map providers that are declared in these configuration files are loaded at run time and are used to load and process site navigation data. The <see
          cref="T:System.Web.SiteMap" />
 
         
 
+        
+
          object, which keeps track of all the providers that are available to it through its <see
          cref="P:System.Web.SiteMap.Providers" />
+
+        
 
         
 
@@ -101,8 +125,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -118,6 +146,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -126,6 +156,8 @@
       <para
         >Provides a common base class for all site map data providers, and a way for developers to implement custom site map data providers that can be used with the ASP.NET site map infrastructure as persistent stores for <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -149,13 +181,19 @@
 
               
 
+              
+
                class is not instantiated directly. The <see
                cref="M:System.Web.SiteMapProvider.#ctor" />
 
               
 
+              
+
                constructor is called from the constructor of classes that are derived from the <see
                cref="T:System.Web.StaticSiteMapProvider" />
+
+              
 
               
 
@@ -168,6 +206,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -201,8 +241,12 @@
 
             
 
+            
+
              class can override the <see
              cref="M:System.Web.SiteMapProvider.AddNode(System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -211,13 +255,19 @@
 
             
 
+            
+
              object to the node collection that is maintained by the site map provider. The default implementation of the <see
              cref="Overload:System.Web.SiteMapProvider.AddNode" />
 
             
 
+            
+
              method throws a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -232,6 +282,8 @@
 
             
 
+            
+
              object to the node collection that is maintained by the site map provider.</para
           >
         </summary>
@@ -240,8 +292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -277,8 +333,12 @@
 
             
 
+            
+
              class can override the <see
              cref="M:System.Web.SiteMapProvider.AddNode(System.Web.SiteMapNode,System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -287,8 +347,12 @@
 
             
 
+            
+
              object with a specified parent to the node collection that is maintained by the site map provider. For example, the <see
              cref="M:System.Web.XmlSiteMapProvider.AddNode(System.Web.SiteMapNode,System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -297,8 +361,12 @@
 
             
 
+            
+
              object that is specified by <paramref
              name="node" />
+
+            
 
             
 
@@ -307,8 +375,12 @@
 
             
 
+            
+
              collection that is maintained by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -317,8 +389,12 @@
 
             
 
+            
+
              object that is specified by <paramref
              name="node" />
+
+            
 
             
 
@@ -327,13 +403,19 @@
 
             
 
+            
+
             . The default implementation of the <see
              cref="Overload:System.Web.SiteMapProvider.AddNode" />
 
             
 
+            
+
              method throws a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -348,8 +430,12 @@
 
             
 
+            
+
              object to the node collection that is maintained by the site map provider and specifies the parent <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -361,8 +447,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -373,13 +463,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
 
           
 
+          
+
            that is the parent of <paramref
            name="node" />
+
+          
 
           
 
@@ -407,8 +503,12 @@
 
             
 
+            
+
              event is raised before attempting to retrieve a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -417,8 +517,12 @@
 
             
 
+            
+
              class. If there are no event subscribers, the <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -427,8 +531,12 @@
 
             
 
+            
+
              method using the current HTTP context to retrieve a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -440,8 +548,12 @@
 
             
 
+            
+
             , null is returned. If security trimming is enabled and the user is not permitted to access the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -453,6 +565,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -481,8 +595,12 @@
 
             
 
+            
+
              property is used for the get accessor of the <see
              cref="P:System.Web.SiteMapNode.Title" />
+
+            
 
             
 
@@ -491,13 +609,19 @@
 
             
 
+            
+
              properties, as well as additional <see
              cref="P:System.Web.SiteMapNode.Attributes" />
 
             
 
+            
+
              properties of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -509,6 +633,8 @@
           <para
             >Gets or sets a Boolean value indicating whether localized values of <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -542,8 +668,12 @@
 
             
 
+            
+
              class must implement the abstract <see
              cref="M:System.Web.SiteMapProvider.FindSiteMapNode(System.String)" />
+
+            
 
             
 
@@ -555,6 +685,8 @@
 
             
 
+            
+
              method parse and handle application-relative syntax properly.</para
           >
           <para
@@ -563,8 +695,12 @@
 
             
 
+            
+
              class, which is the default site map provider for ASP.NET, uses the URL of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -573,8 +709,12 @@
 
             
 
+            
+
              provides a URL, it must be unique within the scope of the site map provider. If no URL is provided, a unique identifier is generated to identify the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -589,6 +729,8 @@
 
             
 
+            
+
              object that represents the page at the specified URL.</para
           >
         </summary>
@@ -600,8 +742,12 @@
 
             
 
+            
+
              that represents the page identified by <paramref
              name="rawURL" />
+
+            
 
             
 
@@ -610,8 +756,12 @@
 
             
 
+            
+
              is found or if security trimming is enabled and the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -623,8 +773,12 @@
 
           
 
+          
+
           A URL that identifies the page for which to retrieve a <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -657,8 +811,12 @@
 
             
 
+            
+
              method calls the abstract <see
              cref="M:System.Web.SiteMapProvider.FindSiteMapNode(System.String)" />
+
+            
 
             
 
@@ -667,13 +825,19 @@
 
             
 
+            
+
              object for the currently requested page based on the raw URL or the virtual path of the request. If no corresponding <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              is found in the <see
              cref="T:System.Web.SiteMap" />
+
+            
 
             
 
@@ -685,8 +849,12 @@
 
             
 
+            
+
              method does not check whether a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -701,8 +869,12 @@
 
             
 
+            
+
              object that represents the currently requested page using the specified <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -717,13 +889,19 @@
 
             
 
+            
+
              that represents the currently requested page; otherwise, null, if no corresponding <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              can be found in the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -735,8 +913,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -769,8 +951,12 @@
 
             
 
+            
+
              implementation returns null in all cases. Classes that derive from the <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -779,8 +965,12 @@
 
             
 
+            
+
              method to provide lookup functionality based on a unique key (instead of a URL, which is used by the <see
              cref="Overload:System.Web.SiteMapProvider.FindSiteMapNode" />
+
+            
 
             
 
@@ -789,13 +979,19 @@
 
             
 
+            
+
              method if your site map provider implementation uses the <see
              cref="P:System.Web.SiteMapNode.Key" />
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -807,6 +1003,8 @@
 
             
 
+            
+
              class provides an implementation that handles searching for site map nodes that do not define a URL.</para
           >
           <para
@@ -815,13 +1013,19 @@
 
             
 
+            
+
              class, which is the default site map provider for ASP.NET, uses the URL of a <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              as a key in the various collections that the classes maintain. Therefore, if a node provides a URL, it must be unique within the scope of the site map provider. If no URL is provided, a unique identifier is generated to identify the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -836,6 +1040,8 @@
 
             
 
+            
+
              object based on a specified key.</para
           >
         </summary>
@@ -847,8 +1053,12 @@
 
             
 
+            
+
              that represents the page identified by <paramref
              name="key" />
+
+            
 
             
 
@@ -857,8 +1067,12 @@
 
             
 
+            
+
              is found or if security trimming is enabled and the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -870,8 +1084,12 @@
 
           
 
+          
+
           A lookup key with which a <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -904,8 +1122,12 @@
 
             
 
+            
+
              class must implement the abstract <see
              cref="M:System.Web.SiteMapProvider.GetChildNodes(System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -920,6 +1142,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -931,8 +1155,12 @@
 
             
 
+            
+
              that contains the immediate child nodes of the specified <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -944,8 +1172,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -978,8 +1210,12 @@
 
             
 
+            
+
              method returns the <see
              cref="P:System.Web.SiteMapProvider.CurrentNode" />
+
+            
 
             
 
@@ -988,8 +1224,12 @@
 
             
 
+            
+
              method and provide an optimized implementation that uses custom caching mechanisms to return the current <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1001,8 +1241,12 @@
 
             
 
+            
+
              parameter is used to specify how many levels of parent and ancestor nodes to retrieve. If preferred, the parent and ancestor nodes can be linked to the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1011,8 +1255,12 @@
 
             
 
+            
+
              method, using the <see
              cref="P:System.Web.SiteMapNode.ParentNode" />
+
+            
 
             
 
@@ -1024,13 +1272,19 @@
 
             
 
+            
+
              class, which is the default site map provider for ASP.NET, caches the entire site map in memory, which results in little or no overhead when querying the <see
              cref="T:System.Web.XmlSiteMapProvider" />
 
             
 
+            
+
              for specific <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1049,8 +1303,12 @@
 
             
 
+            
+
              that represents the currently requested page; otherwise, null, if the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1059,6 +1317,8 @@
         </returns>
         <param name="upLevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1092,8 +1352,12 @@
 
             
 
+            
+
              method returns the <see
              cref="P:System.Web.SiteMapProvider.CurrentNode" />
+
+            
 
             
 
@@ -1102,8 +1366,12 @@
 
             
 
+            
+
              method and provide an optimized implementation that uses custom caching mechanisms to return the current <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1112,8 +1380,12 @@
 
             
 
+            
+
              objects that are in the proximity of the current <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1125,8 +1397,12 @@
 
             
 
+            
+
              parameter is used to specify how many levels of parent and ancestor nodes to retrieve and cache, along with their immediate children. The <paramref
              name="downLevel" />
+
+            
 
             
 
@@ -1135,8 +1411,12 @@
 
             
 
+            
+
              to retrieve. If preferred, the ancestor and descendant nodes can be linked to the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1147,8 +1427,12 @@
 
             
 
+            
+
              method, using the <see
              cref="P:System.Web.SiteMapNode.ParentNode" />
+
+            
 
             
 
@@ -1157,13 +1441,19 @@
 
             
 
+            
+
              properties. If there are fewer ancestor or child node levels than are specified by <paramref
              name="upLevel" />
 
             
 
+            
+
              or <paramref
              name="downLevel" />
+
+            
 
             
 
@@ -1175,13 +1465,19 @@
 
             
 
+            
+
              class, which is the default site map provider for ASP.NET, caches the entire site map in memory, which results in little or no overhead when querying the <see
              cref="T:System.Web.XmlSiteMapProvider" />
 
             
 
+            
+
              for specific <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1200,8 +1496,12 @@
 
             
 
+            
+
              that represents the currently requested page; otherwise, null, if the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1213,8 +1513,12 @@
 
           
 
+          
+
           The number of ancestor <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1225,8 +1529,12 @@
 
           
 
+          
+
           The number of child <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1260,6 +1568,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1271,13 +1581,19 @@
 
             
 
+            
+
              that represents the parent of <paramref
              name="node" />
 
             
 
+            
+
             ; otherwise, null, if the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1289,13 +1605,19 @@
 
               
 
+              
+
                might also return null if the parent node belongs to a different provider. In this case, use the <see
                cref="P:System.Web.SiteMapNode.ParentNode" />
 
               
 
+              
+
                property of <paramref
                name="node" />
+
+              
 
               
 
@@ -1308,8 +1630,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1343,8 +1669,12 @@
 
             
 
+            
+
              class provides a non-optimized implementation of the <see
              cref="M:System.Web.SiteMapProvider.GetParentNodeRelativeToCurrentNodeAndHintDownFromParent(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1353,8 +1683,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.SiteMapProvider.HintNeighborhoodNodes(System.Web.SiteMapNode,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1363,8 +1697,12 @@
 
             
 
+            
+
              method and provide an optimized implementation that uses custom caching mechanisms to return the ancestor node and perform an optimized lookup of the other <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1376,8 +1714,12 @@
 
             
 
+            
+
              parameter is used to specify how many levels of parent and ancestor nodes to traverse when retrieving the target node. If fewer levels exist than are requested, null is returned. The <paramref
              name="downLevel" />
+
+            
 
             
 
@@ -1386,8 +1728,12 @@
 
             
 
+            
+
              that is returned by the <see
              cref="M:System.Web.SiteMapProvider.GetParentNodeRelativeToCurrentNodeAndHintDownFromParent(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1396,8 +1742,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.SiteMapNode.ChildNodes" />
+
+            
 
             
 
@@ -1416,13 +1766,19 @@
 
             
 
+            
+
              that represents an ancestor <see
              cref="T:System.Web.SiteMapNode" />
 
             
 
+            
+
              of the currently requested page; otherwise, null, if the current or ancestor <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1434,10 +1790,14 @@
 
           
 
+          
+
           The number of ancestor node levels to traverse when retrieving the requested ancestor node. </param
         >
         <param name="relativeDepthFromWalkup">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1472,8 +1832,12 @@
 
             
 
+            
+
              class provides a non-optimized implementation of the <see
              cref="M:System.Web.SiteMapProvider.GetParentNodeRelativeToNodeAndHintDownFromParent(System.Web.SiteMapNode,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1482,8 +1846,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.SiteMapProvider.HintNeighborhoodNodes(System.Web.SiteMapNode,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1492,8 +1860,12 @@
 
             
 
+            
+
              method and provide an optimized implementation that uses custom caching mechanisms to return the ancestor node and perform an optimized lookup of the other <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1502,8 +1874,12 @@
 
             
 
+            
+
              method is very similar to the <see
              cref="M:System.Web.SiteMapProvider.GetParentNodeRelativeToCurrentNodeAndHintDownFromParent(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1515,8 +1891,12 @@
 
             
 
+            
+
              parameter is used to specify how many levels of parent and ancestor nodes to traverse when retrieving the target node. If fewer levels exist than are requested, null is returned. The <paramref
              name="downLevel" />
+
+            
 
             
 
@@ -1525,8 +1905,12 @@
 
             
 
+            
+
              that is returned by the <see
              cref="M:System.Web.SiteMapProvider.GetParentNodeRelativeToNodeAndHintDownFromParent(System.Web.SiteMapNode,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1535,8 +1919,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.SiteMapNode.ChildNodes" />
+
+            
 
             
 
@@ -1545,8 +1933,12 @@
 
             
 
+            
+
              parameter, null is returned.  It is up to the provider implementer to decide how to handle the situation where the number of available descendant node levels is less than the value that is specified by the <paramref
              name="downLevel" />
+
+            
 
             
 
@@ -1561,6 +1953,8 @@
 
             
 
+            
+
              object and fetching its child nodes.</para
           >
         </summary>
@@ -1572,13 +1966,19 @@
 
             
 
+            
+
              that represents an ancestor of <paramref
              name="node" />
 
             
 
+            
+
             ; otherwise, null, if the current or ancestor <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1590,8 +1990,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1600,8 +2004,12 @@
 
           
 
+          
+
            and <paramref
            name="relativeDepthFromWalkup" />
+
+          
 
           
 
@@ -1612,10 +2020,14 @@
 
           
 
+          
+
           The number of ancestor node levels to traverse when retrieving the requested ancestor node.</param
         >
         <param name="relativeDepthFromWalkup">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1648,8 +2060,12 @@
 
             
 
+            
+
              method enables a parent provider in a provider hierarchy to obtain a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1665,6 +2081,8 @@
           <para
             >A <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1695,8 +2113,12 @@
 
             
 
+            
+
              method on the specified <paramref
              name="provider" />
+
+            
 
             
 
@@ -1715,8 +2137,12 @@
 
             
 
+            
+
              that represents the root node of the set of nodes that is managed by <paramref
              name="provider" />
+
+            
 
             
 
@@ -1728,8 +2154,12 @@
 
           
 
+          
+
           The provider that calls the <see
            cref="M:System.Web.SiteMapProvider.GetRootNodeCore" />
+
+          
 
           
 
@@ -1763,8 +2193,12 @@
 
             
 
+            
+
              method only checks for an <paramref
              name="upLevel" />
+
+            
 
             
 
@@ -1773,13 +2207,19 @@
 
             
 
+            
+
              parameter that is null. Because the <see
              cref="T:System.Web.XmlSiteMapProvider" />
 
             
 
+            
+
              class caches site map information in memory, the <see
              cref="M:System.Web.SiteMapProvider.HintAncestorNodes(System.Web.SiteMapNode,System.Int32)" />
+
+            
 
             
 
@@ -1791,8 +2231,12 @@
 
             
 
+            
+
              method to perform an optimized retrieval of parent and ancestor nodes of the specified <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1804,8 +2248,12 @@
 
             
 
+            
+
              parameter is used to specify how many levels of parent and ancestor nodes to traverse from the specified <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1814,8 +2262,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Web.SiteMapNode.ParentNode" />
+
+            
 
             
 
@@ -1830,6 +2282,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -1838,13 +2292,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
 
           
 
+          
+
            that acts as a reference point for <paramref
            name="upLevel" />
+
+          
 
           
 
@@ -1855,8 +2315,12 @@
 
           
 
+          
+
           The number of ancestor <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1891,8 +2355,12 @@
 
             
 
+            
+
              method only checks for an <paramref
              name="upLevel" />
+
+            
 
             
 
@@ -1901,8 +2369,12 @@
 
             
 
+            
+
              parameters that are less than -1 and a <paramref
              name="node" />
+
+            
 
             
 
@@ -1911,8 +2383,12 @@
 
             
 
+            
+
              object caches site map information in memory, the <see
              cref="M:System.Web.SiteMapProvider.HintNeighborhoodNodes(System.Web.SiteMapNode,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1924,8 +2400,12 @@
 
             
 
+            
+
              method to perform an optimized lookup of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1934,8 +2414,12 @@
 
             
 
+            
+
             . The <paramref
              name="upLevel" />
+
+            
 
             
 
@@ -1944,8 +2428,12 @@
 
             
 
+            
+
             . The <paramref
              name="downLevel" />
+
+            
 
             
 
@@ -1954,8 +2442,12 @@
 
             
 
+            
+
              that is returned by the <see
              cref="M:System.Web.SiteMapProvider.HintNeighborhoodNodes(System.Web.SiteMapNode,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1964,8 +2456,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.SiteMapNode.ChildNodes" />
+
+            
 
             
 
@@ -1981,13 +2477,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
 
           
 
+          
+
            that acts as a reference point for <paramref
            name="upLevel" />
+
+          
 
           
 
@@ -1998,13 +2500,19 @@
 
           
 
+          
+
           The number of ancestor <see
            cref="T:System.Web.SiteMapNode" />
 
           
 
+          
+
            generations to fetch. 0 indicates no ancestor nodes are retrieved and -1 indicates that all ancestors (and their descendant nodes to the level of <paramref
            name="node" />
+
+          
 
           
 
@@ -2015,8 +2523,12 @@
 
           
 
+          
+
           The number of descendant <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -2050,13 +2562,19 @@
 
             
 
+            
+
              method does not actually build a site map, it only prepares the state of the <see
              cref="T:System.Web.SiteMapProvider" />
 
             
 
+            
+
              object to do so. The default implementation initializes the <see
              cref="P:System.Web.SiteMapProvider.SecurityTrimmingEnabled" />
+
+            
 
             
 
@@ -2068,13 +2586,19 @@
 
             
 
+            
+
              can override the <see
              cref="M:System.Web.SiteMapProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
+            
+
              method to initialize any state and resources that are required to load site map data from persistent storage. For example, if your derived class is using files to store site map data, any file initialization can be performed in the <see
              cref="M:System.Web.SiteMapProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -2086,8 +2610,12 @@
 
             
 
+            
+
              method with its <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -2102,6 +2630,8 @@
 
             
 
+            
+
              implementation, including any resources that are needed to load site map data from persistent storage.</para
           >
         </summary>
@@ -2110,8 +2640,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Configuration.Provider.ProviderBase.Name" />
+
+          
 
           
 
@@ -2122,8 +2656,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -2171,8 +2709,12 @@
 
                   
 
+                  
+
                    exists on <paramref
                    name="node" />
+
+                  
 
                   
 
@@ -2205,6 +2747,8 @@
 
             
 
+            
+
              object can be viewed by the user in the specified context.</para
           >
         </summary>
@@ -2216,6 +2760,8 @@
 
             
 
+            
+
              can be viewed by the user or security trimming is not enabled; otherwise, false.</para
           >
         </returns>
@@ -2224,8 +2770,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -2236,8 +2786,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -2268,13 +2822,19 @@
 
             
 
+            
+
              class can support the concept of a site map provider hierarchy. Any hierarchical relationships between providers are maintained outside the scope of a <see
              cref="T:System.Web.SiteMapProviderCollection" />
 
             
 
+            
+
              collection by the providers themselves. For an example of a functional provider hierarchy, see <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -2286,6 +2846,8 @@
           <para
             >Gets or sets the parent <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -2319,8 +2881,12 @@
 
             
 
+            
+
              class can override the <see
              cref="M:System.Web.SiteMapProvider.RemoveNode(System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -2329,13 +2895,19 @@
 
             
 
+            
+
              objects from the node collection that is maintained by the site map provider. The default implementation of the <see
              cref="M:System.Web.SiteMapProvider.RemoveNode(System.Web.SiteMapNode)" />
 
             
 
+            
+
              method throws a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -2350,6 +2922,8 @@
 
             
 
+            
+
              object from the node collection that is maintained by the site map provider.</para
           >
         </summary>
@@ -2358,8 +2932,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -2392,13 +2970,19 @@
 
             
 
+            
+
              parameter and a reference to the provider that called the <see
              cref="M:System.Web.SiteMapProvider.ResolveSiteMapNode(System.Web.HttpContext)" />
 
             
 
+            
+
              method are passed to the constructor of any associated <see
              cref="T:System.Web.SiteMapResolveEventArgs" />
+
+            
 
             
 
@@ -2413,6 +2997,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2424,6 +3010,8 @@
 
             
 
+            
+
              provided by the event handler delegate that is registered to handle the event or, if more than one delegate is registered to handle the event, the return value of the last delegate in the delegate chain; otherwise, null. </para
           >
         </returns>
@@ -2432,8 +3020,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -2461,8 +3053,12 @@
 
             
 
+            
+
              property is used with the <see
              cref="M:System.Web.SiteMapNode.GetImplicitResourceString(System.String)" />
+
+            
 
             
 
@@ -2471,8 +3067,12 @@
 
             
 
+            
+
              class. For the <see
              cref="P:System.Web.SiteMapNode.Title" />
+
+            
 
             
 
@@ -2481,8 +3081,12 @@
 
             
 
+            
+
              properties, as well as any additional attributes that are defined in the <see
              cref="P:System.Web.SiteMapNode.Attributes" />
+
+            
 
             
 
@@ -2491,8 +3095,12 @@
 
             
 
+            
+
              object, the <see
              cref="M:System.Web.SiteMapNode.GetImplicitResourceString(System.String)" />
+
+            
 
             
 
@@ -2501,8 +3109,12 @@
 
             
 
+            
+
              when the localization is enabled with the <see
              cref="P:System.Web.SiteMapProvider.EnableLocalization" />
+
+            
 
             
 
@@ -2514,6 +3126,8 @@
           <para
             >Get or sets the resource key that is used for localizing <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2545,6 +3159,8 @@
 
             
 
+            
+
              method.</para
           >
           <para />
@@ -2554,6 +3170,8 @@
           <para
             >Gets the root <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -2585,13 +3203,19 @@
 
             
 
+            
+
              class can support the concept of a site map provider hierarchy. Any hierarchical relationships between providers are maintained outside the scope of a <see
              cref="T:System.Web.SiteMapProviderCollection" />
 
             
 
+            
+
              collection by the providers themselves. For an example of a functional provider hierarchy, see <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -2603,6 +3227,8 @@
           <para
             >Gets the root <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -2655,8 +3281,12 @@
 
             
 
+            
+
              representation of the currently requested page without implementing a custom site map provider by subscribing to the <see
              cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
+
+            
 
             
 
@@ -2665,8 +3295,12 @@
 
             
 
+            
+
              object to receive notification when the <see
              cref="P:System.Web.SiteMapProvider.CurrentNode" />
+
+            
 
             
 
@@ -2675,8 +3309,12 @@
 
             
 
+            
+
              object instead of the default one that is returned by the <see
              cref="P:System.Web.SiteMapProvider.CurrentNode" />
+
+            
 
             
 
@@ -2690,6 +3328,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2698,6 +3338,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Web.SiteMapProvider.CurrentNode" />
+
+            
 
             
 

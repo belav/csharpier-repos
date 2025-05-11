@@ -30,8 +30,12 @@
 
         
 
+        
+
         . Because each activator is responsible for calling the next one in the chain, an activator can position itself anywhere in the chain. The <see
          cref="T:System.Runtime.Remoting.Activation.ActivatorLevel" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >Defines the appropriate position for a <see
          cref="T:System.Activator" />
+
+        
 
         
 
@@ -74,6 +80,8 @@
           <para
             >Finds or creates a <see
              cref="T:System.AppDomain" />
+
+            
 
             
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          attribute to specify the structure of the SOAP envelope for a particular message. Your service can then use the message as a parameter or return type in service operations. For information about controlling the serialization of the contents of a SOAP body without modifying the default SOAP envelope itself, see <see
          cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+        
 
         
 
@@ -41,10 +45,14 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Data Contracts Overview</a>
         </format>
+
+        
 
         
 
@@ -57,12 +65,16 @@
 
           
 
+          
+
            objects. For details, see , <format
            type="text/html">
             <a href="7c5a26c8-89c9-4bcb-a4bc-7131e6d01f0c"
               >Specifying Data Transfer in Service Contracts</a
             >
           </format>
+
+          
 
           
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          and annotate one or more of the class's fields or properties with <see
          cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.ServiceModel.MessageHeaderArrayAttribute" />
+
+        
 
         
 
@@ -98,8 +118,12 @@
 
           
 
+          
+
            is not a message contract attribute and cannot be used in conjunction with <see
            cref="T:System.ServiceModel.MessageContractAttribute" />
+
+          
 
           
 
@@ -112,8 +136,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.OperationContractAttribute.ReplyAction" />
+
+        
 
         
 
@@ -127,8 +155,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.MessageContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -142,13 +174,19 @@
 
             
 
+            
+
              property to indicate whether the message body has a wrapper element, and if so, use the <see
              cref="P:System.ServiceModel.MessageContractAttribute.WrapperName" />
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.MessageContractAttribute.WrapperNamespace" />
+
+            
 
             
 
@@ -161,6 +199,8 @@
          type="text/html">
           <a href="1e19c64a-ae84-4c2f-9155-91c54a77c249">Using Message Contracts</a>
         </format>
+
+        
 
         
 
@@ -194,6 +234,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -219,10 +261,14 @@
 
             
 
+            
+
             . For details about protection levels and their assumptions and scopes, see <format
              type="text/html">
               <a href="0c034608-a1ac-4007-8287-b1382eaa8bf2">Understanding Protection Level</a>
             </format>
+
+            
 
             
 
@@ -252,6 +298,8 @@
           <para
             >Set the value of <see
              cref="P:System.ServiceModel.MessageContractAttribute.IsWrapped" />
+
+            
 
             
 
@@ -292,6 +340,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -321,6 +371,8 @@
 
             
 
+            
+
              property to set the name of the wrapper element.</para
           >
         </remarks>
@@ -347,6 +399,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.MessageContractAttribute.WrapperNamespace" />
+
+            
 
             
 

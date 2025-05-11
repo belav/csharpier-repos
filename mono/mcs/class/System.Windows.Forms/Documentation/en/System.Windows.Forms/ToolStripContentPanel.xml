@@ -45,8 +45,12 @@
 
         
 
+        
+
          to hold <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -55,13 +59,19 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Windows.Forms.StatusStrip" />
 
         
 
+        
+
          controls. Use the <see
          cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+        
 
         
 
@@ -73,6 +83,8 @@
       <para
         >Represents the center panel of a <see
          cref="T:System.Windows.Forms.ToolStripContainer" />
+
+        
 
         
 
@@ -93,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+            
 
             
 
@@ -366,8 +380,12 @@
 
             
 
+            
+
              reflects the background color of the <see
              cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+            
 
             
 
@@ -524,6 +542,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -752,11 +772,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripContentPanel.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -771,6 +795,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -779,8 +805,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -818,8 +848,12 @@
 
             
 
+            
+
             , which contains all the information necessary to render the <see
              cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+            
 
             
 
@@ -833,11 +867,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripContentPanel.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -852,6 +890,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -860,8 +900,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -901,11 +945,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripContentPanel.OnRendererChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -920,6 +968,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -928,8 +978,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -969,8 +1023,12 @@
 
             
 
+            
+
              used to customize the appearance of a <see
              cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+            
 
             
 
@@ -1000,6 +1058,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1008,6 +1068,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripContentPanel.Renderer" />
+
+            
 
             
 
@@ -1037,6 +1099,8 @@
           <para
             >Gets or sets the painting styles to be applied to the <see
              cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+            
 
             
 

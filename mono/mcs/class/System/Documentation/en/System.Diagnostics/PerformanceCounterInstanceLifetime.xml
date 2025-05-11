@@ -25,6 +25,8 @@
 
         
 
+        
+
         , which specifies the removal of the performance counter instance when no counters are using the process category.</para
       >
       <block subset="none" type="note">
@@ -34,8 +36,12 @@
 
           
 
+          
+
            property is <see
            cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
+
+          
 
           
 
@@ -44,8 +50,12 @@
 
           
 
+          
+
            value for the performance counter must be <see
            cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+          
 
           
 

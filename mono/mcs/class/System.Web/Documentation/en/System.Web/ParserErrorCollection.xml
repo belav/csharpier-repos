@@ -22,13 +22,19 @@
 
         
 
+        
+
          class provides methods and properties that you can use to manage a collection of <see
          cref="T:System.Web.ParserError" />
 
         
 
+        
+
          objects. For example, you can add a set of parser errors to a collection upon parsing while using a custom <see
          cref="T:System.Web.Compilation.BuildProvider" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
             
 
+            
+
              method to add a single <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -58,8 +68,12 @@
 
             
 
+            
+
              methods to add multiple <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -73,8 +87,12 @@
 
             
 
+            
+
              method and the <see
              cref="P:System.Web.ParserErrorCollection.Item(System.Int32)" />
+
+            
 
             
 
@@ -83,8 +101,12 @@
 
             
 
+            
+
              indexer, to add a single <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -98,6 +120,8 @@
 
         
 
+        
+
          class to do the following: </para
       >
       <list type="bullet">
@@ -108,8 +132,12 @@
 
             
 
+            
+
              objects with the <see
              cref="M:System.Web.ParserErrorCollection.Remove(System.Web.ParserError)" />
+
+            
 
             
 
@@ -123,8 +151,12 @@
 
             
 
+            
+
              is in the collection by using the <see
              cref="M:System.Web.ParserErrorCollection.Contains(System.Web.ParserError)" />
+
+            
 
             
 
@@ -138,8 +170,12 @@
 
             
 
+            
+
              object is located in the collection by using the <see
              cref="M:System.Web.ParserErrorCollection.IndexOf(System.Web.ParserError)" />
+
+            
 
             
 
@@ -166,6 +202,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.ParserErrorCollection" />
+
+            
 
             
 
@@ -197,8 +235,12 @@
 
             
 
+            
+
              constructor adds an array of <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -210,6 +252,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.ParserErrorCollection" />
+
+            
 
             
 
@@ -241,8 +285,12 @@
 
             
 
+            
+
              method to add an existing <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -251,8 +299,12 @@
 
             
 
+            
+
              object to the collection more than once. When you call the <see
              cref="M:System.Web.ParserErrorCollection.Add(System.Web.ParserError)" />
+
+            
 
             
 
@@ -261,11 +313,15 @@
 
             
 
+            
+
              object that is already in the collection, the addition fails and -1 is returned.</para
           >
           <para
             >To add multiple objects to the collection, use the <see
              cref="M:System.Web.ParserErrorCollection.AddRange(System.Web.ParserErrorCollection)" />
+
+            
 
             
 
@@ -308,8 +364,12 @@
 
             
 
+            
+
              method to add an array of <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -318,8 +378,12 @@
 
             
 
+            
+
              method is useful when you create multiple <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -328,8 +392,12 @@
 
             
 
+            
+
              objects to the collection, use the <see
              cref="M:System.Web.ParserErrorCollection.Add(System.Web.ParserError)" />
+
+            
 
             
 
@@ -341,6 +409,8 @@
           <para
             >Adds an array of <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -375,8 +445,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.Web.ParserErrorCollection.AddRange(System.Web.ParserErrorCollection)" />
+
+            
 
             
 
@@ -385,13 +459,19 @@
 
             
 
+            
+
              object being added is already in the collection. If you need this information, use the <see
              cref="M:System.Web.ParserErrorCollection.Contains(System.Web.ParserError)" />
 
             
 
+            
+
              method before using <see
              cref="M:System.Web.ParserErrorCollection.AddRange(System.Web.ParserErrorCollection)" />
+
+            
 
             
 
@@ -403,6 +483,8 @@
           <para
             >Adds the objects in an existing <see
              cref="T:System.Web.ParserErrorCollection" />
+
+            
 
             
 
@@ -434,8 +516,12 @@
 
             
 
+            
+
              object to the collection more than once. However, attempting to add a <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -444,8 +530,12 @@
 
             
 
+            
+
              method will return a value of –1. However, the <see
              cref="Overload:System.Web.ParserErrorCollection.AddRange" />
+
+            
 
             
 
@@ -454,8 +544,12 @@
 
             
 
+            
+
              methods do not have return values. When adding <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -464,8 +558,12 @@
 
             
 
+            
+
              method to determine whether a particular <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -480,6 +578,8 @@
 
             
 
+            
+
              object is located in the collection.</para
           >
         </summary>
@@ -488,6 +588,8 @@
           <para
             >true if the <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -523,8 +625,12 @@
 
             
 
+            
+
              method to copy the <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -533,8 +639,12 @@
 
             
 
+            
+
              objects in the collection by using the <see
              cref="Overload:System.Array.Sort" />
+
+            
 
             
 
@@ -545,6 +655,8 @@
               <para
                 >Copy the <see
                  cref="T:System.Web.ParserError" />
+
+                
 
                 
 
@@ -561,8 +673,12 @@
 
                 
 
+                
+
                  method to remove all the <see
                  cref="T:System.Web.ParserError" />
+
+                
 
                 
 
@@ -573,6 +689,8 @@
               <para
                 >Use the <see
                  cref="M:System.Web.ParserErrorCollection.AddRange(System.Web.ParserError[])" />
+
+                
 
                 
 
@@ -589,6 +707,8 @@
 
             
 
+            
+
              objects in the collection to a compatible one-dimensional array, starting at the specified index of the target array.</para
           >
         </summary>
@@ -597,8 +717,12 @@
 
           
 
+          
+
           The first index within the array to which the <see
            cref="T:System.Web.ParserError" />
+
+          
 
           
 
@@ -629,8 +753,12 @@
 
             
 
+            
+
              method to determine the index of a <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -639,13 +767,19 @@
 
             
 
+            
+
              when you iterate through the collection by using the <see
              cref="T:System.Collections.IEnumerator" />
 
             
 
+            
+
              object returned by the <see
              cref="M:System.Collections.CollectionBase.GetEnumerator" />
+
+            
 
             
 
@@ -660,6 +794,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </summary>
@@ -671,8 +807,12 @@
 
             
 
+            
+
              objects within the collection; otherwise, 1 if the <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -708,8 +848,12 @@
 
             
 
+            
+
              method to insert an existing <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -721,8 +865,12 @@
 
             
 
+            
+
              object to the collection more than once. When you call the <see
              cref="M:System.Web.ParserErrorCollection.Insert(System.Int32,System.Web.ParserError)" />
+
+            
 
             
 
@@ -731,8 +879,12 @@
 
             
 
+            
+
              that is already in the collection, the insertion fails. Use the <see
              cref="M:System.Web.ParserErrorCollection.Contains(System.Web.ParserError)" />
+
+            
 
             
 
@@ -741,8 +893,12 @@
 
             
 
+            
+
              is already in the collection. To reposition a <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -751,8 +907,12 @@
 
             
 
+            
+
              method and then insert it at the desired index by using <see
              cref="M:System.Web.ParserErrorCollection.Insert(System.Int32,System.Web.ParserError)" />
+
+            
 
             
 
@@ -767,6 +927,8 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
@@ -775,8 +937,12 @@
 
           
 
+          
+
           The index within the collection at which to insert the <see
            cref="T:System.Web.ParserError" />
+
+          
 
           
 
@@ -830,13 +996,19 @@
 
             
 
+            
+
              method to remove a <see
              cref="T:System.Web.ParserError" />
 
             
 
+            
+
              object from the collection when you have a reference to the <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -848,6 +1020,8 @@
           <para
             >Removes the specified <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 

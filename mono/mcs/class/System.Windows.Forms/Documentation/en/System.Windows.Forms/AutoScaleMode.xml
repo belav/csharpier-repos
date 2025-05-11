@@ -18,8 +18,12 @@
 
         
 
+        
+
          class and classes derived from it, such as <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          enumeration defines the automatic scaling modes supported by these classes and their derived types. A control's current mode can be accessed through its <see
          cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          automatic scaling mode. The <see
          cref="F:System.Windows.Forms.AutoScaleMode.Dpi" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
           
 
+          
+
            property of the containing <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -65,8 +81,12 @@
 
           
 
+          
+
            property to <see
            cref="F:System.Windows.Forms.AutoScaleMode.None" />
+
+          
 
           
 
@@ -75,8 +95,12 @@
 
           
 
+          
+
            property of a form will set <see
            cref="P:System.Windows.Forms.Form.AutoScale" />
+
+          
 
           
 

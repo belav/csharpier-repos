@@ -21,6 +21,8 @@
 
         
 
+        
+
          method of this class in data-binding syntax in an ASP.NET Web page. This provides an easier syntax to work with than standard data binding. However, because DataBinder.Eval provides automatic type conversion, it can result in slower performance.</para
       >
       <para
@@ -31,10 +33,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="14cdd57d-0f82-4667-b503-73e1a96f136a">Data-Binding Expression Syntax</a>
         </format>
+
+        
 
         
 
@@ -43,6 +49,8 @@
       <para
         >Starting in .NET Framework 4.5, you can use model binding to simplify some of the tasks that you had to perform through data-binding in earlier versions. For a tutorial series on using model binding with Web Forms, see <see
          cref="http://go.microsoft.com/fwlink/?LinkId=286117">Model Binding and Web Forms</see>
+
+        
 
         
 
@@ -67,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.DataBinder" />
+
+            
 
             
 
@@ -101,6 +111,8 @@
 
             
 
+            
+
              parameter must evaluate to a public property. </para
           >
           <para>This method is automatically called when you create data bindings in a rapid application development (RAD) designer such as Visual Studio. You can also use it declaratively to simplify casting to a text string. To do so, you use the &lt;%#  %&gt; expression syntax, as used in standard ASP.NET data binding.</para>
@@ -114,8 +126,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -124,8 +140,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -134,8 +154,12 @@
 
             
 
+            
+
              should be Container.DataItem. If you are binding against the page, <paramref
              name="container" />
+
+            
 
             
 
@@ -144,6 +168,8 @@
           <para
             >Starting in .NET Framework 4.5, you can use model binding to simplify some of the tasks that you had to perform through data-binding in earlier versions. For a tutorial series on using model binding with Web Forms, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=286117">Model Binding and Web Forms</see>
+
+            
 
             
 
@@ -162,11 +188,15 @@
 
             
 
+            
+
              instance that results from the evaluation of the data-binding expression.</para
           >
         </returns>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,8 +207,12 @@
 
           
 
+          
+
           The navigation path from the <paramref
            name="container" />
+
+          
 
           
 
@@ -213,6 +247,8 @@
 
             
 
+            
+
              must evaluate to a public property.</para
           >
           <para
@@ -220,6 +256,8 @@
              type="text/html">
               <a href="0D1364DA-5B30-4D42-8E6B-03378343343F">Formatting Overview</a>
             </format>
+
+            
 
             
 
@@ -231,8 +269,12 @@
 
             
 
+            
+
              resulting from the data-binding expression to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -248,8 +290,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -258,8 +304,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -268,8 +318,12 @@
 
             
 
+            
+
              should be Container.DataItem. If you are binding against the page, <paramref
              name="container" />
+
+            
 
             
 
@@ -278,6 +332,8 @@
           <para
             >Starting in .NET Framework 4.5, you can use model binding to simplify some of the tasks that you had to perform through data-binding in earlier versions. For a tutorial series on using model binding with Web Forms, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=286117">Model Binding and Web Forms</see>
+
+            
 
             
 
@@ -296,11 +352,15 @@
 
             
 
+            
+
              object that results from evaluating the data-binding expression and converting it to a string type.</para
           >
         </returns>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,8 +371,12 @@
 
           
 
+          
+
           The navigation path from the <paramref
            name="container" />
+
+          
 
           
 
@@ -323,8 +387,12 @@
 
           
 
+          
+
           A .NET Framework format string (like those used by <see
            cref="M:System.String.Format(System.String,System.Object)" />
+
+          
 
           
 
@@ -333,8 +401,12 @@
 
           
 
+          
+
            instance returned by the data-binding expression to a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -367,8 +439,12 @@
 
             
 
+            
+
              method, ignoring its <paramref
              name="foundDataItem" />
+
+            
 
             
 
@@ -380,8 +456,12 @@
 
             
 
+            
+
              interface, the <see
              cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+
+            
 
             
 
@@ -398,6 +478,8 @@
         </returns>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -451,6 +533,8 @@
 
             
 
+            
+
              must evaluate to a public property. </para
           >
           <para
@@ -459,8 +543,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -469,8 +557,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -479,8 +571,12 @@
 
             
 
+            
+
              should be Container.DataItem. If you are binding against the page, <paramref
              name="container" />
+
+            
 
             
 
@@ -500,8 +596,12 @@
 
           
 
+          
+
           The object reference against which <paramref
            name="expr" />
+
+          
 
           
 
@@ -512,8 +612,12 @@
 
           
 
+          
+
           The navigation path from the <paramref
            name="container" />
+
+          
 
           
 
@@ -552,8 +656,12 @@
 
             
 
+            
+
              method invokes the <see
              cref="M:System.Web.UI.DataBinder.GetIndexedPropertyValue(System.Object,System.String)" />
+
+            
 
             
 
@@ -562,8 +670,12 @@
 
             
 
+            
+
              method to format the result as specified in the <paramref
              name="format" />
+
+            
 
             
 
@@ -572,13 +684,19 @@
 
             
 
+            
+
             ) converts the <see
              cref="T:System.Object" />
 
             
 
+            
+
              instance returned by the data-binding expression to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -590,8 +708,12 @@
 
             
 
+            
+
              method apply to the <see
              cref="M:System.Web.UI.DataBinder.GetIndexedPropertyValue(System.Object,System.String,System.String)" />
+
+            
 
             
 
@@ -610,6 +732,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -618,10 +742,14 @@
 
           
 
+          
+
           The object reference against which the expression is evaluated. This must be a valid object identifier in the specified language for the page.</param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -655,6 +783,8 @@
 
             
 
+            
+
              method is used to retrieve the value of a property in an object.</para
           >
         </remarks>
@@ -671,10 +801,14 @@
 
           
 
+          
+
           The object that contains the property. </param
         >
         <param name="propName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -709,6 +843,8 @@
 
             
 
+            
+
              method is used to retrieve and format the value of a property in an object.</para
           >
         </remarks>
@@ -724,11 +860,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -739,10 +879,14 @@
 
           
 
+          
+
           The name of the property that contains the value to retrieve. </param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

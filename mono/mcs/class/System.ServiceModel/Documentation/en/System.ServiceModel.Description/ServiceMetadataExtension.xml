@@ -32,8 +32,12 @@
 
         
 
+        
+
          is configured and used by configuring a service with the <see
          cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          class to get the service's metadata at runtime by accessing the <see
          cref="P:System.ServiceModel.Description.ServiceMetadataExtension.Metadata" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
           <para
             >Creates an instance of a <see
              cref="T:System.ServiceModel.Description.ServiceMetadataExtension" />
+
+            
 
             
 

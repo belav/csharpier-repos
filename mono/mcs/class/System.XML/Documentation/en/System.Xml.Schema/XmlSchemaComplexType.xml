@@ -36,6 +36,8 @@
 
         
 
+        
+
         . This class defines a complex type that determines the set of attributes and content of an element.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+
+            
 
             
 
@@ -104,6 +108,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -112,6 +118,8 @@
           <para
             >Gets or sets the value for the <see
              cref="T:System.Xml.Schema.XmlSchemaAnyAttribute" />
+
+            
 
             
 
@@ -429,6 +437,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -437,6 +447,8 @@
           <para
             >Gets or sets the post-compilation <see
              cref="T:System.Xml.Schema.XmlSchemaContentModel" />
+
+            
 
             
 
@@ -562,6 +574,8 @@
           <para
             >Gets the particle that holds the post-compilation value of the <see
              cref="P:System.Xml.Schema.XmlSchemaComplexType.ContentType" />
+
+            
 
             
 
@@ -720,6 +734,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -731,8 +747,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaChoice" />
+
+            
 
             
 
@@ -741,8 +761,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.Schema.XmlSchemaSequence" />
+
+            
 
             
 

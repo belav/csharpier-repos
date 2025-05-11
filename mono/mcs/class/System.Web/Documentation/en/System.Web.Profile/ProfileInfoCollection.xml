@@ -26,8 +26,12 @@
 
         
 
+        
+
          object contains <see
          cref="T:System.Web.Profile.ProfileInfo" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          is returned from the <see
          cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+        
 
         
 
@@ -46,8 +54,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+        
 
         
 
@@ -56,8 +68,12 @@
 
         
 
+        
+
          methods of a <see
          cref="T:System.Web.Profile.ProfileProvider" />
+
+        
 
         
 
@@ -69,8 +85,12 @@
 
         
 
+        
+
          can be supplied to the <see
          cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" />
+
+        
 
         
 
@@ -82,6 +102,8 @@
       <para
         >A collection of <see
          cref="T:System.Web.Profile.ProfileInfo" />
+
+        
 
         
 
@@ -104,8 +126,12 @@
 
             
 
+            
+
              is constructed by profile provider implementers and returned from the <see
              cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -114,8 +140,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -124,8 +154,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -137,6 +171,8 @@
           <para
             >Creates a new, empty <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -170,8 +206,12 @@
 
             
 
+            
+
              method is commonly used by profile-provider implementers to populate a <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -180,8 +220,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -190,13 +234,19 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -211,6 +261,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -219,8 +271,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Profile.ProfileInfo" />
+
+          
 
           
 
@@ -246,6 +302,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.Profile.ProfileInfo" />
+
+            
 
             
 
@@ -277,13 +335,19 @@
 
             
 
+            
+
              to copy <see
              cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
+            
+
              objects to the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -298,6 +362,8 @@
 
             
 
+            
+
              to a one-dimensional array.</para
           >
         </summary>
@@ -306,8 +372,12 @@
 
           
 
+          
+
           A one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -316,8 +386,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -325,6 +399,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,8 +434,12 @@
 
             
 
+            
+
              to copy <see
              cref="T:System.Web.Profile.ProfileInfo" />
+
+            
 
             
 
@@ -374,8 +454,12 @@
 
             
 
+            
+
              to a one-dimensional array of type <see
              cref="T:System.Web.Profile.ProfileInfo" />
+
+            
 
             
 
@@ -387,13 +471,19 @@
 
           
 
+          
+
           A one-dimensional array of type <see
            cref="T:System.Web.Profile.ProfileInfo" />
 
           
 
+          
+
            that is the destination of the elements copied from the <see
            cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+          
 
           
 
@@ -404,8 +494,12 @@
 
           
 
+          
+
           The zero-based index in the <paramref
            name="array" />
+
+          
 
           
 
@@ -431,6 +525,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Web.Profile.ProfileInfo" />
+
+            
 
             
 
@@ -462,6 +558,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -470,6 +568,8 @@
           <para
             >Gets an enumerator that can iterate through the <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -484,8 +584,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -562,6 +666,8 @@
 
             
 
+            
+
              object with the specified user name from the collection.</para
           >
         </summary>
@@ -570,13 +676,19 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.Profile.ProfileInfo.UserName" />
 
           
 
+          
+
            of the <see
            cref="T:System.Web.Profile.ProfileInfo" />
+
+          
 
           
 
@@ -604,8 +716,12 @@
 
             
 
+            
+
              method marks the <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -614,13 +730,19 @@
 
             
 
+            
+
              objects cannot be added to or removed from the collection. After calling the <see
              cref="M:System.Web.Profile.ProfileInfoCollection.SetReadOnly" />
 
             
 
+            
+
              method, you cannot change the <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -632,6 +754,8 @@
           <para
             >Makes the contents of the <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 

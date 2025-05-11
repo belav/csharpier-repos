@@ -22,11 +22,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >For more information on printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -68,10 +74,14 @@
 
           
 
+          
+
           The image of the printed page. </param
         >
         <param name="physicalSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -96,6 +106,8 @@
           <para
             >See the <see
              cref="N:System.Drawing" />
+
+            
 
             
 

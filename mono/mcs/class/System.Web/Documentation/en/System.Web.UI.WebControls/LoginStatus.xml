@@ -56,8 +56,12 @@
 
         
 
+        
+
          control has two states, logged in to the Web site and logged out of the Web site, determined by the <see
          cref="P:System.Web.HttpRequest.IsAuthenticated" />
+
+        
 
         
 
@@ -66,8 +70,12 @@
 
         
 
+        
+
          object's <see
          cref="P:System.Web.UI.Page.Request" />
+
+        
 
         
 
@@ -79,13 +87,19 @@
 
         
 
+        
+
          control displays either a text or an image link, depending on the setting of the <see
          cref="P:System.Web.UI.WebControls.LoginStatus.LoginImageUrl" />
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.LoginStatus.LogoutImageUrl" />
+
+        
 
         
 
@@ -100,10 +114,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to login controls and membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -116,13 +134,19 @@
 
         
 
+        
+
          control provides a link to the login page defined in the application configuration settings. When the user is logged in to the Web site, the <see
          cref="T:System.Web.UI.WebControls.LoginStatus" />
 
         
 
+        
+
          control provides a link to log out of the Web site. Logging out of the Web site clears the user's authentication status and when using cookies will clear the cookie from the user's client computer. On any subsequent visit to the Web site, the <see
          cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+        
 
         
 
@@ -134,8 +158,12 @@
 
         
 
+        
+
          property, which specifies whether to refresh the current page, redirect the user to the login page defined in the application configuration settings, or redirect the user to a page specified by the <see
          cref="P:System.Web.UI.WebControls.LoginStatus.LogoutPageUrl" />
+
+        
 
         
 
@@ -145,6 +173,8 @@
         <para
           >When a user uses the <see
            cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+          
 
           
 
@@ -167,6 +197,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
                  Inset|Outset"
     BorderWidth="size"
@@ -176,9 +208,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -188,9 +224,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -200,10 +240,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -215,9 +259,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -229,6 +277,8 @@
     LoginText="string"
     LogoutAction="<codeFeaturedElement
         >Refresh</codeFeaturedElement>
+
+        
 
         
 
@@ -251,6 +301,8 @@
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -277,6 +329,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+            
 
             
 
@@ -307,6 +361,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -315,8 +371,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+            
 
             
 
@@ -328,6 +388,8 @@
           <para
             >Creates the child controls that make up the <see
              cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+            
 
             
 
@@ -352,6 +414,8 @@
 
             
 
+            
+
              event is raised on the server after the user clicks the logout link and the logout process is complete.</para
           >
           <para
@@ -360,8 +424,12 @@
 
             
 
+            
+
              event is raised, then the logout process is run, and finally the <see
              cref="E:System.Web.UI.WebControls.LoginStatus.LoggedOut" />
+
+            
 
             
 
@@ -373,13 +441,19 @@
 
             
 
+            
+
              event to provide additional processing such as cleaning up database connections or removing per-user cached data after the user logs out of a Web site. The user's identity is still available while the <see
              cref="E:System.Web.UI.WebControls.LoginStatus.LoggedOut" />
 
             
 
+            
+
              event is executing. If your handler for the <see
              cref="E:System.Web.UI.WebControls.LoginStatus.LoggedOut" />
+
+            
 
             
 
@@ -414,6 +488,8 @@
 
             
 
+            
+
              event is raised on the server when the user clicks the logout link. The logout process does not occur until after this event, and user information is still available.</para
           >
           <para
@@ -422,8 +498,12 @@
 
             
 
+            
+
              event allows you to cancel the logout process if the user must complete an activity before leaving the Web site, such as purchasing items in a shopping cart or submitting changes to a database. You can cancel the <see
              cref="E:System.Web.UI.WebControls.LoginStatus.LoggingOut" />
+
+            
 
             
 
@@ -432,8 +512,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
+
+            
 
             
 
@@ -442,6 +526,8 @@
           <para
             >Use the <see
              cref="E:System.Web.UI.WebControls.LoginStatus.LoggingOut" />
+
+            
 
             
 
@@ -485,8 +571,12 @@
 
             
 
+            
+
              property contains the location of the image used for the login link. The <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LoginText" />
+
+            
 
             
 
@@ -498,8 +588,12 @@
 
             
 
+            
+
              is empty, the <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LoginText" />
+
+            
 
             
 
@@ -537,8 +631,12 @@
 
             
 
+            
+
              property is displayed as the link text when the <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LoginImageUrl" />
+
+            
 
             
 
@@ -550,8 +648,12 @@
 
             
 
+            
+
              property contains a link, the <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LoginText" />
+
+            
 
             
 
@@ -563,12 +665,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -612,8 +718,12 @@
 
             
 
+            
+
              property determines which page is presented to the user when he or she logs out using the <see
              cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+            
 
             
 
@@ -625,6 +735,8 @@
 
             
 
+            
+
              value.</para
           >
           <list type="table">
@@ -633,6 +745,8 @@
                 <term>
                   <para>
                     <see cref="P:System.Web.UI.WebControls.LoginStatus.LogoutAction" />
+
+                    
 
                     
 
@@ -657,8 +771,12 @@
 
                   
 
+                  
+
                    property. If <see
                    cref="P:System.Web.UI.WebControls.LoginStatus.LogoutPageUrl" />
+
+                  
 
                   
 
@@ -693,10 +811,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -708,6 +830,8 @@
           <para
             >Gets or sets a value that determines the action taken when a user logs out of a Web site with the <see
              cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+            
 
             
 
@@ -747,8 +871,12 @@
 
             
 
+            
+
              property contains the location of the image used for the logout link. The <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LogoutText" />
+
+            
 
             
 
@@ -760,8 +888,12 @@
 
             
 
+            
+
              is empty, the <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LogoutText" />
+
+            
 
             
 
@@ -808,13 +940,19 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.LogoutAction.Redirect" />
 
             
 
+            
+
             , the user is redirected to the URL contained in <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LogoutPageUrl" />
+
+            
 
             
 
@@ -826,8 +964,12 @@
 
             
 
+            
+
              is set to any other value, the contents of the <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LogoutPageUrl" />
+
+            
 
             
 
@@ -839,10 +981,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -880,8 +1026,12 @@
 
             
 
+            
+
              property is displayed when the <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LogoutImageUrl" />
+
+            
 
             
 
@@ -893,8 +1043,12 @@
 
             
 
+            
+
              property contains a link, the <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LogoutText" />
+
+            
 
             
 
@@ -906,12 +1060,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -946,6 +1104,8 @@
 
             
 
+            
+
              event to provide additional processing, such as closing database connections or cleaning up per-user cached data, after the user has logged out of a Web site.</para
           >
           <para
@@ -956,10 +1116,14 @@
 
             
 
+            
+
             . Raising an event invokes the event handler through a delegate. For more information, see <format
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -968,6 +1132,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LoginStatus.OnLoggedOut(System.EventArgs)" />
+
+            
 
             
 
@@ -982,6 +1148,8 @@
 
             
 
+            
+
              event after the user clicks the logout link and logout processing is complete.</para
           >
         </summary>
@@ -990,8 +1158,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1024,8 +1196,12 @@
 
             
 
+            
+
              event to provide additional processing, such as cleaning up per-user data, before a user logs out of a site. The <see
              cref="M:System.Web.UI.WebControls.LoginStatus.OnLoggingOut(System.Web.UI.WebControls.LoginCancelEventArgs)" />
+
+            
 
             
 
@@ -1039,11 +1215,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LoginStatus.OnLoggingOut(System.Web.UI.WebControls.LoginCancelEventArgs)" />
+
+            
 
             
 
@@ -1058,8 +1238,12 @@
 
             
 
+            
+
              event when a user clicks the logout link on the <see
              cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+            
 
             
 
@@ -1071,8 +1255,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
+
+          
 
           
 
@@ -1104,8 +1292,12 @@
 
             
 
+            
+
              method determines whether the user is logged in by examining the <see
              cref="P:System.Web.HttpRequest.IsAuthenticated" />
+
+            
 
             
 
@@ -1114,8 +1306,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Web.UI.Page.Request" />
+
+            
 
             
 
@@ -1124,8 +1320,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LogoutImageUrl" />
+
+            
 
             
 
@@ -1134,8 +1334,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Web.UI.WebControls.LoginStatus.LoginImageUrl" />
+
+            
 
             
 
@@ -1149,11 +1353,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LoginStatus.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -1169,8 +1377,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1203,8 +1415,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1216,8 +1432,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1251,8 +1471,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1283,6 +1507,8 @@
 
             
 
+            
+
              method. </para
           >
         </summary>
@@ -1291,13 +1517,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            containing the state of the <see
            cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+          
 
           
 
@@ -1328,13 +1560,19 @@
 
             
 
+            
+
              property allows the output stream to write the appropriate HTML markup for the <see
              cref="T:System.Web.UI.WebControls.LoginStatus" />
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.LoginStatus.TagKey" />
+
+            
 
             
 
@@ -1349,8 +1587,12 @@
 
             
 
+            
+
              value for the <see
              cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+            
 
             
 

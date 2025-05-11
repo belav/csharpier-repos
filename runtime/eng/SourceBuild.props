@@ -1,7 +1,8 @@
 <!-- Whenever altering this or other SourceBuild* files, please include @dotnet/source-build-internal as a reviewer. -->
 <Project>
   <PropertyGroup>
-    <GitHubRepositoryName>runtime</GitHubRepositoryName>
+    <GitHubRepositoryName
+>runtime</GitHubRepositoryName>
   </PropertyGroup>
   <!-- Set up the dotnet/runtime source-build command. -->
   <PropertyGroup>
@@ -63,7 +64,8 @@
   >
     <PropertyGroup>
       <!-- Symbols archive is too big for main intermediate package, add it to a different one. -->
-      <SymbolsIntermediateNupkgCategory>runtime</SymbolsIntermediateNupkgCategory>
+      <SymbolsIntermediateNupkgCategory
+>runtime</SymbolsIntermediateNupkgCategory>
     </PropertyGroup>
     <ItemGroup>
       <!--

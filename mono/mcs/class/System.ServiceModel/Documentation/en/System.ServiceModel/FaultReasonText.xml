@@ -22,6 +22,8 @@
 
         
 
+        
+
          class to specify the text of the SOAP fault reason.</para
       >
     </remarks>
@@ -54,11 +56,15 @@
 
             
 
+            
+
              class that uses the specified fault text.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -93,8 +99,12 @@
 
             
 
+            
+
              class that uses the specified SOAP fault text and the specified <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -106,6 +116,8 @@
 
           
 
+          
+
           The text that is the reason of the SOAP fault.</param
         >
         <param name="cultureInfo">
@@ -113,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -149,6 +165,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -157,10 +175,14 @@
 
           
 
+          
+
           The text of the fault reason.</param
         >
         <param name="xmlLang">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -197,6 +219,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -208,6 +232,8 @@
 
             
 
+            
+
              matches; otherwise, false.</para
           >
         </returns>
@@ -216,8 +242,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 

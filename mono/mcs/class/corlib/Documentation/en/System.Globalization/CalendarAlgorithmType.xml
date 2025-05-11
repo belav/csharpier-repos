@@ -28,8 +28,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Globalization.JapaneseCalendar" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          classes are solar-based, the <see
          cref="T:System.Globalization.HijriCalendar" />
+
+        
 
         
 
@@ -48,13 +56,19 @@
 
         
 
+        
+
          classes are lunar-based,.and the <see
          cref="T:System.Globalization.HebrewCalendar" />
 
         
 
+        
+
          and <see
          cref="T:System.Globalization.JapaneseLunisolarCalendar" />
+
+        
 
         
 
@@ -66,8 +80,12 @@
 
         
 
+        
+
          value, which is returned by a calendar member such as the <see
          cref="P:System.Globalization.Calendar.AlgorithmType" />
+
+        
 
         
 

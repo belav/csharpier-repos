@@ -24,8 +24,12 @@
 
         
 
+        
+
          event occurs when a smart tag panel is displayed or hidden. This event is not generated directly by the panel but rather by the <see
          cref="T:System.ComponentModel.Design.DesignerActionUIService" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" />
+
+        
 
         
 
@@ -47,6 +55,8 @@
       <para
         >Provides data for the <see
          cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" />
+
+        
 
         
 
@@ -80,13 +90,19 @@
 
             
 
+            
+
              event, the <paramref
              name="relatedObject" />
 
             
 
+            
+
              parameter always references the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -101,6 +117,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -109,10 +127,14 @@
 
           
 
+          
+
           The object that is associated with the panel.</param
         >
         <param name="changeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,8 +164,12 @@
 
             
 
+            
+
              method, this property has a value of <see
              cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Hide" />
+
+            
 
             
 
@@ -152,8 +178,12 @@
 
             
 
+            
+
             , this property has a value of <see
              cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Show" />
+
+            
 
             
 
@@ -185,13 +215,19 @@
 
             
 
+            
+
              property enables the programmer to associate an object to an instance of the <see
              cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeEventArgs" />
 
             
 
+            
+
              class. This object then is available to methods that handle the <see
              cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" />
+
+            
 
             
 

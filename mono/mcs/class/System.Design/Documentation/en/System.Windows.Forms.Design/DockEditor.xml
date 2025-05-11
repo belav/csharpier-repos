@@ -23,6 +23,8 @@
 
         
 
+        
+
          property.</para
       >
     </summary>
@@ -39,6 +41,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.DockEditor" />
+
+            
 
             
 
@@ -80,8 +84,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -92,10 +100,14 @@
 
           
 
+          
+
           A service provider object through which editing services may be obtained. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,8 +146,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

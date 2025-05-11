@@ -10,8 +10,12 @@
 
         
 
+        
+
         , the other operand is converted to type <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -20,11 +24,15 @@
 
         
 
+        
+
          or <keyword
         >double</keyword>
 
         
 
+        
+
         . </list_item
       >
       <list_item
@@ -33,8 +41,12 @@
 
         
 
+        
+
         , the other operand is converted to type <keyword
         >double</keyword>
+
+        
 
         
 
@@ -46,8 +58,12 @@
 
         
 
+        
+
         , the other operand is converted to type <keyword
         >float</keyword>
+
+        
 
         
 
@@ -59,8 +75,12 @@
 
         
 
+        
+
         , the other operand is converted to type <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -69,8 +89,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -79,8 +103,12 @@
 
         
 
+        
+
         , or <keyword
         >long</keyword>
+
+        
 
         
 
@@ -89,6 +117,8 @@
       <list_item
         > Otherwise, if either operand is of type <keyword
         >long</keyword>
+
+        
 
         
 
@@ -97,11 +127,15 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
         > Otherwise, if either operand is of type <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -110,8 +144,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -120,8 +158,12 @@
 
         
 
+        
+
         , both operands are converted to type <keyword
         >long</keyword>
+
+        
 
         
 
@@ -133,8 +175,12 @@
 
         
 
+        
+
         , the other operand is converted to type <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -143,6 +189,8 @@
       <list_item
         > Otherwise, both operands are converted to type <keyword
         >int</keyword>
+
+        
 
         
 
@@ -157,13 +205,19 @@
 
       
 
+      
+
        type with the <keyword
       >double</keyword>
 
       
 
+      
+
        and <keyword
       >float</keyword>
+
+      
 
       
 
@@ -172,13 +226,19 @@
 
       
 
+      
+
        type and the <keyword
       >double</keyword>
 
       
 
+      
+
        and <keyword
       >float</keyword>
+
+      
 
       
 
@@ -192,8 +252,12 @@
 
       
 
+      
+
        when the other operand is of a signed integral type. The reason is that no integral type exists that can represent the full range of <keyword
       >ulong</keyword>
+
+      
 
       
 
@@ -205,7 +269,7 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 decimal AddPercent(decimal x, double percent) {  
    return x * (1.0 + percent / 100.0);  
 }  
@@ -214,8 +278,12 @@ decimal AddPercent(decimal x, double percent) {
 
       
 
+      
+
       a compile-time error occurs because a <keyword
       >decimal</keyword>
+
+      
 
       
 
@@ -224,19 +292,25 @@ decimal AddPercent(decimal x, double percent) {
 
       
 
+      
+
       . The error is resolved by explicitly converting the second operand to <keyword
       >decimal</keyword>
 
       
 
+      
+
       , as follows: <code_example
       >
-        <![CDATA[
+<![CDATA[
 decimal AddPercent(decimal x, double percent) {  
    return x * (decimal)(1.0 + percent / 100.0);  
 }  
 ]]>
       </code_example>
+
+      
 
       
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          enumeration is used to specify instructions to the .NET Framework on how it will generate the SOAP.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Specifies the SOAP configuration options for use with the <see
          cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+        
 
         
 
@@ -200,7 +204,8 @@
  &lt;str2 id="ref-8"&gt;&amp;#60;&lt;/str2&gt;
  &lt;str3 id="ref-9"&gt;&amp;#60; world&lt;/str3&gt;
  &lt;str4 href="#ref-7"/&gt;</code>
-          <para>remoting serialization with the XsdString option would produce the following XML.</para>
+          <para
+>remoting serialization with the XsdString option would produce the following XML.</para>
           <code> &lt;member1 xsi:type="xsd:int"&gt;10&lt;/member1&gt;
  &lt;member2 xsi:type="xsd:string"&gt;hello&lt;/member2&gt;
  &lt;member3 xsi:type="xsd:string"&gt;hello&lt;/member3&gt;

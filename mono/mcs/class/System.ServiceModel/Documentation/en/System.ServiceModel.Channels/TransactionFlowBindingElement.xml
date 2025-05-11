@@ -30,13 +30,19 @@
 
           
 
+          
+
            protocol to flow transactions from endpoint to endpoint, the transaction timeout can be lost if the destination endpoint attempts to flow again using any protocol other than <see
            cref="P:System.ServiceModel.TransactionProtocol.OleTransactions" />
 
           
 
+          
+
           . This can cause all down-level nodes after the <see
            cref="P:System.ServiceModel.TransactionProtocol.OleTransactions" />
+
+          
 
           
 
@@ -68,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+
+            
 
             
 
@@ -104,6 +112,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -112,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+
+            
 
             
 
@@ -159,13 +171,19 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
 
             
 
+            
+
              initialized from <paramref
              name="context" />
+
+            
 
             
 
@@ -177,8 +195,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -186,6 +208,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,13 +262,19 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
 
             
 
+            
+
              initialized from <paramref
              name="context" />
+
+            
 
             
 
@@ -256,8 +286,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -265,6 +299,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,13 +339,19 @@
 
             
 
+            
+
              can be built for the specified <paramref
              name="context" />
 
             
 
+            
+
             , before attempting to actually build the factory. Note that <see
              cref="M:System.ServiceModel.Channels.TransactionFlowBindingElement.BuildChannelFactory``1(System.ServiceModel.Channels.BindingContext)" />
+
+            
 
             
 
@@ -328,6 +370,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -336,8 +380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -345,6 +393,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,13 +438,19 @@
 
             
 
+            
+
              can be built for the specified <paramref
              name="context" />
 
             
 
+            
+
             , before attempting to actually build the listener. Note that <see
              cref="M:System.ServiceModel.Channels.TransactionFlowBindingElement.BuildChannelListener``1(System.ServiceModel.Channels.BindingContext)" />
+
+            
 
             
 
@@ -413,6 +469,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -421,8 +479,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -430,6 +492,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -468,6 +532,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -519,6 +585,8 @@
 
             
 
+            
+
              requested if it is present; null if it is not. </para
           >
         </returns>
@@ -527,11 +595,15 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
         </param>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -564,6 +636,8 @@
              type="text/html">
               <a href="31a6bc6a-4ef4-45ba-a753-1efa1a19d917">Enabling Transaction Flow</a>
             </format>
+
+            
 
             
 

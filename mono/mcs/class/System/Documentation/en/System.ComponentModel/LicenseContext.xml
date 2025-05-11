@@ -35,6 +35,8 @@
 
         
 
+        
+
         . It implements only run-time support and does not support saved license keys.</para
       >
     </remarks>
@@ -65,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.LicenseContext" />
+
+            
 
             
 
@@ -109,6 +113,8 @@
 
             
 
+            
+
              for the specified type. This method returns null unless you override it.</para
           >
         </returns>
@@ -117,8 +123,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -129,8 +139,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -171,6 +185,8 @@
 
           
 
+          
+
           The type of service to retrieve. </param
         >
       </Docs>
@@ -206,8 +222,12 @@
 
             
 
+            
+
              at design time. You must override the <see
              cref="P:System.ComponentModel.LicenseContext.UsageMode" />
+
+            
 
             
 
@@ -223,8 +243,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -235,8 +259,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.ComponentModel.License.LicenseKey" />
+
+          
 
           
 

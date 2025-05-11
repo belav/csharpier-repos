@@ -51,6 +51,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -80,6 +82,8 @@
 
             
 
+            
+
              class with the provided mesh ID and unique registration ID.</para
           >
         </summary>
@@ -88,8 +92,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -100,8 +108,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Guid" />
+
+          
 
           
 

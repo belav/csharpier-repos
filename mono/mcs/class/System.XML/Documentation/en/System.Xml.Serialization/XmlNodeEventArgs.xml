@@ -32,6 +32,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -40,8 +42,12 @@
 
         
 
+        
+
          event can occur only when you call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" />
+
+        
 
         
 
@@ -125,13 +133,19 @@
 
             
 
+            
+
              property returns the local name (also known as a local part) of an XML qualified name. The <see
              cref="P:System.Xml.Serialization.XmlNodeEventArgs.LocalName" />
 
             
 
+            
+
              property conforms to the 1999 http://www.w3.org specification <paramref
              name="Namespaces in XML" />
+
+            
 
             
 
@@ -208,6 +222,8 @@
           <para
             >The <see
              cref="T:System.Xml.XmlNodeType" />
+
+            
 
             
 

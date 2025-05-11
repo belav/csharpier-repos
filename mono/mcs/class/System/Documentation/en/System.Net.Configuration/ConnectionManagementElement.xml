@@ -34,6 +34,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para>This class is used to specify the maximum number of simultaneous connections to a remote computer. </para>
@@ -65,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.ConnectionManagementElement" />
+
+            
 
             
 
@@ -101,8 +105,12 @@
 
             
 
+            
+
              property to <paramref
              name="address" />
+
+            
 
             
 
@@ -111,8 +119,12 @@
 
             
 
+            
+
              property to <paramref
              name="maxConnection" />
+
+            
 
             
 
@@ -127,11 +139,15 @@
 
             
 
+            
+
              class with the specified address and connection limit information.</para
           >
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,8 +158,12 @@
 
           
 
+          
+
           An integer that identifies the maximum number of connections allowed to <paramref
            name="address" />
+
+          
 
           
 
@@ -176,6 +196,8 @@
           <para
             >This property identifies one or more remote computers and the <see
              cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+
+            
 
             
 
@@ -215,6 +237,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -223,8 +247,12 @@
 
             
 
+            
+
              property is per <see
              cref="P:System.Net.WebRequest.ConnectionGroupName" />
+
+            
 
             
 
@@ -233,13 +261,19 @@
 
             
 
+            
+
              from the default, then the <see
              cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
+            
+
              property applies to the entire application domain. If only a single application domain is running in your application, then the <see
              cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+
+            
 
             
 

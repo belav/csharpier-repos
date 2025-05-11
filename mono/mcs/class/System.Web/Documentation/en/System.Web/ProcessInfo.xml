@@ -21,8 +21,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.ProcessModelInfo.GetHistory(System.Int32)" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
           
 
+          
+
            classes are available only if you are running in IIS 5.0 isolation mode. If you are using IIS 6.0 in worker process isolation mode, the ASP.NET process model is disabled and an <see
            cref="T:System.Web.HttpException" />
 
           
 
+          
+
            exception is thrown when you access <see
            cref="T:System.Web.ProcessInfo" />
+
+          
 
           
 
@@ -69,13 +79,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.ProcessModelInfo.GetHistory(System.Int32)" />
 
             
 
+            
+
             . These methods are the only useful ways to create an initialized <see
              cref="T:System.Web.ProcessInfo" />
+
+            
 
             
 
@@ -87,6 +103,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.ProcessInfo" />
+
+            
 
             
 
@@ -124,13 +142,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.ProcessModelInfo.GetHistory(System.Int32)" />
 
             
 
+            
+
             . These methods are the only useful ways to create an initialized <see
              cref="T:System.Web.ProcessInfo" />
+
+            
 
             
 
@@ -145,6 +169,8 @@
 
             
 
+            
+
              class and sets internal information indicating the status of the process.</para
           >
         </summary>
@@ -153,8 +179,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -165,8 +195,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -177,10 +211,14 @@
 
           
 
+          
+
           The ID number assigned to the process. </param
         >
         <param name="requestCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,8 +229,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.ProcessStatus" />
+
+          
 
           
 
@@ -203,8 +245,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.ProcessShutdownReason" />
+
+          
 
           
 
@@ -212,6 +258,8 @@
         >
         <param name="peakMemoryUsed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,8 +376,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -340,8 +392,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -352,10 +408,14 @@
 
           
 
+          
+
           The ID number assigned to the process. </param
         >
         <param name="requestCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -366,8 +426,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.ProcessStatus" />
+
+          
 
           
 
@@ -378,8 +442,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.ProcessShutdownReason" />
+
+          
 
           
 
@@ -387,6 +455,8 @@
         >
         <param name="peakMemoryUsed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

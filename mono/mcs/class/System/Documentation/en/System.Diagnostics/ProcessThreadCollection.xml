@@ -32,6 +32,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -61,8 +63,12 @@
 
             
 
+            
+
              class, with no associated <see
              cref="T:System.Diagnostics.ProcessThread" />
+
+            
 
             
 
@@ -100,8 +106,12 @@
 
             
 
+            
+
              class, using the specified array of <see
              cref="T:System.Diagnostics.ProcessThread" />
+
+            
 
             
 
@@ -113,13 +123,19 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Diagnostics.ProcessThread" />
 
           
 
+          
+
            instances with which to initialize this <see
            cref="T:System.Diagnostics.ProcessThreadCollection" />
+
+          
 
           
 
@@ -160,6 +176,8 @@
         </returns>
         <param name="thread">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,8 +224,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.ProcessThread" />
+
+          
 
           
 
@@ -247,6 +269,8 @@
 
             
 
+            
+
              instances to the collection, at the specified index.</para
           >
         </summary>
@@ -255,8 +279,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Diagnostics.ProcessThread" />
+
+          
 
           
 
@@ -264,6 +292,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,6 +336,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -314,8 +346,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.ProcessThread" />
+
+          
 
           
 
@@ -356,10 +392,14 @@
 
           
 
+          
+
           The zero-based index indicating the location at which to insert the thread. </param
         >
         <param name="thread">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -424,6 +464,8 @@
         </summary>
         <param name="thread">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

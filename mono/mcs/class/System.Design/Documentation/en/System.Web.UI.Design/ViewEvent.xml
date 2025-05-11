@@ -18,8 +18,12 @@
 
         
 
+        
+
          object is provided to the designer component by the design host, for example vsprvslong, when raising an event caused by certain user actions on the design-time view of a control. The <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          delegate method, which takes a <see
          cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+        
 
         
 
@@ -48,8 +60,12 @@
 
         
 
+        
+
          object. The <see
          cref="T:System.Web.UI.Design.ViewEventHandler" />
+
+        
 
         
 
@@ -58,8 +74,12 @@
 
         
 
+        
+
          property to the static <see
          cref="T:System.Web.UI.Design.ViewEvent" />
+
+        
 
         
 
@@ -82,8 +102,12 @@
 
         
 
+        
+
          class supplies a default delegate to handle the <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -92,13 +116,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+
+        
 
         
 
@@ -110,8 +140,12 @@
 
         
 
+        
+
          object for the type of action on the design surface, and then passes the object to the <see
          cref="T:System.Web.UI.Design.ViewEventHandler" />
+
+        
 
         
 
@@ -120,8 +154,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+        
 
         
 
@@ -135,6 +173,8 @@
 
             
 
+            
+
              event.</para
           >
         </item>
@@ -142,6 +182,8 @@
           <para
             >A <see
              cref="F:System.Web.UI.Design.ViewEvent.Paint" />
+
+            
 
             
 
@@ -155,6 +197,8 @@
 
             
 
+            
+
              event. </para
           >
         </item>
@@ -162,6 +206,8 @@
       <para
         >The <see
          cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
+
+        
 
         
 
@@ -195,8 +241,12 @@
 
             
 
+            
+
              delegate method compares the <see
              cref="P:System.Web.UI.Design.ViewEventArgs.EventType" />
+
+            
 
             
 
@@ -205,13 +255,19 @@
 
             
 
+            
+
              fields to determine which type of action raised the event. A <see
              cref="T:System.Web.UI.Design.ViewEvent" />
 
             
 
+            
+
              object is equal to <see
              cref="F:System.Web.UI.Design.ViewEvent.Click" />
+
+            
 
             
 
@@ -223,8 +279,12 @@
 
             
 
+            
+
              class supplies a default <see
              cref="T:System.Web.UI.Design.ViewEventHandler" />
+
+            
 
             
 
@@ -233,8 +293,12 @@
 
             
 
+            
+
             , the delegate calls the <see
              cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
+
+            
 
             
 
@@ -243,8 +307,12 @@
 
             
 
+            
+
              class override the <see
              cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
+
+            
 
             
 
@@ -278,8 +346,12 @@
 
             
 
+            
+
              delegate method compares the <see
              cref="P:System.Web.UI.Design.ViewEventArgs.EventType" />
+
+            
 
             
 
@@ -288,13 +360,19 @@
 
             
 
+            
+
              fields to determine which type of action raised the event. A <see
              cref="T:System.Web.UI.Design.ViewEvent" />
 
             
 
+            
+
              object is equal to <see
              cref="F:System.Web.UI.Design.ViewEvent.Paint" />
+
+            
 
             
 
@@ -306,8 +384,12 @@
 
             
 
+            
+
              class supplies a default <see
              cref="T:System.Web.UI.Design.ViewEventHandler" />
+
+            
 
             
 
@@ -316,8 +398,12 @@
 
             
 
+            
+
             , the delegate calls the <see
              cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -326,8 +412,12 @@
 
             
 
+            
+
              class override the <see
              cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -361,8 +451,12 @@
 
             
 
+            
+
              delegate method compares the <see
              cref="P:System.Web.UI.Design.ViewEventArgs.EventType" />
+
+            
 
             
 
@@ -371,13 +465,19 @@
 
             
 
+            
+
              fields to determine which type of action raised the event. A <see
              cref="T:System.Web.UI.Design.ViewEvent" />
 
             
 
+            
+
              object is equal to <see
              cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
+
+            
 
             
 
@@ -389,8 +489,12 @@
 
             
 
+            
+
              class supplies a default <see
              cref="T:System.Web.UI.Design.ViewEventHandler" />
+
+            
 
             
 
@@ -399,8 +503,12 @@
 
             
 
+            
+
             , the delegate sets the value for the <see
              cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
+
+            
 
             
 
@@ -412,8 +520,12 @@
 
             
 
+            
+
              class can override the <see
              cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+
+            
 
             
 

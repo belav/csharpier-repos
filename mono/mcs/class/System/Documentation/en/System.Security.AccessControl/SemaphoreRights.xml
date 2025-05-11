@@ -31,8 +31,12 @@
 
         
 
+        
+
          enumeration to specify access control rights when you create <see
          cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+        
 
         
 
@@ -41,13 +45,19 @@
 
         
 
+        
+
          objects with the <see
          cref="M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32,System.String,System.Boolean@,System.Security.AccessControl.SemaphoreSecurity)" />
 
         
 
+        
+
          constructor and the <see
          cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+
+        
 
         
 
@@ -58,6 +68,8 @@
          cref="http://go.microsoft.com/fwlink/p/?LinkId=243073"
           >Synchronization Object Security and Access Rights (Windows)</see
         >
+
+        
 
         
 

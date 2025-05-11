@@ -54,6 +54,8 @@
 
         
 
+        
+
         . </para
       >
       <para
@@ -62,8 +64,12 @@
 
         
 
+        
+
          property to do this. At runtime, applications can detect if vstecasp compatibility mode is enabled by checking the value of the static property <see
          cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />
+
+        
 
         
 
@@ -94,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute" />
+
+            
 
             
 
@@ -128,10 +136,14 @@
 
             
 
+            
+
              property to set the hosting mode in code. This can also be done by setting an application-level configuration flag aspNetCompatibilityEnabled. crdefault <format
              type="text/html">
               <a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a>
             </format>
+
+            
 
             
 
@@ -140,6 +152,8 @@
           <para
             >At runtime, applications can detect whether vstecasp compatibility mode is enabled by checking the value of the static property <see
              cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />
+
+            
 
             
 
@@ -194,8 +208,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+          
 
           
 
@@ -206,8 +224,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 
@@ -218,13 +240,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ObjectModel.Collection`1" />
 
           
 
+          
+
            of type <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -235,8 +263,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+
+          
 
           
 
@@ -278,8 +310,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+          
 
           
 
@@ -290,8 +326,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 
@@ -333,8 +373,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+          
 
           
 
@@ -345,8 +389,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 

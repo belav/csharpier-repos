@@ -30,8 +30,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Principal.SecurityIdentifier" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -79,8 +85,12 @@
 
             
 
+            
+
              is an object with the same underlying type and value as this <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -92,8 +102,12 @@
 
           
 
+          
+
           An object to compare with this <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -127,8 +141,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.Security.Principal.IdentityReference.GetHashCode" />
+
+            
 
             
 
@@ -140,6 +158,8 @@
           <para
             >The hash code for this <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -179,6 +199,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -190,8 +212,12 @@
 
             
 
+            
+
              is a valid translation type for the <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -203,8 +229,12 @@
 
           
 
+          
+
           The type being queried for validity to serve as a conversion from <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -244,8 +274,12 @@
 
             
 
+            
+
              objects to determine whether they are equal. They are considered equal if they have the same canonical name representation as the one returned by the <see
              cref="P:System.Security.Principal.IdentityReference.Value" />
+
+            
 
             
 
@@ -260,8 +294,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -273,8 +311,12 @@
 
           
 
+          
+
           The left <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -285,8 +327,12 @@
 
           
 
+          
+
           The right <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -326,8 +372,12 @@
 
             
 
+            
+
              objects to determine whether they are not equal. They are considered not equal if they have different canonical name representations than the one returned by the <see
              cref="P:System.Security.Principal.IdentityReference.Value" />
+
+            
 
             
 
@@ -342,8 +392,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -355,8 +409,12 @@
 
           
 
+          
+
           The left <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -367,8 +425,12 @@
 
           
 
+          
+
           The right <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -399,6 +461,8 @@
           <para
             >Returns the string representation of the identity represented by the <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -442,8 +506,12 @@
 
             
 
+            
+
              object into another <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -459,8 +527,12 @@
 
           
 
+          
+
           The target type for the conversion from <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -488,6 +560,8 @@
           <para
             >Gets the string value of the identity represented by the <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 

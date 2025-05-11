@@ -9,8 +9,12 @@
 
         
 
+        
+
         , <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -19,8 +23,12 @@
 
         
 
+        
+
         , <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -29,8 +37,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -39,8 +51,12 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -49,8 +65,12 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
+
+        
 
         
 
@@ -59,8 +79,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -69,11 +93,15 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
         > From any <non_terminal
          where="11.1">enum-type</non_terminal>
+
+        
 
         
 
@@ -82,8 +110,12 @@
 
         
 
+        
+
         , <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -92,8 +124,12 @@
 
         
 
+        
+
         , <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -102,8 +138,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -112,8 +152,12 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -122,8 +166,12 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
+
+        
 
         
 
@@ -132,8 +180,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -145,8 +197,12 @@
 
         
 
+        
+
          to any other <non_terminal
          where="11.1">enum-type</non_terminal>
+
+        
 
         
 
@@ -160,8 +216,12 @@
 
     
 
+    
+
      as the underlying type of that <non_terminal
      where="11.1">enum-type</non_terminal>
+
+    
 
     
 
@@ -172,8 +232,12 @@
 
       
 
+      
+
        E with and underlying type of <keyword
       >int</keyword>
+
+      
 
       
 
@@ -182,8 +246,12 @@
 
       
 
+      
+
        is processed as an explicit numeric conversion (<hyperlink
       >13.2.1</hyperlink>
+
+      
 
       
 
@@ -192,8 +260,12 @@
 
       
 
+      
+
        to <keyword
       >byte</keyword>
+
+      
 
       
 
@@ -202,8 +274,12 @@
 
       
 
+      
+
        to E is processed as an implicit numeric conversion (<hyperlink
       >13.1.2</hyperlink>
+
+      
 
       
 
@@ -212,8 +288,12 @@
 
       
 
+      
+
        to <keyword
       >int</keyword>
+
+      
 
       
 

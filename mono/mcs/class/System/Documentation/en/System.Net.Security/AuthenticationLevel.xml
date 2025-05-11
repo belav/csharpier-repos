@@ -23,6 +23,8 @@
 
         
 
+        
+
          property.</para
       >
       <block subset="none" type="note">
@@ -32,8 +34,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />
+
+          
 
           
 
@@ -41,6 +47,8 @@
            type="text/html">
             <a href="d342e87c-f672-4660-a513-41a2f2b80c4a">Internet Authentication</a>
           </format>
+
+          
 
           
 
@@ -53,6 +61,8 @@
       <para
         >Specifies client requirements for authentication and impersonation when using the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -85,6 +95,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -114,8 +126,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.Net.ProtocolViolationException" />
+
+            
 
             
 

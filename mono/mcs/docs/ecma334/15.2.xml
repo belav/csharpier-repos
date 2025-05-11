@@ -7,6 +7,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>{</terminal>
@@ -22,8 +24,12 @@
 
     
 
+    
+
      (<hyperlink
     >15.2.1</hyperlink>
+
+    
 
     
 
@@ -35,11 +41,15 @@
 
     
 
+    
+
     ). The scope of a local variable or constant declared in a block is the block. </paragraph
   >
   <paragraph
     >Within a block, the meaning of a name used in an expression context must always be the same (<hyperlink
     >14.5.2.1</hyperlink>
+
+    
 
     
 

@@ -45,6 +45,8 @@
 
         
 
+        
+
         , function A will be checked for unmanaged code permission during just-in-time compilation, but not subsequently during run time.</para
       >
       <para>This attribute is only effective when applied to PInvoke methods (or classes that contain PInvoke methods) or the definition of an interface through which interop calls will be made. It will be ignored in all other contexts.</para>
@@ -55,8 +57,12 @@
 
         
 
+        
+
         , not <see
          cref="T:System.Security.Permissions.SecurityAttribute" />
+
+        
 
         
 
@@ -93,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.SuppressUnmanagedCodeSecurityAttribute" />
+
+            
 
             
 

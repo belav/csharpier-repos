@@ -13,7 +13,8 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <PackageTags>aspnetcore;targeting-pack</PackageTags>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <PackageType>DotnetPlatform</PackageType>
-    <RefAssemblyPackagePath>ref/$(TargetFramework)/</RefAssemblyPackagePath>
+    <RefAssemblyPackagePath
+>ref/$(TargetFramework)/</RefAssemblyPackagePath>
     <!-- There are no symbols for reference assemblies. -->
     <IncludeSymbols>false</IncludeSymbols>
     <!-- The project representing the shared framework doesn't produce a .NET assembly or symbols. -->
@@ -112,7 +113,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <!-- If Build won't run in the GenerateNuspec context, need to update _PackageFiles. -->
     <GenerateNuspecDependsOn
       Condition=" '$(NoBuild)' == 'true' AND '$(GeneratePackageOnBuild)' != 'true' "
-      >
+    >
       $(GenerateNuspecDependsOn);
       $(ResolveTargetingPackContentDependsOn)
     </GenerateNuspecDependsOn

@@ -21,8 +21,12 @@
 
         
 
+        
+
          is the abstract base class for <see
          cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.ToolStripProgressBar" />
 
         
 
+        
+
         . <see
          cref="T:System.Windows.Forms.ToolStripControlHost" />
+
+        
 
         
 
@@ -51,13 +61,19 @@
 
             
 
+            
+
              with a class that derives from <see
              cref="T:System.Windows.Forms.Control" />
 
             
 
+            
+
             . To fully access the hosted control and properties, you must cast the <see
              cref="P:System.Windows.Forms.ToolStripControlHost.Control" />
+
+            
 
             
 
@@ -71,13 +87,19 @@
 
             
 
+            
+
             , and in the inherited class's default constructor, call the base class constructor passing a class that derives from <see
              cref="T:System.Windows.Forms.Control" />
 
             
 
+            
+
             . This option lets you wrap common control methods and properties for easy access in a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -91,6 +113,8 @@
 
         
 
+        
+
          class to host your customized controls or any other Windows Forms control.</para
       >
       <para
@@ -99,13 +123,19 @@
 
         
 
+        
+
         , derive from <see
          cref="T:System.Windows.Forms.ToolStripControlHost" />
 
         
 
+        
+
          and create a custom implementation. You can override methods such as <see
          cref="M:System.Windows.Forms.ToolStripControlHost.OnSubscribeControlEvents(System.Windows.Forms.Control)" />
+
+        
 
         
 
@@ -138,6 +168,8 @@
 
             
 
+            
+
              class that hosts the specified control.</para
           >
         </summary>
@@ -146,13 +178,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
 
           
 
+          
+
            hosted by this <see
            cref="T:System.Windows.Forms.ToolStripControlHost" />
+
+          
 
           
 
@@ -184,6 +222,8 @@
 
             
 
+            
+
              class that hosts the specified control and that has the specified name.</para
           >
         </summary>
@@ -192,13 +232,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
 
           
 
+          
+
            hosted by this <see
            cref="T:System.Windows.Forms.ToolStripControlHost" />
+
+          
 
           
 
@@ -209,8 +255,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripControlHost" />
+
+          
 
           
 
@@ -369,8 +419,12 @@
 
             
 
+            
+
              that this <see
              cref="T:System.Windows.Forms.ToolStripControlHost" />
+
+            
 
             
 
@@ -407,6 +461,8 @@
           <para
             >Use the <see
              cref="P:System.Windows.Forms.ToolStripControlHost.ControlAlign" />
+
+            
 
             
 
@@ -447,6 +503,8 @@
 
             
 
+            
+
              for the control.</para
           >
         </returns>
@@ -480,8 +538,12 @@
 
             
 
+            
+
              property represents the <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -490,13 +552,19 @@
 
             
 
+            
+
              is true, the control is sized automatically in accordance with the <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
+            
+
              orientation. You can manually adjust the size of the control by setting its <see
              cref="P:System.Windows.Forms.ToolStripItem.AutoSize" />
+
+            
 
             
 
@@ -509,8 +577,12 @@
 
               
 
+              
+
                of a control in its constructor. The preferred method is to override the <see
                cref="P:System.Windows.Forms.ToolStripControlHost.DefaultSize" />
+
+              
 
               
 
@@ -611,8 +683,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -621,8 +697,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -634,8 +714,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ToolStripControlHost" />
+
+            
 
             
 
@@ -650,11 +734,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -716,6 +804,8 @@
 
             
 
+            
+
              is enabled.</para
           >
         </summary>
@@ -739,6 +829,8 @@
              type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -876,11 +968,15 @@
 
             
 
+            
+
              representing the width and height of a rectangle.</para
           >
         </returns>
         <param name="constrainingSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -914,6 +1010,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1094,6 +1192,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1124,6 +1224,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1160,6 +1262,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1187,6 +1291,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1228,6 +1334,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1259,11 +1367,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnBoundsChanged" />
+
+            
 
             
 
@@ -1275,6 +1387,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ToolStripItem.Bounds" />
+
+            
 
             
 
@@ -1307,11 +1421,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnEnter(System.EventArgs)" />
+
+            
 
             
 
@@ -1326,6 +1444,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1334,8 +1454,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1367,11 +1491,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnGotFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -1386,6 +1514,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1394,8 +1524,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1430,11 +1564,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnHostedControlResize(System.EventArgs)" />
+
+            
 
             
 
@@ -1450,8 +1588,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1486,11 +1628,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -1505,6 +1651,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1513,8 +1661,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1549,11 +1701,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+
+            
 
             
 
@@ -1568,6 +1724,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1576,8 +1734,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -1612,11 +1774,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -1631,6 +1797,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1639,8 +1807,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1674,6 +1846,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1682,8 +1856,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -1715,11 +1893,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -1734,6 +1916,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1742,8 +1926,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1775,11 +1963,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnLostFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -1794,6 +1986,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1802,8 +1996,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1837,6 +2035,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1845,8 +2045,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1903,11 +2107,15 @@
 
             
 
+            
+
              method to add or prevent the synchronizing of control events.</para
           >
           <para
             >If you override and hook up events here, unhook them by using the <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnUnsubscribeControlEvents(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1921,11 +2129,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnSubscribeControlEvents(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1938,6 +2150,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1970,8 +2184,12 @@
 
             
 
+            
+
              method to unsubscribe events subscribed in <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnSubscribeControlEvents(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1985,11 +2203,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnUnsubscribeControlEvents(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -2002,6 +2224,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2033,11 +2257,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnValidated(System.EventArgs)" />
+
+            
 
             
 
@@ -2052,6 +2280,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2060,8 +2290,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2096,11 +2330,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripControlHost.OnValidating(System.ComponentModel.CancelEventArgs)" />
+
+            
 
             
 
@@ -2115,6 +2353,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2123,8 +2363,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -2189,8 +2433,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -2395,6 +2643,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2543,6 +2793,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2573,6 +2825,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 

@@ -33,8 +33,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Description.FaultDescriptionCollection.FindAll(System.String)" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          or group of <see
          cref="T:System.ServiceModel.Description.FaultDescription" />
+
+        
 
         
 
@@ -56,6 +64,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.ServiceModel.Description.FaultDescription" />
+
+        
 
         
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              object that has the specified action value.</para
           >
         </summary>
@@ -105,8 +117,12 @@
 
             
 
+            
+
              object that has the specified action, or null. If more than one <see
              cref="T:System.ServiceModel.Description.FaultDescription" />
+
+            
 
             
 
@@ -145,6 +161,8 @@
 
             
 
+            
+
              objects that have the specified action value.</para
           >
         </summary>
@@ -156,8 +174,12 @@
 
             
 
+            
+
              objects that have the specified action. If there are no <see
              cref="T:System.ServiceModel.Description.FaultDescription" />
+
+            
 
             
 

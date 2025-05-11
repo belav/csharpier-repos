@@ -35,6 +35,8 @@
 
         
 
+        
+
          that is not handled in user code has the following effect:</para
       >
       <list type="bullet">
@@ -45,6 +47,8 @@
           <para
             >If a task is executing on a <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -60,6 +64,8 @@
 
         
 
+        
+
          uses the HRESULT COR_E_APPDOMAINUNLOADED, which has the value 0x80131014.</para
       >
       <para
@@ -68,8 +74,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.AppDomainUnloadedException.#ctor" />
+
+        
 
         
 
@@ -105,11 +115,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The target application domain has been unloaded." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.AppDomainUnloadedException" />
+
+            
 
             
 
@@ -156,6 +170,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -186,11 +202,15 @@
 
             
 
+            
+
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.AppDomainUnloadedException" />
+
+            
 
             
 
@@ -237,11 +257,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,6 +306,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -293,6 +319,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -301,10 +329,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,6 +373,8 @@
 
             
 
+            
+
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
@@ -349,8 +383,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -359,11 +397,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.AppDomainUnloadedException" />
+
+            
 
             
 
@@ -410,11 +452,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -425,8 +471,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

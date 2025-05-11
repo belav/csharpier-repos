@@ -62,6 +62,8 @@
 
             
 
+            
+
              in the collection.</para
           >
         </summary>
@@ -123,8 +125,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -136,6 +142,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Xml.Schema.XmlSchemaCollectionEnumerator.Current" />
+
+            
 
             
 
@@ -169,8 +177,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -182,6 +194,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Xml.Schema.XmlSchemaCollectionEnumerator.MoveNext" />
+
+            
 
             
 
@@ -219,8 +233,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -232,6 +250,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Xml.Schema.XmlSchemaCollectionEnumerator.System.Collections.IEnumerator.Reset" />
+
+            
 
             
 

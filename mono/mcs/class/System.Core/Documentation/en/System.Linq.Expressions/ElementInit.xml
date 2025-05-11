@@ -31,6 +31,8 @@
 
         
 
+        
+
          collection.</para
       >
     </summary>
@@ -64,6 +66,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -94,6 +98,8 @@
           <para
             >Gets the collection of arguments that are passed to a method that adds an element to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -175,6 +181,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -183,6 +191,8 @@
           <para
             >A textual representation of the <see
              cref="T:System.Linq.Expressions.ElementInit" />
+
+            
 
             
 
@@ -228,8 +238,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.ElementInit.Arguments" />
+
+          
 
           
 

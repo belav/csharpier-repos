@@ -16,6 +16,8 @@
 
       
 
+      
+
        by providing a linear gradient along the line defined by (x0, y0) and (x1, y1).  </summary
     >
     <remarks>
@@ -23,8 +25,7 @@
 </para>
       <para>
         <example>
-          <code lang="C#"
-            >
+          <code lang="C#">
 Pattern pat;
 
 pat = new LinearGradient (0.0, 0.0,  0.0, 1.0);
@@ -66,6 +67,8 @@ pat.Destroy ();
 
           
 
+          
+
            along the line defined by (x0, y0) and (x1, y1). </summary
         >
         <remarks />
@@ -90,6 +93,8 @@ pat.Destroy ();
         <value
           >A Array of <see
            cref="t:Cairo.PointD" />
+
+          
 
           
 

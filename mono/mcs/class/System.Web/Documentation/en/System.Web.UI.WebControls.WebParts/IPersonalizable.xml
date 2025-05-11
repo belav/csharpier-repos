@@ -16,6 +16,8 @@
 
         
 
+        
+
          for additional management capabilities for the application and extraction of personalization state. For example, controls that need to manage private state information should implement this interface. Controls that access personalized data through complex mechanisms, such as custom cache solutions, data persistence to mainframes, or XML Web services, should also implement this interface.</para
       >
       <block subset="none" type="note">
@@ -45,8 +47,12 @@
 
             
 
+            
+
              interface has changed. If a control returns true from this property, the control's <see
              cref="M:System.Web.UI.WebControls.WebParts.IPersonalizable.Save(System.Web.UI.WebControls.WebParts.PersonalizationDictionary)" />
+
+            
 
             
 
@@ -59,13 +65,19 @@
 
               
 
+              
+
                property is not checked. Some other event has to have caused the control to be considered "dirty" for any control state--not just data managed by <see
                cref="T:System.Web.UI.WebControls.WebParts.IPersonalizable" />
 
               
 
+              
+
               --to be saved. If a control can mark itself as "dirty" during a GET request, or if the personalization infrastructure under some very specific boundary conditions considers a control "dirty" during a GET request, then <see
                cref="M:System.Web.UI.WebControls.WebParts.IPersonalizable.Save(System.Web.UI.WebControls.WebParts.PersonalizationDictionary)" />
+
+              
 
               
 
@@ -78,8 +90,12 @@
 
             
 
+            
+
              control and check the <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartPersonalization.Scope" />
+
+            
 
             
 

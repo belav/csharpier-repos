@@ -48,6 +48,8 @@
         
 
         
+
+        
       security action indicates
       that this is the minimum permission required for the target assembly to be able
       to execute.</para
@@ -73,12 +75,16 @@
 
         
 
+        
+
          that is used.</para
       >
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
       <para
         >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see
          cref="F:System.IO.Path.PathSeparator" />
+
+        
 
         
 
@@ -90,6 +96,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.EnvironmentPermission" />
+
+        
 
         
 
@@ -128,8 +136,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -143,8 +155,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -156,8 +172,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -185,6 +205,8 @@
           <para
             >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see
              cref="F:System.IO.Path.PathSeparator" />
+
+            
 
             
 
@@ -234,6 +256,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -242,6 +266,8 @@
           <para
             >An <see
              cref="T:System.Security.Permissions.EnvironmentPermission" />
+
+            
 
             
 
@@ -277,6 +303,8 @@
             
 
             
+
+            
 containing one or more environment variables for which read access is secured.</para
           >
         </value>
@@ -285,6 +313,8 @@ containing one or more environment variables for which read access is secured.</
           <para
             >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see
              cref="F:System.IO.Path.PathSeparator" />
+
+            
 
             
 
@@ -323,6 +353,8 @@ containing one or more environment variables for which read access is secured.</
 
             
 
+            
+
              containing one or more environment variables for which write access is secured.</para
           >
         </value>
@@ -331,6 +363,8 @@ containing one or more environment variables for which read access is secured.</
           <para
             >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see
              cref="F:System.IO.Path.PathSeparator" />
+
+            
 
             
 

@@ -125,8 +125,12 @@ class TestClass {
 
         
 
+        
+
          class is the base class for delegate types. However, only the system and compilers can derive explicitly from the <see
          cref="T:System.Delegate" />
+
+        
 
         
 
@@ -135,8 +139,12 @@ class TestClass {
 
         
 
+        
+
          class. It is also not permissible to derive a new type from a delegate type. The <see
          cref="T:System.Delegate" />
+
+        
 
         
 
@@ -148,14 +156,20 @@ class TestClass {
 
         
 
+        
+
          class; therefore, users should use the delegate keyword provided by the language.</para
       >
       <block subset="none" type="note">
         <para
           >The common language runtime provides an Invoke method for each delegate type, with the same signature as the delegate. You do not have to call this method explicitly from C#, Visual Basic, or Visual C++, because the compilers call it automatically. The Invoke method is useful in <format
            type="text/html">
-            <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">reflection</a>
+            <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775"
+>reflection</a
+            >
           </format>
+
+          
 
           
 
@@ -172,6 +186,8 @@ class TestClass {
 
         
 
+        
+
         .</para
       >
       <para>The declaration of a delegate type establishes a contract that specifies the signature of one or more methods. A delegate is an instance of a delegate type that has references to: </para>
@@ -183,6 +199,8 @@ class TestClass {
           <para
             >An instance method of a type, with the hidden <paramref
              name="this" />
+
+            
 
             
 
@@ -202,6 +220,8 @@ class TestClass {
 
         
 
+        
+
          method overload. </para
       >
       <block subset="none" type="note">
@@ -210,6 +230,8 @@ class TestClass {
       <para
         >When a delegate represents an instance method closed over its first argument (the most common case), the delegate stores a reference to the method's entry point and a reference to an object, called the target, which is of a type assignable to the type that defined the method. When a delegate represents an open instance method, it stores a reference to the method's entry point. The delegate signature must include the hidden <paramref
          name="this" />
+
+        
 
         
 
@@ -224,8 +246,12 @@ class TestClass {
 
         
 
+        
+
          and <see
          cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" />
+
+        
 
         
 
@@ -238,8 +264,12 @@ class TestClass {
 
           
 
+          
+
            and <see
            cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" />
+
+          
 
           
 
@@ -253,6 +283,8 @@ class TestClass {
             >Covariance and Contravariance in Generics</a
           >
         </format>
+
+        
 
         
 
@@ -296,8 +328,12 @@ class TestClass {
 
             
 
+            
+
              method that specifies a method name and a target object. For example, the <see
              cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" />
+
+            
 
             
 
@@ -314,8 +350,12 @@ class TestClass {
 
           
 
+          
+
           The class instance on which the delegate invokes <paramref
            name="method" />
+
+          
 
           
 
@@ -323,6 +363,8 @@ class TestClass {
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -355,8 +397,12 @@ class TestClass {
 
             
 
+            
+
              method that specifies a method name but does not specify a target object. For example, the <see
              cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" />
+
+            
 
             
 
@@ -373,8 +419,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -383,10 +433,14 @@ class TestClass {
 
           
 
+          
+
           . </param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,6 +471,8 @@ class TestClass {
           <para
             >The clone has the same <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -479,8 +535,12 @@ class TestClass {
 
             
 
+            
+
              delegates in <paramref
              name="delegates" />
+
+            
 
             
 
@@ -492,6 +552,8 @@ class TestClass {
           <para
             >If the <paramref
              name="delegates" />
+
+            
 
             
 
@@ -509,11 +571,15 @@ class TestClass {
 
               
 
+              
+
               , but the two delegates cannot be combined because the types do not match exactly.</para
             >
           </block>
           <para>
             <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" />
+
+            
 
             
 
@@ -532,8 +598,12 @@ class TestClass {
 
             
 
+            
+
              array. Returns null if <paramref
              name="delegates" />
+
+            
 
             
 
@@ -542,8 +612,12 @@ class TestClass {
 
             
 
+            
+
              contains zero elements, or if every entry in <paramref
              name="delegates" />
+
+            
 
             
 
@@ -552,6 +626,8 @@ class TestClass {
         </returns>
         <param name="delegates">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -593,13 +669,19 @@ class TestClass {
 
             
 
+            
+
              and <paramref
              name="b" />
 
             
 
+            
+
              are not <see
              langword="null" />
+
+            
 
             
 
@@ -620,11 +702,15 @@ class TestClass {
 
               
 
+              
+
               , but the two delegates cannot be combined because the types do not match exactly.</para
             >
           </block>
           <para>
             <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" />
+
+            
 
             
 
@@ -643,8 +729,12 @@ class TestClass {
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -653,8 +743,12 @@ class TestClass {
 
             
 
+            
+
              if <paramref
              name="b" />
+
+            
 
             
 
@@ -663,8 +757,12 @@ class TestClass {
 
             
 
+            
+
              if <paramref
              name="a" />
+
+            
 
             
 
@@ -673,8 +771,12 @@ class TestClass {
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -686,10 +788,14 @@ class TestClass {
 
           
 
+          
+
           The delegate whose invocation list comes first. </param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -726,6 +832,8 @@ class TestClass {
 
             
 
+            
+
             .</para
           >
           <para>The invocation list can contain duplicate entries; that is, entries that refer to the same method on the same object.</para>
@@ -742,8 +850,12 @@ class TestClass {
 
             
 
+            
+
             , or the current multicast (combinable) delegate if <paramref
              name="d" />
+
+            
 
             
 
@@ -752,6 +864,8 @@ class TestClass {
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -791,13 +905,19 @@ class TestClass {
 
           
 
+          
+
            or <paramref
            name="method" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -809,8 +929,12 @@ class TestClass {
 
             
 
+            
+
              does not derive from <see
              cref="T:System.Delegate" />
+
+            
 
             
 
@@ -819,6 +943,8 @@ class TestClass {
           <para>-or-</para>
           <para>
             <paramref name="method" />
+
+            
 
             
 
@@ -832,8 +958,12 @@ class TestClass {
 
             
 
+            
+
              method of the <paramref
              name="type" />
+
+            
 
             
 
@@ -854,8 +984,12 @@ class TestClass {
 
             
 
+            
+
              method of the <paramref
              name="type" />
+
+            
 
             
 
@@ -870,6 +1004,8 @@ class TestClass {
 
             
 
+            
+
              method overload, which allows you to create all combinations of open or closed delegates for instance or static methods, and optionally to specify a first argument. </para
           >
           <block subset="none" type="note">
@@ -881,8 +1017,12 @@ class TestClass {
 
             
 
+            
+
              method overload and specifying true for <paramref
              name="throwOnBindFailure" />
+
+            
 
             
 
@@ -895,8 +1035,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -906,6 +1050,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -925,8 +1071,12 @@ class TestClass {
 
             
 
+            
+
              and a return type of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -935,8 +1085,12 @@ class TestClass {
 
             
 
+            
+
              and a return value of type <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -956,8 +1110,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -968,8 +1126,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodInfo" />
+
+          
 
           
 
@@ -1011,8 +1173,12 @@ class TestClass {
 
             
 
+            
+
              method overload and specifying true for <paramref
              name="throwOnBindFailure" />
+
+            
 
             
 
@@ -1025,6 +1191,8 @@ class TestClass {
 
               
 
+              
+
                method overload for better performance.</para
             >
           </block>
@@ -1034,8 +1202,12 @@ class TestClass {
 
             
 
+            
+
              must be assignable to the return type of <paramref
              name="type" />
+
+            
 
             
 
@@ -1047,8 +1219,12 @@ class TestClass {
 
             
 
+            
+
              is supplied, it is passed to <paramref
              name="method" />
+
+            
 
             
 
@@ -1057,8 +1233,12 @@ class TestClass {
 
             
 
+            
+
              is said to be bound to the delegate, and the delegate is said to be closed over its first argument. If <paramref
              name="method" />
+
+            
 
             
 
@@ -1067,8 +1247,12 @@ class TestClass {
 
             
 
+            
+
              is an instance method, then <paramref
              name="firstArgument" />
+
+            
 
             
 
@@ -1080,13 +1264,19 @@ class TestClass {
 
             
 
+            
+
              is supplied, the first parameter of <paramref
              name="method" />
 
             
 
+            
+
              must be a reference type, and <paramref
              name="firstArgument" />
+
+            
 
             
 
@@ -1099,8 +1289,12 @@ class TestClass {
 
               
 
+              
+
                is static (Shared in Visual Basic) and its first parameter is of type <see
                cref="T:System.Object" />
+
+              
 
               
 
@@ -1109,13 +1303,19 @@ class TestClass {
 
               
 
+              
+
               , then <paramref
                name="firstArgument" />
 
               
 
+              
+
                can be a value type. In this case <paramref
                name="firstArgument" />
+
+              
 
               
 
@@ -1128,8 +1328,12 @@ class TestClass {
 
             
 
+            
+
              is a null reference and <paramref
              name="method" />
+
+            
 
             
 
@@ -1138,8 +1342,12 @@ class TestClass {
 
             
 
+            
+
              and of <paramref
              name="method" />
+
+            
 
             
 
@@ -1153,13 +1361,19 @@ class TestClass {
 
                 
 
+                
+
                  explicitly includes the hidden first parameter of <paramref
                  name="method" />
 
                 
 
+                
+
                 , the delegate is said to represent an open instance method. When the delegate is invoked, the first argument in the argument list is passed to the hidden instance parameter of <paramref
                  name="method" />
+
+                
 
                 
 
@@ -1173,8 +1387,12 @@ class TestClass {
 
                 
 
+                
+
                  and <paramref
                  name="type" />
+
+                
 
                 
 
@@ -1188,8 +1406,12 @@ class TestClass {
 
             
 
+            
+
              is a null reference and <paramref
              name="method" />
+
+            
 
             
 
@@ -1198,8 +1420,12 @@ class TestClass {
 
             
 
+            
+
              and of <paramref
              name="method" />
+
+            
 
             
 
@@ -1213,13 +1439,19 @@ class TestClass {
 
                 
 
+                
+
                  and <paramref
                  name="type" />
 
                 
 
+                
+
                  match (that is, all parameter types are compatible), the delegate is said to represent an open static method. This is the most common case for static methods. In this case, you can get slightly better performance by using the <see
                  cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo)" />
+
+                
 
                 
 
@@ -1233,13 +1465,19 @@ class TestClass {
 
                 
 
+                
+
                  begins with the second parameter of <paramref
                  name="method" />
 
                 
 
+                
+
                  and the rest of the parameter types are compatible, then the delegate is said to be closed over a null reference. When the delegate is invoked, a null reference is passed to the first parameter of <paramref
                  name="method" />
+
+                
 
                 
 
@@ -1254,8 +1492,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1265,6 +1507,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1287,8 +1531,12 @@ class TestClass {
 
             
 
+            
+
              and a return type of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1297,8 +1545,12 @@ class TestClass {
 
             
 
+            
+
              and a return value of type <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -1313,6 +1565,8 @@ class TestClass {
 
             
 
+            
+
              is that any given delegate can represent four different combinations of method signature and method kind (static versus instance). Consider a delegate type D with one argument of type C. The following describes the methods D can represent, ignoring the return type since it must match in all cases:</para
           >
           <list type="bullet">
@@ -1323,8 +1577,12 @@ class TestClass {
 
                 
 
+                
+
                  is called, <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -1333,8 +1591,12 @@ class TestClass {
 
                 
 
+                
+
                  belongs to, and the resulting delegate is said to be closed over that instance. (Trivially, D can also be closed over a null reference if <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -1348,8 +1610,12 @@ class TestClass {
 
                 
 
+                
+
                  is called, <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -1363,8 +1629,12 @@ class TestClass {
 
                 
 
+                
+
                  is called, <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -1378,13 +1648,19 @@ class TestClass {
 
                 
 
+                
+
                  is called, <paramref
                  name="firstArgument" />
 
                 
 
+                
+
                  is an instance of F. The resulting delegate represents a static method that is closed over that instance of F. Note that in the case where F and C are the same type, the static method has two arguments of that type. (In this case, D is closed over a null reference if <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -1406,8 +1682,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1418,8 +1698,12 @@ class TestClass {
 
           
 
+          
+
           The object to which the delegate is bound, or null to treat <paramref
            name="method" />
+
+          
 
           
 
@@ -1430,8 +1714,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodInfo" />
+
+          
 
           
 
@@ -1473,8 +1761,12 @@ class TestClass {
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1487,8 +1779,12 @@ class TestClass {
 
             
 
+            
+
              does not derive from <see
              cref="T:System.Delegate" />
+
+            
 
             
 
@@ -1500,6 +1796,8 @@ class TestClass {
 
             
 
+            
+
              is not an instance method.</para
           >
           <para>-or-</para>
@@ -1508,8 +1806,12 @@ class TestClass {
 
             
 
+            
+
              does not implement <paramref
              name="method" />
+
+            
 
             
 
@@ -1532,13 +1834,19 @@ class TestClass {
 
             
 
+            
+
              method overload, specifying false for <paramref
              name="ignoreCase" />
 
             
 
+            
+
              and true for <paramref
              name="throwOnBindFailure" />
+
+            
 
             
 
@@ -1551,8 +1859,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1562,6 +1874,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1583,8 +1897,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1595,8 +1913,12 @@ class TestClass {
 
           
 
+          
+
           The class instance on which <paramref
            name="method" />
+
+          
 
           
 
@@ -1604,6 +1926,8 @@ class TestClass {
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1645,6 +1969,8 @@ class TestClass {
 
             
 
+            
+
              method overload, which allows you to create all combinations of open or closed delegates for instance or static methods. </para
           >
           <block subset="none" type="note">
@@ -1657,8 +1983,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1668,6 +1998,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1690,8 +2022,12 @@ class TestClass {
 
             
 
+            
+
              and a return type of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1700,8 +2036,12 @@ class TestClass {
 
             
 
+            
+
              and a return value of type <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -1721,8 +2061,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1733,8 +2077,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodInfo" />
+
+          
 
           
 
@@ -1745,8 +2093,12 @@ class TestClass {
 
           
 
+          
+
           true to throw an exception if <paramref
            name="method" />
+
+          
 
           
 
@@ -1788,8 +2140,12 @@ class TestClass {
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1802,8 +2158,12 @@ class TestClass {
 
             
 
+            
+
              does not derive from <see
              cref="T:System.Delegate" />
+
+            
 
             
 
@@ -1815,6 +2175,8 @@ class TestClass {
 
             
 
+            
+
              is not a static method.</para
           >
           <para> -or-</para>
@@ -1823,8 +2185,12 @@ class TestClass {
 
             
 
+            
+
              does not implement <paramref
              name="method" />
+
+            
 
             
 
@@ -1847,13 +2213,19 @@ class TestClass {
 
             
 
+            
+
              method overload, specifying false for <paramref
              name="ignoreCase" />
 
             
 
+            
+
              and true for <paramref
              name="throwOnBindFailure" />
+
+            
 
             
 
@@ -1866,8 +2238,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1877,6 +2253,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1898,8 +2276,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1910,8 +2292,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1920,10 +2306,14 @@ class TestClass {
 
           
 
+          
+
           . </param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1966,12 +2356,16 @@ class TestClass {
 
             
 
+            
+
              method overload, which always throws on failure to bind, provide the most flexible way to create delegates. You can use them to create delegates for either static or instance methods, with or without a first argument.</para
           >
           <block subset="none" type="note">
             <para
               >If you do not supply a first argument, use the <see
                cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Boolean)" />
+
+              
 
               
 
@@ -1984,8 +2378,12 @@ class TestClass {
 
             
 
+            
+
              must be assignable to the return type of <paramref
              name="type" />
+
+            
 
             
 
@@ -1997,8 +2395,12 @@ class TestClass {
 
             
 
+            
+
              is supplied, it is passed to <paramref
              name="method" />
+
+            
 
             
 
@@ -2007,8 +2409,12 @@ class TestClass {
 
             
 
+            
+
              is said to be bound to the delegate, and the delegate is said to be closed over its first argument. If <paramref
              name="method" />
+
+            
 
             
 
@@ -2017,8 +2423,12 @@ class TestClass {
 
             
 
+            
+
              is an instance method, then <paramref
              name="firstArgument" />
+
+            
 
             
 
@@ -2030,13 +2440,19 @@ class TestClass {
 
             
 
+            
+
              is supplied, the first parameter of <paramref
              name="method" />
 
             
 
+            
+
              must be a reference type, and <paramref
              name="firstArgument" />
+
+            
 
             
 
@@ -2049,8 +2465,12 @@ class TestClass {
 
               
 
+              
+
                is static (Shared in Visual Basic) and its first parameter is of type <see
                cref="T:System.Object" />
+
+              
 
               
 
@@ -2059,13 +2479,19 @@ class TestClass {
 
               
 
+              
+
               , then <paramref
                name="firstArgument" />
 
               
 
+              
+
                can be a value type. In this case <paramref
                name="firstArgument" />
+
+              
 
               
 
@@ -2078,8 +2504,12 @@ class TestClass {
 
             
 
+            
+
              is a null reference and <paramref
              name="method" />
+
+            
 
             
 
@@ -2088,8 +2518,12 @@ class TestClass {
 
             
 
+            
+
              and of <paramref
              name="method" />
+
+            
 
             
 
@@ -2103,13 +2537,19 @@ class TestClass {
 
                 
 
+                
+
                  explicitly includes the hidden first parameter of <paramref
                  name="method" />
 
                 
 
+                
+
                 , the delegate is said to represent an open instance method. When the delegate is invoked, the first argument in the argument list is passed to the hidden instance parameter of <paramref
                  name="method" />
+
+                
 
                 
 
@@ -2123,8 +2563,12 @@ class TestClass {
 
                 
 
+                
+
                  and <paramref
                  name="type" />
+
+                
 
                 
 
@@ -2138,8 +2582,12 @@ class TestClass {
 
             
 
+            
+
              is a null reference and <paramref
              name="method" />
+
+            
 
             
 
@@ -2148,8 +2596,12 @@ class TestClass {
 
             
 
+            
+
              and of <paramref
              name="method" />
+
+            
 
             
 
@@ -2163,13 +2615,19 @@ class TestClass {
 
                 
 
+                
+
                  and <paramref
                  name="type" />
 
                 
 
+                
+
                  match (that is, all parameter types are compatible), the delegate is said to represent an open static method. This is the most common case for static methods. In this case, you can get slightly better performance by using the <see
                  cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Boolean)" />
+
+                
 
                 
 
@@ -2183,13 +2641,19 @@ class TestClass {
 
                 
 
+                
+
                  begins with the second parameter of <paramref
                  name="method" />
 
                 
 
+                
+
                  and the rest of the parameter types are compatible, then the delegate is said to be closed over a null reference. When the delegate is invoked, a null reference is passed to the first parameter of <paramref
                  name="method" />
+
+                
 
                 
 
@@ -2204,8 +2668,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2215,6 +2683,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2237,8 +2707,12 @@ class TestClass {
 
             
 
+            
+
              and a return type of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2247,8 +2721,12 @@ class TestClass {
 
             
 
+            
+
              and a return value of type <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2263,6 +2741,8 @@ class TestClass {
 
             
 
+            
+
              is that any given delegate can represent four different combinations of method signature and method kind (static versus instance). Consider a delegate type D with one argument of type C. The following describes the methods D can represent, ignoring the return type since it must match in all cases:</para
           >
           <list type="bullet">
@@ -2273,8 +2753,12 @@ class TestClass {
 
                 
 
+                
+
                  is called, <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -2283,8 +2767,12 @@ class TestClass {
 
                 
 
+                
+
                  belongs to, and the resulting delegate is said to be closed over that instance. (Trivially, D can also be closed over a null reference if <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -2298,8 +2786,12 @@ class TestClass {
 
                 
 
+                
+
                  is called, <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -2313,8 +2805,12 @@ class TestClass {
 
                 
 
+                
+
                  is called, <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -2328,13 +2824,19 @@ class TestClass {
 
                 
 
+                
+
                  is called, <paramref
                  name="firstArgument" />
 
                 
 
+                
+
                  is an instance of F. The resulting delegate represents a static method that is closed over that instance of F. Note that in the case where F and C are the same type, the static method has two arguments of that type. (In this case, D is closed over a null reference if <paramref
                  name="firstArgument" />
+
+                
 
                 
 
@@ -2355,8 +2857,12 @@ class TestClass {
 
             
 
+            
+
              is false and the delegate cannot be bound to <paramref
              name="method" />
+
+            
 
             
 
@@ -2368,8 +2874,12 @@ class TestClass {
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2380,8 +2890,12 @@ class TestClass {
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2392,8 +2906,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodInfo" />
+
+          
 
           
 
@@ -2404,8 +2922,12 @@ class TestClass {
 
           
 
+          
+
           true to throw an exception if <paramref
            name="method" />
+
+          
 
           
 
@@ -2447,8 +2969,12 @@ class TestClass {
 
             
 
+            
+
              method overload, specifying true for <paramref
              name="throwOnBindFailure" />
+
+            
 
             
 
@@ -2461,8 +2987,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2472,6 +3002,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2493,8 +3025,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2505,8 +3041,12 @@ class TestClass {
 
           
 
+          
+
           The class instance on which <paramref
            name="method" />
+
+          
 
           
 
@@ -2517,10 +3057,14 @@ class TestClass {
 
           
 
+          
+
           The name of the instance method that the delegate is to represent. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2561,8 +3105,12 @@ class TestClass {
 
             
 
+            
+
              method overload, specifying true for <paramref
              name="throwOnBindFailure" />
+
+            
 
             
 
@@ -2575,8 +3123,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2586,6 +3138,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2607,8 +3161,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2619,13 +3177,19 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            representing the class that implements <paramref
            name="method" />
+
+          
 
           
 
@@ -2636,10 +3200,14 @@ class TestClass {
 
           
 
+          
+
           The name of the static method that the delegate is to represent. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2683,8 +3251,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2694,6 +3266,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2715,8 +3289,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2727,8 +3305,12 @@ class TestClass {
 
           
 
+          
+
           The class instance on which <paramref
            name="method" />
+
+          
 
           
 
@@ -2739,10 +3321,14 @@ class TestClass {
 
           
 
+          
+
           The name of the instance method that the delegate is to represent. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2753,8 +3339,12 @@ class TestClass {
 
           
 
+          
+
           true to throw an exception if <paramref
            name="method" />
+
+          
 
           
 
@@ -2797,8 +3387,12 @@ class TestClass {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2808,6 +3402,8 @@ class TestClass {
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2829,8 +3425,12 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2841,13 +3441,19 @@ class TestClass {
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            representing the class that implements <paramref
            name="method" />
+
+          
 
           
 
@@ -2858,10 +3464,14 @@ class TestClass {
 
           
 
+          
+
           The name of the static method that the delegate is to represent. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2872,8 +3482,12 @@ class TestClass {
 
           
 
+          
+
           true to throw an exception if <paramref
            name="method" />
+
+          
 
           
 
@@ -2917,6 +3531,8 @@ class TestClass {
 
             
 
+            
+
              is invalid as a parameter to the methods implemented by the current instance.</para
           >
         </exception>
@@ -2926,6 +3542,8 @@ class TestClass {
           <para
             >The number, order or type of parameters listed in <paramref
              name="args" />
+
+            
 
             
 
@@ -2939,6 +3557,8 @@ class TestClass {
 
             
 
+            
+
             .</para
           >
           <para>-or-</para>
@@ -2948,6 +3568,8 @@ class TestClass {
           <para
             > The number of elements in <paramref
              name="args" />
+
+            
 
             
 
@@ -2965,6 +3587,8 @@ class TestClass {
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -2978,6 +3602,8 @@ class TestClass {
         </returns>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3017,6 +3643,8 @@ class TestClass {
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -3030,6 +3658,8 @@ class TestClass {
         </returns>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3092,11 +3722,15 @@ class TestClass {
 
             
 
+            
+
              and the current delegate have the same targets, methods, and invocation list; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3214,6 +3848,8 @@ class TestClass {
 
             
 
+            
+
              describing the static method represented by the current delegate.</para
           >
         </returns>
@@ -3252,10 +3888,14 @@ class TestClass {
 
           
 
+          
+
           Not supported. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3292,6 +3932,8 @@ class TestClass {
             
 
             
+
+            
 .</para
           >
         </value>
@@ -3304,6 +3946,8 @@ class TestClass {
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to access type information. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+
+          
 
           
 
@@ -3377,8 +4021,12 @@ class TestClass {
 
             
 
+            
+
              is equal to <paramref
              name="d2" />
+
+            
 
             
 
@@ -3390,10 +4038,14 @@ class TestClass {
 
           
 
+          
+
           The first delegate to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3462,8 +4114,12 @@ class TestClass {
 
             
 
+            
+
              is not equal to <paramref
              name="d2" />
+
+            
 
             
 
@@ -3475,10 +4131,14 @@ class TestClass {
 
           
 
+          
+
           The first delegate to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3518,6 +4178,8 @@ class TestClass {
           <para
             >The following example demonstrates the <see
              cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" />
+
+            
 
             
 
@@ -3660,7 +4322,8 @@ class TestClass {
             <para>MyClass2</para>
             <para>MyClass2</para>
             <para>MyClass</para>
-            <para>removal test 6 result6 is null</para>
+            <para
+>removal test 6 result6 is null</para>
           </c>
         </example>
         <remarks>
@@ -3671,8 +4334,12 @@ class TestClass {
 
             
 
+            
+
              matches a contiguous set of elements in the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3681,8 +4348,12 @@ class TestClass {
 
             
 
+            
+
              is said to occur within the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3691,8 +4362,12 @@ class TestClass {
 
             
 
+            
+
              occurs more than once in the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3711,8 +4386,12 @@ class TestClass {
 
             
 
+            
+
              and removing the last occurrence of the invocation list of <paramref
              name="value" />
+
+            
 
             
 
@@ -3721,8 +4400,12 @@ class TestClass {
 
             
 
+            
+
              is found within the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3731,8 +4414,12 @@ class TestClass {
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -3741,8 +4428,12 @@ class TestClass {
 
             
 
+            
+
              is not found within the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3751,13 +4442,19 @@ class TestClass {
 
             
 
+            
+
              is equal to the invocation list of <paramref
              name="source" />
 
             
 
+            
+
              or if <paramref
              name="source" />
+
+            
 
             
 
@@ -3769,8 +4466,12 @@ class TestClass {
 
           
 
+          
+
           The delegate from which to remove the invocation list of <paramref
            name="value" />
+
+          
 
           
 
@@ -3781,8 +4482,12 @@ class TestClass {
 
           
 
+          
+
           The delegate that supplies the invocation list to remove from the invocation list of <paramref
            name="source" />
+
+          
 
           
 
@@ -3826,8 +4531,12 @@ class TestClass {
 
             
 
+            
+
              matches a contiguous set of elements in the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3836,8 +4545,12 @@ class TestClass {
 
             
 
+            
+
              is said to occur within the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3846,8 +4559,12 @@ class TestClass {
 
             
 
+            
+
              occurs more than once in the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3866,8 +4583,12 @@ class TestClass {
 
             
 
+            
+
              and removing all occurrences of the invocation list of <paramref
              name="value" />
+
+            
 
             
 
@@ -3876,8 +4597,12 @@ class TestClass {
 
             
 
+            
+
              is found within the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3886,8 +4611,12 @@ class TestClass {
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -3896,8 +4625,12 @@ class TestClass {
 
             
 
+            
+
              is not found within the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3906,8 +4639,12 @@ class TestClass {
 
             
 
+            
+
              is equal to the invocation list of <paramref
              name="source" />
+
+            
 
             
 
@@ -3916,13 +4653,19 @@ class TestClass {
 
             
 
+            
+
              contains only a series of invocation lists that are equal to the invocation list of <paramref
              name="value" />
 
             
 
+            
+
             , or if <paramref
              name="source" />
+
+            
 
             
 
@@ -3934,8 +4677,12 @@ class TestClass {
 
           
 
+          
+
           The delegate from which to remove the invocation list of <paramref
            name="value" />
+
+          
 
           
 
@@ -3946,8 +4693,12 @@ class TestClass {
 
           
 
+          
+
           The delegate that supplies the invocation list to remove from the invocation list of <paramref
            name="source" />
+
+          
 
           
 
@@ -3983,13 +4734,19 @@ class TestClass {
 
             
 
+            
+
              matches a contiguous set of elements in the current delegate's invocation list, then the invocation list of <paramref
              name="value" />
 
             
 
+            
+
              is said to occur within the current delegate's invocation list. If the invocation list of <paramref
              name="value" />
+
+            
 
             
 
@@ -4008,8 +4765,12 @@ class TestClass {
 
             
 
+            
+
             , if the invocation list of <paramref
              name="value" />
+
+            
 
             
 
@@ -4018,8 +4779,12 @@ class TestClass {
 
             
 
+            
+
              is null or if the invocation list of <paramref
              name="value" />
+
+            
 
             
 
@@ -4028,11 +4793,15 @@ class TestClass {
 
             
 
+            
+
              is equal to the current delegate's invocation list.</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4065,9 +4834,13 @@ class TestClass {
 
             
 
+            
+
              instance, or 
 <see
              langword="null" />
+
+            
 
             
 
@@ -4079,6 +4852,8 @@ class TestClass {
           <para
             >The following example gets the <see
              cref="P:System.Delegate.Target" />
+
+            
 
             
 
@@ -4120,6 +4895,8 @@ class TestClass {
           <para
             >The following example gets the <see
              cref="P:System.Delegate.Target" />
+
+            
 
             
 

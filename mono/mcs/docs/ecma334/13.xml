@@ -8,8 +8,12 @@
 
       
 
+      
+
        to type <keyword
       >long</keyword>
+
+      
 
       
 
@@ -18,8 +22,12 @@
 
       
 
+      
+
        can implicitly be treated as type <keyword
       >long</keyword>
+
+      
 
       
 
@@ -28,14 +36,18 @@
 
       
 
+      
+
        to type <keyword
       >int</keyword>
 
       
 
+      
+
       , is explicit and so an explicit cast is required. <code_example
       >
-        <![CDATA[
+<![CDATA[
 int a = 123;  
 long b = a;     // implicit conversion from int to long  
 int c = (int) b;  // explicit conversion from long to int  
@@ -44,13 +56,19 @@ int c = (int) b;  // explicit conversion from long to int
 
       
 
+      
+
       end example]</example
     >
 
     
 
+    
+
      Some conversions are defined by the language. Programs may also define their own conversions (<hyperlink
     >13.4</hyperlink>
+
+    
 
     
 

@@ -6,8 +6,12 @@
 
     
 
+    
+
     . Such an event can be used in any context that permits a field. The field contains a delegate (<hyperlink
     >22</hyperlink>
+
+    
 
     
 
@@ -17,7 +21,7 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 public delegate void EventHandler(object sender, EventArgs e);  
 public class Button: Control  
 {  
@@ -40,19 +44,23 @@ public class Button: Control
     <example
       >Outside the declaration of the Button class, the Clickmember can only be used on the left-hand side of the += and -= operators, as in <code_example
       >
-        <![CDATA[
+<![CDATA[
 b.Click += new EventHandler(...);  
 ]]>
       </code_example>
 
       
 
+      
+
       which appends a delegate to the invocation list of the Click event, and <code_example
       >
-        <![CDATA[
+<![CDATA[
 b.Click -= new EventHandler(...);  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -65,8 +73,12 @@ b.Click -= new EventHandler(...);
 
     
 
+    
+
     ) on the containing object for an instance event, or the type object (<hyperlink
     >14.5.11</hyperlink>
+
+    
 
     
 
@@ -76,7 +88,7 @@ b.Click -= new EventHandler(...);
     <note
       >[Note: Thus, an instance event declaration of the form: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class X {  
    public event D Ev;  
 }  
@@ -85,9 +97,11 @@ class X {
 
       
 
+      
+
       could be compiled to something equivalent to: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class X {  
    private D __Ev;  // field to hold the delegate  
    public event D Ev {  
@@ -110,7 +124,7 @@ class X {
     <note
       >Similarly, a static event declaration of the form: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class X {  
    public static event D Ev;  
 }  
@@ -119,9 +133,11 @@ class X {
 
       
 
+      
+
       could be compiled to something equivalent to: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class X {  
    private static D __Ev;  // field to hold the delegate  
    public static event D Ev {  
@@ -135,6 +151,8 @@ class X {
 }  
 ]]>
       </code_example>
+
+      
 
       
 

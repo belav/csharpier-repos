@@ -48,6 +48,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -105,6 +107,8 @@
         </summary>
         <param name="from">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,6 +172,8 @@
 
           
 
+          
+
           The parent node of this configuration element.</param
         >
       </Docs>
@@ -207,8 +213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -216,6 +226,8 @@
         >
         <param name="serializeCollectionKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

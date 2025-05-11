@@ -42,6 +42,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -108,6 +110,8 @@
 
           
 
+          
+
           The lambda expression that is generated.</param
         >
         <param name="ilOffset">
@@ -115,10 +119,14 @@
 
           
 
+          
+
           The offset within MSIL code at which to mark the sequence point.</param
         >
         <param name="sequencePoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

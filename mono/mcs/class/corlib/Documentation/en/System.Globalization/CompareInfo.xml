@@ -39,8 +39,12 @@
 
         
 
+        
+
          class includes a <see
          cref="P:System.Globalization.CultureInfo.CompareInfo" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          uses the information in <see
          cref="P:System.Globalization.CultureInfo.CompareInfo" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          provides the <see
          cref="M:System.Globalization.CompareInfo.GetCompareInfo(System.Int32,System.Reflection.Assembly)" />
+
+        
 
         
 
@@ -74,13 +86,19 @@
 
         
 
+        
+
          object for any culture, you should use the <see
          cref="P:System.Globalization.CultureInfo.CompareInfo" />
 
         
 
+        
+
          property, or call the <see
          cref="M:System.Globalization.CompareInfo.GetCompareInfo(System.Int32,System.Reflection.Assembly)" />
+
+        
 
         
 
@@ -95,13 +113,19 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Globalization.CompareInfo.LastIndexOf" />
 
         
 
+        
+
          methods, can yield unexpected results if the value to search for is ignored. The search value is ignored if it is an empty string (""), a character or string consisting of characters having code points that are not considered in the operation because of comparison options, or a value with code points that have no linguistic significance. If the search value for the <see
          cref="Overload:System.Globalization.CompareInfo.IndexOf" />
+
+        
 
         
 
@@ -116,6 +140,8 @@
 
         
 
+        
+
          to ensure that the behavior is consistent, regardless of the culture settings of the operating system.</para
       >
       <block subset="none" type="note">
@@ -125,13 +151,19 @@
 
           
 
+          
+
            to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
            cref="F:System.Globalization.CompareOptions.Ordinal" />
 
           
 
+          
+
            or <see
            cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+          
 
           
 
@@ -176,8 +208,12 @@
 
             
 
+            
+
             . If a security decision depends on a string comparison or a case change, you should use the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -190,13 +226,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -240,8 +282,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -259,8 +305,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -275,10 +325,14 @@
 
           
 
+          
+
           The first string to compare. </param
         >
         <param name="string2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -318,6 +372,8 @@
 
             
 
+            
+
              property to ensure that the behavior is consistent regardless of the culture settings of the operating system.</para
           >
           <block subset="none" type="note">
@@ -327,13 +383,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -346,6 +408,8 @@
           <para
             >Compares two strings using the specified <see
              cref="T:System.Globalization.CompareOptions" />
+
+            
 
             
 
@@ -384,8 +448,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -403,8 +471,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -419,10 +491,14 @@
 
           
 
+          
+
           The first string to compare. </param
         >
         <param name="string2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -433,8 +509,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="string1" />
+
+          
 
           
 
@@ -443,8 +523,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -453,8 +537,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -463,8 +551,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -473,13 +565,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.StringSort" />
+
+          
 
           
 
@@ -520,6 +618,8 @@
 
             
 
+            
+
              property to ensure that the behavior is consistent regardless of the culture settings of the operating system.</para
           >
           <block subset="none" type="note">
@@ -529,13 +629,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -580,8 +686,12 @@
 
                   
 
+                  
+
                    is less than the specified section of <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -600,8 +710,12 @@
 
                   
 
+                  
+
                    is greater than the specified section of <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -616,6 +730,8 @@
 
           
 
+          
+
           The first string to compare. </param
         >
         <param name="offset1">
@@ -623,8 +739,12 @@
 
           
 
+          
+
           The zero-based index of the character in <paramref
            name="string1" />
+
+          
 
           
 
@@ -635,6 +755,8 @@
 
           
 
+          
+
           The second string to compare. </param
         >
         <param name="offset2">
@@ -642,8 +764,12 @@
 
           
 
+          
+
           The zero-based index of the character in <paramref
            name="string2" />
+
+          
 
           
 
@@ -685,6 +811,8 @@
 
             
 
+            
+
              property to ensure that the behavior is consistent regardless of the culture settings of the operating system.</para
           >
           <block subset="none" type="note">
@@ -694,13 +822,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -713,6 +847,8 @@
           <para
             >Compares the end section of a string with the end section of another string using the specified <see
              cref="T:System.Globalization.CompareOptions" />
+
+            
 
             
 
@@ -752,8 +888,12 @@
 
                   
 
+                  
+
                    is less than the specified section of <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -772,8 +912,12 @@
 
                   
 
+                  
+
                    is greater than the specified section of <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -788,6 +932,8 @@
 
           
 
+          
+
           The first string to compare. </param
         >
         <param name="offset1">
@@ -795,8 +941,12 @@
 
           
 
+          
+
           The zero-based index of the character in <paramref
            name="string1" />
+
+          
 
           
 
@@ -807,6 +957,8 @@
 
           
 
+          
+
           The second string to compare. </param
         >
         <param name="offset2">
@@ -814,8 +966,12 @@
 
           
 
+          
+
           The zero-based index of the character in <paramref
            name="string2" />
+
+          
 
           
 
@@ -826,8 +982,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="string1" />
+
+          
 
           
 
@@ -836,8 +996,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -846,8 +1010,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -856,8 +1024,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -866,13 +1038,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.StringSort" />
+
+          
 
           
 
@@ -915,6 +1093,8 @@
 
             
 
+            
+
              property to ensure that the behavior is consistent regardless of the culture settings of the operating system.</para
           >
           <block subset="none" type="note">
@@ -924,13 +1104,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -975,8 +1161,12 @@
 
                   
 
+                  
+
                    is less than the specified section of <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -995,8 +1185,12 @@
 
                   
 
+                  
+
                    is greater than the specified section of <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -1011,6 +1205,8 @@
 
           
 
+          
+
           The first string to compare. </param
         >
         <param name="offset1">
@@ -1018,8 +1214,12 @@
 
           
 
+          
+
           The zero-based index of the character in <paramref
            name="string1" />
+
+          
 
           
 
@@ -1030,8 +1230,12 @@
 
           
 
+          
+
           The number of consecutive characters in <paramref
            name="string1" />
+
+          
 
           
 
@@ -1042,6 +1246,8 @@
 
           
 
+          
+
           The second string to compare. </param
         >
         <param name="offset2">
@@ -1049,8 +1255,12 @@
 
           
 
+          
+
           The zero-based index of the character in <paramref
            name="string2" />
+
+          
 
           
 
@@ -1061,8 +1271,12 @@
 
           
 
+          
+
           The number of consecutive characters in <paramref
            name="string2" />
+
+          
 
           
 
@@ -1106,6 +1320,8 @@
 
             
 
+            
+
              property to ensure that the behavior is consistent regardless of the culture settings of the operating system.</para
           >
           <block subset="none" type="note">
@@ -1115,13 +1331,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -1134,6 +1356,8 @@
           <para
             >Compares a section of one string with a section of another string using the specified <see
              cref="T:System.Globalization.CompareOptions" />
+
+            
 
             
 
@@ -1173,8 +1397,12 @@
 
                   
 
+                  
+
                    is less than the specified section of <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -1193,8 +1421,12 @@
 
                   
 
+                  
+
                    is greater than the specified section of <paramref
                    name="string2" />
+
+                  
 
                   
 
@@ -1209,6 +1441,8 @@
 
           
 
+          
+
           The first string to compare. </param
         >
         <param name="offset1">
@@ -1216,8 +1450,12 @@
 
           
 
+          
+
           The zero-based index of the character in <paramref
            name="string1" />
+
+          
 
           
 
@@ -1228,8 +1466,12 @@
 
           
 
+          
+
           The number of consecutive characters in <paramref
            name="string1" />
+
+          
 
           
 
@@ -1240,6 +1482,8 @@
 
           
 
+          
+
           The second string to compare. </param
         >
         <param name="offset2">
@@ -1247,8 +1491,12 @@
 
           
 
+          
+
           The zero-based index of the character in <paramref
            name="string2" />
+
+          
 
           
 
@@ -1259,8 +1507,12 @@
 
           
 
+          
+
           The number of consecutive characters in <paramref
            name="string2" />
+
+          
 
           
 
@@ -1271,8 +1523,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="string1" />
+
+          
 
           
 
@@ -1281,8 +1537,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -1291,8 +1551,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -1301,8 +1565,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -1311,13 +1579,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.StringSort" />
+
+          
 
           
 
@@ -1352,13 +1626,19 @@
 
             
 
+            
+
              objects are equal if their <see
              cref="P:System.Globalization.CompareInfo.LCID" />
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.CompareInfo.Name" />
+
+            
 
             
 
@@ -1370,11 +1650,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If a security decision depends on a string comparison or a case change, you should use the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -1389,6 +1673,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1400,6 +1686,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -1408,8 +1696,12 @@
 
           
 
+          
+
           The object to compare with the current <see
            cref="T:System.Globalization.CompareInfo" />
+
+          
 
           
 
@@ -1464,6 +1756,8 @@
 
             
 
+            
+
              object that is associated with the culture with the specified identifier.</para
           >
         </summary>
@@ -1475,8 +1769,12 @@
 
             
 
+            
+
              object associated with the culture with the specified identifier and using string comparison methods in the current <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1485,6 +1783,8 @@
         </returns>
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1523,6 +1823,8 @@
 
             
 
+            
+
              object that is associated with the culture with the specified name.</para
           >
         </summary>
@@ -1534,8 +1836,12 @@
 
             
 
+            
+
              object associated with the culture with the specified identifier and using string comparison methods in the current <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1544,6 +1850,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1585,8 +1893,12 @@
 
             
 
+            
+
              parameter must be of the same type as <see
              cref="P:System.Reflection.Module.Assembly" />
+
+            
 
             
 
@@ -1602,8 +1914,12 @@
 
             
 
+            
+
              object that is associated with the specified culture and that uses string comparison methods in the specified <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1618,8 +1934,12 @@
 
             
 
+            
+
              object associated with the culture with the specified identifier and using string comparison methods in the current <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1631,6 +1951,8 @@
 
           
 
+          
+
           An integer representing the culture identifier. </param
         >
         <param name="assembly">
@@ -1638,8 +1960,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -1681,8 +2007,12 @@
 
             
 
+            
+
              parameter must be of the same type as <see
              cref="P:System.Reflection.Module.Assembly" />
+
+            
 
             
 
@@ -1697,8 +2027,12 @@
 
             
 
+            
+
              object that is associated with the specified culture and that uses string comparison methods in the specified <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1713,8 +2047,12 @@
 
             
 
+            
+
              object associated with the culture with the specified identifier and using string comparison methods in the current <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1726,6 +2064,8 @@
 
           
 
+          
+
           A string representing the culture name. </param
         >
         <param name="assembly">
@@ -1733,8 +2073,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -1767,11 +2111,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method generates the same hash code for two objects that are equal according to the <see
              cref="M:System.Globalization.CompareInfo.Equals(System.Object)" />
+
+            
 
             
 
@@ -1786,6 +2134,8 @@
 
             
 
+            
+
              for hashing algorithms and data structures, such as a hash table.</para
           >
         </summary>
@@ -1794,6 +2144,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Globalization.CompareInfo" />
+
+            
 
             
 
@@ -1832,6 +2184,8 @@
 
             
 
+            
+
              method is equivalent to the Windows API method LCMapString with the LCMAP_SORTKEY flag.</para
           >
         </remarks>
@@ -1847,6 +2201,8 @@
 
             
 
+            
+
              object that contains the sort key for the specified string.</para
           >
         </returns>
@@ -1855,8 +2211,12 @@
 
           
 
+          
+
           The string for which a <see
            cref="T:System.Globalization.SortKey" />
+
+          
 
           
 
@@ -1895,6 +2255,8 @@
 
             
 
+            
+
              method is equivalent to the Windows API method LCMapString with the LCMAP_SORTKEY flag.</para
           >
         </remarks>
@@ -1906,8 +2268,12 @@
 
             
 
+            
+
              object for the specified string using the specified <see
              cref="T:System.Globalization.CompareOptions" />
+
+            
 
             
 
@@ -1922,6 +2288,8 @@
 
             
 
+            
+
              object that contains the sort key for the specified string.</para
           >
         </returns>
@@ -1930,8 +2298,12 @@
 
           
 
+          
+
           The string for which a <see
            cref="T:System.Globalization.SortKey" />
+
+          
 
           
 
@@ -1942,8 +2314,12 @@
 
           
 
+          
+
           A bitwise combination of one or more of the following enumeration values that define how the sort key is calculated: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -1952,8 +2328,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -1962,13 +2342,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.StringSort" />
+
+          
 
           
 
@@ -2008,8 +2394,12 @@
 
             
 
+            
+
              represents a precomposed Unicode character, such as the ligature "Æ" (U+00C6), it might be considered equivalent to any occurrence of its components in the correct sequence, such as "AE" (U+0041, U+0045), depending on the culture. To perform an ordinal (culture-insensitive) search, where a character is considered equivalent to another character only if their Unicode code points are the same, you should call an overload that has a parameter of type <see
              cref="T:System.Globalization.CompareOptions" />
+
+            
 
             
 
@@ -2018,13 +2408,19 @@
 
             
 
+            
+
              value. Unlike <see
              cref="M:System.Globalization.CompareInfo.IndexOf(System.String,System.Char)" />
 
             
 
+            
+
             , which performs a culture-sensitive comparison, overloads of the <see
              cref="M:System.String.IndexOf(System.Char)" />
+
+            
 
             
 
@@ -2037,13 +2433,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -2063,13 +2465,19 @@
 
             
 
+            
+
             , if found, within <paramref
              name="source" />
 
             
 
+            
+
             ; otherwise, -1. Returns 0 (zero) if <paramref
              name="value" />
+
+            
 
             
 
@@ -2081,6 +2489,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -2088,8 +2498,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -2129,8 +2543,12 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -2143,13 +2561,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -2169,13 +2593,19 @@
 
             
 
+            
+
             , if found, within <paramref
              name="source" />
 
             
 
+            
+
             ; otherwise, -1. Returns 0 (zero) if <paramref
              name="value" />
+
+            
 
             
 
@@ -2187,6 +2617,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -2194,8 +2626,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -2236,6 +2672,8 @@
 
             
 
+            
+
              value is not valid for this method.</para
           >
           <para
@@ -2244,8 +2682,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -2254,13 +2696,19 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value, this overload performs an ordinal (culture-insensitive) search. A character is considered equivalent to another character only if the Unicode values are the same. Overloads of <see
              cref="M:System.String.IndexOf(System.Char)" />
+
+            
 
             
 
@@ -2273,13 +2721,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -2295,6 +2749,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -2306,13 +2762,19 @@
 
             
 
+            
+
             , if found, within <paramref
              name="source" />
 
             
 
+            
+
             , using the specified comparison options; otherwise, -1. Returns 0 (zero) if <paramref
              name="value" />
+
+            
 
             
 
@@ -2324,6 +2786,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -2331,8 +2795,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -2343,8 +2811,12 @@
 
           
 
+          
+
           A value that defines how the strings should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -2353,8 +2825,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -2363,8 +2839,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -2373,8 +2853,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -2414,6 +2898,8 @@
 
             
 
+            
+
              and ending at the end of the string.</para
           >
           <para
@@ -2422,13 +2908,19 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value. Overloads of <see
              cref="M:System.String.IndexOf(System.Char)" />
+
+            
 
             
 
@@ -2441,13 +2933,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -2467,8 +2965,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -2477,8 +2979,12 @@
 
             
 
+            
+
              to the end of <paramref
              name="source" />
+
+            
 
             
 
@@ -2487,8 +2993,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -2500,10 +3010,14 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2512,10 +3026,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2556,6 +3074,8 @@
 
             
 
+            
+
              value is not valid for this method.</para
           >
           <para
@@ -2564,8 +3084,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -2574,8 +3098,12 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -2588,13 +3116,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -2610,6 +3144,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -2621,13 +3157,19 @@
 
             
 
+            
+
             , if found, within <paramref
              name="source" />
 
             
 
+            
+
             , using the specified comparison options; otherwise, -1. Returns 0 (zero) if <paramref
              name="value" />
+
+            
 
             
 
@@ -2639,6 +3181,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -2646,8 +3190,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -2658,8 +3206,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -2668,8 +3220,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -2678,8 +3234,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -2688,8 +3248,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -2698,8 +3262,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -2739,6 +3307,8 @@
 
             
 
+            
+
              and ending at the end of the string.</para
           >
           <para
@@ -2747,8 +3317,12 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -2761,13 +3335,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -2787,8 +3367,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -2797,8 +3381,12 @@
 
             
 
+            
+
              to the end of <paramref
              name="source" />
+
+            
 
             
 
@@ -2807,8 +3395,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -2820,10 +3412,14 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2832,10 +3428,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2876,11 +3476,15 @@
 
             
 
+            
+
              and ending at the end of the string.</para
           >
           <para
             >The <see
              cref="F:System.Globalization.CompareOptions.StringSort" />
+
+            
 
             
 
@@ -2892,8 +3496,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -2902,13 +3510,19 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value, this overload performs an ordinal (culture-insensitive) search. A character is considered equivalent to another character only if the Unicode values are the same. Overloads of <see
              cref="M:System.String.IndexOf(System.Char)" />
+
+            
 
             
 
@@ -2921,13 +3535,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -2943,6 +3563,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -2954,8 +3576,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -2964,8 +3590,12 @@
 
             
 
+            
+
              to the end of <paramref
              name="source" />
+
+            
 
             
 
@@ -2974,8 +3604,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -2987,6 +3621,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -2994,8 +3630,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -3006,10 +3646,14 @@
 
           
 
+          
+
           The zero-based starting index of the search. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3018,8 +3662,12 @@
 
           
 
+          
+
            and <paramref
            name="value" />
+
+          
 
           
 
@@ -3028,8 +3676,12 @@
 
           
 
+          
+
            is either the enumeration value <see
            cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+          
 
           
 
@@ -3038,8 +3690,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />
+
+          
 
           
 
@@ -3048,13 +3704,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreWidth" />
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -3095,13 +3757,19 @@
 
             
 
+            
+
              and ending at <paramref
              name="startIndex" />
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -3113,13 +3781,19 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value. Overloads of <see
              cref="M:System.String.IndexOf(System.Char)" />
+
+            
 
             
 
@@ -3132,13 +3806,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -3158,8 +3838,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -3168,8 +3852,12 @@
 
             
 
+            
+
              and contains the number of elements specified by <paramref
              name="count" />
+
+            
 
             
 
@@ -3178,8 +3866,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -3191,6 +3883,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -3198,8 +3892,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -3210,10 +3908,14 @@
 
           
 
+          
+
           The zero-based starting index of the search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3254,11 +3956,15 @@
 
             
 
+            
+
              and ending at the end of the string.</para
           >
           <para
             >The <see
              cref="F:System.Globalization.CompareOptions.StringSort" />
+
+            
 
             
 
@@ -3270,8 +3976,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -3280,8 +3990,12 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -3294,13 +4008,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -3316,6 +4036,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -3327,8 +4049,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -3337,8 +4063,12 @@
 
             
 
+            
+
              to the end of <paramref
              name="source" />
+
+            
 
             
 
@@ -3347,8 +4077,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -3360,6 +4094,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -3367,8 +4103,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -3379,10 +4119,14 @@
 
           
 
+          
+
           The zero-based starting index of the search. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3391,8 +4135,12 @@
 
           
 
+          
+
            and <paramref
            name="value" />
+
+          
 
           
 
@@ -3401,8 +4149,12 @@
 
           
 
+          
+
            is either the enumeration value <see
            cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+          
 
           
 
@@ -3411,8 +4163,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />
+
+          
 
           
 
@@ -3421,13 +4177,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreWidth" />
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -3468,13 +4230,19 @@
 
             
 
+            
+
              and ending at <paramref
              name="startIndex" />
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -3486,8 +4254,12 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -3500,13 +4272,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -3526,8 +4304,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -3536,8 +4318,12 @@
 
             
 
+            
+
              and contains the number of elements specified by <paramref
              name="count" />
+
+            
 
             
 
@@ -3546,8 +4332,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -3559,6 +4349,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -3566,8 +4358,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -3578,10 +4374,14 @@
 
           
 
+          
+
           The zero-based starting index of the search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3623,13 +4423,19 @@
 
             
 
+            
+
              and ending at <paramref
              name="startIndex" />
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -3641,6 +4447,8 @@
 
             
 
+            
+
              value is not valid for this method.</para
           >
           <para
@@ -3649,8 +4457,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -3659,13 +4471,19 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value, this overload performs an ordinal (culture-insensitive) search. A character is considered equivalent to another character only if the Unicode values are the same. Overloads of <see
              cref="M:System.String.IndexOf(System.Char)" />
+
+            
 
             
 
@@ -3678,13 +4496,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -3700,6 +4524,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -3711,8 +4537,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -3721,8 +4551,12 @@
 
             
 
+            
+
              and contains the number of elements specified by <paramref
              name="count" />
+
+            
 
             
 
@@ -3731,8 +4565,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -3744,6 +4582,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -3751,8 +4591,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -3763,10 +4607,14 @@
 
           
 
+          
+
           The zero-based starting index of the search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3777,8 +4625,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -3787,8 +4639,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -3797,8 +4653,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -3807,8 +4667,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -3817,8 +4681,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -3860,13 +4728,19 @@
 
             
 
+            
+
              and ending at <paramref
              name="startIndex" />
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -3878,6 +4752,8 @@
 
             
 
+            
+
              value is not valid for this method.</para
           >
           <para
@@ -3886,8 +4762,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -3896,8 +4776,12 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -3910,13 +4794,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -3932,6 +4822,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -3943,8 +4835,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -3953,8 +4849,12 @@
 
             
 
+            
+
              and contains the number of elements specified by <paramref
              name="count" />
+
+            
 
             
 
@@ -3963,8 +4863,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -3976,6 +4880,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -3983,8 +4889,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -3995,10 +4905,14 @@
 
           
 
+          
+
           The zero-based starting index of the search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4009,8 +4923,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -4019,8 +4937,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -4029,8 +4951,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -4039,8 +4965,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -4049,8 +4979,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -4089,6 +5023,8 @@
 
             
 
+            
+
              is an empty string, this method returns true.</para
           >
           <block subset="none" type="note">
@@ -4098,13 +5034,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -4124,8 +5066,12 @@
 
             
 
+            
+
              is less than or equal to the length of <paramref
              name="source" />
+
+            
 
             
 
@@ -4134,8 +5080,12 @@
 
             
 
+            
+
              starts with <paramref
              name="prefix" />
+
+            
 
             
 
@@ -4147,6 +5097,8 @@
 
           
 
+          
+
           The string to search in. </param
         >
         <param name="prefix">
@@ -4154,8 +5106,12 @@
 
           
 
+          
+
           The string to compare with the beginning of <paramref
            name="source" />
+
+          
 
           
 
@@ -4195,11 +5151,15 @@
 
             
 
+            
+
              is an empty string, this method returns true.</para
           >
           <para
             >The <see
              cref="F:System.Globalization.CompareOptions.StringSort" />
+
+            
 
             
 
@@ -4212,13 +5172,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -4234,6 +5200,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -4245,8 +5213,12 @@
 
             
 
+            
+
              is less than or equal to the length of <paramref
              name="source" />
+
+            
 
             
 
@@ -4255,8 +5227,12 @@
 
             
 
+            
+
              starts with <paramref
              name="prefix" />
+
+            
 
             
 
@@ -4268,6 +5244,8 @@
 
           
 
+          
+
           The string to search in. </param
         >
         <param name="prefix">
@@ -4275,8 +5253,12 @@
 
           
 
+          
+
           The string to compare with the beginning of <paramref
            name="source" />
+
+          
 
           
 
@@ -4287,8 +5269,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -4297,8 +5283,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -4307,8 +5297,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -4317,8 +5311,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -4327,8 +5325,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -4368,8 +5370,12 @@
 
             
 
+            
+
              parameter is sortable if it is a Unicode character that is defined in an internal <see
              cref="T:System.Globalization.CompareInfo" />
+
+            
 
             
 
@@ -4388,11 +5394,15 @@
 
             
 
+            
+
              parameter is sortable; otherwise, false.</para
           >
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4432,8 +5442,12 @@
 
             
 
+            
+
              parameter is represented by one or more UTF-16 encoded <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -4442,8 +5456,12 @@
 
             
 
+            
+
              parameter is sortable if each Unicode character is defined in an internal <see
              cref="T:System.Globalization.CompareInfo" />
+
+            
 
             
 
@@ -4462,8 +5480,12 @@
 
             
 
+            
+
              parameter is not an empty string ("") and all the Unicode characters in <paramref
              name="str" />
+
+            
 
             
 
@@ -4472,6 +5494,8 @@
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4510,6 +5534,8 @@
 
             
 
+            
+
              is an empty string, this method returns true.</para
           >
           <block subset="none" type="note">
@@ -4519,13 +5545,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -4545,8 +5577,12 @@
 
             
 
+            
+
              is less than or equal to the length of <paramref
              name="source" />
+
+            
 
             
 
@@ -4555,8 +5591,12 @@
 
             
 
+            
+
              ends with <paramref
              name="suffix" />
+
+            
 
             
 
@@ -4568,6 +5608,8 @@
 
           
 
+          
+
           The string to search in. </param
         >
         <param name="suffix">
@@ -4575,8 +5617,12 @@
 
           
 
+          
+
           The string to compare with the end of <paramref
            name="source" />
+
+          
 
           
 
@@ -4616,11 +5662,15 @@
 
             
 
+            
+
              is an empty string, this method returns true.</para
           >
           <para
             >The <see
              cref="F:System.Globalization.CompareOptions.StringSort" />
+
+            
 
             
 
@@ -4633,13 +5683,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -4655,6 +5711,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -4666,8 +5724,12 @@
 
             
 
+            
+
              is less than or equal to the length of <paramref
              name="source" />
+
+            
 
             
 
@@ -4676,8 +5738,12 @@
 
             
 
+            
+
              ends with <paramref
              name="suffix" />
+
+            
 
             
 
@@ -4689,6 +5755,8 @@
 
           
 
+          
+
           The string to search in. </param
         >
         <param name="suffix">
@@ -4696,8 +5764,12 @@
 
           
 
+          
+
           The string to compare with the end of <paramref
            name="source" />
+
+          
 
           
 
@@ -4708,8 +5780,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -4718,8 +5794,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -4728,8 +5808,12 @@
 
           
 
+          
+
            used by itself, or the bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -4738,8 +5822,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -4748,8 +5836,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -4789,13 +5881,19 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value. Overloads of <see
              cref="M:System.String.LastIndexOf(System.Char)" />
+
+            
 
             
 
@@ -4808,13 +5906,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -4834,8 +5938,12 @@
 
             
 
+            
+
             , if found, within <paramref
              name="source" />
+
+            
 
             
 
@@ -4847,6 +5955,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -4854,8 +5964,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -4895,8 +6009,12 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -4909,13 +6027,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -4935,8 +6059,12 @@
 
             
 
+            
+
             , if found, within <paramref
              name="source" />
+
+            
 
             
 
@@ -4948,6 +6076,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -4955,8 +6085,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -4997,6 +6131,8 @@
 
             
 
+            
+
              value is not valid for this method.</para
           >
           <para
@@ -5005,8 +6141,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -5015,13 +6155,19 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value, this overload performs an ordinal (culture-insensitive) search. A character is considered equivalent to another character only if the Unicode values are the same. Overloads of <see
              cref="M:System.String.LastIndexOf(System.Char)" />
+
+            
 
             
 
@@ -5034,13 +6180,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -5056,6 +6208,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -5067,8 +6221,12 @@
 
             
 
+            
+
             , if found, within <paramref
              name="source" />
+
+            
 
             
 
@@ -5080,6 +6238,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -5087,8 +6247,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -5099,8 +6263,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -5109,8 +6277,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -5119,8 +6291,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -5129,8 +6305,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -5139,8 +6319,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -5180,6 +6364,8 @@
 
             
 
+            
+
              and ending at the beginning of the string.</para
           >
           <para
@@ -5188,13 +6374,19 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value. Overloads of <see
              cref="M:System.String.LastIndexOf(System.Char)" />
+
+            
 
             
 
@@ -5207,13 +6399,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -5233,8 +6431,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -5243,8 +6445,12 @@
 
             
 
+            
+
              to <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -5253,8 +6459,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -5266,10 +6476,14 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5278,10 +6492,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5322,6 +6540,8 @@
 
             
 
+            
+
              value is not valid for this method.</para
           >
           <para
@@ -5330,8 +6550,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -5340,8 +6564,12 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -5354,13 +6582,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -5376,6 +6610,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -5387,8 +6623,12 @@
 
             
 
+            
+
             , if found, within <paramref
              name="source" />
+
+            
 
             
 
@@ -5400,6 +6640,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -5407,8 +6649,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -5419,8 +6665,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -5429,8 +6679,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -5439,8 +6693,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -5449,8 +6707,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -5459,8 +6721,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -5500,6 +6766,8 @@
 
             
 
+            
+
              and ending at the beginning of the string.</para
           >
           <para
@@ -5508,8 +6776,12 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -5522,13 +6794,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -5548,8 +6826,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -5558,8 +6840,12 @@
 
             
 
+            
+
              to <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -5568,8 +6854,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -5581,10 +6871,14 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5593,10 +6887,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5637,11 +6935,15 @@
 
             
 
+            
+
              and ending at the beginning of the string.</para
           >
           <para
             >The <see
              cref="F:System.Globalization.CompareOptions.StringSort" />
+
+            
 
             
 
@@ -5653,8 +6955,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -5663,13 +6969,19 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value, this overload performs an ordinal (culture-insensitive) search. A character is considered equivalent to another character only if the Unicode values are the same. Overloads of <see
              cref="M:System.String.LastIndexOf(System.Char)" />
+
+            
 
             
 
@@ -5682,13 +6994,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -5704,6 +7022,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -5715,8 +7035,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -5725,8 +7049,12 @@
 
             
 
+            
+
              to <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -5735,8 +7063,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -5748,6 +7080,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -5755,8 +7089,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -5767,10 +7105,14 @@
 
           
 
+          
+
           The zero-based starting index of the backward search. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5779,8 +7121,12 @@
 
           
 
+          
+
            and <paramref
            name="value" />
+
+          
 
           
 
@@ -5789,8 +7135,12 @@
 
           
 
+          
+
            is either the enumeration value <see
            cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+          
 
           
 
@@ -5799,8 +7149,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />
+
+          
 
           
 
@@ -5809,13 +7163,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreWidth" />
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -5856,13 +7216,19 @@
 
             
 
+            
+
              and ending at <paramref
              name="startIndex" />
 
             
 
+            
+
              - <paramref
              name="count" />
+
+            
 
             
 
@@ -5874,13 +7240,19 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value. Overloads of <see
              cref="M:System.String.LastIndexOf(System.Char)" />
+
+            
 
             
 
@@ -5893,13 +7265,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -5919,8 +7297,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -5929,8 +7311,12 @@
 
             
 
+            
+
              and that ends at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -5939,8 +7325,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -5952,6 +7342,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -5959,8 +7351,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -5971,10 +7367,14 @@
 
           
 
+          
+
           The zero-based starting index of the backward search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6015,11 +7415,15 @@
 
             
 
+            
+
              and ending at the beginning of the string.</para
           >
           <para
             >The <see
              cref="F:System.Globalization.CompareOptions.StringSort" />
+
+            
 
             
 
@@ -6031,8 +7435,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -6041,8 +7449,12 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -6055,13 +7467,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -6077,6 +7495,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -6088,8 +7508,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -6098,8 +7522,12 @@
 
             
 
+            
+
              to <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6108,8 +7536,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -6121,6 +7553,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -6128,8 +7562,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -6140,10 +7578,14 @@
 
           
 
+          
+
           The zero-based starting index of the backward search. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6152,8 +7594,12 @@
 
           
 
+          
+
            and <paramref
            name="value" />
+
+          
 
           
 
@@ -6162,8 +7608,12 @@
 
           
 
+          
+
            is either the enumeration value <see
            cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+          
 
           
 
@@ -6172,8 +7622,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />
+
+          
 
           
 
@@ -6182,13 +7636,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreWidth" />
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -6229,13 +7689,19 @@
 
             
 
+            
+
              and ending at <paramref
              name="startIndex" />
 
             
 
+            
+
              - <paramref
              name="count" />
+
+            
 
             
 
@@ -6247,8 +7713,12 @@
 
             
 
+            
+
              and use the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -6261,13 +7731,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -6287,8 +7763,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -6297,8 +7777,12 @@
 
             
 
+            
+
              and that ends at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6307,8 +7791,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -6320,6 +7808,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -6327,8 +7817,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -6339,10 +7833,14 @@
 
           
 
+          
+
           The zero-based starting index of the backward search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6384,13 +7882,19 @@
 
             
 
+            
+
              and ending at <paramref
              name="startIndex" />
 
             
 
+            
+
              - <paramref
              name="count" />
+
+            
 
             
 
@@ -6402,6 +7906,8 @@
 
             
 
+            
+
              value is not valid for this method.</para
           >
           <para
@@ -6410,8 +7916,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -6420,13 +7930,19 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
 
             
 
+            
+
              value, this overload performs an ordinal (culture-insensitive) search. A character is considered equivalent to another character only if the Unicode values are the same. Overloads of <see
              cref="M:System.String.LastIndexOf(System.Char)" />
+
+            
 
             
 
@@ -6439,13 +7955,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -6461,6 +7983,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -6472,8 +7996,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -6482,8 +8010,12 @@
 
             
 
+            
+
              and that ends at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6492,8 +8024,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -6505,6 +8041,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -6512,8 +8050,12 @@
 
           
 
+          
+
           The character to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -6524,10 +8066,14 @@
 
           
 
+          
+
           The zero-based starting index of the backward search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6538,8 +8084,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -6548,8 +8098,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -6558,8 +8112,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -6568,8 +8126,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -6578,8 +8140,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -6621,13 +8187,19 @@
 
             
 
+            
+
              and ending at <paramref
              name="startIndex" />
 
             
 
+            
+
              - <paramref
              name="count" />
+
+            
 
             
 
@@ -6639,6 +8211,8 @@
 
             
 
+            
+
              value is not valid for this method.</para
           >
           <para
@@ -6647,8 +8221,12 @@
 
             
 
+            
+
              does not include the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -6657,8 +8235,12 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Globalization.CompareOptions.Ordinal" />
+
+            
 
             
 
@@ -6671,13 +8253,19 @@
 
               
 
+              
+
                to specify the kind of comparison expected. As a general rule, use linguistic options (using the current culture) for comparing strings displayed in the user interface and specify <see
                cref="F:System.Globalization.CompareOptions.Ordinal" />
 
               
 
+              
+
                or <see
                cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+              
 
               
 
@@ -6693,6 +8281,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -6704,8 +8294,12 @@
 
             
 
+            
+
             , if found, within the section of <paramref
              name="source" />
+
+            
 
             
 
@@ -6714,8 +8308,12 @@
 
             
 
+            
+
              and that ends at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6724,8 +8322,12 @@
 
             
 
+            
+
              if <paramref
              name="value" />
+
+            
 
             
 
@@ -6737,6 +8339,8 @@
 
           
 
+          
+
           The string to search. </param
         >
         <param name="value">
@@ -6744,8 +8348,12 @@
 
           
 
+          
+
           The string to locate within <paramref
            name="source" />
+
+          
 
           
 
@@ -6756,10 +8364,14 @@
 
           
 
+          
+
           The zero-based starting index of the backward search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6770,8 +8382,12 @@
 
           
 
+          
+
           A value that defines how <paramref
            name="source" />
+
+          
 
           
 
@@ -6780,8 +8396,12 @@
 
           
 
+          
+
            should be compared. <paramref
            name="options" />
+
+          
 
           
 
@@ -6790,8 +8410,12 @@
 
           
 
+          
+
           , or a bitwise combination of one or more of the following values: <see
            cref="F:System.Globalization.CompareOptions.IgnoreCase" />
+
+          
 
           
 
@@ -6800,8 +8424,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />
+
+          
 
           
 
@@ -6810,8 +8438,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />
+
+          
 
           
 
@@ -6839,6 +8471,8 @@
           <para
             >Gets the properly formed culture identifier for the current <see
              cref="T:System.Globalization.CompareInfo" />
+
+            
 
             
 
@@ -6873,8 +8507,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.CultureInfo.Name" />
+
+            
 
             
 
@@ -6883,13 +8521,19 @@
 
             
 
+            
+
              property value of hexadecimal 0x10407 identifies an alternate sort culture that sorts names as they might appear in a German telephone book. The <see
              cref="P:System.Globalization.CompareInfo.Name" />
 
             
 
+            
+
              property has a value of "de-de_phoneb", whereas the <see
              cref="P:System.Globalization.CultureInfo.Name" />
+
+            
 
             
 
@@ -6901,6 +8545,8 @@
           <para
             >Gets the name of the culture used for sorting operations by this <see
              cref="T:System.Globalization.CompareInfo" />
+
+            
 
             
 
@@ -6939,13 +8585,19 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Runtime.Serialization.IDeserializationCallback" />
 
             
 
+            
+
              interface. For more information, see the <see
              cref="M:System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(System.Object)" />
+
+            
 
             
 
@@ -6958,6 +8610,8 @@
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6990,8 +8644,12 @@
 
             
 
+            
+
              method. It returns a string that consists of the class name and the value of the instance <see
              cref="P:System.Globalization.CompareInfo.Name" />
+
+            
 
             
 
@@ -7006,6 +8664,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -7014,6 +8674,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Globalization.CompareInfo" />
+
+            
 
             
 

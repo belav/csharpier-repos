@@ -19,6 +19,8 @@
 
         
 
+        
+
          method returns a configuration control.</para
       >
       <para
@@ -27,8 +29,12 @@
 
         
 
+        
+
          method when your transformer requires a customized UI. The configuration control must implement the <see
          cref="T:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl.Succeeded" />
+
+        
 
         
 
@@ -67,6 +77,8 @@
 
             
 
+            
+
              raises this event when a transformer configuration is not completed, either because the user canceled the configuration or because the configuration could not be performed.</para
           >
         </remarks>
@@ -92,6 +104,8 @@
           <para
             >The Web Parts control that implements <see
              cref="T:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl" />
+
+            
 
             
 

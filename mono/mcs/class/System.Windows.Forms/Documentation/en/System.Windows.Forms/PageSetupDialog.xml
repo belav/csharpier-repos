@@ -27,8 +27,12 @@
 
         
 
+        
+
          dialog box modifies the <see
          cref="T:System.Drawing.Printing.PageSettings" />
+
+        
 
         
 
@@ -37,13 +41,19 @@
 
         
 
+        
+
          information for a given <see
          cref="P:System.Windows.Forms.PageSetupDialog.Document" />
 
         
 
+        
+
         . The user can enable sections of the dialog box to manipulate printing and margins; paper orientation, size, and source; and to show Help and network buttons. The <see
          cref="P:System.Windows.Forms.PageSetupDialog.MinMargins" />
+
+        
 
         
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          class, the read/write properties are set to initial values. For a list of these values, see the <see
          cref="M:System.Windows.Forms.PageSetupDialog.#ctor" />
+
+        
 
         
 
@@ -68,8 +82,12 @@
 
         
 
+        
+
          needs page settings to display, you need to set the <see
          cref="P:System.Windows.Forms.PrintDialog.Document" />
+
+        
 
         
 
@@ -78,13 +96,19 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Windows.Forms.PageSetupDialog.PageSettings" />
 
         
 
+        
+
          property before calling <see
          cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+        
 
         
 
@@ -107,6 +131,8 @@
           <para
             >When an instance of <see
              cref="T:System.Windows.Forms.PageSetupDialog" />
+
+            
 
             
 
@@ -234,6 +260,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -337,6 +365,8 @@
 
               
 
+              
+
                button will not be shown.</para
             >
           </block>
@@ -346,6 +376,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Printer</ui>
+
+            
 
             
 
@@ -380,6 +412,8 @@
           <para
             >Gets or sets a value indicating the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -422,13 +456,19 @@
 
             
 
+            
+
              class measures <see
              cref="P:System.Drawing.Printing.PageSettings.Margins" />
 
             
 
+            
+
              in hundredths of an inch, but the <see
              cref="T:System.Windows.Forms.PageSetupDialog" />
+
+            
 
             
 
@@ -594,6 +634,8 @@
 
             
 
+            
+
              button is visible.</para
           >
         </summary>
@@ -622,6 +664,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Network</ui>
+
+            
 
             
 

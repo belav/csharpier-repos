@@ -19,8 +19,12 @@
 
         
 
+        
+
          interface to modify, examine, or extend some aspect of contract-wide execution at the application level. Unlike <see
          cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          objects, <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -44,6 +52,8 @@
 
         
 
+        
+
         .</para
       >
       <list type="bullet">
@@ -51,6 +61,8 @@
           <para
             >Use the <see
              cref="M:System.ServiceModel.Description.IContractBehavior.AddBindingParameters(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" />
+
+            
 
             
 
@@ -64,6 +76,8 @@
 
             
 
+            
+
              method to modify, examine, or insert extensions to a contract in a client application.</para
           >
         </item>
@@ -71,6 +85,8 @@
           <para
             >Use the <see
              cref="M:System.ServiceModel.Description.IContractBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.DispatchRuntime)" />
+
+            
 
             
 
@@ -84,12 +100,16 @@
 
             
 
+            
+
              method to ensure that a contract can support a particular feature.</para
           >
         </item>
       </list>
       <para>
         <see cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -102,13 +122,19 @@
 
           
 
+          
+
            methods pass <see
            cref="T:System.ServiceModel.Description.ContractDescription" />
 
           
 
+          
+
            and <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -120,8 +146,12 @@
 
         
 
+        
+
          types can be used on either the service or the client, or both. To perform a customization task on the service, the <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -130,13 +160,19 @@
 
         
 
+        
+
          property prior to the construction of the service runtime, which occurs when the <see
          cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
         
 
+        
+
          method is called on the <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -148,13 +184,19 @@
 
         
 
+        
+
          property prior to the point when the <see
          cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
         
 
+        
+
          method is called on the <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -166,6 +208,8 @@
       <para
         >The second method is to create a custom attribute that implements <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -188,6 +232,8 @@
 
         
 
+        
+
         . In this case, the behavior is as follows: </para
       >
       <list type="bullet">
@@ -195,6 +241,8 @@
           <para
             >A contract interface. In this case, the behavior is applied to all contracts of that type in any endpoint and indigo1 ignores the value of the <see
              cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
+
+            
 
             
 
@@ -208,6 +256,8 @@
 
             
 
+            
+
              property.</para
           >
         </item>
@@ -215,6 +265,8 @@
           <para
             >A callback class.  In this case, the behavior is applied to the duplex client's endpoint and indigo2 ignores the value of the <see
              cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
+
+            
 
             
 
@@ -228,13 +280,19 @@
 
         
 
+        
+
          object must be added to the <see
          cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" />
 
         
 
+        
+
          property prior to the construction of the client runtime, which occurs when <see
          cref="M:System.ServiceModel.ChannelFactory`1.CreateChannel" />
+
+        
 
         
 
@@ -248,8 +306,12 @@
 
             
 
+            
+
              property prior to the point when the <see
              cref="M:System.ServiceModel.ChannelFactory`1.CreateChannel" />
+
+            
 
             
 
@@ -263,6 +325,8 @@
 
             
 
+            
+
             . </para
           >
         </item>
@@ -273,10 +337,14 @@
 
         
 
+        
+
          types to either the client or service application, see <format
          type="text/html">
           <a href="149b99b6-6eb6-4f45-be22-c967279677d9">Attaching Extensions Using Behaviors</a>
         </format>
+
+        
 
         
 
@@ -324,6 +392,8 @@
 
             
 
+            
+
              method to provide binding elements with the extra objects they require to support the contract behavior.</para
           >
           <para>This method is called once for each endpoint that uses the specified service contract.</para>
@@ -334,6 +404,8 @@
         </summary>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -373,13 +445,19 @@
 
             
 
+            
+
              method to view, modify, or add custom extensions to the client runtime across all messages or for one specific operation. For details about what customizations you can do with a client run-time object, see <see
              cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+            
 
             
 
@@ -391,8 +469,12 @@
 
             
 
+            
+
              method can throw a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -405,8 +487,12 @@
 
             
 
+            
+
              and that returned by the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.CallbackDispatchRuntime" />
+
+            
 
             
 
@@ -418,8 +504,12 @@
 
             
 
+            
+
              objects in the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Operations" />
+
+            
 
             
 
@@ -432,6 +522,8 @@
         </summary>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,13 +563,19 @@
 
             
 
+            
+
              to view, modify, or add custom extensions to the service runtime across all messages in a specific contract or for one specific operation in that contract. For details about what customizations you can perform in a service application, see <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -489,8 +587,12 @@
 
             
 
+            
+
              method can throw a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -503,8 +605,12 @@
 
             
 
+            
+
              and that returned by the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.CallbackClientRuntime" />
+
+            
 
             
 
@@ -516,8 +622,12 @@
 
             
 
+            
+
              objects in the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
+
+            
 
             
 
@@ -530,6 +640,8 @@
         </summary>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -567,6 +679,8 @@
 
             
 
+            
+
              method to confirm that the contract description is sufficient to support the custom contract behavior. Implementations can inspect the description and either throw or return no value.</para
           >
           <para>This method is called once for each endpoint that uses the specified service contract.</para>
@@ -577,6 +691,8 @@
         </summary>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

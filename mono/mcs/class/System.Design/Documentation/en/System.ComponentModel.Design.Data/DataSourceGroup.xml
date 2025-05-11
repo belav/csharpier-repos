@@ -34,6 +34,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -79,6 +81,8 @@
 
             
 
+            
+
              image that represents the group is typically used in design-time pickers. The image may be null.</para
           >
         </remarks>
@@ -87,6 +91,8 @@
           <para
             >When overridden in a derived class, gets the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 

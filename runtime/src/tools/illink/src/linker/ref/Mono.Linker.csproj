@@ -2,7 +2,8 @@
   <PropertyGroup>
     <AssemblyName>illink</AssemblyName>
     <Description>IL Linker</Description>
-    <BuildOutputTargetFolder>ref</BuildOutputTargetFolder>
+    <BuildOutputTargetFolder
+>ref</BuildOutputTargetFolder>
     <!-- Crashes roslyn with InvalidOperationException: Cannot enqueue data after PromiseNotToEnqueue -->
     <RunAnalyzers>false</RunAnalyzers>
     <Nullable>disable</Nullable>

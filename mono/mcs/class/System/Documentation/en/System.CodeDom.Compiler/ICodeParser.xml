@@ -25,6 +25,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -61,6 +63,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -72,6 +76,8 @@
 
             
 
+            
+
              that contains a representation of the parsed code.</para
           >
         </returns>
@@ -80,8 +86,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 

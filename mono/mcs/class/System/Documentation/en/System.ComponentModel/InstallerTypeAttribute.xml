@@ -36,8 +36,12 @@
 
         
 
+        
+
          interface. Use the <see
          cref="P:System.ComponentModel.InstallerTypeAttribute.InstallerType" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -86,6 +92,8 @@
 
             
 
+            
+
              class with the name of the component's installer type.</para
           >
         </summary>
@@ -94,13 +102,19 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Type" />
 
           
 
+          
+
            that represents the installer for the component this attribute is bound to. This class must implement <see
            cref="T:System.ComponentModel.Design.IDesigner" />
+
+          
 
           
 
@@ -134,8 +148,12 @@
 
             
 
+            
+
              class, when given a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -147,13 +165,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
           
 
+          
+
            that represents the installer for the component this attribute is bound to. This class must implement <see
            cref="T:System.ComponentModel.Design.IDesigner" />
+
+          
 
           
 
@@ -189,6 +213,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -198,6 +224,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -232,6 +260,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.InstallerTypeAttribute" />
+
+            
 
             
 

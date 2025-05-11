@@ -40,6 +40,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -75,8 +77,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

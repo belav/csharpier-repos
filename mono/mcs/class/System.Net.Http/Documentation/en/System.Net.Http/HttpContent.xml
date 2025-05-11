@@ -46,6 +46,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -79,8 +81,12 @@
 
             
 
+            
+
              object will complete after all of the content has been written to the stream object passed as the <paramref
              name="stream" />
+
+            
 
             
 
@@ -95,6 +101,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -106,12 +114,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -148,8 +160,12 @@
 
             
 
+            
+
              object will complete after all of the content has been written to the stream object passed as the <paramref
              name="stream" />
+
+            
 
             
 
@@ -164,6 +180,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -172,6 +190,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -184,10 +204,14 @@
 
           
 
+          
+
           The target stream.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,11 +253,15 @@
 
             
 
+            
+
              object will complete after all of the content has been written to the memory stream.</para
           >
           <para
             >Once the operation completes, the  <see
              cref="P:System.Threading.Tasks.Task`1.Result" />
+
+            
 
             
 
@@ -245,8 +273,12 @@
 
             
 
+            
+
               method buffers the content to a memory stream. Derived classes can override this behavior if there is a better way to retrieve the content as stream. For example, a byte array or a string could use a more efficient method way such as wrapping a read-only <see
              cref="T:System.IO.MemoryStream" />
+
+            
 
             
 
@@ -262,6 +294,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -295,6 +329,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -325,8 +361,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -335,8 +375,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -345,8 +389,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Http.HttpContent" />
+
+            
 
             
 
@@ -361,11 +409,15 @@
 
             
 
+            
+
              and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -424,11 +476,15 @@
 
             
 
+            
+
              object will complete after all of the content has been serialized to the memory buffer.</para
           >
           <para
             >After content is serialized to a memory buffer, calls to one of the  <see
              cref="M:System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream)" />
+
+            
 
             
 
@@ -444,6 +500,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -489,6 +547,8 @@
 
             
 
+            
+
               object will complete after all of the content has been serialized to the memory buffer.</para
           >
           <para
@@ -497,11 +557,15 @@
 
             
 
+            
+
              methods will copy the content of the memory buffer to the target stream.</para
           >
           <para
             >If the content exceeds the value  passed in the <paramref
              name="maxBufferSize" />
+
+            
 
             
 
@@ -520,12 +584,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="maxBufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -567,11 +635,15 @@
 
             
 
+            
+
              object will complete after all of the content has been written as a byte array.</para
           >
           <para
             >Once the operation completes, the  <see
              cref="P:System.Threading.Tasks.Task`1.Result" />
+
+            
 
             
 
@@ -587,6 +659,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -630,11 +704,15 @@
 
             
 
+            
+
              object will complete after all of the stream that represents content has been read. </para
           >
           <para
             >Once the operation completes, the  <see
              cref="P:System.Threading.Tasks.Task`1.Result" />
+
+            
 
             
 
@@ -650,6 +728,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -693,11 +773,15 @@
 
             
 
+            
+
              object will complete after all of the content has been written as a string.</para
           >
           <para
             >Once the operation completes, the  <see
              cref="P:System.Threading.Tasks.Task`1.Result" />
+
+            
 
             
 
@@ -713,6 +797,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -751,8 +837,12 @@
 
             
 
+            
+
              object will complete after all of the content has been serialized to the stream object passed in the <paramref
              name="stream" />
+
+            
 
             
 
@@ -771,6 +861,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -780,10 +872,14 @@
 
           
 
+          
+
           The target stream.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

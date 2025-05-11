@@ -38,6 +38,8 @@
           
 
           
+
+          
    are intended primarily for use by compilers, not application
    programmers. They allow compilers to easily implement certain language
    features that are not directly visible to programmers.</block
@@ -80,6 +82,8 @@
 
             
 
+            
+
              provides information about an artificially limited stack that preserves enough space for an exception to be raised and recovery action to be taken. The artificial stack limit is chosen by the common language runtime to ensure that enough space remains to throw an exception safely.</para
           >
           <para>This method is useful in situations where stack overflow might occur as a result of unbounded recursion. It is intended for use in compiler services scenarios, although it can also be used safely in other development scenarios.</para>
@@ -88,6 +92,8 @@
             <para
               >This method is not part of the constrained execution region (CER) support, and should not be confused with the <see
                cref="M:System.Runtime.CompilerServices.RuntimeHelpers.ProbeForSufficientStack" />
+
+              
 
               
 
@@ -133,6 +139,8 @@
 
             
 
+            
+
              instances are considered equal.</para
           >
         </summary>
@@ -144,8 +152,12 @@
 
             
 
+            
+
              parameter is the same instance as the <paramref
              name="o2" />
+
+            
 
             
 
@@ -157,10 +169,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="o2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,8 +245,12 @@
 
             
 
+            
+
              method always calls the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -239,13 +259,19 @@
 
             
 
+            
+
              method. Therefore, using <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" />
 
             
 
+            
+
              might differ from calling GetHashCode directly on the object with the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -258,8 +284,12 @@
 
               
 
+              
+
                method returns identical hash codes for identical object references, you should not use this method to test for object identity, because this hash code does not uniquely identify an object reference. To test for object identify (that is, to test that two objects reference the same object in memory), call the <see
                cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+              
 
               
 
@@ -268,8 +298,12 @@
 
               
 
+              
+
                to test whether two strings represent equal object references, because the string is interned. To test for string interning, call the <see
                cref="M:System.String.IsInterned(System.String)" />
+
+              
 
               
 
@@ -282,8 +316,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" />
+
+            
 
             
 
@@ -296,8 +334,12 @@
 
                 
 
+                
+
                  returns a hash code that is based on the object's definition of equality. For example, two strings with identical contents will return the same value for <see
                  cref="M:System.Object.GetHashCode" />
+
+                
 
                 
 
@@ -310,10 +352,14 @@
 
                 
 
+                
+
                  returns a hash code that indicates object identity. That is, two string variables whose contents are identical and that represent a string that is interned (see the <format
                  type="text/html">
                   <a href="#interning">String Interning</a>
                 </format>
+
+                
 
                 
 
@@ -325,6 +371,8 @@
             <para
               >Note that <see
                cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" />
+
+              
 
               
 
@@ -344,11 +392,15 @@
 
             
 
+            
+
              on these two string objects will produce the same hash code, contrary to the second bulleted item in the previous section.</para
           >
           <para
             >The CLR adds only literals to the pool. Results of string operations such as concatenation are not added to the pool, unless the compiler resolves the string concatenation as a single string literal. Therefore, if str2 was created as the result of a concatenation operation, and str2 is identical to str1, using <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" />
+
+            
 
             
 
@@ -360,11 +412,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >You can also use the <see
              cref="M:System.String.IsInterned(System.String)" />
+
+            
 
             
 
@@ -383,11 +439,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -433,6 +493,8 @@
 
             
 
+            
+
              to assign a value type to an object or to pass a value type as a parameter of a type object.</para
           >
           <para>This method is used by compilers.</para>
@@ -449,8 +511,12 @@
 
             
 
+            
+
              if it is a value class; otherwise, <paramref
              name="obj" />
+
+            
 
             
 
@@ -459,6 +525,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -506,10 +574,14 @@
 
           
 
+          
+
           The array to be initialized. </param
         >
         <param name="fldHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -544,13 +616,19 @@
 
             
 
+            
+
              containing the number of bytes between the start of a <see
              cref="T:System.String" />
 
             
 
+            
+
              and the first <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -600,8 +678,12 @@ in the string.</para
 
             
 
+            
+
              method and the try block. For more information about CERs, see the classes in the <see
              cref="N:System.Runtime.ConstrainedExecution" />
+
+            
 
             
 
@@ -613,13 +695,19 @@ in the string.</para
 
             
 
+            
+
              method do not work perfectly when a <see
              cref="T:System.StackOverflowException" />
 
             
 
+            
+
              is generated from the try block. For more information, see the <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(System.Runtime.CompilerServices.RuntimeHelpers.TryCode,System.Runtime.CompilerServices.RuntimeHelpers.CleanupCode,System.Object)" />
+
+            
 
             
 
@@ -631,8 +719,12 @@ in the string.</para
 
             
 
+            
+
              method calls the <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.ProbeForSufficientStack" />
+
+            
 
             
 
@@ -672,6 +764,8 @@ in the string.</para
           <para
             >Compilers should not call this method directly. Instead, define a CER by calling the <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.PrepareConstrainedRegions" />
+
+            
 
             
 
@@ -716,6 +810,8 @@ in the string.</para
 
           
 
+          
+
           The delegate type to prepare.</param
         >
       </Docs>
@@ -750,8 +846,12 @@ in the string.</para
 
             
 
+            
+
              method to handle virtual calls that are made inside a constrained execution region (CER). At JIT compilation time, the common language runtime does not usually have enough information about the target of a virtual call. Therefore, the runtime does not initially prepare that segment of the call graph. If the code that is using the CER has enough knowledge to determine the target at any point in time before the CER is actually entered, it can call <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(System.RuntimeMethodHandle)" />
+
+            
 
             
 
@@ -764,6 +864,8 @@ in the string.</para
         </summary>
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -802,6 +904,8 @@ in the string.</para
 
             
 
+            
+
              method. The common language runtime cannot prepare constrained execution regions (CERs) rooted in a method that has generic type parameters (either a type parameter on the class containing the method or one on the method itself) when those type parameters are instantiated as reference types.</para
           >
           <para
@@ -810,13 +914,19 @@ in the string.</para
 
             
 
+            
+
              or other value types. To instantiate reference types such as <see
              cref="T:System.String" />
 
             
 
+            
+
             , you must use an explicit <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(System.RuntimeMethodHandle,System.RuntimeTypeHandle[])" />
+
+            
 
             
 
@@ -832,10 +942,14 @@ in the string.</para
 
           
 
+          
+
           A handle to the method to prepare.</param
         >
         <param name="instantiation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -875,13 +989,19 @@ in the string.</para
 
             
 
+            
+
              method, you should use a standard CER. That is, if you are planning to use a moderate amount of stack space, call the <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.PrepareConstrainedRegions" />
 
             
 
+            
+
              method immediately before your try/finally or try/catch block. If you are calling a recursive method or plan to use a lot of stack space, you must use the <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(System.Runtime.CompilerServices.RuntimeHelpers.TryCode,System.Runtime.CompilerServices.RuntimeHelpers.CleanupCode,System.Object)" />
+
+            
 
             
 
@@ -930,6 +1050,8 @@ in the string.</para
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -991,6 +1113,8 @@ in the string.</para
         </summary>
         <param name="module">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

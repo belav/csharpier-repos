@@ -22,8 +22,12 @@
 
         
 
+        
+
         . A <newTerm
         >session</newTerm>
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          property or <see
          cref="Overload:System.Windows.Forms.WebBrowser.Navigate" />
+
+        
 
         
 
@@ -45,13 +53,19 @@
 
         
 
+        
+
          control to navigate to a new Web page, Internet Explorer may either retrieve the latest version of that page from the server or display the version that is currently in the Internet Explorer cache. By contrast, when you use <see
          cref="T:System.Windows.Forms.HtmlHistory" />
 
         
 
+        
+
          to navigate forward and backward in this stack, Internet Explorer will display the pages from the local computer's cache of downloaded Web content, unless the server indicates that the document's content should expire immediately. For more information on the history list and caching in Internet Explorer, see article 234067, "How To Prevent Caching in Internet Explorer," in the Microsoft Knowledge Base at <see
          cref="http://go.microsoft.com/fwlink/?linkid=37115">http://support.microsoft.com</see>
+
+        
 
         
 
@@ -63,8 +77,12 @@
 
         
 
+        
+
          is <see
          cref="Overload:System.Windows.Forms.HtmlHistory.Go" />
+
+        
 
         
 
@@ -73,8 +91,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.HtmlHistory.Back(System.Int32)" />
+
+        
 
         
 
@@ -108,8 +130,12 @@
 
             
 
+            
+
              exceeds the number of previously visited entries in the history, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -118,6 +144,8 @@
           <para
             >If there are no entries behind the current page in the navigation stack, calling <see
              cref="M:System.Windows.Forms.HtmlHistory.Back(System.Int32)" />
+
+            
 
             
 
@@ -130,6 +158,8 @@
         </summary>
         <param name="numberBack">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,8 +186,12 @@
 
             
 
+            
+
              method when you are finished using the <see
              cref="T:System.Windows.Forms.HtmlHistory" />
+
+            
 
             
 
@@ -166,8 +200,12 @@
 
             
 
+            
+
              leaves the <see
              cref="T:System.Windows.Forms.HtmlHistory" />
+
+            
 
             
 
@@ -176,13 +214,19 @@
 
             
 
+            
+
             , you must release all references to <see
              cref="T:System.Windows.Forms.HtmlHistory" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that <see
              cref="T:System.Windows.Forms.HtmlHistory" />
+
+            
 
             
 
@@ -193,10 +237,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -209,13 +257,19 @@
 
               
 
+              
+
                before you release your last reference to <see
                cref="T:System.Windows.Forms.HtmlHistory" />
 
               
 
+              
+
               . Otherwise, the resources <see
                cref="T:System.Windows.Forms.HtmlHistory" />
+
+              
 
               
 
@@ -228,6 +282,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Windows.Forms.HtmlHistory" />
+
+            
 
             
 
@@ -255,12 +311,16 @@
 
             
 
+            
+
             . For more information, see <format
              type="text/html">
               <a href="d1898229-cd40-426e-a275-f3eb65fbc79f"
                 >Importing a Type Library as an Assembly</a
               >
             </format>
+
+            
 
             
 
@@ -294,8 +354,12 @@
 
             
 
+            
+
              exceeds the number of previously visited entries in the history, the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -304,6 +368,8 @@
           <para
             >If there are no entries ahead of the current page in the navigation stack, calling <see
              cref="M:System.Windows.Forms.HtmlHistory.Forward(System.Int32)" />
+
+            
 
             
 
@@ -316,6 +382,8 @@
         </summary>
         <param name="numberForward">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,8 +412,12 @@
 
             
 
+            
+
              with a negative argument is equivalent to using the <see
              cref="M:System.Windows.Forms.HtmlHistory.Back(System.Int32)" />
+
+            
 
             
 
@@ -354,8 +426,12 @@
 
             
 
+            
+
              with a positive argument is equivalent to using the <see
              cref="M:System.Windows.Forms.HtmlHistory.Forward(System.Int32)" />
+
+            
 
             
 
@@ -368,6 +444,8 @@
         </summary>
         <param name="relativePosition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -396,8 +474,12 @@
 
             
 
+            
+
              is equivalent to using either the <see
              cref="P:System.Windows.Forms.WebBrowser.Url" />
+
+            
 
             
 
@@ -406,8 +488,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -420,6 +506,8 @@
         </summary>
         <param name="urlString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -448,8 +536,12 @@
 
             
 
+            
+
              is equivalent to using either the <see
              cref="P:System.Windows.Forms.WebBrowser.Url" />
+
+            
 
             
 
@@ -458,8 +550,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -475,8 +571,12 @@
 
           
 
+          
+
           The URL as a <see
            cref="T:System.Uri" />
+
+          
 
           
 

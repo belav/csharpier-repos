@@ -54,6 +54,8 @@
 
             
 
+            
+
              is accessed for the first time</para
           >
         </remarks>
@@ -62,6 +64,8 @@
           <para
             >Initializes the <see
              cref="T:System.Threading.ThreadLocal`1" />
+
+            
 
             
 
@@ -93,6 +97,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -101,8 +107,12 @@
 
           
 
+          
+
           Whether to track all values set on the instance and expose them through the <see
            cref="P:System.Threading.ThreadLocal`1.Values" />
+
+          
 
           
 
@@ -176,8 +186,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.ThreadLocal`1" />
+
+            
 
             
 
@@ -186,8 +200,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.ThreadLocal`1" />
+
+            
 
             
 
@@ -201,10 +219,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -217,8 +239,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.ThreadLocal`1" />
+
+              
 
               
 
@@ -231,6 +257,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.ThreadLocal`1" />
+
+            
 
             
 
@@ -264,6 +292,8 @@
 
             
 
+            
+
             , this method is not thread-safe.</para
           >
         </remarks>
@@ -275,6 +305,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -283,8 +315,12 @@
 
           
 
+          
+
           A Boolean value that indicates whether this method is being called due to a call to <see
            cref="M:System.Threading.ThreadLocal`1.Dispose" />
+
+          
 
           
 
@@ -316,6 +352,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -339,6 +377,8 @@
           <para
             >Gets whether <see
              cref="P:System.Threading.ThreadLocal`1.Value" />
+
+            
 
             
 
@@ -370,6 +410,8 @@
 
             
 
+            
+
              directly.</para
           >
         </remarks>
@@ -385,8 +427,12 @@
 
             
 
+            
+
              on the <see
              cref="P:System.Threading.ThreadLocal`1.Value" />
+
+            
 
             
 
@@ -420,8 +466,12 @@
 
             
 
+            
+
              will attempt to initialize it. If an initialization function was supplied during the construction, that initialization will happen by invoking the function to retrieve the initial value for <see
              cref="P:System.Threading.ThreadLocal`1.Value" />
+
+            
 
             
 

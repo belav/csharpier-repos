@@ -8,8 +8,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -27,6 +31,8 @@
       <name>
         <non_terminal where="21.3">enum-member-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -50,7 +56,7 @@
 
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 enum Color: uint  
 {  
    Red = -1,  
@@ -62,8 +68,12 @@ enum Color: uint
 
       
 
+      
+
       results in a compile-time error because the constant values -1, -2, and -3 are not in the range of the underlying integral type <keyword
       >uint</keyword>
+
+      
 
       
 
@@ -75,7 +85,7 @@ enum Color: uint
 
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 enum Color   
 {  
    Red,  
@@ -89,12 +99,16 @@ enum Color
 
       
 
+      
+
       shows an enum that has two enum members-Blue and Max-that have the same associated value. end example]</example
     >
   </paragraph>
   <paragraph
     >The associated value of an enum member is assigned either implicitly or explicitly. If the declaration of the enum member has a <non_terminal
      where="14.15">constant-expression</non_terminal>
+
+    
 
     
 
@@ -108,7 +122,7 @@ enum Color
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 enum Color  
 {  
@@ -141,14 +155,18 @@ class Test
 
       
 
+      
+
       prints out the enum member names and their associated values. The output is: <code_example
       >
-        <![CDATA[
+<![CDATA[
 Red = 0  
 Green = 10  
 Blue = 11  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -165,7 +183,7 @@ Blue = 11
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 enum Circular  
 {  
    A = B,  
@@ -173,6 +191,8 @@ enum Circular
 }  
 ]]>
       </code_example>
+
+      
 
       
 

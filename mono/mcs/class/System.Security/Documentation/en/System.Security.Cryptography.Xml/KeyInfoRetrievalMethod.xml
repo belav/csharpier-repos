@@ -25,6 +25,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -40,6 +42,8 @@
 
         
 
+        
+
          class represents the &lt;RetrievalMethod&gt; element for both XML encryption and XML digital signatures.</para
       >
       <para
@@ -48,13 +52,19 @@
 
         
 
+        
+
          class to reference the same <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
 
         
 
+        
+
          information in multiple XMLDSIG signatures or encrypted XML documents, especially when the referenced information is large. For example, a &lt;RetrievalMethod&gt; subelement can be used to reference a <see
          cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+        
 
         
 
@@ -67,6 +77,8 @@
       <para
         >References <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+        
 
         
 
@@ -96,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />
+
+            
 
             
 
@@ -130,8 +144,12 @@
 
             
 
+            
+
              class with the specified Uniform Resource Identifier (URI) pointing to the referenced <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -143,8 +161,12 @@
 
           
 
+          
+
           The Uniform Resource Identifier (URI) of the information to be referenced by the new instance of <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />
+
+          
 
           
 
@@ -181,8 +203,12 @@
 
             
 
+            
+
              class with the specified Uniform Resource Identifier (URI) pointing to the referenced <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -194,8 +220,12 @@
 
           
 
+          
+
           The Uniform Resource Identifier (URI) of the information to be referenced by the new instance of <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />
+
+          
 
           
 
@@ -228,6 +258,8 @@
 
             
 
+            
+
              object returned by this method is suitable for use as a subelement of an XMLDSIG or XML encryption &lt;KeyInfo&gt; element.</para
           >
         </remarks>
@@ -239,6 +271,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -247,6 +281,8 @@
           <para
             >The XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />
+
+            
 
             
 
@@ -289,8 +325,12 @@
 
             
 
+            
+
              object and configures the internal state of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />
+
+            
 
             
 
@@ -302,8 +342,12 @@
 
           
 
+          
+
           The XML element that specifies the state of the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />
+
+          
 
           
 
@@ -360,6 +404,8 @@
           <para
             >Gets or sets the Uniform Resource Identifier (URI) of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />
+
+            
 
             
 

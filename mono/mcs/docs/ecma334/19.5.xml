@@ -2,7 +2,11 @@
 <clause number="19.5" title="Array covariance">
   <paragraph
     >For any two <non_terminal
-     where="11.2">reference-type</non_terminal>
+     where="11.2"
+>reference-type</non_terminal
+    >
+
+    
 
     
 
@@ -11,13 +15,21 @@
 
     
 
+    
+
     ) or explicit reference conversion (<hyperlink
     >13.2.3</hyperlink>
 
     
 
+    
+
     ) exists from A to B, then the same reference conversion also exists from the array type A[R] to the array type B[R], where R is any given <non_terminal
-     where="19.1">rank-specifier</non_terminal>
+     where="19.1"
+>rank-specifier</non_terminal
+    >
+
+    
 
     
 
@@ -29,13 +41,15 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph>
     <example
       >[Example: For example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Test  
 {  
    static void Fill(object[] array, int index, int count, object value) {  
@@ -59,12 +73,16 @@ class Test
 
       
 
+      
+
        cannot be stored in a string array. end example]</example
     >
   </paragraph>
   <paragraph
     >Array covariance specifically does not extend to arrays of <non_terminal
      where="11.1">value-type</non_terminal>
+
+    
 
     
 

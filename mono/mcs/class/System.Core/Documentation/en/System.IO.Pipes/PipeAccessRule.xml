@@ -26,6 +26,8 @@
 
         
 
+        
+
          class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to allow or deny that right.  This class can also specify how access rules are propagated to child objects.</para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          class to create a new access rule.  You can persist the rule using the <see
          cref="T:System.IO.Pipes.PipeSecurity" />
+
+        
 
         
 
@@ -75,6 +81,8 @@
 
             
 
+            
+
              class. Access control rules define user account rights that determine which actions are allowed or disallowed on computers that are running Microsoft Windows.</para
           >
         </remarks>
@@ -86,6 +94,8 @@
 
             
 
+            
+
              class with the specified identity, pipe access rights, and access control type.</para
           >
         </summary>
@@ -94,8 +104,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -106,8 +120,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.Pipes.PipeAccessRights" />
+
+          
 
           
 
@@ -118,8 +136,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -154,6 +176,8 @@
 
             
 
+            
+
              class. Access control rules define user account rights that determine which actions are allowed or disallowed on computers that are running Microsoft Windows.</para
           >
         </remarks>
@@ -165,11 +189,15 @@
 
             
 
+            
+
              class with the specified identity, pipe access rights, and access control type.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -180,8 +208,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.Pipes.PipeAccessRights" />
+
+          
 
           
 
@@ -192,8 +224,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -228,8 +264,12 @@
 
             
 
+            
+
              flags that are associated with the current <see
              cref="T:System.IO.Pipes.PipeAccessRule" />
+
+            
 
             
 

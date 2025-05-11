@@ -22,8 +22,12 @@
 
         
 
+        
+
         , where its value can also be accessed as a read-only <see
          cref="P:System.ServiceModel.EndpointAddress.Identity" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
           <para
             >Creates an empty <see
              cref="T:System.ServiceModel.EndpointIdentity" />
+
+            
 
             
 
@@ -91,8 +97,12 @@
 
             
 
+            
+
              by calling its constructor <see
              cref="M:System.ServiceModel.DnsEndpointIdentity.#ctor(System.IdentityModel.Claims.Claim)" />
+
+            
 
             
 
@@ -111,8 +121,12 @@
 
             
 
+            
+
              associated with the specified <paramref
              name="dnsName" />
+
+            
 
             
 
@@ -121,6 +135,8 @@
         </returns>
         <param name="dnsName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,8 +173,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.ServiceModel.SpnEndpointIdentity" />
+
+            
 
             
 
@@ -167,8 +187,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.ServiceModel.RsaEndpointIdentity" />
+
+            
 
             
 
@@ -187,8 +211,12 @@
 
             
 
+            
+
              associated with the specified <paramref
              name="identity" />
+
+            
 
             
 
@@ -200,8 +228,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IdentityModel.Claims.Claim" />
+
+          
 
           
 
@@ -241,8 +273,12 @@
 
             
 
+            
+
              by calling its constructor, <see
              cref="M:System.ServiceModel.RsaEndpointIdentity.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+
+            
 
             
 
@@ -261,8 +297,12 @@
 
             
 
+            
+
              associated with the specified <paramref
              name="certificate" />
+
+            
 
             
 
@@ -274,8 +314,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -312,8 +356,12 @@
 
             
 
+            
+
              by calling its constructor, <see
              cref="M:System.ServiceModel.RsaEndpointIdentity.#ctor(System.String)" />
+
+            
 
             
 
@@ -332,8 +380,12 @@
 
             
 
+            
+
              associated with the specified <paramref
              name="publicKey" />
+
+            
 
             
 
@@ -342,6 +394,8 @@
         </returns>
         <param name="publicKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -378,13 +432,19 @@
 
             
 
+            
+
              by calling its constructor, <see
              cref="M:System.ServiceModel.SpnEndpointIdentity.#ctor(System.String)" />
 
             
 
+            
+
             , using <paramref
              name="spnName" />
+
+            
 
             
 
@@ -396,8 +456,12 @@
 
             
 
+            
+
              is specified with an empty string, authentication falls back from Kerberos to NTLM if possible. If <see
              cref="P:System.ServiceModel.Security.WindowsClientCredential.AllowNtlm" />
+
+            
 
             
 
@@ -416,8 +480,12 @@
 
             
 
+            
+
              associated with the specified <paramref
              name="spnName" />
+
+            
 
             
 
@@ -426,6 +494,8 @@
         </returns>
         <param name="spnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,13 +532,19 @@
 
             
 
+            
+
              by calling its constructor, <see
              cref="M:System.ServiceModel.UpnEndpointIdentity.#ctor(System.String)" />
 
             
 
+            
+
             , using <paramref
              name="upnName" />
+
+            
 
             
 
@@ -480,8 +556,12 @@
 
             
 
+            
+
              is specified with an empty string, authentication falls back from Kerberos to NTLM if possible. If <see
              cref="P:System.ServiceModel.Security.WindowsClientCredential.AllowNtlm" />
+
+            
 
             
 
@@ -500,8 +580,12 @@
 
             
 
+            
+
              associated with the specified <paramref
              name="upnName" />
+
+            
 
             
 
@@ -510,6 +594,8 @@
         </returns>
         <param name="upnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -549,13 +635,19 @@
 
             
 
+            
+
              by calling its constructor, <see
              cref="M:System.ServiceModel.X509CertificateEndpointIdentity.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
+            
+
             , using <paramref
              name="certificate" />
+
+            
 
             
 
@@ -574,8 +666,12 @@
 
             
 
+            
+
              associated with the specified <paramref
              name="certificate" />
+
+            
 
             
 
@@ -587,8 +683,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -631,8 +731,12 @@
 
             
 
+            
+
              by calling its constructor, <see
              cref="M:System.ServiceModel.X509CertificateEndpointIdentity.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.X509Certificates.X509Certificate2Collection)" />
+
+            
 
             
 
@@ -641,8 +745,12 @@
 
             
 
+            
+
              and <paramref
              name="supportingCertificates" />
+
+            
 
             
 
@@ -662,8 +770,12 @@
 
             
 
+            
+
              associated with the specified <paramref
              name="primaryCertificate" />
+
+            
 
             
 
@@ -676,8 +788,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -688,8 +804,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+          
 
           
 
@@ -725,6 +845,8 @@
           <para
             >true if the specified object <paramref
              name="obj" />
+
+            
 
             
 
@@ -816,6 +938,8 @@
 
             
 
+            
+
             ).</para
           >
         </remarks>
@@ -824,6 +948,8 @@
           <para
             >Initializes an <see
              cref="T:System.ServiceModel.EndpointIdentity" />
+
+            
 
             
 
@@ -867,6 +993,8 @@
 
             
 
+            
+
              with the specified claim and an interface and compares equality.</para
           >
         </summary>
@@ -900,8 +1028,12 @@
 
             
 
+            
+
              of the form "identity(string)" where string = <see
              cref="P:System.ServiceModel.EndpointIdentity.IdentityClaim" />
+
+            
 
             
 

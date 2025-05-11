@@ -26,6 +26,8 @@
 
         
 
+        
+
          class is used by unmanaged code in this service to manage session data. This class supports the .NET Framework infrastructure implementation of the ASP.NET state service and is not intended be used directly from your code.</para
       >
       <para
@@ -33,6 +35,8 @@
          type="text/html">
           <a href="0bb0a3a3-650f-4c47-a0c5-b08b9b591bb4">Session State Modes</a>
         </format>
+
+        
 
         
 
@@ -74,6 +78,8 @@
 
             
 
+            
+
              method is used by unmanaged code in this service to manage the session data.</para
           >
           <para
@@ -81,6 +87,8 @@
              type="text/html">
               <a href="0bb0a3a3-650f-4c47-a0c5-b08b9b591bb4">Session State Modes</a>
             </format>
+
+            
 
             
 
@@ -96,8 +104,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -108,10 +120,14 @@
 
           
 
+          
+
           The action to take on the object.</param
         >
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,10 +138,14 @@
 
           
 
+          
+
           The type of access to objects in the store.</param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,10 +156,14 @@
 
           
 
+          
+
           A value that indicates whether the lock cookie exists in the original request from the ASP.NET Web server to the ASP.NET state server.</param
         >
         <param name="lockCookie">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -150,6 +174,8 @@
 
           
 
+          
+
           The length, in bytes, of the data stored for the session.</param
         >
         <param name="content">
@@ -157,8 +183,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -203,6 +233,8 @@
 
             
 
+            
+
              method is used by unmanaged code in this service to manage the session data.</para
           >
           <para
@@ -210,6 +242,8 @@
              type="text/html">
               <a href="0bb0a3a3-650f-4c47-a0c5-b08b9b591bb4">Session State Modes</a>
             </format>
+
+            
 
             
 
@@ -225,8 +259,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -237,10 +275,14 @@
 
           
 
+          
+
           The action to take on the object.</param
         >
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,10 +293,14 @@
 
           
 
+          
+
           The type of access to objects in the store.</param
         >
         <param name="extraFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -265,10 +311,14 @@
 
           
 
+          
+
           The number of minutes the session data is stored.</param
         >
         <param name="lockCookieExists">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -279,10 +329,14 @@
 
           
 
+          
+
           The owner of the lock on the session state.</param
         >
         <param name="contentLength">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -293,8 +347,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -318,10 +376,14 @@
 
             
 
+            
+
              method is used by unmanaged code in this service to stop processing the session data. This member is provided to support the .NET Framework infrastructure implementation of the ASP.NET state service and is not intended be used directly from your code. For more information about session-state storage options, see <format
              type="text/html">
               <a href="0bb0a3a3-650f-4c47-a0c5-b08b9b591bb4">Session State Modes</a>
             </format>
+
+            
 
             
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >The exception that is thrown when a name conflict occurs while generating a strongly typed <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -64,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -95,6 +103,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -106,12 +116,16 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="list">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -145,6 +159,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -153,6 +169,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -181,6 +199,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -192,6 +212,8 @@
 
             
 
+            
+
              class using the specified serialization information and streaming context.</para
           >
         </summary>
@@ -200,8 +222,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -212,8 +238,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -249,6 +279,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality. </para
           >
         </remarks>
@@ -257,6 +289,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -281,6 +315,8 @@
           <para
             >The <see
              cref="T:System.Data.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -319,6 +355,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -330,6 +368,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -338,8 +378,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -350,8 +394,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

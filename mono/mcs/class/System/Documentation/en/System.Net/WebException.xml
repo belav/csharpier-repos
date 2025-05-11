@@ -37,13 +37,19 @@
 
         
 
+        
+
          class is thrown by classes descended from <see
          cref="T:System.Net.WebRequest" />
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebResponse" />
+
+        
 
         
 
@@ -55,13 +61,19 @@
 
         
 
+        
+
          is thrown by a descendant of the <see
          cref="T:System.Net.WebRequest" />
 
         
 
+        
+
          class, the <see
          cref="P:System.Net.WebException.Response" />
+
+        
 
         
 
@@ -101,8 +113,12 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -111,8 +127,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.WebException.Response" />
+
+            
 
             
 
@@ -121,8 +141,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Net.WebExceptionStatus.RequestCanceled" />
+
+            
 
             
 
@@ -134,6 +158,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -172,8 +198,12 @@
 
             
 
+            
+
              instance is initialized with the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -182,8 +212,12 @@
 
             
 
+            
+
             . If <paramref
              name="message" />
+
+            
 
             
 
@@ -192,8 +226,12 @@
 
             
 
+            
+
              property is initialized to a system-supplied message. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -202,13 +240,19 @@
 
             
 
+            
+
              properties are initialized to null. The <see
              cref="P:System.Net.WebException.Status" />
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Net.WebExceptionStatus.RequestCanceled" />
+
+            
 
             
 
@@ -223,11 +267,15 @@
 
             
 
+            
+
              class with the specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,8 +312,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -280,13 +332,19 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -298,13 +356,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that contains the information required to serialize the new <see
            cref="T:System.Net.WebException" />
+
+          
 
           
 
@@ -315,13 +379,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            that contains the source of the serialized stream that is associated with the new <see
            cref="T:System.Net.WebException" />
+
+          
 
           
 
@@ -362,13 +432,19 @@
 
             
 
+            
+
              instance is initialized with the <see
              cref="P:System.Exception.Message" />
 
             
 
+            
+
              property set to the value of <paramref
              name="message" />
+
+            
 
             
 
@@ -377,8 +453,12 @@
 
             
 
+            
+
              property set to the value of <paramref
              name="innerException" />
+
+            
 
             
 
@@ -387,8 +467,12 @@
 
             
 
+            
+
              is null, the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -397,8 +481,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.WebException.Response" />
+
+            
 
             
 
@@ -407,8 +495,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Net.WebExceptionStatus.RequestCanceled" />
+
+            
 
             
 
@@ -423,6 +515,8 @@
 
             
 
+            
+
              class with the specified error message and nested exception.</para
           >
         </summary>
@@ -431,10 +525,14 @@
 
           
 
+          
+
           The text of the error message. </param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -476,13 +574,19 @@
 
             
 
+            
+
              instance is initialized with the <see
              cref="P:System.Exception.Message" />
 
             
 
+            
+
              property set to the value of <paramref
              name="message" />
+
+            
 
             
 
@@ -491,8 +595,12 @@
 
             
 
+            
+
              property set to the value of <paramref
              name="status" />
+
+            
 
             
 
@@ -501,8 +609,12 @@
 
             
 
+            
+
              is null, the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -511,8 +623,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.WebException.Response" />
+
+            
 
             
 
@@ -527,11 +643,15 @@
 
             
 
+            
+
              class with the specified error message and status.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,8 +662,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.WebExceptionStatus" />
+
+          
 
           
 
@@ -587,13 +711,19 @@
 
             
 
+            
+
              instance is initialized with the <see
              cref="P:System.Exception.Message" />
 
             
 
+            
+
              property set to the value of <paramref
              name="message" />
+
+            
 
             
 
@@ -602,8 +732,12 @@
 
             
 
+            
+
              property set to the value of <paramref
              name="innerException" />
+
+            
 
             
 
@@ -612,8 +746,12 @@
 
             
 
+            
+
              property set to the value of <paramref
              name="status" />
+
+            
 
             
 
@@ -622,8 +760,12 @@
 
             
 
+            
+
              property set to the value of <paramref
              name="response" />
+
+            
 
             
 
@@ -632,8 +774,12 @@
 
             
 
+            
+
              is null, the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -648,11 +794,15 @@
 
             
 
+            
+
              class with the specified error message, nested exception, status, and response.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -663,6 +813,8 @@
 
           
 
+          
+
           A nested exception. </param
         >
         <param name="status">
@@ -670,8 +822,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.WebExceptionStatus" />
+
+          
 
           
 
@@ -682,8 +838,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.WebResponse" />
+
+          
 
           
 
@@ -723,8 +883,12 @@
 
             
 
+            
+
              instance with the data needed to serialize the <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -736,8 +900,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -748,8 +916,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -785,9 +957,13 @@
 
             
 
+            
+
              instance containing the
    error response if one is available; otherwise, <see
              langword="null" />
+
+            
 
             
 
@@ -803,8 +979,12 @@
 
             
 
+            
+
              sets the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -813,8 +993,12 @@
 
             
 
+            
+
              and provides the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -823,13 +1007,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              that was thrown. The application can examine the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -871,6 +1061,8 @@
 
             
 
+            
+
              value that indicates the status of the
    response.</para
           >
@@ -883,8 +1075,12 @@
 
             
 
+            
+
              property indicates the reason for the <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -896,8 +1092,12 @@
 
             
 
+            
+
              is one of the <see
              cref="T:System.Net.WebExceptionStatus" />
+
+            
 
             
 
@@ -907,6 +1107,8 @@
             <para
               >The <see
                cref="F:System.Net.WebExceptionStatus.ProxyNameResolutionFailure" />
+
+              
 
               
 
@@ -952,6 +1154,8 @@
           <para
             >Serializes this instance into the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 

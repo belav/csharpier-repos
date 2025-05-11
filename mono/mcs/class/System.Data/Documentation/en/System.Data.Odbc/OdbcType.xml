@@ -18,6 +18,8 @@
 
         
 
+        
+
          data types, ODBC data types (shown in parentheses), and .NET Framework types.</para
       >
     </remarks>
@@ -26,6 +28,8 @@
       <para
         >Specifies the data type of a field, property, for use in an <see
          cref="T:System.Data.Odbc.OdbcParameter" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
           <para
             >Exact numeric value with precision 19 (if signed) or 20 (if unsigned) and scale 0 (signed: –2[63] &lt;= n &lt;= 2[63] – 1, unsigned:0 &lt;= n &lt;= 2[64] – 1) (SQL_BIGINT). This maps to <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -73,8 +79,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -102,6 +112,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -123,6 +135,8 @@
           <para
             >A fixed-length character string (SQL_CHAR). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -150,6 +164,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -171,6 +187,8 @@
           <para
             >Date data in the format yyyymmddhhmmss (SQL_TYPE_TIMESTAMP). This maps to <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -198,6 +216,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -219,6 +239,8 @@
           <para
             >Signed, approximate, numeric value with a binary precision 53 (zero or absolute value 10[–308] to 10[308]) (SQL_DOUBLE). This maps to <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -246,8 +268,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -275,6 +301,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -296,6 +324,8 @@
           <para
             >Unicode character string of fixed string length (SQL_WCHAR). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -323,6 +353,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -344,6 +376,8 @@
           <para
             >Signed, exact, numeric value with a precision p and scale s, where 1 &lt;= p &lt;= 15, and s &lt;= p (SQL_NUMERIC). This maps to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -371,6 +405,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -392,6 +428,8 @@
           <para
             >Signed, approximate, numeric value with a binary precision 24 (zero or absolute value 10[–38] to 10[38]).(SQL_REAL). This maps to <see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -419,6 +457,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -440,6 +480,8 @@
           <para
             >Exact numeric value with precision 5 and scale 0 (signed: –32,768 &lt;= n &lt;= 32,767, unsigned: 0 &lt;= n &lt;= 65,535) (SQL_SMALLINT). This maps to <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -467,6 +509,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -488,6 +532,8 @@
           <para
             >Date data in the format hhmmss (SQL_TYPE_TIMES). This maps to <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -515,8 +561,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -544,6 +594,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -565,6 +617,8 @@
           <para
             >A fixed-length GUID (SQL_GUID). This maps to <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -592,8 +646,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -618,6 +676,8 @@
           <para
             >A variable-length stream character string (SQL_CHAR). This maps to <see
              cref="T:System.String" />
+
+            
 
             
 

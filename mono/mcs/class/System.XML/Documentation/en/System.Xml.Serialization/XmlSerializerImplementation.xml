@@ -31,13 +31,19 @@
 
         
 
+        
+
         . When such an assembly is loaded, the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
+        
+
          uses the properties of the <see
          cref="T:System.Xml.Serialization.XmlSerializerImplementation" />
+
+        
 
         
 
@@ -70,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializerImplementation" />
+
+            
 
             
 
@@ -111,8 +119,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -155,6 +167,8 @@
 
             
 
+            
+
              class. </para
           >
         </returns>
@@ -163,8 +177,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes that you can use to override the life-cycle stages of a Web control. The classes enable you to modify a control's markup or behavior for new markup standards or for specific browsers.</para
       >
     </summary>
@@ -20,13 +22,19 @@
 
         
 
+        
+
          class is inherited by <see
          cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.Adapters.DataBoundControlAdapter" />
+
+        
 
         
 

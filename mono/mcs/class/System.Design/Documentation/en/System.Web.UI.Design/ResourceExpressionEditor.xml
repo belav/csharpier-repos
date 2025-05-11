@@ -22,8 +22,12 @@
 
         
 
+        
+
          class derives from the <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          class to specify a resource class, key, and designer default value for a resource expression, and then evaluate the selected resource expression for design-time rendering.</para
       >
       <para
@@ -43,13 +49,19 @@
 
         
 
+        
+
          property for a control in the design-time properties grid, the visual designer displays a dialog box to set expressions that provide the run-time value for a control property. You can select the expression type based on a list of expression prefixes. When you select the <ui
         >Resources</ui>
 
         
 
+        
+
          expression prefix in the list, the visual designer uses the <see
          cref="T:System.Web.UI.Design.ResourceExpressionEditor" />
+
+        
 
         
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
          property for a <see
          cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+
+        
 
         
 
@@ -71,8 +87,12 @@
 
         
 
+        
+
          class is associated with the expression prefix Resources and the <see
          cref="T:System.Web.UI.Design.ResourceExpressionEditor" />
+
+        
 
         
 
@@ -84,13 +104,19 @@
 
         
 
+        
+
          method evaluates an input resource expression. The <see
          cref="M:System.Web.UI.Design.ExpressionEditor.GetExpressionEditorSheet(System.String,System.IServiceProvider)" />
 
         
 
+        
+
          method returns the <see
          cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+        
 
         
 
@@ -117,8 +143,12 @@
 
             
 
+            
+
              object is configured by the base class together with an <see
              cref="P:System.Web.UI.Design.ExpressionEditor.ExpressionPrefix" />
+
+            
 
             
 
@@ -130,6 +160,8 @@
           <para
             >Initializes a new instance of a <see
              cref="T:System.Web.UI.Design.ResourceExpressionEditor" />
+
+            
 
             
 
@@ -166,8 +198,12 @@
 
             
 
+            
+
              method looks up the resource that is specified by <paramref
              name="expression" />
+
+            
 
             
 
@@ -179,8 +215,12 @@
 
             
 
+            
+
              method to evaluate a resource expression and provide the design-time value for an associated control property. At run time, the page parser uses the <see
              cref="M:System.Web.Compilation.ResourceExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -189,8 +229,12 @@
 
             
 
+            
+
              methods of the corresponding <see
              cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+
+            
 
             
 
@@ -202,8 +246,12 @@
 
             
 
+            
+
              method to parse the expression string at design time, and then calls the <see
              cref="M:System.Web.UI.Design.ResourceExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
+
+            
 
             
 
@@ -223,8 +271,12 @@
 
           
 
+          
+
           A resource expression to evaluate. <paramref
            name="expression" />
+
+          
 
           
 
@@ -235,8 +287,12 @@
 
           
 
+          
+
           An object supplying additional parse data, in the form of a <see
            cref="T:System.Web.Compilation.ResourceExpressionFields" />
+
+          
 
           
 
@@ -247,10 +303,14 @@
 
           
 
+          
+
           The type of the control property.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,6 +344,8 @@
 
             
 
+            
+
              method returns an expression editor sheet implementation for resource expressions. The visual designer host uses the expression editor sheet in its expressions dialog box. </para
           >
         </remarks>
@@ -299,6 +361,8 @@
 
             
 
+            
+
              that defines the resource expression properties.</para
           >
         </returns>
@@ -307,10 +371,14 @@
 
           
 
+          
+
           A resource expression, used to initialize the expression editor sheet.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

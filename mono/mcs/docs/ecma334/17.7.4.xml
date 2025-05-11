@@ -7,12 +7,16 @@
 
     
 
+    
+
      simply consists of a semicolon. </paragraph
   >
   <paragraph>An event declaration that includes both the abstract and override modifiers specifies that the event is abstract and overrides a base event. The accessors of such an event are also abstract. </paragraph>
   <paragraph
     >Abstract event declarations are only permitted in abstract classes (<hyperlink
     >17.1.1.1</hyperlink>
+
+    
 
     
 
@@ -28,8 +32,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.5.4</hyperlink>
+
+    
 
     
 
@@ -38,13 +46,19 @@
 
     
 
+    
+
     , and <hyperlink
     >17.5.6</hyperlink>
 
     
 
+    
+
      apply as if accessors were methods of a corresponding form. Each accessor corresponds to a method with a single value parameter of the event type, a <keyword
     >void</keyword>
+
+    
 
     
 

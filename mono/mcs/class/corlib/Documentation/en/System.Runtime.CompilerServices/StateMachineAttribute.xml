@@ -27,8 +27,12 @@
 
         
 
+        
+
          attribute to methods in your code. For methods that are state machine methods, the compiler will apply the <see
          cref="T:System.Runtime.CompilerServices.AsyncStateMachineAttribute" />
+
+        
 
         
 
@@ -37,11 +41,15 @@
 
         
 
+        
+
          in the emitted IL.</para
       >
       <para
         >When checking whether a method is a state machine method, it is preferable to instead check for following attributes, which are derived from <unmanagedCodeEntityReference
         >StateMachineAttribute</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -62,6 +70,8 @@
       <block subset="none" type="note">
         <para>
           <unmanagedCodeEntityReference>StateMachineAttribute</unmanagedCodeEntityReference>
+
+          
 
           
 
@@ -101,11 +111,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="stateMachineType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

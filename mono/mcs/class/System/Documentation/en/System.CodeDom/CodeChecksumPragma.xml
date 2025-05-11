@@ -35,8 +35,12 @@
 
         
 
+        
+
          class inherits from <see
          cref="T:System.CodeDom.CodeDirective" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
         . <see
          cref="T:System.CodeDom.CodeChecksumPragma" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeChecksumPragma" />
+
+            
 
             
 
@@ -116,8 +126,12 @@
 
             
 
+            
+
              parameter, see the <see
              cref="P:System.CodeDom.CodeChecksumPragma.ChecksumAlgorithmId" />
+
+            
 
             
 
@@ -132,11 +146,15 @@
 
             
 
+            
+
              class using a file name, a GUID representing the checksum algorithm, and a byte stream representing the checksum data.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,8 +165,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -156,6 +178,8 @@
         >
         <param name="checksumData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,8 +237,12 @@
 
             
 
+            
+
              property contains data from the target file specified by the <see
              cref="P:System.CodeDom.CodeChecksumPragma.FileName" />
+
+            
 
             
 
@@ -246,6 +274,8 @@
           <para
             >An example of a <see
              cref="P:System.CodeDom.CodeChecksumPragma.FileName" />
+
+            
 
             
 

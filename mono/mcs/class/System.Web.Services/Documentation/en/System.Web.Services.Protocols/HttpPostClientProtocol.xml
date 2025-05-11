@@ -25,6 +25,8 @@
 
         
 
+        
+
          to encode parameters and return values into standard MIME formats. The encoders to use are specified in the service description.</para
       >
       <para
@@ -33,13 +35,19 @@
 
         
 
+        
+
          needs to be created for the XML Web service you want to call. When the XML Web service client is calling using HTTP, derive the proxy class <see
          cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
 
         
 
+        
+
         , which in turn derives from <see
          cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
+
+        
 
         
 
@@ -60,8 +72,12 @@
 
         
 
+        
+
         , providing the support for calling an XML Web service method using HTTP-GET and HTTP-POST respectively. Clients calling an XML Web service using SOAP should derive from <see
          cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+
+        
 
         
 
@@ -74,6 +90,8 @@
             >[&lt;topic://cpconcreatingwebserviceproxy&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -98,6 +116,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
+
+            
 
             
 
@@ -131,8 +151,12 @@
 
             
 
+            
+
              to specify that the HTTP request to the XML Web service is made using HTTP-POST. By overriding this method, you can customize the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -147,6 +171,8 @@
 
             
 
+            
+
              instance for the specified URI.</para
           >
         </summary>
@@ -158,6 +184,8 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
@@ -166,13 +194,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
 
           
 
+          
+
            to use when creating the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 

@@ -22,6 +22,8 @@
 
         
 
+        
+
          class allows an object to be converted to a lowercase string. This class also provides support to verify that an object type can be converted to a lowercase string before the conversion is made. </para
       >
       <para
@@ -30,13 +32,19 @@
 
         
 
+        
+
          take as a parameter an object that implements the <see
          cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
         
 
+        
+
          interface. This interface provides contextual information about a component. Typically, this interface is used at design time to provide information about a design-time container. The <see
          cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.Configuration.LowerCaseStringConverter" />
+
+            
 
             
 
@@ -95,13 +105,19 @@
 
             
 
+            
+
              interface as the <paramref
              name="ctx" />
 
             
 
+            
+
              parameter. This interface provides contextual information about a component. Typically, this interface is used at design time to provide information about a design-time container. The <see
              cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+            
 
             
 
@@ -121,8 +137,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -130,6 +150,8 @@
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -163,13 +185,19 @@
 
             
 
+            
+
              interface as the <paramref
              name="ctx" />
 
             
 
+            
+
              parameter. This interface provides contextual information about a component. Typically, this interface is used at design time to provide information about a design-time container. The <see
              cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+            
 
             
 
@@ -189,8 +217,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -198,6 +230,8 @@
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -232,8 +266,12 @@
 
             
 
+            
+
              interface as the <paramref
              name="ctx" />
+
+            
 
             
 
@@ -242,13 +280,19 @@
 
             
 
+            
+
              is commonly used in type conversion. The <paramref
              name="ci" />
 
             
 
+            
+
              parameter object provides the culture-related information. The <paramref
              name="data" />
+
+            
 
             
 
@@ -268,8 +312,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -280,8 +328,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -289,6 +341,8 @@
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -324,8 +378,12 @@
 
             
 
+            
+
              interface as the <paramref
              name="ctx" />
+
+            
 
             
 
@@ -334,13 +392,19 @@
 
             
 
+            
+
              is commonly used in type conversion. The <paramref
              name="ci" />
 
             
 
+            
+
              parameter object provides the culture-related information. The <paramref
              name="value" />
+
+            
 
             
 
@@ -360,8 +424,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -372,8 +440,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -384,10 +456,14 @@
 
           
 
+          
+
           The object to convert.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          class is used by developers to add design time Cascading Style Sheet (CSS) editing capabilities to a property in a property grid.</para
       >
       <para>
@@ -30,10 +32,14 @@
 
         
 
+        
+
          is introduced in the .NET Framework version 3.5.  For more information, see <format
          type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
+
+        
 
         
 
@@ -60,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.CssClassPropertyAttribute" />
+
+            
 
             
 

@@ -6,8 +6,12 @@
 
     
 
+    
+
     ) and indexer access (<hyperlink
     >14.5.6.2</hyperlink>
+
+    
 
     
 
@@ -19,13 +23,19 @@
 
     
 
+    
+
     ), method invocation (<hyperlink
     >14.5.5.1</hyperlink>
 
     
 
+    
+
     ), and indexer access (<hyperlink
     >14.5.6.2</hyperlink>
+
+    
 
     
 
@@ -35,7 +45,7 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface IList  
 {  
    int Count { get; set; }  
@@ -59,8 +69,12 @@ class C
 
       
 
+      
+
       the first two statements cause compile-time errors because the member lookup (<hyperlink
       >14.3</hyperlink>
+
+      
 
       
 
@@ -71,7 +85,7 @@ class C
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface IInteger  
 {  
    void Add(int i);  
@@ -95,8 +109,12 @@ class C
 
       
 
+      
+
       the invocation n.Add(1) is ambiguous because a method invocation (<hyperlink
       >14.5.5.1</hyperlink>
+
+      
 
       
 
@@ -107,7 +125,7 @@ class C
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface IBase  
 {  
    void F(int i);  
@@ -132,6 +150,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

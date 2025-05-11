@@ -18,13 +18,19 @@
 
         
 
+        
+
          enumeration is used by profile providers and the <see
          cref="T:System.Web.Profile.ProfileManager" />
 
         
 
+        
+
          class when they search for profiles in the data source and when they delete them. The <see
          cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+        
 
         
 

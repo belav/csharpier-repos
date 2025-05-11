@@ -25,6 +25,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the forms element of a configuration authentication section.</para
       >
       <para
@@ -33,13 +35,19 @@
 
         
 
+        
+
         ,the <see
          cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
         
 
+        
+
         , and the <see
          cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+        
 
         
 
@@ -52,13 +60,19 @@
 
           
 
+          
+
            can write information into the related section of the configuration file according to the restrictions defined by the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
+
+          
 
           
 
@@ -71,6 +85,8 @@
       <para
         >Configures an ASP.NET application to use the <see
          cref="T:System.Web.Configuration.AuthenticationMode" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
+
+            
 
             
 
@@ -124,6 +142,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Cookieless" />
+
+            
 
             
 
@@ -164,6 +184,8 @@
 
             
 
+            
+
              property gets the user names and passwords to use during forms-based authentication.</para
           >
           <block subset="none" type="note">
@@ -175,6 +197,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
+
+            
 
             
 
@@ -208,6 +232,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.DefaultUrl" />
+
+            
 
             
 
@@ -245,11 +271,15 @@
 
             
 
+            
+
              is used for the authentication cookies.</para
           >
           <para
             >This property corresponds to the value of <see
              cref="P:System.Web.HttpCookie.Domain" />
+
+            
 
             
 
@@ -260,6 +290,8 @@
              type="text/html">
               <a href="74790718-bfa3-4935-bc9a-59c88797e08f">httpCookies</a>
             </format>
+
+            
 
             
 
@@ -316,6 +348,8 @@
 
             
 
+            
+
              property value sets the enableCrossAppRedirects attribute of the forms section in the authentication section of a configuration.</para
           >
           <para
@@ -324,8 +358,12 @@
 
             
 
+            
+
              property is checked by the <see
              cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
+
+            
 
             
 
@@ -334,8 +372,12 @@
 
             
 
+            
+
              is true, then the redirect is performed; otherwise the browser is redirected to the page defined in the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -349,6 +391,8 @@
                   >Forms Authentication Across Applications</a
                 >
               </format>
+
+              
 
               
 
@@ -387,6 +431,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.LoginUrl" />
+
+            
 
             
 
@@ -451,6 +497,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Path" />
+
+            
 
             
 
@@ -534,6 +582,8 @@
 
             
 
+            
+
              is true, a Web application rejects all the forms authentication requests that do not use an SSL connection.</para
           >
         </remarks>
@@ -568,8 +618,12 @@
 
             
 
+            
+
              is set to true, the time interval during which the authentication cookie is valid is reset to the expiration <see
              cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Timeout" />
+
+            
 
             
 

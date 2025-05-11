@@ -40,6 +40,8 @@
 
         
 
+        
+
          class should not allow the setting of null policies, should supply a default policy, or should require an explicit policy to be created and set by the application developer or administrator.</para
       >
     </remarks>
@@ -48,6 +50,8 @@
       <para
         >The <see
          cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+        
 
         
 
@@ -89,8 +93,12 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.PolicyEnforcement" />
+
+            
 
             
 
@@ -99,13 +107,19 @@
 
             
 
+            
+
              parameter and the  <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.ProtectionScenario" />
 
             
 
+            
+
              property is set to <see
              cref="F:System.Security.Authentication.ExtendedProtection.ProtectionScenario.TransportSelected" />
+
+            
 
             
 
@@ -120,6 +134,8 @@
 
             
 
+            
+
              class that specifies when the extended protection policy should be enforced.</para
           >
         </summary>
@@ -128,8 +144,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
+
+          
 
           
 
@@ -163,8 +183,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -176,8 +200,12 @@
 
             
 
+            
+
              method can be used to serialize an <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -186,8 +214,12 @@
 
             
 
+            
+
              to construct a new <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -202,13 +234,19 @@
 
             
 
+            
+
              class from a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              object that contains the required data to populate the <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -220,13 +258,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            instance that contains the information that is required to serialize the new <see
            cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+          
 
           
 
@@ -237,13 +281,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            that contains the source of the serialized stream that is associated with the new <see
            cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+          
 
           
 
@@ -283,8 +333,12 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.PolicyEnforcement" />
+
+            
 
             
 
@@ -293,8 +347,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.CustomChannelBinding" />
+
+            
 
             
 
@@ -303,13 +361,19 @@
 
             
 
+            
+
              parameter, and the  <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.ProtectionScenario" />
 
             
 
+            
+
              property is set to <see
              cref="F:System.Security.Authentication.ExtendedProtection.ProtectionScenario.TransportSelected" />
+
+            
 
             
 
@@ -324,6 +388,8 @@
 
             
 
+            
+
              class that specifies when the extended protection policy should be enforced and the channel binding token (CBT) to be used.</para
           >
         </summary>
@@ -332,8 +398,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
+
+          
 
           
 
@@ -344,8 +414,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+
+          
 
           
 
@@ -386,8 +460,12 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.PolicyEnforcement" />
+
+            
 
             
 
@@ -396,8 +474,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.ProtectionScenario" />
+
+            
 
             
 
@@ -406,13 +488,19 @@
 
             
 
+            
+
              parameter, and the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.CustomServiceNames" />
 
             
 
+            
+
              property is set to the <paramref
              name="customServiceNames" />
+
+            
 
             
 
@@ -427,6 +515,8 @@
 
             
 
+            
+
              class that specifies when the extended protection policy should be enforced, the kind of protection enforced by the policy, and a custom Service Provider Name (SPN) list that is used to match against a client's SPN.</para
           >
         </summary>
@@ -435,8 +525,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
+
+          
 
           
 
@@ -447,8 +541,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Authentication.ExtendedProtection.ProtectionScenario" />
+
+          
 
           
 
@@ -459,8 +557,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -504,8 +606,12 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.PolicyEnforcement" />
+
+            
 
             
 
@@ -514,8 +620,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.ProtectionScenario" />
+
+            
 
             
 
@@ -524,13 +634,19 @@
 
             
 
+            
+
              parameter, and the <see
              cref="P:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.CustomServiceNames" />
 
             
 
+            
+
              property is set to the <paramref
              name="customServiceNames" />
+
+            
 
             
 
@@ -545,6 +661,8 @@
 
             
 
+            
+
              class that specifies when the extended protection policy should be enforced, the kind of protection enforced by the policy, and a custom Service Provider Name (SPN) list that is used to match against a client's SPN.</para
           >
         </summary>
@@ -553,8 +671,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
+
+          
 
           
 
@@ -565,8 +687,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Authentication.ExtendedProtection.ProtectionScenario" />
+
+          
 
           
 
@@ -577,8 +703,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+
+          
 
           
 
@@ -612,8 +742,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Net.Security.NegotiateStream" />
+
+            
 
             
 
@@ -764,8 +898,12 @@
 
             
 
+            
+
              method can be used to serialize an <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -774,8 +912,12 @@
 
             
 
+            
+
              to construct a new <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -790,8 +932,12 @@
 
             
 
+            
+
              object with the required data to serialize an <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -803,13 +949,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            object that holds the serialized data for an <see
            cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+          
 
           
 
@@ -820,13 +972,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            that contains the destination of the serialized stream that is associated with the new <see
            cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+          
 
           
 
@@ -867,8 +1025,12 @@
 
             
 
+            
+
              instance that contains the representation of the <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 

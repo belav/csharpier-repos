@@ -29,6 +29,8 @@
 
         
 
+        
+
          option, each primitive type is instead implemented as a property.</para
       >
       <format type="text/html">
@@ -37,6 +39,8 @@
       <para
         >The <see
          cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" />
+
+        
 
         
 
@@ -169,13 +173,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+            
 
             
 
@@ -237,6 +247,8 @@
           <para
             >Represents primitive types by fields and primitive types by <see
              cref="N:System" />
+
+            
 
             
 

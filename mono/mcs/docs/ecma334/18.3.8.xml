@@ -6,11 +6,13 @@
 
     
 
+    
+
     ). A struct can declare instance constructors having parameters. <example
 
       >[Example: For example <code_example
       >
-        <![CDATA[
+<![CDATA[
 struct Point  
 {  
    int x, y;  
@@ -27,11 +29,13 @@ struct Point
     <example
       >Given the above declaration, the statements <code_example
       >
-        <![CDATA[
+<![CDATA[
 Point p1 = new Point();  
 Point p2 = new Point(0, 0);  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -45,11 +49,13 @@ Point p2 = new Point(0, 0);
 
     
 
+    
+
     ) at every location where the constructor returns. <example
 
       >[Example: Consider the instance constructor implementation below: <code_example
       >
-        <![CDATA[
+<![CDATA[
 struct Point  
 {  
    int x, y;  

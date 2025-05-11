@@ -42,6 +42,8 @@
 
         
 
+        
+
          class represents a writing system.  </para
       >
       <para
@@ -50,8 +52,12 @@
 
         
 
+        
+
          property to obtain the <see
          cref="T:System.Globalization.TextInfo" />
+
+        
 
         
 
@@ -60,13 +66,19 @@
 
         
 
+        
+
          object. If a security decision depends on a string comparison or a case-change operation, the application should use the <see
          cref="P:System.Globalization.CultureInfo.TextInfo" />
 
         
 
+        
+
          property of the object returned by the <see
          cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+        
 
         
 
@@ -81,8 +93,12 @@
 
         
 
+        
+
          property is set to true, the property values of the objects returned by the <see
          cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+        
 
         
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Globalization.CultureInfo.TextInfo" />
+
+        
 
         
 
@@ -101,8 +121,12 @@
 
         
 
+        
+
         , for example, if the selected calendar is not one of the <see
          cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+        
 
         
 
@@ -135,6 +159,8 @@
           <para
             >Gets the American National Standards Institute (ANSI) code page used by the writing system represented by the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -177,6 +203,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -188,8 +216,12 @@
 
             
 
+            
+
              that is the memberwise clone of the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -225,8 +257,12 @@
 
             
 
+            
+
              object is created from a specific culture, and the <see
              cref="P:System.Globalization.TextInfo.CultureName" />
+
+            
 
             
 
@@ -238,8 +274,12 @@
 
             
 
+            
+
              property always reflects a specific culture rather than a neutral culture. If <see
              cref="P:System.Globalization.CultureInfo.Name" />
+
+            
 
             
 
@@ -248,8 +288,12 @@
 
             
 
+            
+
              has as its value an arbitrary specific culture that uses the same language. For example, the <see
              cref="P:System.Globalization.CultureInfo.Name" />
+
+            
 
             
 
@@ -258,8 +302,12 @@
 
             
 
+            
+
              property might return "en-US" for the English (United States) culture. If the <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -268,13 +316,19 @@
 
             
 
+            
+
              property is always identical to the <see
              cref="P:System.Globalization.CultureInfo.Name" />
 
             
 
+            
+
              property value of its associated <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -286,13 +340,19 @@
 
             
 
+            
+
              property never reflects a particular sort. It always corresponds to a default sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see
              cref="P:System.Globalization.CultureInfo.Name" />
 
             
 
+            
+
              is es-ES_tradnl (Spanish with the traditional sort order) then the corresponding <see
              cref="P:System.Globalization.TextInfo.CultureName" />
+
+            
 
             
 
@@ -304,6 +364,8 @@
           <para
             >Gets the name of the culture associated with the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -332,6 +394,8 @@
           <para
             >Gets the Extended Binary Coded Decimal Interchange Code (EBCDIC) code page used by the writing system represented by the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -367,6 +431,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -375,6 +441,8 @@
           <para
             >Determines whether the specified object represents the same writing system as the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -389,8 +457,12 @@
 
             
 
+            
+
              represents the same writing system as the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -402,8 +474,12 @@
 
           
 
+          
+
           The object to compare with the current <see
            cref="T:System.Globalization.TextInfo" />
+
+          
 
           
 
@@ -436,11 +512,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method generates the same hash code for two objects that are equal according to the <see
              cref="M:System.Globalization.TextInfo.Equals(System.Object)" />
+
+            
 
             
 
@@ -455,6 +535,8 @@
 
             
 
+            
+
             , suitable for hashing algorithms and data structures, such as a hash table.</para
           >
         </summary>
@@ -463,6 +545,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -498,8 +582,12 @@
 
             
 
+            
+
              property is true, the application cannot change any of the properties of the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -511,6 +599,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -546,6 +636,8 @@
 
             
 
+            
+
              property indicates the dominant direction of written text and the relative position of user interface elements such as buttons and scroll bars.</para
           >
         </remarks>
@@ -554,6 +646,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -589,6 +683,8 @@
 
             
 
+            
+
              namespace, as well as the Windows API. The detailed culture information is defined in the <see
 
               cref="../../../../Users/a-bewilk/Documents/~tmp/NLS%20information%20page%20at%20the%20Go%20Global%20Developer%20Center"
@@ -601,6 +697,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -609,8 +707,12 @@
 
             
 
+            
+
              property always reflects a specific culture identifier instead of a neutral culture identifier. If <see
              cref="P:System.Globalization.CultureInfo.LCID" />
+
+            
 
             
 
@@ -619,13 +721,19 @@
 
             
 
+            
+
              has as its value an arbitrary specific culture identifier that uses the same language. For example, the <see
              cref="P:System.Globalization.CultureInfo.LCID" />
 
             
 
+            
+
              property returns 0x0009 for the English neutral culture, named "en". However, the corresponding <see
              cref="P:System.Globalization.TextInfo.LCID" />
+
+            
 
             
 
@@ -637,13 +745,19 @@
 
             
 
+            
+
              property always corresponds to a default sort order, and never reflects a specific sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see
              cref="P:System.Globalization.CultureInfo.LCID" />
 
             
 
+            
+
              is set to "0x040A" (Spanish with the traditional sort order), the corresponding <see
              cref="P:System.Globalization.TextInfo.LCID" />
+
+            
 
             
 
@@ -655,6 +769,8 @@
           <para
             >Gets the culture identifier for the culture associated with the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -712,6 +828,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -737,6 +855,8 @@
           <para
             >Gets the original equipment manufacturer (OEM) code page used by the writing system represented by the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -781,6 +901,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -792,13 +914,19 @@
 
             
 
+            
+
              object specified by the <paramref
              name="textInfo" />
 
             
 
+            
+
              parameter, if <paramref
              name="textInfo" />
+
+            
 
             
 
@@ -811,13 +939,19 @@
 
             
 
+            
+
              object specified by <paramref
              name="textInfo" />
 
             
 
+            
+
             , if <paramref
              name="textInfo" />
+
+            
 
             
 
@@ -829,8 +963,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.TextInfo" />
+
+          
 
           
 
@@ -870,6 +1008,8 @@
 
           
 
+          
+
           The source of the deserialization event. </param
         >
       </Docs>
@@ -902,11 +1042,15 @@
 
             
 
+            
+
              to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para
           >
           <para
             >For more information on cultures, see <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -923,6 +1067,8 @@
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -959,11 +1105,15 @@
 
             
 
+            
+
              to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para
           >
           <para
             >For more information on cultures, see <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -980,6 +1130,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1012,6 +1164,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1023,6 +1177,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1031,6 +1187,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -1127,11 +1285,15 @@
 
             
 
+            
+
              method provides an arbitrary casing behavior which is not necessarily linguistically correct. A linguistically correct solution would require additional rules, and the current algorithm is somewhat simpler and faster. We reserve the right to make this API slower in the future.</para
           >
           <para
             >The current implementation of the <see
              cref="M:System.Globalization.TextInfo.ToTitleCase(System.String)" />
+
+            
 
             
 
@@ -1148,6 +1310,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1183,11 +1347,15 @@
 
             
 
+            
+
              to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para
           >
           <para
             >For more information on cultures, see <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1204,6 +1372,8 @@
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1240,11 +1410,15 @@
 
             
 
+            
+
              to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para
           >
           <para
             >For more information on cultures, see <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1261,6 +1435,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

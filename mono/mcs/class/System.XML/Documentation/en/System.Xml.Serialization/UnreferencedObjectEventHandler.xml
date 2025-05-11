@@ -41,6 +41,8 @@
 
         
 
+        
+
          delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
@@ -52,8 +54,12 @@
 
         
 
+        
+
          event occurs only when you call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -68,8 +74,12 @@
 
         
 
+        
+
          event of an <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 

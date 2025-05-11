@@ -47,8 +47,12 @@
 
         
 
+        
+
         . If changes are made to the underlying collection, the <see
          cref="T:System.Collections.ObjectModel.ReadOnlyObservableCollection`1" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.System#ComponentModel#INotifyPropertyChanged#PropertyChanged" />
+
+        
 
         
 
@@ -70,6 +78,8 @@
       <para
         >Represents a read-only <see
          cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+
+        
 
         
 
@@ -128,6 +138,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -169,11 +181,15 @@
 
             
 
+            
+
              event using the provided arguments.</para
           >
         </summary>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,11 +226,15 @@
 
             
 
+            
+
              event using the provided arguments.</para
           >
         </summary>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -244,6 +264,8 @@
           <para
             >For more information, see <see
              cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+
+            
 
             
 

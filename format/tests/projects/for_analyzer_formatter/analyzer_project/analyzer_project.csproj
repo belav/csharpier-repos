@@ -4,7 +4,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <IncludeAssets
+>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="AspNetCoreAnalyzers" Version="0.2.0.1-dev" PrivateAssets="all" />
     <PackageReference Include="IDisposableAnalyzers" Version="3.4.8" PrivateAssets="all" />
@@ -13,7 +14,8 @@
       Version="0.1.647-beta"
       PrivateAssets="all"
     >
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <IncludeAssets
+>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 </Project>

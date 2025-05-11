@@ -22,8 +22,12 @@
 
         
 
+        
+
          property of this <see
          cref="T:System.Configuration.Install.TransactedInstaller" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.Install.TransactedInstaller" />
+
+            
 
             
 
@@ -80,8 +86,12 @@
 
             
 
+            
+
              method of each installer contained in the <see
              cref="P:System.Configuration.Install.Installer.Installers" />
+
+            
 
             
 
@@ -90,8 +100,12 @@
 
             
 
+            
+
              object referenced by the <paramref
              name="savedState" />
+
+            
 
             
 
@@ -100,13 +114,19 @@
 
             
 
+            
+
              methods succeed, the <see
              cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
 
             
 
+            
+
              method is called. Otherwise, the <see
              cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -122,8 +142,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -156,13 +180,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
 
             
 
+            
+
              method of each installer in the <see
              cref="P:System.Configuration.Install.Installer.Installers" />
+
+            
 
             
 
@@ -175,8 +205,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+              
 
               
 
@@ -185,13 +219,19 @@
 
               
 
+              
+
                from the <paramref
                name="savedState" />
 
               
 
+              
+
                parameter might have been deleted at some point after the installation was complete. If the file is deleted, the <paramref
                name="savedState" />
+
+              
 
               
 
@@ -208,8 +248,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 

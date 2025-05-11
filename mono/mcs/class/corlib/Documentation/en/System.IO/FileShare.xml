@@ -46,12 +46,16 @@
 
         
 
+        
+
         . For an example of reading text from a file, see <format
          type="text/html">
           <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
             >[&lt;topic://cpconreadingtextfromfile&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -64,11 +68,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >A typical use of this enumeration is to define whether two processes can simultaneously read from the same file. For example, if a file is opened and <see
          cref="F:System.IO.FileShare.Read" />
+
+        
 
         
 
@@ -80,8 +88,12 @@
 
         
 
+        
+
          parameter is specified in some of the constructors for <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -90,13 +102,19 @@
 
         
 
+        
+
         , and in some of the Open methods of <see
          cref="T:System.IO.File" />
 
         
 
+        
+
          and <see
          cref="T:System.IO.FileInfo" />
+
+        
 
         
 
@@ -108,6 +126,8 @@
       <para
         >Contains constants for controlling the kind of access other <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 

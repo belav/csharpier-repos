@@ -42,6 +42,8 @@
           
 
           
+
+          
 property.</block
         >
       </para>
@@ -51,6 +53,8 @@ property.</block
       <para
         >Provides data for the <see
          cref="E:System.AppDomain.AssemblyLoad" />
+
+        
 
         
 
@@ -90,9 +94,13 @@ property.</block
 
             
 
+            
+
              property is initialized using 
 <paramref
              name="loadedAssembly" />
+
+            
 
             
 
@@ -107,8 +115,12 @@ property.</block
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -117,6 +129,8 @@ property.</block
         </summary>
         <param name="loadedAssembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,6 +171,8 @@ property.</block
             
 
             
+
+            
 representing the assembly that has been loaded.</para
           >
         </value>
@@ -168,6 +184,8 @@ representing the assembly that has been loaded.</para
 
             
 
+            
+
              event occurs.</para
           >
         </remarks>
@@ -176,6 +194,8 @@ representing the assembly that has been loaded.</para
           <para
             >Gets an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 

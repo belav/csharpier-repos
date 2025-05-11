@@ -15,16 +15,19 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
     <summary>
       <para>This class functions as a provider for data type support for "data" and "value" patterns. Usually, RELAX NG recognizes each datatype by its "datatypeLibrary" and the type (local) name, but this class is designed to just return datatypes by the type's qualified name.
 	</para>
-      <para
-        >
+      <para>
 	Each data type is represented as a <see
          cref="T:Commons.Xml.Relaxng.RelaxngDatatype" />
+
+        
 
         
 
@@ -35,6 +38,8 @@
         <para
           >By default, <see
            cref="P:Commons.Xml.Relaxng.RelaxngMergedProvider.DefaultProvider" />
+
+          
 
           
 
@@ -72,11 +77,15 @@
 
           
 
+          
+
            that represents the local name of the datatype.</param
         >
         <param name="ns"
           >a URI <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -88,11 +97,15 @@
 
           
 
+          
+
           ; list of datatype parameters.</param
         >
         <returns
           >a <see
            cref="T:Commons.Xml.Relaxng.RelaxngDatatype" />
+
+          
 
           
 

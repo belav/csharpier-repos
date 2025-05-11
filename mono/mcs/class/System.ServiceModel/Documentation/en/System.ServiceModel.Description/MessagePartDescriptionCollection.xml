@@ -34,6 +34,8 @@
 
         
 
+        
+
          objects by name and namespace.</para
       >
     </remarks>
@@ -42,6 +44,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.ServiceModel.Description.MessagePartDescription" />
+
+        
 
         
 
@@ -79,8 +83,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.ServiceModel.Description.MessagePartDescription" />
+
+            
 
             
 
@@ -95,8 +103,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.ServiceModel.Description.MessagePartDescription" />
+
+            
 
             
 
@@ -108,8 +120,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MessagePartDescription" />
+
+          
 
           
 

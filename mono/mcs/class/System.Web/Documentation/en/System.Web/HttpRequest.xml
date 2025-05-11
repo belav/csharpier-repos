@@ -21,8 +21,12 @@
 
         
 
+        
+
          class are exposed through the Request properties of the <see
          cref="T:System.Web.HttpApplication" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.Page" />
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.UserControl" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.HttpRequest.Form" />
+
+        
 
         
 
@@ -59,13 +73,19 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Web.HttpRequest.ServerVariables" />
 
         
 
+        
+
          collections, you can write Request["key"], as shown in the example for the <see
          cref="P:System.Web.HttpRequest.QueryString" />
+
+        
 
         
 
@@ -75,6 +95,8 @@
         <para
           >Unicode support for <see
            cref="T:System.Web.HttpRequest" />
+
+          
 
           
 
@@ -109,8 +131,12 @@
 
             
 
+            
+
              class. The methods and properties of the <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -119,8 +145,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -129,8 +159,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -145,11 +179,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -160,10 +198,14 @@
 
           
 
+          
+
           Information regarding the URL of the current request. </param
         >
         <param name="queryString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,8 +255,12 @@
 
             
 
+            
+
              property assigns a long-lived unique identifier to a non-authenticated user, which can be used to track the user or assign profile properties to that user without storing data in a Session object. By default, the <see
              cref="P:System.Web.HttpRequest.AnonymousID" />
+
+            
 
             
 
@@ -223,8 +269,12 @@
 
             
 
+            
+
              attribute in the anonymous identification configuration section is set to either the <see
              cref="F:System.Web.HttpCookieMode.UseUri" />
+
+            
 
             
 
@@ -233,8 +283,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Web.HttpCookieMode.AutoDetect" />
+
+            
 
             
 
@@ -319,6 +373,8 @@
 
             
 
+            
+
              method is provided for compatibility with ASP.</para
           >
         </remarks>
@@ -332,6 +388,8 @@
         </returns>
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -405,6 +463,8 @@
 
           
 
+          
+
            used for the request body.</value
         >
         <remarks>
@@ -416,6 +476,8 @@
                 >globalization Element (ASP.NET Settings Schema)</a
               >
             </format>
+
+            
 
             
 
@@ -489,8 +551,12 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -499,8 +565,12 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -513,8 +583,12 @@
 
               
 
+              
+
                collection, the cookie is immediately available in the <see
                cref="P:System.Web.HttpRequest.Cookies" />
+
+              
 
               
 
@@ -547,8 +621,12 @@
 
             
 
+            
+
              returns the file path to the currently executing page handler. For redirect scenarios using <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String)" />
+
+            
 
             
 
@@ -557,13 +635,19 @@
 
             
 
+            
+
              methods this means that the <see
              cref="P:System.Web.HttpRequest.CurrentExecutionFilePath" />
 
             
 
+            
+
              property returns the path to the page redirected to (child page). However, when the client is redirected to another page, the <see
              cref="P:System.Web.HttpRequest.FilePath" />
+
+            
 
             
 
@@ -596,13 +680,19 @@
 
             
 
+            
+
              property does not include the <see
              cref="P:System.Web.HttpRequest.PathInfo" />
 
             
 
+            
+
              trailer. For example, for the URL http://www.contoso.com/virdir/page.html/tail, the <see
              cref="P:System.Web.HttpRequest.FilePath" />
+
+            
 
             
 
@@ -687,6 +777,8 @@
 
             
 
+            
+
              property is populated when the HTTP request Content-Type value is either "application/x-www-form-urlencoded" or "multipart/form-data".</para
           >
         </remarks>
@@ -720,6 +812,8 @@
           <para
             >For a listing of all possible headers, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=73147">Request Header Fields</see>
+
+            
 
             
 
@@ -774,10 +868,11 @@
           >
 The runtime puts a cap on the size of the maximum upload to avoid possible denials of service, this is configured in the &lt;system.web&gt; section of the  machine config or the per-application web.config file in the &lt;httpRuntime&gt; subsection with the attribute "maxRequestLength", a value expressed in kilobytes.
 </para>
-          <para
-            >
+          <para>
    The stream is created on the first access to this property.   Module authors and IHttpHandler developers can work around this by using the <see
              cref="I:System.ServiceProvider.GetService(Type)" />
+
+            
 
             
 
@@ -786,8 +881,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              passing a <see
              cref="T:System.Web.HttpWorkerRequest" />
+
+            
 
             
 
@@ -843,6 +942,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              property returns true if the IP address of the request originator is 127.0.0.1 or if the IP address of the request is the same as the server's IP address.</para
           >
         </remarks>
@@ -859,7 +960,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <value>returns true if the request is using https and false if not.</value>
+        <value
+>returns true if the request is using https and false if not.</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -913,8 +1015,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              property exposes the properties and methods of the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -923,13 +1029,19 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              class that is exposed by <see
              cref="P:System.Web.HttpRequest.LogonUserIdentity" />
 
             
 
+            
+
              tracks the IIS request token and provides easy access to this token for the current HTTP request being processed inside of ASP.NET. An instance of the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -941,6 +1053,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           <para
             >Gets the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -976,6 +1090,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
           
 
+          
+
           The name of the form image map. </param
         >
       </Docs>
@@ -1003,6 +1119,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
               
 
+              
+
                property potentially contains sensitive information about the hosting environment. The return value should not be displayed to users.</para
             >
           </block>
@@ -1019,11 +1137,15 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1059,6 +1181,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
               
 
+              
+
                property potentially contains sensitive information about the hosting environment. The return value should not be displayed to users.</para
             >
           </block>
@@ -1076,10 +1200,14 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
           
 
+          
+
           The virtual path (absolute or relative) for the current request. </param
         >
         <param name="baseVirtualDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1090,8 +1218,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
           
 
+          
+
           true to indicate that <paramref
            name="virtualPath" />
+
+          
 
           
 
@@ -1144,8 +1276,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
             , <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -1154,8 +1290,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
             , and <see
              cref="P:System.Web.HttpRequest.ServerVariables" />
+
+            
 
             
 
@@ -1184,8 +1324,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              is the concatenation of the <see
              cref="P:System.Web.HttpRequest.FilePath" />
+
+            
 
             
 
@@ -1194,8 +1338,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              trailer. For example, for the URL http://www.contoso.com/virdir/page.html/tail, the <see
              cref="P:System.Web.HttpRequest.Path" />
+
+            
 
             
 
@@ -1225,6 +1373,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           <para
             >For the URL Http://www.contoso.com/virdir/page.html/tail, the <see
              cref="P:System.Web.HttpRequest.PathInfo" />
+
+            
 
             
 
@@ -1276,8 +1426,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1286,13 +1440,19 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              property returns the path to the original page. To find the physical path of the currently executing page use the <see
              cref="M:System.Web.HttpRequest.MapPath(System.String,System.String,System.Boolean)" />
 
             
 
+            
+
              method with the input argument set as the <see
              cref="P:System.Web.HttpRequest.CurrentExecutionFilePath" />
+
+            
 
             
 
@@ -1404,10 +1564,14 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
           
 
+          
+
           The physical drive path. </param
         >
         <param name="includeHeaders">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1439,6 +1603,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           <para
             >For a list of server variables supported by IIS, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=52471">IIS Server Variables</see>
+
+            
 
             
 
@@ -1604,13 +1770,19 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              class uses input validation flags to track whether to perform validation on the request collections accessed through the <see
              cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
+            
+
             , <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -1619,8 +1791,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              properties. The <see
              cref="M:System.Web.HttpRequest.ValidateInput" />
+
+            
 
             
 
@@ -1629,8 +1805,12 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
             , <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -1639,11 +1819,15 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
              property are invoked, input validation is performed. Validation works by checking all input data against a hard-coded list of potentially dangerous data.</para
           >
           <para
             >If the validation feature is enabled by page directive or configuration, this method is called during the page's ProcessRequest processing phase. The <see
              cref="M:System.Web.HttpRequest.ValidateInput" />
+
+            
 
             
 
@@ -1658,13 +1842,19 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 
             
 
+            
+
             , <see
              cref="P:System.Web.HttpRequest.Form" />
 
             
 
+            
+
             , and <see
              cref="P:System.Web.HttpRequest.QueryString" />
+
+            
 
             
 

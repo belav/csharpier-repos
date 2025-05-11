@@ -35,13 +35,19 @@
 
         
 
+        
+
          class provides a simple interface for loading and playing a .wav file. The <see
          cref="T:System.Media.SoundPlayer" />
 
         
 
+        
+
          class supports loading a .wav file from a file path, a URL, a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          class, configure a <see
          cref="T:System.Media.SoundPlayer" />
+
+        
 
         
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Media.SoundPlayer.Stream" />
+
+        
 
         
 
@@ -73,8 +87,12 @@
 
         
 
+        
+
          configured to load a .wav file from a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -90,6 +108,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -98,8 +118,12 @@
 
         
 
+        
+
          has finished loading a .wav file, it raises the <see
          cref="E:System.Media.SoundPlayer.LoadCompleted" />
+
+        
 
         
 
@@ -108,8 +132,12 @@
 
         
 
+        
+
          in your event handler to determine if the load succeeded or failed. The <see
          cref="E:System.Media.SoundPlayer.SoundLocationChanged" />
+
+        
 
         
 
@@ -118,8 +146,12 @@
 
         
 
+        
+
          event is raised when the audio source is set to a new <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -130,11 +162,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >For more information about <see
          cref="T:System.Media.SoundPlayer" />
+
+        
 
         
 
@@ -147,12 +183,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >   The <see
            cref="T:System.Media.SoundPlayer" />
+
+          
 
           
 
@@ -163,10 +203,14 @@
 
           
 
+          
+
            and <see
            cref="http://go.microsoft.com/fwlink/?LinkId=131269"
             >Windows Media Player Object Model Reference for Visual Basic .NET and C#</see
           >
+
+          
 
           
 
@@ -201,8 +245,12 @@
 
             
 
+            
+
              with no audio source. Until it is configured with an audio source path, the <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -214,6 +262,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -245,8 +295,12 @@
 
             
 
+            
+
              passed to the <paramref
              name="stream" />
+
+            
 
             
 
@@ -255,13 +309,19 @@
 
             
 
+            
+
              containing a .wav file. The data returned by the <see
              cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method of the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -276,8 +336,12 @@
 
             
 
+            
+
              class, and attaches the .wav file within the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -289,8 +353,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -321,8 +389,12 @@
 
             
 
+            
+
              parameter can be either a file path or a URL to a .wav file. If the path or URL is not valid, the <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -337,11 +409,15 @@
 
             
 
+            
+
              class, and attaches the specified .wav file.</para
           >
         </summary>
         <param name="soundLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -377,6 +453,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -385,8 +463,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -394,6 +476,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,6 +529,8 @@
 
             
 
+            
+
              method uses the current thread to load a .wav file, preventing the thread from handling other messages until the load is complete.</para
           >
           <block subset="none" type="note">
@@ -454,8 +540,12 @@
 
               
 
+              
+
                method may produce a delay while loading a large .wav file. In addition, painting and other events will be blocked until the load is completed. Use the <see
                cref="M:System.Media.SoundPlayer.LoadAsync" />
+
+              
 
               
 
@@ -465,6 +555,8 @@
           <para
             >This method raises the <see
              cref="E:System.Media.SoundPlayer.LoadCompleted" />
+
+            
 
             
 
@@ -501,8 +593,12 @@
 
             
 
+            
+
              is configured to load a .wav file from a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -514,11 +610,15 @@
 
             
 
+            
+
              event when loading completes, even if the load was not successful.</para
           >
           <para
             >If a <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -531,6 +631,8 @@
                 >How to: Load a Sound Asynchronously within a Windows Form</a
               >
             </format>
+
+            
 
             
 
@@ -572,6 +674,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -599,6 +703,8 @@
           <para
             >After this time has expired, the loading is canceled and a <see
              cref="T:System.ServiceProcess.TimeoutException" />
+
+            
 
             
 
@@ -643,11 +749,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Media.SoundPlayer.OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />
+
+            
 
             
 
@@ -662,6 +772,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -670,8 +782,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+          
 
           
 
@@ -708,6 +824,8 @@
 
             
 
+            
+
              has been set.</para
           >
           <para
@@ -718,11 +836,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Media.SoundPlayer.OnSoundLocationChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -737,6 +859,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -745,8 +869,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -783,8 +911,12 @@
 
             
 
+            
+
              audio source for this <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -798,11 +930,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Media.SoundPlayer.OnStreamChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -817,6 +953,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -825,8 +963,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -858,8 +1000,12 @@
 
             
 
+            
+
              method plays the sound using a new thread. If you call <see
              cref="M:System.Media.SoundPlayer.Play" />
+
+            
 
             
 
@@ -868,8 +1014,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Media.SoundPlayer.Load" />
+
+            
 
             
 
@@ -878,8 +1028,12 @@
 
             
 
+            
+
              or URL, future calls to playback methods for the <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -888,6 +1042,8 @@
           <para
             >If the .wav file has not been specified or it fails to load, the <see
              cref="M:System.Media.SoundPlayer.Play" />
+
+            
 
             
 
@@ -924,8 +1080,12 @@
 
             
 
+            
+
              method plays and loops the sound using a new thread. If you call <see
              cref="M:System.Media.SoundPlayer.PlayLooping" />
+
+            
 
             
 
@@ -934,8 +1094,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Media.SoundPlayer.Load" />
+
+            
 
             
 
@@ -944,8 +1108,12 @@
 
             
 
+            
+
              or URL, future calls to playback methods for the <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -957,11 +1125,15 @@
 
             
 
+            
+
              method will play the default beep sound.</para
           >
           <para
             >For more information about <see
              cref="M:System.Media.SoundPlayer.PlayLooping" />
+
+            
 
             
 
@@ -971,6 +1143,8 @@
                 >How to: Loop a Sound Playing on a Windows Form</a
               >
             </format>
+
+            
 
             
 
@@ -1007,8 +1181,12 @@
 
             
 
+            
+
              method uses the current thread to play a .wav file, preventing the thread from handling other messages until the load is complete. You can use the <see
              cref="M:System.Media.SoundPlayer.LoadAsync" />
+
+            
 
             
 
@@ -1017,8 +1195,12 @@
 
             
 
+            
+
              method to load the .wav file to memory in advance. After a .wav file is successfully loaded from a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1027,11 +1209,15 @@
 
             
 
+            
+
              will not need to reload the .wav file until the path for the sound changes.</para
           >
           <para
             >If the .wav file has not been specified or it fails to load, the <see
              cref="M:System.Media.SoundPlayer.PlaySync" />
+
+            
 
             
 
@@ -1065,13 +1251,19 @@
 
             
 
+            
+
              when the <see
              cref="P:System.Media.SoundPlayer.Stream" />
 
             
 
+            
+
              property is set to a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1107,6 +1299,8 @@
 
             
 
+            
+
              has been set.</para
           >
           <para
@@ -1114,6 +1308,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1125,6 +1321,8 @@
           <para
             >Occurs when a new audio source path for this <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -1177,6 +1375,8 @@
 
             
 
+            
+
              property is set to a new and valid sound location.</para
           >
         </remarks>
@@ -1185,6 +1385,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1213,8 +1415,12 @@
 
             
 
+            
+
              audio source for this <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -1225,6 +1431,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1239,8 +1447,12 @@
 
             
 
+            
+
              audio source for this <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -1279,8 +1491,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 
@@ -1295,6 +1511,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1303,8 +1521,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1315,8 +1537,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1346,8 +1572,12 @@
 
             
 
+            
+
              that contains data about the <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 

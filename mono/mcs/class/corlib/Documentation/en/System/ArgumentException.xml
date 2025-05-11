@@ -41,6 +41,8 @@
 
         
 
+        
+
          exception to be thrown by the system.</para
       >
       <code lang="C#"
@@ -74,8 +76,12 @@ public class ArgExceptionExample {
 
         
 
+        
+
          is thrown when a method is invoked and at least one of the passed arguments does not meet the parameter specification of the called method. All instances of <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -87,8 +93,12 @@ public class ArgExceptionExample {
 
         
 
+        
+
          are <see
          cref="T:System.ArgumentNullException" />
+
+        
 
         
 
@@ -97,8 +107,12 @@ public class ArgExceptionExample {
 
         
 
+        
+
         . These derived classes should be used instead of <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -111,6 +125,8 @@ public class ArgExceptionExample {
 
             
 
+            
+
              whenever null is passed to a method that does not accept it as a valid argument.</para
           >
         </item>
@@ -120,8 +136,12 @@ public class ArgExceptionExample {
 
             
 
+            
+
              when the value of an argument is outside the range of acceptable values; for example, when the value "46" is passed as the month argument during the creation of a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -135,10 +155,14 @@ public class ArgExceptionExample {
 
         
 
+        
+
          should be used.</para
       >
       <para>
         <see cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -150,8 +174,12 @@ public class ArgExceptionExample {
 
         
 
+        
+
         , see the <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -191,11 +219,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "An invalid argument was specified." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -242,6 +274,8 @@ public class ArgExceptionExample {
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -277,11 +311,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "An invalid argument was specified." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -328,11 +366,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -371,6 +413,8 @@ public class ArgExceptionExample {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -382,6 +426,8 @@ public class ArgExceptionExample {
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -390,10 +436,14 @@ public class ArgExceptionExample {
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,13 +484,19 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property of the new instance using the value of the <paramref
              name="message" />
 
             
 
+            
+
              parameter. The content of the <paramref
              name="message" />
+
+            
 
             
 
@@ -452,8 +508,12 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -462,11 +522,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -511,11 +575,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,8 +594,12 @@ public class ArgExceptionExample {
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -569,13 +641,19 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property of the new instance using the value of the <paramref
              name="message" />
 
             
 
+            
+
              parameter. The content of the <paramref
              name="message" />
+
+            
 
             
 
@@ -587,8 +665,12 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property of the new instance using <paramref
              name="paramName" />
+
+            
 
             
 
@@ -597,11 +679,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              is intended to be understood by humans.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -648,6 +734,8 @@ public class ArgExceptionExample {
 
             
 
+            
+
              class with a specified error message and the name of the parameter that causes this exception.</para
           >
         </summary>
@@ -656,10 +744,14 @@ public class ArgExceptionExample {
 
           
 
+          
+
           The error message that explains the reason for the exception. </param
         >
         <param name="paramName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -702,13 +794,19 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property of the new instance using the value of the <paramref
              name="message" />
 
             
 
+            
+
              parameter. The content of the <paramref
              name="message" />
+
+            
 
             
 
@@ -720,13 +818,19 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property of the new instance using <paramref
              name="paramName" />
 
             
 
+            
+
             . The content of <paramref
              name="paramName" />
+
+            
 
             
 
@@ -738,8 +842,12 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -748,11 +856,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -805,11 +917,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              class with a specified error message, the parameter name, and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -820,6 +936,8 @@ public class ArgExceptionExample {
 
           
 
+          
+
           The name of the parameter that caused the current exception. </param
         >
         <param name="innerException">
@@ -827,8 +945,12 @@ public class ArgExceptionExample {
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -867,8 +989,12 @@ public class ArgExceptionExample {
 
             
 
+            
+
              sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -877,11 +1003,15 @@ public class ArgExceptionExample {
 
             
 
+            
+
              transmitted over the stream.</para
           >
           <para
             >For more information, see <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -896,6 +1026,8 @@ public class ArgExceptionExample {
 
             
 
+            
+
              object with the parameter name and additional exception information.</para
           >
         </summary>
@@ -904,10 +1036,14 @@ public class ArgExceptionExample {
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -935,13 +1071,19 @@ public class ArgExceptionExample {
 
             
 
+            
+
              containing the error message with <see
              cref="P:System.ArgumentException.ParamName" />
 
             
 
+            
+
              appended, if it in not <see
              langword="null" />
+
+            
 
             
 
@@ -953,6 +1095,8 @@ public class ArgExceptionExample {
           <para
             >This property overrides <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -990,10 +1134,14 @@ public class ArgExceptionExample {
 
             
 
+            
+
              that contains the 
    name of the parameter that caused the current Exception, or
 <see
              langword="null" />
+
+            
 
             
 
@@ -1007,6 +1155,8 @@ public class ArgExceptionExample {
           <para
             >Every <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 

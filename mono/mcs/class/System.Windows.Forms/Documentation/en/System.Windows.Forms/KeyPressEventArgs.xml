@@ -24,8 +24,12 @@
 
         
 
+        
+
          specifies the character that is composed when the user presses a key. For example, when the user presses SHIFT + K, the <see
          cref="P:System.Windows.Forms.KeyPressEventArgs.KeyChar" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          event occurs when the user presses a key. Two events that are closely related to the <see
          cref="E:System.Windows.Forms.Control.KeyPress" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Control.KeyDown" />
+
+        
 
         
 
@@ -57,8 +69,12 @@
 
         
 
+        
+
          event precedes each <see
          cref="E:System.Windows.Forms.Control.KeyPress" />
+
+        
 
         
 
@@ -67,8 +83,12 @@
 
         
 
+        
+
          event occurs when the user releases a key. When the user holds down a key, duplicate <see
          cref="E:System.Windows.Forms.Control.KeyDown" />
+
+        
 
         
 
@@ -77,8 +97,12 @@
 
         
 
+        
+
          events occur each time the character repeats. One <see
          cref="E:System.Windows.Forms.Control.KeyUp" />
+
+        
 
         
 
@@ -90,8 +114,12 @@
 
         
 
+        
+
          event, a <see
          cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+        
 
         
 
@@ -100,8 +128,12 @@
 
         
 
+        
+
          is passed with each <see
          cref="E:System.Windows.Forms.Control.KeyDown" />
+
+        
 
         
 
@@ -110,8 +142,12 @@
 
         
 
+        
+
          event. A <see
          cref="T:System.Windows.Forms.KeyEventArgs" />
+
+        
 
         
 
@@ -120,8 +156,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -130,6 +170,8 @@
       <para
         >Set <see
          cref="P:System.Windows.Forms.KeyPressEventArgs.Handled" />
+
+        
 
         
 
@@ -142,8 +184,12 @@
 
           
 
+          
+
           . For example, <see
            cref="T:System.Windows.Forms.RichTextBox" />
+
+          
 
           
 
@@ -152,13 +198,19 @@
 
           
 
+          
+
            is called. In such cases, you cannot cancel the <see
            cref="E:System.Windows.Forms.Control.KeyPress" />
 
           
 
+          
+
            event, and must cancel the key stroke from <see
            cref="E:System.Windows.Forms.Control.KeyDown" />
+
+          
 
           
 
@@ -173,6 +225,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -181,6 +235,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.KeyPress" />
+
+        
 
         
 
@@ -204,6 +260,8 @@
 
             
 
+            
+
              property to get the current state of the modifier keys.</para
           >
         </remarks>
@@ -215,11 +273,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="keyChar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -247,6 +309,8 @@
 
             
 
+            
+
              to true to cancel the KeyPress event.</para
           >
         </remarks>
@@ -255,6 +319,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="E:System.Windows.Forms.Control.KeyPress" />
+
+            
 
             
 
@@ -283,8 +349,12 @@
 
             
 
+            
+
              property to sample keystrokes at run time and to modify keystrokes under special run-time circumstances. For example, you can use <see
              cref="P:System.Windows.Forms.KeyPressEventArgs.KeyChar" />
+
+            
 
             
 
@@ -339,6 +409,8 @@
             <para
               >For information about how to detect any of the non-character keys mentioned above, see the <see
                cref="T:System.Windows.Forms.KeyEventArgs" />
+
+              
 
               
 

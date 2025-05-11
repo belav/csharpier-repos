@@ -17,8 +17,12 @@
 
         
 
+        
+
          works with <see
          cref="T:System.Windows.Forms.Orientation" />
+
+        
 
         
 
@@ -30,6 +34,8 @@
       <para
         >Specifies the direction to move when getting items with the <see
          cref="M:System.Windows.Forms.ToolStrip.GetNextItem(System.Windows.Forms.ToolStripItem,System.Windows.Forms.ArrowDirection)" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
           <para
             >The direction is down (<see
              cref="F:System.Windows.Forms.Orientation.Vertical" />
+
+            
 
             
 
@@ -78,6 +86,8 @@
 
             
 
+            
+
             ).</para
           >
         </summary>
@@ -102,6 +112,8 @@
 
             
 
+            
+
             ).</para
           >
         </summary>
@@ -123,6 +135,8 @@
           <para
             >The direction is up (<see
              cref="F:System.Windows.Forms.Orientation.Vertical" />
+
+            
 
             
 

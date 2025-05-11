@@ -5,7 +5,7 @@
 
       >[Example: For example <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface ICloneable  
 {  
    object Clone();  
@@ -30,7 +30,7 @@ class ListEntry: ICloneable, IComparable
     <example
       >[Example: In some cases, the name of an interface member may not be appropriate for the implementing class, in which case the interface member may be implemented using explicit interface member implementation. A class implementing a file abstraction, for example, would likely implement a Close member function that has the effect of releasing the file resource, and implement the Dispose method of the IDisposable interface using explicit interface member implementation: <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface IDisposable {  
    void Dispose();  
 }  
@@ -45,6 +45,8 @@ class MyFile: IDisposable {
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -66,7 +68,7 @@ class MyFile: IDisposable {
 
       >[Example: Thus, in the following class <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Shape: ICloneable  
 {  
    object ICloneable.Clone() {...}  
@@ -77,9 +79,11 @@ class Shape: ICloneable
 
       
 
+      
+
       the declaration of IComparable.CompareTo results in a compile-time error because IComparable is not listed in the base class list of Shape and is not a base interface of ICloneable. Likewise, in the declarations <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Shape: ICloneable  
 {  
    object ICloneable.Clone() {...}  
@@ -93,6 +97,8 @@ class Ellipse: Shape
 
       
 
+      
+
       the declaration of ICloneable.Clone in Ellipse results in a compile-time error because ICloneable is not explicitly listed in the base class list of Ellipse. end example]</example
     >
   </paragraph>
@@ -101,7 +107,7 @@ class Ellipse: Shape
 
       >[Example: Thus, in the declarations <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface IControl  
 {  
    void Paint();  
@@ -117,6 +123,8 @@ class TextBox: ITextBox
 }  
 ]]>
       </code_example>
+
+      
 
       
 

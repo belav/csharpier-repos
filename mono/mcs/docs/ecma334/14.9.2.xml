@@ -3,7 +3,7 @@
   <paragraph
     >The predefined floating-point comparison operators are: <code_example
     >
-      <![CDATA[
+<![CDATA[
 bool operator ==(float x, float y);  
 bool operator ==(double x, double y);  
 bool operator !=(float x, float y);  
@@ -29,10 +29,12 @@ bool operator >=(double x, double y);
       <list_item
         > When neither operand is NaN, the operators compare the values of the two floating-point operands with respect to the ordering <code_example
         >
-          <![CDATA[
+<![CDATA[
 {UNICODE_150}{UNICODE_8734} < {UNICODE_150}max < {UNICODE_133} < {UNICODE_150}min < {UNICODE_150}0.0 == +0.0 < +min < {UNICODE_133} < +max < +{UNICODE_8734}  
 ]]>
         </code_example>
+
+        
 
         
 

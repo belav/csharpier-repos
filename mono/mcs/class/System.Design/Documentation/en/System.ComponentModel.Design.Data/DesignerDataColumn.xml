@@ -18,13 +18,19 @@
 
         
 
+        
+
          class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see
          cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
 
         
 
+        
+
          interface. Controls access schema objects by calling the <see
          cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+        
 
         
 
@@ -59,13 +65,19 @@
 
             
 
+            
+
              to set the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.Name" />
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.DataType" />
+
+            
 
             
 
@@ -80,11 +92,15 @@
 
             
 
+            
+
              class with the specified name and data type. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -95,8 +111,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DbType" />
+
+          
 
           
 
@@ -127,8 +147,12 @@
 
             
 
+            
+
              constructor to set the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.Name" />
+
+            
 
             
 
@@ -137,8 +161,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.DefaultValue" />
+
+            
 
             
 
@@ -153,11 +181,15 @@
 
             
 
+            
+
              class with the specified name, data type, and default value. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,8 +200,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DbType" />
+
+          
 
           
 
@@ -177,6 +213,8 @@
         >
         <param name="defaultValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,8 +251,12 @@
 
             
 
+            
+
              constructor to set all the properties of a <see
              cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
+
+            
 
             
 
@@ -229,11 +271,15 @@
 
             
 
+            
+
              class with the specified values. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -244,8 +290,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DbType" />
+
+          
 
           
 
@@ -256,10 +306,14 @@
 
           
 
+          
+
           The default value of the column</param
         >
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,10 +324,14 @@
 
           
 
+          
+
           true if the field can be null in the data store; otherwise, false.</param
         >
         <param name="primaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,6 +342,8 @@
 
           
 
+          
+
           The maximum number of digits used by a numeric data field.</param
         >
         <param name="scale">
@@ -291,10 +351,14 @@
 
           
 
+          
+
           The maximum number of digits to the right of the decimal point in a numeric data field.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

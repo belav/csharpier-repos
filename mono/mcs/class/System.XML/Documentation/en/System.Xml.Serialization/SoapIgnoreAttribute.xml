@@ -35,8 +35,12 @@
 
         
 
+        
+
          class belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -57,8 +63,12 @@
 
         
 
+        
+
          using an <see
          cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+
+        
 
         
 
@@ -80,8 +94,12 @@
 
         
 
+        
+
          to any class member that you want the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -97,12 +115,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can use the word SoapIgnore in your code instead of the longer <see
            cref="T:System.Xml.Serialization.SoapIgnoreAttribute" />
+
+          
 
           
 
@@ -115,6 +137,8 @@
       <para
         >Instructs the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -144,6 +168,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.SoapIgnoreAttribute" />
+
+            
 
             
 

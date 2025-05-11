@@ -51,6 +51,8 @@
 
         
 
+        
+
          enumeration. The values for this enumeration can be found in its documentation.</para
       >
     </remarks>
@@ -89,8 +91,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -108,6 +114,8 @@
 
             
 
+            
+
              class with either restricted or unrestricted permission as specified.</para
           >
         </summary>
@@ -116,8 +124,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -156,8 +168,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+
+          
 
           
 
@@ -171,6 +187,8 @@
 
             
 
+            
+
              class with the specified initial set state of the flags.</para
           >
         </summary>
@@ -179,8 +197,12 @@
 
           
 
+          
+
           The initial state of the permission, represented by a bitwise OR combination of any permission bits defined by <see
            cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+
+          
 
           
 
@@ -289,6 +311,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -296,6 +320,8 @@
               >For the XML encoding for this class, see
  the <see
                cref="T:System.Security.Permissions.SecurityPermission" />
+
+              
 
               
 
@@ -312,6 +338,8 @@
               
 
               
+
+              
  .</para
             >
           </block>
@@ -321,8 +349,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -334,8 +366,12 @@
 
             
 
+            
+
              does not contain the encoding for a <see
              cref="T:System.Security.Permissions.SecurityPermission" />
+
+            
 
             
 
@@ -344,6 +380,8 @@
           <para
             >The version number of <paramref
              name="esd" />
+
+            
 
             
 
@@ -356,6 +394,8 @@
         </summary>
         <param name="esd">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,13 +435,19 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
           
 
+          
+
            and is not of type <see
            cref="T:System.Security.Permissions.SecurityPermission" />
+
+          
 
           
 
@@ -421,6 +467,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -460,13 +508,19 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
           
 
+          
+
            and is not of type <see
            cref="T:System.Security.Permissions.SecurityPermission" />
+
+          
 
           
 
@@ -486,6 +540,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -580,11 +636,15 @@
 
               
 
+              
+
                class page.</para
             >
             <para
               >This method overrides <see
                cref="M:System.Security.CodeAccessPermission.ToXml" qualify="true" />
+
+              
 
               
 
@@ -634,13 +694,19 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
           
 
+          
+
            and is not of type <see
            cref="T:System.Security.Permissions.SecurityPermission" />
+
+          
 
           
 
@@ -651,6 +717,8 @@
           <para
             >The result of a call to <see
              cref="M:System.Security.Permissions.SecurityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -667,6 +735,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

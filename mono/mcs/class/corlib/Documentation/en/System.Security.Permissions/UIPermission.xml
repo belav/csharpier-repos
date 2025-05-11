@@ -43,8 +43,12 @@
 
         
 
+        
+
         , only <see
          cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
+
+        
 
         
 
@@ -100,11 +108,15 @@
 
             
 
+            
+
              class with either fully restricted or unrestricted access, as specified.</para
           >
         </summary>
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,11 +156,15 @@
 
             
 
+            
+
              class with the permissions for the Clipboard, and no access to windows.</para
           >
         </summary>
         <param name="clipboardFlag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,11 +204,15 @@
 
             
 
+            
+
              class with the permissions for windows, and no access to the Clipboard.</para
           >
         </summary>
         <param name="windowFlag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -230,6 +250,8 @@
 
             
 
+            
+
              class with the specified permissions for windows and the Clipboard.</para
           >
         </summary>
@@ -238,10 +260,14 @@
 
           
 
+          
+
           One of the enumeration values. </param
         >
         <param name="clipboardFlag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -339,6 +365,8 @@
 
           
 
+          
+
           The XML encoding used to reconstruct the permission. </param
         >
       </Docs>
@@ -373,8 +401,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Permissions.UIPermissionClipboard" />
+
+            
 
             
 
@@ -391,6 +423,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -428,13 +462,19 @@
 
             
 
+            
+
              to return true, both the <see
              cref="T:System.Security.Permissions.UIPermissionWindow" />
 
             
 
+            
+
              and <see
              cref="T:System.Security.Permissions.UIPermissionClipboard" />
+
+            
 
             
 
@@ -451,6 +491,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -572,13 +614,19 @@
 
             
 
+            
+
              is a permission that represents all the operations represented by the current permission as well as all the operations represented by the specified permission. Specifically, it represents the most permissive values of <see
              cref="T:System.Security.Permissions.UIPermissionWindow" />
 
             
 
+            
+
              and <see
              cref="T:System.Security.Permissions.UIPermissionClipboard" />
+
+            
 
             
 
@@ -595,6 +643,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

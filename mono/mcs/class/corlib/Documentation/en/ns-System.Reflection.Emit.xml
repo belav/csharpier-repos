@@ -15,6 +15,8 @@
 
         
 
+        
+
          namespace contains classes that allow a compiler or tool to emit metadata and Microsoft intermediate language (MSIL) and optionally generate a PE file on disk. The primary clients of these classes are script engines and compilers.</para
       >
     </summary>

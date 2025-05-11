@@ -29,10 +29,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          event is raised by the designer host for certain actions on a control on the design surface. The <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          delegate method, which takes a <see
          cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+        
 
         
 
@@ -67,8 +79,12 @@
 
         
 
+        
+
          delegate. The <see
          cref="T:System.Web.UI.Design.ControlDesigner" />
+
+        
 
         
 
@@ -77,8 +93,12 @@
 
         
 
+        
+
          event. Custom control designers override the <see
          cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
+
+        
 
         
 
@@ -87,8 +107,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+
+        
 
         
 
@@ -97,8 +121,12 @@
 
         
 
+        
+
          method sets the default event delegate for the <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -113,8 +141,12 @@
 
         
 
+        
+
          event that is raised by visual design tools, such as vsprvslong, implementing the <see
          cref="T:System.Web.UI.Design.IControlDesignerView" />
+
+        
 
         
 

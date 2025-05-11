@@ -22,6 +22,8 @@
 
         
 
+        
+
          class returns the following two predefined comparison objects:</para
       >
       <list type="bullet">
@@ -32,13 +34,19 @@
 
             
 
+            
+
              implementation that can be passed to a method such as <see
              cref="M:System.Array.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
 
             
 
+            
+
              or <see
              cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
+
+            
 
             
 
@@ -52,13 +60,19 @@
 
             
 
+            
+
              implementation that can be passed to a method such as <see
              cref="M:System.Array.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
 
             
 
+            
+
              or <see
              cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+
+            
 
             
 
@@ -100,8 +114,12 @@
 
             
 
+            
+
              object returned by this property is passed to the comparison method of a collection object, such as <see
              cref="M:System.Array.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
+
+            
 
             
 
@@ -110,13 +128,19 @@
 
             
 
+            
+
             , its <see
              cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
 
             
 
+            
+
              method is called for each member of an array or for each component of a tuple. This implementation of the <see
              cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+
+            
 
             
 
@@ -133,13 +157,19 @@
 
                 
 
+                
+
                  object (in other words, if it is a collection object that implements the <see
                  cref="T:System.Collections.IStructuralComparable" />
 
                 
 
+                
+
                  interface), it calls the <see
                  cref="M:System.Collections.IStructuralComparable.CompareTo(System.Object,System.Collections.IComparer)" />
+
+                
 
                 
 
@@ -153,8 +183,12 @@
 
                 
 
+                
+
                  object (in other words, if it is not a collection object that implements the <see
                  cref="T:System.Collections.IStructuralComparable" />
+
+                
 
                 
 
@@ -195,8 +229,12 @@
 
             
 
+            
+
              object returned by this property is passed to the equality comparison method of a collection object, such as <see
              cref="M:System.Array.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+
+            
 
             
 
@@ -205,13 +243,19 @@
 
             
 
+            
+
             , its <see
              cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
 
             
 
+            
+
              method is called for each member of an array or for each component of a tuple. This implementation of the <see
              cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -231,13 +275,19 @@
 
                 
 
+                
+
                  object (in other words, if it is a collection object that implements the <see
                  cref="T:System.Collections.IStructuralEquatable" />
 
                 
 
+                
+
                  interface), it calls the <see
                  cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" />
+
+                
 
                 
 
@@ -251,8 +301,12 @@
 
                 
 
+                
+
                  object (in other words, if it is not a collection object that implements the <see
                  cref="T:System.Collections.IStructuralEquatable" />
+
+                
 
                 
 

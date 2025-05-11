@@ -23,8 +23,12 @@
 
         
 
+        
+
          class contains the <see
          cref="P:System.Xml.Linq.XDocument.Declaration" />
+
+        
 
         
 
@@ -32,6 +36,8 @@
          type="text/html">
           <a href="30f1b564-62b5-4e5d-9c36-884e51113feb">Saving With an XML Declaration</a>
         </format>
+
+        
 
         
 
@@ -73,8 +79,12 @@
 
             
 
+            
+
              class from another <see
              cref="T:System.Xml.Linq.XDeclaration" />
+
+            
 
             
 
@@ -86,13 +96,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XDeclaration" />
 
           
 
+          
+
            used to initialize this <see
            cref="T:System.Xml.Linq.XDeclaration" />
+
+          
 
           
 
@@ -128,11 +144,15 @@
 
             
 
+            
+
              class with the specified version, encoding, and standalone status.</para
           >
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,10 +163,14 @@
 
           
 
+          
+
           The encoding for the XML document.</param
         >
         <param name="standalone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,6 +195,8 @@
           <para
             >Any value returned by <see
              cref="P:System.Text.Encoding.WebName" />
+
+            
 
             
 
@@ -232,6 +258,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

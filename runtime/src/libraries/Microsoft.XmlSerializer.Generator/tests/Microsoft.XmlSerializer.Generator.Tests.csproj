@@ -84,7 +84,7 @@
       <Using Namespace="System.IO" />
       <Using Namespace="System.Reflection" />
       <Code Type="Fragment" Language="C#">
-        <![CDATA[
+<![CDATA[
             // Roughly based on System.Xml.Serialization.TempAssembly.GenerateAssemblyId()
             var list = new ArrayList();
             foreach (var module in Assembly.LoadFrom(AssemblyFile).GetModules())

@@ -22,8 +22,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Drawing.Printing.PageSettings.PaperSource" />
+
+        
 
         
 
@@ -32,6 +36,8 @@
       <para
         >For more information about printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Drawing.Printing.PaperSource" />
+
+            
 
             
 
@@ -107,6 +115,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -153,8 +163,12 @@
 
             
 
+            
+
              member. Anything larger than 256 maps to <see
              cref="F:System.Drawing.Printing.PaperSourceKind.Custom" />
+
+            
 
             
 
@@ -163,8 +177,12 @@
 
             
 
+            
+
              enumeration, but the <see
              cref="P:System.Drawing.Printing.PaperSource.RawKind" />
+
+            
 
             
 
@@ -331,6 +349,8 @@
 
             
 
+            
+
              values or a custom value.</para
           >
         </summary>
@@ -349,6 +369,8 @@
           <para
             >Call this property when the paper source needs to be displayed. The name of the paper source is generated based upon the <see
              cref="P:System.Drawing.Printing.PaperSource.Kind" />
+
+            
 
             
 
@@ -379,6 +401,8 @@
           <para
             >Provides information about the <see
              cref="T:System.Drawing.Printing.PaperSource" />
+
+            
 
             
 

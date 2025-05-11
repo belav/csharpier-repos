@@ -6,8 +6,12 @@
 
     
 
+    
+
      consists of the reserved word base followed by either a "." token and an identifier or an <non_terminal
      where="14.5.6">expression-list</non_terminal>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="14.5.8">base-access</non_terminal>
       </name>
+
+      
 
       
 
@@ -39,8 +45,12 @@
 
     
 
+    
+
      is used to access base class members that are hidden by similarly named members in the current class or struct. A <non_terminal
      where="14.5.8">base-access</non_terminal>
+
+    
 
     
 
@@ -52,6 +62,8 @@
 
     
 
+    
+
      expressions of the form base.I and base[E] are evaluated exactly as if they were written ((B)this).I and ((B)this)[E], where B is the base class of the class or struct in which the construct occurs. Thus, base.I and base[E] correspond to this.I and this[E], except this is viewed as an instance of the base class. </paragraph
   >
   <paragraph
@@ -60,8 +72,12 @@
 
     
 
+    
+
      references a virtual function member (a method, property, or indexer), the determination of which function member to invoke at run-time (<hyperlink
     >14.4.3</hyperlink>
+
+    
 
     
 
@@ -70,13 +86,19 @@
 
     
 
+    
+
     ) of the function member with respect to B (instead of with respect to the run-time type of this, as would be usual in a non-base access). Thus, within an override of a virtual function member, a <non_terminal
      where="14.5.8">base-access</non_terminal>
 
     
 
+    
+
      can be used to invoke the inherited implementation of the function member. If the function member referenced by a <non_terminal
      where="14.5.8">base-access</non_terminal>
+
+    
 
     
 

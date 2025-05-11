@@ -36,8 +36,12 @@
 
         
 
+        
+
          on the AutoResetEvent. If the AutoResetEvent is in the non-signaled state, the thread blocks, waiting for the thread that currently controls the resource to signal that the resource is available by calling <see
          cref="M:System.Threading.EventWaitHandle.Set" />
+
+        
 
         
 
@@ -50,13 +54,19 @@
 
         
 
+        
+
          while the <see
          cref="T:System.Threading.AutoResetEvent" />
 
         
 
+        
+
          is in the signaled state, the thread does not block. The <see
          cref="T:System.Threading.AutoResetEvent" />
+
+        
 
         
 
@@ -69,13 +79,19 @@
 
           
 
+          
+
            method will release a thread. If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released. It is as if the second call did not happen. Also, if <see
            cref="M:System.Threading.EventWaitHandle.Set" />
 
           
 
+          
+
            is called when there are no threads waiting and the <see
            cref="T:System.Threading.AutoResetEvent" />
+
+          
 
           
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+        
 
         
 
@@ -104,6 +124,8 @@
 
         
 
+        
+
          in the conceptual documentation.</para
       >
       <para
@@ -112,8 +134,12 @@
 
         
 
+        
+
          derives from the new <see
          cref="T:System.Threading.EventWaitHandle" />
+
+        
 
         
 
@@ -122,13 +148,19 @@
 
         
 
+        
+
          is functionally equivalent to an <see
          cref="T:System.Threading.EventWaitHandle" />
 
         
 
+        
+
          created with <see
          cref="F:System.Threading.EventResetMode.AutoReset" />
+
+        
 
         
 
@@ -141,8 +173,12 @@
 
           
 
+          
+
            class, the <see
            cref="T:System.Threading.EventWaitHandle" />
+
+          
 
           
 
@@ -183,11 +219,15 @@
 
             
 
+            
+
              class with a Boolean value indicating whether to set the initial state to signaled.</para
           >
         </summary>
         <param name="initialState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,6 +249,8 @@
             <para
               >Starting with the dnprdnext and the compact_v35_long, this member is inherited from <see
                cref="T:System.Threading.EventWaitHandle" />
+
+              
 
               
 
@@ -246,8 +288,12 @@
 
               
 
+              
+
               . See <see
                cref="M:System.Threading.EventWaitHandle.Set" />
+
+              
 
               
 
@@ -260,8 +306,12 @@
 
             
 
+            
+
              method releases a single thread. If there are no waiting threads, the wait handle remains signaled until a thread attempts to wait on it, or until its <see
              cref="M:System.Threading.EventWaitHandle.Reset" />
+
+            
 
             
 
@@ -274,13 +324,19 @@
 
               
 
+              
+
                method will release a thread. If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released — as if the second call did not happen. Also, if the <see
                cref="M:System.Threading.AutoResetEvent.Set" />
 
               
 
+              
+
                method is called when there are no threads waiting and the <see
                cref="T:System.Threading.AutoResetEvent" />
+
+              
 
               
 

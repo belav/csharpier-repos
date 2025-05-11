@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration is primarily used by the <see
          cref="Overload:System.Windows.Forms.OSFeature.IsPresent" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          retrieves whether a <see
          cref="T:System.Windows.Forms.SystemParameter" />
+
+        
 
         
 
@@ -43,6 +51,8 @@
       <para
         >For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see
          cref="">http://msdn.microsoft.com</see>
+
+        
 
         
 
@@ -71,6 +81,8 @@
 
             
 
+            
+
              property to access this system-wide parameter. The corresponding Platform SDK system-wide parameters are SPI_GETCARETWIDTH and SPI_SETCARETWIDTH.</para
           >
         </summary>
@@ -92,6 +104,8 @@
           <para
             >Identifies the drop shadow effect. Use the <see
              cref="P:System.Windows.Forms.SystemInformation.IsDropShadowEnabled" />
+
+            
 
             
 
@@ -119,6 +133,8 @@
 
             
 
+            
+
              property to determine if this feature is enabled. The corresponding Platform SDK system-wide parameters are SPI_GETFLATMENU and SPI_SETFLATMENU.</para
           >
         </summary>
@@ -140,6 +156,8 @@
           <para
             >Identifies the contrast value used in ClearType font smoothing. Use the <see
              cref="P:System.Windows.Forms.SystemInformation.FontSmoothingContrast" />
+
+            
 
             
 
@@ -167,6 +185,8 @@
 
             
 
+            
+
              property to access this system-wide parameter. The corresponding Platform SDK system-wide parameters are SPI_GETFONTSMOOTHINGTYPE and SPI_SETFONTSMOOTHINGTYPE.</para
           >
         </summary>
@@ -188,6 +208,8 @@
           <para
             >Identifies the thickness of the left and right edges of the system focus rectangle. Use the <see
              cref="P:System.Windows.Forms.SystemInformation.HorizontalFocusThickness" />
+
+            
 
             
 
@@ -215,6 +237,8 @@
 
             
 
+            
+
              property to determine if this feature is enabled. The corresponding Platform SDK system-wide parameters are SPI_GETMENUFADE and SPI_SETMENUFADE.</para
           >
         </summary>
@@ -236,6 +260,8 @@
           <para
             >Identifies the selection fade effect. Use the <see
              cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" />
+
+            
 
             
 
@@ -263,6 +289,8 @@
 
             
 
+            
+
              property to determine if this feature is enabled. The corresponding Platform SDK system-wide parameters are SPI_GETTOOLTIPANIMATION and SPI_SETTOOLTIPANIMATION.</para
           >
         </summary>
@@ -287,6 +315,8 @@
 
             
 
+            
+
              property to determine if this feature is enabled. The corresponding Platform SDK system-wide parameters are SPI_GETUIEFFECTS and SPI_SETUIEFFECTS.</para
           >
         </summary>
@@ -308,6 +338,8 @@
           <para
             >Identifies the thickness of the top and bottom edges of the system focus rectangle. Use the <see
              cref="P:System.Windows.Forms.SystemInformation.VerticalFocusThickness" />
+
+            
 
             
 

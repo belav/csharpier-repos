@@ -61,8 +61,12 @@
 
         
 
+        
+
          class can be used immediately by creating an instance of one of its constructed types; all you have to do is specify the type of object to be contained in the collection. In addition, you can derive your own collection type from any constructed type, or derive a generic collection type from the <see
          cref="T:System.Collections.ObjectModel.Collection`1" />
+
+        
 
         
 
@@ -74,6 +78,8 @@
 
         
 
+        
+
          class provides protected methods that can be used to customize its behavior when adding and removing items, clearing the collection, or setting the value of an existing item.</para
       >
       <para
@@ -82,8 +88,12 @@
 
         
 
+        
+
          objects can be modified. However, a <see
          cref="T:System.Collections.ObjectModel.Collection`1" />
+
+        
 
         
 
@@ -92,8 +102,12 @@
 
         
 
+        
+
          object cannot be modified. See <see
          cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+
+        
 
         
 
@@ -102,6 +116,8 @@
       <para>Elements in this collection can be accessed using an integer index.  Indexes in this collection are zero-based.</para>
       <para>
         <see cref="T:System.Collections.ObjectModel.Collection`1" />
+
+        
 
         
 
@@ -137,6 +153,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -217,6 +235,8 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
@@ -225,13 +245,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -243,6 +269,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -275,6 +303,8 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
@@ -283,13 +313,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -301,6 +337,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -386,6 +424,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -421,13 +461,19 @@
 
             
 
+            
+
              is undefined. Therefore, you must call <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -438,8 +484,12 @@
 
             
 
+            
+
              returns the same object until <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -448,8 +498,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -461,8 +515,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -471,8 +529,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -481,8 +543,12 @@
 
             
 
+            
+
              is undefined. You cannot set <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -493,6 +559,8 @@
           <para
             >Default implementations of collections in <see
              cref="N:System.Collections.Generic" />
+
+            
 
             
 
@@ -508,6 +576,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -519,8 +589,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -659,8 +733,12 @@
 
             
 
+            
+
              class and exposes all the elements of the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -676,8 +754,12 @@
 
             
 
+            
+
              wrapper around the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -738,13 +820,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -759,11 +847,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -798,13 +890,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -819,11 +917,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -910,8 +1012,12 @@
 
               
 
+              
+
                cannot be cast automatically to the type of the destination <paramref
                name="array" />
+
+              
 
               
 
@@ -920,13 +1026,19 @@
 
               
 
+              
+
                throw <see
                cref="T:System.InvalidCastException" />
 
               
 
+              
+
               , whereas the generic implementations throw <see
                cref="T:System.ArgumentException" />
+
+              
 
               
 
@@ -939,13 +1051,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -960,13 +1078,19 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -978,8 +1102,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -988,8 +1116,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1000,8 +1132,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1037,6 +1173,8 @@
 
             
 
+            
+
              are not synchronized.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration. To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
@@ -1045,8 +1183,12 @@
 
             
 
+            
+
              returns an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1059,6 +1201,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1095,6 +1239,8 @@
 
             
 
+            
+
              are not synchronized.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure.  To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
@@ -1103,13 +1249,19 @@
 
             
 
+            
+
              returns an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
             . Synchronization is effective only if all threads lock this object before accessing the collection. The following code shows the use of the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1138,6 +1290,8 @@ finally {
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1176,8 +1330,12 @@ finally {
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1186,8 +1344,12 @@ finally {
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1198,8 +1360,12 @@ finally {
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1208,13 +1374,19 @@ finally {
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1226,8 +1398,12 @@ finally {
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1236,8 +1412,12 @@ finally {
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1246,8 +1426,12 @@ finally {
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1256,8 +1440,12 @@ finally {
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1268,6 +1456,8 @@ finally {
           <para
             >Default implementations of collections in <see
              cref="N:System.Collections.Generic" />
+
+            
 
             
 
@@ -1284,6 +1474,8 @@ finally {
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1323,6 +1515,8 @@ finally {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1335,13 +1529,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1376,13 +1576,19 @@ finally {
 
             
 
+            
+
              is of type <paramref
              name="T" />
 
             
 
+            
+
              (or null) and then calling <see
              cref="M:System.Collections.ObjectModel.Collection`1.Contains(`0)" />
+
+            
 
             
 
@@ -1394,13 +1600,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -1415,6 +1627,8 @@ finally {
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -1426,8 +1640,12 @@ finally {
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1439,13 +1657,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1480,13 +1704,19 @@ finally {
 
             
 
+            
+
             .  <see
              cref="P:System.Collections.Generic.Comparer`1.Default" />
 
             
 
+            
+
              checks whether type <paramref
              name="T" />
+
+            
 
             
 
@@ -1495,8 +1725,12 @@ finally {
 
             
 
+            
+
              and uses that implementation, if available.  If not, <see
              cref="P:System.Collections.Generic.Comparer`1.Default" />
+
+            
 
             
 
@@ -1505,8 +1739,12 @@ finally {
 
             
 
+            
+
              implements <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1515,8 +1753,12 @@ finally {
 
             
 
+            
+
              does not implement either interface, this method uses <see
              cref="Overload:System.Object.Equals" />
+
+            
 
             
 
@@ -1528,13 +1770,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -1549,6 +1797,8 @@ finally {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1560,6 +1810,8 @@ finally {
 
             
 
+            
+
              if found in the list; otherwise, -1.</para
           >
         </returns>
@@ -1568,13 +1820,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1610,13 +1868,19 @@ finally {
 
             
 
+            
+
              equals the number of items in the <see
              cref="T:System.Collections.IList" />
 
             
 
+            
+
             , then <paramref
              name="value" />
+
+            
 
             
 
@@ -1628,13 +1892,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -1649,6 +1919,8 @@ finally {
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -1657,8 +1929,12 @@ finally {
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1669,13 +1945,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1714,6 +1996,8 @@ finally {
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -1747,6 +2031,8 @@ finally {
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1810,13 +2096,19 @@ finally {
 
             
 
+            
+
             .  <see
              cref="P:System.Collections.Generic.Comparer`1.Default" />
 
             
 
+            
+
              checks whether type <paramref
              name="T" />
+
+            
 
             
 
@@ -1825,8 +2117,12 @@ finally {
 
             
 
+            
+
              and uses that implementation, if available.  If not, <see
              cref="P:System.Collections.Generic.Comparer`1.Default" />
+
+            
 
             
 
@@ -1835,8 +2131,12 @@ finally {
 
             
 
+            
+
              implements <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1845,8 +2145,12 @@ finally {
 
             
 
+            
+
              does not implement either interface, this method uses <see
              cref="Overload:System.Object.Equals" />
+
+            
 
             
 
@@ -1858,13 +2162,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -1879,6 +2189,8 @@ finally {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1887,13 +2199,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 

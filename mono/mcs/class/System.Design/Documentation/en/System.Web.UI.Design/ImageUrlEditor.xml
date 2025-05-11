@@ -21,8 +21,12 @@
 
         
 
+        
+
          is a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.ImageUrlEditor" />
+
+            
 
             
 
@@ -90,6 +96,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.Design.ImageUrlEditor.Filter" />
+
+            
 
             
 

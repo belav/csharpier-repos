@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the authorization section of a configuration file.</para
       >
       <para
@@ -30,13 +32,19 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
         
 
+        
+
         , and the <see
          cref="T:System.Web.Configuration.AuthorizationRuleAction" />
+
+        
 
         
 
@@ -49,13 +57,19 @@
 
           
 
+          
+
            can read and write information from and to the related section of the configuration file according to the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          
 
           
 
@@ -84,13 +98,19 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.AuthorizationSection" />
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -102,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.AuthorizationSection" />
+
+            
 
             
 
@@ -150,6 +172,8 @@
 
             
 
+            
+
              properties.</para
           >
         </summary>
@@ -183,6 +207,8 @@
 
             
 
+            
+
              collection returned by this method does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the rules it contains. This is a common pattern for handling the elements of a configuration file.</para
           >
         </remarks>
@@ -194,8 +220,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Web.Configuration.AuthorizationRule" />
+
+            
 
             
 

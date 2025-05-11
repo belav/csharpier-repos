@@ -6,7 +6,7 @@
 
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 /* Hello, world program  
 This program writes "hello, world" to the console  
 */  
@@ -21,6 +21,8 @@ class Hello
 
       
 
+      
+
       includes a delimited comment. end example]</example
     >
   </paragraph>
@@ -29,7 +31,7 @@ class Hello
 
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 // Hello, world program  
 //   This program writes "hello, world" to the console  
 //  
@@ -44,10 +46,14 @@ class Hello // any name will do for this class
 
       
 
+      
+
       shows several single-line comments. end example]</example
     >
     <grammar_production>
       <name>comment</name>
+
+      
 
       
 
@@ -63,6 +69,8 @@ class Hello // any name will do for this class
       <name>
         <non_terminal where="9.3.2">single-line-comment</non_terminal>
       </name>
+
+      
 
       
 
@@ -79,8 +87,12 @@ class Hello // any name will do for this class
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -100,6 +112,8 @@ class Hello // any name will do for this class
 
       
 
+      
+
        :: <rhs
 
         >Any Unicode character except a <non_terminal
@@ -113,6 +127,8 @@ class Hello // any name will do for this class
 
       
 
+      
+
        :: <rhs
       >Carriage return character (U+000D) </rhs>
       <rhs>Line feed character (U+000A) </rhs>
@@ -123,6 +139,8 @@ class Hello // any name will do for this class
       <name>
         <non_terminal where="9.3.2">delimited-comment</non_terminal>
       </name>
+
+      
 
       
 
@@ -140,8 +158,12 @@ class Hello // any name will do for this class
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -158,6 +180,8 @@ class Hello // any name will do for this class
       <name>
         <non_terminal where="9.3.2">delimited-comment-character</non_terminal>
       </name>
+
+      
 
       
 
@@ -177,6 +201,8 @@ class Hello // any name will do for this class
 
       
 
+      
+
        :: <rhs
       >Any Unicode character except * </rhs>
     </grammar_production>
@@ -184,6 +210,8 @@ class Hello // any name will do for this class
       <name>
         <non_terminal where="9.3.2">not-slash</non_terminal>
       </name>
+
+      
 
       
 

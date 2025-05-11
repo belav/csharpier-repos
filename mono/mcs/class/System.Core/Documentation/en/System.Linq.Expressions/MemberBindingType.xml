@@ -23,6 +23,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -72,8 +74,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Collections.Generic.ICollection`1" />
+
+            
 
             
 

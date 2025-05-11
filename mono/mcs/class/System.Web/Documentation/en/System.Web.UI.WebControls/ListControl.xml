@@ -46,8 +46,12 @@
 
         
 
+        
+
          abstract class cannot be created directly. Instead, this class is inherited by other classes, such as the <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+        
 
         
 
@@ -56,13 +60,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.ListBox" />
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+        
 
         
 
@@ -74,8 +84,12 @@
 
         
 
+        
+
          class allow you to specify the source of the data to populate the list control. Use the <see
          cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
         
 
+        
+
          property to specify the table to use. You can bind different fields in the data source to the <see
          cref="P:System.Web.UI.WebControls.ListItem.Text" />
+
+        
 
         
 
@@ -94,8 +112,12 @@
 
         
 
+        
+
          properties of the items in the list control by setting the <see
          cref="P:System.Web.UI.WebControls.ListControl.DataTextField" />
+
+        
 
         
 
@@ -104,8 +126,12 @@
 
         
 
+        
+
          properties, respectively. The text displayed for each item in the list control can by formatted by setting the <see
          cref="P:System.Web.UI.WebControls.ListControl.DataTextFormatString" />
+
+        
 
         
 
@@ -117,13 +143,19 @@
 
         
 
+        
+
          collection. You can programmatically specify or determine the index of a selected item in the list control by using the <see
          cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
 
         
 
+        
+
          property. The properties of the selected item can be accessed by using the <see
          cref="P:System.Web.UI.WebControls.ListControl.SelectedItem" />
+
+        
 
         
 
@@ -135,8 +167,12 @@
 
         
 
+        
+
          class provides the <see
          cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+
+        
 
         
 
@@ -144,6 +180,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -155,8 +193,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Web.UI.IEditableTextControl" />
+
+        
 
         
 
@@ -181,6 +223,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -218,13 +262,19 @@
 
             
 
+            
+
              method is used primarily by control developers to insert the additional attributes and styles into the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
+            
+
              output stream for controls that are derived from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -236,6 +286,8 @@
           <para
             >Applies HTML attributes and styles to render to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -274,8 +326,12 @@
 
             
 
+            
+
              property allows you to add items to the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -288,10 +344,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -324,10 +384,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -379,8 +443,12 @@
 
             
 
+            
+
              property to determine whether validation is performed when a <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -392,13 +460,19 @@
 
             
 
+            
+
              class does not cause page validation. To perform page validation when the control that is derived from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
+            
+
              class is clicked, set the <see
              cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+
+            
 
             
 
@@ -410,13 +484,19 @@
 
             
 
+            
+
              property is set to true, you can also use the <see
              cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -429,10 +509,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -444,6 +528,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when a control that is derived from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -469,6 +555,8 @@
           <para
             >Clears out the list selection and sets the <see
              cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+            
 
             
 
@@ -554,6 +642,8 @@
 
             
 
+            
+
              property to display as the items of the list in a list control.</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -563,10 +653,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -611,6 +705,8 @@
 
             
 
+            
+
              property to provide a custom display format the items in a list control.</para
           >
           <para
@@ -619,8 +715,12 @@
 
             
 
+            
+
              : <paramref
              name="Bxx" />
+
+            
 
             
 
@@ -635,6 +735,8 @@
 
             
 
+            
+
              in the general example) specifies the parameter index in a zero-based list of parameters.</para
           >
           <block subset="none" type="note">
@@ -643,6 +745,8 @@
           <para
             >The character after the colon (<paramref
              name="B" />
+
+            
 
             
 
@@ -722,6 +826,8 @@
           <para
             >The value after the format character (<paramref
              name="xx" />
+
+            
 
             
 
@@ -894,6 +1000,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -903,10 +1011,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -950,10 +1062,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1038,8 +1154,12 @@
 
             
 
+            
+
              method is used to load the previously saved view state of the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1049,6 +1169,8 @@
             <para
               >This method is used primarily by control developers when extending the <see
                cref="T:System.Web.UI.WebControls.ListControl" />
+
+              
 
               
 
@@ -1064,6 +1186,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1072,13 +1196,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that represents the state of the <see
            cref="T:System.Web.UI.WebControls.ListControl" />
+
+          
 
           
 
@@ -1109,6 +1239,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1117,8 +1249,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1148,11 +1284,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ListControl.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -1167,6 +1307,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1175,8 +1317,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1209,6 +1355,8 @@
 
             
 
+            
+
              event is raised when the selection from the list control changes between posts to the server.</para
           >
           <block subset="none" type="note">
@@ -1222,11 +1370,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1241,6 +1393,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -1249,8 +1403,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1283,8 +1441,12 @@
 
             
 
+            
+
              method is called by the control that is derived from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1293,8 +1455,12 @@
 
             
 
+            
+
              event. Generally, the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1303,11 +1469,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1322,6 +1492,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1330,8 +1502,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1363,8 +1539,12 @@
 
             
 
+            
+
              method is a helper method that is called by the control that is derived from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1379,6 +1559,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -1387,8 +1569,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -1415,13 +1601,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ListControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
             
 
+            
+
              method after data is retrieved to bind data to elements of the data-bound control. For more information, see <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+
+            
 
             
 
@@ -1458,8 +1650,12 @@
 
             
 
+            
+
              method to render the items in the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1474,6 +1670,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1482,8 +1680,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1507,8 +1709,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1518,6 +1724,8 @@
             <para
               >This method is used primarily by control developers when extending the <see
                cref="T:System.Web.UI.WebControls.ListControl" />
+
+              
 
               
 
@@ -1533,6 +1741,8 @@
 
             
 
+            
+
              -derived control and the items it contains.</para
           >
         </summary>
@@ -1544,8 +1754,12 @@
 
             
 
+            
+
              that contains the saved state of the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1576,8 +1790,12 @@
 
             
 
+            
+
              property is not specifically saved on postback. It is restored on postback using the <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+
+            
 
             
 
@@ -1586,8 +1804,12 @@
 
             
 
+            
+
              property is 4, on postback, the <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
+
+            
 
             
 
@@ -1596,8 +1818,12 @@
 
             
 
+            
+
              object that has a <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+            
 
             
 
@@ -1606,13 +1832,19 @@
 
             
 
+            
+
              object has a <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
+            
+
              property of 4, the first item in the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -1624,10 +1856,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1677,6 +1913,8 @@
 
             
 
+            
+
              event is raised when the selection from the list control changes between posts to the server.</para
           >
           <block subset="none" type="note">
@@ -1687,6 +1925,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1759,13 +1999,19 @@
 
             
 
+            
+
              property of the selected <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
             . The <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+
+            
 
             
 
@@ -1777,11 +2023,15 @@
 
             
 
+            
+
              property can also be used to select an item in the list control by setting it with the value of the item. </para
           >
           <para
             >This property cannot be set by themes or style sheet themes. For more information, see <see
              cref="T:System.Web.UI.ThemeableAttribute" />
+
+            
 
             
 
@@ -1792,11 +2042,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When the selected value is not in the list of available values and a postback is performed, an <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -1862,8 +2116,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              method is a helper method that maintains the selected item in the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1878,8 +2136,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1891,8 +2153,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
           
 
+          
+
           The index of the selected item in the <see
            cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+          
 
           
 
@@ -1923,8 +2189,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property allows the output stream to write the appropriate HTML markup for the control that is derived from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1939,8 +2209,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              value for the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -1982,8 +2256,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property gets and sets the same value that the <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+
+            
 
             
 
@@ -1995,8 +2273,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property is commonly used to determine the value of the selected item in the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -2008,8 +2290,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property to select an item in the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -2018,8 +2304,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              control contain the specified value, an <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -2031,8 +2321,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property to support features that are not related to the <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+
+            
 
             
 
@@ -2044,10 +2338,14 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -2062,8 +2360,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -2090,13 +2392,19 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              event is raised when the <see
              cref="P:System.Web.UI.WebControls.ListControl.Text" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+
+            
 
             
 
@@ -2110,11 +2418,15 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2129,8 +2441,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+
+            
 
             
 
@@ -2157,6 +2473,8 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2166,6 +2484,8 @@ if(DropDownList1.Items.FindByValue("2") != null) {
           <para
             >Marks the starting point to begin tracking and saving view-state changes to a <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -2205,8 +2525,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property to specify the name of the validation group for which the control that is derived from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -2218,8 +2542,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property has an effect only when the value of the <see
              cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+
+            
 
             
 
@@ -2228,8 +2556,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property, only the validation controls that are part of the specified group are validated when the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -2238,8 +2570,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+
+            
 
             
 
@@ -2252,10 +2588,14 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -2267,6 +2607,8 @@ if(DropDownList1.Items.FindByValue("2") != null) {
           <para
             >Gets or sets the group of controls for which the control that is derived from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -2294,8 +2636,12 @@ if(DropDownList1.Items.FindByValue("2") != null) {
 
             
 
+            
+
              method does nothing if multiselection is supported. Otherwise, it throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 

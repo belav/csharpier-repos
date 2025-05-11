@@ -43,8 +43,12 @@
 
         
 
+        
+
          ensures that a call that returns an HRESULT of S_OK is transformed such that the [out, retval] parameter is used as the function return value. The S_OK HRESULT is discarded. For HRESULTs other than S_OK, the runtime throws an exception and discards the [out, retval] parameter. When you apply the <see
          cref="T:System.Runtime.InteropServices.PreserveSigAttribute" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
       <para
         >Preserving the original method signature is necessary if the member returns more than one success HRESULT value and you want to detect the different values. Since most COM member return an HRESULT, by applying the <see
          cref="T:System.Runtime.InteropServices.PreserveSigAttribute" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
         
 
+        
+
          also applies this attribute; it applies the attribute to dispinterfaces when it imports a type library.</para
       >
       <block subset="none" type="note">
@@ -77,8 +85,12 @@
 
           
 
+          
+
           , <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -87,8 +99,12 @@
 
           
 
+          
+
            are not supported by the <see
            cref="T:System.Runtime.InteropServices.PreserveSigAttribute" />
+
+          
 
           
 
@@ -97,13 +113,19 @@
 
           
 
+          
+
            class.  When you attempt to use one of these return types with the <see
            cref="T:System.Runtime.InteropServices.PreserveSigAttribute" />
 
           
 
+          
+
            class during these conditions, a <see
            cref="T:System.TypeLoadException" />
+
+          
 
           
 
@@ -138,6 +160,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.PreserveSigAttribute" />
+
+            
 
             
 

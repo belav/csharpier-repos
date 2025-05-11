@@ -19,13 +19,19 @@
 
         
 
+        
+
          event occurs when the currently selected date or range of dates changes; for example, when the user explicitly changes a selection within the current month or when the selection is implicitly changed in response to next/previous month navigation. The <see
          cref="E:System.Windows.Forms.MonthCalendar.DateSelected" />
 
         
 
+        
+
          event occurs when the user explicitly changes a selection. The <see
          cref="M:System.Windows.Forms.DateRangeEventArgs.#ctor(System.DateTime,System.DateTime)" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Windows.Forms.DateRangeEventArgs.End" />
+
+          
 
           
 
@@ -54,6 +64,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -65,13 +77,19 @@
 
         
 
+        
+
          or <see
          cref="E:System.Windows.Forms.MonthCalendar.DateSelected" />
 
         
 
+        
+
          events of the <see
          cref="T:System.Windows.Forms.MonthCalendar" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DateRangeEventArgs.End" />
+
+            
 
             
 
@@ -109,8 +131,12 @@
 
             
 
+            
+
              and <paramref
              name="end" />
+
+            
 
             
 
@@ -125,6 +151,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -133,10 +161,14 @@
 
           
 
+          
+
           The first date/time value in the range that the user has selected. </param
         >
         <param name="end">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

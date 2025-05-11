@@ -28,6 +28,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -51,6 +53,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.Configuration.SerializationSectionGroup" />
+
+            
 
             
 
@@ -87,6 +91,8 @@
 
             
 
+            
+
              serialization configuration element.</para
           >
         </summary>
@@ -120,6 +126,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -145,6 +153,8 @@
           <para
             >Gets the object that represents the configuration group for the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

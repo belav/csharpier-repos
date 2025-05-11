@@ -26,6 +26,8 @@
 
         
 
+        
+
          contract includes synchronous and asynchronous variants of receive, try-to-receive and wait-for-a-message functionality. </para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          to receive messages: you call <see
          cref="Overload:System.ServiceModel.Channels.IInputChannel.Receive" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.ServiceModel.Channels.IInputChannel.BeginWaitForMessage(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+        
 
         
 
@@ -54,13 +64,19 @@
 
         
 
+        
+
         . This approach is common for transactional usages where you start the transaction between the calls to <see
          cref="M:System.ServiceModel.Channels.IInputChannel.WaitForMessage(System.TimeSpan)" />
 
         
 
+        
+
          and <see
          cref="Overload:System.ServiceModel.Channels.IInputChannel.Receive" />
+
+        
 
         
 
@@ -72,8 +88,12 @@
 
         
 
+        
+
          is not necessarily bound to a single sender. Other channels and channel interfaces can provide a correlation between particular senders and an <see
          cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+        
 
         
 
@@ -82,8 +102,12 @@
 
         
 
+        
+
          for each message or reuse the same <see
          cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+        
 
         
 
@@ -125,13 +149,19 @@
 
             
 
+            
+
              method when you want the application processing to continue without waiting for the request to be received. Use the synchronous <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
             
 
+            
+
              method when it is acceptable for the current thread to be blocked until the request message is received or the interval of time specified by the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -151,6 +181,8 @@
 
             
 
+            
+
              that references the asynchronous message reception. </para
           >
         </returns>
@@ -159,8 +191,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -168,6 +204,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -205,13 +243,19 @@
 
             
 
+            
+
              method when you want the application processing to continue without waiting for the request to be received. Use the synchronous <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
             
 
+            
+
              method when it is acceptable for the current thread to be blocked until the request message is received or the interval of time specified by the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -231,6 +275,8 @@
 
             
 
+            
+
              that references the asynchronous receive operation.</para
           >
         </returns>
@@ -239,8 +285,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -251,8 +301,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -260,6 +314,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,8 +353,12 @@
 
             
 
+            
+
              method when you want the application processing to continue without waiting. Use the synchronous <see
              cref="M:System.ServiceModel.Channels.IInputChannel.TryReceive(System.TimeSpan,System.ServiceModel.Channels.Message@)" />
+
+            
 
             
 
@@ -311,8 +371,12 @@
 
             
 
+            
+
             , then you should call <see
              cref="M:System.ServiceModel.Channels.IInputChannel.BeginTryReceive(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -321,11 +385,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >If you are not going to treat timeouts specially then just call <see
              cref="Overload:System.ServiceModel.Channels.IInputChannel.BeginReceive" />
+
+            
 
             
 
@@ -344,6 +412,8 @@
 
             
 
+            
+
              that references the asynchronous receive operation.</para
           >
         </returns>
@@ -352,8 +422,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -364,8 +438,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -373,6 +451,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,13 +490,19 @@
 
             
 
+            
+
              method if you need the application processing to continue without waiting for the message to arrive. Use the synchronous <see
              cref="M:System.ServiceModel.Channels.IInputChannel.WaitForMessage(System.TimeSpan)" />
 
             
 
+            
+
              method when it is acceptable for the current thread to be blocked while it waits for a message to arrive in the queue. The thread is blocked up to the specified <paramref
              name="timeout" />
+
+            
 
             
 
@@ -436,6 +522,8 @@
 
             
 
+            
+
              that references the asynchronous operation to wait for a message to arrive.</para
           >
         </returns>
@@ -444,8 +532,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -456,8 +548,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -465,6 +561,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -505,6 +603,8 @@
 
             
 
+            
+
              received. </para
           >
         </returns>
@@ -513,13 +613,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to one of the <see
            cref="Overload:System.ServiceModel.Channels.IInputChannel.BeginReceive" />
+
+          
 
           
 
@@ -585,6 +691,8 @@
 
             
 
+            
+
              has been exceeded; otherwise false.</para
           >
         </returns>
@@ -593,13 +701,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            that identifies the <see
            cref="M:System.ServiceModel.Channels.IInputChannel.BeginWaitForMessage(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -634,8 +748,12 @@
 
             
 
+            
+
             , it can use the <see
              cref="P:System.ServiceModel.Channels.IInputChannel.LocalAddress" />
+
+            
 
             
 
@@ -674,13 +792,19 @@
 
             
 
+            
+
              method when it is acceptable for the current thread to be blocked until it receives the request message or exceeds the interval of time specified by <paramref
              name="timeout" />
 
             
 
+            
+
             . Use the asynchronous <see
              cref="Overload:System.ServiceModel.Channels.IInputChannel.BeginReceive" />
+
+            
 
             
 
@@ -692,6 +816,8 @@
 
             
 
+            
+
              operation is available with or without an explicit timeout.</para
           >
           <para>If a message is not available, it blocks until one is available or until the timeout is exceeded.</para>
@@ -700,8 +826,12 @@
 
             
 
+            
+
              can be called multiple times or concurrently. Only one <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+
+            
 
             
 
@@ -717,6 +847,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -753,13 +885,19 @@
 
             
 
+            
+
              method when it is acceptable for the current thread to be blocked until it receives the request message or exceeds the interval of time specified by <paramref
              name="timeout" />
 
             
 
+            
+
             . Use the asynchronous <see
              cref="Overload:System.ServiceModel.Channels.IInputChannel.BeginReceive" />
+
+            
 
             
 
@@ -771,6 +909,8 @@
 
             
 
+            
+
              operation is available with or without an explicit timeout.</para
           >
           <para>If a message is not available, it blocks until one is available or until the timeout is exceeded.</para>
@@ -779,8 +919,12 @@
 
             
 
+            
+
              can be called multiple times or concurrently. Only one <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+
+            
 
             
 
@@ -799,6 +943,8 @@
 
             
 
+            
+
              received. </para
           >
         </returns>
@@ -807,13 +953,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
 
           
 
+          
+
            that specifies how long the receive operation has to complete before timing out and throwing a <see
            cref="T:System.TimeoutException" />
+
+          
 
           
 
@@ -874,6 +1026,8 @@
 
             
 
+            
+
              does not result in a message being received or processed in any other way.</para
           >
           <para
@@ -882,13 +1036,19 @@
 
             
 
+            
+
              method exists primarily for transacted scenarios where the user wants to receive the message using a transaction. When using just <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
             
 
+            
+
              normally for this, the user must create the transaction and then call <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+
+            
 
             
 
@@ -900,8 +1060,12 @@
 
             
 
+            
+
              with whatever time out they want (even infinite), then when a message arrives they can open the transaction, call <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+
+            
 
             
 
@@ -913,13 +1077,19 @@
 
             
 
+            
+
              when it is acceptable for the current thread to be blocked while it waits for a message to arrive in the queue. The thread is blocked up to the specified <paramref
              name="timeout" />
 
             
 
+            
+
             . If you need the application processing to continue without waiting, use the asynchronous <see
              cref="M:System.ServiceModel.Channels.IInputChannel.BeginWaitForMessage(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -938,6 +1108,8 @@
 
             
 
+            
+
              has been exceeded; otherwise false.</para
           >
         </returns>
@@ -946,8 +1118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 

@@ -17,8 +17,12 @@
 
         
 
+        
+
          interface defines the methods a resource provider implements to access implicit resources. You can obtain a particular value using the <see
          cref="M:System.Web.Compilation.IImplicitResourceProvider.GetObject(System.Web.Compilation.ImplicitResourceKey,System.Globalization.CultureInfo)" />
+
+        
 
         
 
@@ -62,11 +66,15 @@
 
             
 
+            
+
              of implicit resource keys.</para
           >
         </returns>
         <param name="keyPrefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,11 +116,15 @@
 
             
 
+            
+
              representing the localized value of an implicit resource key.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,8 +135,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 

@@ -47,13 +47,19 @@
 
         
 
+        
+
          class enables language compilers to attach arbitrary properties to managed objects at run time. A <see
          cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" />
 
         
 
+        
+
          object is a dictionary that binds a managed object, which is represented by a key, to its attached property, which is represented by a value. The object's keys are the individual instances of the <paramref
          name="TKey" />
+
+        
 
         
 
@@ -65,8 +71,12 @@
 
         
 
+        
+
          class supports one attached value per managed object. Two keys are equal if passing them to the <see
          cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+        
 
         
 
@@ -79,8 +89,12 @@
 
           
 
+          
+
            to explicitly set the hash code for a key. The <see
            cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" />
+
+          
 
           
 
@@ -89,8 +103,12 @@
 
           
 
+          
+
            method to compute hash codes, and therefore does not invoke <see
            cref="M:System.Object.GetHashCode" />
+
+          
 
           
 
@@ -103,8 +121,12 @@
 
         
 
+        
+
          class holds a collection of key/value pairs, it is best thought of as a table rather than a dictionary object. The <see
          cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" />
+
+        
 
         
 
@@ -124,6 +146,8 @@
 
             
 
+            
+
              interface.</para
           >
         </item>
@@ -134,13 +158,19 @@
 
         
 
+        
+
          class differs from other collection objects in its management of the object lifetime of keys stored in the collection. Ordinarily, when an object is stored in a collection, its lifetime lasts until it is removed (and there are no additional references to the object) or until the collection object itself is destroyed. However, in the <see
          cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" />
 
         
 
+        
+
          class, adding a key/value pair to the table does not ensure that the key will persist, even if it can be reached directly from a value stored in the table (for example, if the table contains one key, A, with a value V1, and a second key, B, with a value P2 that contains a reference to A). Instead, <see
          cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" />
+
+        
 
         
 

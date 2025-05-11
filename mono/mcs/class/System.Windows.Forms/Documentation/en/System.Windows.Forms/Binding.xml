@@ -24,6 +24,8 @@
 
         
 
+        
+
          class to create and maintain a simple binding between the property of a control and either the property of an object, or the property of the current object in a list of objects.</para
       >
       <para
@@ -32,8 +34,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -42,13 +48,19 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Windows.Forms.TextBox" />
 
         
 
+        
+
          control to the FirstName property of a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -60,13 +72,19 @@
 
         
 
+        
+
          class also enables you to format values for display through the <see
          cref="E:System.Windows.Forms.Binding.Format" />
 
         
 
+        
+
          event and to retrieve formatted values through the <see
          cref="E:System.Windows.Forms.Binding.Parse" />
+
+        
 
         
 
@@ -78,8 +96,12 @@
 
         
 
+        
+
          instance with <see
          cref="M:System.Windows.Forms.Binding.#ctor(System.String,System.Object,System.String,System.Boolean)" />
+
+        
 
         
 
@@ -99,6 +121,8 @@
 
             
 
+            
+
              property.</para
           >
         </item>
@@ -109,8 +133,12 @@
 
         
 
+        
+
          control, specify the <see
          cref="P:System.Windows.Forms.TextBoxBase.Text" />
+
+        
 
         
 
@@ -136,8 +164,12 @@
 
               
 
+              
+
                or <see
                cref="T:System.ComponentModel.ITypedList" />
+
+              
 
               
 
@@ -146,8 +178,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Data.DataTable" />
+
+              
 
               
 
@@ -156,8 +192,12 @@
 
               
 
+              
+
               , or <see
                cref="T:System.Data.DataViewManager" />
+
+              
 
               
 
@@ -176,8 +216,12 @@
 
               
 
+              
+
                to create an indexed collection of objects. The collection must be created and filled before creating the <see
                cref="T:System.Windows.Forms.Binding" />
+
+              
 
               
 
@@ -200,6 +244,8 @@ ar1.Add(cust1);</code>
 
               
 
+              
+
                of strongly typed objects </para
             >
           </term>
@@ -214,6 +260,8 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          method will be called on the underlying data source object.</para
       >
       <para
@@ -222,8 +270,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
         , which can contain multiple <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -236,8 +288,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           , <see
            cref="T:System.Data.DataViewManager" />
+
+          
 
           
 
@@ -246,13 +302,19 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           , you are actually binding to a <see
            cref="T:System.Data.DataView" />
 
           
 
+          
+
           . Consequently, the bound rows are actually <see
            cref="T:System.Data.DataRowView" />
+
+          
 
           
 
@@ -265,13 +327,19 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          objects (such as a <see
          cref="T:System.Data.DataSet" />
 
         
 
+        
+
          or <see
          cref="T:System.Data.DataViewManager" />
+
+        
 
         
 
@@ -297,8 +365,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          property for the current <see
          cref="T:System.Drawing.Size" />
+
+        
 
         
 
@@ -310,8 +382,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          returns a list of values by linking one <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -320,8 +396,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          in a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -330,8 +410,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          contains <see
          cref="T:System.Data.DataRelation" />
+
+        
 
         
 
@@ -340,8 +424,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          followed by a <see
          cref="P:System.Data.DataRelation.RelationName" />
+
+        
 
         
 
@@ -350,13 +438,19 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
         . For example, if the <see
          cref="T:System.Data.DataTable" />
 
         
 
+        
+
          named "Suppliers" contains a <see
          cref="T:System.Data.DataRelation" />
+
+        
 
         
 
@@ -389,8 +483,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          objects in a <see
          cref="T:System.Windows.Forms.ControlBindingsCollection" />
+
+        
 
         
 
@@ -399,8 +497,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          property. You add a <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -409,11 +511,15 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          method, thereby binding a property of the control to a property of an object (or to a property of the current object in a list).</para
       >
       <para
         >You can simple-bind to any object that derives from the <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -543,8 +649,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
            property of the <see
            cref="T:System.Windows.Forms.ComboBox" />
+
+          
 
           
 
@@ -553,8 +663,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           , and <see
            cref="T:System.Windows.Forms.ListBox" />
+
+          
 
           
 
@@ -567,8 +681,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          class is an abstract class that manages all the <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -577,8 +695,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          are the <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -587,8 +709,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          classes. How a <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -597,8 +723,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          is a list binding or a property binding. For example, if it is a list binding, you can use the <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        
 
         
 
@@ -607,8 +737,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          in the list; the <see
          cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+        
 
         
 
@@ -617,8 +751,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
         , use the <see
          cref="T:System.Windows.Forms.BindingContext" />
+
+        
 
         
 
@@ -630,8 +768,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
         , use the <see
          cref="M:System.Windows.Forms.BindingManagerBase.AddNew" />
+
+        
 
         
 
@@ -640,8 +782,12 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          class. Use the <see
          cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+
+        
 
         
 
@@ -650,13 +796,19 @@ ar1.Add(cust1);</code>
 
         
 
+        
+
          class to return the appropriate <see
          cref="T:System.Windows.Forms.CurrencyManager" />
 
         
 
+        
+
         . To escape the addition of the new row, use the <see
          cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+
+        
 
         
 
@@ -717,6 +869,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  interface</para
               >
             </item>
@@ -730,8 +884,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class for more information about creating the <paramref
              name="dataMember" />
+
+            
 
             
 
@@ -740,6 +898,8 @@ ar1.Add(cust1);</code>
           <para
             >When you create a binding to a control's property, the new <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -758,6 +918,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                 )</para
               >
             </item>
@@ -768,13 +930,19 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              will be thrown when the <see
              cref="T:System.Windows.Forms.Binding" />
 
             
 
+            
+
              is added to the control's <see
              cref="P:System.Windows.Forms.Control.DataBindings" />
+
+            
 
             
 
@@ -789,11 +957,15 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class that simple-binds the indicated control property to the specified data member of the data source.</para
           >
         </summary>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -804,8 +976,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -813,6 +989,8 @@ ar1.Add(cust1);</code>
         >
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -849,11 +1027,15 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class that binds the indicated control property to the specified data member of the data source, and optionally enables formatting to be applied.</para
           >
         </summary>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -864,8 +1046,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -876,10 +1062,14 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The property or list to bind to. </param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -940,6 +1130,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  interface</para
               >
             </item>
@@ -953,8 +1145,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class for more information about creating the <paramref
              name="dataMember" />
+
+            
 
             
 
@@ -963,6 +1159,8 @@ ar1.Add(cust1);</code>
           <para
             >When you create a binding to a control's property, the new <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -975,6 +1173,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -982,6 +1182,8 @@ ar1.Add(cust1);</code>
               <para
                 >An event named PropertyNameChanged (for example, <see
                  cref="E:System.Windows.Forms.Control.BackColorChanged" />
+
+                
 
                 
 
@@ -998,11 +1200,15 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class that binds the specified control property to the specified data member of the specified data source. Optionally enables formatting and propagates values to the data source based on the specified update setting.</para
           >
         </summary>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1013,8 +1219,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1025,10 +1235,14 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1039,8 +1253,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+          
 
           
 
@@ -1102,6 +1320,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  interface</para
               >
             </item>
@@ -1115,8 +1335,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class for more information about creating the <paramref
              name="dataMember" />
+
+            
 
             
 
@@ -1125,6 +1349,8 @@ ar1.Add(cust1);</code>
           <para
             >When you create a binding to a control's property, the new <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -1143,6 +1369,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                 )</para
               >
             </item>
@@ -1156,8 +1384,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class that binds the indicated control property to the specified data member of the specified data source. Optionally enables formatting, propagates values to the data source based on the specified update setting, and sets the property to the specified value when a <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1169,6 +1401,8 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The name of the control property to bind. </param
         >
         <param name="dataSource">
@@ -1176,8 +1410,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1188,10 +1426,14 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1202,8 +1444,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+          
 
           
 
@@ -1214,13 +1460,19 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to be applied to the bound control property if the data source value is <see
            cref="T:System.DBNull" />
+
+          
 
           
 
@@ -1283,6 +1535,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  interface</para
               >
             </item>
@@ -1296,8 +1550,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class for more information about creating the <paramref
              name="dataMember" />
+
+            
 
             
 
@@ -1306,6 +1564,8 @@ ar1.Add(cust1);</code>
           <para
             >When you create a binding to a control's property, the new <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -1324,6 +1584,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                 )</para
               >
             </item>
@@ -1337,8 +1599,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class that binds the specified control property to the specified data member of the specified data source. Optionally enables formatting with the specified format string; propagates values to the data source based on the specified update setting; and sets the property to the specified value when a <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1350,6 +1616,8 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The name of the control property to bind. </param
         >
         <param name="dataSource">
@@ -1357,8 +1625,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1369,10 +1641,14 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1383,8 +1659,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+          
 
           
 
@@ -1395,8 +1675,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1405,10 +1689,14 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           .</param
         >
         <param name="formatString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1472,6 +1760,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  interface</para
               >
             </item>
@@ -1485,8 +1775,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class for more information about creating the <paramref
              name="dataMember" />
+
+            
 
             
 
@@ -1495,6 +1789,8 @@ ar1.Add(cust1);</code>
           <para
             >When you create a binding to a control's property, the new <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -1513,6 +1809,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                 )</para
               >
             </item>
@@ -1526,8 +1824,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class with the specified control property to the specified data member of the specified data source. Optionally enables formatting with the specified format string; propagates values to the data source based on the specified update setting; enables formatting with the specified format string; sets the property to the specified value when a <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1539,6 +1841,8 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The name of the control property to bind. </param
         >
         <param name="dataSource">
@@ -1546,8 +1850,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1558,10 +1866,14 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1572,8 +1884,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+          
 
           
 
@@ -1584,13 +1900,19 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to be applied to the bound control property if the data source value is <see
            cref="T:System.DBNull" />
+
+          
 
           
 
@@ -1601,6 +1923,8 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           One or more format specifier characters that indicate how a value is to be displayed.</param
         >
         <param name="formatInfo">
@@ -1608,8 +1932,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           An implementation of <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -1645,6 +1973,8 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              is associated with.</para
           >
         </summary>
@@ -1671,6 +2001,8 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              is true: </para
           >
           <list type="bullet">
@@ -1687,8 +2019,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              property, an exception is thrown, but the <see
              cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+            
 
             
 
@@ -1697,8 +2033,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+            
 
             
 
@@ -1712,6 +2052,8 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1720,6 +2062,8 @@ ar1.Add(cust1);</code>
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.Binding.FormattingEnabled" />
+
+            
 
             
 
@@ -1747,8 +2091,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              to iterate through a data-bound list by incrementing or decrementing the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+            
 
             
 
@@ -1757,13 +2105,19 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              class is abstract. The <see
              cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
+            
+
              class, which manages data-bound lists, inherits from the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -1778,8 +2132,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              for this <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -1811,13 +2169,19 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              is created from the <paramref
              name="dataMember" />
 
             
 
+            
+
              string passed to the <see
              cref="Overload:System.Windows.Forms.Binding.#ctor" />
+
+            
 
             
 
@@ -1832,8 +2196,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              parameter in the <see
              cref="Overload:System.Windows.Forms.Binding.#ctor" />
+
+            
 
             
 
@@ -1939,6 +2307,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  interface</para
               >
             </item>
@@ -1976,8 +2346,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              property to specify the value displayed in a bound control when the data source contains <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -2017,6 +2391,8 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
             , the binding will update at least one time, when it is first established.</para
           >
         </remarks>
@@ -2044,8 +2420,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event is raised when data is pushed from the data source into the control. You can handle the <see
              cref="E:System.Windows.Forms.Binding.Format" />
+
+            
 
             
 
@@ -2054,8 +2434,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event is raised to unformat the displayed value, then the <see
              cref="E:System.Windows.Forms.Binding.Format" />
+
+            
 
             
 
@@ -2067,8 +2451,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Binding.Parse" />
+
+            
 
             
 
@@ -2077,8 +2465,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
             , you can display the data in the local currency format by setting the <see
              cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+
+            
 
             
 
@@ -2087,13 +2479,19 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              to the formatted value in the <see
              cref="E:System.Windows.Forms.Binding.Format" />
 
             
 
+            
+
              event. You must consequently unformat the displayed value in the <see
              cref="E:System.Windows.Forms.Binding.Parse" />
+
+            
 
             
 
@@ -2105,13 +2503,19 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event occurs whenever the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Current" />
 
             
 
+            
+
              value of the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -2128,6 +2532,8 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  changes.</para
               >
             </item>
@@ -2135,6 +2541,8 @@ ar1.Add(cust1);</code>
               <para
                 >Whenever the data-bound list is sorted or filtered, which is accomplished when a <see
                  cref="T:System.Data.DataView" />
+
+                
 
                 
 
@@ -2148,13 +2556,19 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event also occurs after the <see
              cref="E:System.Windows.Forms.Binding.Parse" />
 
             
 
+            
+
              event. For example, when a control loses focus, its contents are parsed. Immediately afterward, as new data is pushed into the control, the <see
              cref="E:System.Windows.Forms.Binding.Format" />
+
+            
 
             
 
@@ -2165,6 +2579,8 @@ ar1.Add(cust1);</code>
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2205,6 +2621,8 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              property setting.  </para
           >
         </remarks>
@@ -2213,6 +2631,8 @@ ar1.Add(cust1);</code>
           <para
             >Gets or sets the <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -2239,6 +2659,8 @@ ar1.Add(cust1);</code>
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Overview</a>
             </format>
+
+            
 
             
 
@@ -2275,13 +2697,19 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event to be raised. The handler of this event can take the appropriate action, based on the success, error, or exceptions in the binding process, by examining the <see
              cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+            
 
             
 
@@ -2316,8 +2744,12 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  or <see
                  cref="M:System.Windows.Forms.BindingManagerBase.SuspendBinding" />
+
+                
 
                 
 
@@ -2326,8 +2758,12 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  that the <see
                  cref="T:System.Windows.Forms.Binding" />
+
+                
 
                 
 
@@ -2338,6 +2774,8 @@ ar1.Add(cust1);</code>
               <para
                 >The control to which the <see
                  cref="T:System.Windows.Forms.Binding" />
+
+                
 
                 
 
@@ -2375,8 +2813,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              for the <see
              cref="P:System.Windows.Forms.Binding.NullValue" />
+
+            
 
             
 
@@ -2385,8 +2827,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              property will be ignored. Also, the <see
              cref="P:System.Windows.Forms.Binding.NullValue" />
+
+            
 
             
 
@@ -2398,8 +2844,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
             . If <see
              cref="P:System.Windows.Forms.Binding.NullValue" />
+
+            
 
             
 
@@ -2414,8 +2864,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              to be set as the control property when the data source contains a <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -2450,11 +2904,15 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Binding.OnBindingComplete(System.Windows.Forms.BindingCompleteEventArgs)" />
+
+            
 
             
 
@@ -2469,6 +2927,8 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2477,8 +2937,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+          
 
           
 
@@ -2509,11 +2973,15 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Binding.OnFormat(System.Windows.Forms.ConvertEventArgs)" />
+
+            
 
             
 
@@ -2528,6 +2996,8 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2536,8 +3006,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ConvertEventArgs" />
+
+          
 
           
 
@@ -2572,11 +3046,15 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Binding.OnParse(System.Windows.Forms.ConvertEventArgs)" />
+
+            
 
             
 
@@ -2591,6 +3069,8 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2599,8 +3079,12 @@ ar1.Add(cust1);</code>
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ConvertEventArgs" />
+
+          
 
           
 
@@ -2630,8 +3114,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Binding.Parse" />
+
+            
 
             
 
@@ -2640,8 +3128,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
             , you can display the data in the local currency format by setting the <see
              cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+
+            
 
             
 
@@ -2650,8 +3142,12 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              to the formatted value in the <see
              cref="E:System.Windows.Forms.Binding.Format" />
+
+            
 
             
 
@@ -2660,11 +3156,15 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              event.</para
           >
           <para
             >The <see
              cref="E:System.Windows.Forms.Binding.Parse" />
+
+            
 
             
 
@@ -2678,8 +3178,12 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  event of the <see
                  cref="T:System.Windows.Forms.Control" />
+
+                
 
                 
 
@@ -2693,8 +3197,12 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Windows.Forms.BindingManagerBase" />
+
+                
 
                 
 
@@ -2708,13 +3216,19 @@ ar1.Add(cust1);</code>
 
                 
 
+                
+
                  of the <see
                  cref="T:System.Windows.Forms.BindingManagerBase" />
 
                 
 
+                
+
                  changes (in other words, when the <see
                  cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+                
 
                 
 
@@ -2727,6 +3241,8 @@ ar1.Add(cust1);</code>
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2764,13 +3280,19 @@ ar1.Add(cust1);</code>
 
             
 
+            
+
              to specify the control property that you want to bind to a list in a data source. Most commonly, you bind a display property such as the <see
              cref="P:System.Windows.Forms.Control.Text" />
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 

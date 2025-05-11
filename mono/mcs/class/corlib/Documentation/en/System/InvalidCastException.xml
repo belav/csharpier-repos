@@ -41,6 +41,8 @@
 
         
 
+        
+
          exception.</para
       >
       <code lang="C#"
@@ -73,8 +75,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
         
 
+        
+
          exception is thrown when the conversion of an instance of one type to another type is not supported. It differs from an <see
          cref="T:System.OverflowException" />
+
+        
 
         
 
@@ -86,8 +92,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
         
 
+        
+
          class. For errors that occur when the destination type can store source type values, but is not large enough to store a specific source value, see the <see
          cref="T:System.OverflowException" />
+
+        
 
         
 
@@ -102,6 +112,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
         
 
+        
+
          exception include the following: </para
       >
       <list type="bullet">
@@ -112,13 +124,19 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              implementation that does not support a particular conversion. For example, trying to convert a <see
              cref="T:System.Boolean" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -127,8 +145,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              value to an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -137,8 +159,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              exception. The following example calls both the <see
              cref="M:System.Boolean.System#IConvertible#ToChar(System.IFormatProvider)" />
+
+            
 
             
 
@@ -147,8 +173,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              methods to convert a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -157,8 +187,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
             . In both cases, the method call throws an <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -173,8 +207,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              method to convert an object from one type to another, but one or both types don't implement the <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -185,6 +223,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
           <para
             >Neither the source type nor the target type defines an explicit or narrowing conversion between the two types, and the <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -201,6 +241,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
       <para
         >The following intermediate language (IL) instructions throw an <see
          cref="T:System.InvalidCastException" />
+
+        
 
         
 
@@ -228,6 +270,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
         
 
+        
+
          uses the HRESULT COR_E_INVALIDCAST, which has the value 0x80004002.</para
       >
       <para
@@ -236,8 +280,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
         
 
+        
+
         , see the <see
          cref="M:System.InvalidCastException.#ctor" />
+
+        
 
         
 
@@ -277,11 +325,15 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Cannot cast from source type to destination type." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -328,6 +380,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -363,8 +417,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              property of the new exception using the <paramref
              name="message" />
+
+            
 
             
 
@@ -373,11 +431,15 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -424,11 +486,15 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -467,6 +533,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -478,6 +546,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -486,10 +556,14 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,8 +604,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -540,11 +618,15 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -591,11 +673,15 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -606,8 +692,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -644,13 +734,19 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              property of the new exception using the <paramref
              name="message" />
 
             
 
+            
+
              parameter. The content of <paramref
              name="message" />
+
+            
 
             
 
@@ -662,8 +758,12 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              class, via the protected <see
              cref="P:System.Exception.HResult" />
+
+            
 
             
 
@@ -672,11 +772,15 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -723,6 +827,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
             
 
+            
+
              class with a specified message and error code.</para
           >
         </summary>
@@ -731,10 +837,14 @@ Caught: System.InvalidCastException: Specified cast is not valid.
 
           
 
+          
+
           The message that indicates the reason the exception occurred.</param
         >
         <param name="errorCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

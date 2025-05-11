@@ -9,8 +9,12 @@
 
         
 
+        
+
          namespace provides the <see
          cref="T:System.Timers.Timer" />
+
+        
 
         
 
@@ -25,13 +29,19 @@
 
         
 
+        
+
          component is a server-based timer, which allows you to specify a recurring interval at which the <see
          cref="E:System.Timers.Timer.Elapsed" />
 
         
 
+        
+
          event is raised in your application. You can then handle this event to provide regular processing. For example, suppose you have a critical server that must be kept running 24 hours a day, 7 days a week. You could create a service that uses a <see
          cref="T:System.Timers.Timer" />
+
+        
 
         
 
@@ -43,8 +53,12 @@
 
         
 
+        
+
          is designed for use with worker threads in a multithreaded environment. Server timers can move among threads to handle the raised <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 

@@ -36,6 +36,8 @@
 
         
 
+        
+
          can be obtained for varchar, nvarchar, char, nchar, text, and ntext values, or can be created over an unmanaged buffer.</para
       >
     </remarks>
@@ -46,13 +48,19 @@
 
         
 
+        
+
          is a mutable reference type that wraps a <see
          cref="T:System.Char" />
 
         
 
+        
+
          array or a <see
          cref="T:System.Data.SqlTypes.SqlString" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
 
             
 
+            
+
              is bound by the common language runtime maximum size of an Int32 (2,147,483,647).</para
           >
         </remarks>
@@ -85,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.SqlTypes.SqlChars" />
+
+            
 
             
 
@@ -109,6 +121,8 @@
 
             
 
+            
+
              is bound by the common language runtime maximum size of an Int32 (2,147,483,647).</para
           >
           <para>If a null reference is passed in, the instance is set to null.</para>
@@ -121,6 +135,8 @@
 
             
 
+            
+
              class based on the specified character array.</para
           >
         </summary>
@@ -129,8 +145,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Char" />
+
+          
 
           
 
@@ -160,6 +180,8 @@
 
             
 
+            
+
              is bound by the common language runtime maximum size of an Int32 (2,147,483,647).</para
           >
           <para>If a null reference is passed in, the instance is set to null.</para>
@@ -172,8 +194,12 @@
 
             
 
+            
+
              class based on the specified <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -185,8 +211,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -216,6 +246,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -224,8 +256,12 @@
 
             
 
+            
+
              for stream-wrapped instances of <see
              cref="T:System.Data.SqlTypes.SqlChars" />
+
+            
 
             
 
@@ -263,6 +299,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -274,6 +312,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -282,8 +322,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -310,6 +354,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -318,6 +364,8 @@
           <para
             >Gets a Boolean value that indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlChars" />
+
+            
 
             
 
@@ -371,6 +419,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -417,6 +467,8 @@
           <para
             >Returns a null instance of this <see
              cref="T:System.Data.SqlTypes.SqlChars" />
+
+            
 
             
 
@@ -496,6 +548,8 @@
 
             
 
+            
+
             , an exception is thrown.</para
           >
           <para
@@ -504,8 +558,12 @@
 
             
 
+            
+
              specifies more characters to be copied than are available from the <paramref
              name="offsetInBuffer" />
+
+            
 
             
 
@@ -522,6 +580,8 @@
 
             
 
+            
+
              instance to the passed-in buffer and returns the number of copied characters.</para
           >
         </summary>
@@ -533,6 +593,8 @@
 
             
 
+            
+
              long value representing the number of copied bytes.</para
           >
         </returns>
@@ -541,13 +603,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int64" />
 
           
 
+          
+
            long value offset into the value that is contained in the <see
            cref="T:System.Data.SqlTypes.SqlChars" />
+
+          
 
           
 
@@ -558,6 +626,8 @@
 
           
 
+          
+
           The character array buffer to copy into.</param
         >
         <param name="offsetInBuffer">
@@ -565,8 +635,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -577,8 +651,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -611,6 +689,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -619,8 +699,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -645,6 +729,8 @@
           <para
             >Sets this <see
              cref="T:System.Data.SqlTypes.SqlChars" />
+
+            
 
             
 
@@ -673,6 +759,8 @@
           <para
             >Returns information about the storage state of this <see
              cref="T:System.Data.SqlTypes.SqlChars" />
+
+            
 
             
 
@@ -707,6 +795,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -715,10 +805,14 @@
 
           
 
+          
+
           The object to be populated with serialization information. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -801,6 +895,8 @@
 
           
 
+          
+
           XmlWriter</param
         >
       </Docs>
@@ -828,8 +924,12 @@
 
             
 
+            
+
              instance to its equivalent <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -841,6 +941,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -868,6 +970,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -876,6 +980,8 @@
           <para
             >Returns a managed copy of the value held by this <see
              cref="T:System.Data.SqlTypes.SqlChars" />
+
+            
 
             
 
@@ -911,13 +1017,19 @@
 
             
 
+            
+
              but within <see
              cref="P:System.Data.SqlTypes.SqlChars.MaxLength" />
 
             
 
+            
+
             , <see
              cref="P:System.Data.SqlTypes.SqlChars.Length" />
+
+            
 
             
 
@@ -929,8 +1041,12 @@
 
             
 
+            
+
              must be less than or equal to <see
              cref="P:System.Data.SqlTypes.SqlChars.Length" />
+
+            
 
             
 
@@ -939,6 +1055,8 @@
           <para
             >If an attempt is made to write beyond <see
              cref="P:System.Data.SqlTypes.SqlChars.MaxLength" />
+
+            
 
             
 
@@ -953,6 +1071,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -961,8 +1081,12 @@
 
           
 
+          
+
           A long value offset into the value that is contained in the <see
            cref="T:System.Data.SqlTypes.SqlChars" />
+
+          
 
           
 
@@ -973,6 +1097,8 @@
 
           
 
+          
+
           The character array buffer to copy into.</param
         >
         <param name="offsetInBuffer">
@@ -980,8 +1106,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -992,8 +1122,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 

@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -175,6 +177,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -212,6 +216,8 @@
           <para
             >indigo1 security system validates the service certificate against a <see
              cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+
+            
 
             
 

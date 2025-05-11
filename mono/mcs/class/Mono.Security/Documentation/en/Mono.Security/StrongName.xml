@@ -12,6 +12,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -87,6 +89,8 @@
         <param name="rsa"
           >a <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -187,6 +191,8 @@
 
           
 
+          
+
            algorithm. The last 8 bytes (in reverse order) are used as the token.</remarks
         >
       </Docs>
@@ -250,6 +256,8 @@
         <value
           >a <see
            cref="T:System.String" />
+
+          
 
           
 

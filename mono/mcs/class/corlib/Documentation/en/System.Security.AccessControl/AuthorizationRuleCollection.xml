@@ -31,6 +31,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -69,10 +71,14 @@
 
           
 
+          
+
           An array to which to copy the contents of the collection.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

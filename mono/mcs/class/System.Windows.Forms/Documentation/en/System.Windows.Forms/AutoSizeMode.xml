@@ -18,8 +18,12 @@
 
         
 
+        
+
          value produces the same behavior that you get for controls with the <see
          cref="P:System.Windows.Forms.Control.AutoSize" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Control.MaximumSize" />
 
         
 
+        
+
          properties are respected, but the current value of the <see
          cref="P:System.Windows.Forms.Control.Size" />
+
+        
 
         
 
@@ -49,6 +59,8 @@
       <para
         >Specifies how a control will behave when its <see
          cref="P:System.Windows.Forms.Control.AutoSize" />
+
+        
 
         
 
@@ -87,6 +99,8 @@
           <para
             >The control grows as much as necessary to fit its contents but does not shrink smaller than the value of its <see
              cref="P:System.Windows.Forms.Control.Size" />
+
+            
 
             
 

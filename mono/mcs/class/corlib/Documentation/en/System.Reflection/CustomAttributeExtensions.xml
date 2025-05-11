@@ -50,8 +50,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -70,6 +74,8 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
@@ -78,10 +84,14 @@
 
           
 
+          
+
           The assembly to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,8 +128,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -138,6 +152,8 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
@@ -146,10 +162,14 @@
 
           
 
+          
+
           The member to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,8 +206,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -206,6 +230,8 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
@@ -214,10 +240,14 @@
 
           
 
+          
+
           The module to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -254,8 +284,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -274,6 +308,8 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
@@ -282,10 +318,14 @@
 
           
 
+          
+
           The parameter to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,8 +363,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -343,11 +387,15 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,6 +406,8 @@
 
           
 
+          
+
           The type of attribute to search for.</param
         >
         <param name="inherit">
@@ -365,8 +415,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -404,8 +458,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -424,11 +482,15 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -439,6 +501,8 @@
 
           
 
+          
+
           The type of attribute to search for.</param
         >
         <param name="inherit">
@@ -446,8 +510,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -490,8 +558,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -510,6 +582,8 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
@@ -518,10 +592,14 @@
 
           
 
+          
+
           The assembly to inspect.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -564,8 +642,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -584,6 +666,8 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
@@ -592,10 +676,14 @@
 
           
 
+          
+
           The member to inspect.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -638,8 +726,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -658,6 +750,8 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
@@ -666,10 +760,14 @@
 
           
 
+          
+
           The module to inspect.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -712,8 +810,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -732,6 +834,8 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
@@ -740,10 +844,14 @@
 
           
 
+          
+
           The parameter to inspect.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -787,8 +895,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -807,11 +919,15 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -822,8 +938,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -831,6 +951,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -874,8 +996,12 @@
 
             
 
+            
+
              extension method if you expect more than one value to be returned, or <see
              cref="T:System.Reflection.AmbiguousMatchException" />
+
+            
 
             
 
@@ -894,11 +1020,15 @@
 
             
 
+            
+
             , or null if no such attribute is found.</para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -909,8 +1039,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -918,6 +1052,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -958,11 +1094,15 @@
 
             
 
+            
+
             , or an empty collection if no such attributes exist. </para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1003,11 +1143,15 @@
 
             
 
+            
+
             , or an empty collection if no such attributes exist. </para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1048,11 +1192,15 @@
 
             
 
+            
+
             , or an empty collection if no such attributes exist. </para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1093,11 +1241,15 @@
 
             
 
+            
+
             , or an empty collection if no such attributes exist. </para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1139,8 +1291,12 @@
 
             
 
+            
+
              and that match <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1152,10 +1308,14 @@
 
           
 
+          
+
           The assembly to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1197,11 +1357,15 @@
 
             
 
+            
+
              that match the specified criteria, or an empty collection if no such attributes exist. </para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1212,8 +1376,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -1255,8 +1423,12 @@
 
             
 
+            
+
              and that match <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1268,10 +1440,14 @@
 
           
 
+          
+
           The member to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1313,8 +1489,12 @@
 
             
 
+            
+
              and that match <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1326,10 +1506,14 @@
 
           
 
+          
+
           The module to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1371,11 +1555,15 @@
 
             
 
+            
+
             , or an empty collection if no such attributes exist. </para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1386,8 +1574,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -1429,8 +1621,12 @@
 
             
 
+            
+
              and that match <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1442,10 +1638,14 @@
 
           
 
+          
+
           The parameter to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1488,8 +1688,12 @@
 
             
 
+            
+
              and that match <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1501,10 +1705,14 @@
 
           
 
+          
+
           The member to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1515,8 +1723,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -1559,8 +1771,12 @@
 
             
 
+            
+
              and that match <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1572,10 +1788,14 @@
 
           
 
+          
+
           The parameter to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1586,8 +1806,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -1635,8 +1859,12 @@
 
             
 
+            
+
              and that match <paramref
              name="T" />
+
+            
 
             
 
@@ -1648,10 +1876,14 @@
 
           
 
+          
+
           The assembly to inspect.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1699,8 +1931,12 @@
 
             
 
+            
+
              and that match <paramref
              name="T" />
+
+            
 
             
 
@@ -1712,10 +1948,14 @@
 
           
 
+          
+
           The member to inspect.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1763,8 +2003,12 @@
 
             
 
+            
+
              and that match <paramref
              name="T" />
+
+            
 
             
 
@@ -1776,10 +2020,14 @@
 
           
 
+          
+
           The module to inspect.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1827,8 +2075,12 @@
 
             
 
+            
+
              and that match <paramref
              name="T" />
+
+            
 
             
 
@@ -1840,10 +2092,14 @@
 
           
 
+          
+
           The parameter to inspect.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1892,8 +2148,12 @@
 
             
 
+            
+
              and that match <paramref
              name="T" />
+
+            
 
             
 
@@ -1905,10 +2165,14 @@
 
           
 
+          
+
           The member to inspect.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1917,10 +2181,14 @@
 
           
 
+          
+
           ; otherwise, false. </param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1969,8 +2237,12 @@
 
             
 
+            
+
              and that match <paramref
              name="T" />
+
+            
 
             
 
@@ -1982,10 +2254,14 @@
 
           
 
+          
+
           The parameter to inspect.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1994,10 +2270,14 @@
 
           
 
+          
+
           ; otherwise, false. </param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2039,6 +2319,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -2047,10 +2329,14 @@
 
           
 
+          
+
           The assembly to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2092,6 +2378,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -2100,10 +2388,14 @@
 
           
 
+          
+
           The member to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2145,6 +2437,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -2153,10 +2447,14 @@
 
           
 
+          
+
           The module to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2198,6 +2496,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -2206,10 +2506,14 @@
 
           
 
+          
+
           The parameter to inspect.</param
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2252,11 +2556,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2267,6 +2575,8 @@
 
           
 
+          
+
           The type of the attribute to search for.</param
         >
         <param name="inherit">
@@ -2274,8 +2584,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 
@@ -2318,11 +2632,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="element">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2333,6 +2651,8 @@
 
           
 
+          
+
           The type of attribute to search for.</param
         >
         <param name="inherit">
@@ -2340,8 +2660,12 @@
 
           
 
+          
+
           true to inspect the ancestors of <paramref
            name="element" />
+
+          
 
           
 

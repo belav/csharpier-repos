@@ -35,8 +35,12 @@
 
         
 
+        
+
          when you call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -58,13 +66,19 @@
 
         
 
+        
+
         , specify the <see
          cref="T:System.Type" />
 
         
 
+        
+
          of the derived class. When the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -76,13 +90,19 @@
 
         
 
+        
+
          to include derived classes in service description documents that are written in the Web Services Description Language (WSDL). For example, if a method returns an <see
          cref="T:System.Object" />
 
         
 
+        
+
         , apply the <see
          cref="T:System.Xml.Serialization.XmlIncludeAttribute" />
+
+        
 
         
 
@@ -95,6 +115,8 @@
       <para
         >Allows the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -129,6 +151,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -137,8 +161,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

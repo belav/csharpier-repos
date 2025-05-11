@@ -25,8 +25,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.RepeaterCommandEventArgs.#ctor(System.Web.UI.WebControls.RepeaterItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
          type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -81,6 +91,8 @@
 
             
 
+            
+
             .</para
           >
           <list type="table">
@@ -104,6 +116,8 @@
 
                   
 
+                  
+
                    parameter </para
                 >
               </description>
@@ -115,6 +129,8 @@
               <description>
                 <para>
                   <paramref name="commandSource" />
+
+                  
 
                   
 
@@ -132,6 +148,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -140,8 +158,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+          
 
           
 
@@ -150,8 +172,12 @@
 
           
 
+          
+
           . The <see
            cref="P:System.Web.UI.WebControls.RepeaterCommandEventArgs.Item" />
+
+          
 
           
 
@@ -204,6 +230,8 @@
 
             
 
+            
+
              associated with this event.</para
           >
         </remarks>
@@ -212,6 +240,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+            
 
             
 

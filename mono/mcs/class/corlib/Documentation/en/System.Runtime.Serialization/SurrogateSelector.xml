@@ -65,6 +65,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -104,8 +106,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -116,10 +122,14 @@
 
           
 
+          
+
           The context-specific data. </param
         >
         <param name="surrogate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,11 +171,15 @@
 
             
 
+            
+
              that can handle a particular object type to the list of surrogates.</para
           >
         </summary>
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,6 +217,8 @@
           <para
             >The next <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+            
 
             
 
@@ -283,8 +299,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -295,8 +315,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

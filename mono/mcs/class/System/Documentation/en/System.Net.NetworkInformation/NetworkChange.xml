@@ -24,8 +24,12 @@
 
         
 
+        
+
          class provides address change notification by raising <see
          cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged" />
+
+        
 
         
 
@@ -37,13 +41,19 @@
 
         
 
+        
+
          object call your event-handling methods when a <see
          cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged" />
 
         
 
+        
+
          event occurs, you must associate the methods with a <see
          cref="T:System.Net.NetworkInformation.NetworkAddressChangedEventHandler" />
+
+        
 
         
 
@@ -74,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.NetworkChange" />
+
+            
 
             
 
@@ -109,8 +121,12 @@
 
             
 
+            
+
              class raises <see
              cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged" />
+
+            
 
             
 
@@ -122,8 +138,12 @@
 
             
 
+            
+
              object call an event-handling method when a <see
              cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged" />
+
+            
 
             
 
@@ -132,11 +152,15 @@
 
             
 
+            
+
              delegate, and add this delegate to this event. </para
           >
           <para
             >The <see
              cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged" />
+
+            
 
             
 
@@ -176,8 +200,12 @@
 
             
 
+            
+
              class raises <see
              cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
+
+            
 
             
 
@@ -189,8 +217,12 @@
 
             
 
+            
+
              object call an event-handling method when a <see
              cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
+
+            
 
             
 
@@ -199,11 +231,15 @@
 
             
 
+            
+
              delegate, and add this delegate to this event. </para
           >
           <para
             >The <see
              cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
+
+            
 
             
 

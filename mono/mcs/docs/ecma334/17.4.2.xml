@@ -6,6 +6,8 @@
 
     
 
+    
+
      includes a readonly modifier, the fields introduced by the declaration are readonly fields. Direct assignments to readonly fields can only occur as part of that declaration or in an instance constructor or static constructor in the same class. (A readonly field can be assigned to multiple times in these contexts.) Specifically, direct assignments to a readonly field are permitted only in the following contexts: <list
     >
       <list_item
@@ -14,8 +16,12 @@
 
         
 
+        
+
          that introduces the field (by including a <non_terminal
          where="19.6">variable-initializer</non_terminal>
+
+        
 
         
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          method and by handlers for the <see
          cref="E:System.Windows.Forms.DataGridView.CellPainting" />
+
+        
 
         
 
@@ -33,13 +37,19 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Windows.Forms.DataGridView.RowPostPaint" />
 
         
 
+        
+
          events of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -51,6 +61,8 @@
       <para
         >Defines values for specifying the parts of a <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 

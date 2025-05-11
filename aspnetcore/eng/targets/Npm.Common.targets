@@ -16,7 +16,9 @@
       ResolveProjectReferences;
       _Build;
     </BuildDependsOn>
-    <NpmBuildArgs Condition="'$(NpmBuildArgs)' == ''">run build</NpmBuildArgs>
+    <NpmBuildArgs Condition="'$(NpmBuildArgs)' == ''"
+>run build</NpmBuildArgs
+    >
   </PropertyGroup>
   <ItemGroup>
     <TSFiles Include="src\**\*.ts" />
@@ -106,8 +108,7 @@
       $(PackDependsOn);
       PrepareForBuild
     </PackDependsOn>
-    <PackDependsOn Condition="'$(NoBuild)' != 'true'"
-      >
+    <PackDependsOn Condition="'$(NoBuild)' != 'true'">
       $(PackDependsOn);
       Build;
       _Pack

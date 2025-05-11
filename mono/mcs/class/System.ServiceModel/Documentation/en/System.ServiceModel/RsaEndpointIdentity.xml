@@ -53,6 +53,8 @@
 
             
 
+            
+
              class from a claim.</para
           >
         </summary>
@@ -61,8 +63,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Claims.Claim" />
+
+          
 
           
 
@@ -99,8 +105,12 @@
 
             
 
+            
+
              is converted to an RSA claim and an endpoint identity is created by the method <see
              cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />
+
+            
 
             
 
@@ -112,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.RsaEndpointIdentity" />
+
+            
 
             
 
@@ -142,6 +154,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -153,11 +167,15 @@
 
             
 
+            
+
              class from a public key.</para
           >
         </summary>
         <param name="publicKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

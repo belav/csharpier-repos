@@ -26,13 +26,19 @@
 
         
 
+        
+
          enumeration specifies the possible values of the <see
          cref="P:System.Windows.Forms.VisualStyles.TextMetrics.PitchAndFamily" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.VisualStyles.TextMetrics" />
+
+        
 
         
 

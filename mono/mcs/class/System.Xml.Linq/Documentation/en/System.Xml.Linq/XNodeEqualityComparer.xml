@@ -32,13 +32,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
+        
+
         . Classes that require identity (such as <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Linq.XNodeEqualityComparer" />
+
+            
 
             
 
@@ -112,6 +120,8 @@
 
                 
 
+                
+
                  objects of different types are never equal. </para
               >
             </item>
@@ -119,6 +129,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XText" />
+
+                
 
                 
 
@@ -132,6 +144,8 @@
 
                 
 
+                
+
                  nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equal-length sequences of pairwise equal content nodes. </para
               >
             </item>
@@ -139,6 +153,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XDocument" />
+
+                
 
                 
 
@@ -152,6 +168,8 @@
 
                 
 
+                
+
                  nodes are equal if they contain the same comment text. </para
               >
             </item>
@@ -162,6 +180,8 @@
 
                 
 
+                
+
                  nodes are equal if they have the same target and data. </para
               >
             </item>
@@ -169,6 +189,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XDocumentType" />
+
+                
 
                 
 
@@ -189,6 +211,8 @@
 
             
 
+            
+
              indicating if the nodes are equal.</para
           >
         </returns>
@@ -197,8 +221,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -209,8 +237,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -243,8 +275,12 @@
 
             
 
+            
+
              implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -259,6 +295,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -270,6 +308,8 @@
 
             
 
+            
+
              that contains a value-based hash code for the node.</para
           >
         </returns>
@@ -278,8 +318,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -324,6 +368,8 @@
 
                 
 
+                
+
                  objects of different types are never equal. </para
               >
             </item>
@@ -331,6 +377,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XText" />
+
+                
 
                 
 
@@ -344,6 +392,8 @@
 
                 
 
+                
+
                  nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equa-length sequences of pairwise equal content nodes. </para
               >
             </item>
@@ -351,6 +401,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XDocument" />
+
+                
 
                 
 
@@ -364,6 +416,8 @@
 
                 
 
+                
+
                  nodes are equal if they contain the same comment text. </para
               >
             </item>
@@ -374,6 +428,8 @@
 
                 
 
+                
+
                  nodes are equal if they have the same target and data. </para
               >
             </item>
@@ -381,6 +437,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XDocumentType" />
+
+                
 
                 
 
@@ -424,8 +482,12 @@
 
             
 
+            
+
              implementation of <see
              cref="T:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -444,11 +506,15 @@
 
             
 
+            
+
              that contains a value-based hash code for the node.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

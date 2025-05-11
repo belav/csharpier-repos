@@ -17,6 +17,8 @@
 
         
 
+        
+
          provides a base class that can be inherited from and extended to display a formatted custom Web server control at design time in a visual designer tool such as vsprvslong.</para
       >
       <para
@@ -25,8 +27,12 @@
 
         
 
+        
+
          object works with a custom control designer to provide automatic formatting at design time for a custom control. For example, the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
             
 
+            
+
              class or another designer class that is appropriate for your control, such as the <see
              cref="T:System.Web.UI.Design.TextControlDesigner" />
+
+            
 
             
 
@@ -59,8 +69,12 @@
 
             
 
+            
+
              class that formats your custom control by overriding the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormat.Apply(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -74,8 +88,12 @@
 
             
 
+            
+
              property, which is a <see
              cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+
+            
 
             
 
@@ -89,6 +107,8 @@
 
         
 
+        
+
          class provides the following members to support automatic formatting at design time:</para
       >
       <list type="bullet">
@@ -96,6 +116,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerAutoFormat.Apply(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -109,8 +131,12 @@
 
             
 
+            
+
              method, which provides a copy of the control for previewing in an <ui
             >AutoFormat</ui>
+
+            
 
             
 
@@ -121,6 +147,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
+
+            
 
             
 
@@ -153,8 +181,12 @@
 
             
 
+            
+
              constructor to create a new format and add it to a <see
              cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+
+            
 
             
 
@@ -163,8 +195,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.Design.ControlDesigner" />
+
+            
 
             
 
@@ -179,6 +215,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -187,8 +225,12 @@
 
           
 
+          
+
           A string that identifies a specific <see
            cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+          
 
           
 
@@ -220,8 +262,12 @@
 
             
 
+            
+
              method applies formatting to the specified control based on the <see
              cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
+
+            
 
             
 
@@ -230,8 +276,12 @@
 
             
 
+            
+
              property and then use the <see
              cref="M:System.Web.UI.WebControls.WebControl.MergeStyle(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -244,6 +294,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,8 +327,12 @@
 
             
 
+            
+
              method is used by visual designers, such as vsprvslong, in an <ui
             >AutoFormat</ui>
+
+            
 
             
 
@@ -288,8 +344,12 @@
 
             
 
+            
+
              attribute for the <see
              cref="T:System.Web.UI.Design.ControlDesigner" />
+
+            
 
             
 
@@ -298,8 +358,12 @@
 
             
 
+            
+
              method returns a copy of the control in the <paramref
              name="runtimeControl" />
+
+            
 
             
 
@@ -318,11 +382,15 @@
 
             
 
+            
+
              method returns a copy of the associated Web server control.</para
           >
         </returns>
         <param name="runtimeControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +417,12 @@
 
             
 
+            
+
              property from each <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -359,8 +431,12 @@
 
             
 
+            
+
              collection of a <see
              cref="T:System.Web.UI.Design.ControlDesigner" />
+
+            
 
             
 
@@ -372,6 +448,8 @@
           <para
             >Gets the name of a <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -402,8 +480,12 @@
 
             
 
+            
+
              property is read-only, each individual property that it contains can be set. For example, you can set the <see
              cref="P:System.Web.UI.WebControls.Style.ForeColor" />
+
+            
 
             
 
@@ -412,8 +494,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormatStyle" />
+
+            
 
             
 
@@ -428,8 +514,12 @@
 
             
 
+            
+
              object that is used by the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -457,13 +547,19 @@
 
             
 
+            
+
              method returns a string that contains the value of the <see
              cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -478,6 +574,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -489,8 +587,12 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          is used by the <see
          cref="T:System.ComponentModel.IBindingListView" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ListSortDescription" />
+
+            
 
             
 
@@ -130,6 +136,8 @@
           <para
             >Gets or sets the direction of the sort operation associated with this <see
              cref="T:System.ComponentModel.ListSortDescription" />
+
+            
 
             
 

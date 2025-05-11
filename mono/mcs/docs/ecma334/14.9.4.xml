@@ -3,7 +3,7 @@
   <paragraph
     >The predefined boolean equality operators are: <code_example
     >
-      <![CDATA[
+<![CDATA[
 bool operator ==(bool x, bool y);  
 bool operator !=(bool x, bool y);  
 ]]>
@@ -13,6 +13,8 @@ bool operator !=(bool x, bool y);
   <paragraph
     >The result of != is false if both x and y are true or if both x and y are false. Otherwise, the result is true. When the operands are of type <keyword
     >bool</keyword>
+
+    
 
     
 

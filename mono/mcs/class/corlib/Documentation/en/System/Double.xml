@@ -55,8 +55,12 @@
 
         
 
+        
+
          value type represents a double-precision 64-bit number with values ranging from negative 1.79769313486232e308 to positive 1.79769313486232e308, as well as positive or negative zero, <see
          cref="F:System.Double.PositiveInfinity" />
+
+        
 
         
 
@@ -65,13 +69,19 @@
 
         
 
+        
+
         , and not a number (<see
          cref="F:System.Double.NaN" />
 
         
 
+        
+
         ). It is intended to represent values that are extremely large (such as distances between planets or galaxies) or extremely small (the molecular mass of a substance in kilograms) and that often are imprecise (such as the distance from earth to another solar system), The <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -120,6 +130,8 @@
 
         
 
+        
+
          data type stores double-precision floating-point values in a 64-bit binary format, as shown in the following table: </para
       >
       <list type="table">
@@ -164,8 +176,12 @@
 
         
 
+        
+
         ), binary fractions are unable to represent some fractional values. For example, 1/10, which is represented precisely by .1 as a decimal fraction, is represented by .001100110011 as a binary fraction, with the pattern "0011" repeating to infinity. In this case, the floating-point value provides an imprecise representation of the number that it represents. Performing additional mathematical operations on the original floating-point value often tends to increase its lack of precision. For example, if we compare the result of multiplying .1 by 10 and adding .1 to .1 nine times, we see that addition, because it has involved eight more operations, has produced the less precise result. Note that this disparity is apparent only if we display the two <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -176,8 +192,12 @@
 
         
 
+        
+
         , which if necessary displays all 17 digits of precision supported by the <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -191,13 +211,19 @@
 
         
 
+        
+
          value has up to 15 decimal digits of precision, although a maximum of 17 digits is maintained internally. This means that some floating-point operations may lack the precision to change a floating point value. The following example provides an illustration. It defines a very large floating-point value, and then adds the product of <see
          cref="F:System.Double.Epsilon" />
 
         
 
+        
+
          and one quadrillion to it. The product, however, is too small to modify the original floating-point value. Its least significant digit is thousandths, whereas the most significant digit in the product is 1<superscript
         >-312</superscript>
+
+        
 
         
 
@@ -215,8 +241,12 @@
 
             
 
+            
+
              statement from {0} and {1} to {0:R} and {1:R} to display all significant digits of the two <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -225,8 +255,12 @@
 
             
 
+            
+
              method to round the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -241,8 +275,12 @@
 
             
 
+            
+
              rather than the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -251,13 +289,19 @@
 
             
 
+            
+
              or <see
              cref="T:System.UInt64" />
 
             
 
+            
+
              types is important, use the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -268,6 +312,8 @@
           <para
             >A value might not round-trip if a floating-point number is involved. A value is said to round-trip if an operation converts an original floating-point number to another form, an inverse operation transforms the converted form back to a floating-point number, and the final floating-point number is not equal to the original floating-point number. The roundtrip might fail because one or more least significant digits are lost or changed in a conversion. In the following example, three <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -282,8 +328,12 @@
 
             
 
+            
+
              to preserve the full precision of <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -297,8 +347,12 @@
 
             
 
+            
+
              values have less precision than <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -307,8 +361,12 @@
 
             
 
+            
+
              value that is converted to a seemingly equivalent <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -317,8 +375,12 @@
 
             
 
+            
+
              value because of differences in precision. In the following example, the result of identical division operations is assigned to a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -327,13 +389,19 @@
 
             
 
+            
+
              value. After the <see
              cref="T:System.Single" />
 
             
 
+            
+
              value is cast to a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -346,13 +414,19 @@
 
             
 
+            
+
              in place of the <see
              cref="T:System.Single" />
 
             
 
+            
+
              data type, or use the <see
              cref="M:System.Math.Round(System.Double)" />
+
+            
 
             
 
@@ -366,8 +440,12 @@
 
         
 
+        
+
          values may differ slightly by platform because of the loss of precision of the <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -376,13 +454,19 @@
 
         
 
+        
+
          value may differ in the 32-bit and 64-bit versions of the .NET Framework. The following example illustrates this difference when the literal value -4.42330604244772E-305 and a variable whose value is -4.42330604244772E-305 are assigned to a <see
          cref="T:System.Double" />
 
         
 
+        
+
          variable. Note that the result of the <see
          cref="M:System.Double.Parse(System.String)" />
+
+        
 
         
 
@@ -401,8 +485,12 @@
 
         
 
+        
+
          values must represent identical values. However, because of differences in precision between values, or because of a loss of precision by one or both values, floating-point values that are expected to be identical often turn out to be unequal because of differences in their least significant digits. As a result, calls to the <see
          cref="M:System.Double.Equals(System.Double)" />
+
+        
 
         
 
@@ -411,13 +499,19 @@
 
         
 
+        
+
          method to determine the relationship between two <see
          cref="T:System.Double" />
 
         
 
+        
+
          values, often yield unexpected results. This is evident in the following example, where two apparently equal <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -430,13 +524,19 @@
 
         
 
+        
+
          value is squared, and then the square root is calculated to restore the original value. A second <see
          cref="T:System.Double" />
 
         
 
+        
+
          is multiplied by 3.51 and squared before the square root of the result is divided by 3.51 to restore the original value. Although the two values appear to be identical, a call to the <see
          cref="M:System.Double.Equals(System.Double)" />
+
+        
 
         
 
@@ -449,8 +549,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Double.CompareTo(System.Double)" />
+
+        
 
         
 
@@ -464,12 +568,16 @@
 
             
 
+            
+
              method to ensure that both values have the same precision. The following example modifies a previous example to use this approach so that two fractional values are equivalent. </para
           >
           <para>code reference: System.Double.Structure#11</para>
           <para
             >Note, though, that the problem of precision still applies to rounding of midpoint values. For more information, see the <see
              cref="M:System.Math.Round(System.Double,System.Int32,System.MidpointRounding)" />
+
+            
 
             
 
@@ -484,8 +592,12 @@
 
               
 
+              
+
                is sometimes used as an absolute measure of the distance between two <see
                cref="T:System.Double" />
+
+              
 
               
 
@@ -494,8 +606,12 @@
 
               
 
+              
+
                measures the smallest possible value that can be added to, or subtracted from, a <see
                cref="T:System.Double" />
+
+              
 
               
 
@@ -504,8 +620,12 @@
 
               
 
+              
+
                values, the value of <see
                cref="F:System.Double.Epsilon" />
+
+              
 
               
 
@@ -515,6 +635,8 @@
           <para
             >The following example uses the latter approach to define an IsApproximatelyEqual method that tests the relative difference between two values. It also contrasts the result of calls to the IsApproximatelyEqual method and the <see
              cref="M:System.Double.Equals(System.Double)" />
+
+            
 
             
 
@@ -542,8 +664,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -552,8 +678,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Double.PositiveInfinity" />
+
+            
 
             
 
@@ -562,8 +692,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -575,8 +709,12 @@
 
             
 
+            
+
              also results from a division by zero with a positive dividend, and <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -590,8 +728,12 @@
 
             
 
+            
+
             . For example, <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -605,8 +747,12 @@
 
                 
 
+                
+
                  or <see
                  cref="F:System.Double.NegativeInfinity" />
+
+                
 
                 
 
@@ -622,13 +768,19 @@
 
             
 
+            
+
              method with a negative value returns <see
              cref="F:System.Double.NaN" />
 
             
 
+            
+
             , as does calling the <see
              cref="M:System.Math.Acos(System.Double)" />
+
+            
 
             
 
@@ -639,6 +791,8 @@
           <para
             >Any operation with an argument whose value is <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -658,6 +812,8 @@
 
         
 
+        
+
          structure and related types provide methods to perform operations in the following areas: </para
       >
       <list type="bullet">
@@ -668,13 +824,19 @@
 
             
 
+            
+
              method to determine whether two <see
              cref="T:System.Double" />
 
             
 
+            
+
              values are equal, or the <see
              cref="M:System.Double.CompareTo(System.Double)" />
+
+            
 
             
 
@@ -686,13 +848,19 @@
 
             
 
+            
+
              structure also supports a complete set of comparison operators. For example, you can test for equality or inequality, or determine whether one value is greater than or equal to another. If one of the operands is a numeric type other than a <see
              cref="T:System.Double" />
 
             
 
+            
+
             , it is converted to a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -705,6 +873,8 @@
 
               
 
+              
+
                values that you expect to be equal may turn out to be unequal, which affects the result of the comparison. See the <format
                type="text/html">
                 <a href="874bd404-f7a8-4147-ac57-2d2c5994e1ea#Equality">Testing for Equality</a>
@@ -712,8 +882,12 @@
 
               
 
+              
+
                section for more information about comparing two <see
                cref="T:System.Double" />
+
+              
 
               
 
@@ -726,8 +900,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Double.IsInfinity(System.Double)" />
+
+            
 
             
 
@@ -736,8 +914,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Double.IsNegativeInfinity(System.Double)" />
+
+            
 
             
 
@@ -751,8 +933,12 @@
 
             
 
+            
+
              methods. If one of the operands in a mathematical operation is a numeric type other than a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -761,8 +947,12 @@
 
             
 
+            
+
              before performing the operation. The result of the operation is also a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -774,8 +964,12 @@
 
             
 
+            
+
              class. It includes additional methods commonly used for arithmetic (such as <see
              cref="M:System.Math.Abs(System.Double)" />
+
+            
 
             
 
@@ -784,8 +978,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Math.Sqrt(System.Double)" />
+
+            
 
             
 
@@ -794,13 +992,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Math.Sin(System.Double)" />
 
             
 
+            
+
             ), and calculus (such as <see
              cref="M:System.Math.Log(System.Double)" />
+
+            
 
             
 
@@ -812,8 +1016,12 @@
 
             
 
+            
+
              value. The <see
              cref="M:System.BitConverter.DoubleToInt64Bits(System.Double)" />
+
+            
 
             
 
@@ -822,8 +1030,12 @@
 
             
 
+            
+
              value's bit pattern in a 64-bit integer. The <see
              cref="M:System.BitConverter.GetBytes(System.Double)" />
+
+            
 
             
 
@@ -837,8 +1049,12 @@
 
             
 
+            
+
              value by calling the <see
              cref="M:System.Math.Round(System.Double)" />
+
+            
 
             
 
@@ -852,8 +1068,12 @@
 
             
 
+            
+
              value to its string representation by calling the <see
              cref="M:System.Double.ToString" />
+
+            
 
             
 
@@ -864,10 +1084,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
             </format>
+
+            
 
             
 
@@ -881,8 +1105,12 @@
 
             
 
+            
+
              value by calling either the <see
              cref="M:System.Double.Parse(System.String)" />
+
+            
 
             
 
@@ -891,13 +1119,19 @@
 
             
 
+            
+
              method. If the parse operation fails, the <see
              cref="M:System.Double.Parse(System.String)" />
 
             
 
+            
+
              method throws an exception, whereas the <see
              cref="M:System.Double.TryParse(System.String,System.Double@)" />
+
+            
 
             
 
@@ -911,8 +1145,12 @@
 
             
 
+            
+
              structure provides an explicit interface implementation for the <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -921,8 +1159,12 @@
 
             
 
+            
+
              values. Conversion of a value of any standard numeric type to a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -934,8 +1176,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -1001,13 +1247,19 @@
 
             
 
+            
+
              values that are converted to <see
              cref="T:System.Double" />
 
             
 
+            
+
              values. In the following example, two values produced by identical division operations are unequal because one of the values is a a single-precision floating point value converted to a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1050,6 +1302,8 @@
 
             
 
+            
+
              method at times may seem surprising. For example, multiplication by a particular value followed by division by the same value should produce the original value. In the following example, however, the computed value turns out to be greater than the original value. Showing all significant digits of the two values by using the "R" <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format string</a>
@@ -1057,8 +1311,12 @@
 
             
 
+            
+
              indicates that the computed value differs from the original value in its least significant digits. For information on handling such comparisons, see the Remarks section of the <see
              cref="M:System.Double.Equals(System.Double)" />
+
+            
 
             
 
@@ -1071,13 +1329,19 @@
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.Double.CompareTo(System.Object)" />
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -1089,13 +1353,19 @@
 
             
 
+            
+
              is not considered equal to another object whose value is <see
              cref="F:System.Double.NaN" />
 
             
 
+            
+
              (even itself), the <see
              cref="T:System.IComparable`1" />
+
+            
 
             
 
@@ -1110,6 +1380,8 @@
 
             
 
+            
+
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
@@ -1118,8 +1390,12 @@
 
             
 
+            
+
              and the parameter type is <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1128,8 +1404,12 @@
 
             
 
+            
+
              object, then generates a <see
              cref="M:System.Double.CompareTo(System.Double)" />
+
+            
 
             
 
@@ -1140,6 +1420,8 @@
              type="text/html">
               <a href="0ea65c59-85eb-4a52-94ca-c36d3bd13058">Type Conversion Tables</a>
             </format>
+
+            
 
             
 
@@ -1159,6 +1441,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -1186,6 +1470,8 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
@@ -1195,8 +1481,12 @@
 
                   
 
+                  
+
                   ) and <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1215,6 +1505,8 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
@@ -1224,8 +1516,12 @@
 
                   
 
+                  
+
                    are not a number (<see
                    cref="F:System.Double.NaN" />
+
+                  
 
                   
 
@@ -1234,8 +1530,12 @@
 
                   
 
+                  
+
                   , or <see
                    cref="F:System.Double.NegativeInfinity" />
+
+                  
 
                   
 
@@ -1254,6 +1554,8 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
@@ -1263,8 +1565,12 @@
 
                   
 
+                  
+
                    is not a number (<see
                    cref="F:System.Double.NaN" />
+
+                  
 
                   
 
@@ -1276,6 +1582,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1311,8 +1619,12 @@
 
           
 
+          
+
           is not a null reference and is not of type <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -1326,8 +1638,12 @@
 
             
 
+            
+
              parameter must be null or an instance of Double; otherwise, an exception is thrown. Any instance of <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1339,6 +1655,8 @@
 
             
 
+            
+
              method at times may seem surprising. For example, multiplication by a particular value followed by division by the same value should produce the original value. In the following example, however, the computed value turns out to be greater than the original value. Showing all significant digits of the two values by using the "R" <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format string</a>
@@ -1346,8 +1664,12 @@
 
             
 
+            
+
              indicates that the computed value differs from the original value in its least significant digits. For information on handling such comparisons, see the Remarks section of the <see
              cref="M:System.Double.Equals(System.Double)" />
+
+            
 
             
 
@@ -1360,8 +1682,12 @@
 
             
 
+            
+
              interface. Note that, although a <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -1370,8 +1696,12 @@
 
             
 
+            
+
              (even itself), the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1391,6 +1721,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -1418,6 +1750,8 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
@@ -1427,8 +1761,12 @@
 
                   
 
+                  
+
                   ) and <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1447,6 +1785,8 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
@@ -1456,8 +1796,12 @@
 
                   
 
+                  
+
                    are both Double.NaN, <see
                    cref="F:System.Double.PositiveInfinity" />
+
+                  
 
                   
 
@@ -1477,6 +1821,8 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
@@ -1486,8 +1832,12 @@
 
                   
 
+                  
+
                    is not a number (<see
                    cref="F:System.Double.NaN" />
+
+                  
 
                   
 
@@ -1499,6 +1849,8 @@
 
                   
 
+                  
+
                    is null. </para
                 >
               </description>
@@ -1507,6 +1859,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1545,8 +1899,12 @@
 
             
 
+            
+
              property reflects the smallest positive <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1555,13 +1913,19 @@
 
             
 
+            
+
              instance is zero. For example, the following code shows that zero and <see
              cref="F:System.Double.Epsilon" />
 
             
 
+            
+
              are considered to be unequal values, whereas zero and half the value of <see
              cref="F:System.Double.Epsilon" />
+
+            
 
             
 
@@ -1574,8 +1938,12 @@
 
             
 
+            
+
              has an exponent of -1022 and a mantissa of 1. This means that <see
              cref="F:System.Double.Epsilon" />
+
+            
 
             
 
@@ -1584,8 +1952,12 @@
 
             
 
+            
+
              value greater than zero and represents the smallest possible value and the smallest possible increment for a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1598,13 +1970,19 @@
 
             
 
+            
+
              property is not a general measure of precision of the <see
              cref="T:System.Double" />
 
             
 
+            
+
              type; it applies only to <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1614,6 +1992,8 @@
             <para
               >The value of the <see
                cref="F:System.Double.Epsilon" />
+
+              
 
               
 
@@ -1627,8 +2007,12 @@
 
             
 
+            
+
              constant to establish the acceptable absolute margin of difference for the two values to be considered equal.  (Typically, that margin of difference is many times greater than <see
              cref="F:System.Double.Epsilon" />
+
+            
 
             
 
@@ -1637,8 +2021,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Double.Equals(System.Double)" />
+
+            
 
             
 
@@ -1653,6 +2041,8 @@
 
             
 
+            
+
              constant is too small to be detected, so it equates to zero. You can define an alternative epsilon value that equals 2.2250738585072014E-308 instead. </para
           >
         </remarks>
@@ -1661,6 +2051,8 @@
           <para
             >Represents the smallest positive <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1697,13 +2089,19 @@
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.Double.Equals(System.Object)" />
 
             
 
+            
+
              because it does not have to convert the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1718,6 +2116,8 @@
 
             
 
+            
+
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
@@ -1726,8 +2126,12 @@
 
             
 
+            
+
              and the parameter type is <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1736,8 +2140,12 @@
 
             
 
+            
+
              object, then generates a <see
              cref="M:System.Double.Equals(System.Double)" />
+
+            
 
             
 
@@ -1748,6 +2156,8 @@
              type="text/html">
               <a href="0ea65c59-85eb-4a52-94ca-c36d3bd13058">Type Conversion Tables</a>
             </format>
+
+            
 
             
 
@@ -1762,13 +2172,19 @@
 
             
 
+            
+
              method should be used with caution, because two apparently equivalent values can be unequal due to the differing precision of the two values. The following example reports that the <see
              cref="T:System.Double" />
 
             
 
+            
+
              value .333333 and the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1778,6 +2194,8 @@
           <para
             >Rather than comparing for equality, one technique involves defining an acceptable relative margin of difference between two values (such as .001% of one of the values). If the absolute value of the difference between the two values is less than or equal to that margin, the difference is likely to be due to differences in precision and, therefore, the values are likely to be equal. The following example uses this technique to compare .33333 and 1/3, the two <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1791,8 +2209,12 @@
 
               
 
+              
+
                defines the minimum expression of a positive value whose range is near zero, the margin of difference between two similar values must be greater than <see
                cref="F:System.Double.Epsilon" />
+
+              
 
               
 
@@ -1801,13 +2223,19 @@
 
               
 
+              
+
               . Because of this, we recommend that you do not use <see
                cref="F:System.Double.Epsilon" />
 
               
 
+              
+
                when comparing <see
                cref="T:System.Double" />
+
+              
 
               
 
@@ -1820,8 +2248,12 @@
 
             
 
+            
+
              values. A second alternative takes advantage of a design feature of the floating-point format: The difference between the integer representation of two floating-point values indicates the number of possible floating-point values that separates them. For example, the difference between 0.0 and <see
              cref="F:System.Double.Epsilon" />
+
+            
 
             
 
@@ -1830,8 +2262,12 @@
 
             
 
+            
+
              is the smallest representable value when working with a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1840,13 +2276,19 @@
 
             
 
+            
+
              values that the previous code example with the <see
              cref="M:System.Double.Equals(System.Double)" />
 
             
 
+            
+
              method found to be unequal. Note that the example uses the <see
              cref="M:System.BitConverter.DoubleToInt64Bits(System.Double)" />
+
+            
 
             
 
@@ -1860,8 +2302,12 @@
 
             
 
+            
+
              values are tested for equality by calling the <see
              cref="M:System.Double.Equals(System.Double)" />
+
+            
 
             
 
@@ -1870,13 +2316,19 @@
 
             
 
+            
+
              values are tested for equality by using the equality operator, the operator returns false. When you want to determine whether the value of a <see
              cref="T:System.Double" />
 
             
 
+            
+
              is not a number (NaN), an alternative is to call the <see
              cref="M:System.Double.IsNaN(System.Double)" />
+
+            
 
             
 
@@ -1891,6 +2343,8 @@
 
             
 
+            
+
              object represent the same value.</para
           >
         </summary>
@@ -1902,6 +2356,8 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
@@ -1910,8 +2366,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -1950,13 +2410,19 @@
 
             
 
+            
+
              method should be used with caution, because two apparently equivalent values can be unequal due to the differing precision of the two values. The following example reports that the <see
              cref="T:System.Double" />
 
             
 
+            
+
              value .3333 and the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -1969,8 +2435,12 @@
 
             
 
+            
+
              method, see the documentation for the <see
              cref="M:System.Double.Equals(System.Double)" />
+
+            
 
             
 
@@ -1983,13 +2453,19 @@
 
               
 
+              
+
                defines the minimum expression of a positive value whose range is near zero, the margin of difference between two similar values must be greater than <see
                cref="F:System.Double.Epsilon" />
 
               
 
+              
+
               . Typically, it is many times greater than <see
                cref="F:System.Double.Epsilon" />
+
+              
 
               
 
@@ -2003,8 +2479,12 @@
 
             
 
+            
+
              values are tested for equality by calling the <see
              cref="M:System.Double.Equals(System.Double)" />
+
+            
 
             
 
@@ -2013,13 +2493,19 @@
 
             
 
+            
+
              values are tested for equality by using the equality operator, the operator returns false. When you want to determine whether the value of a <see
              cref="T:System.Double" />
 
             
 
+            
+
              is not a number (NaN), an alternative is to call the <see
              cref="M:System.Double.IsNaN(System.Double)" />
+
+            
 
             
 
@@ -2038,8 +2524,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2048,6 +2538,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2082,11 +2574,12 @@
  The algorithm used to generate the hash code is
  unspecified.</para>
           <para>
-            <block subset="none" type="note"
-              >
+            <block subset="none" type="note">
  
 This method overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -2132,8 +2625,12 @@ This method overrides <see
 
             
 
+            
+
              for value type <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2145,6 +2642,8 @@ This method overrides <see
           <para
             >The enumerated constant, <see
              cref="F:System.TypeCode.Double" />
+
+            
 
             
 
@@ -2184,8 +2683,12 @@ This method overrides <see
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -2204,8 +2707,12 @@ This method overrides <see
 
             
 
+            
+
              evaluates to <see
              cref="F:System.Double.PositiveInfinity" />
+
+            
 
             
 
@@ -2214,11 +2721,15 @@ This method overrides <see
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2263,8 +2774,12 @@ This method overrides <see
 
             
 
+            
+
              to signal that that result of the operation is undefined. For example, dividing 0.0 by 0.0 results in <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -2276,8 +2791,12 @@ This method overrides <see
 
               
 
+              
+
                returns false if a <see
                cref="T:System.Double" />
+
+              
 
               
 
@@ -2286,8 +2805,12 @@ This method overrides <see
 
               
 
+              
+
                or <see
                cref="F:System.Double.NegativeInfinity" />
+
+              
 
               
 
@@ -2296,13 +2819,19 @@ This method overrides <see
 
               
 
+              
+
               , <see
                cref="M:System.Double.IsPositiveInfinity(System.Double)" />
 
               
 
+              
+
               , and <see
                cref="M:System.Double.IsNegativeInfinity(System.Double)" />
+
+              
 
               
 
@@ -2318,6 +2847,8 @@ This method overrides <see
 
             
 
+            
+
             ).</para
           >
         </summary>
@@ -2329,8 +2860,12 @@ This method overrides <see
 
             
 
+            
+
              evaluates to <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -2339,6 +2874,8 @@ This method overrides <see
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2378,6 +2915,8 @@ This method overrides <see
 
             
 
+            
+
              to signal an overflow condition.</para
           >
         </remarks>
@@ -2393,8 +2932,12 @@ This method overrides <see
 
             
 
+            
+
              evaluates to <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -2403,6 +2946,8 @@ This method overrides <see
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2442,6 +2987,8 @@ This method overrides <see
 
             
 
+            
+
              to signal an overflow condition.</para
           >
         </remarks>
@@ -2457,8 +3004,12 @@ This method overrides <see
 
             
 
+            
+
              evaluates to <see
              cref="F:System.Double.PositiveInfinity" />
+
+            
 
             
 
@@ -2467,6 +3018,8 @@ This method overrides <see
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2509,8 +3062,12 @@ This method overrides <see
 
             
 
+            
+
              is <see
              cref="F:System.Double.PositiveInfinity" />
+
+            
 
             
 
@@ -2519,8 +3076,12 @@ This method overrides <see
 
             
 
+            
+
              results from addition, multiplication, and exponentiation operations when the result exceeds <see
              cref="F:System.Double.MaxValue" />
+
+            
 
             
 
@@ -2533,6 +3094,8 @@ This method overrides <see
           <para
             >Represents the largest possible value of a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2576,8 +3139,12 @@ This method overrides <see
 
             
 
+            
+
               is <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -2586,8 +3153,12 @@ This method overrides <see
 
             
 
+            
+
              results from subtraction and multiplication operations when the result is less than <see
              cref="F:System.Double.MinValue" />
+
+            
 
             
 
@@ -2600,6 +3171,8 @@ This method overrides <see
           <para
             >Represents the smallest possible value of a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2639,8 +3212,12 @@ This method overrides <see
 
             
 
+            
+
              when the result of an operation is undefined. For example, the result of dividing zero by zero is <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -2649,8 +3226,12 @@ This method overrides <see
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -2663,13 +3244,19 @@ This method overrides <see
 
             
 
+            
+
              value or an operation on a <see
              cref="F:System.Double.NaN" />
 
             
 
+            
+
              value returns <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -2682,8 +3269,12 @@ This method overrides <see
 
             
 
+            
+
              method to determine whether a value is not a number. Two <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -2729,11 +3320,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
           <para
             >Use <see
              cref="M:System.Double.IsNegativeInfinity(System.Double)" />
+
+            
 
             
 
@@ -2776,8 +3371,12 @@ This method overrides <see
 
             
 
+            
+
              method defines the equality operator for <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2789,8 +3388,12 @@ This method overrides <see
 
             
 
+            
+
              values are tested for equality by using the equality operator, the result is false; two <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -2799,13 +3402,19 @@ This method overrides <see
 
             
 
+            
+
              method, the result is true.  When you want to determine whether the value of a <see
              cref="T:System.Double" />
 
             
 
+            
+
              is not a number (NaN), an alternative is to call the <see
              cref="M:System.Double.IsNaN(System.Double)" />
+
+            
 
             
 
@@ -2820,6 +3429,8 @@ This method overrides <see
 
             
 
+            
+
              values are equal.</para
           >
         </summary>
@@ -2831,8 +3442,12 @@ This method overrides <see
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -2844,10 +3459,14 @@ This method overrides <see
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2884,8 +3503,12 @@ This method overrides <see
 
             
 
+            
+
              method defines the operation of the greater-than operator for <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2900,8 +3523,12 @@ This method overrides <see
 
             
 
+            
+
              value is greater than another specified <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2916,8 +3543,12 @@ This method overrides <see
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -2929,10 +3560,14 @@ This method overrides <see
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2969,8 +3604,12 @@ This method overrides <see
 
             
 
+            
+
              method defines the operation of the greater-than-or-equal operator for <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2985,8 +3624,12 @@ This method overrides <see
 
             
 
+            
+
              value is greater than or equal to another specified <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3001,8 +3644,12 @@ This method overrides <see
 
             
 
+            
+
              is greater than or equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -3014,10 +3661,14 @@ This method overrides <see
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3054,8 +3705,12 @@ This method overrides <see
 
             
 
+            
+
              method defines the inequality operator for <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3070,6 +3725,8 @@ This method overrides <see
 
             
 
+            
+
              values are not equal.</para
           >
         </summary>
@@ -3081,8 +3738,12 @@ This method overrides <see
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -3094,10 +3755,14 @@ This method overrides <see
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3134,8 +3799,12 @@ This method overrides <see
 
             
 
+            
+
              method defines the operation of the less-than operator for <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3150,8 +3819,12 @@ This method overrides <see
 
             
 
+            
+
              value is less than another specified <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3166,8 +3839,12 @@ This method overrides <see
 
             
 
+            
+
              is less than <paramref
              name="right" />
+
+            
 
             
 
@@ -3179,10 +3856,14 @@ This method overrides <see
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3219,8 +3900,12 @@ This method overrides <see
 
             
 
+            
+
              method defines the operation of the less-than-or-equal operator for <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3235,8 +3920,12 @@ This method overrides <see
 
             
 
+            
+
              value is less than or equal to another specified <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3251,8 +3940,12 @@ This method overrides <see
 
             
 
+            
+
              is less than or equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -3264,10 +3957,14 @@ This method overrides <see
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3303,10 +4000,14 @@ This method overrides <see
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -3317,13 +4018,19 @@ This method overrides <see
 
           
 
+          
+
            represents a value that is less than <see
            cref="F:System.Double.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Double.MaxValue" />
+
+          
 
           
 
@@ -3337,8 +4044,12 @@ This method overrides <see
 
             
 
+            
+
              parameter can contain the current culture's <see
              cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />
+
+            
 
             
 
@@ -3347,8 +4058,12 @@ This method overrides <see
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />
+
+            
 
             
 
@@ -3438,8 +4153,12 @@ This method overrides <see
 
             
 
+            
+
              parameter is interpreted using a combination of the <see
              cref="F:System.Globalization.NumberStyles.Float" />
+
+            
 
             
 
@@ -3448,8 +4167,12 @@ This method overrides <see
 
             
 
+            
+
              flags. This means that white space and thousands separators are allowed, for example, while currency symbols are not. For finer control over which style elements are permitted in <paramref
              name="s" />
+
+            
 
             
 
@@ -3458,8 +4181,12 @@ This method overrides <see
 
             
 
+            
+
              or the <see
              cref="M:System.Double.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -3471,8 +4198,12 @@ This method overrides <see
 
             
 
+            
+
              parameter is interpreted using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -3481,13 +4212,19 @@ This method overrides <see
 
             
 
+            
+
             . To parse a string using the formatting information of some other culture, call the <see
              cref="M:System.Double.Parse(System.String,System.IFormatProvider)" />
 
             
 
+            
+
              or <see
              cref="M:System.Double.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -3499,8 +4236,12 @@ This method overrides <see
 
             
 
+            
+
              method a string that is created by calling the <see
              cref="Overload:System.Double.ToString" />
+
+            
 
             
 
@@ -3509,8 +4250,12 @@ This method overrides <see
 
             
 
+            
+
              value is returned. However, because of a loss of precision, the values may not be equal. In addition, attempting to parse the string representation of either <see
              cref="F:System.Double.MinValue" />
+
+            
 
             
 
@@ -3519,8 +4264,12 @@ This method overrides <see
 
             
 
+            
+
              throws an <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -3533,8 +4282,12 @@ This method overrides <see
 
             
 
+            
+
              parameter during a parse operation, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+
+            
 
             
 
@@ -3543,13 +4296,19 @@ This method overrides <see
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+
+            
 
             
 
@@ -3568,11 +4327,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3613,10 +4376,14 @@ This method overrides <see
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -3627,13 +4394,19 @@ This method overrides <see
 
           
 
+          
+
            represents a value that is less than <see
            cref="F:System.Double.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Double.MaxValue" />
+
+          
 
           
 
@@ -3647,8 +4420,12 @@ This method overrides <see
 
             
 
+            
+
              parameter defines the style elements (such as white space, thousands separators, and currency symbols) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -3657,8 +4434,12 @@ This method overrides <see
 
             
 
+            
+
              enumeration. The following <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -3682,8 +4463,12 @@ This method overrides <see
 
             
 
+            
+
              parameter can contain the current culture's <see
              cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />
+
+            
 
             
 
@@ -3692,13 +4477,19 @@ This method overrides <see
 
             
 
+            
+
             , or <see
              cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />
 
             
 
+            
+
             . Depending on the value of <paramref
              name="style" />
+
+            
 
             
 
@@ -3728,8 +4519,12 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -3738,8 +4533,12 @@ This method overrides <see
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -3748,8 +4547,12 @@ This method overrides <see
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -3768,8 +4571,12 @@ This method overrides <see
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+
+                  
 
                   
 
@@ -3778,13 +4585,19 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -3803,8 +4616,12 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -3813,8 +4630,12 @@ This method overrides <see
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -3823,8 +4644,12 @@ This method overrides <see
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -3833,13 +4658,19 @@ This method overrides <see
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -3866,13 +4697,19 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -3891,13 +4728,19 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -3916,13 +4759,19 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -3941,13 +4790,19 @@ This method overrides <see
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -3970,8 +4825,12 @@ This method overrides <see
 
             
 
+            
+
              style) always parses successfully. The remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -3980,8 +4839,12 @@ This method overrides <see
 
             
 
+            
+
              flags affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -3997,6 +4860,8 @@ This method overrides <see
                   <para
                     >Elements permitted in <paramref
                      name="s" />
+
+                    
 
                     
 
@@ -4048,6 +4913,8 @@ This method overrides <see
 
                   
 
+                  
+
                   .  </para
                 >
               </description>
@@ -4062,6 +4929,8 @@ This method overrides <see
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -4082,6 +4951,8 @@ This method overrides <see
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -4096,6 +4967,8 @@ This method overrides <see
                 <para
                   >The sign element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -4146,6 +5019,8 @@ This method overrides <see
 
                   
 
+                  
+
                    cannot represent a hexadecimal number or a number in exponential notation.</para
                 >
               </description>
@@ -4163,13 +5038,19 @@ This method overrides <see
 
                   
 
+                  
+
                   , sign at the beginning of <paramref
                    name="s" />
 
                   
 
+                  
+
                   , and the decimal point (.) symbol. The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -4190,8 +5071,12 @@ This method overrides <see
 
                   
 
+                  
+
                   , <paramref
                    name="sign" />
+
+                  
 
                   
 
@@ -4212,6 +5097,8 @@ This method overrides <see
 
                   
 
+                  
+
                    cannot represent a hexadecimal number.</para
                 >
               </description>
@@ -4223,13 +5110,19 @@ This method overrides <see
 
             
 
+            
+
              parameter is parsed using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
+            
+
              object that is initialized for the current system culture. For more information, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
+
+            
 
             
 
@@ -4241,8 +5134,12 @@ This method overrides <see
 
             
 
+            
+
              method a string that is created by calling the <see
              cref="Overload:System.Double.ToString" />
+
+            
 
             
 
@@ -4251,8 +5148,12 @@ This method overrides <see
 
             
 
+            
+
              value is returned. However, because of a loss of precision, the values may not be equal. In addition, attempting to parse the string representation of either <see
              cref="F:System.Double.MinValue" />
+
+            
 
             
 
@@ -4261,8 +5162,12 @@ This method overrides <see
 
             
 
+            
+
              throws an <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -4275,8 +5180,12 @@ This method overrides <see
 
             
 
+            
+
              parameter during a parse operation, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+
+            
 
             
 
@@ -4285,13 +5194,19 @@ This method overrides <see
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+
+            
 
             
 
@@ -4310,11 +5225,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4325,8 +5244,12 @@ This method overrides <see
 
           
 
+          
+
           A bitwise combination of enumeration values that indicate the style elements that can be present in <paramref
            name="s" />
+
+          
 
           
 
@@ -4335,8 +5258,12 @@ This method overrides <see
 
           
 
+          
+
            combined with <see
            cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+          
 
           
 
@@ -4377,10 +5304,14 @@ This method overrides <see
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -4391,13 +5322,19 @@ This method overrides <see
 
           
 
+          
+
            represents a value that is less than <see
            cref="F:System.Double.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Double.MaxValue" />
+
+          
 
           
 
@@ -4411,8 +5348,12 @@ This method overrides <see
 
             
 
+            
+
              method is typically used to convert text that can be formatted in a variety of ways to a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -4424,8 +5365,12 @@ This method overrides <see
 
             
 
+            
+
              parameter is interpreted using a combination of the <see
              cref="F:System.Globalization.NumberStyles.Float" />
+
+            
 
             
 
@@ -4434,8 +5379,12 @@ This method overrides <see
 
             
 
+            
+
              flags. The <paramref
              name="s" />
+
+            
 
             
 
@@ -4444,8 +5393,12 @@ This method overrides <see
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />
+
+            
 
             
 
@@ -4454,8 +5407,12 @@ This method overrides <see
 
             
 
+            
+
              for the culture specified by <paramref
              name="provider" />
+
+            
 
             
 
@@ -4541,6 +5498,8 @@ This method overrides <see
 
             
 
+            
+
              topic.</para
           >
           <para
@@ -4549,8 +5508,12 @@ This method overrides <see
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4559,8 +5522,12 @@ This method overrides <see
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4569,8 +5536,12 @@ This method overrides <see
 
             
 
+            
+
             . Typically, it is a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4579,13 +5550,19 @@ This method overrides <see
 
             
 
+            
+
              object. If <paramref
              name="provider" />
 
             
 
+            
+
              is null or a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4597,8 +5574,12 @@ This method overrides <see
 
             
 
+            
+
              method a string that is created by calling the <see
              cref="Overload:System.Double.ToString" />
+
+            
 
             
 
@@ -4607,8 +5588,12 @@ This method overrides <see
 
             
 
+            
+
              value is returned. However, because of a loss of precision, the values may not be equal. In addition, attempting to parse the string representation of either <see
              cref="F:System.Double.MinValue" />
+
+            
 
             
 
@@ -4617,8 +5602,12 @@ This method overrides <see
 
             
 
+            
+
              throws an <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -4631,8 +5620,12 @@ This method overrides <see
 
             
 
+            
+
              parameter during a parse operation, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+
+            
 
             
 
@@ -4641,13 +5634,19 @@ This method overrides <see
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+
+            
 
             
 
@@ -4666,11 +5665,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4681,8 +5684,12 @@ This method overrides <see
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -4724,10 +5731,14 @@ This method overrides <see
 
           
 
+          
+
            is a null reference</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -4738,13 +5749,19 @@ This method overrides <see
 
           
 
+          
+
            represents a value that is less than <see
            cref="F:System.Double.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Double.MaxValue" />
+
+          
 
           
 
@@ -4758,8 +5775,12 @@ This method overrides <see
 
             
 
+            
+
              parameter defines the style elements (such as white space, thousands separators, and currency symbols) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -4768,8 +5789,12 @@ This method overrides <see
 
             
 
+            
+
              enumeration. The following <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -4793,8 +5818,12 @@ This method overrides <see
 
             
 
+            
+
              parameter can contain <see
              cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />
+
+            
 
             
 
@@ -4803,8 +5832,12 @@ This method overrides <see
 
             
 
+            
+
             , or <see
              cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />
+
+            
 
             
 
@@ -4813,8 +5846,12 @@ This method overrides <see
 
             
 
+            
+
             . Depending on the value of <paramref
              name="style" />
+
+            
 
             
 
@@ -4844,8 +5881,12 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -4854,8 +5895,12 @@ This method overrides <see
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -4864,8 +5909,12 @@ This method overrides <see
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -4884,8 +5933,12 @@ This method overrides <see
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+
+                  
 
                   
 
@@ -4894,13 +5947,19 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -4919,8 +5978,12 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -4929,8 +5992,12 @@ This method overrides <see
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -4939,8 +6006,12 @@ This method overrides <see
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -4949,13 +6020,19 @@ This method overrides <see
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -4982,13 +6059,19 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -5007,13 +6090,19 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -5032,13 +6121,19 @@ This method overrides <see
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -5057,13 +6152,19 @@ This method overrides <see
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -5086,8 +6187,12 @@ This method overrides <see
 
             
 
+            
+
              style) always parses successfully. The remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -5096,8 +6201,12 @@ This method overrides <see
 
             
 
+            
+
              flags affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -5113,6 +6222,8 @@ This method overrides <see
                   <para
                     >Elements permitted in <paramref
                      name="s" />
+
+                    
 
                     
 
@@ -5164,6 +6275,8 @@ This method overrides <see
 
                   
 
+                  
+
                   .  </para
                 >
               </description>
@@ -5178,6 +6291,8 @@ This method overrides <see
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -5198,6 +6313,8 @@ This method overrides <see
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -5212,6 +6329,8 @@ This method overrides <see
                 <para
                   >The sign element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -5262,6 +6381,8 @@ This method overrides <see
 
                   
 
+                  
+
                    cannot represent a hexadecimal number or a number in exponential notation.</para
                 >
               </description>
@@ -5279,13 +6400,19 @@ This method overrides <see
 
                   
 
+                  
+
                   , sign at the beginning of <paramref
                    name="s" />
 
                   
 
+                  
+
                   , and the decimal point (.) symbol. The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -5306,8 +6433,12 @@ This method overrides <see
 
                   
 
+                  
+
                   , <paramref
                    name="sign" />
+
+                  
 
                   
 
@@ -5328,6 +6459,8 @@ This method overrides <see
 
                   
 
+                  
+
                    cannot represent a hexadecimal number.</para
                 >
               </description>
@@ -5339,8 +6472,12 @@ This method overrides <see
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -5349,8 +6486,12 @@ This method overrides <see
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -5359,8 +6500,12 @@ This method overrides <see
 
             
 
+            
+
             . Typically, it is a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -5369,13 +6514,19 @@ This method overrides <see
 
             
 
+            
+
              object. If <paramref
              name="provider" />
 
             
 
+            
+
              is null or a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -5387,8 +6538,12 @@ This method overrides <see
 
             
 
+            
+
              method a string that is created by calling the <see
              cref="Overload:System.Double.ToString" />
+
+            
 
             
 
@@ -5397,8 +6552,12 @@ This method overrides <see
 
             
 
+            
+
              value is returned. However, because of a loss of precision, the values may not be equal. In addition, attempting to parse the string representation of either <see
              cref="F:System.Double.MinValue" />
+
+            
 
             
 
@@ -5407,8 +6566,12 @@ This method overrides <see
 
             
 
+            
+
              throws an <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -5421,8 +6584,12 @@ This method overrides <see
 
             
 
+            
+
              parameter during a parse operation, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+
+            
 
             
 
@@ -5431,13 +6598,19 @@ This method overrides <see
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+
+            
 
             
 
@@ -5456,11 +6629,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5471,8 +6648,12 @@ This method overrides <see
 
           
 
+          
+
           A bitwise combination of enumeration values that indicate the style elements that can be present in <paramref
            name="s" />
+
+          
 
           
 
@@ -5481,8 +6662,12 @@ This method overrides <see
 
           
 
+          
+
            combined with <see
            cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+          
 
           
 
@@ -5493,8 +6678,12 @@ This method overrides <see
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -5534,11 +6723,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
           <para
             >Use <see
              cref="M:System.Double.IsPositiveInfinity(System.Double)" />
+
+            
 
             
 
@@ -5582,13 +6775,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToBoolean(System.Double)" />
+
+            
 
             
 
@@ -5603,6 +6802,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -5612,6 +6813,8 @@ This method overrides <see
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5646,13 +6849,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToByte(System.Double)" />
+
+            
 
             
 
@@ -5667,6 +6876,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -5678,11 +6889,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5718,6 +6933,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -5727,6 +6944,8 @@ This method overrides <see
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5773,6 +6992,8 @@ This method overrides <see
 
           
 
+          
+
           This parameter is ignored.</param
         >
       </Docs>
@@ -5807,13 +7028,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDecimal(System.Double)" />
+
+            
 
             
 
@@ -5828,6 +7055,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -5839,11 +7068,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5881,8 +7114,12 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -5897,6 +7134,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -5906,6 +7145,8 @@ This method overrides <see
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5943,13 +7184,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt16(System.Double)" />
+
+            
 
             
 
@@ -5964,6 +7211,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -5975,11 +7224,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6014,13 +7267,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt32(System.Double)" />
+
+            
 
             
 
@@ -6035,6 +7294,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -6046,11 +7307,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6088,13 +7353,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt64(System.Double)" />
+
+            
 
             
 
@@ -6109,6 +7380,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -6120,11 +7393,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6162,13 +7439,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSByte(System.Double)" />
+
+            
 
             
 
@@ -6183,6 +7466,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -6194,11 +7479,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6236,13 +7525,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSingle(System.Double)" />
+
+            
 
             
 
@@ -6257,6 +7552,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -6268,11 +7565,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6312,13 +7613,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the static (Shared in Visual Basic) <see
              cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -6333,6 +7640,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -6344,6 +7653,8 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -6352,8 +7663,12 @@ This method overrides <see
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -6391,13 +7706,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt16(System.Double)" />
+
+            
 
             
 
@@ -6412,6 +7733,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -6423,11 +7746,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6465,13 +7792,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt32(System.Double)" />
+
+            
 
             
 
@@ -6486,6 +7819,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -6497,11 +7832,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6539,13 +7878,19 @@ This method overrides <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt64(System.Double)" />
+
+            
 
             
 
@@ -6560,6 +7905,8 @@ This method overrides <see
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -6571,11 +7918,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6612,13 +7963,19 @@ This method overrides <see
 
             
 
+            
+
              method formats a <see
              cref="T:System.Double" />
 
             
 
+            
+
              value in the default ("G", or general) format of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.Double.ToString(System.String)" />
+
+            
 
             
 
@@ -6685,13 +8042,19 @@ This method overrides <see
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />
+
+            
 
             
 
@@ -6771,10 +8134,14 @@ This method overrides <see
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6787,6 +8154,8 @@ This method overrides <see
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -6837,13 +8206,19 @@ This method overrides <see
 
             
 
+            
+
              method formats a <see
              cref="T:System.Double" />
 
             
 
+            
+
              value in the default ("G", or general) format of a specified culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.Double.ToString(System.String)" />
+
+            
 
             
 
@@ -6909,13 +8284,19 @@ This method overrides <see
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />
+
+            
 
             
 
@@ -6996,10 +8377,14 @@ This method overrides <see
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -7015,6 +8400,8 @@ This method overrides <see
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -7025,8 +8412,12 @@ This method overrides <see
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -7035,8 +8426,12 @@ This method overrides <see
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -7045,8 +8440,12 @@ This method overrides <see
 
             
 
+            
+
              is a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -7055,8 +8454,12 @@ This method overrides <see
 
             
 
+            
+
              object. The <paramref
              name="provider" />
+
+            
 
             
 
@@ -7065,8 +8468,12 @@ This method overrides <see
 
             
 
+            
+
              is null, the return value is formatted using the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -7085,11 +8492,15 @@ This method overrides <see
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7126,6 +8537,8 @@ This method overrides <see
 
           
 
+          
+
            is invalid.</exception
         >
         <example>
@@ -7133,6 +8546,8 @@ This method overrides <see
             >The following example shows the effects of various
       formats on the string returned by <see
              cref="M:System.Double.ToString" />
+
+            
 
             
 
@@ -7173,13 +8588,19 @@ class test {
 
             
 
+            
+
              method formats a <see
              cref="T:System.Double" />
 
             
 
+            
+
              value in a specified format by using the conventions of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.Double.ToString(System.String)" />
+
+            
 
             
 
@@ -7245,8 +8666,12 @@ class test {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />
+
+            
 
             
 
@@ -7255,8 +8680,12 @@ class test {
 
             
 
+            
+
             , or the string representation of a number, as specified by <paramref
              name="format" />
+
+            
 
             
 
@@ -7268,8 +8697,12 @@ class test {
 
             
 
+            
+
              parameter can be any valid standard numeric format specifier except for D and X, as well as any combination of custom numeric format specifiers. If <paramref
              name="format" />
+
+            
 
             
 
@@ -7286,10 +8719,14 @@ class test {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -7305,6 +8742,8 @@ class test {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -7315,8 +8754,12 @@ class test {
 
             
 
+            
+
              returns <see
              cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />
+
+            
 
             
 
@@ -7325,8 +8768,12 @@ class test {
 
             
 
+            
+
              instead of the expected number. If you require more precision, specify <paramref
              name="format" />
+
+            
 
             
 
@@ -7345,11 +8792,15 @@ class test {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7390,6 +8841,8 @@ class test {
 
           
 
+          
+
            is invalid.</exception
         >
         <remarks>
@@ -7400,13 +8853,19 @@ class test {
 
             
 
+            
+
              method formats a <see
              cref="T:System.Double" />
 
             
 
+            
+
              value in a specified format of a specified culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.Double.ToString(System.String)" />
+
+            
 
             
 
@@ -7472,8 +8931,12 @@ class test {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />
+
+            
 
             
 
@@ -7482,8 +8945,12 @@ class test {
 
             
 
+            
+
             , or the string representation of a number, as specified by <paramref
              name="format" />
+
+            
 
             
 
@@ -7495,8 +8962,12 @@ class test {
 
             
 
+            
+
              parameter can be any valid standard numeric format specifier except for D and X, as well as any combination of custom numeric format specifiers. If <paramref
              name="format" />
+
+            
 
             
 
@@ -7513,10 +8984,14 @@ class test {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -7532,6 +9007,8 @@ class test {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -7542,8 +9019,12 @@ class test {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -7552,8 +9033,12 @@ class test {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -7562,8 +9047,12 @@ class test {
 
             
 
+            
+
              is a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -7572,8 +9061,12 @@ class test {
 
             
 
+            
+
              object. The <paramref
              name="provider" />
+
+            
 
             
 
@@ -7582,8 +9075,12 @@ class test {
 
             
 
+            
+
              is null, the return value is formatted using the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -7595,8 +9092,12 @@ class test {
 
             
 
+            
+
              returns <see
              cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />
+
+            
 
             
 
@@ -7605,8 +9106,12 @@ class test {
 
             
 
+            
+
              instead of the expected number. If you require more precision, specify <paramref
              name="format" />
+
+            
 
             
 
@@ -7625,8 +9130,12 @@ class test {
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -7638,10 +9147,14 @@ class test {
 
           
 
+          
+
           A numeric format string.</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

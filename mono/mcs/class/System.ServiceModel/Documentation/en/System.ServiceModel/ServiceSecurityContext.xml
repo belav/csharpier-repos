@@ -22,11 +22,15 @@
 
         
 
+        
+
          for a message. </para
       >
       <para
         >Use this class to obtain information about a remote <newTerm
         >security context</newTerm>
+
+        
 
         
 
@@ -38,13 +42,19 @@
 
         
 
+        
+
          from the <see
          cref="P:System.ServiceModel.OperationContext.Current" />
 
         
 
+        
+
          property of the <see
          cref="T:System.ServiceModel.OperationContext" />
+
+        
 
         
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          class contains a collection of <see
          cref="T:System.IdentityModel.Claims.Claim" />
+
+        
 
         
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.ServiceModel.ServiceAuthorizationManager" />
+
+        
 
         
 
@@ -78,6 +96,8 @@
          type="text/html">
           <a href="1db325ec-85be-47d0-8b6e-3ba2fdf3dda0">Authorization Policy Sample</a>
         </format>
+
+        
 
         
 
@@ -92,8 +112,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Security.Principal.IIdentity" />
+
+        
 
         
 
@@ -102,8 +126,12 @@
 
         
 
+        
+
          property returns an implementation of the <see
          cref="T:System.Security.Principal.IIdentity" />
+
+        
 
         
 
@@ -125,6 +153,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -137,6 +167,8 @@
              type="text/html">
               <a href="66b46f95-fa2d-4b5b-b6ce-0572ab0cdd50">secureConversationBootstrap element</a>
             </format>
+
+            
 
             
 
@@ -183,6 +215,8 @@
 
             
 
+            
+
              class with the collection of policies object.</para
           >
         </summary>
@@ -191,13 +225,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
 
           
 
+          
+
             of type <see
            cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+          
 
           
 
@@ -233,8 +273,12 @@
 
             
 
+            
+
             . For the default policy engine, use the constructors that take a collection of <see
              cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+            
 
             
 
@@ -249,6 +293,8 @@
 
             
 
+            
+
              class with the specified authorization parameters.</para
           >
         </summary>
@@ -257,8 +303,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IdentityModel.Policy.AuthorizationContext" />
+
+          
 
           
 
@@ -299,6 +349,8 @@
 
             
 
+            
+
              class with the specified authorization parameters and collection of policies.</para
           >
         </summary>
@@ -307,8 +359,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IdentityModel.Policy.AuthorizationContext" />
+
+          
 
           
 
@@ -319,13 +375,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
 
           
 
+          
+
             of type <see
            cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+          
 
           
 
@@ -357,6 +419,8 @@
           <para
             >Returns an instance of the <see
              cref="T:System.ServiceModel.ServiceSecurityContext" />
+
+            
 
             
 
@@ -392,8 +456,12 @@
 
             
 
+            
+
              contains a collection of <see
              cref="T:System.IdentityModel.Claims.ClaimSet" />
+
+            
 
             
 
@@ -454,6 +522,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -505,11 +575,15 @@
 
             
 
+            
+
              is used instead of Kerberos.</para
           >
           <para
             >The Kerberos Requester Token is used only on the client to represent the service. The authorization policy that it generates contains one claim, an SPN; hence, no identity in the claim. In most cases there is no problem, because <see
              cref="T:System.ServiceModel.ServiceSecurityContext" />
+
+            
 
             
 
@@ -545,6 +619,8 @@
           <para
             >If the remote party cannot be associated with a Windows account, the <see
              cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
+
+            
 
             
 

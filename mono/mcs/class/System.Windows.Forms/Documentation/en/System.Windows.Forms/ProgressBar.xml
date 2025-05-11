@@ -33,6 +33,8 @@
 
         
 
+        
+
          control visually indicates the progress of a lengthy operation in one of three styles:</para
       >
       <list type="bullet">
@@ -49,6 +51,8 @@
 
             
 
+            
+
              in a marquee fashion.</para
           >
         </item>
@@ -59,8 +63,12 @@
 
         
 
+        
+
          property determines the style of <see
          cref="T:System.Windows.Forms.ProgressBar" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          control can only be oriented horizontally. For an example of how to create a vertically oriented <see
          cref="T:System.Windows.Forms.ProgressBar" />
+
+        
 
         
 
@@ -79,13 +91,19 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Windows.Forms.ProgressBar" />
 
         
 
+        
+
          control is typically used when an application performs tasks such as copying files or printing documents. Users of an application might consider an application unresponsive if there is no visual cue. By using the <see
          cref="T:System.Windows.Forms.ProgressBar" />
+
+        
 
         
 
@@ -97,8 +115,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ProgressBar.Minimum" />
+
+        
 
         
 
@@ -107,13 +129,19 @@
 
         
 
+        
+
          property is typically set to a value of 0, and the <see
          cref="P:System.Windows.Forms.ProgressBar.Maximum" />
 
         
 
+        
+
          property is typically set to a value indicating the completion of a task. For example, to properly display the progress when copying a group of files, the <see
          cref="P:System.Windows.Forms.ProgressBar.Maximum" />
+
+        
 
         
 
@@ -125,8 +153,12 @@
 
         
 
+        
+
          property represents the progress that the application has made toward completing the operation. The value displayed by the <see
          cref="T:System.Windows.Forms.ProgressBar" />
+
+        
 
         
 
@@ -135,13 +167,19 @@
 
         
 
+        
+
          property. Based on the size of the <see
          cref="T:System.Windows.Forms.ProgressBar" />
 
         
 
+        
+
         , the <see
          cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+        
 
         
 
@@ -153,8 +191,12 @@
 
         
 
+        
+
          other than changing the <see
          cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+        
 
         
 
@@ -163,8 +205,12 @@
 
         
 
+        
+
          property to specify a specific value to increment the <see
          cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+        
 
         
 
@@ -173,13 +219,19 @@
 
         
 
+        
+
          method to increment the value. To vary the increment value, you can use the <see
          cref="M:System.Windows.Forms.ProgressBar.Increment(System.Int32)" />
 
         
 
+        
+
          method and specify a value with which to increment the <see
          cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+        
 
         
 
@@ -191,13 +243,19 @@
 
           
 
+          
+
            and <see
            cref="P:System.Windows.Forms.Control.BackColor" />
 
           
 
+          
+
            changes for the <see
            cref="T:System.Windows.Forms.ProgressBar" />
+
+          
 
           
 
@@ -224,13 +282,19 @@
 
             
 
+            
+
              property is set to 0, the <see
              cref="P:System.Windows.Forms.ProgressBar.Maximum" />
 
             
 
+            
+
              property is set to 100, and the <see
              cref="P:System.Windows.Forms.ProgressBar.Step" />
+
+            
 
             
 
@@ -242,6 +306,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -276,6 +342,8 @@
           <para
             >Overrides <see
              cref="P:System.Windows.Forms.Control.AllowDrop" />
+
+            
 
             
 
@@ -361,8 +429,12 @@
 
             
 
+            
+
              has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -374,6 +446,8 @@
           <para
             >Gets or sets the background image for the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -409,8 +483,12 @@
 
             
 
+            
+
              has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -422,6 +500,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.BackgroundImage" />
+
+            
 
             
 
@@ -464,8 +544,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -507,8 +591,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -520,6 +608,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.BackgroundImageLayout" />
+
+            
 
             
 
@@ -579,6 +669,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -621,6 +713,8 @@
           <para
             >Overrides <see
              cref="P:System.Windows.Forms.Control.CreateParams" />
+
+            
 
             
 
@@ -698,8 +792,12 @@
 
             
 
+            
+
              property has no effect on the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -735,8 +833,12 @@
 
             
 
+            
+
              control does not raise the <see
              cref="E:System.Windows.Forms.ProgressBar.DoubleClick" />
+
+            
 
             
 
@@ -777,8 +879,12 @@
 
             
 
+            
+
              control cannot receive keyboard focus, so it never raises the <see
              cref="E:System.Windows.Forms.ProgressBar.Enter" />
+
+            
 
             
 
@@ -790,6 +896,8 @@
           <para
             >Occurs when focus enters the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -833,6 +941,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -863,6 +973,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Font" />
+
+            
 
             
 
@@ -981,6 +1093,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1008,8 +1122,12 @@
 
             
 
+            
+
              method enables you to increment the value of the progress bar by a specific amount. This method of incrementing the progress bar is similar to using the <see
              cref="P:System.Windows.Forms.ProgressBar.Step" />
+
+            
 
             
 
@@ -1018,8 +1136,12 @@
 
             
 
+            
+
              method. The <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -1028,8 +1150,12 @@
 
             
 
+            
+
             . If, after calling the <see
              cref="M:System.Windows.Forms.ProgressBar.Increment(System.Int32)" />
+
+            
 
             
 
@@ -1038,8 +1164,12 @@
 
             
 
+            
+
              property is greater than the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Maximum" />
+
+            
 
             
 
@@ -1048,8 +1178,12 @@
 
             
 
+            
+
              property remains at the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Maximum" />
+
+            
 
             
 
@@ -1058,8 +1192,12 @@
 
             
 
+            
+
              method with a negative value specified in the <paramref
              name="value" />
+
+            
 
             
 
@@ -1068,8 +1206,12 @@
 
             
 
+            
+
              property is less than the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Minimum" />
+
+            
 
             
 
@@ -1078,8 +1220,12 @@
 
             
 
+            
+
              property remains at the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Minimum" />
+
+            
 
             
 
@@ -1091,8 +1237,12 @@
 
             
 
+            
+
              object whose style is set to <see
              cref="F:System.Windows.Forms.ProgressBarStyle.Marquee" />
+
+            
 
             
 
@@ -1101,13 +1251,19 @@
 
             
 
+            
+
             , calling <see
              cref="M:System.Windows.Forms.ProgressBar.Increment(System.Int32)" />
 
             
 
+            
+
              is unnecessary and will raise an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1120,6 +1276,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1157,8 +1315,12 @@
 
             
 
+            
+
              control cannot receive keyboard focus, so it never raises the <see
              cref="E:System.Windows.Forms.ProgressBar.KeyDown" />
+
+            
 
             
 
@@ -1201,8 +1363,12 @@
 
             
 
+            
+
              control cannot receive keyboard focus, so it never raises the <see
              cref="E:System.Windows.Forms.ProgressBar.KeyPress" />
+
+            
 
             
 
@@ -1245,8 +1411,12 @@
 
             
 
+            
+
              control cannot receive keyboard focus, so it never raises the <see
              cref="E:System.Windows.Forms.ProgressBar.KeyUp" />
+
+            
 
             
 
@@ -1286,8 +1456,12 @@
 
             
 
+            
+
              control cannot receive keyboard focus, so it never raises the <see
              cref="E:System.Windows.Forms.ProgressBar.Leave" />
+
+            
 
             
 
@@ -1299,6 +1473,8 @@
           <para
             >Occurs when focus leaves the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -1363,8 +1539,12 @@
 
             
 
+            
+
              property. When the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Maximum" />
+
+            
 
             
 
@@ -1373,13 +1553,19 @@
 
             
 
+            
+
              control is redrawn to reflect the new range of the control. When the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
 
             
 
+            
+
              property is equal to the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Maximum" />
+
+            
 
             
 
@@ -1391,8 +1577,12 @@
 
             
 
+            
+
              property must be set (by setting the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -1401,8 +1591,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ProgressBar.PerformStep" />
+
+            
 
             
 
@@ -1411,8 +1605,12 @@
 
             
 
+            
+
              property to the total number of files in a file copy operation. Each time a file is copied, the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -1453,8 +1651,12 @@
 
             
 
+            
+
              property. When the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Minimum" />
+
+            
 
             
 
@@ -1463,8 +1665,12 @@
 
             
 
+            
+
              control is redrawn to reflect the new range of the control. When the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -1473,8 +1679,12 @@
 
             
 
+            
+
              property, the progress bar is empty. To change the value of the progress bar, use the <see
              cref="P:System.Windows.Forms.ProgressBar.Step" />
+
+            
 
             
 
@@ -1483,13 +1693,19 @@
 
             
 
+            
+
              method, use the <see
              cref="M:System.Windows.Forms.ProgressBar.Increment(System.Int32)" />
 
             
 
+            
+
              method, or set the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -1535,8 +1751,12 @@
 
             
 
+            
+
              control does not raise the <see
              cref="E:System.Windows.Forms.ProgressBar.MouseDoubleClick" />
+
+            
 
             
 
@@ -1575,11 +1795,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ProgressBar.OnBackColorChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1594,6 +1818,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1602,8 +1828,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1637,6 +1867,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1645,11 +1877,15 @@
 
             
 
+            
+
              method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <block subset="none" type="note">
             <para>
               <see cref="P:System.Windows.Forms.Control.ForeColor" />
+
+              
 
               
 
@@ -1665,6 +1901,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1673,8 +1911,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1708,8 +1950,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1747,11 +1993,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ProgressBar.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -1766,6 +2016,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1774,8 +2026,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1814,11 +2070,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ProgressBar.OnRightToLeftLayoutChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1833,6 +2093,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1841,8 +2103,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1883,8 +2149,12 @@
 
             
 
+            
+
              property will have no effect on the appearance of the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -1896,6 +2166,8 @@
           <para
             >Gets or sets the space between the edges of a <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -1932,6 +2204,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1940,6 +2214,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Padding" />
+
+            
 
             
 
@@ -1975,6 +2251,8 @@
 
             
 
+            
+
              is drawn.</para
           >
         </summary>
@@ -2000,8 +2278,12 @@
 
             
 
+            
+
              method increments the value of the progress bar by the amount specified by the <see
              cref="P:System.Windows.Forms.ProgressBar.Step" />
+
+            
 
             
 
@@ -2010,8 +2292,12 @@
 
             
 
+            
+
              property to specify the amount that each completed task in an operation changes the value of the progress bar. For example, if you are copying a group of files, you might want to set the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Step" />
+
+            
 
             
 
@@ -2020,8 +2306,12 @@
 
             
 
+            
+
              property to the total number of files to copy. When each file is copied, you can call the <see
              cref="M:System.Windows.Forms.ProgressBar.PerformStep" />
+
+            
 
             
 
@@ -2030,13 +2320,19 @@
 
             
 
+            
+
              property. If you want to have more flexible control of the value of the progress bar, you can use the <see
              cref="M:System.Windows.Forms.ProgressBar.Increment(System.Int32)" />
 
             
 
+            
+
              method or set the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -2048,8 +2344,12 @@
 
             
 
+            
+
              property specifies the current position of the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -2058,8 +2358,12 @@
 
             
 
+            
+
              method, the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -2068,8 +2372,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -2078,8 +2386,12 @@
 
             
 
+            
+
              property. If, after calling the <see
              cref="M:System.Windows.Forms.ProgressBar.PerformStep" />
+
+            
 
             
 
@@ -2088,8 +2400,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -2098,13 +2414,19 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
 
             
 
+            
+
              property remains at the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Minimum" />
+
+            
 
             
 
@@ -2116,8 +2438,12 @@
 
             
 
+            
+
              object whose style is set to <see
              cref="F:System.Windows.Forms.ProgressBarStyle.Marquee" />
+
+            
 
             
 
@@ -2126,13 +2452,19 @@
 
             
 
+            
+
             , calling <see
              cref="M:System.Windows.Forms.ProgressBar.PerformStep" />
 
             
 
+            
+
              is unnecessary and will raise an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -2144,6 +2476,8 @@
           <para
             >Advances the current position of the progress bar by the amount of the <see
              cref="P:System.Windows.Forms.ProgressBar.Step" />
+
+            
 
             
 
@@ -2180,8 +2514,12 @@
 
             
 
+            
+
              to <see
              cref="P:System.Drawing.SystemColors.Highlight" />
+
+            
 
             
 
@@ -2190,8 +2528,12 @@
 
             
 
+            
+
              method is useful when you create a designer for the control, or you are creating your own control that incorporates the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -2203,6 +2545,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.Control.ForeColor" />
+
+            
 
             
 
@@ -2287,6 +2631,8 @@
 
             
 
+            
+
              property is useful when creating an application for use with languages that read from right to left. </para
           >
         </remarks>
@@ -2295,6 +2641,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -2323,6 +2671,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2331,6 +2681,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ProgressBar.RightToLeftLayout" />
+
+            
 
             
 
@@ -2360,8 +2712,12 @@
 
             
 
+            
+
              property to specify the amount that each completed task in an operation changes the value of the progress bar. For example, if you are copying a group of files, you might want to set the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Step" />
+
+            
 
             
 
@@ -2370,8 +2726,12 @@
 
             
 
+            
+
              property to the total number of files to copy. When each file is copied, you can call the <see
              cref="M:System.Windows.Forms.ProgressBar.PerformStep" />
+
+            
 
             
 
@@ -2380,13 +2740,19 @@
 
             
 
+            
+
              property. If you want to have more flexible control of the value of the progress bar, you can use the <see
              cref="M:System.Windows.Forms.ProgressBar.Increment(System.Int32)" />
 
             
 
+            
+
              method or set the value of the <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -2398,6 +2764,8 @@
           <para
             >Gets or sets the amount by which a call to the <see
              cref="M:System.Windows.Forms.ProgressBar.PerformStep" />
+
+            
 
             
 
@@ -2441,8 +2809,12 @@
 
             
 
+            
+
              style is honored only when visual styles are enabled. The <see
              cref="F:System.Windows.Forms.ProgressBarStyle.Continuous" />
+
+            
 
             
 
@@ -2483,6 +2855,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2513,6 +2887,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ProgressBar.TabStop" />
+
+            
 
             
 
@@ -2553,6 +2929,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2586,6 +2964,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -2611,13 +2991,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ProgressBar.Maximum" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ProgressBar.Value" />
+
+            
 
             
 
@@ -2632,6 +3018,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -2640,6 +3028,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -2676,8 +3066,12 @@
 
             
 
+            
+
              property are specified by the <see
              cref="P:System.Windows.Forms.ProgressBar.Minimum" />
+
+            
 
             
 
@@ -2686,8 +3080,12 @@
 
             
 
+            
+
              properties. This property enables you to increment or decrement the value of the progress bar directly. To perform consistent increases in the value of the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -2696,13 +3094,19 @@
 
             
 
+            
+
              property with the <see
              cref="M:System.Windows.Forms.ProgressBar.PerformStep" />
 
             
 
+            
+
              method. To increase the progress bar value by varying amounts, use the <see
              cref="M:System.Windows.Forms.ProgressBar.Increment(System.Int32)" />
+
+            
 
             
 

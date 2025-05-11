@@ -22,13 +22,19 @@
 
         
 
+        
+
         , you must call the <see
          cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
 
         
 
+        
+
          method of the <see
          cref="T:System.Data.Odbc.OdbcCommand" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
          is being used, the associated <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 
@@ -50,8 +60,12 @@
 
         
 
+        
+
         , and no other operations can be performed on the <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 
@@ -60,13 +74,19 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Data.Odbc.OdbcDataReader" />
 
         
 
+        
+
          is called. For example, you cannot retrieve output parameters until after you call <see
          cref="M:System.Data.Odbc.OdbcDataReader.Close" />
+
+        
 
         
 
@@ -78,10 +98,14 @@
 
         
 
+        
+
         . However, the precise behavior is both driver and timing dependent.</para
       >
       <para>
         <see cref="P:System.Data.Odbc.OdbcDataReader.IsClosed" />
+
+        
 
         
 
@@ -90,8 +114,12 @@
 
         
 
+        
+
          are the only properties that you can call after the <see
          cref="T:System.Data.Odbc.OdbcDataReader" />
+
+        
 
         
 
@@ -100,8 +128,12 @@
 
         
 
+        
+
          before you can call <see
          cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
+
+        
 
         
 
@@ -130,13 +162,19 @@
 
             
 
+            
+
              method when you are finished using the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
+            
+
              to use the associated <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -151,6 +189,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -160,6 +200,8 @@
           <para
             >Closes the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -229,11 +271,15 @@
 
             
 
+            
+
              to exclude hidden fields.</para
           >
           <para
             >After you execute a query that does not return rows, <see
              cref="P:System.Data.Odbc.OdbcDataReader.FieldCount" />
+
+            
 
             
 
@@ -284,6 +330,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -297,6 +345,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,6 +377,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -340,6 +392,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -375,8 +429,12 @@
 
             
 
+            
+
              returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if <see
              cref="M:System.Data.Odbc.OdbcDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -385,8 +443,12 @@
 
             
 
+            
+
              is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -398,6 +460,8 @@
 
             
 
+            
+
              returns the length of the field in bytes.</para
           >
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported then the method call will fail.</para>
@@ -405,6 +469,8 @@
             <para
               >No exception will be thrown if the value of <paramref
                name="bufferIndex" />
+
+              
 
               
 
@@ -425,10 +491,14 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -439,10 +509,14 @@
 
           
 
+          
+
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -451,10 +525,14 @@
 
           
 
+          
+
            where the write operation is to start. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,6 +563,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -498,6 +578,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,8 +615,12 @@
 
             
 
+            
+
              returns the number of available characters in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if <see
              cref="M:System.Data.Odbc.OdbcDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -543,8 +629,12 @@
 
             
 
+            
+
              is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -556,6 +646,8 @@
 
             
 
+            
+
              returns the length of the field in characters.</para
           >
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported then the method call will fail.</para>
@@ -563,6 +655,8 @@
             <para
               >No exception will be thrown if the value of <paramref
                name="bufferIndex" />
+
+              
 
               
 
@@ -583,10 +677,14 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -597,10 +695,14 @@
 
           
 
+          
+
           The buffer into which to copy data. </param
         >
         <param name="bufferIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -609,10 +711,14 @@
 
           
 
+          
+
            where the write operation is to start. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,6 +779,8 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
       </Docs>
@@ -701,6 +809,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -712,11 +822,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -747,6 +861,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -755,6 +871,8 @@
           <para
             >Gets the value of the specified column as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -769,11 +887,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -804,10 +926,14 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
           <para>
             <see cref="M:System.Data.Odbc.OdbcDataReader.GetDecimal(System.Int32)" />
+
+            
 
             
 
@@ -822,6 +948,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -833,11 +961,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -868,6 +1000,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -881,6 +1015,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -916,6 +1052,8 @@
 
             
 
+            
+
              that can be used to iterate through the rows in the data reader.</para
           >
         </summary>
@@ -924,6 +1062,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -954,6 +1094,8 @@
 
             
 
+            
+
              that is the data type of the object.</para
           >
         </summary>
@@ -965,11 +1107,15 @@
 
             
 
+            
+
              that is the data type of the object.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1000,6 +1146,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1013,6 +1161,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1043,6 +1193,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1056,6 +1208,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1086,6 +1240,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1099,6 +1255,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1129,6 +1287,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1142,6 +1302,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1172,6 +1334,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1185,6 +1349,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1220,6 +1386,8 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
       </Docs>
@@ -1245,10 +1413,14 @@
 
             
 
+            
+
              performs a case-sensitive lookup first. If it fails, a second case-insensitive search is made. The method throws an IndexOutOfRange exception if the zero-based column ordinal is not found.</para
           >
           <para>
             <see cref="M:System.Data.Odbc.OdbcDataReader.GetOrdinal(System.String)" />
+
+            
 
             
 
@@ -1260,8 +1432,12 @@
 
             
 
+            
+
              within a loop. Instead, call <see
              cref="M:System.Data.Odbc.OdbcDataReader.GetOrdinal(System.String)" />
+
+            
 
             
 
@@ -1278,6 +1454,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1305,6 +1483,8 @@
           <para
             >The <see
              cref="M:System.Data.Odbc.OdbcDataReader.GetSchemaTable" />
+
+            
 
             
 
@@ -1356,8 +1536,12 @@
 
                   
 
+                  
+
                    is a numeric data type, this is the maximum precision of the column. The precision depends on the definition of the column. If <see
                    cref="T:System.Data.DbType" />
+
+                  
 
                   
 
@@ -1376,8 +1560,12 @@
 
                   
 
+                  
+
                    is <see
                    cref="F:System.Data.DbType.Decimal" />
+
+                  
 
                   
 
@@ -1393,6 +1581,8 @@
                 <para
                   >Maps to the common language runtime type of <see
                    cref="T:System.Data.DbType" />
+
+                  
 
                   
 
@@ -1507,8 +1697,12 @@
 
             
 
+            
+
              needs the correct identification of the primary keys of the table in order to work correctly. If the BaseTableName is not returned for every column in the query results, the .NET Framework Data Provider for ODBC tries to parse the SQL statement to find the table names involved in the query. This works with UPDATE, INSERT, DELETE and simple SELECT statements, but not with stored procedures or SELECT statements based on joins. If some or all the schema information is missing from this table, the <see
              cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+
+            
 
             
 
@@ -1517,6 +1711,8 @@
           <para
             >To make sure that metadata columns return the correct information, you must call <see
              cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
+
+            
 
             
 
@@ -1535,8 +1731,12 @@
 
             
 
+            
+
              that describes the column metadata of the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1548,6 +1748,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1579,6 +1781,8 @@
 
             
 
+            
+
              to look for null values before calling this method.</para
           >
         </remarks>
@@ -1587,6 +1791,8 @@
           <para
             >Gets the value of the specified column as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1601,11 +1807,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1636,6 +1846,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1647,11 +1859,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1681,6 +1897,8 @@
 
             
 
+            
+
              for null database columns.</para
           >
         </remarks>
@@ -1694,6 +1912,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1723,6 +1943,8 @@
 
             
 
+            
+
              method provides an efficient means for retrieving all columns, instead of retrieving each column individually.</para
           >
           <para
@@ -1731,8 +1953,12 @@
 
             
 
+            
+
              array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1741,11 +1967,15 @@
 
             
 
+            
+
              array whose length is more than the number of columns that are contained in the resulting row.</para
           >
           <para
             >This method returns <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1764,6 +1994,8 @@
 
             
 
+            
+
              in the array.</para
           >
         </returns>
@@ -1772,8 +2004,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1802,6 +2038,8 @@
 
             
 
+            
+
              contains one or more rows.</para
           >
         </summary>
@@ -1826,13 +2064,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
 
             
 
+            
+
              are the only properties that you can call after the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1844,6 +2088,8 @@
           <para
             >Indicates whether the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1874,8 +2120,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.Odbc.OdbcDataReader.GetChar(System.Int32)" />
+
+            
 
             
 
@@ -1894,11 +2144,15 @@
 
             
 
+            
+
             ; otherwise false.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1967,6 +2221,8 @@
 
             
 
+            
+
              is positioned on the first result.</para
           >
         </remarks>
@@ -1975,6 +2231,8 @@
           <para
             >Advances the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -2007,8 +2265,12 @@
 
             
 
+            
+
              is before the first record. Therefore, you must call <see
              cref="M:System.Data.Odbc.OdbcDataReader.Read" />
+
+            
 
             
 
@@ -2020,13 +2282,19 @@
 
             
 
+            
+
              is being used, the associated <see
              cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
+            
+
              is busy serving it until you call <see
              cref="M:System.Data.Odbc.OdbcDataReader.Close" />
+
+            
 
             
 
@@ -2038,6 +2306,8 @@
           <para
             >Advances the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -2070,8 +2340,12 @@
 
             
 
+            
+
              property is not set until all rows are read and you close the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -2083,10 +2357,14 @@
 
             
 
+            
+
              will be 2.</para
           >
           <para>
             <see cref="P:System.Data.Odbc.OdbcDataReader.IsClosed" />
+
+            
 
             
 
@@ -2095,8 +2373,12 @@
 
             
 
+            
+
              are the only properties that you can call after the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 

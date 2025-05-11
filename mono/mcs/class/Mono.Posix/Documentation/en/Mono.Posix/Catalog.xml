@@ -29,6 +29,8 @@
 
         
 
+        
+
          instead.</para
       >
     </remarks>
@@ -89,6 +91,8 @@
 
           
 
+          
+
            instead.</remarks
         >
         <altmember cref="M:Mono.Unix.Catalog.GetPluralString" />
@@ -120,6 +124,8 @@
           >This member is obsolete.  Please use 
 				<see
            cref="M:Mono.Unix.Catalog.GetString" />
+
+          
 
           
 
@@ -158,6 +164,8 @@
           >This member is obsolete.  Please use 
 				<see
            cref="M:Mono.Unix.Catalog.Init" />
+
+          
 
           
 

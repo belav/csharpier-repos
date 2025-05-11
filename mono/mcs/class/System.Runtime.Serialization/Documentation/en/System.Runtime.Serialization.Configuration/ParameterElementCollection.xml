@@ -35,10 +35,14 @@
 
         
 
+        
+
          elements within the <format
          type="text/html">
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
         </format>
+
+        
 
         
 
@@ -50,6 +54,8 @@
       <para
         >Handles the XML elements used to configure serialization by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -76,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Configuration.ParameterElementCollection" />
+
+            
 
             
 
@@ -117,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+
+          
 
           
 
@@ -201,6 +213,8 @@
         </returns>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,8 +324,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+
+          
 
           
 
@@ -378,8 +396,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+
+          
 
           
 
@@ -411,6 +433,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is the base class used for ASP.NET controls that retrieve tabular or list-style data from an ASP.NET data source control and bind user-interface (UI) elements of the control to that data for display. Composite data-bound controls such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+        
 
         
 
@@ -57,8 +69,12 @@
 
         
 
+        
+
          derive from <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -70,6 +86,8 @@
 
         
 
+        
+
          class directly; instead, they use controls that derive from this class.</para
       >
       <para
@@ -78,8 +96,12 @@
 
         
 
+        
+
          interface and classes that derive from the <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -88,8 +110,12 @@
 
         
 
+        
+
          classes. When deriving a class from the <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -98,13 +124,19 @@
 
         
 
+        
+
          method to bind the UI elements of your control to data retrieved by the <see
          cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
 
         
 
+        
+
          method. In most cases, the <see
          cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+
+        
 
         
 
@@ -116,8 +148,12 @@
 
         
 
+        
+
          method is the equivalent of the DataBind method, and is called to bind data at run time. The <see
          cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+
+        
 
         
 
@@ -126,8 +162,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+
+        
 
         
 
@@ -152,6 +192,8 @@
           <para
             >Initializes the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -183,8 +225,12 @@
 
             
 
+            
+
              method is used by the <see
              cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" />
+
+            
 
             
 
@@ -193,8 +239,12 @@
 
             
 
+            
+
              class's implementation of the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+
+            
 
             
 
@@ -209,6 +259,8 @@
 
             
 
+            
+
              object used by the data-bound control if no arguments are specified.</para
           >
         </summary>
@@ -220,8 +272,12 @@
 
             
 
+            
+
              initialized to <see
              cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+
+            
 
             
 
@@ -258,6 +314,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
           <para
@@ -266,10 +324,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -329,8 +391,12 @@
 
             
 
+            
+
              method retrieves a <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -339,13 +405,19 @@
 
             
 
+            
+
              method. If the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
 
             
 
+            
+
              property is used to identify a data source, a default <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -360,6 +432,8 @@
 
             
 
+            
+
              object that the data-bound control uses to perform data operations.</para
           >
         </summary>
@@ -371,8 +445,12 @@
 
             
 
+            
+
              that the data-bound control uses to perform data operations. If the <see
              cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
+
+            
 
             
 
@@ -381,8 +459,12 @@
 
             
 
+            
+
              is returned; otherwise, the default <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -414,8 +496,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.GetDataSource" />
+
+            
 
             
 
@@ -424,13 +510,19 @@
 
             
 
+            
+
              instance is retrieved by these two methods and is cached by the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
+            
+
              object until the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataPropertyChanged" />
+
+            
 
             
 
@@ -445,6 +537,8 @@
 
             
 
+            
+
              interface that the data-bound control is associated with, if any.</para
           >
         </summary>
@@ -456,8 +550,12 @@
 
             
 
+            
+
              that represents the data source identified by <see
              cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />
+
+            
 
             
 
@@ -504,6 +602,8 @@
           <para
             >The data-bound control maintains a value in view state that indicates whether it is currently bound to data. The <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.MarkAsDataBound" />
+
+            
 
             
 
@@ -561,8 +661,12 @@
 
             
 
+            
+
              method notifies a data-bound control that the underlying data source has changed and that the control should rebind and any necessary work should be performed. Typically, the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -574,13 +678,19 @@
 
             
 
+            
+
              class sets the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
 
             
 
+            
+
              property to true when it raises the <see
              cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
+
+            
 
             
 
@@ -594,11 +704,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -613,6 +727,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -621,8 +737,12 @@
 
           
 
+          
+
           The source of the event, the <see
            cref="T:System.Web.UI.DataSourceView" />
+
+          
 
           
 
@@ -633,8 +753,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -666,13 +790,19 @@
 
             
 
+            
+
              class calls the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.ConfirmInitState" />
 
             
 
+            
+
              method to set the initialized state of the data-bound control and sets the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+
+            
 
             
 
@@ -687,6 +817,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -695,8 +827,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -727,8 +863,12 @@
 
             
 
+            
+
              method is overridden by the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -737,13 +877,19 @@
 
             
 
+            
+
              property to true in cases where the HTTP request is a postback and view state is enabled but the data-bound control has not yet been bound. This scenario is common with controls such as <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -759,8 +905,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -771,8 +921,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -807,8 +961,12 @@
 
             
 
+            
+
              method when you derive a data-bound control from the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -817,13 +975,19 @@
 
             
 
+            
+
              enables you to avoid the <see
              cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.BaseDataBoundControl.DataBound" />
+
+            
 
             
 
@@ -835,8 +999,12 @@
 
             
 
+            
+
              class provides no specific implementation for this method, the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+
+            
 
             
 
@@ -845,8 +1013,12 @@
 
             
 
+            
+
              method to bind the values of any user interface (UI) controls to the data that is retrieved by the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+
+            
 
             
 
@@ -862,13 +1034,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IEnumerable" />
 
           
 
+          
+
            list of data returned from a <see
            cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+
+          
 
           
 
@@ -893,13 +1071,19 @@
 
             
 
+            
+
              method is called after data is retrieved to bind data to elements of the data-bound control. Derived types override this method to retrieve data only if the default implementation is not adequate. Typically, it is sufficient to provide a <see
              cref="T:System.Web.UI.DataSourceViewSelectCallback" />
 
             
 
+            
+
              delegate that performs any custom data work, rather than implementing the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+
+            
 
             
 
@@ -935,13 +1119,19 @@
 
             
 
+            
+
              property calls the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" />
 
             
 
+            
+
              method to create a default <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -953,6 +1143,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -986,8 +1178,12 @@
 
             
 
+            
+
              method is only called in the <see
              cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />
+
+            
 
             
 
@@ -996,8 +1192,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -1006,8 +1206,12 @@
 
             
 
+            
+
              property to ensure that it is an instance of the <see
              cref="T:System.Web.UI.IDataSource" />
+
+            
 
             
 
@@ -1016,8 +1220,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1033,8 +1241,12 @@
 
           
 
+          
+
           An object set to the <see
            cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+          
 
           
 

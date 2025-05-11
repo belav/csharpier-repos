@@ -26,8 +26,12 @@
 
         
 
+        
+
          and the StateChange property of the <see
          cref="T:System.Data.SqlClient.SqlConnection" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
 
             
 
+            
+
              class, when given the original state and the current state of the object.</para
           >
         </summary>
@@ -69,8 +75,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.ConnectionState" />
+
+          
 
           
 
@@ -81,8 +91,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.ConnectionState" />
+
+          
 
           
 

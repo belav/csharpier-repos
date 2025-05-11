@@ -23,6 +23,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -40,6 +42,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Framework.TaskFinishedEventArgs" />
+
+            
 
             
 
@@ -76,11 +80,15 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -91,10 +99,14 @@
 
           
 
+          
+
           The Help keyword associated with the event.</param
         >
         <param name="projectFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -105,6 +117,8 @@
 
           
 
+          
+
           The file in which the task is defined.</param
         >
         <param name="taskName">
@@ -112,10 +126,14 @@
 
           
 
+          
+
           The name of the task.</param
         >
         <param name="succeeded">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

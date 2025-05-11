@@ -31,13 +31,19 @@
 
         
 
+        
+
          file. When the <see
          cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Extensions" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+        
 
         
 

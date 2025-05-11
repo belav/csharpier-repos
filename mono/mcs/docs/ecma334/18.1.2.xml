@@ -6,11 +6,15 @@
 
     
 
+    
+
      specification, in which case the struct is said to implement the given interface types. <grammar_production
     >
       <name>
         <non_terminal where="18.1.2">struct-interfaces</non_terminal>
       </name>
+
+      
 
       
 
@@ -24,6 +28,8 @@
   <paragraph
     >Interface implementations are discussed further in <hyperlink
     >20.4</hyperlink>
+
+    
 
     
 

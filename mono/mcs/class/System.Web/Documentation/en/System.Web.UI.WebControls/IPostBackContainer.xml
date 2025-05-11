@@ -16,8 +16,12 @@
 
         
 
+        
+
          interface enable buttons to get a <see
          cref="T:System.Web.UI.PostBackOptions" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -39,8 +45,12 @@
 
         
 
+        
+
          interface should also implement the <see
          cref="T:System.Web.UI.IPostBackEventHandler" />
+
+        
 
         
 
@@ -76,13 +86,19 @@
 
             
 
+            
+
              method should configure a new <see
              cref="T:System.Web.UI.PostBackOptions" />
 
             
 
+            
+
              instance with the information required for the <see
              cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" />
+
+            
 
             
 
@@ -101,8 +117,12 @@
 
             
 
+            
+
              object containing the options required to generate a postback script for <paramref
              name="buttonControl" />
+
+            
 
             
 

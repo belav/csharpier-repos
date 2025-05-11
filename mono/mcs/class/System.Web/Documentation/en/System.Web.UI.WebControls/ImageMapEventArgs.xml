@@ -19,8 +19,12 @@
 
         
 
+        
+
          event is raised when a <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          control is clicked. To allow a <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -39,8 +47,12 @@
 
         
 
+        
+
          event, you must first set either the <see
          cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+        
 
         
 
@@ -49,13 +61,19 @@
 
         
 
+        
+
          property to HotSpotMode.PostBack. To control the actions programmatically that are performed when a postback <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
 
         
 
+        
+
          is clicked, provide an event handler for the <see
          cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+        
 
         
 
@@ -67,8 +85,12 @@
 
         
 
+        
+
          property stores a string that is associated with the behavior of the <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -77,8 +99,12 @@
 
         
 
+        
+
          event data when the <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -93,8 +119,12 @@
 
         
 
+        
+
          event of an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -119,11 +149,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+
+            
 
             
 
@@ -153,6 +187,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -167,6 +203,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -175,8 +213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -185,8 +227,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -214,13 +260,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              object in an <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -235,13 +287,19 @@
 
             
 
+            
+
              assigned to the <see
              cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 

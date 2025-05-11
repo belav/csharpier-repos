@@ -27,6 +27,8 @@
 
           
 
+          
+
            instead.</para
         >
       </block>
@@ -36,8 +38,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+        
 
         
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          interface to support remote procedure calls (RPCs), and the <see
          cref="T:System.Runtime.Serialization.IFormatter" />
+
+        
 
         
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
         ) to support serialization of a graph of objects. The <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        
 
         
 
@@ -66,8 +80,12 @@
 
         
 
+        
+
          objects, without using the <see
          cref="T:System.Runtime.Remoting.Messaging.IRemotingFormatter" />
+
+        
 
         
 
@@ -79,13 +97,19 @@
 
         
 
+        
+
          interface allows the specification of two separate object graphs: the graph of objects to serialize, and an additional graph that contains an array of header objects that convey information about the remote function call (for example, transaction ID or a method signature). For proper serialization, the root object of the first graph must be an object that implements either the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
         
 
+        
+
          interface or the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+        
 
         
 
@@ -97,8 +121,12 @@
 
         
 
+        
+
          delegate is specified to the <see
          cref="M:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -107,8 +135,12 @@
 
         
 
+        
+
          delegate to produce an object that supports the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -120,8 +152,12 @@
 
         
 
+        
+
          can also handle RPCs that are produced with objects that implement the <see
          cref="T:System.Runtime.Serialization.Formatters.ISoapMessage" />
+
+        
 
         
 
@@ -130,8 +166,12 @@
 
         
 
+        
+
          functionality, place an object that supports the <see
          cref="T:System.Runtime.Serialization.Formatters.ISoapMessage" />
+
+        
 
         
 
@@ -140,8 +180,12 @@
 
         
 
+        
+
          property must be set to another object that supports the <see
          cref="T:System.Runtime.Serialization.Formatters.ISoapMessage" />
+
+        
 
         
 
@@ -160,6 +204,8 @@
 
         
 
+        
+
          does not support serialization compatibility between versions of the .NET Framework. Serialization between versions 1.1 and 2.0 types in the Framework often fails. The following actions can be taken to remedy this issue:</para
       >
       <list type="bullet">
@@ -167,6 +213,8 @@
           <para
             >Convert to use the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -200,6 +248,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+            
 
             
 
@@ -239,6 +289,8 @@
 
                   
 
+                  
+
                    initialized to specify that the serialized data can be transmitted to or received from any of the other contexts</para
                 >
               </description>
@@ -250,6 +302,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+            
 
             
 
@@ -281,6 +335,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -289,8 +345,12 @@
 
             
 
+            
+
              to search for surrogates that are registered for the object types you want to deserialize. Surrogates are helpers that serialize and deserialize objects of specific classes. The default <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+            
 
             
 
@@ -299,8 +359,12 @@
 
             
 
+            
+
              for remoting purposes. In a remoting situation the specified <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+            
 
             
 
@@ -309,8 +373,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -319,13 +387,19 @@
 
             
 
+            
+
              parameter to an instance of <see
              cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
 
             
 
+            
+
             . If you do not need surrogates, set the <paramref
              name="selector" />
+
+            
 
             
 
@@ -340,13 +414,19 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -358,13 +438,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.ISurrogateSelector" />
 
           
 
+          
+
            to use with the new instance of <see
            cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+          
 
           
 
@@ -375,8 +461,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -385,13 +475,19 @@
 
           
 
+          
+
            parameter is null, then the <see
            cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.Context" />
 
           
 
+          
+
            defaults to <see
            cref="F:System.Runtime.Serialization.StreamingContextStates.CrossMachine" />
+
+          
 
           
 
@@ -445,6 +541,8 @@
 
             
 
+            
+
              that controls the binding of a serialized object to a type.</para
           >
         </summary>
@@ -473,6 +571,8 @@
 
             
 
+            
+
              provides an enumeration that describes the source and the destination for a given serialized stream, as well as a way for serialization to retain that context and an additional caller-defined context.</para
           >
         </remarks>
@@ -484,8 +584,12 @@
 
             
 
+            
+
              used with this <see
              cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+            
 
             
 
@@ -523,6 +627,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -537,6 +643,8 @@
         </returns>
         <param name="serializationStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -570,8 +678,12 @@
 
             
 
+            
+
              parameter is one of two ways to return headers from a stream in SOAP Remote Procedure Call (RPC) format. The other way is to use the <see
              cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" />
+
+            
 
             
 
@@ -591,6 +703,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -600,6 +714,8 @@
           <para
             >Deserializes the stream into an object graph with any headers in that stream being handled by the given <see
              cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" />
+
+            
 
             
 
@@ -615,10 +731,14 @@
 
           
 
+          
+
           The stream that contains the data to deserialize.</param
         >
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -649,8 +769,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+
+            
 
             
 
@@ -663,6 +787,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -671,6 +797,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
+
+            
 
             
 
@@ -709,6 +837,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -717,10 +847,14 @@
 
           
 
+          
+
           The stream onto which the formatter puts the data to serialize. </param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -760,11 +894,15 @@
 
             
 
+            
+
              in the SOAP Remote Procedure Call (RPC) format.</para
           >
         </summary>
         <param name="serializationStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -775,10 +913,14 @@
 
           
 
+          
+
           The object or root of the object graph to serialize. All child objects of this root object are automatically serialized. </param
         >
         <param name="headers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -809,13 +951,19 @@
 
             
 
+            
+
              to generate <see
              cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
+            
+
              instances for <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -827,6 +975,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Runtime.Serialization.SurrogateSelector" />
+
+            
 
             
 
@@ -859,6 +1009,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Runtime.Serialization.Formatters.ISoapMessage" />
+
+            
 
             
 

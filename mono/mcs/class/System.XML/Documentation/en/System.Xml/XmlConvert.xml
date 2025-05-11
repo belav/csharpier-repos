@@ -33,8 +33,12 @@
 
         
 
+        
+
          class is functionally equivalent to the <see
          cref="T:System.Convert" />
+
+        
 
         
 
@@ -49,13 +53,19 @@
 
         
 
+        
+
         . When names contain invalid characters, you can use the <see
          cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Xml.XmlConvert.DecodeName(System.String)" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          method with the <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -80,6 +94,8 @@
       <para
         >The following <see
          cref="T:System.Xml.XmlConvert" />
+
+        
 
         
 
@@ -106,6 +122,8 @@
             <para
               >Takes a name and returns the encoded name along with any invalid character that is replaced by an escape string. This method allows colons in any position, which means that the name may still be invalid according to the W3C <see
                cref="www.w3.org/TR/REC-xml-names">Namespaces in XML 1.0 recommendation</see>
+
+              
 
               
 
@@ -136,6 +154,8 @@
 
               
 
+              
+
                except that it also encodes the colon character, guaranteeing that the name can be used as the LocalName part of a namespace-qualified name.</para
             >
           </description>
@@ -160,8 +180,12 @@
 
         
 
+        
+
          class contains two methods that check the characters in an element or attribute name and verify that the name conforms to the rules set by the W3C <see
          cref="http://www.w3.org/TR/2006/REC-xml-20060816/">XML 1.0 recommendation</see>
+
+        
 
         
 
@@ -174,12 +198,16 @@
 
             
 
+            
+
              checks the characters and verifies that the name is valid. The method returns the name if it's valid, and throws an exception if it isn't.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Xml.XmlConvert.VerifyNCName(System.String)" />
+
+            
 
             
 
@@ -193,6 +221,8 @@
 
         
 
+        
+
          contains additional methods that validate tokens, white-space characters, public IDs, and other strings.</para
       >
       <format type="text/html">
@@ -203,8 +233,12 @@
 
         
 
+        
+
          also provides methods that enable you to convert data from a string to a strongly typed data type. For example, the <see
          cref="Overload:System.Xml.XmlConvert.ToDateTime" />
+
+        
 
         
 
@@ -213,13 +247,19 @@
 
         
 
+        
+
          equivalent. This is useful because most methods in the <see
          cref="T:System.XmlReader" />
 
         
 
+        
+
          class return data as a string. After the data is read, it can be converted to the proper data type before being used. The <see
          cref="Overload:System.Xml.XmlConvert.ToString" />
+
+        
 
         
 
@@ -254,6 +294,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.XmlConvert" />
+
+            
 
             
 
@@ -327,6 +369,8 @@ public class App {
 
                 
 
+                
+
                  (where HHHH stands for a valid, four digit hexadecimal UCS-2 code) that has not been decoded is transformed into the corresponding Unicode 2.1 (Unicode 3.0 if supported by the application) character.</para
               >
             </item>
@@ -346,8 +390,12 @@ public class App {
 
             
 
+            
+
              and <see
              cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+
+            
 
             
 
@@ -360,6 +408,8 @@ public class App {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -398,13 +448,19 @@ public class App {
 
             
 
+            
+
             , <see
              cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
+
+            
 
             
 
@@ -441,12 +497,16 @@ public class App {
 
             
 
+            
+
              method except that it encodes the colon character, which guarantees that the name can be used as the local name part of a namespace qualified name.</para
           >
           <para>For example, if you passed this method the invalid name a:b, it returns a_x003a_b, which is a valid local name.</para>
           <para
             >If <paramref
              name="name" />
+
+            
 
             
 
@@ -463,6 +523,8 @@ public class App {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -501,8 +563,12 @@ public class App {
 
             
 
+            
+
              method for an example comparing the <see
              cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+
+            
 
             
 
@@ -511,8 +577,12 @@ public class App {
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
+
+            
 
             
 
@@ -530,6 +600,8 @@ public class App {
 
             
 
+            
+
              is escaped as _xHHHH_. The HHHH string stands for the four-digit hexadecimal UCS-2 code for the character in most significant bit first order. For example, the name Order Details is encoded as Order_x0020_Details.</para
           >
           <para>The underscore character does not need to be escaped unless it is followed by a character sequence that together with the underscore can be misinterpreted as an escape sequence when decoding the name. For example, Order_Details is not encoded, but Order_x0020_ is encoded as Order_x005f_x0020_. No shortforms are allowed. For example, the forms _x20_ and __ are not generated.</para>
@@ -539,8 +611,12 @@ public class App {
 
             
 
+            
+
             . To guarantee it is a valid namespace qualified name use <see
              cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+
+            
 
             
 
@@ -557,6 +633,8 @@ public class App {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,9 +673,13 @@ public class App {
 
             
 
+            
+
              method for an example comparing the
 <see
              cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+
+            
 
             
 
@@ -606,8 +688,12 @@ public class App {
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
+
+            
 
             
 
@@ -620,6 +706,8 @@ public class App {
           <para
             >If <paramref
              name="name" />
+
+            
 
             
 
@@ -636,6 +724,8 @@ public class App {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -675,6 +765,8 @@ public class App {
 
           
 
+          
+
           The character to verify as a non-colon character.</param
         >
       </Docs>
@@ -711,6 +803,8 @@ public class App {
 
           
 
+          
+
            object to validate.</param
         >
       </Docs>
@@ -742,6 +836,8 @@ public class App {
 
             
 
+            
+
              recommendation.</para
           >
         </remarks>
@@ -755,6 +851,8 @@ public class App {
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -789,6 +887,8 @@ public class App {
 
             
 
+            
+
              recommendation.</para
           >
         </remarks>
@@ -802,6 +902,8 @@ public class App {
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -836,6 +938,8 @@ public class App {
 
             
 
+            
+
              recommendation.</para
           >
         </remarks>
@@ -849,6 +953,8 @@ public class App {
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -891,10 +997,14 @@ public class App {
 
           
 
+          
+
           The surrogate character to validate.</param
         >
         <param name="highChar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -930,6 +1040,8 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
@@ -937,8 +1049,12 @@ public class App {
 
           
 
+          
+
            does not represent a <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -956,8 +1072,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -970,6 +1090,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1008,8 +1130,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -1018,13 +1144,19 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -1036,10 +1168,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1050,13 +1186,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.Byte.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Byte.MaxValue" />
+
+          
 
           
 
@@ -1070,8 +1212,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1084,6 +1230,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1122,8 +1270,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -1135,10 +1287,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1152,8 +1308,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -1166,6 +1326,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1207,6 +1369,8 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
@@ -1215,8 +1379,12 @@ public class App {
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1232,8 +1400,12 @@ public class App {
 
               
 
+              
+
                method is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see
                cref="M:System.Xml.XmlConvert.ToDateTime(System.String,System.Xml.XmlDateTimeSerializationMode)" />
+
+              
 
               
 
@@ -1249,8 +1421,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1263,6 +1439,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1305,8 +1483,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -1315,8 +1497,12 @@ public class App {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -1325,8 +1511,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.DateTimeStyles.AllowTrailingWhite" />
+
+            
 
             
 
@@ -1339,6 +1529,8 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
@@ -1347,13 +1539,19 @@ public class App {
 
             
 
+            
+
              or <paramref
              name="format" />
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1365,8 +1563,12 @@ public class App {
 
             
 
+            
+
              does not contain a date and time that corresponds to <paramref
              name="format" />
+
+            
 
             
 
@@ -1375,6 +1577,8 @@ public class App {
         </exception>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1388,8 +1592,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1405,10 +1613,14 @@ public class App {
 
           
 
+          
+
           The string to convert. </param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1449,6 +1661,8 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
@@ -1457,13 +1671,19 @@ public class App {
 
             
 
+            
+
              or an element of <paramref
              name="formats" />
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1475,8 +1695,12 @@ public class App {
 
             
 
+            
+
              does not contain a date and time that corresponds to any of the elements of <paramref
              name="formats" />
+
+            
 
             
 
@@ -1490,8 +1714,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1524,6 +1752,8 @@ public class App {
 
           
 
+          
+
           An array containing the format structures to apply to the converted DateTime. Valid formats include "yyyy-MM-ddTHH:mm:sszzzzzz" and its subsets. </param
         >
         <remarks>
@@ -1538,8 +1768,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1555,10 +1789,14 @@ public class App {
 
           
 
+          
+
           The string to convert. </param
         >
         <param name="formats">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1599,13 +1837,19 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              using the <see
              cref="T:System.Xml.XmlDateTimeSerializationMode" />
+
+            
 
             
 
@@ -1620,8 +1864,12 @@ public class App {
 
             
 
+            
+
              equivalent of the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1633,8 +1881,12 @@ public class App {
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1645,8 +1897,12 @@ public class App {
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.XmlDateTimeSerializationMode" />
+
+          
 
           
 
@@ -1687,8 +1943,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -1703,11 +1963,15 @@ public class App {
 
             
 
+            
+
              equivalent of the supplied string.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1750,8 +2014,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -1766,11 +2034,15 @@ public class App {
 
             
 
+            
+
              equivalent of the supplied string.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1781,13 +2053,19 @@ public class App {
 
           
 
+          
+
           The format from which <paramref
            name="s" />
 
           
 
+          
+
            is converted. The format parameter can be any subset of the W3C Recommendation for the XML dateTime type. (For more information see http://www.w3.org/TR/xmlschema-2/#dateTime.) The string <paramref
            name="s" />
+
+          
 
           
 
@@ -1830,8 +2108,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -1846,11 +2128,15 @@ public class App {
 
             
 
+            
+
              equivalent of the supplied string.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1861,8 +2147,12 @@ public class App {
 
           
 
+          
+
           An array of formats from which <paramref
            name="s" />
+
+          
 
           
 
@@ -1871,8 +2161,12 @@ public class App {
 
           
 
+          
+
            can be any subset of the W3C Recommendation for the XML dateTime type. (For more information see http://www.w3.org/TR/xmlschema-2/#dateTime.) The string <paramref
            name="s" />
+
+          
 
           
 
@@ -1910,8 +2204,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -1920,8 +2218,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+            
 
             
 
@@ -1930,13 +2232,19 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -1948,10 +2256,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1962,13 +2274,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.Decimal.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Decimal.MaxValue" />
+
+          
 
           
 
@@ -1982,8 +2300,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -1996,6 +2318,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2033,10 +2357,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2047,13 +2375,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.Double.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Double.MaxValue" />
+
+          
 
           
 
@@ -2064,6 +2398,8 @@ public class App {
           <para
             >If <paramref
              name="s" />
+
+            
 
             
 
@@ -2078,8 +2414,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2092,6 +2432,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2129,8 +2471,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -2143,6 +2489,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2180,8 +2528,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -2190,8 +2542,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -2200,8 +2556,12 @@ public class App {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -2213,10 +2573,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2227,13 +2591,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.Int16.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Int16.MaxValue" />
+
+          
 
           
 
@@ -2247,8 +2617,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -2261,6 +2635,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2299,8 +2675,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -2309,8 +2689,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -2319,8 +2703,12 @@ public class App {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -2332,10 +2720,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2346,13 +2738,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.Int32.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -2366,8 +2764,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2380,6 +2782,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2418,8 +2822,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -2428,8 +2836,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -2438,8 +2850,12 @@ public class App {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -2451,10 +2867,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2465,13 +2885,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.Int64.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Int64.MaxValue" />
+
+          
 
           
 
@@ -2485,8 +2911,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -2499,6 +2929,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2543,8 +2975,12 @@ public class App {
 
             
 
+            
+
             (<see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2556,8 +2992,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -2566,8 +3006,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -2576,8 +3020,12 @@ public class App {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -2589,10 +3037,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2603,13 +3055,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.SByte.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.SByte.MaxValue" />
+
+          
 
           
 
@@ -2623,8 +3081,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.SByte" />
+
+            
 
             
 
@@ -2637,6 +3099,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2673,10 +3137,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2687,13 +3155,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.Single.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.Single.MaxValue" />
+
+          
 
           
 
@@ -2704,6 +3178,8 @@ public class App {
           <para
             >If <paramref
              name="s" />
+
+            
 
             
 
@@ -2718,8 +3194,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -2732,6 +3212,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2773,8 +3255,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2787,6 +3273,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2825,13 +3313,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -2846,8 +3340,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2860,6 +3358,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2898,8 +3398,12 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
+
+            
 
             
 
@@ -2914,8 +3418,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2928,6 +3436,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2973,8 +3483,12 @@ public class App {
 
               
 
+              
+
                method is obsolete in the 2.0 version of the .NET Framework and has been replaced with the <see
                cref="M:System.Xml.XmlConvert.ToString(System.DateTime,System.Xml.XmlDateTimeSerializationMode)" />
+
+              
 
               
 
@@ -2990,8 +3504,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3004,6 +3522,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3042,8 +3562,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3058,8 +3582,12 @@ public class App {
 
             
 
+            
+
              representation of the supplied <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -3071,8 +3599,12 @@ public class App {
 
           
 
+          
+
           The <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -3110,13 +3642,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -3131,8 +3669,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3145,6 +3687,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3185,6 +3729,8 @@ public class App {
 
             
 
+            
+
              is Double.PositiveInfinity or Double.NegativeInfinity, this method returns the string INF or -INF respectively.</para
           >
         </remarks>
@@ -3196,8 +3742,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3210,6 +3760,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3247,8 +3799,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3261,6 +3817,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3298,13 +3856,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -3319,8 +3883,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3333,6 +3901,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3371,13 +3941,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -3392,8 +3968,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3406,6 +3986,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3444,13 +4026,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -3465,8 +4053,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3479,6 +4071,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3523,8 +4117,12 @@ public class App {
 
             
 
+            
+
             (<see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -3536,13 +4134,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -3557,8 +4161,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3571,6 +4179,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3610,6 +4220,8 @@ public class App {
 
             
 
+            
+
              is Single.PositiveInfinity or Single.NegativeInfinity, this method returns the string INF or -INF respectively.</para
           >
         </remarks>
@@ -3621,8 +4233,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3635,6 +4251,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3675,8 +4293,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3709,8 +4331,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3723,6 +4349,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3767,8 +4395,12 @@ public class App {
 
             
 
+            
+
             (<see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -3780,13 +4412,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -3801,8 +4439,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3815,6 +4457,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3859,8 +4503,12 @@ public class App {
 
             
 
+            
+
             (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -3872,13 +4520,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -3893,8 +4547,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3907,6 +4565,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3951,8 +4611,12 @@ public class App {
 
             
 
+            
+
             (<see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -3964,13 +4628,19 @@ public class App {
 
             
 
+            
+
             .ToString(<see
              langword="null" />
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -3985,8 +4655,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3999,6 +4673,8 @@ public class App {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4041,8 +4717,12 @@ public class App {
 
             
 
+            
+
             .ToString(<paramref
              name="format" />
+
+            
 
             
 
@@ -4051,11 +4731,15 @@ public class App {
 
             
 
+            
+
             ).</para
           >
         </remarks>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4069,8 +4753,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4086,10 +4774,14 @@ public class App {
 
           
 
+          
+
           The value to convert. </param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4130,13 +4822,19 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
 
             
 
+            
+
              using the <see
              cref="T:System.Xml.XmlDateTimeSerializationMode" />
+
+            
 
             
 
@@ -4151,8 +4849,12 @@ public class App {
 
             
 
+            
+
              equivalent of the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4164,8 +4866,12 @@ public class App {
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -4176,13 +4882,19 @@ public class App {
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.XmlDateTimeSerializationMode" />
 
           
 
+          
+
            values that specify how to treat the <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -4221,8 +4933,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4237,8 +4953,12 @@ public class App {
 
             
 
+            
+
              representation in the specified format of the supplied <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -4250,8 +4970,12 @@ public class App {
 
           
 
+          
+
           The <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -4262,8 +4986,12 @@ public class App {
 
           
 
+          
+
           The format to which <paramref
            name="s" />
+
+          
 
           
 
@@ -4300,8 +5028,12 @@ public class App {
 
           
 
+          
+
            is not in the correct format to represent a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -4315,8 +5047,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4329,6 +5065,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4373,8 +5111,12 @@ public class App {
 
             
 
+            
+
             (<see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4386,8 +5128,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -4396,8 +5142,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -4406,8 +5156,12 @@ public class App {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -4419,10 +5173,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -4433,13 +5191,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.UInt16.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.UInt16.MaxValue" />
+
+          
 
           
 
@@ -4453,8 +5217,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -4467,6 +5235,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4511,8 +5281,12 @@ public class App {
 
             
 
+            
+
             (<see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4524,8 +5298,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -4534,8 +5312,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -4544,8 +5326,12 @@ public class App {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -4557,10 +5343,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -4571,13 +5361,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.UInt32.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.UInt32.MaxValue" />
+
+          
 
           
 
@@ -4591,8 +5387,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.UInt32" />
+
+            
 
             
 
@@ -4605,6 +5405,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4649,8 +5451,12 @@ public class App {
 
             
 
+            
+
             (<see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4662,8 +5468,12 @@ public class App {
 
             
 
+            
+
             (<paramref
              name="s" />
+
+            
 
             
 
@@ -4672,8 +5482,12 @@ public class App {
 
             
 
+            
+
             |<see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -4682,8 +5496,12 @@ public class App {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+
+            
 
             
 
@@ -4695,10 +5513,14 @@ public class App {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -4709,13 +5531,19 @@ public class App {
 
           
 
+          
+
            represents a number less than <see
            cref="F:System.UInt64.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.UInt64.MaxValue" />
+
+          
 
           
 
@@ -4729,8 +5557,12 @@ public class App {
 
             
 
+            
+
              to a <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4743,6 +5575,8 @@ public class App {
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4779,13 +5613,19 @@ public class App {
 
           
 
+          
+
            is <see
            langword="null" />
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -4796,6 +5636,8 @@ public class App {
 
           
 
+          
+
            is not a valid XML name.</exception
         >
         <remarks>
@@ -4803,6 +5645,8 @@ public class App {
           <para
             >This method can be used with the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -4826,6 +5670,8 @@ public class App {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4864,8 +5710,12 @@ public class App {
 
             
 
+            
+
              contains a colon, <see
              cref="T:System.Xml.XmlException" />
+
+            
 
             
 
@@ -4878,8 +5728,12 @@ public class App {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4888,10 +5742,14 @@ public class App {
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.Xml.XmlException">
           <paramref name="name" />
+
+          
 
           
 
@@ -4907,6 +5765,8 @@ public class App {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4958,6 +5818,8 @@ catch(Exception e) {
 
           
 
+          
+
           The string you wish to verify.</param
         >
       </Docs>
@@ -4993,6 +5855,8 @@ catch(Exception e) {
 
             
 
+            
+
              production [13] PublidChar for details on the allowed characters</para
           >
           <para>If the parameter is null, an ArgumentNullException will be thrown. If any of the characters are not valid public id characters, an XmlException is thrown with information about the first invalid character encountered.</para>
@@ -5008,6 +5872,8 @@ catch(Exception e) {
         <param name="publicId">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.String" />
+
+          
 
           
 
@@ -5051,6 +5917,8 @@ catch(Exception e) {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5064,6 +5932,8 @@ catch(Exception e) {
         </returns>
         <param name="token">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5102,6 +5972,8 @@ catch(Exception e) {
 
             
 
+            
+
              production [3] S for details on the allowed characters.</para
           >
           <para>If the parameter is null, an ArgumentNullException will be thrown. </para>
@@ -5118,6 +5990,8 @@ catch(Exception e) {
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.String" />
+
+          
 
           
 
@@ -5155,6 +6029,8 @@ catch(Exception e) {
 
             
 
+            
+
              production [2] Char for details on the allowed characters.</para
           >
           <para>If the parameter is null, an ArgumentNullException will be thrown. If any of the characters are not valid xml characters, an XmlException is thrown with information on the first invalid character encountered.</para>
@@ -5170,6 +6046,8 @@ catch(Exception e) {
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.String" />
+
+          
 
           
 

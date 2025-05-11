@@ -46,13 +46,19 @@
 
         
 
+        
+
          is the number of elements the <see
          cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
         
 
+        
+
          can hold. As elements are added to a <see
          cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+        
 
         
 
@@ -64,8 +70,12 @@
 
         
 
+        
+
          instance. The default hash code provider is the <see
          cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
+
+        
 
         
 
@@ -77,11 +87,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >In .NET Framework version 1.0, this class uses culture-sensitive string comparisons. However, in .NET Framework version 1.1 and later, this class uses <see
          cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+        
 
         
 
@@ -97,12 +111,16 @@
 
         
 
+        
+
         and <format
          type="text/html">
           <a href="579ef891-1f83-4c63-9ebd-2f40406b5b91"
             >Performing Culture-Insensitive String Operations</a
           >
         </format>
+
+        
 
         
 
@@ -113,6 +131,8 @@
         <para
           >The <see
            cref="M:System.Collections.Specialized.NameObjectCollectionBase.BaseGet(System.String)" />
+
+          
 
           
 
@@ -128,8 +148,12 @@
 
         
 
+        
+
          keys and <see
          cref="T:System.Object" />
+
+        
 
         
 
@@ -161,13 +185,19 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -179,6 +209,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -187,8 +219,12 @@
 
             
 
+            
+
              instance. The default hash code provider is the <see
              cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
+
+            
 
             
 
@@ -197,6 +233,8 @@
           <para
             >The comparer determines whether two keys are equal. The default comparer is the <see
              cref="T:System.Collections.CaseInsensitiveComparer" />
+
+            
 
             
 
@@ -209,6 +247,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -243,13 +283,19 @@
 
             
 
+            
+
              object is the number of elements that the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -261,6 +307,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -269,8 +317,12 @@
 
             
 
+            
+
              object combines the comparer and the hash code provider.  The hash code provider dispenses hash codes for keys in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -286,8 +338,12 @@
 
             
 
+            
+
              class that is empty, has the default initial capacity, and uses the specified <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -299,8 +355,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IEqualityComparer" />
+
+          
 
           
 
@@ -333,13 +393,19 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -351,6 +417,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -359,8 +427,12 @@
 
             
 
+            
+
              instance. The default hash code provider is the <see
              cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
+
+            
 
             
 
@@ -372,6 +444,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -380,13 +454,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -401,6 +481,8 @@
 
             
 
+            
+
              class that is empty, has the specified initial capacity, and uses the default hash code provider and the default comparer.</para
           >
         </summary>
@@ -409,8 +491,12 @@
 
           
 
+          
+
           The approximate number of entries that the <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -452,13 +538,19 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -470,6 +562,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -478,8 +572,12 @@
 
             
 
+            
+
              instance. The default hash code provider is the <see
              cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
+
+            
 
             
 
@@ -488,6 +586,8 @@
           <para
             >The comparer determines whether two keys are equal. The default comparer is the <see
              cref="T:System.Collections.CaseInsensitiveComparer" />
+
+            
 
             
 
@@ -503,6 +603,8 @@
 
             
 
+            
+
              class that is empty, has the default initial capacity, and uses the specified hash code provider and the specified comparer.</para
           >
         </summary>
@@ -511,13 +613,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IHashCodeProvider" />
 
           
 
+          
+
            that will supply the hash codes for all keys in the <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -528,8 +636,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -564,13 +676,19 @@
 
             
 
+            
+
              object is the number of elements that the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -582,6 +700,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -590,8 +710,12 @@
 
             
 
+            
+
              object combines the comparer and the hash code provider.  The hash code provider dispenses hash codes for keys in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -603,13 +727,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the <paramref
              name="capacity" />
+
+            
 
             
 
@@ -624,8 +754,12 @@
 
             
 
+            
+
              class that is empty, has the specified initial capacity, and uses the specified <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -637,8 +771,12 @@
 
           
 
+          
+
           The approximate number of entries that the <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -649,8 +787,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IEqualityComparer" />
+
+          
 
           
 
@@ -691,13 +833,19 @@
 
             
 
+            
+
              class that is serializable and uses the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -709,13 +857,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            object that contains the information required to serialize the new <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -726,13 +880,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            object that contains the source and destination of the serialized stream associated with the new <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -775,13 +935,19 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -793,6 +959,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -801,8 +969,12 @@
 
             
 
+            
+
              instance. The default hash code provider is the <see
              cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
+
+            
 
             
 
@@ -814,6 +986,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -822,13 +996,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -843,6 +1023,8 @@
 
             
 
+            
+
              class that is empty, has the specified initial capacity and uses the specified hash code provider and the specified comparer.</para
           >
         </summary>
@@ -851,8 +1033,12 @@
 
           
 
+          
+
           The approximate number of entries that the <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -863,13 +1049,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IHashCodeProvider" />
 
           
 
+          
+
            that will supply the hash codes for all keys in the <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -880,8 +1072,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -917,8 +1113,12 @@
 
             
 
+            
+
              already equals the capacity, the capacity of the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -930,8 +1130,12 @@
 
             
 
+            
+
              is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -940,8 +1144,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -956,6 +1164,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -964,8 +1174,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -976,8 +1190,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1009,6 +1227,8 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para>This method is an O(1) operation.</para>
@@ -1018,6 +1238,8 @@
           <para
             >Removes all entries from the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1057,6 +1279,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1068,11 +1292,15 @@
 
             
 
+            
+
              that represents the value of the entry at the specified index.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1115,6 +1343,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1126,6 +1356,8 @@
 
             
 
+            
+
              that represents the value of the first entry with the specified key, if found; otherwise, null.</para
           >
         </returns>
@@ -1134,8 +1366,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1168,13 +1404,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -1189,8 +1431,12 @@
 
             
 
+            
+
              array that contains all the keys in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1205,8 +1451,12 @@
 
             
 
+            
+
              array that contains all the keys in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1240,13 +1490,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -1261,8 +1517,12 @@
 
             
 
+            
+
              array that contains all the values in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1277,8 +1537,12 @@
 
             
 
+            
+
              array that contains all the values in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1314,13 +1578,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -1335,6 +1605,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1346,6 +1618,8 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
@@ -1354,8 +1628,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1394,6 +1672,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1405,11 +1685,15 @@
 
             
 
+            
+
              that represents the key of the entry at the specified index.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1446,6 +1730,8 @@
 
             
 
+            
+
              instance contains entries whose keys are not null.</para
           >
         </summary>
@@ -1454,6 +1740,8 @@
           <para
             >true if the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1489,8 +1777,12 @@
 
             
 
+            
+
              does not contain an element with the specified key, the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1503,13 +1795,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -1524,6 +1822,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1532,8 +1832,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1569,13 +1873,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -1590,11 +1900,15 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1634,11 +1948,15 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1649,8 +1967,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1691,8 +2013,12 @@
 
             
 
+            
+
              instance, if found; otherwise, adds an entry with the specified key and value into the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1704,8 +2030,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1716,8 +2046,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1747,13 +2081,19 @@
 
             
 
+            
+
              can store. <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1765,8 +2105,12 @@
 
             
 
+            
+
             . If <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -1779,6 +2123,8 @@
           <para
             >Gets the number of key/value pairs contained in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1818,8 +2164,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1828,8 +2178,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1840,8 +2194,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1850,13 +2208,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1868,8 +2232,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1878,8 +2246,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1888,8 +2260,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1898,8 +2274,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1917,6 +2297,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1928,8 +2310,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -1969,13 +2355,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -1990,8 +2382,12 @@
 
             
 
+            
+
              interface and returns the data needed to serialize the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -2003,13 +2399,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            object that contains the information required to serialize the <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -2020,13 +2422,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            object that contains the source and destination of the serialized stream associated with the <see
            cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+          
 
           
 
@@ -2059,6 +2467,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -2099,8 +2509,12 @@
 
             
 
+            
+
              instance that contains all the keys in the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -2139,8 +2553,12 @@
 
             
 
+            
+
              method is not visible to COM clients by default, inheriting the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -2152,13 +2570,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -2173,11 +2597,15 @@
 
             
 
+            
+
              interface and raises the deserialization event when the deserialization is complete.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2214,6 +2642,8 @@
 
             
 
+            
+
              to copy the elements.</para
           >
           <para
@@ -2222,8 +2652,12 @@
 
             
 
+            
+
              method is not visible to COM clients by default, inheriting the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -2235,13 +2669,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+
+            
 
             
 
@@ -2256,8 +2696,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -2269,8 +2713,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -2279,8 +2727,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -2291,8 +2743,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -2328,13 +2784,19 @@
 
             
 
+            
+
              object is not synchronized. Derived classes can provide a synchronized version of the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -2344,6 +2806,8 @@
           <para
             >The following code example shows how to lock the collection using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -2357,6 +2821,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -2393,8 +2859,12 @@
 
             
 
+            
+
              class using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -2403,8 +2873,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -2413,8 +2887,12 @@
 
             
 
+            
+
              object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 
@@ -2424,6 +2902,8 @@
           <para
             >The following code example shows how to lock the collection using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -2437,6 +2917,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+
+            
 
             
 

@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration represents the names of image files that are used to draw visual style elements. The <see
          cref="T:System.Windows.Forms.VisualStyles.FilenameProperty" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          method to specify which file name property to retrieve for the element that the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+        
 
         
 

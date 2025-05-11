@@ -67,6 +67,8 @@
 
             
 
+            
+
              containing information about the location and measurements of the view at design time.</para
           >
         </returns>
@@ -75,8 +77,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -110,8 +116,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -166,6 +176,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -174,8 +186,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Web.UI.Design.ViewFlags" />
+
+          
 
           
 
@@ -183,6 +199,8 @@
         >
         <param name="setFlag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,8 +235,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -226,6 +248,8 @@
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,6 +311,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+            
 
             
 

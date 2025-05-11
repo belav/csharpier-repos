@@ -17,6 +17,8 @@
 
         
 
+        
+
          interface when you want to implement your own custom ASP.NET data source control.</para
       >
       <para
@@ -25,8 +27,12 @@
 
         
 
+        
+
          interface is a data source control. The <see
          cref="T:System.Web.UI.IDataSource" />
+
+        
 
         
 
@@ -35,8 +41,12 @@
 
         
 
+        
+
          method and the <see
          cref="M:System.Web.UI.IDataSource.GetViewNames" />
+
+        
 
         
 
@@ -45,8 +55,12 @@
 
         
 
+        
+
          abstraction in the <see
          cref="N:System.Data" />
+
+        
 
         
 
@@ -58,8 +72,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+        
 
         
 
@@ -68,11 +86,15 @@
 
         
 
+        
+
         , support many views. The data source view defines the capabilities of a data source and the operations that it supports.</para
       >
       <para
         >In summary, data source controls implement the <see
          cref="T:System.Web.UI.IDataSource" />
+
+        
 
         
 
@@ -101,8 +123,12 @@
 
             
 
+            
+
              event is raised when the properties of a data-bound control or the underlying data has changed in some way that affects the data bindings between a data-bound control and its data. For example, the event is raised if a file name property, such as the <see
              cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
+
+            
 
             
 
@@ -113,6 +139,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -150,6 +178,8 @@
 
             
 
+            
+
              class. The data source view defines the capabilities of a data source control, and performs all the work necessary to retrieve data from the underlying data store and perform operations such as sorting, inserting, deleting, and updating.</para
           >
           <para
@@ -158,8 +188,12 @@
 
             
 
+            
+
              interface implement the <see
              cref="M:System.Web.UI.IDataSource.GetView(System.String)" />
+
+            
 
             
 
@@ -178,8 +212,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Web.UI.IDataSource" />
+
+            
 
             
 
@@ -188,6 +226,8 @@
         </returns>
         <param name="viewName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,13 +258,19 @@
 
             
 
+            
+
              method returns a collection of view names currently associated with the data source control instance. Callers can iterate through the collection of view names and retrieve individual <see
              cref="T:System.Web.UI.DataSourceView" />
 
             
 
+            
+
              objects with the <see
              cref="M:System.Web.UI.IDataSource.GetView(System.String)" />
+
+            
 
             
 
@@ -236,8 +282,12 @@
 
             
 
+            
+
              interface implement the <see
              cref="M:System.Web.UI.IDataSource.GetViewNames" />
+
+            
 
             
 
@@ -252,6 +302,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -263,8 +315,12 @@
 
             
 
+            
+
              that contains the names of the views associated with the <see
              cref="T:System.Web.UI.IDataSource" />
+
+            
 
             
 

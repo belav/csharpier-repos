@@ -34,6 +34,8 @@
 
         
 
+        
+
          interface.</para
       >
     </remarks>
@@ -42,6 +44,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -106,8 +112,12 @@
 
             
 
+            
+
              class and adds an <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -119,8 +129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -159,8 +173,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -175,6 +193,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -183,8 +203,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -223,6 +247,8 @@
 
             
 
+            
+
              object into an array. The copying begins at the specified index location.</para
           >
         </remarks>
@@ -234,6 +260,8 @@
 
             
 
+            
+
              object into an array.</para
           >
         </summary>
@@ -242,8 +270,12 @@
 
           
 
+          
+
           The array that the <see
            cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+          
 
           
 
@@ -251,6 +283,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,6 +314,8 @@
 
             
 
+            
+
              objects the collection contains.</para
           >
         </remarks>
@@ -288,6 +324,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -324,8 +362,12 @@
 
             
 
+            
+
              class implements the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -340,8 +382,12 @@
 
             
 
+            
+
              object that can be used to navigate the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -353,6 +399,8 @@
           <para
             >An <see
              cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
+
+            
 
             
 
@@ -384,6 +432,8 @@
           <para
             >Gets a value that indicates whether access to the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -451,8 +501,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -464,8 +518,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -494,8 +552,12 @@
 
             
 
+            
+
              is not thread safe. Derived classes can provide their own synchronized version of the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -504,13 +566,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
+            
+
              class, not directly on the class itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -522,6 +590,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -557,6 +627,8 @@
 
             
 
+            
+
              object into an array. The copying begins at the index location specified.</para
           >
         </remarks>
@@ -568,6 +640,8 @@
 
             
 
+            
+
              object into an array.</para
           >
         </summary>
@@ -576,8 +650,12 @@
 
           
 
+          
+
           The array that the <see
            cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+          
 
           
 
@@ -585,6 +663,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -619,8 +699,12 @@
 
             
 
+            
+
              class implements the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -635,8 +719,12 @@
 
             
 
+            
+
              object that can be used to navigate the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -648,6 +736,8 @@
           <para
             >An <see
              cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
+
+            
 
             
 

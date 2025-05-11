@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace provides advanced two-dimensional and vector graphics functionality.</para
       >
     </summary>
@@ -17,6 +19,8 @@
       <para
         >The following table lists some of the important classes and enumerations in the<see
          cref="N:System.Drawing.Drawing2D" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Drawing.Drawing2D.GraphicsContainer" />
+
+              
 
               
 
@@ -58,8 +66,12 @@
 
               
 
+              
+
                classes represent a series of lines and curves. The <see
                cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
+
+              
 
               
 
@@ -68,8 +80,12 @@
 
               
 
+              
+
                classes provide detailed information about the contents of a <see
                cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+              
 
               
 
@@ -92,8 +108,12 @@
 
               
 
+              
+
                class represents a matrix for geometric transforms. The <see
                cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+              
 
               
 
@@ -116,8 +136,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+              
 
               
 
@@ -140,8 +164,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+
+              
 
               
 
@@ -150,13 +178,19 @@
 
               
 
+              
+
                 enumeration enables you to specify how two lines are joined in a path. The <see
                cref="T:System.Drawing.Drawing2D.PenAlignment" />
 
               
 
+              
+
                enumeration enables you specify the alignment of the drawing tip, when you draw a line. The <see
                cref="T:System.Drawing.Drawing2D.PenType" />
+
+              
 
               
 
@@ -179,8 +213,12 @@
 
               
 
+              
+
                enumeration specifies fill styles for a <see
                cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+              
 
               
 
@@ -189,8 +227,12 @@
 
               
 
+              
+
                class specifies a blend pattern for a <see
                cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+              
 
               
 
@@ -199,8 +241,12 @@
 
               
 
+              
+
                enumeration specifies the fill style for a <see
                cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+              
 
               
 
@@ -213,6 +259,8 @@
         <para
           >Classes in the <see
            cref="N:System.Drawing.Drawing2D" />
+
+          
 
           
 

@@ -35,8 +35,12 @@
 
         
 
+        
+
          class and derived classes to create digital signatures that help protect the integrity of your data.  The <see
          cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          class, the <see
          cref="T:System.Security.Cryptography.ECDSA" />
+
+        
 
         
 
@@ -59,13 +67,19 @@
 
         
 
+        
+
          class instead of the <see
          cref="T:System.Security.Cryptography.DSA" />
 
         
 
+        
+
          class. Use <see
          cref="T:System.Security.Cryptography.DSA" />
+
+        
 
         
 
@@ -78,6 +92,8 @@
       <para
         >Represents the abstract base class from which all implementations of the Digital Signature Algorithm (<see
          cref="T:System.Security.Cryptography.DSA" />
+
+        
 
         
 
@@ -106,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -175,6 +193,8 @@
 
             
 
+            
+
             , use the name System.Security.Cryptography.DSA.</para
           >
         </remarks>
@@ -191,8 +211,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.DSA" />
+
+          
 
           
 
@@ -228,6 +252,8 @@
 
           
 
+          
+
            will be thrown if the instance doesn't have a private key or if the parameter rgbHash isn't exactly 20 bytes long (like all SHA1 hashes are).</remarks
         >
         <summary>
@@ -235,6 +261,8 @@
           <para
             >When overridden in a derived class, creates the <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -247,6 +275,8 @@
         </returns>
         <param name="rgbHash">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,8 +312,12 @@
 
           
 
+          
+
           .<see
            cref="M:System.Security.Cryptography.DSAParameters.X" />
+
+          
 
           
 
@@ -294,6 +328,8 @@
           <para
             >When overridden in a derived class, exports the <see
              cref="T:System.Security.Cryptography.DSAParameters" />
+
+            
 
             
 
@@ -308,11 +344,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -351,6 +391,8 @@
 
             
 
+            
+
              object from an XML string.</para
           >
         </summary>
@@ -359,8 +401,12 @@
 
           
 
+          
+
           The XML string to use to reconstruct the <see
            cref="T:System.Security.Cryptography.DSA" />
+
+          
 
           
 
@@ -396,8 +442,12 @@
 
           
 
+          
+
            is required if you want to import the DSA private key into the instance. Note that you are responsable to zeroize the private key inside the <see
            cref="T:System.Security.Cryptography.DSAParameters" />
+
+          
 
           
 
@@ -411,6 +461,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -419,8 +471,12 @@
 
           
 
+          
+
           The parameters for <see
            cref="T:System.Security.Cryptography.DSA" />
+
+          
 
           
 
@@ -459,6 +515,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -470,11 +528,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -511,6 +573,8 @@
 
           
 
+          
+
            will be thrown if the parameter rgbHash isn't exactly 20 bytes long (like all SHA1 hashes are) or if the signature length isn't 40 bytes long (as all DSA signatures are).</remarks
         >
         <summary>
@@ -518,6 +582,8 @@
           <para
             >When overridden in a derived class, verifies the <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -532,8 +598,12 @@
 
             
 
+            
+
              matches the signature computed using the specified hash algorithm and key on <paramref
              name="rgbHash" />
+
+            
 
             
 
@@ -545,8 +615,12 @@
 
           
 
+          
+
           The hash of the data signed with <paramref
            name="rgbSignature" />
+
+          
 
           
 
@@ -557,8 +631,12 @@
 
           
 
+          
+
           The signature to be verified for <paramref
            name="rgbData" />
+
+          
 
           
 

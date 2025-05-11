@@ -75,8 +75,12 @@
 
         
 
+        
+
          control to create a link to another Web page. The <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
+
+        
 
         
 
@@ -85,8 +89,12 @@
 
         
 
+        
+
          property. It can also be displayed as an image specified by the <see
          cref="P:System.Web.UI.WebControls.HyperLink.ImageUrl" />
+
+        
 
         
 
@@ -98,8 +106,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.HyperLink.ImageUrl" />
+
+        
 
         
 
@@ -108,13 +120,19 @@
 
         
 
+        
+
          property takes precedence. If the image is unavailable, the text in the <see
          cref="P:System.Web.UI.WebControls.HyperLink.Text" />
 
         
 
+        
+
          property is displayed. In browsers that support ToolTip functionality, the <see
          cref="P:System.Web.UI.WebControls.HyperLink.Text" />
+
+        
 
         
 
@@ -128,6 +146,8 @@
               >[&lt;topic://cpconASPNETSyntaxForValidationControls&gt;]</a
             >
           </format>
+
+          
 
           
 
@@ -150,10 +170,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -175,6 +199,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -184,9 +210,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -196,9 +226,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -208,10 +242,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -223,9 +261,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -250,11 +292,15 @@
 
         
 
+        
+
         "
     Text="string"
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -283,6 +329,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -291,6 +339,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -329,6 +379,8 @@
 
             
 
+            
+
              control to the output stream for rendering.</para
           >
         </summary>
@@ -359,6 +411,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -367,8 +421,12 @@
 
             
 
+            
+
             , and the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -377,8 +435,12 @@
 
             
 
+            
+
              property of the control. Otherwise, the <see
              cref="M:System.Web.UI.Control.AddParsedSubObject(System.Object)" />
+
+            
 
             
 
@@ -387,8 +449,12 @@
 
             
 
+            
+
              class is called and the specified object is added to the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -403,6 +469,8 @@
 
             
 
+            
+
              control. </para
           >
         </summary>
@@ -411,8 +479,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -438,6 +510,8 @@
 
           
 
+          
+
           .</value
         >
         <remarks>
@@ -448,13 +522,19 @@
 
             
 
+            
+
              control can be displayed as text or an image. Use the <see
              cref="P:System.Web.UI.WebControls.HyperLink.ImageUrl" />
 
             
 
+            
+
              property to specify an image to display for the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -467,8 +547,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.HyperLink.ImageUrl" />
+
+              
 
               
 
@@ -477,13 +561,19 @@
 
               
 
+              
+
                property takes precedence. If the image is unavailable, the text in the <see
                cref="P:System.Web.UI.WebControls.HyperLink.Text" />
 
               
 
+              
+
                property is displayed. In browsers that support ToolTip functionality, the <see
                cref="P:System.Web.UI.WebControls.HyperLink.Text" />
+
+              
 
               
 
@@ -496,6 +586,8 @@
           <para
             >Gets or sets the path to an image to display for the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -542,8 +634,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -572,8 +668,12 @@
 
             
 
+            
+
              property to specify the URL to navigate to when the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -585,6 +685,8 @@
           <para
             >Gets or sets the URL to link to when the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -637,6 +739,8 @@
 
             
 
+            
+
              control on a page.</para
           >
         </summary>
@@ -663,8 +767,12 @@
 
             
 
+            
+
              property to specify the frame or window that displays the Web page linked to when the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -673,11 +781,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >If this property is not set, the browser or window with focus refreshes when the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -690,13 +802,19 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
                cref="P:System.Web.UI.WebControls.HyperLink.Target" />
 
               
 
+              
+
                property if the rendered output for the <see
                cref="T:System.Web.UI.WebControls.HyperLink" />
+
+              
 
               
 
@@ -707,11 +825,15 @@
 
               
 
+              
+
               . </para
             >
             <para
               >When creating accessible Web pages, it is strongly recommended you avoid using the <see
                cref="P:System.Web.UI.WebControls.HyperLink.Target" />
+
+              
 
               
 
@@ -724,12 +846,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0"
                   >ASP.NET Controls and Accessibility</a
                 >
               </format>
+
+              
 
               
 
@@ -742,6 +868,8 @@
           <para
             >Gets or sets the target window or frame in which to display the Web page content linked to when the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -779,13 +907,19 @@
 
             
 
+            
+
              control can be displayed as text or an image. Use the <see
              cref="P:System.Web.UI.WebControls.HyperLink.Text" />
 
             
 
+            
+
              property to specify the text to display for the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -797,8 +931,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.HyperLink.ImageUrl" />
+
+            
 
             
 
@@ -807,13 +945,19 @@
 
             
 
+            
+
              property takes precedence. If the image is unavailable, the text in the <see
              cref="P:System.Web.UI.WebControls.HyperLink.Text" />
 
             
 
+            
+
              property is displayed. In browsers that support ToolTip functionality, the <see
              cref="P:System.Web.UI.WebControls.HyperLink.Text" />
+
+            
 
             
 
@@ -830,12 +974,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -848,6 +996,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -856,6 +1006,8 @@
           <para
             >Gets or sets the text caption for the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 

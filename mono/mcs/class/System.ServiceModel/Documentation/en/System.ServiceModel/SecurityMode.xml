@@ -21,8 +21,12 @@
 
         
 
+        
+
          is set to <see
          cref="F:System.ServiceModel.SecurityMode.None" />
+
+        
 
         
 
@@ -30,6 +34,8 @@
          type="text/html">
           <a href="0c034608-a1ac-4007-8287-b1382eaa8bf2">Understanding Protection Level</a>
         </format>
+
+        
 
         
 
@@ -43,6 +49,8 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="739ec222-4eda-4cc9-a470-67e64a7a3f10">Programming WCF Security</a>
@@ -50,10 +58,14 @@
 
         
 
+        
+
         . crabout the transport mode, see <format
          type="text/html">
           <a href="86c94153-e48d-4539-b6cf-cd8060582e7f">Transport Security</a>
         </format>
+
+        
 
         
 
@@ -65,13 +77,19 @@
 
         
 
+        
+
         , then the value set in <see
          cref="T:System.ServiceModel.HttpClientCredentialType" />
 
         
 
+        
+
          or <see
          cref="T:System.ServiceModel.TcpClientCredentialType" />
+
+        
 
         
 

@@ -20,6 +20,8 @@
 
     
 
+    
+
     ) of a function member invocation provides actual values or variable references for the parameters of the function member. </paragraph
   >
   <paragraph
@@ -28,11 +30,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >Once a particular function member has been identified at compile-time, possibly through overload resolution, the actual run-time process of invoking the function member is described in <hyperlink
     >14.4.3</hyperlink>
+
+    
 
     
 
@@ -123,6 +129,8 @@
       <table_line>new T(x, y) Overload resolution is applied to select the best instance </table_line>
       <table_line>constructor in the class or struct T. The instance constructor is </table_line>
       <table_line>invoked with the argument list (x, y). </table_line>
+
+      
 
       
 

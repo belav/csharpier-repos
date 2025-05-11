@@ -9,6 +9,8 @@
 
         
 
+        
+
         ) with respect to the argument list A, then the set of candidate operators consists of all applicable operator op declarations in T. </list_item
       >
       <list_item> Otherwise, if T is object, the set of candidate operators is empty. </list_item>

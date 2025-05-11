@@ -38,6 +38,8 @@
 
         
 
+        
+
          value that is used.</para
       >
       <para
@@ -46,8 +48,12 @@
 
         
 
+        
+
          is used only for declarative security. For imperative security, use the <see
          cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+        
 
         
 
@@ -95,6 +103,8 @@
 
             
 
+            
+
              class with the specified security action.</para
           >
         </summary>
@@ -103,8 +113,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -145,6 +159,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -153,6 +169,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+            
 
             
 
@@ -192,8 +210,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Delete" />
+
+            
 
             
 
@@ -202,8 +224,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Export" />
+
+            
 
             
 
@@ -212,13 +238,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Decrypt" />
 
             
 
+            
+
             , and <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" />
+
+            
 
             
 

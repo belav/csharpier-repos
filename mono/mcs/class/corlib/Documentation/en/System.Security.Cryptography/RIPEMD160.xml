@@ -34,8 +34,12 @@
 
           
 
+          
+
            has been superseded by the Secure Hash Algorithms SHA-256 and SHA-512 and their derived classes. <see
            cref="T:System.Security.Cryptography.SHA256" />
+
+          
 
           
 
@@ -44,13 +48,19 @@
 
           
 
+          
+
            offer better security and performance than <see
            cref="T:System.Security.Cryptography.RIPEMD160" />
 
           
 
+          
+
           . Use <see
            cref="T:System.Security.Cryptography.RIPEMD160" />
+
+          
 
           
 
@@ -86,6 +96,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -94,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.RIPEMD160" />
+
+            
 
             
 
@@ -130,6 +144,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -141,6 +157,8 @@
 
             
 
+            
+
              hash algorithm.</para
           >
         </summary>
@@ -149,6 +167,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Security.Cryptography.RIPEMD160" />
+
+            
 
             
 
@@ -187,6 +207,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -195,6 +217,8 @@
           <para
             >Creates an instance of the specified implementation of the <see
              cref="T:System.Security.Cryptography.RIPEMD160" />
+
+            
 
             
 
@@ -209,6 +233,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -217,8 +243,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.RIPEMD160" />
+
+          
 
           
 

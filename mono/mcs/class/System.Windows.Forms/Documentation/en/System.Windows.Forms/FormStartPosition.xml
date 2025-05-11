@@ -23,8 +23,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -83,6 +87,8 @@
           <para
             >The position of the form is determined by the <see
              cref="P:System.Windows.Forms.Control.Location" />
+
+            
 
             
 

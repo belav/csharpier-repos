@@ -54,6 +54,8 @@
 
         
 
+        
+
          class represents a 7-tuple, or septuple, which is a tuple that has seven components.</para
       >
       <para
@@ -62,8 +64,12 @@
 
         
 
+        
+
          object by calling either the <see
          cref="M:System.Tuple`7.#ctor(`0,`1,`2,`3,`4,`5,`6)" />
+
+        
 
         
 
@@ -72,8 +78,12 @@
 
         
 
+        
+
          method. You can retrieve the value of the tuple's components by using the read-only <see
          cref="P:System.Tuple`7.Item1" />
+
+        
 
         
 
@@ -82,8 +92,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Tuple`7.Item3" />
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Tuple`7.Item5" />
+
+        
 
         
 
@@ -102,8 +120,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Tuple`7.Item7" />
+
+        
 
         
 
@@ -121,6 +143,8 @@
 
             
 
+            
+
              object that contains population data for New York City for each census from 1950 through 2000. The septuple is passed to the ComputePopulationChange method, which calculates the annual rate of change between censuses, as well as the annual rate of change for the entire 60 year period. </para
           >
           <para>code reference: System.Tuple`7.Class#1</para>
@@ -129,6 +153,8 @@
           <para
             >To return multiple values from a method without the use of out parameters (in C#) or ByRef parameters (in Visual Basic). For example, the previous example returns its computed statistics, along with the city name, in a <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -142,8 +168,12 @@
 
             
 
+            
+
              method has a single parameter that lets you supply one value to the method that the thread executes at startup. If you supply a <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -217,6 +247,8 @@
 
             
 
+            
+
              parameter is considered to be equal to the current instance under the following conditions:</para
           >
           <list type="bullet">
@@ -224,6 +256,8 @@
               <para
                 >It is a <see
                  cref="T:System.Tuple`7" />
+
+                
 
                 
 
@@ -246,6 +280,8 @@
 
             
 
+            
+
              object is equal to a specified object.</para
           >
         </summary>
@@ -255,6 +291,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,6 +321,8 @@
           <para
             >Returns the hash code for the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -315,6 +355,8 @@
 
             
 
+            
+
              component in one of two ways:</para
           >
           <list type="bullet">
@@ -322,6 +364,8 @@
               <para
                 >By calling the GetType method on the value that is returned by the <see
                  cref="P:System.Tuple`7.Item1" />
+
+                
 
                 
 
@@ -335,13 +379,19 @@
 
                 
 
+                
+
                  object that represents the <see
                  cref="T:System.Tuple`7" />
 
                 
 
+                
+
                  object, and retrieving the first element from the array that is returned by its <see
                  cref="M:System.Type.GetGenericArguments" />
+
+                
 
                 
 
@@ -355,6 +405,8 @@
           <para
             >Gets the value of the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -383,6 +435,8 @@
 
             
 
+            
+
              component in one of two ways:</para
           >
           <list type="bullet">
@@ -390,6 +444,8 @@
               <para
                 >By calling the GetType method on the value that is returned by the <see
                  cref="P:System.Tuple`7.Item2" />
+
+                
 
                 
 
@@ -403,13 +459,19 @@
 
                 
 
+                
+
                  object that represents the <see
                  cref="T:System.Tuple`7" />
 
                 
 
+                
+
                  object, and retrieving the second element from the array that is returned by its <see
                  cref="M:System.Type.GetGenericArguments" />
+
+                
 
                 
 
@@ -423,6 +485,8 @@
           <para
             >Gets the value of the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -451,6 +515,8 @@
 
             
 
+            
+
              component in one of two ways:</para
           >
           <list type="bullet">
@@ -458,6 +524,8 @@
               <para
                 >By calling the GetType method on the value that is returned by the <see
                  cref="P:System.Tuple`7.Item3" />
+
+                
 
                 
 
@@ -471,13 +539,19 @@
 
                 
 
+                
+
                  object that represents the <see
                  cref="T:System.Tuple`7" />
 
                 
 
+                
+
                  object, and retrieving the third element from the array that is returned by its <see
                  cref="M:System.Type.GetGenericArguments" />
+
+                
 
                 
 
@@ -491,6 +565,8 @@
           <para
             >Gets the value of the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -519,6 +595,8 @@
 
             
 
+            
+
              component in one of two ways:</para
           >
           <list type="bullet">
@@ -526,6 +604,8 @@
               <para
                 >By calling the GetType method on the value that is returned by the <see
                  cref="P:System.Tuple`7.Item4" />
+
+                
 
                 
 
@@ -539,13 +619,19 @@
 
                 
 
+                
+
                  object that represents the <see
                  cref="T:System.Tuple`7" />
 
                 
 
+                
+
                  object, and retrieving the fourth element from the array that is returned by its <see
                  cref="M:System.Type.GetGenericArguments" />
+
+                
 
                 
 
@@ -559,6 +645,8 @@
           <para
             >Gets the value of the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -587,6 +675,8 @@
 
             
 
+            
+
              component in one of two ways:</para
           >
           <list type="bullet">
@@ -594,6 +684,8 @@
               <para
                 >By calling the GetType method on the value that is returned by the <see
                  cref="P:System.Tuple`7.Item5" />
+
+                
 
                 
 
@@ -607,13 +699,19 @@
 
                 
 
+                
+
                  object that represents the <see
                  cref="T:System.Tuple`7" />
 
                 
 
+                
+
                  object, and retrieving the fifth element from the array that is returned by its <see
                  cref="M:System.Type.GetGenericArguments" />
+
+                
 
                 
 
@@ -627,6 +725,8 @@
           <para
             >Gets the value of the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -655,6 +755,8 @@
 
             
 
+            
+
              component in one of two ways:</para
           >
           <list type="bullet">
@@ -662,6 +764,8 @@
               <para
                 >By calling the GetType method on the value that is returned by the <see
                  cref="P:System.Tuple`7.Item6" />
+
+                
 
                 
 
@@ -675,13 +779,19 @@
 
                 
 
+                
+
                  object that represents the <see
                  cref="T:System.Tuple`7" />
 
                 
 
+                
+
                  object, and retrieving the sixth element from the array that is returned by its <see
                  cref="M:System.Type.GetGenericArguments" />
+
+                
 
                 
 
@@ -695,6 +805,8 @@
           <para
             >Gets the value of the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -723,6 +835,8 @@
 
             
 
+            
+
              component in one of two ways:</para
           >
           <list type="bullet">
@@ -730,6 +844,8 @@
               <para
                 >By calling the GetType method on the value that is returned by the <see
                  cref="P:System.Tuple`7.Item7" />
+
+                
 
                 
 
@@ -743,13 +859,19 @@
 
                 
 
+                
+
                  object that represents the <see
                  cref="T:System.Tuple`7" />
 
                 
 
+                
+
                  object, and retrieving the seventh element from the array that is returned by its <see
                  cref="M:System.Type.GetGenericArguments" />
+
+                
 
                 
 
@@ -763,6 +885,8 @@
           <para
             >Gets the value of the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -800,8 +924,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IStructuralComparable" />
+
+            
 
             
 
@@ -813,8 +941,12 @@
 
             
 
+            
+
              objects. For example, you can use this method to order <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -826,8 +958,12 @@
 
             
 
+            
+
              parameters to order the members of a collection. For example, it is called by the <see
              cref="M:System.Array.Sort(System.Array,System.Collections.IComparer)" />
+
+            
 
             
 
@@ -836,13 +972,19 @@
 
             
 
+            
+
              method of a <see
              cref="T:System.Collections.SortedList" />
 
             
 
+            
+
              object that is instantiated by using the <see
              cref="M:System.Collections.SortedList.#ctor(System.Collections.IComparer)" />
+
+            
 
             
 
@@ -855,8 +997,12 @@
 
               
 
+              
+
                method is intended for use in sorting operations. It should not be used when the primary purpose of a comparison is to determine whether two objects are equal. To determine whether two objects are equal, call the <see
                cref="M:System.Tuple`7.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+
+              
 
               
 
@@ -872,6 +1018,8 @@
 
             
 
+            
+
              object to a specified object by using a specified comparer, and returns an integer that indicates whether the current object is before, after, or in the same position as the specified object in the sort order.</para
           >
         </summary>
@@ -880,6 +1028,8 @@
           <para
             >A signed integer that indicates the relative position of this instance and <paramref
              name="other" />
+
+            
 
             
 
@@ -907,6 +1057,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -919,6 +1071,8 @@
                 <para
                   >This instance and <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -937,6 +1091,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -948,10 +1104,14 @@
 
           
 
+          
+
           An object to compare with the current instance.</param
         >
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -988,8 +1148,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IStructuralEquatable" />
+
+            
 
             
 
@@ -1001,8 +1165,12 @@
 
             
 
+            
+
              implementation is called only if other is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -1011,8 +1179,12 @@
 
             
 
+            
+
              method first passes the <see
              cref="P:System.Tuple`7.Item1" />
+
+            
 
             
 
@@ -1021,8 +1193,12 @@
 
             
 
+            
+
              objects to be compared to the <see
              cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1031,13 +1207,19 @@
 
             
 
+            
+
              values of the two <see
              cref="T:System.Tuple`7" />
 
             
 
+            
+
              objects. This continues until the method call returns false when it compares a specific pair of Item values, or the two <see
              cref="P:System.Tuple`7.Item7" />
+
+            
 
             
 
@@ -1049,6 +1231,8 @@
           <para
             >Returns a value that indicates whether the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -1064,10 +1248,14 @@
 
           
 
+          
+
           The object to compare with this instance.</param
         >
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1103,8 +1291,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IStructuralEquatable" />
+
+            
 
             
 
@@ -1116,11 +1308,15 @@
 
             
 
+            
+
              implementation.</para
           >
           <para
             >The algorithm used to compute the hash code should return the same hash code for two <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -1132,6 +1328,8 @@
           <para
             >Calculates the hash code for the current <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -1147,13 +1345,19 @@
 
           
 
+          
+
           An object whose <see
            cref="M:System.Collections.IEqualityComparer.GetHashCode(System.Object)" />
 
           
 
+          
+
            method calculates the hash code of the current <see
            cref="T:System.Tuple`7" />
+
+          
 
           
 
@@ -1186,8 +1390,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1199,8 +1407,12 @@
 
             
 
+            
+
              implementation for the <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 
@@ -1209,8 +1421,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1223,8 +1439,12 @@
 
               
 
+              
+
                method is intended for use in sorting operations. It should not be used when the primary purpose of a comparison is to determine whether two objects are equal. To determine whether two objects are equal, call the <see
                cref="M:System.Tuple`7.Equals(System.Object)" />
+
+              
 
               
 
@@ -1241,6 +1461,8 @@
 
             
 
+            
+
              object to a specified object and returns an integer that indicates whether the current object is before, after, or in the same position as the specified object in the sort order.</para
           >
         </summary>
@@ -1249,6 +1471,8 @@
           <para
             >A signed integer that indicates the relative position of this instance and <paramref
              name="obj" />
+
+            
 
             
 
@@ -1276,6 +1500,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1288,6 +1514,8 @@
                 <para
                   >This instance and <paramref
                    name="obj" />
+
+                  
 
                   
 
@@ -1306,6 +1534,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1314,6 +1544,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1364,8 +1596,12 @@
 
             
 
+            
+
             ), where Item1, Item2, Item3, Item4, Item5, Item6, and Item7 represent the values of the <see
              cref="P:System.Tuple`7.Item1" />
+
+            
 
             
 
@@ -1374,8 +1610,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Tuple`7.Item3" />
+
+            
 
             
 
@@ -1384,8 +1624,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Tuple`7.Item5" />
+
+            
 
             
 
@@ -1394,13 +1638,19 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Tuple`7.Item7" />
 
             
 
+            
+
              properties, respectively. If any of the property values is null, it is represented as <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1415,6 +1665,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1423,6 +1675,8 @@
           <para
             >The string representation of this <see
              cref="T:System.Tuple`7" />
+
+            
 
             
 

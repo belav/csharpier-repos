@@ -27,8 +27,12 @@
 
         
 
+        
+
          class represents a collection of <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          objects are used to bind the values contained by local <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          class to programmatically manage a set of <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -60,13 +72,19 @@
 
         
 
+        
+
          objects using the appropriate methods of the <see
          cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
         
 
+        
+
          class. To programmatically retrieve <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -80,6 +98,8 @@
 
             
 
+            
+
              object from the collection, by name or using array notation.</para
           >
         </item>
@@ -90,8 +110,12 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -105,8 +129,12 @@
 
         
 
+        
+
          property specifies the total number of items in the collection, and is used to determine the upper bound of the collection. You can add and remove items from the collection by using the <see
          cref="Overload:System.Web.UI.WebControls.ParameterCollection.Add" />
+
+        
 
         
 
@@ -115,13 +143,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.ParameterCollection.Remove(System.Web.UI.WebControls.Parameter)" />
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.WebControls.ParameterCollection.RemoveAt(System.Int32)" />
+
+        
 
         
 
@@ -133,8 +167,12 @@
 
         
 
+        
+
          collection might be important. For example, when using the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -143,8 +181,12 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+        
 
         
 
@@ -153,8 +195,12 @@
 
         
 
+        
+
          control with Microsoft SQL Server, the order of the <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -166,6 +212,8 @@
            type="text/html">
             <a href="772c7312-211a-4eb3-8d6e-eec0aa1dcc07">Script Exploits Overview</a>
           </format>
+
+          
 
           
 
@@ -194,6 +242,8 @@
             <para
               >The base parameter class. Use it to bind to a local variable or any static string using the <see
                cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+              
 
               
 
@@ -271,8 +321,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -320,8 +374,12 @@
 
             
 
+            
+
              method to append a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -330,8 +388,12 @@
 
             
 
+            
+
              object specified by the <paramref
              name="param" />
+
+            
 
             
 
@@ -343,6 +405,8 @@
           <para
             >Appends the specified <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -378,8 +442,12 @@
 
             
 
+            
+
              method to create and append a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -388,13 +456,19 @@
 
             
 
+            
+
              object using the name and default value specified by the <paramref
              name="name" />
 
             
 
+            
+
              and <paramref
              name="value" />
+
+            
 
             
 
@@ -406,6 +480,8 @@
           <para
             >Creates a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -421,10 +497,14 @@
 
           
 
+          
+
           The name of the parameter. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -459,8 +539,12 @@
 
             
 
+            
+
              method to create and append a strongly typed <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -469,8 +553,12 @@
 
             
 
+            
+
              object using the name, type and value specified by the <paramref
              name="name" />
+
+            
 
             
 
@@ -479,8 +567,12 @@
 
             
 
+            
+
              and <paramref
              name="value" />
+
+            
 
             
 
@@ -495,8 +587,12 @@
 
             
 
+            
+
              object with the specified name, <see
              cref="T:System.TypeCode" />
+
+            
 
             
 
@@ -512,6 +608,8 @@
 
           
 
+          
+
           The name of the parameter. </param
         >
         <param name="type">
@@ -519,10 +617,14 @@
 
           
 
+          
+
           The type of the parameter.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -556,8 +658,12 @@
 
             
 
+            
+
              object is in the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -572,6 +678,8 @@
 
             
 
+            
+
              collection contains a specific value</para
           >
         </summary>
@@ -583,8 +691,12 @@
 
             
 
+            
+
             ; otherwise, false. If null is passed for the <paramref
              name="value" />
+
+            
 
             
 
@@ -622,8 +734,12 @@
 
           
 
+          
+
           The integer index of the <paramref
            name="parameterArray" />
+
+          
 
           
 
@@ -654,8 +770,12 @@
 
             
 
+            
+
              method creates an instance of a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -664,8 +784,12 @@
 
             
 
+            
+
              returned by the <see
              cref="M:System.Web.UI.WebControls.ParameterCollection.GetKnownTypes" />
+
+            
 
             
 
@@ -762,6 +886,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -770,6 +896,8 @@
           <para
             >A default instance of a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -799,8 +927,12 @@
 
             
 
+            
+
              types that the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -815,8 +947,12 @@
 
             
 
+            
+
              objects that identify the types of <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -851,8 +987,12 @@
 
             
 
+            
+
              parameter is used by <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -861,13 +1001,19 @@
 
             
 
+            
+
              and current <see
              cref="T:System.Web.HttpRequest" />
 
             
 
+            
+
              object that the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -879,8 +1025,12 @@
 
             
 
+            
+
              object must have uniquely named entries but the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -889,8 +1039,12 @@
 
             
 
+            
+
              object names, the implementation of this method appends a number to the end of each <see
              cref="P:System.Web.UI.WebControls.Parameter.Name" />
+
+            
 
             
 
@@ -905,6 +1059,8 @@
 
             
 
+            
+
              object names and their corresponding values currently contained by the collection.</para
           >
         </summary>
@@ -916,6 +1072,8 @@
 
             
 
+            
+
              of name/value pairs.</para
           >
         </returns>
@@ -924,13 +1082,19 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpRequest" />
 
           
 
+          
+
            that the <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -941,13 +1105,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
 
           
 
+          
+
            instance that is passed to each parameter's <see
            cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+          
 
           
 
@@ -981,6 +1151,8 @@
 
             
 
+            
+
              collection.</para
           >
         </remarks>
@@ -992,8 +1164,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -1005,6 +1181,8 @@
           <para
             >The index of <paramref
              name="parameter" />
+
+            
 
             
 
@@ -1042,8 +1220,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -1118,13 +1300,19 @@
 
             
 
+            
+
              method is called to perform additional processing after the <see
              cref="M:System.Web.UI.StateManagedCollection.Clear" />
 
             
 
+            
+
              method completes. It calls the <see
              cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1164,8 +1352,12 @@
 
             
 
+            
+
              method is called to perform additional processing before the <see
              cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
+
+            
 
             
 
@@ -1180,6 +1372,8 @@
 
             
 
+            
+
              method is called.</para
           >
         </summary>
@@ -1188,13 +1382,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
+          
+
            that is inserted into the <see
            cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+          
 
           
 
@@ -1229,13 +1429,19 @@
 
             
 
+            
+
              method is called to perform additional processing after the <see
              cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
 
             
 
+            
+
              method completes. It calls the <see
              cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1250,6 +1456,8 @@
 
             
 
+            
+
              method completes.</para
           >
         </summary>
@@ -1258,13 +1466,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
+          
+
            that was inserted into the <see
            cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+          
 
           
 
@@ -1298,6 +1512,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1306,8 +1522,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1341,13 +1561,19 @@
 
             
 
+            
+
              method is called to perform additional processing after the <see
              cref="M:System.Web.UI.WebControls.ParameterCollection.Remove(System.Web.UI.WebControls.Parameter)" />
 
             
 
+            
+
              method completes. It calls the <see
              cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1362,6 +1588,8 @@
 
             
 
+            
+
              method completes.</para
           >
         </summary>
@@ -1370,8 +1598,12 @@
 
           
 
+          
+
           The index in the collection that the <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -1382,13 +1614,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
+          
+
            that was removed from the <see
            cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+          
 
           
 
@@ -1418,8 +1656,12 @@
 
             
 
+            
+
              method determines whether the object specified in the <paramref
              name="o" />
+
+            
 
             
 
@@ -1428,8 +1670,12 @@
 
             
 
+            
+
              instance. If not, it throws an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1442,6 +1688,8 @@
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1468,8 +1716,12 @@
 
             
 
+            
+
              collection is contained by a data source control, the <see
              cref="E:System.Web.UI.WebControls.ParameterCollection.ParametersChanged" />
+
+            
 
             
 
@@ -1483,11 +1735,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -1499,6 +1755,8 @@
           <para
             >Occurs when one or more <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1533,8 +1791,12 @@
 
             
 
+            
+
              object from a <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -1549,8 +1811,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -1582,8 +1848,12 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1598,8 +1868,12 @@
 
             
 
+            
+
              object at the specified index from the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -1630,8 +1904,12 @@
 
             
 
+            
+
              method is a helper function that is used to mark a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1649,6 +1927,8 @@
 
             
 
+            
+
              object as having changed since the last load or save from view state.</para
           >
         </summary>
@@ -1657,8 +1937,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -1692,8 +1976,12 @@
 
             
 
+            
+
              parameter is used by <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1702,13 +1990,19 @@
 
             
 
+            
+
              and current <see
              cref="T:System.Web.HttpRequest" />
 
             
 
+            
+
              object that the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1720,8 +2014,12 @@
 
             
 
+            
+
              object is different from the value cached in view state, the <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -1736,6 +2034,8 @@
 
             
 
+            
+
              objects contained by the collection, and calls the Evaluate method on each one.</para
           >
         </summary>
@@ -1744,13 +2044,19 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpRequest" />
 
           
 
+          
+
            that the <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -1761,13 +2067,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
 
           
 
+          
+
            instance that is passed to each parameter's <see
            cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+          
 
           
 

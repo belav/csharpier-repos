@@ -38,8 +38,12 @@
 
         
 
+        
+
          can be used to represent code expressions that include a binary operator. Some examples of binary operators are equality (==), addition (+), and bitwise (|) operators. The <see
          cref="T:System.CodeDom.CodeBinaryOperatorType" />
+
+        
 
         
 
@@ -73,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeBinaryOperatorExpression" />
+
+            
 
             
 
@@ -112,6 +118,8 @@
 
             
 
+            
+
              class using the specified parameters.</para
           >
         </summary>
@@ -120,8 +128,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -132,8 +144,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeBinaryOperatorType" />
+
+          
 
           
 
@@ -144,8 +160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -207,6 +227,8 @@
           <para
             >A binary operator performs an evaluation on two operands. Some examples of binary operators are equality (==), addition (+), and bitwise (|) operators. Many commonly used binary operators can be found in the <see
              cref="T:System.CodeDom.CodeBinaryOperatorType" />
+
+            
 
             
 

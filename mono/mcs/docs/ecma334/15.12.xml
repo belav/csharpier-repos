@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>lock</keyword>
@@ -21,7 +23,11 @@
   </paragraph>
   <paragraph
     >The expression of a lock statement must denote a value of a <non_terminal
-     where="11.2">reference-type</non_terminal>
+     where="11.2"
+>reference-type</non_terminal
+    >
+
+    
 
     
 
@@ -30,8 +36,12 @@
 
     
 
+    
+
     ) is ever performed for the expression of a lock statement, and thus it is a compile-time error for the expression to denote a value of a <non_terminal
      where="11.1">value-type</non_terminal>
+
+    
 
     
 
@@ -40,21 +50,27 @@
   <paragraph
     >A lock statement of the form <code_example
     >
-      <![CDATA[
+<![CDATA[
 lock (x) ...  
 ]]>
     </code_example>
 
     
 
+    
+
     where x is an expression of a <non_terminal
-     where="11.2">reference-type</non_terminal>
+     where="11.2"
+>reference-type</non_terminal
+    >
+
+    
 
     
 
     , is precisely equivalent to <code_example
     >
-      <![CDATA[
+<![CDATA[
 System.Threading.Monitor.Enter(x);  
 try {  
    ...  
@@ -67,13 +83,15 @@ finally {
 
     
 
+    
+
     except that x is only evaluated once. </paragraph
   >
   <paragraph>
     <example
       >[Example: The System.Type object of a class can conveniently be used as the mutual-exclusion lock for static methods of the class. For example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Cache  
 {  
    public static void Add(object x) {  
@@ -89,6 +107,8 @@ class Cache
 }  
 ]]>
       </code_example>
+
+      
 
       
 

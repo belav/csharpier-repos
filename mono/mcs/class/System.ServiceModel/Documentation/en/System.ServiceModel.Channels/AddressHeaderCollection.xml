@@ -33,8 +33,12 @@
 
         
 
+        
+
          can be initialized with an <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          objects and then searched for a header with a specific qualified name using the <see
          cref="M:System.ServiceModel.Channels.AddressHeaderCollection.FindHeader(System.String,System.String)" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          method. The <see
          cref="M:System.ServiceModel.Channels.AddressHeaderCollection.AddHeadersTo(System.ServiceModel.Channels.Message)" />
+
+        
 
         
 
@@ -85,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
+
+            
 
             
 
@@ -123,6 +137,8 @@
 
             
 
+            
+
              class from an enumerable set of address headers.</para
           >
         </summary>
@@ -156,13 +172,19 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.ServiceModel.Channels.Message" />
 
             
 
+            
+
              and accessible through the <see
              cref="P:System.ServiceModel.Channels.Message.Headers" />
+
+            
 
             
 
@@ -178,8 +200,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -221,8 +247,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+            
 
             
 
@@ -234,10 +264,14 @@
 
           
 
+          
+
           The name of the address header to be found.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,10 +308,14 @@
 
             
 
+            
+
              method instead.</para
           >
           <para>
             <see cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -296,6 +334,8 @@
 
             
 
+            
+
              in the collection with the specified name and namespace.</para
           >
         </returns>
@@ -304,10 +344,14 @@
 
           
 
+          
+
           The name of the address header to be found.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

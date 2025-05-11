@@ -40,13 +40,19 @@
 
         
 
+        
+
          is thrown by the <see
          cref="T:System.Net.Sockets.Socket" />
 
         
 
+        
+
          and <see
          cref="T:System.Net.Dns" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          class sets the <see
          cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+        
 
         
 
@@ -99,8 +109,12 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+            
 
             
 
@@ -112,6 +126,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -146,13 +162,19 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
+            
+
              property to <paramref
              name="errorCode" />
+
+            
 
             
 
@@ -164,6 +186,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -202,8 +226,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -218,13 +246,19 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -255,6 +289,8 @@
 
             
 
+            
+
              property contains the error code that is associated with the error that caused the exception.</para
           >
           <para
@@ -263,8 +299,12 @@
 
             
 
+            
+
              sets the <see
              cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+            
 
             
 
@@ -323,6 +363,8 @@
 
             
 
+            
+
              property contains the error code that is associated with the error that caused the exception.</para
           >
           <para
@@ -331,8 +373,12 @@
 
             
 
+            
+
              sets the <see
              cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+            
 
             
 

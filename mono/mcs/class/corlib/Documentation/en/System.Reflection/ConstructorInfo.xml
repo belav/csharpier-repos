@@ -52,6 +52,8 @@
 
       
 
+      
+
       .</permission
     >
     <remarks>
@@ -62,8 +64,12 @@
 
         
 
+        
+
          on a ConstructorInfo returned by either the <see
          cref="M:System.Type.GetConstructors" />
+
+        
 
         
 
@@ -72,8 +78,12 @@
 
         
 
+        
+
          method of a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -85,13 +95,19 @@
 
           
 
+          
+
            inherits from <see
            cref="T:System.Reflection.MethodBase" />
 
           
 
+          
+
            several members, such as <see
            cref="P:System.Reflection.MethodBase.IsGenericMethod" />
+
+          
 
           
 
@@ -130,6 +146,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -174,6 +192,8 @@
 
             
 
+            
+
              that contains the value ".ctor". An object
    constructor will be named with this field if and only if it is not a type initializer.</para
           >
@@ -182,6 +202,8 @@
               >For more information on type
       initializers, see <see
                cref="F:System.Reflection.ConstructorInfo.TypeConstructorName" />
+
+              
 
               
 
@@ -228,11 +250,15 @@
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -317,6 +343,8 @@
 
             
 
+            
+
              do not match the types of the parameters accepted by the constructor reflected by the current instance, under the constraints of the default binder.</para
           >
         </exception>
@@ -331,11 +359,15 @@
 
           
 
+          
+
           .Length does not equal the number of parameters required by the contract of the constructor reflected by the current instance.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to invoke non-public members of loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+          
 
           
 
@@ -349,6 +381,8 @@
 
             
 
+            
+
              array should be identical to the number, type, and order of parameters for the constructor reflected by this instance. Before calling the constructor, Invoke ensures that the caller has access permission and verifies that the parameters are valid.</para
           >
           <para>Access restrictions are ignored for fully trusted code. That is, private constructors, methods, fields, and properties can be accessed and invoked using reflection whenever the code is fully trusted.</para>
@@ -356,6 +390,8 @@
             <para
               >To create an instance of a value type that has no instance constructors, use the <see
                cref="M:System.Activator.CreateInstance(System.Type)" />
+
+              
 
               
 
@@ -370,8 +406,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -381,6 +421,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -399,6 +441,8 @@
         </returns>
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -442,8 +486,12 @@
 
           
 
+          
+
            do not match the types of the parameters accepted by the constructor reflected by the current instance, under the constraints of <paramref
            name="binder" />
+
+          
 
           
 
@@ -460,11 +508,15 @@
 
           
 
+          
+
           .Length does not equal the number of parameters required by the contract of the constructor reflected by the current instance.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to invoke non-public members of loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+          
 
           
 
@@ -475,8 +527,12 @@
 
           
 
+          
+
           A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -487,8 +543,12 @@
 
           
 
+          
+
           An array of type Object used to match the number, order and type of the parameters for this constructor, under the constraints of <paramref
            name="binder" />
+
+          
 
           
 
@@ -499,13 +559,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
 
           
 
+          
+
            used to govern the coercion of types. If this is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -516,6 +582,8 @@
           <para
             >The number, type, and order of elements in the <paramref
              name="parameters" />
+
+            
 
             
 
@@ -530,6 +598,8 @@
 
               
 
+              
+
                method.</para
             >
           </block>
@@ -540,8 +610,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -551,6 +625,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -572,6 +648,8 @@
 
           
 
+          
+
           One of the BindingFlags values that specifies the type of binding. </param
         >
         <param name="binder">
@@ -579,8 +657,12 @@
 
           
 
+          
+
           A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -591,8 +673,12 @@
 
           
 
+          
+
           An array of type Object used to match the number, order and type of the parameters for this constructor, under the constraints of <paramref
            name="binder" />
+
+          
 
           
 
@@ -603,13 +689,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
 
           
 
+          
+
            used to govern the coercion of types. If this is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -652,8 +744,12 @@
 
             
 
+            
+
             . Therefore, when you examine a set of <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -662,13 +758,19 @@
 
             
 
+            
+
              — the <see
              cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
+            
+
              property returns <see
              cref="F:System.Reflection.MemberTypes.Constructor" />
+
+            
 
             
 
@@ -680,6 +782,8 @@
           <para
             >Gets a <see
              cref="T:System.Reflection.MemberTypes" />
+
+            
 
             
 
@@ -718,6 +822,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -729,8 +835,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -742,8 +852,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Reflection.ConstructorInfo" />
+
+          
 
           
 
@@ -754,8 +868,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Reflection.ConstructorInfo" />
+
+          
 
           
 
@@ -793,6 +911,8 @@
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -804,8 +924,12 @@
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -817,8 +941,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Reflection.ConstructorInfo" />
+
+          
 
           
 
@@ -829,8 +957,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Reflection.ConstructorInfo" />
+
+          
 
           
 
@@ -897,8 +1029,12 @@
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -913,8 +1049,12 @@
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -955,6 +1095,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -967,6 +1109,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -974,10 +1118,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1087,8 +1235,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.InteropServices._ConstructorInfo" />
+
+            
 
             
 
@@ -1100,6 +1252,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -1115,6 +1269,8 @@
 
           
 
+          
+
           The instance that created this method.</param
         >
         <param name="invokeAttr">
@@ -1122,8 +1278,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1134,8 +1294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -1144,8 +1308,12 @@
 
           
 
+          
+
            is null, then <see
            cref="P:System.Type.DefaultBinder" />
+
+          
 
           
 
@@ -1156,8 +1324,12 @@
 
           
 
+          
+
           An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref
            name="binder" />
+
+          
 
           
 
@@ -1168,13 +1340,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
 
           
 
+          
+
            used to govern the coercion of types. If this is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1213,8 +1391,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.InteropServices._ConstructorInfo" />
+
+            
 
             
 
@@ -1226,6 +1408,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Object[])" />
+
+            
 
             
 
@@ -1241,6 +1425,8 @@
 
           
 
+          
+
           The instance that created this method.</param
         >
         <param name="parameters">
@@ -1248,8 +1434,12 @@
 
           
 
+          
+
           An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref
            name="binder" />
+
+          
 
           
 
@@ -1290,8 +1480,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.InteropServices._ConstructorInfo" />
+
+            
 
             
 
@@ -1303,6 +1497,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -1318,8 +1514,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1330,8 +1530,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -1340,8 +1544,12 @@
 
           
 
+          
+
            is null, then <see
            cref="P:System.Type.DefaultBinder" />
+
+          
 
           
 
@@ -1352,8 +1560,12 @@
 
           
 
+          
+
           An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref
            name="binder" />
+
+          
 
           
 
@@ -1364,13 +1576,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
 
           
 
+          
+
            used to govern the coercion of types. If this is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1408,8 +1626,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.InteropServices._ConstructorInfo" />
+
+            
 
             
 
@@ -1421,6 +1643,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.ConstructorInfo.Invoke(System.Object[])" />
+
+            
 
             
 
@@ -1436,8 +1660,12 @@
 
           
 
+          
+
           An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref
            name="binder" />
+
+          
 
           
 
@@ -1477,6 +1705,8 @@
           <para
             >This field is a <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -38,8 +38,12 @@
 
         
 
+        
+
          provides data for a <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          event notifies the <see
          cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
       <para
         >A <see
          cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
+
+        
 
         
 
@@ -71,6 +81,8 @@
 
             
 
+            
+
              property that indicates the component that was modified.</para
           >
         </item>
@@ -78,6 +90,8 @@
           <para
             >A <see
              cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.Member" />
+
+            
 
             
 
@@ -91,6 +105,8 @@
 
             
 
+            
+
              property that indicates the new value of the member.</para
           >
         </item>
@@ -98,6 +114,8 @@
           <para
             >An <see
              cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.OldValue" />
+
+            
 
             
 
@@ -111,13 +129,19 @@
 
         
 
+        
+
          event automatically when components are added, removed, or modified. A <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
         
 
+        
+
          event is not raised during form load and unload because changes at this time are expected. A component designer might raise the <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+        
 
         
 
@@ -129,6 +153,8 @@
       <para
         >Provides data for the <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+        
 
         
 
@@ -172,11 +198,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,8 +217,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.MemberDescriptor" />
+
+          
 
           
 
@@ -199,10 +233,14 @@
 
           
 
+          
+
           The old value of the changed member. </param
         >
         <param name="newValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

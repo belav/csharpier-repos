@@ -21,8 +21,12 @@
 
         
 
+        
+
          is the <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
         . A subset of the hosted control's properties and events are exposed at the <see
          cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          control is fully accessible through the <see
          cref="P:System.Windows.Forms.ToolStripTextBox.TextBox" />
+
+        
 
         
 
@@ -54,6 +66,8 @@
 
         
 
+        
+
          control allows the user to enter text in an application. This control has additional functionality that is not found in the standard Windows text box control, including multiline editing.</para
       >
       <para
@@ -62,8 +76,12 @@
 
         
 
+        
+
          control is used to display a single line of text or accept it as input. You can use the <see
          cref="P:System.Windows.Forms.ToolStripTextBox.Multiline" />
+
+        
 
         
 
@@ -72,13 +90,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ToolStripTextBox.AcceptsReturn" />
 
         
 
+        
+
          properties to true to allow greater text manipulation in a multiline <see
          cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+        
 
         
 
@@ -90,8 +114,12 @@
 
         
 
+        
+
          control by setting the <see
          cref="P:System.Windows.Forms.ToolStripTextBox.MaxLength" />
+
+        
 
         
 
@@ -100,8 +128,12 @@
 
         
 
+        
+
          property to allow the user to type only uppercase, only lowercase, or a combination of uppercase and lowercase characters into the <see
          cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+        
 
         
 
@@ -113,8 +145,12 @@
 
         
 
+        
+
          control, you can create an event handler for the <see
          cref="E:System.Windows.Forms.Control.KeyDown" />
+
+        
 
         
 
@@ -123,8 +159,12 @@
 
         
 
+        
+
          control by setting the <see
          cref="P:System.Windows.Forms.ToolStripTextBox.ReadOnly" />
+
+        
 
         
 
@@ -136,6 +176,8 @@
       <para
         >Represents a text box in a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -156,6 +198,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -184,6 +228,8 @@
 
             
 
+            
+
              class with the specified name. </para
           >
         </summary>
@@ -192,8 +238,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+          
 
           
 
@@ -224,6 +274,8 @@
 
             
 
+            
+
              class derived from a base control.</para
           >
         </summary>
@@ -232,8 +284,12 @@
 
           
 
+          
+
           The control from which to derive the <see
            cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+          
 
           
 
@@ -271,6 +327,8 @@
 
             
 
+            
+
              control. If there is no default button for the form, then the ENTER key will always create a new line of text in the control, no matter what the value of this property.</para
           >
         </remarks>
@@ -279,6 +337,8 @@
           <para
             >Gets or sets a value indicating whether pressing ENTER in a multiline <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -312,6 +372,8 @@
 
             
 
+            
+
              property is set to true, the user must press CTRL+TAB to move the focus to the next control in the tab order.</para
           >
         </remarks>
@@ -342,6 +404,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -350,6 +414,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AcceptsTab" />
+
+            
 
             
 
@@ -381,6 +447,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -389,8 +457,12 @@
 
           
 
+          
+
           The text to append to the current contents of the <see
            cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+          
 
           
 
@@ -440,8 +512,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteMode" />
+
+            
 
             
 
@@ -450,13 +526,19 @@
 
             
 
+            
+
              properties to create a <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
 
             
 
+            
+
              that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -468,13 +550,19 @@
 
             
 
+            
+
              property is optional, but you must set the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteSource" />
 
             
 
+            
+
              property to CustomSource in order to use <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteCustomSource" />
+
+            
 
             
 
@@ -486,8 +574,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -499,6 +591,8 @@
           <para
             >Gets or sets a custom string collection to use when the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -540,8 +634,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteMode" />
+
+            
 
             
 
@@ -550,13 +648,19 @@
 
             
 
+            
+
              properties to create a <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
 
             
 
+            
+
              that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -568,13 +672,19 @@
 
             
 
+            
+
              property is optional, but you must set the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteSource" />
 
             
 
+            
+
              property to CustomSource in order to use <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteCustomSource" />
+
+            
 
             
 
@@ -586,8 +696,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -599,6 +713,8 @@
           <para
             >Gets or sets an option that controls how automatic completion works for the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -640,8 +756,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteMode" />
+
+            
 
             
 
@@ -650,13 +770,19 @@
 
             
 
+            
+
              properties to create a <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
 
             
 
+            
+
              that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -668,13 +794,19 @@
 
             
 
+            
+
              property is optional, but you must set the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteSource" />
 
             
 
+            
+
              property to CustomSource in order to use <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteCustomSource" />
+
+            
 
             
 
@@ -686,8 +818,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStripTextBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -798,6 +934,8 @@
 
             
 
+            
+
              property to create borderless and flat style controls, in addition to the default three-dimensional control.</para
           >
         </remarks>
@@ -806,6 +944,8 @@
           <para
             >Gets or sets the border type of the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -835,6 +975,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -843,6 +985,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.BorderStyle" />
+
+            
 
             
 
@@ -879,8 +1023,12 @@
 
             
 
+            
+
              method to undo the last operation in a <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -892,6 +1040,8 @@
           <para
             >Gets a value indicating whether the user can undo the previous operation in a <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -928,6 +1078,8 @@
 
             
 
+            
+
              property to change the case of characters as required by your application.</para
           >
         </remarks>
@@ -936,6 +1088,8 @@
           <para
             >Gets or sets whether the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -962,6 +1116,8 @@
           <para
             >Clears all text from the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -994,6 +1150,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1019,8 +1177,12 @@
 
             
 
+            
+
              class, to copy text in the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -1032,6 +1194,8 @@
           <para
             >Copies the current selection in the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -1060,13 +1224,19 @@
 
             
 
+            
+
              if text is selected in the control. You can use this method, instead of using the <see
              cref="T:System.Windows.Forms.Clipboard" />
 
             
 
+            
+
              class, to copy text in the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -1078,6 +1248,8 @@
           <para
             >Moves the current selection in the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -1112,6 +1284,8 @@
 
             
 
+            
+
              and adjacent items.</para
           >
         </summary>
@@ -1138,13 +1312,19 @@
 
               
 
+              
+
                of a <see
                cref="T:System.Windows.Forms.ToolStripTextBox" />
 
               
 
+              
+
                in its constructor. The preferred method is to override the <see
                cref="P:System.Windows.Forms.ToolStripTextBox.DefaultSize" />
+
+              
 
               
 
@@ -1157,6 +1337,8 @@
           <para
             >Gets the default size of the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -1185,6 +1367,8 @@
           <para
             >Specifies that the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.SelectionLength" />
+
+            
 
             
 
@@ -1217,8 +1401,12 @@
 
             
 
+            
+
              parameter is outside the client area of the control, the first character of the string closest to the point specified in <paramref
              name="pt" />
+
+            
 
             
 
@@ -1231,8 +1419,12 @@
 
               
 
+              
+
                parameter is located on the right side of the client area of the control, the last character of the string closest to the point specified in <paramref
                name="pt" />
+
+              
 
               
 
@@ -1250,6 +1442,8 @@
         </returns>
         <param name="pt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1281,6 +1475,8 @@
 
             
 
+            
+
              parameter. The character index is a zero-based index of text in the control, including spaces. You can use this method to determine where in the text the user has the mouse over by passing the mouse coordinates to this method. This can be useful if you want to perform tasks when the mouse pointer hovers over a word in the text of the control.</para
           >
         </remarks>
@@ -1294,6 +1490,8 @@
         </returns>
         <param name="pt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1325,8 +1523,12 @@
 
             
 
+            
+
              parameter is negative, <see
              cref="M:System.Windows.Forms.ToolStripTextBox.GetFirstCharIndexFromLine(System.Int32)" />
+
+            
 
             
 
@@ -1335,8 +1537,12 @@
 
             
 
+            
+
              parameter exceeds the number of lines in the control, <see
              cref="M:System.Windows.Forms.ToolStripTextBox.GetFirstCharIndexFromLine(System.Int32)" />
+
+            
 
             
 
@@ -1347,8 +1553,12 @@
 
             
 
+            
+
              returns the first character index of a physical line. The physical line is the displayed line, not the assigned line. The number of displayed lines can be greater than the number of assigned lines due to word wrap. For example, if you assign two long lines to a <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 
@@ -1357,8 +1567,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStripTextBox.WordWrap" />
+
+            
 
             
 
@@ -1375,6 +1589,8 @@
         </returns>
         <param name="lineNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1425,8 +1641,12 @@
 
             
 
+            
+
              parameter of the method. The first line of text in the control returns the value zero. The <see
              cref="M:System.Windows.Forms.ToolStripTextBox.GetLineFromCharIndex(System.Int32)" />
+
+            
 
             
 
@@ -1435,8 +1655,12 @@
 
             
 
+            
+
              method returns 1 if the character at the specified character index has wrapped to the second physical line. If <see
              cref="P:System.Windows.Forms.ToolStripTextBox.WordWrap" />
+
+            
 
             
 
@@ -1445,8 +1669,12 @@
 
             
 
+            
+
              method to search for text, you can obtain the character index to where the search results are found. You can call this method with the character index returned by the <see
              cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+
+            
 
             
 
@@ -1456,6 +1684,8 @@
             <para
               >If the character index specified in the <paramref
                name="index" />
+
+              
 
               
 
@@ -1473,6 +1703,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1504,6 +1736,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -1517,6 +1751,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1592,6 +1828,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1600,6 +1838,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.HideSelection" />
+
+            
 
             
 
@@ -1639,6 +1879,8 @@
 
             
 
+            
+
              property of the text box control is set to true and a newline character appears in the text, the text following the newline character is added to a new element in the array and displayed on a separate line.</para
           >
         </remarks>
@@ -1647,6 +1889,8 @@
           <para
             >Gets or sets the lines of text in a <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -1713,13 +1957,19 @@
 
             
 
+            
+
              control. You can also set this property in code to indicate that changes were made to the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
 
             
 
+            
+
              control by the application. This property can be used by validation and data-saving methods to determine if changes were made in a <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -1731,6 +1981,8 @@
           <para
             >Gets or sets a value that indicates that the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -1760,6 +2012,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1768,6 +2022,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.Modified" />
+
+            
 
             
 
@@ -1871,11 +2127,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripTextBox.OnAcceptsTabChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1890,6 +2150,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1898,8 +2160,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1934,11 +2200,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripTextBox.OnBorderStyleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1953,6 +2223,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1961,8 +2233,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1997,11 +2273,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripTextBox.OnHideSelectionChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2016,6 +2296,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2024,8 +2306,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2060,11 +2346,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripTextBox.OnModifiedChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2079,6 +2369,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2087,8 +2379,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2123,11 +2419,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripTextBox.OnMultilineChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2142,6 +2442,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2150,8 +2452,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2186,11 +2492,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripTextBox.OnReadOnlyChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2205,6 +2515,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2213,8 +2525,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2286,6 +2602,8 @@
 
             
 
+            
+
              method will only paste text into the control if text is currently stored in the Clipboard. </para
           >
         </remarks>
@@ -2320,6 +2638,8 @@
 
             
 
+            
+
              property to allow the contents to be copied.</para
           >
         </remarks>
@@ -2328,6 +2648,8 @@
           <para
             >Gets or sets a value indicating whether text in the <see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -2357,6 +2679,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2365,6 +2689,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.ReadOnly" />
+
+            
 
             
 
@@ -2390,6 +2716,8 @@
           <para
             >This method enables you to scroll the contents of the control until the caret is within the visible region of the control. If the caret is positioned below the visible region of the control, the <see
              cref="M:System.Windows.Forms.ToolStripTextBox.ScrollToCaret" />
+
+            
 
             
 
@@ -2428,6 +2756,8 @@
 
             
 
+            
+
              parameter to 0. You can use this method to select a substring of text, such as when searching through the text of the control and replacing information.</para
           >
           <block subset="none" type="note">
@@ -2437,8 +2767,12 @@
 
               
 
+              
+
                parameter to the position within the text box where you want the caret to move to and set the <paramref
                name="length" />
+
+              
 
               
 
@@ -2455,10 +2789,14 @@
 
           
 
+          
+
           The position of the first character in the current text selection within the text box.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2483,6 +2821,8 @@
           <para
             >This method enables you to select all text within the control. You can use this method with the <see
              cref="M:System.Windows.Forms.TextBoxBase.Cut" />
+
+            
 
             
 
@@ -2523,8 +2863,12 @@
 
             
 
+            
+
             . If no text is currently selected in the<see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -2565,8 +2909,12 @@
 
             
 
+            
+
              property is set to a value that is larger than the number of characters within the text of the control, the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.SelectionLength" />
+
+            
 
             
 
@@ -2575,8 +2923,12 @@
 
             
 
+            
+
              property (if any value is specified for the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.SelectionStart" />
+
+            
 
             
 
@@ -2589,8 +2941,12 @@
 
               
 
+              
+
                to the position within the text box where you want the caret to move to and set the <see
                cref="P:System.Windows.Forms.ToolStripTextBox.SelectionLength" />
+
+              
 
               
 
@@ -2603,6 +2959,8 @@
           <para
             >Gets or sets the number of characters selected in the<see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -2639,8 +2997,12 @@
 
             
 
+            
+
              property. If the remaining text in the control after the position indicated by the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.SelectionStart" />
+
+            
 
             
 
@@ -2649,8 +3011,12 @@
 
             
 
+            
+
              property, the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.SelectionLength" />
+
+            
 
             
 
@@ -2659,8 +3025,12 @@
 
             
 
+            
+
              property never causes an increase in the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.SelectionLength" />
+
+            
 
             
 
@@ -2673,8 +3043,12 @@
 
               
 
+              
+
                to the position within the text box where you want the caret to move to and set the <see
                cref="P:System.Windows.Forms.ToolStripTextBox.SelectionLength" />
+
+              
 
               
 
@@ -2687,6 +3061,8 @@
           <para
             >Gets or sets the starting point of text selected in the<see
              cref="T:System.Windows.Forms.ToolStripTextBox" />
+
+            
 
             
 
@@ -2719,6 +3095,8 @@
           <para
             >Use the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.ShortcutsEnabled" />
+
+            
 
             
 
@@ -2826,6 +3204,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -2862,13 +3242,19 @@
 
             
 
+            
+
              to match the layout of text on your form. For example, if your controls are all located on the right side of the form, you can set the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.TextBoxTextAlign" />
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.HorizontalAlignment.Right" />
+
+            
 
             
 
@@ -2880,6 +3266,8 @@
           <para
             >Gets or sets how text is aligned in a <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -2909,6 +3297,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2917,6 +3307,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripTextBox.TextBoxTextAlign" />
+
+            
 
             
 
@@ -2950,6 +3342,8 @@
 
             
 
+            
+
              property to determine the number of characters in a string for tasks such as searching for specific strings of text within the text of the control, where knowledge of the total number of characters is needed.</para
           >
         </remarks>
@@ -2976,6 +3370,8 @@
           <para
             >This method will undo the last clipboard or text change operation performed in the text box control if the <see
              cref="P:System.Windows.Forms.TextBoxBase.CanUndo" />
+
+            
 
             
 

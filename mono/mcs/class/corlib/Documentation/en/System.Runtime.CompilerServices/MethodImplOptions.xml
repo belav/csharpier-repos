@@ -42,11 +42,15 @@
 
         
 
+        
+
         attribute.</para
       >
       <para
         >You can specify multiple <see
          cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
         <para
           >Locking on the instance or on the type, as with the <see
            cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" />
+
+          
 
           
 
@@ -201,6 +207,8 @@
              type="text/html">
               <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Ngen.exe</a>
             </format>
+
+            
 
             
 

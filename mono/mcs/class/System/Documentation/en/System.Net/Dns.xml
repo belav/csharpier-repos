@@ -29,6 +29,8 @@
 
         
 
+        
+
          class is a static class that retrieves information about a specific host from the Internet Domain Name System (DNS).</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          class. If the specified host has more than one entry in the DNS database, <see
          cref="T:System.Net.IPHostEntry" />
+
+        
 
         
 
@@ -82,8 +88,12 @@
 
             
 
+            
+
              method asynchronously queries a DNS server for the IP addresses that are associated with a host name. If <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -98,6 +108,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -108,8 +120,12 @@
 
             
 
+            
+
              operation must be completed by calling the <see
              cref="M:System.Net.Dns.EndGetHostAddresses(System.IAsyncResult)" />
+
+            
 
             
 
@@ -118,11 +134,15 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
             >This method does not block until the operation is complete. To block until the operation is complete, use the <see
              cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
+
+            
 
             
 
@@ -147,11 +167,15 @@
 
             
 
+            
+
              instance that references the asynchronous request.</para
           >
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,8 +186,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -174,8 +202,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="requestCallback" />
+
+          
 
           
 
@@ -221,8 +253,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -240,8 +276,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+
+          
 
           
 
@@ -255,8 +295,12 @@
 
             
 
+            
+
              operation must be completed by calling the <see
              cref="M:System.Net.Dns.EndGetHostByName(System.IAsyncResult)" />
+
+            
 
             
 
@@ -265,11 +309,15 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
             >This method does not block until the operation is complete. To block until the operation is complete, use the <see
              cref="M:System.Net.Dns.GetHostByName(System.String)" />
+
+            
 
             
 
@@ -283,6 +331,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -291,6 +341,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -306,6 +358,8 @@
 
             
 
+            
+
              information about the specified DNS host name.</para
           >
         </summary>
@@ -317,11 +371,15 @@
 
             
 
+            
+
              instance that references the asynchronous request.</para
           >
         </returns>
         <param name="hostName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,8 +390,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -344,8 +406,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="requestCallback" />
+
+          
 
           
 
@@ -385,6 +451,8 @@
 
             
 
+            
+
              method asynchronously queries a DNS server for the IP addresses and aliases associated with an IP address.</para
           >
           <para
@@ -392,6 +460,8 @@
              type="text/html">
               <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
             </format>
+
+            
 
             
 
@@ -403,8 +473,12 @@
 
             
 
+            
+
              operation must be completed by calling the <see
              cref="M:System.Net.Dns.EndGetHostEntry(System.IAsyncResult)" />
+
+            
 
             
 
@@ -413,11 +487,15 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
             >This method does not block until the operation is complete. To block until the operation is complete, use the <see
              cref="M:System.Net.Dns.GetHostEntry(System.String)" />
+
+            
 
             
 
@@ -438,6 +516,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -449,11 +529,15 @@
 
             
 
+            
+
              instance that references the asynchronous request.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,8 +548,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -476,8 +564,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="requestCallback" />
+
+          
 
           
 
@@ -516,6 +608,8 @@
 
             
 
+            
+
              method queries a DNS server for the IP address that is associated with a host name or IP address.</para
           >
           <para
@@ -523,6 +617,8 @@
              type="text/html">
               <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
             </format>
+
+            
 
             
 
@@ -534,13 +630,19 @@
 
             
 
+            
+
              operation must be completed by calling the <see
              cref="M:System.Net.Dns.EndGetHostEntry(System.IAsyncResult)" />
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="requestCallback" />
+
+            
 
             
 
@@ -552,6 +654,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -559,6 +663,8 @@
              type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
+
+            
 
             
 
@@ -573,6 +679,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -584,11 +692,15 @@
 
             
 
+            
+
              instance that references the asynchronous request.</para
           >
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -599,8 +711,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -611,8 +727,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="requestCallback" />
+
+          
 
           
 
@@ -658,8 +778,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -677,8 +801,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+
+          
 
           
 
@@ -692,8 +820,12 @@
 
             
 
+            
+
              operation must be completed by calling the <see
              cref="M:System.Net.Dns.EndResolve(System.IAsyncResult)" />
+
+            
 
             
 
@@ -702,11 +834,15 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
             >This method does not block until the operation is complete. To block until the operation is complete, use the <see
              cref="M:System.Net.Dns.Resolve(System.String)" />
+
+            
 
             
 
@@ -720,6 +856,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -728,6 +866,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -743,6 +883,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -754,11 +896,15 @@
 
             
 
+            
+
              instance that references the asynchronous request.</para
           >
         </returns>
         <param name="hostName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -769,8 +915,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -781,8 +931,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="requestCallback" />
+
+          
 
           
 
@@ -820,8 +974,12 @@
 
             
 
+            
+
              method queries a DNS server for the IP addresses associated with a host name. If <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -834,6 +992,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -853,13 +1013,19 @@
 
             
 
+            
+
              that holds the IP addresses for the host specified by the <paramref
              name="hostNameOrAddress" />
 
             
 
+            
+
              parameter of <see
              cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -871,13 +1037,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            instance returned by a call to the <see
            cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -921,8 +1093,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -937,6 +1113,8 @@
 
             
 
+            
+
              method. </para
           >
           <para
@@ -945,13 +1123,19 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -963,6 +1147,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -982,6 +1168,8 @@
 
             
 
+            
+
              object that contains DNS information about a host.</para
           >
         </returns>
@@ -990,13 +1178,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            instance that is returned by a call to the <see
            cref="M:System.Net.Dns.BeginGetHostByName(System.String,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1035,8 +1229,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -1048,6 +1246,8 @@
 
             
 
+            
+
              method. </para
           >
           <block subset="none" type="note">
@@ -1056,6 +1256,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1075,6 +1277,8 @@
 
             
 
+            
+
              instance that contains address information about the host.</para
           >
         </returns>
@@ -1083,13 +1287,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            instance returned by a call to an <see
            cref="Overload:System.Net.Dns.BeginGetHostEntry" />
+
+          
 
           
 
@@ -1133,8 +1343,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1149,13 +1363,19 @@
 
             
 
+            
+
              is set to true, the <see
              cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -1167,6 +1387,8 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
@@ -1175,6 +1397,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1194,6 +1418,8 @@
 
             
 
+            
+
              object that contains DNS information about a host.</para
           >
         </returns>
@@ -1202,13 +1428,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            instance that is returned by a call to the <see
            cref="M:System.Net.Dns.BeginResolve(System.String,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1246,8 +1478,12 @@
 
             
 
+            
+
              method queries a DNS server for the IP addresses associated with a host name. If <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -1260,13 +1496,19 @@
 
             
 
+            
+
              method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see
              cref="T:System.Net.IPAddress" />
 
             
 
+            
+
              instance if only IPv6 results where available for the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -1278,6 +1520,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1297,8 +1541,12 @@
 
             
 
+            
+
              that holds the IP addresses for the host that is specified by the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -1307,6 +1555,8 @@
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1342,8 +1592,12 @@
 
             
 
+            
+
               object will complete after the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -1352,6 +1606,8 @@
           <para
             >This method queries a DNS server for the IP addresses associated with a host name. If <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -1370,6 +1626,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1378,8 +1636,12 @@
 
             
 
+            
+
              property on the task object returns an array of type <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -1388,11 +1650,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1436,8 +1702,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1455,8 +1725,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+
+          
 
           
 
@@ -1473,6 +1747,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1485,8 +1761,12 @@
 
             
 
+            
+
              instance from the specified <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -1501,11 +1781,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >An <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -1517,8 +1801,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -1563,8 +1851,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1572,6 +1864,8 @@
         >
         <exception cref="T:System.FormatException">
           <paramref name="address " />
+
+          
 
           
 
@@ -1589,8 +1883,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+
+          
 
           
 
@@ -1607,6 +1905,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1616,6 +1916,8 @@
           <para
             >Creates an <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -1630,11 +1932,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1679,8 +1985,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1698,8 +2008,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+
+          
 
           
 
@@ -1713,6 +2027,8 @@
 
             
 
+            
+
              method queries the Internet DNS server for host information. If you pass an empty string as the host name, this method retrieves the standard host name for the local computer.</para
           >
           <para
@@ -1721,8 +2037,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.Dns.EndGetHostByName(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1734,13 +2054,19 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -1752,6 +2078,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1771,8 +2099,12 @@
 
             
 
+            
+
              object that contains host information for the address specified in <paramref
              name="hostName" />
+
+            
 
             
 
@@ -1781,6 +2113,8 @@
         </returns>
         <param name="hostName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1818,6 +2152,8 @@
 
             
 
+            
+
              method queries a DNS server for the IP addresses and aliases associated with an IP address.</para
           >
           <para
@@ -1826,13 +2162,19 @@
 
             
 
+            
+
              method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see
              cref="T:System.Net.IPHostEntry" />
 
             
 
+            
+
              instance if only IPv6 results where available for the <paramref
              name="address" />
+
+            
 
             
 
@@ -1844,8 +2186,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -1857,6 +2203,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1872,6 +2220,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1883,8 +2233,12 @@
 
             
 
+            
+
              instance that contains address information about the host specified in <paramref
              name="address" />
+
+            
 
             
 
@@ -1893,6 +2247,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1929,12 +2285,16 @@
 
             
 
+            
+
              method queries a DNS server for the IP address that is associated with a host name or IP address.</para
           >
           <para>When an empty string is passed as the host name, this method returns the IPv4 addresses of the local host.</para>
           <para
             >If the host name could not be found, the <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -1946,8 +2306,12 @@
 
             
 
+            
+
              exception is also returned if the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -1956,8 +2320,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Net.IPAddress.IPv6Any" />
+
+            
 
             
 
@@ -1969,8 +2337,12 @@
 
             
 
+            
+
              method assumes that if an IP literal string is passed in the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -1979,8 +2351,12 @@
 
             
 
+            
+
              instance returned with all of the properties set. These properties include the <see
              cref="P:System.Net.IPHostEntry.AddressList" />
+
+            
 
             
 
@@ -1989,13 +2365,19 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Net.IPHostEntry.HostName" />
 
             
 
+            
+
             . As a result, the implementation of the <see
              cref="M:System.Net.Dns.GetHostEntry(System.String)" />
+
+            
 
             
 
@@ -2009,6 +2391,8 @@
 
                 
 
+                
+
                  parameter contains a legal IP string literal, then the first phase succeeds.</para
               >
             </item>
@@ -2019,6 +2403,8 @@
 
                 
 
+                
+
                  property. </para
               >
             </item>
@@ -2026,6 +2412,8 @@
               <para
                 >The host name from this reverse lookup is used again to obtain all the possible IP addresses associated with the name and set as the <see
                  cref="P:System.Net.IPHostEntry.AddressList" />
+
+                
 
                 
 
@@ -2040,11 +2428,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The <see
              cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
+
+            
 
             
 
@@ -2056,13 +2448,19 @@
 
             
 
+            
+
              method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see
              cref="T:System.Net.IPHostEntry" />
 
             
 
+            
+
              instance if only IPv6 results where available for the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -2074,8 +2472,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -2087,6 +2489,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -2102,6 +2506,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -2113,8 +2519,12 @@
 
             
 
+            
+
              instance that contains address information about the host specified in <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -2123,6 +2533,8 @@
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2158,8 +2570,12 @@
 
             
 
+            
+
               object will complete after the <paramref
              name="address" />
+
+            
 
             
 
@@ -2172,8 +2588,12 @@
 
             
 
+            
+
              instance if only IPv6 results where available for the <paramref
              name="address" />
+
+            
 
             
 
@@ -2185,8 +2605,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -2198,6 +2622,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -2213,6 +2639,8 @@
 
             
 
+            
+
              instance as an asynchronous operation.</para
           >
         </summary>
@@ -2224,6 +2652,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2232,8 +2662,12 @@
 
             
 
+            
+
              property on the task object returns an <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -2242,11 +2676,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2282,8 +2720,12 @@
 
             
 
+            
+
               object will complete after the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -2297,6 +2739,8 @@
 
             
 
+            
+
              exception is returned with a value of 11001 (Windows Sockets error WSAHOST_NOT_FOUND). This exception can be returned if the DNS server does not respond. This exception can also be returned if the name is not an official host name or alias, or it cannot be found in the database(s) being queried. </para
           >
           <para
@@ -2305,8 +2749,12 @@
 
             
 
+            
+
              exception is also returned if the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -2315,8 +2763,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Net.IPAddress.IPv6Any" />
+
+            
 
             
 
@@ -2328,8 +2780,12 @@
 
             
 
+            
+
              parameter that the application wants an <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -2338,13 +2794,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
+            
+
             , and <see
              cref="P:System.Net.IPHostEntry.HostName" />
+
+            
 
             
 
@@ -2358,6 +2820,8 @@
 
                 
 
+                
+
                  parameter contains a legal IP string literal, then the first phase succeeds.</para
               >
             </item>
@@ -2368,6 +2832,8 @@
 
                 
 
+                
+
                  property. </para
               >
             </item>
@@ -2375,6 +2841,8 @@
               <para
                 >The host name from this reverse lookup is used again to obtain all the possible IP addresses associated with the name and set as the <see
                  cref="P:System.Net.IPHostEntry.AddressList" />
+
+                
 
                 
 
@@ -2389,11 +2857,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The <see
              cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
+
+            
 
             
 
@@ -2405,8 +2877,12 @@
 
             
 
+            
+
              instance if only IPv6 results where available for the <paramref
              name="hostNameOrAddress" />
+
+            
 
             
 
@@ -2418,8 +2894,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -2431,6 +2911,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -2446,6 +2928,8 @@
 
             
 
+            
+
              instance as an asynchronous operation.</para
           >
         </summary>
@@ -2457,6 +2941,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2465,8 +2951,12 @@
 
             
 
+            
+
              property on the task object returns an <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -2475,11 +2965,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2521,8 +3015,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+
+          
 
           
 
@@ -2575,8 +3073,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -2594,13 +3096,19 @@
 
           
 
+          
+
            . See <see
            cref="T:System.Net.DnsPermission" />
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+
+          
 
           
 
@@ -2610,6 +3118,8 @@
           <para
             >The following example demonstrates the use of the <see
              cref="M:System.Net.Dns.Resolve(System.String)" />
+
+            
 
             
 
@@ -2651,11 +3161,15 @@ public class DnsTest {
 
             
 
+            
+
              method queries a DNS server for the IP address associated with a host name or IP address.</para
           >
           <para
             >When <paramref
              name="hostName" />
+
+            
 
             
 
@@ -2667,13 +3181,19 @@ public class DnsTest {
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.IPHostEntry" />
+
+            
 
             
 
@@ -2685,6 +3205,8 @@ public class DnsTest {
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -2700,6 +3222,8 @@ public class DnsTest {
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -2711,8 +3235,12 @@ public class DnsTest {
 
             
 
+            
+
              instance that contains address information about the host specified in <paramref
              name="hostName" />
+
+            
 
             
 
@@ -2721,6 +3249,8 @@ public class DnsTest {
         </returns>
         <param name="hostName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

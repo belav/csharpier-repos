@@ -24,8 +24,12 @@
 
         
 
+        
+
          abstract class and overrides its members with implementations specific to the data store. The session-state store provider is called by the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
 
         
 
+        
+
          property. ASP.NET applications do not share session data.</para
       >
       <para
@@ -45,8 +51,12 @@
 
         
 
+        
+
          implementation for an ASP.NET application by setting the mode attribute of the sessionState configuration element to <see
          cref="F:System.Web.SessionState.SessionStateMode.Custom" />
+
+        
 
         
 
@@ -62,13 +72,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
 
         
 
+        
+
          classes include lock functionality that exclusively locks the session store item for a particular session for the duration of the execution of an ASP.NET page. Note that even if the <see
          cref="P:System.Web.Configuration.PagesSection.EnableSessionState" />
+
+        
 
         
 
@@ -80,8 +96,12 @@
 
         
 
+        
+
          method. When the request completes, the lock is released during the call to the <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.SetAndReleaseItemExclusive(System.Web.HttpContext,System.String,System.Web.SessionState.SessionStateStoreData,System.Object,System.Boolean)" />
+
+        
 
         
 
@@ -93,8 +113,12 @@
 
         
 
+        
+
          object encounters locked session data during the call to either the <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
+
+        
 
         
 
@@ -103,8 +127,12 @@
 
         
 
+        
+
          method, it will re-request the session data at half-second intervals until either the lock is released or the amount of time that the session data has been locked exceeds the value of the <see
          cref="P:System.Web.Configuration.HttpRuntimeSection.ExecutionTimeout" />
+
+        
 
         
 
@@ -113,8 +141,12 @@
 
         
 
+        
+
          object will call the <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.ReleaseItemExclusive(System.Web.HttpContext,System.String,System.Object)" />
+
+        
 
         
 
@@ -126,8 +158,12 @@
 
         
 
+        
+
          method on a separate thread before the call to the <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.SetAndReleaseItemExclusive(System.Web.HttpContext,System.String,System.Web.SessionState.SessionStateStoreData,System.Object,System.Boolean)" />
+
+        
 
         
 
@@ -136,13 +172,19 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
 
         
 
+        
+
          methods return a lock identifier. This lock identifier must be included with each request to modify locked session-store data. Session-store data is modified only if the lock identifier in the data store matches the lock identifier supplied by the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -157,13 +199,19 @@
 
         
 
+        
+
          method is called for a particular session, the data for that session is deleted from the data store using the <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.RemoveItem(System.Web.HttpContext,System.String,System.Object,System.Web.SessionState.SessionStateStoreData)" />
 
         
 
+        
+
          method; otherwise, the data will remain in the session data store to server future requests for the session. It is up to the <see
          cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+
+        
 
         
 
@@ -192,13 +240,19 @@
 
             
 
+            
+
              abstract class. Initialization values for a <see
              cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
 
             
 
+            
+
              implementation are passed to the <see
              cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -210,6 +264,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+
+            
 
             
 
@@ -243,8 +299,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateNewStoreData(System.Web.HttpContext,System.Int32)" />
+
+            
 
             
 
@@ -253,8 +313,12 @@
 
             
 
+            
+
              event. The <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateNewStoreData(System.Web.HttpContext,System.Int32)" />
+
+            
 
             
 
@@ -274,8 +338,12 @@
 
             
 
+            
+
              method creates a new <see
              cref="T:System.Web.SessionState.SessionStateStoreData" />
+
+            
 
             
 
@@ -284,8 +352,12 @@
 
             
 
+            
+
              object, an <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
+
+            
 
             
 
@@ -294,13 +366,19 @@
 
             
 
+            
+
              value. The <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
+            
+
              collection for the ASP.NET application can be retrieved using the <see
              cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -315,6 +393,8 @@
 
             
 
+            
+
              object to be used for the current request.</para
           >
         </summary>
@@ -326,6 +406,8 @@
 
             
 
+            
+
              for the current request.</para
           >
         </returns>
@@ -334,8 +416,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -346,13 +432,19 @@
 
           
 
+          
+
           The session-state <see
            cref="P:System.Web.SessionState.HttpSessionState.Timeout" />
 
           
 
+          
+
            value for the new <see
            cref="T:System.Web.SessionState.SessionStateStoreData" />
+
+          
 
           
 
@@ -386,8 +478,12 @@
 
             
 
+            
+
              method is used with sessions when the cookieless and regenerateExpiredSessionId attributes are both true. Having the regenerateExpiredSessionId attribute set to true causes the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -396,8 +492,12 @@
 
             
 
+            
+
              value when an expired <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -409,8 +509,12 @@
 
             
 
+            
+
              value requires redirecting the browser to a URL that contains the newly generated <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -419,8 +523,12 @@
 
             
 
+            
+
              method is called during the initial request that contains an expired <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -429,8 +537,12 @@
 
             
 
+            
+
              object acquires a new <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -439,13 +551,19 @@
 
             
 
+            
+
              method to add an uninitialized entry to the session-state data store. The browser is then redirected to the URL containing the newly generated <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
 
             
 
+            
+
              value. The existence of the uninitialized entry in the session data store ensures that the redirected request that includes the newly generated <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -457,8 +575,12 @@
 
             
 
+            
+
              value and contains only default values, including an expiration date and time and a value that corresponds to the <paramref
              name="actionFlags" />
+
+            
 
             
 
@@ -467,8 +589,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
+
+            
 
             
 
@@ -477,8 +603,12 @@
 
             
 
+            
+
              value equal to the <see
              cref="F:System.Web.SessionState.SessionStateActions.InitializeItem" />
+
+            
 
             
 
@@ -487,8 +617,12 @@
 
             
 
+            
+
              object by the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
+
+            
 
             
 
@@ -497,8 +631,12 @@
 
             
 
+            
+
              methods, and informs the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -507,11 +645,15 @@
 
             
 
+            
+
              object will then initialize the new session and raise the Session_OnStart event.</para
           >
           <para
             >For more information about cookieless sessions, see the <see
              cref="P:System.Web.SessionState.HttpSessionState.IsCookieless" />
+
+            
 
             
 
@@ -527,8 +669,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -539,8 +685,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+          
 
           
 
@@ -551,8 +701,12 @@
 
           
 
+          
+
           The session <see
            cref="P:System.Web.SessionState.HttpSessionState.Timeout" />
+
+          
 
           
 
@@ -579,13 +733,19 @@
 
             
 
+            
+
              method is called when the <see
              cref="M:System.Web.SessionState.SessionStateModule.Dispose" />
 
             
 
+            
+
              method executes at the closing of the application domain. Classes that inherit the <see
              cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+
+            
 
             
 
@@ -597,6 +757,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+
+            
 
             
 
@@ -629,8 +791,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.EndRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -639,8 +805,12 @@
 
             
 
+            
+
              event. You can use the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.EndRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -655,6 +825,8 @@
 
             
 
+            
+
              object at the end of a request.</para
           >
         </summary>
@@ -663,8 +835,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -768,8 +944,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.InitializeRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -778,8 +958,12 @@
 
             
 
+            
+
              method. You can use the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.InitializeRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -794,6 +978,8 @@
 
             
 
+            
+
              object for per-request initialization.</para
           >
         </summary>
@@ -802,8 +988,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -837,8 +1027,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.ReleaseItemExclusive(System.Web.HttpContext,System.String,System.Object)" />
+
+            
 
             
 
@@ -847,13 +1041,19 @@
 
             
 
+            
+
              event, if session values are unchanged. If session values have been modified, the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
+            
+
              object instead calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.SetAndReleaseItemExclusive(System.Web.HttpContext,System.String,System.Web.SessionState.SessionStateStoreData,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -865,8 +1065,12 @@
 
             
 
+            
+
              object also calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.ReleaseItemExclusive(System.Web.HttpContext,System.String,System.Object)" />
+
+            
 
             
 
@@ -875,8 +1079,12 @@
 
             
 
+            
+
              value. For more information about locking and details about the lock identifier, see "Locking Session-Store Data" in the <see
              cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+
+            
 
             
 
@@ -888,8 +1096,12 @@
 
             
 
+            
+
              method only removes the lock from an item in the session data store for the current application that matches the supplied session <paramref
              name="id" />
+
+            
 
             
 
@@ -898,13 +1110,19 @@
 
             
 
+            
+
              values. If the <paramref
              name="lockId" />
 
             
 
+            
+
              does not match the one in the data store, the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.ReleaseItemExclusive(System.Web.HttpContext,System.String,System.Object)" />
+
+            
 
             
 
@@ -920,8 +1138,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -932,10 +1154,14 @@
 
           
 
+          
+
           The session identifier for the current request.</param
         >
         <param name="lockId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -970,8 +1196,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.RemoveItem(System.Web.HttpContext,System.String,System.Object,System.Web.SessionState.SessionStateStoreData)" />
+
+            
 
             
 
@@ -980,8 +1210,12 @@
 
             
 
+            
+
              event, to delete the data for a session item from the session data store if the <see
              cref="M:System.Web.SessionState.HttpSessionState.Abandon" />
+
+            
 
             
 
@@ -990,13 +1224,19 @@
 
             
 
+            
+
              and <paramref
              name="lockId" />
 
             
 
+            
+
              values is deleted. For more information about locking and details about the lock identifier, see "Locking Session-Store Data" in the <see
              cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+
+            
 
             
 
@@ -1012,8 +1252,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -1024,10 +1268,14 @@
 
           
 
+          
+
           The session identifier for the current request.</param
         >
         <param name="lockId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1038,8 +1286,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SessionState.SessionStateStoreData" />
+
+          
 
           
 
@@ -1072,13 +1324,19 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.ResetItemTimeout(System.Web.HttpContext,System.String)" />
 
             
 
+            
+
              method to update the expiration date and time for a session to the current date and time plus the session <see
              cref="P:System.Web.SessionState.HttpSessionState.Timeout" />
+
+            
 
             
 
@@ -1092,6 +1350,8 @@
 
                 
 
+                
+
                  attribute is true, or</para
               >
             </item>
@@ -1102,8 +1362,12 @@
 
                 
 
+                
+
                  and <see
                  cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+
+                
 
                 
 
@@ -1117,8 +1381,12 @@
 
             
 
+            
+
              attribute is set to false, the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.ResetItemTimeout(System.Web.HttpContext,System.String)" />
+
+            
 
             
 
@@ -1134,8 +1402,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -1143,6 +1415,8 @@
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1178,8 +1452,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.SetAndReleaseItemExclusive(System.Web.HttpContext,System.String,System.Web.SessionState.SessionStateStoreData,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -1188,8 +1466,12 @@
 
             
 
+            
+
              event, to insert current session-item information into the data store or update existing session-item information in the data store with current values, to update the expiration time on the item, and to release the lock on the data. Only session data for the current application that matches the supplied session <paramref
              name="id" />
+
+            
 
             
 
@@ -1198,8 +1480,12 @@
 
             
 
+            
+
              values is updated. For more information about locking, see "Locking Session Store Data" in the <see
              cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+
+            
 
             
 
@@ -1211,8 +1497,12 @@
 
             
 
+            
+
              method is not called. Instead, the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.ReleaseItemExclusive(System.Web.HttpContext,System.String,System.Object)" />
+
+            
 
             
 
@@ -1224,8 +1514,12 @@
 
             
 
+            
+
              method has been called, the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.SetAndReleaseItemExclusive(System.Web.HttpContext,System.String,System.Web.SessionState.SessionStateStoreData,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -1234,8 +1528,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.RemoveItem(System.Web.HttpContext,System.String,System.Object,System.Web.SessionState.SessionStateStoreData)" />
+
+            
 
             
 
@@ -1251,8 +1549,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -1263,6 +1565,8 @@
 
           
 
+          
+
           The session identifier for the current request.</param
         >
         <param name="item">
@@ -1270,8 +1574,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SessionState.SessionStateStoreData" />
+
+          
 
           
 
@@ -1282,10 +1590,14 @@
 
           
 
+          
+
           The lock identifier for the current request. </param
         >
         <param name="newItem">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1320,8 +1632,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.SetItemExpireCallback(System.Web.SessionState.SessionStateItemExpireCallback)" />
+
+            
 
             
 
@@ -1330,8 +1646,12 @@
 
             
 
+            
+
              implementation and to associate the <see
              cref="T:System.Web.SessionState.SessionStateItemExpireCallback" />
+
+            
 
             
 
@@ -1343,8 +1663,12 @@
 
             
 
+            
+
              method to inform the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -1353,8 +1677,12 @@
 
             
 
+            
+
              delegate supplied by the <paramref
              name="expireCallback" />
+
+            
 
             
 
@@ -1363,8 +1691,12 @@
 
             
 
+            
+
              delegate will be called. For example, the delegate could be called during the call to the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.RemoveItem(System.Web.HttpContext,System.String,System.Object,System.Web.SessionState.SessionStateStoreData)" />
+
+            
 
             
 
@@ -1376,6 +1708,8 @@
           <para
             >Sets a reference to the <see
              cref="T:System.Web.SessionState.SessionStateItemExpireCallback" />
+
+            
 
             
 
@@ -1391,8 +1725,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SessionState.SessionStateItemExpireCallback" />
+
+          
 
           
 

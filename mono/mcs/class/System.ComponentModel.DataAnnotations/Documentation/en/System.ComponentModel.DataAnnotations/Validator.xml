@@ -23,6 +23,8 @@
 
         
 
+        
+
          attributes.</para
       >
     </summary>
@@ -64,8 +66,12 @@
 
             
 
+            
+
              instance that is attached to the object type. It also checks whether each property that is marked with <see
              cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+
+            
 
             
 
@@ -85,6 +91,8 @@
 
           
 
+          
+
           The object to validate.</param
         >
         <param name="validationContext">
@@ -92,10 +100,14 @@
 
           
 
+          
+
           The context that describes the object to validate.</param
         >
         <param name="validationResults">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +152,12 @@
 
             
 
+            
+
              instance that is attached to the object type. It also checks whether each property that is marked with <see
              cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+
+            
 
             
 
@@ -161,10 +177,14 @@
 
           
 
+          
+
           The object to validate.</param
         >
         <param name="validationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,10 +195,14 @@
 
           
 
+          
+
           A collection to hold each failed validation.</param
         >
         <param name="validateAllProperties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,8 +246,12 @@
 
             
 
+            
+
              instance that is associated with the property that is identified by the <paramref
              name="validationContext" />
+
+            
 
             
 
@@ -243,6 +271,8 @@
 
           
 
+          
+
           The value to validate.</param
         >
         <param name="validationContext">
@@ -250,10 +280,14 @@
 
           
 
+          
+
           The context that describes the property to validate.</param
         >
         <param name="validationResults">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,8 +335,12 @@
 
             
 
+            
+
              parameter against the <paramref
              name="value" />
+
+            
 
             
 
@@ -311,8 +349,12 @@
 
             
 
+            
+
              parameter is not null, this method adds a <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+            
 
             
 
@@ -321,8 +363,12 @@
 
             
 
+            
+
              parameter is null, this method does not add a <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+            
 
             
 
@@ -331,13 +377,19 @@
 
             
 
+            
+
              attribute is included in the <paramref
              name="validationAttributes" />
 
             
 
+            
+
              parameter, the <see
              cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+
+            
 
             
 
@@ -357,10 +409,14 @@
 
           
 
+          
+
           The value to validate.</param
         >
         <param name="validationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -371,10 +427,14 @@
 
           
 
+          
+
           A collection to hold failed validations. </param
         >
         <param name="validationAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,6 +474,8 @@
 
             
 
+            
+
              instance that is attached to the object type.</para
           >
         </remarks>
@@ -426,10 +488,14 @@
 
           
 
+          
+
           The object to validate.</param
         >
         <param name="validationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,6 +536,8 @@
 
             
 
+            
+
              instance that is attached to the object type. </para
           >
         </remarks>
@@ -482,6 +550,8 @@
 
           
 
+          
+
           The object to validate.</param
         >
         <param name="validationContext">
@@ -489,10 +559,14 @@
 
           
 
+          
+
           The context that describes the object to validate.</param
         >
         <param name="validateAllProperties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -532,8 +606,12 @@
 
             
 
+            
+
              instance that is associated with the property identified by the <paramref
              name="validationContext" />
+
+            
 
             
 
@@ -549,10 +627,14 @@
 
           
 
+          
+
           The value to validate.</param
         >
         <param name="validationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -596,8 +678,12 @@
 
             
 
+            
+
              parameter against the <paramref
              name="value" />
+
+            
 
             
 
@@ -606,8 +692,12 @@
 
             
 
+            
+
              attribute is included, the <see
              cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+
+            
 
             
 
@@ -623,6 +713,8 @@
 
           
 
+          
+
           The value to validate.</param
         >
         <param name="validationContext">
@@ -630,10 +722,14 @@
 
           
 
+          
+
           The context that describes the object to validate.</param
         >
         <param name="validationAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

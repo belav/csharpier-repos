@@ -40,6 +40,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -91,6 +93,8 @@
 
             
 
+            
+
              object associated with the transaction.</para
           >
         </summary>
@@ -123,6 +127,8 @@
 
             
 
+            
+
              object associated with the transaction.</para
           >
         </summary>
@@ -147,13 +153,19 @@
 
             
 
+            
+
              should rollback the transaction. However, the behavior of <see
              cref="Overload:System.Data.Common.DbTransaction.Dispose" />
 
             
 
+            
+
              is provider specific, and should not replace calling <see
              cref="M:System.Data.Common.DbTransaction.Rollback" />
+
+            
 
             
 
@@ -165,6 +177,8 @@
           <para
             >Releases the unmanaged resources used by the <see
              cref="T:System.Data.Common.DbTransaction" />
+
+            
 
             
 
@@ -194,13 +208,19 @@
 
             
 
+            
+
              should rollback the transaction. However, the behavior of <see
              cref="Overload:System.Data.Common.DbTransaction.Dispose" />
 
             
 
+            
+
              is provider specific, and should not replace calling <see
              cref="M:System.Data.Common.DbTransaction.Rollback" />
+
+            
 
             
 
@@ -215,6 +235,8 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
@@ -223,8 +245,12 @@
 
           
 
+          
+
           If true, this method releases all resources held by any managed objects that this <see
            cref="T:System.Data.Common.DbTransaction" />
+
+          
 
           
 
@@ -253,6 +279,8 @@
           <para
             >Specifies the <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 
@@ -303,6 +331,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.Common.DbConnection" />
+
+            
 
             
 

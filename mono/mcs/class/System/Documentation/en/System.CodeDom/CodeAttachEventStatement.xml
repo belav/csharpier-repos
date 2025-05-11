@@ -38,13 +38,19 @@
 
         
 
+        
+
          can be used to represent a statement that adds an event-handler delegate for an event. The <see
          cref="P:System.CodeDom.CodeAttachEventStatement.Event" />
 
         
 
+        
+
          property indicates the event to attach the event handler to. The <see
          cref="P:System.CodeDom.CodeAttachEventStatement.Listener" />
+
+        
 
         
 
@@ -78,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeAttachEventStatement" />
+
+            
 
             
 
@@ -116,6 +124,8 @@
 
             
 
+            
+
              class using the specified event and delegate.</para
           >
         </summary>
@@ -124,8 +134,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeEventReferenceExpression" />
+
+          
 
           
 
@@ -136,8 +150,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -176,6 +194,8 @@
 
             
 
+            
+
              class using the specified object containing the event, event name, and event-handler delegate.</para
           >
         </summary>
@@ -184,8 +204,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -196,6 +220,8 @@
 
           
 
+          
+
           The name of the event to attach an event handler to. </param
         >
         <param name="listener">
@@ -203,8 +229,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

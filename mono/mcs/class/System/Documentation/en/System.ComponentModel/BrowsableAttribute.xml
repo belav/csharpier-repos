@@ -36,8 +36,12 @@
 
         
 
+        
+
          constructor's <paramref
          name="browsable" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          constructor's <paramref
          name="browsable" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
           
 
+          
+
           . For a property marked with Browsable(false), the value is <see
            cref="F:System.ComponentModel.BrowsableAttribute.No" />
+
+          
 
           
 
@@ -70,8 +82,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.ComponentModel.BrowsableAttribute.No" />
+
+          
 
           
 
@@ -83,6 +99,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -120,8 +138,12 @@
 
             
 
+            
+
              constructor of the value true, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+
+            
 
             
 
@@ -130,8 +152,12 @@
 
             
 
+            
+
              constructor of the value false, the value is <see
              cref="F:System.ComponentModel.BrowsableAttribute.No" />
+
+            
 
             
 
@@ -140,8 +166,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.ComponentModel.BrowsableAttribute.No" />
+
+            
 
             
 
@@ -156,11 +186,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="browsable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,8 +251,12 @@
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+
+            
 
             
 
@@ -233,8 +271,12 @@
 
             
 
+            
+
             , which is <see
              cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+
+            
 
             
 
@@ -275,11 +317,15 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -371,13 +417,19 @@
 
             
 
+            
+
              constructor of the value false, this attribute is set to the constant member <see
              cref="F:System.ComponentModel.BrowsableAttribute.No" />
 
             
 
+            
+
             . Therefore, when you check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.BrowsableAttribute.No" />
+
+            
 
             
 
@@ -419,13 +471,19 @@
 
             
 
+            
+
              constructor of the value true, this attribute is set to the constant member <see
              cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
+            
+
             . Therefore, when you check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+
+            
 
             
 

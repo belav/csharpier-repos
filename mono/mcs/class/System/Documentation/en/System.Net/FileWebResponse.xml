@@ -38,13 +38,19 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Net.WebResponse" />
 
         
 
+        
+
          abstract base class to return file system resources for the <see
          cref="T:System.Net.FileWebRequest" />
+
+        
 
         
 
@@ -56,13 +62,19 @@
 
         
 
+        
+
          instances directly; instead, they are created by calling the <see
          cref="M:System.Net.FileWebRequest.GetResponse" />
 
         
 
+        
+
          method on a <see
          cref="T:System.Net.FileWebRequest" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -87,8 +103,12 @@
 
         
 
+        
+
          class relies on the <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -100,6 +120,8 @@
       <para
         >Provides a file system implementation of the <see
          cref="T:System.Net.WebResponse" />
+
+        
 
         
 
@@ -142,8 +164,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.FileWebResponse" />
+
+            
 
             
 
@@ -158,13 +184,19 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -176,13 +208,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            instance that contains the information required to serialize the new <see
            cref="T:System.Net.FileWebResponse" />
+
+          
 
           
 
@@ -193,13 +231,19 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            class that contains the source of the serialized stream associated with the new <see
            cref="T:System.Net.FileWebResponse" />
+
+          
 
           
 
@@ -232,13 +276,19 @@
 
             
 
+            
+
              method cleans up the resources used by a <see
              cref="T:System.Net.FileWebResponse" />
 
             
 
+            
+
              and closes the response stream by calling the <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -248,6 +298,8 @@
             <para
               >The response stream must be closed to avoid running out of system resources. You can closes the response stream by calling either <see
                cref="M:System.IO.Stream.Close" />
+
+              
 
               
 
@@ -284,6 +336,8 @@
 
             
 
+            
+
              property contains the length, in bytes, of the file system resource.</para
           >
         </remarks>
@@ -315,8 +369,12 @@
 
             
 
+            
+
              property contains the content type of the file system resource. The value of <see
              cref="P:System.Net.FileWebResponse.ContentType" />
+
+            
 
             
 
@@ -355,8 +413,12 @@
 
             
 
+            
+
              and is called by the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -365,8 +427,12 @@
 
             
 
+            
+
              method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -375,13 +441,19 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.Net.FileWebResponse.Dispose(System.Boolean)" />
 
             
 
+            
+
              method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -393,13 +465,19 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.FileWebResponse" />
 
             
 
+            
+
              references. This method invokes the Dispose method derived from <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -414,11 +492,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,6 +559,8 @@
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -488,6 +572,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -496,8 +582,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -508,8 +598,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -545,12 +639,16 @@
 
             
 
+            
+
              method returns the data stream from the file system resource.</para
           >
           <block subset="none" type="note">
             <para
               >The response stream must be closed to avoid running out of system resources. The response stream can be closed by calling <see
                cref="M:System.IO.Stream.Close" />
+
+              
 
               
 
@@ -568,6 +666,8 @@
           <para
             >A <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -604,13 +704,19 @@
 
             
 
+            
+
              property contains two name/value pairs, one for content length and one for content type, both of which are also exposed as properties, <see
              cref="P:System.Net.FileWebResponse.ContentLength" />
 
             
 
+            
+
              and <see
              cref="P:System.Net.FileWebResponse.ContentType" />
+
+            
 
             
 
@@ -642,6 +748,8 @@
           <para
             >The <see
              cref="P:System.Net.FileWebResponse.ResponseUri" />
+
+            
 
             
 
@@ -679,8 +787,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Net.FileWebResponse" />
+
+            
 
             
 
@@ -689,8 +801,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.FileWebResponse" />
+
+            
 
             
 
@@ -699,13 +815,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.FileWebResponse" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.FileWebResponse" />
+
+            
 
             
 
@@ -716,10 +838,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -732,13 +858,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Net.FileWebResponse" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Net.FileWebResponse" />
+
+              
 
               
 
@@ -752,6 +884,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Net.FileWebResponse" />
+
+            
 
             
 
@@ -792,8 +926,12 @@
 
             
 
+            
+
              instance with the data needed to serialize the <see
              cref="T:System.Net.FileWebResponse" />
+
+            
 
             
 
@@ -805,13 +943,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            , which will hold the serialized data for the <see
            cref="T:System.Net.FileWebResponse" />
+
+          
 
           
 
@@ -822,13 +966,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            containing the destination of the serialized stream associated with the new <see
            cref="T:System.Net.FileWebResponse" />
+
+          
 
           
 

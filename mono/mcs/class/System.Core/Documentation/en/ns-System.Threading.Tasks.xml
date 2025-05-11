@@ -10,8 +10,12 @@
 
         
 
+        
+
          which represents an asynchronous operation that can be waited on and cancelled, and <see
          cref="T:System.Threading.Tasks.Task`1" />
+
+        
 
         
 
@@ -20,8 +24,12 @@
 
         
 
+        
+
          class provides static methods for creating and starting tasks, and the <see
          cref="T:System.Threading.Tasks.TaskScheduler" />
+
+        
 
         
 

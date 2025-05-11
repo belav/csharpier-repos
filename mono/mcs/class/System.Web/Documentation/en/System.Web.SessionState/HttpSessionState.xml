@@ -29,8 +29,12 @@
 
         
 
+        
+
          class, which is accessible through the <see
          cref="P:System.Web.HttpContext.Session" />
+
+        
 
         
 
@@ -39,13 +43,19 @@
 
         
 
+        
+
         , or the <see
          cref="P:System.Web.UI.Page.Session" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -57,10 +67,14 @@
 
         
 
+        
+
          in the <format
          type="text/html">
           <a href="bda6fb8c-0076-43e3-9ce2-8cf1f8bdaa7d">sessionState</a>
         </format>
+
+        
 
         
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          for the cookieless attribute. You can also have ASP.NET determine whether cookies are enabled for the browser by specifying a value of <see
          cref="F:System.Web.HttpCookieMode.AutoDetect" />
+
+        
 
         
 
@@ -79,8 +97,12 @@
 
         
 
+        
+
          is specified, or enabled when <see
          cref="F:System.Web.HttpCookieMode.AutoDetect" />
+
+        
 
         
 
@@ -92,8 +114,12 @@
 
         
 
+        
+
          property pass. When a new session begins, the session <see
          cref="E:System.Web.SessionState.SessionStateModule.Start" />
+
+        
 
         
 
@@ -102,8 +128,12 @@
 
         
 
+        
+
          method is called, or the ASP.NET application is shut down, the session <see
          cref="E:System.Web.SessionState.SessionStateModule.End" />
+
+        
 
         
 
@@ -112,8 +142,12 @@
 
         
 
+        
+
          event is raised only when the session state mode is set to <see
          cref="F:System.Web.SessionState.SessionStateMode.InProc" />
+
+        
 
         
 
@@ -125,8 +159,12 @@
 
         
 
+        
+
          object. For more information, see the <see
          cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+        
 
         
 
@@ -139,6 +177,8 @@
 
         
 
+        
+
          value in the <format
          type="text/html">
           <a href="bda6fb8c-0076-43e3-9ce2-8cf1f8bdaa7d">sessionState</a>
@@ -146,10 +186,14 @@
 
         
 
+        
+
          element of your application configuration. For more information, see <format
          type="text/html">
           <a href="0bb0a3a3-650f-4c47-a0c5-b08b9b591bb4">Session State Modes</a>
         </format>
+
+        
 
         
 
@@ -161,8 +205,12 @@
 
         
 
+        
+
          property) and the ASP.NET cache (see the <see
          cref="N:System.Web.Caching" />
+
+        
 
         
 
@@ -171,8 +219,12 @@
 
         
 
+        
+
          namespace), which persists user values in a data store without expiring them using a time-out; ASP.NET <see
          cref="N:System.Web.UI.WebControls" />
+
+        
 
         
 
@@ -181,8 +233,12 @@
 
         
 
+        
+
         ; <see
          cref="P:System.Web.HttpResponse.Cookies" />
+
+        
 
         
 
@@ -191,8 +247,12 @@
 
         
 
+        
+
          property; and fields on an HTML form that are available from an HTTP POST using the <see
          cref="P:System.Web.HttpRequest.Form" />
+
+        
 
         
 
@@ -202,6 +262,8 @@
             >ASP.NET State-Management Recommendations</a
           >
         </format>
+
+        
 
         
 
@@ -230,8 +292,12 @@
 
             
 
+            
+
              method is called, the current session is no longer valid and a new session can be started. <see
              cref="M:System.Web.SessionState.HttpSessionState.Abandon" />
+
+            
 
             
 
@@ -240,8 +306,12 @@
 
             
 
+            
+
              event to be raised. A new <see
              cref="E:System.Web.SessionState.SessionStateModule.Start" />
+
+            
 
             
 
@@ -255,10 +325,14 @@
 
             
 
+            
+
              configuration element to true. For more information, see <format
              type="text/html">
               <a href="146ca206-d151-4f2e-a548-bcca05ccf0cb">Session Identifiers</a>
             </format>
+
+            
 
             
 
@@ -270,13 +344,19 @@
 
             
 
+            
+
              event is supported only when the <see
              cref="P:System.Web.SessionState.HttpSessionState.Mode" />
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.SessionState.SessionStateMode.InProc" />
+
+            
 
             
 
@@ -312,8 +392,12 @@
 
             
 
+            
+
              parameter refers to an existing session state item, the existing item is overwritten with the specified <paramref
              name="value" />
+
+            
 
             
 
@@ -329,10 +413,14 @@
 
           
 
+          
+
           The name of the item to add to the session-state collection. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,8 +469,12 @@
 
             
 
+            
+
              property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
              cref="P:System.Web.HttpResponse.ContentEncoding" />
+
+            
 
             
 
@@ -415,6 +507,8 @@
           <para
             >The <see
              cref="P:System.Web.SessionState.HttpSessionState.Contents" />
+
+            
 
             
 
@@ -452,8 +546,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -464,8 +562,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -520,6 +622,8 @@
 
             
 
+            
+
              that can iterate through the variable names in the session-state collection.</para
           >
         </returns>
@@ -547,12 +651,16 @@
 
             
 
+            
+
              configuration element.</para
           >
           <block subset="none" type="note">
             <para
               >To improve the security of your application, your application should allow users to log out, at which point it should call the <see
                cref="M:System.Web.SessionState.HttpSessionState.Abandon" />
+
+              
 
               
 
@@ -568,6 +676,8 @@
 
             
 
+            
+
              in the request.</para
           >
           <para
@@ -575,6 +685,8 @@
              type="text/html">
               <a href="bda6fb8c-0076-43e3-9ce2-8cf1f8bdaa7d">sessionState</a>
             </format>
+
+            
 
             
 
@@ -587,8 +699,12 @@
 
               
 
+              
+
                value and including it in requests to the server. If you are storing private or sensitive information in session state, it is recommended that you use SSL to encrypt any communication between the browser and server that includes the <see
                cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+              
 
               
 
@@ -750,8 +866,12 @@
 
             
 
+            
+
              property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
              cref="P:System.Globalization.CultureInfo.LCID" />
+
+            
 
             
 
@@ -763,8 +883,12 @@
 
             
 
+            
+
              property accesses the <see
              cref="P:System.Globalization.CultureInfo.LCID" />
+
+            
 
             
 
@@ -800,8 +924,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+            
 
             
 
@@ -809,6 +937,8 @@
              type="text/html">
               <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a>
             </format>
+
+            
 
             
 
@@ -843,6 +973,8 @@
 
             
 
+            
+
             , the collection remains unchanged. No exception is thrown.</para
           >
         </remarks>
@@ -852,6 +984,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -878,8 +1012,12 @@
 
             
 
+            
+
              performs the same function as <see
              cref="M:System.Web.SessionState.HttpSessionState.Clear" />
+
+            
 
             
 
@@ -916,6 +1054,8 @@
 
           
 
+          
+
           The index of the item to remove from the session-state collection. </param
         >
       </Docs>
@@ -940,13 +1080,19 @@
 
             
 
+            
+
              property is used to uniquely identify a browser with session data on the server. The <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
 
             
 
+            
+
              value is randomly generated by ASP.NET and stored in a non-expiring session cookie in the browser. The <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -960,8 +1106,12 @@
 
             
 
+            
+
              configuration element to true, or to <see
              cref="F:System.Web.HttpCookieMode.UseUri" />
+
+            
 
             
 
@@ -970,8 +1120,12 @@
 
             
 
+            
+
              for the cookieless attribute. You can also have ASP.NET determine whether cookies are enabled for the browser by specifying a value of <see
              cref="F:System.Web.HttpCookieMode.AutoDetect" />
+
+            
 
             
 
@@ -980,13 +1134,19 @@
 
             
 
+            
+
              is specified, or enabled when <see
              cref="F:System.Web.HttpCookieMode.AutoDetect" />
 
             
 
+            
+
              is specified, then the session identifier will be stored in a cookie; otherwise the session identifier will be stored in the URL. For more information, see the <see
              cref="P:System.Web.SessionState.HttpSessionState.IsCookieless" />
+
+            
 
             
 
@@ -998,13 +1158,19 @@
 
             
 
+            
+
              is sent between the server and the browser in clear text, either in a cookie or in the URL. As a result, an unwanted source could gain access to the session of another user by obtaining the <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
 
             
 
+            
+
              value and including it in requests to the server. If you are storing private or sensitive information in session state, it is recommended that you use SSL to encrypt any communication between the browser and server that includes the <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -1016,13 +1182,19 @@
 
             
 
+            
+
              object is used. As a result, a new session ID is generated for each page request until the session object is accessed. If your application requires a static session ID for the entire session, you can either implement the Session_Start method in the application's Global.asax file and store data in the <see
              cref="P:System.Web.UI.Page.Session" />
 
             
 
+            
+
              object to fix the session ID, or you can use code in another part of your application to explicitly store data in the <see
              cref="P:System.Web.UI.Page.Session" />
+
+            
 
             
 
@@ -1063,8 +1235,12 @@
 
             
 
+            
+
              is out-of-process (<see
              cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+            
 
             
 
@@ -1073,11 +1249,15 @@
 
             
 
+            
+
             ), the object will not be created and will not be added to this collection.</para
           >
           <para
             >The <see
              cref="P:System.Web.SessionState.HttpSessionState.StaticObjects" />
+
+            
 
             
 
@@ -1130,10 +1310,14 @@
 
             
 
+            
+
              property can be set in the Web.config file for an application using the timeout attribute of the <format
              type="text/html">
               <a href="bda6fb8c-0076-43e3-9ce2-8cf1f8bdaa7d">sessionState</a>
             </format>
+
+            
 
             
 
@@ -1142,11 +1326,15 @@
 
             
 
+            
+
              property value directly using application code.</para
           >
           <para
             >The <see
              cref="P:System.Web.SessionState.HttpSessionState.Timeout" />
+
+            
 
             
 

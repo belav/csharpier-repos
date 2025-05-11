@@ -20,6 +20,8 @@
 
         
 
+        
+
          enumeration represents the font sizes defined by HTML 4.0. The font size can be an absolute or relative size.</para
       >
       <para
@@ -28,8 +30,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.UI.WebControls.FontSize.XSmall" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.UI.WebControls.FontSize.Medium" />
+
+        
 
         
 
@@ -48,13 +58,19 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.UI.WebControls.FontSize.XLarge" />
 
         
 
+        
+
         , and <see
          cref="F:System.Web.UI.WebControls.FontSize.XXLarge" />
+
+        
 
         
 
@@ -66,8 +82,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Web.UI.WebControls.FontSize.Larger" />
+
+        
 
         
 
@@ -80,8 +100,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Web.UI.WebControls.FontSize.Larger" />
+
+          
 
           
 

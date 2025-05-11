@@ -31,6 +31,8 @@
 
         
 
+        
+
          class to group together policy assertions and to enumerate or modify a group of assertions.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
          is used most frequently as a return value for the methods of the <see
          cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+        
 
         
 
@@ -71,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
+
+            
 
             
 
@@ -109,8 +117,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -249,8 +261,12 @@
 
           
 
+          
+
           The index at which to insert <paramref
            name="item" />
+
+          
 
           
 
@@ -261,8 +277,12 @@
 
           
 
+          
+
           The policy assertion to insert at <paramref
            name="index" />
+
+          
 
           
 
@@ -369,6 +389,8 @@
 
           
 
+          
+
           The index that contains the assertion to replace.</param
         >
         <param name="item">
@@ -376,8 +398,12 @@
 
           
 
+          
+
           The policy assertion to replace the assertion already at <paramref
            name="index" />
+
+          
 
           
 

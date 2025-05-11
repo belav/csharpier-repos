@@ -38,6 +38,8 @@
 
         
 
+        
+
          can be used to represent the declaration for a property of a type.</para
       >
       <para
@@ -46,8 +48,12 @@
 
         
 
+        
+
          property specifies the data type of the property. The <see
          cref="P:System.CodeDom.CodeMemberProperty.GetStatements" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          property contains any set statement methods for the property. The <see
          cref="P:System.CodeDom.CodeMemberProperty.Parameters" />
+
+        
 
         
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -127,8 +139,12 @@
 
             
 
+            
+
              should return the value for the member property. Use a <see
              cref="T:System.CodeDom.CodeMethodReturnStatement" />
+
+            
 
             
 
@@ -165,6 +181,8 @@
 
               
 
+              
+
                collection.</para
             >
           </block>
@@ -197,12 +215,16 @@
 
             
 
+            
+
              will return false if the property is read-only.</para
           >
           <block subset="none" type="note">
             <para
               >Setting this property to false will clear the <see
                cref="P:System.CodeDom.CodeMemberProperty.SetStatements" />
+
+              
 
               
 
@@ -334,6 +356,8 @@
           <para
             >One of the statements in this collection typically sets a value for the property. Often, the statements within a set method accessor perform checking to determine whether to set or translate the specified value for the property. A <see
              cref="T:System.CodeDom.CodePropertySetValueReferenceExpression" />
+
+            
 
             
 

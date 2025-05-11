@@ -24,8 +24,12 @@
 
         
 
+        
+
          class. Instances of this class are returned when you retrieve the unicast address information for a <see
          cref="T:System.Net.NetworkInformation.NetworkInterface" />
+
+        
 
         
 

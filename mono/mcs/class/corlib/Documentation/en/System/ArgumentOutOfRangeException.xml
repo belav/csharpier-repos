@@ -45,8 +45,12 @@
         
 
         
+
+        
       class to throw a <see
          cref="T:System.ArgumentOutOfRangeException" />
+
+        
 
         
 
@@ -85,6 +89,8 @@ class ArgOutOfRangeExample {
 
         
 
+        
+
          is used extensively by: </para
       >
       <list type="bullet">
@@ -95,8 +101,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              and <see
              cref="N:System.IO" />
+
+            
 
             
 
@@ -110,6 +120,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              class.</para
           >
         </item>
@@ -120,8 +132,12 @@ class ArgOutOfRangeExample {
 
         
 
+        
+
         . It is provided so that application code can differentiate between exceptions caused by invalid arguments that are not null, and exceptions caused by null arguments. For errors caused by null arguments, see <see
          cref="T:System.ArgumentNullException" />
+
+        
 
         
 
@@ -129,6 +145,8 @@ class ArgOutOfRangeExample {
       >
       <para>
         <see cref="T:System.ArgumentOutOfRangeException" />
+
+        
 
         
 
@@ -140,8 +158,12 @@ class ArgOutOfRangeExample {
 
         
 
+        
+
         , see the <see
          cref="T:System.ArgumentOutOfRangeException" />
+
+        
 
         
 
@@ -181,11 +203,15 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Nonnegative number required." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -232,6 +258,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -270,6 +298,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Nonnegative number required." This message takes into account the current system culture.</para
           >
           <para
@@ -278,8 +308,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property of the new instance using the <paramref
              name="paramName" />
+
+            
 
             
 
@@ -288,11 +322,15 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              is intended to be understood by humans.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -349,11 +387,15 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              class with the name of the parameter that causes this exception.</para
           >
         </summary>
         <param name="paramName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,6 +434,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -403,6 +447,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -411,10 +457,14 @@ class ArgOutOfRangeExample {
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -451,6 +501,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              class with a specified error message and the exception that is the cause of this exception.</para
           >
         </summary>
@@ -459,10 +511,14 @@ class ArgOutOfRangeExample {
 
           
 
+          
+
           The error message that explains the reason for this exception. </param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -503,13 +559,19 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property of the new instance using the value of the <paramref
              name="message" />
 
             
 
+            
+
              parameter. The content of the <paramref
              name="message" />
+
+            
 
             
 
@@ -521,8 +583,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property of the new instance using the <paramref
              name="paramName" />
+
+            
 
             
 
@@ -531,11 +597,15 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              is intended to be understood by humans.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -592,6 +662,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              class with the name of the parameter that causes this exception and a specified error message.</para
           >
         </summary>
@@ -600,10 +672,14 @@ class ArgOutOfRangeExample {
 
           
 
+          
+
           The name of the parameter that caused the exception. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -646,8 +722,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property of the new instance using the <paramref
              name="paramName" />
+
+            
 
             
 
@@ -656,8 +736,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property using the <paramref
              name="actualValue" />
+
+            
 
             
 
@@ -666,8 +750,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property using the <paramref
              name="message" />
+
+            
 
             
 
@@ -676,8 +764,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              and <paramref
              name="message" />
+
+            
 
             
 
@@ -689,8 +781,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              parameter is not used within the .NET Framework class library. However, the <see
              cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+
+            
 
             
 
@@ -702,8 +798,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              parameter contains an invalid value that is passed to the method and causes this exception to be thrown. This value is stored in the <see
              cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+
+            
 
             
 
@@ -712,11 +812,15 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -783,11 +887,15 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              class with the parameter name, the value of the argument, and a specified error message.</para
           >
         </summary>
         <param name="paramName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -798,10 +906,14 @@ class ArgOutOfRangeExample {
 
           
 
+          
+
           The value of the argument that causes this exception. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -835,10 +947,14 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              that contains the 
    value of the parameter that caused the current exception, or
 <see
              langword="null" />
+
+            
 
             
 
@@ -855,13 +971,19 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property is assigned a value at the time of object construction. If the <see
              cref="P:System.ArgumentOutOfRangeException.ActualValue" />
 
             
 
+            
+
              property value is not null, a string representation of the value is appended to the message string held by the <see
              cref="P:System.ArgumentOutOfRangeException.Message" />
+
+            
 
             
 
@@ -873,13 +995,19 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              property is not used within the .NET Framework class library. It carries a null value in all the <see
              cref="T:System.ArgumentOutOfRangeException" />
 
             
 
+            
+
              objects thrown by the .NET Framework class library. The <see
              cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+
+            
 
             
 
@@ -924,8 +1052,12 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -934,11 +1066,15 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              transmitted over the stream.</para
           >
           <para
             >For more information, see <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -953,6 +1089,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              object with the invalid argument value and additional exception information.</para
           >
         </summary>
@@ -961,10 +1099,14 @@ class ArgOutOfRangeExample {
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -992,6 +1134,8 @@ class ArgOutOfRangeExample {
 
             
 
+            
+
              containing the error message. The error message should describe the expected values of the parameter that causes this exception.</para
           >
         </value>
@@ -1000,6 +1144,8 @@ class ArgOutOfRangeExample {
           <para
             >This property overrides <see
              cref="P:System.ArgumentException.Message" />
+
+            
 
             
 

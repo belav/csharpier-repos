@@ -42,6 +42,8 @@
 
         
 
+        
+
          enumeration is of interest only in a few debugging scenarios. Your code should never use the thread state to synchronize the activities of threads.</para
       >
       <para>
@@ -49,8 +51,12 @@
 
         
 
+        
+
          defines a set of all possible execution states for threads. Once a thread is created, it is in at least one of the states until it terminates. Threads created within the common language runtime are initially in the Unstarted state, while external threads that come into the runtime are already in the Running state. An Unstarted thread is transitioned into the Running state by calling <see
          cref="M:System.Threading.Thread.Start" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Diagnostics.ThreadState" />
+
+          
 
           
 
@@ -99,6 +109,8 @@
 
               
 
+              
+
                method on the new thread, and the call returns. </para
             >
             <para
@@ -107,8 +119,12 @@
 
               
 
+              
+
                method does not return until the new thread has started running. There is no way to know at what point the new thread will start running, during the call to <see
                cref="M:System.Threading.Thread.Start" />
+
+              
 
               
 
@@ -138,6 +154,8 @@
 
               
 
+              
+
                on another object. </para
             >
           </term>
@@ -150,6 +168,8 @@
             <para
               >The thread calls <see
                cref="M:System.Threading.Thread.Join" />
+
+              
 
               
 
@@ -190,6 +210,8 @@
 
               
 
+              
+
                request. </para
             >
           </term>
@@ -227,6 +249,8 @@
 
               
 
+              
+
                request. </para
             >
           </term>
@@ -250,8 +274,12 @@
 
         
 
+        
+
         , and another thread calls <see
          cref="M:System.Threading.Thread.Abort(System.Object)" />
+
+        
 
         
 
@@ -260,8 +288,12 @@
 
         
 
+        
+
          or is interrupted, it will receive the <see
          cref="T:System.Threading.ThreadAbortException" />
+
+        
 
         
 
@@ -273,6 +305,8 @@
 
         
 
+        
+
          property of a thread provides the current state of a thread. Applications must use a bitmask to determine whether a thread is running. Since the value for Running is zero (0), test whether a thread is running by using C# code such as (myThread.ThreadState &amp; (ThreadState.Stopped | ThreadState.Unstarted)) == 0 or Visual Basic code such as (myThread.ThreadState And (ThreadState.Stopped Or ThreadState.Unstarted)) = 0.</para
       >
     </remarks>
@@ -281,6 +315,8 @@
       <para
         >Specifies the execution states of a <see
          cref="T:System.Threading.Thread" />
+
+        
 
         
 
@@ -320,8 +356,12 @@
 
             
 
+            
+
              and the thread is now dead, but its state has not yet changed to <see
              cref="F:System.Threading.ThreadState.Stopped" />
+
+            
 
             
 
@@ -362,8 +402,12 @@
 
             
 
+            
+
              method has been invoked on the thread, but the thread has not yet received the pending <see
              cref="T:System.Threading.ThreadAbortException" />
+
+            
 
             
 
@@ -404,6 +448,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -438,6 +484,8 @@
           <para
             >The thread has been started, it is not blocked, and there is no pending <see
              cref="T:System.Threading.ThreadAbortException" />
+
+            
 
             
 
@@ -580,6 +628,8 @@
 
             
 
+            
+
              method has not been invoked on the thread.</para
           >
         </summary>
@@ -617,8 +667,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Thread.Join" />
+
+            
 
             
 
@@ -627,13 +681,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
 
             
 
+            
+
              — or of waiting on a thread synchronization object such as <see
              cref="T:System.Threading.ManualResetEvent" />
+
+            
 
             
 

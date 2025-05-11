@@ -10,6 +10,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -27,6 +29,8 @@
       <name>
         <non_terminal where="9.5.7">line-indicator</non_terminal>
       </name>
+
+      
 
       
 
@@ -50,6 +54,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <terminal>"</terminal>
@@ -63,8 +69,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -84,6 +94,8 @@
 
       
 
+      
+
        :: <rhs
 
         >Any character except " (U+0022), and <non_terminal
@@ -97,13 +109,19 @@
 
     
 
+    
+
      directives are present, the compiler reports true line numbers and source file names in its output. When processing a <symbol
     >#line</symbol>
 
     
 
+    
+
      directive that includes a <non_terminal
      where="9.5.7">line-indicator</non_terminal>
+
+    
 
     
 
@@ -115,13 +133,19 @@
 
     
 
+    
+
      default directive reverses the effect of all preceding <symbol
     >#line</symbol>
 
     
 
+    
+
      directives. The compiler reports true line information for subsequent lines, precisely as if no <symbol
     >#line</symbol>
+
+    
 
     
 
@@ -134,8 +158,12 @@
 
       
 
+      
+
        differs from a regular string literal in that escape characters are not processed; the '\' character simply designates an ordinary back-slash character within a <non_terminal
        where="9.5.7">file-name</non_terminal>
+
+      
 
       
 

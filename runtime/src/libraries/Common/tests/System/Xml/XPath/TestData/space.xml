@@ -1,10 +1,11 @@
 <Doc>
   <Title>XPath test</Title>
   <Summary>This shall test XPath test</Summary>
-  <Chap xml:space="preserve"
-    >
+  <Chap xml:space="preserve">
    <Title
     >XPath test</Title>
+
+    
 
     
 
@@ -18,13 +19,19 @@
 
         
 
+        
+
          Paragraph </Para
       >
 
       
 
+      
+
        End of first paragraph </Para
     >
+
+    
 
     
 
@@ -35,10 +42,14 @@
     
 
     
+
+    
  </Chap
   >
   <Chap>
     <Title>XPath test</Title>
+
+    
 
     
 

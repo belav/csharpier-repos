@@ -23,13 +23,19 @@
 
         
 
+        
+
          objects. The current setting for a <see
          cref="T:System.Net.Cache.RequestCachePolicy" />
 
         
 
+        
+
          object is available in the <see
          cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
+
+        
 
         
 
@@ -41,6 +47,8 @@
 
         
 
+        
+
          value is the default cache behavior specified in the machine configuration file that ships with the .NET Framework. No entries are taken from caches, added to caches, or removed from caches between the client and server.</para
       >
       <para
@@ -49,13 +57,19 @@
 
         
 
+        
+
          property is used to get or set the default cache policy for <see
          cref="T:System.Net.HttpWebRequest" />
 
         
 
+        
+
          instances. The <see
          cref="P:System.Net.WebRequest.CachePolicy" />
+
+        
 
         
 
@@ -64,8 +78,12 @@
 
         
 
+        
+
          instances. The <see
          cref="P:System.Net.WebRequest.CachePolicy" />
+
+        
 
         
 
@@ -78,6 +96,8 @@
       <para
         >Specifies caching behavior for resources obtained using <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -155,6 +175,8 @@
           <para
             >Satisfies a request using the locally cached resource; does not send a request for an item that is not in the cache. When this cache policy level is specified, a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 

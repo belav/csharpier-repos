@@ -67,13 +67,19 @@
 
         
 
+        
+
          control to create a list control that allows single or multiple item selection. Use the <see
          cref="P:System.Web.UI.WebControls.ListBox.Rows" />
 
         
 
+        
+
          property to specify the height of the control. To enable multiple item selection, set the <see
          cref="P:System.Web.UI.WebControls.ListBox.SelectionMode" />
+
+        
 
         
 
@@ -85,8 +91,12 @@
 
         
 
+        
+
          control, place a ListItem element for each entry between the opening and closing tags of the <see
          cref="T:System.Web.UI.WebControls.ListBox" />
+
+        
 
         
 
@@ -98,8 +108,12 @@
 
         
 
+        
+
          collection to examine the <see
          cref="T:System.Web.UI.WebControls.ListItem" />
+
+        
 
         
 
@@ -108,8 +122,12 @@
 
         
 
+        
+
          control. For example, you can determine the selected item(s) in the <see
          cref="T:System.Web.UI.WebControls.ListBox" />
+
+        
 
         
 
@@ -118,13 +136,19 @@
 
         
 
+        
+
          collection and testing the <see
          cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
         
 
+        
+
          value for each <see
          cref="T:System.Web.UI.WebControls.ListItem" />
+
+        
 
         
 
@@ -136,8 +160,12 @@
 
         
 
+        
+
          control also supports data binding. To bind the control to a data source, first create a data source, such as one of the <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -146,8 +174,12 @@
 
         
 
+        
+
          method to bind the data source to the <see
          cref="T:System.Web.UI.WebControls.ListBox" />
+
+        
 
         
 
@@ -156,13 +188,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.ListControl.DataValueField" />
 
         
 
+        
+
          properties to specify which field in the data source to bind to the Text and Value properties, respectively, of each list item in the control. The <see
          cref="T:System.Web.UI.WebControls.ListBox" />
+
+        
 
         
 
@@ -177,6 +215,8 @@
 
           
 
+          
+
           , <format
            type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -186,12 +226,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -214,10 +258,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -237,9 +285,13 @@
 
         
 
+        
+
         "
     AutoPostBack="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -251,11 +303,15 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     CausesValidation="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -272,9 +328,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -284,9 +344,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -296,10 +360,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -311,9 +379,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -339,6 +411,8 @@
 
         
 
+        
+
         |Multiple"
     SkinID="string"
     Style="string"
@@ -347,6 +421,8 @@
     ValidationGroup="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -359,9 +435,13 @@
 
         
 
+        
+
         |False"
                 Selected="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -392,6 +472,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -400,6 +482,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -435,6 +519,8 @@
 
           
 
+          
+
           The output stream that renders HTML content to the client. </param
         >
       </Docs>
@@ -467,13 +553,19 @@
 
               
 
+              
+
                property is inherited from the <see
                cref="T:System.Web.UI.WebControls.WebControl" />
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.ListBox" />
+
+              
 
               
 
@@ -520,13 +612,19 @@
 
               
 
+              
+
                property is inherited from the <see
                cref="T:System.Web.UI.WebControls.WebControl" />
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.ListBox" />
+
+              
 
               
 
@@ -573,13 +671,19 @@
 
               
 
+              
+
                property is inherited from the <see
                cref="T:System.Web.UI.WebControls.WebControl" />
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.ListBox" />
+
+              
 
               
 
@@ -621,13 +725,19 @@
 
             
 
+            
+
              method to identify or access the selected items in the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
 
             
 
+            
+
              control. Each element in the returned array represents the index for a selected list item. You can use the index values to access the items in the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -639,6 +749,8 @@
           <para
             >Gets the array of index values for currently selected items in the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -679,8 +791,12 @@
 
             
 
+            
+
              method is used primarily by control developers, when deriving a custom control from the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -692,8 +808,12 @@
 
             
 
+            
+
              method indicates if the state of the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -702,8 +822,12 @@
 
             
 
+            
+
              value as the last posted value. A user selecting an item in the control changes the <see
              cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+            
 
             
 
@@ -712,8 +836,12 @@
 
             
 
+            
+
              object in the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -722,13 +850,19 @@
 
             
 
+            
+
              control. If some list items are selected in the control, or if the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
 
             
 
+            
+
              is disabled, <see
              cref="M:System.Web.UI.WebControls.ListBox.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -740,8 +874,12 @@
 
             
 
+            
+
              method returns true for a control, the ASP.NET page framework invokes the <see
              cref="M:System.Web.UI.WebControls.RadioButtonList.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -761,8 +899,12 @@
 
           
 
+          
+
           The key identifier for the control, used to index the <paramref
            name="postCollection" />
+
+          
 
           
 
@@ -773,8 +915,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -800,8 +946,12 @@
 
             
 
+            
+
              method is used primarily by control developers, when deriving a custom control from the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -810,8 +960,12 @@
 
             
 
+            
+
              method allows derived classes to handle the <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -823,8 +977,12 @@
 
             
 
+            
+
              method performs any necessary prerendering steps prior to saving view state and rendering content for the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -839,6 +997,8 @@
 
             
 
+            
+
              control prior to rendering on the client.</para
           >
         </summary>
@@ -847,8 +1007,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -879,8 +1043,12 @@
 
             
 
+            
+
              method is used primarily by control developers, when deriving a custom control from the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -892,8 +1060,12 @@
 
             
 
+            
+
              method on a <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -902,8 +1074,12 @@
 
             
 
+            
+
              method indicates that the state of the list items have changed in the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -912,8 +1088,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -922,8 +1102,12 @@
 
             
 
+            
+
              event. Control developers can override the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -935,8 +1119,12 @@
 
             
 
+            
+
              method can optionally perform validation before raising the <see
              cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+
+            
 
             
 
@@ -945,8 +1133,12 @@
 
             
 
+            
+
              is selected, set the <see
              cref="P:System.Web.UI.WebControls.ListControl.AutoPostBack" />
+
+            
 
             
 
@@ -955,8 +1147,12 @@
 
             
 
+            
+
              properties to true, and then specify the group of controls to validate in the <see
              cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+
+            
 
             
 
@@ -971,8 +1167,12 @@
 
             
 
+            
+
              method whenever posted data for the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -1022,8 +1222,12 @@
 
             
 
+            
+
              property to specify the number of rows to display in the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -1038,6 +1242,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -1046,6 +1252,8 @@
           <para
             >Gets or sets the number of rows displayed in the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -1083,13 +1291,19 @@
 
             
 
+            
+
              property to specify the mode behavior of the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
 
             
 
+            
+
              control. Setting this property to ListSelectionMode.Single indicates only a single item can be selected from the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -1101,6 +1315,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -1109,6 +1325,8 @@
           <para
             >Gets or sets the selection mode of the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -1155,8 +1373,12 @@
 
             
 
+            
+
              method to process posted data for changes to a <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -1168,13 +1390,19 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -1194,10 +1422,14 @@
 
           
 
+          
+
           The index within the posted collection that references the content to load. </param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1228,8 +1460,12 @@
 
             
 
+            
+
              method to raise an event when the posted data for a <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 
@@ -1241,13 +1477,19 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -1262,8 +1504,12 @@
 
             
 
+            
+
              method whenever posted data for the <see
              cref="T:System.Web.UI.WebControls.ListBox" />
+
+            
 
             
 

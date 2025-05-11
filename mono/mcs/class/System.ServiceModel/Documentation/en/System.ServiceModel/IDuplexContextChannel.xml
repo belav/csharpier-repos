@@ -57,6 +57,8 @@
 
             
 
+            
+
              is set to true. Setting it to false instead allow the user to send some final messages to the remote side on its output session before closing the channel.</para
           >
         </remarks>
@@ -101,6 +103,8 @@
 
             
 
+            
+
              that references the asynchronous close operation.</para
           >
         </returns>
@@ -109,8 +113,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -121,8 +129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -130,6 +142,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,8 +203,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -228,13 +246,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.IDuplexContextChannel.BeginCloseOutputSession(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 

@@ -65,6 +65,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -96,8 +98,12 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -109,8 +115,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -144,6 +154,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -155,13 +167,19 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              object and an integer that indicates whether <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYearMonth.Value" />
+
+            
 
             
 
@@ -173,8 +191,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -185,8 +207,12 @@
 
           
 
+          
+
           An integer that indicates whether <paramref
            name="value" />
+
+          
 
           
 
@@ -224,6 +250,8 @@
 
             
 
+            
+
              that indicates the XSD of the current SOAP type.</para
           >
         </returns>
@@ -256,6 +284,8 @@
           <para
             >The <see
              cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYearMonth.Parse(System.String)" />
+
+            
 
             
 
@@ -318,8 +348,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYearMonth" />
+
+            
 
             
 
@@ -334,8 +368,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -347,8 +385,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -375,6 +417,8 @@
           <para
             >An integer of less than 0 indicates a negative <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYearMonth.Sign" />
+
+            
 
             
 
@@ -413,8 +457,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -429,13 +477,19 @@
 
             
 
+            
+
              that is obtained from <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYearMonth.Value" />
 
             
 
+            
+
              in the format "yyyy-MM" or "'-'yyyy-MM" if <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYearMonth.Sign" />
+
+            
 
             
 

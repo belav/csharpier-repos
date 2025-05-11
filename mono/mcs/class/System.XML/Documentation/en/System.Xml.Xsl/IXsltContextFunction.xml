@@ -23,6 +23,8 @@
 
         
 
+        
+
         , see article Q324899, "HOW TO: Implement and Use Custom Functions When You Execute XPath Queries in Visual Basic .NET" in the Microsoft Knowledge Base at http://support.microsoft.com.</para
       >
     </remarks>
@@ -91,6 +93,8 @@
 
             
 
+            
+
              parameter is required so that functions which require a node set can be supplied the current context node.</para
           >
         </remarks>
@@ -106,11 +110,15 @@
 
             
 
+            
+
              representing the return value of the function.</para
           >
         </returns>
         <param name="xsltContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -121,10 +129,14 @@
 
           
 
+          
+
           The arguments of the function call. Each argument is an element in the array. </param
         >
         <param name="docContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,6 +212,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.XPath.XPathResultType" />
+
+            
 
             
 

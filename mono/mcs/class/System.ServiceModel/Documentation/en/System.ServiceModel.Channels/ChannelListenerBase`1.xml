@@ -63,6 +63,8 @@
 
             
 
+            
+
              if you want to specify other values for these operation timeouts.</para
           >
         </remarks>
@@ -71,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelListenerBase`1" />
+
+            
 
             
 
@@ -104,6 +108,8 @@
 
             
 
+            
+
              instead of the default constructor if you want to specify custom values for the open, send, receive, and close operation timeouts instead of using the service model default values.</para
           >
         </remarks>
@@ -115,6 +121,8 @@
 
             
 
+            
+
              class with specified default communication timeouts.</para
           >
         </summary>
@@ -123,8 +131,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
+
+          
 
           
 
@@ -157,6 +169,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -195,6 +209,8 @@
 
             
 
+            
+
              accepted by the listener.</para
           >
         </returns>
@@ -203,8 +219,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -247,6 +267,8 @@
 
             
 
+            
+
              that references the asynchronous accept channel operation. </para
           >
         </returns>
@@ -255,8 +277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -300,6 +326,8 @@
 
             
 
+            
+
              that references the asynchronous accept channel operation. </para
           >
         </returns>
@@ -308,8 +336,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -320,8 +352,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -362,6 +398,8 @@
 
             
 
+            
+
              accepted by the listener.</para
           >
         </returns>
@@ -370,13 +408,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="Overload:System.ServiceModel.Channels.ChannelListenerBase`1.BeginAcceptChannel" />
+
+          
 
           
 
@@ -417,6 +461,8 @@
 
             
 
+            
+
              accepted.</para
           >
         </returns>
@@ -425,8 +471,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -470,6 +520,8 @@
 
             
 
+            
+
              that references the asynchronous accept channel operation. </para
           >
         </returns>
@@ -478,8 +530,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -490,8 +546,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -532,6 +592,8 @@
 
             
 
+            
+
              accepted by the listener.</para
           >
         </returns>
@@ -540,13 +602,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.Channels.ChannelListenerBase`1.OnBeginAcceptChannel(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 

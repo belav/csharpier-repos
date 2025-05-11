@@ -22,8 +22,12 @@
 
         
 
+        
+
          class represents a collection container that enables a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          control can contain only <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          method to add a new <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
          collection at the end of an ordinal index array. Use the <see
          cref="M:System.Web.UI.WebControls.ViewCollection.AddAt(System.Int32,System.Web.UI.Control)" />
+
+        
 
         
 
@@ -65,13 +81,19 @@
 
         
 
+        
+
          indexer to get a <see
          cref="T:System.Web.UI.WebControls.View" />
 
         
 
+        
+
          control from the <see
          cref="T:System.Web.UI.WebControls.ViewCollection" />
+
+        
 
         
 
@@ -83,6 +105,8 @@
       <para
         >Represents a collection container that enables a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -110,6 +134,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -118,8 +144,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MultiView" />
+
+          
 
           
 
@@ -146,8 +176,12 @@
 
             
 
+            
+
              method adds the new control to the end of an ordinal index array. The control can only be an instance of a <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -156,6 +190,8 @@
           <para
             >To add a control to the collection at a specific index location, use the <see
              cref="M:System.Web.UI.WebControls.ViewCollection.AddAt(System.Int32,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -170,6 +206,8 @@
 
             
 
+            
+
              control to the collection.</para
           >
         </summary>
@@ -178,8 +216,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.View" />
+
+          
 
           
 
@@ -213,8 +255,12 @@
 
             
 
+            
+
              method adds the new control to the collection at the specified index location. The control can only be an instance of a <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -223,6 +269,8 @@
           <para
             >To add a control at the end of an ordinal index array, use the <see
              cref="M:System.Web.UI.WebControls.ViewCollection.Add(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -237,6 +285,8 @@
 
             
 
+            
+
              control to the collection at the specified index location.</para
           >
         </summary>
@@ -245,8 +295,12 @@
 
           
 
+          
+
           The array index at which to add the <see
            cref="T:System.Web.UI.WebControls.View" />
+
+          
 
           
 
@@ -257,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.View" />
+
+          
 
           
 

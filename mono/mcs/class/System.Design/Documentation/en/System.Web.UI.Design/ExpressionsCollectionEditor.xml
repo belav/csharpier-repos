@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -47,13 +55,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
 
         
 
+        
+
          classes to set the expression bindings for control properties at design time, and the <see
          cref="T:System.Web.UI.Design.ControlPersister" />
+
+        
 
         
 
@@ -80,6 +94,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
+
+            
 
             
 
@@ -114,8 +130,12 @@
 
             
 
+            
+
              method launches the user interface for editing the <paramref
              name="value" />
+
+            
 
             
 
@@ -124,8 +144,12 @@
 
             
 
+            
+
              method when you attempt to edit the value of a property that this editor is associated with. The input service provider is used to obtain any editing services that are required within the <see
              cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
+
+            
 
             
 
@@ -137,8 +161,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -147,13 +175,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
 
             
 
+            
+
              classes to set the expression bindings for control properties at design time, and the <see
              cref="T:System.Web.UI.Design.ControlPersister" />
+
+            
 
             
 
@@ -165,8 +199,12 @@
 
             
 
+            
+
              method returns the input <paramref
              name="value" />
+
+            
 
             
 
@@ -185,8 +223,12 @@
 
             
 
+            
+
              object containing the selected expressions; otherwise, if no expressions are selected, the <paramref
              name="value" />
+
+            
 
             
 
@@ -198,8 +240,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -210,10 +256,14 @@
 
           
 
+          
+
           A service provider object through which editing services can be obtained.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,8 +295,12 @@
 
             
 
+            
+
              method returns the <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.Modal" />
+
+            
 
             
 
@@ -258,13 +312,19 @@
 
             
 
+            
+
              is not supported in the specified context, the <see
              cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.GetEditStyle" />
 
             
 
+            
+
              returns <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -283,6 +343,8 @@
 
             
 
+            
+
              enumeration value indicating the editing style for the provided user interface.</para
           >
         </returns>
@@ -291,8 +353,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

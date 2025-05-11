@@ -19,8 +19,12 @@
 
         
 
+        
+
          event is raised when a <see
          cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+        
 
         
 
@@ -29,13 +33,19 @@
 
         
 
+        
+
          control. The <see
          cref="E:System.Web.UI.WebControls.SiteMapPath.ItemDataBound" />
 
         
 
+        
+
          event is raised when DataBind is called on the item during a call to <see
          cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
+
+        
 
         
 
@@ -46,6 +56,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -60,8 +72,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.SiteMapPath.ItemDataBound" />
+
+        
 
         
 
@@ -90,8 +106,12 @@
 
             
 
+            
+
              class, setting the specified <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            
 
             
 
@@ -103,8 +123,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+          
 
           
 

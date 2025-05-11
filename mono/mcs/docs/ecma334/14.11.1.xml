@@ -6,8 +6,12 @@
 
     
 
+    
+
     , or when the operands are of types that do not define an applicable operator &amp; or operator |, but do define implicit conversions to <keyword
     >bool</keyword>
+
+    
 
     
 
@@ -19,8 +23,12 @@
 
         
 
+        
+
         . Then, if x is true, y is evaluated and converted to type <keyword
         >bool</keyword>
+
+        
 
         
 
@@ -32,8 +40,12 @@
 
         
 
+        
+
         . Then, if x is true, the result of the operation is true. Otherwise, y is evaluated and converted to type <keyword
         >bool</keyword>
+
+        
 
         
 

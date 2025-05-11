@@ -38,6 +38,8 @@
 
         
 
+        
+
          class defines the following common categories: </para
       >
       <list type="table">
@@ -62,6 +64,8 @@
 
               
 
+              
+
               . </para
             >
           </description>
@@ -77,6 +81,8 @@
 
               
 
+              
+
               . </para
             >
           </description>
@@ -89,6 +95,8 @@
             <para
               >Designers that are used with designers. The attribute is set to the constant member <see
                cref="F:System.ComponentModel.DesignerCategoryAttribute.Generic" />
+
+              
 
               
 
@@ -110,6 +118,8 @@
          type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -146,6 +156,8 @@
 
             
 
+            
+
              class with an empty string ("").</para
           >
         </summary>
@@ -177,11 +189,15 @@
 
             
 
+            
+
              class with the given category name.</para
           >
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,6 +311,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -304,6 +322,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) is used to describe how an attribute class can be used. </paragraph
   >
   <paragraph
@@ -14,11 +16,13 @@
 
     
 
+    
+
     ) that enables an attribute class to specify the kinds of declarations on which it can be used. <example
 
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]  
 public class SimpleAttribute: Attribute  
@@ -28,8 +32,12 @@ public class SimpleAttribute: Attribute
 
       
 
+      
+
       defines an attribute class named SimpleAttribute that can be placed on <non_terminal
        where="17.1">class-declaration</non_terminal>
+
+      
 
       
 
@@ -38,13 +46,17 @@ public class SimpleAttribute: Attribute
 
       
 
+      
+
       s only. The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 [Simple] class Class1 {...}  
 [Simple] interface Interface1 {...}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -53,13 +65,17 @@ public class SimpleAttribute: Attribute
 
       
 
+      
+
        name Simple. Thus, the example above is semantically equivalent to the following <code_example
       >
-        <![CDATA[
+<![CDATA[
 [SimpleAttribute] class Class1 {...}  
 [SimpleAttribute] interface Interface1 {...}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -72,13 +88,15 @@ public class SimpleAttribute: Attribute
 
     
 
+    
+
     ), called AllowMultiple, which indicates whether the attribute can be specified more than once for a given entity. If AllowMultiple for an attribute class is true, then that class is a multi-use attribute class, and can be specified more than once on an entity. If AllowMultiple for an attribute class is false or it is unspecified, then that class is a single-use attribute class, and can be specified at most once on an entity. </paragraph
   >
   <paragraph>
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]  
 public class AuthorAttribute: Attribute {  
@@ -93,13 +111,17 @@ public class AuthorAttribute: Attribute {
 
       
 
+      
+
       defines a multi-use attribute class named AuthorAttribute. The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 [Author("Brian Kernighan"), Author("Dennis Ritchie")]   
 class Class1 {...}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -112,12 +134,14 @@ class Class1 {...}
 
     
 
+    
+
     ), called Inherited, which indicates whether the attribute, when specified on a base class, is also inherited by classes that derive from that base class. If Inherited for an attribute class is true, then that attribute is inherited. If Inherited for an attribute class is false or it is unspecified, then that attribute is not inherited. </paragraph
   >
   <paragraph
     >An attribute class X not having an AttributeUsage attribute attached to it, as in <code_example
     >
-      <![CDATA[
+<![CDATA[
 using System;  
 class X: Attribute { ... }  
 ]]>
@@ -125,9 +149,11 @@ class X: Attribute { ... }
 
     
 
+    
+
     is equivalent to the following: <code_example
     >
-      <![CDATA[
+<![CDATA[
 using System;  
 [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited =  
 true)]  

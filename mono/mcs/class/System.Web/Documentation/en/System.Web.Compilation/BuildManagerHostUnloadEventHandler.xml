@@ -34,13 +34,19 @@
 
         
 
+        
+
          event and the <see
          cref="E:System.Web.Compilation.ClientBuildManager.AppDomainShutdown" />
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.Compilation.ClientBuildManager" />
+
+        
 
         
 

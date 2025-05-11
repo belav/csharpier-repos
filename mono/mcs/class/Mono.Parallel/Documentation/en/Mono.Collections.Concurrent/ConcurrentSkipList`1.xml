@@ -115,8 +115,12 @@
 
           
 
+          
+
            if the element supplied was found, <see
            langword="false" />
+
+          
 
           
 
@@ -149,8 +153,12 @@
 
           
 
+          
+
            if an item corresponding to the given hash is found, <see
            langword="false" />
+
+          
 
           
 
@@ -383,8 +391,12 @@
 
           
 
+          
+
            if an element with the provided hash was found and if value point to it, <see
            langword="false" />
+
+          
 
           
 

@@ -135,8 +135,12 @@
 
             
 
+            
+
              property is equal to Anonymous, <see
              cref="F:System.ServiceModel.MessageCredentialType.UserName" />
+
+            
 
             
 
@@ -145,13 +149,19 @@
 
             
 
+            
+
             , setting this property to false implies that the service certificate is available at the client out-of-band, and that the client must specify the <see
              cref="P:System.ServiceModel.Configuration.ServiceCredentialsElement.ServiceCertificate" />
 
             
 
+            
+
              property of <see
              cref="T:System.ServiceModel.Configuration.ServiceCredentialsElement" />
+
+            
 
             
 
@@ -163,8 +173,12 @@
 
             
 
+            
+
              property is equal to <see
              cref="F:System.ServiceModel.MessageCredentialType.Windows" />
+
+            
 
             
 
@@ -180,8 +194,12 @@
 
             
 
+            
+
              element, or by using the <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -189,6 +207,8 @@
              type="text/html">
               <a href="a4c8f52c-5b30-45c4-a545-63244aba82be">Specifying the Identity</a>
             </format>
+
+            
 
             
 
@@ -229,13 +249,19 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 

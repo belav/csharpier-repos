@@ -19,6 +19,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -37,6 +39,8 @@
           <para
             >Specifies that only an image is to be rendered for this <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -88,6 +94,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -109,6 +117,8 @@
           <para
             >Specifies that only text is to be rendered for this <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 

@@ -22,6 +22,8 @@
 
         
 
+        
+
          object provides lifetime management of objects in the hosting environment for an ASP.NET application. It is responsible for:</para
       >
       <list type="bullet">
@@ -62,13 +64,19 @@
 
             
 
+            
+
              method reduces the reference count of applications using the application manager to 0, the <see
              cref="M:System.Web.Hosting.ApplicationManager.Close" />
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Hosting.ApplicationManager.ShutdownAll" />
+
+            
 
             
 
@@ -110,6 +118,8 @@
 
             
 
+            
+
              method is used to create and register objects in the application. Only one object of each type can be created. If you need to create multiple objects of the same type, you must implement an object factory. For more information, see the code example in this topic.</para
           >
           <para
@@ -118,8 +128,12 @@
 
             
 
+            
+
              method creates an object of the specified type in the application domain of the application specified in the <paramref
              name="appID" />
+
+            
 
             
 
@@ -131,8 +145,12 @@
 
             
 
+            
+
              parameter controls the behavior of the <see
              cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -141,13 +159,19 @@
 
             
 
+            
+
              is true, the <see
              cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
 
             
 
+            
+
              method throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -159,8 +183,12 @@
 
             
 
+            
+
              is false, the <see
              cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -172,13 +200,19 @@
 
             
 
+            
+
              method calls the overload that takes an additional <paramref
              name="throwOnError" />
 
             
 
+            
+
              parameter with <paramref
              name="throwOnError" />
+
+            
 
             
 
@@ -197,11 +231,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="appId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -212,10 +250,14 @@
 
           
 
+          
+
           The type of the object to create.</param
         >
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,10 +268,14 @@
 
           
 
+          
+
           The physical path to the application.</param
         >
         <param name="failIfExists">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,8 +313,12 @@
 
             
 
+            
+
              method provides the <paramref
              name="throwOnError" />
+
+            
 
             
 
@@ -277,8 +327,12 @@
 
             
 
+            
+
              method that does not provide <paramref
              name="throwOnError" />
+
+            
 
             
 
@@ -297,11 +351,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="appId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,10 +370,14 @@
 
           
 
+          
+
           The type of the object to create.</param
         >
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,6 +388,8 @@
 
           
 
+          
+
           The physical path to the application.</param
         >
         <param name="failIfExists">
@@ -333,10 +397,14 @@
 
           
 
+          
+
           true to throw an exception if an object of the specified type is currently registered; false to return the existing registered object of the specified type.</param
         >
         <param name="throwOnError">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -367,8 +435,12 @@
 
             
 
+            
+
              object is created by an ASP.NET host process in the default application domain. If an instance of the <see
              cref="T:System.Web.Hosting.ApplicationManager" />
+
+            
 
             
 
@@ -377,8 +449,12 @@
 
             
 
+            
+
              method first creates an instance of the <see
              cref="T:System.Web.Hosting.ApplicationManager" />
+
+            
 
             
 
@@ -387,8 +463,12 @@
 
             
 
+            
+
              class was previously created, the <see
              cref="M:System.Web.Hosting.ApplicationManager.GetApplicationManager" />
+
+            
 
             
 
@@ -403,6 +483,8 @@
 
             
 
+            
+
              object associated with this ASP.NET host process.</para
           >
         </summary>
@@ -411,6 +493,8 @@
           <para
             >The single instance of the <see
              cref="T:System.Web.Hosting.ApplicationManager" />
+
+            
 
             
 
@@ -450,6 +534,8 @@
 
             
 
+            
+
              method.</para
           >
         </returns>
@@ -458,10 +544,14 @@
 
           
 
+          
+
           The unique identifier for the application that owns the object.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,8 +587,12 @@
 
             
 
+            
+
              objects that contain information about the applications managed by this <see
              cref="T:System.Web.Hosting.ApplicationManager" />
+
+            
 
             
 
@@ -524,6 +618,8 @@
           <para
             >This method overrides the <see
              cref="M:System.MarshalByRefObject.InitializeLifetimeService" />
+
+            
 
             
 
@@ -557,6 +653,8 @@
           <para
             >The <see
              cref="M:System.Web.Hosting.ApplicationManager.IsIdle" />
+
+            
 
             
 
@@ -612,8 +710,12 @@
 
             
 
+            
+
              method is equivalent to calling the <see
              cref="M:System.Web.Hosting.HostingEnvironment.InitiateShutdown" />
+
+            
 
             
 
@@ -622,8 +724,12 @@
 
             
 
+            
+
              instance; however, the <see
              cref="M:System.Web.Hosting.ApplicationManager.ShutdownAll" />
+
+            
 
             
 
@@ -658,13 +764,19 @@
 
             
 
+            
+
              method is equivalent to calling the <see
              cref="M:System.Web.Hosting.HostingEnvironment.InitiateShutdown" />
 
             
 
+            
+
              method for a specific application domain; however, the <see
              cref="M:System.Web.Hosting.ApplicationManager.ShutdownApplication(System.String)" />
+
+            
 
             
 
@@ -677,6 +789,8 @@
         </summary>
         <param name="appId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -709,10 +823,14 @@
 
           
 
+          
+
           The unique identifier for the application that owns the object.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

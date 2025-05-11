@@ -26,6 +26,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -56,6 +58,8 @@
           <para
             >Represents a pointer to an interface instance that allows the sending process to control the way the storage is released when the receiving process calls the ReleaseStgMedium function. If <see
              cref="F:System.Runtime.InteropServices.ComTypes.STGMEDIUM.pUnkForRelease" />
+
+            
 
             
 
@@ -91,6 +95,8 @@
           <para
             >Specifies the type of storage medium. The marshaling and unmarshaling routines use this value to determine which union member was used. This value must be one of the elements of the <see
              cref="T:System.Runtime.InteropServices.ComTypes.TYMED" />
+
+            
 
             
 

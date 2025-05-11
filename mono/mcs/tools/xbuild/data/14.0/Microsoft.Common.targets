@@ -284,22 +284,21 @@
   <PropertyGroup>
     <AllowedReferenceAssemblyFileExtensions
       Condition=" '$(AllowedReferenceAssemblyFileExtensions)' == '' "
-      >
+    >
 			.exe;
 			.dll
 		</AllowedReferenceAssemblyFileExtensions
     >
     <AllowedReferenceRelatedFileExtensions
       Condition=" '$(AllowedReferenceRelatedFileExtensions)' == '' "
-      >
+    >
 			.exe.mdb;
 			.dll.mdb;
 			.pdb;
 			.xml
 		</AllowedReferenceRelatedFileExtensions
     >
-    <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''"
-      >
+    <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''">
 			{CandidateAssemblyFiles};
 			$(ReferencePath);
 			@(AdditionalReferencePath);
@@ -902,8 +901,7 @@ _CopyDeployFilesToOutputDirectoryPreserveNewest"
 			$(MSBuildProjectDefaultTargets);
 			AfterRebuild;
 		</RebuildDependsOn>
-    <RebuildDependsOn Condition="'$(MSBuildProjectDefaultTargets)' == 'Rebuild'"
-      >
+    <RebuildDependsOn Condition="'$(MSBuildProjectDefaultTargets)' == 'Rebuild'">
 			BeforeRebuild;
 			Clean;
 			Build;

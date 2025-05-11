@@ -36,6 +36,8 @@
 
           
 
+          
+
            class compares strings using ordinal sort rules and ignores the case of the strings being compared.</para
         >
       </block>
@@ -67,6 +69,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Permissions.ResourcePermissionBase" />
+
+            
 
             
 
@@ -104,6 +108,8 @@
 
             
 
+            
+
              class with the specified level of access to resources at creation.</para
           >
         </summary>
@@ -112,8 +118,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -153,8 +163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+
+          
 
           
 
@@ -278,6 +292,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
       </Docs>
@@ -310,8 +326,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Permissions.ResourcePermissionBase.RemovePermissionAccess(System.Security.Permissions.ResourcePermissionBaseEntry)" />
+
+            
 
             
 
@@ -326,6 +346,8 @@
 
             
 
+            
+
              objects added to this permission.</para
           >
         </summary>
@@ -334,6 +356,8 @@
           <para
             >An array of <see
              cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+
+            
 
             
 
@@ -381,6 +405,8 @@
 
           
 
+          
+
           A permission object of the same type as the current permission object. </param
         >
       </Docs>
@@ -422,6 +448,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -540,8 +568,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+
+          
 
           
 
@@ -631,6 +663,8 @@
 
             
 
+            
+
              is a permission that represents all the operations represented by both the current permission object and the specified permission object. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -644,6 +678,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

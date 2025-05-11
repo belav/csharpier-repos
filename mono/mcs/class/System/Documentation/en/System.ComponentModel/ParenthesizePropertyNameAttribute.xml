@@ -39,8 +39,12 @@
 
         
 
+        
+
          with a <see
          cref="P:System.ComponentModel.ParenthesizePropertyNameAttribute.NeedParenthesis" />
+
+        
 
         
 
@@ -74,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" />
+
+            
 
             
 
@@ -111,11 +117,15 @@
 
             
 
+            
+
              class, using the specified value to indicate whether the attribute is displayed with parentheses.</para
           >
         </summary>
         <param name="needParenthesis">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,6 +159,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" />
+
+            
 
             
 
@@ -187,6 +199,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

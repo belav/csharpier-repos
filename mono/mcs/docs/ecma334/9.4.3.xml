@@ -7,6 +7,8 @@
 
       
 
+      
+
        :: one of <rhs
       >
         <keyword>abstract</keyword>
@@ -79,9 +81,12 @@
         <keyword>public</keyword>
       </rhs>
       <rhs>
-        <keyword>readonly</keyword>
-        <keyword>ref</keyword>
-        <keyword>return</keyword>
+        <keyword
+>readonly</keyword>
+        <keyword
+>ref</keyword>
+        <keyword
+>return</keyword>
         <keyword>sbyte</keyword>
         <keyword>sealed</keyword>
       </rhs>
@@ -124,6 +129,8 @@
 
       >[Note: For example, within a property declaration, the "get" and "set" identifiers have special meaning (<hyperlink
       >17.6.2</hyperlink>
+
+      
 
       
 

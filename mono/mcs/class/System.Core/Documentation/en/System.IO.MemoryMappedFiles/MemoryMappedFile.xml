@@ -27,8 +27,12 @@
 
         
 
+        
+
          methods create a memory-mapped file from a specified path or a <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >The <see
          cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateNew" />
+
+        
 
         
 
@@ -85,6 +91,8 @@
 
           
 
+          
+
           The path to file to map.</param
         >
       </Docs>
@@ -118,8 +126,12 @@
 
             
 
+            
+
              parameter pertains to the source file on disk. You can use only the <see
              cref="F:System.IO.FileMode.Open" />
+
+            
 
             
 
@@ -139,6 +151,8 @@
 
           
 
+          
+
           The path to file to map.</param
         >
         <param name="mode">
@@ -146,8 +160,12 @@
 
           
 
+          
+
           Access mode; must be <see
            cref="F:System.IO.FileMode.Open" />
+
+          
 
           
 
@@ -185,8 +203,12 @@
 
             
 
+            
+
              parameter pertains to the source file on disk. You can use only the <see
              cref="F:System.IO.FileMode.Open" />
+
+            
 
             
 
@@ -206,10 +228,14 @@
 
           
 
+          
+
           The path to the file to map.</param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,10 +244,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="mapName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,6 +290,8 @@
 
             
 
+            
+
              parameter pertains to the source file on disk. </para
           >
           <para
@@ -268,8 +300,12 @@
 
             
 
+            
+
              is larger than the size of the file on disk, the file on disk is increased to match the specified capacity even if no data is written to the memory-mapped file. To prevent this from occurring, specify 0 (zero) for the default capacity, which will internally set <paramref
              name="capacity" />
+
+            
 
             
 
@@ -289,10 +325,14 @@
 
           
 
+          
+
           The path to the file to map.</param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,8 +341,12 @@
 
           
 
+          
+
            enumeration values except <see
            cref="F:System.IO.FileMode.Append" />
+
+          
 
           
 
@@ -313,10 +357,14 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file. </param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,6 +404,8 @@
 
             
 
+            
+
              parameter pertains to the source file on disk. </para
           >
           <para
@@ -364,8 +414,12 @@
 
             
 
+            
+
              is larger than the size of the file on disk, the file on disk is increased to match the specified capacity even if no data is written to the memory-mapped file. To prevent this from occurring, specify 0 (zero) for the default capacity, which will internally set <paramref
              name="capacity" />
+
+            
 
             
 
@@ -385,10 +439,14 @@
 
           
 
+          
+
           The path to the file to map.</param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,8 +455,12 @@
 
           
 
+          
+
            enumeration values except <see
            cref="F:System.IO.FileMode.Append" />
+
+          
 
           
 
@@ -409,6 +471,8 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file. </param
         >
         <param name="capacity">
@@ -416,10 +480,14 @@
 
           
 
+          
+
           The maximum size, in bytes, to allocate to the memory-mapped file. Specify 0 to set the capacity to the size of the file on disk.</param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -469,8 +537,12 @@
 
             
 
+            
+
              is larger than the size of the file on disk, the file on disk is increased to match the specified capacity even if no data is written to the memory-mapped file. To prevent this from occurring, specify 0 (zero) for the default capacity, which will internally set <paramref
              name="capacity" />
+
+            
 
             
 
@@ -490,8 +562,12 @@
 
           
 
+          
+
           The <paramref
            name="fileStream" />
+
+          
 
           
 
@@ -502,10 +578,14 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -516,8 +596,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -528,6 +612,8 @@
 
           
 
+          
+
           The permissions that can be granted for file access and operations on memory-mapped files.</param
         >
         <param name="inheritability">
@@ -535,8 +621,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies whether a handle to the memory-mapped file can be inherited by a child process. The default is <see
            cref="F:System.IO.HandleInheritability.None" />
+
+          
 
           
 
@@ -547,8 +637,12 @@
 
           
 
+          
+
           true to not dispose <paramref
            name="fileStream" />
+
+          
 
           
 
@@ -557,8 +651,12 @@
 
           
 
+          
+
            is closed; false to dispose <paramref
            name="fileStream" />
+
+          
 
           
 
@@ -609,10 +707,14 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -664,10 +766,14 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -678,8 +784,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -737,10 +847,14 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -751,8 +865,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -763,10 +881,14 @@
 
           
 
+          
+
           A bitwise combination of enumeration values that specifies memory allocation options for the memory-mapped file.</param
         >
         <param name="memoryMappedFileSecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -777,8 +899,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies whether a handle to the memory-mapped file can be inherited by a child process. The default is <see
            cref="F:System.IO.HandleInheritability.None" />
+
+          
 
           
 
@@ -829,10 +955,14 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -884,10 +1014,14 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -898,8 +1032,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -957,10 +1095,14 @@
 
           
 
+          
+
           A name to assign to the memory-mapped file.</param
         >
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -971,8 +1113,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -983,10 +1129,14 @@
 
           
 
+          
+
           A bitwise combination of enumeration values that specifies memory allocation options for the memory-mapped file.</param
         >
         <param name="memoryMappedFileSecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -997,8 +1147,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies whether a handle to the memory-mapped file can be inherited by a child process. The default is <see
            cref="F:System.IO.HandleInheritability.None" />
+
+          
 
           
 
@@ -1033,6 +1187,8 @@
           <para
             >Creates a <see
              cref="T:System.IO.MemoryMappedFiles.MemoryMappedViewAccessor" />
+
+            
 
             
 
@@ -1075,6 +1231,8 @@
 
             
 
+            
+
              parameter. If you do this, the size of the view might be smaller or larger than the size of the source file on disk. This is because views are provided in units of system pages, and the size of the view is rounded up to the next system page size.</para
           >
         </remarks>
@@ -1083,6 +1241,8 @@
           <para
             >Creates a <see
              cref="T:System.IO.MemoryMappedFiles.MemoryMappedViewAccessor" />
+
+            
 
             
 
@@ -1098,6 +1258,8 @@
 
           
 
+          
+
           The byte at which to start the view.</param
         >
         <param name="size">
@@ -1105,8 +1267,12 @@
 
           
 
+          
+
           The size of the view. Specify 0 (zero) to create a view that starts at <paramref
            name="offset" />
+
+          
 
           
 
@@ -1145,6 +1311,8 @@
 
             
 
+            
+
              parameter. If you do this, the size of the view might be smaller or larger than the size of the source file on disk. This is because views are provided in units of system pages, and the size of the view is rounded up to the next system page size.</para
           >
         </remarks>
@@ -1153,6 +1321,8 @@
           <para
             >Creates a <see
              cref="T:System.IO.MemoryMappedFiles.MemoryMappedViewAccessor" />
+
+            
 
             
 
@@ -1168,6 +1338,8 @@
 
           
 
+          
+
           The byte at which to start the view.</param
         >
         <param name="size">
@@ -1175,8 +1347,12 @@
 
           
 
+          
+
           The size of the view. Specify 0 (zero) to create a view that starts at <paramref
            name="offset" />
+
+          
 
           
 
@@ -1187,8 +1363,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -1258,6 +1438,8 @@
 
             
 
+            
+
              parameter. If you do this, the size of the view might be smaller or larger than the size of the source file on disk. This is because views are provided in units of system pages, and the size of the view is rounded up to the next system page size.</para
           >
         </remarks>
@@ -1274,6 +1456,8 @@
 
           
 
+          
+
           The byte at which to start the view.</param
         >
         <param name="size">
@@ -1281,8 +1465,12 @@
 
           
 
+          
+
           The size of the view. Specify 0 (zero) to create a view that starts at <paramref
            name="offset" />
+
+          
 
           
 
@@ -1321,6 +1509,8 @@
 
             
 
+            
+
              parameter. If you do this, the size of the view might be smaller or larger than the size of the source file on disk. This is because views are provided in units of system pages, and the size of the view is rounded up to the next system page size.</para
           >
         </remarks>
@@ -1337,6 +1527,8 @@
 
           
 
+          
+
           The byte at which to start the view.</param
         >
         <param name="size">
@@ -1344,8 +1536,12 @@
 
           
 
+          
+
           The size of the view. Specify 0 (zero) to create a view that starts at <paramref
            name="offset" />
+
+          
 
           
 
@@ -1356,8 +1552,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see
            cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          
 
           
 
@@ -1386,6 +1586,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
+
+            
 
             
 
@@ -1420,11 +1622,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1508,6 +1714,8 @@
 
           
 
+          
+
           The name of the memory-mapped file to open.</param
         >
       </Docs>
@@ -1555,10 +1763,14 @@
 
           
 
+          
+
           The name of the memory-mapped file to open.</param
         >
         <param name="desiredAccessRights">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1610,10 +1822,14 @@
 
           
 
+          
+
           The name of the memory-mapped file to open.</param
         >
         <param name="desiredAccessRights">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1624,8 +1840,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies whether a handle to the memory-mapped file can be inherited by a child process. The default is <see
            cref="F:System.IO.HandleInheritability.None" />
+
+          
 
           
 
@@ -1698,6 +1918,8 @@
         </summary>
         <param name="memoryMappedFileSecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

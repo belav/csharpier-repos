@@ -53,6 +53,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -87,6 +89,8 @@
 
             
 
+            
+
              object that corresponds to the content type of this validated XML node.</para
           >
         </summary>
@@ -111,6 +115,8 @@
           <para
             >The <see
              cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />
+
+            
 
             
 
@@ -175,8 +181,12 @@
 
             
 
+            
+
              property is set only if the static type of the XML node is a union type in which case the <see
              cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />
+
+            
 
             
 
@@ -218,6 +228,8 @@
 
             
 
+            
+
              object that corresponds to this validated XML node.</para
           >
         </summary>
@@ -249,6 +261,8 @@
           <para
             >Gets or sets the compiled <see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+            
 
             
 
@@ -315,8 +329,12 @@
 
             
 
+            
+
              values for this XML node are <see
              cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />
+
+            
 
             
 
@@ -325,8 +343,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
+
+            
 
             
 
@@ -338,6 +360,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Schema.XmlSchemaValidity" />
+
+            
 
             
 

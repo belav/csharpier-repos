@@ -35,8 +35,12 @@
 
         
 
+        
+
          value can only be used with <see
          cref="M:System.Globalization.CompareInfo.Compare(System.String,System.String)" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
         . <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          value is used with <see
          cref="M:System.Globalization.CompareInfo.IsPrefix(System.String,System.String,System.Globalization.CompareOptions)" />
+
+        
 
         
 
@@ -65,13 +77,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Globalization.CompareInfo.IndexOf(System.String,System.Char)" />
 
         
 
+        
+
         , or <see
          cref="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.Char)" />
+
+        
 
         
 
@@ -84,13 +102,19 @@
 
           
 
+          
+
            value to specify the kind of comparison expected. As a general rule, user-facing comparisons are best served by the use of linguistic options (using the current culture), while security comparisons should specify <see
            cref="F:System.Globalization.CompareOptions.Ordinal" />
 
           
 
+          
+
            or <see
            cref="F:System.Globalization.CompareOptions.OrdinalIgnoreCase" />
+
+          
 
           
 
@@ -103,6 +127,8 @@
       <para
         >Defines the string comparison options to use with <see
          cref="T:System.Globalization.CompareInfo" />
+
+        
 
         
 
@@ -182,6 +208,8 @@
           <para
             >Indicates that the string comparison must ignore nonspacing combining characters, such as diacritics. The <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+            
 
             
 
@@ -288,8 +316,12 @@
 
             
 
+            
+
              comes before a string starting with YYYY<subscript
             >16</subscript>
+
+            
 
             
 
@@ -298,13 +330,19 @@
 
             
 
+            
+
              is less than YYYY<subscript
             >16</subscript>
 
             
 
+            
+
             . This value cannot be combined with other <see
              cref="T:System.Globalization.CompareOptions" />
+
+            
 
             
 

@@ -28,6 +28,8 @@
 
         
 
+        
+
          class corresponds to the Web Services Description Language (WSDL) &lt;fault&gt; element enclosed by the &lt;operation&gt; element that is in turn enclosed by the &lt;portType&gt; element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -36,6 +38,8 @@
       <para
         >Represents a collection of instances of the <see
          cref="T:System.Web.Services.Description.OperationFault" />
+
+        
 
         
 
@@ -69,8 +73,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.OperationFaultCollection" />
+
+            
 
             
 
@@ -85,6 +93,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -93,8 +103,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationFault" />
+
+          
 
           
 
@@ -131,8 +145,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="T:System.Web.Services.Description.OperationFaultCollection" />
+
+            
 
             
 
@@ -147,8 +165,12 @@
 
             
 
+            
+
              parameter is a member of the <see
              cref="T:System.Web.Services.Description.OperationFaultCollection" />
+
+            
 
             
 
@@ -160,8 +182,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationFault" />
+
+          
 
           
 
@@ -196,8 +222,12 @@
 
             
 
+            
+
              to a compatible one-dimensional array of type <see
              cref="T:System.Web.Services.Description.OperationFault" />
+
+            
 
             
 
@@ -209,8 +239,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.OperationFault" />
+
+          
 
           
 
@@ -218,6 +252,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,6 +316,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -292,8 +330,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationFault" />
+
+          
 
           
 
@@ -331,13 +373,19 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
 
             
 
+            
+
             , the <paramref
              name="bindingOperationFault" />
+
+            
 
             
 
@@ -353,8 +401,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Description.OperationFaultCollection" />
+
+            
 
             
 
@@ -366,8 +418,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="operationFaultMessage" />
+
+          
 
           
 
@@ -378,8 +434,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationFault" />
+
+          
 
           
 
@@ -461,11 +521,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements that follow the removed <see
              cref="T:System.Web.Services.Description.OperationFault" />
+
+            
 
             
 
@@ -480,8 +544,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.OperationFaultCollection" />
+
+            
 
             
 
@@ -493,8 +561,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationFault" />
+
+          
 
           
 

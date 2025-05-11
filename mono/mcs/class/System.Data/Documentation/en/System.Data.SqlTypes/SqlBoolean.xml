@@ -37,8 +37,12 @@
 
         
 
+        
+
          structure and a standard Boolean value is that, where a standard Boolean has two possible values, true and false, a <see
          cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+        
 
         
 
@@ -47,13 +51,19 @@
 
         
 
+        
+
         , <see
          cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
         
 
+        
+
         , or <see
          cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
 
             
 
+            
+
              structure using the supplied Boolean value.</para
           >
         </summary>
@@ -91,8 +103,12 @@
 
           
 
+          
+
           The value for the new <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -121,6 +137,8 @@
 
             
 
+            
+
              structure using the specified integer value.</para
           >
         </summary>
@@ -129,8 +147,12 @@
 
           
 
+          
+
           The integer whose value is to be used for the new <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -165,6 +187,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -177,8 +201,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -189,8 +217,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -219,6 +251,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -255,6 +289,8 @@
 
             
 
+            
+
             , regardless of its value, is considered greater than a null reference (Nothing in Visual Basic).</para
           >
         </remarks>
@@ -266,8 +302,12 @@
 
             
 
+            
+
              object to the supplied <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -299,6 +339,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -311,6 +353,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -329,11 +373,15 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -348,9 +396,13 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
           <see cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -376,6 +428,8 @@
 
             
 
+            
+
             , regardless of its value, is considered greater than a null reference (Nothing in Visual Basic).</para
           >
         </remarks>
@@ -384,6 +438,8 @@
           <para
             >Compares this <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -415,6 +471,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -427,6 +485,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -445,11 +505,15 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -461,6 +525,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -491,6 +557,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -502,11 +570,15 @@
 
             
 
+            
+
              and the two are equal; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -541,6 +613,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -552,8 +626,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -562,8 +640,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -572,13 +654,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -590,8 +678,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -602,8 +694,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -634,8 +730,12 @@
 
             
 
+            
+
              field is a constant for the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -650,8 +750,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -712,6 +816,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -723,6 +829,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -731,8 +839,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -765,13 +877,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is null, the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -786,6 +904,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -797,6 +917,8 @@
 
             
 
+            
+
              that is true if the first instance is greater than the second instance; otherwise false. </para
           >
         </returns>
@@ -805,8 +927,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -817,8 +943,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -851,13 +981,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is null, the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -872,6 +1008,8 @@
 
             
 
+            
+
              to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -883,6 +1021,8 @@
 
             
 
+            
+
              that is true if the first instance is greater than or equal to the second instance; otherwise false.</para
           >
         </returns>
@@ -891,8 +1031,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -903,8 +1047,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -928,8 +1076,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -944,8 +1096,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            
 
             
 
@@ -976,6 +1132,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -984,6 +1142,8 @@
           <para
             >Indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1012,8 +1172,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1028,8 +1192,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1067,13 +1235,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is null, the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1088,6 +1262,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -1099,6 +1275,8 @@
 
             
 
+            
+
              that is true if the first instance is less than the second instance; otherwise, false.</para
           >
         </returns>
@@ -1107,8 +1285,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1119,8 +1301,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1153,13 +1339,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is null, the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1174,6 +1366,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1185,6 +1379,8 @@
 
             
 
+            
+
              that is true if the first instance is less than or equal to the second instance; otherwise, false.</para
           >
         </returns>
@@ -1193,8 +1389,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1205,8 +1405,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1237,6 +1441,8 @@
 
             
 
+            
+
              for equality.</para
           >
         </summary>
@@ -1248,8 +1454,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1258,8 +1468,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1268,13 +1482,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1286,8 +1506,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1298,8 +1522,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1330,8 +1558,12 @@
 
             
 
+            
+
              field is a constant for the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1339,6 +1571,8 @@
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -1353,8 +1587,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1386,8 +1624,12 @@
 
             
 
+            
+
              field is a constant for the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1402,8 +1644,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1438,6 +1684,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -1449,6 +1697,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1457,8 +1707,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1497,6 +1751,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -1509,8 +1765,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1521,8 +1781,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1562,8 +1826,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1574,8 +1842,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1610,6 +1882,8 @@
 
             
 
+            
+
              for equality.</para
           >
         </summary>
@@ -1621,8 +1895,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1631,8 +1909,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1641,13 +1923,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1659,8 +1947,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1671,8 +1963,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1712,8 +2008,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1724,8 +2024,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -1989,8 +2293,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2005,6 +2313,8 @@
 
             
 
+            
+
              is false, false otherwise.</para
           >
         </returns>
@@ -2013,8 +2323,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2047,13 +2361,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is null, the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2068,6 +2388,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -2079,6 +2401,8 @@
 
             
 
+            
+
              that is true if the first instance is greater than the second instance; otherwise, false. </para
           >
         </returns>
@@ -2087,8 +2411,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2099,8 +2427,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2133,13 +2465,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is null, the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2154,6 +2492,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -2165,6 +2505,8 @@
 
             
 
+            
+
              that is true if the first instance is greater than or equal to the second instance; otherwise, false. </para
           >
         </returns>
@@ -2173,8 +2515,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2185,8 +2531,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2244,6 +2594,8 @@
 
             
 
+            
+
              to determine whether they are not equal.</para
           >
         </summary>
@@ -2255,8 +2607,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2265,8 +2621,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2275,13 +2635,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2293,8 +2659,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2305,8 +2675,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2339,13 +2713,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is null, the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2360,6 +2740,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2371,6 +2753,8 @@
 
             
 
+            
+
              that is true if the first instance is less than the second instance; otherwise, false.</para
           >
         </returns>
@@ -2379,8 +2763,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2391,8 +2779,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2425,13 +2817,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is null, the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2446,6 +2844,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2457,6 +2857,8 @@
 
             
 
+            
+
              that is true if the first instance is less than or equal to the second instance; otherwise, false.</para
           >
         </returns>
@@ -2465,8 +2867,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2477,8 +2883,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2512,6 +2922,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2523,9 +2935,13 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
             <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2534,8 +2950,12 @@
 
             
 
+            
+
              if argument was null, and <see
              cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            
 
             
 
@@ -2547,8 +2967,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2582,6 +3006,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -2593,6 +3019,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2601,8 +3029,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2636,8 +3068,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2652,6 +3088,8 @@
 
             
 
+            
+
              is true, false otherwise.</para
           >
         </returns>
@@ -2660,8 +3098,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2692,6 +3134,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -2703,6 +3147,8 @@
 
             
 
+            
+
              structure whose Value is the result of the bitwise OR operation.</para
           >
         </returns>
@@ -2711,8 +3157,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2723,8 +3173,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -2758,8 +3212,12 @@
 
             
 
+            
+
              representation of a logical value to its <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2774,6 +3232,8 @@
 
             
 
+            
+
              structure that contains the parsed value.</para
           >
         </returns>
@@ -2782,8 +3242,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2846,6 +3310,8 @@
 
           
 
+          
+
           XmlReader </param
         >
       </Docs>
@@ -2876,6 +3342,8 @@
 
           
 
+          
+
           XmlWriter </param
         >
       </Docs>
@@ -2897,8 +3365,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2913,8 +3385,12 @@
 
             
 
+            
+
              structure whose value is 1 or 0. If the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2923,8 +3399,12 @@
 
             
 
+            
+
              structure's value is 1. Otherwise, the new <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2957,8 +3437,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -2973,8 +3457,12 @@
 
             
 
+            
+
              structure whose value is 1 or 0. If the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2983,8 +3471,12 @@
 
             
 
+            
+
              structure's value is 1. Otherwise, the new <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3017,8 +3509,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3033,8 +3529,12 @@
 
             
 
+            
+
              structure whose value is 1 or 0. If the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3043,8 +3543,12 @@
 
             
 
+            
+
              structure's value is 1. Otherwise, the new <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3074,8 +3578,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3090,8 +3598,12 @@
 
             
 
+            
+
              structure's value equals true then the new <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3121,8 +3633,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -3137,8 +3653,12 @@
 
             
 
+            
+
              structure's value equals true, the new <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -3168,8 +3688,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3184,8 +3708,12 @@
 
             
 
+            
+
              structure's value equals true, the new <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3215,8 +3743,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -3231,8 +3763,12 @@
 
             
 
+            
+
              structure whose value is 1 or 0. If the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3241,8 +3777,12 @@
 
             
 
+            
+
              value is 1. If the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3251,8 +3791,12 @@
 
             
 
+            
+
              value is 0. If <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3261,8 +3805,12 @@
 
             
 
+            
+
              value is <see
              cref="F:System.Data.SqlTypes.SqlMoney.Null" />
+
+            
 
             
 
@@ -3295,8 +3843,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3311,6 +3863,8 @@
 
             
 
+            
+
              structure whose value is 1 or 0.</para
           >
           <para
@@ -3319,13 +3873,19 @@
 
             
 
+            
+
              structure's value equals true, the new <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
 
             
 
+            
+
              structure's value is 1; otherwise the new <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3358,8 +3918,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3374,8 +3938,12 @@
 
             
 
+            
+
              structure whose value is 1 or 0. If the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3384,8 +3952,12 @@
 
             
 
+            
+
              structure's value is 1. Otherwise the new <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3415,6 +3987,8 @@
 
             
 
+            
+
              structure to a string.</para
           >
         </summary>
@@ -3423,6 +3997,8 @@
           <para
             >A string that contains the value of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3454,8 +4030,12 @@
 
             
 
+            
+
              field is a constant for the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3470,8 +4050,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3498,6 +4082,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3538,8 +4124,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -3550,8 +4140,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+          
 
           
 
@@ -3582,8 +4176,12 @@
 
             
 
+            
+
              field is a constant for the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3598,8 +4196,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 

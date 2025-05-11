@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides a way to programmatically create, access, and modify groups of properties added to the group subsection of the profile section of a configuration file. </para
       >
       <para
@@ -30,8 +32,12 @@
 
         
 
+        
+
         . The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. An instance of this class is created for each user profile, and you can access the individual profile values in your code through the <see
          cref="P:System.Web.HttpContext.Profile" />
+
+        
 
         
 
@@ -39,6 +45,8 @@
          type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d">ASP.NET Profile Properties Overview</a>
         </format>
+
+        
 
         
 
@@ -67,13 +75,19 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.ProfileGroupSettings" />
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -88,11 +102,15 @@
 
             
 
+            
+
              class using default settings.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,8 +140,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 
@@ -173,6 +195,8 @@
 
             
 
+            
+
              collection; otherwise, an exception is raised when the configuration file is saved.</para
           >
         </remarks>
@@ -181,6 +205,8 @@
           <para
             >Gets or sets name of the group of <see
              cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+            
 
             
 
@@ -212,6 +238,8 @@
           <para
             >Gets the properties collection for the <see
              cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+            
 
             
 

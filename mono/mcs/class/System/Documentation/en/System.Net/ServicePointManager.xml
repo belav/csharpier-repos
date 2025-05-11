@@ -33,8 +33,12 @@
 
         
 
+        
+
          is a static class used to create, maintain, and delete instances of the <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          object, the <see
          cref="T:System.Net.ServicePointManager" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          object that contains connection information for the host and scheme identified by the URI. If there is an existing <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          object returns the existing <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 
@@ -76,8 +92,12 @@
 
         
 
+        
+
          object creates a new <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 
@@ -89,6 +109,8 @@
       <para
         >Manages the collection of <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 
@@ -130,13 +152,19 @@
 
             
 
+            
+
              property is set to an <see
              cref="T:System.Net.ICertificatePolicy" />
 
             
 
+            
+
              interface object, the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 
@@ -180,6 +208,8 @@
 
             
 
+            
+
              is true, the certificate is checked against the certificate authority revocation list, as part of the certificate validation process. Its default value is false.</para
           >
         </remarks>
@@ -188,6 +218,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -231,8 +263,7 @@
 	  </para>
           <example>
             <para>The following example removes weak (export) ciphers from the list that will be offered to the server.</para>
-            <code lang="C#"
-              >
+            <code lang="C#">
 ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnumerable&lt;string&gt; allCiphers) =&gt; {
     return from cipher in allCiphers where !cipher.Contains ("EXPORT")
     select cipher;
@@ -242,8 +273,7 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
           </example>
           <example>
             <para>Example: Use AES128 (preference) or AES256 (allowed) but no other ciphers.</para>
-            <code lang="C#"
-              >
+            <code lang="C#">
 ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnumerable&lt;string&gt; allCiphers) =&gt; {
     string prefix = p == SecurityProtocolType.Tls ? "TLS_" : "SSL_";
     return new List&lt;string&gt; { prefix + "RSA_WITH_AES_128_CBC_SHA", prefix + "RSA_WITH_AES_256_CBC_SHA" };
@@ -283,8 +313,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              containing the maximum number of concurrent connections allowed by a <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -302,8 +336,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property sets the default maximum number of concurrent connections that the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 
@@ -312,8 +350,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property when creating <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -325,8 +367,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property has no effect on existing <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -335,8 +381,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              objects that are initialized after the change. If the value of this property has not been set either directly or through configuration, the value defaults to the constant <see
              cref="F:System.Net.ServicePointManager.DefaultPersistentConnectionLimit" />
+
+            
 
             
 
@@ -349,8 +399,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
               
 
+              
+
                property affect both HTTP 1.0 and HTTP 1.1 connections. It is not possible to separately alter the connection limit for HTTP 1.0 and HTTP 1.1 protocols. When used in the server environment (ASP.NET) <see
                cref="P:System.Net.ServicePointManager.DefaultConnectionLimit" />
+
+              
 
               
 
@@ -363,6 +417,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
           <para
             >Gets or sets the maximum number of concurrent connections allowed by a <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -410,6 +466,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object connected to an HTTP/1.0 or later server. This field is constant but is no longer used in the .NET Framework 2.0.</para
           >
         </summary>
@@ -454,13 +512,19 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object connected to an HTTP/1.1 or later server. This field is constant and is used to initialize the <see
              cref="P:System.Net.ServicePointManager.DefaultConnectionLimit" />
 
             
 
+            
+
              property if the value of the <see
              cref="P:System.Net.ServicePointManager.DefaultConnectionLimit" />
+
+            
 
             
 
@@ -545,8 +609,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property is true and <see
              cref="P:System.Net.HttpWebRequest.ContentLength" />
+
+            
 
             
 
@@ -555,11 +623,15 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property is true. The client will expect to receive a 100-Continue response from the server to indicate that the client should send the data to be posted. This mechanism allows clients to avoid sending large amounts of data over the network when the server, based on the request headers, intends to reject the request.</para
           >
           <para
             >For example, assume the <see
              cref="P:System.Net.ServicePointManager.Expect100Continue" />
+
+            
 
             
 
@@ -572,8 +644,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              objects. Only new <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -587,6 +663,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -626,8 +704,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -636,6 +718,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
         <exception cref="T:System.InvalidOperationException"
           >The maximum number of service points defined in <see
            cref="P:System.Net.ServicePointManager.MaxServicePoints" />
+
+          
 
           
 
@@ -649,8 +733,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              method returns the <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -659,8 +747,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object exists for that host, the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 
@@ -675,13 +767,19 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object or creates a new <see
              cref="T:System.Net.ServicePoint" />
 
             
 
+            
+
              object to manage communications with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -696,6 +794,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object that manages communications for the request.</para
           >
         </returns>
@@ -704,8 +804,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -746,8 +850,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -759,11 +867,15 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
           
 
+          
+
            is in an invalid form.</exception
         >
         <exception cref="T:System.InvalidOperationException"
           >The maximum number of service points defined in <see
            cref="P:System.Net.ServicePointManager.MaxServicePoints" />
+
+          
 
           
 
@@ -777,8 +889,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              method returns the <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -787,8 +903,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object exists for that host, the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 
@@ -803,8 +923,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object or creates a new <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -819,6 +943,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object that manages communications for the request.</para
           >
         </returns>
@@ -827,10 +953,14 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
           
 
+          
+
           The URI of the Internet resource to be contacted. </param
         >
         <param name="proxy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -871,8 +1001,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -881,6 +1015,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
         <exception cref="T:System.InvalidOperationException"
           >The maximum number of service points defined in <see
            cref="P:System.Net.ServicePointManager.MaxServicePoints" />
+
+          
 
           
 
@@ -894,8 +1030,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              method returns the <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -904,8 +1044,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object exists for that host, the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 
@@ -920,13 +1064,19 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object or creates a new <see
              cref="T:System.Net.ServicePoint" />
 
             
 
+            
+
              object to manage communications with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -941,6 +1091,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object that manages communications for the request.</para
           >
         </returns>
@@ -949,8 +1101,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -958,6 +1114,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
         >
         <param name="proxy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -995,8 +1153,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              containing the maximum idle time, in milliseconds, of a <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1006,6 +1168,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1020,8 +1184,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property sets the maximum idle time that the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 
@@ -1030,13 +1198,19 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property when creating <see
              cref="T:System.Net.ServicePoint" />
 
             
 
+            
+
              objects. Changes to this value affect only <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1048,8 +1222,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object has been idle for the time specified in <see
              cref="P:System.Net.ServicePoint.MaxIdleTime" />
+
+            
 
             
 
@@ -1058,8 +1236,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object is idle when the list of connections associated with the <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1071,6 +1253,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
           <para
             >Gets or sets the maximum idle time of a <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1106,8 +1290,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              containing the maximum number of <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1126,8 +1314,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property below the number of <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1136,8 +1328,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              deletes the <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1146,8 +1342,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              objects with active connections is greater than the value of <see
              cref="P:System.Net.ServicePointManager.MaxServicePoints" />
+
+            
 
             
 
@@ -1156,8 +1356,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              object deletes the <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1169,6 +1373,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
           <para
             >Gets or sets the maximum number of <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -1210,8 +1416,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              objects managed by the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 
@@ -1247,8 +1457,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              property to a method to use for custom validation by the client of the server certificate. When doing custom validation, the <paramref
              name="sender" />
+
+            
 
             
 
@@ -1257,8 +1471,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
              can be a host string name or an object derived from <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1267,8 +1485,12 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
 
             
 
+            
+
             , for example) depending on the <see
              cref="P:System.Net.ServicePointManager.CertificatePolicy" />
+
+            
 
             
 
@@ -1277,6 +1499,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
           <para
             >When custom validation is not used, the certificate name is compared with host name used to create the request. For example, if <see
              cref="M:System.Net.WebRequest.Create(System.String)" />
+
+            
 
             
 
@@ -1357,8 +1581,12 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
 
             
 
+            
+
              parameter specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. The <paramref
              name="keepAliveInterval" />
+
+            
 
             
 
@@ -1370,8 +1598,12 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
 
             
 
+            
+
              of <see
              cref="F:System.Net.Sockets.SocketError.NetworkReset" />
+
+            
 
             
 
@@ -1380,8 +1612,12 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
 
             
 
+            
+
              of <see
              cref="F:System.Net.Sockets.SocketError.NotConnected" />
+
+            
 
             
 
@@ -1397,13 +1633,19 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
 
           
 
+          
+
           If set to true, then the TCP keep-alive option on a TCP connection will be enabled using the specified <paramref
            name="keepAliveTime " />
 
           
 
+          
+
           and <paramref
            name="keepAliveInterval" />
+
+          
 
           
 
@@ -1414,10 +1656,14 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
 
           
 
+          
+
           Specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent.</param
         >
         <param name="keepAliveInterval">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1448,6 +1694,8 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
 
             
 
+            
+
              objects. Only new service points created after the change are affected.</para
           >
           <para>The Nagle algorithm is fully described in IETF RFC 896.</para>
@@ -1457,6 +1705,8 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
           <para
             >Determines whether the Nagle algorithm is used by the service points managed by this <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 

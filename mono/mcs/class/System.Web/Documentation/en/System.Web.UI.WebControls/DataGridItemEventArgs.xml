@@ -25,8 +25,12 @@
 
         
 
+        
+
          event is raised when an item in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          event is raised when an item in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.DataGridItemEventArgs.#ctor(System.Web.UI.WebControls.DataGridItem)" />
+
+        
 
         
 
@@ -63,6 +75,8 @@
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -77,13 +91,19 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.DataGrid.ItemDataBound" />
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -111,11 +131,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
+
+            
 
             
 
@@ -143,6 +167,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -157,6 +183,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -165,13 +193,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridItem" />
 
           
 
+          
+
            that represents an item in the <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
+
+          
 
           
 
@@ -202,6 +236,8 @@
 
             
 
+            
+
              control when the event is raised.</para
           >
         </remarks>
@@ -210,6 +246,8 @@
           <para
             >Gets the referenced item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 

@@ -28,6 +28,8 @@
 
         
 
+        
+
          value specifies that no digit shape is substituted for the Unicode input, a digit shape is substituted based on context, or a native national digit shape is substituted for the input.</para
       >
       <para
@@ -36,8 +38,12 @@
 
         
 
+        
+
          enumeration with the <see
          cref="P:System.Globalization.NumberFormatInfo.DigitSubstitution" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
       <para
         >The <see
          cref="T:System.Globalization.DigitShapes" />
+
+        
 
         
 

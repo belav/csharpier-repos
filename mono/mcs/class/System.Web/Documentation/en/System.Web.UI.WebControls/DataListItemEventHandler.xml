@@ -27,8 +27,12 @@
 
         
 
+        
+
          event is raised when an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          event is raised when an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -53,10 +61,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
          type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
+
+        
 
         
 
@@ -71,13 +83,19 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.DataList.ItemDataBound" />
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 

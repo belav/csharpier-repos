@@ -34,6 +34,8 @@
 
         
 
+        
+
          when an XML Web service supports the SOAP protocol version 1.2. This class cannot be inherited.</para
       >
     </summary>
@@ -51,6 +53,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.Soap12OperationBinding" />
+
+            
 
             
 

@@ -12,6 +12,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -48,11 +50,15 @@
 
           
 
+          
+
             instance that has a private key </param
         >
         <param name="hash"
           >a <see
            cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+          
 
           
 
@@ -65,6 +71,8 @@
           <para
             >See <see
              cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" />
+
+            
 
             
 
@@ -98,6 +106,8 @@
 
           
 
+          
+
            instance that has a private key</param
         >
         <param name="C">the encrypted message</param>
@@ -107,6 +117,8 @@
           <para
             >See <see
              cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" />
+
+            
 
             
 
@@ -138,6 +150,8 @@
         <param name="hash"
           >a <see
            cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+          
 
           
 
@@ -178,6 +192,8 @@
 
           
 
+          
+
            instance</param
         >
         <param name="hash"
@@ -186,11 +202,15 @@
 
           
 
+          
+
            required for the MGF</param
         >
         <param name="rng"
           >a <see
            cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+          
 
           
 
@@ -203,6 +223,8 @@
           <para
             >See <see
              cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" />
+
+            
 
             
 
@@ -237,11 +259,15 @@
 
           
 
+          
+
            instance</param
         >
         <param name="rng"
           >a <see
            cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+          
 
           
 
@@ -254,6 +280,8 @@
           <para
             >See <see
              cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" />
+
+            
 
             
 
@@ -306,6 +334,8 @@
 
           
 
+          
+
            to convert</param
         >
         <param name="size">the length the resulting octet string.</param>
@@ -339,6 +369,8 @@
 
           
 
+          
+
            to generate the mask</param
         >
         <param name="mgfSeed">seed used to generate the mask</param>
@@ -349,6 +381,8 @@
           <para
             >See <see
              cref="T:System.Security.Cryptography.PKCS1MaskGenerationMethod" />
+
+            
 
             
 
@@ -404,6 +438,8 @@
 
           
 
+          
+
            instance that has a private key</param
         >
         <param name="c">the encrypted message</param>
@@ -433,6 +469,8 @@
         <param name="rsa"
           >an <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -468,6 +506,8 @@
 
           
 
+          
+
            instance that has a private key</param
         >
         <param name="m">the message (generally a properly padded hash) to sign</param>
@@ -497,6 +537,8 @@
         <param name="rsa"
           >an <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -533,11 +575,15 @@
 
           
 
+          
+
            instance that has a private key</param
         >
         <param name="hash"
           >a <see
            cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+          
 
           
 
@@ -550,6 +596,8 @@
           <para
             >See <see
              cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" />
+
+            
 
             
 
@@ -585,9 +633,13 @@
 
           
 
+          
+
            instance</param
         >
-        <param name="hash">required for the PKCS#1 encoding </param>
+        <param name="hash"
+>required for the PKCS#1 encoding </param
+        >
         <param name="hashValue">the hash value to verify</param>
         <param name="signature">a message signature </param>
         <summary>RSA Signature Scheme with Appendix PKCS1 v1.5 Signature verification</summary>
@@ -596,6 +648,8 @@
           <para
             >See <see
              cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" />
+
+            
 
             
 

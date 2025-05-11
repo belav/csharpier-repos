@@ -22,8 +22,12 @@
 
         
 
+        
+
          to create your own serializer to serialize and deserialize objects. Both the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class inherit from the <see
          cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+        
 
         
 
@@ -80,6 +92,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -113,13 +127,19 @@
 
             
 
+            
+
              implementation determines when to return true. Implementations may check that they are positioned on an element or look for an expected element name. One implementation of the <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
+            
+
             , the <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+            
 
             
 
@@ -131,6 +151,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -139,6 +161,8 @@
           <para
             >Gets a value that specifies whether the <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -154,8 +178,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -192,8 +220,12 @@
 
             
 
+            
+
             , the starting element is specified in the constructor of the extension class.  For an example, see the constructors for the <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+            
 
             
 
@@ -205,6 +237,8 @@
           <para
             >Gets a value that specifies whether the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -220,8 +254,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -261,6 +299,8 @@
 
             
 
+            
+
              and returns the deserialized object.</para
           >
         </summary>
@@ -273,8 +313,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -314,6 +358,8 @@
 
             
 
+            
+
              and returns the deserialized object.</para
           >
         </summary>
@@ -326,8 +372,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -364,6 +414,8 @@
 
             
 
+            
+
              and returns the deserialized object.</para
           >
         </summary>
@@ -376,8 +428,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -415,8 +471,12 @@
 
             
 
+            
+
              parameter uses the same code as the <see
              cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.IsStartObject" />
+
+            
 
             
 
@@ -428,6 +488,8 @@
           <para
             >Reads the XML stream or document with an <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -443,8 +505,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -482,8 +548,12 @@
 
             
 
+            
+
              parameter uses the same code as the <see
              cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.IsStartObject" />
+
+            
 
             
 
@@ -495,6 +565,8 @@
           <para
             >Reads the XML document or stream with an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -510,8 +582,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -548,6 +624,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -556,8 +634,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -594,6 +676,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -602,8 +686,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -641,6 +729,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -649,8 +739,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -658,6 +752,8 @@
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -694,13 +790,19 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.WriteObjectContent" />
 
             
 
+            
+
             , and <see
              cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.WriteEndObject" />
+
+            
 
             
 
@@ -715,6 +817,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -723,8 +827,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -732,6 +840,8 @@
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -768,6 +878,8 @@
 
             
 
+            
+
              overload.</para
           >
         </remarks>
@@ -779,6 +891,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -787,8 +901,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -796,6 +914,8 @@
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -833,6 +953,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -841,8 +963,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -850,6 +976,8 @@
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -887,6 +1015,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -895,8 +1025,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -904,6 +1038,8 @@
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -941,6 +1077,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -949,8 +1087,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -958,6 +1100,8 @@
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -995,6 +1139,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1003,8 +1149,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1012,6 +1162,8 @@
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

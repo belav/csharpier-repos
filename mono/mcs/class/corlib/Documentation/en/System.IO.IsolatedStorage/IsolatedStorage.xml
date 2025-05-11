@@ -35,12 +35,16 @@
 
         
 
+        
+
          class. </para
       >
       <block subset="none" type="note">
         <para
           >Isolated storage is not available for win8_appname_long apps. Instead, use the application data classes in the Windows.Storage namespaces included in the wrt API to store local data and files. For more information, see <see
            cref="http://go.microsoft.com/fwlink/?LinkId=229175">Application data</see>
+
+          
 
           
 
@@ -75,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+
+            
 
             
 
@@ -158,6 +164,8 @@
 
             
 
+            
+
              property overrides this property.</para
           >
         </remarks>
@@ -197,8 +205,12 @@
 
             
 
+            
+
              implements this property. In the case of <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+
+            
 
             
 
@@ -270,6 +282,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -278,8 +292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -320,6 +338,8 @@
 
             
 
+            
+
              method overrides this method.</para
           >
         </remarks>
@@ -333,6 +353,8 @@
         </returns>
         <param name="newQuotaSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -375,6 +397,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -383,8 +407,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+
+          
 
           
 
@@ -395,8 +423,12 @@
 
           
 
+          
+
           The type of <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -405,8 +437,12 @@
 
           
 
+          
+
            for the calling application. null lets the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+
+          
 
           
 
@@ -450,6 +486,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -458,8 +496,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+
+          
 
           
 
@@ -470,8 +512,12 @@
 
           
 
+          
+
           The type of <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -480,8 +526,12 @@
 
           
 
+          
+
            present in the domain of the calling application. null lets the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+
+          
 
           
 
@@ -492,8 +542,12 @@
 
           
 
+          
+
           The type of <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -502,8 +556,12 @@
 
           
 
+          
+
            present in the assembly of the calling application. null lets the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+
+          
 
           
 
@@ -541,8 +599,12 @@
 
             
 
+            
+
              property returns the value of <see
              cref="P:System.Security.Permissions.IsolatedStoragePermission.UserQuota" />
+
+            
 
             
 
@@ -554,8 +616,12 @@
 
             
 
+            
+
             , but the quota is configured in the security policy, and can be set. Code receives a quota of space on the basis of its evidence, so the same code can receive a different quota if it is run with different evidence (for example, the same application run locally and from a share on an intranet can receive different quotas). <see
              cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.MaximumSize" />
+
+            
 
             
 
@@ -593,6 +659,8 @@
 
             
 
+            
+
              property overrides this property.</para
           >
         </remarks>
@@ -623,6 +691,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.Remove" />
+
+            
 
             
 
@@ -664,6 +734,8 @@
           <para
             >Gets an <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+
+            
 
             
 
@@ -742,6 +814,8 @@
           <para
             >The <see
              cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.UsedSize" />
+
+            
 
             
 

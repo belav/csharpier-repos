@@ -38,8 +38,12 @@
 
         
 
+        
+
          attribute are methods that can be remotely invoked. Apply the <see
          cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
+
+        
 
         
 
@@ -73,6 +77,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
+
+            
 
             
 
@@ -197,8 +203,12 @@
 
             
 
+            
+
              property cannot be set on the <see
              cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
+
+            
 
             
 

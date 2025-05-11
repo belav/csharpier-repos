@@ -34,6 +34,8 @@
 
         
 
+        
+
          accepts null as a valid value and allows duplicate elements.</para
       >
       <para>String comparisons are case-sensitive.</para>
@@ -72,6 +74,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -103,6 +107,8 @@
 
             
 
+            
+
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
@@ -111,8 +117,12 @@
 
             
 
+            
+
              is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -121,8 +131,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -134,6 +148,8 @@
           <para
             >Adds a string to the end of the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -149,8 +165,12 @@
 
           
 
+          
+
           The string to add to the end of the <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -184,6 +204,8 @@
 
             
 
+            
+
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
@@ -192,13 +214,19 @@
 
             
 
+            
+
              can accommodate the new elements without increasing the capacity, this method is an O(<paramref
              name="n" />
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -207,8 +235,12 @@
 
             
 
+            
+
              + <paramref
              name="m" />
+
+            
 
             
 
@@ -217,13 +249,19 @@
 
             
 
+            
+
              is the number of elements to be added and <paramref
              name="m" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -238,6 +276,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -246,8 +286,12 @@
 
           
 
+          
+
           An array of strings to add to the end of the <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -279,6 +323,8 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
@@ -287,13 +333,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -305,6 +357,8 @@
           <para
             >Removes all the strings from the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -340,11 +394,15 @@
 
             
 
+            
+
              method can confirm the existence of a string before performing further operations.</para
           >
           <para
             >This method determines equality by calling <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -356,13 +414,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -374,8 +438,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -384,8 +452,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -394,8 +466,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -410,6 +486,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -421,8 +499,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -434,8 +516,12 @@
 
           
 
+          
+
           The string to locate in the <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -472,13 +558,19 @@
 
             
 
+            
+
              in the same order in which the enumerator of the <see
              cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
+            
+
              iterates through the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -490,13 +582,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -511,6 +609,8 @@
 
             
 
+            
+
              values to a one-dimensional array of strings, starting at the specified index of the target array.</para
           >
         </summary>
@@ -519,13 +619,19 @@
 
           
 
+          
+
           The one-dimensional array of strings that is the destination of the elements copied from <see
            cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -536,8 +642,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -568,6 +678,8 @@
           <para
             >Gets the number of strings contained in the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -607,8 +719,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+            
 
             
 
@@ -617,8 +733,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+            
 
             
 
@@ -629,8 +749,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+            
 
             
 
@@ -639,13 +763,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+            
 
             
 
@@ -657,8 +787,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+            
 
             
 
@@ -667,8 +801,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+            
 
             
 
@@ -677,8 +815,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+            
 
             
 
@@ -687,8 +829,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+            
 
             
 
@@ -706,8 +852,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -722,8 +872,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -759,6 +913,8 @@
 
             
 
+            
+
             . String comparisons are case-sensitive.</para
           >
           <para
@@ -767,13 +923,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -785,8 +947,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -795,8 +961,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -805,8 +975,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -821,6 +995,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -832,8 +1008,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -842,6 +1022,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -877,6 +1059,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -885,8 +1069,12 @@
 
             
 
+            
+
              is equal to <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -895,8 +1083,12 @@
 
             
 
+            
+
              is added to the end of <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -909,13 +1101,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -930,6 +1128,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -938,8 +1138,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -947,6 +1151,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -975,13 +1181,19 @@
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.Specialized.StringCollection.IsReadOnly" />
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -995,6 +1207,8 @@
 
             
 
+            
+
              instance is always writable.</para
           >
           <para>Retrieving the value of this property is an O(1) operation.</para>
@@ -1004,6 +1218,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1033,13 +1249,19 @@
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.Specialized.StringCollection.IsSynchronized" />
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1049,6 +1271,8 @@
           <para
             >The following code example shows how to lock the collection using the <see
              cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
+
+            
 
             
 
@@ -1062,6 +1286,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1119,8 +1345,12 @@
 
             
 
+            
+
             . Only the first occurrence is removed. To remove all occurrences of the specified string, use RemoveAt(IndexOf(value)) repeatedly while <see
              cref="M:System.Collections.Specialized.StringCollection.IndexOf(System.String)" />
+
+            
 
             
 
@@ -1132,8 +1362,12 @@
 
             
 
+            
+
              does not contain the specified object, the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1146,6 +1380,8 @@
 
             
 
+            
+
             . String comparisons are case-sensitive.</para
           >
           <para
@@ -1154,13 +1390,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -1175,6 +1417,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1183,8 +1427,12 @@
 
           
 
+          
+
           The string to remove from the <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -1220,13 +1468,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -1241,11 +1495,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1275,8 +1533,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
+
+            
 
             
 
@@ -1285,8 +1547,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1295,8 +1561,12 @@
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1306,6 +1576,8 @@
           <para
             >The following code example shows how to lock the collection using the <see
              cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
+
+            
 
             
 
@@ -1319,6 +1591,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1356,6 +1630,8 @@
 
             
 
+            
+
              to copy the elements.</para
           >
           <para
@@ -1364,13 +1640,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -1385,8 +1667,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1398,8 +1684,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1408,8 +1698,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1420,8 +1714,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1460,8 +1758,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1470,8 +1772,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1482,8 +1788,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1492,13 +1802,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1510,8 +1826,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1520,8 +1840,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1530,8 +1854,12 @@
 
             
 
+            
+
              throws an exception. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1540,8 +1868,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1553,8 +1885,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -1563,8 +1899,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1573,8 +1913,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1591,8 +1935,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1607,8 +1955,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1643,6 +1995,8 @@
 
             
 
+            
+
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
@@ -1651,8 +2005,12 @@
 
             
 
+            
+
              already equals the capacity, the capacity of the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1664,8 +2022,12 @@
 
             
 
+            
+
              is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -1674,8 +2036,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -1690,6 +2056,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1701,8 +2069,12 @@
 
             
 
+            
+
              index at which the <paramref
              name="value" />
+
+            
 
             
 
@@ -1714,13 +2086,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to be added to the end of the <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -1755,6 +2133,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1763,13 +2143,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -1781,8 +2167,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -1791,8 +2181,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1801,8 +2195,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -1817,6 +2215,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1828,8 +2228,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1841,13 +2245,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -1882,11 +2292,15 @@
 
             
 
+            
+
              is searched forward starting at the first element and ending at the last element.</para
           >
           <para
             >This method determines equality by calling <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1898,13 +2312,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -1916,8 +2336,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -1926,8 +2350,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1936,8 +2364,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -1952,8 +2384,12 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the entire <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1968,8 +2404,12 @@
 
             
 
+            
+
              within the entire <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1981,13 +2421,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -2023,8 +2469,12 @@
 
             
 
+            
+
              already equals the capacity, the capacity of the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -2036,8 +2486,12 @@
 
             
 
+            
+
              is equal to <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -2046,8 +2500,12 @@
 
             
 
+            
+
              is added to the end of <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -2060,13 +2518,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -2081,6 +2545,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -2089,8 +2555,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -2101,8 +2571,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2141,6 +2615,8 @@
 
             
 
+            
+
              object has a fixed size.</para
           >
         </summary>
@@ -2174,6 +2650,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -2237,8 +2715,12 @@
 
             
 
+            
+
              does not contain the specified object, the <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -2251,6 +2733,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2259,13 +2743,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringCollection.Count" />
+
+            
 
             
 
@@ -2280,6 +2770,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2288,13 +2780,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 

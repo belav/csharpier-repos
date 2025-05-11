@@ -45,6 +45,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -76,6 +78,8 @@
 
             
 
+            
+
              class with the specified XML element.</para
           >
         </summary>
@@ -84,8 +88,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -218,6 +226,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 

@@ -31,6 +31,8 @@
 
         
 
+        
+
          and test the types of shapes contained in each subpath. This class cannot be inherited.</para
       >
     </summary>
@@ -56,8 +58,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -69,8 +75,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -146,6 +156,8 @@
 
             
 
+            
+
              object to be reallocated for other purposes.</para
           >
         </remarks>
@@ -154,6 +166,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
+
+            
 
             
 
@@ -228,8 +242,12 @@
 
             
 
+            
+
              returns true. If all points in the array belong to lines, then <see
              cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.HasCurve" />
+
+            
 
             
 
@@ -241,8 +259,12 @@
 
             
 
+            
+
              will always return false. Calling the <see
              cref="Overload:System.Drawing.Drawing2D.GraphicsPath.Flatten" />
+
+            
 
             
 
@@ -251,13 +273,19 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Drawing.Drawing2D.GraphicsPath.Warp" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -269,6 +297,8 @@
           <para
             >Indicates whether the path associated with this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
+
+            
 
             
 
@@ -306,6 +336,8 @@
 
             
 
+            
+
              method to set markers in a path. Markers are used to create groups of subpaths. One or more subpaths can be between two markers.</para
           >
         </remarks>
@@ -317,8 +349,12 @@
 
             
 
+            
+
              object has a <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -327,13 +363,19 @@
 
             
 
+            
+
              method increments the associated <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
+            
+
              to the next marker in its path and copies all the points contained between the current marker and the next marker (or end of path) to a second <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -349,8 +391,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -482,8 +528,12 @@
 
             
 
+            
+
              method of an iterator, it gets the first figure (subpath) of that iterator's associated path. The second time, it gets the second figure, and so on. When you call the <see
              cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.Rewind" />
+
+            
 
             
 
@@ -492,8 +542,12 @@
 
             
 
+            
+
             , the next call to <see
              cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.NextSubpath(System.Drawing.Drawing2D.GraphicsPath,System.Boolean@)" />
+
+            
 
             
 
@@ -502,8 +556,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.NextPathType(System.Byte@,System.Int32@,System.Int32@)" />
+
+            
 
             
 
@@ -515,6 +573,8 @@
           <para
             >Rewinds this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
+
+            
 
             
 

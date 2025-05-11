@@ -9,6 +9,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -36,6 +38,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.1">new-line</non_terminal>
@@ -52,7 +56,7 @@
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 #warning Code review needed before check-in  
 #if Debug && Retail  
 #error A build can't be both debug and retail  
@@ -63,8 +67,12 @@ class Test {...}
 
       
 
+      
+
       always produces a warning ("Code review needed before check-in"), and produces a compile-time error if the pre-processing identifiers Debug and Retail are both defined. Note that a <non_terminal
        where="9.5.5">pp-message</non_terminal>
+
+      
 
       
 

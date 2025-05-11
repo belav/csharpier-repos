@@ -67,11 +67,15 @@
 
             
 
+            
+
              class, building the key pair from a byte array.</para
           >
         </summary>
         <param name="keyPairArray">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,11 +112,15 @@
 
             
 
+            
+
              class, building the key pair from a FileStream.</para
           >
         </summary>
         <param name="keyPairFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,11 +157,15 @@
 
             
 
+            
+
              class, building the key pair from a String.</para
           >
         </summary>
         <param name="keyPairContainer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,6 +202,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -201,6 +215,8 @@
 
             
 
+            
+
              class, building the key pair from serialized data.</para
           >
         </summary>
@@ -209,8 +225,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -221,8 +241,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -282,6 +306,8 @@
 
           
 
+          
+
           The object that initiated the callback.</param
         >
       </Docs>
@@ -317,8 +343,12 @@
 
             
 
+            
+
              object with all the data required to reinstantiate the current <see
              cref="T:System.Reflection.StrongNameKeyPair" />
+
+            
 
             
 
@@ -330,10 +360,14 @@
 
           
 
+          
+
           The object to be populated with serialization information.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -42,11 +42,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          instance. Windows CSPs enable keys sizes of 384 to 16384 bits for Windows versions prior to win81, and key sizes of 512 to 16384 bits for win81. For more information, see <see
          cref="http://msdn.microsoft.com/library/aa379941(v=vs.85).aspx">CryptGenKey</see>
+
+        
 
         
 
@@ -74,13 +82,19 @@
 
         
 
+        
+
          class reverses the order of an encrypted array of bytes after encryption and before decryption.  By default, data encrypted by the <see
          cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
 
         
 
+        
+
          class cannot be decrypted by the CAPI CryptDecrypt function and data encrypted by the CAPI CryptEncrypt method cannot be decrypted by the <see
          cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
         
 
+        
+
          class throws a <see
          cref="T:System.Security.Cryptography.CryptographicException" />
+
+        
 
         
 
@@ -105,6 +123,8 @@
 
         
 
+        
+
          method. </para
       >
     </remarks>
@@ -113,6 +133,8 @@
       <para
         >Performs asymmetric encryption and decryption using the implementation of the <see
          cref="T:System.Security.Cryptography.RSA" />
+
+        
 
         
 
@@ -145,8 +167,12 @@
 
             
 
+            
+
              key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref
              name="AT_KEYEXCHANGE" />
+
+            
 
             
 
@@ -158,6 +184,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+            
 
             
 
@@ -192,8 +220,12 @@
 
             
 
+            
+
              key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref
              name="AT_KEYEXCHANGE" />
+
+            
 
             
 
@@ -208,11 +240,15 @@
 
             
 
+            
+
              class with the specified key size.</para
           >
         </summary>
         <param name="dwKeySize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,8 +284,12 @@
 
             
 
+            
+
              field of the <paramref
              name="parameters" />
+
+            
 
             
 
@@ -261,8 +301,12 @@
 
             
 
+            
+
              key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref
              name="AT_KEYEXCHANGE" />
+
+            
 
             
 
@@ -274,8 +318,12 @@
 
             
 
+            
+
              key pair suitable for authenticating (digitally signed) messages or files by setting the <see
              cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+
+            
 
             
 
@@ -284,13 +332,19 @@
 
             
 
+            
+
              parameter to the <see
              cref="F:System.Security.Cryptography.KeyNumber.Signature" />
 
             
 
+            
+
              value. This type of key corresponds to the <paramref
              name="AT_SIGNATURE" />
+
+            
 
             
 
@@ -302,8 +356,12 @@
 
             
 
+            
+
              object with the <see
              cref="F:System.Security.Cryptography.KeyNumber.Exchange" />
+
+            
 
             
 
@@ -312,8 +370,12 @@
 
             
 
+            
+
              object with the <see
              cref="F:System.Security.Cryptography.KeyNumber.Signature" />
+
+            
 
             
 
@@ -325,8 +387,12 @@
 
             
 
+            
+
              class, you must create a <see
              cref="F:System.Security.Cryptography.KeyNumber.Signature" />
+
+            
 
             
 
@@ -341,11 +407,15 @@
 
             
 
+            
+
              class with the specified parameters.</para
           >
         </summary>
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -382,8 +452,12 @@
 
             
 
+            
+
              field of the <paramref
              name="parameters" />
+
+            
 
             
 
@@ -395,8 +469,12 @@
 
             
 
+            
+
              key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref
              name="AT_KEYEXCHANGE" />
+
+            
 
             
 
@@ -408,8 +486,12 @@
 
             
 
+            
+
              key pair suitable for authenticating (digitally signed) messages or files by setting the <see
              cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+
+            
 
             
 
@@ -418,13 +500,19 @@
 
             
 
+            
+
              parameter to the <see
              cref="F:System.Security.Cryptography.KeyNumber.Signature" />
 
             
 
+            
+
              value. This type of key corresponds to the <paramref
              name="AT_SIGNATURE" />
+
+            
 
             
 
@@ -436,8 +524,12 @@
 
             
 
+            
+
              object with the <see
              cref="F:System.Security.Cryptography.KeyNumber.Exchange" />
+
+            
 
             
 
@@ -446,8 +538,12 @@
 
             
 
+            
+
              object with the <see
              cref="F:System.Security.Cryptography.KeyNumber.Signature" />
+
+            
 
             
 
@@ -459,8 +555,12 @@
 
             
 
+            
+
              class, you must create a <see
              cref="F:System.Security.Cryptography.KeyNumber.Signature" />
+
+            
 
             
 
@@ -475,6 +575,8 @@
 
             
 
+            
+
              class with the specified key size and parameters.</para
           >
         </summary>
@@ -483,10 +585,14 @@
 
           
 
+          
+
           The size of the key to use in bits. </param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -527,8 +633,12 @@
 
             
 
+            
+
              property to retrieve additional information about a cryptographic key pair.  The returned <see
              cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -540,8 +650,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -550,8 +664,12 @@
 
             
 
+            
+
              if a key container has not been created.  To make sure that a key container has been created, call a method such as <see
              cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(System.Byte[],System.Boolean)" />
+
+            
 
             
 
@@ -560,8 +678,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Security.Cryptography.RSACryptoServiceProvider.SignData" />
+
+            
 
             
 
@@ -570,8 +692,12 @@
 
             
 
+            
+
             , and so on, before you call the <see
              cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -583,6 +709,8 @@
           <para
             >Gets a <see
              cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -619,6 +747,8 @@
 
             
 
+            
+
              to encrypt data for decryption with this method.</para
           >
         </remarks>
@@ -627,6 +757,8 @@
           <para
             >Decrypts data with the <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -642,6 +774,8 @@
 
           
 
+          
+
           The data to be decrypted. </param
         >
         <param name="fOAEP">
@@ -649,8 +783,12 @@
 
           
 
+          
+
           true to perform direct <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -704,6 +842,8 @@
 
           
 
+          
+
           The data to be decrypted. </param
         >
       </Docs>
@@ -736,8 +876,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+            
 
             
 
@@ -752,11 +896,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -789,6 +937,8 @@
           <para
             >The following table describes the padding supported by different versions of Microsoft Windows and the maximum length of <paramref
              name="rgb" />
+
+            
 
             
 
@@ -848,6 +998,8 @@
 
             
 
+            
+
              to decrypt the results of this method.</para
           >
         </remarks>
@@ -856,6 +1008,8 @@
           <para
             >Encrypts data with the <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -871,6 +1025,8 @@
 
           
 
+          
+
           The data to be encrypted. </param
         >
         <param name="fOAEP">
@@ -878,8 +1034,12 @@
 
           
 
+          
+
           true to perform direct <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -933,6 +1093,8 @@
 
           
 
+          
+
           The data to be encrypted. </param
         >
       </Docs>
@@ -972,6 +1134,8 @@
 
             
 
+            
+
              method returns a blob containing key information that is compatible with the unmanaged Microsoft Cryptographic API (CAPI).   </para
           >
         </remarks>
@@ -980,6 +1144,8 @@
           <para
             >Exports a blob containing the key information associated with an <see
              cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+            
 
             
 
@@ -994,11 +1160,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1034,8 +1204,12 @@
 
           
 
+          
+
            parameters <see
            cref="M:System.Security.Cryptography.RSAParameters.D" />
+
+          
 
           
 
@@ -1044,8 +1218,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Security.Cryptography.RSAParameters.Q" />
+
+          
 
           
 
@@ -1054,13 +1232,19 @@
 
           
 
+          
+
           , <see
            cref="M:System.Security.Cryptography.RSAParameters.DQ" />
 
           
 
+          
+
            and <see
            cref="M:System.Security.Cryptography.RSAParameters.InverseQ" />
+
+          
 
           
 
@@ -1071,6 +1255,8 @@
           <para
             >Exports the <see
              cref="T:System.Security.Cryptography.RSAParameters" />
+
+            
 
             
 
@@ -1085,11 +1271,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1150,8 +1340,12 @@
 
             
 
+            
+
              method initializes the key data of an <see
              cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+            
 
             
 
@@ -1164,6 +1358,8 @@
         </summary>
         <param name="keyBlob">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1203,6 +1399,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1211,8 +1409,12 @@
 
           
 
+          
+
           The parameters for <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -1246,6 +1448,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1273,6 +1477,8 @@
 
             
 
+            
+
              supports key sizes from 384 bits to 16384 bits in increments of 8 bits if you have the Microsoft Enhanced Cryptographic Provider installed.  It supports key sizes from 384 bits to 512 bits in increments of 8 bits if you have the Microsoft Base Cryptographic Provider installed. </para
           >
           <para
@@ -1281,8 +1487,12 @@
 
             
 
+            
+
              instance. Windows CSPs enable key sizes of 384 to 16384 bits for Windows versions prior to win81, and key sizes of 512 to 16384 bits for win81. For more information, see <see
              cref="http://msdn.microsoft.com/library/aa379941(v=vs.85).aspx">CryptGenKey</see>
+
+            
 
             
 
@@ -1294,8 +1504,12 @@
 
             
 
+            
+
              class does not allow you to change key sizes using the <see
              cref="P:System.Security.Cryptography.RSACryptoServiceProvider.KeySize" />
+
+            
 
             
 
@@ -1331,8 +1545,12 @@
 
             
 
+            
+
              property is automatically set to true when you specify a key container name in a <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -1341,8 +1559,12 @@
 
             
 
+            
+
              object.  You can specify a container name using the <see
              cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" />
+
+            
 
             
 
@@ -1354,13 +1576,19 @@
 
             
 
+            
+
              property to true without initializing the <see
              cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
 
             
 
+            
+
              object with a <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -1400,8 +1628,12 @@
 
             
 
+            
+
              class can be initialized either with a public key only or with both a public and private key.  Use the <see
              cref="P:System.Security.Cryptography.RSACryptoServiceProvider.PublicOnly" />
+
+            
 
             
 
@@ -1413,6 +1645,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+            
 
             
 
@@ -1444,6 +1678,8 @@
           <para
             >Gets the name of the signature algorithm available with this implementation of <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -1480,6 +1716,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1488,8 +1726,12 @@
 
             
 
+            
+
              parameter can accept a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1498,8 +1740,12 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1518,6 +1764,8 @@
 
             
 
+            
+
              signature for the specified data.</para
           >
         </returns>
@@ -1526,10 +1774,14 @@
 
           
 
+          
+
           The input data for which to compute the hash. </param
         >
         <param name="halg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1568,8 +1820,12 @@
 
             
 
+            
+
              parameter can accept a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1578,8 +1834,12 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1598,6 +1858,8 @@
 
             
 
+            
+
              signature for the specified data.</para
           >
         </returns>
@@ -1606,10 +1868,14 @@
 
           
 
+          
+
           The input data for which to compute the hash. </param
         >
         <param name="halg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1650,6 +1916,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1658,8 +1926,12 @@
 
             
 
+            
+
              parameter can accept a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1668,8 +1940,12 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1697,11 +1973,15 @@
 
             
 
+            
+
              signature for the specified data.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1712,6 +1992,8 @@
 
           
 
+          
+
           The offset into the array from which to begin using data. </param
         >
         <param name="count">
@@ -1719,10 +2001,14 @@
 
           
 
+          
+
           The number of bytes in the array to use as data. </param
         >
         <param name="halg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1758,6 +2044,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1766,13 +2054,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.MD5" />
 
             
 
+            
+
             . The algorithm identifier can be derived from the hash name by using the <see
              cref="M:System.Security.Cryptography.CryptoConfig.MapNameToOID(System.String)" />
+
+            
 
             
 
@@ -1791,6 +2085,8 @@
 
             
 
+            
+
              signature for the specified hash value.</para
           >
         </returns>
@@ -1799,10 +2095,14 @@
 
           
 
+          
+
           The hash value of the data to be signed. </param
         >
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1832,8 +2132,12 @@
 
             
 
+            
+
              flag to a <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -1842,8 +2146,12 @@
 
             
 
+            
+
              property applies to all code in the current application domain, whereas the <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -1852,8 +2160,12 @@
 
             
 
+            
+
              affects the key store location only if <see
              cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+            
 
             
 
@@ -1898,8 +2210,12 @@
 
             
 
+            
+
              digital signature produced by the <see
              cref="M:System.Security.Cryptography.RSACryptoServiceProvider.SignData(System.IO.Stream,System.Object)" />
+
+            
 
             
 
@@ -1911,8 +2227,12 @@
 
             
 
+            
+
              parameter can accept a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1921,8 +2241,12 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1942,6 +2266,8 @@
 
           
 
+          
+
           The data that was signed. </param
         >
         <param name="halg">
@@ -1949,10 +2275,14 @@
 
           
 
+          
+
           The name of the hash algorithm used to create the hash value of the data. </param
         >
         <param name="signature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1992,8 +2322,12 @@
 
             
 
+            
+
              digital signature produced by the <see
              cref="M:System.Security.Cryptography.RSACryptoServiceProvider.SignHash(System.Byte[],System.String)" />
+
+            
 
             
 
@@ -2005,13 +2339,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.MD5" />
 
             
 
+            
+
             . The algorithm identifier can be derived from the hash name by using the <see
              cref="M:System.Security.Cryptography.CryptoConfig.MapNameToOID(System.String)" />
+
+            
 
             
 
@@ -2031,6 +2371,8 @@
 
           
 
+          
+
           The hash value of the signed data. </param
         >
         <param name="str">
@@ -2038,10 +2380,14 @@
 
           
 
+          
+
           The hash algorithm identifier (OID) used to create the hash value of the data. </param
         >
         <param name="rgbSignature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

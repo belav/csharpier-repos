@@ -69,6 +69,8 @@
 
             
 
+            
+
              property of the new instance to
    a system-supplied message that describes the error, such as "Attempted to read
    past the end of the stream." This message takes into account the current system
@@ -80,9 +82,13 @@
 
             
 
+            
+
              property of the new instance is 
 initialized to <see
              langword="null" />
+
+            
 
             
 
@@ -94,6 +100,8 @@ initialized to <see
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.EndOfStreamException" />
+
+            
 
             
 
@@ -131,14 +139,20 @@ initialized to <see
 
             
 
+            
+
              property of the
    new instance using <paramref
              name="message" />
 
             
 
+            
+
             . If <paramref
              name="message" />
+
+            
 
             
 
@@ -148,8 +162,12 @@ initialized to <see
 
             
 
+            
+
             , the <see
              cref="!:System.IO.EndOfStreamException.Message" />
+
+            
 
             
 
@@ -163,9 +181,13 @@ initialized to <see
 
             
 
+            
+
              property of the new instance is
 initialized to <see
              langword="null" />
+
+            
 
             
 
@@ -180,8 +202,12 @@ initialized to <see
 
             
 
+            
+
              class with its message string set to <paramref
              name="message" />
+
+            
 
             
 
@@ -193,8 +219,12 @@ initialized to <see
 
           
 
+          
+
           A string that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -232,6 +262,8 @@ initialized to <see
 
             
 
+            
+
              class with the specified serialization and context information.</para
           >
         </summary>
@@ -240,8 +272,12 @@ initialized to <see
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -252,8 +288,12 @@ initialized to <see
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -294,8 +334,12 @@ initialized to <see
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -304,11 +348,15 @@ initialized to <see
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.IO.EndOfStreamException" />
+
+            
 
             
 
@@ -355,6 +403,8 @@ initialized to <see
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
@@ -363,8 +413,12 @@ initialized to <see
 
           
 
+          
+
           A string that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -375,8 +429,12 @@ initialized to <see
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

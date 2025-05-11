@@ -28,8 +28,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializationGeneratedCode" />
+
+            
 
             
 

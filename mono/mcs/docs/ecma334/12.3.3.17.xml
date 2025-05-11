@@ -3,14 +3,18 @@
   <paragraph
     >For a using statement stmt of the form: <code_example
     >
-      <![CDATA[
+<![CDATA[
 using (resource-acquisition) embedded-statement  
 ]]>
     </code_example>
     <list>
       <list_item
         > The definite assignment state of v at the beginning of <non_terminal
-         where="15.13">resource-acquisition</non_terminal>
+         where="15.13"
+>resource-acquisition</non_terminal
+        >
+
+        
 
         
 
@@ -22,8 +26,14 @@ using (resource-acquisition) embedded-statement
 
         
 
+        
+
          is the same as the state of v at the end of <non_terminal
-         where="15.13">resource-acquisition</non_terminal>
+         where="15.13"
+>resource-acquisition</non_terminal
+        >
+
+        
 
         
 

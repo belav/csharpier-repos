@@ -84,6 +84,8 @@
 
         
 
+        
+
          control is a composite control that provides all the common UI elements needed to authenticate a user on a Web site. The following three elements are required for all login scenarios: </para
       >
       <list type="bullet">
@@ -100,6 +102,8 @@
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.Login" />
+
+        
 
         
 
@@ -140,6 +144,8 @@
 
         
 
+        
+
          property.</para
       >
       <block subset="none" type="note">
@@ -151,10 +157,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to login controls and membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -170,6 +180,8 @@
 
           
 
+          
+
           , <format
            type="text/html">
             <a href="3eeeee9e-b09f-4c7f-8ce5-d9ca1f9322ad"
@@ -179,10 +191,14 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="2dab2012-c278-426a-bb0d-93b260c428a7">Securing Membership</a>
           </format>
+
+          
 
           
 
@@ -195,13 +211,19 @@
 
         
 
+        
+
          control uses a membership provider to obtain user credentials. Unless you specify otherwise, the <see
          cref="T:System.Web.UI.WebControls.Login" />
 
         
 
+        
+
          control uses the default membership provider defined in the Web.config file. To specify a different provider, set the <see
          cref="P:System.Web.UI.WebControls.Login.MembershipProvider" />
+
+        
 
         
 
@@ -212,11 +234,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >If you want to use a custom authentication service, you can use the <see
          cref="M:System.Web.UI.WebControls.Login.OnAuthenticate(System.Web.UI.WebControls.AuthenticateEventArgs)" />
+
+        
 
         
 
@@ -234,8 +260,12 @@
 
         
 
+        
+
          control is fully customizable through templates and style settings. All UI text messages are also customizable through properties of the <see
          cref="T:System.Web.UI.WebControls.Login" />
+
+        
 
         
 
@@ -247,13 +277,19 @@
 
         
 
+        
+
          control is customized with templates, then the <see
          cref="P:System.Web.UI.WebControls.WebControl.AccessKey" />
 
         
 
+        
+
          property and the <see
          cref="P:System.Web.UI.WebControls.WebControl.TabIndex" />
+
+        
 
         
 
@@ -262,8 +298,12 @@
 
         
 
+        
+
          property and the <see
          cref="P:System.Web.UI.WebControls.WebControl.TabIndex" />
+
+        
 
         
 
@@ -274,8 +314,12 @@
 
         
 
+        
+
          control properties represented by text boxes, such as <see
          cref="P:System.Web.UI.WebControls.Login.UserName" />
+
+        
 
         
 
@@ -284,8 +328,12 @@
 
         
 
+        
+
         , are accessible during all phases of the page life cycle. The control will pick up any changes made by the end user by means of the <see
          cref="E:System.Web.UI.WebControls.TextBox.TextChanged" />
+
+        
 
         
 
@@ -298,8 +346,12 @@
 
           
 
+          
+
            control in a <see
            cref="T:System.Web.UI.WebControls.WizardStep" />
+
+          
 
           
 
@@ -308,13 +360,19 @@
 
           
 
+          
+
            property in a Page_Load event handler if the user is authenticated. The <see
            cref="T:System.Web.UI.WebControls.Wizard" />
 
           
 
+          
+
            control does not automatically advance to the next <see
            cref="T:System.Web.UI.WebControls.WizardStep" />
+
+          
 
           
 
@@ -324,6 +382,8 @@
       <para
         >The following table lists the <see
          cref="T:System.Web.UI.WebControls.Login" />
+
+        
 
         
 
@@ -453,13 +513,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.Login.Password" />
 
         
 
+        
+
          properties have <see
          cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+
+        
 
         
 
@@ -471,8 +537,12 @@
 
         
 
+        
+
          control uses a validation group so that other fields on the same page as the <see
          cref="T:System.Web.UI.WebControls.Login" />
+
+        
 
         
 
@@ -481,8 +551,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.Login" />
+
+        
 
         
 
@@ -491,8 +565,12 @@
 
         
 
+        
+
          control with the ID "Login1" will use a validation group name of "Login1". If you want to set the validation group that the <see
          cref="T:System.Web.UI.WebControls.Login" />
+
+        
 
         
 
@@ -510,13 +588,19 @@
 
         
 
+        
+
          control lets you specify CSS style rules in markup. If you use templates to customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.Login" />
 
         
 
+        
+
          control, you can specify CSS styles in the markup in the templates. In that case, no extra outer table is required. You can prevent the table from being rendered by setting the <see
          cref="P:System.Web.UI.WebControls.Login.RenderOuterTable" />
+
+        
 
         
 
@@ -538,10 +622,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -564,6 +652,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -577,9 +667,13 @@
 
         
 
+        
+
         |False"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -589,15 +683,21 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
 
         
 
+        
+
         |False"
     FailureAction="<codeFeaturedElement
         >Refresh</codeFeaturedElement>
+
+        
 
         
 
@@ -608,9 +708,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -618,6 +722,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -629,9 +735,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -647,6 +757,8 @@
     LoginButtonText="string"
     LoginButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -667,6 +779,8 @@
 
         
 
+        
+
         "
     PasswordLabelText="string"
     PasswordRecoveryIconUrl="uri"
@@ -675,6 +789,8 @@
     PasswordRequiredErrorMessage="string"
     RememberMeSet="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -689,6 +805,8 @@
 
         
 
+        
+
         |TextOnTop"
     TitleText="string"
     ToolTip="string"
@@ -700,9 +818,13 @@
 
         
 
+        
+
         |False"
     VisibleWhenLoggedIn="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -744,8 +866,12 @@
 
             
 
+            
+
              constructor creates a new instance of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -754,6 +880,8 @@
           <para
             >The following table shows the initial property values for a new instance of <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -934,6 +1062,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -961,13 +1091,19 @@
 
             
 
+            
+
              event is raised when a user uses the <see
              cref="T:System.Web.UI.WebControls.Login" />
 
             
 
+            
+
              control to log in to a Web site. Custom authentication schemes can use the <see
              cref="E:System.Web.UI.WebControls.Login.Authenticate" />
+
+            
 
             
 
@@ -980,8 +1116,12 @@
 
               
 
+              
+
                control to log in to a Web site, all data in the view state and all post data is lost. Do not perform actions in the <see
                cref="E:System.Web.UI.WebControls.Login.Authenticate" />
+
+              
 
               
 
@@ -993,6 +1133,8 @@
              type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
+
+            
 
             
 
@@ -1030,6 +1172,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -1038,6 +1182,8 @@
           <para
             >Gets or sets the amount of padding inside the borders of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1083,13 +1229,19 @@
 
             
 
+            
+
              property gets a reference to a <see
              cref="T:System.Web.UI.WebControls.Style" />
 
             
 
+            
+
              object that you use to change the appearance of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1101,8 +1253,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1114,8 +1270,12 @@
 
             
 
+            
+
              property defines the appearance of the <see
              cref="P:System.Web.UI.WebControls.Login.RememberMeText" />
+
+            
 
             
 
@@ -1127,8 +1287,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1137,8 +1301,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1150,8 +1318,12 @@
 
             
 
+            
+
              control style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Login.CheckBoxStyle" />
+
+            
 
             
 
@@ -1220,8 +1392,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.Login.CheckBoxStyle" />
+
+            
 
             
 
@@ -1233,6 +1409,8 @@
           <para
             >Gets a reference to a <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1263,8 +1441,12 @@
 
             
 
+            
+
              method creates instances of the controls that compose the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1276,6 +1458,8 @@
           <para
             >Creates the individual controls that make up the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1342,8 +1526,12 @@
 
             
 
+            
+
              property contains the text of a link to the registration page for the site. The URL of the registration page is specified in the <see
              cref="P:System.Web.UI.WebControls.Login.CreateUserUrl" />
+
+            
 
             
 
@@ -1355,8 +1543,12 @@
 
             
 
+            
+
              is empty, the text in the <see
              cref="P:System.Web.UI.WebControls.Login.CreateUserText" />
+
+            
 
             
 
@@ -1368,11 +1560,15 @@
 
             
 
+            
+
              property is empty, a link to the registration page is not available to the user.</para
           >
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -1382,6 +1578,8 @@
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1425,8 +1623,12 @@
 
             
 
+            
+
              property contains the URL of the new-user registration page for the Web site. The <see
              cref="P:System.Web.UI.WebControls.Login.CreateUserText" />
+
+            
 
             
 
@@ -1435,6 +1637,8 @@
           <para
             >If the <see
              cref="P:System.Web.UI.WebControls.Login.CreateUserText" />
+
+            
 
             
 
@@ -1484,6 +1688,8 @@
 
             
 
+            
+
              property specifies the page that is displayed when a login attempt is successful.</para
           >
           <para
@@ -1492,10 +1698,14 @@
 
             
 
+            
+
              control is to return the user to the referring page, or to the page defined in the defaultUrl attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -1507,8 +1717,12 @@
 
             
 
+            
+
              property overrides the default behavior of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1520,10 +1734,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1564,13 +1782,19 @@
 
             
 
+            
+
              property is set to true, the text contained in the <see
              cref="P:System.Web.UI.WebControls.Login.RememberMeText" />
 
             
 
+            
+
              property is displayed on the page, along with a Remember Me check box. When the user selects the Remember Me check box, the authentication cookie sent to his or her computer persists so that the user is automatically authenticated on future visits to the site. The value of the <see
              cref="P:System.Web.UI.WebControls.Login.RememberMeSet" />
+
+            
 
             
 
@@ -1582,8 +1806,12 @@
 
             
 
+            
+
              is false, a Remember Me check box is not displayed on the page and the user has no way to control whether the authentication cookie persists or not. You can still set the <see
              cref="P:System.Web.UI.WebControls.Login.RememberMeSet" />
+
+            
 
             
 
@@ -1596,8 +1824,12 @@
 
               
 
+              
+
                property to true and the <see
                cref="P:System.Web.UI.WebControls.Login.DisplayRememberMe" />
+
+              
 
               
 
@@ -1610,10 +1842,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1657,8 +1893,12 @@
 
             
 
+            
+
              property defines the behavior of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1670,6 +1910,8 @@
 
             
 
+            
+
              property to alert the user that the login attempt failed.</para
           >
           <para
@@ -1678,8 +1920,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Web.UI.WebControls.LoginFailureAction.RedirectToLoginPage" />
+
+            
 
             
 
@@ -1691,10 +1937,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1732,6 +1982,8 @@
 
             
 
+            
+
              property specifies the string that is displayed when a login attempt fails.</para
           >
           <para
@@ -1740,8 +1992,12 @@
 
             
 
+            
+
              control, you can indicate where on the template to display the <see
              cref="P:System.Web.UI.WebControls.Login.FailureText" />
+
+            
 
             
 
@@ -1750,13 +2006,19 @@
 
             
 
+            
+
              control and giving that control the ID "FailureText". When you use a template, the <see
              cref="P:System.Web.UI.WebControls.Login.FailureTextStyle" />
 
             
 
+            
+
              property is not applied to the text specified in the <see
              cref="P:System.Web.UI.WebControls.Login.FailureText" />
+
+            
 
             
 
@@ -1774,6 +2036,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1783,12 +2047,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1838,8 +2106,12 @@
 
             
 
+            
+
              property gets a reference to a <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -1851,8 +2123,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -1864,8 +2140,12 @@
 
             
 
+            
+
              property defines the appearance of the <see
              cref="P:System.Web.UI.WebControls.Login.FailureText" />
+
+            
 
             
 
@@ -1877,8 +2157,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1887,8 +2171,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -1900,8 +2188,12 @@
 
             
 
+            
+
              control style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Login.FailureTextStyle" />
+
+            
 
             
 
@@ -1970,8 +2262,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.Login.FailureTextStyle" />
+
+            
 
             
 
@@ -1983,6 +2279,8 @@
           <para
             >Gets a reference to a collection of properties that define the appearance of error text in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2049,8 +2347,12 @@
 
             
 
+            
+
              property contains the link text to the login Help page for the site. The URL of the login Help page is specified in the <see
              cref="P:System.Web.UI.WebControls.Login.HelpPageUrl" />
+
+            
 
             
 
@@ -2062,8 +2364,12 @@
 
             
 
+            
+
              is empty, the text in the <see
              cref="P:System.Web.UI.WebControls.Login.HelpPageText" />
+
+            
 
             
 
@@ -2075,11 +2381,15 @@
 
             
 
+            
+
              property is empty, the link to the login Help page is not available to the user.</para
           >
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -2089,6 +2399,8 @@
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2132,8 +2444,12 @@
 
             
 
+            
+
              property contains the URL of the login Help page for the Web site. The <see
              cref="P:System.Web.UI.WebControls.Login.HelpPageText" />
+
+            
 
             
 
@@ -2145,8 +2461,12 @@
 
             
 
+            
+
              is empty, text in the <see
              cref="P:System.Web.UI.WebControls.Login.HelpPageText" />
+
+            
 
             
 
@@ -2155,6 +2475,8 @@
           <para
             >If the <see
              cref="P:System.Web.UI.WebControls.Login.HelpPageText" />
+
+            
 
             
 
@@ -2204,8 +2526,12 @@
 
             
 
+            
+
              property defines the appearance of hyperlinks in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2214,8 +2540,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -2224,6 +2554,8 @@
           <para
             >Common settings include custom background color, text color, and font properties. The <see
              cref="P:System.Web.UI.WebControls.Login.HyperLinkStyle" />
+
+            
 
             
 
@@ -2252,8 +2584,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2262,8 +2598,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2275,8 +2615,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Login.HyperLinkStyle" />
+
+            
 
             
 
@@ -2345,8 +2689,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.Login.HyperLinkStyle" />
+
+            
 
             
 
@@ -2358,6 +2706,8 @@
           <para
             >Gets a reference to a collection of properties that define the appearance of hyperlinks in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2394,8 +2744,12 @@
 
             
 
+            
+
              property contains instructions for users logging in to the Web site. This text is displayed in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2407,8 +2761,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2420,12 +2778,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2475,8 +2837,12 @@
 
             
 
+            
+
              property defines the appearance of instruction text in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2485,8 +2851,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -2498,8 +2868,12 @@
 
             
 
+            
+
              property defines the appearance of the <see
              cref="P:System.Web.UI.WebControls.Login.InstructionText" />
+
+            
 
             
 
@@ -2511,8 +2885,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2521,8 +2899,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2534,8 +2916,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Login.InstructionTextStyle" />
+
+            
 
             
 
@@ -2604,8 +2990,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.Login.InstructionTextStyle" />
+
+            
 
             
 
@@ -2620,8 +3010,12 @@
 
             
 
+            
+
              object that defines the settings for instruction text in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2667,8 +3061,12 @@
 
             
 
+            
+
              property defines the appearance of text box labels in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2677,8 +3075,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -2687,6 +3089,8 @@
           <para
             >Common settings include custom background color, text color, and font properties. The <see
              cref="P:System.Web.UI.WebControls.Login.LabelStyle" />
+
+            
 
             
 
@@ -2710,8 +3114,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2720,8 +3128,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2733,8 +3145,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Login.LabelStyle" />
+
+            
 
             
 
@@ -2803,8 +3219,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.Login.LabelStyle" />
+
+            
 
             
 
@@ -2819,8 +3239,12 @@
 
             
 
+            
+
              object that defines the settings for <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2863,8 +3287,12 @@
 
             
 
+            
+
              property contains the template that defines how the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2873,6 +3301,8 @@
           <para
             >The following table lists the required and optional controls used in a <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -2903,8 +3333,12 @@
 
                   
 
+                  
+
                   , including <see
                    cref="T:System.Web.UI.WebControls.TextBox" />
+
+                  
 
                   
 
@@ -2926,8 +3360,12 @@
 
                   
 
+                  
+
                   , including <see
                    cref="T:System.Web.UI.WebControls.TextBox" />
+
+                  
 
                   
 
@@ -2962,6 +3400,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -2987,13 +3427,19 @@
 
             
 
+            
+
              control throws an <see
              cref="T:System.Web.HttpException" />
 
             
 
+            
+
              exception if the layout template does not contain the required controls. No exception is thrown if you give an optional control ID to a control of the wrong type; however, the control is subsequently ignored by the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3005,8 +3451,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -3015,11 +3465,15 @@
 
             
 
+            
+
             . The control's command name property must be set to "Login".</para
           >
           <para
             >When a template is used for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3033,8 +3487,12 @@
 
                 
 
+                
+
                 . (For details, see the <see
                  cref="T:System.Web.UI.WebControls.Login" />
+
+                
 
                 
 
@@ -3047,12 +3505,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.Login.VisibleWhenLoggedIn" />
+
+                
 
                 
 
@@ -3065,12 +3527,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.Login.FailureAction" />
+
+                
 
                 
 
@@ -3083,12 +3549,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.Login.Password" />
+
+                
 
                 
 
@@ -3101,12 +3571,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.Login.UserName" />
+
+                
 
                 
 
@@ -3120,6 +3594,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -3128,6 +3604,8 @@
           <para
             >Gets or sets the template used to display the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3160,8 +3638,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.UI.PageStatePersister.ViewState" />
+
+          
 
           
 
@@ -3188,8 +3670,12 @@
 
             
 
+            
+
              event is raised after the authentication provider checks the user's credentials and the authentication cookie is queued to send to the browser in the next response. Use the <see
              cref="E:System.Web.UI.WebControls.Login.LoggedIn" />
+
+            
 
             
 
@@ -3201,8 +3687,12 @@
 
             
 
+            
+
              control first raises the <see
              cref="E:System.Web.UI.WebControls.Login.LoggingIn" />
+
+            
 
             
 
@@ -3211,8 +3701,12 @@
 
             
 
+            
+
              event, and finally the <see
              cref="E:System.Web.UI.WebControls.Login.LoggedIn" />
+
+            
 
             
 
@@ -3225,8 +3719,12 @@
 
               
 
+              
+
                control to log in to a Web site, all data in the view state and all post data is lost. Do not perform actions in the <see
                cref="E:System.Web.UI.WebControls.Login.LoggedIn" />
+
+              
 
               
 
@@ -3238,6 +3736,8 @@
              type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
+
+            
 
             
 
@@ -3272,8 +3772,12 @@
 
             
 
+            
+
              event is raised when a user submits login information but before the user is authenticated on the Web site. Use the <see
              cref="E:System.Web.UI.WebControls.Login.LoggingIn" />
+
+            
 
             
 
@@ -3285,13 +3789,19 @@
 
             
 
+            
+
              event by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.CancelEventArgs" />
+
+            
 
             
 
@@ -3303,8 +3813,12 @@
 
             
 
+            
+
              event is raised, the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3313,8 +3827,12 @@
 
             
 
+            
+
              event and then the <see
              cref="E:System.Web.UI.WebControls.Login.LoggedIn" />
+
+            
 
             
 
@@ -3325,6 +3843,8 @@
              type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
+
+            
 
             
 
@@ -3358,8 +3878,12 @@
 
             
 
+            
+
              is a read-only field and the default value is "Login". This value is passed to the <see
              cref="M:System.Web.UI.WebControls.Login.OnBubbleEvent(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -3406,8 +3930,12 @@
 
             
 
+            
+
              property contains the URL of the image rendered as the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3416,8 +3944,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -3426,6 +3958,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.Login.LoginButtonText" />
+
+            
 
             
 
@@ -3475,8 +4009,12 @@
 
             
 
+            
+
              property to control the appearance of the login button in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3485,8 +4023,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -3498,6 +4040,8 @@
 
             
 
+            
+
              property defines the appearance of the login button.</para
           >
           <para
@@ -3506,8 +4050,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3516,8 +4064,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3529,8 +4081,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Login.LoginButtonStyle" />
+
+            
 
             
 
@@ -3599,8 +4155,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.Login.LoginButtonStyle" />
+
+            
 
             
 
@@ -3615,8 +4175,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the login button in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3650,8 +4214,12 @@
 
             
 
+            
+
              property contains the text displayed for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3660,8 +4228,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.Login.LoginButtonText" />
+
+            
 
             
 
@@ -3670,8 +4242,12 @@
 
             
 
+            
+
              values affect the <see
              cref="P:System.Web.UI.WebControls.Login.LoginButtonText" />
+
+            
 
             
 
@@ -3686,6 +4262,8 @@
 
                     
 
+                    
+
                      setting </para
                   >
                 </term>
@@ -3693,6 +4271,8 @@
                   <para
                     >How the <see
                      cref="P:System.Web.UI.WebControls.Login.LoginButtonText" />
+
+                    
 
                     
 
@@ -3739,12 +4319,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -3756,6 +4340,8 @@
           <para
             >Gets or sets the text for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3792,8 +4378,12 @@
 
             
 
+            
+
              property determines the type of button to use for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3805,6 +4395,8 @@
                 <term>
                   <para>
                     <see cref="P:System.Web.UI.WebControls.Login.LoginButtonType" />
+
+                    
 
                     
 
@@ -3829,6 +4421,8 @@
 
                   
 
+                  
+
                    property. </para
                 >
               </description>
@@ -3846,8 +4440,12 @@
 
                   
 
+                  
+
                    property. The string specified in the <see
                    cref="P:System.Web.UI.WebControls.Login.LoginButtonText" />
+
+                  
 
                   
 
@@ -3868,6 +4466,8 @@
 
                   
 
+                  
+
                    property. </para
                 >
               </description>
@@ -3879,8 +4479,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.ButtonType.Button" />
+
+            
 
             
 
@@ -3889,8 +4493,12 @@
 
             
 
+            
+
             , the content of the <see
              cref="P:System.Web.UI.WebControls.Login.LoginButtonImageUrl" />
+
+            
 
             
 
@@ -3902,6 +4510,8 @@
           <para
             >Gets or sets the type of button to use when rendering the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3929,8 +4539,12 @@
 
             
 
+            
+
              event is raised when the credentials entered by the user are invalid. You can use the <see
              cref="E:System.Web.UI.WebControls.Login.LoginError" />
+
+            
 
             
 
@@ -3941,6 +4555,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3984,8 +4600,12 @@
 
             
 
+            
+
              property contains the name of the data provider that provides the authentication information for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -3997,8 +4617,12 @@
 
             
 
+            
+
              property, it will always return <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -4010,6 +4634,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -4018,10 +4644,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -4059,13 +4689,19 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Web.UI.WebControls.Login.Authenticate" />
 
             
 
+            
+
              event. Use the <see
              cref="E:System.Web.UI.WebControls.Login.Authenticate" />
+
+            
 
             
 
@@ -4079,11 +4715,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Login.OnAuthenticate(System.Web.UI.WebControls.AuthenticateEventArgs)" />
+
+            
 
             
 
@@ -4098,6 +4738,8 @@
 
             
 
+            
+
              event to authenticate the user.</para
           >
         </summary>
@@ -4106,8 +4748,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.AuthenticateEventArgs" />
+
+          
 
           
 
@@ -4141,8 +4787,12 @@
 
             
 
+            
+
              method implements the <see
              cref="M:System.Web.UI.Control.OnBubbleEvent(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -4154,8 +4804,12 @@
 
             
 
+            
+
              control Login button, the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -4175,6 +4829,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -4182,8 +4838,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4213,13 +4873,19 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Web.UI.WebControls.Login.LoggedIn" />
 
             
 
+            
+
              event. Use the <see
              cref="E:System.Web.UI.WebControls.Login.LoggedIn" />
+
+            
 
             
 
@@ -4233,11 +4899,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Login.OnLoggedIn(System.EventArgs)" />
+
+            
 
             
 
@@ -4252,6 +4922,8 @@
 
             
 
+            
+
              event after the user logs in to the Web site and has been authenticated.</para
           >
         </summary>
@@ -4260,8 +4932,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4294,13 +4970,19 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Web.UI.WebControls.Login.LoggingIn" />
 
             
 
+            
+
              event. Use the <see
              cref="E:System.Web.UI.WebControls.Login.LoggingIn" />
+
+            
 
             
 
@@ -4314,11 +4996,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Login.OnLoggingIn(System.Web.UI.WebControls.LoginCancelEventArgs)" />
+
+            
 
             
 
@@ -4333,6 +5019,8 @@
 
             
 
+            
+
              event when a user submits login information but before the authentication takes place.</para
           >
         </summary>
@@ -4341,8 +5029,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
+
+          
 
           
 
@@ -4372,13 +5064,19 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Web.UI.WebControls.Login.LoginError" />
 
             
 
+            
+
              event. Use the <see
              cref="E:System.Web.UI.WebControls.Login.LoginError" />
+
+            
 
             
 
@@ -4392,11 +5090,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Login.OnLoginError(System.EventArgs)" />
+
+            
 
             
 
@@ -4411,6 +5113,8 @@
 
             
 
+            
+
              event when a login attempt fails.</para
           >
         </summary>
@@ -4419,8 +5123,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4452,13 +5160,19 @@
 
             
 
+            
+
              method implements the <see
              cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
+            
+
              method to notify the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -4472,11 +5186,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Login.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -4491,6 +5209,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -4499,8 +5219,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4533,8 +5257,12 @@
 
             
 
+            
+
              property determines whether to display the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -4543,8 +5271,12 @@
 
             
 
+            
+
              text entry field above the <see
              cref="P:System.Web.UI.WebControls.Login.Password" />
+
+            
 
             
 
@@ -4553,8 +5285,12 @@
 
             
 
+            
+
              text entry field next to the <see
              cref="P:System.Web.UI.WebControls.Login.Password" />
+
+            
 
             
 
@@ -4566,6 +5302,8 @@
           <para
             >Gets or sets a value that specifies the position of the elements of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -4602,12 +5340,16 @@
 
             
 
+            
+
              property contains the password entered by the user. The password is in clear text. For more information, see <format
              type="text/html">
               <a href="3eeeee9e-b09f-4c7f-8ce5-d9ca1f9322ad"
                 >Basic Security Practices for Web Applications</a
               >
             </format>
+
+            
 
             
 
@@ -4620,8 +5362,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.Login.Password" />
+
+              
 
               
 
@@ -4630,8 +5376,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.Login.Password" />
+
+              
 
               
 
@@ -4643,8 +5393,12 @@
 
             
 
+            
+
              control properties represented by text boxes, such as <see
              cref="P:System.Web.UI.WebControls.Login.UserName" />
+
+            
 
             
 
@@ -4653,8 +5407,12 @@
 
             
 
+            
+
             , are accessible during all phases of the page life cycle. The control will pick up any changes made by the end user by means of the <see
              cref="E:System.Web.UI.WebControls.TextBox.TextChanged" />
+
+            
 
             
 
@@ -4695,8 +5453,12 @@
 
             
 
+            
+
              property contains the label text for the <see
              cref="P:System.Web.UI.WebControls.Login.Password" />
+
+            
 
             
 
@@ -4705,6 +5467,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.Login.TextLayout" />
+
+            
 
             
 
@@ -4717,12 +5481,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4734,6 +5502,8 @@
           <para
             >Gets or sets the text of the label for the <see
              cref="P:System.Web.UI.WebControls.Login.Password" />
+
+            
 
             
 
@@ -4806,8 +5576,12 @@
 
             
 
+            
+
              property contains the text of a link to the password recovery page for the site. The URL of the password recovery page is specified in the <see
              cref="P:System.Web.UI.WebControls.Login.PasswordRecoveryUrl" />
+
+            
 
             
 
@@ -4819,8 +5593,12 @@
 
             
 
+            
+
              is empty, the text in the <see
              cref="P:System.Web.UI.WebControls.Login.PasswordRecoveryText" />
+
+            
 
             
 
@@ -4832,11 +5610,15 @@
 
             
 
+            
+
              property is empty, the link to the password recovery page is not available to the user.</para
           >
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -4846,6 +5628,8 @@
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4892,8 +5676,12 @@
 
             
 
+            
+
              property contains the URL of the password recovery page for the Web site. The <see
              cref="P:System.Web.UI.WebControls.Login.PasswordRecoveryText" />
+
+            
 
             
 
@@ -4902,6 +5690,8 @@
           <para
             >If the <see
              cref="P:System.Web.UI.WebControls.Login.PasswordRecoveryText" />
+
+            
 
             
 
@@ -4942,8 +5732,12 @@
 
             
 
+            
+
              property contains the error message displayed in a <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -4955,6 +5749,8 @@
 
             
 
+            
+
              property value is displayed only when both the following conditions are true: </para
           >
           <list type="bullet">
@@ -4962,6 +5758,8 @@
               <para
                 >A <see
                  cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+                
 
                 
 
@@ -4979,12 +5777,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4996,8 +5798,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Login.UserNameRequiredErrorMessage" />
+
+            
 
             
 
@@ -5006,8 +5812,12 @@
 
             
 
+            
+
              control. For these values to display, the <see
              cref="P:System.Web.UI.WebControls.ValidationSummary.ValidationGroup" />
+
+            
 
             
 
@@ -5016,13 +5826,19 @@
 
             
 
+            
+
              control must be set to the <see
              cref="P:System.Web.UI.Control.ID" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5034,6 +5850,8 @@
           <para
             >Gets or sets the error message to display in a <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -5070,6 +5888,8 @@
 
             
 
+            
+
              property is true, the authentication cookie sent to the user's computer is set to expire in 50 years, making it a persistent cookie that will be used when the user next visits the Web site. Because the authentication cookie will be present on the user's computer, the user will be considered already authenticated and will not have to log in to the Web site again.</para
           >
           <para
@@ -5078,8 +5898,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="P:System.Web.UI.WebControls.Login.RememberMeSet" />
+
+            
 
             
 
@@ -5091,8 +5915,12 @@
 
             
 
+            
+
              property is false, a Remember Me check box is not displayed on the page and the user has no way to control whether the authentication cookie is persistent. If the <see
              cref="P:System.Web.UI.WebControls.Login.RememberMeSet" />
+
+            
 
             
 
@@ -5101,6 +5929,8 @@
           <para
             >If the user logs out of the Web site using the <see
              cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+            
 
             
 
@@ -5113,8 +5943,12 @@
 
               
 
+              
+
                property to true and the <see
                cref="P:System.Web.UI.WebControls.Login.DisplayRememberMe" />
+
+              
 
               
 
@@ -5127,10 +5961,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -5168,8 +6006,12 @@
 
             
 
+            
+
              property contains the text of the label for the Remember Me <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -5182,12 +6024,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -5226,6 +6072,8 @@
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5271,13 +6119,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            containing the state of the <see
            cref="T:System.Web.UI.WebControls.Login" />
+
+          
 
           
 
@@ -5308,13 +6162,19 @@
 
             
 
+            
+
              property to determine the <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
+            
+
              value that is associated with a <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5329,8 +6189,12 @@
 
             
 
+            
+
              value that corresponds to a <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5376,8 +6240,12 @@
 
             
 
+            
+
              property defines the appearance of the User name and Password <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -5386,13 +6254,19 @@
 
             
 
+            
+
              control. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -5404,6 +6278,8 @@
 
             
 
+            
+
              property defines the appearance of the user name and password text boxes. </para
           >
           <para
@@ -5412,8 +6288,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5422,8 +6302,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5435,8 +6319,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Login.TextBoxStyle" />
+
+            
 
             
 
@@ -5505,8 +6393,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.Login.TextBoxStyle" />
+
+            
 
             
 
@@ -5518,6 +6410,8 @@
           <para
             >Gets a reference to a collection of properties that define the appearance of text boxes in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5554,13 +6448,19 @@
 
             
 
+            
+
              property to specify the position of labels relative to their associated text boxes for the <see
              cref="T:System.Web.UI.WebControls.Login" />
 
             
 
+            
+
              control. This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.LoginTextLayout" />
+
+            
 
             
 
@@ -5607,6 +6507,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -5637,8 +6539,12 @@
 
             
 
+            
+
              property specifies the title displayed at the top of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5651,12 +6557,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -5668,6 +6578,8 @@
           <para
             >Gets or sets the title of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5713,13 +6625,19 @@
 
             
 
+            
+
              property gets a reference to a <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
+            
+
              object that you use to change the appearance of the title contained in the <see
              cref="P:System.Web.UI.WebControls.Login.TitleText" />
+
+            
 
             
 
@@ -5731,8 +6649,12 @@
 
             
 
+            
+
              property defines the appearance of the title in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5741,8 +6663,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -5754,8 +6680,12 @@
 
             
 
+            
+
              property defines the appearance of the <see
              cref="P:System.Web.UI.WebControls.Login.TitleText" />
+
+            
 
             
 
@@ -5767,8 +6697,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5777,8 +6711,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5790,8 +6728,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Login.TitleTextStyle" />
+
+            
 
             
 
@@ -5860,8 +6802,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.Login.TitleTextStyle" />
+
+            
 
             
 
@@ -5873,6 +6819,8 @@
           <para
             >Gets a reference to a collection of properties that define the appearance of the title text in the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5899,6 +6847,8 @@
           <para
             >Overrides the base <see
              cref="M:System.Web.UI.Control.TrackViewState" />
+
+            
 
             
 
@@ -5932,8 +6882,12 @@
 
             
 
+            
+
              property contains the user name entered by the user. <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -5942,13 +6896,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Login.Password" />
 
             
 
+            
+
             , are accessible during all phases of the page life cycle. The control will pick up any changes made by the end user by means of the <see
              cref="E:System.Web.UI.WebControls.TextBox.TextChanged" />
+
+            
 
             
 
@@ -5989,8 +6949,12 @@
 
             
 
+            
+
              property contains the label text for the <see
              cref="P:System.Web.UI.WebControls.Login.UserName" />
+
+            
 
             
 
@@ -5999,6 +6963,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.Login.TextLayout" />
+
+            
 
             
 
@@ -6011,12 +6977,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -6028,6 +6998,8 @@
           <para
             >Gets or sets the text of the label for the <see
              cref="P:System.Web.UI.WebControls.Login.UserName" />
+
+            
 
             
 
@@ -6064,8 +7036,12 @@
 
             
 
+            
+
              property contains the error message displayed in a <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -6077,6 +7053,8 @@
 
             
 
+            
+
              property value is displayed only when both the following conditions are true: </para
           >
           <list type="bullet">
@@ -6084,6 +7062,8 @@
               <para
                 >A <see
                  cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+                
 
                 
 
@@ -6101,12 +7081,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -6118,8 +7102,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Login.UserNameRequiredErrorMessage" />
+
+            
 
             
 
@@ -6128,8 +7116,12 @@
 
             
 
+            
+
              control. For these values to display, the <see
              cref="P:System.Web.UI.WebControls.ValidationSummary.ValidationGroup" />
+
+            
 
             
 
@@ -6138,13 +7130,19 @@
 
             
 
+            
+
              control must be set to the <see
              cref="P:System.Web.UI.Control.ID" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -6156,6 +7154,8 @@
           <para
             >Gets or sets the error message to display in a <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -6201,6 +7201,8 @@
 
             
 
+            
+
              property.</para
           >
           <list type="table">
@@ -6225,6 +7227,8 @@
 
                   
 
+                  
+
                    properties.</para
                 >
               </description>
@@ -6237,6 +7241,8 @@
                 <para
                   >The color of the border around the error messages. The color can be any of the <see
                    cref="T:System.Drawing.Color" />
+
+                  
 
                   
 
@@ -6311,6 +7317,8 @@
 
                   
 
+                  
+
                    object.</para
                 >
               </description>
@@ -6342,6 +7350,8 @@
 
                   
 
+                  
+
                    properties.</para
                 >
               </description>
@@ -6354,6 +7364,8 @@
                 <para
                   >A <see
                    cref="T:System.Web.UI.WebControls.Unit" />
+
+                  
 
                   
 
@@ -6372,6 +7384,8 @@
 
                   
 
+                  
+
                    object that represents the width of the error messages.</para
                 >
               </description>
@@ -6386,8 +7400,12 @@
 
             
 
+            
+
              properties that define the appearance of error messages associated with validators used by the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -6427,8 +7445,12 @@
 
             
 
+            
+
              property specifies whether the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -6437,8 +7459,12 @@
 
             
 
+            
+
              control does not appear on the page when an authenticated user accesses the site. This is used on Web pages that are used both as login pages and as information pages to hide the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -6450,8 +7476,12 @@
 
             
 
+            
+
              property has no effect on a <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 
@@ -6463,10 +7493,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -6478,6 +7512,8 @@
           <para
             >Gets or sets a value indicating whether to show the <see
              cref="T:System.Web.UI.WebControls.Login" />
+
+            
 
             
 

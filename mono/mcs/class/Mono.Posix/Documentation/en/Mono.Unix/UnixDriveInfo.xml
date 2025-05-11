@@ -18,10 +18,11 @@
   <Docs>
     <summary>Represents information about Unix volumes.</summary>
     <remarks>
-      <para
-        >
+      <para>
         The <see
          cref="T:Mono.Unix.UnixDriveInfo" />
+
+        
 
         
 
@@ -32,11 +33,12 @@
       >
       <list type="bullet">
         <item>
-          <term
-            >
+          <term>
           Total size and free disk space
           (<see
              cref="P:Mono.Unix.UnixDriveInfo.TotalSize" />
+
+            
 
             
 
@@ -46,22 +48,27 @@
 
             
 
+            
+
             ).
         </term
           >
         </item>
         <item>
-          <term
-            >
+          <term>
           Querying of all availble disk drives, 
           <see
              cref="M:Mono.Unix.UnixDriveInfo.GetDrives" />
 
             
 
+            
+
             , 
           visible through <c
             >/etc/fstab</c>
+
+            
 
             
 
@@ -76,10 +83,11 @@
         running on the system or because of other actions being performed
         within the current process.
       </para>
-      <para
-        >
+      <para>
         The only gurantee is that the information provided <i
         >was</i>
+
+        
 
         
 
@@ -89,17 +97,20 @@
 
         
 
+        
+
          an 
         <see
          cref="T:System.InvalidOperationException" />
 
         
 
+        
+
          will be thrown
         when attempting to access the provided information.
         <block
-         subset="none" type="note"
-          >
+         subset="none" type="note">
           To clarify, most properties will attempt to refresh the information
           before returning it so that the information retrieved is as
           up-to-date as possible, but it cannot take everything into
@@ -130,10 +141,11 @@
         <Parameter Name="mountPoint" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="mountPoint"
-          >
+        <param name="mountPoint">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -141,10 +153,11 @@
           get information about.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates a <see
            cref="T:Mono.Unix.UnixDriveInfo" />
+
+          
 
           
 
@@ -158,6 +171,8 @@
 
           
 
+          
+
            isn't a valid mount point.
         </exception
         >
@@ -166,8 +181,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -191,10 +210,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the available free space for the drive.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -203,23 +223,26 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The available free space is the space that normal users are able
             to write to (in the absense of file system quotas which may
             further limit how much disk space users can fill).  The drive may
             have some space reserved for the super-user (<c
-            >root</c>
+            
+>root</c>
+
+            
 
             
 
             ).
           </para
           >
-          <para
-            >
+          <para>
             Use <see
              cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" />
+
+            
 
             
 
@@ -228,8 +251,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total disk space.  
           The volume may not be mounted.
         </exception
@@ -249,21 +271,23 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           Retrieves the file system format of the 
           <paramref
            name="mountPoint" />
 
           
 
+          
+
            volume.
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -292,10 +316,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the drive type.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:Mono.Unix.UnixDriveType" />
+
+          
 
           
 
@@ -303,11 +328,12 @@
           drive this mount point is.
         </value
         >
-        <remarks
-          >
+        <remarks>
           Currently, this always returns 
           <see
            cref="F:Mono.Unix.UnixDriveType.Unknown" />
+
+          
 
           
 
@@ -342,12 +368,15 @@
 
           
 
+          
+
           .</summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:Mono.Unix.UnixDriveInfo" />
+
+          
 
           
 
@@ -357,19 +386,24 @@
 
           
 
+          
+
           .
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This method only <i
             >conceptually</i>
 
             
 
+            
+
              reads <c
             >/etc/fstab</c>
+
+            
 
             
 
@@ -380,9 +414,13 @@
 
             
 
+            
+
              APIs, which may or may 
             not actually read <c
             >/etc/fstab</c>
+
+            
 
             
 
@@ -390,10 +428,11 @@
             documentation).
           </para
           >
-          <para
-            >
+          <para>
             This method does not return <c
             >/etc/fstab</c>
+
+            
 
             
 
@@ -404,16 +443,19 @@
 
             
 
+            
+
              must start with a 
             forward-slash ("/").
           </para
           >
         </remarks>
-        <exception cref="T:System.IO.IOException"
-          >
+        <exception cref="T:System.IO.IOException">
           There was an error calling 
           <see
            cref="M:Mono.Unix.Native.Syscall.setfsent" />
+
+          
 
           
 
@@ -447,10 +489,11 @@
         <Parameter Name="specialFile" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="specialFile"
-          >
+        <param name="specialFile">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -460,13 +503,16 @@
 
           
 
+          
+
           ).
         </param
         >
-        <summary
-          >
+        <summary>
           Creates a <see
            cref="T:Mono.Unix.UnixDriveInfo" />
+
+          
 
           
 
@@ -474,10 +520,11 @@
           containing information about the specified block device name.
         </summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:Mono.Unix.UnixDriveInfo" />
+
+          
 
           
 
@@ -502,10 +549,11 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           Returns a <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -513,10 +561,11 @@
           specified mount point is connected and queryable.
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -528,10 +577,11 @@
           <para>
             This property generates no exceptions.
           </para>
-          <para
-            >
+          <para>
             If this property returns <see
              langword="true" />
+
+            
 
             
 
@@ -539,6 +589,8 @@
             properties should not generate
             <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -562,10 +614,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the maximum filename length.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -575,12 +628,13 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The operating system does not specify an encoding for filenames,
             it just stores the bytes given to it.  Since 
             <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -592,9 +646,13 @@
 
             
 
+            
+
              be directly compared against
             <see
              cref="P:System.String.Length" />
+
+            
 
             
 
@@ -602,8 +660,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the maximum filename length.
           The volume may not be mounted.
         </exception
@@ -624,10 +681,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the mount point.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -659,10 +717,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets information about the mount point directory.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:Mono.Unix.UnixDirectoryInfo" />
+
+          
 
           
 
@@ -710,10 +769,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the total free space on the volume.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -722,23 +782,26 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The total free space includes all the free space on the Unix
             volume, and may include space the normal users are not able to
             write to, either because of disk quotas or because space is
             reserved for the super-user (<c
-            >root</c>
+            
+>root</c>
+
+            
 
             
 
             ).
           </para
           >
-          <para
-            >
+          <para>
             Use <see
              cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
+
+            
 
             
 
@@ -748,8 +811,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total free space.  
           The volume may not be mounted.
         </exception
@@ -770,10 +832,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the total size of the Unix volume.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -782,8 +845,7 @@
         </value
         >
         <remarks></remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total size.  
           The volume may not be mounted.
         </exception
@@ -804,10 +866,11 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the block device name.</summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 

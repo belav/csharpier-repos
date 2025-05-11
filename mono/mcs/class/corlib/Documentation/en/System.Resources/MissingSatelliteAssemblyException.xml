@@ -38,8 +38,12 @@
 
         
 
+        
+
          is thrown if the resource manager tries to retrieve but cannot find a resource for the default culture. However, the .NET Framework will load the resources for an app's default culture from a satellite assembly if the <see
          cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          for the location parameter. When this is the case, the <see
          cref="T:System.Resources.MissingSatelliteAssemblyException" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          attribute is missing. Note that the exception is thrown by a resource retrieval method such as <see
          cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
         , and not when the <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -80,6 +96,8 @@
 
         
 
+        
+
          uses the HRESULT COR_E_MISSINGSATELLITEASSEMBLY, which has the value 0x80131536.</para
       >
       <para>
@@ -87,8 +105,12 @@
 
         
 
+        
+
          uses the default <see
          cref="Overload:System.Object.Equals" />
+
+        
 
         
 
@@ -100,8 +122,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Resources.MissingSatelliteAssemblyException.#ctor" />
+
+        
 
         
 
@@ -111,6 +137,8 @@
         <para
           >You should always use the <see
            cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+
+          
 
           
 
@@ -143,6 +171,8 @@
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Resources.MissingSatelliteAssemblyException" />
+
+            
 
             
 
@@ -182,6 +212,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -193,6 +225,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Resources.MissingSatelliteAssemblyException" />
+
+            
 
             
 
@@ -225,6 +259,8 @@
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Resources.MissingSatelliteAssemblyException" />
+
+            
 
             
 
@@ -264,6 +300,8 @@
 
                   
 
+                  
+
                    string. </para
                 >
               </description>
@@ -278,11 +316,15 @@
 
             
 
+            
+
              class with the specified error message. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +364,8 @@
 
             
 
+            
+
              class from serialized data. </para
           >
         </summary>
@@ -330,10 +374,14 @@
 
           
 
+          
+
           The object that holds the serialized object data.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -369,8 +417,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -379,11 +431,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Resources.MissingSatelliteAssemblyException" />
+
+            
 
             
 
@@ -430,11 +486,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,8 +505,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -482,6 +546,8 @@
 
             
 
+            
+
              class.</para
           >
           <list type="table">
@@ -525,6 +591,8 @@
 
             
 
+            
+
              class with a specified error message and the name of a neutral culture. </para
           >
         </summary>
@@ -533,10 +601,14 @@
 
           
 
+          
+
           The error message that explains the reason for the exception.</param
         >
         <param name="cultureName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -566,10 +638,14 @@
 
             
 
+            
+
              attribute. For a list of culture names, see the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
+
+            
 
             
 

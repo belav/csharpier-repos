@@ -72,6 +72,8 @@
 
           
 
+          
+
            class.</para
         >
       </block>
@@ -162,8 +164,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+
+            
 
             
 
@@ -172,8 +178,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+            
 
             
 
@@ -182,8 +192,12 @@
 
             
 
+            
+
              matches the type of an instance in <see
              cref="P:System.ServiceModel.Channels.BindingContext.BindingParameters" />
+
+            
 
             
 
@@ -195,13 +209,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.ServiceModel.Channels.IChannelListener" />
 
             
 
+            
+
             , and <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -216,6 +236,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -227,6 +249,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -235,8 +259,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -244,6 +272,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,6 +300,8 @@
           <para
             >If false, the sending channel applies the <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -300,6 +332,8 @@
           <para
             >With buffer pools, you can take a buffer from the pool, use it, and return it to the pool once you are done. Thus the overhead in creating and destroying buffers is avoided. The downside is that there is an increase in memory usage because your buffers are not getting garbage collected. If the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />
+
+            
 
             
 

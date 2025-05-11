@@ -39,6 +39,8 @@
 
         
 
+        
+
          can represent a for loop or while loop.</para
       >
       <para
@@ -47,8 +49,12 @@
 
         
 
+        
+
          property specifies the statement to execute before the first loop iteration. The <see
          cref="P:System.CodeDom.CodeIterationStatement.TestExpression" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          property specifies the statement to execute at the end of each loop iteration. The <see
          cref="P:System.CodeDom.CodeIterationStatement.Statements" />
+
+        
 
         
 
@@ -92,6 +102,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeIterationStatement" />
+
+            
 
             
 
@@ -138,6 +150,8 @@
 
             
 
+            
+
              class using the specified parameters.</para
           >
         </summary>
@@ -146,8 +160,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -158,8 +176,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -170,8 +192,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -182,8 +208,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -251,8 +281,12 @@
 
             
 
+            
+
              that contains a <see
              cref="T:System.CodeDom.CodeSnippetExpression" />
+
+            
 
             
 

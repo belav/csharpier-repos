@@ -6,14 +6,18 @@
 
     
 
+    
+
      and <hyperlink
     >14.6.5</hyperlink>
 
     
 
+    
+
     ) can be applied to pointer variables of all types except void*. Thus, for every pointer type T*, the following operators are implicitly defined: <code_example
     >
-      <![CDATA[
+<![CDATA[
 T* operator ++(T* x);  
 T* operator --(T* x);  
 ]]>
@@ -22,6 +26,8 @@ T* operator --(T* x);
   <paragraph
     >The operators produce the same results as x+1 and x-1, respectively (<hyperlink
     >25.5.6</hyperlink>
+
+    
 
     
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          is thrown when you invoke the following methods or properties when you are trying to change the value of a read-only column.</para
       >
       <list type="bullet">
@@ -62,6 +64,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -88,11 +92,15 @@
 
             
 
+            
+
              class with the specified string.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -125,6 +133,8 @@
 
             
 
+            
+
              class with serialization information.</para
           >
         </summary>
@@ -133,10 +143,14 @@
 
           
 
+          
+
           The data that is required to serialize or deserialize an object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -172,11 +186,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

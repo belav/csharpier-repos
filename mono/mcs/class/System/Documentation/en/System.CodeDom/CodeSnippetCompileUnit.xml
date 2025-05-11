@@ -38,11 +38,15 @@
 
         
 
+        
+
          can represent a literal block of code that is included directly in the source without modification.</para
       >
       <para
         >A <see
          cref="T:System.CodeDom.CodeSnippetCompileUnit" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          property contains the literal code fragment as a string. The <see
          cref="P:System.CodeDom.CodeSnippetCompileUnit.LinePragma" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -97,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeSnippetCompileUnit" />
+
+            
 
             
 
@@ -131,11 +143,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

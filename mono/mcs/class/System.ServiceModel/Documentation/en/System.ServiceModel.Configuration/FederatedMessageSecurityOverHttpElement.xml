@@ -48,6 +48,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -288,8 +290,12 @@
 
             
 
+            
+
              element, or by using the <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -297,6 +303,8 @@
              type="text/html">
               <a href="a4c8f52c-5b30-45c4-a545-63244aba82be">Specifying the Identity</a>
             </format>
+
+            
 
             
 

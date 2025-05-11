@@ -22,8 +22,12 @@
 
         
 
+        
+
         , the base implementation for writing custom channels, and the <see
          cref="T:System.ServiceModel.Channels.ChannelManagerBase" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.ChannelListenerBase" />
+
+        
 
         
 
@@ -42,13 +50,19 @@
 
         
 
+        
+
          class and then inherited from there by <see
          cref="T:System.ServiceModel.Channels.CustomBinding" />
 
         
 
+        
+
          and the system-provided bindings, such as <see
          cref="T:System.ServiceModel.BasicHttpBinding" />
+
+        
 
         
 
@@ -58,6 +72,8 @@
       <para
         >When using the service model, on the other hand, you program against services and contracts, and timeouts are more in the background. They are controlled by the infrastructure machinery which flows timeouts from place to place on your behalf. <see
          cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
+
+        
 
         
 

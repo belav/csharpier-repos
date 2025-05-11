@@ -26,8 +26,12 @@
 
         
 
+        
+
          class provides support for the Authorization, ProxyAuthorization, WWW-Authenticate, and Proxy-Authenticate HTTP header values as defined in <see
          cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+
+        
 
         
 
@@ -63,11 +67,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="scheme">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -102,6 +110,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -110,10 +120,14 @@
 
           
 
+          
+
           The scheme to use for authorization.</param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,8 +161,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+
+            
 
             
 
@@ -163,6 +181,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -171,11 +191,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -207,6 +231,8 @@
 
             
 
+            
+
               method is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -218,6 +244,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -226,6 +254,8 @@
           <para
             >Returns <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -283,6 +313,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -294,6 +326,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -302,11 +336,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,6 +395,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -365,6 +405,8 @@
           <para
             >Returns <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -398,6 +440,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -406,6 +450,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

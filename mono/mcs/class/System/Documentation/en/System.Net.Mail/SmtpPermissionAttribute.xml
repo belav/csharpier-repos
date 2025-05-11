@@ -32,8 +32,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.Mail.SmtpPermissionAttribute" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          class demands an <see
          cref="T:System.Net.Mail.SmtpPermission" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
       <para
         >The <see
          cref="T:System.Net.Mail.SmtpAccess" />
+
+        
 
         
 
@@ -95,6 +105,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -103,8 +115,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -134,8 +150,12 @@
 
             
 
+            
+
              method will throw an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -181,6 +201,8 @@
 
             
 
+            
+
              in an assembly's metadata.</para
           >
         </summary>
@@ -189,6 +211,8 @@
           <para
             >An <see
              cref="T:System.Net.Mail.SmtpPermission" />
+
+            
 
             
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -36,8 +38,12 @@
 
         
 
+        
+
          parameter of the <see
          cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.EnumFormatEtc(System.Runtime.InteropServices.ComTypes.DATADIR)" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
             
 
+            
+
              supply an enumerator for the formats that can be specified in <see
              cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.GetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)" />
+
+            
 
             
 
@@ -102,8 +112,12 @@
 
             
 
+            
+
              supply an enumerator for the formats that can be specified in <see
              cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.SetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@,System.Boolean)" />
+
+            
 
             
 

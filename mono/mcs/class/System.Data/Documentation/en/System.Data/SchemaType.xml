@@ -21,6 +21,8 @@
 
         
 
+        
+
          usually should be set to Mapped, because any established table and column mappings are used.</para
       >
     </remarks>
@@ -29,6 +31,8 @@
       <para
         >Specifies how to handle existing schema mappings when performing a <see
          cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
           <para
             >Apply any existing table mappings to the incoming schema. Configure the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -77,6 +83,8 @@
           <para
             >Ignore any table mappings on the DataAdapter. Configure the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system mutexes. For an overview of these classes, and their relationship to the underlying Windows access control structures, see <see
          cref="T:System.Security.AccessControl.MutexSecurity" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
           
 
+          
+
            object represents a local mutex, access control is irrelevant.</para
         >
       </block>
@@ -50,8 +56,12 @@
 
         
 
+        
+
          method to get a <see
          cref="T:System.Security.AccessControl.MutexSecurity" />
+
+        
 
         
 
@@ -60,8 +70,12 @@
 
         
 
+        
+
          method to obtain a collection of <see
          cref="T:System.Security.AccessControl.MutexAccessRule" />
+
+        
 
         
 
@@ -69,6 +83,8 @@
       >
       <para>
         <see cref="T:System.Security.AccessControl.MutexAccessRule" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          objects to specify access rights to allow or deny to a user or group. A <see
          cref="T:System.Security.AccessControl.MutexAccessRule" />
+
+        
 
         
 
@@ -96,8 +116,12 @@
 
         
 
+        
+
          method to get the <see
          cref="T:System.Security.AccessControl.MutexSecurity" />
+
+        
 
         
 
@@ -106,8 +130,12 @@
 
         
 
+        
+
          object by using its methods to add the rule, and then use the <see
          cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
+
+        
 
         
 
@@ -120,8 +148,12 @@
 
           
 
+          
+
            object do not affect the access levels of the named mutex until you call the <see
            cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
+
+          
 
           
 
@@ -133,8 +165,12 @@
 
         
 
+        
+
          objects are immutable. Security for a mutex is modified using the methods of the <see
          cref="T:System.Security.AccessControl.MutexSecurity" />
+
+        
 
         
 
@@ -179,8 +215,12 @@
 
             
 
+            
+
              (by calling the <see
              cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+            
 
             
 
@@ -189,8 +229,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            
 
             
 
@@ -199,13 +243,19 @@
 
             
 
+            
+
              access. To release the mutex, by calling the <see
              cref="M:System.Threading.Mutex.ReleaseMutex" />
 
             
 
+            
+
              method, the user must have <see
              cref="F:System.Security.AccessControl.MutexRights.Modify" />
+
+            
 
             
 
@@ -220,6 +270,8 @@
 
             
 
+            
+
              class, specifying the user or group the rule applies to, the access rights, and whether the specified access rights are allowed or denied.</para
           >
         </summary>
@@ -228,8 +280,12 @@
 
           
 
+          
+
           The user or group the rule applies to. Must be of type <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -238,8 +294,12 @@
 
           
 
+          
+
            that can be converted to type <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -250,8 +310,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.MutexRights" />
+
+          
 
           
 
@@ -262,8 +326,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -300,8 +368,12 @@
 
             
 
+            
+
              (by calling the <see
              cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+            
 
             
 
@@ -310,8 +382,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            
 
             
 
@@ -320,13 +396,19 @@
 
             
 
+            
+
              access. To release the mutex, by calling the <see
              cref="M:System.Threading.Mutex.ReleaseMutex" />
 
             
 
+            
+
              methods, the user must have <see
              cref="F:System.Security.AccessControl.MutexRights.Modify" />
+
+            
 
             
 
@@ -338,8 +420,12 @@
 
             
 
+            
+
              object, by passing <paramref
              name="identity" />
+
+            
 
             
 
@@ -348,13 +434,19 @@
 
             
 
+            
+
              constructor, and passing the newly created <see
              cref="T:System.Security.Principal.NTAccount" />
 
             
 
+            
+
              object to the <see
              cref="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)" />
+
+            
 
             
 
@@ -369,11 +461,15 @@
 
             
 
+            
+
              class, specifying the name of the user or group the rule applies to, the access rights, and whether the specified access rights are allowed or denied.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,8 +480,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.MutexRights" />
+
+          
 
           
 
@@ -396,8 +496,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -432,8 +536,12 @@
 
             
 
+            
+
              objects are immutable. You can create a new access rule representing a different user, different rights, or a different <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 

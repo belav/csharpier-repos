@@ -21,6 +21,8 @@
 
         
 
+        
+
          object is used at design time to select and edit a URL for an XML schema definition file (.xsd), and to assign the URL to a control property.</para
       >
       <para
@@ -29,8 +31,12 @@
 
         
 
+        
+
          attribute to associate the <see
          cref="T:System.Web.UI.Design.XsdSchemaFileEditor" />
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
          method. The <see
          cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          method, which in turn displays a user interface for selecting the URL, and then returns the URL that is selected by the user. The <see
          cref="Overload:System.Web.UI.Design.UrlEditor.GetEditStyle" />
+
+        
 
         
 
@@ -62,8 +76,12 @@
 
         
 
+        
+
          to define a custom editor for an XML schema URL property. For example, a derived class can override the <see
          cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+
+        
 
         
 
@@ -72,13 +90,19 @@
 
         
 
+        
+
          method with a custom <see
          cref="P:System.Web.UI.Design.XsdSchemaFileEditor.Filter" />
 
         
 
+        
+
          or <see
          cref="P:System.Web.UI.Design.XsdSchemaFileEditor.Caption" />
+
+        
 
         
 
@@ -108,6 +132,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -132,13 +158,19 @@
 
             
 
+            
+
              property is used by the <see
              cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
             
 
+            
+
              method when calling the <see
              cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+
+            
 
             
 
@@ -170,13 +202,19 @@
 
             
 
+            
+
              property is used by the <see
              cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
             
 
+            
+
              method when calling the <see
              cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+
+            
 
             
 
@@ -188,6 +226,8 @@
 
             
 
+            
+
              property default value indicates two URL filters for the dialog box: one for XML schema definition files (*.xsd) and another for all files (*.*).</para
           >
           <para
@@ -196,8 +236,12 @@
 
             
 
+            
+
              class, and then override the <see
              cref="P:System.Web.UI.Design.XsdSchemaFileEditor.Filter" />
+
+            
 
             
 

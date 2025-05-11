@@ -38,8 +38,12 @@
 
         
 
+        
+
          attribute can only be applied once in a class to a field or property that returns an <see
          cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
       <para
         >The <see
          cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
 
         
 
+        
+
         , the association between the prefix and the namespace is lost.</para
       >
       <para
@@ -77,8 +85,12 @@
 
         
 
+        
+
          object and apply the <see
          cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+
+        
 
         
 
@@ -113,6 +125,8 @@
 
         
 
+        
+
          object that contains all namespace prefix definitions.</para
       >
       <para
@@ -121,8 +135,12 @@
 
         
 
+        
+
          object using the <see
          cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" />
+
+        
 
         
 
@@ -186,6 +204,8 @@
 
         
 
+        
+
          to the class that represents the root element.</para
       >
       <code> &lt;?xml version="1.0"?&gt;
@@ -222,8 +242,12 @@
 
             
 
+            
+
              can only be applied to a target that returns an <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -235,6 +259,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+
+            
 
             
 

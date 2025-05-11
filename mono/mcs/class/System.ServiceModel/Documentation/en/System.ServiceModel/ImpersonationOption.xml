@@ -21,11 +21,15 @@
 
         
 
+        
+
          enumeration to control impersonation in indigo1 applications.</para
       >
       <para
         >This setting interacts with a configuration property on <see
          cref="P:System.ServiceModel.Configuration.ServiceAuthorizationElement.ImpersonateCallerForAllOperations" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
             
 
+            
+
              is equal to true.</para
           >
         </summary>
@@ -84,6 +90,8 @@
           <para
             >Impersonation is not performed. If <see
              cref="P:System.ServiceModel.Configuration.ServiceAuthorizationElement.ImpersonateCallerForAllOperations" />
+
+            
 
             
 

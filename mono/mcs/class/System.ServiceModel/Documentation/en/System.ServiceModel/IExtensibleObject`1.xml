@@ -30,11 +30,15 @@
 
         
 
+        
+
          to enable aggregation of extensions.</para
       >
       <para
         >For example, if you are implementing a TreeNode class and want to allow external code to add annotations and methods to some instances of TreeNode, you can have TreeNode implement IExtensibleObject&lt;TreeNode&gt;. This enables code that uses TreeNode to add objects that implement IExtensibleObject&lt;TreeNode&gt; to the <see
          cref="P:System.ServiceModel.IExtensibleObject`1.Extensions" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
          type="text/html">
           <a href="bc88cefc-31fb-428e-9447-6d20a7d452af">Extensible Objects</a>
         </format>
+
+        
 
         
 

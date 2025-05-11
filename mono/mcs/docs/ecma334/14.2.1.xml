@@ -6,6 +6,8 @@
 
     
 
+    
+
      The precedence of an operator is established by the definition of its associated grammar production. <note
 
       >[Note: For example, an <non_terminal
@@ -13,8 +15,12 @@
 
       
 
+      
+
        consists of a sequence of <non_terminal
        where="14.7">multiplicative-expression</non_terminal>
+
+      
 
       
 
@@ -41,6 +47,8 @@
     <table_line>14.11 Conditional OR || </table_line>
     <table_line>14.12 Conditional ?: </table_line>
     <table_line>14.13 Assignment = *= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |= </table_line>
+
+    
 
     
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          attribute enables the target framework provider to trace a loaded type back to the original assembly it was forwarded from.</para
       >
     </remarks>
@@ -38,6 +40,8 @@
       <para
         >Specifies a source <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -80,8 +86,12 @@
 
           
 
+          
+
           The source <see
            cref="T:System.Type" />
+
+          
 
           
 

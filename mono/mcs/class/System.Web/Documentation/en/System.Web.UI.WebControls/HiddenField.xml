@@ -49,11 +49,15 @@
 
         
 
+        
+
          control is used to store a value that needs to be persisted across posts to the server. It is rendered as an &lt;input type= "hidden"/&gt; element.</para
       >
       <para
         >Normally view state, session state, and cookies are used to maintain the state of a Web Forms page. However, if these methods are disabled or are not available, you can use the <see
          cref="T:System.Web.UI.WebControls.HiddenField" />
+
+        
 
         
 
@@ -65,8 +69,12 @@
 
         
 
+        
+
          control, use the <see
          cref="P:System.Web.UI.WebControls.HiddenField.Value" />
+
+        
 
         
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          control changes between posts to the server by creating an event handler for the <see
          cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
+
+        
 
         
 
@@ -95,9 +107,13 @@
 
         
 
+        
+
         "
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -115,6 +131,8 @@
     Value="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -142,6 +160,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -150,6 +170,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
+
+            
 
             
 
@@ -181,13 +203,19 @@
 
             
 
+            
+
              method is normally used to create a <see
              cref="T:System.Web.UI.ControlCollection" />
 
             
 
+            
+
              object for storing the child controls of a Web Server control. In this implementation of the method, an <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -202,6 +230,8 @@
 
             
 
+            
+
              object used to indicate that child controls are not allowed.</para
           >
         </summary>
@@ -210,6 +240,8 @@
           <para
             >Always returns an <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -238,8 +270,12 @@
 
             
 
+            
+
              control does not support themes. This property has been overridden to always return false. If you attempt to set this property, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -272,8 +308,12 @@
 
             
 
+            
+
              control is not supported. A <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -315,6 +355,8 @@
 
             
 
+            
+
              on those controls.</para
           >
         </remarks>
@@ -323,6 +365,8 @@
           <para
             >Processes postback data for a <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
+
+            
 
             
 
@@ -337,6 +381,8 @@
 
             
 
+            
+
              control's state changes as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -345,10 +391,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,6 +431,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -389,8 +441,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -417,8 +473,12 @@
 
             
 
+            
+
              event is raised when the value of the <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
+
+            
 
             
 
@@ -432,11 +492,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.HiddenField.OnValueChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -451,6 +515,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -459,8 +525,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -488,13 +558,19 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
+            
+
              class to notify the ASP.NET application that the state of the <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
+
+            
 
             
 
@@ -506,6 +582,8 @@
           <para
             >Notifies the ASP.NET application that the state of the <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
+
+            
 
             
 
@@ -541,8 +619,12 @@
 
             
 
+            
+
              method is used to render the server control content to the client's browser using the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -557,6 +639,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -565,8 +649,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -591,8 +679,12 @@
 
             
 
+            
+
              control does not support themes. This property has been overridden to always return an empty string. If you attempt to set this property, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -636,8 +728,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -649,6 +745,8 @@
           <para
             >For a description of this member, see the <see
              cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -664,10 +762,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -697,8 +799,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -710,6 +816,8 @@
           <para
             >For a description of this member, see the <see
              cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -740,8 +848,12 @@
 
             
 
+            
+
              property to specify or determine the value of the <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
+
+            
 
             
 
@@ -773,8 +885,12 @@
 
             
 
+            
+
              event is raised when the value of the <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
+
+            
 
             
 
@@ -788,6 +904,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -796,6 +914,8 @@
           <para
             >Occurs when the value of the <see
              cref="T:System.Web.UI.WebControls.HiddenField" />
+
+            
 
             
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration is used to represent the different node types that are available in the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -72,13 +76,19 @@
 
         
 
+        
+
          enumeration is a flag enumeration, which allows you to combine values through bitwise operations. For example, to represent the parent and leaf nodes, you can perform a bitwise OR operation on the <see
          cref="F:System.Web.UI.WebControls.TreeNodeTypes.Parent" />
 
         
 
+        
+
          and <see
          cref="F:System.Web.UI.WebControls.TreeNodeTypes.Leaf" />
+
+        
 
         
 
@@ -91,8 +101,12 @@
 
           
 
+          
+
            property uses the <see
            cref="T:System.Web.UI.WebControls.TreeNodeTypes" />
+
+          
 
           
 
@@ -101,13 +115,19 @@
 
           
 
+          
+
            control. When it is set to a value other than the <see
            cref="F:System.Web.UI.WebControls.TreeNodeTypes.None" />
 
           
 
+          
+
            value, check boxes are displayed next to the specified node type, which allows users to select multiple items from the <see
            cref="T:System.Web.UI.WebControls.TreeView" />
+
+          
 
           
 
@@ -120,6 +140,8 @@
       <para
         >Represents the different node types (leaf, parent, and root) in the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 

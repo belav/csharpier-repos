@@ -15,6 +15,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -40,6 +42,8 @@
 
           
 
+          
+
            and validates the reader against the target grammar. </summary
         >
         <returns
@@ -47,10 +51,11 @@
            cref="T:System.Boolean" />
         </returns>
         <remarks>
-          <para
-            >
+          <para>
 		When the XML node consumed by this method was invalid in the context of the target pattern, <see
              cref="T:Commons.Xml.Relaxng.RelaxngException" />
+
+            
 
             
 
@@ -100,6 +105,8 @@
 
           
 
+          
+
            that is being validated.</param
         >
         <param name="grammarXml">To be added.</param>
@@ -128,6 +135,8 @@
 
           
 
+          
+
            that is being validated.</param
         >
         <param name="grammarXml"
@@ -136,11 +145,15 @@
 
           
 
+          
+
            that contains the RELAX NG pattern that is being compiled and being used to validate.</param
         >
         <param name="provider"
           >a <see
            cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+
+          
 
           
 
@@ -168,11 +181,15 @@
 
           
 
+          
+
            that is being validated.</param
         >
         <param name="pattern"
           >a <see
            cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+
+          
 
           
 

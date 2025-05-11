@@ -29,6 +29,8 @@
 
         
 
+        
+
          class defines properties that are common to all part controls and enable them to have a modular and consistent appearance on a Web page. These common properties include a title, a description, and characteristics of the chrome or frame that surrounds a part control. </para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          property specifies a title for the part control. The <see
          cref="P:System.Web.UI.WebControls.WebParts.Part.Description" />
+
+        
 
         
 
@@ -47,13 +53,19 @@
 
         
 
+        
+
          property dictates what kind of border is rendered around a part control, while the <see
          cref="P:System.Web.UI.WebControls.WebParts.Part.ChromeState" />
 
         
 
+        
+
          property indicates whether a part control is rendered normally, or minimized. The border of a part control is affected by the properties of the zone that contains it; for example, the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebZone.PartChromeType" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          control, which renders content inside a corresponding zone. Another type is the <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+        
 
         
 
@@ -75,8 +91,12 @@
 
         
 
+        
+
          controls. A third type of part control is the <see
          cref="T:System.Web.UI.WebControls.WebParts.CatalogPart" />
+
+        
 
         
 
@@ -85,11 +105,15 @@
 
         
 
+        
+
          controls that users can add to or remove from a Web page.</para
       >
       <para
         >Part controls are contained in zones, all of which derive from the abstract <see
          cref="T:System.Web.UI.WebControls.WebParts.WebZone" />
+
+        
 
         
 
@@ -153,8 +177,12 @@
 
         
 
+        
+
          class handle the inherited, UI-oriented properties differently. <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -163,8 +191,12 @@
 
         
 
+        
+
          class documentation), which enables the values of those properties to be saved for future browser sessions, a feature known as personalization. For example, if you programmatically enable a user to update the value of a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -173,8 +205,12 @@
 
         
 
+        
+
          property at run time, that value will be personalized (assuming that personalization is enabled, which is the default). Several UI properties that <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -183,8 +219,12 @@
 
         
 
+        
+
          class, and from the <see
          cref="T:System.Web.UI.WebControls.WebControl" />
+
+        
 
         
 
@@ -196,8 +236,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.WebParts.CatalogPart" />
+
+        
 
         
 
@@ -206,8 +250,12 @@
 
         
 
+        
+
          control's <see
          cref="P:System.Web.UI.WebControls.WebParts.PropertyGridEditorPart.Title" />
+
+        
 
         
 
@@ -219,8 +267,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.WebParts.CatalogPart" />
+
+        
 
         
 
@@ -229,13 +281,19 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.WebParts.CatalogPart" />
 
         
 
+        
+
          control is created (for example, in the method that handles the control's <see
          cref="E:System.Web.UI.Control.Init" />
+
+        
 
         
 
@@ -265,6 +323,8 @@
           <para
             >A part control's <see
              cref="P:System.Web.UI.WebControls.WebParts.Part.ChromeState" />
+
+            
 
             
 
@@ -300,8 +360,12 @@
 
             
 
+            
+
              property determines what kind of border surrounds the control. Options include showing a title only, a border only, a title and border, neither, or the default option, which simply uses the value of the <see
              cref="P:System.Web.UI.WebControls.WebParts.WebZone.PartChromeType" />
+
+            
 
             
 
@@ -337,8 +401,12 @@
 
             
 
+            
+
              object. Any HTML tags or text strings that are not processed on the server are treated as <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -350,8 +418,12 @@
 
             
 
+            
+
              property allows you programmatic access to the instance of the <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -363,6 +435,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -407,8 +481,12 @@
 
             
 
+            
+
              property is typically a string that is used in catalogs that provide lists of part controls, and as a ToolTip in the part control's title bar. The content of the <see
              cref="P:System.Web.UI.WebControls.WebParts.Part.Description" />
+
+            
 
             
 
@@ -417,8 +495,12 @@
 
             
 
+            
+
              property, followed by a hyphen, followed by the <see
              cref="P:System.Web.UI.WebControls.WebParts.Part.Description" />
+
+            
 
             
 
@@ -430,12 +512,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -489,13 +575,19 @@
 
             
 
+            
+
              property. The title text also appears as part of the ToolTip text when you position your mouse pointer over the title bar of a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
+            
+
              control or other server control that appears in a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" />
+
+            
 
             
 
@@ -507,6 +599,8 @@
 
             
 
+            
+
              property of the zone that contains the part control.</para
           >
           <para
@@ -515,8 +609,12 @@
 
             
 
+            
+
             . Also, it is possible to provide a standard subtitle that is appended to the title string. For details, see <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPart.Subtitle" />
+
+            
 
             
 
@@ -528,12 +626,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 

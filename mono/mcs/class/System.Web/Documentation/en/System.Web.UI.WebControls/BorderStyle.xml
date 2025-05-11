@@ -20,6 +20,8 @@
 
         
 
+        
+
          enumeration represents the different border style options for a control.</para
       >
       <para
@@ -28,8 +30,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.WebControl" />
+
+        
 
         
 
@@ -39,6 +45,8 @@
         <para
           >When using the <see
            cref="F:System.Web.UI.WebControls.BorderStyle.Double" />
+
+          
 
           
 

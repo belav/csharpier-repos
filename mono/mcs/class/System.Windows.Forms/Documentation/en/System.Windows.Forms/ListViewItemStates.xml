@@ -23,8 +23,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+        
 
         
 
@@ -46,6 +54,8 @@
       <para
         >Defines constants that represent the possible states of a <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 

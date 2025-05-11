@@ -32,8 +32,7 @@
 As you can see, the bottom row is always [0 0 1]. The Cairo.Matrix implementation deals with the top 6 values only.
 </para>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 Cairo.Graphics g;
 Matrix matrix;
 
@@ -169,6 +168,8 @@ if (cs == Cairo.Status.Success) {
         <returns
           >A hash as an <see
            cref="t:System.Int32" />
+
+          
 
           
 
@@ -319,8 +320,12 @@ if (cs == Cairo.Status.Success) {
 
           
 
+          
+
           .Success. Otherwise, return <see
            cref="T:Cairo.Status" />
+
+          
 
           
 
@@ -532,6 +537,8 @@ if (cs == Cairo.Status.Success) {
               <term>dy2 = dx1 * b + dy1 * d;</term>
             </item>
           </list>
+
+          
 
           
 

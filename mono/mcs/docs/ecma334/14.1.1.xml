@@ -9,6 +9,8 @@
 
         
 
+        
+
         ) before its value can be obtained, or otherwise a compile-time error occurs. </list_item
       >
       <list_item
@@ -17,11 +19,15 @@
 
         
 
+        
+
         ) is performed, and the result of the invocation becomes the value of the property access expression. </list_item
       >
       <list_item
         > The value of an indexer access expression is obtained by invoking the get-accessor of the indexer. If the indexer has no get-accessor, a compile-time error occurs. Otherwise, a function member invocation (<hyperlink
         >14.4.3</hyperlink>
+
+        
 
         
 

@@ -61,11 +61,9 @@
       <first-name bk:x="y">Jane</first-name>
       <last-name>Austen</last-name>
     </author>
-    <price
-      >19.95
+    <price>19.95
 
-      <!-- another comment -->
-    </price>
+      <!-- another comment --></price>
   </book>
   <book genre="novel" publicationdate="1982" bk:ISBN="1-861001-45-3">
     <title xmlns:a="urn:a1">7. Sense and Sensibility</title>
@@ -76,11 +74,9 @@
       </first-name>
       <last-name>Austen</last-name>
     </author>
-    <price
-      >19.95
+    <price>19.95
 
-      <!-- another comment -->
-    </price>
+      <!-- another comment --></price>
   </book>
   <book genre="novel" publicationdate="1982" bk:ISBN="1-861001-45-3">
     <a:title xmlns:a="urn:a1">8. Sense and Sensibility</a:title>
@@ -91,11 +87,9 @@
       </first-name>
       <last-name>Austen</last-name>
     </author>
-    <price
-      >19.95
+    <price>19.95
 
-      <!-- another comment -->
-    </price>
+      <!-- another comment --></price>
   </book>
   <book genre="novel" publicationdate="1982" bk:ISBN="1-861001-45-3">
     <title xmlns:a="urn:a1">7. Sense and Sensibility</title>
@@ -106,10 +100,8 @@
       </a:first-name>
       <last-name>Austen</last-name>
     </author>
-    <price
-      >19.95
+    <price>19.95
 
-      <!-- another comment -->
-    </price>
+      <!-- another comment --></price>
   </book>
 </bookstore>

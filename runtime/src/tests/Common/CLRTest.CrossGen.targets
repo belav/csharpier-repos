@@ -41,7 +41,7 @@ WARNING:   When setting properties based on their current state (for example:
       <CrossgenBashScript
         Condition="'$(CLRTestKind)' == 'BuildAndRun' and '$(CrossGenTest)' != 'false'"
       >
-        <![CDATA[
+<![CDATA[
 
 if [ "$(AlwaysUseCrossGen2)" == "true" ]; then
     export RunCrossGen2=1
@@ -181,7 +181,7 @@ fi
       <CrossgenBatchScript
         Condition="'$(CLRTestKind)' == 'BuildAndRun' and '$(CrossGenTest)' != 'false'"
       >
-        <![CDATA[
+<![CDATA[
 
 if /i "$(AlwaysUseCrossGen2)" == "true" (
     set RunCrossGen2=1

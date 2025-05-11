@@ -49,6 +49,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -57,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
+
+            
 
             
 
@@ -138,8 +142,12 @@
 
             
 
+            
+
              state. You can check the state of a connection by calling <see
              cref="P:System.Net.NetworkInformation.TcpConnectionInformation.State" />
+
+            
 
             
 
@@ -156,6 +164,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.TcpConnectionInformation" />
+
+            
 
             
 
@@ -192,6 +202,8 @@
 
             
 
+            
+
              state. </para
           >
           <para>The TCP protocol is defined in IETF RFC 793. Note that the objects returned by this method reflect the connections as of the time the array is created. This information is not updated dynamically.</para>
@@ -205,6 +217,8 @@
           <para
             >A <see
              cref="T:System.Net.IPEndPoint" />
+
+            
 
             
 
@@ -250,6 +264,8 @@
 
             
 
+            
+
              array that contains objects that describe the UDP listeners, or an empty array if no UDP listeners are detected.</para
           >
         </returns>
@@ -284,8 +300,12 @@
 
             
 
+            
+
              class documentation. Note that the <see
              cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
+
+            
 
             
 
@@ -301,6 +321,8 @@
           <para
             >An <see
              cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
+
+            
 
             
 
@@ -339,8 +361,12 @@
 
             
 
+            
+
              class documentation. Note that the <see
              cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
+
+            
 
             
 
@@ -356,6 +382,8 @@
           <para
             >An <see
              cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
+
+            
 
             
 
@@ -392,6 +420,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -404,6 +434,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
+
+            
 
             
 
@@ -441,8 +473,12 @@
 
             
 
+            
+
              class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
              cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+
+            
 
             
 
@@ -458,6 +494,8 @@
           <para
             >An <see
              cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+
+            
 
             
 
@@ -495,8 +533,12 @@
 
             
 
+            
+
              class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
              cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+
+            
 
             
 
@@ -512,6 +554,8 @@
           <para
             >An <see
              cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+
+            
 
             
 
@@ -549,8 +593,12 @@
 
             
 
+            
+
              class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
              cref="T:System.Net.NetworkInformation.TcpStatistics" />
+
+            
 
             
 
@@ -566,6 +614,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.TcpStatistics" />
+
+            
 
             
 
@@ -603,8 +653,12 @@
 
             
 
+            
+
              class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
              cref="T:System.Net.NetworkInformation.TcpStatistics" />
+
+            
 
             
 
@@ -620,6 +674,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.TcpStatistics" />
+
+            
 
             
 
@@ -657,8 +713,12 @@
 
             
 
+            
+
              class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
              cref="T:System.Net.NetworkInformation.UdpStatistics" />
+
+            
 
             
 
@@ -674,6 +734,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.UdpStatistics" />
+
+            
 
             
 
@@ -711,8 +773,12 @@
 
             
 
+            
+
              class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
              cref="T:System.Net.NetworkInformation.UdpStatistics" />
+
+            
 
             
 
@@ -728,6 +794,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.UdpStatistics" />
+
+            
 
             
 
@@ -787,6 +855,8 @@
 
             
 
+            
+
              value that specifies whether the local computer is acting as a Windows Internet Name Service (WINS) proxy.</para
           >
         </summary>
@@ -817,6 +887,8 @@
           <para
             >The node type determines the way in which NetBIOS names are resolved to IP addresses. For additional information, see the <see
              cref="T:System.Net.NetworkInformation.NetBiosNodeType" />
+
+            
 
             
 

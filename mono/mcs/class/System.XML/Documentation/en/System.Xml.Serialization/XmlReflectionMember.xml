@@ -26,6 +26,8 @@
 
         
 
+        
+
          class is not used directly. Instead, it is used: </para
       >
       <list type="bullet">
@@ -33,6 +35,8 @@
           <para
             >To initialize <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -46,13 +50,19 @@
 
             
 
+            
+
              class while <see
              cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
+            
+
              creates <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -63,6 +73,8 @@
       <para
         >During reflection of a SOAP Web service method, arrays of <see
          cref="T:System.Xml.Serialization.XmlReflectionMember" />
+
+        
 
         
 
@@ -88,8 +100,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+
+        
 
         
 
@@ -98,13 +114,19 @@
 
         
 
+        
+
          array into an <see
          cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
         
 
+        
+
          that contains an <see
          cref="T:System.Xml.Serialization.XmlMemberMapping" />
+
+        
 
         
 
@@ -141,6 +163,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -169,6 +193,8 @@
 
             
 
+            
+
              class and its properties directly.</para
           >
         </remarks>
@@ -177,6 +203,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Xml.Serialization.XmlReflectionMember" />
+
+            
 
             
 
@@ -209,6 +237,8 @@
 
             
 
+            
+
              class and its properties directly.</para
           >
           <para
@@ -217,8 +247,12 @@
 
             
 
+            
+
              class for the cases when a member corresponds to a &lt;part&gt; element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method (indicated by the <see
              cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+
+            
 
             
 
@@ -227,6 +261,8 @@
           <para
             >When a Web service method is being reflected, the return type's <see
              cref="P:System.Xml.Serialization.XmlReflectionMember.MemberName" />
+
+            
 
             
 
@@ -263,6 +299,8 @@
 
             
 
+            
+
              class and its properties directly.</para
           >
           <para
@@ -271,8 +309,12 @@
 
             
 
+            
+
              class for the cases when a member corresponds to a part element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method (indicated by the <see
              cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+
+            
 
             
 
@@ -308,8 +350,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+            
 
             
 
@@ -318,8 +364,12 @@
 
             
 
+            
+
              nor <see
              cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
+
+            
 
             
 
@@ -328,6 +378,8 @@
           <para
             >You do not need to use the <see
              cref="T:System.Xml.Serialization.XmlReflectionMember" />
+
+            
 
             
 
@@ -370,6 +422,8 @@
 
             
 
+            
+
              class and its properties directly.</para
           >
         </remarks>
@@ -378,6 +432,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
+
+            
 
             
 
@@ -416,6 +472,8 @@
 
             
 
+            
+
              class and its properties directly.</para
           >
         </remarks>
@@ -427,8 +485,12 @@
 
             
 
+            
+
              with the collection of <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

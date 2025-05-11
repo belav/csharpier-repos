@@ -25,8 +25,12 @@
 
         
 
+        
+
          is passed to the <see
          cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          event is raised when validation is performed on the server. This allows you to perform a custom server-side validation routine on the value of an input control (with a <see
          cref="T:System.Web.UI.WebControls.CustomValidator" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          property. Once your code has determined whether the value is valid, store the results of the validation in the <see
          cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.IsValid" />
+
+        
 
         
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.ServerValidateEventArgs.#ctor(System.String,System.Boolean)" />
+
+        
 
         
 
@@ -73,6 +89,8 @@
          type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
+
+        
 
         
 
@@ -87,8 +105,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.CustomValidator" />
+
+        
 
         
 
@@ -118,11 +140,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" />
+
+            
 
             
 
@@ -150,6 +176,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -162,6 +190,8 @@
                 <para
                   >The value of the <paramref
                    name="isValid" />
+
+                  
 
                   
 
@@ -179,11 +209,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -212,13 +246,19 @@
 
             
 
+            
+
              property to indicate whether the value specified by the <see
              cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" />
 
             
 
+            
+
              property passed validation. This value determines whether the input control associated with the <see
              cref="T:System.Web.UI.WebControls.CustomValidator" />
+
+            
 
             
 
@@ -230,6 +270,8 @@
           <para
             >Gets or sets whether the value specified by the <see
              cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" />
+
+            
 
             
 
@@ -258,8 +300,12 @@
 
             
 
+            
+
              property determine the value to validate in the custom event handler for the <see
              cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" />
+
+            
 
             
 
@@ -271,6 +317,8 @@
           <para
             >Gets the value to validate in the custom event handler for the <see
              cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" />
+
+            
 
             
 

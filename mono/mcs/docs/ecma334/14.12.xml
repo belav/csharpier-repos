@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.11">conditional-or-expression</non_terminal>
@@ -30,6 +32,8 @@
 
     
 
+    
+
     , or an expression of a type that implements operator true. If neither of these requirements is satisfied, a compile-time error occurs. </paragraph
   >
   <paragraph
@@ -42,11 +46,15 @@
 
         
 
+        
+
         ) exists from X to Y, but not from Y to X, then Y is the type of the conditional expression. </list_item
       >
       <list_item
         > Otherwise, if an implicit conversion (<hyperlink
         >13.1</hyperlink>
+
+        
 
         
 
@@ -64,6 +72,8 @@
 
         
 
+        
+
          value of b is determined: </list_item
       >
       <list>
@@ -73,8 +83,12 @@
 
           
 
+          
+
            exists, then this implicit conversion is performed to produce a <keyword
           >bool</keyword>
+
+          
 
           
 
@@ -86,12 +100,16 @@
 
           
 
+          
+
            value. </list_item
         >
       </list>
       <list_item
         > If the <keyword
         >bool</keyword>
+
+        
 
         
 

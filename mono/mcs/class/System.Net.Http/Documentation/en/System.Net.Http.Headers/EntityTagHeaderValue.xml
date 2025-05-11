@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -59,8 +61,12 @@
 
           
 
+          
+
           A string that contains an <see
            cref="T:System.Net.Http.Headers.EntityTagHeaderValue" />
+
+          
 
           
 
@@ -95,6 +101,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -103,8 +111,12 @@
 
           
 
+          
+
           A string that contains an  <see
            cref="T:System.Net.Http.Headers.EntityTagHeaderValue" />
+
+          
 
           
 
@@ -115,13 +127,19 @@
 
           
 
+          
+
           A value that indicates if this entity-tag header is a weak validator. If the entity-tag header is weak validator, then <paramref
            name="isWeak" />
 
           
 
+          
+
            should be set to true. If the entity-tag header is a strong validator, then <paramref
            name="isWeak" />
+
+          
 
           
 
@@ -183,8 +201,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.Http.Headers.EntityTagHeaderValue" />
+
+            
 
             
 
@@ -199,6 +221,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -207,11 +231,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,6 +271,8 @@
 
             
 
+            
+
              method is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -254,6 +284,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -262,6 +294,8 @@
           <para
             >Returns <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -319,6 +353,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -330,6 +366,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -338,11 +376,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -374,6 +416,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -382,6 +426,8 @@
           <para
             >Returns <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -434,6 +480,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -442,6 +490,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -24,13 +24,19 @@
 
         
 
+        
+
          class is used by the <see
          cref="T:System.Net.Mail.SmtpClient" />
 
         
 
+        
+
          and <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          name, <see
          cref="P:System.Net.Mail.MailAddress.Host" />
+
+        
 
         
 
@@ -52,8 +62,12 @@
 
         
 
+        
+
         . The <see
          cref="P:System.Net.Mail.MailAddress.DisplayName" />
+
+        
 
         
 
@@ -62,6 +76,8 @@
       <para
         >The <see
          cref="T:System.Net.Mail.MailAddress" />
+
+        
 
         
 
@@ -75,6 +91,8 @@
 
             
 
+            
+
              is not set, this is the mail address format generated.</para
           >
         </item>
@@ -82,6 +100,8 @@
           <para
             >A standard quoted display name format of "display name" &lt;user@host&gt;. If a <see
              cref="P:System.Net.Mail.MailAddress.DisplayName" />
+
+            
 
             
 
@@ -95,8 +115,12 @@
 
             
 
+            
+
              name, <see
              cref="P:System.Net.Mail.MailAddress.Host" />
+
+            
 
             
 
@@ -110,6 +134,8 @@
 
             
 
+            
+
              for display name &lt;user@host&gt;, if these are not included.</para
           >
         </item>
@@ -120,6 +146,8 @@
 
             
 
+            
+
             . property. </para
           >
         </item>
@@ -127,6 +155,8 @@
           <para
             >A <see
              cref="P:System.Net.Mail.MailAddress.User" />
+
+            
 
             
 
@@ -158,6 +188,8 @@
 
         
 
+        
+
         , including comments.</para
       >
       <para>-- Example: (non comment) unquoted display (non comment) name (non comment) &lt;user@host&gt;</para>
@@ -167,11 +199,15 @@
 
         
 
+        
+
          class accepts a mail address as valid, other mail servers may not accept the mail address.</para
       >
       <para
         >The <see
          cref="T:System.Net.Mail.MailAddress" />
+
+        
 
         
 
@@ -211,6 +247,8 @@
 
             
 
+            
+
              parameter can contain a display name and the associated e-mail address if you enclose the address in angle brackets. For example: </para
           >
           <para>"Tom Smith &lt;tsmith@contoso.com&gt;"</para>
@@ -218,6 +256,8 @@
           <para
             >The following table shows the property values for a <see
              cref="T:System.Net.Mail.MailAddress" />
+
+            
 
             
 
@@ -284,6 +324,8 @@
 
             
 
+            
+
              class using the specified address. </para
           >
         </summary>
@@ -292,8 +334,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -330,13 +376,19 @@
 
             
 
+            
+
              contains non-ASCII characters, the iso-8859-1 character set is used for the <paramref
              name="displayName" />
 
             
 
+            
+
              encoding. Encoding non-ASCII characters is discussed in RFC 1522, which is available at <see
              cref="http://www.ietf.org">http://www.ietf.org</see>
+
+            
 
             
 
@@ -348,8 +400,12 @@
 
             
 
+            
+
              contains a display name, and <paramref
              name="displayName" />
+
+            
 
             
 
@@ -358,13 +414,19 @@
 
             
 
+            
+
             , <paramref
              name="displayName" />
 
             
 
+            
+
              overrides the value specified in <paramref
              name="address" />
+
+            
 
             
 
@@ -379,6 +441,8 @@
 
             
 
+            
+
              class using the specified address and display name.</para
           >
         </summary>
@@ -387,8 +451,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -399,13 +467,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that contains the display name associated with <paramref
            name="address" />
+
+          
 
           
 
@@ -448,8 +522,12 @@
 
             
 
+            
+
              contains a display name, and <paramref
              name="displayName" />
+
+            
 
             
 
@@ -458,13 +536,19 @@
 
             
 
+            
+
             , <paramref
              name="displayName" />
 
             
 
+            
+
              overrides the value specified in <paramref
              name="address" />
+
+            
 
             
 
@@ -476,8 +560,12 @@
 
             
 
+            
+
              method does not check if the <paramref
              name="displayName" />
+
+            
 
             
 
@@ -486,8 +574,12 @@
 
             
 
+            
+
              property. Quotes will be added before transmission, except where <see
              cref="P:System.Text.Encoding.ASCII" />
+
+            
 
             
 
@@ -496,8 +588,12 @@
 
             
 
+            
+
              is specified in the <paramref
              name="displayNameEncoding" />
+
+            
 
             
 
@@ -506,8 +602,12 @@
 
             
 
+            
+
              parameter will be applied to the <see
              cref="P:System.Net.Mail.MailAddress.DisplayName" />
+
+            
 
             
 
@@ -516,8 +616,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Text.Encoding.Unicode" />
+
+            
 
             
 
@@ -526,8 +630,12 @@
 
             
 
+            
+
              parameter. <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -536,6 +644,8 @@
           <para
             >For more information on supported mail address formats, see <see
              cref="T:System.Net.Mail.MailAddress" />
+
+            
 
             
 
@@ -550,6 +660,8 @@
 
             
 
+            
+
              class using the specified address, display name, and encoding.</para
           >
         </summary>
@@ -558,8 +670,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -570,13 +686,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that contains the display name associated with <paramref
            name="address" />
+
+          
 
           
 
@@ -587,13 +709,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
 
           
 
+          
+
            that defines the character set used for <paramref
            name="displayName" />
+
+          
 
           
 
@@ -620,6 +748,8 @@
           <para
             >The value returned by this property does not include the <see
              cref="P:System.Net.Mail.MailAddress.DisplayName" />
+
+            
 
             
 
@@ -654,8 +784,12 @@
 
             
 
+            
+
              method to get the encoded form of the <see
              cref="P:System.Net.Mail.MailAddress.DisplayName" />
+
+            
 
             
 
@@ -664,6 +798,8 @@
           <para
             >Some software programs that are used to read e-mail display the <see
              cref="P:System.Net.Mail.MailAddress.DisplayName" />
+
+            
 
             
 
@@ -732,6 +868,8 @@
 
             
 
+            
+
              method returns a hash code of the mail address. This value can be used as a key in hash tables.</para
           >
         </remarks>
@@ -794,13 +932,19 @@
 
             
 
+            
+
              property is not null and not equal to <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
              (""), <see
              cref="M:System.Net.Mail.MailAddress.ToString" />
+
+            
 
             
 
@@ -811,13 +955,19 @@
 
             
 
+            
+
              &lt;<see
              cref="P:System.Net.Mail.MailAddress.User" />
 
             
 
+            
+
             @<see
              cref="P:System.Net.Mail.MailAddress.Host" />
+
+            
 
             
 
@@ -829,8 +979,12 @@
 
             
 
+            
+
              is null or is equal to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -839,8 +993,12 @@
 
             
 
+            
+
              returns the value of the <see
              cref="P:System.Net.Mail.MailAddress.Address" />
+
+            
 
             
 
@@ -859,8 +1017,12 @@
 
             
 
+            
+
              that contains the contents of this <see
              cref="T:System.Net.Mail.MailAddress" />
+
+            
 
             
 

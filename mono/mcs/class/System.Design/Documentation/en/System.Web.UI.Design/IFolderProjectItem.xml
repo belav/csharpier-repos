@@ -44,11 +44,15 @@
 
             
 
+            
+
              representing the added document.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -59,8 +63,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -97,11 +105,15 @@
 
             
 
+            
+
              representing the new folder.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

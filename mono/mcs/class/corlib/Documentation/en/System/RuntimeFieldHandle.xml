@@ -48,6 +48,8 @@
 
         
 
+        
+
          structure is a handle to the field represented by the instance.</para
       >
     </remarks>
@@ -94,8 +96,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.RuntimeFieldHandle" />
+
+            
 
             
 
@@ -104,6 +110,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,6 +152,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -155,6 +165,8 @@
 
             
 
+            
+
              is equal to the value of the current instance; otherwise, false.</para
           >
         </returns>
@@ -163,8 +175,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.RuntimeFieldHandle" />
+
+          
 
           
 
@@ -225,11 +241,15 @@
 
             
 
+            
+
              parameter is reserved; it does not currently participate in this operation.</para
           >
           <para
             >For more information, see the <see
              cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+
+            
 
             
 
@@ -244,6 +264,8 @@
 
             
 
+            
+
              with the data necessary to deserialize the field represented by the current instance.</para
           >
         </summary>
@@ -252,8 +274,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -261,6 +287,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,6 +328,8 @@
 
             
 
+            
+
              structures are equal.</para
           >
         </summary>
@@ -311,8 +341,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -324,13 +358,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.RuntimeFieldHandle" />
 
           
 
+          
+
            to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -341,13 +381,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.RuntimeFieldHandle" />
 
           
 
+          
+
            to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -387,6 +433,8 @@
 
             
 
+            
+
              structures are not equal.</para
           >
         </summary>
@@ -398,8 +446,12 @@
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -411,13 +463,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.RuntimeFieldHandle" />
 
           
 
+          
+
            to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -428,13 +486,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.RuntimeFieldHandle" />
 
           
 
+          
+
            to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -467,9 +531,13 @@
 
             
 
+            
+
              that contains the
    value of the current <see
              cref="T:System.RuntimeFieldHandle" />
+
+            
 
             
 

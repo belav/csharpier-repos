@@ -39,8 +39,12 @@
 
         
 
+        
+
          control, only one version of each row can be displayed. The displayed row is a <see
          cref="T:System.Data.DataRowView" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
         
 
+        
+
          can have one of four different version states: Default, Original, Current, and Proposed.</para
       >
       <para
@@ -60,8 +66,12 @@
 
         
 
+        
+
          on a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Data.DataRowView.EndEdit" />
+
+        
 
         
 
@@ -80,13 +94,19 @@
 
         
 
+        
+
          is invoked, the proposed version is discarded, and the value reverts to Original. If <see
          cref="M:System.Data.DataRowView.EndEdit" />
 
         
 
+        
+
          is invoked, the <see
          cref="T:System.Data.DataRowView" />
+
+        
 
         
 
@@ -98,6 +118,8 @@
       <para
         >Represents a customized view of a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -122,8 +144,12 @@
 
             
 
+            
+
              to add a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -135,8 +161,12 @@
 
             
 
+            
+
              method is identical to the <see
              cref="M:System.Data.DataRow.BeginEdit" />
+
+            
 
             
 
@@ -145,8 +175,12 @@
 
             
 
+            
+
             . After calling <see
              cref="M:System.Data.DataRowView.BeginEdit" />
+
+            
 
             
 
@@ -155,8 +189,12 @@
 
             
 
+            
+
              can be rolled back by calling <see
              cref="M:System.Data.DataRow.CancelEdit" />
+
+            
 
             
 
@@ -165,8 +203,12 @@
 
             
 
+            
+
              method before allowing users to change row values. After values have been changed, you retrieve the new values by setting the <see
              cref="P:System.Data.DataRowView.RowVersion" />
+
+            
 
             
 
@@ -175,8 +217,12 @@
 
             
 
+            
+
             , or call <see
              cref="M:System.Data.DataRowView.EndEdit" />
+
+            
 
             
 
@@ -209,13 +255,19 @@
 
             
 
+            
+
             , all changes to the row are rolled back. You can also roll back changes by calling <see
              cref="M:System.Data.DataTable.RejectChanges" />
 
             
 
+            
+
              on the parent <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -254,13 +306,19 @@
 
             
 
+            
+
              for the child <see
              cref="T:System.Data.DataTable" />
 
             
 
+            
+
              with the specified child <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -275,8 +333,12 @@
 
             
 
+            
+
              for the child <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -288,8 +350,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRelation" />
+
+          
 
           
 
@@ -323,13 +389,19 @@
 
             
 
+            
+
              for the child <see
              cref="T:System.Data.DataTable" />
 
             
 
+            
+
              with the specified child <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -344,8 +416,12 @@
 
             
 
+            
+
              for the child <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -357,8 +433,12 @@
 
           
 
+          
+
           A string containing the <see
            cref="T:System.Data.DataRelation" />
+
+          
 
           
 
@@ -387,6 +467,8 @@
 
             
 
+            
+
              to which this row belongs.</para
           >
         </summary>
@@ -412,8 +494,12 @@
 
             
 
+            
+
              is invoked on the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -426,8 +512,12 @@
 
               
 
+              
+
                may be invalid when a DataRow is deleted from the underlying table. When the <see
                cref="T:System.Data.DataRowView" />
+
+              
 
               
 
@@ -436,8 +526,12 @@
 
               
 
+              
+
                such as <see
                cref="M:System.Data.DataRowView.Delete" />
+
+              
 
               
 
@@ -472,8 +566,12 @@
 
             
 
+            
+
              and ends the editing session that was begun with <see
              cref="M:System.Data.DataRowView.BeginEdit" />
+
+            
 
             
 
@@ -482,8 +580,12 @@
 
             
 
+            
+
              to discard the changes made to the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -515,6 +617,8 @@
 
             
 
+            
+
              is identical to the specified object.</para
           >
         </summary>
@@ -526,13 +630,19 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Data.DataRowView" />
 
             
 
+            
+
              and it returns the same row as the current <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -544,8 +654,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -571,6 +685,8 @@
           <para
             >Returns the hash code of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -622,8 +738,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.DataRowView.IsNew" />
+
+            
 
             
 
@@ -632,8 +752,12 @@
 
             
 
+            
+
             . <see
              cref="P:System.Data.DataRowView.IsNew" />
+
+            
 
             
 
@@ -642,13 +766,19 @@
 
             
 
+            
+
              is called on the <see
              cref="T:System.Data.DataRowView" />
 
             
 
+            
+
             , or <see
              cref="M:System.Data.DataView.AddNew" />
+
+            
 
             
 
@@ -660,6 +790,8 @@
           <para
             >Indicates whether a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -733,8 +865,12 @@
 
             
 
+            
+
              changes. This change does not cause the associated index position of the <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -746,6 +882,8 @@
           <para
             >Event that is raised when a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -768,6 +906,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -799,8 +939,12 @@
 
             
 
+            
+
              property specifies both <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -809,8 +953,12 @@
 
             
 
+            
+
              settings. For more information, see <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -819,8 +967,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Data.DataViewRowState" />
+
+            
 
             
 
@@ -832,6 +984,8 @@
           <para
             >Gets the current version description of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -867,8 +1021,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -905,8 +1063,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -943,8 +1105,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -984,8 +1150,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1025,8 +1195,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1066,8 +1240,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1109,8 +1287,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1129,6 +1311,8 @@
 
             
 
+            
+
              of the specified type that is the editor for this object, or null if the editor cannot be found.</para
           >
         </returns>
@@ -1137,8 +1321,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1169,8 +1357,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1212,8 +1404,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1230,6 +1426,8 @@
         </returns>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1260,8 +1458,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1303,8 +1505,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1321,6 +1527,8 @@
         </returns>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1353,8 +1561,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1373,6 +1585,8 @@
 
             
 
+            
+
              that represents the owner of the specified property.</para
           >
         </returns>
@@ -1381,8 +1595,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1413,8 +1631,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IDataErrorInfo" />
+
+            
 
             
 

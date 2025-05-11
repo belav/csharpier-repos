@@ -12,6 +12,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -42,6 +44,8 @@
 
           
 
+          
+
            to convert into an ASN.1 object.</param
         >
         <summary>Convert a DateTime to an ASN.1 object.</summary>
@@ -51,13 +55,14 @@
 
           
 
+          
+
            object representing the date.</returns
         >
         <remarks>
           <para>Dates before 2050 are encoded using ASN.1's UTCTIME ("yyMMddHHmmss") while dates after 2050 are encoded with GENERALIZEDTIME ("yyyyMMddHHmmss"). This logic is implemented for compliance with RFC3280.</para>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	DateTime now = DateTime.UtcNow;
 	ASN1 asnNow = ASN1Convert.FromOid (now);
   </code
@@ -89,12 +94,16 @@
 
           
 
+          
+
            to convert into an ASN.1 object.</param
         >
         <summary>Convert an integer to convert into an ASN.1 object.</summary>
         <returns
           >an <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 
@@ -106,7 +115,8 @@
             <code lang="C#">
 	int i = 16;
 	ASN1 asnSixteen = ASN1Convert.FromOid (i);
-  </code>
+  </code
+            >
           </example>
         </remarks>
       </Docs>
@@ -136,6 +146,8 @@
 
           
 
+          
+
            object representing the OID.</returns
         >
         <remarks>
@@ -145,16 +157,19 @@
 
             
 
+            
+
             .<see
              cref="M:System.Security.Cryptography.CryptoConfig.EncodeOID" />
+
+            
 
             
 
              so the documented limitations applies.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	string oidSha1 = "1.3.14.3.2.26";
 	ASN1 asnOidSha1 = ASN1Convert.FromOid (oidSha1);
   </code
@@ -188,6 +203,8 @@
 
           
 
+          
+
            object representing a integer.</returns
         >
         <remarks>To be added</remarks>
@@ -216,12 +233,16 @@
 
           
 
+          
+
            object containing a date/time.</param
         >
         <summary>Convert an ASN.1 object to a DateTime.</summary>
         <returns
           >the <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -250,6 +271,8 @@
 
           
 
+          
+
            object containing an integer.</param
         >
         <summary>Convert an ASN.1 object to an integer.</summary>
@@ -259,11 +282,15 @@
 
           
 
+          
+
            decoded from the ASN.1 object.</returns
         >
         <remarks
           >A <see
            cref="T:System.FormatException" />
+
+          
 
           
 
@@ -291,6 +318,8 @@
         <param name="asn1"
           >an <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 

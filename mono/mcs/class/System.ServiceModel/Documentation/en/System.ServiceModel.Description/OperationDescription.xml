@@ -28,8 +28,12 @@
 
         
 
+        
+
          object is used to describe contracts and their operations. Within a <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          that describes aspects of the operation, such as whether the operation is one-way or request/reply. Each <see
          cref="T:System.ServiceModel.Description.OperationDescription" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          objects. <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
         , and its methods that correspond to endpoint operations are marked with <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -71,13 +87,19 @@
 
         
 
+        
+
          have corresponding properties in the indigo2 programming model on <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
 
         
 
+        
+
         , for example, <see
          cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
+
+        
 
         
 
@@ -120,11 +142,15 @@
 
             
 
+            
+
              class with a specified name and contract description.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -135,8 +161,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ContractDescription" />
+
+          
 
           
 
@@ -192,6 +222,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Description.IOperationBehavior" />
+
+            
 
             
 
@@ -299,8 +331,12 @@
 
             
 
+            
+
              is set, the <see
              cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
+
+            
 
             
 
@@ -311,8 +347,12 @@
 
             
 
+            
+
              corresponds to the <see
              cref="P:System.ServiceModel.OperationContractAttribute.HasProtectionLevel" />
+
+            
 
             
 
@@ -321,6 +361,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
+
+            
 
             
 
@@ -353,6 +395,8 @@
 
             
 
+            
+
              property controls whether an operation can be the first operation called when a session is created. </para
           >
           <block subset="none" type="note">
@@ -362,8 +406,12 @@
 
               
 
+              
+
                must be true and the binding used must support sessions for the <see
                cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+
+              
 
               
 
@@ -377,6 +425,8 @@
 
             
 
+            
+
              to false to force clients to call another method on the service before they can invoke this one. </para
           >
           <para>
@@ -384,8 +434,12 @@
 
             
 
+            
+
              corresponds to the <see
              cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+
+            
 
             
 
@@ -418,11 +472,15 @@
 
             
 
+            
+
              property to indicate that an operation does not return a reply message. This type of operation is useful for notifications or event-style communication, especially in two-way communication. </para
           >
           <para
             >If the <see
              cref="P:System.ServiceModel.Description.OperationDescription.IsOneWay" />
+
+            
 
             
 
@@ -433,8 +491,12 @@
 
             
 
+            
+
              corresponds to the <see
              cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
+
+            
 
             
 
@@ -467,6 +529,8 @@
 
             
 
+            
+
              property to indicate that calling a service operation terminates the communication session. </para
           >
           <para>
@@ -474,8 +538,12 @@
 
             
 
+            
+
              corresponds to the <see
              cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
+
+            
 
             
 
@@ -514,10 +582,14 @@
 
             
 
+            
+
              are types which may be present in an object graph when serialization or deserialization occurs. For more information about known types, see <format
              type="text/html">
               <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
             </format>
+
+            
 
             
 
@@ -572,6 +644,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Description.OperationDescription.Name" />
+
+            
 
             
 
@@ -635,6 +709,8 @@
 
             
 
+            
+
              property controls whether the messages of an operation must be encrypted, signed, or both. The value set here is the default value for all messages specified for this operation unless a narrower scope overrides this value.</para
           >
           <para>
@@ -642,8 +718,12 @@
 
             
 
+            
+
              corresponds to the <see
              cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -655,8 +735,12 @@
 
             
 
+            
+
              is set, the <see
              cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
+
+            
 
             
 

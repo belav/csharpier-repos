@@ -23,8 +23,12 @@
 
         
 
+        
+
          method to specify whether the <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -33,6 +37,8 @@
       <para
         >See the <see
          cref="P:System.Xml.XmlWriterSettings.NewLineHandling" />
+
+        
 
         
 
@@ -66,6 +72,8 @@
           <para
             >New line characters are entitized. This setting preserves all characters when the output is read by a normalizing <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -117,6 +125,8 @@
           <para
             >New line characters are replaced to match the character specified in the <see
              cref="P:System.Xml.XmlWriterSettings.NewLineChars" />
+
+            
 
             
 

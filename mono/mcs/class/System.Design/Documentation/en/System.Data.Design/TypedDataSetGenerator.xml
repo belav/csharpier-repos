@@ -18,6 +18,8 @@
 
         
 
+        
+
          class takes information provided (for example, an XML schema) and creates a typed dataset class.</para
       >
     </remarks>
@@ -26,6 +28,8 @@
       <para
         >Generates a strongly typed <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -60,13 +64,19 @@
 
             
 
+            
+
             . The dataset is created in the namespace indicated in the <paramref
              name="codeNamespace" />
 
             
 
+            
+
              parameter, and the dataset is generated in the managed programming language indicated in the <paramref
              name="codeProvider" />
+
+            
 
             
 
@@ -81,8 +91,12 @@
 
             
 
+            
+
              based on an existing <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -97,6 +111,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -105,13 +121,19 @@
 
           
 
+          
+
           The source <see
            cref="T:System.Data.DataSet" />
 
           
 
+          
+
            that specifies the metadata for the typed <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -122,8 +144,12 @@
 
           
 
+          
+
           The namespace that provides the target namespace for the typed <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -134,8 +160,12 @@
 
           
 
+          
+
           The language-specific <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -173,12 +203,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Generates a strongly typed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -193,6 +227,8 @@
 
             
 
+            
+
              based on the provided input file.</para
           >
         </summary>
@@ -204,6 +240,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -212,8 +250,12 @@
 
           
 
+          
+
           A string that represents the XML schema to base the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -224,8 +266,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -236,8 +282,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -248,8 +298,12 @@
 
           
 
+          
+
           The language-specific <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -288,12 +342,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Generates a strongly typed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -308,6 +366,8 @@
 
             
 
+            
+
              based on the provided input file.</para
           >
         </summary>
@@ -319,6 +379,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -327,8 +389,12 @@
 
           
 
+          
+
           A string that represents the XML schema to base the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -339,8 +405,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -351,8 +421,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -363,8 +437,12 @@
 
           
 
+          
+
           The language specific <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -372,6 +450,8 @@
         >
         <param name="customDBProviders">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,12 +490,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Generates a strongly typed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -430,6 +514,8 @@
 
             
 
+            
+
              based on the provided input file.</para
           >
         </summary>
@@ -441,6 +527,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -449,8 +537,12 @@
 
           
 
+          
+
           A string that represents the XML schema to base the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -461,8 +553,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -473,8 +569,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -485,8 +585,12 @@
 
           
 
+          
+
           The language-specific <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -497,13 +601,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DbProviderFactory" />
 
           
 
+          
+
            to use to override the provider contained in the <paramref
            name="inputFileContent" />
+
+          
 
           
 
@@ -599,12 +709,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >This method returns the first provider name in the specified <paramref
              name="inputFileContent" />
+
+            
 
             
 
@@ -623,6 +737,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -631,8 +747,12 @@
 
           
 
+          
+
           A string that represents the XML schema to base the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -668,6 +788,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -677,8 +799,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -693,6 +819,8 @@
 
             
 
+            
+
              in the input file.</para
           >
         </summary>
@@ -704,6 +832,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -712,8 +842,12 @@
 
           
 
+          
+
           A string that represents the XML schema to base the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -721,6 +855,8 @@
         >
         <param name="tableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

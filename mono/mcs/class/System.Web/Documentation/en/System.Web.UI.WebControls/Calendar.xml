@@ -46,8 +46,7 @@
 
 <example
       >
-        <code lang="C#"
-          >
+        <code lang="C#">
 	&lt;asp:Calendar runat="server" BorderStyle="double"
 	 BorderColor="#E7E5DB" BorderWidth="2" BackColor="#F8F7F4"
 	 Font--Size=".9em" Font--Names="Verdana" class="TableThin"&gt;

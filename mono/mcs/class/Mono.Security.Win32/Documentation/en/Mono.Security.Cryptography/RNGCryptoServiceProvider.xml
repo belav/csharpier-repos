@@ -19,6 +19,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -78,6 +80,8 @@
 
           
 
+          
+
            containing the parameters to create the cryptographic context. </param
         >
         <summary>Creates a new CryptoAPI-based instance to get new random data. </summary>
@@ -99,6 +103,8 @@
         <param name="str"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 

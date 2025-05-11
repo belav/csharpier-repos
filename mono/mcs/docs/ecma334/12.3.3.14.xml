@@ -3,7 +3,7 @@
   <paragraph
     >For a try statement stmt of the form: <code_example
     >
-      <![CDATA[
+<![CDATA[
 try try-block finally finally-block  
 ]]>
     </code_example>

@@ -21,13 +21,19 @@
 
         
 
+        
+
          class monitors a specific SQL Server database table. When the table changes, items associated with the table are removed from the <see
          cref="T:System.Web.Caching.Cache" />
 
         
 
+        
+
         , and a new version of the item is added to the <see
          cref="T:System.Web.Caching.Cache" />
+
+        
 
         
 
@@ -39,13 +45,19 @@
 
         
 
+        
+
          class also supports integration with the <see
          cref="T:System.Data.SqlClient.SqlDependency" />
 
         
 
+        
+
          class when using a sqprsqlong database. The query notification mechanism of sqprsqlong detects changes to data that invalidate the results of an SQL query and removes any cached items associated with the SQL query from the <see
          cref="T:System.Web.Caching.Cache" />
+
+        
 
         
 
@@ -57,8 +69,12 @@
 
         
 
+        
+
          class to add items to your application's <see
          cref="T:System.Web.Caching.Cache" />
+
+        
 
         
 
@@ -69,8 +85,12 @@
 
         
 
+        
+
          directive to make an output-cached page or a user control dependent on a SQL Server database table. Finally, you can use the <see
          cref="T:System.Web.Caching.SqlCacheDependency" />
+
+        
 
         
 
@@ -81,10 +101,14 @@
 
         
 
+        
+
          page directive to make an output-cached page dependent on the results of an SQL query when using sqprsqlong. Query notification using sqprsqlong is not supported on the <format
          type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
         </format>
+
+        
 
         
 
@@ -97,10 +121,14 @@
 
           
 
+          
+
            class or by using the <format
            type="text/html">
             <a href="d17168e3-83f1-48d7-ab1c-535fd335eca0">Aspnet_regsql.exe</a>
           </format>
+
+          
 
           
 
@@ -109,6 +137,8 @@
         <para
           >Using a <see
            cref="T:System.Web.Caching.SqlCacheDependency" />
+
+          
 
           
 
@@ -142,6 +172,8 @@
 
         
 
+        
+
          object and either a specific SQL Server database table or the results of a sqprsqlong query. This class cannot be inherited.</para
       >
     </summary>
@@ -168,11 +200,15 @@
 
             
 
+            
+
              objects that use the query-notification feature of sqprsqlong products. </para
           >
           <para
             >SQL statements that are associated with the <paramref
              name="sqlCmd" />
+
+            
 
             
 
@@ -192,8 +228,12 @@
 
             
 
+            
+
              instance with a <see
              cref="T:System.Web.Caching.SqlCacheDependency" />
+
+            
 
             
 
@@ -208,8 +248,12 @@
 
             
 
+            
+
              class, using the supplied <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -221,13 +265,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlClient.SqlCommand" />
 
           
 
+          
+
            that is used to create a <see
            cref="T:System.Web.Caching.SqlCacheDependency" />
+
+          
 
           
 
@@ -257,6 +307,8 @@
 
             
 
+            
+
              objects for SQL Server 7.0 and SQL Server 2000 products.</para
           >
           <para
@@ -265,8 +317,12 @@
 
             
 
+            
+
              parameter must be defined in the application's Web.config file. For example, the following Web.config file defines a database named pubs for <see
              cref="T:System.Web.Caching.SqlCacheDependency" />
+
+            
 
             
 
@@ -295,8 +351,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Caching.TableNotEnabledForNotificationException" />
+
+            
 
             
 
@@ -305,8 +365,12 @@
 
             
 
+            
+
              is thrown, you can call the <see
              cref="M:System.Web.Caching.SqlCacheDependencyAdmin.EnableNotifications(System.String)" />
+
+            
 
             
 
@@ -317,8 +381,12 @@
 
             
 
+            
+
              command-line tool to set up the database for notifications. If a <see
              cref="T:System.Web.Caching.TableNotEnabledForNotificationException" />
+
+            
 
             
 
@@ -327,10 +395,14 @@
 
             
 
+            
+
              method or use <format
              type="text/html">
               <a href="d17168e3-83f1-48d7-ab1c-535fd335eca0">Aspnet_regsql.exe</a>
             </format>
+
+            
 
             
 
@@ -345,11 +417,15 @@
 
             
 
+            
+
              class, using the supplied parameters to create a cache-key dependency.</para
           >
         </summary>
         <param name="databaseEntryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,8 +436,12 @@
 
           
 
+          
+
           The name of the database table that the <see
            cref="T:System.Web.Caching.SqlCacheDependency" />
+
+          
 
           
 
@@ -388,8 +468,12 @@
 
             
 
+            
+
              method returns an identifier used to uniquely track <see
              cref="T:System.Web.Caching.SqlCacheDependency" />
+
+            
 
             
 
@@ -405,6 +489,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -413,6 +499,8 @@
           <para
             >The unique identifier for the <see
              cref="T:System.Web.Caching.SqlCacheDependency" />
+
+            
 
             
 

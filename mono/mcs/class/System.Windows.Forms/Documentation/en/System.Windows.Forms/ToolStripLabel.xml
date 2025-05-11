@@ -27,8 +27,12 @@
 
         
 
+        
+
          class to create a label that can render text and images that can implement the <see
          cref="P:System.Windows.Forms.ToolStripItem.TextAlign" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          properties. The <see
          cref="T:System.Windows.Forms.ToolStripLabel" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          is like a <see
          cref="T:System.Windows.Forms.ToolStripButton" />
+
+        
 
         
 
@@ -59,6 +71,8 @@
       >
       <para>
         <see cref="T:System.Windows.Forms.ToolStripLabel" />
+
+        
 
         
 
@@ -70,8 +84,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.LinkLabel.LinkVisited" />
+
+        
 
         
 
@@ -80,13 +98,19 @@
 
         
 
+        
+
          properties on a <see
          cref="T:System.Windows.Forms.ToolStripLabel" />
 
         
 
+        
+
          to support link control in a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -98,6 +122,8 @@
       <para
         >Represents a nonselectable <see
          cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
 
         
 
@@ -118,6 +144,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 
@@ -146,6 +174,8 @@
 
             
 
+            
+
              class, specifying the image to display.</para
           >
         </summary>
@@ -154,13 +184,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -188,6 +224,8 @@
 
             
 
+            
+
              class, specifying the text to display.</para
           >
         </summary>
@@ -196,8 +234,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -229,6 +271,8 @@
 
             
 
+            
+
              class, specifying the text and image to display.</para
           >
         </summary>
@@ -237,8 +281,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -249,13 +297,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -288,8 +342,12 @@
 
             
 
+            
+
              class, specifying the text and image to display and whether the <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 
@@ -301,8 +359,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -313,13 +375,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -330,8 +398,12 @@
 
           
 
+          
+
           true if the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -365,13 +437,19 @@
 
             
 
+            
+
              class, specifying the text and image to display, whether the <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
+            
+
              acts as a link, and providing a <see
              cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+            
 
             
 
@@ -383,8 +461,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -395,13 +477,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -412,8 +500,12 @@
 
           
 
+          
+
           true if the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -424,8 +516,12 @@
 
           
 
+          
+
           A <see
            cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+          
 
           
 
@@ -460,8 +556,12 @@
 
             
 
+            
+
              class, specifying the text and image to display, whether the <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 
@@ -470,8 +570,12 @@
 
             
 
+            
+
              event handler and name for the <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 
@@ -483,8 +587,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -495,13 +603,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -512,8 +626,12 @@
 
           
 
+          
+
           true if the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -524,8 +642,12 @@
 
           
 
+          
+
           A <see
            cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+          
 
           
 
@@ -536,8 +658,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripLabel" />
+
+          
 
           
 
@@ -568,6 +694,8 @@
 
             
 
+            
+
              control. You can use this property to specify the color that the link is displayed in when the link is in the process of being clicked.</para
           >
           <para
@@ -576,13 +704,19 @@
 
             
 
+            
+
              specifies the color of all links displayed in the <see
              cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
+            
+
              control. The <see
              cref="P:System.Windows.Forms.ToolStripLabel.VisitedLinkColor" />
+
+            
 
             
 
@@ -618,8 +752,12 @@
 
             
 
+            
+
              is a nonselectable <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -631,6 +769,8 @@
           <para
             >Gets a value indicating the selectable state of a <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 
@@ -690,6 +830,8 @@
 
             
 
+            
+
              is a hyperlink. </para
           >
         </summary>
@@ -720,6 +862,8 @@
           <para
             >This property enables you to specify the behavior of links when they are displayed in the control. For example, if you want links to be displayed with an underline only when the mouse pointer is over a link, you can set this property to LinkBehavior.HoverUnderline. For more information about the types of behaviors that can be associated with a link, see <see
              cref="T:System.Windows.Forms.LinkBehavior" />
+
+            
 
             
 
@@ -776,8 +920,12 @@
 
             
 
+            
+
              control does not automatically denote that a link is a visited link. To display the link as a visited link, you can set the value of this property to true in an event handler for the click event of the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -786,8 +934,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 
@@ -824,11 +976,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripLabel.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -843,6 +999,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -851,8 +1009,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -884,11 +1046,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripLabel.OnMouseEnter(System.EventArgs)" />
+
+            
 
             
 
@@ -903,6 +1069,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -911,8 +1079,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -944,11 +1116,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripLabel.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -963,6 +1139,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -971,8 +1149,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1007,11 +1189,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripLabel.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1026,6 +1212,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1034,8 +1222,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1071,8 +1263,12 @@
 
             
 
+            
+
              implementation relies on the host <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1081,8 +1277,12 @@
 
             
 
+            
+
              method to determine whether the given character matches a mnemonic in the item's text. In this case, the method selects the item associated with the label, or raises the <see
              cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+            
 
             
 
@@ -1099,6 +1299,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1123,6 +1325,8 @@
           <para
             >This property enables you to specify the color that is displayed for all links in the <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 

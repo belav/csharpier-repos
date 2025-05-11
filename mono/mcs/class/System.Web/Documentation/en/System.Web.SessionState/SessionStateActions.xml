@@ -18,13 +18,19 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
 
         
 
+        
+
          and <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
+
+        
 
         
 
@@ -33,8 +39,12 @@
 
         
 
+        
+
          implementation. When a session item is retrieved from the data store, the enumeration value indicates whether the session requires initialization or not based on a value stored with the data. The <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
+
+        
 
         
 
@@ -43,8 +53,12 @@
 
         
 
+        
+
          methods set an <paramref
          name="actions" />
+
+        
 
         
 
@@ -53,8 +67,12 @@
 
         
 
+        
+
          enumeration value based on this value retrieved with the session item. If the value of the <paramref
          name="actions" />
+
+        
 
         
 
@@ -63,8 +81,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -73,8 +95,12 @@
 
         
 
+        
+
          parameter is <see
          cref="F:System.Web.SessionState.SessionStateActions.None" />
+
+        
 
         
 
@@ -86,8 +112,12 @@
 
         
 
+        
+
          method is created with a value indicating that the item requires initialization and that the <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
+
+        
 
         
 
@@ -96,13 +126,19 @@
 
         
 
+        
+
          methods should set the <paramref
          name="actions" />
 
         
 
+        
+
          parameter to <see
          cref="F:System.Web.SessionState.SessionStateActions.InitializeItem" />
+
+        
 
         
 

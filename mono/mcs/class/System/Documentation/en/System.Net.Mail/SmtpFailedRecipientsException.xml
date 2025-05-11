@@ -27,6 +27,8 @@
 
         
 
+        
+
          property contains the exceptions received while attempting to send e-mail. The e-mail might have been successfully delivered to some of the recipients.</para
       >
     </remarks>
@@ -35,6 +37,8 @@
       <para
         >The exception that is thrown when e-mail is sent using an <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
           <para
             >Initializes an empty instance of the <see
              cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+            
 
             
 
@@ -99,8 +105,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -109,6 +119,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,8 +156,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+            
 
             
 
@@ -160,13 +176,19 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -178,13 +200,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            instance that contains the information required to serialize the new <see
            cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+          
 
           
 
@@ -195,13 +223,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            that contains the source of the serialized stream that is associated with the new <see
            cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+          
 
           
 
@@ -238,13 +272,19 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.String" />
 
             
 
+            
+
              and inner <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -256,10 +296,14 @@
 
           
 
+          
+
           The exception message.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -296,13 +340,19 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.String" />
 
             
 
+            
+
              and array of type <see
              cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+
+            
 
             
 
@@ -314,10 +364,14 @@
 
           
 
+          
+
           The exception message.</param
         >
         <param name="innerExceptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,8 +413,12 @@
 
             
 
+            
+
              instance with the data that is needed to serialize the <see
              cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+            
 
             
 
@@ -395,6 +453,8 @@
           <para
             >Gets one or more <see
              cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+
+            
 
             
 
@@ -435,8 +495,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+            
 
             
 
@@ -451,13 +515,19 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 

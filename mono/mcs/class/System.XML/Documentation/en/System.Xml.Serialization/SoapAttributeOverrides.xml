@@ -26,8 +26,12 @@
 
         
 
+        
+
          class enables an <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
         , you create an <see
          cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+
+        
 
         
 
@@ -59,8 +71,12 @@
 
         
 
+        
+
          constructor. The resulting <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -69,8 +85,12 @@
 
         
 
+        
+
          to override attributes that control how objects are serialized. To accomplish this, the <see
          cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+        
 
         
 
@@ -79,8 +99,12 @@
 
         
 
+        
+
          associated with each overridden object type. Each <see
          cref="T:System.Xml.Serialization.SoapAttributes" />
+
+        
 
         
 
@@ -89,6 +113,8 @@
       <para
         >The process for creating and using a <see
          cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+        
 
         
 
@@ -102,6 +128,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -112,8 +140,12 @@
 
             
 
+            
+
             , using the new, derived type. You can optionally assign a new <see
              cref="P:System.Xml.Serialization.SoapElementAttribute.ElementName" />
+
+            
 
             
 
@@ -127,8 +159,12 @@
 
             
 
+            
+
              property or collection. For example, you would set the <see
              cref="P:System.Xml.Serialization.SoapAttributes.SoapElement" />
+
+            
 
             
 
@@ -137,8 +173,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Xml.Serialization.SoapElementAttribute" />
+
+            
 
             
 
@@ -152,6 +192,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -162,8 +204,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -172,8 +218,12 @@
 
             
 
+            
+
              method. If the object being overridden is a <see
              cref="T:System.Xml.Serialization.SoapTypeAttribute" />
+
+            
 
             
 
@@ -187,13 +237,19 @@
 
             
 
+            
+
              using the <see
              cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+
+            
 
             
 
@@ -207,13 +263,19 @@
 
             
 
+            
+
             , pass the <see
              cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Serialization.XmlSerializer.#ctor" />
+
+            
 
             
 
@@ -227,6 +289,8 @@
 
             
 
+            
+
              to serialize or deserialize the class objects.</para
           >
         </item>
@@ -237,6 +301,8 @@
       <para
         >Allows you to override attributes applied to properties, fields, and classes when you use an <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -266,6 +332,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -305,8 +373,12 @@
 
             
 
+            
+
              contains a union of attribute objects that cause the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -315,8 +387,12 @@
 
             
 
+            
+
             , depending on the particular behaviors you want to override. For example, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -325,8 +401,12 @@
 
             
 
+            
+
             , assign it to the <see
              cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
+
+            
 
             
 
@@ -335,13 +415,19 @@
 
             
 
+            
+
             , and add the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -350,13 +436,19 @@
 
             
 
+            
+
              method to add the <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -368,13 +460,19 @@
 
             
 
+            
+
              that contains a <see
              cref="T:System.Xml.Serialization.SoapTypeAttribute" />
 
             
 
+            
+
             . Because the <see
              cref="T:System.Xml.Serialization.SoapTypeAttribute" />
+
+            
 
             
 
@@ -389,8 +487,12 @@
 
             
 
+            
+
              to a collection of <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
+
+            
 
             
 
@@ -399,8 +501,12 @@
 
             
 
+            
+
              parameter specifies an object to be overridden by the <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
+
+            
 
             
 
@@ -412,8 +518,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -424,8 +534,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.SoapAttributes" />
+
+          
 
           
 
@@ -465,8 +579,12 @@
 
             
 
+            
+
              contains a union of attribute objects that cause the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -475,8 +593,12 @@
 
             
 
+            
+
             , depending on the particular behaviors you want to override. For example, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -485,8 +607,12 @@
 
             
 
+            
+
             , assign it to the <see
              cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
+
+            
 
             
 
@@ -495,13 +621,19 @@
 
             
 
+            
+
             , and add the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -510,13 +642,19 @@
 
             
 
+            
+
              method to add the <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -528,8 +666,12 @@
 
             
 
+            
+
              contains either a <see
              cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+
+            
 
             
 
@@ -539,13 +681,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.Serialization.SoapIgnoreAttribute" />
+
+            
 
             
 
@@ -560,8 +708,12 @@
 
             
 
+            
+
              to the collection of <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
+
+            
 
             
 
@@ -570,8 +722,12 @@
 
             
 
+            
+
             . The <paramref
              name="type" />
+
+            
 
             
 
@@ -580,8 +736,12 @@
 
             
 
+            
+
             . The <paramref
              name="member" />
+
+            
 
             
 
@@ -593,8 +753,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -605,6 +769,8 @@
 
           
 
+          
+
           The name of the member to override. </param
         >
         <param name="attributes">
@@ -612,8 +778,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.SoapAttributes" />
+
+          
 
           
 

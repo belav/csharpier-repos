@@ -10,6 +10,8 @@
 
         
 
+        
+
          namespace contains classes for interaction with code analysis tools. These tools are used to analyze code for conformance to coding conventions such as naming or security rules.</para
       >
     </summary>

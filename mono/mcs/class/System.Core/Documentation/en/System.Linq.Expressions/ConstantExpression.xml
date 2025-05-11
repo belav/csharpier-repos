@@ -31,8 +31,12 @@
 
         
 
+        
+
          factory methods to create a <see
          cref="T:System.Linq.Expressions.ConstantExpression" />
+
+        
 
         
 
@@ -44,13 +48,19 @@
 
         
 
+        
+
          of a <see
          cref="T:System.Linq.Expressions.ConstantExpression" />
 
         
 
+        
+
          is <see
          cref="F:System.Linq.Expressions.ExpressionType.Constant" />
+
+        
 
         
 
@@ -91,8 +101,12 @@
 
             
 
+            
+
              nodes calls <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -101,8 +115,12 @@
 
             
 
+            
+
              class. However, it should still support unknown visitors by calling <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -117,8 +135,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
+
+            
 
             
 
@@ -131,6 +153,8 @@
         </returns>
         <param name="visitor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,6 +189,8 @@
 
             
 
+            
+
              when overriding this method.</para
           >
         </summary>
@@ -188,6 +214,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 

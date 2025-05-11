@@ -94,6 +94,8 @@
 
           
 
+          
+
           The type whose ProgID is being requested. </param
         >
       </Docs>
@@ -129,6 +131,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -140,8 +144,12 @@
 
             
 
+            
+
              array containing a list of classes in <paramref
              name="assembly" />
+
+            
 
             
 
@@ -150,6 +158,8 @@
         </returns>
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,6 +199,8 @@
 
             
 
+            
+
              to get an assembly.</para
           >
         </remarks>
@@ -204,11 +216,15 @@
 
             
 
+            
+
              contains types that were successfully registered; otherwise false if the assembly contains no eligible types.</para
           >
         </returns>
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,13 +235,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.InteropServices.AssemblyRegistrationFlags" />
 
           
 
+          
+
            value indicating any special settings needed when registering <paramref
            name="assembly" />
+
+          
 
           
 
@@ -295,6 +317,8 @@
 
           
 
+          
+
           The type to determine if it is a COM type. </param
         >
       </Docs>
@@ -332,6 +356,8 @@
 
           
 
+          
+
           The type to check for COM registration requirements. </param
         >
       </Docs>
@@ -366,6 +392,8 @@
 
             
 
+            
+
             . This method also calls any unregistration functions found in the assembly.</para
           >
         </remarks>
@@ -381,11 +409,15 @@
 
             
 
+            
+
              contains types that were successfully unregistered; otherwise false if the assembly contains no eligible types.</para
           >
         </returns>
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

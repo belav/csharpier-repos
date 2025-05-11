@@ -38,11 +38,15 @@
 
         
 
+        
+
          is not shared between threads. Each executing thread has a separate instance of the field, and independently sets and gets values for that field. If the field is accessed on a different thread, it will contain a different value.</para
       >
       <para
         >Note that in addition to applying the <see
          cref="T:System.ThreadStaticAttribute" />
+
+        
 
         
 
@@ -59,6 +63,8 @@
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -92,6 +98,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ThreadStaticAttribute" />
+
+            
 
             
 

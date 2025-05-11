@@ -26,6 +26,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >Provides data for the <see
          cref="T:System.Exception.SerializeObjectState" />
+
+        
 
         
 
@@ -73,11 +77,15 @@
 
             
 
+            
+
              allows you to serialize custom data in security-transparent code. </para
           >
           <para
             >For more information and an example, see the <see
              cref="T:System.Runtime.Serialization.ISafeSerializationData" />
+
+            
 
             
 
@@ -90,6 +98,8 @@
         </summary>
         <param name="serializedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,6 +130,8 @@
           <para
             >For more information and an example, see the <see
              cref="T:System.Runtime.Serialization.ISafeSerializationData" />
+
+            
 
             
 

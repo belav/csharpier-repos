@@ -5,7 +5,7 @@
 
       >[Example: For example <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface IMethods  
 {  
    void F();  
@@ -28,7 +28,7 @@ abstract class C: IMethods
 
       >[Example: For example <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface IMethods  
 {  
    void F();  

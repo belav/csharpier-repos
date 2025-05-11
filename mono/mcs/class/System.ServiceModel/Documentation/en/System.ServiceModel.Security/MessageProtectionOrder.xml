@@ -21,8 +21,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
+
+        
 
         
 
@@ -44,13 +52,19 @@
 
         
 
+        
+
          or <see
          cref="F:System.ServiceModel.Security.MessageProtectionOrder.EncryptBeforeSign" />
 
         
 
+        
+
          option. (<newTerm
         >Entropy</newTerm>
+
+        
 
         
 
@@ -65,11 +79,15 @@
 
         
 
+        
+
         . This setting first signs the message, encrypts the message body, and then encrypts the XML signature. This reduces the likelihood of a successful cryptographic guessing attack against the signature. </para
       >
       <para
         >However, using the default has performance implications. In effect, there is a tradeoff of performance for increased security. Encrypting the signature can decrease performance between 10 percent and 40 percent. If the data content of the message is of low value, and performance throughput is more significant, use <see
          cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncrypt" />
+
+        
 
         
 
@@ -88,12 +106,16 @@
 
         
 
+        
+
         . For more information about creating a custom binding for a specific authentication mode, see <format
          type="text/html">
           <a href="a7c7747a-5b8c-463f-8493-7266dac75066"
             >How To: Create a SecurityBindingElement for a Specified Authentication Mode</a
           >
         </format>
+
+        
 
         
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          method to open an existing memory-mapped file. </para
       >
     </remarks>
@@ -197,8 +199,12 @@
 
             
 
+            
+
              right and the <see
              cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Execute" />
+
+            
 
             
 

@@ -35,8 +35,12 @@
 
         
 
+        
+
          class provides enumeration functionality for the <see
          cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -84,13 +92,19 @@
 
             
 
+            
+
              property retrieves the current <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -125,13 +139,19 @@
 
             
 
+            
+
              method advances the enumeration to the next <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -143,6 +163,8 @@
           <para
             >This method returns a bool that specifies whether the enumeration successfully advanced. If the enumeration successfully moved to the next <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+            
 
             
 
@@ -177,13 +199,19 @@
 
             
 
+            
+
              method resets the enumeration to the first <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -220,13 +248,19 @@
 
             
 
+            
+
              property retrieves the current <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 

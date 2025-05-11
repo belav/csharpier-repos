@@ -16,12 +16,16 @@
 
         
 
+        
+
          interface provide controls with a script that will initiate a callback to the server. A callback differs from the more common postback in that the page processing for the callback recreates the page without changing state information held by the page. For more information on creating callbacks, see <format
          type="text/html">
           <a href="dfaaa7d4-e1f2-4322-b2f5-796e0419f185"
             >Implementing Client Callbacks Without Postbacks in ASP.NET Web Pages</a
           >
         </format>
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          interface should also implement the <see
          cref="T:System.Web.UI.ICallbackEventHandler" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
 
             
 
+            
+
              method should return a script that, when run on the client, will initiate a callback to the Web server. </para
           >
           <para
@@ -79,8 +89,12 @@
 
             
 
+            
+
              parameter is passed to the <see
              cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+
+            
 
             
 
@@ -93,6 +107,8 @@
                 >Implementing Client Callbacks Without Postbacks in ASP.NET Web Pages</a
               >
             </format>
+
+            
 
             
 
@@ -109,6 +125,8 @@
         </returns>
         <param name="argument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

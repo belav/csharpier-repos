@@ -21,6 +21,8 @@
 
         
 
+        
+
          provides configuration support for personalization options for Web Parts, such as the personalization provider and personalization authorizations.</para
       >
     </remarks>
@@ -44,6 +46,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -52,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.WebPartsPersonalization" />
+
+            
 
             
 
@@ -88,6 +94,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </remarks>
@@ -96,6 +104,8 @@
           <para
             >Gets an <see
              cref="T:System.Web.Configuration.AuthorizationSection" />
+
+            
 
             
 
@@ -129,6 +139,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.WebPartsPersonalization.Providers" />
+
+            
 
             
 
@@ -189,6 +201,8 @@
           <para
             >Gets a <see
              cref="T:System.Configuration.ProviderSettingsCollection" />
+
+            
 
             
 

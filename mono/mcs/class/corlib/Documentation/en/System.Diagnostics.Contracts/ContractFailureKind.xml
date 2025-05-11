@@ -21,8 +21,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
 
             
 
+            
+
              contract failed.</para
           >
         </summary>
@@ -81,6 +87,8 @@
           <para
             >An <see
              cref="Overload:System.Diagnostics.Contracts.Contract.Assume" />
+
+            
 
             
 
@@ -111,6 +119,8 @@
 
             
 
+            
+
              contract failed.</para
           >
         </summary>
@@ -135,6 +145,8 @@
           <para
             >An <see
              cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" />
+
+            
 
             
 
@@ -165,6 +177,8 @@
 
             
 
+            
+
              contract failed.</para
           >
         </summary>
@@ -189,6 +203,8 @@
           <para
             >A <see
              cref="Overload:System.Diagnostics.Contracts.Contract.Requires" />
+
+            
 
             
 

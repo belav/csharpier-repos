@@ -45,6 +45,8 @@
 
         
 
+        
+
          method creates an instance of a type defined in an assembly by invoking the constructor that best matches the specified arguments. If no arguments are specified, the constructor that takes no parameters, that is, the default constructor, is invoked.</para
       >
       <para>You must have sufficient permission to search for and call a constructor; otherwise, an exception is thrown. By default, only public constructors are considered during the search for a constructor. If no constructor or default constructor can be found, an exception is thrown.</para>
@@ -54,8 +56,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Reflection.BindingFlags" />
+
+        
 
         
 
@@ -64,6 +70,8 @@
       <para
         >An evidence parameter affects the security policy and permissions for the constructor. For more information, see the <see
          cref="T:System.Security.Policy.Evidence" />
+
+        
 
         
 
@@ -77,8 +85,12 @@
 
         
 
+        
+
          method creates a proxy to a currently running remote object, server-activated well-known object, or XML Web service. You can specify the connection medium, that is, the channel. For more information, see the <see
          cref="T:System.Runtime.Remoting.Channels.ChannelServices" />
+
+        
 
         
 
@@ -90,13 +102,19 @@
 
         
 
+        
+
          method creates an instance of a type from a currently running assembly. The <see
          cref="M:System.Activator.CreateInstanceFrom(System.String,System.String)" />
 
         
 
+        
+
          method creates an instance from a file that contains an assembly. The <see
          cref="M:System.Activator.CreateComInstanceFrom(System.String,System.String)" />
+
+        
 
         
 
@@ -140,6 +158,8 @@
 
             
 
+            
+
              method to unwrap the return value.</para
           >
           <para
@@ -148,13 +168,19 @@
 
             
 
+            
+
              attribute with a value of true must be applied either explicitly or by default to the COM type so the <see
              cref="M:System.Activator.CreateComInstanceFrom(System.String,System.String)" />
 
             
 
+            
+
              method can create an instance of that type; otherwise, <see
              cref="T:System.TypeLoadException" />
+
+            
 
             
 
@@ -166,8 +192,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -180,8 +210,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -191,6 +225,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -212,8 +248,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -221,6 +261,8 @@
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,6 +306,8 @@
 
             
 
+            
+
              method to unwrap the return value.</para
           >
           <para
@@ -272,13 +316,19 @@
 
             
 
+            
+
              attribute with a value of true must be applied either explicitly or by default to the COM type so the <see
              cref="M:System.Activator.CreateComInstanceFrom(System.String,System.String)" />
 
             
 
+            
+
              method can create an instance of that type; otherwise, <see
              cref="T:System.TypeLoadException" />
+
+            
 
             
 
@@ -290,8 +340,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -304,8 +358,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -315,6 +373,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -336,8 +396,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -348,6 +412,8 @@
 
           
 
+          
+
           The name of the preferred type. </param
         >
         <param name="hashValue">
@@ -355,10 +421,14 @@
 
           
 
+          
+
           The value of the computed hash code. </param
         >
         <param name="hashAlgorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,6 +465,8 @@
 
             
 
+            
+
              method to unwrap the return value.</para
           >
           <para
@@ -403,13 +475,19 @@
 
             
 
+            
+
              class contains an <see
              cref="T:System.ApplicationIdentity" />
 
             
 
+            
+
              object that provides access to the application manifest. For more information, see the <see
              cref="T:System.Security.Policy.ApplicationSecurityManager" />
+
+            
 
             
 
@@ -424,6 +502,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -433,6 +513,8 @@
         </returns>
         <param name="activationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -469,8 +551,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -480,6 +566,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -498,6 +586,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -535,6 +625,8 @@
 
             
 
+            
+
              method to unwrap the return value.</para
           >
           <para
@@ -543,13 +635,19 @@
 
             
 
+            
+
              class contains an <see
              cref="T:System.ApplicationIdentity" />
 
             
 
+            
+
              object that provides access to the application manifest. For more information, see the <see
              cref="T:System.Security.Policy.ApplicationSecurityManager" />
+
+            
 
             
 
@@ -561,6 +659,8 @@
           <para
             >Creates an instance of the type that is designated by the specified <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -576,10 +676,14 @@
 
           
 
+          
+
           An activation context object that specifies the object to create.</param
         >
         <param name="activationCustomData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -618,10 +722,14 @@
 
             
 
+            
+
              to unwrap the return value.</para
           >
           <para>
             <paramref name="assemblyName" />
+
+            
 
             
 
@@ -643,6 +751,8 @@
 
             
 
+            
+
             . For information on using the application configuration file to define assembly locations, see <format
              type="text/html">
               <a href="1cb92bd7-6bab-44cf-8fd3-36303ce84fea">Specifying an Assembly's Location</a>
@@ -650,8 +760,12 @@
 
             
 
+            
+
             . If <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -664,8 +778,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -675,6 +793,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -696,8 +816,12 @@
 
           
 
+          
+
           The name of the assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -706,10 +830,14 @@
 
           
 
+          
+
            is null, the executing assembly is searched. </param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -749,8 +877,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -760,6 +892,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -781,10 +915,14 @@
 
           
 
+          
+
           The type of object to create. </param
         >
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -831,8 +969,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -842,6 +984,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -863,6 +1007,8 @@
 
           
 
+          
+
           The type of object to create. </param
         >
         <param name="args">
@@ -870,8 +1016,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -910,11 +1060,15 @@
 
             
 
+            
+
              when a host needs to execute code in an application domain that has restricted security permissions.</para
           >
           <para
             >Use <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -927,12 +1081,16 @@
 
               
 
+              
+
                to require the immediate caller to have full trust. For important limitations on using the LinkDemand member, see <format
                type="text/html">
                 <a href="1AB877F2-70F4-4E0D-8116-943999DFE8F5"
                   >[&lt;topic://cpcondemandvslinkdemand&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -953,8 +1111,12 @@
 
           
 
+          
+
           The remote domain where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -965,8 +1127,12 @@
 
           
 
+          
+
           The name of the assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -975,10 +1141,14 @@
 
           
 
+          
+
            is null, the executing assembly is searched. </param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1018,6 +1188,8 @@
 
             
 
+            
+
              to unwrap the return value.</para
           >
           <para
@@ -1026,10 +1198,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -1042,8 +1218,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1053,6 +1233,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1074,13 +1256,19 @@
 
           
 
+          
+
           The name of the assembly where the type named <paramref
            name="typeName" />
 
           
 
+          
+
            is sought. If <paramref
            name="assemblyName" />
+
+          
 
           
 
@@ -1091,10 +1279,14 @@
 
           
 
+          
+
           The fully qualified name of the preferred type. </param
         >
         <param name="activationAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1103,8 +1295,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -1145,10 +1341,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -1161,8 +1361,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1172,6 +1376,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1193,6 +1399,8 @@
 
           
 
+          
+
           The type of object to create. </param
         >
         <param name="args">
@@ -1200,8 +1408,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -1212,13 +1424,19 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -1262,8 +1480,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1273,6 +1495,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1294,10 +1518,14 @@
 
           
 
+          
+
           The type of object to create. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1306,8 +1534,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -1318,8 +1550,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -1328,13 +1564,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="type" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1345,8 +1587,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -1357,8 +1603,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -1367,13 +1617,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1417,10 +1673,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -1433,8 +1693,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1444,6 +1708,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1465,10 +1731,14 @@
 
           
 
+          
+
           The type of object to create. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1477,8 +1747,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -1489,8 +1763,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -1499,13 +1777,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="type" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1516,8 +1800,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -1528,8 +1816,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -1538,13 +1830,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1555,13 +1853,19 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -1604,6 +1908,8 @@
 
             
 
+            
+
              to unwrap the return value.</para
           >
           <para
@@ -1612,10 +1918,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -1628,8 +1938,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1639,6 +1953,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1660,13 +1976,19 @@
 
           
 
+          
+
           The name of the assembly where the type named <paramref
            name="typeName" />
 
           
 
+          
+
            is sought. If <paramref
            name="assemblyName" />
+
+          
 
           
 
@@ -1677,6 +1999,8 @@
 
           
 
+          
+
           The fully qualified name of the preferred type. </param
         >
         <param name="ignoreCase">
@@ -1684,8 +2008,12 @@
 
           
 
+          
+
           true to specify that the search for <paramref
            name="typeName" />
+
+          
 
           
 
@@ -1696,13 +2024,19 @@
 
           
 
+          
+
           A combination of zero or more bit flags that affect the search for the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -1713,8 +2047,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -1723,13 +2061,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1740,8 +2084,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -1752,8 +2100,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -1762,13 +2114,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1779,13 +2137,19 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -1829,11 +2193,15 @@
 
             
 
+            
+
              when a host needs to execute code in an application domain that has restricted security permissions.</para
           >
           <para
             >Use <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -1845,10 +2213,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -1861,12 +2233,16 @@
 
               
 
+              
+
                to require the immediate caller to have full trust. For important limitations on using the LinkDemand member, see <format
                type="text/html">
                 <a href="1AB877F2-70F4-4E0D-8116-943999DFE8F5"
                   >[&lt;topic://cpcondemandvslinkdemand&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -1887,8 +2263,12 @@
 
           
 
+          
+
           The domain where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -1899,13 +2279,19 @@
 
           
 
+          
+
           The name of the assembly where the type named <paramref
            name="typeName" />
 
           
 
+          
+
            is sought. If <paramref
            name="assemblyName" />
+
+          
 
           
 
@@ -1916,6 +2302,8 @@
 
           
 
+          
+
           The fully qualified name of the preferred type. </param
         >
         <param name="ignoreCase">
@@ -1923,8 +2311,12 @@
 
           
 
+          
+
           true to specify that the search for <paramref
            name="typeName" />
+
+          
 
           
 
@@ -1935,13 +2327,19 @@
 
           
 
+          
+
           A combination of zero or more bit flags that affect the search for the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -1952,8 +2350,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -1962,13 +2364,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1979,8 +2387,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -1991,8 +2403,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -2001,13 +2417,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2018,13 +2440,19 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -2075,6 +2503,8 @@
 
             
 
+            
+
              to unwrap the return value.</para
           >
           <para
@@ -2083,10 +2513,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -2099,8 +2533,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2110,6 +2548,8 @@
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2131,13 +2571,19 @@
 
           
 
+          
+
           The name of the assembly where the type named <paramref
            name="typeName" />
 
           
 
+          
+
            is sought. If <paramref
            name="assemblyName" />
+
+          
 
           
 
@@ -2148,6 +2594,8 @@
 
           
 
+          
+
           The fully qualified name of the preferred type. </param
         >
         <param name="ignoreCase">
@@ -2155,8 +2603,12 @@
 
           
 
+          
+
           true to specify that the search for <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2167,13 +2619,19 @@
 
           
 
+          
+
           A combination of zero or more bit flags that affect the search for the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -2184,8 +2642,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -2194,13 +2656,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -2211,8 +2679,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -2223,8 +2695,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -2233,13 +2709,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2250,8 +2732,12 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -2260,10 +2746,14 @@
 
           
 
+          
+
            specifies the URL that is required to activate a remote object.  </param
         >
         <param name="securityInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2314,11 +2804,15 @@
 
             
 
+            
+
              when a host needs to execute code in an application domain that has restricted security permissions.</para
           >
           <para
             >Use <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -2331,12 +2825,16 @@
 
               
 
+              
+
                to require the immediate caller to have full trust. For important limitations on using the LinkDemand member, see <format
                type="text/html">
                 <a href="1AB877F2-70F4-4E0D-8116-943999DFE8F5"
                   >[&lt;topic://cpcondemandvslinkdemand&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -2357,8 +2855,12 @@
 
           
 
+          
+
           The domain where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2369,13 +2871,19 @@
 
           
 
+          
+
           The name of the assembly where the type named <paramref
            name="typeName" />
 
           
 
+          
+
            is sought. If <paramref
            name="assemblyName" />
+
+          
 
           
 
@@ -2386,6 +2894,8 @@
 
           
 
+          
+
           The fully qualified name of the preferred type. </param
         >
         <param name="ignoreCase">
@@ -2393,8 +2903,12 @@
 
           
 
+          
+
           true to specify that the search for <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2405,13 +2919,19 @@
 
           
 
+          
+
           A combination of zero or more bit flags that affect the search for the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -2422,8 +2942,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -2432,13 +2956,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -2449,8 +2979,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -2461,8 +2995,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -2471,13 +3009,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2488,8 +3032,12 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -2498,10 +3046,14 @@
 
           
 
+          
+
            specifies the URL that is required to activate a remote object.  </param
         >
         <param name="securityAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2537,8 +3089,12 @@
 
             
 
+            
+
              generic method is used by compilers to implement the instantiation of types specified by type parameters. For example, in the following generic method, the implementation of new T() (gcnew T() in C++) uses the <see
              cref="M:System.Activator.CreateInstance``1" />
+
+            
 
             
 
@@ -2551,6 +3107,8 @@
 
             
 
+            
+
              in application code, because the type must be known at compile time. If the type is known at compile time, normal instantiation syntax can be used (new operator in C#, New in Visual Basic, gcnew in C++). </para
           >
           <para
@@ -2559,8 +3117,12 @@
 
             
 
+            
+
              generic method that take argument lists, because the non-generic overloads of <see
              cref="M:System.Activator.CreateInstance(System.ActivationContext)" />
+
+            
 
             
 
@@ -2577,6 +3139,8 @@
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2615,6 +3179,8 @@
 
             
 
+            
+
              method to unwrap the return value.</para
           >
           <para
@@ -2623,8 +3189,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -2644,8 +3214,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2653,6 +3227,8 @@
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2691,11 +3267,15 @@
 
             
 
+            
+
              when a host needs to execute code in an application domain that has restricted security permissions.</para
           >
           <para
             >Use the <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -2708,12 +3288,16 @@
 
               
 
+              
+
                to require the immediate caller to have full trust. For important limitations on using the LinkDemand member, see <format
                type="text/html">
                 <a href="1AB877F2-70F4-4E0D-8116-943999DFE8F5"
                   >[&lt;topic://cpcondemandvslinkdemand&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -2726,8 +3310,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -2747,8 +3335,12 @@
 
           
 
+          
+
           The remote domain where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2759,8 +3351,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2768,6 +3364,8 @@
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2807,6 +3405,8 @@
 
             
 
+            
+
              method to unwrap the return value.</para
           >
           <para
@@ -2815,10 +3415,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -2830,8 +3434,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -2851,8 +3459,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2863,10 +3475,14 @@
 
           
 
+          
+
           The name of the preferred type. </param
         >
         <param name="activationAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2875,8 +3491,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -2919,6 +3539,8 @@
 
             
 
+            
+
              method to unwrap the return value.</para
           >
           <para
@@ -2927,10 +3549,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -2942,8 +3568,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -2963,8 +3593,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2975,6 +3609,8 @@
 
           
 
+          
+
           The name of the preferred type. </param
         >
         <param name="ignoreCase">
@@ -2982,8 +3618,12 @@
 
           
 
+          
+
           true to specify that the search for <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2994,13 +3634,19 @@
 
           
 
+          
+
           A combination of zero or more bit flags that affect the search for the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3011,8 +3657,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3021,13 +3671,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -3038,8 +3694,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -3050,8 +3710,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -3060,13 +3724,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -3077,13 +3747,19 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -3127,11 +3803,15 @@
 
             
 
+            
+
              when a host needs to execute code in an application domain that has restricted security permissions.</para
           >
           <para
             >Use the <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -3143,10 +3823,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -3158,8 +3842,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -3179,8 +3867,12 @@
 
           
 
+          
+
           The remote domain where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3191,8 +3883,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3203,6 +3899,8 @@
 
           
 
+          
+
           The name of the preferred type. </param
         >
         <param name="ignoreCase">
@@ -3210,8 +3908,12 @@
 
           
 
+          
+
           true to specify that the search for <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3222,13 +3924,19 @@
 
           
 
+          
+
           A combination of zero or more bit flags that affect the search for the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3239,8 +3947,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3249,13 +3961,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -3266,8 +3984,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -3278,8 +4000,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -3288,13 +4014,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -3305,13 +4037,19 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -3362,6 +4100,8 @@
 
             
 
+            
+
              method to unwrap the return value.</para
           >
           <para
@@ -3370,10 +4110,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -3385,8 +4129,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -3406,8 +4154,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3418,6 +4170,8 @@
 
           
 
+          
+
           The name of the preferred type. </param
         >
         <param name="ignoreCase">
@@ -3425,8 +4179,12 @@
 
           
 
+          
+
           true to specify that the search for <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3437,13 +4195,19 @@
 
           
 
+          
+
           A combination of zero or more bit flags that affect the search for the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3454,8 +4218,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3464,13 +4232,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -3481,8 +4255,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -3493,8 +4271,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -3503,13 +4285,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -3520,8 +4308,12 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -3530,10 +4322,14 @@
 
           
 
+          
+
            specifies the URL that is required to activate a remote object.  </param
         >
         <param name="securityInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3584,11 +4380,15 @@
 
             
 
+            
+
              when a host needs to execute code in an application domain that has restricted security permissions.</para
           >
           <para
             >Use the <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -3600,10 +4400,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -3616,12 +4420,16 @@
 
               
 
+              
+
                to require the immediate caller to have full trust. For important limitations on using the LinkDemand member, see <format
                type="text/html">
                 <a href="1AB877F2-70F4-4E0D-8116-943999DFE8F5"
                   >[&lt;topic://cpcondemandvslinkdemand&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -3634,8 +4442,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -3655,8 +4467,12 @@
 
           
 
+          
+
           The remote domain where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3667,8 +4483,12 @@
 
           
 
+          
+
           The name of a file that contains an assembly where the type named <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3679,6 +4499,8 @@
 
           
 
+          
+
           The name of the preferred type. </param
         >
         <param name="ignoreCase">
@@ -3686,8 +4508,12 @@
 
           
 
+          
+
           true to specify that the search for <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3698,13 +4524,19 @@
 
           
 
+          
+
           A combination of zero or more bit flags that affect the search for the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3715,8 +4547,12 @@
 
           
 
+          
+
           An object that uses <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3725,13 +4561,19 @@
 
           
 
+          
+
            to seek and identify the <paramref
            name="typeName" />
 
           
 
+          
+
            constructor. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -3742,8 +4584,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="args" />
+
+          
 
           
 
@@ -3754,8 +4600,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -3764,13 +4614,19 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -3781,8 +4637,12 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -3791,10 +4651,14 @@
 
           
 
+          
+
            specifies the URL that is required to activate a remote object.  </param
         >
         <param name="securityAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3842,10 +4706,14 @@
 
           
 
+          
+
           The type of the well-known object to which you want to connect. </param
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3886,8 +4754,12 @@
 
             
 
+            
+
              parameter communicates information to the channel, and is passed to the <see
              cref="M:System.Runtime.Remoting.Channels.IChannelSender.CreateMessageSink(System.String,System.Object,System.String@)" />
+
+            
 
             
 
@@ -3907,6 +4779,8 @@
 
           
 
+          
+
           The type of the well-known object to which you want to connect. </param
         >
         <param name="url">
@@ -3914,10 +4788,14 @@
 
           
 
+          
+
           The URL of the well-known object. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3992,6 +4870,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -4004,6 +4884,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -4011,10 +4893,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

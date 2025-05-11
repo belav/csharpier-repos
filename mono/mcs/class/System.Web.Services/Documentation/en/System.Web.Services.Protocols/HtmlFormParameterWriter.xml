@@ -27,13 +27,19 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
 
         
 
+        
+
          namespace support the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. Web service writers and readers serialize and deserialize, respectively, between the parameters or return objects of Web methods and the HTTP request or response streams. Web service writers and readers use HTTP for transport but don't exchange messages using the SOAP standard.The client-side <see
          cref="T:System.Web.Services.Protocols.HtmlFormParameterWriter" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
           directly. When the Wsdl.exe tool generates client proxy code according to the HTTP-POST implementation, it applies the <see
          cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+        
 
         
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          property to <see
          cref="T:System.Web.Services.Protocols.HtmlFormParameterWriter" />
+
+        
 
         
 
@@ -81,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.HtmlFormParameterWriter" />
+
+            
 
             
 
@@ -120,10 +136,14 @@
 
           
 
+          
+
           The outgoing request.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -155,8 +175,12 @@
 
             
 
+            
+
               property determines whether the <see
              cref="M:System.Web.Services.Protocols.HtmlFormParameterWriter.WriteRequest(System.IO.Stream,System.Object[])" />
+
+            
 
             
 
@@ -195,8 +219,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter writer,object[] values)" />
+
+            
 
             
 
@@ -212,10 +240,14 @@
 
           
 
+          
+
           An input stream for the outgoing HTTP request's body.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

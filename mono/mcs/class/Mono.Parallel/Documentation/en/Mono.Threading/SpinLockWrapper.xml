@@ -19,6 +19,8 @@
 
       
 
+      
+
        to be able to pass around the lock.</summary
     >
     <remarks />
@@ -39,6 +41,8 @@
         <summary
           >Initialize underlying <see
            cref="T:System.Threading.SpinLock" />
+
+          
 
           
 
@@ -66,8 +70,12 @@
 
           
 
+          
+
            to enable thread tracking, <see
            langword="false" />
+
+          
 
           
 
@@ -76,6 +84,8 @@
         <summary
           >Initialize underlying <see
            cref="T:System.Threading.SpinLock" />
+
+          
 
           
 
@@ -101,6 +111,8 @@
         <summary
           >Instance of <see
            cref="T:System.Threading.SpinLock" />
+
+          
 
           
 

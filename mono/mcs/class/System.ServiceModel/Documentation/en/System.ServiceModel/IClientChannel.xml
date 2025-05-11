@@ -32,13 +32,19 @@
 
         
 
+        
+
          interface defines the operations supported by all channels returned by a call to <see
          cref="M:System.ServiceModel.ChannelFactory`1.CreateChannel" />
 
         
 
+        
+
         . Use the <see
          cref="T:System.ServiceModel.IClientChannel" />
+
+        
 
         
 
@@ -51,13 +57,19 @@
 
         
 
+        
+
          exports both a <see
          cref="T:System.ServiceModel.ClientBase`1" />
 
         
 
+        
+
          class and a service contract interface by creating a contract interface that inherits from both the target service contract and <see
          cref="T:System.ServiceModel.IClientChannel" />
+
+        
 
         
 
@@ -71,10 +83,14 @@
 
         
 
+        
+
         . For examples of its appearance in generated client code files, see <format
          type="text/html">
           <a href="c3f6e4b0-1131-4c94-aa39-a197c5c2f2ca">Understanding Generated Client Code</a>
         </format>
+
+        
 
         
 
@@ -109,8 +125,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+
+            
 
             
 
@@ -125,13 +145,19 @@
 
             
 
+            
+
              attempts to call the <see
              cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
             
 
+            
+
              objects in the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.InteractiveChannelInitializers" />
+
+            
 
             
 
@@ -171,6 +197,8 @@
 
             
 
+            
+
             , so for many applications this call is optional.</para
           >
           <para
@@ -179,13 +207,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.ServiceModel.IClientChannel.BeginDisplayInitializationUI(System.AsyncCallback,System.Object)" />
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.IClientChannel.EndDisplayInitializationUI(System.IAsyncResult)" />
+
+            
 
             
 
@@ -203,6 +237,8 @@
           <para
             >The <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -234,13 +270,19 @@
 
             
 
+            
+
              without calling <see
              cref="M:System.ServiceModel.IClientChannel.DisplayInitializationUI" />
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.ICommunicationObject.Open" />
+
+            
 
             
 
@@ -251,8 +293,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+
+            
 
             
 
@@ -288,6 +334,8 @@
 
             
 
+            
+
             , so for many applications this call is optional.</para
           >
           <para
@@ -296,13 +344,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.ServiceModel.IClientChannel.BeginDisplayInitializationUI(System.AsyncCallback,System.Object)" />
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.IClientChannel.EndDisplayInitializationUI(System.IAsyncResult)" />
+
+            
 
             
 
@@ -318,8 +372,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+
+            
 
             
 
@@ -359,6 +417,8 @@
           <para
             >Called when the call to <see
              cref="M:System.ServiceModel.IClientChannel.BeginDisplayInitializationUI(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -411,8 +471,12 @@
 
             
 
+            
+
              serves as both the ultimate destination and the physical address if a <see
              cref="P:System.ServiceModel.IClientChannel.Via" />
+
+            
 
             
 
@@ -421,8 +485,12 @@
 
             
 
+            
+
              is specified, then that is the actual physical address to which the message is sent and through which the message must go to arrive at its destination. This value can be set from a configuration file using the <see
              cref="T:System.ServiceModel.Description.ClientViaBehavior" />
+
+            
 
             
 

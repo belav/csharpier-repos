@@ -25,16 +25,19 @@
   <Docs>
     <summary>Provides information about a Unix pipe.</summary>
     <remarks>
-      <para
-        >
+      <para>
         A Unix <i
         >pipe</i>
+
+        
 
         
 
          is an object allowing bidirectional data flow
         through a pair of <see
          cref="T:Mono.Unix.UnixStream" />
+
+        
 
         
 
@@ -46,8 +49,13 @@
 
         
 
+        
+
          is the <i
-        >read end</i>
+        
+>read end</i>
+
+        
 
         
 
@@ -57,9 +65,13 @@
 
         
 
+        
+
          is the
         <i
         >write end</i>
+
+        
 
         
 
@@ -69,9 +81,13 @@
 
         
 
+        
+
          can be read through 
         <see
          cref="F:Mono.Unix.UnixPipes.Reading" />
+
+        
 
         
 
@@ -82,11 +98,12 @@
         read end of the pipe.
       </para
       >
-      <para
-        >
+      <para>
         The pipe persists until 
         <see
          cref="F:Mono.Unix.UnixPipes.Reading" />
+
+        
 
         
 
@@ -96,15 +113,18 @@
 
         
 
+        
+
          are closed.
       </para
       >
-      <para
-        >
+      <para>
         A pipe that has had an end closed is considered widowed.  
         Writing on such a pipe causes the writing process to receive a 
         <see
          cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
+
+        
 
         
 
@@ -137,10 +157,11 @@
         <Parameter Name="writing" Type="Mono.Unix.UnixStream" />
       </Parameters>
       <Docs>
-        <param name="reading"
-          >
+        <param name="reading">
           A <see
            cref="T:Mono.Unix.UnixStream" />
+
+          
 
           
 
@@ -150,19 +171,24 @@
 
           
 
+          
+
            can be read from 
           <paramref
            name="reading" />
 
           
 
+          
+
           .
         </param
         >
-        <param name="writing"
-          >
+        <param name="writing">
           A <see
            cref="T:Mono.Unix.UnixStream" />
+
+          
 
           
 
@@ -172,20 +198,25 @@
 
           
 
+          
+
            can be read from 
           <paramref
            name="reading" />
 
           
 
+          
+
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Constructs and initializes a new instance of the 
           <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -195,8 +226,12 @@
 
           
 
+          
+
            and <paramref
            name="writing" />
+
+          
 
           
 
@@ -224,10 +259,11 @@
       <Parameters />
       <Docs>
         <summary>Creates a Unix pipe for interprocess communication.</summary>
-        <returns
-          >
+        <returns>
           A <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -237,9 +273,13 @@
 
           
 
+          
+
           )
           and the "write end" (<see
            cref="F:Mono.Unix.UnixPipes.Writing" />
+
+          
 
           
 
@@ -248,12 +288,13 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This method creates a Unix pipe, an object which allows
             bidirectional data flow through a pair of 
             <see
              cref="T:Mono.Unix.UnixStream" />
+
+            
 
             
 
@@ -262,11 +303,12 @@
           >
         </remarks>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             Too many descriptors are active.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMFILE" />
+
+            
 
             
 
@@ -274,11 +316,12 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -307,10 +350,11 @@
         <Parameter Name="value" Type="Mono.Unix.UnixPipes" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >
+        <param name="value">
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -327,14 +371,20 @@
 
           
 
+          
+
            if <paramref
            name="obj" />
+
+          
 
           
 
            is a 
           <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -345,15 +395,21 @@
 
           
 
+          
+
            and
           <see
            cref="F:Mono.Unix.UnixPipes.Writing" />
 
           
 
+          
+
            match; otherwise, 
           <see
            langword="false" />
+
+          
 
           
 
@@ -433,36 +489,41 @@
         <Parameter Name="rhs" Type="Mono.Unix.UnixPipes" />
       </Parameters>
       <Docs>
-        <param name="lhs"
-          >
+        <param name="lhs">
           The first <see
            cref="T:Mono.Unix.UnixPipes" />
 
           
 
+          
+
            to compare.
         </param
         >
-        <param name="rhs"
-          >
+        <param name="rhs">
           The second <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
            to compare.
         </param
         >
-        <summary
-          >
+        <summary>
           Returns a <see
            cref="T:System.Boolean" />
+
+          
 
           
 
            value indicating whether
           the two specified <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -475,8 +536,12 @@
 
           
 
+          
+
            if <paramref
            name="lhs" />
+
+          
 
           
 
@@ -486,9 +551,13 @@
 
           
 
+          
+
            represent the same 
           <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -523,36 +592,41 @@
         <Parameter Name="rhs" Type="Mono.Unix.UnixPipes" />
       </Parameters>
       <Docs>
-        <param name="lhs"
-          >
+        <param name="lhs">
           The first <see
            cref="T:Mono.Unix.UnixPipes" />
 
           
 
+          
+
            to compare.
         </param
         >
-        <param name="rhs"
-          >
+        <param name="rhs">
           The second <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
            to compare.
         </param
         >
-        <summary
-          >
+        <summary>
           Returns a <see
            cref="T:System.Boolean" />
+
+          
 
           
 
            value indicating whether
           the two specified <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -565,8 +639,12 @@
 
           
 
+          
+
            if <paramref
            name="lhs" />
+
+          
 
           
 
@@ -576,9 +654,13 @@
 
           
 
+          
+
            do not represent the same 
           <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -603,10 +685,11 @@
         <ReturnType>Mono.Unix.UnixStream</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           A <see
            cref="T:Mono.Unix.UnixStream" />
+
+          
 
           
 
@@ -616,16 +699,19 @@
 
           
 
+          
+
            stream.
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             A pipe that has had an end closed is considered widowed.  
             Writing on such a pipe causes the writing process to receive a 
             <see
              cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
+
+            
 
             
 
@@ -651,10 +737,11 @@
         <ReturnType>Mono.Unix.UnixStream</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           A <see
            cref="T:Mono.Unix.UnixStream" />
+
+          
 
           
 
@@ -665,16 +752,19 @@
 
           
 
+          
+
            stream.
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             A pipe that has had an end closed is considered widowed.  
             Writing on such a pipe causes the writing process to receive a 
             <see
              cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
+
+            
 
             
 

@@ -30,13 +30,19 @@
 
         
 
+        
+
          interface defines the method that <see
          cref="T:System.Net.WebRequest" />
 
         
 
+        
+
          descendants must use to register with the <see
          cref="M:System.Net.WebRequest.Create(System.String)" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          interface can be registered with the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          calls the class's <see
          cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" />
+
+        
 
         
 
@@ -71,6 +85,8 @@
       <para
         >Provides the base interface for creating <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -110,8 +126,12 @@
 
             
 
+            
+
              method must return an initialized instance of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -126,6 +146,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -137,11 +159,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

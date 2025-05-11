@@ -33,8 +33,12 @@
 
           
 
+          
+
            has been superseded by the Secure Hash Algorithms SHA-256 and SHA-512 and their derived classes. <see
            cref="T:System.Security.Cryptography.SHA256Managed" />
+
+          
 
           
 
@@ -43,13 +47,19 @@
 
           
 
+          
+
            offer better security and performance than <see
            cref="T:System.Security.Cryptography.RIPEMD160Managed" />
 
           
 
+          
+
           . Use <see
            cref="T:System.Security.Cryptography.RIPEMD160Managed" />
+
+          
 
           
 
@@ -62,6 +72,8 @@
       <para
         >Computes the <see
          cref="T:System.Security.Cryptography.RIPEMD160" />
+
+        
 
         
 
@@ -93,6 +105,8 @@
 
             
 
+            
+
              algorithm is 160 bits.</para
           >
         </remarks>
@@ -101,6 +115,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.RIPEMD160" />
+
+            
 
             
 
@@ -162,11 +178,15 @@
 
             
 
+            
+
              hash algorithm for computing the hash.</para
           >
         </summary>
         <param name="rgb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,10 +197,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="cbSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,6 +269,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Security.Cryptography.RIPEMD160Managed" />
+
+            
 
             
 

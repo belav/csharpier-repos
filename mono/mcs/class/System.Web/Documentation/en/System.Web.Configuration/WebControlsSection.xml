@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the webControls section of a configuration file.</para
       >
       <block subset="none" type="note">
@@ -31,13 +33,19 @@
 
           
 
+          
+
            can read and write information from and to the related section of the configuration file according to the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          
 
           
 
@@ -65,13 +73,19 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.WebControlsSection" />
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -83,6 +97,8 @@
           <para
             >Creates a new instance of <see
              cref="T:System.Web.Configuration.WebControlsSection" />
+
+            
 
             
 
@@ -118,6 +134,8 @@
              type="text/html">
               <a href="13edb6b9-2dea-43c6-b8c1-a47207de19aa">Client Script in ASP.NET Web Pages</a>
             </format>
+
+            
 
             
 

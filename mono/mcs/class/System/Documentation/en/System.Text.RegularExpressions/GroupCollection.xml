@@ -35,8 +35,12 @@
 
         
 
+        
+
          class consists of one or more <see
          cref="T:System.Text.RegularExpressions.Group" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          object is returned by the <see
          cref="P:System.Text.RegularExpressions.Match.Groups" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          objects. If the match is successful, the first element in the collection contains the <see
          cref="T:System.Text.RegularExpressions.Group" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
          object whose <see
          cref="P:System.Text.RegularExpressions.Group.Success" />
+
+        
 
         
 
@@ -78,8 +94,12 @@
 
         
 
+        
+
          property equals <see
          cref="F:System.String.Empty" />
+
+        
 
         
 
@@ -92,11 +112,15 @@
 
         
 
+        
+
          article.  </para
       >
       <para
         >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see
          cref="M:System.Text.RegularExpressions.GroupCollection.GetEnumerator" />
+
+        
 
         
 
@@ -139,6 +163,8 @@
 
               
 
+              
+
                method instead.</para
             >
           </block>
@@ -152,10 +178,14 @@
 
           
 
+          
+
           The array the collection is to be copied into. </param
         >
         <param name="arrayIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,13 +215,19 @@
 
             
 
+            
+
              object always has at least one member. If a match is unsuccessful, the <see
              cref="P:System.Text.RegularExpressions.Match.Groups" />
 
             
 
+            
+
              property returns a <see
              cref="T:System.Text.RegularExpressions.GroupCollection" />
+
+            
 
             
 
@@ -232,8 +268,12 @@
 
             
 
+            
+
              method to retrieve an enumerator that lets you iterate through the <see
              cref="T:System.Text.RegularExpressions.Group" />
+
+            
 
             
 
@@ -252,8 +292,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Text.RegularExpressions.GroupCollection" />
+
+            
 
             
 
@@ -306,6 +350,8 @@
 
               
 
+              
+
                property instead.</para
             >
           </block>
@@ -315,6 +361,8 @@
           <para
             >Gets a value that indicates whether access to the <see
              cref="T:System.Text.RegularExpressions.GroupCollection" />
+
+            
 
             
 
@@ -402,6 +450,8 @@
 
               
 
+              
+
                property instead.</para
             >
           </block>
@@ -411,6 +461,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Text.RegularExpressions.GroupCollection" />
+
+            
 
             
 

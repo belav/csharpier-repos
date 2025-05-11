@@ -20,6 +20,8 @@
 
         
 
+        
+
         , it is added by value instead of by reference. After this, users of this message instance's message properties can copy this object to other messages by cloning, instead of sharing a single object across all messages. </para
       >
     </remarks>
@@ -55,6 +57,8 @@
 
             
 
+            
+
              as a custom property.</para
           >
         </remarks>
@@ -67,6 +71,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.IMessageProperty" />
+
+            
 
             
 

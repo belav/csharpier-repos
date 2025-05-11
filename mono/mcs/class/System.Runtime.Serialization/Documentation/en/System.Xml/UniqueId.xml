@@ -22,6 +22,8 @@
 
         
 
+        
+
         s.</para
       >
     </remarks>
@@ -77,6 +79,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -103,6 +107,8 @@
           <para
             >Creates a new instance of this class using a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -146,8 +152,12 @@
 
           
 
+          
+
           A string used to generate the <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -191,6 +201,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -199,8 +211,12 @@
 
           
 
+          
+
           Offset position within the byte array that represents a <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -243,8 +259,12 @@
 
           
 
+          
+
           Offset position within the char array that represents a <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -255,8 +275,12 @@
 
           
 
+          
+
           Number of array entries to use, starting from <paramref
            name="offset" />
+
+          
 
           
 
@@ -293,6 +317,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -324,6 +350,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -335,11 +363,15 @@
 
             
 
+            
+
             ; otherwise false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -371,6 +403,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -379,6 +413,8 @@
           <para
             >An integer hash-code representation of this <see
              cref="T:System.Xml.UniqueId" />
+
+            
 
             
 
@@ -408,8 +444,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -448,6 +488,8 @@
 
             
 
+            
+
             s.</para
           >
         </summary>
@@ -459,6 +501,8 @@
 
             
 
+            
+
             s are equal, or are both null; false if they are not equal, or if only one of them is null.</para
           >
         </returns>
@@ -467,8 +511,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -479,8 +527,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -518,6 +570,8 @@
 
             
 
+            
+
             s.</para
           >
         </summary>
@@ -530,8 +584,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -542,8 +600,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -590,6 +652,8 @@
 
             
 
+            
+
              value into a char array.</para
           >
         </summary>
@@ -601,6 +665,8 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
@@ -609,8 +675,12 @@
 
           
 
+          
+
           Position in the char array to start inserting the <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -650,6 +720,8 @@
 
             
 
+            
+
              value in string format.</para
           >
         </summary>
@@ -658,6 +730,8 @@
           <para
             >A string representation of the <see
              cref="T:System.Xml.UniqueId" />
+
+            
 
             
 
@@ -727,8 +801,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -743,8 +821,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -756,8 +838,12 @@
 
           
 
+          
+
           byte array that will contain the <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -768,8 +854,12 @@
 
           
 
+          
+
           Position in the byte array to start inserting the <see
            cref="T:System.Guid" />
+
+          
 
           
 

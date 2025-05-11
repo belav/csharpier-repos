@@ -32,7 +32,7 @@
   </ItemGroup>
   <PropertyGroup>
     <CLRTestBatchPreCommands>
-      <![CDATA[
+<![CDATA[
 $(CLRTestBatchPreCommands)
 
     set __ResponseFile=%scriptPath%\multifolder.rsp
@@ -84,7 +84,7 @@ $(CLRTestBatchPreCommands)
 ]]>
     </CLRTestBatchPreCommands>
     <CLRTestBashPreCommands>
-      <![CDATA[
+<![CDATA[
 $(CLRTestBashPreCommands)
 
     __OutputDir=$PWD

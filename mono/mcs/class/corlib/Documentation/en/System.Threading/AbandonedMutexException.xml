@@ -30,6 +30,8 @@
 
         
 
+        
+
          class.</para
       >
       <para>The next thread to request ownership of the mutex can handle this exception and proceed, provided that the integrity of the data structures can be verified.</para>
@@ -39,6 +41,8 @@
       <para
         >The exception that is thrown when one thread acquires a <see
          cref="T:System.Threading.Mutex" />
+
+        
 
         
 
@@ -69,11 +73,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The wait completed due to an abandoned mutex." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -140,6 +148,8 @@
 
             
 
+            
+
              class with default values.</para
           >
         </summary>
@@ -169,11 +179,15 @@
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -212,6 +226,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -246,11 +262,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,11 +306,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The wait completed due to an abandoned mutex." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -339,6 +363,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -352,6 +378,8 @@
               <description>
                 <para>
                   <paramref name="location" />
+
+                  
 
                   
 
@@ -369,8 +397,12 @@
 
             
 
+            
+
              class with a specified index for the abandoned mutex, if applicable, and a <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -382,8 +414,12 @@
 
           
 
+          
+
           The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see
            cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+          
 
           
 
@@ -392,8 +428,12 @@
 
           
 
+          
+
            or <see
            cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+          
 
           
 
@@ -404,8 +444,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -443,6 +487,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -454,6 +500,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -462,8 +510,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -474,8 +526,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -511,6 +567,8 @@
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
@@ -519,8 +577,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -529,11 +591,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -562,6 +628,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -575,6 +643,8 @@
               <description>
                 <para>
                   <paramref name="message" />
+
+                  
 
                   
 
@@ -612,11 +682,15 @@
 
             
 
+            
+
              class with a specified error message and inner exception. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -627,8 +701,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -665,11 +743,15 @@
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -708,6 +790,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -721,6 +805,8 @@
               <description>
                 <para>
                   <paramref name="handle" />
+
+                  
 
                   
 
@@ -740,6 +826,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -754,11 +842,15 @@
 
             
 
+            
+
              class with a specified error message, the index of the abandoned mutex, if applicable, and the abandoned mutex. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -769,8 +861,12 @@
 
           
 
+          
+
           The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see
            cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+          
 
           
 
@@ -779,8 +875,12 @@
 
           
 
+          
+
            or <see
            cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+          
 
           
 
@@ -791,8 +891,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -830,6 +934,8 @@
 
             
 
+            
+
              is a text string intended to inform the user about the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
@@ -838,8 +944,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -848,11 +958,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -881,6 +995,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -894,6 +1010,8 @@
               <description>
                 <para>
                   <paramref name="message" />
+
+                  
 
                   
 
@@ -913,6 +1031,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -926,6 +1046,8 @@
               <description>
                 <para>
                   <paramref name="location" />
+
+                  
 
                   
 
@@ -943,8 +1065,12 @@
 
             
 
+            
+
              class with a specified error message, the inner exception, the index for the abandoned mutex, if applicable, and a <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -956,6 +1082,8 @@
 
           
 
+          
+
           An error message that explains the reason for the exception.</param
         >
         <param name="inner">
@@ -963,8 +1091,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -975,8 +1107,12 @@
 
           
 
+          
+
           The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see
            cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+          
 
           
 
@@ -985,8 +1121,12 @@
 
           
 
+          
+
            or <see
            cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+          
 
           
 
@@ -997,8 +1137,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -1031,8 +1175,12 @@
 
             
 
+            
+
              method, the <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -1041,8 +1189,12 @@
 
             
 
+            
+
              objects that was passed to <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -1051,8 +1203,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            
 
             
 
@@ -1087,8 +1243,12 @@
 
             
 
+            
+
              method, this property returns the index of the abandoned mutex with the lowest index in the array of <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -1097,13 +1257,19 @@
 
             
 
+            
+
             , or –1 if the abandoned mutex could not be identified. If the exception is thrown on a call to <see
              cref="Overload:System.Threading.WaitHandle.WaitOne" />
 
             
 
+            
+
              or <see
              cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            
 
             
 

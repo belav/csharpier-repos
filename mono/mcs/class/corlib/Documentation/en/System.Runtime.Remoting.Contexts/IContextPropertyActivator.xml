@@ -35,13 +35,19 @@
 
         
 
+        
+
          interface is exposed on all <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
+        
+
          properties that are interested in participating in activation and that might have not provided a message sink. Client <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+        
 
         
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          is also used to collect information from the client and server context property and to deliver information from the server context properties to the client context properties when returning to the client <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+        
 
         
 
@@ -96,6 +106,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -108,8 +120,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+          
 
           
 
@@ -150,6 +166,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -162,8 +180,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+
+          
 
           
 
@@ -201,8 +223,12 @@
 
             
 
+            
+
              interface when a construction request arrives at a server. This allows the context property to examine the contents of each <see
              cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+            
 
             
 
@@ -222,8 +248,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+          
 
           
 
@@ -264,6 +294,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -280,8 +312,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+
+          
 
           
 
@@ -320,6 +356,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -332,8 +370,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+          
 
           
 

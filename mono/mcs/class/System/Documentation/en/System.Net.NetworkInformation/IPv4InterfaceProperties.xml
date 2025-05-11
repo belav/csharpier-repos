@@ -27,11 +27,15 @@
 
         
 
+        
+
          method.</para
       >
       <para
         >For IPV6 properties, see <see
          cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -74,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+
+            
 
             
 
@@ -138,6 +146,8 @@
 
             
 
+            
+
              value that indicates whether this interface has an automatic private IP addressing (APIPA) address.</para
           >
         </summary>
@@ -175,6 +185,8 @@
 
             
 
+            
+
              value that indicates whether this interface has automatic private IP addressing (APIPA) enabled.</para
           >
         </summary>
@@ -206,6 +218,8 @@
 
             
 
+            
+
              value that indicates whether the interface is configured to use a Dynamic Host Configuration Protocol (DHCP) server to obtain an IP address.</para
           >
         </summary>
@@ -234,6 +248,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -289,6 +305,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

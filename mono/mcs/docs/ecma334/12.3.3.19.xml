@@ -6,8 +6,12 @@
 
     
 
+    
+
     ), simple names (<hyperlink
     >14.5.2</hyperlink>
+
+    
 
     
 
@@ -16,13 +20,19 @@
 
     
 
+    
+
     ), non-indexed base access expressions (<hyperlink
     >14.5.8</hyperlink>
 
     
 
+    
+
     ), and typeof expressions (<hyperlink
     >14.5.11</hyperlink>
+
+    
 
     
 

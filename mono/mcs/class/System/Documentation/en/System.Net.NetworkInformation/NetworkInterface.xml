@@ -24,6 +24,8 @@
 
         
 
+        
+
          method returns an array that contains one instance of this class for each network interface on the local computer.</para
       >
     </remarks>
@@ -55,6 +57,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -63,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.NetworkInterface" />
+
+            
 
             
 
@@ -131,6 +137,8 @@
 
             
 
+            
+
              array that contains objects that describe the available network interfaces, or an empty array if no interfaces are detected.</para
           >
         </returns>
@@ -172,6 +180,8 @@
 
             
 
+            
+
              object that describes this network interface.</para
           >
         </returns>
@@ -206,6 +216,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -214,6 +226,8 @@
           <para
             >An <see
              cref="T:System.Net.NetworkInformation.IPv4InterfaceStatistics" />
+
+            
 
             
 
@@ -294,6 +308,8 @@
 
             
 
+            
+
              object that contains the physical address.</para
           >
         </returns>
@@ -343,6 +359,8 @@
 
             
 
+            
+
              value that indicates whether the network interface is set to only receive data packets.</para
           >
         </summary>
@@ -375,11 +393,15 @@
 
             
 
+            
+
              property to get the correct value.</para
           >
           <para
             >A network interface may have different interface indexes for the IPv4 and IPv6 loopback interface. The <see
              cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" />
+
+            
 
             
 
@@ -441,11 +463,15 @@
 
             
 
+            
+
              enumeration documentation. </para
           >
           <para
             >This property only returns a subset of the possible values defined in the <see
              cref="T:System.Net.NetworkInformation.NetworkInterfaceType" />
+
+            
 
             
 
@@ -523,6 +549,8 @@
 
             
 
+            
+
              enumeration documentation.</para
           >
         </remarks>
@@ -590,6 +618,8 @@
 
             
 
+            
+
              value that indicates whether the interface supports the specified protocol.</para
           >
         </summary>
@@ -602,8 +632,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.NetworkInterfaceComponent" />
+
+          
 
           
 
@@ -634,6 +668,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

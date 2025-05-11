@@ -102,6 +102,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -132,6 +134,8 @@
           <para
             >This functionality is not exposed by the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+
+            
 
             
 
@@ -191,6 +195,8 @@
           <para
             >This functionality is not exposed by the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+
+            
 
             
 

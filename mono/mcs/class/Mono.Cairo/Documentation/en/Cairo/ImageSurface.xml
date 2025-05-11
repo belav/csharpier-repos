@@ -52,8 +52,12 @@
 
           
 
+          
+
            and <see
            cref="M:Cairo.Graphics.Fill()" />
+
+          
 
           
 
@@ -87,15 +91,18 @@
           >the number of bytes between the start of rows in the buffer. Having this be specified separate from width  allows for padding at the end of rows, or for writing to a subportion of a larger image</param
         >
         <summary>Creates an image surface for the provided pixel data.</summary>
-        <remarks
-          >
+        <remarks>
 	  The output buffer must be kept around until the <see
            cref="T:Cairo.Surface" />
 
           
 
+          
+
            is destroyed or <see
            cref="M:Cairo.Surface.Finish()" />
+
+          
 
           
 
@@ -106,8 +113,12 @@
 
           
 
+          
+
            and <see
            cref="M:Cairo.Graphics.Fill()" />
+
+          
 
           
 
@@ -144,15 +155,18 @@
           >Stride, the number of bytes in a row.   This is typically a number bigger or equal than the width, and it is used to permit individual lines to be aligned.</param
         >
         <summary>Creates an image surface for the provided pixel data.</summary>
-        <remarks
-          >
+        <remarks>
 	  The output buffer must be kept around until the <see
            cref="T:Cairo.Surface" />
 
           
 
+          
+
            is destroyed or <see
            cref="M:Cairo.Surface.Finish()" />
+
+          
 
           
 
@@ -163,8 +177,12 @@
 
           
 
+          
+
            and <see
            cref="M:Cairo.Graphics.Fill()" />
+
+          
 
           
 
@@ -192,6 +210,8 @@
 
           
 
+          
+
            Array</value
         >
         <remarks />
@@ -216,6 +236,8 @@
 
           
 
+          
+
            pointing to the image data in memory</value
         >
         <remarks></remarks>
@@ -237,6 +259,8 @@
         <value
           >The <see
            cref="t:Cairo.Format" />
+
+          
 
           
 

@@ -32,8 +32,12 @@
 
         
 
+        
+
          collection to programmatically manage a collection of <see
          cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          control. You can add, remove, or insert columns in the <see
          cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+        
 
         
 
@@ -56,13 +64,19 @@
 
           
 
+          
+
            property is set to true, the columns created by the <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
+          
+
            control are not added to the <see
            cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+          
 
           
 
@@ -75,8 +89,12 @@
 
         
 
+        
+
          control does not store the contents of its <see
          cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+        
 
         
 
@@ -85,13 +103,19 @@
 
         
 
+        
+
          control's state is reloaded and the control is rebuilt. Otherwise, the changes to the <see
          cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
         
 
+        
+
          collection are not reflected in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -104,13 +128,19 @@
 
           
 
+          
+
            collection of the <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
+          
+
            control, it is easier to list the columns statically and then use the <see
            cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+
+          
 
           
 
@@ -123,11 +153,15 @@
 
         
 
+        
+
          control.</para
       >
       <para
         >The following table lists the different column classes that derive from the <see
          cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+        
 
         
 
@@ -154,6 +188,8 @@
             <para
               >A column that is bound to a field in a data source. It displays each item in the field as text. This is the default column type for the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -209,8 +245,12 @@
 
           
 
+          
+
            class is the base class for the column classes listed. It is not used directly in the <see
            cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+          
 
           
 
@@ -226,8 +266,12 @@
 
         
 
+        
+
         -derived column objects that represent the columns in a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -256,6 +300,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -267,6 +313,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -275,8 +323,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
+
+          
 
           
 
@@ -287,8 +339,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -321,8 +377,12 @@
 
             
 
+            
+
             -derived column object to the end of a <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -334,8 +394,12 @@
 
             
 
+            
+
              control does not store the contents of its <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+            
 
             
 
@@ -344,13 +408,19 @@
 
             
 
+            
+
              control can reload its state and rebuild itself. Otherwise, the changes to the <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
+            
+
              collection are not reflected in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -363,13 +433,19 @@
 
               
 
+              
+
                collection of the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
+              
+
                control, it is easier to list the columns statically and then use the <see
                cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+
+              
 
               
 
@@ -385,8 +461,12 @@
 
             
 
+            
+
             -derived column object to the end of the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -398,13 +478,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
+          
+
           -derived column object to append to the <see
            cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+          
 
           
 
@@ -438,8 +524,12 @@
 
             
 
+            
+
             -derived column object at the specified index location in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -451,8 +541,12 @@
 
             
 
+            
+
              control does not store the contents of its <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+            
 
             
 
@@ -461,13 +555,19 @@
 
             
 
+            
+
              control can reload its state and rebuild itself. Otherwise, the changes to the <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
+            
+
              collection are not reflected in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -480,13 +580,19 @@
 
               
 
+              
+
                collection of the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
+              
+
                control, it is easier to list the columns statically and then use the <see
                cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+
+              
 
               
 
@@ -502,8 +608,12 @@
 
             
 
+            
+
             -derived column object in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -515,13 +625,19 @@
 
           
 
+          
+
           The index location in the <see
            cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
+          
+
            at which to insert the <see
            cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+          
 
           
 
@@ -532,13 +648,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
+          
+
           -derived column to insert in the <see
            cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+          
 
           
 
@@ -566,8 +688,12 @@
 
             
 
+            
+
             -derived column objects from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -577,6 +703,8 @@
             <para
               >The <see
                cref="P:System.Web.UI.WebControls.TableRowCollection.Count" />
+
+              
 
               
 
@@ -592,8 +720,12 @@
 
             
 
+            
+
             -derived column objects from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -625,8 +757,12 @@
 
             
 
+            
+
              collection into the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -639,8 +775,12 @@
 
               
 
+              
+
                parameter must be a zero-based <see
                cref="T:System.Array" />
+
+              
 
               
 
@@ -656,13 +796,19 @@
 
             
 
+            
+
              collection to the specified <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -674,13 +820,19 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+          
 
           
 
@@ -691,8 +843,12 @@
 
           
 
+          
+
           The first position in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -720,8 +876,12 @@
 
             
 
+            
+
              collection. The <see
              cref="P:System.Web.UI.WebControls.DataGridColumnCollection.Count" />
+
+            
 
             
 
@@ -733,6 +893,8 @@
           <para
             >Gets the number of columns in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -769,8 +931,12 @@
 
             
 
+            
+
              interface that can be iterated through easily to get each item in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -782,6 +948,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -790,11 +958,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -807,8 +979,12 @@
 
               
 
+              
+
                method must be called after creating a <see
                cref="T:System.Collections.IEnumerator" />
+
+              
 
               
 
@@ -817,8 +993,12 @@
 
               
 
+              
+
                method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -834,13 +1014,19 @@
 
             
 
+            
+
              interface that contains all the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
+            
+
             -derived column objects in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -855,13 +1041,19 @@
 
             
 
+            
+
              interface that contains all <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
+            
+
             -derived column objects in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -895,13 +1087,19 @@
 
             
 
+            
+
             -derived column object in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
+            
+
              collection. If the specified <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -916,8 +1114,12 @@
 
             
 
+            
+
             -derived column object from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -932,13 +1134,19 @@
 
             
 
+            
+
             -derived column in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
+            
+
             . The default value is -1, which indicates that the specified <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -950,13 +1158,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
+          
+
           -derived column to search for in the <see
            cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+          
 
           
 
@@ -984,6 +1198,8 @@
 
             
 
+            
+
              collection can be written to in all cases.</para
           >
         </remarks>
@@ -992,6 +1208,8 @@
           <para
             >Gets a value that indicates whether the columns in the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -1025,6 +1243,8 @@
 
             
 
+            
+
              class and is overridden to always return false.</para
           >
           <para
@@ -1033,13 +1253,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1051,6 +1277,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -1117,8 +1345,12 @@
 
             
 
+            
+
             -derived column object from a <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -1130,8 +1362,12 @@
 
             
 
+            
+
              control does not store the contents of its <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+            
 
             
 
@@ -1140,13 +1376,19 @@
 
             
 
+            
+
              control can reload its state and rebuild itself. Otherwise, the changes to the <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
+            
+
              collection are not reflected in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1159,13 +1401,19 @@
 
               
 
+              
+
                collection of the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
+              
+
                control, it is easier to list the columns statically and then use the <see
                cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+
+              
 
               
 
@@ -1181,8 +1429,12 @@
 
             
 
+            
+
             -derived column object from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -1194,13 +1446,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
+          
+
           -derived column to remove from the <see
            cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+          
 
           
 
@@ -1230,8 +1488,12 @@
 
             
 
+            
+
             -derived column object from a <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -1243,8 +1505,12 @@
 
             
 
+            
+
              control does not store the contents of its <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+            
 
             
 
@@ -1253,13 +1519,19 @@
 
             
 
+            
+
              control can reload its state and rebuild itself. Otherwise, the changes to the <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
+            
+
              collection are not reflected in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1272,13 +1544,19 @@
 
               
 
+              
+
                collection of the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
+              
+
                control, it is easier to list the columns statically and then use the <see
                cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+
+              
 
               
 
@@ -1294,8 +1572,12 @@
 
             
 
+            
+
             -derived column object from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -1307,13 +1589,19 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
+          
+
           -derived column in the <see
            cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+          
 
           
 
@@ -1341,6 +1629,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -1349,13 +1639,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1367,6 +1663,8 @@
           <para
             >Gets the object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+
+            
 
             
 
@@ -1407,13 +1705,19 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when a <see
              cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1453,8 +1757,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1484,6 +1792,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 

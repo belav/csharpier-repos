@@ -21,6 +21,8 @@
 
         
 
+        
+
          method to warp or distort the figures in a graphics path. This can be used to create unusual shapes.</para
       >
     </remarks>
@@ -29,6 +31,8 @@
       <para
         >Specifies the type of warp transformation applied in a <see
          cref="Overload:System.Drawing.Drawing2D.GraphicsPath.Warp" />
+
+        
 
         
 

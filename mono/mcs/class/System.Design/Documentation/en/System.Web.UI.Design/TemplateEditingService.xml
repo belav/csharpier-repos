@@ -30,8 +30,12 @@
 
           
 
+          
+
            class is obsolete. Expose templates through the <see
            cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+          
 
           
 
@@ -40,13 +44,19 @@
 
           
 
+          
+
            object for each <see
            cref="T:System.Web.UI.Design.TemplateDefinition" />
 
           
 
+          
+
            in each <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -79,8 +89,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -89,13 +103,19 @@
 
               
 
+              
+
                object for each <see
                cref="T:System.Web.UI.Design.TemplateDefinition" />
 
               
 
+              
+
                in each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 
@@ -111,6 +131,8 @@
 
             
 
+            
+
              class with the specified designer host. </para
           >
         </summary>
@@ -119,8 +141,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -156,8 +182,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -166,13 +196,19 @@
 
               
 
+              
+
                object for each <see
                cref="T:System.Web.UI.Design.TemplateDefinition" />
 
               
 
+              
+
                in each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 
@@ -192,6 +228,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -200,8 +238,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+
+          
 
           
 
@@ -212,8 +254,12 @@
 
           
 
+          
+
           The name of the editing frame that will be displayed on the frame. Typically, this is the same as the <see
            cref="P:System.ComponentModel.Design.DesignerVerb.Text" />
+
+          
 
           
 
@@ -222,10 +268,14 @@
 
           
 
+          
+
            that is invoked to create the frame.</param
         >
         <param name="templateNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,8 +313,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -273,8 +327,12 @@
 
               
 
+              
+
                object for each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 
@@ -290,6 +348,8 @@
 
             
 
+            
+
              object, using the specified name, template names, control style, and template styles.</para
           >
         </summary>
@@ -301,6 +361,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -309,8 +371,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+
+          
 
           
 
@@ -321,13 +387,19 @@
 
           
 
+          
+
           The name of the editing frame that will be displayed on the frame. Typically, this is the same as the <see
            cref="P:System.ComponentModel.Design.DesignerVerb.Text" />
 
           
 
+          
+
            used as the menu text for the <see
            cref="T:System.Web.UI.Design.TemplateEditingVerb" />
+
+          
 
           
 
@@ -338,6 +410,8 @@
 
           
 
+          
+
           An array of names for the templates that the template editing frame will contain. </param
         >
         <param name="controlStyle">
@@ -345,8 +419,12 @@
 
           
 
+          
+
           The control <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -357,8 +435,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -384,6 +466,8 @@
           <para
             >Releases all resources that are used by the <see
              cref="T:System.Web.UI.Design.TemplateEditingService" />
+
+            
 
             
 
@@ -434,13 +518,19 @@
 
               
 
+              
+
                class is obsolete. Use the <see
                cref="P:System.Web.UI.Design.TemplatedEditableDesignerRegion.TemplateDefinition" />
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.Design.TemplatedEditableDesignerRegion" />
+
+              
 
               
 
@@ -461,8 +551,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -491,8 +585,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -501,13 +599,19 @@
 
               
 
+              
+
                object for each <see
                cref="T:System.Web.UI.Design.TemplateDefinition" />
 
               
 
+              
+
                in each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 
@@ -517,6 +621,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.Design.TemplateEditingService.SupportsNestedTemplateEditing" />
+
+            
 
             
 

@@ -51,6 +51,8 @@
 
           
 
+          
+
            extension method</summary
         >
         <remarks>
@@ -94,6 +96,8 @@
 
           
 
+          
+
            extension method</summary
         >
         <remarks>
@@ -128,6 +132,8 @@
         <param name="list">To be added.</param>
         <summary>
           <see cref="T:System.Collections.Generic.IEnumerable{System.Int32}" />
+
+          
 
           
 
@@ -175,6 +181,8 @@
 
           
 
+          
+
            extension method.
             </summary
         >
@@ -216,6 +224,8 @@
         <param name="self">To be added.</param>
         <summary>
           <c>System.Object</c>
+
+          
 
           
 

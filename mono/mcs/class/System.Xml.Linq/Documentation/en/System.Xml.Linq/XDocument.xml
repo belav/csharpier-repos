@@ -22,12 +22,16 @@
 
         
 
+        
+
         , see <format
          type="text/html">
           <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
             >Valid Content of XElement and XDocument Objects</a
           >
         </format>
+
+        
 
         
 
@@ -42,10 +46,14 @@
 
         
 
+        
+
          object, see <format
          type="text/html">
           <a href="90f78331-1be8-42fb-93e7-bd1325826467">XDocument Class Overview</a>
         </format>
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
             
 
+            
+
             . Instead, you can usually create your XML trees with an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -84,11 +96,15 @@
 
             
 
+            
+
              as your root node.</para
           >
           <para
             >For details about the valid content of an <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 
@@ -101,6 +117,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -109,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 
@@ -145,13 +165,19 @@
 
             
 
+            
+
             . Instead, you can usually create your XML trees with an <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              root node. Unless you have a specific requirement to create a document (for example, because you have to create processing instructions and comments at the top level, or you have to support document types), it is often more convenient to use <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -163,12 +189,16 @@
 
             
 
+            
+
             , see <format
              type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
             </format>
+
+            
 
             
 
@@ -183,11 +213,15 @@
 
             
 
+            
+
              class with the specified content.</para
           >
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,6 +251,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -225,8 +261,12 @@
 
             
 
+            
+
              parameter, and creates copies of all nodes as it assembles the newly initialized <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 
@@ -241,8 +281,12 @@
 
             
 
+            
+
              class from an existing <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 
@@ -254,8 +298,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -295,13 +343,19 @@
 
             
 
+            
+
             . Instead, you can usually create your XML trees with an <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              root node. Unless you have a specific requirement to create a document (for example, because you have to create processing instructions and comments at the top level, or you have to support document types), it is often more convenient to use <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -313,12 +367,16 @@
 
             
 
+            
+
             , see <format
              type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
             </format>
+
+            
 
             
 
@@ -333,8 +391,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Xml.Linq.XDeclaration" />
+
+            
 
             
 
@@ -346,8 +408,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XDeclaration" />
+
+          
 
           
 
@@ -355,6 +421,8 @@
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,8 +456,12 @@
 
             
 
+            
+
             . Another approach for encoding a document is to specify the encoding on an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -429,6 +501,8 @@
 
             
 
+            
+
              node. When you serialize or save the tree, the DTD will also be serialized. sqltecxlinq will expand any entities in the DTD. When you serialize or save the XML tree, the entity references are not saved; instead, the nodes are saved with the entity references replaced by the text of the entity.</para
           >
           <para>If the DTD contains default attributes, the attributes are created in the XML tree as ordinary attributes.</para>
@@ -438,8 +512,12 @@
 
             
 
+            
+
              that will validate based on a DTD, and then create an XML tree from the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -480,8 +558,12 @@
 
             
 
+            
+
              overload that takes <see
              cref="T:System.Xml.Linq.LoadOptions" />
+
+            
 
             
 
@@ -493,8 +575,12 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -503,11 +589,15 @@
 
             
 
+            
+
              methods that read and parse the document. </para
           >
           <para
             >If you have to modify <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -521,13 +611,19 @@
 
                 
 
+                
+
                  by calling one of the <see
                  cref="Overload:System.Xml.XmlReader.Create" />
 
                 
 
+                
+
                  overloads that take <see
                  cref="T:System.Xml.XmlReaderSettings" />
+
+                
 
                 
 
@@ -541,8 +637,12 @@
 
                 
 
+                
+
                  to one of the <see
                  cref="Overload:System.Xml.Linq.XDocument.Load" />
+
+                
 
                 
 
@@ -551,8 +651,12 @@
 
                 
 
+                
+
                  that takes <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -569,6 +673,8 @@
 
             
 
+            
+
              instance by using the specified stream.</para
           >
         </summary>
@@ -580,11 +686,15 @@
 
             
 
+            
+
              object that reads the data that is contained in the stream. </para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -620,13 +730,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -641,8 +757,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -657,8 +777,12 @@
 
             
 
+            
+
              that contains the contents of the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -670,13 +794,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
 
           
 
+          
+
            that contains the content for the <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -712,6 +842,8 @@
 
             
 
+            
+
              to read the XML into an XML tree.</para
           >
           <para
@@ -720,8 +852,12 @@
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 
@@ -733,13 +869,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -754,6 +896,8 @@
 
             
 
+            
+
              from a file. </para
           >
         </summary>
@@ -765,6 +909,8 @@
 
             
 
+            
+
              that contains the contents of the specified file.</para
           >
         </returns>
@@ -773,8 +919,12 @@
 
           
 
+          
+
           A URI string that references the file to load into a new <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -810,13 +960,19 @@
 
             
 
+            
+
              from a DOM document, and then use the <see
              cref="T:System.Xml.XmlNodeReader" />
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 
@@ -828,13 +984,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -849,8 +1011,12 @@
 
             
 
+            
+
              from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -865,8 +1031,12 @@
 
             
 
+            
+
              that contains the contents of the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -878,13 +1048,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            that contains the content for the <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -921,8 +1097,12 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -931,11 +1111,15 @@
 
             
 
+            
+
              methods that read and parse the document. </para
           >
           <para
             >If you have to modify <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -949,13 +1133,19 @@
 
                 
 
+                
+
                  by calling one of the <see
                  cref="Overload:System.Xml.XmlReader.Create" />
 
                 
 
+                
+
                  overloads that takes <see
                  cref="T:System.Xml.XmlReaderSettings" />
+
+                
 
                 
 
@@ -969,8 +1159,12 @@
 
                 
 
+                
+
                  to one of the <see
                  cref="Overload:System.Xml.Linq.XDocument.Load" />
+
+                
 
                 
 
@@ -979,8 +1173,12 @@
 
                 
 
+                
+
                  that takes <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -997,6 +1195,8 @@
 
             
 
+            
+
              instance by using the specified stream, optionally preserving white space, setting the base URI, and retaining line information.</para
           >
         </summary>
@@ -1008,11 +1208,15 @@
 
             
 
+            
+
              object that reads the data that is contained in the stream.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1023,8 +1227,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -1061,13 +1269,19 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
 
             
 
+            
+
              causes the reader to read all white space in the source XML. Nodes of type <see
              cref="T:System.Xml.Linq.XText" />
+
+            
 
             
 
@@ -1079,8 +1293,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -1092,8 +1310,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -1109,12 +1331,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -1126,8 +1352,12 @@
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1139,8 +1369,12 @@
 
             
 
+            
+
              is not valid when loading from a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1149,6 +1383,8 @@
           <para
             >There is a performance penalty if you set the <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -1161,13 +1397,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1182,8 +1424,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1198,8 +1444,12 @@
 
             
 
+            
+
              that contains the XML that was read from the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1211,13 +1461,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
 
           
 
+          
+
            that contains the content for the <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -1228,8 +1484,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -1266,13 +1526,19 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
 
             
 
+            
+
              causes the reader to read all white space in the source XML. Nodes of type <see
              cref="T:System.Xml.Linq.XText" />
+
+            
 
             
 
@@ -1284,8 +1550,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -1297,8 +1567,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -1314,12 +1588,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -1331,8 +1609,12 @@
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 
@@ -1344,8 +1626,12 @@
 
             
 
+            
+
              and the <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -1358,13 +1644,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1379,6 +1671,8 @@
 
             
 
+            
+
              from a file, optionally preserving white space, setting the base URI, and retaining line information.</para
           >
         </summary>
@@ -1390,6 +1684,8 @@
 
             
 
+            
+
              that contains the contents of the specified file.</para
           >
         </returns>
@@ -1398,8 +1694,12 @@
 
           
 
+          
+
           A URI string that references the file to load into a new <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -1410,8 +1710,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -1448,13 +1752,19 @@
 
             
 
+            
+
              from a DOM document, and then using the <see
              cref="T:System.Xml.XmlNodeReader" />
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1466,8 +1776,12 @@
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XDocument" />
+
+            
 
             
 
@@ -1479,8 +1793,12 @@
 
             
 
+            
+
              is not valid when loading from a <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1489,8 +1807,12 @@
 
             
 
+            
+
              will be configured to either read whitespace or not. The LINQ to XML tree will be populated with the whitespace nodes that the reader surfaces. This will be the behavior regardless of whether <see
              cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+            
 
             
 
@@ -1502,13 +1824,19 @@
 
             
 
+            
+
              may have a valid base URI or not. If you set <see
              cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
 
             
 
+            
+
             , the base URI will be set in the XML tree from the base URI that is reported by the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1520,8 +1848,12 @@
 
             
 
+            
+
              may have a valid line information or not. If you set <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -1530,11 +1862,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >There is a performance penalty if you set the <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -1547,13 +1883,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1568,8 +1910,12 @@
 
             
 
+            
+
              from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1584,8 +1930,12 @@
 
             
 
+            
+
              that contains the XML that was read from the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1597,13 +1947,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            that will be read for the content of the <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -1614,8 +1970,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -1649,13 +2009,19 @@
 
             
 
+            
+
              contain a <see
              cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
+            
+
              property, you can write code that operates on collections of objects where the type of each is a subclass of <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -1696,8 +2062,12 @@
 
             
 
+            
+
              that takes <see
              cref="T:System.Xml.Linq.LoadOptions" />
+
+            
 
             
 
@@ -1713,12 +2083,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -1730,13 +2104,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1751,6 +2131,8 @@
 
             
 
+            
+
              from a string.</para
           >
         </summary>
@@ -1762,11 +2144,15 @@
 
             
 
+            
+
              populated from the string that contains XML.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1803,13 +2189,19 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
 
             
 
+            
+
              causes the reader to read all white space in the source XML. Nodes of type <see
              cref="T:System.Xml.Linq.XText" />
+
+            
 
             
 
@@ -1821,8 +2213,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -1834,8 +2230,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -1851,12 +2251,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -1868,8 +2272,12 @@
 
             
 
+            
+
              is not valid when parsing from a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1878,6 +2286,8 @@
           <para
             >There is a performance penalty if you set the <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -1890,13 +2300,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1911,6 +2327,8 @@
 
             
 
+            
+
              from a string, optionally preserving white space, setting the base URI, and retaining line information.</para
           >
         </summary>
@@ -1922,11 +2340,15 @@
 
             
 
+            
+
              populated from the string that contains XML.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1937,8 +2359,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -1969,12 +2395,16 @@
 
             
 
+            
+
             . See <format
              type="text/html">
               <a href="d266f58d-f2f3-4668-b661-e716e658d13a"
                 >Querying an XDocument vs. Querying an XElement</a
               >
             </format>
+
+            
 
             
 
@@ -2013,8 +2443,12 @@
 
             
 
+            
+
              that takes <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -2023,11 +2457,15 @@
 
             
 
+            
+
              option to save unindented XML. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
           >
           <para
             >Use <see
              cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+
+            
 
             
 
@@ -2042,8 +2480,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2055,8 +2497,12 @@
 
           
 
+          
+
           The stream to output this <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -2090,8 +2536,12 @@
 
             
 
+            
+
              that takes <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -2104,12 +2554,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -2124,8 +2578,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -2137,13 +2595,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
 
           
 
+          
+
            that the <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -2177,8 +2641,12 @@
 
             
 
+            
+
              that takes <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -2191,12 +2659,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -2211,11 +2683,15 @@
 
             
 
+            
+
              to a file, overwriting an existing file, if it exists.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2249,8 +2725,12 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2262,13 +2742,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlWriter" />
 
           
 
+          
+
            that the <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -2305,8 +2791,12 @@
 
             
 
+            
+
              are set to <see
              cref="F:System.Xml.Linq.SaveOptions.None" />
+
+            
 
             
 
@@ -2318,8 +2808,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -2328,6 +2822,8 @@
           <para
             >Use <see
              cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+
+            
 
             
 
@@ -2342,8 +2838,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2355,8 +2855,12 @@
 
           
 
+          
+
           The stream to output this <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -2367,8 +2871,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -2405,8 +2913,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -2418,8 +2930,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -2428,8 +2944,12 @@
 
             
 
+            
+
              methods that do not take <paramref
              name="options" />
+
+            
 
             
 
@@ -2445,12 +2965,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -2465,8 +2989,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -2478,8 +3006,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -2490,8 +3022,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -2528,8 +3064,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -2541,8 +3081,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -2551,8 +3095,12 @@
 
             
 
+            
+
              methods that do not take <paramref
              name="options" />
+
+            
 
             
 
@@ -2568,12 +3116,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -2588,11 +3140,15 @@
 
             
 
+            
+
              to a file, optionally disabling formatting.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2603,8 +3159,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -2641,6 +3201,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2649,8 +3211,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

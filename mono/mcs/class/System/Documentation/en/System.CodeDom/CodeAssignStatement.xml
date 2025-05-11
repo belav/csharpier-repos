@@ -38,8 +38,12 @@
 
         
 
+        
+
          can be used to represent a statement that assigns the value of an object to another object, or a reference to another reference. Simple assignment statements are usually of the form " <paramref
          name="value1" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          ", where <paramref
          name="value1" />
+
+        
 
         
 
@@ -58,13 +66,19 @@
 
         
 
+        
+
          is being assigned. The <see
          cref="P:System.CodeDom.CodeAssignStatement.Left" />
 
         
 
+        
+
          property indicates the object to assign to. The <see
          cref="P:System.CodeDom.CodeAssignStatement.Right" />
+
+        
 
         
 
@@ -98,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeAssignStatement" />
+
+            
 
             
 
@@ -136,6 +152,8 @@
 
             
 
+            
+
              class using the specified expressions.</para
           >
         </summary>
@@ -144,10 +162,14 @@
 
           
 
+          
+
           The variable to assign to. </param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

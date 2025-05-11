@@ -49,8 +49,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -63,8 +67,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -74,6 +82,8 @@
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                
 
                 
 
@@ -87,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.SupportingTokenParameters" />
+
+            
 
             
 
@@ -123,6 +135,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Security.Tokens.SupportingTokenParameters" />
+
+            
 
             
 
@@ -187,8 +201,12 @@
 
             
 
+            
+
              in <see
              cref="P:System.ServiceModel.Security.Tokens.SupportingTokenParameters.Endorsing" />
+
+            
 
             
 
@@ -197,13 +215,19 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
 
             
 
+            
+
              property set to <paramref
              name="requireDerivedKeys" />
+
+            
 
             
 
@@ -219,8 +243,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -335,8 +363,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Security.Tokens.SupportingTokenParameters.Signed" />
+
+            
 
             
 
@@ -345,8 +377,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ServiceModel.Security.Tokens.SupportingTokenParameters.SignedEndorsing" />
+
+            
 
             
 

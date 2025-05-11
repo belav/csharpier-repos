@@ -45,13 +45,19 @@
 
         
 
+        
+
          presents a simple mechanism for indicating to the end user that a control on a form has an error associated with it. If an error description string is specified for the control, an icon appears next to the control. The icon flashes in the manner specified by <see
          cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
 
         
 
+        
+
         , at the rate specified by <see
          cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
          in association with data-bound controls. When using <see
          cref="T:System.Windows.Forms.ErrorProvider" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
         , either in the constructor or by setting the <see
          cref="P:System.Windows.Forms.ErrorProvider.ContainerControl" />
+
+        
 
         
 
@@ -84,6 +98,8 @@
         <para
           >The <see
            cref="T:System.Windows.Forms.ErrorProvider" />
+
+          
 
           
 
@@ -107,6 +123,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Windows.Forms.ErrorProvider" />
+
+            
 
             
 
@@ -165,8 +183,12 @@
 
             
 
+            
+
              class and initializes the default settings for <see
              cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
+
+            
 
             
 
@@ -175,8 +197,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Windows.Forms.ErrorProvider.Icon" />
+
+            
 
             
 
@@ -210,6 +236,8 @@
 
             
 
+            
+
              specified is the container object for the data-bound controls to associate the error provider with.</para
           >
         </remarks>
@@ -221,8 +249,12 @@
 
             
 
+            
+
              class attached to an <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -234,8 +266,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IContainer" />
+
+          
 
           
 
@@ -261,8 +297,12 @@
 
             
 
+            
+
              specified by <see
              cref="P:System.Windows.Forms.ErrorProvider.ContainerControl" />
+
+            
 
             
 
@@ -277,11 +317,15 @@
 
             
 
+            
+
              class attached to a container.</para
           >
         </summary>
         <param name="parentControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -315,8 +359,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+
+            
 
             
 
@@ -325,13 +373,19 @@
 
             
 
+            
+
              instead of setting <see
              cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+
+            
 
             
 
@@ -346,8 +400,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+
+            
 
             
 
@@ -359,13 +417,19 @@
 
           
 
+          
+
           A data set based on the <see
            cref="T:System.Collections.IList" />
 
           
 
+          
+
            interface to be monitored for errors. Typically, this is a <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -376,13 +440,19 @@
 
           
 
+          
+
           A collection within the <paramref
            name="newDataSource" />
 
           
 
+          
+
            to monitor for errors. Typically, this will be a <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -418,8 +488,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.ErrorBlinkStyle.NeverBlink" />
+
+            
 
             
 
@@ -460,8 +534,12 @@
 
             
 
+            
+
              when an error occurs. Setting the <see
              cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
+
+            
 
             
 
@@ -470,8 +548,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.ErrorBlinkStyle.NeverBlink" />
+
+            
 
             
 
@@ -506,8 +588,12 @@
 
             
 
+            
+
              to determine whether you can attach an <see
              cref="T:System.Windows.Forms.ErrorProvider" />
+
+            
 
             
 
@@ -527,8 +613,12 @@
 
             
 
+            
+
              and is not a <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -537,11 +627,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="extendee">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -572,8 +666,12 @@
 
             
 
+            
+
             , restoring the properties to their default values. To clear the error message, call the <see
              cref="M:System.Windows.Forms.ErrorProvider.SetError(System.Windows.Forms.Control,System.String)" />
+
+            
 
             
 
@@ -582,13 +680,19 @@
 
             
 
+            
+
              for the <see
              cref="T:System.String" />
 
             
 
+            
+
              value. This removes the error glyph from the specified <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -625,6 +729,8 @@
 
             
 
+            
+
              the data-bound controls reside on.</para
           >
         </remarks>
@@ -633,6 +739,8 @@
           <para
             >Gets or sets a value indicating the parent control for this <see
              cref="T:System.Windows.Forms.ErrorProvider" />
+
+            
 
             
 
@@ -669,8 +777,12 @@
 
             
 
+            
+
              is a navigation string based on <see
              cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+
+            
 
             
 
@@ -682,8 +794,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+
+            
 
             
 
@@ -692,13 +808,19 @@
 
             
 
+            
+
              instead of setting <see
              cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+
+            
 
             
 
@@ -739,13 +861,19 @@
 
             
 
+            
+
              is a data source that you can attach to a control and that you want to monitor for errors. <see
              cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
+            
+
              can be set to any collection that implements <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -757,8 +885,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+
+            
 
             
 
@@ -767,13 +899,19 @@
 
             
 
+            
+
              instead of setting <see
              cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+
+            
 
             
 
@@ -785,6 +923,8 @@
           <para
             >Gets or sets the data source that the <see
              cref="T:System.Windows.Forms.ErrorProvider" />
+
+            
 
             
 
@@ -843,6 +983,8 @@
 
           
 
+          
+
           The item to get the error description string for. </param
         >
       </Docs>
@@ -885,8 +1027,12 @@
 
             
 
+            
+
              values. The default icon alignment is <see
              cref="F:System.Windows.Forms.ErrorIconAlignment.MiddleRight" />
+
+            
 
             
 
@@ -895,6 +1041,8 @@
         </returns>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -944,6 +1092,8 @@
 
           
 
+          
+
           The control to get the padding for. </param
         >
       </Docs>
@@ -982,6 +1132,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -1025,11 +1177,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ErrorProvider.OnRightToLeftChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1044,6 +1200,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1052,8 +1210,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1110,6 +1272,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1118,6 +1282,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ErrorProvider.RightToLeft" />
+
+            
 
             
 
@@ -1148,8 +1314,12 @@
 
             
 
+            
+
              is greater than zero, then the error icon is displayed, and the ToolTip for the error icon is the error description text. If the length is zero or <paramref
              name="value" />
+
+            
 
             
 
@@ -1165,6 +1335,8 @@
 
           
 
+          
+
           The control to set the error description string for. </param
         >
         <param name="value">
@@ -1172,8 +1344,12 @@
 
           
 
+          
+
           The error description string, or null or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -1212,6 +1388,8 @@
 
           
 
+          
+
           The control to set the icon location for. </param
         >
         <param name="value">
@@ -1219,8 +1397,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ErrorIconAlignment" />
+
+          
 
           
 
@@ -1259,8 +1441,12 @@
 
           
 
+          
+
           The <paramref
            name="control" />
+
+          
 
           
 
@@ -1271,8 +1457,12 @@
 
           
 
+          
+
           The number of pixels to add between the icon and the <paramref
            name="control" />
+
+          
 
           
 
@@ -1390,6 +1580,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1401,8 +1593,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+
+            
 
             
 

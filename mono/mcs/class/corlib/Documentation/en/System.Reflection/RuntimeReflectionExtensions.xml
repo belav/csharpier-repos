@@ -55,6 +55,8 @@
 
           
 
+          
+
           The delegate to examine.</param
         >
       </Docs>
@@ -90,6 +92,8 @@
         </returns>
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,10 +136,14 @@
 
           
 
+          
+
           The type that contains the event.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -180,6 +188,8 @@
 
           
 
+          
+
           The type that contains the events.</param
         >
       </Docs>
@@ -219,10 +229,14 @@
 
           
 
+          
+
           The type that contains the field.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,6 +281,8 @@
 
           
 
+          
+
           The type that contains the fields.</param
         >
       </Docs>
@@ -306,10 +322,14 @@
 
           
 
+          
+
           The type to retrieve a mapping for.</param
         >
         <param name="interfaceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,6 +373,8 @@
 
           
 
+          
+
           The type that contains the method.</param
         >
         <param name="name">
@@ -360,10 +382,14 @@
 
           
 
+          
+
           The name of the method.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -408,6 +434,8 @@
 
           
 
+          
+
           The type that contains the methods.</param
         >
       </Docs>
@@ -446,6 +474,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -488,10 +518,14 @@
 
           
 
+          
+
           The type that contains the property.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -21,13 +21,19 @@
 
         
 
+        
+
          interface in your code. Instead use the <see
          cref="P:System.Xml.XmlTextReader.Normalization" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Xml.XmlTextReader" />
+
+        
 
         
 
@@ -39,6 +45,8 @@
       <para
         >Establishes a <see
          cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
             
 
+            
+
              interface and <see
              cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
+
+            
 
             
 
@@ -79,8 +91,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -121,8 +137,12 @@
 
             
 
+            
+
              interface and <see
              cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
+
+            
 
             
 
@@ -131,8 +151,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 

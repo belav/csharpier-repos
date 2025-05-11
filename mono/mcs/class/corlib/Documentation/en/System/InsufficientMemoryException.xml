@@ -27,8 +27,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.InsufficientMemoryException" />
+
+        
 
         
 
@@ -40,11 +44,15 @@
 
         
 
+        
+
          constructor when you specify a projected memory allocation larger than the amount of currently available memory. Your program can catch the exception and either delay the task that needs the memory or execute it in smaller steps that require less memory.</para
       >
       <para
         >See the <see
          cref="T:System.Runtime.MemoryFailPoint" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
 
           
 
+          
+
            or the <format
            type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
@@ -64,8 +74,12 @@
 
           
 
+          
+
           , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
            cref="T:System.OutOfMemoryException" />
+
+          
 
           
 
@@ -101,11 +115,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Insufficient available memory to meet the expected demands of an operation at this time. Please try again later." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InsufficientMemoryException" />
+
+            
 
             
 
@@ -152,6 +170,8 @@
 
             
 
+            
+
              class with a system-supplied message that describes the error.</para
           >
         </summary>
@@ -178,6 +198,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InsufficientMemoryException" />
+
+            
 
             
 
@@ -217,6 +239,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -231,11 +255,15 @@
 
             
 
+            
+
              class with a specified message that describes the error.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,8 +299,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -281,11 +313,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InsufficientMemoryException" />
+
+            
 
             
 
@@ -325,6 +361,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -339,11 +377,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,8 +396,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used in the <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnObjectCreating(System.Web.UI.WebControls.ObjectDataSourceEventArgs)" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          methods to provide access to the business object instance before any data operations that are using the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          property. By adding an event handler delegate to handle the <see
          cref="E:System.Web.UI.WebControls.ObjectDataSourceView.ObjectCreating" />
+
+        
 
         
 
@@ -52,13 +64,19 @@
 
         
 
+        
+
          performing the instantiation. This is useful when you want a non-default instance of your business object or to call a non-default constructor to create the instance; the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
+        
+
          always calls the default constructor to create an instance of the business object it works with. You can also add an event handler delegate to handle the  <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectCreated" />
+
+        
 
         
 
@@ -70,13 +88,19 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnObjectCreated(System.Web.UI.WebControls.ObjectDataSourceEventArgs)" />
 
         
 
+        
+
          methods are not called by the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -88,8 +112,12 @@
 
         
 
+        
+
          control exposes many events that you can handle to work with the underlying business object at various times in its lifecycle. The following table lists the events and the associated <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -116,6 +144,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs immediately before the instance of the business object is created.</para>
@@ -135,6 +165,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectCreated" />
+
+              
 
               
 
@@ -160,6 +192,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs before the data is retrieved.</para>
@@ -182,13 +216,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
+
+              
 
               
 
@@ -214,6 +254,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs after the data is retrieved.</para>
@@ -236,13 +278,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+
+              
 
               
 
@@ -265,6 +313,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectDisposing" />
+
+              
 
               
 
@@ -293,13 +343,19 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectCreated" />
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -328,6 +384,8 @@
 
             
 
+            
+
              class using the specified object.</para
           >
         </summary>
@@ -336,8 +394,12 @@
 
           
 
+          
+
           The business object with which the <see
            cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+          
 
           
 
@@ -363,6 +425,8 @@
           <para
             >Gets or sets an object that represents the business object with which the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 

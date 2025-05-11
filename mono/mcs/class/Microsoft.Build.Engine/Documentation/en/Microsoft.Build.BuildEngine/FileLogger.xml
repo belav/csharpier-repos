@@ -22,8 +22,12 @@
 
         
 
+        
+
          writes messages to a file in exactly the same format as the <see
          cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Extends the <see
          cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.BuildEngine.FileLogger" />
+
+            
 
             
 
@@ -92,8 +100,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.Framework.IEventSource" />
+
+          
 
           
 

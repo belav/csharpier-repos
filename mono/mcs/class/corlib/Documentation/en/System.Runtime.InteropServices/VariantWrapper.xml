@@ -24,6 +24,8 @@
 
         
 
+        
+
          is to add one level of indirection when marshaling a managed type to the corresponding VARIANT type.</para
       >
       <para
@@ -32,13 +34,19 @@
 
         
 
+        
+
          that the interop marshaler passes as VT_VARIANT | VT_BYREF. In versions 1.0 and 1.1 of the .NET Framework, it was not possible to marshal variant data of type VT_VARIANT | VT_BYREF to unmanaged code. The interop marshaler passed a variant of the managed type (for example, VT_BSTR | VT_BYREF for <see
          cref="T:System.String" />
 
         
 
+        
+
         , or VT_I4 | VT_BYREF for <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -50,6 +58,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -58,8 +68,12 @@
 
         
 
+        
+
          only when calling <see
          cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+
+        
 
         
 
@@ -68,13 +82,19 @@
 
         
 
+        
+
         . In Visual Basic, ByRef semantics are added automatically for every implicit late binding call. Also note that nesting <see
          cref="T:System.Runtime.InteropServices.VariantWrapper" />
 
         
 
+        
+
          objects and arrays of <see
          cref="T:System.Runtime.InteropServices.VariantWrapper" />
+
+        
 
         
 
@@ -112,8 +132,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -122,6 +146,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -150,6 +176,8 @@
           <para
             >Gets the object wrapped by the <see
              cref="T:System.Runtime.InteropServices.VariantWrapper" />
+
+            
 
             
 

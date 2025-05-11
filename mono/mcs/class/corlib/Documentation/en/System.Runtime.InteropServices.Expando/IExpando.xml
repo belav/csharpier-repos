@@ -40,6 +40,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -80,11 +82,15 @@
 
             
 
+            
+
              object representing the added field.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,10 +135,14 @@
 
           
 
+          
+
           The name of the method. </param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,6 +186,8 @@
 
           
 
+          
+
           The name of the property. </param
         >
       </Docs>
@@ -209,6 +221,8 @@
         </summary>
         <param name="m">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

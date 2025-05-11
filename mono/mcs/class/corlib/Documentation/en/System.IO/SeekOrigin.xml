@@ -38,8 +38,12 @@
 
         
 
+        
+
          is used by the Seek methods of <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -58,13 +66,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.BinaryWriter" />
 
         
 
+        
+
         , and other classes. The Seek methods take an offset parameter that is relative to the position specified by <see
          cref="T:System.IO.SeekOrigin" />
+
+        
 
         
 

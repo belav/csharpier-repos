@@ -38,6 +38,8 @@
 
         
 
+        
+
          can be used to represent the declaration for a field of a type.</para
       >
     </remarks>
@@ -68,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeMemberField" />
+
+            
 
             
 
@@ -106,6 +110,8 @@
 
             
 
+            
+
              class using the specified field type and field name.</para
           >
         </summary>
@@ -114,10 +120,14 @@
 
           
 
+          
+
           An object that indicates the type of the field. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,6 +161,8 @@
 
             
 
+            
+
              parameter references a generic type, it must follow the syntax conventions for generic types. Generic types are formatted as follows: the name of the type, followed by a grave accent ("`"), followed by a count of the generic type arguments, followed by the parameters delimited with brackets.</para
           >
           <block subset="none" type="note">
@@ -159,6 +171,8 @@
           <para
             >To avoid the possibility of making a syntactic mistake, consider using the <see
              cref="M:System.CodeDom.CodeMemberField.#ctor(System.Type,System.String)" />
+
+            
 
             
 
@@ -173,6 +187,8 @@
 
             
 
+            
+
              class using the specified field type and field name.</para
           >
         </summary>
@@ -181,10 +197,14 @@
 
           
 
+          
+
           The type of the field. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,6 +239,8 @@
 
             
 
+            
+
              class using the specified field type and field name.</para
           >
         </summary>
@@ -227,10 +249,14 @@
 
           
 
+          
+
           The type of the field. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

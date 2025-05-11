@@ -31,6 +31,8 @@
 
         
 
+        
+
          is nonfunctional, and can be used only as the base class for SOAP attributes.</para
       >
     </remarks>
@@ -61,6 +63,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
+
+            
 
             
 
@@ -111,8 +115,12 @@
 
             
 
+            
+
              field through the public <see
              cref="P:System.Runtime.Remoting.Metadata.SoapAttribute.XmlNamespace" />
+
+            
 
             
 
@@ -146,6 +154,8 @@
 
             
 
+            
+
              field directly.</para
           >
         </remarks>
@@ -154,6 +164,8 @@
           <para
             >A reflection object used by attribute classes derived from the <see
              cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
+
+            
 
             
 
@@ -181,6 +193,8 @@
           <para
             >For example, if a field FieldA of an object ObjectB is qualified with the SoapFieldAttribute(UseAttribute=true) attribute, FieldA will be serialized as &lt;ObjectB&gt;&lt;FieldA&gt;5&lt;/FieldA&gt;&lt;/ObjectB&gt;. If the <see
              cref="P:System.Runtime.Remoting.Metadata.SoapAttribute.UseAttribute" />
+
+            
 
             
 

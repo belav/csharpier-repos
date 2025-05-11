@@ -53,8 +53,12 @@
 
         
 
+        
+
         , which can be placed in a <see
          cref="T:System.ServiceModel.Syndication.SyndicationElementExtensionCollection" />
+
+        
 
         
 
@@ -93,11 +97,15 @@
 
             
 
+            
+
              class with the specified object.</para
           >
         </summary>
         <param name="dataContractExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,6 +139,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -139,13 +149,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            that contains the content of the new <see
            cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+          
 
           
 
@@ -183,6 +199,8 @@
 
             
 
+            
+
              class with the specified object and data contract serializer.</para
           >
         </summary>
@@ -191,10 +209,14 @@
 
           
 
+          
+
           The data contract object used to initialize the extension.</param
         >
         <param name="dataContractSerializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,6 +251,8 @@
 
             
 
+            
+
              class with the specified object and XML serializer.</para
           >
         </summary>
@@ -237,10 +261,14 @@
 
           
 
+          
+
           The object used to initialize the extension.</param
         >
         <param name="serializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,11 +304,15 @@
 
             
 
+            
+
              class with the specified outer name, outer namespace, and object.</para
           >
         </summary>
         <param name="outerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,10 +323,14 @@
 
           
 
+          
+
           The namespace of the enclosing XML element.</param
         >
         <param name="dataContractExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -334,11 +370,15 @@
 
             
 
+            
+
              class with the specified outer name, outer namespace, object, and data contract serializer.</para
           >
         </summary>
         <param name="outerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,6 +389,8 @@
 
           
 
+          
+
           The namespace of the enclosing XML element.</param
         >
         <param name="dataContractExtension">
@@ -356,10 +398,14 @@
 
           
 
+          
+
           The object used to initialize the extension.</param
         >
         <param name="dataContractSerializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -396,6 +442,8 @@
         </returns>
         <typeparam name="TExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -440,8 +488,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+          
 
           
 
@@ -449,6 +501,8 @@
         >
         <typeparam name="TExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -493,8 +547,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -502,6 +560,8 @@
         >
         <typeparam name="TExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,8 +593,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+            
 
             
 
@@ -549,8 +613,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+            
 
             
 
@@ -635,6 +703,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -643,8 +713,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

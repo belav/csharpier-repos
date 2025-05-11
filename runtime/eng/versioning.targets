@@ -163,7 +163,7 @@
         >$(ArtifactsObjDir)runtime_version.h</RuntimeVersionFile
       >
       <_RuntimeVersionFileContents>
-        <![CDATA[
+<![CDATA[
 #define RuntimeAssemblyMajorVersion $(MajorVersion)
 #define RuntimeAssemblyMinorVersion $(MinorVersion)
 

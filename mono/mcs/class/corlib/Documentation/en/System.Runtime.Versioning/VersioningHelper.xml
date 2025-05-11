@@ -24,8 +24,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
 
             
 
+            
+
              identity, or both.</para
           >
         </remarks>
@@ -86,6 +92,8 @@
 
           
 
+          
+
           The name of the resource.</param
         >
         <param name="from">
@@ -93,10 +101,14 @@
 
           
 
+          
+
           The scope of the resource.</param
         >
         <param name="to">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,10 +158,14 @@
 
           
 
+          
+
           The name of the resource.</param
         >
         <param name="from">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -160,6 +176,8 @@
 
           
 
+          
+
           The end of the scope range.</param
         >
         <param name="type">
@@ -167,8 +185,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

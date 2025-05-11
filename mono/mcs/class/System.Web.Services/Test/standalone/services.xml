@@ -752,7 +752,8 @@
   </service>
   <service>
     <wsdl>http://sandbox.grandcentral.com/services/reports?WSDL</wsdl>
-    <name>reportsTest</name>
+    <name
+>reportsTest</name>
     <serverType>Apache/1.3.29 (Unix) mod_jk/1.2.0 mod_perl/1.29 mod_ssl/2.8.16 OpenSSL/0.9.7c # </serverType>
     <protocols>
       <protocol>Soap</protocol>
@@ -1216,7 +1217,8 @@
   </service>
   <service>
     <wsdl>http://www.infoaccelerator.net/cfc/rtf2html.cfc?WSDL</wsdl>
-    <name>rtf2htmlTest</name>
+    <name
+>rtf2htmlTest</name>
     <serverType>Microsoft-IIS/5.0 # </serverType>
     <protocols>
       <protocol>Soap</protocol>
@@ -1273,7 +1275,8 @@
   </service>
   <service>
     <wsdl>http://www.richsolutions.com/richpayments/richpay.asmx?WSDL</wsdl>
-    <name>richpayTest</name>
+    <name
+>richpayTest</name>
     <serverType>Microsoft-IIS/5.0 # ASP.NET</serverType>
     <protocols>
       <protocol>Soap</protocol>
@@ -2249,7 +2252,8 @@
   </service>
   <service>
     <wsdl>http://ws.xara.com/graphicrender/render3d.wsdl</wsdl>
-    <name>render3dTest</name>
+    <name
+>render3dTest</name>
     <serverType>Microsoft-IIS/5.0 # </serverType>
     <protocols>
       <protocol>Soap</protocol>
@@ -3108,7 +3112,8 @@
   </service>
   <service>
     <wsdl>http://lokeuei.malaysiandevelopers.net/magnum4d/results.asmx?WSDL</wsdl>
-    <name>resultsTest</name>
+    <name
+>resultsTest</name>
     <serverType>Microsoft-IIS/5.0 # ASP.NET</serverType>
     <protocols>
       <protocol>Soap</protocol>

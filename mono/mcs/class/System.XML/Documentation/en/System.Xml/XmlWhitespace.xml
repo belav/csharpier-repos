@@ -64,11 +64,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="strData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -79,8 +83,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDocument" />
+
+          
 
           
 
@@ -117,8 +125,12 @@
 
             
 
+            
+
              serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see
              cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+
+            
 
             
 
@@ -127,6 +139,8 @@
           <para
             >The cloned node has no parent. <see
              cref="P:System.Xml.XmlNode.ParentNode" />
+
+            
 
             
 
@@ -143,6 +157,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,6 +321,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -313,8 +331,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -356,6 +378,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -364,8 +388,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

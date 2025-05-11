@@ -6,14 +6,18 @@
 
     
 
+    
+
     ) and  -operator (<hyperlink
     >14.7.5</hyperlink>
 
     
 
+    
+
     ) can be applied to values of all pointer types except void*. Thus, for every pointer type T*, the following operators are implicitly defined: <code_example
     >
-      <![CDATA[
+<![CDATA[
 T* operator +(T* x, int y);  
 T* operator +(T* x, uint y);  
 T* operator +(T* x, long y);  
@@ -36,8 +40,12 @@ long operator -(T* x, T* y);
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -46,8 +54,12 @@ long operator -(T* x, T* y);
 
     
 
+    
+
     , or <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -59,13 +71,19 @@ long operator -(T* x, T* y);
 
     
 
+    
+
     . In effect, P  -Q is computed as ((<keyword
     >long</keyword>
 
     
 
+    
+
     )(P)  -(<keyword
     >long</keyword>
+
+    
 
     
 
@@ -75,7 +93,7 @@ long operator -(T* x, T* y);
     <example
       >[Example: For example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 class Test  
 {  
@@ -96,13 +114,17 @@ class Test
 
       
 
+      
+
       which produces the output: <code_example
       >
-        <![CDATA[
+<![CDATA[
 p - q = -14  
 q - p = 14  
 ]]>
       </code_example>
+
+      
 
       
 

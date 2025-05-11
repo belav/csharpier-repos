@@ -46,8 +46,7 @@
             Smart method of splitting a string.  Skips quoted elements, removes the quotes.
             </summary>
         <returns>A string array of the split up elements</returns>
-        <remarks
-          >
+        <remarks>
             This split function works somewhat like the String.Split() function in that it breaks apart a string into
             pieces and returns the pieces as an array.  The primary differences are:
             <list
@@ -63,8 +62,12 @@
           
 
           
+
+          
             Thus, if splitting the following string looking for a comma:<br
            />
+
+          
 
           
 
@@ -76,8 +79,12 @@
           
 
           
+
+          
             The resulting array would contain<br
            />
+
+          
 
           
 
@@ -88,8 +95,12 @@
           
 
           
+
+          
             [1] Two<br
            />
+
+          
 
           
 
@@ -100,9 +111,13 @@
           
 
           
+
+          
             [3] Five<br
            />
           <br />
+
+          
 
           
 

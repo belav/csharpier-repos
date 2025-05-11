@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          is the column type specialized to hold cells of this type. By default, the <see
          cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
+
+        
 
         
 
@@ -44,13 +52,19 @@
 
         
 
+        
+
         . To pattern the cells within a column after an existing <see
          cref="T:System.Windows.Forms.DataGridViewLinkCell" />
 
         
 
+        
+
         , set the column's <see
          cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
+
+        
 
         
 
@@ -81,6 +95,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -108,8 +124,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.ActiveLinkColor" />
+
+            
 
             
 
@@ -141,8 +161,12 @@
 
             
 
+            
+
              method whenever you derive from <see
              cref="T:System.Windows.Forms.DataGridViewLinkCell" />
+
+            
 
             
 
@@ -161,8 +185,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewLinkCell" />
+
+            
 
             
 
@@ -193,8 +221,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="T:System.Windows.Forms.DataGridViewLinkCell.DataGridViewLinkCellAccessibleObject" />
+
+            
 
             
 
@@ -204,6 +236,8 @@
             <para
               >To get or set <see
                cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+              
 
               
 
@@ -219,6 +253,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -230,8 +266,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.DataGridViewLinkCell" />
+
+            
 
             
 
@@ -256,6 +296,8 @@
           <para
             >As implemented in this class, this property always returns null because a <see
              cref="T:System.Windows.Forms.DataGridViewLinkCell" />
+
+            
 
             
 
@@ -285,6 +327,8 @@
           <para
             >Gets the display <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -416,13 +460,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+
+            
 
             
 
@@ -435,6 +485,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -453,8 +505,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.LinkVisited" />
+
+            
 
             
 
@@ -466,8 +522,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -475,6 +535,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,8 +572,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.LinkBehavior" />
+
+            
 
             
 
@@ -543,8 +609,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.LinkColor" />
+
+            
 
             
 
@@ -576,8 +646,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.LinkVisited" />
+
+            
 
             
 
@@ -614,13 +688,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -633,6 +713,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -652,8 +734,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -684,8 +770,12 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnMouseLeave(System.Int32)" />
+
+            
 
             
 
@@ -694,8 +784,12 @@
 
             
 
+            
+
              must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnMouseLeave(System.Int32)" />
+
+            
 
             
 
@@ -708,6 +802,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -724,6 +820,8 @@
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -755,13 +853,19 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnMouseMove(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnMouseMove(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -774,6 +878,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -793,8 +899,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -825,13 +935,19 @@
 
             
 
+            
+
              is called just before <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
+            
+
             . It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewLinkCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -844,6 +960,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -863,8 +981,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1060,6 +1182,8 @@
 
             
 
+            
+
              property will not be automatically set to true when visited.  </para
           >
           <para
@@ -1068,8 +1192,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.TrackVisitedState" />
+
+            
 
             
 
@@ -1106,8 +1234,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.UseColumnTextForLinkValue" />
+
+            
 
             
 
@@ -1119,6 +1251,8 @@
           <para
             >Gets or sets a value indicating whether the column <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.Text" />
+
+            
 
             
 
@@ -1164,8 +1298,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.VisitedLinkColor" />
+
+            
 
             
 

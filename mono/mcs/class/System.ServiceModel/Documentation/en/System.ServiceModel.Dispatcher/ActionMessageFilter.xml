@@ -30,11 +30,15 @@
 
         
 
+        
+
          with no actions.</para
       >
       <para
         >This type is serializable as a <see
          cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+        
 
         
 
@@ -75,8 +79,12 @@
 
             
 
+            
+
              provided to populate the <see
              cref="T:System.ServiceModel.Dispatcher.ActionMessageFilter" />
+
+            
 
             
 
@@ -85,8 +93,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+
+            
 
             
 
@@ -95,8 +107,12 @@
 
             
 
+            
+
              contained in the <see
              cref="T:System.ServiceModel.Dispatcher.ActionMessageFilter" />
+
+            
 
             
 
@@ -105,8 +121,12 @@
 
             
 
+            
+
              property and cannot be modified after the <see
              cref="T:System.ServiceModel.Dispatcher.ActionMessageFilter" />
+
+            
 
             
 
@@ -122,8 +142,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -157,6 +181,8 @@
 
             
 
+            
+
              object is instantiated.</para
           >
         </remarks>
@@ -165,6 +191,8 @@
           <para
             >Gets a read-only copy of action strings for which this <see
              cref="T:System.ServiceModel.Dispatcher.ActionMessageFilter" />
+
+            
 
             
 
@@ -202,6 +230,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -210,13 +240,19 @@
 
             
 
+            
+
             , create one by calling a constructor on the desired type of filter table. In general, <see
              cref="T:System.ServiceModel.Dispatcher.ActionMessageFilter" />
 
             
 
+            
+
             s should be added to instances of <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" />
+
+            
 
             
 
@@ -235,8 +271,12 @@
 
             
 
+            
+
              object to which <see
              cref="T:System.ServiceModel.Dispatcher.ActionMessageFilter" />
+
+            
 
             
 
@@ -245,11 +285,15 @@
 
             
 
+            
+
              can be added.</para
           >
         </returns>
         <typeparam name="FilterData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,8 +329,12 @@
 
             
 
+            
+
              when a message must be tested against the actions in a single filter and the <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -301,6 +349,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -312,6 +362,8 @@
 
             
 
+            
+
              action header matches one of the specified actions; otherwise, false.</para
           >
         </returns>
@@ -320,8 +372,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -358,8 +414,12 @@
 
             
 
+            
+
              method when a message must be tested against the actions in a single filter and the <see
              cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+            
 
             
 
@@ -374,6 +434,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -382,6 +444,8 @@
           <para
             >true if the <see
              cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+            
 
             
 

@@ -31,13 +31,19 @@
 
         
 
+        
+
          interface, indicating that they must be notified whenever the remoting infrastructure marshals, unmarshals, or disconnects an object or proxy. Every object that is registered with <see
          cref="T:System.Runtime.Remoting.Services.TrackingServices" />
 
         
 
+        
+
          is called by remoting when an object or proxy in the current <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          class are static and operate on the tracking handlers in the current <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -62,6 +72,8 @@
            type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
+
+          
 
           
 
@@ -99,6 +111,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -133,8 +147,12 @@
 
             
 
+            
+
              in the current <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -174,11 +192,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,11 +239,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          page of the Codeplex website.</para
       >
     </remarks>
@@ -898,6 +900,8 @@
 
             
 
+            
+
              object and initializes it from a list of elements, such as new List&lt;SampleType&gt;(){ a, b, c } in C# or Dim sampleList = { a, b, c } in Visual Basic.</para
           >
         </summary>
@@ -1340,6 +1344,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1489,8 +1495,12 @@
 
             
 
+            
+
             . A <see
              cref="F:System.Linq.Expressions.ExpressionType.Quote" />
+
+            
 
             
 
@@ -1559,6 +1569,8 @@
           <para
             >A list of run-time variables. For more information, see <see
              cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />
+
+            
 
             
 

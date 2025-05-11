@@ -26,8 +26,12 @@
 
         
 
+        
+
          class is used represent an individual row in a <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          control has a designated row type using the <see
          cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -80,13 +90,19 @@
 
               
 
+              
+
                control. The empty row is displayed when the <see
                cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
+              
+
                control has no records to display and the <see
                cref="P:System.Web.UI.WebControls.GridView.EmptyDataTemplate" />
+
+              
 
               
 
@@ -105,6 +121,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -117,6 +135,8 @@
             <para
               >The header row in the <see
                cref="T:System.Web.UI.WebControls.GridView" />
+
+              
 
               
 
@@ -135,6 +155,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -150,6 +172,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -161,13 +185,19 @@
 
         
 
+        
+
          object, use the <see
          cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
 
         
 
+        
+
          property. A <see
          cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
 
         
 
@@ -195,8 +225,12 @@
 
               
 
+              
+
                object is an alternate row in the <see
                cref="T:System.Web.UI.WebControls.GridView" />
+
+              
 
               
 
@@ -215,6 +249,8 @@
 
               
 
+              
+
                object is in edit mode.</para
             >
           </description>
@@ -227,6 +263,8 @@
             <para
               >The <see
                cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+              
 
               
 
@@ -245,6 +283,8 @@
 
               
 
+              
+
                object is selected.</para
             >
           </description>
@@ -256,8 +296,12 @@
 
         
 
+        
+
          object, use the <see
          cref="P:System.Web.UI.WebControls.GridViewRow.RowState" />
+
+        
 
         
 
@@ -269,8 +313,12 @@
 
         
 
+        
+
          control stores all of its data rows in the <see
          cref="P:System.Web.UI.WebControls.GridView.Rows" />
+
+        
 
         
 
@@ -279,13 +327,19 @@
 
         
 
+        
+
          object in the <see
          cref="P:System.Web.UI.WebControls.GridView.Rows" />
 
         
 
+        
+
          collection, use the <see
          cref="P:System.Web.UI.WebControls.GridViewRow.RowIndex" />
+
+        
 
         
 
@@ -297,8 +351,12 @@
 
         
 
+        
+
          object by using the <see
          cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
+
+        
 
         
 
@@ -311,13 +369,19 @@
 
           
 
+          
+
            property is available only during and after the <see
            cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
 
           
 
+          
+
            event of a <see
            cref="T:System.Web.UI.WebControls.GridView" />
+
+          
 
           
 
@@ -330,6 +394,8 @@
 
         
 
+        
+
          property.</para
       >
       <para
@@ -338,8 +404,12 @@
 
         
 
+        
+
          object by using the <see
          cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+
+        
 
         
 
@@ -348,13 +418,19 @@
 
         
 
+        
+
          collection of the cell. You can also use the <see
          cref="M:System.Web.UI.Control.FindControl(System.String)" />
 
         
 
+        
+
          method of the cell to find the control, if the control has an <see
          cref="P:System.Web.UI.Control.ID" />
+
+        
 
         
 
@@ -366,8 +442,12 @@
 
         
 
+        
+
          field column or an automatically generated field column, use the <see
          cref="P:System.Web.UI.WebControls.TableCell.Text" />
+
+        
 
         
 
@@ -380,8 +460,12 @@
 
           
 
+          
+
             field column without binding the value to a property of a control. In this case, the field value is automatically placed in a <see
            cref="T:System.Web.UI.DataBoundLiteralControl" />
+
+          
 
           
 
@@ -390,8 +474,12 @@
 
           
 
+          
+
            control from the appropriate cell and then use its <see
            cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+
+          
 
           
 
@@ -404,8 +492,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.GridViewRow.#ctor(System.Int32,System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+
+        
 
         
 
@@ -417,6 +509,8 @@
       <para
         >Represents an individual row in a <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -447,11 +541,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -481,6 +579,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -495,6 +595,8 @@
                 <para
                   >The value of the <paramref
                    name="rowIndex" />
+
+                  
 
                   
 
@@ -515,6 +617,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -532,6 +636,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -546,6 +652,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -554,8 +662,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+          
 
           
 
@@ -564,8 +676,12 @@
 
           
 
+          
+
            collection of a <see
            cref="T:System.Web.UI.WebControls.GridView" />
+
+          
 
           
 
@@ -576,13 +692,19 @@
 
           
 
+          
+
           The index of the <see
            cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
           
 
+          
+
            in the underlying <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -593,8 +715,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+          
 
           
 
@@ -605,8 +731,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -634,8 +764,12 @@
 
             
 
+            
+
              property to access the properties of the underlying data object to which the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -644,13 +778,19 @@
 
             
 
+            
+
              property is only available during and after the <see
              cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
 
             
 
+            
+
              event of a <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -665,6 +805,8 @@
           <para
             >Gets the underlying data object to which the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -693,13 +835,19 @@
 
             
 
+            
+
              property to determine the index of the <see
              cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
             
 
+            
+
              in the underlying <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -717,8 +865,12 @@
 
             
 
+            
+
              in the underlying <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -759,6 +911,8 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
@@ -766,8 +920,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -795,8 +953,12 @@
 
             
 
+            
+
              property to determine the index of the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -805,8 +967,12 @@
 
             
 
+            
+
              collection of a <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -824,13 +990,19 @@
 
             
 
+            
+
              object in the <see
              cref="P:System.Web.UI.WebControls.GridView.Rows" />
 
             
 
+            
+
              collection of a <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -862,8 +1034,12 @@
 
             
 
+            
+
              property to determine the state of the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -891,8 +1067,12 @@
 
                   
 
+                  
+
                     object is an alternate row in the <see
                    cref="T:System.Web.UI.WebControls.GridView" />
+
+                  
 
                   
 
@@ -911,6 +1091,8 @@
 
                   
 
+                  
+
                     object is in edit mode.</para
                 >
               </description>
@@ -923,6 +1105,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+                  
 
                   
 
@@ -941,6 +1125,8 @@
 
                   
 
+                  
+
                     object is selected.</para
                 >
               </description>
@@ -953,6 +1139,8 @@
           <para
             >Gets the state of the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -984,13 +1172,19 @@
 
             
 
+            
+
              property to determine the type of row that the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
+            
+
              object represents. The following table lists the different row type values using the <see
              cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+            
 
             
 
@@ -1020,6 +1214,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -1034,6 +1230,8 @@
                 <para
                   >The footer row in the <see
                    cref="T:System.Web.UI.WebControls.GridView" />
+
+                  
 
                   
 
@@ -1054,6 +1252,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -1071,8 +1271,12 @@
 
                   
 
+                  
+
                    control. The empty row is displayed when <see
                    cref="T:System.Web.UI.WebControls.GridView" />
+
+                  
 
                   
 
@@ -1093,6 +1297,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -1110,6 +1316,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -1122,6 +1330,8 @@
           <para
             >Gets the row type of the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -1155,8 +1365,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -1168,6 +1382,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+
+            
 
             
 
@@ -1198,8 +1414,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -1211,6 +1431,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+
+            
 
             
 
@@ -1241,8 +1463,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -1254,6 +1480,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+
+            
 
             
 

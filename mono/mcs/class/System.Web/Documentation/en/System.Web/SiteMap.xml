@@ -19,8 +19,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          object is a component of the ASP.NET site navigation infrastructure that provides access to read-only site map information for page and control developers using navigation and <see
          cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+
+        
 
         
 
@@ -39,8 +47,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -49,8 +61,12 @@
 
         
 
+        
+
          class, such as the <see
          cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+        
 
         
 
@@ -59,6 +75,8 @@
       <para
         >The <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -78,6 +96,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -88,8 +108,12 @@
 
         
 
+        
+
          is a container for a hierarchical collection of <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -98,8 +122,12 @@
 
         
 
+        
+
          does not maintain the relationships between the nodes; rather, it delegates this to the site map providers. The <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -108,8 +136,12 @@
 
         
 
+        
+
          objects) that is held by these site map providers. It keeps track of the providers from which it can access site navigation data and exposes its <see
          cref="P:System.Web.SiteMap.Providers" />
+
+        
 
         
 
@@ -118,8 +150,12 @@
 
         
 
+        
+
          abstract class, the <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -131,8 +167,12 @@
 
         
 
+        
+
          class is the <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -141,8 +181,12 @@
 
         
 
+        
+
          object, and use it to initialize the site map for your site. For an example of a custom site map provider, see <see
          cref="T:System.Web.SiteMapProvider" />
+
+        
 
         
 
@@ -155,6 +199,8 @@
 
         
 
+        
+
          class offers only static members for performance and it can be accessed at any time in a given site from a Web Form or Web server control.</para
       >
     </remarks>
@@ -163,6 +209,8 @@
       <para
         >The <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -191,8 +239,12 @@
 
             
 
+            
+
              class retrieves the <see
              cref="P:System.Web.SiteMap.CurrentNode" />
+
+            
 
             
 
@@ -205,6 +257,8 @@
 
             
 
+            
+
              event is raised by the default site map provider if one or more subscriptions exist. </para
           >
           <para
@@ -213,8 +267,12 @@
 
             
 
+            
+
              object, you might create your own mechanism to find and retrieve the <see
              cref="P:System.Web.SiteMapProvider.CurrentNode" />
+
+            
 
             
 
@@ -223,8 +281,12 @@
 
             
 
+            
+
              class and use a URL-based scheme to identify pages, you can override the <see
              cref="M:System.Web.StaticSiteMapProvider.FindSiteMapNode(System.String)" />
+
+            
 
             
 
@@ -236,6 +298,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -289,8 +353,12 @@
 
             
 
+            
+
              object is used and site navigation data is loaded from the Web.sitemap file that is located in the root directory of the site. This is identified in the management classes that manage the site navigation configuration and the site map configuration section of the Web.config files. By default, it is an instance of the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -299,8 +367,12 @@
 
             
 
+            
+
              class. For more information on writing your own provider, see <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -312,6 +384,8 @@
           <para
             >Gets the default <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -343,8 +417,12 @@
 
             
 
+            
+
              collection are those that are specified in the configuration hierarchy to initialize the <see
              cref="T:System.Web.SiteMap" />
+
+            
 
             
 
@@ -353,13 +431,19 @@
 
             
 
+            
+
              property) is guaranteed to be used by the <see
              cref="T:System.Web.SiteMap" />
 
             
 
+            
+
              during initialization; the presence of a provider in the <see
              cref="P:System.Web.SiteMap.Providers" />
+
+            
 
             
 
@@ -374,8 +458,12 @@
 
             
 
+            
+
              objects that are available to the <see
              cref="T:System.Web.SiteMap" />
+
+            
 
             
 
@@ -407,8 +495,12 @@
 
             
 
+            
+
              class retrieves the <see
              cref="P:System.Web.SiteMap.RootNode" />
+
+            
 
             
 
@@ -417,13 +509,19 @@
 
             
 
+            
+
              class retrieves the root node of the root provider in the hierarchy. To access the root node of the default provider, call the <see
              cref="P:System.Web.SiteMap.Provider" />
 
             
 
+            
+
              property, which retrieves both the default provider and its <see
              cref="P:System.Web.SiteMapProvider.RootNode" />
+
+            
 
             
 
@@ -435,13 +533,19 @@
 
             
 
+            
+
              object, which is the default provider for the <see
              cref="T:System.Web.SiteMap" />
 
             
 
+            
+
              class, supports only one <see
              cref="P:System.Web.XmlSiteMapProvider.RootNode" />
+
+            
 
             
 
@@ -453,8 +557,12 @@
 
             
 
+            
+
              class and override the abstract <see
              cref="P:System.Web.SiteMapProvider.RootNode" />
+
+            
 
             
 
@@ -463,8 +571,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -476,8 +588,12 @@
 
             
 
+            
+
              property might result in an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -489,6 +605,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -519,8 +637,12 @@
 
             
 
+            
+
              object to the static <see
              cref="E:System.Web.SiteMap.SiteMapResolve" />
+
+            
 
             
 
@@ -529,8 +651,12 @@
 
             
 
+            
+
              property is accessed. This enables the user to implement custom logic when creating a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -542,8 +668,12 @@
 
             
 
+            
+
              event, you also subscribe to the <see
              cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
+
+            
 
             
 
@@ -555,6 +685,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Web.SiteMap.CurrentNode" />
+
+            
 
             
 

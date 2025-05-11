@@ -29,8 +29,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          provides the strongest compatibility guarantee, followed by <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
         . <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
+
+        
 
         
 
@@ -59,6 +71,8 @@
       <para
         >For a detailed discussion of the meaning of each guarantee, see the <see
          cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
+
+        
 
         
 

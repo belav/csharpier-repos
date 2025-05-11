@@ -25,8 +25,12 @@
 
         
 
+        
+
          abstract class exposes an abstract method, <see
          cref="M:System.Web.Services.Description.SoapExtensionImporter.ImportMethod(System.CodeDom.CodeAttributeDeclarationCollection)" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          to extend the generation of client proxy code or abstract server code. You can use such a derived class in conjunction with a class derived from the abstract <see
          cref="T:System.Web.Services.Protocols.SoapExtension" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
       <para
         >You can specify <see
          cref="T:System.Web.Services.Description.SoapExtensionImporter" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -112,13 +124,19 @@
 
             
 
+            
+
              object maintains references to instances of <see
              cref="T:System.Web.Services.Description.SoapExtensionImporter" />
 
             
 
+            
+
              derived types, and then calls the <see
              cref="M:System.Web.Services.Description.SoapExtensionImporter.ImportMethod(System.CodeDom.CodeAttributeDeclarationCollection)" />
+
+            
 
             
 
@@ -133,8 +151,12 @@
 
             
 
+            
+
              instance that invokes the <see
              cref="M:System.Web.Services.Description.SoapExtensionImporter.ImportMethod(System.CodeDom.CodeAttributeDeclarationCollection)" />
+
+            
 
             
 
@@ -168,6 +190,8 @@
 
             
 
+            
+
              method. The attributes are added to all Web methods in a binding class.</para
           >
         </remarks>
@@ -180,8 +204,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeAttributeDeclarationCollection" />
+
+          
 
           
 
@@ -190,8 +218,12 @@
 
           
 
+          
+
             method can place new <see
            cref="T:System.CodeDom.CodeAttributeDeclaration" />
+
+          
 
           
 

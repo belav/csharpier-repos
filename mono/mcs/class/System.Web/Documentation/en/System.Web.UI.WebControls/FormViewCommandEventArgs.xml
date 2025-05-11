@@ -22,8 +22,12 @@
 
         
 
+        
+
          event is raised when a button within the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -32,6 +36,8 @@
       <para
         >Buttons within a <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -59,8 +65,12 @@
 
               
 
+              
+
                control to the mode specified by the <see
                cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+              
 
               
 
@@ -69,8 +79,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+              
 
               
 
@@ -89,8 +103,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
+
+              
 
               
 
@@ -109,13 +127,19 @@
 
               
 
+              
+
                control in edit mode. Raises the <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+              
 
               
 
@@ -134,8 +158,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemInserting" />
+
+              
 
               
 
@@ -154,13 +182,19 @@
 
               
 
+              
+
                control in insert mode. Raises the <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+              
 
               
 
@@ -179,8 +213,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" />
+
+              
 
               
 
@@ -199,8 +237,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" />
+
+              
 
               
 
@@ -215,6 +257,8 @@
 
         
 
+        
+
          event is raised when a button listed in the previous table is clicked, it is recommended that you use the events listed in the table for the operation.</para
       >
       <para
@@ -223,8 +267,12 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the command name and command argument of the button clicked. To determine the command name and command argument, use the <see
          cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+
+        
 
         
 
@@ -233,8 +281,12 @@
 
         
 
+        
+
          properties, respectively. You can also access the button control that raised the event by using the <see
          cref="P:System.Web.UI.WebControls.DetailsViewCommandEventArgs.CommandSource" />
+
+        
 
         
 
@@ -248,6 +300,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -256,8 +310,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.FormViewCommandEventArgs.#ctor(System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
+
+        
 
         
 
@@ -269,6 +327,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.FormView.ItemCommand" />
+
+        
 
         
 
@@ -299,11 +359,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" />
+
+            
 
             
 
@@ -333,13 +397,19 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
+                  
+
                    contained in the <paramref
                    name="originalArgs" />
+
+                  
 
                   
 
@@ -360,13 +430,19 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
+                  
+
                    contained in the <paramref
                    name="originalArgs" />
+
+                  
 
                   
 
@@ -387,6 +463,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -401,6 +479,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" />
+
+            
 
             
 
@@ -429,8 +509,12 @@
 
             
 
+            
+
              property to access the properties of the control that raised the event. In the case of a <see
              cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" />
+
+            
 
             
 

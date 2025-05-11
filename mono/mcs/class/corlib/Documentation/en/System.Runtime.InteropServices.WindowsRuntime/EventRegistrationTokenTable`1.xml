@@ -37,6 +37,8 @@
 
         
 
+        
+
          property, if it is not null. An instance of this table is required for each event.</para
       >
     </remarks>
@@ -64,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1" />
+
+            
 
             
 
@@ -149,6 +153,8 @@
 
             
 
+            
+
              whose invocation list includes all the event handler delegates that have been added, and that have not yet been removed. Invoking this delegate invokes all the event handlers. </para
           >
         </summary>
@@ -187,6 +193,8 @@
         </summary>
         <param name="token">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

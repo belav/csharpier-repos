@@ -13,8 +13,7 @@
     <summary>Color objects holding red, green, blue, and alpha values.</summary>
     <remarks>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 static readonly double  M_PI = 3.14159265358979323846;
 
 Cairo.Graphics gr;

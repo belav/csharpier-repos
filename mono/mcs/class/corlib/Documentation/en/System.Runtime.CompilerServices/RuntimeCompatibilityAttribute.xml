@@ -35,13 +35,19 @@
 
         
 
+        
+
          class.  To maintain compatibility between languages, the common language runtime (CLR) wraps objects that do not derive from <see
          cref="T:System.Exception" />
 
         
 
+        
+
          in a <see
          cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
+
+        
 
         
 
@@ -53,11 +59,15 @@
 
         
 
+        
+
          class to specify whether exceptions should appear wrapped inside catch blocks and exception filters for an assembly.  Many language compilers, including the Microsoft C# and Visual Basic compilers, apply this attribute by default to specify the wrapping behavior.</para
       >
       <para
         >Note that the runtime still wraps exceptions even if you use the <see
          cref="T:System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" />
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          class with a <see
          cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
+
+        
 
         
 
@@ -105,6 +119,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -133,8 +149,12 @@
 
             
 
+            
+
              class with a <see
              cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
+
+            
 
             
 

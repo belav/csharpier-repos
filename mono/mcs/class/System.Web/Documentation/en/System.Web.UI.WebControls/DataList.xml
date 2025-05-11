@@ -96,8 +96,12 @@
 
         
 
+        
+
          control to display a template-defined data bound list. The <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -112,6 +116,8 @@
       <para
         >The contents of the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -141,6 +147,8 @@
 
               
 
+              
+
               . If not defined, ItemTemplate is used. </para
             >
           </description>
@@ -155,6 +163,8 @@
             <para
               >If defined, provides the content and layout for the item currently being edited in the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -175,6 +185,8 @@
 
               
 
+              
+
               . If not defined, a footer section will not be displayed. </para
             >
           </description>
@@ -189,6 +201,8 @@
             <para
               >If defined, provides the content and layout for the header section of the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -209,6 +223,8 @@
 
               
 
+              
+
               . </para
             >
           </description>
@@ -226,8 +242,12 @@
 
               
 
+              
+
               . If not defined, <see
                cref="P:System.Web.UI.WebControls.DataList.ItemTemplate" />
+
+              
 
               
 
@@ -248,6 +268,8 @@
 
               
 
+              
+
               . If not defined, a separator will not be displayed. </para
             >
           </description>
@@ -259,13 +281,19 @@
 
         
 
+        
+
          needs to be defined to display the items in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
+        
+
          control. Additional templates can be used to provide a custom look to the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -280,6 +308,8 @@
       <para
         >The appearance of the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -309,6 +339,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -323,6 +355,8 @@
             <para
               >Specifies the style for the item being edited in the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -343,6 +377,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -357,6 +393,8 @@
             <para
               >Specifies the style for the header in the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -377,6 +415,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -394,6 +434,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -408,6 +450,8 @@
             <para
               >Specifies the style for the separator between the items in the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -441,6 +485,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -455,6 +501,8 @@
             <para
               >Shows or hides the header section of the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -475,8 +523,12 @@
 
         
 
+        
+
          control can be vertical or horizontal. Set the <see
          cref="P:System.Web.UI.WebControls.DataList.RepeatDirection" />
+
+        
 
         
 
@@ -488,8 +540,12 @@
 
         
 
+        
+
          control is controlled with the <see
          cref="P:System.Web.UI.WebControls.DataList.RepeatLayout" />
+
+        
 
         
 
@@ -498,8 +554,12 @@
 
         
 
+        
+
          in a table format, while RepeatLayout.Flow displays the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -523,6 +583,8 @@
 
         
 
+        
+
         , <format
          type="text/html">
           <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -532,12 +594,16 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
             >Validating User Input in ASP.NET Web Pages</a
           >
         </format>
+
+        
 
         
 
@@ -559,12 +625,16 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     Caption="string"
     CaptionAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -582,9 +652,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -594,9 +668,13 @@
 
         
 
+        
+
         |False"
     ExtractTemplateRows="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -606,9 +684,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -616,6 +698,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -627,9 +711,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -640,10 +728,14 @@
 
         
 
+        
+
         |Horizontal|Vertical|Both"
     Height="size"
     HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -669,9 +761,13 @@
 
         
 
+        
+
         "
     RepeatLayout="<codeFeaturedElement
         >Table</codeFeaturedElement>
+
+        
 
         
 
@@ -683,9 +779,13 @@
 
         
 
+        
+
         |False"
     ShowHeader="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -699,9 +799,13 @@
 
         
 
+        
+
         "
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -759,6 +863,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -767,6 +873,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -798,13 +906,19 @@
 
             
 
+            
+
              property to provide a custom style for the alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
+            
+
              control. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -816,8 +930,12 @@
 
             
 
+            
+
              control are inherited from one item style property to another through a hierarchy. Item style properties set lower in the hierarchy are inherited by item style properties higher in the hierarchy. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -826,13 +944,19 @@
 
             
 
+            
+
              control will also have a red font. This allows you to provide a common appearance for the control by setting a single item style property. You can override the inherited style settings for an item style property that is higher in the hierarchy by setting its style properties. For example, you can specify a blue font for the <see
              cref="P:System.Web.UI.WebControls.DataList.AlternatingItemStyle" />
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -906,6 +1030,8 @@
 
             
 
+            
+
              control. You can then list the style attributes within the opening &lt;AlternatingItemStyle&gt; tag.</para
           >
         </remarks>
@@ -914,6 +1040,8 @@
           <para
             >Gets the style properties for alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -963,8 +1091,12 @@
 
             
 
+            
+
              property to control the contents of alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -973,11 +1105,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >To specify a template for the alternating items, place the &lt;AlternatingItemTemplate&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -992,12 +1128,16 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
               </format>
+
+              
 
               
 
@@ -1010,6 +1150,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1019,6 +1161,8 @@
           <para
             >Gets or sets the template for alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1064,8 +1208,12 @@
 
             
 
+            
+
              event is raised when the Cancel button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1077,13 +1225,19 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataList.EditItemIndex" />
 
             
 
+            
+
              property to -1 (to deselect the item) and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1093,6 +1247,8 @@
             <para
               >Text is not HTML encoded before it is displayed in the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -1109,6 +1265,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -1117,6 +1275,8 @@
                type="text/html">
                 <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
               </format>
+
+              
 
               
 
@@ -1129,12 +1289,16 @@
 
               
 
+              
+
               , and <format
                type="text/html">
                 <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                   >Introduction to Validating User Input in ASP.NET Web Pages</a
                 >
               </format>
+
+              
 
               
 
@@ -1147,6 +1311,8 @@
           <para
             >Occurs when the Cancel button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1172,6 +1338,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataList.CancelCommandName" />
+
+            
 
             
 
@@ -1209,8 +1377,12 @@
 
             
 
+            
+
              method is used primarily by control developers when deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1222,8 +1394,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.WebControls.DataList.CreateItem(System.Int32,System.Web.UI.WebControls.ListItemType)" />
+
+            
 
             
 
@@ -1232,8 +1408,12 @@
 
             
 
+            
+
              methods to create <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -1242,8 +1422,12 @@
 
             
 
+            
+
              collection. You can access all item types, including the header, footer, and separator items, through the <see
              cref="P:System.Web.UI.WebControls.BaseDataList.Controls" />
+
+            
 
             
 
@@ -1255,8 +1439,12 @@
 
             
 
+            
+
              method to customize how <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -1265,13 +1453,19 @@
 
             
 
+            
+
              control. Override the <see
              cref="M:System.Web.UI.WebControls.DataList.InitializeItem(System.Web.UI.WebControls.DataListItem)" />
 
             
 
+            
+
              method to customize templates for a <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -1284,6 +1478,8 @@
         </summary>
         <param name="useDataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1314,8 +1510,12 @@
 
             
 
+            
+
              method is used primarily by control developers in deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1330,6 +1530,8 @@
 
             
 
+            
+
              control to implement all style related properties.</para
           >
         </summary>
@@ -1338,6 +1540,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.TableStyle" />
+
+            
 
             
 
@@ -1372,8 +1576,12 @@
 
             
 
+            
+
              method is used primarily by control developers in creating a custom implementation of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1382,8 +1590,12 @@
 
             
 
+            
+
              method is functionally equivalent to calling the <see
              cref="M:System.Web.UI.WebControls.DataListItem.#ctor(System.Int32,System.Web.UI.WebControls.ListItemType)" />
+
+            
 
             
 
@@ -1392,8 +1604,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Web.UI.WebControls.DataListItem.ItemIndex" />
+
+            
 
             
 
@@ -1402,13 +1618,19 @@
 
             
 
+            
+
              properties are initialized for the new <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
+            
+
              using the specified values, but the item is not inserted into the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1420,8 +1642,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.WebControls.DataList.CreateItem(System.Int32,System.Web.UI.WebControls.ListItemType)" />
+
+            
 
             
 
@@ -1430,8 +1656,12 @@
 
             
 
+            
+
              methods to create <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -1440,8 +1670,12 @@
 
             
 
+            
+
              collection. You can access all item types, including the header, footer, and separator items, through the <see
              cref="P:System.Web.UI.WebControls.BaseDataList.Controls" />
+
+            
 
             
 
@@ -1456,6 +1690,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1467,6 +1703,8 @@
 
             
 
+            
+
              created with the specified list-item type.</para
           >
         </returns>
@@ -1475,8 +1713,12 @@
 
           
 
+          
+
           The specified location within the <see
            cref="T:System.Web.UI.WebControls.DataList" />
+
+          
 
           
 
@@ -1487,8 +1729,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -1519,8 +1765,12 @@
 
             
 
+            
+
              event is raised when the Delete button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1532,8 +1782,12 @@
 
             
 
+            
+
              event removes the selected item from the data source and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1549,6 +1803,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1557,6 +1813,8 @@
           <para
             >Occurs when the Delete button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1582,6 +1840,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataList.DeleteCommandName" />
+
+            
 
             
 
@@ -1617,8 +1877,12 @@
 
             
 
+            
+
              event is raised when the Edit button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1630,13 +1894,19 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataList.EditItemIndex" />
 
             
 
+            
+
              property to the selected row and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1646,6 +1916,8 @@
             <para
               >Text is not HTML encoded before it is displayed in the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -1662,6 +1934,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -1670,6 +1944,8 @@
                type="text/html">
                 <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
               </format>
+
+              
 
               
 
@@ -1682,12 +1958,16 @@
 
               
 
+              
+
               , and <format
                type="text/html">
                 <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                   >Introduction to Validating User Input in ASP.NET Web Pages</a
                 >
               </format>
+
+              
 
               
 
@@ -1700,6 +1980,8 @@
           <para
             >Occurs when the Edit button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1725,6 +2007,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataList.EditCommandName" />
+
+            
 
             
 
@@ -1758,6 +2042,8 @@
 
             
 
+            
+
              property to programmatically specify the item to edit. You can also use this property to determine the index of the item selected for editing.</para
           >
           <block subset="none" type="note">
@@ -1767,12 +2053,16 @@
 
               
 
+              
+
                property is zero based.</para
             >
           </block>
           <para
             >To unselect an item, set the <see
              cref="P:System.Web.UI.WebControls.DataList.EditItemIndex" />
+
+            
 
             
 
@@ -1787,12 +2077,16 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
               </format>
+
+              
 
               
 
@@ -1805,12 +2099,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.DataList.EditItemIndex" />
+
+            
 
             
 
@@ -1822,6 +2120,8 @@
           <para
             >Gets or sets the index number of the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1858,13 +2158,19 @@
 
             
 
+            
+
              property to provide a custom style for the item selected for editing in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
+            
+
              control. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -1876,8 +2182,12 @@
 
             
 
+            
+
              control are inherited from one item style property to another through a hierarchy. Item style properties set lower in the hierarchy are inherited by item style properties higher in the hierarchy. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -1886,13 +2196,19 @@
 
             
 
+            
+
              control will also have a red font. This allows you to provide a common appearance for the control by setting a single item style property. You can override the inherited style settings for an item style property that is higher in the hierarchy by setting its style properties. For example, you can specify a blue font for the <see
              cref="P:System.Web.UI.WebControls.DataList.AlternatingItemStyle" />
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -1966,6 +2282,8 @@
 
             
 
+            
+
              control. You can then list the style attributes within the opening &lt;EditItemStyle&gt; tag.</para
           >
         </remarks>
@@ -1974,6 +2292,8 @@
           <para
             >Gets the style properties for the item selected for editing in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2023,8 +2343,12 @@
 
             
 
+            
+
              property to control the contents of the item selected for editing in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2033,11 +2357,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >To specify a template for the item selected for editing, place the &lt;EditItemTemplate&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2052,12 +2380,16 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
               </format>
+
+              
 
               
 
@@ -2070,6 +2402,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2079,6 +2413,8 @@
           <para
             >Gets or sets the template for the item selected for editing in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2125,8 +2461,12 @@
 
             
 
+            
+
              control are specified by using templates. Normally, you list controls that you want to display in the templates. You can also place a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2138,8 +2478,12 @@
 
             
 
+            
+
              property to specify whether the rows of a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2148,13 +2492,19 @@
 
             
 
+            
+
              control are extracted and displayed. All rows extracted from the templates of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
+            
+
              control are displayed in a single table. This allows you to create a single table from other smaller tables and still maintain the features of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2167,8 +2517,12 @@
 
               
 
+              
+
                control for each template you want to include in the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -2177,8 +2531,12 @@
 
               
 
+              
+
                control for this feature to work properly. The <see
                cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+              
 
               
 
@@ -2191,8 +2549,12 @@
 
             
 
+            
+
              control in a template, you can use the <see
              cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
+
+            
 
             
 
@@ -2201,8 +2563,12 @@
 
             
 
+            
+
              object to control the number of columns the cell spans. You can also use the <see
              cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
+
+            
 
             
 
@@ -2215,8 +2581,12 @@
 
               
 
+              
+
               , <see
                cref="P:System.Web.UI.WebControls.DataList.RepeatDirection" />
+
+              
 
               
 
@@ -2225,8 +2595,12 @@
 
               
 
+              
+
                properties do not affect the appearance of the <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -2242,8 +2616,12 @@
 
             
 
+            
+
              control, defined in each template of a <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2280,8 +2658,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2293,8 +2675,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2303,8 +2689,12 @@
 
             
 
+            
+
              property. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.WebControl.ControlStyle" />
+
+            
 
             
 
@@ -2313,8 +2703,12 @@
 
             
 
+            
+
              property will also have a red font. This allows you to provide a common appearance for the control by setting a single style property. You can override the inherited style settings by setting the <see
              cref="P:System.Web.UI.WebControls.DataList.FooterStyle" />
+
+            
 
             
 
@@ -2323,8 +2717,12 @@
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.WebControl.ControlStyle" />
+
+            
 
             
 
@@ -2333,6 +2731,8 @@
           <para
             >To specify a custom style for the footer section, place the &lt;FooterStyle&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2345,6 +2745,8 @@
 
               
 
+              
+
                property must be set to true for this property to be visible.</para
             >
           </block>
@@ -2354,6 +2756,8 @@
           <para
             >Gets the style properties for the footer section of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2403,8 +2807,12 @@
 
             
 
+            
+
              property to control the contents of the footer section. The appearance of the footer section is controlled by the <see
              cref="P:System.Web.UI.WebControls.DataList.FooterStyle" />
+
+            
 
             
 
@@ -2417,6 +2825,8 @@
 
               
 
+              
+
                property must be set to true for this property to be visible.</para
             >
           </block>
@@ -2426,8 +2836,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2436,8 +2850,12 @@
 
             
 
+            
+
              property. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.WebControl.ControlStyle" />
+
+            
 
             
 
@@ -2446,8 +2864,12 @@
 
             
 
+            
+
              property will also have a red font. This allows you to provide a common appearance for the control by setting a single style property. You can override the inherited style settings by setting the <see
              cref="P:System.Web.UI.WebControls.DataList.HeaderStyle" />
+
+            
 
             
 
@@ -2456,8 +2878,12 @@
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.WebControl.ControlStyle" />
+
+            
 
             
 
@@ -2466,6 +2892,8 @@
           <para
             >To specify a template for the footer section, place the &lt;FooterTemplate&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2480,12 +2908,16 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
               </format>
+
+              
 
               
 
@@ -2498,6 +2930,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2507,6 +2941,8 @@
           <para
             >Gets or sets the template for the footer section of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2556,8 +2992,12 @@
 
             
 
+            
+
              property to specify the grid line style for the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2622,6 +3062,8 @@
 
               
 
+              
+
                property is set to RepeatLayout.Table.</para
             >
           </block>
@@ -2634,8 +3076,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.DataList.RepeatLayout" />
+
+            
 
             
 
@@ -2672,8 +3118,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2682,6 +3132,8 @@
           <para
             >To specify a custom style for the heading section, place the &lt;HeaderStyle&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2694,6 +3146,8 @@
 
               
 
+              
+
                property must be set to true for this property to be visible.</para
             >
           </block>
@@ -2703,6 +3157,8 @@
           <para
             >Gets the style properties for the heading section of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2752,8 +3208,12 @@
 
             
 
+            
+
              property to control the contents of the heading section. The appearance of the header section is controlled by the <see
              cref="P:System.Web.UI.WebControls.DataList.HeaderStyle" />
+
+            
 
             
 
@@ -2766,12 +3226,16 @@
 
               
 
+              
+
                property must be set to true for this property to be visible.</para
             >
           </block>
           <para
             >To specify a template for the heading section, place the &lt;HeaderTemplate&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2786,12 +3250,16 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
               </format>
+
+              
 
               
 
@@ -2804,6 +3272,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2813,6 +3283,8 @@
           <para
             >Gets or sets the template for the heading section of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2860,8 +3332,12 @@
 
             
 
+            
+
              method is used primarily by control developers to extend the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2873,8 +3349,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.WebControls.DataList.CreateItem(System.Int32,System.Web.UI.WebControls.ListItemType)" />
+
+            
 
             
 
@@ -2883,8 +3363,12 @@
 
             
 
+            
+
              methods to create <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -2893,8 +3377,12 @@
 
             
 
+            
+
              collection. You can access all item types, including the header, footer, and separator items, through the <see
              cref="P:System.Web.UI.WebControls.BaseDataList.Controls" />
+
+            
 
             
 
@@ -2906,8 +3394,12 @@
 
             
 
+            
+
              method to customize how <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -2916,13 +3408,19 @@
 
             
 
+            
+
              control. Override the <see
              cref="M:System.Web.UI.WebControls.DataList.InitializeItem(System.Web.UI.WebControls.DataListItem)" />
 
             
 
+            
+
              method to customize templates for a <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -2937,6 +3435,8 @@
 
             
 
+            
+
              object based on the specified templates and styles for the list-item type.</para
           >
         </summary>
@@ -2945,8 +3445,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataListItem" />
+
+          
 
           
 
@@ -2977,8 +3481,12 @@
 
             
 
+            
+
              event is raised when any button is clicked in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2994,6 +3502,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3002,6 +3512,8 @@
           <para
             >Occurs when any button is clicked in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3033,8 +3545,12 @@
 
             
 
+            
+
              event is raised when an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3046,8 +3562,12 @@
 
             
 
+            
+
              event is commonly used to control the content and appearance of a row in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3063,6 +3583,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3071,6 +3593,8 @@
           <para
             >Occurs on the server when an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3102,8 +3626,12 @@
 
             
 
+            
+
              event is raised after an item is data bound to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3119,6 +3647,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3127,6 +3657,8 @@
           <para
             >Occurs when an item is data bound to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3158,8 +3690,12 @@
 
             
 
+            
+
              collection to programmatically control the items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3168,8 +3704,12 @@
 
             
 
+            
+
              collection does not provide any methods to add or remove items to the collection. However, you can control the contents of an item by providing a handler for the <see
              cref="E:System.Web.UI.WebControls.DataList.ItemCreated" />
+
+            
 
             
 
@@ -3182,6 +3722,8 @@
 
               
 
+              
+
                collection. The header, footer, and separator are not included in the collection.</para
             >
           </block>
@@ -3191,6 +3733,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -3230,8 +3774,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3243,8 +3791,12 @@
 
             
 
+            
+
              control are inherited from one item style property to another through a hierarchy. Item style properties set lower in the hierarchy are inherited by item style properties higher in the hierarchy. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -3253,13 +3805,19 @@
 
             
 
+            
+
              control will also have a red font. This allows you to provide a common appearance for the control by setting a single item style property. You can override the inherited style settings for an item style property that is higher in the hierarchy by setting its style properties. For example, you can specify a blue font for the <see
              cref="P:System.Web.UI.WebControls.DataList.AlternatingItemStyle" />
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -3333,8 +3891,12 @@
 
             
 
+            
+
              control, place the &lt;ItemStyle&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3346,8 +3908,12 @@
 
             
 
+            
+
              property to provide a different appearance for the alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3359,6 +3925,8 @@
           <para
             >Gets the style properties for the items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3408,8 +3976,12 @@
 
             
 
+            
+
              property to control the contents of the items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3418,8 +3990,12 @@
 
             
 
+            
+
              control is controlled by the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -3431,8 +4007,12 @@
 
             
 
+            
+
              control, place the &lt;ItemTemplate&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3444,8 +4024,12 @@
 
             
 
+            
+
              property to provide a different appearance for the alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3460,12 +4044,16 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
               </format>
+
+              
 
               
 
@@ -3478,6 +4066,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -3487,6 +4077,8 @@
           <para
             >Gets or sets the template for the items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3536,6 +4128,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3544,13 +4138,19 @@
 
             
 
+            
+
              method restores view-state information for the <see
              cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
+            
+
              control from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.DataList.SaveViewState" />
+
+            
 
             
 
@@ -3565,6 +4165,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -3573,8 +4175,12 @@
 
           
 
+          
+
           An object that represents the state of the <see
            cref="T:System.Web.UI.WebControls.DataList" />
+
+          
 
           
 
@@ -3611,10 +4217,14 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3647,8 +4257,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataList.CancelCommand" />
+
+            
 
             
 
@@ -3660,8 +4274,12 @@
 
             
 
+            
+
              event is raised when the Cancel button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3673,13 +4291,19 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataList.EditItemIndex" />
 
             
 
+            
+
              property to -1 (to deselect the item) and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3694,6 +4318,8 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -3703,12 +4329,16 @@
 
               
 
+              
+
               , and <format
                type="text/html">
                 <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                   >Introduction to Validating User Input in ASP.NET Web Pages</a
                 >
               </format>
+
+              
 
               
 
@@ -3725,11 +4355,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataList.OnCancelCommand(System.Web.UI.WebControls.DataListCommandEventArgs)" />
+
+            
 
             
 
@@ -3744,6 +4378,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -3752,8 +4388,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataListCommandEventArgs" />
+
+          
 
           
 
@@ -3786,8 +4426,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataList.DeleteCommand" />
+
+            
 
             
 
@@ -3799,8 +4443,12 @@
 
             
 
+            
+
              event is raised when the Delete button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3812,8 +4460,12 @@
 
             
 
+            
+
              event removes the selected item from the data source and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3829,11 +4481,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataList.OnDeleteCommand(System.Web.UI.WebControls.DataListCommandEventArgs)" />
+
+            
 
             
 
@@ -3848,6 +4504,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -3856,8 +4514,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataListCommandEventArgs" />
+
+          
 
           
 
@@ -3890,8 +4552,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataList.EditCommand" />
+
+            
 
             
 
@@ -3903,8 +4569,12 @@
 
             
 
+            
+
              event is raised when the Edit button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3916,13 +4586,19 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataList.EditItemIndex" />
 
             
 
+            
+
              property to the selected row and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -3937,6 +4613,8 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -3946,12 +4624,16 @@
 
               
 
+              
+
               , and <format
                type="text/html">
                 <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                   >Introduction to Validating User Input in ASP.NET Web Pages</a
                 >
               </format>
+
+              
 
               
 
@@ -3968,11 +4650,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataList.OnEditCommand(System.Web.UI.WebControls.DataListCommandEventArgs)" />
+
+            
 
             
 
@@ -3987,6 +4673,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -3995,8 +4683,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataListCommandEventArgs" />
+
+          
 
           
 
@@ -4029,8 +4721,12 @@
 
             
 
+            
+
              method notifies the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4045,8 +4741,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4058,8 +4758,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4088,8 +4792,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataList.ItemCommand" />
+
+            
 
             
 
@@ -4101,13 +4809,19 @@
 
             
 
+            
+
              event is raised when any button is clicked in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
+            
+
              control and is commonly used when you have a button control with a custom CommandName value, such as Add, in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4123,11 +4837,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataList.OnItemCommand(System.Web.UI.WebControls.DataListCommandEventArgs)" />
+
+            
 
             
 
@@ -4142,6 +4860,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4150,8 +4870,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataListCommandEventArgs" />
+
+          
 
           
 
@@ -4184,8 +4908,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataList.ItemCreated" />
+
+            
 
             
 
@@ -4197,8 +4925,12 @@
 
             
 
+            
+
              event is raised when an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4210,8 +4942,12 @@
 
             
 
+            
+
              event is commonly used to control the content and appearance of a row in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4227,11 +4963,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataList.OnItemCreated(System.Web.UI.WebControls.DataListItemEventArgs)" />
+
+            
 
             
 
@@ -4246,6 +4986,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4254,8 +4996,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataListItemEventArgs" />
+
+          
 
           
 
@@ -4288,8 +5034,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataList.ItemDataBound" />
+
+            
 
             
 
@@ -4301,8 +5051,12 @@
 
             
 
+            
+
              event is raised after an item is data bound to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4318,11 +5072,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataList.OnItemDataBound(System.Web.UI.WebControls.DataListItemEventArgs)" />
+
+            
 
             
 
@@ -4337,6 +5095,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4345,8 +5105,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataListItemEventArgs" />
+
+          
 
           
 
@@ -4379,8 +5143,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataList.UpdateCommand" />
+
+            
 
             
 
@@ -4392,6 +5160,8 @@
 
             
 
+            
+
              event is raised when the Update button for an item is clicked.</para
           >
           <para
@@ -4400,13 +5170,19 @@
 
             
 
+            
+
              event updates the data, sets the <see
              cref="P:System.Web.UI.WebControls.DataList.EditItemIndex" />
 
             
 
+            
+
              property to -1 (to deselect the item), and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4421,6 +5197,8 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -4430,12 +5208,16 @@
 
               
 
+              
+
               , and <format
                type="text/html">
                 <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                   >Introduction to Validating User Input in ASP.NET Web Pages</a
                 >
               </format>
+
+              
 
               
 
@@ -4452,11 +5234,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataList.OnUpdateCommand(System.Web.UI.WebControls.DataListCommandEventArgs)" />
+
+            
 
             
 
@@ -4471,6 +5257,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4479,8 +5267,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataListItemEventArgs" />
+
+          
 
           
 
@@ -4508,8 +5300,12 @@
 
             
 
+            
+
              method is used primarily by control developers when deriving a custom control from the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4521,8 +5317,12 @@
 
             
 
+            
+
              prepares the control hierarchy and sets styles for contained <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -4534,6 +5334,8 @@
           <para
             >Prepares the control hierarchy for rendering in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4567,8 +5369,12 @@
 
             
 
+            
+
              method is used primarily by control developers, when deriving a custom control from the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4580,13 +5386,19 @@
 
             
 
+            
+
              method renders the inner content of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
+            
+
              control, including the contained <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -4601,6 +5413,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -4609,8 +5423,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -4639,8 +5457,12 @@
 
             
 
+            
+
              control. For example, if you set this property to 5, the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4653,8 +5475,12 @@
 
               
 
+              
+
                control displays its items in a single row or column, based on the value of the <see
                cref="P:System.Web.UI.WebControls.DataList.RepeatDirection" />
+
+              
 
               
 
@@ -4663,8 +5489,12 @@
 
               
 
+              
+
                property is set to RepeatDirection.Horizontal, the items are displayed in a single row. If the <see
                cref="P:System.Web.UI.WebControls.DataList.RepeatDirection" />
+
+              
 
               
 
@@ -4677,6 +5507,8 @@
           <para
             >Gets or sets the number of columns to display in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4714,8 +5546,12 @@
 
             
 
+            
+
              property to specify the display direction of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4728,6 +5564,8 @@
 
               
 
+              
+
                property.</para
             >
           </block>
@@ -4737,8 +5575,12 @@
 
             
 
+            
+
              property is set to 3, the items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4785,8 +5627,12 @@
 
             
 
+            
+
              property is set to 3, the items of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4836,6 +5682,8 @@
 
             
 
+            
+
              control displays vertically or horizontally.</para
           >
         </summary>
@@ -4870,8 +5718,12 @@
 
             
 
+            
+
              property to specify whether the items in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4880,8 +5732,12 @@
 
             
 
+            
+
              values that are supported by the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -4890,8 +5746,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Flow" />
+
+            
 
             
 
@@ -4904,8 +5764,12 @@
 
             
 
+            
+
              control is displayed in a table, you can use the <see
              cref="P:System.Web.UI.WebControls.DataList.GridLines" />
+
+            
 
             
 
@@ -4943,6 +5807,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
           <para
@@ -4951,8 +5817,12 @@
 
             
 
+            
+
              property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -4961,10 +5831,14 @@
 
             
 
+            
+
              property's value is then persisted to a string object after the save-state stage of the server control's life cycle. For more information, see <format
              type="text/html">
               <a href="7949d756-1a79-464e-891f-904b1cfc7991">ASP.NET Page Life Cycle Overview</a>
             </format>
+
+            
 
             
 
@@ -4976,8 +5850,12 @@
 
             
 
+            
+
              method and modifying the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -4990,10 +5868,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -5009,6 +5891,8 @@
           <para
             >The object that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5034,6 +5918,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataList.SelectCommandName" />
+
+            
 
             
 
@@ -5067,8 +5953,12 @@
 
             
 
+            
+
              property to programmatically specify the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5081,12 +5971,16 @@
 
               
 
+              
+
                property is zero based.</para
             >
           </block>
           <para
             >To deselect an item, set the <see
              cref="P:System.Web.UI.WebControls.DataList.SelectedIndex" />
+
+            
 
             
 
@@ -5098,6 +5992,8 @@
 
             
 
+            
+
              property is stored in control state.</para
           >
         </remarks>
@@ -5106,6 +6002,8 @@
           <para
             >Gets or sets the index of the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5145,13 +6043,19 @@
 
             
 
+            
+
              property to get a <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
+            
+
              object that represents the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5163,6 +6067,8 @@
           <para
             >Gets the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5202,8 +6108,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5215,8 +6125,12 @@
 
             
 
+            
+
              control are inherited from one item style property to another through a hierarchy. Item style properties set lower in the hierarchy are inherited by item style properties higher in the hierarchy. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -5225,13 +6139,19 @@
 
             
 
+            
+
              control will also have a red font. This allows you to provide a common appearance for the control by setting a single item style property. You can override the inherited style settings for an item style property that is higher in the hierarchy by setting its style properties. For example, you can specify a blue font for the <see
              cref="P:System.Web.UI.WebControls.DataList.AlternatingItemStyle" />
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.DataList.ItemStyle" />
+
+            
 
             
 
@@ -5305,6 +6225,8 @@
 
             
 
+            
+
              control. You can then list the style attributes within the opening &lt;SelectedItemStyle&gt; tag.</para
           >
         </remarks>
@@ -5313,6 +6235,8 @@
           <para
             >Gets the style properties for the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5362,8 +6286,12 @@
 
             
 
+            
+
              property to control the contents of the selected item. The appearance of the selected item is controlled by the <see
              cref="P:System.Web.UI.WebControls.DataList.SelectedItemStyle" />
+
+            
 
             
 
@@ -5372,6 +6300,8 @@
           <para
             >To specify a template for the selected item, place the &lt;SelectedItemTemplate&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5386,12 +6316,16 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
               </format>
+
+              
 
               
 
@@ -5404,6 +6338,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -5413,6 +6349,8 @@
           <para
             >Gets or sets the template for the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5481,8 +6419,12 @@
 
             
 
+            
+
              property to provide a custom style for the separator between each item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5491,8 +6433,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5504,6 +6450,8 @@
 
             
 
+            
+
              control. You can then list the style attributes within the opening &lt;SeparatorStyle&gt; tag.</para
           >
         </remarks>
@@ -5512,6 +6460,8 @@
           <para
             >Gets the style properties of the separator between each item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5561,8 +6511,12 @@
 
             
 
+            
+
              property to control the contents of the separator between the items of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5571,8 +6525,12 @@
 
             
 
+            
+
              control. The appearance of the separator between the items of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5581,11 +6539,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >To specify a template for the separator, place the &lt;SeparatorTemplate&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5600,12 +6562,16 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
               </format>
+
+              
 
               
 
@@ -5618,6 +6584,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -5627,6 +6595,8 @@
           <para
             >Gets or sets the template for the separator between the items of the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5670,8 +6640,12 @@
 
             
 
+            
+
              property to specify whether the footer section is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5683,8 +6657,12 @@
 
             
 
+            
+
              property. The contents of the footer section are controlled by the <see
              cref="P:System.Web.UI.WebControls.DataList.FooterTemplate" />
+
+            
 
             
 
@@ -5696,6 +6674,8 @@
           <para
             >Gets or sets a value indicating whether the footer section is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5730,8 +6710,12 @@
 
             
 
+            
+
              property to specify whether the header section is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5743,8 +6727,12 @@
 
             
 
+            
+
              property. The contents of the header section are controlled by the <see
              cref="P:System.Web.UI.WebControls.DataList.HeaderTemplate" />
+
+            
 
             
 
@@ -5756,6 +6744,8 @@
           <para
             >Gets or sets a value indicating whether the header section is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -5799,8 +6789,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -5815,6 +6809,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5826,6 +6822,8 @@
 
             
 
+            
+
              that represents the style of the specified item type at the specified index in the list control.</para
           >
         </returns>
@@ -5834,8 +6832,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -5843,6 +6845,8 @@
         >
         <param name="repeatIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5873,8 +6877,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -5886,6 +6894,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasFooter" />
+
+            
 
             
 
@@ -5917,8 +6927,12 @@
 
             
 
+            
+
              instance is cast an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -5930,6 +6944,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasHeader" />
+
+            
 
             
 
@@ -5961,8 +6977,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -5974,6 +6994,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasSeparators" />
+
+            
 
             
 
@@ -6010,8 +7032,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -6026,11 +7052,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="itemType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6041,10 +7071,14 @@
 
           
 
+          
+
           The index of the item.</param
         >
         <param name="repeatInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6055,8 +7089,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -6087,8 +7125,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -6100,6 +7142,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.WebControls.IRepeatInfoUser.RepeatedItemCount" />
+
+            
 
             
 
@@ -6131,8 +7175,12 @@
 
             
 
+            
+
              property to determine the <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+            
 
             
 
@@ -6141,8 +7189,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.DataList.TagKey" />
+
+            
 
             
 
@@ -6154,6 +7206,8 @@
           <para
             >Gets the HTML tag that is used to render the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -6178,6 +7232,8 @@
 
             
 
+            
+
              method is overridden to mark the starting point at which to begin tracking and saving changes to the control as part of the control's view state.</para
           >
         </remarks>
@@ -6189,8 +7245,12 @@
 
             
 
+            
+
              control so they can be stored in the control's <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -6222,6 +7282,8 @@
 
             
 
+            
+
              event is raised when the Update button for an item is clicked.</para
           >
           <para
@@ -6230,13 +7292,19 @@
 
             
 
+            
+
              event updates the data, sets the <see
              cref="P:System.Web.UI.WebControls.DataList.EditItemIndex" />
 
             
 
+            
+
              property to -1 (to deselect the item), and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -6251,6 +7319,8 @@
 
               
 
+              
+
               , <format
                type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -6260,12 +7330,16 @@
 
               
 
+              
+
               , and <format
                type="text/html">
                 <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                   >Introduction to Validating User Input in ASP.NET Web Pages</a
                 >
               </format>
+
+              
 
               
 
@@ -6282,6 +7356,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6290,6 +7366,8 @@
           <para
             >Occurs when the Update button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -6315,6 +7393,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataList.UpdateCommandName" />
+
+            
 
             
 

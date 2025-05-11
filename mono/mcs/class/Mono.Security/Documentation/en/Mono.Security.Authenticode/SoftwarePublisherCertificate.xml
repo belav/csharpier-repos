@@ -19,6 +19,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -103,6 +105,8 @@
 
           
 
+          
+
            representing the filename under which the X.509 certificates and CRL will be loaded.</param
         >
         <summary>Create a SoftwarePublisherCertificate object from the specified file.</summary>
@@ -132,8 +136,12 @@
 
           
 
+          
+
            of <see
            cref="T:Mono.Security.X509.X509Crl" />
+
+          
 
           
 

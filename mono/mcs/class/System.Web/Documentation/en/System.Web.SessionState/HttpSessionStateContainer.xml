@@ -25,8 +25,12 @@
 
         
 
+        
+
          class, which is accessible through the <see
          cref="P:System.Web.HttpContext.Session" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          or the <see
          cref="P:System.Web.UI.Page.Session" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Web.SessionState.HttpSessionState" />
+
+        
 
         
 
@@ -55,13 +67,19 @@
 
         
 
+        
+
          interface that has been populated with session-state data and added to the <see
          cref="T:System.Web.HttpContext" />
 
         
 
+        
+
          of the current request by the session-state module for the <see
          cref="T:System.Web.HttpApplication" />
+
+        
 
         
 
@@ -73,8 +91,12 @@
 
         
 
+        
+
          class calls the <see
          cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+        
 
         
 
@@ -86,8 +108,12 @@
 
         
 
+        
+
          class is the ASP.NET implementation of the <see
          cref="T:System.Web.SessionState.IHttpSessionState" />
+
+        
 
         
 
@@ -96,8 +122,12 @@
 
         
 
+        
+
          class is not intended to be called from application code. If you replace the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -106,8 +136,12 @@
 
         
 
+        
+
          class, or supply your own implementation of the <see
          cref="T:System.Web.SessionState.IHttpSessionState" />
+
+        
 
         
 
@@ -149,6 +183,8 @@
 
             
 
+            
+
              object and initializes it with the specified settings and values.</para
           >
         </summary>
@@ -157,8 +193,12 @@
 
           
 
+          
+
           A session identifier for the new session. If null, an <see
            cref="T:System.ArgumentException" />
+
+          
 
           
 
@@ -169,8 +209,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+          
 
           
 
@@ -181,8 +225,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpStaticObjectsCollection" />
+
+          
 
           
 
@@ -193,10 +241,14 @@
 
           
 
+          
+
           The amount of time, in minutes, allowed between requests before the session-state provider terminates the session.</param
         >
         <param name="newSession">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -207,8 +259,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.SessionState.HttpSessionStateContainer.CookieMode" />
+
+          
 
           
 
@@ -219,8 +275,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.SessionState.SessionStateMode" />
+
+          
 
           
 
@@ -228,6 +288,8 @@
         >
         <param name="isReadonly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -254,8 +316,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+            
 
             
 
@@ -264,13 +330,19 @@
 
             
 
+            
+
              property as true. A custom session module can then query the <see
              cref="P:System.Web.SessionState.HttpSessionStateContainer.IsAbandoned" />
 
             
 
+            
+
              property and remove the session information if the <see
              cref="P:System.Web.SessionState.HttpSessionStateContainer.IsAbandoned" />
+
+            
 
             
 
@@ -305,8 +377,12 @@
 
             
 
+            
+
              parameter refers to an existing session-state item, the existing item is overwritten with the specified <paramref
              name="value" />
+
+            
 
             
 
@@ -322,10 +398,14 @@
 
           
 
+          
+
           The name of the item to add to the session-state collection. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -371,8 +451,12 @@
 
             
 
+            
+
              property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
              cref="P:System.Web.HttpResponse.ContentEncoding" />
+
+            
 
             
 
@@ -404,8 +488,12 @@
 
             
 
+            
+
              is true, the <see
              cref="P:System.Web.SessionState.HttpSessionState.CookieMode" />
+
+            
 
             
 
@@ -414,13 +502,19 @@
 
             
 
+            
+
             ; otherwise, the <see
              cref="P:System.Web.SessionState.HttpSessionState.CookieMode" />
 
             
 
+            
+
              property returns <see
              cref="F:System.Web.HttpCookieMode.UseCookies" />
+
+            
 
             
 
@@ -457,8 +551,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -469,8 +567,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -523,6 +625,8 @@
 
             
 
+            
+
              that can iterate through the variable names in the session-state collection.</para
           >
         </returns>
@@ -565,8 +669,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.SessionState.HttpSessionState" />
+
+            
 
             
 
@@ -655,8 +763,12 @@
 
             
 
+            
+
              property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
              cref="P:System.Globalization.CultureInfo.LCID" />
+
+            
 
             
 
@@ -668,8 +780,12 @@
 
             
 
+            
+
              property accesses the <see
              cref="P:System.Globalization.CultureInfo.LCID" />
+
+            
 
             
 
@@ -704,8 +820,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+            
 
             
 
@@ -713,6 +833,8 @@
              type="text/html">
               <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a>
             </format>
+
+            
 
             
 
@@ -746,6 +868,8 @@
 
             
 
+            
+
             , the collection remains unchanged. No exception is thrown.</para
           >
         </remarks>
@@ -755,6 +879,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -780,8 +906,12 @@
 
             
 
+            
+
              performs the same function as <see
              cref="M:System.Web.SessionState.HttpSessionStateContainer.Clear" />
+
+            
 
             
 
@@ -814,6 +944,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -861,8 +993,12 @@
 
             
 
+            
+
              is out-of-process (<see
              cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+            
 
             
 
@@ -871,10 +1007,14 @@
 
             
 
+            
+
             ), the object will not be created and will not be added to this collection.</para
           >
           <para>
             <see cref="P:System.Web.SessionState.HttpSessionStateContainer.StaticObjects" />
+
+            
 
             
 

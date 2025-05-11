@@ -44,14 +44,20 @@
 
         
 
+        
+
          on the formatting of a
       <see
          cref="T:System.Enum" />
 
         
 
+        
+
         . With this attribute, the <paramref
          name="Position" />
+
+        
 
         
 
@@ -62,12 +68,13 @@
 
         
 
+        
+
          is not used as a
       bit-field, and the value 3 (Red | Blue) is not considered a valid value for the
       enumeration when formatting.</para
       >
-      <code lang="C#"
-        >
+      <code lang="C#">
 using System;
 [FlagsAttribute()] 
 public enum Position { 
@@ -115,8 +122,12 @@ public class enumFormat {
 
         
 
+        
+
          is applied to this class, and its <see
          cref="P:System.AttributeUsageAttribute.Inherited" />
+
+        
 
         
 
@@ -130,6 +141,8 @@ public class enumFormat {
           <para
             >Use the <see
              cref="T:System.FlagsAttribute" />
+
+            
 
             
 
@@ -195,6 +208,8 @@ public class enumFormat {
           <para
             >Initializes a new instance of the <see
              cref="T:System.FlagsAttribute" />
+
+            
 
             
 

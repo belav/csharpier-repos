@@ -21,8 +21,12 @@
 
         
 
+        
+
          event is raised when the user clicks the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.MonthChangedEventArgs.#ctor(System.DateTime,System.DateTime)" />
+
+        
 
         
 
@@ -46,6 +54,8 @@
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -60,8 +70,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -87,6 +101,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.MonthChangedEventArgs" />
+
+            
 
             
 
@@ -133,6 +149,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -141,8 +159,12 @@
 
           
 
+          
+
           The date that determines the month currently displayed by the <see
            cref="T:System.Web.UI.WebControls.Calendar" />
+
+          
 
           
 
@@ -153,8 +175,12 @@
 
           
 
+          
+
           The date that determines the month previously displayed by the <see
            cref="T:System.Web.UI.WebControls.Calendar" />
+
+          
 
           
 
@@ -182,6 +208,8 @@
 
             
 
+            
+
              control and to compare the currently displayed month with another month. For example, you can use this property to calculate the number of months until or since a certain date.</para
           >
           <para>This date is normally the first date of the currently displayed month; however, it can be programmatically changed to any date within the month.</para>
@@ -191,8 +219,12 @@
 
             
 
+            
+
              property can be assigned to this property programmatically to override the month change when the user clicks the navigation controls for the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -204,6 +236,8 @@
           <para
             >Gets the date that determines the currently displayed month in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -232,8 +266,12 @@
 
             
 
+            
+
              control. You can restore the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -242,8 +280,12 @@
 
             
 
+            
+
              property to <see
              cref="P:System.Web.UI.WebControls.MonthChangedEventArgs.PreviousDate" />
+
+            
 
             
 
@@ -256,8 +298,12 @@
 
             
 
+            
+
              property is updated to the date in this property before the <see
              cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" />
+
+            
 
             
 
@@ -269,6 +315,8 @@
           <para
             >Gets the date that determines the previously displayed month in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 

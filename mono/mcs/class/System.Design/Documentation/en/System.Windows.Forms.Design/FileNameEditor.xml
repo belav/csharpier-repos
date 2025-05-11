@@ -21,6 +21,8 @@
 
         
 
+        
+
          provides a file selection dialog box for file name selection and editing.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.FileNameEditor" />
+
+            
 
             
 
@@ -80,6 +84,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -92,8 +98,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -104,10 +114,14 @@
 
           
 
+          
+
           A service provider object through which editing services may be obtained. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +154,12 @@
 
             
 
+            
+
              method is not supported, this method will return <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -156,6 +174,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -167,6 +187,8 @@
 
             
 
+            
+
              values indicating the provided editing style.</para
           >
         </returns>
@@ -175,8 +197,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -214,8 +240,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.OpenFileDialog" />
+
+          
 
           
 

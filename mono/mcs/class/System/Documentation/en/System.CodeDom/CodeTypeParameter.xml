@@ -32,6 +32,8 @@
 
         
 
+        
+
          class represents a type parameter in the declaration of a generic type or method. </para
       >
       <para
@@ -40,8 +42,12 @@
 
         
 
+        
+
          class contains the type parameter <paramref
          name="T" />
+
+        
 
         
 
@@ -54,6 +60,8 @@
             >Generics in the .NET Framework Class Library</a
           >
         </format>
+
+        
 
         
 
@@ -88,6 +96,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -96,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeParameter" />
+
+            
 
             
 
@@ -129,11 +141,15 @@
 
             
 
+            
+
              class with the specified type parameter name. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

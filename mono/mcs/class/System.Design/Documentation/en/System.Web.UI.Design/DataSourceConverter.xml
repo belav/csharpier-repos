@@ -21,11 +21,15 @@
 
         
 
+        
+
          provides methods that can be used to retrieve a list of data sources accessible to the current design-time component.</para
       >
       <para
         >This type converter is used by vsprvslong to provide the values that appear in the list of data sources in the <ui
         >Properties</ui>
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -52,10 +60,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -79,6 +91,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.DataSourceConverter" />
+
+            
 
             
 
@@ -120,8 +134,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -132,8 +150,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -173,6 +195,8 @@
 
             
 
+            
+
              that represents the specified object after conversion.</para
           >
         </returns>
@@ -181,8 +205,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -193,8 +221,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -205,8 +237,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -239,6 +275,8 @@
 
             
 
+            
+
              method, and then returning the components that are valid data sources.</para
           >
         </remarks>
@@ -254,6 +292,8 @@
 
             
 
+            
+
              listing the standard accessible data sources.</para
           >
         </returns>
@@ -262,8 +302,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -296,6 +340,8 @@
 
             
 
+            
+
              provides.</para
           >
         </remarks>
@@ -304,6 +350,8 @@
           <para
             >Gets a value indicating whether the collection of standard values returned from <see
              cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+
+            
 
             
 
@@ -318,8 +366,12 @@
 
             
 
+            
+
              returned from <see
              cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+
+            
 
             
 
@@ -332,8 +384,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -371,6 +427,8 @@
 
             
 
+            
+
              should be called to find a common set of values the object supports; otherwise, false. This implementation always returns true.</para
           >
         </returns>
@@ -379,8 +437,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -416,8 +478,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Design.DataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -426,13 +492,19 @@
 
             
 
+            
+
              class, a valid data source is a component that implements the <see
              cref="T:System.Collections.IEnumerable" />
 
             
 
+            
+
              or <see
              cref="T:System.ComponentModel.IListSource" />
+
+            
 
             
 
@@ -451,8 +523,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -461,11 +537,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

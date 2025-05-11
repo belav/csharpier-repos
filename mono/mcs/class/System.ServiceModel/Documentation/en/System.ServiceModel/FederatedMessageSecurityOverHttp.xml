@@ -53,6 +53,8 @@
 
             
 
+            
+
              object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para
           >
         </remarks>
@@ -90,6 +92,8 @@
           <para
             >Gets a collection of the <see
              cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
+
+            
 
             
 
@@ -143,13 +147,19 @@
 
             
 
+            
+
              are <see
              cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
 
             
 
+            
+
              and <see
              cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />
+
+            
 
             
 
@@ -242,6 +252,8 @@
           <para
             >Gets or sets the binding to be used by the client when communicating with the security token service whose endpoint address equals <see
              cref="P:System.ServiceModel.FederatedMessageSecurityOverHttp.IssuerAddress" />
+
+            
 
             
 

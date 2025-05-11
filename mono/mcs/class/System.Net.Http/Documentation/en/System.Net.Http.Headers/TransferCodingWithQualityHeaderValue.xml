@@ -28,8 +28,12 @@
 
         
 
+        
+
            class provides support for the Accept-Encoding header as defined in <see
          cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >This type derives from <see
          cref="T:System.Net.Http.Headers.TransferCodingHeaderValue" />
+
+        
 
         
 
@@ -77,11 +83,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,6 +126,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -124,10 +136,14 @@
 
           
 
+          
+
           A string used to initialize the new instance.</param
         >
         <param name="quality">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,6 +180,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -175,6 +193,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -183,11 +203,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -216,6 +240,8 @@
           <para
             >Gets the quality factor from the <see
              cref="T:System.Net.Http.Headers.TransferCodingWithQualityHeaderValue" />
+
+            
 
             
 

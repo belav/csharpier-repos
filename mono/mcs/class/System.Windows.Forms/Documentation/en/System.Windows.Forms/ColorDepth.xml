@@ -18,8 +18,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >Specifies the number of colors used to display an image in an <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 

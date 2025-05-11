@@ -21,6 +21,8 @@
 
         
 
+        
+
          provides methods that can retrieve a list of data members from the current data source of a design-time component.</para
       >
       <para>This type converter is used by vsprvslong to provide the values that appear in the list of data members in the Properties window.</para>
@@ -31,8 +33,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -45,12 +51,16 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56"
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -74,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.DataFieldConverter" />
+
+            
 
             
 
@@ -114,8 +126,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -126,8 +142,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -167,6 +187,8 @@
 
             
 
+            
+
              that represents the specified object after conversion.</para
           >
         </returns>
@@ -175,8 +197,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -187,8 +213,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -199,8 +229,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -233,6 +267,8 @@
 
             
 
+            
+
              implementation of the associated component's designer to retrieve the current data source selection.</para
           >
         </remarks>
@@ -248,6 +284,8 @@
 
             
 
+            
+
              listing the data members of the data source selected for the component. </para
           >
         </returns>
@@ -256,8 +294,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -290,6 +332,8 @@
 
             
 
+            
+
              provides.</para
           >
         </remarks>
@@ -298,6 +342,8 @@
           <para
             >Gets a value indicating whether the collection of standard values returned from <see
              cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+
+            
 
             
 
@@ -312,8 +358,12 @@
 
             
 
+            
+
              returned from <see
              cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+
+            
 
             
 
@@ -326,8 +376,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -365,6 +419,8 @@
 
             
 
+            
+
              should be called to find a common set of values the object supports; otherwise, false. This implementation always returns true.</para
           >
         </returns>
@@ -373,8 +429,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

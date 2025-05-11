@@ -27,6 +27,8 @@
 
         
 
+        
+
          interface implementation: </para
       >
       <list type="bullet">
@@ -34,6 +36,8 @@
           <para
             >The <see
              cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
+
+            
 
             
 
@@ -47,6 +51,8 @@
 
             
 
+            
+
              property indicates the security evidence for the assembly.</para
           >
         </item>
@@ -54,6 +60,8 @@
           <para
             >The <see
              cref="P:System.CodeDom.Compiler.CompilerResults.PathToAssembly" />
+
+            
 
             
 
@@ -67,6 +75,8 @@
 
             
 
+            
+
              property indicates any compiler errors and warnings.</para
           >
         </item>
@@ -74,6 +84,8 @@
           <para
             >The <see
              cref="P:System.CodeDom.Compiler.CompilerResults.Output" />
+
+            
 
             
 
@@ -87,6 +99,8 @@
 
             
 
+            
+
              property indicates result code value returned by the compiler.</para
           >
         </item>
@@ -94,6 +108,8 @@
           <para
             >The <see
              cref="P:System.CodeDom.Compiler.CompilerResults.TempFiles" />
+
+            
 
             
 
@@ -108,10 +124,14 @@
 
           
 
+          
+
            is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -154,6 +174,8 @@
 
             
 
+            
+
              class that uses the specified temporary files.</para
           >
         </summary>
@@ -162,8 +184,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.TempFileCollection" />
+
+          
 
           
 
@@ -201,13 +227,19 @@
 
               
 
+              
+
                property calls the <see
                cref="Overload:System.AppDomain.Load" />
 
               
 
+              
+
                method to load the compiled assembly into the current application domain.  After calling the get accessor, the compiled assembly cannot be deleted until the current <see
                cref="T:System.AppDomain" />
+
+              
 
               
 
@@ -246,6 +278,8 @@
           <para
             >File and line number information is associated with each <see
              cref="T:System.CodeDom.Compiler.CompilerError" />
+
+            
 
             
 

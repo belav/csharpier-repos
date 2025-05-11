@@ -25,8 +25,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Configuration.MsmqElementBase.MaxRetryCycles" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -86,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+
+            
 
             
 
@@ -121,6 +129,8 @@
 
             
 
+            
+
              class with additional serialized information about the exception.</para
           >
         </summary>
@@ -129,13 +139,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            instance that holds the serialized data associated with the <see
            cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+
+          
 
           
 
@@ -146,13 +162,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            instance that contains the source and destination of the serialized stream associated with the <see
            cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+
+          
 
           
 
@@ -186,6 +208,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+
+            
 
             
 

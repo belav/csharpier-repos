@@ -23,8 +23,12 @@
 
         
 
+        
+
          event occurs when a control is redrawn. A <see
          cref="T:System.Windows.Forms.PaintEventArgs" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          to use to paint the control and the <see
          cref="P:System.Windows.Forms.PaintEventArgs.ClipRectangle" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -56,6 +66,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.Paint" />
+
+        
 
         
 
@@ -83,13 +95,19 @@
 
             
 
+            
+
              identified by the <paramref
              name="graphics" />
 
             
 
+            
+
              parameter is disposed when the <see
              cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            
 
             
 
@@ -104,6 +122,8 @@
 
             
 
+            
+
              class with the specified graphics and clipping rectangle.</para
           >
         </summary>
@@ -112,8 +132,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -124,8 +148,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -175,8 +203,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            
 
             
 
@@ -185,8 +217,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            
 
             
 
@@ -195,13 +231,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.PaintEventArgs" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            
 
             
 
@@ -212,10 +254,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -228,13 +274,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.PaintEventArgs" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Windows.Forms.PaintEventArgs" />
+
+              
 
               
 
@@ -247,6 +299,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            
 
             
 
@@ -277,8 +331,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected <see
              cref="M:System.Windows.Forms.PaintEventArgs.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -287,13 +345,19 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -305,8 +369,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            
 
             
 
@@ -321,11 +389,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

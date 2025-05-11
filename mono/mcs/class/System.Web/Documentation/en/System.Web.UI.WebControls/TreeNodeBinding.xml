@@ -37,8 +37,12 @@
 
         
 
+        
+
          control is bound to a data source where each data item contains multiple fields (such as an XML element with several attributes), a node displays the value that is returned by the ToString method of the data item, by default. In the case of an XML element, the node displays the element name, which shows the underlying structure of the tree, but is not very useful otherwise. You can bind the properties of a node to a specific field by specifying tree node bindings. A <see
          cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          control stores its <see
          cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          property and applies the bindings to the data source to create a one-to-one relationship between the tree hierarchy and the data source hierarchy. For each data item in the data source, the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
          object in order to create the corresponding <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see
          cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" />
+
+        
 
         
 
@@ -93,8 +113,12 @@
 
         
 
+        
+
          property, or both properties. There is a slight performance gain by specifying both. A node depth specifies the node level that gets bound. For example, the following <see
          cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+        
 
         
 
@@ -103,8 +127,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.TreeNode.Value" />
+
+        
 
         
 
@@ -117,8 +145,12 @@
 
         
 
+        
+
          interface) exposes a <see
          cref="P:System.Web.UI.IHierarchyData.Type" />
+
+        
 
         
 
@@ -127,8 +159,12 @@
 
         
 
+        
+
          declaration binds the &lt;Book&gt; elements of an <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+        
 
         
 
@@ -141,13 +177,19 @@
 
         
 
+        
+
          object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
 
         
 
+        
+
          objects to which the <see
          cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+        
 
         
 
@@ -160,6 +202,8 @@
 
           
 
+          
+
            object by setting the corresponding property directly in the node.</para
         >
       </block>
@@ -169,8 +213,12 @@
 
         
 
+        
+
          class that allow you to bind a property of the <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
+
+        
 
         
 
@@ -200,8 +248,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -222,8 +274,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -244,8 +300,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -266,8 +326,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -288,8 +352,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -310,8 +378,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -326,8 +398,12 @@
 
         
 
+        
+
          class that allow you to bind a property of the <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
+
+        
 
         
 
@@ -357,8 +433,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -379,8 +459,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -401,8 +485,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -423,8 +511,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -445,8 +537,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -467,8 +563,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -489,8 +589,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -511,8 +615,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -533,8 +641,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -555,8 +667,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -571,8 +687,12 @@
 
         
 
+        
+
          objects are defined, the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -586,6 +706,8 @@
 
             
 
+            
+
              object that defines and matches both a depth and a data member.</para
           >
         </item>
@@ -593,6 +715,8 @@
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -606,6 +730,8 @@
 
             
 
+            
+
              object that defines and matches the depth only.</para
           >
         </item>
@@ -613,6 +739,8 @@
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -626,8 +754,12 @@
 
             
 
+            
+
              object that does not have a match in the data source. In this case, the value that is returned by the ToString method of the data item is then bound to the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+            
 
             
 
@@ -636,8 +768,12 @@
 
             
 
+            
+
              properties of the nodes to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -651,8 +787,12 @@
 
         
 
+        
+
          class also allows you to format the text that is displayed in a node by setting the <see
          cref="P:System.Web.UI.WebControls.TreeNodeBinding.FormatString" />
+
+        
 
         
 
@@ -664,6 +804,8 @@
       <para
         >Defines the relationship between a data item and the node it is binding to in a <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -686,8 +828,12 @@
 
             
 
+            
+
              constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -696,8 +842,12 @@
 
             
 
+            
+
              collection of a <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -709,6 +859,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -742,8 +894,12 @@
 
             
 
+            
+
              object) exposes a <see
              cref="P:System.Web.UI.IHierarchyData.Type" />
+
+            
 
             
 
@@ -752,8 +908,12 @@
 
             
 
+            
+
              declaration binds the &lt;Book&gt; elements of an <see
              cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+            
 
             
 
@@ -766,13 +926,19 @@
 
             
 
+            
+
              object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" />
 
             
 
+            
+
              or <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+            
 
             
 
@@ -784,13 +950,19 @@
 
             
 
+            
+
              object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -803,6 +975,8 @@
           <para
             >Gets or sets the value to match against a <see
              cref="P:System.Web.UI.IHierarchyData.Type" />
+
+            
 
             
 
@@ -836,13 +1010,19 @@
 
             
 
+            
+
              declaration binds the Name and ID fields of the data source to the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.TreeNode.Value" />
+
+            
 
             
 
@@ -855,13 +1035,19 @@
 
             
 
+            
+
              object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" />
 
             
 
+            
+
              or <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+            
 
             
 
@@ -873,13 +1059,19 @@
 
             
 
+            
+
              object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -892,6 +1084,8 @@
           <para
             >Gets or sets the node depth at which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -931,13 +1125,19 @@
 
             
 
+            
+
              property is used to provide a custom format for a node's text. The data format string consists of two parts, separated by a colon, in the form { <paramref
              name="A" />
 
             
 
+            
+
              : <paramref
              name="Bxx" />
+
+            
 
             
 
@@ -952,6 +1152,8 @@
 
             
 
+            
+
              in the general example) specifies the parameter index in a zero-based list of parameters.</para
           >
           <block subset="none" type="note">
@@ -960,6 +1162,8 @@
           <para
             >The character after the colon (<paramref
              name="B" />
+
+            
 
             
 
@@ -1042,6 +1246,8 @@
 
             
 
+            
+
              in the general example) specifies the number of significant digits or decimal places to display.</para
           >
           <para
@@ -1049,6 +1255,8 @@
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Overview</a>
             </format>
+
+            
 
             
 
@@ -1061,8 +1269,12 @@
 
             
 
+            
+
              property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -1075,6 +1287,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1083,6 +1297,8 @@
           <para
             >Gets or sets the string that specifies the display format for the text of a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1119,8 +1335,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageToolTip" />
+
+            
 
             
 
@@ -1129,8 +1349,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -1142,8 +1366,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1156,8 +1384,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.ImageToolTip" />
+
+              
 
               
 
@@ -1170,8 +1402,12 @@
 
             
 
+            
+
              property to bind the same ToolTip text to each node image, you can bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ImageToolTip" />
+
+            
 
             
 
@@ -1180,8 +1416,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageToolTipField" />
+
+            
 
             
 
@@ -1194,12 +1434,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1211,6 +1455,8 @@
           <para
             >Gets or sets the ToolTip text for the image that is displayed next to a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1247,8 +1493,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageToolTipField" />
+
+            
 
             
 
@@ -1257,8 +1507,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -1270,8 +1524,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1284,8 +1542,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.ImageToolTip" />
+
+              
 
               
 
@@ -1298,8 +1560,12 @@
 
             
 
+            
+
              property to bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ImageToolTip" />
+
+            
 
             
 
@@ -1308,13 +1574,19 @@
 
             
 
+            
+
              object to a field, you can set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ImageToolTip" />
 
             
 
+            
+
              property to a fixed value by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageToolTip" />
+
+            
 
             
 
@@ -1327,8 +1599,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+              
 
               
 
@@ -1345,13 +1621,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1391,8 +1673,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageUrl" />
+
+            
 
             
 
@@ -1401,8 +1687,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -1411,8 +1701,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1425,6 +1719,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -1434,13 +1730,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageUrlField" />
+
+            
 
             
 
@@ -1452,8 +1754,12 @@
 
             
 
+            
+
              property, you should also consider setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageToolTip" />
+
+            
 
             
 
@@ -1466,6 +1772,8 @@
           <para
             >Gets or sets the URL to an image that is displayed next to a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1502,8 +1810,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageUrlField" />
+
+            
 
             
 
@@ -1512,8 +1824,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -1522,8 +1838,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1536,6 +1856,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -1545,8 +1867,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -1555,8 +1881,12 @@
 
             
 
+            
+
              property to a fixed value by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageUrl" />
+
+            
 
             
 
@@ -1569,8 +1899,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+              
 
               
 
@@ -1583,8 +1917,12 @@
 
             
 
+            
+
              property, you should also consider setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ImageToolTipField" />
+
+            
 
             
 
@@ -1600,13 +1938,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1646,8 +1990,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.NavigateUrl" />
+
+            
 
             
 
@@ -1656,8 +2004,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -1666,8 +2018,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1676,8 +2032,12 @@
 
             
 
+            
+
              control displays a hyperlink for the text of the node, instead of plain text. You can also optionally set the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Target" />
+
+            
 
             
 
@@ -1690,8 +2050,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+
+              
 
               
 
@@ -1704,8 +2068,12 @@
 
             
 
+            
+
              property to bind the same URL to each node, you can bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+
+            
 
             
 
@@ -1714,8 +2082,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.NavigateUrlField" />
+
+            
 
             
 
@@ -1728,6 +2100,8 @@
           <para
             >Gets or sets the URL to link to when a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1764,8 +2138,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.NavigateUrlField" />
+
+            
 
             
 
@@ -1774,8 +2152,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -1784,8 +2166,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1794,13 +2180,19 @@
 
             
 
+            
+
              property is set, the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
 
             
 
+            
+
              control displays a hyperlink for the text of the node, instead of plain text. You can also optionally set the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Target" />
+
+            
 
             
 
@@ -1813,8 +2205,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+
+              
 
               
 
@@ -1827,8 +2223,12 @@
 
             
 
+            
+
              property to bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+
+            
 
             
 
@@ -1837,13 +2237,19 @@
 
             
 
+            
+
              object to a field, you can set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
 
             
 
+            
+
              property to a fixed value by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.NavigateUrl" />
+
+            
 
             
 
@@ -1856,8 +2262,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+              
 
               
 
@@ -1874,13 +2284,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1914,13 +2330,19 @@
 
             
 
+            
+
              control supports dynamic node population. When the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.PopulateOnDemand" />
 
             
 
+            
+
              property is set to true, the child nodes of the node that the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -1932,8 +2354,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -1942,8 +2368,12 @@
 
             
 
+            
+
              property set to true. Data bindings that are created declaratively have the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.PopulateOnDemand" />
+
+            
 
             
 
@@ -1956,8 +2386,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -1966,8 +2400,12 @@
 
               
 
+              
+
                property does not require an event-handling method to be defined for the <see
                cref="E:System.Web.UI.WebControls.TreeView.TreeNodePopulate" />
+
+              
 
               
 
@@ -1976,8 +2414,12 @@
 
               
 
+              
+
               . Instead, the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -1986,8 +2428,12 @@
 
               
 
+              
+
                objects in the <see
                cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
+
+              
 
               
 
@@ -1996,8 +2442,12 @@
 
               
 
+              
+
                event; however, it will be called after the event-handling method for the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -2010,8 +2460,12 @@
 
             
 
+            
+
              control to populate a node dynamically on the client when that node is expanded, preventing the need to post back to the server. For more information on client-side node population, see <see
              cref="P:System.Web.UI.WebControls.TreeView.PopulateNodesFromClient" />
+
+            
 
             
 
@@ -2024,6 +2478,8 @@
           <para
             >Gets or sets a value indicating whether the node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2060,8 +2516,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.SelectAction" />
+
+            
 
             
 
@@ -2070,8 +2530,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2080,13 +2544,19 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
+            
+
              object is applied. The <see
              cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+            
 
             
 
@@ -2099,8 +2569,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+              
 
               
 
@@ -2130,8 +2604,12 @@
 
                   
 
+                  
+
                    event or the <see
                    cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCollapsed" />
+
+                  
 
                   
 
@@ -2158,6 +2636,8 @@
 
                   
 
+                  
+
                    event when a node is selected.</para
                 >
               </description>
@@ -2173,8 +2653,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+
+                  
 
                   
 
@@ -2190,8 +2674,12 @@
 
               
 
+              
+
                is not rendered for a node with its <see
                cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+              
 
               
 
@@ -2205,6 +2693,8 @@
           <para
             >Gets or sets the event or events to raise when a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2241,8 +2731,12 @@
 
             
 
+            
+
              control, you can display check boxes next to an image in the node. When the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2251,8 +2745,12 @@
 
             
 
+            
+
              property to specify the value to bind to the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ShowCheckBox" />
+
+            
 
             
 
@@ -2261,8 +2759,12 @@
 
             
 
+            
+
              object. This binding relationship affects all <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2271,8 +2773,12 @@
 
             
 
+            
+
              object is applied. The <see
              cref="P:System.Web.UI.WebControls.TreeNode.ShowCheckBox" />
+
+            
 
             
 
@@ -2285,8 +2791,12 @@
 
               
 
+              
+
                property can be used to display check boxes, it is more common to use the <see
                cref="P:System.Web.UI.WebControls.TreeView.ShowCheckBoxes" />
+
+              
 
               
 
@@ -2295,8 +2805,12 @@
 
               
 
+              
+
                control. However, the <see
                cref="P:System.Web.UI.WebControls.TreeView.ShowCheckBoxes" />
+
+              
 
               
 
@@ -2305,8 +2819,12 @@
 
               
 
+              
+
                property is often used to override that setting for a node to which the <see
                cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+              
 
               
 
@@ -2315,8 +2833,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.ShowCheckBox" />
+
+              
 
               
 
@@ -2330,6 +2852,8 @@
           <para
             >Gets or sets a value indicating whether a check box is displayed next to a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2360,13 +2884,19 @@
 
             
 
+            
+
              method is a helper function that creates a copy of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
+            
+
              object from which the <see
              cref="M:System.Web.UI.WebControls.TreeNodeBinding.System.ICloneable.Clone" />
+
+            
 
             
 
@@ -2376,6 +2906,8 @@
             <para
               >the <see
                cref="M:System.Web.UI.WebControls.TreeNodeBinding.System.ICloneable.Clone" />
+
+              
 
               
 
@@ -2391,6 +2923,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2399,6 +2933,8 @@
           <para
             >An object that represents a copy of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2429,8 +2965,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IDataSourceViewSchemaAccessor" />
+
+            
 
             
 
@@ -2443,6 +2983,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataSourceViewSchemaAccessor.DataSourceViewSchema" />
+
+            
 
             
 
@@ -2473,8 +3015,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -2486,6 +3032,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IStateManager.IsTrackingViewState" />
+
+            
 
             
 
@@ -2559,8 +3107,12 @@
 
             
 
+            
+
              method has been called on a server control, the <see
              cref="P:System.Web.UI.Control.IsTrackingViewState" />
+
+            
 
             
 
@@ -2572,6 +3124,8 @@
           <para
             >Instructs the <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2602,8 +3156,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Target" />
+
+            
 
             
 
@@ -2612,8 +3170,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2622,13 +3184,19 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
+            
+
              object is applied. The <see
              cref="P:System.Web.UI.WebControls.TreeNode.Target" />
+
+            
 
             
 
@@ -2641,8 +3209,12 @@
 
               
 
+              
+
                property overrides the <see
                cref="P:System.Web.UI.WebControls.TreeView.Target" />
+
+              
 
               
 
@@ -2651,8 +3223,12 @@
 
               
 
+              
+
                control for the nodes to which the <see
                cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+              
 
               
 
@@ -2661,8 +3237,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.Target" />
+
+              
 
               
 
@@ -2676,8 +3256,12 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
                cref="P:System.Web.UI.WebControls.TreeNodeBinding.Target" />
+
+              
 
               
 
@@ -2686,10 +3270,14 @@
 
               
 
+              
+
                control must be XHTML 1.1 compliant. For more information, see <format
                type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
+
+              
 
               
 
@@ -2701,10 +3289,14 @@
 
               
 
+              
+
                property to target another window. For more information, see <format
                type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
               </format>
+
+              
 
               
 
@@ -2718,6 +3310,8 @@
           <para
             >Gets or sets the target window or frame in which to display the Web page content that is associated with a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2754,8 +3348,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.TargetField" />
+
+            
 
             
 
@@ -2764,13 +3362,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object. The <see
              cref="P:System.Web.UI.WebControls.TreeNode.Target" />
+
+            
 
             
 
@@ -2782,8 +3386,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2796,8 +3404,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.Target" />
+
+              
 
               
 
@@ -2810,8 +3422,12 @@
 
             
 
+            
+
              property to bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Target" />
+
+            
 
             
 
@@ -2820,13 +3436,19 @@
 
             
 
+            
+
              object to a field, you can set <see
              cref="P:System.Web.UI.WebControls.TreeNode.Target" />
 
             
 
+            
+
              property to a fixed value by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Target" />
+
+            
 
             
 
@@ -2839,8 +3461,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+              
 
               
 
@@ -2857,13 +3483,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2900,8 +3532,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Text" />
+
+            
 
             
 
@@ -2910,8 +3546,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2920,13 +3560,19 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
+            
+
              object is applied. The <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+            
 
             
 
@@ -2939,8 +3585,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+              
 
               
 
@@ -2953,8 +3603,12 @@
 
             
 
+            
+
              property to bind the same text to each node, you can bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+            
 
             
 
@@ -2963,8 +3617,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.TextField" />
+
+            
 
             
 
@@ -2977,12 +3635,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2994,6 +3656,8 @@
           <para
             >Gets or sets the text that is displayed for the node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3030,8 +3694,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.TextField" />
+
+            
 
             
 
@@ -3040,8 +3708,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -3050,13 +3722,19 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
+            
+
              object is applied. The <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+            
 
             
 
@@ -3069,8 +3747,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+              
 
               
 
@@ -3083,8 +3765,12 @@
 
             
 
+            
+
              property to bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+            
 
             
 
@@ -3093,13 +3779,19 @@
 
             
 
+            
+
              object to a field, you can set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
 
             
 
+            
+
              property to a fixed value by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Text" />
+
+            
 
             
 
@@ -3112,8 +3804,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+              
 
               
 
@@ -3130,13 +3826,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3173,8 +3875,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ToolTip" />
+
+            
 
             
 
@@ -3183,8 +3889,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -3193,8 +3903,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3207,8 +3921,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" />
+
+              
 
               
 
@@ -3221,8 +3939,12 @@
 
             
 
+            
+
              property to bind the same ToolTip text to each node, you can bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" />
+
+            
 
             
 
@@ -3231,8 +3953,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ToolTipField" />
+
+            
 
             
 
@@ -3245,12 +3971,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -3262,6 +3992,8 @@
           <para
             >Gets or sets the ToolTip text for a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3298,8 +4030,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ToolTipField" />
+
+            
 
             
 
@@ -3308,8 +4044,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -3318,8 +4058,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3332,8 +4076,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" />
+
+              
 
               
 
@@ -3346,8 +4094,12 @@
 
             
 
+            
+
              property to bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" />
+
+            
 
             
 
@@ -3356,13 +4108,19 @@
 
             
 
+            
+
              object to a field, you can set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" />
 
             
 
+            
+
              property to a fixed value by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ToolTip" />
+
+            
 
             
 
@@ -3375,8 +4133,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+              
 
               
 
@@ -3393,13 +4155,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3429,6 +4197,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -3440,13 +4210,19 @@
 
             
 
+            
+
              property. If the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
 
             
 
+            
+
              property is null or an empty string (""), <ui
             >(Empty)</ui>
+
+            
 
             
 
@@ -3483,8 +4259,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Value" />
+
+            
 
             
 
@@ -3493,8 +4273,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -3503,8 +4287,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3513,13 +4301,19 @@
 
             
 
+            
+
              property is used to supplement the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
 
             
 
+            
+
              property by storing any additional data associated with the node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3532,8 +4326,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.Value" />
+
+              
 
               
 
@@ -3546,8 +4344,12 @@
 
             
 
+            
+
              property to bind the same value to each node, you can bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Value" />
+
+            
 
             
 
@@ -3556,8 +4358,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ValueField" />
+
+            
 
             
 
@@ -3570,12 +4376,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -3587,6 +4397,8 @@
           <para
             >Gets or sets a displayed value that is not displayed but is used to store any additional data about a node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3623,8 +4435,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.ValueField" />
+
+            
 
             
 
@@ -3633,8 +4449,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -3643,8 +4463,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3653,13 +4477,19 @@
 
             
 
+            
+
              property is used to supplement the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
 
             
 
+            
+
              property by storing any additional data associated with the node to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -3672,8 +4502,12 @@
 
               
 
+              
+
                property by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.Value" />
+
+              
 
               
 
@@ -3686,8 +4520,12 @@
 
             
 
+            
+
              property to bind the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Value" />
+
+            
 
             
 
@@ -3696,13 +4534,19 @@
 
             
 
+            
+
              object to an field, you can set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Value" />
 
             
 
+            
+
              property to a fixed value by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.Value" />
+
+            
 
             
 
@@ -3715,8 +4559,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" />
+
+              
 
               
 
@@ -3733,13 +4581,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 

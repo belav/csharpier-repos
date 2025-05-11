@@ -31,8 +31,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          controls) can display a set of controls called <newTerm
         >the pager</newTerm>
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          class is used by these controls to represent the properties of the pager. In general, the <see
          cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+        
 
         
 
@@ -61,11 +73,15 @@
 
         
 
+        
+
          object.</para
       >
       <para
         >The pager supports several different display modes. To specify the mode in which to display the pager, set the <see
          cref="P:System.Web.UI.WebControls.PagerSettings.Mode" />
+
+        
 
         
 
@@ -129,8 +145,12 @@
 
         
 
+        
+
          property is set to the <see
          cref="F:System.Web.UI.WebControls.PagerButtons.NextPrevious" />
+
+        
 
         
 
@@ -139,8 +159,12 @@
 
         
 
+        
+
         , or <see
          cref="F:System.Web.UI.WebControls.PagerButtons.NumericFirstLast" />
+
+        
 
         
 
@@ -258,8 +282,12 @@
 
           
 
+          
+
            property is set, the text that is specified by the <see
            cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageText" />
+
+          
 
           
 
@@ -272,8 +300,12 @@
 
         
 
+        
+
          property is set to the <see
          cref="F:System.Web.UI.WebControls.PagerButtons.Numeric" />
+
+        
 
         
 
@@ -282,8 +314,12 @@
 
         
 
+        
+
          value, you can specify the number of page buttons to display in the pager by setting the <see
          cref="P:System.Web.UI.WebControls.PagerSettings.PageButtonCount" />
+
+        
 
         
 
@@ -295,8 +331,12 @@
 
         
 
+        
+
          property. To show or hide the pager, use the <see
          cref="P:System.Web.UI.WebControls.PagerSettings.Visible" />
+
+        
 
         
 
@@ -323,8 +363,12 @@
 
             
 
+            
+
              constructor to create a new instance of the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -337,6 +381,8 @@
 
               
 
+              
+
                constructor generally is used by control developers when providing paging support in a custom control.</para
             >
           </block>
@@ -346,6 +392,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -388,8 +436,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NextPreviousFirstLast" />
+
+            
 
             
 
@@ -398,8 +450,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageImageUrl" />
+
+            
 
             
 
@@ -412,8 +468,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageImageUrl" />
+
+              
 
               
 
@@ -422,13 +482,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageText" />
 
               
 
+              
+
                properties are both set, the image is displayed with the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageText" />
+
+              
 
               
 
@@ -471,8 +537,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NextPreviousFirstLast" />
+
+            
 
             
 
@@ -481,8 +551,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageText" />
+
+            
 
             
 
@@ -495,8 +569,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageText" />
+
+              
 
               
 
@@ -505,13 +583,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageText" />
 
               
 
+              
+
                properties are both set, the image is displayed with the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageText" />
+
+              
 
               
 
@@ -560,8 +644,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NextPreviousFirstLast" />
+
+            
 
             
 
@@ -570,8 +658,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.LastPageImageUrl" />
+
+            
 
             
 
@@ -584,8 +676,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.LastPageImageUrl" />
+
+              
 
               
 
@@ -594,13 +690,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagerSettings.LastPageText" />
 
               
 
+              
+
                properties are both set, the image is displayed with the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.LastPageText" />
+
+              
 
               
 
@@ -643,8 +745,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NextPreviousFirstLast" />
+
+            
 
             
 
@@ -653,8 +759,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.LastPageText" />
+
+            
 
             
 
@@ -667,8 +777,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.LastPageText" />
+
+              
 
               
 
@@ -677,13 +791,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagerSettings.LastPageText" />
 
               
 
+              
+
                properties are both set, the image is displayed with the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.LastPageText" />
+
+              
 
               
 
@@ -726,6 +846,8 @@
           <para
             >Controls that support pagination provide multiple modes in which to display the paging controls. Use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.Mode" />
+
+            
 
             
 
@@ -789,8 +911,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NextPrevious" />
+
+            
 
             
 
@@ -799,8 +925,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NumericFirstLast" />
+
+            
 
             
 
@@ -918,8 +1048,12 @@
 
               
 
+              
+
                property is set, the text that is specified by the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.FirstPageText" />
+
+              
 
               
 
@@ -968,8 +1102,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NumericFirstLast" />
+
+            
 
             
 
@@ -978,8 +1116,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.NextPageImageUrl" />
+
+            
 
             
 
@@ -992,8 +1134,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.NextPageImageUrl" />
+
+              
 
               
 
@@ -1002,13 +1148,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagerSettings.NextPageText" />
 
               
 
+              
+
                properties are both set, the image is displayed with the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.NextPageText" />
+
+              
 
               
 
@@ -1051,8 +1203,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NumericFirstLast" />
+
+            
 
             
 
@@ -1061,8 +1217,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.NextPageText" />
+
+            
 
             
 
@@ -1075,8 +1235,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.NextPageText" />
+
+              
 
               
 
@@ -1085,13 +1249,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagerSettings.NextPageText" />
 
               
 
+              
+
                properties are both set, the image is displayed with the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.NextPageText" />
+
+              
 
               
 
@@ -1134,8 +1304,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.Numeric" />
+
+            
 
             
 
@@ -1144,8 +1318,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.PageButtonCount" />
+
+            
 
             
 
@@ -1161,13 +1339,19 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.Numeric" />
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NumericFirstLast" />
+
+            
 
             
 
@@ -1204,6 +1388,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.Position" />
+
+            
 
             
 
@@ -1293,8 +1479,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NextPreviousFirstLast" />
+
+            
 
             
 
@@ -1303,8 +1493,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.PreviousPageImageUrl" />
+
+            
 
             
 
@@ -1317,8 +1511,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.PreviousPageImageUrl" />
+
+              
 
               
 
@@ -1327,13 +1525,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagerSettings.PreviousPageText" />
 
               
 
+              
+
                properties are both set, the image is displayed with the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.PreviousPageText" />
+
+              
 
               
 
@@ -1376,8 +1580,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.PagerButtons.NextPreviousFirstLast" />
+
+            
 
             
 
@@ -1386,8 +1594,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.PreviousPageText" />
+
+            
 
             
 
@@ -1400,8 +1612,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.PreviousPageText" />
+
+              
 
               
 
@@ -1410,13 +1626,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagerSettings.PreviousPageText" />
 
               
 
+              
+
                properties are both set, the image is displayed with the <see
                cref="P:System.Web.UI.WebControls.PagerSettings.PreviousPageText" />
+
+              
 
               
 
@@ -1450,13 +1672,19 @@
 
             
 
+            
+
              event is raised each time a property of a <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
 
             
 
+            
+
              object changes values. The <see
              cref="E:System.Web.UI.WebControls.PagerSettings.PropertyChanged" />
+
+            
 
             
 
@@ -1470,6 +1698,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1478,6 +1708,8 @@
           <para
             >Occurs when a property of a <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -1511,8 +1743,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1550,8 +1786,12 @@
 
             
 
+            
+
              method to load the previously saved view state of the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -1564,6 +1804,8 @@
 
               
 
+              
+
                method is private and cannot be called.</para
             >
           </block>
@@ -1573,6 +1815,8 @@
           <para
             >Loads the previously saved view state of the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -1600,8 +1844,12 @@
 
             
 
+            
+
              method is a helper method that is used by the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -1611,6 +1859,8 @@
             <para
               >The <see
                cref="M:System.Web.UI.WebControls.PagerSettings.System#Web#UI#IStateManager#SaveViewState" />
+
+              
 
               
 
@@ -1626,6 +1876,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1634,6 +1886,8 @@
           <para
             >An object that contains the saved state of the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -1661,8 +1915,12 @@
 
             
 
+            
+
              method is overridden to mark the starting point at which to begin tracking and saving changes to the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -1675,6 +1933,8 @@
 
               
 
+              
+
                method is private and cannot be called.</para
             >
           </block>
@@ -1684,6 +1944,8 @@
           <para
             >Marks the starting point at which to begin tracking and saving view state changes to the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -1709,13 +1971,19 @@
 
             
 
+            
+
              method is used to retrieve a string representation of a <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
 
             
 
+            
+
              object. The <see
              cref="M:System.Web.UI.WebControls.PagerSettings.ToString" />
+
+            
 
             
 
@@ -1727,6 +1995,8 @@
           <para
             >Retrieves the string representation of a <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -1767,8 +2037,12 @@
 
             
 
+            
+
              property to specify whether the paging controls are displayed in a control that supports pagination. To hide the paging controls, set the <see
              cref="P:System.Web.UI.WebControls.PagerSettings.Visible" />
+
+            
 
             
 

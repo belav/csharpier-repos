@@ -30,6 +30,8 @@
 
         
 
+        
+
          attribute.</para
       >
     </remarks>
@@ -67,8 +69,12 @@
 
             
 
+            
+
             , which enables both early and late binding. <see
              cref="F:System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual" />
+
+            
 
             
 
@@ -105,6 +111,8 @@
 
             
 
+            
+
             , which enables late binding only.</para
           >
         </summary>
@@ -133,6 +141,8 @@
           <para
             >Indicates that an interface is exposed to COM as an interface that is derived from <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148003">IUnknown</see>
+
+            
 
             
 

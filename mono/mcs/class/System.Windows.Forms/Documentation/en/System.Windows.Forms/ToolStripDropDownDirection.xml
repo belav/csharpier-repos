@@ -19,6 +19,8 @@
 
         
 
+        
+
          control is displayed relative to its parent control.</para
       >
     </summary>
@@ -37,6 +39,8 @@
           <para
             >Uses the mouse position to specify that the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              is displayed above and to the right of its parent control.</para
           >
         </summary>
@@ -85,6 +91,8 @@
           <para
             >Uses the mouse position to specify that the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -112,6 +120,8 @@
 
             
 
+            
+
              is displayed below and to the right of its parent control.</para
           >
         </summary>
@@ -136,13 +146,19 @@
 
             
 
+            
+
              setting, specifying either <see
              cref="F:System.Windows.Forms.ToolStripDropDownDirection.Left" />
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.ToolStripDropDownDirection.Right" />
+
+            
 
             
 
@@ -170,6 +186,8 @@
 
             
 
+            
+
              is displayed to the left of its parent control.</para
           >
         </summary>
@@ -191,6 +209,8 @@
           <para
             >Compensates for nested drop-down controls and specifies that the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 

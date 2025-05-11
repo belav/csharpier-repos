@@ -18,13 +18,19 @@
 
         
 
+        
+
          to determine how to validate its data. This type of validation is called implicit validation, because it occurs without the application developer having to make an explicit call to <see
          cref="M:System.Windows.Forms.ContainerControl.Validate" />
 
         
 
+        
+
          or <see
          cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
+
+        
 
         
 
@@ -37,6 +43,8 @@
             >User Input Validation in Windows Forms (Windows Forms)</a
           >
         </format>
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
+
+            
 
             
 
@@ -91,6 +103,8 @@
           <para
             >Implicit validation occurs, but if validation fails, focus will still change to the new control. If validation fails, the <see
              cref="E:System.Windows.Forms.Control.Validated" />
+
+            
 
             
 
@@ -135,8 +149,12 @@
 
             
 
+            
+
              behavior from its container (such as a form or another control). If there is no container control, it defaults to <see
              cref="F:System.Windows.Forms.AutoValidate.EnablePreventFocusChange" />
+
+            
 
             
 

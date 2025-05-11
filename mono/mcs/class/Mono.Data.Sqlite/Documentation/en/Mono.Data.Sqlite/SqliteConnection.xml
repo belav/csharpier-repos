@@ -21,10 +21,11 @@
   </Interfaces>
   <Docs>
     <summary>SQLite implentation of DbConnection.</summary>
-    <remarks
-      >
+    <remarks>
       The <see
        cref="P:Mono.Data.Sqlite.SqliteConnection.ConnectionString">ConnectionString</see>
+
+      
 
       
 
@@ -66,9 +67,13 @@
 
             
 
+            
+
              - Use DateTime.Ticks<br
              />
             <b>ISO8601</b>
+
+            
 
             
 
@@ -84,9 +89,13 @@
 
             
 
+            
+
              - Store GUID columns in binary form<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -109,15 +118,21 @@
 
             
 
+            
+
              - Normal file flushing behavior<br
              />
             <b>Full</b>
 
             
 
+            
+
              - Full flushing after all writes<br
              />
             <b>Off</b>
+
+            
 
             
 
@@ -146,9 +161,13 @@
 
             
 
+            
+
              - Automatically enlist in distributed transactions<br
              />
             <b>N</b>
+
+            
 
             
 
@@ -165,9 +184,13 @@
 
             
 
+            
+
              - Use connection pooling<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -184,9 +207,13 @@
 
             
 
+            
+
              - Don't create the database if it does not exist, throw an error instead<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -209,9 +236,13 @@
 
             
 
+            
+
              - Use the more compatible legacy 3.x database format<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -229,6 +260,8 @@
 
             
 
+            
+
             The default command timeout</description
           >
           <description>N</description>
@@ -241,15 +274,21 @@
 
             
 
+            
+
              - Delete the journal file after a commit<br
              />
             <b>Persist</b>
 
             
 
+            
+
              - Zero out and leave the journal file on disk after a commit<br
              />
             <b>Off</b>
+
+            
 
             
 
@@ -266,9 +305,13 @@
 
             
 
+            
+
              - Open the database for read only access<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -819,15 +862,21 @@
 
                 
 
+                
+
                  - Use DateTime.Ticks<br
                  />
                 <b>ISO8601</b>
 
                 
 
+                
+
                  - Use ISO8601 DateTime format<br
                  />
                 <b>JulianDay</b>
+
+                
 
                 
 
@@ -843,9 +892,13 @@
 
                 
 
+                
+
                  - Store GUID columns in binary form<br
                  />
                 <b>No/Off/0</b>
+
+                
 
                 
 
@@ -867,15 +920,21 @@
 
                 
 
+                
+
                  - Normal file flushing behavior<br
                  />
                 <b>Full</b>
 
                 
 
+                
+
                  - Full flushing after all writes<br
                  />
                 <b>Off</b>
+
+                
 
                 
 
@@ -903,9 +962,13 @@
 
                 
 
+                
+
                  - Automatically enlist in distributed transactions<br
                  />
                 <b>N</b>
+
+                
 
                 
 
@@ -921,9 +984,13 @@
 
                 
 
+                
+
                  - Use connection pooling<br
                  />
                 <b>False</b>
+
+                
 
                 
 
@@ -939,9 +1006,13 @@
 
                 
 
+                
+
                  - Don't create the database if it does not exist, throw an error instead<br
                  />
                 <b>False</b>
+
+                
 
                 
 
@@ -963,9 +1034,13 @@
 
                 
 
+                
+
                  - Use the more compatible legacy 3.x database format<br
                  />
                 <b>False</b>
+
+                
 
                 
 
@@ -982,6 +1057,8 @@
 
                 
 
+                
+
                 The default command timeout</description
               >
               <description>N</description>
@@ -994,15 +1071,21 @@
 
                 
 
+                
+
                  - Delete the journal file after a commit<br
                  />
                 <b>Persist</b>
 
                 
 
+                
+
                  - Zero out and leave the journal file on disk after a commit<br
                  />
                 <b>Off</b>
+
+                
 
                 
 
@@ -1018,9 +1101,13 @@
 
                 
 
+                
+
                  - Open the database for read only access<br
                  />
                 <b>False</b>
+
+                
 
                 
 
@@ -1284,8 +1371,7 @@
             </summary>
         <returns>A DataTable of the MetaDataCollections schema</returns>
         <remarks>To be added.</remarks>
-        <overloads
-          >
+        <overloads>
             The following commands are used to extract schema information out of the database.  Valid schema types are:
             <list
            type="bullet">
@@ -1396,8 +1482,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
             Opens the connection using the parameters found in the <see
            cref="P:Mono.Data.Sqlite.SqliteConnection.ConnectionString">ConnectionString</see>
         </summary>

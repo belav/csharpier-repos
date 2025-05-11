@@ -88,8 +88,12 @@
 
         
 
+        
+
          control to create a hyperlink-style button on the Web page. The <see
          cref="T:System.Web.UI.WebControls.LinkButton" />
+
+        
 
         
 
@@ -98,13 +102,19 @@
 
         
 
+        
+
          control, but has the same functionality as a <see
          cref="T:System.Web.UI.WebControls.Button" />
 
         
 
+        
+
          control. If you want to link to another Web page when the control is clicked, consider using the <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
+
+        
 
         
 
@@ -117,10 +127,14 @@
 
           
 
+          
+
            control renders JavaScript to the client browser. The client browser must have JavaScript enabled for this control to function properly. For more information on client script, see <format
            type="text/html">
             <a href="13edb6b9-2dea-43c6-b8c1-a47207de19aa">Client Script in ASP.NET Web Pages</a>
           </format>
+
+          
 
           
 
@@ -133,8 +147,12 @@
 
         
 
+        
+
          control is a Submit button. You can provide an event handler for the <see
          cref="E:System.Web.UI.WebControls.LinkButton.Click" />
+
+        
 
         
 
@@ -143,8 +161,12 @@
 
         
 
+        
+
          property to specify the command name. This allows you to create multiple <see
          cref="T:System.Web.UI.WebControls.LinkButton" />
+
+        
 
         
 
@@ -153,13 +175,19 @@
 
         
 
+        
+
          control is clicked. You can also use the <see
          cref="P:System.Web.UI.WebControls.LinkButton.CommandArgument" />
 
         
 
+        
+
          property with a Command button to provide additional information about the command to perform, such as specifying ascending order. You can also provide an event handler for the <see
          cref="E:System.Web.UI.WebControls.LinkButton.Command" />
+
+        
 
         
 
@@ -172,12 +200,16 @@
 
           
 
+          
+
            control. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
            type="text/html">
             <a href="96D2C59E-693C-4079-9B53-B3FF0D9E9133"
               >[&lt;topic://cpconASPNETSyntaxForValidationControls&gt;]</a
             >
           </format>
+
+          
 
           
 
@@ -196,8 +228,12 @@
 
         
 
+        
+
          control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control. To prevent page validation from occurring, set the <see
          cref="P:System.Web.UI.WebControls.LinkButton.CausesValidation" />
+
+        
 
         
 
@@ -219,11 +255,15 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     CausesValidation="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -236,9 +276,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -248,9 +292,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -260,10 +308,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -275,9 +327,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -307,6 +363,8 @@
 
         
 
+        
+
         |False"
     Width="size"
 /&gt;</code
@@ -332,6 +390,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -340,6 +400,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -378,6 +440,8 @@
 
             
 
+            
+
              control to the output stream for rendering on the client.</para
           >
         </summary>
@@ -409,6 +473,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -417,8 +483,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -447,6 +517,8 @@
 
             
 
+            
+
              control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control.</para
           >
           <para
@@ -455,13 +527,19 @@
 
             
 
+            
+
              control is clicked by using the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CausesValidation" />
 
             
 
+            
+
              property. To prevent validation from being performed, set the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CausesValidation" />
+
+            
 
             
 
@@ -474,13 +552,19 @@
 
             
 
+            
+
              property is set to true, you can also use the <see
              cref="P:System.Web.UI.WebControls.LinkButton.ValidationGroup" />
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -492,10 +576,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -507,6 +595,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -543,13 +633,19 @@
 
             
 
+            
+
              event is raised when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
 
             
 
+            
+
              control is clicked. This event is commonly used when no command name is associated with the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -565,6 +661,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -573,6 +671,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -604,8 +704,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -614,13 +718,19 @@
 
             
 
+            
+
              control. This allows you to create multiple <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
 
             
 
+            
+
              controls on a Web page and programmatically determine which <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -630,6 +740,8 @@
             <para
               >The <see
                cref="E:System.Web.UI.WebControls.LinkButton.Command" />
+
+              
 
               
 
@@ -646,6 +758,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -654,6 +768,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -683,8 +799,12 @@
 
             
 
+            
+
              property to specify an argument that complements the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CommandName" />
+
+            
 
             
 
@@ -697,8 +817,12 @@
 
               
 
+              
+
                property is typically only used when the <see
                cref="P:System.Web.UI.WebControls.LinkButton.CommandName" />
+
+              
 
               
 
@@ -711,8 +835,12 @@
 
             
 
+            
+
              property complements the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CommandName" />
+
+            
 
             
 
@@ -721,8 +849,12 @@
 
             
 
+            
+
              property to Sort and set the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CommandArgument" />
+
+            
 
             
 
@@ -734,10 +866,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -752,8 +888,12 @@
 
             
 
+            
+
              event handler along with the associated <see
              cref="P:System.Web.UI.WebControls.LinkButton.CommandName" />
+
+            
 
             
 
@@ -794,8 +934,12 @@
 
             
 
+            
+
              controls on a Web page, use the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CommandName" />
+
+            
 
             
 
@@ -804,13 +948,19 @@
 
             
 
+            
+
              control clicked. You can set the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CommandName" />
 
             
 
+            
+
              property with any string that identifies the command to perform. You can then programmatically determine the command name of the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -822,6 +972,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -830,10 +982,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -848,13 +1004,19 @@
 
             
 
+            
+
              control. This value is passed to the <see
              cref="E:System.Web.UI.WebControls.LinkButton.Command" />
 
             
 
+            
+
              event handler along with the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CommandArgument" />
+
+            
 
             
 
@@ -897,8 +1059,12 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.Web.UI.PostBackOptions" />
+
+            
 
             
 
@@ -907,8 +1073,12 @@
 
             
 
+            
+
              control's postback behavior. The <see
              cref="T:System.Web.UI.PostBackOptions" />
+
+            
 
             
 
@@ -917,11 +1087,15 @@
 
             
 
+            
+
              method, which is used to obtain a reference to a client-side script function that, when invoked, causes the server to post back to the page.</para
           >
           <para
             >This method is used primarily by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -936,8 +1110,12 @@
 
             
 
+            
+
              object that represents the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -952,8 +1130,12 @@
 
             
 
+            
+
              that represents the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -979,6 +1161,8 @@
         <remarks>To be added</remarks>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1008,13 +1192,19 @@
 
             
 
+            
+
              event is raised when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
 
             
 
+            
+
              control is clicked. This event is commonly used when no command name is associated with the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1030,11 +1220,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LinkButton.OnClick(System.EventArgs)" />
+
+            
 
             
 
@@ -1049,8 +1243,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1062,8 +1260,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1102,8 +1304,12 @@
 
             
 
+            
+
              property to specify additional client-side script that executes when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1112,8 +1318,12 @@
 
             
 
+            
+
              event is raised. The script that you specify for this property is rendered in the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1125,10 +1335,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1143,8 +1357,12 @@
 
             
 
+            
+
              control's <see
              cref="E:System.Web.UI.WebControls.LinkButton.Click" />
+
+            
 
             
 
@@ -1174,8 +1392,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1184,13 +1406,19 @@
 
             
 
+            
+
              control. This allows you to create multiple <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
 
             
 
+            
+
              controls on a Web page and programmatically determine which <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1200,6 +1428,8 @@
             <para
               >The <see
                cref="E:System.Web.UI.WebControls.LinkButton.Command" />
+
+              
 
               
 
@@ -1216,11 +1446,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LinkButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
+
+            
 
             
 
@@ -1235,8 +1469,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1248,8 +1486,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+
+          
 
           
 
@@ -1279,8 +1521,12 @@
 
             
 
+            
+
              method notifies the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1295,6 +1541,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1303,8 +1551,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1349,8 +1601,12 @@
 
             
 
+            
+
              property allows you to perform a cross-page post using the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1359,8 +1615,12 @@
 
             
 
+            
+
              property to the URL of the Web page to post to when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1369,8 +1629,12 @@
 
             
 
+            
+
              control to post to Page2.aspx. If you do not specify a value for the <see
              cref="P:System.Web.UI.WebControls.LinkButton.PostBackUrl" />
+
+            
 
             
 
@@ -1380,6 +1644,8 @@
             <para
               >When performing a cross-page postback with controls with server-side validation, you should check that the page's <see
                cref="P:System.Web.UI.Page.IsValid" />
+
+              
 
               
 
@@ -1403,6 +1669,8 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
           <para
@@ -1411,10 +1679,14 @@ End Sub</code>
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1426,6 +1698,8 @@ End Sub</code>
           <para
             >Gets or sets the URL of the page to post to from the current page when the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1458,13 +1732,19 @@ End Sub</code>
 
             
 
+            
+
              control, when it is clicked, to raise a <see
              cref="E:System.Web.UI.WebControls.LinkButton.Click" />
 
             
 
+            
+
              event, and if defined, a <see
              cref="E:System.Web.UI.WebControls.LinkButton.Command" />
+
+            
 
             
 
@@ -1479,11 +1759,15 @@ End Sub</code>
 
             
 
+            
+
              control when it posts back to the server.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1517,8 +1801,12 @@ End Sub</code>
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1556,8 +1844,12 @@ End Sub</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackEventHandler" />
+
+            
 
             
 
@@ -1569,6 +1861,8 @@ End Sub</code>
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -1594,8 +1888,12 @@ End Sub</code>
 
             
 
+            
+
              property to specify or determine the caption to display on the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1612,12 +1910,16 @@ End Sub</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -1630,6 +1932,8 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1638,6 +1942,8 @@ End Sub</code>
           <para
             >Gets or sets the text caption displayed on the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1691,8 +1997,12 @@ End Sub</code>
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1704,8 +2014,12 @@ End Sub</code>
 
             
 
+            
+
              property is set to true. When you specify a value for the <see
              cref="P:System.Web.UI.WebControls.LinkButton.ValidationGroup" />
+
+            
 
             
 
@@ -1714,8 +2028,12 @@ End Sub</code>
 
             
 
+            
+
              control posts back to the server. If you do not specify a value for this property and the <see
              cref="P:System.Web.UI.WebControls.LinkButton.CausesValidation" />
+
+            
 
             
 
@@ -1727,10 +2045,14 @@ End Sub</code>
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1742,6 +2064,8 @@ End Sub</code>
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 

@@ -29,8 +29,12 @@
 
         
 
+        
+
          to represent an external asynchronous operation. <see
          cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
          cref="http://blogs.msdn.com/b/pfxteam/archive/2009/06/02/9685804.aspx"
           >The Nature of TaskCompletionSource&lt;TResult&gt;</see
         >
+
+        
 
         
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          also contain examples of how to use <see
          cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          unbound to a delegate, providing access to the consumer side through the <see
          cref="P:System.Threading.Tasks.TaskCompletionSource`1.Task" />
+
+        
 
         
 
@@ -93,6 +107,8 @@
           <para
             >Creates a <see
              cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+
+            
 
             
 
@@ -124,6 +140,8 @@
 
             
 
+            
+
              with the specified state.</para
           >
         </summary>
@@ -132,8 +150,12 @@
 
           
 
+          
+
           The state to use as the underlying <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -166,13 +188,19 @@
 
             
 
+            
+
              created by this instance and accessible through its <see
              cref="P:System.Threading.Tasks.TaskCompletionSource`1.Task" />
 
             
 
+            
+
              property will be instantiated using the specified <paramref
              name="creationOptions" />
+
+            
 
             
 
@@ -187,6 +215,8 @@
 
             
 
+            
+
              with the specified options.</para
           >
         </summary>
@@ -195,8 +225,12 @@
 
           
 
+          
+
           The options to use when creating the underlying <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -231,6 +265,8 @@
 
             
 
+            
+
              with the specified state and options.</para
           >
         </summary>
@@ -239,8 +275,12 @@
 
           
 
+          
+
           The state to use as the underlying <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -251,8 +291,12 @@
 
           
 
+          
+
           The options to use when creating the underlying <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -284,8 +328,12 @@
 
             
 
+            
+
              into the <see
              cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+
+            
 
             
 
@@ -326,8 +374,12 @@
 
             
 
+            
+
              into the <see
              cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+
+            
 
             
 
@@ -339,8 +391,12 @@
 
           
 
+          
+
           The collection of exceptions to bind to this <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -374,8 +430,12 @@
 
             
 
+            
+
              into the <see
              cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+
+            
 
             
 
@@ -387,8 +447,12 @@
 
           
 
+          
+
           The exception to bind to this <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -444,8 +508,12 @@
 
             
 
+            
+
              that is controlled by this instance. When you create a <see
              cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+
+            
 
             
 
@@ -454,8 +522,12 @@
 
             
 
+            
+
              property of this <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -468,8 +540,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetException(System.Exception)" />
+
+            
 
             
 
@@ -478,8 +554,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetCanceled" />
+
+            
 
             
 
@@ -494,8 +574,12 @@
 
             
 
+            
+
              created by this <see
              cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+
+            
 
             
 
@@ -527,8 +611,12 @@
 
             
 
+            
+
              is already in one of the three final states: <see
              cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
+
+            
 
             
 
@@ -537,8 +625,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+
+            
 
             
 
@@ -547,6 +639,8 @@
           <para
             >This method also returns false if the underlying <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -561,8 +655,12 @@
 
             
 
+            
+
              into the <see
              cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+
+            
 
             
 
@@ -606,8 +704,12 @@
 
             
 
+            
+
              is already in one of the three final states: <see
              cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
+
+            
 
             
 
@@ -616,8 +718,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+
+            
 
             
 
@@ -632,8 +738,12 @@
 
             
 
+            
+
              into the <see
              cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+
+            
 
             
 
@@ -649,8 +759,12 @@
 
           
 
+          
+
           The collection of exceptions to bind to this <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -683,8 +797,12 @@
 
             
 
+            
+
              is already in one of the three final states: <see
              cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
+
+            
 
             
 
@@ -693,8 +811,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+
+            
 
             
 
@@ -709,8 +831,12 @@
 
             
 
+            
+
              into the <see
              cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+
+            
 
             
 
@@ -726,8 +852,12 @@
 
           
 
+          
+
           The exception to bind to this <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          attribute.</para
       >
     </remarks>
@@ -64,6 +66,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -77,8 +81,12 @@
 
             
 
+            
+
              does not contain type information for the dispinterface in order to prevent clients from caching the DISPIDs of the interface. The dispinterface does not exhibit the versioning problems described in <see
              cref="T:System.Runtime.InteropServices.ClassInterfaceAttribute" />
+
+            
 
             
 
@@ -113,6 +121,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -144,8 +154,12 @@
 
             
 
+            
+
              exposes the first public, COM-visible interface implemented by the class as the default interface of the coclass. Beginning with the .NET Framework version 2.0, you can specify the default interface exposed to COM by using the <see
              cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
+
+            
 
             
 
@@ -157,6 +171,8 @@
           <para
             >Indicates that no class interface is generated for the class. If no interfaces are implemented explicitly, the class can only provide late-bound access through the IDispatch interface. This is the recommended setting for <see
              cref="T:System.Runtime.InteropServices.ClassInterfaceAttribute" />
+
+            
 
             
 

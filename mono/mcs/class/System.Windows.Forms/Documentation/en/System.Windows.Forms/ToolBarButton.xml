@@ -35,8 +35,12 @@
 
         
 
+        
+
          controls are parented by <see
          cref="T:System.Windows.Forms.ToolBar" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ToolBarButton.ImageIndex" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          property of the button to display text beneath or to the right of the image. To assign images to the buttons by creating an <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          property of the toolbar; then assign the image index value to the <see
          cref="P:System.Windows.Forms.ToolBarButton.ImageIndex" />
+
+        
 
         
 
@@ -78,8 +94,12 @@
 
         
 
+        
+
          property of the parent toolbar control. The ToolBarAppearance.Flat appearance gives the buttons a flat appearance. As the mouse pointer moves over the buttons, their appearance changes to three-dimensional. Button separators appear as lines rather than spaces between the buttons when the buttons have a flat appearance. If the <see
          cref="P:System.Windows.Forms.ToolBar.Appearance" />
+
+        
 
         
 
@@ -91,8 +111,12 @@
 
         
 
+        
+
          to a button if the <see
          cref="P:System.Windows.Forms.ToolBarButton.Style" />
+
+        
 
         
 
@@ -104,8 +128,12 @@
 
         
 
+        
+
          controls to display on a <see
          cref="T:System.Windows.Forms.ToolBar" />
+
+        
 
         
 
@@ -114,13 +142,19 @@
 
         
 
+        
+
          method of the <see
          cref="P:System.Windows.Forms.ToolBar.Buttons" />
 
         
 
+        
+
          property. Alternatively, you can add several toolbar buttons using the <see
          cref="M:System.Windows.Forms.ToolBar.ToolBarButtonCollection.AddRange(System.Windows.Forms.ToolBarButton[])" />
+
+        
 
         
 
@@ -135,13 +169,19 @@
 
         
 
+        
+
          replaces and extends the <see
          cref="T:System.Windows.Forms.ToolBarButton" />
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.ToolBarButton" />
+
+        
 
         
 
@@ -163,13 +203,19 @@
 
             
 
+            
+
              has no default <see
              cref="P:System.Windows.Forms.ToolBarButton.Text" />
 
             
 
+            
+
              or <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -181,6 +227,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolBarButton" />
+
+            
 
             
 
@@ -208,8 +256,12 @@
 
             
 
+            
+
              has no <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -218,13 +270,19 @@
 
             
 
+            
+
             . The <paramref
              name="text" />
 
             
 
+            
+
              parameter is assigned to the <see
              cref="P:System.Windows.Forms.ToolBarButton.Text" />
+
+            
 
             
 
@@ -239,6 +297,8 @@
 
             
 
+            
+
              class and displays the assigned text on the button.</para
           >
         </summary>
@@ -247,8 +307,12 @@
 
           
 
+          
+
           The text to display on the new <see
            cref="T:System.Windows.Forms.ToolBarButton" />
+
+          
 
           
 
@@ -278,8 +342,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -288,8 +356,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -301,8 +373,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ToolBarButton" />
+
+            
 
             
 
@@ -317,11 +393,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,13 +440,19 @@
 
             
 
+            
+
              to be displayed when the drop-down button is clicked. This property is not used unless the <see
              cref="P:System.Windows.Forms.ToolBarButton.Style" />
 
             
 
+            
+
              property value is set to <see
              cref="F:System.Windows.Forms.ToolBarButtonStyle.DropDownButton" />
+
+            
 
             
 
@@ -379,8 +465,12 @@
 
               
 
+              
+
                property is defined as a <see
                cref="T:System.Windows.Forms.Menu" />
+
+              
 
               
 
@@ -389,8 +479,12 @@
 
               
 
+              
+
                for it to display properly. If you are creating your own <see
                cref="T:System.Windows.Forms.MenuItem" />
+
+              
 
               
 
@@ -399,13 +493,19 @@
 
               
 
+              
+
                and assign the <see
                cref="T:System.Windows.Forms.ContextMenu" />
 
               
 
+              
+
                to the <see
                cref="P:System.Windows.Forms.ToolBarButton.DropDownMenu" />
+
+              
 
               
 
@@ -447,13 +547,19 @@
 
             
 
+            
+
              property is set to false, the toolbar button cannot be clicked, and the button's appearance changes. The <see
              cref="T:System.Drawing.Image" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolBarButton.Text" />
+
+            
 
             
 
@@ -503,13 +609,19 @@
 
             
 
+            
+
              value references the indexed value of the images in an <see
              cref="T:System.Windows.Forms.ImageList" />
 
             
 
+            
+
              assigned to the parent <see
              cref="T:System.Windows.Forms.ToolBar" />
+
+            
 
             
 
@@ -562,13 +674,19 @@
 
             
 
+            
+
              value indicates an image in the <see
              cref="T:System.Windows.Forms.ImageList" />
 
             
 
+            
+
              assigned to the parent <see
              cref="T:System.Windows.Forms.ToolBar" />
+
+            
 
             
 
@@ -605,13 +723,19 @@
 
             
 
+            
+
              from the <see
              cref="P:System.Windows.Forms.ToolBar.Buttons" />
 
             
 
+            
+
              collection of a <see
              cref="T:System.Windows.Forms.ToolBar" />
+
+            
 
             
 
@@ -669,13 +793,19 @@
 
             
 
+            
+
              is set to true, the toolbar button appears to have its face grayed. This appearance is different from the dimmed appearance when the <see
              cref="P:System.Windows.Forms.ToolBarButton.Enabled" />
 
             
 
+            
+
              property is set to false since the partial-push appearance gives a haze to the entire button face. This property has no effect unless the <see
              cref="T:System.Windows.Forms.ToolBarButtonStyle" />
+
+            
 
             
 
@@ -713,8 +843,12 @@
 
             
 
+            
+
              is set to true, the toolbar button appears sunken or inset relative to the other buttons. This property has no effect unless the <see
              cref="T:System.Windows.Forms.ToolBarButtonStyle" />
+
+            
 
             
 
@@ -747,8 +881,12 @@
 
             
 
+            
+
              and the current button are both <see
              cref="P:System.Windows.Forms.ToolBarButton.Visible" />
+
+            
 
             
 
@@ -792,13 +930,19 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Windows.Forms.ToolBarButtonStyle.DropDownButton" />
 
             
 
+            
+
              you can specify a <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -845,6 +989,8 @@
 
             
 
+            
+
              derived type can be assigned to this property. If this property is being set through the Windows Forms designer, only text can be assigned.</para
           >
         </remarks>
@@ -882,8 +1028,12 @@
 
             
 
+            
+
              constructor that accepts the text string as a parameter. The orientation of the text on the toolbar button is determined by the <see
              cref="P:System.Windows.Forms.ToolBar.TextAlign" />
+
+            
 
             
 
@@ -892,8 +1042,12 @@
 
             
 
+            
+
             , which can be set to one of the <see
              cref="T:System.Windows.Forms.ToolBarTextAlign" />
+
+            
 
             
 
@@ -934,8 +1088,12 @@
 
             
 
+            
+
              property of the button's parent <see
              cref="T:System.Windows.Forms.ToolBar" />
+
+            
 
             
 
@@ -968,13 +1126,19 @@
 
             
 
+            
+
              method returns a string that includes the type and the value of the <see
              cref="P:System.Windows.Forms.ToolBarButton.Style" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolBarButton.Text" />
+
+            
 
             
 
@@ -989,6 +1153,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -997,6 +1163,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.ToolBarButton" />
+
+            
 
             
 

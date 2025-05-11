@@ -1,5 +1,4 @@
-<variations name="attValuelTemp" xml:space="preserve"
-  >
+<variations name="attValuelTemp" xml:space="preserve">
 	<variation
 
     case_id="77531"
@@ -16,6 +15,8 @@
     type="Interoperability"
     versions="192"
   />
+
+  
 
   
 

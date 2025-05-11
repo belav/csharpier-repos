@@ -22,6 +22,8 @@
 
         
 
+        
+
          control was closed.</para
       >
     </summary>
@@ -40,6 +42,8 @@
           <para
             >Specifies that the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -67,6 +71,8 @@
 
             
 
+            
+
              control was closed because another application has received the focus.</para
           >
         </summary>
@@ -91,8 +97,12 @@
 
             
 
+            
+
              control was closed because the <see
              cref="M:System.Windows.Forms.ToolStripDropDown.Close" />
+
+            
 
             
 
@@ -120,6 +130,8 @@
 
             
 
+            
+
              control was closed because one of its items was clicked.</para
           >
         </summary>
@@ -141,6 +153,8 @@
           <para
             >Specifies that the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 

@@ -10,6 +10,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -29,8 +31,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -47,6 +53,8 @@
       <name>
         <non_terminal where="17.6">property-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -92,6 +100,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -109,8 +119,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -119,8 +133,12 @@
 
     
 
+    
+
     ), the new (<hyperlink
     >17.2.2</hyperlink>
+
+    
 
     
 
@@ -129,13 +147,19 @@
 
     
 
+    
+
     ), virtual (<hyperlink
     >17.5.3</hyperlink>
 
     
 
+    
+
     , <hyperlink
     >17.6.3</hyperlink>
+
+    
 
     
 
@@ -144,8 +168,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.6.3</hyperlink>
+
+    
 
     
 
@@ -154,13 +182,19 @@
 
     
 
+    
+
     ), abstract (<hyperlink
     >17.5.6</hyperlink>
 
     
 
+    
+
     , <hyperlink
     >17.6.3</hyperlink>
+
+    
 
     
 
@@ -172,6 +206,8 @@
 
     
 
+    
+
     ) with regard to valid combinations of modifiers. </paragraph
   >
   <paragraph
@@ -180,8 +216,12 @@
 
     
 
+    
+
      specifies the name of the property. Unless the property is an explicit interface member implementation, the <non_terminal
      where="17.6">member-name</non_terminal>
+
+    
 
     
 
@@ -190,13 +230,19 @@
 
     
 
+    
+
     ), the <non_terminal
      where="17.6">member-name</non_terminal>
 
     
 
+    
+
      consists of an <non_terminal
      where="11.2">interface-type</non_terminal>
+
+    
 
     
 
@@ -208,6 +254,8 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
@@ -216,8 +264,12 @@
 
     
 
+    
+
     , which must be enclosed in "{" and "}" tokens, declare the accessors (<hyperlink
     >17.6.2</hyperlink>
+
+    
 
     
 
@@ -227,6 +279,8 @@
   <paragraph
     >When a property declaration includes an extern modifier, the property is said to be an external property. Because an external property declaration provides no actual implementation, each of its  <non_terminal
      where="17.6.2">accessor-declarations</non_terminal>
+
+    
 
     
 

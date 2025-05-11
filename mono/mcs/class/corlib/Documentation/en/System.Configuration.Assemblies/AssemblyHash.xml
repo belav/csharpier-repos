@@ -37,6 +37,8 @@
 
         
 
+        
+
          values are used throughout the common language runtime to detect a change in assembly contents.</para
       >
     </remarks>
@@ -77,8 +79,12 @@
 
             
 
+            
+
              structure with the specified hash value. The hash algorithm defaults to <see
              cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
+
+            
 
             
 
@@ -87,6 +93,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,6 +137,8 @@
 
             
 
+            
+
              structure with the specified hash algorithm and the hash value.</para
           >
         </summary>
@@ -137,8 +147,12 @@
 
           
 
+          
+
           The algorithm used to generate the hash. Values for this parameter come from the <see
            cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
+
+          
 
           
 
@@ -146,6 +160,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,6 +272,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -325,6 +343,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

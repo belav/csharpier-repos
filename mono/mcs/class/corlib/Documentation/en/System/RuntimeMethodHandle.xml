@@ -46,8 +46,12 @@
 
         
 
+        
+
          objects are created through the use of the CIL instruction <see
          langword="ldtoken" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
           
 
+          
+
           , see Partition III of the CLI
    Specification.</block
         >
@@ -69,6 +75,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
         <see cref="T:System.RuntimeMethodHandle" />
+
+        
 
         
 
@@ -114,8 +122,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.RuntimeMethodHandle" />
+
+            
 
             
 
@@ -127,8 +139,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -169,6 +185,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -180,6 +198,8 @@
 
             
 
+            
+
              is equal to the value of this instance; otherwise, false.</para
           >
         </returns>
@@ -188,8 +208,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeMethodHandle" />
+
+          
 
           
 
@@ -284,11 +308,15 @@
 
             
 
+            
+
              parameter is reserved; it does not currently participate in this operation.</para
           >
           <para
             >For more information, see the <see
              cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+
+            
 
             
 
@@ -303,6 +331,8 @@
 
             
 
+            
+
              with the data necessary to deserialize the field represented by this instance.</para
           >
         </summary>
@@ -311,10 +341,14 @@
 
           
 
+          
+
           The object to populate with serialization information. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,6 +388,8 @@
 
             
 
+            
+
              are equal.</para
           >
         </summary>
@@ -365,8 +401,12 @@
 
             
 
+            
+
              is equal to the value of <paramref
              name="right" />
+
+            
 
             
 
@@ -378,13 +418,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeMethodHandle" />
 
           
 
+          
+
            to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -395,13 +441,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeMethodHandle" />
 
           
 
+          
+
            to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -441,6 +493,8 @@
 
             
 
+            
+
              are not equal.</para
           >
         </summary>
@@ -452,8 +506,12 @@
 
             
 
+            
+
              is unequal to the value of <paramref
              name="right" />
+
+            
 
             
 
@@ -465,13 +523,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeMethodHandle" />
 
           
 
+          
+
            to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -482,13 +546,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeMethodHandle" />
 
           
 
+          
+
            to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -518,6 +588,8 @@
           <para
             > A <see
              cref="T:System.IntPtr" />
+
+            
 
             
 

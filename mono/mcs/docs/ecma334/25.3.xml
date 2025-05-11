@@ -6,8 +6,12 @@
 
     
 
+    
+
     ) and the fixed statement (<hyperlink
     >25.6</hyperlink>
+
+    
 
     
 
@@ -21,8 +25,12 @@
 
     
 
+    
+
     ) permits the address of a fixed variable to be obtained without restrictions. However, because a moveable variable is subject to relocation or disposal by the garbage collector, the address of a moveable variable can only be obtained using a fixed statement (<hyperlink
     >25.6</hyperlink>
+
+    
 
     
 
@@ -37,8 +45,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.2</hyperlink>
+
+        
 
         
 
@@ -50,13 +62,19 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.4</hyperlink>
 
         
 
+        
+
         ) of the form V.I, where V is a fixed variable of a <non_terminal
          where="11.1">struct-type</non_terminal>
+
+        
 
         
 
@@ -68,8 +86,12 @@
 
         
 
+        
+
          (<hyperlink
         >25.5.1</hyperlink>
+
+        
 
         
 
@@ -78,8 +100,12 @@
 
         
 
+        
+
          (<hyperlink
         >25.5.2</hyperlink>
+
+        
 
         
 
@@ -88,8 +114,12 @@
 
         
 
+        
+
          (<hyperlink
         >25.5.3</hyperlink>
+
+        
 
         
 

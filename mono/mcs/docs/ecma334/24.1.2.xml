@@ -5,7 +5,7 @@
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 [AttributeUsage(AttributeTargets.Class)]  
 public class HelpAttribute: Attribute  
@@ -24,6 +24,8 @@ public class HelpAttribute: Attribute
 
       
 
+      
+
       defines an attribute class named HelpAttribute that has one positional parameter (string url) and one named parameter (string Topic). Although it is non-static and public, the property Url does not define a named parameter, since it is not read-write. </example
     >
   </paragraph>
@@ -31,7 +33,7 @@ public class HelpAttribute: Attribute
     <example
       >This attribute class might be used as follows: <code_example
       >
-        <![CDATA[
+<![CDATA[
 [Help("http://www.mycompany.com/.../Class1.htm")]  
 class Class1 {  
 }  
@@ -40,6 +42,8 @@ class Class2 {
 }  
 ]]>
       </code_example>
+
+      
 
       
 

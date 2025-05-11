@@ -25,8 +25,12 @@
 
         
 
+        
+
          class can enforce validation using a schema or document type definition (DTD). The <see
          cref="T:System.Xml.ValidationType" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          instance should perform. The <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -45,13 +53,19 @@
 
         
 
+        
+
          object created by the <see
          cref="Overload:System.Xml.XmlReader.Create" />
 
         
 
+        
+
          method, or an <see
          cref="T:System.Xml.XmlValidatingReader" />
+
+        
 
         
 
@@ -93,6 +107,8 @@
             <para
               > This field is obsolete in the Microsoft .NET Framework version 2.0 and is applicable only to the <see
                cref="T:System.Xml.XmlValidatingReader" />
+
+              
 
               
 
@@ -152,6 +168,8 @@
           <para
             >Default attributes are reported and general entities can be resolved by calling <see
              cref="M:System.Xml.XmlReader.ResolveEntity" />
+
+            
 
             
 
@@ -220,6 +238,8 @@
 
               
 
+              
+
                class.</para
             >
           </block>
@@ -229,6 +249,8 @@
           <para
             >Validate according to XML-Data Reduced (XDR) schemas, including inline XDR schemas. XDR schemas are recognized using the x-schema namespace prefix or the <see
              cref="P:System.Xml.XmlValidatingReader.Schemas" />
+
+            
 
             
 

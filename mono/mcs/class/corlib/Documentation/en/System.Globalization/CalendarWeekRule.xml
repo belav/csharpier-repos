@@ -30,13 +30,19 @@
 
         
 
+        
+
          enumeration is returned by the <see
          cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" />
 
         
 
+        
+
          property and is used by the culture's current calendar to determine the calendar week rule. The enumeration value is also used as a parameter to the <see
          cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          value that indicates the first day of the week in addition to depending on a <see
          cref="T:System.Globalization.CalendarWeekRule" />
+
+        
 
         
 
@@ -58,13 +68,19 @@
 
         
 
+        
+
          property provides the default value for a culture, but any <see
          cref="T:System.DayOfWeek" />
 
         
 
+        
+
          value can be specified as the first day of the week in the <see
          cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" />
+
+        
 
         
 
@@ -76,13 +92,19 @@
 
         
 
+        
+
          value can have one to seven days. The first week based on the <see
          cref="F:System.Globalization.CalendarWeekRule.FirstFullWeek" />
 
         
 
+        
+
          value always has seven days. The first week based on the <see
          cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
+
+        
 
         
 
@@ -94,8 +116,12 @@
 
         
 
+        
+
          defines the first Sunday (January 6) as the beginning of the first week of the year. The first five days of the year are considered part of the last week of the previous year. In contrast, selecting <see
          cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
+
+        
 
         
 
@@ -307,6 +333,8 @@
 
         
 
+        
+
          defines the first Sunday (January 3) as the beginning of the first week of the year because there are fewer than four days from January 1 to the day before the following Sunday.</para
       >
       <list type="table">
@@ -473,8 +501,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.DayOfWeek" />
+
+        
 
         
 
@@ -483,13 +515,19 @@
 
         
 
+        
+
          defines Tuesday (January 1) as the beginning of the first week of the year, because there are more than four days between Tuesday, January 1, and Sunday, January 6. Using this rule, January 5 belongs to the first week of the year. For 2010, a year in which January 1 falls on a Friday, applying the <see
          cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
 
         
 
+        
+
          rule with <see
          cref="F:System.DayOfWeek.Sunday" />
+
+        
 
         
 
@@ -505,6 +543,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -514,8 +554,12 @@
 
         
 
+        
+
          object supports a set of calendars. The <see
          cref="P:System.Globalization.CultureInfo.Calendar" />
+
+        
 
         
 
@@ -524,8 +568,12 @@
 
         
 
+        
+
          property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -534,13 +582,19 @@
 
         
 
+        
+
          property of <see
          cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
         
 
+        
+
          to a new <see
          cref="T:System.Globalization.Calendar" />
+
+        
 
         
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          is an abstract class that provides a full designer loader based on the Code Document Object Model (CodeDOM). You provide the CodeDOM parser and generator, and a type resolution service.</para
       >
     </remarks>
@@ -53,6 +55,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+            
 
             
 
@@ -83,8 +87,12 @@
 
             
 
+            
+
             , but it does use the provider to obtain an <see
              cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+            
 
             
 
@@ -93,8 +101,12 @@
 
             
 
+            
+
              to see if it implements the <see
              cref="T:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload" />
+
+            
 
             
 
@@ -103,8 +115,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
+
+            
 
             
 
@@ -116,6 +132,8 @@
           <para
             >Gets the <see
              cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
+
+            
 
             
 
@@ -143,8 +161,12 @@
 
             
 
+            
+
              method removes services added by the <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Initialize" />
+
+            
 
             
 
@@ -156,8 +178,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+            
 
             
 
@@ -166,8 +192,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+            
 
             
 
@@ -176,13 +206,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+            
 
             
 
@@ -193,10 +229,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -209,13 +249,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+              
 
               
 
@@ -228,6 +274,8 @@
           <para
             >Releases the resources used by the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+            
 
             
 
@@ -252,6 +300,8 @@
           <para
             >The following table describes the replaceable services that the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+            
 
             
 
@@ -281,6 +331,8 @@
 
                   
 
+                  
+
                    interface to create names that are valid identifiers for the language. In addition, the name creation service supports empty names. Empty names should be interpreted as temporary local variables during serialization.</para
                 >
               </description>
@@ -295,6 +347,8 @@
                 <para
                   >Allows other objects to serialize a group of components into a binary object. This service is most often used by features such as copy and paste or undo and redo. The <see
                    cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+                  
 
                   
 
@@ -315,6 +369,8 @@
 
                   
 
+                  
+
                    as a means to serialize components to a binary object.</para
                 >
               </description>
@@ -323,6 +379,8 @@
           <para
             >For details on replaceable and non-replaceable services, see <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -354,8 +412,12 @@
 
             
 
+            
+
              method checks for the presence of the <see
              cref="T:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload" />
+
+            
 
             
 
@@ -364,8 +426,12 @@
 
             
 
+            
+
             . The provider will reparse the CodeDOM tree and pass the resulting parse tree to the <see
              cref="M:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload.ShouldReloadDesigner(System.CodeDom.CodeCompileUnit)" />
+
+            
 
             
 
@@ -381,6 +447,8 @@
           <para
             >true if the <see
              cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
+
+            
 
             
 
@@ -408,8 +476,12 @@
 
             
 
+            
+
              method, see <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />
+
+            
 
             
 
@@ -441,8 +513,12 @@
 
             
 
+            
+
              method, see <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginUnload" />
+
+            
 
             
 
@@ -482,11 +558,15 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,10 +577,14 @@
 
           
 
+          
+
           The original name of the component.</param
         >
         <param name="newName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,8 +617,12 @@
 
             
 
+            
+
              method, see <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -550,6 +638,8 @@
 
           
 
+          
+
           true to indicate that the load completed successfully; otherwise, false.</param
         >
         <param name="errors">
@@ -557,8 +647,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -588,8 +682,12 @@
 
             
 
+            
+
              method is called when the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+            
 
             
 
@@ -604,6 +702,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -612,6 +712,8 @@
           <para
             >A <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -647,8 +749,12 @@
 
             
 
+            
+
              method obtains the root <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+            
 
             
 
@@ -657,8 +763,12 @@
 
             
 
+            
+
             , then <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+
+            
 
             
 
@@ -667,13 +777,19 @@
 
             
 
+            
+
              with the existing CodeDOM tree. The result is the original CodeDOM tree with matching members and statements replaced. Finally, <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
+            
+
              calls the abstract <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
+
+            
 
             
 
@@ -685,8 +801,12 @@
 
             
 
+            
+
             , then <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+
+            
 
             
 
@@ -705,8 +825,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+          
 
           
 
@@ -741,8 +865,12 @@
 
             
 
+            
+
              method obtains an <see
              cref="T:System.CodeDom.Compiler.ICodeParser" />
+
+            
 
             
 
@@ -751,8 +879,12 @@
 
             
 
+            
+
              locates the first class in the file, obtains a root <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+            
 
             
 
@@ -761,8 +893,12 @@
 
             
 
+            
+
              assumes that this process will create all necessary components in the <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -771,13 +907,19 @@
 
             
 
+            
+
              property. Finally, <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
+            
+
              calls the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.SetBaseComponentClassName(System.String)" />
+
+            
 
             
 
@@ -796,8 +938,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+          
 
           
 
@@ -834,11 +980,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="serializationData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -873,6 +1023,8 @@
         </returns>
         <param name="objects">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -911,10 +1063,14 @@
 
           
 
+          
+
           The container where the new object is added.</param
         >
         <param name="dataType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -949,6 +1105,8 @@
 
           
 
+          
+
           The name to validate.</param
         >
       </Docs>
@@ -979,6 +1137,8 @@
 
           
 
+          
+
           The name to validate.</param
         >
       </Docs>
@@ -1005,13 +1165,19 @@
 
             
 
+            
+
              automatically adds this <see
              cref="T:System.ComponentModel.Design.ITypeResolutionService" />
 
             
 
+            
+
              to the service container when the <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Initialize" />
+
+            
 
             
 
@@ -1048,8 +1214,12 @@
 
             
 
+            
+
              method saves a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -1058,8 +1228,12 @@
 
             
 
+            
+
              on the appropriate text writer to save the code. The <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+            
 
             
 
@@ -1068,8 +1242,12 @@
 
             
 
+            
+
              are the same instances of objects that were retrieved from <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Parse" />
+
+            
 
             
 
@@ -1078,8 +1256,12 @@
 
             
 
+            
+
              property of code elements. This data will be available during the <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
+
+            
 
             
 
@@ -1095,8 +1277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 

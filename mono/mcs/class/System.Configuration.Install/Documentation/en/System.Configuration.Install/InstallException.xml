@@ -32,6 +32,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -57,11 +59,15 @@
 
             
 
+            
+
              class, and specifies the message to display to the user.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -93,6 +99,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -101,8 +109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -113,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -146,11 +162,15 @@
 
             
 
+            
+
              class, and specifies the message to display to the user, and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,8 +181,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

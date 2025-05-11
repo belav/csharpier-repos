@@ -3,7 +3,7 @@
   <paragraph
     >The canonical "hello, world" program can be written as follows: <code_example
     >
-      <![CDATA[
+<![CDATA[
 using System;  
 class Hello  
 {  
@@ -17,16 +17,18 @@ class Hello
   <paragraph
     >The source code for a C# program is typically stored in one or more text files with a file extension of .cs, as in hello.cs. Using a command-line compiler, such a program can be compiled with a command line like <code_example
     >
-      <![CDATA[
+<![CDATA[
 csc hello.cs  
 ]]>
     </code_example>
 
     
 
+    
+
     which produces an application named hello.exe. The output produced by this application when it is run is: <code_example
     >
-      <![CDATA[
+<![CDATA[
 hello, world  
 ]]>
     </code_example>
@@ -37,6 +39,8 @@ hello, world
       <list_item
         > The using System; directive references a namespace called System that is provided by the Common Language Infrastructure (CLI) class library. This namespace contains the Console class referred to in the Main method. Namespaces provide a hierarchical means of organizing the elements of one or more programs. A <non_terminal
          where="16.3">using-directive</non_terminal>
+
+        
 
         
 

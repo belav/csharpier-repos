@@ -36,6 +36,8 @@
 
         
 
+        
+
          to determine what drives are available, and what type of drives they are. You can also query to determine the capacity and available free space on the drive.</para
       >
     </remarks>
@@ -74,6 +76,8 @@
 
           
 
+          
+
           A valid drive path or drive letter. This can be either uppercase or lowercase, 'a' to 'z'. A null value is not valid. </param
         >
       </Docs>
@@ -97,6 +101,8 @@
           <para
             >This property indicates the amount of free space available on the drive. Note that this number may be different from the <see
              cref="P:System.IO.DriveInfo.TotalFreeSpace" />
+
+            
 
             
 
@@ -128,6 +134,8 @@
           <para
             >Use <see
              cref="P:System.IO.DriveInfo.DriveFormat" />
+
+            
 
             
 
@@ -165,8 +173,12 @@
 
             
 
+            
+
              property indicates whether a drive is one of the following: CDRom, Fixed, Network, NoRootDirectory, Ram, Removable, or Unknown. These values are described in the <see
              cref="T:System.IO.DriveType" />
+
+            
 
             
 
@@ -204,13 +216,19 @@
 
             
 
+            
+
              methods and properties. Use the <see
              cref="P:System.IO.DriveInfo.IsReady" />
 
             
 
+            
+
              property to test whether a drive is ready because using this method on a drive that is not ready will throw a <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -226,6 +244,8 @@
           <para
             >An array of type <see
              cref="T:System.IO.DriveInfo" />
+
+            
 
             
 
@@ -255,13 +275,19 @@
 
             
 
+            
+
              indicates whether a drive is ready. For example, it indicates whether a CD is in a CD drive or whether a removable storage device is ready for read/write operations. If you do not test whether a drive is ready, and it is not ready,  querying the drive using <see
              cref="T:System.IO.DriveInfo" />
 
             
 
+            
+
              will raise an <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -273,8 +299,12 @@
 
             
 
+            
+
              to avoid catching exceptions from other members such as <see
              cref="P:System.IO.DriveInfo.TotalSize" />
+
+            
 
             
 
@@ -283,13 +313,19 @@
 
             
 
+            
+
             , and <see
              cref="P:System.IO.DriveInfo.DriveFormat" />
 
             
 
+            
+
             . Between the time that your code checks <see
              cref="P:System.IO.DriveInfo.IsReady" />
+
+            
 
             
 
@@ -384,6 +420,8 @@
 
             
 
+            
+
              object are automatically tracked and serialized by the formatter.</para
           >
           <para
@@ -392,8 +430,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 
@@ -408,11 +450,15 @@
 
             
 
+            
+
              object with the data needed to serialize the target object.</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,8 +469,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -454,6 +504,8 @@
           <para
             >This method returns the <see
              cref="P:System.IO.DriveInfo.Name" />
+
+            
 
             
 
@@ -537,6 +589,8 @@
           <para
             >The label length is determined by the operating system. For example, NTFS allows a volume label to be up to 32 characters long. Note that null is a valid <see
              cref="P:System.IO.DriveInfo.VolumeLabel" />
+
+            
 
             
 

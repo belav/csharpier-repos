@@ -23,13 +23,19 @@
 
         
 
+        
+
          enumeration is typically used in the <see
          cref="T:System.ConsoleKeyInfo" />
 
         
 
+        
+
          structure, which is returned by the <see
          cref="M:System.Console.ReadKey" />
+
+        
 
         
 

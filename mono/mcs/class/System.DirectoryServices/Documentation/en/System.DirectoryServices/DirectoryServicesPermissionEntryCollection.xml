@@ -102,6 +102,8 @@
 
             
 
+            
+
              object to this collection.          </para
           >
         </summary>
@@ -110,6 +112,8 @@
           <para
             >The zero-based index of the added <see
              cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+            
 
             
 
@@ -144,6 +148,8 @@
 
             
 
+            
+
              array to this collection.          </para
           >
         </summary>
@@ -172,6 +178,8 @@
           <para
             >Appends the contents of the specified <see
              cref="T:System.DirectoryServices.DirectoryServicesPermissionEntryCollection" />
+
+            
 
             
 
@@ -207,11 +215,15 @@
 
             
 
+            
+
              objects in this collection to the specified array, starting at the specified index in the target array.          </para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,6 +254,8 @@
 
             
 
+            
+
              object is in this collection.          </para
           >
         </summary>
@@ -250,6 +264,8 @@
           <para
             >true if the specified <see
              cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+            
 
             
 
@@ -281,6 +297,8 @@
 
             
 
+            
+
              object in this collection.          </para
           >
         </summary>
@@ -289,6 +307,8 @@
           <para
             >The zero-based index of the first matching object.  Returns -1 if no member of this collection is identical to the <see
              cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+            
 
             
 
@@ -322,6 +342,8 @@
 
             
 
+            
+
              into this collection at the specified index.          </para
           >
         </summary>
@@ -347,6 +369,8 @@
           <para
             >Removes the first occurrence of an object in this collection that is identical to the specified <see
              cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+            
 
             
 
@@ -382,6 +406,8 @@
       <para
         >Contains a strongly-typed collection of <see
          cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+        
 
         
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          control creates new user accounts in a Web site's user data store. The <see
          cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          control. The <see
          cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
 
         
 
+        
+
          step is a required step within the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -50,8 +60,12 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+
+        
 
         
 
@@ -60,13 +74,19 @@
 
         
 
+        
+
          is displayed in the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
+        
+
          control before the <see
          cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+
+        
 
         
 
@@ -79,8 +99,12 @@
 
           
 
+          
+
            step is the first step in the wizard by default, it is possible to provide a different first step. Doing so, however, can affect whether the <ui
           >Previous</ui>
+
+          
 
           
 
@@ -89,8 +113,12 @@
 
           
 
+          
+
            step does not have a custom navigation template, and is preceded by another step that is rendered before <see
            cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+
+          
 
           
 
@@ -99,8 +127,12 @@
 
           
 
+          
+
            button is displayed on the <see
            cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+
+          
 
           
 
@@ -109,8 +141,12 @@
 
           
 
+          
+
            step is rendered before the alternate "first" step, then the <ui
           >Previous</ui>
+
+          
 
           
 
@@ -119,13 +155,19 @@
 
           
 
+          
+
            button is never rendered at design time. If you want the <ui
           >Previous</ui>
 
           
 
+          
+
            button to be rendered at design time, you must add it to the custom navigation template of the <see
            cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+
+          
 
           
 
@@ -138,8 +180,12 @@
 
         
 
+        
+
          step to contain additional fields, or change the display order of the fields included in the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+
+        
 
         
 
@@ -151,8 +197,12 @@
 
         
 
+        
+
          button on the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+
+        
 
         
 
@@ -161,13 +211,19 @@
 
         
 
+        
+
          property is set to false to keep the user from returning to the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
 
         
 
+        
+
          step and accidentally attempting to create another user account with the same credentials. If you set the <see
          cref="P:System.Web.UI.WebControls.CreateUserWizardStep.AllowReturn" />
+
+        
 
         
 
@@ -192,6 +248,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+
+            
 
             
 
@@ -225,13 +283,19 @@
 
             
 
+            
+
              property is set to false to keep users from returning to the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
 
             
 
+            
+
              step and accidentally trying to create another user account with the same credentials. If you override the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizardStep.AllowReturn" />
+
+            
 
             
 
@@ -243,6 +307,8 @@
           <para
             >Gets or sets a value indicating whether the user is allowed to return to the current step from a subsequent step in a <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -279,8 +345,12 @@
 
             
 
+            
+
              property specifies the navigation options to display for the user-account-creation step of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -292,8 +362,12 @@
 
             
 
+            
+
              property determines which of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -302,8 +376,12 @@
 
             
 
+            
+
              control. For more information, see the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+
+            
 
             
 
@@ -316,8 +394,12 @@
 
               
 
+              
+
                property to any value other than the <see
                cref="F:System.Web.UI.WebControls.WizardStepType.Auto" />
+
+              
 
               
 
@@ -326,8 +408,12 @@
 
               
 
+              
+
                enumeration, an <see
                cref="T:System.InvalidOperationException" />
+
+              
 
               
 
@@ -340,10 +426,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -358,8 +448,12 @@
 
             
 
+            
+
              step of a <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -393,12 +487,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -410,6 +508,8 @@
           <para
             >Gets or sets the title to use for the user-account-creation step of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 

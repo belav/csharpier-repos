@@ -15,6 +15,8 @@
 
         
 
+        
+
          for components that will interact with the Windows Forms data-binding engine. It is rare for a component author to need to implement this interface.</para
       >
       <para
@@ -23,8 +25,12 @@
 
         
 
+        
+
          class provides an example implementation of <see
          cref="T:System.Windows.Forms.ICurrencyManagerProvider" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Windows.Forms.ICurrencyManagerProvider" />
+
+            
 
             
 
@@ -95,8 +105,12 @@
 
             
 
+            
+
              is null or an empty string (""), <see
              cref="M:System.Windows.Forms.ICurrencyManagerProvider.GetRelatedCurrencyManager(System.String)" />
+
+            
 
             
 
@@ -105,8 +119,12 @@
 
             
 
+            
+
             , which is the same currency manager returned from the <see
              cref="P:System.Windows.Forms.ICurrencyManagerProvider.CurrencyManager" />
+
+            
 
             
 
@@ -121,8 +139,12 @@
 
             
 
+            
+
              for this <see
              cref="T:System.Windows.Forms.ICurrencyManagerProvider" />
+
+            
 
             
 
@@ -137,8 +159,12 @@
 
             
 
+            
+
              obtained from this <see
              cref="T:System.Windows.Forms.ICurrencyManagerProvider" />
+
+            
 
             
 
@@ -150,8 +176,12 @@
 
           
 
+          
+
           The name of the column or list, within the data source, to obtain the <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 

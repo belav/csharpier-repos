@@ -27,13 +27,19 @@
 
         
 
+        
+
          class enables a serializer to set data about the context of an object that is being serialized to a stack where another serializer can access it. The value of the <see
          cref="P:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.Context" />
 
         
 
+        
+
          property is provided by an <see
          cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+        
 
         
 
@@ -47,13 +53,19 @@
 
         
 
+        
+
         . If a serializer writes this value to a data stream, it might need to include the context or type of property it is writing. The serializer does not have this information, however, because it is only instructed to write the <see
          cref="T:System.Boolean" />
 
         
 
+        
+
          value. To provide this information to the serializer, the parent serializer can push a <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -90,6 +102,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -123,6 +137,8 @@
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,6 +268,8 @@
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

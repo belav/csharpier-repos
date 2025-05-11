@@ -75,6 +75,8 @@
 
           
 
+          
+
           An existing DBDataPermission used to create a new DBDataPermission. </param
         >
       </Docs>
@@ -103,6 +105,8 @@
 
           
 
+          
+
           A security action associated with a custom security attribute. </param
         >
       </Docs>
@@ -127,6 +131,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -135,8 +141,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -168,8 +178,12 @@
 
             
 
+            
+
              enumeration takes precedence over the <see
              cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+
+            
 
             
 
@@ -178,8 +192,12 @@
 
             
 
+            
+
              to false, you must also set <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -194,6 +212,8 @@
 
             
 
+            
+
              value, and a value indicating whether a blank password is allowed.</para
           >
         </summary>
@@ -202,8 +222,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -211,6 +235,8 @@
         >
         <param name="allowBlankPassword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,10 +299,14 @@
 
           
 
+          
+
           A permitted connection string.</param
         >
         <param name="restrictions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,8 +317,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.KeyRestrictionBehavior" />
+
+          
 
           
 
@@ -313,8 +347,12 @@
 
             
 
+            
+
              enumeration takes precedence over the <see
              cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+
+            
 
             
 
@@ -323,8 +361,12 @@
 
             
 
+            
+
              to false, you must also set <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -359,6 +401,8 @@
           <para
             >Removes all permissions that were previous added using the <see
              cref="M:System.Data.Common.DBDataPermission.Add(System.String,System.String,System.Data.KeyRestrictionBehavior)" />
+
+            
 
             
 
@@ -445,6 +489,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
       </Docs>
@@ -483,6 +529,8 @@
 
           
 
+          
+
           A permission object to intersect with the current permission object. It must be of the same type as the current permission object. </param
         >
       </Docs>
@@ -518,6 +566,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -571,8 +621,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.Common.DBDataPermission.FromXml(System.Security.SecurityElement)" />
+
+            
 
             
 
@@ -614,6 +668,8 @@
 
             
 
+            
+
              is a permission that represents all the operations permitted by both the current permission object and the specified permission object. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -627,6 +683,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

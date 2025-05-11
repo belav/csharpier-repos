@@ -16,6 +16,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -38,6 +40,8 @@
     <summary
       >An XML parser used chiefly to construct <see
        cref="T:System.Security.SecurityElement" />
+
+      
 
       
 

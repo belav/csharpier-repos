@@ -26,13 +26,19 @@
 
         
 
+        
+
          the <see
          cref="T:System.Drawing.ColorConverter" />
 
         
 
+        
+
          expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see
          cref="Overload:System.Drawing.ColorConverter.ConvertFrom" />
+
+        
 
         
 
@@ -44,6 +50,8 @@
       <para
         >Converts colors from one data type to another. Access this class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.ColorConverter" />
+
+            
 
             
 
@@ -104,8 +114,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -113,6 +127,8 @@
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -152,8 +168,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -164,8 +184,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -200,13 +224,19 @@
 
             
 
+            
+
              the <see
              cref="T:System.Drawing.ColorConverter" />
 
             
 
+            
+
              expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see
              cref="Overload:System.Drawing.ColorConverter.ConvertFrom" />
+
+            
 
             
 
@@ -225,6 +255,8 @@
 
             
 
+            
+
              representing the converted value.</para
           >
         </returns>
@@ -233,8 +265,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -245,8 +281,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -254,6 +294,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,11 +339,15 @@
 
             
 
+            
+
              representing the converted value.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,8 +358,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -324,10 +374,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -366,6 +420,8 @@
 
           
 
+          
+
           A formatter context. Use this object to extract additional information about the environment from which this converter is being invoked. Always check whether this value is null. Also, properties on the context object may return null. </param
         >
       </Docs>
@@ -400,6 +456,8 @@
 
             
 
+            
+
              must be called to find a common set of values the object supports; otherwise, false.</para
           >
         </returns>
@@ -408,8 +466,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 

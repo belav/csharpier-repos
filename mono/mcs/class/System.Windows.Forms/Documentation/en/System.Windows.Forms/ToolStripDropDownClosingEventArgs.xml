@@ -25,6 +25,8 @@
 
         
 
+        
+
          class to determine which actions to take when the user closes the drop-down list but before the list is closed.</para
       >
     </remarks>
@@ -33,6 +35,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
             
 
+            
+
              class to determine which actions to take when the user closes the drop-down list but before the list is closed.</para
           >
         </remarks>
@@ -71,6 +77,8 @@
 
             
 
+            
+
              class with the specified reason for closing. </para
           >
         </summary>
@@ -79,8 +87,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ToolStripDropDownCloseReason" />
+
+          
 
           
 
@@ -109,6 +121,8 @@
           <para
             >Gets the reason that the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 

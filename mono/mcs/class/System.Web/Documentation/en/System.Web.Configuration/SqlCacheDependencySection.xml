@@ -25,11 +25,15 @@
 
         
 
+        
+
          allows you to programmatically access and modify the sqlCacheDependency element of the cache configuration section. </para
       >
       <para
         >The SQL cache dependency allows the cached data to be synchronized with the original source. After you configure the relationship between an item stored in an ASP.NET application's cache and a specific SQL Server database table, an instance of the <see
          cref="T:System.Web.Caching.SqlCacheDependency" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          object. The row-level <see
          cref="T:System.Web.Caching.SqlCacheDependency" />
+
+        
 
         
 
@@ -55,13 +63,19 @@
 
           
 
+          
+
            can write information into the related section of the configuration file according to the restrictions defined by the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
+
+          
 
           
 
@@ -89,13 +103,19 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.SqlCacheDependencySection" />
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -107,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.SqlCacheDependencySection" />
+
+            
 
             
 
@@ -143,12 +165,16 @@
 
             
 
+            
+
              property allows you to programmatically access the databases element of the <format
              type="text/html">
               <a href="3ffabd95-87b6-4a52-b753-9d298d43841d"
                 >sqlCacheDependency Element for caching (ASP.NET Settings Schema)</a
               >
             </format>
+
+            
 
             
 
@@ -163,8 +189,12 @@
 
             
 
+            
+
              objects stored within the <see
              cref="T:System.Web.Configuration.SqlCacheDependencySection" />
+
+            
 
             
 
@@ -217,11 +247,15 @@
 
             
 
+            
+
              class monitors the table so that when an item in the table changes the item is automatically removed from the cache.</para
           >
           <para
             >For this class to work correctly, the database and any tables on which you want to set dependencies must have notifications enabled. For more information, see the remarks provided for the <see
              cref="T:System.Web.Caching.SqlCacheDependency" />
+
+            
 
             
 
@@ -234,8 +268,12 @@
 
               
 
+              
+
                objects should be monitored for changes.  This setting does not affect the row-level <see
                cref="T:System.Web.Caching.SqlCacheDependency" />
+
+              
 
               
 
@@ -274,6 +312,8 @@
 
             
 
+            
+
              property defines the time frequency with which ASP.NET polls the database for changes in the table linked to the cached item.</para
           >
           <para>Note   The frequency can be overridden on a database level in the databases element of the sqlCacheDependency in the cache configuration section.</para>
@@ -283,6 +323,8 @@
           <para
             >Gets or sets the frequency with which the <see
              cref="T:System.Web.Caching.SqlCacheDependency" />
+
+            
 
             
 

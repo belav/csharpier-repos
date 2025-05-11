@@ -38,8 +38,12 @@
 
         
 
+        
+
          event occurs before the value of an application settings property is changed, typically through a call to the <see
          cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          can be canceled through the <see
          cref="T:System.Configuration.SettingChangingEventArgs" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
       <para
         >Represents the method that will handle the <see
          cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+
+        
 
         
 

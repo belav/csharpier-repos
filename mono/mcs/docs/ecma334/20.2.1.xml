@@ -9,13 +9,17 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <keyword>new</keyword>
         <opt />
-        <non_terminal where="17.5">return-type</non_terminal>
+        <non_terminal where="17.5"
+>return-type</non_terminal
+        >
         <non_terminal where="9.4.2">identifier</non_terminal>
         <terminal>(</terminal>
         <non_terminal where="17.5.1">formal-parameter-list</non_terminal>
@@ -27,7 +31,11 @@
   </paragraph>
   <paragraph
     >The attributes, <non_terminal
-     where="17.5">return-type</non_terminal>
+     where="17.5"
+>return-type</non_terminal
+    >
+
+    
 
     
 
@@ -36,8 +44,12 @@
 
     
 
+    
+
      of an interface method declaration have the same meaning as those of a method declaration in a class (<hyperlink
     >17.5</hyperlink>
+
+    
 
     
 

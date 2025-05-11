@@ -3,7 +3,7 @@
   <paragraph
     >For an if statement stmt of the form: <code_example
     >
-      <![CDATA[
+<![CDATA[
 if (expr) then-stmt else else-stmt  
 ]]>
     </code_example>

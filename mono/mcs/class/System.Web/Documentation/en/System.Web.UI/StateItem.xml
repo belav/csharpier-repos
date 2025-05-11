@@ -22,8 +22,12 @@
 
         
 
+        
+
          objects to an ASP.NET server control's <see
          cref="T:System.Web.UI.StateBag" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          property or the <see
          cref="M:System.Web.UI.StateBag.Add(System.String,System.Object)" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          then tracks changes to all the items that it stores. Any changes to a <see
          cref="T:System.Web.UI.StateItem" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
          property. These changes are saved by a call to the <see
          cref="M:System.Web.UI.Control.SaveViewState" />
+
+        
 
         
 
@@ -61,6 +77,8 @@
          type="text/html">
           <a href="e18eb2f2-cf00-47ae-b1a1-dfc188a6dea1">ASP.NET Web Server Controls</a>
         </format>
+
+        
 
         
 
@@ -72,6 +90,8 @@
       <para
         >Represents an item that is saved in the <see
          cref="T:System.Web.UI.StateBag" />
+
+        
 
         
 
@@ -95,6 +115,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.StateItem" />
+
+            
 
             
 
@@ -125,8 +147,12 @@
 
             
 
+            
+
              object that is stored in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 

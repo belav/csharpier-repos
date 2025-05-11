@@ -25,8 +25,12 @@
 
         
 
+        
+
          event is raised when the <see
          cref="T:System.Web.UI.WebControls.AdRotator" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.AdCreatedEventArgs.#ctor(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -50,6 +58,8 @@
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.AdRotator" />
+
+        
 
         
 
@@ -93,11 +107,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
+
+            
 
             
 
@@ -127,13 +145,19 @@
 
                   
 
+                  
+
                    parameter if the <paramref
                    name="adProperties" />
 
                   
 
+                  
+
                    parameter is not null; otherwise, an empty <see
                    cref="T:System.Collections.IDictionary" />
+
+                  
 
                   
 
@@ -154,13 +178,19 @@
 
                   
 
+                  
+
                    parameter is not null, the value in the <paramref
                    name="adProperties" />
 
                   
 
+                  
+
                    parameter that represents the alternate text; otherwise, <see
                    cref="F:System.String.Empty" />
+
+                  
 
                   
 
@@ -181,13 +211,19 @@
 
                   
 
+                  
+
                    parameter is not null, the value in the <paramref
                    name="adProperties" />
 
                   
 
+                  
+
                    parameter that represents the URL of the image to display; otherwise, <see
                    cref="F:System.String.Empty" />
+
+                  
 
                   
 
@@ -208,13 +244,19 @@
 
                   
 
+                  
+
                    parameter is not null, the value in the <paramref
                    name="adProperties" />
 
                   
 
+                  
+
                    parameter that represents the URL to navigate to; otherwise, <see
                    cref="F:System.String.Empty" />
+
+                  
 
                   
 
@@ -232,6 +274,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -240,8 +284,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -276,8 +324,12 @@
 
             
 
+            
+
              property to get a <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -286,8 +338,12 @@
 
             
 
+            
+
              object are of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -299,8 +355,12 @@
 
             
 
+            
+
              control randomly selects an advertisement each time the control is displayed on the Web page. The attributes for the selected advertisement are extracted from the advertisement XML file and stored in a <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -309,8 +369,12 @@
 
             
 
+            
+
              control creates a new instance of the <see
              cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
+
+            
 
             
 
@@ -319,8 +383,12 @@
 
             
 
+            
+
              property gets initialized with the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -332,6 +400,8 @@
 
             
 
+            
+
              event handler to get the custom attributes.</para
           >
         </remarks>
@@ -340,6 +410,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -369,8 +441,12 @@
 
             
 
+            
+
              property to specify the text to display if the image specified in the <see
              cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.ImageUrl" />
+
+            
 
             
 
@@ -382,8 +458,12 @@
 
             
 
+            
+
              control automatically sets the <see
              cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AlternateText" />
+
+            
 
             
 
@@ -395,6 +475,8 @@
           <para
             >Gets or sets the alternate text displayed in the <see
              cref="T:System.Web.UI.WebControls.AdRotator" />
+
+            
 
             
 
@@ -424,8 +506,12 @@
 
             
 
+            
+
              property to specify the URL of an image to display for an advertisement in the <see
              cref="T:System.Web.UI.WebControls.AdRotator" />
+
+            
 
             
 
@@ -437,8 +523,12 @@
 
             
 
+            
+
              control automatically sets the <see
              cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.ImageUrl" />
+
+            
 
             
 
@@ -451,6 +541,8 @@
 
               
 
+              
+
                control.</para
             >
           </block>
@@ -460,6 +552,8 @@
           <para
             >Gets or sets the URL of an image to display in the <see
              cref="T:System.Web.UI.WebControls.AdRotator" />
+
+            
 
             
 
@@ -489,13 +583,19 @@
 
             
 
+            
+
              property to specify the Web page to display when the <see
              cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
+            
+
              control is clicked. A common use for this property is to redirect the navigation, when the <see
              cref="T:System.Web.UI.WebControls.AdRotator" />
+
+            
 
             
 
@@ -507,8 +607,12 @@
 
             
 
+            
+
              control automatically sets the <see
              cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.NavigateUrl" />
+
+            
 
             
 
@@ -521,6 +625,8 @@
 
               
 
+              
+
                control.</para
             >
           </block>
@@ -530,6 +636,8 @@
           <para
             >Gets or sets the Web page to display when the <see
              cref="T:System.Web.UI.WebControls.AdRotator" />
+
+            
 
             
 

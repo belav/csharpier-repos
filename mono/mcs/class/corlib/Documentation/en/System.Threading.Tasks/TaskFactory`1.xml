@@ -29,8 +29,12 @@
 
         
 
+        
+
          class encodes some common <see
          cref="T:System.Threading.Tasks.Task`1" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          is available through the <see
          cref="P:System.Threading.Tasks.Task`1.Factory" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
       <para
         >Provides support for creating and scheduling <see
          cref="T:System.Threading.Tasks.Task`1" />
+
+        
 
         
 
@@ -83,8 +93,12 @@
 
             
 
+            
+
              instance with a default configuration. The <see
              cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+            
 
             
 
@@ -93,8 +107,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+
+            
 
             
 
@@ -103,13 +121,19 @@
 
             
 
+            
+
             , and the <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
+            
+
              property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -121,6 +145,8 @@
           <para
             >Initializes a <see
              cref="T:System.Threading.Tasks.TaskFactory`1" />
+
+            
 
             
 
@@ -154,8 +180,12 @@
 
             
 
+            
+
              instance with a default configuration. The <see
              cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+            
 
             
 
@@ -164,8 +194,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+
+            
 
             
 
@@ -174,13 +208,19 @@
 
             
 
+            
+
             , and the <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
+            
+
              property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -195,6 +235,8 @@
 
             
 
+            
+
              instance with the default configuration.</para
           >
         </summary>
@@ -203,8 +245,12 @@
 
           
 
+          
+
           The default cancellation token that will be assigned to tasks created by this <see
            cref="T:System.Threading.Tasks.TaskFactory" />
+
+          
 
           
 
@@ -237,8 +283,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Threading.Tasks.TaskCreationOptions.None" />
+
+            
 
             
 
@@ -247,8 +297,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Threading.Tasks.TaskContinuationOptions.None" />
+
+            
 
             
 
@@ -257,13 +311,19 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="scheduler" />
 
             
 
+            
+
             , unless it's null, in which case the property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -278,6 +338,8 @@
 
             
 
+            
+
              instance with the specified configuration.</para
           >
         </summary>
@@ -286,13 +348,19 @@
 
           
 
+          
+
           The scheduler to use to schedule any tasks created with this <see
            cref="T:System.Threading.Tasks.TaskFactory`1" />
 
           
 
+          
+
           . A null value indicates that the current <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -329,8 +397,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="creationOptions" />
+
+            
 
             
 
@@ -339,8 +411,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -349,8 +425,12 @@
 
             
 
+            
+
              property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -365,6 +445,8 @@
 
             
 
+            
+
              instance with the specified configuration.</para
           >
         </summary>
@@ -373,8 +455,12 @@
 
           
 
+          
+
           The default options to use when creating tasks with this <see
            cref="T:System.Threading.Tasks.TaskFactory`1" />
+
+          
 
           
 
@@ -385,8 +471,12 @@
 
           
 
+          
+
           The default options to use when creating continuation tasks with this <see
            cref="T:System.Threading.Tasks.TaskFactory`1" />
+
+          
 
           
 
@@ -425,8 +515,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="creationOptions" />
+
+            
 
             
 
@@ -435,8 +529,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -445,13 +543,19 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="scheduler" />
 
             
 
+            
+
             , unless it's null, in which case the property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -466,6 +570,8 @@
 
             
 
+            
+
              instance with the specified configuration.</para
           >
         </summary>
@@ -474,8 +580,12 @@
 
           
 
+          
+
           The default cancellation token that will be assigned to tasks created by this <see
            cref="T:System.Threading.Tasks.TaskFactory" />
+
+          
 
           
 
@@ -486,8 +596,12 @@
 
           
 
+          
+
           The default options to use when creating tasks with this <see
            cref="T:System.Threading.Tasks.TaskFactory`1" />
+
+          
 
           
 
@@ -498,8 +612,12 @@
 
           
 
+          
+
           The default options to use when creating continuation tasks with this <see
            cref="T:System.Threading.Tasks.TaskFactory`1" />
+
+          
 
           
 
@@ -510,13 +628,19 @@
 
           
 
+          
+
           The default scheduler to use to schedule any tasks created with this <see
            cref="T:System.Threading.Tasks.TaskFactory`1" />
 
           
 
+          
+
           . A null value indicates that <see
            cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+          
 
           
 
@@ -579,6 +703,8 @@
           <para
             >Gets the <see
              cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+
+            
 
             
 
@@ -1209,6 +1335,8 @@
 
             
 
+            
+
              enumeration value for this task factory.</para
           >
         </summary>
@@ -1660,6 +1788,8 @@
           <para
             >If this property returns null, <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 

@@ -5,7 +5,7 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A  
 {  
    int i = 0;  
@@ -21,6 +21,8 @@ class A
 
       
 
+      
+
       within the F method, the instance variable i is hidden by the local variable i, but within the G method, i still refers to the instance variable. end example]</example
     >
   </paragraph>
@@ -29,7 +31,7 @@ class A
 
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class Outer  
 {  
    static void F(int i) {}  
@@ -45,6 +47,8 @@ class Outer
 }  
 ]]>
       </code_example>
+
+      
 
       
 

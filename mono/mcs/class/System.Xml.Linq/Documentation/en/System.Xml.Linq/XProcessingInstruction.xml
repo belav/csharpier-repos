@@ -26,6 +26,8 @@
 
         
 
+        
+
          node. </para
       >
     </remarks>
@@ -64,6 +66,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -72,8 +76,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+          
 
           
 
@@ -108,6 +116,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -116,13 +126,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            containing the target application for this <see
            cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+          
 
           
 
@@ -133,8 +149,12 @@
 
           
 
+          
+
           The string data for this <see
            cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+          
 
           
 
@@ -190,13 +210,19 @@
 
             
 
+            
+
              contain a <see
              cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
+            
+
              property, you can write code that operates on collections of concrete subclass of <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -256,6 +282,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -267,6 +295,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -275,8 +305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

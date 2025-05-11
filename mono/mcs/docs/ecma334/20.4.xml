@@ -5,7 +5,7 @@
 
       >[Example: For example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface ICloneable  
 {  
    object Clone();  
@@ -24,6 +24,8 @@ class ListEntry: ICloneable, IComparable
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -32,7 +34,7 @@ class ListEntry: ICloneable, IComparable
 
       >[Example: For example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 interface IControl  
 {  
    void Paint();  

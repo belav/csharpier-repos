@@ -57,11 +57,15 @@
 
           
 
+          
+
           .</param
         >
         <param name="height"
           > the current height of <paramref
            name="drawable" />
+
+          
 
           
 
@@ -71,15 +75,18 @@
         <remarks
           >The way that colors are represented in the drawable is specified by the provided visual.
 		  <block
-           subset="none" type="note"
-            >
+           subset="none" type="note">
 			If <paramref
              name="drawable" />
 
             
 
+            
+
              is a Window, then the function <see
              cref="M:Cairo.XlibSurface.SetSize()" />
+
+            
 
             
 

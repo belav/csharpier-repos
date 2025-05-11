@@ -26,6 +26,8 @@
 
         
 
+        
+
          namespace overview.</para
       >
     </remarks>
@@ -37,8 +39,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+            
 
             
 
@@ -93,8 +101,12 @@
 
             
 
+            
+
              does not reliably indicate the type of print operation occurring, and returns <see
              cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />
+
+            
 
             
 
@@ -106,6 +118,8 @@
           <para
             >Returns <see
              cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />
+
+            
 
             
 

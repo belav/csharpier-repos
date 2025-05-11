@@ -25,13 +25,19 @@
 
         
 
+        
+
          layer is required, which this class provides. This class is a binding in the stack of bindings that performs a message-level shape change called OneWayBindingElement. This shape change can take a <see
          cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
         
 
+        
+
          or a <see
          cref="T:System.ServiceModel.Channels.IRequestChannel" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
         , or conversely it can take a <see
          cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+
+        
 
         
 
@@ -50,8 +60,12 @@
 
         
 
+        
+
          and expose it as a <see
          cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+        
 
         
 
@@ -83,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.OneWayBindingElement" />
+
+            
 
             
 
@@ -130,13 +146,19 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
+            
+
              initialized from the <paramref
              name="context" />
+
+            
 
             
 
@@ -148,8 +170,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -157,6 +183,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,13 +236,19 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
+            
+
              initialized from the <paramref
              name="context" />
+
+            
 
             
 
@@ -226,8 +260,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -235,6 +273,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,8 +314,12 @@
 
             
 
+            
+
              is an <see
              cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+            
 
             
 
@@ -284,8 +328,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ServiceModel.Channels.IRequestChannel" />
+
+            
 
             
 
@@ -305,8 +353,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -314,6 +366,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,8 +412,12 @@
 
             
 
+            
+
              is an <see
              cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+            
 
             
 
@@ -368,8 +426,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ServiceModel.Channels.IReplyChannel" />
+
+            
 
             
 
@@ -389,8 +451,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -398,6 +464,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -496,13 +564,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.ServiceModel.Channels.IChannelListener" />
 
             
 
+            
+
             , and <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -521,6 +595,8 @@
 
             
 
+            
+
              object from the binding stack, if present.</para
           >
         </returns>
@@ -529,8 +605,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -538,6 +618,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

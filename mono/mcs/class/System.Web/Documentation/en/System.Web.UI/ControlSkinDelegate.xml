@@ -29,13 +29,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.ControlSkin" />
 
         
 
+        
+
         , or <see
          cref="T:System.Web.UI.PageTheme" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          delegate is associated with the <see
          cref="M:System.Web.UI.ControlSkin.ApplySkin(System.Web.UI.Control)" />
+
+        
 
         
 
@@ -57,8 +67,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Web.UI.ControlSkin" />
+
+        
 
         
 
@@ -67,10 +81,14 @@
 
         
 
+        
+
          object. For more information about ASP.NET themes, see <format
          type="text/html">
           <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">Introduction to ASP.NET Themes</a>
         </format>
+
+        
 
         
 

@@ -26,12 +26,16 @@
 
         
 
+        
+
          found under the <format
          type="text/html">
           <a href="3ce45919-388a-418c-8968-6df0372c73ec"
             >&lt;system.xml.serialization&gt; Element</a
           >
         </format>
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -52,6 +58,8 @@
       <para
         >Handles configuration settings for XML serialization of <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -74,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.Configuration.DateTimeSerializationSection" />
+
+            
 
             
 
@@ -110,6 +120,8 @@
                 >&lt;dateTimeSerialization&gt; Element</a
               >
             </format>
+
+            
 
             
 

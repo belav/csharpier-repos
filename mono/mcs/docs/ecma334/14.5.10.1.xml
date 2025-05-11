@@ -6,8 +6,12 @@
 
     
 
+    
+
      is used to create a new instance of a <non_terminal
      where="11.2">class-type</non_terminal>
+
+    
 
     
 
@@ -16,11 +20,15 @@
 
     
 
+    
+
     . <grammar_production
     >
       <name>
         <non_terminal where="14.5.10.1">object-creation-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -41,8 +49,12 @@
 
     
 
+    
+
      must be a <non_terminal
      where="11.2">class-type</non_terminal>
+
+    
 
     
 
@@ -51,8 +63,12 @@
 
     
 
+    
+
     . The type cannot be an abstract <non_terminal
      where="11.2">class-type</non_terminal>
+
+    
 
     
 
@@ -64,8 +80,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.4.1</hyperlink>
+
+    
 
     
 
@@ -74,8 +94,12 @@
 
     
 
+    
+
      or a <non_terminal
      where="11.1">struct-type</non_terminal>
+
+    
 
     
 
@@ -87,8 +111,12 @@
 
     
 
+    
+
      of the form new T(A), where T is a <non_terminal
      where="11.2">class-type</non_terminal>
+
+    
 
     
 
@@ -97,8 +125,12 @@
 
     
 
+    
+
      and A is an optional <non_terminal
      where="14.4.1">argument-list</non_terminal>
+
+    
 
     
 
@@ -107,6 +139,8 @@
       <list_item
         > If T is a <non_terminal
          where="11.1">value-type</non_terminal>
+
+        
 
         
 
@@ -119,13 +153,19 @@
 
           
 
+          
+
            is a default constructor invocation. The result of the  <non_terminal
            where="14.5.10.1">object-creation-expression</non_terminal>
 
           
 
+          
+
            is a value of type T, namely the default value for T as defined in <hyperlink
           >11.1.1</hyperlink>
+
+          
 
           
 
@@ -138,12 +178,16 @@
 
         
 
+        
+
          or a struct-type: </list_item
       >
       <list>
         <list_item
           > If T is an abstract <non_terminal
            where="11.2">class-type</non_terminal>
+
+          
 
           
 
@@ -155,11 +199,15 @@
 
           
 
+          
+
           . The set of candidate instance constructors consists of all accessible instance constructors declared in T. If the set of candidate instance constructors is empty, or if a single best instance constructor cannot be identified, a compile-time error occurs. </list_item
         >
         <list_item
           > The result of the <non_terminal
            where="14.5.10.1">object-creation-expression</non_terminal>
+
+          
 
           
 
@@ -169,6 +217,8 @@
       <list_item
         > Otherwise, the <non_terminal
          where="14.5.10.1">object-creation-expression</non_terminal>
+
+        
 
         
 
@@ -182,8 +232,12 @@
 
     
 
+    
+
      of the form new T(A), where T is <non_terminal
      where="11.2">class-type</non_terminal>
+
+    
 
     
 
@@ -192,8 +246,12 @@
 
     
 
+    
+
      and A is an optional <non_terminal
      where="14.4.1">argument-list</non_terminal>
+
+    
 
     
 
@@ -208,11 +266,15 @@
 
           
 
+          
+
           ). </list_item
         >
         <list_item
           > The instance constructor is invoked according to the rules of function member invocation (<hyperlink
           >14.4.3</hyperlink>
+
+          
 
           
 
@@ -227,11 +289,15 @@
 
           
 
+          
+
            is required to definitely assign a value to each field of the instance being created, no initialization of the temporary variable is necessary. </list_item
         >
         <list_item
           > The instance constructor is invoked according to the rules of function member invocation (<hyperlink
           >14.4.3</hyperlink>
+
+          
 
           
 

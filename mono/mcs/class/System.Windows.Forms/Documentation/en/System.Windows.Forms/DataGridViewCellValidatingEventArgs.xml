@@ -25,8 +25,12 @@
 
         
 
+        
+
          event lets you cancel changes to the current cell when the new value is not valid. Use the <see
          cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.FormattedValue" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.ColumnIndex" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          collection. To cancel the change, set the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -55,6 +67,8 @@
       <para
         >When this event is canceled in data-bound mode, the new value is not pushed to the underlying data source. When this event is canceled in virtual mode, the <see
          cref="E:System.Windows.Forms.DataGridView.CellValuePushed" />
+
+        
 
         
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -115,8 +133,12 @@
 
             
 
+            
+
              property value. This is the value that you can validate before it is parsed into the cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+
+            
 
             
 

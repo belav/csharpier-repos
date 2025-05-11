@@ -27,8 +27,12 @@
 
           
 
+          
+
            class or the <see
            cref="T:System.Security.Cryptography.SHA512Cng" />
+
+          
 
           
 
@@ -37,8 +41,12 @@
 
           
 
+          
+
            class. Use <see
            cref="T:System.Security.Cryptography.MD5Cng" />
+
+          
 
           
 
@@ -49,6 +57,8 @@
         <para
           >Using the MD5 algorithm with the FIPS Windows security setting enabled throws a <see
            cref="T:System.Security.Cryptography.CryptographicException" />
+
+          
 
           
 
@@ -85,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.MD5Cng" />
+
+            
 
             
 

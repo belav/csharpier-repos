@@ -27,11 +27,12 @@
 
         
 
+        
+
          with the appropriate number of arguments:</para
       >
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 CdeclFunction printf = new CdeclFunction (
 	"libc",       // the libraary
 	"printf",     // the function name
@@ -100,6 +101,8 @@ printf.Invoke (new object[]{"hello, %s\n", "world!"});
         <param name="returnType"
           >The return type of the function to invoke.  The default return type is <see
            cref="T:System.Void" />
+
+          
 
           
 

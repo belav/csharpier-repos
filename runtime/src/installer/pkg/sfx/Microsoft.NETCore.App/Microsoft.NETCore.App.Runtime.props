@@ -98,7 +98,8 @@
   <Target Name="AddRuntimeFilesToPackage" DependsOnTargets="ResolveRuntimeFilesFromLocalBuild">
     <ItemGroup>
       <RuntimeFiles Condition="'%(RuntimeFiles.IsNative)' == 'true'">
-        <TargetPath>runtimes/$(RuntimeIdentifier)/native</TargetPath>
+        <TargetPath
+>runtimes/$(RuntimeIdentifier)/native</TargetPath>
       </RuntimeFiles>
     </ItemGroup>
     <ItemGroup Condition="'$(BuildNativeAOTRuntimePack)' != 'true'">
@@ -106,20 +107,25 @@
         <TargetPath>tools</TargetPath>
       </RuntimeFiles>
       <RuntimeFiles Include="@(MonoFrameworkReleaseFiles)" ExcludeFromDataFiles="true">
-        <TargetPath>runtimes/$(RuntimeIdentifier)/native/Mono.release.framework/%(RecursiveDir)</TargetPath>
+        <TargetPath
+>runtimes/$(RuntimeIdentifier)/native/Mono.release.framework/%(RecursiveDir)</TargetPath>
       </RuntimeFiles>
       <RuntimeFiles Include="@(MonoFrameworkDebugFiles)" ExcludeFromDataFiles="true">
-        <TargetPath>runtimes/$(RuntimeIdentifier)/native/Mono.debug.framework/%(RecursiveDir)</TargetPath>
+        <TargetPath
+>runtimes/$(RuntimeIdentifier)/native/Mono.debug.framework/%(RecursiveDir)</TargetPath>
       </RuntimeFiles>
       <RuntimeFiles Include="@(MonoIncludeFiles)" ExcludeFromDataFiles="true">
-        <TargetPath>runtimes/$(RuntimeIdentifier)/native/include/%(RecursiveDir)</TargetPath>
+        <TargetPath
+>runtimes/$(RuntimeIdentifier)/native/include/%(RecursiveDir)</TargetPath>
       </RuntimeFiles>
       <RuntimeFiles Include="@(MonoBuildFiles)" ExcludeFromDataFiles="true">
-        <TargetPath>runtimes/$(RuntimeIdentifier)/build/%(RecursiveDir)</TargetPath>
+        <TargetPath
+>runtimes/$(RuntimeIdentifier)/build/%(RecursiveDir)</TargetPath>
       </RuntimeFiles>
       <CoreCLRCrossTargetFiles PackOnly="true" />
       <CoreCLRCrossTargetFiles Condition="'%(FileName)' == 'clrjit' or '%(FileName)' == 'libclrjit'">
-        <TargetPath>runtimes/$(CoreCLRCrossTargetComponentDirName)_$(TargetArchitecture)/native</TargetPath>
+        <TargetPath
+>runtimes/$(CoreCLRCrossTargetComponentDirName)_$(TargetArchitecture)/native</TargetPath>
       </CoreCLRCrossTargetFiles>
       <CoreCLRCrossTargetFiles Condition="'%(FileName)' == 'crossgen'">
         <TargetPath>tools/$(CoreCLRCrossTargetComponentDirName)_$(TargetArchitecture)</TargetPath>
@@ -148,7 +154,7 @@
         Condition="'%(LibrariesRuntimeFiles.Extension)' != '.a' or '$(TargetsMobile)' == 'true' or '$(BuildNativeAOTRuntimePack)' == 'true'"
       >
         <TargetPath Condition="'%(LibrariesRuntimeFiles.NativeSubDirectory)' != ''"
-          >runtimes/$(RuntimeIdentifier)/native/%(LibrariesRuntimeFiles.NativeSubDirectory)%(RecursiveDir)</TargetPath
+>runtimes/$(RuntimeIdentifier)/native/%(LibrariesRuntimeFiles.NativeSubDirectory)%(RecursiveDir)</TargetPath
         >
       </ReferenceCopyLocalPaths>
     </ItemGroup>
@@ -168,7 +174,8 @@
       Include="$(_diaSymReaderPath)"
       Condition="'$(CoreCLRCrossTargetComponentDirName)' != ''"
     >
-      <TargetPath>runtimes/$(CoreCLRCrossTargetComponentDirName)_$(TargetArchitecture)/native</TargetPath>
+      <TargetPath
+>runtimes/$(CoreCLRCrossTargetComponentDirName)_$(TargetArchitecture)/native</TargetPath>
     </NativeRuntimeAsset>
   </ItemGroup>
   <!-- VS uses this file to show the target framework in the drop down. -->

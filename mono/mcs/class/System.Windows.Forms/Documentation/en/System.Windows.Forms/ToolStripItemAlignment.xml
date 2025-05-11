@@ -19,8 +19,12 @@
 
         
 
+        
+
          in a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
             
 
+            
+
              is to be anchored toward the left or top end of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -55,8 +63,12 @@
 
             
 
+            
+
              orientation. If the value of <see
              cref="T:System.Windows.Forms.RightToLeft" />
+
+            
 
             
 
@@ -65,8 +77,12 @@
 
             
 
+            
+
              are aligned to the right side of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -94,8 +110,12 @@
 
             
 
+            
+
              is to be anchored toward the right or bottom end of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -104,8 +124,12 @@
 
             
 
+            
+
              orientation. If the value of <see
              cref="T:System.Windows.Forms.RightToLeft" />
+
+            
 
             
 
@@ -114,8 +138,12 @@
 
             
 
+            
+
              are aligned to the left side of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

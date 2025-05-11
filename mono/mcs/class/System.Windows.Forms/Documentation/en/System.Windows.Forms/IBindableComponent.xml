@@ -23,13 +23,19 @@
 
         
 
+        
+
          contains a reference to its <see
          cref="T:System.Windows.Forms.IBindableComponent" />
 
         
 
+        
+
          owner through the <see
          cref="P:System.Windows.Forms.Binding.BindableComponent" />
+
+        
 
         
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          class implements this interface, so if your bindable component inherits from <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -76,6 +86,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -102,6 +114,8 @@
           <para
             >Gets the collection of data-binding objects for this <see
              cref="T:System.Windows.Forms.IBindableComponent" />
+
+            
 
             
 

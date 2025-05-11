@@ -28,8 +28,12 @@
 
         
 
+        
+
          is a complete implementation of a designer loader without anything relating to a persistence format. A <see
          cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          adds two kinds of services to the designer host’s service container: replaceable services and irreplaceable services. You can replace a replaceable service by changing the value of the protected <see
          cref="P:System.ComponentModel.Design.Serialization.BasicDesignerLoader.LoaderHost" />
+
+        
 
         
 
@@ -101,6 +109,8 @@
 
         
 
+        
+
          interface.</para
       >
     </summary>
@@ -120,6 +130,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -155,8 +167,12 @@
 
             
 
+            
+
              method. You do not need to override this method in your own class. The <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.BeginLoad(System.ComponentModel.Design.Serialization.IDesignerLoaderHost)" />
+
+            
 
             
 
@@ -173,6 +189,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -183,13 +201,19 @@
 
                 
 
+                
+
                 , <see
                  cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
                 
 
+                
+
                 , and <see
                  cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
+
+                
 
                 
 
@@ -203,8 +227,12 @@
 
             
 
+            
+
              will call the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.System#ComponentModel#Design#Serialization#IDesignerLoaderService#AddLoadDependency" />
+
+            
 
             
 
@@ -213,13 +241,19 @@
 
             
 
+            
+
              methods instead of the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -228,8 +262,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -242,6 +280,8 @@
         </summary>
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,13 +308,19 @@
 
             
 
+            
+
              method does not flush changes to the designer loader. If you want changes to be saved, call <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.Flush" />
 
             
 
+            
+
              before calling <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.Dispose" />
+
+            
 
             
 
@@ -286,8 +332,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -296,8 +346,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -306,13 +360,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -323,10 +383,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -339,13 +403,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+              
 
               
 
@@ -358,6 +428,8 @@
           <para
             >Releases the resources used by the <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -391,6 +463,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -403,13 +477,19 @@
 
           
 
+          
+
           true to enable component notification by the <see
            cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
           
 
+          
+
           ; false to disable component notification by the <see
            cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+
+          
 
           
 
@@ -436,13 +516,19 @@
 
             
 
+            
+
              method returns immediately. Otherwise, <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.Flush" />
 
             
 
+            
+
              asks the serialization manager to create a serialization session and then calls <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+
+            
 
             
 
@@ -475,8 +561,12 @@
 
             
 
+            
+
              is a helper method that allows classes deriving from <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -496,8 +586,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -524,8 +618,12 @@
 
             
 
+            
+
              method is called the first time <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.BeginLoad(System.ComponentModel.Design.Serialization.IDesignerLoaderHost)" />
+
+            
 
             
 
@@ -534,8 +632,12 @@
 
             
 
+            
+
              provides, so after calling the base implementation you may replace existing services. You must remove any custom services you add here by overriding <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.Dispose" />
+
+            
 
             
 
@@ -567,8 +669,12 @@
 
             
 
+            
+
              method is used by some designer loaders to optimize reloading. This method can be overridden if your designer loader supports intelligent reloading. Some designer loaders can detect changes made to their underlying document and determine if a reload of the designer is actually necessary. If not, they should return false from this method. The default implementation always returns true, indicating that any call to <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.Reload(System.ComponentModel.Design.Serialization.BasicDesignerLoader.ReloadOptions)" />
+
+            
 
             
 
@@ -607,6 +713,8 @@
 
             
 
+            
+
              has not been called yet, or if this designer loader has been disposed.</para
           >
         </remarks>
@@ -635,8 +743,12 @@
 
             
 
+            
+
              class provides the <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderService" />
+
+            
 
             
 
@@ -668,8 +780,12 @@
 
             
 
+            
+
              method is called, the designer loader will call the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+
+            
 
             
 
@@ -701,8 +817,12 @@
 
             
 
+            
+
              method is invoked to start the loading process. You should perform any necessary initialization for loading at this time. This method should not be used to perform the actual load. The default implementation disables change notifications and sets up the <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -714,8 +834,12 @@
 
             
 
+            
+
              to provide dependent load support, you should call <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />
+
+            
 
             
 
@@ -724,8 +848,12 @@
 
             
 
+            
+
              method after the last call to the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.System#ComponentModel#Design#Serialization#IDesignerLoaderService#DependentLoadComplete(System.Boolean,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -734,8 +862,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderService" />
+
+            
 
             
 
@@ -744,8 +876,12 @@
 
             
 
+            
+
              is not available when <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.BeginLoad(System.ComponentModel.Design.Serialization.IDesignerLoaderHost)" />
+
+            
 
             
 
@@ -754,8 +890,12 @@
 
             
 
+            
+
              will directly call <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />
+
+            
 
             
 
@@ -767,13 +907,19 @@
 
             
 
+            
+
              method will automatically call this, either indirectly by calling <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.System#ComponentModel#Design#Serialization#IDesignerLoaderService#AddLoadDependency" />
 
             
 
+            
+
              if <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderService" />
+
+            
 
             
 
@@ -805,6 +951,8 @@
 
             
 
+            
+
              method is invoked when the designer loader is about to unload the document.</para
           >
           <para
@@ -813,8 +961,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -852,13 +1004,19 @@
 
             
 
+            
+
              method is invoked when loading is finished. It is always called, even if an exception is thrown during loading. The value of <paramref
              name="successful" />
 
             
 
+            
+
              will be set to true if the load succeeded, or false if a fatal error occurred. The <paramref
              name="errors" />
+
+            
 
             
 
@@ -870,8 +1028,12 @@
 
             
 
+            
+
              to provide dependent load support, you should call the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -880,8 +1042,12 @@
 
             
 
+            
+
              method. By default, <see
              cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+
+            
 
             
 
@@ -890,8 +1056,12 @@
 
             
 
+            
+
              and does this for you. If <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderService" />
+
+            
 
             
 
@@ -900,8 +1070,12 @@
 
             
 
+            
+
              is called, <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.BeginLoad(System.ComponentModel.Design.Serialization.IDesignerLoaderHost)" />
+
+            
 
             
 
@@ -910,8 +1084,12 @@
 
             
 
+            
+
              after calling <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+
+            
 
             
 
@@ -923,8 +1101,12 @@
 
             
 
+            
+
              method. If you provide your own loader service, or if you choose not to provide a loader service, you are responsible for calling this method. The <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.BeginLoad(System.ComponentModel.Design.Serialization.IDesignerLoaderHost)" />
+
+            
 
             
 
@@ -933,8 +1115,12 @@
 
             
 
+            
+
              method if <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderService" />
+
+            
 
             
 
@@ -950,6 +1136,8 @@
 
           
 
+          
+
           true if the load completed successfully; otherwise, false.</param
         >
         <param name="errors">
@@ -957,8 +1145,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -985,13 +1177,19 @@
 
             
 
+            
+
              method is called in response to a component changing, adding, or removing event which indicates that the designer is about to be modified. You can implement source code control by overriding this method. A call to <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnModifying" />
 
             
 
+            
+
              does not mean that the <see
              cref="P:System.ComponentModel.Design.Serialization.BasicDesignerLoader.Modified" />
+
+            
 
             
 
@@ -1031,8 +1229,12 @@
 
             
 
+            
+
              method is invoked when the designer loader needs to flush to persistence any changes made to the designers. It is invoked in response to a call to the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.Flush" />
+
+            
 
             
 
@@ -1048,8 +1250,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+          
 
           
 
@@ -1084,13 +1290,19 @@
 
             
 
+            
+
              method is invoked when the designer loader needs to load its state. <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
+            
+
              is called before the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />
+
+            
 
             
 
@@ -1106,8 +1318,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+          
 
           
 
@@ -1202,8 +1418,12 @@
 
             
 
+            
+
              method is called during <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.Flush" />
+
+            
 
             
 
@@ -1212,13 +1432,19 @@
 
             
 
+            
+
              collection can be exceptions or objects with <see
              cref="M:System.Object.ToString" />
 
             
 
+            
+
              values that describe the error. The default implementation of <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.ReportFlushErrors(System.Collections.ICollection)" />
+
+            
 
             
 
@@ -1234,8 +1460,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -1267,6 +1497,8 @@
 
             
 
+            
+
              method should be called during loading to establish the full name of the component a designer is designing.</para
           >
         </remarks>
@@ -1276,6 +1508,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1302,8 +1536,12 @@
 
             
 
+            
+
              method once for each external object participating in the load process. The <see
              cref="M:System.ComponentModel.Design.Serialization.IDesignerLoaderService.DependentLoadComplete(System.Boolean,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -1315,6 +1553,8 @@
           <para
             >Registers an external component as part of the load process managed by <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderService" />
+
+            
 
             
 
@@ -1348,13 +1588,19 @@
 
             
 
+            
+
              method is called to signal that a dependent loading operation has completed. Call the <see
              cref="M:System.ComponentModel.Design.Serialization.IDesignerLoaderService.DependentLoadComplete(System.Boolean,System.Collections.ICollection)" />
 
             
 
+            
+
              method once for every process that was registered by calling the <see
              cref="M:System.ComponentModel.Design.Serialization.IDesignerLoaderService.AddLoadDependency" />
+
+            
 
             
 
@@ -1366,8 +1612,12 @@
 
             
 
+            
+
              parameter to true and passes either an empty collection or null to the <paramref
              name="errorCollection" />
+
+            
 
             
 
@@ -1376,8 +1626,12 @@
 
             
 
+            
+
              parameter to false and passes a collection of exceptions that indicate the reason or reasons for failure to the <paramref
              name="errorCollection" />
+
+            
 
             
 
@@ -1393,6 +1647,8 @@
 
           
 
+          
+
           true to load successfully; otherwise, false.</param
         >
         <param name="errorCollection">
@@ -1400,8 +1656,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -1425,6 +1685,8 @@
           <para
             >Any object can call the <see
              cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.System#ComponentModel#Design#Serialization#IDesignerLoaderService#Reload" />
+
+            
 
             
 

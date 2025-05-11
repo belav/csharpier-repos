@@ -37,6 +37,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -44,6 +46,8 @@
           <para
             >Apply an <see
              cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+
+            
 
             
 
@@ -57,6 +61,8 @@
 
             
 
+            
+
              to the class and specify a member within the class that acts as a new extension point.</para
           >
         </item>
@@ -64,6 +70,8 @@
           <para
             >Optionally, apply an <see
              cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
+
+            
 
             
 
@@ -93,6 +101,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
+
+            
 
             
 
@@ -126,6 +136,8 @@
 
             
 
+            
+
              class, setting the XML namespace and XML namespace prefix for a service description format extension.</para
           >
         </summary>
@@ -134,10 +146,14 @@
 
           
 
+          
+
           The XML namespace prefix associated with a service description format extension.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

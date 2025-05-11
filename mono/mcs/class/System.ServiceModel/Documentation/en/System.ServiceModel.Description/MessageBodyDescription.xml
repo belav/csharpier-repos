@@ -25,6 +25,8 @@
 
         
 
+        
+
          class to construct or modify a SOAP message body when added to the description tree. </para
       >
     </remarks>
@@ -52,6 +54,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.MessageBodyDescription" />
+
+            
 
             
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          methods. Pure methods do not make any visible state changes. This attribute is not enforced by the current analysis tools; you should use this attribute only if you are sure that the methods are pure. </para
       >
     </remarks>
@@ -57,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.Contracts.PureAttribute" />
+
+            
 
             
 

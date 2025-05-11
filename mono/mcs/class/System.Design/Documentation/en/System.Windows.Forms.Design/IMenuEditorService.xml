@@ -39,6 +39,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -120,8 +122,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Menu" />
+
+          
 
           
 
@@ -156,8 +162,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 

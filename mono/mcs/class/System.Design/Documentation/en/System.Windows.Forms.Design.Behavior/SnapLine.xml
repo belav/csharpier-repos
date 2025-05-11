@@ -55,12 +55,16 @@
 
         
 
+        
+
          class and related types help support the Snapline mode. </para
       >
       <para>Snaplines are generated dynamically and automatically as a control edge moves near another control or near the boundaries of its container. This can occur when a control is added from the toolbox, or moved or resized by mouse operations or keyboard commands. Controls typically have both horizontal and vertical snaplines defined; for rectangular controls, these typically extend from all four edges. </para>
       <para
         >The <see
          cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+        
 
         
 
@@ -124,6 +128,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.Design.Behavior.SnapLine.IsVertical" />
             </para>
@@ -139,8 +145,12 @@
 
         
 
+        
+
          class stores snaplines for its corresponding control type in the <see
          cref="P:System.Windows.Forms.Design.ControlDesigner.SnapLines" />
+
+        
 
         
 
@@ -149,8 +159,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Windows.Forms.Design.Behavior.SnapLineType.Right" />
+
+        
 
         
 
@@ -159,8 +173,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Windows.Forms.Design.Behavior.SnapLineType.Bottom" />
+
+        
 
         
 
@@ -169,8 +187,12 @@
 
         
 
+        
+
          property of the class derived from <see
          cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+        
 
         
 
@@ -179,6 +201,8 @@
       <para
         >The <see
          cref="P:System.Windows.Forms.Design.Behavior.SnapLine.SnapLineType" />
+
+        
 
         
 
@@ -219,13 +243,19 @@
 
             
 
+            
+
              property to null and the <see
              cref="P:System.Windows.Forms.Design.Behavior.SnapLine.Priority" />
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.Design.Behavior.SnapLinePriority.Low" />
+
+            
 
             
 
@@ -240,6 +270,8 @@
 
             
 
+            
+
              class using the specified snapline type and offset.</para
           >
         </summary>
@@ -248,8 +280,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLineType" />
+
+          
 
           
 
@@ -257,6 +293,8 @@
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,8 +325,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.Design.Behavior.SnapLinePriority.Low" />
+
+            
 
             
 
@@ -303,6 +345,8 @@
 
             
 
+            
+
              class using the specified snapline type, offset, and filter name. </para
           >
         </summary>
@@ -311,8 +355,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLineType" />
+
+          
 
           
 
@@ -323,6 +371,8 @@
 
           
 
+          
+
           The position of the snapline, in pixels, relative to the upper-left origin of the owning control.</param
         >
         <param name="filter">
@@ -330,8 +380,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -362,6 +416,8 @@
 
             
 
+            
+
              property to null.</para
           >
         </remarks>
@@ -373,6 +429,8 @@
 
             
 
+            
+
              class using the specified snapline type, offset, and priority. </para
           >
         </summary>
@@ -381,8 +439,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLineType" />
+
+          
 
           
 
@@ -393,6 +455,8 @@
 
           
 
+          
+
           The position of the snapline, in pixels, relative to the upper-left origin of the owning control.</param
         >
         <param name="priority">
@@ -400,8 +464,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLinePriority" />
+
+          
 
           
 
@@ -437,6 +505,8 @@
 
             
 
+            
+
              class using the specified snapline type, offset, filter name, and priority. </para
           >
         </summary>
@@ -445,8 +515,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLineType" />
+
+          
 
           
 
@@ -457,6 +531,8 @@
 
           
 
+          
+
           The position of the snapline, in pixels, relative to the upper-left origin of the owning control.</param
         >
         <param name="filter">
@@ -464,8 +540,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -476,8 +556,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLinePriority" />
+
+          
 
           
 
@@ -506,6 +590,8 @@
 
             
 
+            
+
              property value.</para
           >
         </remarks>
@@ -517,11 +603,15 @@
 
             
 
+            
+
              property of the snapline.</para
           >
         </summary>
         <param name="adjustment">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -545,6 +635,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.Design.Behavior.SnapLine.Filter" />
+
+            
 
             
 
@@ -577,8 +669,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.Design.Behavior.SnapLineType.Bottom" />
+
+            
 
             
 
@@ -587,8 +683,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Windows.Forms.Design.Behavior.SnapLineType.Baseline" />
+
+            
 
             
 
@@ -620,13 +720,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.Design.Behavior.SnapLineType.Right" />
 
             
 
+            
+
             , and <see
              cref="F:System.Windows.Forms.Design.Behavior.SnapLineType.Vertical" />
+
+            
 
             
 
@@ -659,8 +765,12 @@
 
             
 
+            
+
              property is initialized at construction time, but it can be changed thereafter with the <see
              cref="M:System.Windows.Forms.Design.Behavior.SnapLine.AdjustOffset(System.Int32)" />
+
+            
 
             
 
@@ -695,11 +805,15 @@
 
             
 
+            
+
              property establishes categories of importance for the snaplines associated with a control. </para
           >
           <para
             >The Windows Forms Designer uses this property to determine which snaplines to display during a control addition, resize, or move operation. For more information, see the <see
              cref="T:System.Windows.Forms.Design.Behavior.SnapLinePriority" />
+
+            
 
             
 
@@ -739,8 +853,12 @@
 
             
 
+            
+
              should snap to another <see
              cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+            
 
             
 
@@ -755,8 +873,12 @@
 
             
 
+            
+
              should snap to <paramref
              name="line2" />
+
+            
 
             
 
@@ -768,8 +890,12 @@
 
           
 
+          
+
           The specified <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+          
 
           
 
@@ -780,13 +906,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
 
           
 
+          
+
            to which the specified <see
            cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+          
 
           
 
@@ -816,8 +948,12 @@
 
             
 
+            
+
              property to direct snap alignment operations. Typically only snaplines that are similarly oriented can snap to each other. For example, two snaplines of type <see
              cref="F:System.Windows.Forms.Design.Behavior.SnapLineType.Horizontal" />
+
+            
 
             
 
@@ -826,8 +962,12 @@
 
             
 
+            
+
              and a <see
              cref="F:System.Windows.Forms.Design.Behavior.SnapLineType.Vertical" />
+
+            
 
             
 
@@ -868,8 +1008,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+            
 
             
 

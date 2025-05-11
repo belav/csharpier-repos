@@ -24,8 +24,12 @@
 
         
 
+        
+
          are obtained by calling the <see
          cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         . When your application no longer needs the <see
          cref="T:System.Net.FtpWebResponse" />
+
+        
 
         
 
@@ -44,8 +52,12 @@
 
         
 
+        
+
          method to free the resources held by the <see
          cref="T:System.Net.FtpWebResponse" />
+
+        
 
         
 
@@ -57,8 +69,12 @@
 
         
 
+        
+
          property contains the status code returned by the server, and the <see
          cref="P:System.Net.FtpWebResponse.StatusDescription" />
+
+        
 
         
 
@@ -70,13 +86,19 @@
 
         
 
+        
+
          request, is available in the stream returned by the <see
          cref="M:System.Net.FtpWebResponse.GetResponseStream" />
 
         
 
+        
+
          method. The length of the stream data can be obtained from the <see
          cref="P:System.Net.FtpWebResponse.ContentLength" />
+
+        
 
         
 
@@ -135,13 +157,19 @@
 
             
 
+            
+
              method closes the data stream returned by the <see
              cref="M:System.Net.FtpWebResponse.GetResponseStream" />
 
             
 
+            
+
              method if the <see
              cref="P:System.Net.FtpWebRequest.KeepAlive" />
+
+            
 
             
 
@@ -155,6 +183,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -190,8 +220,12 @@
 
             
 
+            
+
              property contains the number of bytes in the stream. <see
              cref="P:System.Net.FtpWebResponse.ContentLength" />
+
+            
 
             
 
@@ -200,8 +234,12 @@
 
             
 
+            
+
              field, the <see
              cref="P:System.Net.FtpWebResponse.ContentLength" />
+
+            
 
             
 
@@ -210,13 +248,19 @@
 
             
 
+            
+
              method, the <see
              cref="P:System.Net.FtpWebResponse.ContentLength" />
 
             
 
+            
+
              property is always zero. For requests that use the <see
              cref="F:System.Net.WebRequestMethods.Ftp.DownloadFile" />
+
+            
 
             
 
@@ -228,8 +272,12 @@
 
             
 
+            
+
              method, <see
              cref="P:System.Net.FtpWebResponse.ContentLength" />
+
+            
 
             
 
@@ -264,8 +312,12 @@
 
             
 
+            
+
              property is not available until the connection to the server is closed or reused. If the <see
              cref="P:System.Net.FtpWebRequest.KeepAlive" />
+
+            
 
             
 
@@ -306,6 +358,8 @@
 
             
 
+            
+
              object that contains it.</para
           >
           <para
@@ -314,8 +368,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Net.WebRequestMethods.Ftp.ListDirectory" />
+
+            
 
             
 
@@ -334,8 +392,12 @@
 
             
 
+            
+
              instance that contains data returned with the response; otherwise, <see
              cref="F:System.IO.Stream.Null" />
+
+            
 
             
 
@@ -372,13 +434,19 @@
 
             
 
+            
+
              property is provided only for compatibility with other implementations of the <see
              cref="T:System.Net.WebRequest" />
 
             
 
+            
+
              and <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -390,6 +458,8 @@
           <para
             >Gets an empty <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -423,8 +493,12 @@
 
             
 
+            
+
              property returns the data requested by the <see
              cref="F:System.Net.WebRequestMethods.Ftp.GetDateTimeStamp" />
+
+            
 
             
 
@@ -433,8 +507,12 @@
 
             
 
+            
+
              returns <see
              cref="F:System.DateTime.MinValue" />
+
+            
 
             
 
@@ -469,8 +547,12 @@
 
             
 
+            
+
              property is not always the same as the value returned by the <see
              cref="P:System.Net.FtpWebResponse.ResponseUri" />
+
+            
 
             
 
@@ -482,8 +564,12 @@
 
             
 
+            
+
              method, <see
              cref="P:System.Net.FtpWebResponse.ResponseUri" />
+
+            
 
             
 
@@ -521,8 +607,12 @@
 
             
 
+            
+
              property is included in the <see
              cref="P:System.Net.FtpWebResponse.StatusDescription" />
+
+            
 
             
 
@@ -531,13 +621,19 @@
 
             
 
+            
+
              changes as status codes are returned by the FTP server. After you call the <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
 
             
 
+            
+
              method, <see
              cref="P:System.Net.FtpWebResponse.StatusCode" />
+
+            
 
             
 
@@ -546,8 +642,12 @@
 
             
 
+            
+
              method, <see
              cref="P:System.Net.FtpWebResponse.StatusCode" />
+
+            
 
             
 
@@ -582,8 +682,12 @@
 
             
 
+            
+
              property includes the 3-digit <see
              cref="P:System.Net.FtpWebResponse.StatusCode" />
+
+            
 
             
 
@@ -592,13 +696,19 @@
 
             
 
+            
+
              changes as status codes are returned by the FTP server. After you call the <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
 
             
 
+            
+
              method, <see
              cref="P:System.Net.FtpWebResponse.StatusDescription" />
+
+            
 
             
 
@@ -607,8 +717,12 @@
 
             
 
+            
+
              method, <see
              cref="P:System.Net.FtpWebResponse.StatusDescription" />
+
+            
 
             
 
@@ -643,8 +757,12 @@
 
             
 
+            
+
              property is set to true), the <see
              cref="P:System.Net.FtpWebResponse.WelcomeMessage" />
+
+            
 
             
 

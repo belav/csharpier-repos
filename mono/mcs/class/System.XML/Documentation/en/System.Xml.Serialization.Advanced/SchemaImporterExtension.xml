@@ -31,10 +31,14 @@
 
         
 
+        
+
         . Schema importation also occurs when using the <format
          type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          class allows you to modify the code generated when using any of these tools. For example, you may have an existing class that processes book orders on a system and you have an existing XSD document that supplies your orders. Using the <see
          cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+
+        
 
         
 
@@ -59,6 +67,8 @@
 
         
 
+        
+
          namespace. For more information, see <format
          type="text/html">
           <a href="0444ddf3-c3f6-44ed-a999-f710d9c3e0cf">Using the CodeDOM</a>
@@ -66,10 +76,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="c77b8bfd-0a32-4e36-b59a-4f687f32c524">CodeDOM Quick Reference</a>
         </format>
+
+        
 
         
 
@@ -84,6 +98,8 @@
 
             
 
+            
+
              class. </para
           >
         </item>
@@ -91,6 +107,8 @@
           <para
             >Use the <see
              cref="Overload:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportSchemaType" />
+
+            
 
             
 
@@ -104,6 +122,8 @@
 
             
 
+            
+
              method to handle &lt;xsd:any&gt; elements found in the XSD document.</para
           >
         </item>
@@ -111,6 +131,8 @@
           <para
             >If required, use the <see
              cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportDefaultValue(System.String,System.String)" />
+
+            
 
             
 
@@ -161,6 +183,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -203,6 +227,8 @@
 
             
 
+            
+
              namespace. For more information, see <format
              type="text/html">
               <a href="0444ddf3-c3f6-44ed-a999-f710d9c3e0cf">Using the CodeDOM</a>
@@ -210,10 +236,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="c77b8bfd-0a32-4e36-b59a-4f687f32c524">CodeDOM Quick Reference</a>
             </format>
+
+            
 
             
 
@@ -233,8 +263,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaAny" />
+
+          
 
           
 
@@ -245,8 +279,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -257,8 +295,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlSchemas" />
+
+          
 
           
 
@@ -269,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+          
 
           
 
@@ -281,8 +327,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -293,8 +343,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -305,8 +359,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -317,8 +375,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -357,6 +419,8 @@
 
             
 
+            
+
              namespace. For more information, see <format
              type="text/html">
               <a href="0444ddf3-c3f6-44ed-a999-f710d9c3e0cf">Using the CodeDOM</a>
@@ -364,10 +428,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="c77b8bfd-0a32-4e36-b59a-4f687f32c524">CodeDOM Quick Reference</a>
             </format>
+
+            
 
             
 
@@ -386,6 +454,8 @@
 
             
 
+            
+
              setting the new default value.</para
           >
         </returns>
@@ -394,10 +464,14 @@
 
           
 
+          
+
           The value found in the original XSD.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -448,8 +522,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaType" />
+
+          
 
           
 
@@ -460,8 +538,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -472,8 +554,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlSchemas" />
+
+          
 
           
 
@@ -484,8 +570,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+          
 
           
 
@@ -496,8 +586,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -508,8 +602,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -520,8 +618,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -532,8 +634,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -579,6 +685,8 @@
 
             
 
+            
+
              namespace. For more information, see <format
              type="text/html">
               <a href="0444ddf3-c3f6-44ed-a999-f710d9c3e0cf">Using the CodeDOM</a>
@@ -586,10 +694,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="c77b8bfd-0a32-4e36-b59a-4f687f32c524">CodeDOM Quick Reference</a>
             </format>
+
+            
 
             
 
@@ -609,10 +721,14 @@
 
           
 
+          
+
           The name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -623,8 +739,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -635,8 +755,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlSchemas" />
+
+          
 
           
 
@@ -647,8 +771,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+          
 
           
 
@@ -659,8 +787,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -671,8 +803,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -683,8 +819,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -695,8 +835,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 

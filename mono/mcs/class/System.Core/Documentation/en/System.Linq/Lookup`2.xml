@@ -39,8 +39,12 @@
 
         
 
+        
+
          resembles a <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          maps keys to single values, whereas a <see
          cref="T:System.Linq.Lookup`2" />
+
+        
 
         
 
@@ -62,13 +70,19 @@
 
         
 
+        
+
          by calling <see
          cref="M:System.Linq.Enumerable.ToLookup``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})" />
 
         
 
+        
+
          on an object that implements <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -81,13 +95,19 @@
 
           
 
+          
+
           . Additionally, <see
            cref="T:System.Linq.Lookup`2" />
 
           
 
+          
+
            objects are immutable, that is, you cannot add or remove elements or keys from a <see
            cref="T:System.Linq.Lookup`2" />
+
+          
 
           
 
@@ -180,8 +200,12 @@
 
             
 
+            
+
              property does not change because items cannot be added to or removed from a <see
              cref="T:System.Linq.Lookup`2" />
+
+            
 
             
 
@@ -193,6 +217,8 @@
           <para
             >Gets the number of key/value collection pairs in the <see
              cref="T:System.Linq.Lookup`2" />
+
+            
 
             
 
@@ -229,6 +255,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -237,6 +265,8 @@
           <para
             >An enumerator for the <see
              cref="T:System.Linq.Lookup`2" />
+
+            
 
             
 
@@ -300,6 +330,8 @@
 
             
 
+            
+
             . This class cannot be inherited.</para
           >
         </summary>
@@ -308,6 +340,8 @@
           <para
             >An enumerator for the <see
              cref="T:System.Linq.Lookup`2" />
+
+            
 
             
 

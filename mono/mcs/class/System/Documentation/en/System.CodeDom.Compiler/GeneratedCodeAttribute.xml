@@ -29,6 +29,8 @@
 
         
 
+        
+
          class can be used by code analysis tools to identify computer-generated code, and to provide an analysis based on the tool and the version of the tool that generated the code.</para
       >
     </remarks>
@@ -67,6 +69,8 @@
 
             
 
+            
+
              class specifying the name and version of the tool that generated the code.</para
           >
         </summary>
@@ -75,10 +79,14 @@
 
           
 
+          
+
           The name of the tool that generated the code.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

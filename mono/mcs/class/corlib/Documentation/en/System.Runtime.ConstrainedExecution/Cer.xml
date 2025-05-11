@@ -23,6 +23,8 @@
 
         
 
+        
+
          enumeration specifies the behavior of a method, type, or assembly within a constrained execution region (CER). Use one of the three available values to indicate that the entity will succeed, has no knowledge of a CER, or might (deterministically) be able to report success or failure.</para
       >
       <para>A CER provides guarantees that the region of code will execute uninterrupted even if an asynchronous exception such as an aborted thread out-of-memory exception, or stack overflow is raised.</para>
@@ -116,8 +118,12 @@
 
             
 
+            
+
              with ReliabilityContractAttribute(Cer.Success) implies that when it is run under a CER, it always returns a count of the number of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 

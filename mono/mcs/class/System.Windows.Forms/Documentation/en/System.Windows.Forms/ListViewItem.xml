@@ -43,8 +43,12 @@
 
         
 
+        
+
          control is similar to a <see
          cref="T:System.Windows.Forms.ListBox" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          control provides a number of different ways items can be viewed by the user. The <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -63,13 +71,19 @@
 
         
 
+        
+
          control. <see
          cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
+        
+
          objects can be displayed in the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
          class provide ways to change the display of the item in the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -91,8 +109,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+
+        
 
         
 
@@ -101,8 +123,12 @@
 
         
 
+        
+
          properties allow you to change how the text of the item is displayed in the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -111,8 +137,12 @@
 
         
 
+        
+
          property allows you to specify the image to load from the <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -121,8 +151,12 @@
 
         
 
+        
+
          control (by setting the <see
          cref="P:System.Windows.Forms.ListView.LargeImageList" />
+
+        
 
         
 
@@ -131,8 +165,12 @@
 
         
 
+        
+
          properties of the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -141,8 +179,12 @@
 
         
 
+        
+
          control. You can use the <see
          cref="P:System.Windows.Forms.ListViewItem.Checked" />
+
+        
 
         
 
@@ -151,8 +193,12 @@
 
         
 
+        
+
          property of the associated <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -161,8 +207,12 @@
 
         
 
+        
+
          and columns are defined in the <see
          cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+
+        
 
         
 
@@ -171,8 +221,12 @@
 
         
 
+        
+
          control. You can add subitems to an item by calling the <see
          cref="M:System.Windows.Forms.ListViewItem.ListViewSubItemCollection.Add(System.Windows.Forms.ListViewItem.ListViewSubItem)" />
+
+        
 
         
 
@@ -181,13 +235,19 @@
 
         
 
+        
+
          class. The <see
          cref="P:System.Windows.Forms.ListViewItem.SubItems" />
 
         
 
+        
+
          property allows you to gain access to the <see
          cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
+
+        
 
         
 
@@ -199,8 +259,12 @@
 
         
 
+        
+
          class are item-specific versions of properties and methods in the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -209,13 +273,19 @@
 
         
 
+        
+
          method is similar to the <see
          cref="T:System.Windows.Forms.ListView" />
 
         
 
+        
+
          version of the method, but the <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -227,8 +297,12 @@
 
         
 
+        
+
          class also provides methods that are not versions of <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -237,8 +311,12 @@
 
         
 
+        
+
          method places the item's text into edit mode so the user can change the item's text (when the <see
          cref="P:System.Windows.Forms.ListView.LabelEdit" />
+
+        
 
         
 
@@ -247,8 +325,12 @@
 
         
 
+        
+
          control is set to true). The <see
          cref="M:System.Windows.Forms.ListViewItem.Clone" />
+
+        
 
         
 
@@ -257,8 +339,12 @@
 
         
 
+        
+
          objects to reuse in other <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -270,6 +356,8 @@
       <para
         >Represents an item in a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -289,6 +377,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -316,6 +406,8 @@
 
             
 
+            
+
              should not exceed 259 characters or unexpected behavior could occur.</para
           >
         </remarks>
@@ -327,11 +419,15 @@
 
             
 
+            
+
              class with the specified item text.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,11 +455,15 @@
 
             
 
+            
+
              class with an array of strings representing subitems.</para
           >
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,8 +495,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -412,6 +516,8 @@
 
             
 
+            
+
              class and assigns it to the specified group.</para
           >
         </summary>
@@ -420,8 +526,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -455,6 +565,8 @@
 
             
 
+            
+
              class with the specified serialization information and streaming context.</para
           >
         </summary>
@@ -463,13 +575,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            containing information about the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -480,8 +598,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -505,6 +627,8 @@
 
             
 
+            
+
              should not exceed 259 characters or unexpected behavior could occur.</para
           >
         </remarks>
@@ -516,11 +640,15 @@
 
             
 
+            
+
              class with the specified item text and the image index position of the item's icon.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -531,13 +659,19 @@
 
           
 
+          
+
           The zero-based index of the image within the <see
            cref="T:System.Windows.Forms.ImageList" />
 
           
 
+          
+
            associated with the <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -566,8 +700,12 @@
 
             
 
+            
+
              parameter specifies an image in the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -576,8 +714,12 @@
 
             
 
+            
+
              control, which can be accessed with the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -586,6 +728,8 @@
           <para
             >The text of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -600,11 +744,15 @@
 
             
 
+            
+
              class with the specified text and image.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -615,8 +763,12 @@
 
           
 
+          
+
           The name of the image within the <see
            cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+          
 
           
 
@@ -625,8 +777,12 @@
 
           
 
+          
+
            to display in the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -658,8 +814,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -669,6 +829,8 @@
           <para
             >The text of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -683,11 +845,15 @@
 
             
 
+            
+
              class with the specified item text and assigns it to the specified group.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -698,8 +864,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -730,11 +900,15 @@
 
             
 
+            
+
              class with the image index position of the item's icon and an array of strings representing subitems.</para
           >
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -745,13 +919,19 @@
 
           
 
+          
+
           The zero-based index of the image within the <see
            cref="T:System.Windows.Forms.ImageList" />
 
           
 
+          
+
            associated with the <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -783,8 +963,12 @@
 
             
 
+            
+
              parameter specifies an image in the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -793,8 +977,12 @@
 
             
 
+            
+
              control, which can be accessed with the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -809,6 +997,8 @@
 
             
 
+            
+
              class with the specified item and subitem text and image.</para
           >
         </summary>
@@ -817,8 +1007,12 @@
 
           
 
+          
+
           An array containing the text of the subitems of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -829,8 +1023,12 @@
 
           
 
+          
+
           The name of the image within the <see
            cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+          
 
           
 
@@ -839,8 +1037,12 @@
 
           
 
+          
+
            to display in the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -872,8 +1074,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -889,11 +1095,15 @@
 
             
 
+            
+
              class with an array of strings representing subitems, and assigns the item to the specified group.</para
           >
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -904,8 +1114,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -980,8 +1194,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -991,6 +1209,8 @@
           <para
             >The text of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -1005,11 +1225,15 @@
 
             
 
+            
+
              class with the specified item text and the image index position of the item's icon, and assigns the item to the specified group.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1020,13 +1244,19 @@
 
           
 
+          
+
           The zero-based index of the image within the <see
            cref="T:System.Windows.Forms.ImageList" />
 
           
 
+          
+
            associated with the <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -1037,8 +1267,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1071,8 +1305,12 @@
 
             
 
+            
+
              parameter specifies an image in the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -1081,8 +1319,12 @@
 
             
 
+            
+
              control, which can be accessed with the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -1094,8 +1336,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -1105,6 +1351,8 @@
           <para
             >The text of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -1119,11 +1367,15 @@
 
             
 
+            
+
              class with the specified text, image, and group.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1134,13 +1386,19 @@
 
           
 
+          
+
           The name of the image within the <see
            cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
+          
+
            of the owning <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -1151,8 +1409,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1185,8 +1447,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -1202,11 +1468,15 @@
 
             
 
+            
+
              class with the image index position of the item's icon and an array of strings representing subitems, and assigns the item to the specified group.</para
           >
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1217,13 +1487,19 @@
 
           
 
+          
+
           The zero-based index of the image within the <see
            cref="T:System.Windows.Forms.ImageList" />
 
           
 
+          
+
            associated with the <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -1234,8 +1510,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1268,8 +1548,12 @@
 
             
 
+            
+
              parameter specifies an image in the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -1278,8 +1562,12 @@
 
             
 
+            
+
              control, which can be accessed with the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -1291,8 +1579,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -1308,6 +1600,8 @@
 
             
 
+            
+
              class with subitems containing the specified text, image, and group.</para
           >
         </summary>
@@ -1316,8 +1610,12 @@
 
           
 
+          
+
           An array of strings that represents the text for subitems of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -1328,13 +1626,19 @@
 
           
 
+          
+
           The name of the image within the <see
            cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
+          
+
            of the owning <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -1345,8 +1649,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1426,11 +1734,15 @@
 
             
 
+            
+
              class with the image index position of the item's icon; the foreground color, background color, and font of the item; and an array of strings representing subitems.</para
           >
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1441,13 +1753,19 @@
 
           
 
+          
+
           The zero-based index of the image within the <see
            cref="T:System.Windows.Forms.ImageList" />
 
           
 
+          
+
            associated with the <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -1458,8 +1776,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1470,8 +1792,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1482,8 +1808,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1518,8 +1848,12 @@
 
             
 
+            
+
              parameter specifies an image in the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -1528,8 +1862,12 @@
 
             
 
+            
+
              control, which can be accessed with the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -1544,6 +1882,8 @@
 
             
 
+            
+
              class with the subitems containing the specified text, image, colors, and font.</para
           >
         </summary>
@@ -1552,8 +1892,12 @@
 
           
 
+          
+
           An array of strings that represent the text of the subitems for the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -1564,13 +1908,19 @@
 
           
 
+          
+
           The name of the image within the <see
            cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
+          
+
            of the owning <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -1581,8 +1931,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1593,8 +1947,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1605,8 +1963,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1642,8 +2004,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -1659,11 +2025,15 @@
 
             
 
+            
+
              class with the image index position of the item's icon; the foreground color, background color, and font of the item; and an array of strings representing subitems. Assigns the item to the specified group.</para
           >
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1674,13 +2044,19 @@
 
           
 
+          
+
           The zero-based index of the image within the <see
            cref="T:System.Windows.Forms.ImageList" />
 
           
 
+          
+
            associated with the <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -1691,8 +2067,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1703,8 +2083,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1715,8 +2099,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1727,8 +2115,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1764,8 +2156,12 @@
 
             
 
+            
+
              parameter specifies an image in the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -1774,8 +2170,12 @@
 
             
 
+            
+
              control, which can be accessed with the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+
+            
 
             
 
@@ -1787,8 +2187,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -1804,6 +2208,8 @@
 
             
 
+            
+
              class with the subitems containing the specified text, image, colors, font, and group.</para
           >
         </summary>
@@ -1812,8 +2218,12 @@
 
           
 
+          
+
           An array of strings that represents the text of the subitems for the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -1824,13 +2234,19 @@
 
           
 
+          
+
           The name of the image within the <see
            cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
+          
+
            of the owning <see
            cref="T:System.Windows.Forms.ListView" />
+
+          
 
           
 
@@ -1841,8 +2257,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1853,8 +2273,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1865,8 +2289,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1877,8 +2305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1910,8 +2342,12 @@
 
             
 
+            
+
              property to change the color displayed behind the item text. This property can be used if you want to use different background and foreground color combinations (using the <see
              cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+
+            
 
             
 
@@ -1920,8 +2356,12 @@
 
             
 
+            
+
              property to <see
              cref="P:System.Drawing.Color.Red" />
+
+            
 
             
 
@@ -1930,6 +2370,8 @@
           <para
             >If you want to use the same background color for all subitems of an item, set the <see
              cref="P:System.Windows.Forms.ListViewItem.UseItemStyleForSubItems" />
+
+            
 
             
 
@@ -1962,8 +2404,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1972,8 +2418,12 @@
 
             
 
+            
+
              control and call the <see
              cref="M:System.Windows.Forms.ListViewItem.BeginEdit" />
+
+            
 
             
 
@@ -2011,13 +2461,19 @@
 
             
 
+            
+
              method. The <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              class provides a <see
              cref="M:System.Windows.Forms.ListView.GetItemRect(System.Int32)" />
+
+            
 
             
 
@@ -2029,13 +2485,19 @@
 
             
 
+            
+
             . If the <see
              cref="T:System.Windows.Forms.ListBox" />
 
             
 
+            
+
              is scrollable and positioned so that the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -2047,13 +2509,19 @@
 
             
 
+            
+
              property has a value of <see
              cref="F:System.Windows.Forms.View.List" />
 
             
 
+            
+
             , the width of the bounding rectangle is the width of the column containing the item, not the width of the text in the item. If the <see
              cref="P:System.Windows.Forms.ListView.Columns" />
+
+            
 
             
 
@@ -2094,8 +2562,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2104,8 +2576,12 @@
 
             
 
+            
+
              control, you can use the <see
              cref="P:System.Windows.Forms.ListView.CheckedItems" />
+
+            
 
             
 
@@ -2114,8 +2590,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2148,13 +2628,19 @@
 
             
 
+            
+
              class based on an existing item. Even the subitems of the item being cloned are specified for the new version. This feature is useful if you want to reuse a <see
              cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
+            
+
              in more than one <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2199,8 +2685,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -2211,8 +2701,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -2240,13 +2734,19 @@
 
             
 
+            
+
              control. This method can be used when performing validation on the item. You can call the <see
              cref="M:System.Windows.Forms.ListViewItem.EnsureVisible" />
 
             
 
+            
+
              method to ensure that the item is displayed in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2258,8 +2758,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2300,11 +2804,15 @@
 
             
 
+            
+
              method returns null if no item is found in the given direction. </para
           >
           <para
             >Identifying the nearest item can vary depending on the operating system the application is running on and will affect the results of <see
              cref="M:System.Windows.Forms.ListViewItem.FindNearestItem(System.Windows.Forms.SearchDirectionHint)" />
+
+            
 
             
 
@@ -2319,6 +2827,8 @@
 
             
 
+            
+
             , searching in the specified direction.</para
           >
         </summary>
@@ -2330,6 +2840,8 @@
 
             
 
+            
+
              that is closest to the given coordinates, searching in the specified direction.</para
           >
         </returns>
@@ -2338,8 +2850,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.SearchDirectionHint" />
+
+          
 
           
 
@@ -2371,8 +2887,12 @@
 
             
 
+            
+
              control does not have directly editable areas—only items contained in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2381,8 +2901,12 @@
 
             
 
+            
+
              will display the focus reticle when the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2391,8 +2915,12 @@
 
             
 
+            
+
              control is the item with focus. Although an item may display the focus reticle, it might not actually be a selected item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2401,8 +2929,12 @@
 
             
 
+            
+
              property to determine if the item is currently the focused item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2411,8 +2943,12 @@
 
             
 
+            
+
              is not associated with a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2424,8 +2960,12 @@
 
             
 
+            
+
              control provides the <see
              cref="P:System.Windows.Forms.ListView.FocusedItem" />
+
+            
 
             
 
@@ -2434,8 +2974,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2447,6 +2991,8 @@
           <para
             >Gets or sets a value indicating whether the item has focus within the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2483,13 +3029,19 @@
 
             
 
+            
+
              is immutable (you cannot adjust any of its properties), you can only assign the <see
              cref="P:System.Windows.Forms.Control.Font" />
 
             
 
+            
+
              property a new <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -2527,8 +3079,12 @@
 
             
 
+            
+
              property to change the color of the item text. This property can be used if you want to use different background and foreground color combinations (using the <see
              cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+
+            
 
             
 
@@ -2537,8 +3093,12 @@
 
             
 
+            
+
              property to <see
              cref="P:System.Drawing.Color.Red" />
+
+            
 
             
 
@@ -2547,6 +3107,8 @@
           <para
             >If you want to use the same foreground color for all subitems of an item, set the <see
              cref="P:System.Windows.Forms.ListViewItem.UseItemStyleForSubItems" />
+
+            
 
             
 
@@ -2584,8 +3146,12 @@
 
             
 
+            
+
              method represents only the section of the item specified in the <paramref
              name="portion" />
+
+            
 
             
 
@@ -2594,13 +3160,19 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              class to obtain the bounding rectangle of any item in a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2619,6 +3191,8 @@
 
             
 
+            
+
              that represents the bounding rectangle for the specified portion of the item.</para
           >
         </returns>
@@ -2627,8 +3201,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ItemBoundsPortion" />
+
+          
 
           
 
@@ -2665,8 +3243,12 @@
 
             
 
+            
+
              method will return null if the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2675,8 +3257,12 @@
 
             
 
+            
+
              view, or there is not a <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -2691,6 +3277,8 @@
 
             
 
+            
+
              at the specified coordinates.</para
           >
         </summary>
@@ -2702,6 +3290,8 @@
 
             
 
+            
+
              at the specified x- and y-coordinates.</para
           >
         </returns>
@@ -2710,10 +3300,14 @@
 
           
 
+          
+
           The x-coordinate. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2749,13 +3343,19 @@
 
             
 
+            
+
              constructor, or you can use this property to modify the group membership at run time. If you set this property to null and there are groups in the <see
              cref="P:System.Windows.Forms.ListView.Groups" />
 
             
 
+            
+
              collection, the item will appear in the default group, which has the header label "DefaultGroupSystem.Windows.Forms". The default group is not contained in the <see
              cref="P:System.Windows.Forms.ListView.Groups" />
+
+            
 
             
 
@@ -2767,8 +3367,12 @@
 
               
 
+              
+
                groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
                cref="T:System.Windows.Forms.ListViewGroup" />
+
+              
 
               
 
@@ -2821,13 +3425,19 @@
 
             
 
+            
+
              property. Depending on the current value of the <see
              cref="P:System.Windows.Forms.ListView.View" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2836,8 +3446,12 @@
 
             
 
+            
+
              used by the item could be one specified in the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
+
+            
 
             
 
@@ -2846,8 +3460,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2856,8 +3474,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.LargeIcon" />
+
+            
 
             
 
@@ -2866,8 +3488,12 @@
 
             
 
+            
+
              specified in the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
+
+            
 
             
 
@@ -2876,8 +3502,12 @@
 
             
 
+            
+
              specified in the <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -2886,8 +3516,12 @@
 
             
 
+            
+
              specified in the <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -2896,8 +3530,12 @@
 
             
 
+            
+
              specified in the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
+
+            
 
             
 
@@ -2906,8 +3544,12 @@
 
             
 
+            
+
              controls, you can set a single index value for the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+
+            
 
             
 
@@ -2916,8 +3558,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -2926,8 +3572,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+
+            
 
             
 
@@ -2936,8 +3586,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+
+            
 
             
 
@@ -2946,8 +3600,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+
+            
 
             
 
@@ -3001,8 +3659,12 @@
 
             
 
+            
+
              property returns an empty string ("") when the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+
+            
 
             
 
@@ -3011,8 +3673,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+
+            
 
             
 
@@ -3021,13 +3687,19 @@
 
             
 
+            
+
              properties are mutually exclusive, meaning if one is set, the other is ignored. If you set the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+
+            
 
             
 
@@ -3036,8 +3708,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+
+            
 
             
 
@@ -3047,6 +3723,8 @@
             <para
               >If you are using multiple image lists, for small and large icon view, with a <see
                cref="T:System.Windows.Forms.ListView" />
+
+              
 
               
 
@@ -3087,8 +3765,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3097,8 +3779,12 @@
 
             
 
+            
+
              used by the item could be one specified in the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
+
+            
 
             
 
@@ -3107,8 +3793,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3117,8 +3807,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.View.LargeIcon" />
+
+            
 
             
 
@@ -3127,8 +3821,12 @@
 
             
 
+            
+
              specified in the <see
              cref="P:System.Windows.Forms.ListView.LargeImageList" />
+
+            
 
             
 
@@ -3137,8 +3835,12 @@
 
             
 
+            
+
              specified in the <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -3147,13 +3849,19 @@
 
             
 
+            
+
              control is providing the image for the item. To determine the index position in the <see
              cref="T:System.Windows.Forms.ImageList" />
 
             
 
+            
+
              that contains the image to display for the item, use the <see
              cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+
+            
 
             
 
@@ -3165,6 +3873,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -3201,8 +3911,12 @@
 
             
 
+            
+
              property can be used only when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -3211,8 +3925,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -3221,8 +3939,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3234,6 +3956,8 @@
           <para
             >Gets or sets the number of small image widths by which to indent the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -3263,13 +3987,19 @@
 
             
 
+            
+
              control as well as to determine its position within the <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3281,6 +4011,8 @@
           <para
             >Gets the zero-based index of the item within the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3317,8 +4049,12 @@
 
             
 
+            
+
              control that owns the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -3330,6 +4066,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3370,8 +4108,12 @@
 
             
 
+            
+
              property is also the key for the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -3383,6 +4125,8 @@
           <para
             >Gets or sets the name associated with this <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -3421,8 +4165,12 @@
 
             
 
+            
+
              property should be set after the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -3431,8 +4179,12 @@
 
             
 
+            
+
              are constructed. Changing the <see
              cref="P:System.Windows.Forms.ListViewItem.Position" />
+
+            
 
             
 
@@ -3441,13 +4193,19 @@
 
             
 
+            
+
              is in <see
              cref="F:System.Windows.Forms.View.Details" />
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.View.List" />
+
+            
 
             
 
@@ -3456,8 +4214,12 @@
 
             
 
+            
+
              property will automatically change when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -3466,8 +4228,12 @@
 
             
 
+            
+
              is changed from <see
              cref="F:System.Windows.Forms.View.SmallIcon" />
+
+            
 
             
 
@@ -3476,8 +4242,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.View.Tile" />
+
+            
 
             
 
@@ -3486,8 +4256,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -3496,8 +4270,12 @@
 
             
 
+            
+
              is in <see
              cref="F:System.Windows.Forms.View.SmallIcon" />
+
+            
 
             
 
@@ -3506,8 +4284,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.View.Tile" />
+
+            
 
             
 
@@ -3516,8 +4298,12 @@
 
             
 
+            
+
              property for an item will cause the other items contained in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3529,6 +4315,8 @@
           <para
             >Gets or sets the position of the upper-left corner of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -3553,8 +4341,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+
+            
 
             
 
@@ -3563,8 +4355,12 @@
 
             
 
+            
+
              control that contains the item. You can use the <see
              cref="M:System.Windows.Forms.ListViewItem.Remove" />
+
+            
 
             
 
@@ -3573,8 +4369,12 @@
 
             
 
+            
+
              control. This feature can be useful if you want to move the item to a different <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3586,6 +4386,8 @@
           <para
             >Removes the item from its associated <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3622,8 +4424,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3632,8 +4438,12 @@
 
             
 
+            
+
              property is set to false, setting the value of this property to select an item automatically cancels the selection for any other items in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -3642,8 +4452,12 @@
 
             
 
+            
+
              control by using the <see
              cref="P:System.Windows.Forms.ListView.SelectedItems" />
+
+            
 
             
 
@@ -3656,8 +4470,12 @@
 
               
 
+              
+
                control has focus. To select items in response to a user action such as a button click, be sure to call the <see
                cref="M:System.Windows.Forms.Control.Focus" />
+
+              
 
               
 
@@ -3699,8 +4517,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -3711,8 +4533,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -3760,8 +4586,12 @@
 
             
 
+            
+
              assigned to the <see
              cref="P:System.Windows.Forms.ListView.StateImageList" />
+
+            
 
             
 
@@ -3770,8 +4600,12 @@
 
             
 
+            
+
              control, where the state images to display to the left of the item are stored. Typically, the state image is a selected or cleared check box or an image that is intended to represent selected or cleared states for the item. If no value is specified for the <see
              cref="P:System.Windows.Forms.ListView.StateImageList" />
+
+            
 
             
 
@@ -3780,8 +4614,12 @@
 
             
 
+            
+
              control displays a default selected or cleared check box when the <see
              cref="P:System.Windows.Forms.ListView.CheckBoxes" />
+
+            
 
             
 
@@ -3794,13 +4632,19 @@
 
               
 
+              
+
                specified in the <see
                cref="P:System.Windows.Forms.ListView.StateImageList" />
 
               
 
+              
+
                property can contain any number of images, and the <see
                cref="P:System.Windows.Forms.ListViewItem.StateImageIndex" />
+
+              
 
               
 
@@ -3845,8 +4689,12 @@
 
             
 
+            
+
             , you can add subitems, remove subitems, and obtain a count of subitems. For more information on the tasks that can be performed with the subitems in the collection, see the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
+
+            
 
             
 
@@ -3856,6 +4704,8 @@
             <para
               >The first subitem in the <see
                cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
+
+              
 
               
 
@@ -3901,8 +4751,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -3913,8 +4767,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -3952,8 +4810,12 @@
 
             
 
+            
+
              property can be used to store any object that you want to associate with an item. Although you can store any item, the <see
              cref="P:System.Windows.Forms.ListViewItem.Tag" />
+
+            
 
             
 
@@ -3994,8 +4856,12 @@
 
             
 
+            
+
              property allows you to change the text displayed for the item. The text of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -4007,8 +4873,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+
+            
 
             
 
@@ -4017,13 +4887,19 @@
 
             
 
+            
+
              properties to specify how the text is displayed. The <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              class provides the <see
              cref="P:System.Windows.Forms.ListView.LabelWrap" />
+
+            
 
             
 
@@ -4064,13 +4940,19 @@
 
             
 
+            
+
              and its containing <see
              cref="T:System.Windows.Forms.ListView" />
 
             
 
+            
+
              have ToolTips set, only the ToolTip for the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -4082,6 +4964,8 @@
           <para
             >Gets or sets the text shown when the mouse pointer rests on the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -4128,8 +5012,12 @@
 
             
 
+            
+
              control, you can set this property to false. When this property is set to true, any changes made to the subitem's <see
              cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Font" />
+
+            
 
             
 
@@ -4138,13 +5026,19 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.BackColor" />
 
             
 
+            
+
              properties are ignored, and the values of the item are used instead. You can use this property if you need to specify a different text color, background color, or font to be used for a subitem to highlight the item when subitems are displayed in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -4159,13 +5053,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+
+            
 
             
 

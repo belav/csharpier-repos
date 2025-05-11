@@ -17,6 +17,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -38,6 +40,8 @@
         >This type is obsolete.  Please use 
     <see
          cref="T:Mono.Unix.Native.Syscall" />
+
+        
 
         
 
@@ -223,8 +227,12 @@
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -235,6 +243,8 @@
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.access" />
+
+            
 
             
 
@@ -275,6 +285,8 @@
 
           
 
+          
+
           . If a previous alarm was activated, the call returns the time delay before the expiration of that previous alarm (now canceled). Otherwise, it returns zero.</returns
         >
         <remarks>
@@ -282,6 +294,8 @@
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.getuid" />
+
+            
 
             
 
@@ -321,8 +335,12 @@
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -333,6 +351,8 @@
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.chdir" />
+
+            
 
             
 
@@ -381,8 +401,12 @@
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -393,6 +417,8 @@
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.chmod" />
+
+            
 
             
 
@@ -437,11 +463,15 @@
 
           
 
+          
+
            representing owner UID.</param
         >
         <param name="group"
           >a <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -454,8 +484,12 @@
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -466,6 +500,8 @@
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.chown" />
+
+            
 
             
 
@@ -502,6 +538,8 @@
 
           
 
+          
+
            representing new root directory.</param
         >
         <summary>Change root directory</summary>
@@ -511,8 +549,12 @@
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -523,6 +565,8 @@
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.chroot" />
+
+            
 
             
 
@@ -563,8 +607,12 @@
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -575,6 +623,8 @@
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.close" />
+
+            
 
             
 
@@ -614,8 +664,12 @@
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -626,6 +680,8 @@
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.closedir" />
+
+            
 
             
 
@@ -681,11 +737,15 @@
 
             
 
+            
+
              instead.</para
           >
           <para
             >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -731,11 +791,15 @@
 
             
 
+            
+
              instead.</para
           >
           <para
             >On success, the new file descriptor is returned. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -789,11 +853,15 @@
 
             
 
+            
+
              instead.</para
           >
           <para
             >On success, the new file descriptor is returned. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -839,11 +907,12 @@
 
             
 
+            
+
              instead.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 using System;
 using Mono.Posix;
 using System.Runtime.InteropServices;
@@ -911,11 +980,15 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para
             >On success, fork() returns 0 to the child process and returns the process ID of the child process to the parent process. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -955,6 +1028,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
         </remarks>
@@ -988,6 +1063,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.geteuid" />
+
+            
 
             
 
@@ -1025,6 +1102,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.getgid" />
+
+            
 
             
 
@@ -1068,6 +1147,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.UnixGroup.GetGroupName" />
+
+            
 
             
 
@@ -1117,6 +1198,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
         </remarks>
@@ -1151,6 +1234,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.getpgrp" />
+
+            
 
             
 
@@ -1191,6 +1276,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para>often used to generate temp. file names etc.</para>
@@ -1228,6 +1315,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para>To be added</para>
@@ -1262,6 +1351,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.getuid" />
+
+            
 
             
 
@@ -1308,11 +1399,12 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	public static void Main(string[] args)
 	{
 		const int ROOT = 0;
@@ -1368,6 +1460,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
         </remarks>
@@ -1411,13 +1505,16 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <example>
             <code lang="C#">
 		int myPID = Syscall.getpid();
 		Syscall.kill(myPID,9);
-  </code>
+  </code
+            >
           </example>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.kill" />
@@ -1457,11 +1554,15 @@ class Test
 
           
 
+          
+
            Owner UID</param
         >
         <param name="group"
           >a <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1477,6 +1578,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.lchown" />
+
+            
 
             
 
@@ -1532,11 +1635,15 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para
             >There is no way to distinguish the links. On success, zero is returned. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -1595,6 +1702,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para>The offset parameter is interpreted according to the possible following values of whence: </para>
@@ -1616,6 +1725,8 @@ class Test
               <description>the new file offset will be the end of the file plus offset. </description>
             </item>
           </list>
+
+          
 
           
 
@@ -1663,8 +1774,12 @@ If we seek past the end of a file, the new file region contains 0. </remarks
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -1675,6 +1790,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             >This member is obsolete.  Please use
           <see
              cref="P:Mono.Unix.Native.Syscall.lstat" />
+
+            
 
             
 
@@ -1722,8 +1839,12 @@ If we seek past the end of a file, the new file region contains 0. </remarks
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -1734,6 +1855,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.mkdir" />
+
+            
 
             
 
@@ -1775,8 +1898,12 @@ If we seek past the end of a file, the new file region contains 0. </remarks
 
           
 
+          
+
           . On success, zero is returned. On error, -1 is returned and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -1787,6 +1914,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.nice" />
+
+            
 
             
 
@@ -1841,11 +1970,15 @@ If we seek past the end of a file, the new file region contains 0. </remarks
 
             
 
+            
+
              instead.</para
           >
           <para
             >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -1904,11 +2037,15 @@ If we seek past the end of a file, the new file region contains 0. </remarks
 
             
 
+            
+
              instead.</para
           >
           <para
             >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -1954,11 +2091,12 @@ If we seek past the end of a file, the new file region contains 0. </remarks
 
             
 
+            
+
              instead.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	
 public static void Main(string[] argv)
 {
@@ -2008,6 +2146,8 @@ public static void Main(string[] argv)
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.pause" />
+
+            
 
             
 
@@ -2066,6 +2206,8 @@ public static void Main(string[] argv)
 
             
 
+            
+
              instead.</para
           >
         </remarks>
@@ -2108,11 +2250,12 @@ public static void Main(string[] argv)
 
             
 
+            
+
              instead.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	
 public static void Main(string[] argv)
 {
@@ -2129,6 +2272,8 @@ public static void Main(string[] argv)
   </code
             >
           </example>
+
+          
 
           
 
@@ -2174,6 +2319,8 @@ See also opendir()</remarks
             >This member is obsolete.  Please use
           <see
              cref="P:Mono.Unix.Native.Syscall.readlink" />
+
+            
 
             
 
@@ -2227,6 +2374,8 @@ See also opendir()</remarks
 
             
 
+            
+
              instead.</para
           >
         </remarks>
@@ -2266,6 +2415,8 @@ See also opendir()</remarks
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.rmdir" />
+
+            
 
             
 
@@ -2309,6 +2460,8 @@ See also opendir()</remarks
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.setgid" />
+
+            
 
             
 
@@ -2359,6 +2512,8 @@ See also opendir()</remarks
 
             
 
+            
+
              instead.</para
           >
         </remarks>
@@ -2403,6 +2558,8 @@ See also opendir()</remarks
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.setregid" />
+
+            
 
             
 
@@ -2453,6 +2610,8 @@ See also opendir()</remarks
 
             
 
+            
+
              instead.</para
           >
         </remarks>
@@ -2486,6 +2645,8 @@ See also opendir()</remarks
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.setsid" />
+
+            
 
             
 
@@ -2531,6 +2692,8 @@ See also opendir()</remarks
 
             
 
+            
+
              instead.</para
           >
           <para>often used to generate temp. file names etc.</para>
@@ -2567,8 +2730,12 @@ See also opendir()</remarks
 
           
 
+          
+
           .        The signal() function returns the previous value of the signal handler, or SIG_ERR on error  and  <see
            cref="T:System.Runtime.InteropServices.Marshal" />
+
+          
 
           
 
@@ -2594,12 +2761,13 @@ See also opendir()</remarks
 
             
 
+            
+
              instead.</para
           >
           <para>See 'man signal(2)' and 'man signal(7)' for more information and error codes.</para>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 /*
 Possible signal values list:
 Signal     Value     Action   Comment
@@ -2700,6 +2868,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para>see also lstat()</para>
@@ -2740,6 +2910,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" />
+
+            
 
             
 
@@ -2794,6 +2966,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para>See also: link().</para>
@@ -2824,6 +2998,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.sync" />
+
+            
 
             
 
@@ -2870,6 +3046,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para>Returns previous umask value.</para>
@@ -2910,6 +3088,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.unlink" />
+
+            
 
             
 
@@ -2964,11 +3144,15 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para
             >waitpid() returns the pid of the child. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -3027,11 +3211,15 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para
             >waitpid() returns the pid of the child. On error, -1 is returned and  <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -3074,6 +3262,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.WEXITSTATUS" />
+
+            
 
             
 
@@ -3120,6 +3310,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para>Result is true (1) if the process has exited.</para>
@@ -3163,6 +3355,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
           <para>WIFSIGNALED evaluates to true (1) when the process was terminated with a signal.</para>
@@ -3203,6 +3397,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.WIFSTOPPED" />
+
+            
 
             
 
@@ -3264,6 +3460,8 @@ class Test
 
             
 
+            
+
              instead.</para
           >
         </remarks>
@@ -3303,6 +3501,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.WSTOPSIG" />
+
+            
 
             
 
@@ -3346,6 +3546,8 @@ class Test
             >This member is obsolete.  Please use
           <see
              cref="M:Mono.Unix.Native.Syscall.WTERMSIG" />
+
+            
 
             
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          class allows you to specify the derived types that can be inserted into an array returned by a public field or public read/write property.</para
       >
       <para
@@ -38,8 +40,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Xml.Serialization.XmlAttributes" />
+
+        
 
         
 
@@ -48,13 +54,19 @@
 
         
 
+        
+
          class is used when overriding the set of <see
          cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
         
 
+        
+
          objects that can be inserted into an array to which the <see
          cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          and use the <see
          cref="M:System.Xml.Serialization.XmlArrayItemAttributes.Add(System.Xml.Serialization.XmlArrayItemAttribute)" />
+
+        
 
         
 
@@ -76,8 +92,12 @@
 
         
 
+        
+
          collection returned by the <see
          cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
+
+        
 
         
 
@@ -86,8 +106,12 @@
 
         
 
+        
+
          the <see
          cref="T:System.Xml.Serialization.XmlAttributes" />
+
+        
 
         
 
@@ -96,8 +120,12 @@
 
         
 
+        
+
         , that specifies the type of the object that contains the field or property, and the name of the field or property. Construct an <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -106,13 +134,19 @@
 
         
 
+        
+
          before calling the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
         
 
+        
+
          or <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -124,6 +158,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+        
 
         
 
@@ -153,6 +189,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
+
+            
 
             
 
@@ -192,6 +230,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -204,8 +244,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+          
 
           
 
@@ -244,6 +288,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -255,6 +301,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -263,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+          
 
           
 
@@ -304,6 +356,8 @@
 
             
 
+            
+
              array to the collection, starting at a specified target index. </para
           >
         </summary>
@@ -312,8 +366,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+          
 
           
 
@@ -321,6 +379,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,6 +419,8 @@
 
             
 
+            
+
              in the collection or -1 if the attribute is not found in the collection. </para
           >
         </summary>
@@ -370,6 +432,8 @@
 
             
 
+            
+
              in the collection or -1 if the attribute is not found in the collection.</para
           >
         </returns>
@@ -378,8 +442,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+          
 
           
 
@@ -419,11 +487,15 @@
 
             
 
+            
+
              into the collection at the specified index. </para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,8 +506,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+          
 
           
 
@@ -501,6 +577,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -512,6 +590,8 @@
 
             
 
+            
+
              from the collection, if it is present. </para
           >
         </summary>
@@ -520,8 +600,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+          
 
           
 

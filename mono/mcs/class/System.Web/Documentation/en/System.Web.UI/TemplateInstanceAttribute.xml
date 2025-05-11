@@ -24,8 +24,12 @@
 
         
 
+        
+
          class allows you to mark a template property as one that allows single or multiple instantiations. A template that only allows a single instantiation can have the controls that are contained inside of it referenced. The <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartZone.ZoneTemplate" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          class is optional. If a template property is not extended with a <see
          cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+        
 
         
 
@@ -47,10 +55,14 @@
 
         
 
+        
+
          field, is used. For more information about using attributes, see <format
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Web.UI.TemplateInstance" />
+
+            
 
             
 
@@ -116,6 +132,8 @@
 
             
 
+            
+
              enumeration value.</para
           >
         </remarks>
@@ -124,6 +142,8 @@
           <para
             >Defines the default value for the <see
              cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+            
 
             
 
@@ -155,8 +175,12 @@
 
             
 
+            
+
              object and is identical to the this <see
              cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+            
 
             
 
@@ -171,8 +195,12 @@
 
             
 
+            
+
              object and is identical to the this <see
              cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+            
 
             
 
@@ -184,8 +212,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -214,6 +246,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -222,6 +256,8 @@
           <para
             >The hash code for this <see
              cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+            
 
             
 
@@ -253,8 +289,12 @@
 
             
 
+            
+
              field or the <see
              cref="F:System.Web.UI.TemplateInstance.Multiple" />
+
+            
 
             
 
@@ -266,6 +306,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.UI.TemplateInstance" />
+
+            
 
             
 
@@ -294,8 +336,12 @@
 
             
 
+            
+
              class is the <see
              cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" />
+
+            
 
             
 
@@ -310,8 +356,12 @@
 
             
 
+            
+
              object is the same as the default <see
              cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+            
 
             
 
@@ -323,6 +373,8 @@
           <para
             >true if the value of the current instance of <see
              cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+            
 
             
 
@@ -353,6 +405,8 @@
 
             
 
+            
+
              field is accessed, a new template instance is instantiated multiple times.</para
           >
         </remarks>
@@ -361,6 +415,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+            
 
             
 
@@ -391,6 +447,8 @@
 
             
 
+            
+
              field is accessed, a new template instance is instantiated a single time.</para
           >
         </remarks>
@@ -399,6 +457,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.UI.TemplateInstanceAttribute" />
+
+            
 
             
 

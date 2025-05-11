@@ -78,11 +78,15 @@
 
             
 
+            
+
              indicating whether the script was successfully loaded.</para
           >
         </returns>
         <param name="scriptLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -93,10 +97,14 @@
 
           
 
+          
+
           Internal only.</param
         >
         <param name="helperType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,6 +139,8 @@
 
             
 
+            
+
              object is run, it may need to run the WPAD (Web Proxy Automatic Detection) protocol to detect whether a proxy is required for reaching the destination URL. During this process, the system downloads and compiles the PAC (Proxy Auto-Configuration) script in memory and tries to execute the FindProxyForURL function as per the PAC specification.
 </para
           >
@@ -148,6 +158,8 @@
 
             
 
+            
+
             .</para
           >
           <para>An internal-only value returned.</para>
@@ -157,10 +169,14 @@
 
           
 
+          
+
           Internal only.</param
         >
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

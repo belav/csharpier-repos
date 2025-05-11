@@ -26,6 +26,8 @@
 
         
 
+        
+
         . A check will be made that the message is intended for that service.</para
       >
       <para>The three authentication modes used under Kerberos are:</para>
@@ -72,6 +74,8 @@
 
             
 
+            
+
              property to 1 minute.</para
           >
         </remarks>
@@ -83,11 +87,15 @@
 
             
 
+            
+
              with the specified identity claim.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,6 +126,8 @@
 
             
 
+            
+
              property to 1 minute.</para
           >
         </remarks>
@@ -126,6 +136,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.ServiceModel.SpnEndpointIdentity" />
+
+            
 
             
 

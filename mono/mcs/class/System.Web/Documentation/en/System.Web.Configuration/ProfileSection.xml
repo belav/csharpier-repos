@@ -22,8 +22,12 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the content of the configuration file profile section. The profile section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the profile section to generate a class called ProfileCommon, which is derived from <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -32,10 +36,14 @@
 
         
 
+        
+
          property. For more information about the profile features added to vstecasplong, see <format
          type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d">ASP.NET Profile Properties Overview</a>
         </format>
+
+        
 
         
 
@@ -47,6 +55,8 @@
       <para
         >The <see
          cref="T:System.Web.Configuration.ProfileSection" />
+
+        
 
         
 
@@ -118,6 +128,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -135,6 +147,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -146,6 +160,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.ProfileSection" />
+
+            
 
             
 
@@ -179,8 +195,12 @@
 
             
 
+            
+
              property is false, changes to individual profiles are not saved unless the <see
              cref="M:System.Web.Profile.ProfileBase.Save" />
+
+            
 
             
 
@@ -189,8 +209,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+            
 
             
 
@@ -258,11 +282,15 @@
 
             
 
+            
+
              property is false, the profile feature is disabled, and you will not be able to access user-profile information from your ASP.NET code.</para
           >
           <para
             >When the property is true, at run time the ASP.NET compilation system uses the information specified in the profile section to generate a class called ProfileCommon, which is derived from <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -300,13 +328,19 @@
 
             
 
+            
+
             . To customize the information this class provides, you can set the <see
              cref="P:System.Web.Configuration.ProfileSection.Inherits" />
 
             
 
+            
+
              property to the name of a type you create that derives from <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -316,6 +350,8 @@
             <para
               >If you provide a type reference in the <see
                cref="P:System.Web.Configuration.ProfileSection.Inherits" />
+
+              
 
               
 
@@ -330,6 +366,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -338,6 +376,8 @@
           <para
             >Gets or sets a type reference for a custom type derived from <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -367,6 +407,8 @@
           <para
             >Gets the properties collection for the <see
              cref="T:System.Web.Configuration.ProfileSection" />
+
+            
 
             
 
@@ -403,8 +445,12 @@
 
             
 
+            
+
              property is a <see
              cref="T:System.Web.Configuration.RootProfilePropertySettingsCollection" />
+
+            
 
             
 
@@ -413,8 +459,12 @@
 
             
 
+            
+
              objects and a collection of <see
              cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+            
 
             
 
@@ -423,8 +473,12 @@
 
             
 
+            
+
              objects. These collections are used by the ASP.NET compilation engine to dynamically generate a class called ProfileCommon, which is derived from <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -439,8 +493,12 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+            
 
             
 
@@ -478,6 +536,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Configuration.ProviderSettings" />
+
+            
 
             
 

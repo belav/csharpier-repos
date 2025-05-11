@@ -34,8 +34,12 @@
 
         
 
+        
+
          and to create an instance of <see
          cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          and want to serialize it, use the <see
          cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter`1" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
       <para
         >A class that serializes a <see
          cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+
+            
 
             
 
@@ -117,6 +129,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -125,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -156,6 +174,8 @@
 
             
 
+            
+
              to instantiate when a syndication item is read in.</para
           >
         </remarks>
@@ -167,6 +187,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -175,13 +197,19 @@
 
           
 
+          
+
           The instance derived from <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
           
 
+          
+
            to associate with the <see
            cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+
+          
 
           
 
@@ -215,6 +243,8 @@
 
             
 
+            
+
              parameter is true, all elements defined in the Atom 1.0 specification that are not defined in the RSS 2.0 specification are serialized with the Atom 1.0 namespace.</para
           >
         </remarks>
@@ -226,6 +256,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -234,8 +266,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -243,6 +279,8 @@
         >
         <param name="serializeExtensionsAsAtom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -279,6 +317,8 @@
 
             
 
+            
+
              contains a valid RSS 2.0 syndication item.</para
           >
         </summary>
@@ -290,6 +330,8 @@
 
             
 
+            
+
              contains a valid RSS 2.0 syndication item.</para
           >
         </returns>
@@ -298,8 +340,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -333,8 +379,12 @@
 
             
 
+            
+
              instance is not automatically associated with the <see
              cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+
+            
 
             
 
@@ -349,6 +399,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -357,6 +409,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -383,6 +437,8 @@
           <para
             >Gets the type of the syndication item associated with the <see
              cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+
+            
 
             
 
@@ -417,6 +473,8 @@
 
             
 
+            
+
              instance when deserializing an RSS 2.0 item.</para
           >
         </remarks>
@@ -443,6 +501,8 @@
           <para
             >The default value of this property is true. Element extensions are XML elements that are not defined in the Atom 1.0 specification. This property determines whether to write these elements during serialization. Similarly, this property determines whether to preserve element extensions inside the ElementExtensions property in the <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -484,6 +544,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -492,8 +554,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -518,6 +584,8 @@
           <para
             >The default value of this property is true. When this property is true, any properties in the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -560,6 +628,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -598,6 +668,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -606,8 +678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -644,6 +720,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -652,8 +730,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -712,13 +794,19 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
 
             
 
+            
+
              to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -730,8 +818,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

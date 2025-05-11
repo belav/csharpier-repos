@@ -20,8 +20,12 @@
 
         
 
+        
+
          can display error messages, show dialog boxes, and get ambient properties of the host, such as the font for dialog boxes and color schemes, through the <see
          cref="P:System.Windows.Forms.Design.IUIService.Styles" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
             
 
+            
+
              that can display a <see
              cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+
+            
 
             
 
@@ -69,6 +77,8 @@
           <para
             >Indicates whether the component can display a <see
              cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+
+            
 
             
 
@@ -84,8 +94,12 @@
 
           
 
+          
+
           The component to check for support for displaying a <see
            cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+
+          
 
           
 
@@ -116,6 +130,8 @@
 
             
 
+            
+
              that indicates the window that should be the owner for dialog boxes of this sort that are spawned from an integrated development environment.</para
           >
         </remarks>
@@ -128,6 +144,8 @@
           <para
             >An <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -184,6 +202,8 @@
 
             
 
+            
+
              is similar to a property page from the Component Object Model (COM).</para
           >
           <para
@@ -192,8 +212,12 @@
 
             
 
+            
+
              is thrown. To avoid this, be sure to call <see
              cref="M:System.Windows.Forms.Design.IUIService.CanShowComponentEditor(System.Object)" />
+
+            
 
             
 
@@ -205,6 +229,8 @@
           <para
             >Attempts to display a <see
              cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+
+            
 
             
 
@@ -220,8 +246,12 @@
 
           
 
+          
+
           The component for which to display a <see
            cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+
+          
 
           
 
@@ -232,8 +262,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -271,6 +305,8 @@
 
             
 
+            
+
              values indicating the result code returned by the dialog box.</para
           >
         </returns>
@@ -279,8 +315,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -315,8 +355,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -348,6 +392,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,8 +432,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -395,6 +445,8 @@
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,6 +478,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,10 +518,14 @@
 
           
 
+          
+
           The message to display. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,11 +568,15 @@
 
             
 
+            
+
              values indicating the result code returned by the dialog box.</para
           >
         </returns>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -525,10 +587,14 @@
 
           
 
+          
+
           The caption for the dialog box. </param
         >
         <param name="buttons">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,8 +603,12 @@
 
           
 
+          
+
            values: <see
            cref="F:System.Windows.Forms.MessageBoxButtons.OK" />
+
+          
 
           
 
@@ -547,13 +617,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Windows.Forms.MessageBoxButtons.YesNo" />
 
           
 
+          
+
           , or <see
            cref="F:System.Windows.Forms.MessageBoxButtons.YesNoCancel" />
+
+          
 
           
 
@@ -589,8 +665,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -599,8 +679,12 @@
 
           
 
+          
+
            or one of the predefined values from <see
            cref="T:System.ComponentModel.Design.StandardToolWindows" />
+
+          
 
           
 
@@ -629,6 +713,8 @@
           <para
             >The values for these styles may be retrieved by using the style as a key for the dictionary, accessing the dictionary using the key as an indexer. For example: (object implementing <see
              cref="T:System.Windows.Forms.Design.IUIService" />
+
+            
 
             
 

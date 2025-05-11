@@ -27,8 +27,12 @@
 
         
 
+        
+
          interface provides the methods and properties that are required by the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          class is the base implementation of the <see
          cref="T:System.Net.IWebProxy" />
+
+        
 
         
 
@@ -53,6 +61,8 @@
       <para
         >Provides the base interface for implementation of proxy access for the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -92,6 +102,8 @@
 
             
 
+            
+
              instance that contains the credentials needed to authenticate a request to the proxy server.</para
           >
         </value>
@@ -103,8 +115,12 @@
 
             
 
+            
+
              property is an <see
              cref="T:System.Net.ICredentials" />
+
+            
 
             
 
@@ -149,8 +165,12 @@
 
             
 
+            
+
              method returns the URI of the proxy server that handles requests to the Internet resource that is specified in the <paramref
              name="destination" />
+
+            
 
             
 
@@ -169,8 +189,12 @@
 
             
 
+            
+
              instance that contains the URI of the proxy used to contact <paramref
              name="destination" />
+
+            
 
             
 
@@ -182,8 +206,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -223,13 +251,19 @@
 
             
 
+            
+
              method indicates whether to use the proxy server to access the host that is specified in the <paramref
              name="host" />
 
             
 
+            
+
              parameter. If <see
              cref="M:System.Net.IWebProxy.IsBypassed(System.Uri)" />
+
+            
 
             
 
@@ -248,6 +282,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -256,8 +292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 

@@ -38,6 +38,8 @@
 
         
 
+        
+
         , may not have a user interface that can be viewed at design time. These components are usually represented by icons that are shown in the component tray.</para
       >
       <para>The component tray is a rectangular region displayed at the bottom of the design view window while in design view mode, once it is active. The component tray becomes active in design view after a component that is displayed in the component tray has been added to or is part of the current document.</para>
@@ -71,6 +73,8 @@
 
             
 
+            
+
              class using the specified designer and service provider.</para
           >
         </summary>
@@ -79,8 +83,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesigner" />
+
+          
 
           
 
@@ -91,8 +99,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -127,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -186,8 +202,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -220,6 +240,8 @@
 
             
 
+            
+
             , which indicates whether the component has a user interface that can be displayed.</para
           >
         </remarks>
@@ -236,8 +258,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -289,6 +315,8 @@
 
             
 
+            
+
              before attempting to create the component and add it to the component tray.</para
           >
         </remarks>
@@ -301,8 +329,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -334,6 +366,8 @@
 
           
 
+          
+
           The exception about which to display information. </param
         >
       </Docs>
@@ -360,8 +394,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -370,8 +408,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -383,8 +425,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.Design.ComponentTray" />
+
+            
 
             
 
@@ -399,11 +445,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -435,6 +485,8 @@
 
             
 
+            
+
              is an accessor method for the location extender property that is added to each component in the component tray.</para
           >
         </remarks>
@@ -450,8 +502,12 @@
 
             
 
+            
+
              indicating the coordinates of the specified component, or an empty <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -460,8 +516,12 @@
 
             
 
+            
+
              has an <see
              cref="P:System.Drawing.Point.IsEmpty" />
+
+            
 
             
 
@@ -470,8 +530,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Point.Y" />
+
+            
 
             
 
@@ -483,8 +547,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -539,6 +607,8 @@
 
             
 
+            
+
             , this method returns the next component in the tray, given a starting component.</para
           >
         </summary>
@@ -550,6 +620,8 @@
 
             
 
+            
+
              is false).</para
           >
         </returns>
@@ -558,10 +630,14 @@
 
           
 
+          
+
           The component from which to start enumerating.</param
         >
         <param name="forward">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -633,13 +709,19 @@
 
             
 
+            
+
             . If <paramref
              name="receiver" />
 
             
 
+            
+
              does not have a component view, the returned value is an empty <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -658,8 +740,12 @@
 
             
 
+            
+
              representing the location of <paramref
              name="receiver" />
+
+            
 
             
 
@@ -671,8 +757,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -709,11 +799,15 @@
 
             
 
+            
+
              is being shown on the tray; otherwise, false.</para
           >
         </returns>
         <param name="comp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -762,8 +856,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragEventArgs" />
+
+          
 
           
 
@@ -798,8 +896,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragEventArgs" />
+
+          
 
           
 
@@ -831,8 +933,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -867,8 +973,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragEventArgs" />
+
+          
 
           
 
@@ -903,8 +1013,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
+
+          
 
           
 
@@ -938,6 +1052,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -946,8 +1062,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -1004,8 +1124,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1036,8 +1160,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1072,8 +1200,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1108,8 +1240,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1144,8 +1280,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1199,8 +1339,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -1236,8 +1380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -1248,8 +1396,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1286,6 +1438,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1298,8 +1452,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -1310,13 +1468,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
 
           
 
+          
+
            representing the location of <paramref
            name="receiver" />
+
+          
 
           
 
@@ -1365,8 +1529,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IExtenderProvider" />
+
+            
 
             
 
@@ -1378,6 +1546,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IExtenderProvider.CanExtend(System.Object)" />
+
+            
 
             
 
@@ -1393,8 +1563,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

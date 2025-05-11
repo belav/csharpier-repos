@@ -21,6 +21,8 @@
 
       
 
+      
+
        for the detailed differences of those implementations.</remarks
     >
     <summary>
@@ -28,6 +30,8 @@
       <para
         >Provides an accessor to the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -64,13 +68,19 @@
 
             
 
+            
+
              method is called from an <see
              cref="T:System.Xml.XmlNode" />
 
             
 
+            
+
              object, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -79,8 +89,12 @@
 
             
 
+            
+
              method is called from an <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -89,8 +103,12 @@
 
             
 
+            
+
              object, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -105,6 +123,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -113,6 +133,8 @@
           <para
             >An <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 

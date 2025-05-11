@@ -38,6 +38,8 @@
 
         
 
+        
+
          class transports messages using the HTTP protocol.</para
       >
       <para>Channels are used by the .NET Framework remoting infrastructure to transport remote calls. When a client makes a call to a remote object, the call is serialized into a message that is sent by a client channel and received by a server channel. It is then deserialized and processed. Any returned values are transmitted by the server channel and received by the client channel.</para>
@@ -47,8 +49,12 @@
 
         
 
+        
+
          through which all messages processed by the <see
          cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
 
         
 
+        
+
          accepts messages serialized in either binary or SOAP format.</para
       >
       <para
@@ -68,8 +76,12 @@
 
         
 
+        
+
          object has associated configuration properties that can be set at run time either in a configuration file (by invoking the static <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
+
+        
 
         
 
@@ -78,13 +90,19 @@
 
         
 
+        
+
          collection to the <see
          cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.#ctor" />
 
         
 
+        
+
          constructor). For a list of these configuration properties, see the documentation for <see
          cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.#ctor" />
+
+        
 
         
 
@@ -109,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+
+            
 
             
 
@@ -137,6 +157,8 @@
 
             
 
+            
+
              parameter to 0 (zero).</para
           >
         </remarks>
@@ -148,11 +170,15 @@
 
             
 
+            
+
              class that listens on the specified port.</para
           >
         </summary>
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,11 +217,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -210,6 +240,8 @@
 
             
 
+            
+
              class with the specified channel properties and sink.</para
           >
         </summary>
@@ -218,8 +250,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -230,13 +266,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
           
 
+          
+
            to use with the new instance of the <see
            cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+
+          
 
           
 
@@ -265,8 +307,12 @@
 
             
 
+            
+
              property by using the <paramref
              name="name" />
+
+            
 
             
 
@@ -275,6 +321,8 @@
           <para
             >To request that an available port be dynamically assigned, set the <paramref
              name="port" />
+
+            
 
             
 
@@ -289,6 +337,8 @@
 
             
 
+            
+
              class with the given name and that listens on the specified port.</para
           >
         </summary>
@@ -297,10 +347,14 @@
 
           
 
+          
+
           The name of the channel. </param
         >
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -336,8 +390,12 @@
 
             
 
+            
+
              property using the <paramref
              name="name" />
+
+            
 
             
 
@@ -349,11 +407,15 @@
 
             
 
+            
+
              parameter to 0 (zero).</para
           >
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -368,11 +430,15 @@
 
             
 
+            
+
              class at the specified port with the given name, which listens on the specified port, and uses the specified sink.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -383,6 +449,8 @@
 
           
 
+          
+
           The port on which the channel listens. </param
         >
         <param name="sinkProvider">
@@ -390,8 +458,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+          
 
           
 
@@ -423,6 +495,8 @@
 
           
 
+          
+
           A URI on which the channel hook must listen. </param
         >
       </Docs>
@@ -447,13 +521,19 @@
 
             
 
+            
+
             , the value of this property can be cast to an instance of <see
              cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
 
             
 
+            
+
              describing the channel to which the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+
+            
 
             
 
@@ -486,6 +566,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -515,8 +597,12 @@
 
             
 
+            
+
              instance; higher priority channels appear before lower priority channels. Clients try to connect to the server channels in the order that they are listed in the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -621,6 +707,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -629,6 +717,8 @@
           <para
             >Returns an array of all the URLs for an object with the specified URI, hosted on the current <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+
+            
 
             
 
@@ -643,11 +733,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="objectUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -705,6 +799,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -713,6 +809,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -769,6 +867,8 @@
 
             
 
+            
+
              method has been called to stop listening on the channel.</para
           >
           <para>If your channel uses a dynamically assigned port number, your port number might change when you restart listening.</para>
@@ -782,8 +882,12 @@
 
           
 
+          
+
           Should always be null for <see
            cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+
+          
 
           
 
@@ -813,6 +917,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>If your channel uses a dynamically assigned port number, your port number might change when you restart listening.</para>
@@ -826,8 +932,12 @@
 
           
 
+          
+
           Should always be null for <see
            cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+
+          
 
           
 
@@ -854,6 +964,8 @@
           <para
             >Gets a Boolean value that indicates whether <see
              cref="T:System.Runtime.Remoting.Channels.IChannelReceiverHook" />
+
+            
 
             
 

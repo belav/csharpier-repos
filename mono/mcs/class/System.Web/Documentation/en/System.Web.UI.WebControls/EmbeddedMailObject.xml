@@ -19,6 +19,8 @@
 
         
 
+        
+
          represents an item to embed in a mail message. These embedded items can be image files such as company logos. Each embedded item is specified by an identifier and a path.  </para
       >
       <para>To ensure that an embedded object is displayed correctly within the e-mail message file, the following conditions must be met:</para>
@@ -36,6 +38,8 @@
 
             
 
+            
+
              property contains a reference to the image file using the following syntax: </para
           >
           <code>&lt;img src="cid:identifier" alt="Alternate Text" /&gt;.</code>
@@ -47,6 +51,8 @@
 
         
 
+        
+
          is added to a mail message and does not fulfill all of the requirements specified previously, it will most likely be displayed as an attachment in the mail message. If an item is referenced by an identifier in the mail message but not included as an embedded item, it will appear as a broken attachment when the mail is viewed.</para
       >
       <para
@@ -55,8 +61,12 @@
 
         
 
+        
+
          stores a collection of <see
          cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          is used by the <see
          cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
+
+        
 
         
 
@@ -75,11 +89,15 @@
 
         
 
+        
+
          object to create the mail message.</para
       >
       <para
         >Mail messages that allow embedded objects are configurable in the following Web controls by setting their <see
          cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+        
 
         
 
@@ -109,8 +127,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+          
 
           
 
@@ -123,6 +145,8 @@
       <para
         >Represents an item to embed in an e-mail message constructed using the <see
          cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+        
 
         
 
@@ -145,8 +169,12 @@
 
             
 
+            
+
              property. To get or set the path to the embedded item, use the <see
              cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+
+            
 
             
 
@@ -158,6 +186,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+
+            
 
             
 
@@ -190,6 +220,8 @@
 
             
 
+            
+
              class, using the specified identifier name and path to populate the object.</para
           >
         </summary>
@@ -198,8 +230,12 @@
 
           
 
+          
+
           The name used as the identifier of the item to embed in the mail message. For more information, see <see
            cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
+
+          
 
           
 
@@ -210,8 +246,12 @@
 
           
 
+          
+
           The path used to retrieve an item to embed in the mail message. For more information, see <see
            cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+
+          
 
           
 
@@ -247,8 +287,12 @@
 
             
 
+            
+
              property specifies an identifier for an item to embed in a mail message constructed declaratively with the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -257,8 +301,12 @@
 
             
 
+            
+
              property to its appropriate location in the body of the file specified in the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+            
 
             
 
@@ -271,6 +319,8 @@
 
             
 
+            
+
              property is an empty string.</para
           >
           <para>It is a best practice for accessibility design to set the alternate text property in your mail message for any embedded images.</para>
@@ -280,6 +330,8 @@
           <para
             >Gets or sets the name that is used as the identifier of the item to be embedded in a mail message constructed with the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -316,13 +368,19 @@
 
             
 
+            
+
              property specifies the path to the item you want to embed in the mail message constructed declaratively with the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
 
             
 
+            
+
              object. The file path in <see
              cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+
+            
 
             
 
@@ -335,6 +393,8 @@
           <para
             >Gets or sets the path that is used to retrieve an item to embed in a mail message constructed with the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 

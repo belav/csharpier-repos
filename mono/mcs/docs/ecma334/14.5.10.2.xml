@@ -6,8 +6,12 @@
 
     
 
+    
+
      is used to create a new instance of an <non_terminal
      where="19.1">array-type</non_terminal>
+
+    
 
     
 
@@ -19,6 +23,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>new</keyword>
@@ -26,7 +32,9 @@
         <terminal>[</terminal>
         <non_terminal where="14.5.6">expression-list</non_terminal>
         <terminal>]</terminal>
-        <non_terminal where="19.1">rank-specifiers</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifiers</non_terminal
+        >
         <opt />
         <non_terminal where="19.6">array-initializer</non_terminal>
         <opt />
@@ -44,8 +52,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -54,8 +66,12 @@
 
     
 
+    
+
     , or <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -67,22 +83,26 @@
 
     
 
+    
+
     ), the layout of arrays is unspecified. </paragraph
   >
   <paragraph>If an array creation expression of the first form includes an array initializer, each expression in the expression list must be a constant and the rank and dimension lengths specified by the expression list must match those of the array initializer. </paragraph>
   <paragraph
     >In an array creation expression of the second form, the rank of the specified array type must match that of the array initializer. The individual dimension lengths are inferred from the number of elements in each of the corresponding nesting levels of the array initializer. Thus, the expression <code_example
     >
-      <![CDATA[
+<![CDATA[
 new int[,] {{0, 1}, {2, 3}, {4, 5}}  
 ]]>
     </code_example>
 
     
 
+    
+
     exactly corresponds to <code_example
     >
-      <![CDATA[
+<![CDATA[
 new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}  
 ]]>
     </code_example>
@@ -90,6 +110,8 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
   <paragraph
     >Array initializers are described further in <hyperlink
     >19.6</hyperlink>
+
+    
 
     
 
@@ -104,8 +126,12 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 
         
 
+        
+
          are evaluated in order, from left to right. Following evaluation of each expression, an implicit conversion (<hyperlink
         >13.1</hyperlink>
+
+        
 
         
 
@@ -114,8 +140,12 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -124,8 +154,12 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -139,6 +173,8 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 
         
 
+        
+
         ). </list_item
       >
       <list_item> If the array creation expression contains an array initializer, then each expression in the array initializer is evaluated and assigned to its corresponding array element. The evaluations and assignments are performed in the order the expressions are written in the array initializer-in other words, elements are initialized in increasing index order, with the rightmost dimension increasing first. If evaluation of a given expression or the subsequent assignment to the corresponding array element causes an exception, then no further elements are initialized (and the remaining elements will thus have their default values). </list_item>
@@ -149,10 +185,12 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 
       >[Example: For example, the statement <code_example
       >
-        <![CDATA[
+<![CDATA[
 int[][] a = new int[100][];  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -161,18 +199,22 @@ int[][] a = new int[100][];
 
     
 
+    
+
      It is not possible for the same array creation expression to also instantiate the  sub-arrays, and the statement <code_example
     >
-      <![CDATA[
+<![CDATA[
 int[][] a = new int[100][5];    // Error  
 ]]>
     </code_example>
 
     
 
+    
+
     results in a compile-time error. Instantiation of the sub-arrays must instead be performed manually, as in <code_example
     >
-      <![CDATA[
+<![CDATA[
 int[][] a = new int[100][];  
 for (int i = 0; i < 100; i++) a[i] = new int[5];  
 ]]>
@@ -181,10 +223,12 @@ for (int i = 0; i < 100; i++) a[i] = new int[5];
   <paragraph
     >When an array of arrays has a "rectangular" shape, that is when the sub-arrays are all of the same length, it is more efficient to use a multi-dimensional array. In the example above, instantiation of the array of arrays creates 101 objects-one outer array and 100 sub-arrays. In contrast, <code_example
     >
-      <![CDATA[
+<![CDATA[
 int[,] = new int[100, 5];  
 ]]>
     </code_example>
+
+    
 
     
 

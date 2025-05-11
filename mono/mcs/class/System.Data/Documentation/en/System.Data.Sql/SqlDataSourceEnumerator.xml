@@ -22,13 +22,19 @@
 
         
 
+        
+
          class exposes this information to the application developer, providing a <see
          cref="T:System.Data.DataTable" />
 
         
 
+        
+
          containing information about all the available servers. This returned table contains a list of server instances that matches the list provided when a user attempts to create a new connection, and on the <paramref
          name="Connection Properties" />
+
+        
 
         
 
@@ -107,6 +113,8 @@
 
               
 
+              
+
                to locate data sources on a network, the method will not always return a complete list of the available servers, and the list might not be the same on every call. If you plan to use this function to let users select a server from a list, make sure that you always also supply an option to type in a name that is not in the list, in case the server enumeration does not return all the available servers. In addition, this method may take a significant amount of time to execute, so be careful about calling it when performance is critical.</para
             >
           </block>
@@ -119,6 +127,8 @@
 
             
 
+            
+
              containing information about all visible SQL Server 2000 or SQL Server 2005 instances.</para
           >
         </summary>
@@ -127,6 +137,8 @@
           <para
             >Returns a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -158,8 +170,12 @@
 
             
 
+            
+
              class does not provide a constructor. Use the <see
              cref="P:System.Data.Sql.SqlDataSourceEnumerator.Instance" />
+
+            
 
             
 
@@ -171,6 +187,8 @@
           <para
             >Gets an instance of the <see
              cref="T:System.Data.Sql.SqlDataSourceEnumerator" />
+
+            
 
             
 

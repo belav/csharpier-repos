@@ -24,8 +24,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          class implements the client-side reading of non-XML text into Web method return values. To obtain a return value, the text, which is encoded in the body of an HTTP response, is parsed using regular expression pattern matching, as specified by the attribute <see
          cref="T:System.Web.Services.Protocols.MatchAttribute" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          class calls the <see
          cref="T:System.Web.Services.Protocols.PatternMatcher" />
+
+        
 
         
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
          attributes to the corresponding Web methods in the client proxy class that is generated. Also, <see
          cref="T:System.Web.Services.Protocols.TextReturnReader" />
+
+        
 
         
 
@@ -71,11 +87,15 @@
 
         
 
+        
+
         , the default class for deserializing Web method return values according to the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. </para
       >
       <para
         >You typically will not need to use the <see
          cref="T:System.Web.Services.Protocols.TextReturnReader" />
+
+        
 
         
 
@@ -100,6 +120,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.TextReturnReader" />
+
+            
 
             
 
@@ -133,13 +155,19 @@
 
             
 
+            
+
              method. For the <see
              cref="T:System.Web.Services.Protocols.TextReturnReader" />
 
             
 
+            
+
              class, the initializer is a <see
              cref="T:System.Web.Services.Protocols.PatternMatcher" />
+
+            
 
             
 
@@ -151,13 +179,19 @@
 
             
 
+            
+
              method is invoked during service initialization. Later, at the time a response is processed, the initializer object is passed to the <see
              cref="M:System.Web.Services.Protocols.TextReturnReader.Initialize(System.Object)" />
 
             
 
+            
+
              method of another <see
              cref="T:System.Web.Services.Protocols.TextReturnReader" />
+
+            
 
             
 
@@ -177,8 +211,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -208,8 +246,12 @@
 
             
 
+            
+
              method supplies the <see
              cref="T:System.Web.Services.Protocols.PatternMatcher" />
+
+            
 
             
 
@@ -218,8 +260,12 @@
 
             
 
+            
+
              method to parse text contained in the HTTP response. The <see
              cref="M:System.Web.Services.Protocols.TextReturnReader.Initialize(System.Object)" />
+
+            
 
             
 
@@ -228,8 +274,12 @@
 
             
 
+            
+
             , is obtained by calling the <see
              cref="M:System.Web.Services.Protocols.TextReturnReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+            
 
             
 
@@ -245,8 +295,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.PatternMatcher" />
+
+          
 
           
 
@@ -280,8 +334,12 @@
 
             
 
+            
+
              class's implementation of the <see
              cref="M:System.Web.Services.Protocols.TextReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
+
+            
 
             
 
@@ -290,8 +348,12 @@
 
             
 
+            
+
              object passed as an argument to the <see
              cref="M:System.Web.Services.Protocols.TextReturnReader.Initialize(System.Object)" />
+
+            
 
             
 
@@ -311,8 +373,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.WebResponse" />
+
+          
 
           
 
@@ -323,13 +389,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            whose content is the body of the HTTP response represented by the <paramref
            name="response" />
+
+          
 
           
 

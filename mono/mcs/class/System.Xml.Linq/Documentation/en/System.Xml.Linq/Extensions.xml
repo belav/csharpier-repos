@@ -23,6 +23,8 @@
 
         
 
+        
+
          extension methods are not axis methods, however. These methods remove attributes or nodes from the XML tree.</para
       >
       <para
@@ -31,8 +33,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Xml.Linq.XDocument" />
+
+        
 
         
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          classes. These other axis methods operate on a single object, and return a collection of <see
          cref="T:System.Xml.Linq.XElement" />
+
+        
 
         
 
@@ -51,8 +61,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Xml.Linq.XNode" />
+
+        
 
         
 
@@ -105,6 +119,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>This method uses deferred execution.</para>
@@ -121,8 +137,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -134,13 +154,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -151,13 +177,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -205,6 +237,8 @@
 
             
 
+            
+
             , the ancestor will be included multiple times in the result collection.</para
           >
           <para>This method uses deferred execution.</para>
@@ -214,6 +248,8 @@
           <para
             >Returns a filtered collection of elements that contains the ancestors of every node in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -228,13 +264,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              that contains the ancestors of every node in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -246,13 +288,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -263,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -275,13 +327,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -321,6 +379,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>This method uses deferred execution. </para>
@@ -337,8 +397,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -350,13 +414,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -397,6 +467,8 @@
 
             
 
+            
+
             , the ancestor will be included multiple times in the result collection.</para
           >
           <para>This method uses deferred execution. </para>
@@ -406,6 +478,8 @@
           <para
             >Returns a filtered collection of elements that contains every element in the source collection, and the ancestors of every element in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -420,13 +494,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              that contains every element in the source collection, and the ancestors of every element in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -438,13 +518,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -455,8 +541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -506,8 +596,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XAttribute" />
+
+            
 
             
 
@@ -519,13 +613,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -571,6 +671,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -582,13 +684,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XAttribute" />
 
             
 
+            
+
              that contains a filtered collection of the attributes of every element in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -600,13 +708,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -617,8 +731,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -665,8 +783,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -675,13 +797,19 @@
 
             
 
+            
+
             , so this method operates on an <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XContainer" />
+
+            
 
             
 
@@ -702,8 +830,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -715,13 +847,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -732,13 +870,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -787,8 +931,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -800,13 +948,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -862,8 +1016,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -875,13 +1033,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -892,13 +1056,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -950,6 +1120,8 @@
 
             
 
+            
+
              instead of using this axis method explicitly.</para
           >
           <para>This method uses deferred execution. </para>
@@ -959,6 +1131,8 @@
           <para
             >Returns a filtered collection of elements that contains the descendant elements of every element and document in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -973,13 +1147,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              that contains the descendant elements of every element and document in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -991,13 +1171,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -1008,8 +1194,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1020,13 +1210,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -1075,8 +1271,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1088,13 +1288,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -1140,6 +1346,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -1151,13 +1359,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              that contains every element in the source collection, and the descendents of every element in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -1169,13 +1383,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -1186,8 +1406,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1234,6 +1458,8 @@
 
             
 
+            
+
              for every element in the source collection, there is no integrated elements axis that allows you to retrieve a collection of every child element for every element in the source collection.</para
           >
           <para>This method uses deferred execution. </para>
@@ -1250,8 +1476,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1263,13 +1493,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -1280,13 +1516,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -1339,6 +1581,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -1350,13 +1594,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              of the child elements of every element and document in the source collection. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -1368,13 +1618,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -1385,8 +1641,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1397,13 +1657,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -1458,8 +1724,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -1471,13 +1741,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -1488,13 +1764,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -1549,8 +1831,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -1562,13 +1848,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -1579,13 +1871,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XContainer" />
+
+          
 
           
 
@@ -1625,12 +1923,16 @@
 
             
 
+            
+
              before disconnecting them from their parents. This is required to avoid issues with mixed imperative/declarative code. For more information, see <format
              type="text/html">
               <a href="d9a5c404-2b0e-46cd-a358-0e78773b3094"
                 >Mixed Declarative Code/Imperative Code Bugs</a
               >
             </format>
+
+            
 
             
 
@@ -1646,13 +1948,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XAttribute" />
+
+          
 
           
 
@@ -1699,12 +2007,16 @@
 
             
 
+            
+
              before disconnecting them from their parents. This is required to avoid issues with mixed imperative/declarative code. For more information, see <format
              type="text/html">
               <a href="d9a5c404-2b0e-46cd-a358-0e78773b3094"
                 >Mixed Declarative Code/Imperative Code Bugs</a
               >
             </format>
+
+            
 
             
 
@@ -1720,13 +2032,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -1737,13 +2055,19 @@
 
           
 
+          
+
           The type of the objects in <paramref
            name="source" />
 
           
 
+          
+
           , constrained to <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 

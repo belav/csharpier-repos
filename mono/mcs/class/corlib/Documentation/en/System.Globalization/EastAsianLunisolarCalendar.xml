@@ -35,8 +35,12 @@
 
         
 
+        
+
          class supports the sexagenary cycle of years (which repeats every 60 years) in addition to solar years and lunar months. Each solar year in the calendar is associated with a Sexagenary Year (see <see
          cref="M:System.Globalization.EastAsianLunisolarCalendar.GetSexagenaryYear(System.DateTime)" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
         ), and a Terrestrial Branch (see <see
          cref="M:System.Globalization.EastAsianLunisolarCalendar.GetTerrestrialBranch(System.Int32)" />
+
+        
 
         
 
@@ -59,10 +67,14 @@
 
           
 
+          
+
            class and the other calendar classes in the .NET Framework, see <format
            type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
           </format>
+
+          
 
           
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          method returns a positive integer that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
          cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
         
 
+        
+
          supports a set of calendars. Currently, none of the lunisolar calendar classes that derive from <see
          cref="T:System.Globalization.EastAsianLunisolarCalendar" />
+
+        
 
         
 
@@ -98,8 +118,12 @@
 
         
 
+        
+
          class. Therefore, this class and those that derive from it can be used only to calculate dates in the East Asian lunisolar calendars. This class supports several "get" methods to describe a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -108,8 +132,12 @@
 
         
 
+        
+
          method to convert from lunisolar calendar data to a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -153,8 +181,12 @@
 
             
 
+            
+
              is affected if the resulting day is not a valid day in the resulting month of the resulting year. In this case, the day part is changed to the last valid day in the resulting month of the resulting year. The year part of the resulting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -163,8 +195,12 @@
 
             
 
+            
+
             . This implementation supports only the current era. Therefore, <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -173,13 +209,19 @@
 
             
 
+            
+
             . The time-of-day part of the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -191,6 +233,8 @@
 
             
 
+            
+
              parameter is 6, the resulting year is one more than the specified year, the resulting month is April, and the resulting day is the thirtieth day, which is the last day in April.</para
           >
           <para
@@ -199,13 +243,19 @@
 
             
 
+            
+
              parameter is negative, the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              is earlier than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -217,8 +267,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -227,8 +281,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -237,8 +295,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -258,8 +320,12 @@
 
             
 
+            
+
              that results from adding the specified number of months to the <paramref
              name="time" />
+
+            
 
             
 
@@ -271,8 +337,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -281,10 +351,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="months">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,13 +397,19 @@
 
             
 
+            
+
              is affected if the resulting day is not a valid day in the resulting month of the resulting year. In this case, the day part is changed to the last valid day in the resulting month of the resulting year. The month part of the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -338,8 +418,12 @@
 
             
 
+            
+
              is thrown if the resulting year is outside the era of the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -348,8 +432,12 @@
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -361,6 +449,8 @@
 
             
 
+            
+
              parameter is 1, the resulting date will be the twenty-eighth day of February in the following year.</para
           >
           <para
@@ -369,13 +459,19 @@
 
             
 
+            
+
              is negative, the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              is earlier than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -387,8 +483,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -397,8 +497,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -407,8 +511,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -428,8 +536,12 @@
 
             
 
+            
+
              that results from adding the specified number of years to the <paramref
              name="time" />
+
+            
 
             
 
@@ -441,8 +553,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -451,10 +567,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="years">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -522,6 +642,8 @@
 
           
 
+          
+
           An integer from 1 through 60 that represents a year in the sexagenary cycle. </param
         >
       </Docs>
@@ -558,6 +680,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -566,8 +690,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -610,8 +738,12 @@
 
             
 
+            
+
              values that represents the day of the week specified in the <paramref
              name="time" />
+
+            
 
             
 
@@ -623,8 +755,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -659,13 +795,19 @@
 
             
 
+            
+
              for the first day of the first month returns 1, and <see
              cref="M:System.Globalization.EastAsianLunisolarCalendar.GetDayOfYear(System.DateTime)" />
 
             
 
+            
+
              for the last day of the last month returns the total number of days in that year, which is the same value returned by <see
              cref="M:System.Globalization.EastAsianLunisolarCalendar.GetDaysInYear(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -684,6 +826,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -692,8 +836,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -733,13 +881,19 @@
 
             
 
+            
+
              parameter is the second month, the <see
              cref="M:System.Globalization.EastAsianLunisolarCalendar.GetDaysInMonth(System.Int32,System.Int32,System.Int32)" />
 
             
 
+            
+
              method returns 28 or 29, depending on whether the <paramref
              name="year" />
+
+            
 
             
 
@@ -759,6 +913,8 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="month">
@@ -766,10 +922,14 @@
 
           
 
+          
+
           An integer from 1 through 12 in a common year, or 1 through 13 in a leap year, that represents the month. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -808,8 +968,12 @@
 
             
 
+            
+
              method returns 365 or 366, depending on whether the <paramref
              name="year" />
+
+            
 
             
 
@@ -829,10 +993,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -871,8 +1039,12 @@
 
             
 
+            
+
              method returns a number from 1 through 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
              cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+
+            
 
             
 
@@ -893,8 +1065,12 @@
 
             
 
+            
+
              and <paramref
              name="era" />
+
+            
 
             
 
@@ -906,10 +1082,14 @@
 
           
 
+          
+
           An integer that represents the year.</param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -949,6 +1129,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -957,8 +1139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1003,10 +1189,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1049,6 +1239,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -1057,8 +1249,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1102,6 +1298,8 @@
 
           
 
+          
+
           An integer from 1 through 60 that represents a year in the sexagenary cycle.</param
         >
       </Docs>
@@ -1138,6 +1336,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1146,8 +1346,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1194,10 +1398,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1208,10 +1416,14 @@
 
           
 
+          
+
           An integer from 1 through 31 that represents the day. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1256,11 +1468,15 @@
 
             
 
+            
+
              parameter is a leap month; otherwise, false.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1271,10 +1487,14 @@
 
           
 
+          
+
           An integer from 1 through 13 that represents the month. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1316,10 +1536,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1364,6 +1588,8 @@
 
             
 
+            
+
              method can convert any date in the current calendar to a Gregorian calendar date. The Gregorian date can subsequently be used, for example, to compare dates in different calendars or create an equivalent date in a particular calendar.</para
           >
         </remarks>
@@ -1372,6 +1598,8 @@
           <para
             >Returns a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1386,11 +1614,15 @@
 
             
 
+            
+
              that is set to the specified date, time, and era.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1401,10 +1633,14 @@
 
           
 
+          
+
           An integer from 1 through 13 that represents the month. </param
         >
         <param name="day">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1415,10 +1651,14 @@
 
           
 
+          
+
           An integer from 0 through 23 that represents the hour. </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1429,6 +1669,8 @@
 
           
 
+          
+
           An integer from 0 through 59 that represents the second. </param
         >
         <param name="millisecond">
@@ -1436,10 +1678,14 @@
 
           
 
+          
+
           An integer from 0 through 999 that represents the millisecond. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1474,8 +1720,12 @@
 
             
 
+            
+
              method uses the <see
              cref="P:System.Globalization.EastAsianLunisolarCalendar.TwoDigitYearMax" />
+
+            
 
             
 
@@ -1486,13 +1736,19 @@
 
             
 
+            
+
              supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see
              cref="P:System.Globalization.EastAsianLunisolarCalendar.TwoDigitYearMax" />
 
             
 
+            
+
              value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see
              cref="M:System.Globalization.EastAsianLunisolarCalendar.ToFourDigitYear(System.Int32)" />
+
+            
 
             
 
@@ -1511,11 +1767,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1546,8 +1806,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Globalization.EastAsianLunisolarCalendar" />
+
+            
 
             
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          is used to raise an event at user-defined intervals. This Windows timer is designed for a single-threaded environment where UI threads are used to perform processing. It requires that the user code have a UI message pump available and always operate from the same thread, or marshal the call onto another thread.</para
       >
       <para
@@ -38,8 +40,12 @@
 
         
 
+        
+
          event to perform a polling operation or to display a splash screen for a specified period of time. Whenever the <see
          cref="P:System.Windows.Forms.Timer.Enabled" />
+
+        
 
         
 
@@ -48,13 +54,19 @@
 
         
 
+        
+
          property is greater than zero, the <see
          cref="E:System.Windows.Forms.Timer.Tick" />
 
         
 
+        
+
          event is raised at intervals based on the <see
          cref="P:System.Windows.Forms.Timer.Interval" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
           
 
+          
+
            class in the <see
            cref="N:System.Timers" />
+
+          
 
           
 
@@ -96,13 +112,19 @@
 
             
 
+            
+
              is set to false. To enable the timer, call the <see
              cref="M:System.Windows.Forms.Timer.Start" />
 
             
 
+            
+
              method or set <see
              cref="P:System.Windows.Forms.Timer.Enabled" />
+
+            
 
             
 
@@ -115,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 
@@ -145,8 +169,12 @@
 
             
 
+            
+
              constructor enables you to associate a <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 
@@ -155,8 +183,12 @@
 
             
 
+            
+
              object. By associating the <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 
@@ -165,8 +197,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -175,8 +211,12 @@
 
             
 
+            
+
             , an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -185,8 +225,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -195,8 +239,12 @@
 
             
 
+            
+
              on the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -208,13 +256,19 @@
 
             
 
+            
+
              is set to false. To enable the timer, call the <see
              cref="M:System.Windows.Forms.Timer.Start" />
 
             
 
+            
+
              method or set <see
              cref="P:System.Windows.Forms.Timer.Enabled" />
+
+            
 
             
 
@@ -230,6 +284,8 @@
 
             
 
+            
+
              class together with the specified container.</para
           >
         </summary>
@@ -238,8 +294,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.IContainer" />
+
+          
 
           
 
@@ -269,13 +329,19 @@
 
             
 
+            
+
              when you are finished using the timer. The <see
              cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
 
             
 
+            
+
              method leaves the timer in an unusable state. After you call <see
              cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -285,6 +351,8 @@
             <para
               >Always call <see
                cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
+
+              
 
               
 
@@ -298,6 +366,8 @@
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -331,8 +401,12 @@
 
             
 
+            
+
              method is the same as setting <see
              cref="P:System.Windows.Forms.Timer.Enabled" />
+
+            
 
             
 
@@ -341,8 +415,12 @@
 
             
 
+            
+
              method is the same as setting <see
              cref="P:System.Windows.Forms.Timer.Enabled" />
+
+            
 
             
 
@@ -384,8 +462,12 @@
 
             
 
+            
+
              event is raised relative to the last occurrence of the <see
              cref="E:System.Windows.Forms.Timer.Tick" />
+
+            
 
             
 
@@ -416,8 +498,12 @@
 
             
 
+            
+
             . If you are inheriting from <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 
@@ -428,6 +514,8 @@
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -442,6 +530,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -450,13 +540,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
 
           
 
+          
+
            that contains the event data. This is always <see
            cref="F:System.EventArgs.Empty" />
+
+          
 
           
 
@@ -481,6 +577,8 @@
           <para
             >You can also start the timer by setting the <see
              cref="P:System.Windows.Forms.Timer.Enabled" />
+
+            
 
             
 
@@ -513,8 +611,12 @@
 
             
 
+            
+
              property to false. A <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 
@@ -526,8 +628,12 @@
 
             
 
+            
+
              after you have disabled a <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 
@@ -536,8 +642,12 @@
 
             
 
+            
+
              will cause the <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 
@@ -546,8 +656,12 @@
 
             
 
+            
+
              is set for a 5000-millisecond interval, and you call <see
              cref="M:System.Windows.Forms.Timer.Stop" />
+
+            
 
             
 
@@ -556,13 +670,19 @@
 
             
 
+            
+
              will cause the <see
              cref="T:System.Windows.Forms.Timer" />
 
             
 
+            
+
              to wait 5000 milliseconds before raising the <see
              cref="E:System.Windows.Forms.Timer.Tick" />
+
+            
 
             
 
@@ -575,8 +695,12 @@
 
               
 
+              
+
                within a Windows Forms application can cause messages from other <see
                cref="T:System.Windows.Forms.Timer" />
+
+              
 
               
 
@@ -585,8 +709,12 @@
 
               
 
+              
+
                components operate on the main application thread. If you have two <see
                cref="T:System.Windows.Forms.Timer" />
+
+              
 
               
 
@@ -595,8 +723,12 @@
 
               
 
+              
+
                on the first <see
                cref="T:System.Windows.Forms.Timer" />
+
+              
 
               
 
@@ -605,8 +737,12 @@
 
               
 
+              
+
                class in the <see
                cref="N:System.Threading" />
+
+              
 
               
 
@@ -672,8 +808,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Diagnostics.Debug" />
+
+            
 
             
 
@@ -682,8 +822,12 @@
 
             
 
+            
+
              event may not behave as expected, as displaying the assertion dialog box may cause Windows to raise the <see
              cref="E:System.Windows.Forms.Timer.Tick" />
+
+            
 
             
 
@@ -692,8 +836,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Diagnostics.Debug.WriteIf" />
+
+            
 
             
 
@@ -702,8 +850,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Diagnostics.Debug.WriteLineIf" />
+
+            
 
             
 
@@ -714,6 +866,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -746,8 +900,12 @@
 
             
 
+            
+
              method returns a string that includes the value of the <see
              cref="P:System.Windows.Forms.Timer.Interval" />
+
+            
 
             
 
@@ -762,6 +920,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -770,6 +930,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.Timer" />
+
+            
 
             
 

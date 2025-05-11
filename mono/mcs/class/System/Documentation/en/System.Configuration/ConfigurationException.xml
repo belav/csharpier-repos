@@ -31,6 +31,8 @@
 
         
 
+        
+
          exception is thrown if the application attempts to read or write data to the configuration file but is unsuccessful. Some possible reasons for this can include malformed XML in the configuration file, file permission issues, and configuration properties with values that are not valid.</para
       >
       <block subset="none" type="note">
@@ -40,8 +42,12 @@
 
           
 
+          
+
            object is maintained for backward compatibility. The <see
            cref="T:System.Configuration.ConfigurationErrorsException" />
+
+          
 
           
 
@@ -84,6 +90,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -120,6 +128,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -128,8 +138,12 @@
 
           
 
+          
+
           A message describing why this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -167,6 +181,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -175,10 +191,14 @@
 
           
 
+          
+
           The object that holds the information to deserialize.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,6 +241,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -229,8 +251,12 @@
 
           
 
+          
+
           A message describing why this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -241,8 +267,12 @@
 
           
 
+          
+
           The inner exception that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -285,6 +315,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -293,8 +325,12 @@
 
           
 
+          
+
           A message describing why this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -305,13 +341,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
 
           
 
+          
+
            that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -355,6 +397,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -363,8 +407,12 @@
 
           
 
+          
+
           A message describing why this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -375,8 +423,12 @@
 
           
 
+          
+
           The inner exception that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -387,13 +439,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
 
           
 
+          
+
            that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -437,6 +495,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -445,8 +505,12 @@
 
           
 
+          
+
           A message describing why this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -457,8 +521,12 @@
 
           
 
+          
+
           The path to the configuration file that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -469,8 +537,12 @@
 
           
 
+          
+
           The line number within the configuration file at which this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -515,6 +587,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -523,8 +597,12 @@
 
           
 
+          
+
           A message describing why this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -535,8 +613,12 @@
 
           
 
+          
+
           The inner exception that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -547,8 +629,12 @@
 
           
 
+          
+
           The path to the configuration file that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -559,8 +645,12 @@
 
           
 
+          
+
           The line number within the configuration file at which this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -590,8 +680,12 @@
 
             
 
+            
+
              property does not contain the name of the configuration file, nor the line number at which this <see
              cref="T:System.Configuration.ConfigurationException" />
+
+            
 
             
 
@@ -600,8 +694,12 @@
 
             
 
+            
+
              property, use the <see
              cref="P:System.Configuration.ConfigurationException.Message" />
+
+            
 
             
 
@@ -666,8 +764,12 @@
 
             
 
+            
+
              method sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -676,13 +778,19 @@
 
             
 
+            
+
              exception occurred. During deserialization, the <see
              cref="T:System.Configuration.ConfigurationException" />
 
             
 
+            
+
              exception is reconstituted from the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -697,6 +805,8 @@
 
             
 
+            
+
              object with the file name and line number at which this configuration exception occurred.</para
           >
         </summary>
@@ -705,10 +815,14 @@
 
           
 
+          
+
           The object that holds the information to be serialized.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -752,6 +866,8 @@
 
             
 
+            
+
              object was loaded when this configuration exception was thrown.</para
           >
         </summary>
@@ -764,13 +880,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
 
           
 
+          
+
            that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -814,6 +936,8 @@
 
             
 
+            
+
              object represented when this configuration exception was thrown.</para
           >
         </summary>
@@ -826,13 +950,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
 
           
 
+          
+
            that caused this <see
            cref="T:System.Configuration.ConfigurationException" />
+
+          
 
           
 
@@ -883,8 +1013,12 @@
 
             
 
+            
+
              property contains a concatenation of the <see
              cref="P:System.Configuration.ConfigurationException.BareMessage" />
+
+            
 
             
 
@@ -893,8 +1027,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Configuration.ConfigurationException.Line" />
+
+            
 
             
 

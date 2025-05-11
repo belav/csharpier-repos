@@ -16,13 +16,19 @@
 
         
 
+        
+
          interface defines the <see
          cref="P:System.Web.UI.ITextControl.Text" />
 
         
 
+        
+
          property a control implements to allow the getting or setting of its text content. The <see
          cref="P:System.Web.UI.ITextControl.Text" />
+
+        
 
         
 
@@ -34,6 +40,8 @@
            type="text/html">
             <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
           </format>
+
+          
 
           
 
@@ -64,6 +72,8 @@
 
             
 
+            
+
              property can be set programmatically or through user input.</para
           >
           <block subset="none" type="note">
@@ -72,6 +82,8 @@
                type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
+
+              
 
               
 

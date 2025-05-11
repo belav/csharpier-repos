@@ -39,6 +39,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -151,6 +153,8 @@
         </returns>
         <param name="pCustData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -502,11 +506,15 @@
 
             
 
+            
+
              was found in the type library; otherwise, false.</para
           >
         </returns>
         <param name="szNameBuf">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -517,8 +525,12 @@
 
           
 
+          
+
           The hash value of <paramref
            name="szNameBuf" />
+
+          
 
           
 
@@ -556,8 +568,12 @@
 
             
 
+            
+
              structure originally obtained from the <see
              cref="M:System.Runtime.InteropServices.ComTypes.ITypeLib.GetLibAttr(System.IntPtr@)" />
+
+            
 
             
 
@@ -566,6 +582,8 @@
         </summary>
         <param name="pTLibAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

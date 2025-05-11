@@ -52,8 +52,12 @@
 
         
 
+        
+
          errors. This catch block also catches <see
          cref="T:System.DivideByZeroException" />
+
+        
 
         
 
@@ -63,14 +67,20 @@
 
         
 
+        
+
          derives from <see
          cref="T:System.ArithmeticException" />
+
+        
 
         
 
         , and there is no catch block explicitly
       defined for <see
          cref="T:System.DivideByZeroException" />
+
+        
 
         
 
@@ -149,8 +159,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              method in the following example assumes that the <paramref
              name="obj" />
+
+            
 
             
 
@@ -163,13 +177,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              exception that results when <paramref
              name="obj" />
 
             
 
+            
+
              is null can be eliminated by modifying the source code to explicitly test for null before calling the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -185,8 +205,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              method, which returns a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -195,8 +219,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              method, which throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -205,8 +233,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              value. Similarly, if a user tries to open a file that does not exist, you can first call the <see
              cref="M:System.IO.File.Exists(System.String)" />
+
+            
 
             
 
@@ -218,13 +250,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              object or calling the <see
              cref="M:System.IO.File.Open(System.String,System.IO.FileMode)" />
 
             
 
+            
+
              method may throw a <see
              cref="T:System.IO.FileNotFoundException" />
+
+            
 
             
 
@@ -238,13 +276,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              exception if the common language runtime is unable to allocate additional memory. Ordinarily, system failures are not handled by using exception handling. Instead, you may be able to use an event such as <see
              cref="E:System.AppDomain.UnhandledException" />
 
             
 
+            
+
              and call the <see
              cref="M:System.Environment.FailFast(System.String)" />
+
+            
 
             
 
@@ -277,8 +321,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              property of the exception object. During the creation of the exception object, you can pass a text string to the constructor to describe the details of that particular exception. If no error message argument is supplied to the constructor, the default error message is used. For more information, see the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -289,6 +337,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
           <para
             >The state of the call stack when the exception was thrown. The <see
              cref="P:System.Exception.StackTrace" />
+
+            
 
             
 
@@ -308,8 +358,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
          class includes a number of properties that help identify the code location, the type, the help file, and the reason for the exception: <see
          cref="P:System.Exception.StackTrace" />
+
+        
 
         
 
@@ -318,8 +372,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
         , <see
          cref="P:System.Exception.Message" />
+
+        
 
         
 
@@ -328,8 +386,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
         , <see
          cref="P:System.Exception.HResult" />
+
+        
 
         
 
@@ -338,13 +400,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
         , <see
          cref="P:System.Exception.TargetSite" />
 
         
 
+        
+
         , and <see
          cref="P:System.Exception.Data" />
+
+        
 
         
 
@@ -356,8 +424,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
          property maintains this information. The outer exception is thrown in response to this inner exception. The code that handles the outer exception can use the information from the earlier inner exception to handle the error more appropriately. Supplementary information about the exception can be stored as a collection of key/value pairs in the <see
          cref="P:System.Exception.Data" />
+
+        
 
         
 
@@ -366,6 +438,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
       <para
         >The error message string that is passed to the constructor during the creation of the exception object should be localized and can be supplied from a resource file by using the <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -378,10 +452,14 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
         </format>
+
+        
 
         
 
@@ -393,11 +471,15 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
          property can hold a URL (or URN) to a help file.</para
       >
       <para
         >The <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -409,8 +491,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
          class, see the <see
          cref="M:System.Exception.#ctor" />
+
+        
 
         
 
@@ -439,8 +525,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
             , <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -449,13 +539,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
             , or <see
              cref="T:System.NotSupportedException" />
 
             
 
+            
+
             . The string you supply to the exception object's constructor when instantiating the exception object should describe the error so that the developer can fix it. For more information, see the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -469,8 +565,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              (the most derived class) rather than an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -496,6 +596,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              exception when parsing the numeric representation of a string that is out of range of the target integral type, you would not want to use the same exception for an error that results from the caller not supplying the appropriate constrained values when calling the method. </para
           >
         </item>
@@ -506,13 +608,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
          class is the base class of all exceptions in the .NET Framework. Many derived classes rely on the inherited behavior of the members of the <see
          cref="T:System.Exception" />
 
         
 
+        
+
          class; they do not override the members of <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -527,8 +635,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
             . If necessary, define any unique members needed by your class to provide additional information about the exception. For example, the <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -537,13 +649,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              property that specifies the name of the parameter whose argument caused the exception, and the <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
+            
+
              property includes a <see
              cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.MatchTimeout" />
+
+            
 
             
 
@@ -557,6 +675,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              do not override the behavior of inherited members. </para
           >
         </item>
@@ -564,6 +684,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
           <para
             >Determine whether your custom exception object is serializable. Serialization enables you to save information about the exception and permits exception information to be shared by a server and a client proxy in a remoting context. To make the exception object serializable, mark it with the <see
              cref="T:System.SerializableAttribute" />
+
+            
 
             
 
@@ -579,12 +701,16 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
                 
 
+                
+
                 , which uses default values to initialize the properties of a new exception object. </para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Exception.#ctor(System.String)" />
+
+                
 
                 
 
@@ -597,12 +723,16 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
                 
 
+                
+
                 , which initializes a new exception object with a specified error message and inner exception. </para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+                
 
                 
 
@@ -618,13 +748,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Serialization.StreamingContext" />
 
         
 
+        
+
          parameters for serialization, the NotPrimeException class defines three additional constructors to support the NonPrime property.  Each constructor calls a base class constructor in addition to preserving the value of the non-prime number. The NotPrimeException class is also marked with the <see
          cref="T:System.SerializableAttribute" />
+
+        
 
         
 
@@ -641,6 +777,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
       <para
         >In net_win8_profile for win8, some exception information is typically lost when an exception is propagated through non-.NET Framework stack frames. Starting with the net_v451 and win81, the common language runtime continues to use the original <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -680,11 +818,15 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error and takes into account the current system culture.</para
           >
           <para
             >All the derived classes should provide this default constructor. The following table shows the initial property values for an instance of <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -731,6 +873,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -766,8 +910,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              property of the new instance by using the <paramref
              name="message" />
+
+            
 
             
 
@@ -776,8 +924,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              parameter is null, this is the same as calling the <see
              cref="M:System.Exception.#ctor" />
+
+            
 
             
 
@@ -786,6 +938,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -832,11 +986,15 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -877,6 +1035,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -888,6 +1048,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -896,8 +1058,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -908,8 +1074,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -950,8 +1120,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -960,11 +1134,15 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -1011,6 +1189,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
@@ -1019,10 +1199,14 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
           
 
+          
+
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1059,8 +1243,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Exception.Data" />
+
+            
 
             
 
@@ -1072,6 +1260,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
           <para
             >The key/value pairs stored in the collection returned by the <see
              cref="P:System.Exception.Data" />
+
+            
 
             
 
@@ -1095,11 +1285,15 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              object in some nonstandard way; otherwise, the remaining key/value pairs are formatted in some normal manner.</para
           >
           <para
             >Now suppose, in another scenario, the exception handler at each level of the call stack hierarchy catches the exception thrown by the next lower-level exception handler. In addition, each exception handler knows the collection returned by the <see
              cref="P:System.Exception.Data" />
+
+            
 
             
 
@@ -1113,8 +1307,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
               
 
+              
+
               , <see
                cref="T:System.OutOfMemoryException" />
+
+              
 
               
 
@@ -1123,13 +1321,19 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
               
 
+              
+
                and <see
                cref="T:System.Threading.ThreadAbortException" />
 
               
 
+              
+
                classes always return null for the value of the <see
                cref="P:System.Exception.Data" />
+
+              
 
               
 
@@ -1172,6 +1376,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              method.</para
           >
           <code lang="C#"
@@ -1201,6 +1407,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              that is the root cause of one or more subsequent exceptions.</para
           >
         </summary>
@@ -1209,6 +1417,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
           <para
             >The first exception thrown in a chain of exceptions. If the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -1249,6 +1459,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the SerializationInfo transmitted over the stream.</para
           >
         </remarks>
@@ -1260,6 +1472,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              with information about the exception.</para
           >
         </summary>
@@ -1268,8 +1482,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1280,8 +1498,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1314,8 +1536,12 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
              method exists to support the .NET Framework infrastructure, and internally invokes the fundamental method, <see
              cref="M:System.Object.GetType" />
+
+            
 
             
 
@@ -1331,6 +1557,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1388,11 +1616,15 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
 
             
 
+            
+
             . </para
           >
           <para
             >Starting with the net_v45, the <see
              cref="P:System.Exception.HResult" />
+
+            
 
             
 
@@ -1430,6 +1662,8 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
           <para
             >An instance of <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -1488,8 +1722,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              is thrown as a direct result of a previous exception <paramref
              name="Y" />
+
+            
 
             
 
@@ -1498,8 +1736,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              should contain a reference to <paramref
              name="Y" />
+
+            
 
             
 
@@ -1513,8 +1755,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              is thrown. The function catches the <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -1523,8 +1769,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
             . The <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -1533,13 +1783,19 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              property of the <see
              cref="T:System.IO.FileNotFoundException" />
 
             
 
+            
+
             , enabling the code that catches the <see
              cref="T:System.IO.FileNotFoundException" />
+
+            
 
             
 
@@ -1551,6 +1807,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              property, which holds a reference to the inner exception, is set upon initialization of the exception object.</para
           >
         </remarks>
@@ -1559,6 +1817,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
           <para
             >Gets the <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -1593,9 +1853,13 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              that contains a detailed description of the error, or
 <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1611,6 +1875,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              property should completely describe the error and, when possible, should also explain how to correct the error. Top-level exception handlers may display the message to end-users, so you should ensure that it is grammatically correct and that each sentence of the message ends with a period. Do not use question marks or exclamation points. If your application uses localized exception messages, you should ensure that they are accurately translated. </para
           >
           <block subset="none" type="note">
@@ -1622,8 +1888,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              property is included in the information returned by <see
              cref="M:System.Exception.ToString" />
+
+            
 
             
 
@@ -1632,8 +1902,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              property is set only when creating an <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -1645,6 +1919,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
           <para
             >Starting with the net_v451 and win81, the fidelity of error messages from exceptions that are propagated from Windows Runtime types and members that are not part of the .NET Framework is improved. In particular, exception messages from Visual C++ component extensions (C++/CX) are now propagated back into .NET Framework <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -1683,6 +1959,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              interface.</para
           >
           <para
@@ -1691,8 +1969,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              event is subscribed to, the exception is deserialized and created as an empty exception. The exception's constructor is not run, and the exception state is also deserialized. The <see
              cref="M:System.Runtime.Serialization.ISafeSerializationData.CompleteDeserialization(System.Object)" />
+
+            
 
             
 
@@ -1704,6 +1986,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              event enables transparent exception types to serialize and deserialize exception data. Transparent code can execute commands within the bounds of the permission set it is operating within, but cannot execute, call, derive from, or contain critical code.</para
           >
           <para
@@ -1712,8 +1996,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              event is not subscribed to, deserialization occurs as usual using the <see
              cref="M:System.Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+            
 
             
 
@@ -1725,8 +2013,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              event is added in the exception's constructor to provide for its serialization. But because the constructor is not executed when the <see
              cref="E:System.Exception.SerializeObjectState" />
+
+            
 
             
 
@@ -1735,13 +2027,19 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              exception when you try to deserialize the exception. To avoid this, you should also add the handler for the <see
              cref="E:System.Exception.SerializeObjectState" />
 
             
 
+            
+
              event in the <see
              cref="M:System.Runtime.Serialization.ISafeSerializationData.CompleteDeserialization(System.Object)" />
+
+            
 
             
 
@@ -1773,6 +2071,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
           <para
             >If <see
              cref="P:System.Exception.Source" />
+
+            
 
             
 
@@ -1810,6 +2110,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              that describes the contents of the call stack.</para
           >
         </value>
@@ -1822,13 +2124,19 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              property returns the frames of the call stack that originate at the location where the exception was thrown. You can obtain information about additional frames in the call stack by creating a new instance of the <see
              cref="T:System.Diagnostics.StackTrace" />
 
             
 
+            
+
              class and using its <see
              cref="M:System.Diagnostics.StackTrace.ToString" />
+
+            
 
             
 
@@ -1838,6 +2146,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
           <para
             >The <see
              cref="P:System.Exception.StackTrace" />
+
+            
 
             
 
@@ -1879,8 +2189,12 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              obtains the method from the stack trace. If the stack trace is a null reference, <see
              cref="P:System.Exception.TargetSite" />
+
+            
 
             
 
@@ -1890,6 +2204,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
             <para
               >The <see
                cref="P:System.Exception.TargetSite" />
+
+              
 
               
 
@@ -1932,6 +2248,8 @@ Inner Exception is MyAppException: ExceptExample inner exception
 
             
 
+            
+
              on that Exception.</para
           >
           <code lang="C#"
@@ -1965,6 +2283,8 @@ Error: System.ArgumentException: Object must be of type String.
 
             
 
+            
+
              returns a representation of the current exception that is intended to be understood by humans. Where the exception contains culture-sensitive data, the string representation returned by ToString is required to take into account the current system culture. Although there are no exact requirements for the format of the returned string, it should attempt to reflect the value of the object as perceived by the user.</para
           >
           <para
@@ -1973,13 +2293,19 @@ Error: System.ArgumentException: Object must be of type String.
 
             
 
+            
+
              obtains the name of the class that threw the current exception, the message, the result of calling <see
              cref="M:System.Exception.ToString" />
 
             
 
+            
+
              on the inner exception, and the result of calling <see
              cref="P:System.Environment.StackTrace" />
+
+            
 
             
 
@@ -1989,6 +2315,8 @@ Error: System.ArgumentException: Object must be of type String.
           <para
             >This method overrides <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 

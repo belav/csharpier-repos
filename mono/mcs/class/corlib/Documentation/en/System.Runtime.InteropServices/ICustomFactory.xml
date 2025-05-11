@@ -28,13 +28,19 @@
 
         
 
+        
+
          class with the <see
          cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
 
         
 
+        
+
         . When the class is activated, the proxy's <see
          cref="M:System.Runtime.InteropServices.ICustomFactory.CreateInstance(System.Type)" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
       <para
         >Enables users to write activation code for managed objects that extend <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -92,11 +100,15 @@
 
             
 
+            
+
              associated with the specified type.</para
           >
         </returns>
         <param name="serverType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

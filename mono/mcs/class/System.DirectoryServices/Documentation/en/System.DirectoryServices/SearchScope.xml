@@ -99,8 +99,12 @@
 
             
 
+            
+
              property is specified for a search, the scope of the search must be set to <see
              cref="F:System.DirectoryServices.SearchScope.Base" />
+
+            
 
             
 
@@ -147,6 +151,8 @@
 
             
 
+            
+
              type of search is performed. </para
           >
         </summary>
@@ -160,6 +166,8 @@
       <para
         >Specifies the possible scopes for a directory search that is performed using the <see
          cref="T:System.DirectoryServices.DirectorySearcher" />
+
+        
 
         
 

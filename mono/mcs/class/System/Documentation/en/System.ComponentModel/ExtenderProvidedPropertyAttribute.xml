@@ -39,8 +39,12 @@
 
         
 
+        
+
          is injected automatically by the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
           
 
+          
+
            on a type that implements the <see
            cref="T:System.ComponentModel.IExtenderProvider" />
+
+          
 
           
 
@@ -62,6 +70,8 @@
            type="text/html">
             <a href="4ce043d8-cd48-49dd-abef-185a2079e96a">Extender Providers</a>
           </format>
+
+          
 
           
 
@@ -99,6 +109,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -133,8 +145,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -149,8 +165,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 

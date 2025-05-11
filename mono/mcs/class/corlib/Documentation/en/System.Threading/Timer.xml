@@ -48,6 +48,8 @@
         
 
         
+
+        
 class.</para
       >
       <code lang="C#"
@@ -123,8 +125,12 @@ class App {
 
         
 
+        
+
          delegate to specify the method you want the <see
          cref="T:System.Threading.Timer" />
+
+        
 
         
 
@@ -133,11 +139,15 @@ class App {
 
         
 
+        
+
          thread supplied by the system.</para
       >
       <para
         >When you create a timer, you can specify an amount of time to wait before the first execution of the method (due time), and an amount of time to wait between subsequent executions (period). You can change these values, or disable the timer, using the <see
          cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -150,13 +160,19 @@ class App {
 
           
 
+          
+
           , you must keep a reference to it. As with any managed object, a <see
            cref="T:System.Threading.Timer" />
 
           
 
+          
+
            is subject to garbage collection when there are no references to it. The fact that a <see
            cref="T:System.Threading.Timer" />
+
+          
 
           
 
@@ -169,13 +185,19 @@ class App {
 
         
 
+        
+
          method to free the resources held by the timer. Note that callbacks can occur after the <see
          cref="M:System.Threading.Timer.Dispose" />
 
         
 
+        
+
          method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see
          cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" />
+
+        
 
         
 
@@ -187,6 +209,8 @@ class App {
 
         
 
+        
+
          threads. The callback can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the callback, or if all thread pool threads are in use and the callback is queued multiple times.</para
       >
       <block subset="none" type="note">
@@ -195,13 +219,19 @@ class App {
 
           
 
+          
+
            is a simple, lightweight timer that uses callback methods and is served by thread pool threads. It is not recommended for use with Windows Forms, because its callbacks do not occur on the user interface thread. <see
            cref="T:System.Windows.Forms.Timer" />
 
           
 
+          
+
            is a better choice for use with Windows Forms. For server-based timer functionality, you might consider using <see
            cref="T:System.Timers.Timer" />
+
+          
 
           
 
@@ -242,8 +272,12 @@ class App {
 
             
 
+            
+
              object itself as the state object. After creating the timer, use the <see
              cref="Overload:System.Threading.Timer.Change" />
+
+            
 
             
 
@@ -255,6 +289,8 @@ class App {
 
             
 
+            
+
              object is assigned to the state object. </para
           >
           <para
@@ -263,8 +299,12 @@ class App {
 
             
 
+            
+
              should be reentrant, because it is called on <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -279,8 +319,12 @@ class App {
 
             
 
+            
+
              class with an infinite period and an infinite due time, using the newly created <see
              cref="T:System.Threading.Timer" />
+
+            
 
             
 
@@ -292,8 +336,12 @@ class App {
 
           
 
+          
+
           A <see
            cref="T:System.Threading.TimerCallback" />
+
+          
 
           
 
@@ -333,13 +381,19 @@ class App {
 
           
 
+          
+
            or <paramref
            name="period" />
 
           
 
+          
+
            is negative and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -350,8 +404,12 @@ class App {
 
           
 
+          
+
            is a <see
            langword="null" />
+
+          
 
           
 
@@ -365,13 +423,19 @@ class App {
 
             
 
+            
+
              parameter is invoked once after <paramref
              name="dueTime" />
 
             
 
+            
+
              elapses, and thereafter each time the <paramref
              name="period" />
+
+            
 
             
 
@@ -385,6 +449,8 @@ class App {
 
               
 
+              
+
                constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para
             >
           </block>
@@ -394,8 +460,12 @@ class App {
 
             
 
+            
+
              is zero (0), <paramref
              name="callback" />
+
+            
 
             
 
@@ -404,8 +474,12 @@ class App {
 
             
 
+            
+
              is <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -414,8 +488,12 @@ class App {
 
             
 
+            
+
              is not invoked; the timer is disabled, but can be re-enabled by calling the <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -427,8 +505,12 @@ class App {
 
             
 
+            
+
              is zero (0) or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -437,8 +519,12 @@ class App {
 
             
 
+            
+
              is not <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -447,8 +533,12 @@ class App {
 
             
 
+            
+
              is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -460,8 +550,12 @@ class App {
 
             
 
+            
+
              should be reentrant, because it is called on <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -477,8 +571,12 @@ class App {
 
           
 
+          
+
           A <see
            cref="T:System.Threading.TimerCallback" />
+
+          
 
           
 
@@ -489,10 +587,14 @@ class App {
 
           
 
+          
+
           An object containing information to be used by the callback method, or null. </param
         >
         <param name="dueTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -501,8 +603,12 @@ class App {
 
           
 
+          
+
            is invoked, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -513,13 +619,19 @@ class App {
 
           
 
+          
+
           The time interval between invocations of <paramref
            name="callback" />
 
           
 
+          
+
           , in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -558,13 +670,19 @@ class App {
 
             
 
+            
+
              parameter is invoked once after <paramref
              name="dueTime" />
 
             
 
+            
+
              elapses, and thereafter each time the <paramref
              name="period" />
+
+            
 
             
 
@@ -578,6 +696,8 @@ class App {
 
               
 
+              
+
                constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para
             >
           </block>
@@ -587,8 +707,12 @@ class App {
 
             
 
+            
+
              is zero (0), <paramref
              name="callback" />
+
+            
 
             
 
@@ -597,8 +721,12 @@ class App {
 
             
 
+            
+
              is <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -607,8 +735,12 @@ class App {
 
             
 
+            
+
              is not invoked; the timer is disabled, but can be re-enabled by calling the <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -620,8 +752,12 @@ class App {
 
             
 
+            
+
              is zero (0) or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -630,8 +766,12 @@ class App {
 
             
 
+            
+
              is not <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -640,8 +780,12 @@ class App {
 
             
 
+            
+
              is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -653,8 +797,12 @@ class App {
 
             
 
+            
+
              should be reentrant, because it is called on <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -670,8 +818,12 @@ class App {
 
           
 
+          
+
           A <see
            cref="T:System.Threading.TimerCallback" />
+
+          
 
           
 
@@ -682,10 +834,14 @@ class App {
 
           
 
+          
+
           An object containing information to be used by the callback method, or null. </param
         >
         <param name="dueTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -694,8 +850,12 @@ class App {
 
           
 
+          
+
            is invoked, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -706,13 +866,19 @@ class App {
 
           
 
+          
+
           The time interval between invocations of <paramref
            name="callback" />
 
           
 
+          
+
           , in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -753,8 +919,12 @@ class App {
 
           
 
+          
+
            or <paramref
            name="period" />
+
+          
 
           
 
@@ -763,8 +933,12 @@ class App {
 
           
 
+          
+
           , or is greater than <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -775,8 +949,12 @@ class App {
 
           
 
+          
+
            is a <see
            langword="null" />
+
+          
 
           
 
@@ -790,13 +968,19 @@ class App {
 
             
 
+            
+
              parameter is invoked once after <paramref
              name="dueTime" />
 
             
 
+            
+
              elapses, and thereafter each time the <paramref
              name="period" />
+
+            
 
             
 
@@ -810,6 +994,8 @@ class App {
 
               
 
+              
+
                constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para
             >
           </block>
@@ -819,8 +1005,12 @@ class App {
 
             
 
+            
+
              is zero (0), <paramref
              name="callback" />
+
+            
 
             
 
@@ -829,13 +1019,19 @@ class App {
 
             
 
+            
+
              is negative one (-1) milliseconds, <paramref
              name="callback" />
 
             
 
+            
+
              is not invoked; the timer is disabled, but can be re-enabled by calling the <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -847,8 +1043,12 @@ class App {
 
             
 
+            
+
              is zero (0) or negative one (-1) milliseconds and <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -857,8 +1057,12 @@ class App {
 
             
 
+            
+
              is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -870,8 +1074,12 @@ class App {
 
             
 
+            
+
              should be reentrant, because it is called on <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -886,6 +1094,8 @@ class App {
 
             
 
+            
+
              values to measure time intervals.</para
           >
         </summary>
@@ -894,8 +1104,12 @@ class App {
 
           
 
+          
+
           A <see
            cref="T:System.Threading.TimerCallback" />
+
+          
 
           
 
@@ -906,10 +1120,14 @@ class App {
 
           
 
+          
+
           An object containing information to be used by the callback method, or null. </param
         >
         <param name="dueTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -918,8 +1136,12 @@ class App {
 
           
 
+          
+
            representing the amount of time to delay before the <paramref
            name="callback" />
+
+          
 
           
 
@@ -930,8 +1152,12 @@ class App {
 
           
 
+          
+
           The time interval between invocations of the methods referenced by <paramref
            name="callback" />
+
+          
 
           
 
@@ -975,13 +1201,19 @@ class App {
 
             
 
+            
+
              parameter is invoked once after <paramref
              name="dueTime" />
 
             
 
+            
+
              elapses, and thereafter each time the <paramref
              name="period" />
+
+            
 
             
 
@@ -995,6 +1227,8 @@ class App {
 
               
 
+              
+
                constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para
             >
           </block>
@@ -1004,8 +1238,12 @@ class App {
 
             
 
+            
+
              is zero (0), <paramref
              name="callback" />
+
+            
 
             
 
@@ -1014,8 +1252,12 @@ class App {
 
             
 
+            
+
              is <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -1024,8 +1266,12 @@ class App {
 
             
 
+            
+
              is not invoked; the timer is disabled, but can be re-enabled by calling the <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1037,8 +1283,12 @@ class App {
 
             
 
+            
+
              is zero (0) or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -1047,8 +1297,12 @@ class App {
 
             
 
+            
+
              is not <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -1057,8 +1311,12 @@ class App {
 
             
 
+            
+
              is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1070,8 +1328,12 @@ class App {
 
             
 
+            
+
              should be reentrant, because it is called on <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -1087,8 +1349,12 @@ class App {
 
           
 
+          
+
           A <see
            cref="T:System.Threading.TimerCallback" />
+
+          
 
           
 
@@ -1099,10 +1365,14 @@ class App {
 
           
 
+          
+
           An object containing information to be used by the callback method, or null. </param
         >
         <param name="dueTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1111,8 +1381,12 @@ class App {
 
           
 
+          
+
            is invoked, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1123,13 +1397,19 @@ class App {
 
           
 
+          
+
           The time interval between invocations of <paramref
            name="callback" />
 
           
 
+          
+
           , in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1166,13 +1446,19 @@ class App {
 
           
 
+          
+
            or <paramref
            name="period" />
 
           
 
+          
+
            is negative and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1186,8 +1472,12 @@ class App {
 
             
 
+            
+
              elapses, and thereafter each time the time interval specified by <paramref
              name="period" />
+
+            
 
             
 
@@ -1199,8 +1489,12 @@ class App {
 
             
 
+            
+
              is zero (0), the callback method is invoked immediately. If <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1209,13 +1503,19 @@ class App {
 
             
 
+            
+
             , the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
 
             
 
+            
+
              and specifying a positive value for <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1227,8 +1527,12 @@ class App {
 
             
 
+            
+
              is zero (0) or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -1237,13 +1541,19 @@ class App {
 
             
 
+            
+
              is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
 
             
 
+            
+
              and specifying a positive value for <paramref
              name="period" />
+
+            
 
             
 
@@ -1263,13 +1573,19 @@ class App {
 
           
 
+          
+
           The amount of time to delay before the invoking the callback method specified when the <see
            cref="T:System.Threading.Timer" />
 
           
 
+          
+
            was constructed, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1280,13 +1596,19 @@ class App {
 
           
 
+          
+
           The time interval between invocations of the callback method specified when the <see
            cref="T:System.Threading.Timer" />
 
           
 
+          
+
            was constructed, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1323,8 +1645,12 @@ class App {
 
             
 
+            
+
              elapses, and thereafter each time the time interval specified by <paramref
              name="period" />
+
+            
 
             
 
@@ -1336,8 +1662,12 @@ class App {
 
             
 
+            
+
              is zero (0), the callback method is invoked immediately. If <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1346,13 +1676,19 @@ class App {
 
             
 
+            
+
             , the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
 
             
 
+            
+
              and specifying a positive value for <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1364,8 +1700,12 @@ class App {
 
             
 
+            
+
              is zero (0) or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -1374,13 +1714,19 @@ class App {
 
             
 
+            
+
              is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
 
             
 
+            
+
              and specifying a positive value for <paramref
              name="period" />
+
+            
 
             
 
@@ -1400,13 +1746,19 @@ class App {
 
           
 
+          
+
           The amount of time to delay before the invoking the callback method specified when the <see
            cref="T:System.Threading.Timer" />
 
           
 
+          
+
            was constructed, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1417,13 +1769,19 @@ class App {
 
           
 
+          
+
           The time interval between invocations of the callback method specified when the <see
            cref="T:System.Threading.Timer" />
 
           
 
+          
+
            was constructed, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1463,13 +1821,19 @@ class App {
 
           
 
+          
+
            or <paramref
            name="period" />
 
           
 
+          
+
            is negative and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1483,8 +1847,12 @@ class App {
 
             
 
+            
+
              elapses, and thereafter each time the time interval specified by <paramref
              name="period" />
+
+            
 
             
 
@@ -1496,8 +1864,12 @@ class App {
 
             
 
+            
+
              is zero (0), the callback method is invoked immediately. If <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1506,8 +1878,12 @@ class App {
 
             
 
+            
+
              and specifying a positive value for <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1519,8 +1895,12 @@ class App {
 
             
 
+            
+
              is zero (0) or negative one (-1) milliseconds, and <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1529,8 +1909,12 @@ class App {
 
             
 
+            
+
              and specifying a value greater than zero for <paramref
              name="period" />
+
+            
 
             
 
@@ -1542,6 +1926,8 @@ class App {
           <para
             >Changes the start time and the interval between method invocations for a timer, using <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1557,13 +1943,19 @@ class App {
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            representing the amount of time to delay before invoking the callback method specified when the <see
            cref="T:System.Threading.Timer" />
+
+          
 
           
 
@@ -1574,8 +1966,12 @@ class App {
 
           
 
+          
+
           The time interval between invocations of the callback method specified when the <see
            cref="T:System.Threading.Timer" />
+
+          
 
           
 
@@ -1617,8 +2013,12 @@ class App {
 
             
 
+            
+
              elapses, and thereafter each time the time interval specified by <paramref
              name="period" />
+
+            
 
             
 
@@ -1630,8 +2030,12 @@ class App {
 
             
 
+            
+
              is zero (0), the callback method is invoked immediately. If <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1640,13 +2044,19 @@ class App {
 
             
 
+            
+
             , the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
 
             
 
+            
+
              and specifying a positive value for <paramref
              name="dueTime" />
+
+            
 
             
 
@@ -1658,8 +2068,12 @@ class App {
 
             
 
+            
+
              is zero (0) or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -1668,13 +2082,19 @@ class App {
 
             
 
+            
+
              is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see
              cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" />
 
             
 
+            
+
              and specifying a positive value for <paramref
              name="period" />
+
+            
 
             
 
@@ -1694,13 +2114,19 @@ class App {
 
           
 
+          
+
           The amount of time to delay before the invoking the callback method specified when the <see
            cref="T:System.Threading.Timer" />
 
           
 
+          
+
            was constructed, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1711,13 +2137,19 @@ class App {
 
           
 
+          
+
           The time interval between invocations of the callback method specified when the <see
            cref="T:System.Threading.Timer" />
 
           
 
+          
+
            was constructed, in milliseconds. Specify <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1754,12 +2186,16 @@ class App {
 
             
 
+            
+
              to be reallocated for other purposes. For more information about Dispose, see <format
              type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1772,8 +2208,12 @@ class App {
 
               
 
+              
+
                method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see
                cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" />
+
+              
 
               
 
@@ -1786,6 +2226,8 @@ class App {
           <para
             >Releases all resources used by the current instance of <see
              cref="T:System.Threading.Timer" />
+
+            
 
             
 
@@ -1826,8 +2268,12 @@ class App {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1841,12 +2287,16 @@ class App {
 
             
 
+            
+
              to be reallocated for other purposes. For more information about Dispose, see <format
              type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1858,13 +2308,19 @@ class App {
 
             
 
+            
+
              specified by the <paramref
              name="notifyObject" />
 
             
 
+            
+
              parameter. Use this overload of the <see
              cref="Overload:System.Threading.Timer.Dispose" />
+
+            
 
             
 
@@ -1877,8 +2333,12 @@ class App {
 
               
 
+              
+
                method to set the <paramref
                name="dueTime" />
+
+              
 
               
 
@@ -1887,8 +2347,12 @@ class App {
 
               
 
+              
+
                method overload is called: If the timer queues a new callback before the <see
                cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" />
+
+              
 
               
 
@@ -1897,13 +2361,19 @@ class App {
 
               
 
+              
+
                continues to block; otherwise, the timer is disposed while the new callback is being queued, and an <see
                cref="T:System.ObjectDisposedException" />
 
               
 
+              
+
                is thrown when the new callback calls the <see
                cref="Overload:System.Threading.Timer.Change" />
+
+              
 
               
 
@@ -1919,6 +2389,8 @@ class App {
 
             
 
+            
+
              and signals when the timer has been disposed of.</para
           >
         </summary>
@@ -1931,8 +2403,12 @@ class App {
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 

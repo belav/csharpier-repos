@@ -38,6 +38,8 @@
 
         
 
+        
+
          can be used to represent a namespace import directive.</para
       >
       <para>In most languages, a namespace import directive causes visibility of the types within the imported namespaces to code that references types in the imported namespaces.</para>
@@ -75,6 +77,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -106,11 +110,15 @@
 
             
 
+            
+
              class using the specified namespace to import.</para
           >
         </summary>
         <param name="nameSpace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

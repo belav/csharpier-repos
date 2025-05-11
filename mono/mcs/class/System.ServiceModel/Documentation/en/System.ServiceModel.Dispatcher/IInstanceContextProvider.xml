@@ -22,8 +22,12 @@
 
         
 
+        
+
          interface to provide the appropriate <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          to decide which session or call from a client is associated with which <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -44,6 +52,8 @@
          type="text/html">
           <a href="4a6a46d7-b7d7-4bb5-a0dd-03ffa3cbc230">InstanceContextSharing</a>
         </format>
+
+        
 
         
 
@@ -56,13 +66,19 @@
 
           
 
+          
+
            is inserted into indigo1, the normal property that controls the creation of <see
            cref="T:System.ServiceModel.InstanceContext" />
 
           
 
+          
+
            objects (the <see
            cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+          
 
           
 
@@ -75,13 +91,19 @@
 
         
 
+        
+
          objects when created (for example, to attach custom extensions to each <see
          cref="T:System.ServiceModel.InstanceContext" />
 
         
 
+        
+
         ) is the <see
          cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
+
+        
 
         
 
@@ -93,6 +115,8 @@
       <para
         >Implement to participate in the creation or choosing of a <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -130,8 +154,12 @@
 
             
 
+            
+
              method is called when a message is received. Return the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -140,8 +168,12 @@
 
             
 
+            
+
              object for the message and then calls the <see
              cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.InitializeInstanceContext(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
+
+            
 
             
 
@@ -153,8 +185,12 @@
 
             
 
+            
+
              object goes through the throttling system and increments the count of <see
              cref="P:System.ServiceModel.Dispatcher.ServiceThrottle.MaxConcurrentInstances" />
+
+            
 
             
 
@@ -173,8 +209,12 @@
 
             
 
+            
+
              object that is used to process the message; return null to instruct indigo2 to create a new <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -186,10 +226,14 @@
 
           
 
+          
+
           The incoming message.</param
         >
         <param name="channel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,8 +270,12 @@
 
             
 
+            
+
              is called when <see
              cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.GetExistingInstanceContext(System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
+
+            
 
             
 
@@ -236,8 +284,12 @@
 
             
 
+            
+
              object is created. This method is called to notify you that a new <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -252,6 +304,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -260,8 +314,12 @@
 
           
 
+          
+
           The new <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -272,10 +330,14 @@
 
           
 
+          
+
           The incoming message.</param
         >
         <param name="channel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,8 +372,12 @@
 
             
 
+            
+
              is called when indigo2 is about to close and recycle an idle <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -322,6 +388,8 @@
              type="text/html">
               <a href="4a6a46d7-b7d7-4bb5-a0dd-03ffa3cbc230">InstanceContextSharing</a>
             </format>
+
+            
 
             
 
@@ -336,8 +404,12 @@
 
             
 
+            
+
              activities have completed to enable implementers to prevent the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -352,8 +424,12 @@
 
             
 
+            
+
              object and adjust the value of <see
              cref="P:System.ServiceModel.Dispatcher.ServiceThrottle.MaxConcurrentInstances" />
+
+            
 
             
 
@@ -365,8 +441,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -406,8 +486,12 @@
 
             
 
+            
+
              method is called when the <see
              cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
+
+            
 
             
 
@@ -416,8 +500,12 @@
 
             
 
+            
+
              object that you use to inform the runtime that the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -426,8 +514,12 @@
 
             
 
+            
+
              object notifies the runtime that the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -436,8 +528,12 @@
 
             
 
+            
+
              once again. This cycle continues until <see
              cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
+
+            
 
             
 
@@ -452,8 +548,12 @@
 
             
 
+            
+
              method returns false to enable implementers to provide a callback to notify indigo2 when the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -465,13 +565,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.InstanceContextIdleCallback" />
 
           
 
+          
+
            object that notifies indigo2 when the <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -482,8 +588,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 

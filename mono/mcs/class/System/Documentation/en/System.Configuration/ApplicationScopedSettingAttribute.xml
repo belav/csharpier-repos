@@ -36,6 +36,8 @@
 
         
 
+        
+
          indicates that a property should be considered an application-level setting, and that appropriate storage decisions should be made accordingly by the settings provider. </para
       >
       <para
@@ -44,13 +46,19 @@
 
         
 
+        
+
          or <see
          cref="T:System.Configuration.UserScopedSettingAttribute" />
 
         
 
+        
+
         , the property is not recognized by the settings provider—it is not serialized. It is invalid, however, to apply both attributes to the same property. Such an attempt will cause a <see
          cref="T:System.Configuration.ConfigurationErrorsException" />
+
+        
 
         
 
@@ -86,6 +94,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.ApplicationScopedSettingAttribute" />
+
+            
 
             
 

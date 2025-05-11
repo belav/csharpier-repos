@@ -26,8 +26,12 @@
 
         
 
+        
+
          replaces the <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -36,13 +40,19 @@
 
         
 
+        
+
          include a custom table layout, support for the form's sizing and moving grips, and support for the <see
          cref="P:System.Windows.Forms.ToolStripStatusLabel.Spring" />
 
         
 
+        
+
          property, which allows a <see
          cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+        
 
         
 
@@ -54,13 +64,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
         
 
+        
+
          in all orientations. They are available by default at design time for the <see
          cref="T:System.Windows.Forms.StatusStrip" />
+
+        
 
         
 
@@ -94,8 +110,12 @@
 
         
 
+        
+
          control displays information about an object being viewed on a <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -104,8 +124,12 @@
 
         
 
+        
+
          control consists of <see
          cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+        
 
         
 
@@ -114,8 +138,12 @@
 
         
 
+        
+
          can also contain <see
          cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+        
 
         
 
@@ -124,8 +152,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+        
 
         
 
@@ -137,13 +169,19 @@
 
         
 
+        
+
          has no panels. To add panels to a <see
          cref="T:System.Windows.Forms.StatusStrip" />
 
         
 
+        
+
         , use the <see
          cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" />
+
+        
 
         
 
@@ -154,10 +192,14 @@
 
         
 
+        
+
          at design time to add, remove, or reorder items and modify properties. Use the <format
          type="text/html">
           <a href="c150678b-4873-4743-b23f-84fb3126582c">StatusStrip Tasks Dialog Box</a>
         </format>
+
+        
 
         
 
@@ -169,13 +211,19 @@
 
         
 
+        
+
          replaces and extends the <see
          cref="T:System.Windows.Forms.StatusBar" />
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -200,6 +248,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -239,6 +289,8 @@
 
             
 
+            
+
              supports overflow functionality.</para
           >
         </summary>
@@ -266,8 +318,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -277,6 +333,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+              
 
               
 
@@ -293,6 +351,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -327,13 +387,19 @@
 
             
 
+            
+
              method to add a <see
              cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 
+            
+
              with commonly used characteristics to a <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -348,8 +414,12 @@
 
             
 
+            
+
              with the specified text, image, and event handler on a new <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -364,13 +434,19 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
+            
+
              if the <paramref
              name="text" />
+
+            
 
             
 
@@ -382,8 +458,12 @@
 
           
 
+          
+
           The text to use for the <see
            cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+          
 
           
 
@@ -392,8 +472,12 @@
 
           
 
+          
+
            parameter is a hyphen (-), this method creates a <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 
@@ -404,13 +488,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+          
 
           
 
@@ -421,13 +511,19 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.Control.Click" />
 
           
 
+          
+
            event when the <see
            cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+          
 
           
 
@@ -456,8 +552,12 @@
 
             
 
+            
+
              are docked to the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -489,6 +589,8 @@
 
             
 
+            
+
              property to set the interior space between controls. When a control is a container of items, padding represents the space from the edge of the container.</para
           >
         </remarks>
@@ -497,6 +599,8 @@
           <para
             >Gets the spacing, in pixels, between the left, right, top, and bottom edges of the <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -529,6 +633,8 @@
 
             
 
+            
+
              by default.</para
           >
         </summary>
@@ -555,6 +661,8 @@
           <para
             >Gets the size, in pixels, of the <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -585,8 +693,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -595,8 +707,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -608,8 +724,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -624,11 +744,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,8 +783,12 @@
 
             
 
+            
+
              property to define how a <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -669,13 +797,19 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.DockStyle.Left" />
 
             
 
+            
+
              causes the <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -691,8 +825,12 @@
 
             
 
+            
+
              borders are docked to its parent control and determines how a <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -729,8 +867,12 @@
 
             
 
+            
+
              property set to true and the <see
              cref="P:System.Windows.Forms.StatusStrip.GripStyle" />
+
+            
 
             
 
@@ -739,8 +881,12 @@
 
             
 
+            
+
              property to one of the overflow values. If the <see
              cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+
+            
 
             
 
@@ -749,8 +895,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+
+            
 
             
 
@@ -791,8 +941,12 @@
 
             
 
+            
+
              property to get or set how items are arranged on the <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -804,6 +958,8 @@
           <para
             >Gets or sets a value indicating how the <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -843,11 +999,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="levent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -882,11 +1042,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.StatusStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -902,13 +1066,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
+          
+
            that contains information about the <see
            cref="T:System.Windows.Forms.StatusStrip" />
+
+          
 
           
 
@@ -938,13 +1108,19 @@
 
             
 
+            
+
              to do custom table layouts. The default value of <see
              cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+
+            
 
             
 
@@ -956,6 +1132,8 @@
           <para
             >Provides custom table layout for a <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -1052,8 +1230,12 @@
 
             
 
+            
+
              property to get or set <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1065,6 +1247,8 @@
           <para
             >Gets or sets a value indicating whether ToolTips are shown for the <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -1102,6 +1286,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1132,8 +1318,12 @@
 
             
 
+            
+
              property to display a grip to provide an indication to the user of when a <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -1145,8 +1335,12 @@
 
             
 
+            
+
              property set to true and the <see
              cref="P:System.Windows.Forms.StatusStrip.GripStyle" />
+
+            
 
             
 
@@ -1155,8 +1349,12 @@
 
             
 
+            
+
              property to one of the overflow values. If the <see
              cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+
+            
 
             
 
@@ -1165,8 +1363,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+
+            
 
             
 
@@ -1202,6 +1404,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 

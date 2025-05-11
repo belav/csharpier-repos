@@ -27,13 +27,19 @@
 
         
 
+        
+
         , which stores configuration data to the local file system in files with the extension .config. The contents of configuration files are structured as XML documents. User-scoped settings are persisted in a file with the name username.config. Within this file, data is stored as elements within a &lt;userSettings&gt; section. Each of these sections is represented by a corresponding <see
          cref="T:System.Configuration.ClientSettingsSection" />
 
         
 
+        
+
         . Each section object is owned and administered by a configuration section handler, which is an <see
          cref="T:System.Configuration.IConfigurationSectionHandler" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          class represents a simple extension of the <see
          cref="T:System.Configuration.ConfigurationSection" />
+
+        
 
         
 
@@ -57,6 +67,8 @@
          type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
         </format>
+
+        
 
         
 
@@ -91,8 +103,12 @@
 
             
 
+            
+
              constructor initializes the <see
              cref="P:System.Configuration.ClientSettingsSection.Settings" />
+
+            
 
             
 
@@ -104,6 +120,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.ClientSettingsSection" />
+
+            
 
             
 
@@ -166,6 +184,8 @@
           <para
             >The <see
              cref="P:System.Configuration.ClientSettingsSection.Settings" />
+
+            
 
             
 

@@ -14,13 +14,19 @@
 
         
 
+        
+
          namespace contains classes that define culture-related information, including language, country/region, calendars in use, format patterns for dates, currency, and numbers, and sort order for strings. These classes are useful for writing globalized (internationalized) applications. Classes such as <see
          cref="T:System.Globalization.StringInfo" />
 
         
 
+        
+
          and <see
          cref="T:System.Globalization.TextInfo" />
+
+        
 
         
 
@@ -32,6 +38,8 @@
       <para
         >The following MSDN blogs include discussions of the <see
          cref="N:System.Globalization" />
+
+        
 
         
 

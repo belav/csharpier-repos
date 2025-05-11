@@ -32,11 +32,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Spin locks can be used for leaf-level locks where the object allocation implied by using a <see
          cref="T:System.Threading.Monitor" />
+
+        
 
         
 
@@ -67,8 +71,12 @@
 
         
 
+        
+
          should only be used after you have been determined that doing so will improve an application's performance. It is also important to note that <see
          cref="T:System.Threading.SpinLock" />
+
+        
 
         
 
@@ -77,8 +85,12 @@
 
         
 
+        
+
          instance, as the two instances (the original and the copy) would then be completely independent of one another, which would likely lead to erroneous behavior of the application. If a <see
          cref="T:System.Threading.SpinLock" />
+
+        
 
         
 
@@ -87,6 +99,8 @@
       <para
         >Do not store <see
          cref="T:System.Threading.SpinLock" />
+
+        
 
         
 
@@ -121,6 +135,8 @@
 
             
 
+            
+
              tracks thread ownership.</para
           >
         </remarks>
@@ -132,11 +148,15 @@
 
             
 
+            
+
              structure with the option to track thread IDs to improve debugging.</para
           >
         </summary>
         <param name="enableThreadOwnerTracking">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,8 +214,12 @@
 
             
 
+            
+
              provides the same behavior as if calling <see
              cref="M:System.Threading.SpinLock.Exit(System.Boolean)" />
+
+            
 
             
 
@@ -207,13 +231,19 @@
 
             
 
+            
+
              without having first called <see
              cref="M:System.Threading.SpinLock.Enter(System.Boolean@)" />
 
             
 
+            
+
               the internal state of the <see
              cref="T:System.Threading.SpinLock" />
+
+            
 
             
 
@@ -256,8 +286,12 @@
 
             
 
+            
+
              with the <paramref
              name="useMemoryBarrier" />
+
+            
 
             
 
@@ -266,8 +300,12 @@
 
             
 
+            
+
              overload behaves as if specifying true for <paramref
              name="useMemoryBarrier" />
+
+            
 
             
 
@@ -279,13 +317,19 @@
 
             
 
+            
+
              without having first called <see
              cref="M:System.Threading.SpinLock.Enter(System.Boolean@)" />
 
             
 
+            
+
              the internal state of the <see
              cref="T:System.Threading.SpinLock" />
+
+            
 
             
 
@@ -298,6 +342,8 @@
         </summary>
         <param name="useMemoryBarrier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

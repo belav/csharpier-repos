@@ -99,7 +99,8 @@
     >
       <_ImplicitlySkipAnalyzers>true</_ImplicitlySkipAnalyzers>
       <_SkipAnalyzers>true</_SkipAnalyzers>
-      <Features>run-nullable-analysis=never;$(Features)</Features>
+      <Features
+>run-nullable-analysis=never;$(Features)</Features>
     </PropertyGroup>
     <!-- Display a message to inform the users about us implicitly skipping analyzers for speeding up indirect builds. -->
     <ShowMessageForImplicitlySkipAnalyzers Condition="'$(_ImplicitlySkipAnalyzers)' == 'true'" />

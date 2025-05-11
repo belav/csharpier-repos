@@ -27,8 +27,12 @@
 
         
 
+        
+
         , which stores configuration data to the local file system. However, you can create alternate storage mechanisms by deriving from the abstract <see
          cref="T:System.Configuration.SettingsProvider" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
         . If this attribute is not provided, the default, <see
          cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+        
 
         
 
@@ -50,13 +58,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
 
         
 
+        
+
          and <see
          cref="P:System.Configuration.SettingsProvider.ApplicationName" />
+
+        
 
         
 
@@ -68,8 +82,12 @@
 
         
 
+        
+
          interface. This interface mirrors methods found in the <see
          cref="T:System.Configuration.ApplicationSettingsBase" />
+
+        
 
         
 
@@ -82,8 +100,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Configuration.UserScopedSettingAttribute" />
+
+        
 
         
 
@@ -92,10 +114,14 @@
 
         
 
+        
+
         . For a full listing of attributes that can be applied to application settings, see <format
          type="text/html">
           <a href="53caa66c-a9fb-43a5-953c-ad092590098d">Application Settings Attributes</a>
         </format>
+
+        
 
         
 
@@ -115,13 +141,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.Configuration.UserScopedSettingAttribute" />
 
             
 
+            
+
             ; the provider should throw a <see
              cref="T:System.Configuration.ConfigurationException" />
+
+            
 
             
 
@@ -158,6 +190,8 @@
 
             
 
+            
+
              method typically performs all initialization.</para
           >
           <para>Client code typically does not directly instantiate a settings provider; instead, you use the following procedure to find a settings provider for a particular settings property:</para>
@@ -169,8 +203,12 @@
 
                 
 
+                
+
                  method on the current <see
                  cref="T:System.ComponentModel.Component" />
+
+                
 
                 
 
@@ -179,8 +217,12 @@
 
                 
 
+                
+
                  to return a reference to the current <see
                  cref="T:System.Configuration.ISettingsProviderService" />
+
+                
 
                 
 
@@ -194,8 +236,12 @@
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Configuration.ISettingsProviderService" />
+
+                
 
                 
 
@@ -209,6 +255,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Configuration.SettingsProvider" />
+
+            
 
             
 
@@ -239,8 +287,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Configuration.Provider.ProviderBase.Name" />
+
+            
 
             
 
@@ -284,8 +336,12 @@
 
             
 
+            
+
              method must be implemented to handle special settings, those marked with <see
              cref="T:System.Configuration.SpecialSettingAttribute" />
+
+            
 
             
 
@@ -304,6 +360,8 @@
 
             
 
+            
+
              containing the values for the specified settings property group.</para
           >
         </returns>
@@ -312,8 +370,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -324,8 +386,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyCollection" />
+
+          
 
           
 
@@ -363,8 +429,12 @@
 
             
 
+            
+
              contains the <see
              cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+
+            
 
             
 
@@ -373,8 +443,12 @@
 
             
 
+            
+
              method for each <see
              cref="T:System.Configuration.SettingsProvider" />
+
+            
 
             
 
@@ -383,6 +457,8 @@
           <para
             >The <see
              cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+
+            
 
             
 
@@ -406,8 +482,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -418,8 +498,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyValueCollection" />
+
+          
 
           
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          interface. </para
       >
     </remarks>
@@ -58,11 +60,15 @@
 
             
 
+            
+
              class using the specified object instance</para
           >
         </summary>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -99,8 +105,12 @@
 
             
 
+            
+
              is null, an empty dictionary is created. If <paramref
              name="items" />
+
+            
 
             
 
@@ -115,6 +125,8 @@
 
             
 
+            
+
              class using the specified object and an optional property bag.</para
           >
         </summary>
@@ -123,10 +135,14 @@
 
           
 
+          
+
           The object instance to validate.  It cannot be null</param
         >
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,8 +180,12 @@
 
             
 
+            
+
              parameter represents a service that can be used by the <see
              cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
+
+            
 
             
 
@@ -174,6 +194,8 @@
           <para
             >If the <paramref
              name="items" />
+
+            
 
             
 
@@ -188,11 +210,15 @@
 
             
 
+            
+
              class using the service provider and dictionary of service consumers. </para
           >
         </summary>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,8 +229,12 @@
 
           
 
+          
+
           The object that implements the <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -212,6 +242,8 @@
         >
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,13 +271,19 @@
 
             
 
+            
+
              value is the name that is shown to the user. If a display name is not explicitly set, this property uses the value that is assigned by the associated <see
              cref="T:System.ComponentModel.DataAnnotations.DisplayAttribute" />
 
             
 
+            
+
              object. If that attribute does not exist, the property returns the value of the <see
              cref="P:System.ComponentModel.DataAnnotations.ValidationContext.MemberName" />
+
+            
 
             
 
@@ -283,8 +321,12 @@
 
             
 
+            
+
              object is defined at the application level, the <see
              cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
+
+            
 
             
 
@@ -296,8 +338,12 @@
 
             
 
+            
+
              object is not defined or it does not return the service, the <see
              cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
+
+            
 
             
 
@@ -306,8 +352,12 @@
 
             
 
+            
+
              object that is passed to the <see
              cref="M:System.ComponentModel.DataAnnotations.ValidationContext.#ctor(System.Object,System.IServiceProvider,System.Collections.Generic.IDictionary{System.Object,System.Object})" />
+
+            
 
             
 
@@ -324,6 +374,8 @@
         </returns>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,6 +412,8 @@
 
             
 
+            
+
              using a service provider that can return service instances by type when <see
 
               cref="http://msdn.microsoft.com/en-us/library/system.web.mvc.idependencyresolver.getservice(VS.98).aspx"
@@ -368,11 +422,15 @@
 
             
 
+            
+
              is called.</para
           >
         </summary>
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,6 +555,8 @@
 
             
 
+            
+
              property is used for getting services during validation.</para
           >
           <para
@@ -505,8 +565,12 @@
 
             
 
+            
+
              provider that is specified in the constructor implements the <see
              cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+            
 
             
 
@@ -515,8 +579,12 @@
 
             
 
+            
+
              property. Otherwise the <see
              cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
+
+            
 
             
 

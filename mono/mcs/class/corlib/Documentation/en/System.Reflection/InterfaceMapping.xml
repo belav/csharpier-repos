@@ -31,6 +31,8 @@
 
         
 
+        
+
          structure when a type implements interface methods that use method names other than those specified by the interface, or when a type implements multiple interfaces which have a method with the same name.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
          structure, use the <see
          cref="M:System.Type.GetInterfaceMap(System.Type)" />
+
+        
 
         
 
@@ -83,6 +89,8 @@
           <para
             >The elements returned in the InterfaceMethods array match their counterpart elements returned from the <see
              cref="F:System.Reflection.InterfaceMapping.TargetMethods" />
+
+            
 
             
 
@@ -151,6 +159,8 @@
 
             
 
+            
+
              array match their counterpart elements returned from the TargetMethods array. That is, the elements are in the same array indexing order.</para
           >
         </remarks>
@@ -187,8 +197,12 @@
 
             
 
+            
+
              field is the instance of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -197,8 +211,12 @@
 
             
 
+            
+
              method returned the current <see
              cref="T:System.Reflection.InterfaceMapping" />
+
+            
 
             
 

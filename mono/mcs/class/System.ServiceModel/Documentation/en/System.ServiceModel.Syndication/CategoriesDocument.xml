@@ -73,6 +73,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -110,15 +112,18 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            
 
             
 
@@ -131,13 +136,19 @@ Returns <see
 
           
 
+          
+
           A collection of <see
            cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
           
 
+          
+
            instances used to initialize the new <see
            cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+          
 
           
 
@@ -174,8 +185,12 @@ Returns <see
 
             
 
+            
+
              initializing it with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -184,10 +199,11 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />
+
+            
 
             
 
@@ -197,6 +213,8 @@ Returns <see
         </returns>
         <param name="linkToCategoriesDocument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,8 +255,12 @@ Returns <see
 
             
 
+            
+
              parameter is set to true, the categories contained within the categories document are immutable. If the <paramref
              name="isFixed" />
+
+            
 
             
 
@@ -253,15 +275,18 @@ Returns <see
 
             
 
+            
+
              class. </para
           >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            
 
             
 
@@ -274,6 +299,8 @@ Returns <see
 
           
 
+          
+
           A collection of categories.</param
         >
         <param name="isFixed">
@@ -281,10 +308,14 @@ Returns <see
 
           
 
+          
+
           A value that specifies whether a user can add a category to the categories document.</param
         >
         <param name="scheme">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,6 +347,8 @@ Returns <see
           <para
             >Gets the element extensions for the <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -351,8 +384,12 @@ Returns <see
 
             
 
+            
+
              instance initialized with the <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -361,10 +398,11 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter" />
+
+            
 
             
 
@@ -392,6 +430,8 @@ Returns <see
           <para
             >Gets and sets the language of the <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -429,8 +469,12 @@ Returns <see
 
             
 
+            
+
              instance from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -439,10 +483,11 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -455,8 +500,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -490,8 +539,12 @@ Returns <see
 
             
 
+            
+
              to a <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -503,8 +556,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -542,10 +599,11 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -558,10 +616,14 @@ Returns <see
 
           
 
+          
+
           The name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -572,10 +634,14 @@ Returns <see
 
           
 
+          
+
           The attribute to parse.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -611,10 +677,11 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
+          <para>
 Returns <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -627,8 +694,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -636,6 +707,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,6 +746,8 @@ Returns <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -681,8 +756,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -690,6 +769,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -727,6 +808,8 @@ Returns <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -735,8 +818,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -744,6 +831,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

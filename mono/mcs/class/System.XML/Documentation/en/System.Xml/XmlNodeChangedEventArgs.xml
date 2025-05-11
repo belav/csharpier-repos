@@ -40,6 +40,8 @@
 
           
 
+          
+
            call may have to remove the node being appended from its previous parent. In this case you will see a NodeRemoved event followed by a NodeInserted event.</para
         >
       </block>
@@ -52,8 +54,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Xml.XmlDocument.NodeChanging" />
+
+        
 
         
 
@@ -62,8 +68,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Xml.XmlDocument.NodeInserting" />
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Xml.XmlDocument.NodeRemoving" />
+
+        
 
         
 
@@ -115,6 +129,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -123,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -135,13 +155,19 @@
 
           
 
+          
+
           The old parent <see
            cref="T:System.Xml.XmlNode" />
 
           
 
+          
+
            of the <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -152,13 +178,19 @@
 
           
 
+          
+
           The new parent <see
            cref="T:System.Xml.XmlNode" />
 
           
 
+          
+
            of the <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -169,8 +201,12 @@
 
           
 
+          
+
           The old value of the <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -181,8 +217,12 @@
 
           
 
+          
+
           The new value of the <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -193,8 +233,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNodeChangedAction" />
+
+          
 
           
 
@@ -255,6 +299,8 @@
 
             
 
+            
+
              after the operation completes.</para
           >
         </summary>
@@ -304,6 +350,8 @@
 
             
 
+            
+
              that is being added, removed or changed.</para
           >
         </summary>
@@ -332,6 +380,8 @@
           <para
             >Gets the value of the <see
              cref="P:System.Xml.XmlNode.ParentNode" />
+
+            
 
             
 

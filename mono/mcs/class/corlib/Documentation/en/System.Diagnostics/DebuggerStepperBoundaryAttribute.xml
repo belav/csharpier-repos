@@ -41,8 +41,12 @@
 
         
 
+        
+
          attribute is used as an escape from the effect of a <see
          cref="T:System.Diagnostics.DebuggerNonUserCodeAttribute" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
         , designer-provided code is executed as a step-through until the next user supplied code is encountered. When context switches are made on a thread, the next user-supplied code module stepped into may not relate to the code that was in the process of being debugged. To avoid this debugging experience, use the <see
          cref="T:System.Diagnostics.DebuggerStepperBoundaryAttribute" />
+
+        
 
         
 
@@ -61,13 +69,19 @@
 
         
 
+        
+
          while stepping through code using the F10 key (or <ui
         >Step Over</ui>
 
         
 
+        
+
          command) has the same effect as pressing the F5 key or using the <ui
         >Start Debugging</ui>
+
+        
 
         
 
@@ -102,6 +116,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -110,6 +126,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.DebuggerStepperBoundaryAttribute" />
+
+            
 
             
 

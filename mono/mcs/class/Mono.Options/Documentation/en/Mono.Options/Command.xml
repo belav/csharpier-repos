@@ -8,10 +8,11 @@
     <AssemblyName>Mono.Options</AssemblyName>
     <AssemblyVersion>0.2.3.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadingSafetyStatement
-    >
+  <ThreadingSafetyStatement>
     Public <c
     >static</c>
+
+    
 
     
 
@@ -28,10 +29,11 @@
       Represents a program command.
     </summary>
     <remarks>
-      <para
-        >
+      <para>
         Many command-line utilities are <i
         >suites</i>
+
+        
 
         
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
         , <b
         >svn</b>
+
+        
 
         
 
@@ -52,19 +58,24 @@
 
         
 
+        
+
         .
       </para
       >
-      <para
-        >
+      <para>
         A <c
         >Command</c>
+
+        
 
         
 
          represents a specific command in such a suite.
         It has a <see
          cref="P:Mono.Options.Command.Name" />
+
+        
 
         
 
@@ -75,15 +86,21 @@
 
         
 
+        
+
          property, an optional
         <see
          cref="T:Mono.Options.OptionSet" />
 
         
 
+        
+
          accessible through the
         <see
          cref="P:Mono.Options.Command.Options" />
+
+        
 
         
 
@@ -94,9 +111,13 @@
 
         
 
+        
+
          property and
         the <see
          cref="M:Mono.Options.Command.Invoke" />
+
+        
 
         
 
@@ -121,30 +142,33 @@
         <Parameter Name="help" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="name"
-          >
+        <param name="name">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
            which is the command name.
         </param
         >
-        <param name="help"
-          >
+        <param name="help">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
            which is the command help text.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the <c
           >Command</c>
+
+          
 
           
 
@@ -152,11 +176,12 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
           This constructor initializes the
           <see
              cref="P:Mono.Options.Command.Name" />
+
+            
 
             
 
@@ -166,15 +191,21 @@
 
             
 
+            
+
              and initializes the
           <see
              cref="P:Mono.Options.Command.Help" />
 
             
 
+            
+
              property of the new
           instance using <paramref
              name="help" />
+
+            
 
             
 
@@ -187,8 +218,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -211,32 +246,38 @@
         <ReturnType>Mono.Options.CommandSet</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           A <see
            cref="T:Mono.Options.CommandSet" />
+
+          
 
           
 
            instance which owns the
           <c
           >Command</c>
+
+          
 
           
 
           .
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:Mono.Options.CommandSet" />
+
+          
 
           
 
            instance which owns the
           <c
           >Command</c>
+
+          
 
           
 
@@ -244,10 +285,11 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             A <c
             >Command</c>
+
+            
 
             
 
@@ -257,9 +299,13 @@
 
             
 
+            
+
              instance.
             The <c
             >CommandSet</c>
+
+            
 
             
 
@@ -269,13 +315,16 @@
 
             
 
+            
+
             .
           </para
           >
-          <para
-            >
+          <para>
             If the <c
             >Command</c>
+
+            
 
             
 
@@ -285,18 +334,23 @@
 
             
 
+            
+
             , then this property is <see
              langword="null" />
+
+            
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             Use the <c
             >CommandSet</c>
+
+            
 
             
 
@@ -306,9 +360,13 @@
 
             
 
+            
+
              property or an overridden
             <see
              cref="M:Mono.Options.Command.Invoke" />
+
+            
 
             
 
@@ -319,10 +377,14 @@
 
             
 
+            
+
             , the
             preferred message output stream through
             <see
              cref="P:Mono.Options.CommandSet.Out" />
+
+            
 
             
 
@@ -343,20 +405,22 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           A short, one-line, description of the <c
           >Command</c>
+
+          
 
           
 
           .
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -366,19 +430,24 @@
 
           
 
+          
+
           .
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The <c
             >Help</c>
 
             
 
+            
+
              property text is shown when the <c
             >help</c>
+
+            
 
             
 
@@ -412,10 +481,11 @@
         />
       </Parameters>
       <Docs>
-        <param name="arguments"
-          >
+        <param name="arguments">
           A <see
            cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+
+          
 
           
 
@@ -423,10 +493,11 @@
           which contains the unprocessed command-line arguments.
         </param
         >
-        <summary
-          >
+        <summary>
           Invoked by <see
            cref="M:Mono.Options.CommandSet.Run" />
+
+          
 
           
 
@@ -434,10 +505,11 @@
           has been executed.
         </summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -446,10 +518,11 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The value returned by <c
             >Invoke()</c>
+
+            
 
             
 
@@ -459,15 +532,18 @@
 
             
 
+            
+
             , and should be treated
             as a possible process exit value.
           </para
           >
           <block subset="none" type="behaviors">
-            <para
-              >
+            <para>
               If the <c
               >Invoke()</c>
+
+              
 
               
 
@@ -477,9 +553,13 @@
 
               
 
+              
+
                method will use
               <see
                cref="P:Mono.Options.Command.Options" />
+
+              
 
               
 
@@ -489,24 +569,31 @@
 
               
 
+              
+
               , and pass any un-processed values
               on to <see
                cref="P:Mono.Options.Command.Run" />
 
               
 
+              
+
               .
             </para
             >
-            <para
-              >
+            <para>
               If the <c
               >Options</c>
 
               
 
+              
+
                property is <see
                langword="null" />
+
+              
 
               
 
@@ -517,23 +604,30 @@
               
 
               
+
+              
               will be provided to the <c
               >Run</c>
+
+              
 
               
 
                property as-is.
             </para
             >
-            <para
-              >
+            <para>
               If the <c
               >Run</c>
 
               
 
+              
+
                property is <see
                langword="null" />
+
+              
 
               
 
@@ -561,20 +655,22 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           The name of the <c
           >Command</c>
+
+          
 
           
 
           , which is used for command invocation.
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -583,14 +679,17 @@
 
           
 
+          
+
           .
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The <c
             >Name</c>
+
+            
 
             
 
@@ -599,9 +698,13 @@
 
             
 
+            
+
              instances
             referred to by a <see
              cref="T:Mono.Options.CommandSet" />
+
+            
 
             
 
@@ -628,10 +731,11 @@
         <summary>
           Optional command-line option information.
         </summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:Mono.Options.OptionSet" />
+
+          
 
           
 
@@ -641,19 +745,24 @@
 
           
 
+          
+
           .
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             If the <c
             >Options</c>
 
             
 
+            
+
              property is not <see
              langword="null" />
+
+            
 
             
 
@@ -664,9 +773,13 @@
 
             
 
+            
+
              will be invoked on
             the <c
             >Options</c>
+
+            
 
             
 
@@ -676,9 +789,13 @@
 
             
 
+            
+
              will be forwarded to
             <see
              cref="M:Mono.Options.Command.Invoke" />
+
+            
 
             
 
@@ -708,10 +825,11 @@
         <summary>
           Optional command handler.
         </summary>
-        <value
-          >
+        <value>
           A <see
            cref="T:System.Action{System.Collections.Generic.IEnumerable{System.String}}" />
+
+          
 
           
 
@@ -722,14 +840,17 @@
 
           
 
+          
+
           .
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The <c
             >Run</c>
+
+            
 
             
 
@@ -739,15 +860,21 @@
 
             
 
+            
+
              method when
             <see
              cref="M:Mono.Options.CommandSet.Run" />
 
             
 
+            
+
              dispatches to a
             <c
             >Command</c>
+
+            
 
             
 

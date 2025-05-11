@@ -44,6 +44,8 @@
 
         
 
+        
+
          allows you to declaratively specify which URI strings and regular expression strings your class can use.</para
       >
       <para
@@ -52,8 +54,12 @@
 
         
 
+        
+
          is stored in the metadata of the attribute target, which is the class to which <see
          cref="T:System.Net.WebPermissionAttribute" />
+
+        
 
         
 
@@ -62,8 +68,12 @@
 
         
 
+        
+
          passed to the constructor determines the allowable <see
          cref="T:System.Net.WebPermissionAttribute" />
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          returned by the <see
          cref="M:System.Net.WebPermissionAttribute.CreatePermission" />
+
+        
 
         
 
@@ -82,6 +96,8 @@
       <block subset="none" type="note">
         <para>
           <see cref="T:System.Net.WebPermissionAttribute" />
+
+          
 
           
 
@@ -94,6 +110,8 @@
 
           
 
+          
+
           . For <format
            type="text/html">
             <a href="15AAB1E1-6B7D-41AD-B102-C1ED7BEDEA27"
@@ -103,8 +121,12 @@
 
           
 
+          
+
           , use the corresponding <see
            cref="T:System.Net.WebPermission" />
+
+          
 
           
 
@@ -147,8 +169,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -159,6 +185,8 @@
           <para
             >The <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -173,6 +201,8 @@
 
             
 
+            
+
              class with a value that specifies the security actions that can be performed on this class.</para
           >
         </summary>
@@ -181,8 +211,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -216,6 +250,8 @@
 
             
 
+            
+
              that represents the URI accepted by the
    current instance.</para
           >
@@ -225,8 +261,12 @@
 
           
 
+          
+
           is being set and is not <see
            langword="null" />
+
+          
 
           
 
@@ -240,8 +280,12 @@
 
             
 
+            
+
              to your class, this property specifies what URI string will be accepted for use within your class. This permission is applied when the security system calls <see
              cref="M:System.Net.WebPermissionAttribute.CreatePermission" />
+
+            
 
             
 
@@ -253,6 +297,8 @@
           <para
             >Gets or sets the URI string accepted by the current <see
              cref="T:System.Net.WebPermissionAttribute" />
+
+            
 
             
 
@@ -284,6 +330,8 @@
 
             
 
+            
+
              to your class, this property specifies what regular expression string will be accepted for use within your class. This property is write-once.</para
           >
         </remarks>
@@ -292,6 +340,8 @@
           <para
             >Gets or sets a regular expression pattern that describes the URI accepted by the current <see
              cref="T:System.Net.WebPermissionAttribute" />
+
+            
 
             
 
@@ -325,6 +375,8 @@
 
             
 
+            
+
              that represents the connection controlled by the
    current instance.</para
           >
@@ -334,8 +386,12 @@
 
           
 
+          
+
            is being set and is not <see
            langword="null" />
+
+          
 
           
 
@@ -349,6 +405,8 @@
 
             
 
+            
+
              to your class, this property specifies what URI connection is accepted for use within your class. This property is write-once.</para
           >
         </remarks>
@@ -357,6 +415,8 @@
           <para
             >Gets or sets the URI connection string controlled by the current <see
              cref="T:System.Net.WebPermissionAttribute" />
+
+            
 
             
 
@@ -388,6 +448,8 @@
 
             
 
+            
+
              to your class, this property specifies what regular expression connect string is accepted for use within your class. This property is write-once.</para
           >
         </remarks>
@@ -396,6 +458,8 @@
           <para
             >Gets or sets a regular expression pattern that describes the URI connection controlled by the current <see
              cref="T:System.Net.WebPermissionAttribute" />
+
+            
 
             
 
@@ -436,6 +500,8 @@
 
             
 
+            
+
              method is called by the security system, not by application code.</para
           >
           <para
@@ -444,8 +510,12 @@
 
             
 
+            
+
              is stored in the metadata of the attribute target, which is the class to which <see
              cref="T:System.Net.WebPermissionAttribute" />
+
+            
 
             
 
@@ -454,8 +524,12 @@
 
             
 
+            
+
              returned by <see
              cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
+
+            
 
             
 
@@ -470,6 +544,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -478,6 +554,8 @@
           <para
             >A <see
              cref="T:System.Net.WebPermission" />
+
+            
 
             
 

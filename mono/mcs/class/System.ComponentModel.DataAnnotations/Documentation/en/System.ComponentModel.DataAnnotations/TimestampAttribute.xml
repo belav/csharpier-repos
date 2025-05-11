@@ -27,8 +27,12 @@
 
         
 
+        
+
          attribute is used with a Dynamic Data field, the column is not displayed unless the <see
          cref="T:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
       <para
         >For more information, see <format
          type="text/html">
-          <a href="65c9cf0e-3e8a-45f8-87b3-3460d96afb0b">rowversion</a>
+          <a href="65c9cf0e-3e8a-45f8-87b3-3460d96afb0b"
+>rowversion</a
+          >
         </format>
+
+        
 
         
 
@@ -69,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.DataAnnotations.TimestampAttribute" />
+
+            
 
             
 

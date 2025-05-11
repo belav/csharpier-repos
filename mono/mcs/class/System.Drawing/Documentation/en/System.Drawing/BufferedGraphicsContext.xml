@@ -23,6 +23,8 @@
 
         
 
+        
+
          class allows you to implement custom double buffering for your graphics. Graphics that use double buffering can reduce or eliminate flicker that is caused by redrawing a display surface.</para
       >
       <block subset="none" type="note">
@@ -32,13 +34,19 @@
 
           
 
+          
+
            control style flag on a control using the <see
            cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
 
           
 
+          
+
            method. Setting the <see
            cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
+
+          
 
           
 
@@ -51,13 +59,19 @@
 
         
 
+        
+
          class provides methods for creating and configuring a graphics buffer. The <see
          cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
         
 
+        
+
          method creates a <see
          cref="T:System.Drawing.BufferedGraphics" />
+
+        
 
         
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          for the current application domain from the static <see
          cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+
+        
 
         
 
@@ -79,8 +97,12 @@
 
         
 
+        
+
          using the constructor, but for most applications the <see
          cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+
+        
 
         
 
@@ -94,12 +116,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="4C2A90EE-BBBE-4FF6-9170-1B06C195C918"
             >How to: Manually Manage Buffered Graphics</a
           >
         </format>
+
+        
 
         
 
@@ -126,8 +152,12 @@
 
             
 
+            
+
              instead of the default instance provided by the <see
              cref="T:System.Drawing.BufferedGraphicsManager" />
+
+            
 
             
 
@@ -140,8 +170,12 @@
 
               
 
+              
+
                when you finish using a dedicated <see
                cref="T:System.Drawing.BufferedGraphicsContext" />
+
+              
 
               
 
@@ -158,6 +192,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -166,6 +202,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 
@@ -200,8 +238,12 @@
 
             
 
+            
+
              method with a rectangle whose size exceeds the value of the <see
              cref="P:System.Drawing.BufferedGraphicsContext.MaximumBuffer" />
+
+            
 
             
 
@@ -210,8 +252,12 @@
 
             
 
+            
+
              is created to allocate the buffer and provide a temporary context for the buffer. The new <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 
@@ -220,13 +266,19 @@
 
             
 
+            
+
              for the application domain and it is disposed automatically when the <see
              cref="T:System.Drawing.BufferedGraphics" />
 
             
 
+            
+
              returned by the <see
              cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+
+            
 
             
 
@@ -241,6 +293,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -252,6 +306,8 @@
 
             
 
+            
+
              that can be used to draw to a buffer of the specified dimensions.</para
           >
         </returns>
@@ -260,8 +316,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -272,8 +332,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -307,8 +371,12 @@
 
             
 
+            
+
              method with a rectangle whose size exceeds the value of the <see
              cref="P:System.Drawing.BufferedGraphicsContext.MaximumBuffer" />
+
+            
 
             
 
@@ -317,8 +385,12 @@
 
             
 
+            
+
              is created to allocate the buffer and provide a temporary context for the buffer. The new <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 
@@ -327,13 +399,19 @@
 
             
 
+            
+
              for the application domain and it is disposed automatically when the <see
              cref="T:System.Drawing.BufferedGraphics" />
 
             
 
+            
+
              returned by the <see
              cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+
+            
 
             
 
@@ -348,6 +426,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -359,6 +439,8 @@
 
             
 
+            
+
              that can be used to draw to a buffer of the specified dimensions.</para
           >
         </returns>
@@ -367,8 +449,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -379,8 +465,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -408,8 +498,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 
@@ -418,8 +512,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 
@@ -428,13 +526,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 
@@ -445,10 +549,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -461,8 +569,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.BufferedGraphicsContext" />
+
+              
 
               
 
@@ -471,8 +583,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Drawing.BufferedGraphicsContext" />
+
+              
 
               
 
@@ -485,6 +601,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 
@@ -554,8 +672,12 @@
 
             
 
+            
+
              size will be used temporarily and then discarded when the <see
              cref="T:System.Drawing.BufferedGraphics" />
+
+            
 
             
 

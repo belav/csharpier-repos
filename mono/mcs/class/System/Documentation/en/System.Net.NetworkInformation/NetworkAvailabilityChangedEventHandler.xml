@@ -38,8 +38,12 @@
 
         
 
+        
+
          events raised by the <see
          cref="T:System.Net.NetworkInformation.NetworkChange" />
+
+        
 
         
 
@@ -48,11 +52,15 @@
 
         
 
+        
+
          class overview documentation. </para
       >
       <para
         >The <see
          cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
+
+        
 
         
 

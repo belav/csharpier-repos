@@ -27,6 +27,8 @@
 
         
 
+        
+
          class to bind the value of a client-side HTTP cookie passed as part of an HTTP request to a parameter used by ASP.NET data source controls. </para
       >
       <para
@@ -35,8 +37,12 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Web.UI.WebControls.CookieParameter.CookieName" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          object to bind to, in addition to those inherited from the <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          class attempts to bind to the named cookie every time the <see
          cref="M:System.Web.UI.WebControls.CookieParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+        
 
         
 
@@ -69,8 +83,12 @@
 
           
 
+          
+
            object is specified, but no corresponding cookie is passed with the HTTP request. Similarly, they might display no data if the cookie is passed with null. Set the <see
            cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+          
 
           
 
@@ -98,8 +116,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.CookieParameter.#ctor" />
+
+            
 
             
 
@@ -108,8 +130,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -118,8 +144,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -128,8 +158,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.TypeCode.Object" />
+
+            
 
             
 
@@ -138,13 +172,19 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Data.ParameterDirection.Input" />
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -156,6 +196,8 @@
           <para
             >Initializes a new unnamed instance of the <see
              cref="T:System.Web.UI.WebControls.CookieParameter" />
+
+            
 
             
 
@@ -186,8 +228,12 @@
 
             
 
+            
+
              constructor is a protected copy constructor used to clone a <see
              cref="T:System.Web.UI.WebControls.CookieParameter" />
+
+            
 
             
 
@@ -196,8 +242,12 @@
 
             
 
+            
+
              object, including <see
              cref="P:System.Web.UI.WebControls.CookieParameter.CookieName" />
+
+            
 
             
 
@@ -206,8 +256,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -222,8 +276,12 @@
 
             
 
+            
+
              class with the values of the instance specified by the <paramref
              name="original" />
+
+            
 
             
 
@@ -235,8 +293,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.CookieParameter" />
+
+          
 
           
 
@@ -267,8 +329,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.CookieParameter.#ctor(System.String,System.String)" />
+
+            
 
             
 
@@ -277,8 +343,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -293,11 +363,15 @@
 
             
 
+            
+
              class, using the specified string to identify which HTTP cookie to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,8 +382,12 @@
 
           
 
+          
+
           The name of the HTTP cookie that the parameter object is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -341,8 +419,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.CookieParameter.#ctor(System.String,System.TypeCode,System.String)" />
+
+            
 
             
 
@@ -351,13 +433,19 @@
 
             
 
+            
+
             , and string that identifies the cookie that the parameter binds to. Only the <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+
+            
 
             
 
@@ -372,11 +460,15 @@
 
             
 
+            
+
              class, using the specified string to identify which HTTP cookie to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,8 +479,12 @@
 
           
 
+          
+
           The type that the parameter represents. The default is <see
            cref="F:System.TypeCode.Object" />
+
+          
 
           
 
@@ -399,8 +495,12 @@
 
           
 
+          
+
           The name of the HTTP cookie that the parameter object is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -431,13 +531,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.CookieParameter.#ctor(System.Web.UI.WebControls.CookieParameter)" />
 
             
 
+            
+
              copy constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.CookieParameter" />
+
+            
 
             
 
@@ -452,6 +558,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -460,6 +568,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.CookieParameter" />
+
+            
 
             
 
@@ -493,8 +603,12 @@
 
             
 
+            
+
              property identifies an HTTP cookie, which is represented by an <see
              cref="T:System.Web.HttpCookie" />
+
+            
 
             
 
@@ -503,8 +617,12 @@
 
             
 
+            
+
              object. If the HTTP cookie is not available in the current <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -513,8 +631,12 @@
 
             
 
+            
+
              method binds the parameter to the value of the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -523,8 +645,12 @@
 
             
 
+            
+
              property is not set, the <see
              cref="M:System.Web.UI.WebControls.CookieParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -564,8 +690,12 @@
 
             
 
+            
+
              parameter is used by the <see
              cref="M:System.Web.UI.WebControls.CookieParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -574,8 +704,12 @@
 
             
 
+            
+
              object binds to. The <paramref
              name="control" />
+
+            
 
             
 
@@ -590,6 +724,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -601,6 +737,8 @@
 
             
 
+            
+
              method returns null.</para
           >
         </returns>
@@ -609,13 +747,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Control" />
 
           
 
+          
+
            that is associated with the Web Forms page where the <see
            cref="T:System.Web.UI.WebControls.CookieParameter" />
+
+          
 
           
 

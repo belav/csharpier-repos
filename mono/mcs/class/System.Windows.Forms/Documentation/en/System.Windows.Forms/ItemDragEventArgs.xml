@@ -24,8 +24,12 @@
 
         
 
+        
+
          event occurs when the user begins dragging an item. An <see
          cref="T:System.Windows.Forms.ItemDragEventArgs" />
+
+        
 
         
 
@@ -40,13 +44,19 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Windows.Forms.ListView" />
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -73,6 +83,8 @@
 
             
 
+            
+
              property is automatically set to null.</para
           >
         </remarks>
@@ -84,6 +96,8 @@
 
             
 
+            
+
              class with a specified mouse button.</para
           >
         </summary>
@@ -92,8 +106,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -125,6 +143,8 @@
 
             
 
+            
+
              class with a specified mouse button and the item that is being dragged.</para
           >
         </summary>
@@ -133,8 +153,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -142,6 +166,8 @@
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,8 +220,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 

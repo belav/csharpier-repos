@@ -6,9 +6,11 @@
 
     
 
+    
+
     . The example <code_example
     >
-      <![CDATA[
+<![CDATA[
 class Constants  
 {  
    public const int A = 1;  
@@ -19,12 +21,14 @@ class Constants
 
     
 
+    
+
     shows a class named Constants that has two public constants. </paragraph
   >
   <paragraph
     >Even though constants are considered static members, a constant declaration neither requires nor allows the modifier static. Constants can be accessed through the class, as in <code_example
     >
-      <![CDATA[
+<![CDATA[
 using System;  
 class Test  
 {  
@@ -34,6 +38,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

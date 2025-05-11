@@ -21,6 +21,8 @@
 
         
 
+        
+
         . The style RPC means that the WSDL representation of messages exchanged for an operation contains parameters as if it were a remote procedure call. The following is an example.</para
       >
       <code>  &lt;wsdl:message name="IUseAndStyleCalculator_Add_InputMessage"&gt;
@@ -35,6 +37,8 @@
       <para
         >Use the <see
          cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+
+        
 
         
 

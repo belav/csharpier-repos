@@ -37,10 +37,14 @@
 
           
 
+          
+
            class and the other calendar classes in the .NET Framework, see <format
            type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
           </format>
+
+          
 
           
 
@@ -243,8 +247,12 @@
 
         
 
+        
+
          class adjusts the calendar date by adding or subtracting a value from zero to two days to accommodate the variances in the start and the end of Ramadan and to accommodate the date difference between countries/regions. That value is stored in the <see
          cref="P:System.Globalization.HijriCalendar.HijriAdjustment" />
+
+        
 
         
 
@@ -253,13 +261,19 @@
 
         
 
+        
+
          is not set explicitly, it derives its value from the settings in the regional and language options portion of Control Panel and is stored in the registry value HKEY_CURRENT_USER\Control Panel\International\AddHijriDate. However, that information can change during the life of the <see
          cref="T:System.AppDomain" />
 
         
 
+        
+
         . The <see
          cref="T:System.Globalization.HijriCalendar" />
+
+        
 
         
 
@@ -271,8 +285,12 @@
 
         
 
+        
+
          supports a set of calendars. The <see
          cref="P:System.Globalization.CultureInfo.Calendar" />
+
+        
 
         
 
@@ -281,8 +299,12 @@
 
         
 
+        
+
          property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -291,13 +313,19 @@
 
         
 
+        
+
          property of <see
          cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
         
 
+        
+
          to a new <see
          cref="T:System.Globalization.Calendar" />
+
+        
 
         
 
@@ -331,6 +359,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Globalization.HijriCalendar" />
+
+            
 
             
 
@@ -370,8 +400,12 @@
 
             
 
+            
+
              is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The year part of the resulting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -380,8 +414,12 @@
 
             
 
+            
+
             . This implementation supports only the current era. Therefore, <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -390,13 +428,19 @@
 
             
 
+            
+
             . The time-of-day part of the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -408,6 +452,8 @@
 
             
 
+            
+
              parameter is 3, the resulting year is one more than the specified year, the resulting month is Safar, and the resulting day is the 29th day, which is the last day in Safar.</para
           >
           <para
@@ -416,13 +462,19 @@
 
             
 
+            
+
              parameter is negative, the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              is earlier than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -434,8 +486,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -444,8 +500,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -454,8 +514,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -471,8 +535,12 @@
 
             
 
+            
+
              that is the specified number of months away from the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -487,8 +555,12 @@
 
             
 
+            
+
              that results from adding the specified number of months to the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -500,8 +572,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -509,6 +585,8 @@
         >
         <param name="months">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -547,13 +625,19 @@
 
             
 
+            
+
              is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The month part of the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -562,8 +646,12 @@
 
             
 
+            
+
              is thrown if the resulting year is outside the era of the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -572,8 +660,12 @@
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -585,6 +677,8 @@
 
             
 
+            
+
              is 1, the resulting date will be the 29th day of Zulhijjah in the following year.</para
           >
           <para
@@ -593,13 +687,19 @@
 
             
 
+            
+
              is negative, the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              is earlier than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -611,8 +711,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -621,8 +725,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -631,8 +739,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -648,8 +760,12 @@
 
             
 
+            
+
              that is the specified number of years away from the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -664,8 +780,12 @@
 
             
 
+            
+
              that results from adding the specified number of years to the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -677,8 +797,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -686,6 +810,8 @@
         >
         <param name="years">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -755,6 +881,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -783,6 +911,8 @@
           <para
             >Gets the list of eras in the <see
              cref="T:System.Globalization.HijriCalendar" />
+
+            
 
             
 
@@ -819,6 +949,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -830,6 +962,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -838,8 +972,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -874,6 +1012,8 @@
           <para
             >The <see
              cref="T:System.DayOfWeek" />
+
+            
 
             
 
@@ -956,6 +1096,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -967,8 +1109,12 @@
 
             
 
+            
+
              value that represents the day of the week in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -980,8 +1126,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1016,13 +1166,19 @@
 
             
 
+            
+
              for the first day of the first month returns 1, and <see
              cref="M:System.Globalization.HijriCalendar.GetDayOfYear(System.DateTime)" />
 
             
 
+            
+
              for the last day of the last month returns the total number of days in that year, which is the same value returned by <see
              cref="M:System.Globalization.HijriCalendar.GetDaysInYear(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1037,6 +1193,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1048,6 +1206,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1056,8 +1216,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1097,8 +1261,12 @@
 
             
 
+            
+
              = 12), depending on whether <paramref
              name="year" />
+
+            
 
             
 
@@ -1118,6 +1286,8 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="month">
@@ -1125,10 +1295,14 @@
 
           
 
+          
+
           An integer from 1 to 12 that represents the month. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1173,10 +1347,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1215,6 +1393,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1226,6 +1406,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1234,8 +1416,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1278,8 +1464,12 @@
 
             
 
+            
+
              method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
              cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+
+            
 
             
 
@@ -1298,11 +1488,15 @@
 
             
 
+            
+
              type does not support the notion of a leap month.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1313,13 +1507,19 @@
 
           
 
+          
+
           An era. Specify <see
            cref="F:System.Globalization.Calendar.CurrentEra" />
 
           
 
+          
+
            or <see
            cref="F:System.Globalization.HijriCalendar.HijriEra" />
+
+          
 
           
 
@@ -1355,6 +1555,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1366,6 +1568,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1374,8 +1578,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1420,10 +1628,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1459,6 +1671,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1470,6 +1684,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1478,8 +1694,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1508,8 +1728,12 @@
 
             
 
+            
+
              class adjusts the calendar date by adding or subtracting a value from zero to two days to accommodate the variances in the start and the end of Ramadan and to accommodate the date difference between countries/regions. That value is stored in the <see
              cref="P:System.Globalization.HijriCalendar.HijriAdjustment" />
+
+            
 
             
 
@@ -1518,13 +1742,19 @@
 
             
 
+            
+
              is not set explicitly, it derives its value from the settings in the regional and language options portion of Control Panel and is stored in the registry value HKEY_CURRENT_USER\Control Panel\International\AddHijriDate. However, that information can change during the life of the <see
              cref="T:System.AppDomain" />
 
             
 
+            
+
             . The <see
              cref="T:System.Globalization.HijriCalendar" />
+
+            
 
             
 
@@ -1557,6 +1787,8 @@
           <para
             >The value of the <see
              cref="F:System.Globalization.HijriCalendar.HijriEra" />
+
+            
 
             
 
@@ -1613,10 +1845,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1627,10 +1863,14 @@
 
           
 
+          
+
           An integer from 1 to 30 that represents the day. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1680,6 +1920,8 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="month">
@@ -1687,10 +1929,14 @@
 
           
 
+          
+
           An integer from 1 to 12 that represents the month. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1735,10 +1981,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1814,8 +2064,12 @@
 
             
 
+            
+
              type, which is January 1, 0001 C.E. However, the <see
              cref="T:System.Globalization.HijriCalendar" />
+
+            
 
             
 
@@ -1823,6 +2077,8 @@
              type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">Standard DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -1873,6 +2129,8 @@
 
             
 
+            
+
              that is set to the specified date, time, and era.</para
           >
         </summary>
@@ -1884,11 +2142,15 @@
 
             
 
+            
+
              that is set to the specified date and time in the current era.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1899,10 +2161,14 @@
 
           
 
+          
+
           An integer from 1 to 12 that represents the month. </param
         >
         <param name="day">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1913,10 +2179,14 @@
 
           
 
+          
+
           An integer from 0 to 23 that represents the hour. </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1927,6 +2197,8 @@
 
           
 
+          
+
           An integer from 0 to 59 that represents the second. </param
         >
         <param name="millisecond">
@@ -1934,10 +2206,14 @@
 
           
 
+          
+
           An integer from 0 to 999 that represents the millisecond. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1971,13 +2247,19 @@
 
             
 
+            
+
              is the last year in the 100-year range that can be represented by a two-digit year. The century is determined by finding the sole occurrence of the two-digit <paramref
              name="year" />
 
             
 
+            
+
              within that 100-year range. For example, if <see
              cref="P:System.Globalization.HijriCalendar.TwoDigitYearMax" />
+
+            
 
             
 
@@ -1988,13 +2270,19 @@
 
             
 
+            
+
              supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see
              cref="P:System.Globalization.HijriCalendar.TwoDigitYearMax" />
 
             
 
+            
+
              value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see
              cref="M:System.Globalization.HijriCalendar.ToFourDigitYear(System.Int32)" />
+
+            
 
             
 
@@ -2009,6 +2297,8 @@
 
             
 
+            
+
              property to determine the appropriate century.</para
           >
         </summary>
@@ -2020,11 +2310,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2055,8 +2349,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Globalization.HijriCalendar" />
+
+            
 
             
 

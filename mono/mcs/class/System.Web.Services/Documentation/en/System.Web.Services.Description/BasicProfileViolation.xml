@@ -39,6 +39,8 @@
 
             
 
+            
+
              object that specifies whether the Web service declares that it conforms to the WSI Basic Profile version 1.1.</para
           >
         </summary>
@@ -62,6 +64,8 @@
           <para
             >Gets a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -132,6 +136,8 @@
 
             
 
+            
+
              object that describes the WSDL violation of the Basic Profile version 1.1 specification.</para
           >
         </summary>
@@ -158,8 +164,12 @@
 
             
 
+            
+
              that comprises information from <see
              cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />
+
+            
 
             
 
@@ -168,8 +178,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />
+
+            
 
             
 
@@ -184,8 +198,12 @@
 
             
 
+            
+
              that comprises information from <see
              cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />
+
+            
 
             
 
@@ -194,8 +212,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />
+
+            
 
             
 

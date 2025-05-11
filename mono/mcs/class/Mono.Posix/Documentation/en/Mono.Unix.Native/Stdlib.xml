@@ -19,6 +19,8 @@
 
     
 
+    
+
     , but any hidden dependencies 
   between e.g.
   <see
@@ -26,9 +28,13 @@
 
     
 
+    
+
      and 
   <see
      cref="M:Mono.Unix.Native.Stdlib.fopen" />
+
+    
 
     
 
@@ -46,6 +52,8 @@
     <remarks
       >The Stdlib class exports only functions that are part of the standard C library, from the ISO-9899 standard (C99).  As such, exports should be portable to any operating system supporting the standard C library, such as Microsoft Windows, as opposed to <see
        cref="T:Mono.Unix.Native.Syscall" />
+
+      
 
       
 
@@ -83,14 +91,17 @@
 
           
 
+          
+
            are generally made available to a parent process.</param
         >
         <summary>Perform normal program termination.</summary>
         <remarks>
-          <para
-            >
+          <para>
 The <c
             >_Exit</c>
+
+            
 
             
 
@@ -99,18 +110,23 @@ The <c
 
             
 
+            
+
             (3) function, and may or may not perform the other actions listed in <see
              cref="M:Mono.Unix.Native.Stdlib.exit" />
+
+            
 
             
 
             (3).
 </para
           >
-          <para
-            >
+          <para>
 The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see
              cref="F:Mono.Unix.Native.Stdlib.EXIT_SUCCESS" />
+
+            
 
             
 
@@ -119,13 +135,19 @@ The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see
 
             
 
+            
+
              as possible values of <paramref
              name="status" />
 
             
 
+            
+
             .  Cooperating processes may use other values; in a program which might be called by a mail transfer agent, the values described in <c
             >sysexits</c>
+
+            
 
             
 
@@ -209,6 +231,8 @@ This function never returns.
 
           
 
+          
+
            streams.</summary
         >
         <remarks>To be added.</remarks>
@@ -239,9 +263,13 @@ This function never returns.
 
             
 
+            
+
             () function causes abnormal program termination to occur, unless the signal
 <see
              cref="F:Mono.Unix.Native.Signum.SIGABRT" />
+
+            
 
             
 
@@ -254,6 +282,8 @@ Any open streams are flushed and closed.
           <para
             >The <c
             >abort</c>
+
+            
 
             
 
@@ -322,8 +352,12 @@ Any open streams are flushed and closed.
 
           
 
+          
+
            function returns a pointer to the allocated memory if successful; otherwise <see
            cref="F:System.IntPtr.Zero" />
+
+          
 
           
 
@@ -332,18 +366,23 @@ Any open streams are flushed and closed.
 
           
 
+          
+
            returns <see
            cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+
+          
 
           
 
           .</returns
         >
         <remarks>
-          <para
-            >
+          <para>
 The <c
             >calloc</c>
+
+            
 
             
 
@@ -352,8 +391,12 @@ The <c
 
             
 
+            
+
              objects, each <paramref
              name="size" />
+
+            
 
             
 
@@ -362,23 +405,30 @@ The <c
 
             
 
+            
+
             (3) with an argument of "<c
             >nmemb * size</c>
+
+            
 
             
 
             ," with the exception that the allocated memory is explicitly initialized to zero bytes.
 </para
           >
-          <para
-            >
+          <para>
 The return value of <c
             >calloc</c>
 
             
 
+            
+
              must be passed to <see
              cref="M:Mono.Unix.Native.Stdlib.free" />
+
+            
 
             
 
@@ -413,11 +463,15 @@ The return value of <c
 
           
 
+          
+
            stream to clear end-of-file and error indicators on.</param
         >
         <summary
           >Clear <c
           >FILE</c>
+
+          
 
           
 
@@ -429,8 +483,12 @@ The return value of <c
 
           
 
+          
+
           () function returns the value 0 if successful; otherwise the value -1 is returned and <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -439,6 +497,8 @@ The return value of <c
         <remarks
           >Clears the end-of-file and error indicators for the stream pointed to by <paramref
            name="stream" />
+
+          
 
           
 
@@ -494,11 +554,15 @@ The return value of <c
 
           
 
+          
+
            are generally made available to a parent process.</param
         >
         <summary
           >Terminates the process that calls the function with the exit status <paramref
            name="status" />
+
+          
 
           
 
@@ -511,11 +575,15 @@ The return value of <c
 
             
 
+            
+
              function terminates a process.</para
           >
           <para
             >Before termination, <c
             >exit</c>
+
+            
 
             
 
@@ -526,6 +594,8 @@ The return value of <c
               <term
                 >Call the functions registered with the <see
                  cref="M:Mono.Unix.Native.Stdlib.atexit" />
+
+                
 
                 
 
@@ -545,6 +615,8 @@ The return value of <c
 
                 
 
+                
+
                 (3) function.</term
               >
             </item>
@@ -555,18 +627,23 @@ The return value of <c
 
             
 
+            
+
              argument is made available to a parent process which has called a <see
              cref="M:Mono.Unix.Native.Syscall.wait" />
+
+            
 
             
 
             (2)-family function.
 </para
           >
-          <para
-            >
+          <para>
 The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see
              cref="F:Mono.Unix.Native.Stdlib.EXIT_SUCCESS" />
+
+            
 
             
 
@@ -575,13 +652,19 @@ The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see
 
             
 
+            
+
              as possible values of <paramref
              name="status" />
 
             
 
+            
+
             .  Cooperating processes may use other values; in a program which might be called by a mail transfer agent, the values described in <c
             >sysexits</c>
+
+            
 
             
 
@@ -594,8 +677,12 @@ The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see
 
             
 
+            
+
             () does nothing to prevent bottomless recursion should a function registered using <see
              cref="M:Mono.Unix.Native.Stdlib.atexit" />
+
+            
 
             
 
@@ -604,8 +691,12 @@ The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see
 
             
 
+            
+
             ().  Such functions must call <see
              cref="M:Mono.Unix.Native.Stdlib._Exit" />
+
+            
 
             
 
@@ -617,8 +708,7 @@ The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see
 This function never returns.
 </para>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 using System;
 using Mono.Unix.Native;
 using System.Runtime.InteropServices;
@@ -681,6 +771,8 @@ class Test
 
           
 
+          
+
            when an error occurs.</remarks
         >
       </Docs>
@@ -708,6 +800,8 @@ class Test
         <remarks
           >This is the value to return from <c
           >Main</c>
+
+          
 
           
 
@@ -740,11 +834,15 @@ class Test
 
           
 
+          
+
            stream to close.</param
         >
         <summary
           >Close a <c
           >FILE</c>
+
+          
 
           
 
@@ -757,8 +855,12 @@ class Test
 
             
 
+            
+
              is returned and the global variable <c
             >errno</c>
+
+            
 
             
 
@@ -770,8 +872,12 @@ class Test
 
             
 
+            
+
             () function may also fail and set <c
             >errno</c>
+
+            
 
             
 
@@ -780,8 +886,12 @@ class Test
 
             
 
+            
+
             (2) or <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
+
+            
 
             
 
@@ -796,8 +906,12 @@ class Test
 
             
 
+            
+
             () function dissociates the named stream from its underlying file or set of functions.  If the stream was being used for output, any buffered data is written first, using <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
+
+            
 
             
 
@@ -832,11 +946,15 @@ class Test
 
           
 
+          
+
            stream on which to test the end-of-file indicator.</param
         >
         <summary
           >Test end-of-file indicator for the <c
           >FILE</c>
+
+          
 
           
 
@@ -848,6 +966,8 @@ class Test
 
           
 
+          
+
            is set.  Otherwise, 0 is returned.</returns
         >
         <remarks
@@ -856,8 +976,12 @@ class Test
 
           
 
+          
+
           () tests the end-of-file indicator for the stream pointed to by stream, returning non-zero if it is set.  The end-of-file indicator can only be cleared by the function <see
            cref="M:Mono.Unix.Native.Stdlib.clearerr" />
+
+          
 
           
 
@@ -890,11 +1014,15 @@ class Test
 
           
 
+          
+
            stream on which to test the error indicator.</param
         >
         <summary
           >Tests the error indicator for the <c
           >FILE</c>
+
+          
 
           
 
@@ -906,6 +1034,8 @@ class Test
 
           
 
+          
+
           .  Otherwise, 0 is returned.</returns
         >
         <remarks
@@ -914,8 +1044,12 @@ class Test
 
           
 
+          
+
           () tests the error indicator for the stream pointed to by stream, returning non-zero if it is set.  The error indicator can only be reset by the <see
            cref="M:Mono.Unix.Native.Stdlib.clearerr" />
+
+          
 
           
 
@@ -948,11 +1082,15 @@ class Test
 
           
 
+          
+
            stream to flush.</param
         >
         <summary
           >Flush a <c
           >FILE</c>
+
+          
 
           
 
@@ -964,8 +1102,12 @@ class Test
 
           
 
+          
+
            is returned and the global variable <c
           >errno</c>
+
+          
 
           
 
@@ -989,6 +1131,8 @@ class Test
 
                   
 
+                  
+
                    argument is not an open stream, or not a stream open for writing.</description
                 >
               </item>
@@ -999,13 +1143,19 @@ class Test
 
               
 
+              
+
                may also fail and set <c
               >errno</c>
 
               
 
+              
+
                for any of the errors specified for <see
                cref="M:Mono.Unix.Native.Syscall.write" />
+
+              
 
               
 
@@ -1020,8 +1170,12 @@ class Test
 
             
 
+            
+
             () forces a write of all buffered data for the given output or update <paramref
              name="stream" />
+
+            
 
             
 
@@ -1033,8 +1187,12 @@ class Test
 
             
 
+            
+
             , <c
             >fflush</c>
+
+            
 
             
 
@@ -1067,11 +1225,15 @@ class Test
 
           
 
+          
+
            stream to read a character from.</param
         >
         <summary
           >Get next character from a <c
           >FILE</c>
+
+          
 
           
 
@@ -1083,8 +1245,12 @@ class Test
 
           
 
+          
+
           .  The routines <see
            cref="M:Mono.Unix.Native.Stdlib.feof" />
+
+          
 
           
 
@@ -1093,8 +1259,12 @@ class Test
 
           
 
+          
+
           (3) must be used to distinguish between end-of-file and error.  If an error occurs, use <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -1103,8 +1273,12 @@ class Test
 
           
 
+          
+
            until the condition is cleared with <see
            cref="M:Mono.Unix.Native.Stdlib.clearerr" />
+
+          
 
           
 
@@ -1116,8 +1290,12 @@ class Test
 
           
 
+          
+
           () function obtains the next input character (if present) from the stream pointed at by stream, or the next character pushed back on the stream via <see
            cref="M:Mono.Unix.Native.Stdlib.ungetc" />
+
+          
 
           
 
@@ -1153,12 +1331,16 @@ class Test
 
           
 
+          
+
            stream to retreive the current file position for.</param
         >
         <param name="pos">Where to store the current file position.</param>
         <summary
           >Retrieve the current file position of a <c
           >FILE</c>
+
+          
 
           
 
@@ -1171,13 +1353,19 @@ class Test
 
             
 
+            
+
              if successful; otherwise <c
             >-1</c>
 
             
 
+            
+
              is returned and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -1200,6 +1388,8 @@ class Test
 
                   
 
+                  
+
                    argument is not not a seekable stream</description
                 >
               </item>
@@ -1210,6 +1400,8 @@ class Test
                 <description
                   >The <paramref
                    name="whence" />
+
+                  
 
                   
 
@@ -1226,13 +1418,19 @@ class Test
 
                   
 
+                  
+
                    for <see
                    cref="M:Mono.Unix.Native.Stdlib.fseek" />
 
                   
 
+                  
+
                   () and <see
                    cref="M:Mono.Unix.Native.Stdlib.ftell" />
+
+                  
 
                   
 
@@ -1249,6 +1447,8 @@ class Test
 
                   
 
+                  
+
                   (3)).</description
                 >
               </item>
@@ -1259,8 +1459,12 @@ class Test
 
             
 
+            
+
              may also fail for any of the error specified for the routines <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
+
+            
 
             
 
@@ -1269,13 +1473,19 @@ class Test
 
             
 
+            
+
             (2), <see
              cref="M:Mono.Unix.Native.Syscall.lseek" />
 
             
 
+            
+
             (2), and <see
              cref="M:Mono.Unix.Native.Stdlib.malloc" />
+
+            
 
             
 
@@ -1290,8 +1500,12 @@ class Test
 
             
 
+            
+
             () is an alternate interfaces for retrieving the current position in the file, similar to <see
              cref="M:Mono.Unix.Native.Stdlib.ftell" />
+
+            
 
             
 
@@ -1300,8 +1514,12 @@ class Test
 
             
 
+            
+
              pointed to by pos.  This provides a portable way to seek to offsets larger than those that can be represented by a long int.  They may also store additional state information in the <see
              cref="T:Mono.Unix.Native.FilePosition" />
+
+            
 
             
 
@@ -1310,6 +1528,8 @@ class Test
           <block subset="none" type="note"
             >The value of <paramref
              name="pos" />
+
+            
 
             
 
@@ -1348,11 +1568,15 @@ class Test
 
           
 
+          
+
           .</param
         >
         <param name="stream"
           >The <c
           >FILE</c>
+
+          
 
           
 
@@ -1364,11 +1588,15 @@ class Test
 
           
 
+          
+
            stream.</summary
         >
         <returns
           >See the <see
            cref="M:Mono.Unix.Native.Stdlib.fgets(System.Text.StringBuilder,int,System.IntPtr)" />
+
+          
 
           
 
@@ -1382,8 +1610,12 @@ class Test
 
             
 
+            
+
             , <paramref
              name="sb" />
+
+            
 
             
 
@@ -1392,14 +1624,20 @@ class Test
 
             
 
+            
+
             )</c
           >
+
+          
 
           
 
           .
 See the <see
            cref="M:Mono.Unix.Native.Stdlib.fgets(System.Text.StringBuilder,int,System.IntPtr)" />
+
+          
 
           
 
@@ -1437,11 +1675,15 @@ See the <see
 
           
 
+          
+
           .</param
         >
         <param name="size"
           >The maximum number of characters that <paramref
            name="sb" />
+
+          
 
           
 
@@ -1453,11 +1695,15 @@ See the <see
 
           
 
+          
+
            stream to read a line from.</param
         >
         <summary
           >Read a line from a <c
           >FILE</c>
+
+          
 
           
 
@@ -1470,8 +1716,12 @@ See the <see
 
             
 
+            
+
             .  If end-of-file occurs before any characters are read, returns <see
              langword="null" />
+
+            
 
             
 
@@ -1480,8 +1730,12 @@ See the <see
 
             
 
+            
+
              remains unchanged.  If an error occurs, <see
              langword="null" />
+
+            
 
             
 
@@ -1490,8 +1744,12 @@ See the <see
 
             
 
+            
+
              are indeterminate.  <c
             >fgets</c>
+
+            
 
             
 
@@ -1500,8 +1758,12 @@ See the <see
 
             
 
+            
+
             (3) and <see
              cref="M:Mono.Unix.Native.Stdlib.ferror" />
+
+            
 
             
 
@@ -1524,6 +1786,8 @@ See the <see
 
                   
 
+                  
+
                    is not a readable stream.</description
                 >
               </item>
@@ -1534,8 +1798,12 @@ See the <see
 
             
 
+            
+
              may also fail for any of the error specified for the routines <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
+
+            
 
             
 
@@ -1544,13 +1812,19 @@ See the <see
 
             
 
+            
+
             (2), <see
              cref="M:Mono.Unix.Native.Syscall.read" />
 
             
 
+            
+
             (2), or <see
              cref="M:Mono.Unix.Native.Stdlib.malloc" />
+
+            
 
             
 
@@ -1564,8 +1838,12 @@ See the <see
 
           
 
+          
+
           () function reads at most one less than the number of characters specified by <paramref
            name="size" />
+
+          
 
           
 
@@ -1574,8 +1852,12 @@ See the <see
 
           
 
+          
+
            and stores them in the string <paramref
            name="sb" />
+
+          
 
           
 
@@ -1639,6 +1921,8 @@ See the <see
 
           
 
+          
+
            stream with it.</summary
         >
         <returns>
@@ -1648,13 +1932,19 @@ See the <see
 
             
 
+            
+
              pointer.  Otherwise, <see
              cref="F:System.IntPtr.Zero" />
 
             
 
+            
+
              is returned and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -1677,6 +1967,8 @@ See the <see
 
                   
 
+                  
+
                    argument was invalid.</description
                 >
               </item>
@@ -1687,13 +1979,19 @@ See the <see
 
             
 
+            
+
              may also fail for any of the error specified for the routines <see
              cref="M:Mono.Unix.Native.Stdlib.malloc" />
 
             
 
+            
+
             (3) and <see
              cref="M:Mono.Unix.Native.Syscall.open" />
+
+            
 
             
 
@@ -1710,8 +2008,12 @@ See the <see
 
             
 
+            
+
              to close the <c
             >FILE</c>
+
+            
 
             
 
@@ -1720,6 +2022,8 @@ See the <see
           <para
             >The argument <paramref
              name="mode" />
+
+            
 
             
 
@@ -1767,6 +2071,8 @@ See the <see
 
                 
 
+                
+
                 (3) or similar.</description
               >
             </item>
@@ -1780,6 +2086,8 @@ See the <see
 
                 
 
+                
+
                 (3) or similar.</description
               >
             </item>
@@ -1790,14 +2098,20 @@ See the <see
 
             
 
+            
+
              string can also include the letter "b" either as a third character or as a character between the characters in any of the two-character strings described above, and is used to enable <i
             >binary</i>
+
+            
 
             
 
              reading/writing on platforms which have different text/binary encodings (read: Microsoft Windows).  The default (non-<c
             >b</c>
             <paramref name="mode" />
+
+            
 
             
 
@@ -1809,8 +2123,12 @@ See the <see
 
             
 
+            
+
              (0666), as modified by the process' umask value (see <see
              cref="M:Mono.Unix.Native.Syscall.umask" />
+
+            
 
             
 
@@ -1843,6 +2161,8 @@ See the <see
         <summary
           >Maximum number of <c
           >FILE</c>
+
+          
 
           
 
@@ -1879,11 +2199,15 @@ See the <see
 
           
 
+          
+
            stream to write to.</param
         >
         <param name="message"
           >The string to write on <paramref
            name="stream" />
+
+          
 
           
 
@@ -1895,11 +2219,15 @@ See the <see
 
           
 
+          
+
            stream.</summary
         >
         <returns
           >Returns the number of characters printed or a negative value if an error occurs, and <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -1930,6 +2258,8 @@ See the <see
             <para
               >Any of the errors documented for the <see
                cref="M:Mono.Unix.Native.Syscall.write" />
+
+              
 
               
 
@@ -1982,6 +2312,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
           
 
+          
+
            stream to write to.</param
         >
         <param name="format">The message format.</param>
@@ -1992,11 +2324,15 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
           
 
+          
+
            stream.</summary
         >
         <returns
           >Returns the number of characters printed or a negative value if an error occurs, and <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -2030,6 +2366,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
               
 
+              
+
                system call may also be returned.
 </para
             >
@@ -2042,13 +2380,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
             
 
+            
+
             () family of functions produces output according to a format as described below.  <c
             >fprintf</c>
 
             
 
+            
+
             () writes output to the given output <paramref
              name="stream" />
+
+            
 
             
 
@@ -2060,8 +2404,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
             
 
+            
+
              string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of <c
             >stdarg</c>
+
+            
 
             
 
@@ -2077,8 +2425,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , specifying the next argument to access.  If this field is not provided, the argument following the last argument accessed will be used.  Arguments are numbered starting at <c
                 >1</c>
+
+                
 
                 
 
@@ -2102,6 +2454,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -2110,8 +2464,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >d</c>
+
+                      
 
                       
 
@@ -2120,8 +2478,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >n</c>
+
+                      
 
                       
 
@@ -2130,8 +2492,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >s</c>
+
+                      
 
                       
 
@@ -2140,8 +2506,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, this option has no effect.  For <c
                       >o</c>
+
+                      
 
                       
 
@@ -2150,8 +2520,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        and <c
                       >X</c>
+
+                      
 
                       
 
@@ -2160,8 +2534,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (or '<c
                       >0X</c>
+
+                      
 
                       
 
@@ -2170,8 +2548,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions) prepended to it. For <c
                       >a</c>
+
+                      
 
                       
 
@@ -2180,8 +2562,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >e</c>
+
+                      
 
                       
 
@@ -2190,8 +2576,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >f</c>
+
+                      
 
                       
 
@@ -2200,8 +2590,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >g</c>
+
+                      
 
                       
 
@@ -2210,13 +2604,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, the result will always contain a decimal point, even if no digits follow it (normally, a decimal point appears in the results of those conversions only if a digit follows).  For <c
                       >g</c>
 
                       
 
+                      
+
                        and <c
                       >G</c>
+
+                      
 
                       
 
@@ -2230,6 +2630,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (zero)</term
                     >
                     <description
@@ -2238,13 +2640,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , the converted value is padded on the left with zeros rather than blanks.  If a precision is given with a numeric conversion (<c
                       >d</c>
 
                       
 
+                      
+
                       , <c
                       >i</c>
+
+                      
 
                       
 
@@ -2253,8 +2661,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >u</c>
+
+                      
 
                       
 
@@ -2263,13 +2675,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >x</c>
 
                       
 
+                      
+
                       , and <c
                       >X</c>
+
+                      
 
                       
 
@@ -2283,6 +2701,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -2291,13 +2711,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, the converted value is padded on the right with blanks, rather than on the left with blanks or zeros.  A <c
                       >-</c>
 
                       
 
+                      
+
                        overrides a <c
                       >0</c>
+
+                      
 
                       
 
@@ -2311,6 +2737,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (space)</term
                     >
                     <description
@@ -2319,8 +2747,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >A</c>
+
+                      
 
                       
 
@@ -2329,8 +2761,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >e</c>
+
+                      
 
                       
 
@@ -2339,8 +2775,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >f</c>
+
+                      
 
                       
 
@@ -2349,8 +2789,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >g</c>
+
+                      
 
                       
 
@@ -2359,8 +2803,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , or <c
                       >i</c>
+
+                      
 
                       
 
@@ -2374,11 +2822,15 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
                       >A sign must always be placed before a number produced by a signed conversion.  A <c
                       >+</c>
+
+                      
 
                       
 
@@ -2392,6 +2844,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -2400,8 +2854,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >u</c>
+
+                      
 
                       
 
@@ -2410,8 +2868,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ) or the integral portion of a floating point conversion (<c
                       >f</c>
+
+                      
 
                       
 
@@ -2420,8 +2882,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ) should be grouped and separated by thousands using the non-monetary separator returned by <see
                        cref="M:Mono.Unix.Native.Syscall.localeconv" />
+
+                      
 
                       
 
@@ -2441,8 +2907,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >i</c>
+
+                
 
                 
 
@@ -2451,8 +2921,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >u</c>
+
+                
 
                 
 
@@ -2461,8 +2935,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >X</c>
+
+                
 
                 
 
@@ -2471,8 +2949,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >A</c>
+
+                
 
                 
 
@@ -2481,8 +2963,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >E</c>
+
+                
 
                 
 
@@ -2491,8 +2977,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >F</c>
+
+                
 
                 
 
@@ -2501,13 +2991,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >G</c>
 
                 
 
+                
+
                  conversions, or the maximum number of characters to be printed from a string for <c
                 >s</c>
+
+                
 
                 
 
@@ -2521,8 +3017,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >i</c>
+
+                
 
                 
 
@@ -2531,8 +3031,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >o</c>
+
+                
 
                 
 
@@ -2541,13 +3045,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >x</c>
 
                 
 
+                
+
                 , or <c
                 >X</c>
+
+                
 
                 
 
@@ -2559,6 +3069,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
                     <term>Modifier</term>
                     <description>
                       <c>d</c>
+
+                      
 
                       
 
@@ -2606,6 +3118,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        (ell)</term
                     >
                     <description>
@@ -2621,6 +3135,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
                   <item>
                     <term>
                       <c>ll</c>
+
+                      
 
                       
 
@@ -2695,8 +3211,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      modifier, when applied to a <c
                     >o</c>
+
+                    
 
                     
 
@@ -2705,8 +3225,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                     
 
+                    
+
                     , <c
                     >x</c>
+
+                    
 
                     
 
@@ -2715,8 +3239,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, indicates that the argument is of an unsigned type equivalent in size to a <c
                     >ptrdiff_t</c>
+
+                    
 
                     
 
@@ -2725,8 +3253,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      modifier, when applied to a <c
                     >d</c>
+
+                    
 
                     
 
@@ -2735,8 +3267,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, indicates that the argument is of a signed type equivalent in size to a <c
                     >size_t</c>
+
+                    
 
                     
 
@@ -2745,8 +3281,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, it indicates that the argument is a pointer to a signed type equivalent in size to a <c
                     >size_t</c>
+
+                    
 
                     
 
@@ -2760,8 +3300,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >A</c>
+
+                  
 
                   
 
@@ -2770,8 +3314,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >E</c>
+
+                  
 
                   
 
@@ -2780,8 +3328,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >F</c>
+
+                  
 
                   
 
@@ -2790,8 +3342,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , or <c
                   >G</c>
+
+                  
 
                   
 
@@ -2819,8 +3375,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    or <c
                   >s</c>
+
+                  
 
                   
 
@@ -2839,6 +3399,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
                   <item>
                     <term>
                       <c>l</c>
+
+                      
 
                       
 
@@ -2864,8 +3426,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
             
 
+            
+
             ' or an asterisk followed by one or more decimal digits and a '<c
             >$</c>
+
+            
 
             
 
@@ -2874,8 +3440,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
             
 
+            
+
              argument supplies the field width or precision.  A negative field width is treated as a left adjustment flag followed by a positive field width; a negative precision is treated as though it were missing.  If a single format directive mixes positional (<c
             >nn$</c>
+
+            
 
             
 
@@ -2898,8 +3468,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  (or appropriate variant) argument is converted to signed decimal (<c
                 >d</c>
+
+                
 
                 
 
@@ -2908,8 +3482,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ), unsigned octal (<c
                 >o</c>
+
+                
 
                 
 
@@ -2918,8 +3496,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ), or unsigned hexadecimal (<c
                 >x</c>
+
+                
 
                 
 
@@ -2928,8 +3510,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ) notation.  The letters "<c
                 >abcdef</c>
+
+                
 
                 
 
@@ -2938,13 +3524,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversions; the letters "<c
                 >ABCDEF</c>
 
                 
 
+                
+
                 " are used for <c
                 >X</c>
+
+                
 
                 
 
@@ -2961,8 +3553,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted to signed decimal, unsigned octal, or unsigned decimal, as if the format had been <c
                 >ld</c>
+
+                
 
                 
 
@@ -2971,8 +3567,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , or <c
                 >lu</c>
+
+                
 
                 
 
@@ -2989,8 +3589,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted in the style <c
                 >[-]d.ddde±dd</c>
+
+                
 
                 
 
@@ -2999,13 +3603,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversion uses the letter '<c
                 >E</c>
 
                 
 
+                
+
                 ' (rather than '<c
                 >e</c>
+
+                
 
                 
 
@@ -3017,8 +3627,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >A</c>
+
+                
 
                 
 
@@ -3027,8 +3641,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >E</c>
+
+                
 
                 
 
@@ -3037,8 +3655,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >F</c>
+
+                
 
                 
 
@@ -3047,8 +3669,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >G</c>
+
+                
 
                 
 
@@ -3057,8 +3683,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >-inf</c>
+
+                
 
                 
 
@@ -3067,8 +3697,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >-INF</c>
+
+                
 
                 
 
@@ -3077,13 +3711,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  is represented as <c
                 >nan</c>
 
                 
 
+                
+
                  when using the lowercase conversion, and <c
                 >NAN</c>
+
+                
 
                 
 
@@ -3100,8 +3740,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted to decimal notation in the style <c
                 >[-]ddd.ddd</c>
+
+                
 
                 
 
@@ -3118,13 +3762,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted in style <c
                 >f</c>
 
                 
 
+                
+
                  or <c
                 >e</c>
+
+                
 
                 
 
@@ -3133,8 +3783,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  or <c
                 >E</c>
+
+                
 
                 
 
@@ -3143,8 +3797,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversions). The precision specifies the number of significant digits.  If the precision is missing, 6 digits are given; if the precision is zero, it is treated as 1. Style <c
                 >e</c>
+
+                
 
                 
 
@@ -3161,8 +3819,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted to hexadecimal notation in the style <c
                 >[-]0xh.hhhp[±]d</c>
+
+                
 
                 
 
@@ -3171,8 +3833,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  is a literal character '<c
                 >p</c>
+
+                
 
                 
 
@@ -3181,8 +3847,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversion uses the prefix "<c
                 >0X</c>
+
+                
 
                 
 
@@ -3191,8 +3861,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 "), the letters "<c
                 >ABCDEF</c>
+
+                
 
                 
 
@@ -3201,13 +3875,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ") to represent the hex digits, and the letter '<c
                 >P</c>
 
                 
 
+                
+
                 ' (rather than '<c
                 >p</c>
+
+                
 
                 
 
@@ -3220,8 +3900,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >0x6.48p-1</c>
+
+                  
 
                   
 
@@ -3230,8 +3914,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    are all equivalent.  The format chosen depends on the internal representation of the number, but the implementation guarantees that the length of the mantissa will be minimized.  Zeroes are always represented with a mantissa of 0 (preceded by a '<c
                   >-</c>
+
+                  
 
                   
 
@@ -3250,8 +3938,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  with the <c
                 >l</c>
+
+                
 
                 
 
@@ -3268,8 +3960,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted to an <c
                 >unsigned char</c>
+
+                
 
                 
 
@@ -3282,13 +3978,19 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    (ell) modifier is used, the <c
                   >wint_t</c>
 
                   
 
+                  
+
                    argument shall be converted to a <c
                   >wchar_t</c>
+
+                  
 
                   
 
@@ -3307,8 +4009,12 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
                 
 
+                
+
                  with the <c
                 >l</c>
+
+                
 
                 
 
@@ -3319,10 +4025,11 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
               <term>
                 <c>s</c>
               </term>
-              <description
-                >
+              <description>
 The <c
                 >char *</c>
+
+                
 
                 
 
@@ -3335,8 +4042,12 @@ The <c
 
                   
 
+                  
+
                    (ell) modifier is used, the <c
                   >wchar_t *</c>
+
+                  
 
                   
 
@@ -3354,13 +4065,19 @@ The <c
 
                 
 
+                
+
                  pointer argument is printed in hexadecimal (as if by '<c
                 >%#x</c>
 
                 
 
+                
+
                 ' or '<c
                 >%#lx</c>
+
+                
 
                 
 
@@ -3377,6 +4094,8 @@ The <c
 
                 
 
+                
+
                  (or variant) pointer argument.  No argument is converted.</description
               >
             </item>
@@ -3390,8 +4109,12 @@ The <c
 
                 
 
+                
+
                 ' is written.  No argument is converted.  The complete conversion specification is '<c
                 >%%</c>
+
+                
 
                 
 
@@ -3402,6 +4125,8 @@ The <c
           <para
             >The decimal point character is defined in the program's locale (category <c
             >LC_NUMERIC</c>
+
+            
 
             
 
@@ -3439,11 +4164,15 @@ The <c
 
           
 
+          
+
            stream to write to.</param
         >
         <summary
           >Output a character to a <c
           >FILE</c>
+
+          
 
           
 
@@ -3455,6 +4184,8 @@ The <c
 
           
 
+          
+
            is returned.</returns
         >
         <remarks
@@ -3463,13 +4194,19 @@ The <c
 
           
 
+          
+
           () function writes the character <paramref
            name="c" />
 
           
 
+          
+
            (converted to an "unsigned char") to the output stream pointed to by <paramref
            name="stream" />
+
+          
 
           
 
@@ -3504,11 +4241,15 @@ The <c
 
           
 
+          
+
            stream to write to.</param
         >
         <summary
           >Output a line to a <c
           >FILE</c>
+
+          
 
           
 
@@ -3521,8 +4262,12 @@ The <c
 
             
 
+            
+
              function returns <c
             >0</c>
+
+            
 
             
 
@@ -3531,8 +4276,12 @@ The <c
 
             
 
+            
+
              on error, and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -3555,6 +4304,8 @@ The <c
 
                   
 
+                  
+
                    argument not a writable stream.</description
                 >
               </item>
@@ -3565,8 +4316,12 @@ The <c
 
             
 
+            
+
              may also fail for any of the errors specified for the routines <see
              cref="M:Mono.Unix.Native.Syscall.write" />
+
+            
 
             
 
@@ -3580,13 +4335,19 @@ The <c
 
           
 
+          
+
           () writes the string pointed to by <paramref
            name="s" />
 
           
 
+          
+
            to the stream pointed to by <paramref
            name="stream" />
+
+          
 
           
 
@@ -3629,6 +4390,8 @@ The <c
 
           
 
+          
+
            stream to read from.</param
         >
         <summary>Read from a binary stream.</summary>
@@ -3636,6 +4399,8 @@ The <c
           <para
             >The function <c
             >fread</c>
+
+            
 
             
 
@@ -3647,13 +4412,19 @@ The <c
 
             
 
+            
+
             () does not distinguish between end-of-file and error, and callers must use <see
              cref="M:Mono.Unix.Native.Stdlib.feof" />
 
             
 
+            
+
             (3) and <see
              cref="M:Mono.Unix.Native.Stdlib.ferror" />
+
+            
 
             
 
@@ -3666,9 +4437,13 @@ The <c
 
           
 
+          
+
           () reads <c
           >
             <paramref name="ptr" />
+
+            
 
             
 
@@ -3677,13 +4452,19 @@ The <c
 
           
 
+          
+
            bytes from the stream pointed to by <paramref
            name="stream" />
 
           
 
+          
+
           , storing them at the location given by <paramref
            name="ptr" />
+
+          
 
           
 
@@ -3730,6 +4511,8 @@ The <c
 
           
 
+          
+
            stream to read from.</param
         >
         <summary>Read from a binary stream.</summary>
@@ -3737,6 +4520,8 @@ The <c
           <para
             >The function <c
             >fread</c>
+
+            
 
             
 
@@ -3748,13 +4533,19 @@ The <c
 
             
 
+            
+
             () does not distinguish between end-of-file and error, and callers must use <see
              cref="M:Mono.Unix.Native.Stdlib.feof" />
 
             
 
+            
+
             (3) and <see
              cref="M:Mono.Unix.Native.Stdlib.ferror" />
+
+            
 
             
 
@@ -3767,8 +4558,12 @@ The <c
 
           
 
+          
+
           () reads <paramref
            name="nmemb" />
+
+          
 
           
 
@@ -3777,13 +4572,19 @@ The <c
 
           
 
+          
+
            bytes long, from the stream pointed to by <paramref
            name="stream" />
 
           
 
+          
+
           , storing them at the location given by <paramref
            name="ptr" />
+
+          
 
           
 
@@ -3830,6 +4631,8 @@ The <c
 
           
 
+          
+
            stream to read from.</param
         >
         <summary>Read from a binary stream.</summary>
@@ -3837,6 +4640,8 @@ The <c
           <para
             >The function <c
             >fread</c>
+
+            
 
             
 
@@ -3848,13 +4653,19 @@ The <c
 
             
 
+            
+
             () does not distinguish between end-of-file and error, and callers must use <see
              cref="M:Mono.Unix.Native.Stdlib.feof" />
 
             
 
+            
+
             (3) and <see
              cref="M:Mono.Unix.Native.Stdlib.ferror" />
+
+            
 
             
 
@@ -3867,8 +4678,12 @@ The <c
 
           
 
+          
+
           () reads <paramref
            name="nmemb" />
+
+          
 
           
 
@@ -3877,13 +4692,19 @@ The <c
 
           
 
+          
+
            bytes long, from the stream pointed to by <paramref
            name="stream" />
 
           
 
+          
+
           , storing them at the location given by <paramref
            name="ptr" />
+
+          
 
           
 
@@ -3930,6 +4751,8 @@ The <c
 
           
 
+          
+
            stream to read from.</param
         >
         <summary>Read from a binary stream.</summary>
@@ -3937,6 +4760,8 @@ The <c
           <para
             >The function <c
             >fread</c>
+
+            
 
             
 
@@ -3948,13 +4773,19 @@ The <c
 
             
 
+            
+
             () does not distinguish between end-of-file and error, and callers must use <see
              cref="M:Mono.Unix.Native.Stdlib.feof" />
 
             
 
+            
+
             (3) and <see
              cref="M:Mono.Unix.Native.Stdlib.ferror" />
+
+            
 
             
 
@@ -3967,8 +4798,12 @@ The <c
 
           
 
+          
+
           () reads <paramref
            name="nmemb" />
+
+          
 
           
 
@@ -3977,13 +4812,19 @@ The <c
 
           
 
+          
+
            bytes long, from the stream pointed to by <paramref
            name="stream" />
 
           
 
+          
+
           , storing them at the location given by <paramref
            name="ptr" />
+
+          
 
           
 
@@ -4018,8 +4859,12 @@ The <c
 
           
 
+          
+
           () function causes the allocated memory referenced by <paramref
            name="ptr" />
+
+          
 
           
 
@@ -4028,8 +4873,12 @@ The <c
 
           
 
+          
+
            is <see
            cref="F:System.IntPtr.Zero" />
+
+          
 
           
 
@@ -4071,11 +4920,15 @@ The <c
 
           
 
+          
+
            stream to reopen.</param
         >
         <summary
           >Reopen a <c
           >FILE</c>
+
+          
 
           
 
@@ -4088,13 +4941,19 @@ The <c
 
             
 
+            
+
              pointer.  Otherwise, <see
              cref="F:System.IntPtr.Zero" />
 
             
 
+            
+
              is returned and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -4117,6 +4976,8 @@ The <c
 
                   
 
+                  
+
                    argument was invalid.</description
                 >
               </item>
@@ -4127,8 +4988,12 @@ The <c
 
             
 
+            
+
              may also fail for any of the error specified for the routines <see
              cref="M:Mono.Unix.Native.Stdlib.malloc" />
+
+            
 
             
 
@@ -4138,15 +5003,21 @@ The <c
 
             
 
+            
+
             (2), 
 <see
              cref="M:Mono.Unix.Native.Stdlib.fclose" />
 
             
 
+            
+
             (3), and
 <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
+
+            
 
             
 
@@ -4161,13 +5032,19 @@ The <c
 
             
 
+            
+
             () function opens the file whose name is the string pointed to by <paramref
              name="path" />
 
             
 
+            
+
              and associates the stream pointed to by <paramref
              name="stream" />
+
+            
 
             
 
@@ -4180,8 +5057,12 @@ The <c
 
             
 
+            
+
              to close the returned <c
             >FILE</c>
+
+            
 
             
 
@@ -4190,6 +5071,8 @@ The <c
           <para
             >The argument <paramref
              name="mode" />
+
+            
 
             
 
@@ -4237,6 +5120,8 @@ The <c
 
                 
 
+                
+
                 (3) or similar.</description
               >
             </item>
@@ -4250,6 +5135,8 @@ The <c
 
                 
 
+                
+
                 (3) or similar.</description
               >
             </item>
@@ -4260,14 +5147,20 @@ The <c
 
             
 
+            
+
              string can also include the letter "b" either as a third character or as a character between the characters in any of the two-character strings described above, and is used to enable <i
             >binary</i>
+
+            
 
             
 
              reading/writing on platforms which have different text/binary encodings (read: Microsoft Windows).  The default (non-<c
             >b</c>
             <paramref name="mode" />
+
+            
 
             
 
@@ -4279,8 +5172,12 @@ The <c
 
             
 
+            
+
              argument is <see
              langword="null" />
+
+            
 
             
 
@@ -4289,8 +5186,12 @@ The <c
 
             
 
+            
+
             () attempts to re-open the file associated with <paramref
              name="stream" />
+
+            
 
             
 
@@ -4305,6 +5206,8 @@ The <c
 
                 
 
+                
+
                  can only be reopened with that same mode.</term
               >
             </item>
@@ -4315,8 +5218,12 @@ The <c
 
                 
 
+                
+
                  can be reopened with the same mode, or mode <c
                 >"w"</c>
+
+                
 
                 
 
@@ -4330,8 +5237,12 @@ The <c
 
                 
 
+                
+
                  can be reopened with the same mode, or mode <c
                 >"a"</c>
+
+                
 
                 
 
@@ -4345,13 +5256,19 @@ The <c
 
                 
 
+                
+
                 , <c
                 >"w+"</c>
 
                 
 
+                
+
                 , or <c
                 >"a+"</c>
+
+                
 
                 
 
@@ -4365,8 +5282,12 @@ The <c
 
             
 
+            
+
             () function is to change the file associated with a standard text stream (<see
              cref="F:Mono.Unix.Native.Stdlib.stderr" />
+
+            
 
             
 
@@ -4375,8 +5296,12 @@ The <c
 
             
 
+            
+
             , or <see
              cref="F:Mono.Unix.Native.Stdlib.stdout" />
+
+            
 
             
 
@@ -4420,11 +5345,15 @@ The <c
 
           
 
+          
+
            stream to seek.</param
         >
         <param name="offset"
           >Number of bytes to add to the the file offset specified by <paramref
            name="whence" />
+
+          
 
           
 
@@ -4436,11 +5365,15 @@ The <c
 
           
 
+          
+
            to.</param
         >
         <summary
           >Set file position for a <c
           >FILE</c>
+
+          
 
           
 
@@ -4453,13 +5386,19 @@ The <c
 
             
 
+            
+
              if successful; otherwise <c
             >-1</c>
 
             
 
+            
+
              is returned and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -4482,6 +5421,8 @@ The <c
 
                   
 
+                  
+
                    argument is not not a seekable stream</description
                 >
               </item>
@@ -4492,6 +5433,8 @@ The <c
                 <description
                   >The <paramref
                    name="whence" />
+
+                  
 
                   
 
@@ -4508,13 +5451,19 @@ The <c
 
                   
 
+                  
+
                    for <see
                    cref="M:Mono.Unix.Native.Stdlib.fseek" />
 
                   
 
+                  
+
                   () and <see
                    cref="M:Mono.Unix.Native.Stdlib.ftell" />
+
+                  
 
                   
 
@@ -4531,6 +5480,8 @@ The <c
 
                   
 
+                  
+
                   (3)).</description
                 >
               </item>
@@ -4541,8 +5492,12 @@ The <c
 
             
 
+            
+
              may also fail for any of the error specified for the routines <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
+
+            
 
             
 
@@ -4551,13 +5506,19 @@ The <c
 
             
 
+            
+
             (2), <see
              cref="M:Mono.Unix.Native.Syscall.lseek" />
 
             
 
+            
+
             (2), and <see
              cref="M:Mono.Unix.Native.Stdlib.malloc" />
+
+            
 
             
 
@@ -4571,8 +5532,12 @@ The <c
 
           
 
+          
+
           () function sets the file position indicator for the stream pointed to by <paramref
            name="stream" />
+
+          
 
           
 
@@ -4581,8 +5546,12 @@ The <c
 
           
 
+          
+
            bytes to the position specified by <paramref
            name="whence" />
+
+          
 
           
 
@@ -4591,8 +5560,12 @@ The <c
 
           
 
+          
+
           , <see
            cref="F:Mono.Unix.Native.SeekFlags.SEEK_CUR" />
+
+          
 
           
 
@@ -4601,8 +5574,12 @@ The <c
 
           
 
+          
+
           , the offset is relative to the start of the file, the current position indicator, or end-of-file, respectively.  A successful call to the <c
           >fseek</c>
+
+          
 
           
 
@@ -4611,8 +5588,12 @@ The <c
 
           
 
+          
+
           (3) and <see
            cref="M:Mono.Unix.Native.Stdlib.ungetwc" />
+
+          
 
           
 
@@ -4648,12 +5629,16 @@ The <c
 
           
 
+          
+
            stream to set the current file position for.</param
         >
         <param name="pos">The file position to seek to.</param>
         <summary
           >Sets the current file position of a <c
           >FILE</c>
+
+          
 
           
 
@@ -4666,13 +5651,19 @@ The <c
 
             
 
+            
+
              if successful; otherwise <c
             >-1</c>
 
             
 
+            
+
              is returned and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -4695,6 +5686,8 @@ The <c
 
                   
 
+                  
+
                    argument is not not a seekable stream</description
                 >
               </item>
@@ -4705,6 +5698,8 @@ The <c
                 <description
                   >The <paramref
                    name="whence" />
+
+                  
 
                   
 
@@ -4721,13 +5716,19 @@ The <c
 
                   
 
+                  
+
                    for <see
                    cref="M:Mono.Unix.Native.Stdlib.fseek" />
 
                   
 
+                  
+
                   () and <see
                    cref="M:Mono.Unix.Native.Stdlib.ftell" />
+
+                  
 
                   
 
@@ -4744,6 +5745,8 @@ The <c
 
                   
 
+                  
+
                   (3)).</description
                 >
               </item>
@@ -4754,8 +5757,12 @@ The <c
 
             
 
+            
+
              may also fail for any of the error specified for the routines <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
+
+            
 
             
 
@@ -4764,13 +5771,19 @@ The <c
 
             
 
+            
+
             (2), <see
              cref="M:Mono.Unix.Native.Syscall.lseek" />
 
             
 
+            
+
             (2), and <see
              cref="M:Mono.Unix.Native.Stdlib.malloc" />
+
+            
 
             
 
@@ -4784,8 +5797,12 @@ The <c
 
           
 
+          
+
           () function is an alternate interfaces for setting the current position in the file, similar to <see
            cref="M:Mono.Unix.Native.Stdlib.fseek" />
+
+          
 
           
 
@@ -4794,8 +5811,12 @@ The <c
 
           
 
+          
+
            pointed to by pos.  This provides a portable way to seek to offsets larger than those that can be represented by a long int.  It may also store additional state information in the <see
            cref="T:Mono.Unix.Native.FilePosition" />
+
+          
 
           
 
@@ -4828,11 +5849,15 @@ The <c
 
           
 
+          
+
            stream to get the file position from.</param
         >
         <summary
           >Get current file position for <c
           >FILE</c>
+
+          
 
           
 
@@ -4845,8 +5870,12 @@ The <c
 
             
 
+            
+
              is returned and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -4869,6 +5898,8 @@ The <c
 
                   
 
+                  
+
                    argument is not not a seekable stream</description
                 >
               </item>
@@ -4879,6 +5910,8 @@ The <c
                 <description
                   >The <paramref
                    name="whence" />
+
+                  
 
                   
 
@@ -4895,13 +5928,19 @@ The <c
 
                   
 
+                  
+
                    for <see
                    cref="M:Mono.Unix.Native.Stdlib.fseek" />
 
                   
 
+                  
+
                   () and <see
                    cref="M:Mono.Unix.Native.Stdlib.ftell" />
+
+                  
 
                   
 
@@ -4918,6 +5957,8 @@ The <c
 
                   
 
+                  
+
                   (3)).</description
                 >
               </item>
@@ -4928,8 +5969,12 @@ The <c
 
             
 
+            
+
              may also fail for any of the error specified for the routines <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
+
+            
 
             
 
@@ -4938,13 +5983,19 @@ The <c
 
             
 
+            
+
             (2), <see
              cref="M:Mono.Unix.Native.Syscall.lseek" />
 
             
 
+            
+
             (2), and <see
              cref="M:Mono.Unix.Native.Stdlib.malloc" />
+
+            
 
             
 
@@ -4958,8 +6009,12 @@ The <c
 
           
 
+          
+
           () function obtains the current value of the file position indicator for the stream pointed to by <paramref
            name="stream" />
+
+          
 
           
 
@@ -5002,11 +6057,15 @@ The <c
 
           
 
+          
+
            stream to write to.</param
         >
         <summary
           >Write to a binary <c
           >FILE</c>
+
+          
 
           
 
@@ -5019,6 +6078,8 @@ The <c
 
             
 
+            
+
             () advance the file position indicator for the stream by the number of bytes written.  It returns the number of objects written. If an error occurs, or the end-of-file is reached, the return value is a short object count (or zero).</para
           >
           <para
@@ -5027,8 +6088,12 @@ The <c
 
             
 
+            
+
             () returns a value less than <paramref
              name="nmemb" />
+
+            
 
             
 
@@ -5043,9 +6108,13 @@ The <c
 
             
 
+            
+
             () writes <c
             >
               <paramref name="ptr" />
+
+              
 
               
 
@@ -5054,13 +6123,19 @@ The <c
 
             
 
+            
+
              bytes to the stream pointed to by <paramref
              name="stream" />
 
             
 
+            
+
             , obtaining them from the location given by <paramref
              name="ptr" />
+
+            
 
             
 
@@ -5109,11 +6184,15 @@ The <c
 
           
 
+          
+
            stream to write to.</param
         >
         <summary
           >Write to a binary <c
           >FILE</c>
+
+          
 
           
 
@@ -5126,6 +6205,8 @@ The <c
 
             
 
+            
+
             () advance the file position indicator for the stream by the number of bytes written.  It returns the number of objects written. If an error occurs, or the end-of-file is reached, the return value is a short object count (or zero).</para
           >
           <para
@@ -5134,8 +6215,12 @@ The <c
 
             
 
+            
+
             () returns a value less than <paramref
              name="nmemb" />
+
+            
 
             
 
@@ -5150,8 +6235,12 @@ The <c
 
             
 
+            
+
             () writes <paramref
              name="nmemb" />
+
+            
 
             
 
@@ -5160,13 +6249,19 @@ The <c
 
             
 
+            
+
              bytes long, to the stream pointed to by <paramref
              name="stream" />
 
             
 
+            
+
             , obtaining them from the location given by <paramref
              name="ptr" />
+
+            
 
             
 
@@ -5215,11 +6310,15 @@ The <c
 
           
 
+          
+
            stream to write to.</param
         >
         <summary
           >Write to a binary <c
           >FILE</c>
+
+          
 
           
 
@@ -5232,6 +6331,8 @@ The <c
 
             
 
+            
+
             () advance the file position indicator for the stream by the number of bytes written.  It returns the number of objects written. If an error occurs, or the end-of-file is reached, the return value is a short object count (or zero).</para
           >
           <para
@@ -5240,8 +6341,12 @@ The <c
 
             
 
+            
+
             () returns a value less than <paramref
              name="nmemb" />
+
+            
 
             
 
@@ -5256,8 +6361,12 @@ The <c
 
             
 
+            
+
             () writes <paramref
              name="nmemb" />
+
+            
 
             
 
@@ -5266,13 +6375,19 @@ The <c
 
             
 
+            
+
              bytes long, to the stream pointed to by <paramref
              name="stream" />
 
             
 
+            
+
             , obtaining them from the location given by <paramref
              name="ptr" />
+
+            
 
             
 
@@ -5321,11 +6436,15 @@ The <c
 
           
 
+          
+
            stream to write to.</param
         >
         <summary
           >Write to a binary <c
           >FILE</c>
+
+          
 
           
 
@@ -5338,6 +6457,8 @@ The <c
 
             
 
+            
+
             () advance the file position indicator for the stream by the number of bytes written.  It returns the number of objects written. If an error occurs, or the end-of-file is reached, the return value is a short object count (or zero).</para
           >
           <para
@@ -5346,8 +6467,12 @@ The <c
 
             
 
+            
+
             () returns a value less than <paramref
              name="nmemb" />
+
+            
 
             
 
@@ -5362,8 +6487,12 @@ The <c
 
             
 
+            
+
             () writes <paramref
              name="nmemb" />
+
+            
 
             
 
@@ -5372,13 +6501,19 @@ The <c
 
             
 
+            
+
              bytes long, to the stream pointed to by <paramref
              name="stream" />
 
             
 
+            
+
             , obtaining them from the location given by <paramref
              name="ptr" />
+
+            
 
             
 
@@ -5412,11 +6547,15 @@ The <c
 
           
 
+          
+
            stream to read a character from.</param
         >
         <summary
           >Get next character from a <c
           >FILE</c>
+
+          
 
           
 
@@ -5428,8 +6567,12 @@ The <c
 
           
 
+          
+
           .  The routines <see
            cref="M:Mono.Unix.Native.Stdlib.feof" />
+
+          
 
           
 
@@ -5438,8 +6581,12 @@ The <c
 
           
 
+          
+
           (3) must be used to distinguish between end-of-file and error.  If an error occurs, use <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -5448,8 +6595,12 @@ The <c
 
           
 
+          
+
            until the condition is cleared with <see
            cref="M:Mono.Unix.Native.Stdlib.clearerr" />
+
+          
 
           
 
@@ -5461,8 +6612,12 @@ The <c
 
           
 
+          
+
           () function obtains the next input character (if present) from the stream pointed at by stream, or the next character pushed back on the stream via <see
            cref="M:Mono.Unix.Native.Stdlib.ungetc" />
+
+          
 
           
 
@@ -5494,8 +6649,12 @@ The <c
 
           
 
+          
+
           .  The routines <see
            cref="M:Mono.Unix.Native.Stdlib.feof" />
+
+          
 
           
 
@@ -5504,8 +6663,12 @@ The <c
 
           
 
+          
+
           (3) must be used to distinguish between end-of-file and error.  If an error occurs, use <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -5514,8 +6677,12 @@ The <c
 
           
 
+          
+
            until the condition is cleared with <see
            cref="M:Mono.Unix.Native.Stdlib.clearerr" />
+
+          
 
           
 
@@ -5527,9 +6694,13 @@ The <c
 
           
 
+          
+
           () function is equivalent to <c
           >
             <see cref="M:Mono.Unix.Native.Stdlib.getc" />
+
+            
 
             
 
@@ -5538,8 +6709,12 @@ The <c
 
             
 
+            
+
             )</c
           >
+
+          
 
           
 
@@ -5549,13 +6724,19 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           , or the next character pushed back on <c
           >stdin</c>
 
           
 
+          
+
            via <see
            cref="M:Mono.Unix.Native.Stdlib.ungetc" />
+
+          
 
           
 
@@ -5590,8 +6771,12 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           () function returns the value of the environment variable as a string.  If the variable name is not in the current environment, <see
            langword="null" />
+
+          
 
           
 
@@ -5603,8 +6788,12 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           () function obtains the current value of the environment variable, <paramref
            name="name" />
+
+          
 
           
 
@@ -5638,6 +6827,8 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           .</summary
         >
         <returns>To be added.</returns>
@@ -5666,6 +6857,8 @@ obtaining the next input character (if present) from <see
         <summary
           >The number of characters filled by <see
            cref="M:Mono.Unix.Native.Stdlib.tmpnam" />
+
+          
 
           
 
@@ -5706,8 +6899,12 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           () function returns a pointer to the allocated memory if successful; otherwise a <see
            cref="F:System.IntPtr.Zero" />
+
+          
 
           
 
@@ -5716,8 +6913,12 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
            returns <see
            cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+
+          
 
           
 
@@ -5730,8 +6931,12 @@ obtaining the next input character (if present) from <see
 
             
 
+            
+
             () function allocates <paramref
              name="size" />
+
+            
 
             
 
@@ -5740,8 +6945,12 @@ obtaining the next input character (if present) from <see
 
             
 
+            
+
              bytes in length (see <see
              cref="M:Mono.Unix.Native.Syscall.getpagesize" />
+
+            
 
             
 
@@ -5750,8 +6959,12 @@ obtaining the next input character (if present) from <see
 
             
 
+            
+
             () fails, <see
              cref="F:System.IntPtr.Zero" />
+
+            
 
             
 
@@ -5763,11 +6976,15 @@ obtaining the next input character (if present) from <see
 
             
 
+            
+
              the return value to avoid a memory leak.</para
           >
           <para
             >Note that <c
             >malloc</c>
+
+            
 
             
 
@@ -5826,6 +7043,8 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           .</summary
         >
         <returns
@@ -5834,8 +7053,12 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           () function returns the value 0 if successful; otherwise the value -1 is returned and <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -5847,8 +7070,12 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           () function finds the error message corresponding to the current value of <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -5857,8 +7084,12 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
            and does not point to the null character, this string is prepended to the message string and separated from it by a colon and space ("<c
           >: </c>
+
+          
 
           
 
@@ -5892,11 +7123,15 @@ obtaining the next input character (if present) from <see
 
           
 
+          
+
           .</summary
         >
         <returns
           >Returns the number of characters printed or a negative value if an error occurs, and <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -5927,6 +7162,8 @@ obtaining the next input character (if present) from <see
             <para
               >Any of the errors documented for the <see
                cref="M:Mono.Unix.Native.Syscall.write" />
+
+              
 
               
 
@@ -5981,11 +7218,15 @@ Use printf (string) instead.")</AttributeName>
 
           
 
+          
+
           .</summary
         >
         <returns
           >Returns the number of characters printed or a negative value if an error occurs, and <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -6019,6 +7260,8 @@ Use printf (string) instead.")</AttributeName>
 
               
 
+              
+
                system call may also be returned.
 </para
             >
@@ -6031,13 +7274,19 @@ Use printf (string) instead.")</AttributeName>
 
             
 
+            
+
             () family of functions produces output according to a format as described below.  <c
             >printf</c>
 
             
 
+            
+
             () writes output to the given output <paramref
              name="stream" />
+
+            
 
             
 
@@ -6049,8 +7298,12 @@ Use printf (string) instead.")</AttributeName>
 
             
 
+            
+
              string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of <c
             >stdarg</c>
+
+            
 
             
 
@@ -6066,8 +7319,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , specifying the next argument to access.  If this field is not provided, the argument following the last argument accessed will be used.  Arguments are numbered starting at <c
                 >1</c>
+
+                
 
                 
 
@@ -6091,6 +7348,8 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -6099,8 +7358,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >d</c>
+
+                      
 
                       
 
@@ -6109,8 +7372,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >n</c>
+
+                      
 
                       
 
@@ -6119,8 +7386,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >s</c>
+
+                      
 
                       
 
@@ -6129,8 +7400,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, this option has no effect.  For <c
                       >o</c>
+
+                      
 
                       
 
@@ -6139,8 +7414,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                        and <c
                       >X</c>
+
+                      
 
                       
 
@@ -6149,8 +7428,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (or '<c
                       >0X</c>
+
+                      
 
                       
 
@@ -6159,8 +7442,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions) prepended to it. For <c
                       >a</c>
+
+                      
 
                       
 
@@ -6169,8 +7456,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >e</c>
+
+                      
 
                       
 
@@ -6179,8 +7470,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >f</c>
+
+                      
 
                       
 
@@ -6189,8 +7484,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >g</c>
+
+                      
 
                       
 
@@ -6199,13 +7498,19 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, the result will always contain a decimal point, even if no digits follow it (normally, a decimal point appears in the results of those conversions only if a digit follows).  For <c
                       >g</c>
 
                       
 
+                      
+
                        and <c
                       >G</c>
+
+                      
 
                       
 
@@ -6219,6 +7524,8 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (zero)</term
                     >
                     <description
@@ -6227,13 +7534,19 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , the converted value is padded on the left with zeros rather than blanks.  If a precision is given with a numeric conversion (<c
                       >d</c>
 
                       
 
+                      
+
                       , <c
                       >i</c>
+
+                      
 
                       
 
@@ -6242,8 +7555,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >u</c>
+
+                      
 
                       
 
@@ -6252,13 +7569,19 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >x</c>
 
                       
 
+                      
+
                       , and <c
                       >X</c>
+
+                      
 
                       
 
@@ -6272,6 +7595,8 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -6280,13 +7605,19 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, the converted value is padded on the right with blanks, rather than on the left with blanks or zeros.  A <c
                       >-</c>
 
                       
 
+                      
+
                        overrides a <c
                       >0</c>
+
+                      
 
                       
 
@@ -6300,6 +7631,8 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (space)</term
                     >
                     <description
@@ -6308,8 +7641,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >A</c>
+
+                      
 
                       
 
@@ -6318,8 +7655,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >e</c>
+
+                      
 
                       
 
@@ -6328,8 +7669,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >f</c>
+
+                      
 
                       
 
@@ -6338,8 +7683,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >g</c>
+
+                      
 
                       
 
@@ -6348,8 +7697,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , or <c
                       >i</c>
+
+                      
 
                       
 
@@ -6363,11 +7716,15 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
                       >A sign must always be placed before a number produced by a signed conversion.  A <c
                       >+</c>
+
+                      
 
                       
 
@@ -6381,6 +7738,8 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -6389,8 +7748,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >u</c>
+
+                      
 
                       
 
@@ -6399,8 +7762,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ) or the integral portion of a floating point conversion (<c
                       >f</c>
+
+                      
 
                       
 
@@ -6409,8 +7776,12 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ) should be grouped and separated by thousands using the non-monetary separator returned by <see
                        cref="M:Mono.Unix.Native.Syscall.localeconv" />
+
+                      
 
                       
 
@@ -6430,8 +7801,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >i</c>
+
+                
 
                 
 
@@ -6440,8 +7815,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >u</c>
+
+                
 
                 
 
@@ -6450,8 +7829,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >X</c>
+
+                
 
                 
 
@@ -6460,8 +7843,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >A</c>
+
+                
 
                 
 
@@ -6470,8 +7857,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >E</c>
+
+                
 
                 
 
@@ -6480,8 +7871,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >F</c>
+
+                
 
                 
 
@@ -6490,13 +7885,19 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >G</c>
 
                 
 
+                
+
                  conversions, or the maximum number of characters to be printed from a string for <c
                 >s</c>
+
+                
 
                 
 
@@ -6510,8 +7911,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >i</c>
+
+                
 
                 
 
@@ -6520,8 +7925,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >o</c>
+
+                
 
                 
 
@@ -6530,13 +7939,19 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >x</c>
 
                 
 
+                
+
                 , or <c
                 >X</c>
+
+                
 
                 
 
@@ -6548,6 +7963,8 @@ Use printf (string) instead.")</AttributeName>
                     <term>Modifier</term>
                     <description>
                       <c>d</c>
+
+                      
 
                       
 
@@ -6595,6 +8012,8 @@ Use printf (string) instead.")</AttributeName>
 
                       
 
+                      
+
                        (ell)</term
                     >
                     <description>
@@ -6610,6 +8029,8 @@ Use printf (string) instead.")</AttributeName>
                   <item>
                     <term>
                       <c>ll</c>
+
+                      
 
                       
 
@@ -6684,8 +8105,12 @@ Use printf (string) instead.")</AttributeName>
 
                     
 
+                    
+
                      modifier, when applied to a <c
                     >o</c>
+
+                    
 
                     
 
@@ -6694,8 +8119,12 @@ Use printf (string) instead.")</AttributeName>
 
                     
 
+                    
+
                     , <c
                     >x</c>
+
+                    
 
                     
 
@@ -6704,8 +8133,12 @@ Use printf (string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, indicates that the argument is of an unsigned type equivalent in size to a <c
                     >ptrdiff_t</c>
+
+                    
 
                     
 
@@ -6714,8 +8147,12 @@ Use printf (string) instead.")</AttributeName>
 
                     
 
+                    
+
                      modifier, when applied to a <c
                     >d</c>
+
+                    
 
                     
 
@@ -6724,8 +8161,12 @@ Use printf (string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, indicates that the argument is of a signed type equivalent in size to a <c
                     >size_t</c>
+
+                    
 
                     
 
@@ -6734,8 +8175,12 @@ Use printf (string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, it indicates that the argument is a pointer to a signed type equivalent in size to a <c
                     >size_t</c>
+
+                    
 
                     
 
@@ -6749,8 +8194,12 @@ Use printf (string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >A</c>
+
+                  
 
                   
 
@@ -6759,8 +8208,12 @@ Use printf (string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >E</c>
+
+                  
 
                   
 
@@ -6769,8 +8222,12 @@ Use printf (string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >F</c>
+
+                  
 
                   
 
@@ -6779,8 +8236,12 @@ Use printf (string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , or <c
                   >G</c>
+
+                  
 
                   
 
@@ -6808,8 +8269,12 @@ Use printf (string) instead.")</AttributeName>
 
                   
 
+                  
+
                    or <c
                   >s</c>
+
+                  
 
                   
 
@@ -6828,6 +8293,8 @@ Use printf (string) instead.")</AttributeName>
                   <item>
                     <term>
                       <c>l</c>
+
+                      
 
                       
 
@@ -6853,8 +8320,12 @@ Use printf (string) instead.")</AttributeName>
 
             
 
+            
+
             ' or an asterisk followed by one or more decimal digits and a '<c
             >$</c>
+
+            
 
             
 
@@ -6863,8 +8334,12 @@ Use printf (string) instead.")</AttributeName>
 
             
 
+            
+
              argument supplies the field width or precision.  A negative field width is treated as a left adjustment flag followed by a positive field width; a negative precision is treated as though it were missing.  If a single format directive mixes positional (<c
             >nn$</c>
+
+            
 
             
 
@@ -6887,8 +8362,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  (or appropriate variant) argument is converted to signed decimal (<c
                 >d</c>
+
+                
 
                 
 
@@ -6897,8 +8376,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 ), unsigned octal (<c
                 >o</c>
+
+                
 
                 
 
@@ -6907,8 +8390,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 ), or unsigned hexadecimal (<c
                 >x</c>
+
+                
 
                 
 
@@ -6917,8 +8404,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 ) notation.  The letters "<c
                 >abcdef</c>
+
+                
 
                 
 
@@ -6927,13 +8418,19 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversions; the letters "<c
                 >ABCDEF</c>
 
                 
 
+                
+
                 " are used for <c
                 >X</c>
+
+                
 
                 
 
@@ -6950,8 +8447,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted to signed decimal, unsigned octal, or unsigned decimal, as if the format had been <c
                 >ld</c>
+
+                
 
                 
 
@@ -6960,8 +8461,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , or <c
                 >lu</c>
+
+                
 
                 
 
@@ -6978,8 +8483,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted in the style <c
                 >[-]d.ddde±dd</c>
+
+                
 
                 
 
@@ -6988,13 +8497,19 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversion uses the letter '<c
                 >E</c>
 
                 
 
+                
+
                 ' (rather than '<c
                 >e</c>
+
+                
 
                 
 
@@ -7006,8 +8521,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >A</c>
+
+                
 
                 
 
@@ -7016,8 +8535,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >E</c>
+
+                
 
                 
 
@@ -7026,8 +8549,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >F</c>
+
+                
 
                 
 
@@ -7036,8 +8563,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >G</c>
+
+                
 
                 
 
@@ -7046,8 +8577,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >-inf</c>
+
+                
 
                 
 
@@ -7056,8 +8591,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >-INF</c>
+
+                
 
                 
 
@@ -7066,13 +8605,19 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  is represented as <c
                 >nan</c>
 
                 
 
+                
+
                  when using the lowercase conversion, and <c
                 >NAN</c>
+
+                
 
                 
 
@@ -7089,8 +8634,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted to decimal notation in the style <c
                 >[-]ddd.ddd</c>
+
+                
 
                 
 
@@ -7107,13 +8656,19 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted in style <c
                 >f</c>
 
                 
 
+                
+
                  or <c
                 >e</c>
+
+                
 
                 
 
@@ -7122,8 +8677,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  or <c
                 >E</c>
+
+                
 
                 
 
@@ -7132,8 +8691,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversions). The precision specifies the number of significant digits.  If the precision is missing, 6 digits are given; if the precision is zero, it is treated as 1. Style <c
                 >e</c>
+
+                
 
                 
 
@@ -7150,8 +8713,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted to hexadecimal notation in the style <c
                 >[-]0xh.hhhp[±]d</c>
+
+                
 
                 
 
@@ -7160,8 +8727,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  is a literal character '<c
                 >p</c>
+
+                
 
                 
 
@@ -7170,8 +8741,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversion uses the prefix "<c
                 >0X</c>
+
+                
 
                 
 
@@ -7180,8 +8755,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 "), the letters "<c
                 >ABCDEF</c>
+
+                
 
                 
 
@@ -7190,13 +8769,19 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                 ") to represent the hex digits, and the letter '<c
                 >P</c>
 
                 
 
+                
+
                 ' (rather than '<c
                 >p</c>
+
+                
 
                 
 
@@ -7209,8 +8794,12 @@ Use printf (string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >0x6.48p-1</c>
+
+                  
 
                   
 
@@ -7219,8 +8808,12 @@ Use printf (string) instead.")</AttributeName>
 
                   
 
+                  
+
                    are all equivalent.  The format chosen depends on the internal representation of the number, but the implementation guarantees that the length of the mantissa will be minimized.  Zeroes are always represented with a mantissa of 0 (preceded by a '<c
                   >-</c>
+
+                  
 
                   
 
@@ -7239,8 +8832,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  with the <c
                 >l</c>
+
+                
 
                 
 
@@ -7257,8 +8854,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted to an <c
                 >unsigned char</c>
+
+                
 
                 
 
@@ -7271,13 +8872,19 @@ Use printf (string) instead.")</AttributeName>
 
                   
 
+                  
+
                    (ell) modifier is used, the <c
                   >wint_t</c>
 
                   
 
+                  
+
                    argument shall be converted to a <c
                   >wchar_t</c>
+
+                  
 
                   
 
@@ -7296,8 +8903,12 @@ Use printf (string) instead.")</AttributeName>
 
                 
 
+                
+
                  with the <c
                 >l</c>
+
+                
 
                 
 
@@ -7308,10 +8919,11 @@ Use printf (string) instead.")</AttributeName>
               <term>
                 <c>s</c>
               </term>
-              <description
-                >
+              <description>
 The <c
                 >char *</c>
+
+                
 
                 
 
@@ -7324,8 +8936,12 @@ The <c
 
                   
 
+                  
+
                    (ell) modifier is used, the <c
                   >wchar_t *</c>
+
+                  
 
                   
 
@@ -7343,13 +8959,19 @@ The <c
 
                 
 
+                
+
                  pointer argument is printed in hexadecimal (as if by '<c
                 >%#x</c>
 
                 
 
+                
+
                 ' or '<c
                 >%#lx</c>
+
+                
 
                 
 
@@ -7366,6 +8988,8 @@ The <c
 
                 
 
+                
+
                  (or variant) pointer argument.  No argument is converted.</description
               >
             </item>
@@ -7379,8 +9003,12 @@ The <c
 
                 
 
+                
+
                 ' is written.  No argument is converted.  The complete conversion specification is '<c
                 >%%</c>
+
+                
 
                 
 
@@ -7391,6 +9019,8 @@ The <c
           <para
             >The decimal point character is defined in the program's locale (category <c
             >LC_NUMERIC</c>
+
+            
 
             
 
@@ -7428,11 +9058,15 @@ The <c
 
           
 
+          
+
            stream to write to.</param
         >
         <summary
           >Output a character to a <c
           >FILE</c>
+
+          
 
           
 
@@ -7444,6 +9078,8 @@ The <c
 
           
 
+          
+
            is returned.</returns
         >
         <remarks
@@ -7452,13 +9088,19 @@ The <c
 
           
 
+          
+
           () function writes the character <paramref
            name="c" />
 
           
 
+          
+
            (converted to an "unsigned char") to the output stream pointed to by <paramref
            name="stream" />
+
+          
 
           
 
@@ -7492,11 +9134,15 @@ The <c
 
           
 
+          
+
           .</summary
         >
         <returns
           >Returns the character written.  If an error occurrs, the value <see
            cref="F:Mono.Unix.Native.Stdlib.EOF" />
+
+          
 
           
 
@@ -7508,13 +9154,19 @@ The <c
 
           
 
+          
+
           () function is identical to <see
            cref="M:Mono.Unix.Native.Stdlib.putc" />
 
           
 
+          
+
           () with an output stream of <see
            cref="F:Mono.Unix.Native.Stdlib.stdout" />
+
+          
 
           
 
@@ -7548,6 +9200,8 @@ The <c
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7557,8 +9211,12 @@ The <c
 
             
 
+            
+
              function returns <c
             >0</c>
+
+            
 
             
 
@@ -7567,8 +9225,12 @@ The <c
 
             
 
+            
+
              on error, and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -7591,6 +9253,8 @@ The <c
 
                   
 
+                  
+
                    argument not a writable stream.</description
                 >
               </item>
@@ -7601,8 +9265,12 @@ The <c
 
             
 
+            
+
              may also fail for any of the errors specified for the routines <see
              cref="M:Mono.Unix.Native.Syscall.write" />
+
+            
 
             
 
@@ -7616,13 +9284,19 @@ The <c
 
           
 
+          
+
           () writes the string <paramref
            name="s" />
 
           
 
+          
+
           , and a terminating newline character, to the stream <see
            cref="F:Mono.Unix.Native.Stdlib.stdout" />
+
+          
 
           
 
@@ -7655,7 +9329,10 @@ The <c
         <summary>Send a realtime signal to the current process.</summary>
         <returns
           >The <c
-          >raise</c>
+          
+>raise</c>
+
+          
 
           
 
@@ -7664,17 +9341,24 @@ The <c
 
           
 
+          
+
            indicates the error.
         </returns
         >
         <remarks
           >The <c
-          >raise</c>
+          
+>raise</c>
+
+          
 
           
 
           () function sends the signal <paramref
            name="sig" />
+
+          
 
           
 
@@ -7713,7 +9397,10 @@ The <c
         <summary>Send a signal to the current process.</summary>
         <returns
           >The <c
-          >raise</c>
+          
+>raise</c>
+
+          
 
           
 
@@ -7722,17 +9409,24 @@ The <c
 
           
 
+          
+
            indicates the error.
 </returns
         >
         <remarks
           >The <c
-          >raise</c>
+          
+>raise</c>
+
+          
 
           
 
           () function sends the signal <paramref
            name="sig" />
+
+          
 
           
 
@@ -7761,7 +9455,10 @@ The <c
         <returns>To be added.</returns>
         <remarks
           >The <c
-          >rand</c>
+          
+>rand</c>
+
+          
 
           
 
@@ -7795,11 +9492,15 @@ The <c
 
           
 
+          
+
           (3).</summary
         >
         <remarks
           >The maximum value returned by <see
            cref="M:Mono.Unix.Native.Stdlib.rand" />
+
+          
 
           
 
@@ -7840,7 +9541,10 @@ The <c
         <summary>Reallocate a memory block.</summary>
         <returns
           >The <c
-          >realloc</c>
+          
+>realloc</c>
+
+          
 
           
 
@@ -7849,8 +9553,12 @@ The <c
 
           
 
+          
+
           , to the allocated memory if successful; otherwise a <see
            cref="F:System.IntPtr.Zero" />
+
+          
 
           
 
@@ -7859,13 +9567,20 @@ The <c
 
           
 
+          
+
            returns <see
            cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
           
 
+          
+
           . The <c
-          >realloc</c>
+          
+>realloc</c>
+
+          
 
           
 
@@ -7873,7 +9588,10 @@ The <c
         >
         <remarks
           >The <c
-          >realloc</c>
+          
+>realloc</c>
+
+          
 
           
 
@@ -7882,8 +9600,12 @@ The <c
 
           
 
+          
+
            to <paramref
            name="size" />
+
+          
 
           
 
@@ -7892,8 +9614,12 @@ The <c
 
           
 
+          
+
            is returned and the memory referenced by <paramref
            name="ptr" />
+
+          
 
           
 
@@ -7902,8 +9628,12 @@ The <c
 
           
 
+          
+
            is freed and a pointer to the newly allocated memory is returned.  Note that this may be different from the value passed as <paramref
            name="ptr" />
+
+          
 
           
 
@@ -7912,18 +9642,27 @@ The <c
 
           
 
+          
+
            is <see
            cref="F:System.IntPtr.Zero" />
 
           
 
+          
+
           , the <c
-          >realloc</c>
+          
+>realloc</c>
+
+          
 
           
 
           () function behaves identically to <see
            cref="M:Mono.Unix.Native.Stdlib.malloc" />
+
+          
 
           
 
@@ -7954,7 +9693,10 @@ The <c
         <summary>Remove a directory entry.</summary>
         <returns
           >The <c
-          >remove</c>
+          
+>remove</c>
+
+          
 
           
 
@@ -7963,17 +9705,24 @@ The <c
 
           
 
+          
+
            indicates the error.</returns
         >
         <remarks>
           <para
             >The <c
-            >remove</c>
+            
+>remove</c>
+
+            
 
             
 
             () function removes the file or directory specified by <paramref
              name="path" />
+
+            
 
             
 
@@ -7985,15 +9734,21 @@ The <c
 
             
 
-             specifies a directory, <c
+            
 
-              >remove(<paramref
+             specifies a directory, <c
+            
+>remove(<paramref
                name="path" />
+
+              
 
               
 
               )</c
             >
+
+            
 
             
 
@@ -8003,13 +9758,19 @@ The <c
 
               
 
+              
+
               (<paramref
                name="path" />
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -8019,13 +9780,19 @@ The <c
 
               
 
+              
+
               (<paramref
                name="path" />
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -8063,7 +9830,10 @@ The <c
         <summary>Rename oldpath to newpath.</summary>
         <returns
           >The <c
-          >rename</c>
+          
+>rename</c>
+
+          
 
           
 
@@ -8072,12 +9842,17 @@ The <c
 
           
 
+          
+
            indicates the error.</returns
         >
         <remarks>
           <para
             >The <c
-            >rename</c>
+            
+>rename</c>
+
+            
 
             
 
@@ -8086,8 +9861,12 @@ The <c
 
             
 
+            
+
              to be renamed as <paramref
              name="newpath" />
+
+            
 
             
 
@@ -8096,8 +9875,12 @@ The <c
 
             
 
+            
+
              exists, it is first removed.  Both <paramref
              name="oldpath" />
+
+            
 
             
 
@@ -8106,11 +9889,16 @@ The <c
 
             
 
+            
+
              must be of the same type (that is, both directories or both non-directories), and must reside on the same file system.</para
           >
           <para
             >The <c
-            >rename</c>
+            
+>rename</c>
+
+            
 
             
 
@@ -8119,8 +9907,12 @@ The <c
 
             
 
+            
+
              already exists, an instance of <paramref
              name="newpath" />
+
+            
 
             
 
@@ -8129,6 +9921,8 @@ The <c
           <para
             >If the final component of <paramref
              name="oldpath" />
+
+            
 
             
 
@@ -8161,11 +9955,15 @@ The <c
 
           
 
+          
+
            stream to set file position indicator to the beginning of the file.</param
         >
         <summary
           >Set the file position indicator of the <c
           >FILE</c>
+
+          
 
           
 
@@ -8175,12 +9973,17 @@ The <c
         <remarks>
           <para
             >The <c
-            >rewind</c>
+            
+>rewind</c>
+
+            
 
             
 
             () function sets the file position indicator for the stream pointed to by <paramref
              name="stream" />
+
+            
 
             
 
@@ -8191,13 +9994,19 @@ The <c
 
             
 
+            
+
             (<paramref
              name="stream" />
 
             
 
+            
+
             , 0, <see
              cref="F:Mono.Unix.Native.SeekFlags.SEEK_SET" />
+
+            
 
             
 
@@ -8210,11 +10019,16 @@ The <c
 
             
 
+            
+
             (3)).</para
           >
           <para
             >Since <c
-            >rewind</c>
+            
+>rewind</c>
+
+            
 
             
 
@@ -8224,8 +10038,12 @@ The <c
 
               
 
+              
+
               ((<see
                cref="T:Mono.Unix.Native.Error" />
+
+              
 
               
 
@@ -8234,13 +10052,20 @@ The <c
 
             
 
+            
+
             , then call <c
-            >rewind</c>
+            
+>rewind</c>
+
+            
 
             
 
             (), and if <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -8280,12 +10105,16 @@ The <c
 
           
 
+          
+
            stream to set buffering operations on.</param
         >
         <param name="buf">The buffer to use for buffering.</param>
         <summary
           >Control <c
           >FILE</c>
+
+          
 
           
 
@@ -8297,8 +10126,12 @@ The <c
 
           
 
+          
+
           () function returns the value 0 if successful; otherwise the value -1 is returned and <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -8311,8 +10144,12 @@ The <c
 
             
 
+            
+
              function disables <c
             >FILE</c>
+
+            
 
             
 
@@ -8321,13 +10158,19 @@ The <c
 
             
 
+            
+
              is <see
              cref="F:System.IntPtr.Zero" />
 
             
 
+            
+
             , otherwise full buffering is enabled (and <paramref
              name="buf" />
+
+            
 
             
 
@@ -8340,14 +10183,20 @@ The <c
 
             
 
+            
+
              function is an alias for calls to <see
              />
             <see cref="M:Mono.Unix.Native.Stdlib.setvbuf" />
 
             
 
+            
+
             .  Except for the lack of a return value, the <c
             >setbuf</c>
+
+            
 
             
 
@@ -8358,18 +10207,26 @@ The <c
 
             
 
+            
+
              (<paramref
              name="stream" />
 
             
 
+            
+
             , <paramref
              name="buf" />
 
             
 
+            
+
             , <paramref
              name="buf" />
+
+            
 
             
 
@@ -8378,13 +10235,19 @@ The <c
 
             
 
+            
+
              : <see
              cref="M:Mono.Unix.Native.Stdlib._IONBF" />
 
             
 
+            
+
             , <see
              cref="M:Mono.Unix.Native.Stdlib.BUFSIZ" />
+
+            
 
             
 
@@ -8397,8 +10260,12 @@ The <c
 
             
 
+            
+
              refer to at least <see
              cref="M:Mono.Unix.Native.Stdlib.BUFSIZ" />
+
+            
 
             
 
@@ -8407,13 +10274,19 @@ The <c
 
             
 
+            
+
             , <see
              cref="M:Mono.Unix.Native.Stdlib.setvbuf" />
 
             
 
+            
+
             , or <see
              cref="M:Mono.Unix.Native.Stdlib.fclose" />
+
+            
 
             
 
@@ -8452,12 +10325,16 @@ The <c
 
           
 
+          
+
            stream to set buffering operations on.</param
         >
         <param name="buf">The buffer to use for buffering.</param>
         <summary
           >Control <c
           >FILE</c>
+
+          
 
           
 
@@ -8469,8 +10346,12 @@ The <c
 
           
 
+          
+
           () function returns the value 0 if successful; otherwise the value -1 is returned and <see
            cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+          
 
           
 
@@ -8483,8 +10364,12 @@ The <c
 
             
 
+            
+
              function disables <c
             >FILE</c>
+
+            
 
             
 
@@ -8493,13 +10378,19 @@ The <c
 
             
 
+            
+
              is <see
              cref="F:System.IntPtr.Zero" />
 
             
 
+            
+
             , otherwise full buffering is enabled (and <paramref
              name="buf" />
+
+            
 
             
 
@@ -8512,14 +10403,20 @@ The <c
 
             
 
+            
+
              function is an alias for calls to <see
              />
             <see cref="M:Mono.Unix.Native.Stdlib.setvbuf" />
 
             
 
+            
+
             .  Except for the lack of a return value, the <c
             >setbuf</c>
+
+            
 
             
 
@@ -8530,18 +10427,26 @@ The <c
 
             
 
+            
+
              (<paramref
              name="stream" />
 
             
 
+            
+
             , <paramref
              name="buf" />
 
             
 
+            
+
             , <paramref
              name="buf" />
+
+            
 
             
 
@@ -8550,13 +10455,19 @@ The <c
 
             
 
+            
+
              : <see
              cref="M:Mono.Unix.Native.Stdlib._IONBF" />
 
             
 
+            
+
             , <see
              cref="M:Mono.Unix.Native.Stdlib.BUFSIZ" />
+
+            
 
             
 
@@ -8569,8 +10480,12 @@ The <c
 
             
 
+            
+
              refer to at least <see
              cref="M:Mono.Unix.Native.Stdlib.BUFSIZ" />
+
+            
 
             
 
@@ -8579,13 +10494,19 @@ The <c
 
             
 
+            
+
             , <see
              cref="M:Mono.Unix.Native.Stdlib.setvbuf" />
 
             
 
+            
+
             , or <see
              cref="M:Mono.Unix.Native.Stdlib.fclose" />
+
+            
 
             
 
@@ -8624,6 +10545,8 @@ The <c
 
           
 
+          
+
           .</summary
         >
         <remarks>To be added.</remarks>
@@ -8652,16 +10575,19 @@ The <c
       </Parameters>
       <Docs>
         <param name="rts">To be added.</param>
-        <param name="action"
-          >
+        <param name="action">
           A <see
            cref="T:Mono.Unix.Native.SignalAction" />
+
+          
 
           
 
            specifying what to
           do when the <paramref
            name="signum" />
+
+          
 
           
 
@@ -8672,15 +10598,18 @@ The <c
           Specifies what should happen when a signal is emitted.
         </summary>
         <returns>
-          <para
-            >
+          <para>
             A <see
              cref="T:System.Int32" />
 
             
 
+            
+
             ; if equal to <c
             >0</c>
+
+            
 
             
 
@@ -8690,9 +10619,13 @@ The <c
 
             
 
+            
+
              is returned on failure, and sets 
             <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -8723,6 +10656,8 @@ The <c
 
                     
 
+                    
+
                      is invalid.
                   </para
                   >
@@ -8732,11 +10667,12 @@ The <c
           </block>
         </returns>
         <remarks>
-          <para
-            >
+          <para>
             This is the safer, restricted form of 
             <see
              cref="M:Mono.Unix.Native.Stdlib.signal(Mono.Unix.Native.RealTimeSignum,Mono.Unix.Native.SignalHandler)" />
+
+            
 
             
 
@@ -8746,16 +10682,19 @@ The <c
 
             
 
+            
+
             (2) permits an arbitrary method to be set as
             the signal handler, this method permits specifying only the
             default, ignore, or error handlers.
           </para
           >
           <block subset="none" type="behaviors">
-            <para
-              >
+            <para>
               If <paramref
                name="action" />
+
+              
 
               
 
@@ -8765,6 +10704,8 @@ The <c
 
               
 
+              
+
               , then
               this method is equivalent to 
               <c
@@ -8774,18 +10715,23 @@ The <c
 
                 
 
+                
+
                 , SIG_DFL)</c
               >
+
+              
 
               
 
               .
             </para
             >
-            <para
-              >
+            <para>
               If <paramref
                name="action" />
+
+              
 
               
 
@@ -8795,6 +10741,8 @@ The <c
 
               
 
+              
+
               , then
               this method is equivalent to 
               <c
@@ -8804,18 +10752,23 @@ The <c
 
                 
 
+                
+
                 , SIG_IGN)</c
               >
+
+              
 
               
 
               .
             </para
             >
-            <para
-              >
+            <para>
               If <paramref
                name="action" />
+
+              
 
               
 
@@ -8825,6 +10778,8 @@ The <c
 
               
 
+              
+
               , then
               this method is equivalent to 
               <c
@@ -8834,8 +10789,12 @@ The <c
 
                 
 
+                
+
                 , SIG_ERR)</c
               >
+
+              
 
               
 
@@ -8870,16 +10829,19 @@ The <c
       </Parameters>
       <Docs>
         <param name="signal">To be added.</param>
-        <param name="action"
-          >
+        <param name="action">
           A <see
            cref="T:Mono.Unix.Native.SignalAction" />
+
+          
 
           
 
            specifying what to
           do when the <paramref
            name="signum" />
+
+          
 
           
 
@@ -8890,15 +10852,18 @@ The <c
           Specifies what should happen when a signal is emitted.
         </summary>
         <returns>
-          <para
-            >
+          <para>
             A <see
              cref="T:System.Int32" />
 
             
 
+            
+
             ; if equal to <c
             >0</c>
+
+            
 
             
 
@@ -8908,9 +10873,13 @@ The <c
 
             
 
+            
+
              is returned on failure, and sets 
             <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -8941,6 +10910,8 @@ The <c
 
                     
 
+                    
+
                      is invalid.
                   </para
                   >
@@ -8950,11 +10921,12 @@ The <c
           </block>
         </returns>
         <remarks>
-          <para
-            >
+          <para>
             This is the safer, restricted form of 
             <see
              cref="M:Mono.Unix.Native.Stdlib.signal(Mono.Unix.Native.Signum,Mono.Unix.Native.SignalHandler)" />
+
+            
 
             
 
@@ -8964,16 +10936,19 @@ The <c
 
             
 
+            
+
             (2) permits an arbitrary method to be set as
             the signal handler, this method permits specifying only the
             default, ignore, or error handlers.
           </para
           >
           <block subset="none" type="behaviors">
-            <para
-              >
+            <para>
               If <paramref
                name="action" />
+
+              
 
               
 
@@ -8983,6 +10958,8 @@ The <c
 
               
 
+              
+
               , then
               this method is equivalent to 
               <c
@@ -8992,18 +10969,23 @@ The <c
 
                 
 
+                
+
                 , SIG_DFL)</c
               >
+
+              
 
               
 
               .
             </para
             >
-            <para
-              >
+            <para>
               If <paramref
                name="action" />
+
+              
 
               
 
@@ -9013,6 +10995,8 @@ The <c
 
               
 
+              
+
               , then
               this method is equivalent to 
               <c
@@ -9022,18 +11006,23 @@ The <c
 
                 
 
+                
+
                 , SIG_IGN)</c
               >
+
+              
 
               
 
               .
             </para
             >
-            <para
-              >
+            <para>
               If <paramref
                name="action" />
+
+              
 
               
 
@@ -9043,6 +11032,8 @@ The <c
 
               
 
+              
+
               , then
               this method is equivalent to 
               <c
@@ -9052,8 +11043,12 @@ The <c
 
                 
 
+                
+
                 , SIG_ERR)</c
               >
+
+              
 
               
 
@@ -9100,12 +11095,16 @@ The <c
 
           
 
+          
+
            stream to set buffering behavior on.</param
         >
         <param name="buf">The buffer to use for buffering.</param>
         <param name="mode"
           >The type of buffering to start using with <paramref
            name="stream" />
+
+          
 
           
 
@@ -9117,11 +11116,15 @@ The <c
 
           
 
+          
+
           .</param
         >
         <summary
           >Control <c
           >FILE</c>
+
+          
 
           
 
@@ -9133,8 +11136,12 @@ The <c
 
           
 
+          
+
           () function returns 0 on success, or <see
            cref="F:Mono.Unix.Native.Stdlib.EOF" />
+
+          
 
           
 
@@ -9147,13 +11154,19 @@ The <c
 
             
 
+            
+
             ).  The function <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
 
             
 
+            
+
             (3) may be used to force the block out early.  (See <see
              cref="M:Mono.Unix.Native.Stdlib.fclose" />
+
+            
 
             
 
@@ -9166,13 +11179,19 @@ The <c
 
             
 
+            
+
             (3) is called, and an optimally-sized buffer is obtained.  If a stream refers to a terminal (as <see
              cref="F:Mono.Unix.Native.Stdlib.stdout" />
 
             
 
+            
+
              normally does) it is line buffered.  The standard error stream <see
              cref="F:Mono.Unix.Native.Stdlib.stderr" />
+
+            
 
             
 
@@ -9184,8 +11203,12 @@ The <c
 
             
 
+            
+
              function may be used to alter the buffering behavior of a stream.  The <paramref
              name="mode" />
+
+            
 
             
 
@@ -9222,8 +11245,12 @@ The <c
 
             
 
+            
+
              argument may be given as zero to obtain deferred optimal-size buffer allocation as usual.  If it is not zero, then except for unbuffered files, the <paramref
              name="buf" />
+
+            
 
             
 
@@ -9232,8 +11259,12 @@ The <c
 
             
 
+            
+
              bytes long; this buffer will be used instead of the current buffer.  If <paramref
              name="buf" />
+
+            
 
             
 
@@ -9242,8 +11273,12 @@ The <c
 
             
 
+            
+
             , it is the caller's responsibility to <see
              cref="M:Mono.Unix.Native.Stdlib.free" />
+
+            
 
             
 
@@ -9253,6 +11288,8 @@ The <c
           <para
             >The <c
             >setvbuf</c>
+
+            
 
             
 
@@ -9298,12 +11335,16 @@ The <c
 
           
 
+          
+
            stream to set buffering behavior on.</param
         >
         <param name="buf">The buffer to use for buffering.</param>
         <param name="mode"
           >The type of buffering to start using with <paramref
            name="stream" />
+
+          
 
           
 
@@ -9315,11 +11356,15 @@ The <c
 
           
 
+          
+
           .</param
         >
         <summary
           >Control <c
           >FILE</c>
+
+          
 
           
 
@@ -9331,8 +11376,12 @@ The <c
 
           
 
+          
+
           () function returns 0 on success, or <see
            cref="F:Mono.Unix.Native.Stdlib.EOF" />
+
+          
 
           
 
@@ -9345,13 +11394,19 @@ The <c
 
             
 
+            
+
             ).  The function <see
              cref="M:Mono.Unix.Native.Stdlib.fflush" />
 
             
 
+            
+
             (3) may be used to force the block out early.  (See <see
              cref="M:Mono.Unix.Native.Stdlib.fclose" />
+
+            
 
             
 
@@ -9364,13 +11419,19 @@ The <c
 
             
 
+            
+
             (3) is called, and an optimally-sized buffer is obtained.  If a stream refers to a terminal (as <see
              cref="F:Mono.Unix.Native.Stdlib.stdout" />
 
             
 
+            
+
              normally does) it is line buffered.  The standard error stream <see
              cref="F:Mono.Unix.Native.Stdlib.stderr" />
+
+            
 
             
 
@@ -9382,8 +11443,12 @@ The <c
 
             
 
+            
+
              function may be used to alter the buffering behavior of a stream.  The <paramref
              name="mode" />
+
+            
 
             
 
@@ -9420,8 +11485,12 @@ The <c
 
             
 
+            
+
              argument may be given as zero to obtain deferred optimal-size buffer allocation as usual.  If it is not zero, then except for unbuffered files, the <paramref
              name="buf" />
+
+            
 
             
 
@@ -9430,8 +11499,12 @@ The <c
 
             
 
+            
+
              bytes long; this buffer will be used instead of the current buffer.  If <paramref
              name="buf" />
+
+            
 
             
 
@@ -9440,8 +11513,12 @@ The <c
 
             
 
+            
+
             , it is the caller's responsibility to <see
              cref="M:Mono.Unix.Native.Stdlib.free" />
+
+            
 
             
 
@@ -9451,6 +11528,8 @@ The <c
           <para
             >The <c
             >setvbuf</c>
+
+            
 
             
 
@@ -9516,6 +11595,8 @@ The <c
         <remarks
           >This value is returned by <see
            cref="M:Mono.Unix.Native.Stdlib.signal" />
+
+          
 
           
 
@@ -9589,6 +11670,8 @@ The <c
 
           
 
+          
+
            signal.</param
         >
         <summary>Register a handler for a given signal.</summary>
@@ -9599,8 +11682,12 @@ The <c
 
             
 
+            
+
              on error and <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+
+            
 
             
 
@@ -9623,6 +11710,8 @@ The <c
 
                   
 
+                  
+
                    argument is not a valid signal number.</description
                 >
               </item>
@@ -9636,8 +11725,12 @@ The <c
 
                   
 
+                  
+
                    or <see
                    cref="F:Mono.Unix.Native.Signum.SIGSTOP" />
+
+                  
 
                   
 
@@ -9654,17 +11747,20 @@ The <c
               mechanism is not signal-safe, yet the Platform Invoke mechanism is
               required for unmanaged code to invoke managed code.
             </para>
-            <para
-              >
+            <para>
               New code should use the replacement method
               <see
                cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" />
 
               
 
+              
+
                or the
               type <see
                cref="T:Mono.Unix.UnixSignal" />
+
+              
 
               
 
@@ -9678,6 +11774,8 @@ The <c
 
             
 
+            
+
             (2) facility.</para
           >
           <para
@@ -9686,8 +11784,12 @@ The <c
 
             
 
+            
+
             (4)).  Signals are optionally generated when a process resumes after being stopped, when the status of child processes changes, or when input is ready at the control terminal.  Most signals result in the termination of the process receiving them if no action is taken; some signals instead cause the process receiving them to be stopped, or are simply discarded if the process has not requested otherwise. Except for the <see
              cref="F:Mono.Unix.Native.Signum.SIGKILL" />
+
+            
 
             
 
@@ -9696,8 +11798,12 @@ The <c
 
             
 
+            
+
              signals, the <c
             >signal</c>
+
+            
 
             
 
@@ -9710,8 +11816,12 @@ The <c
 
             
 
+            
+
              argument specifies which signal was received.  The <paramref
              name="func" />
+
+            
 
             
 
@@ -9720,8 +11830,12 @@ The <c
 
             
 
+            
+
              should be <see
              cref="F:Mono.Unix.Native.Stdlib.SIG_DFL" />
+
+            
 
             
 
@@ -9730,8 +11844,12 @@ The <c
 
             
 
+            
+
              resets the default action. To ignore the signal func should be <see
              cref="F:Mono.Unix.Native.Stdlib.SIG_IGN" />
+
+            
 
             
 
@@ -9740,8 +11858,12 @@ The <c
 
             
 
+            
+
              is not used, further occurrences of the signal are automatically blocked and <paramref
              name="func" />
+
+            
 
             
 
@@ -9756,8 +11878,12 @@ The <c
 
             
 
+            
+
             (2).)  The affected system calls include <see
              cref="M:Mono.Unix.Native.Syscall.read" />
+
+            
 
             
 
@@ -9766,8 +11892,12 @@ The <c
 
             
 
+            
+
             (2), <see
              cref="M:Mono.Unix.Native.Syscall.sendto" />
+
+            
 
             
 
@@ -9776,8 +11906,12 @@ The <c
 
             
 
+            
+
             (2), <see
              cref="M:Mono.Unix.Native.Syscall.sendmsg" />
+
+            
 
             
 
@@ -9786,8 +11920,12 @@ The <c
 
             
 
+            
+
             (2) on a communications channel or a low speed device and during a <see
              cref="M:Mono.Unix.Native.Syscall.ioctl" />
+
+            
 
             
 
@@ -9796,8 +11934,12 @@ The <c
 
             
 
+            
+
             (2).  However, calls that have already committed are not restarted, but instead return a partial success (for example, a short read count).  These semantics could be changed with <see
              cref="M:Mono.Unix.Native.Syscall.siginterrupt" />
+
+            
 
             
 
@@ -9810,6 +11952,8 @@ The <c
 
             
 
+            
+
             (2) function; ignored signals remain ignored.
 </para
           >
@@ -9819,8 +11963,12 @@ The <c
 
             
 
+            
+
              as the action for the signal <see
              cref="F:Mono.Unix.Native.Stdlib.SIGCHLD" />
+
+            
 
             
 
@@ -9829,13 +11977,19 @@ The <c
 
             
 
+            
+
             (2) or equivalent, it will block until all of the calling process's children terminate, and then return a value of -1 with <see
              cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
             
 
+            
+
              returning <see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -9879,8 +12033,12 @@ The <c
 
           
 
+          
+
            were unlimited (again, not including the final '<c
           >\0</c>
+
+          
 
           
 
@@ -9892,13 +12050,19 @@ The <c
 
           
 
+          
+
            function will fill at most <see
            cref="P:System.Text.StringBuilder.Capacity" />
 
           
 
+          
+
            characters of the input buffer with the string <paramref
            name="message" />
+
+          
 
           
 
@@ -9955,8 +12119,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
           
 
+          
+
            were unlimited (again, not including the final '<c
           >\0</c>
+
+          
 
           
 
@@ -9969,13 +12137,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
             
 
+            
+
             () family of functions produces output according to a format as described below.  <c
             >snprintf</c>
 
             
 
+            
+
             () writes output to the given output <paramref
              name="stream" />
+
+            
 
             
 
@@ -9987,8 +12161,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
             
 
+            
+
              string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of <c
             >stdarg</c>
+
+            
 
             
 
@@ -10004,8 +12182,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , specifying the next argument to access.  If this field is not provided, the argument following the last argument accessed will be used.  Arguments are numbered starting at <c
                 >1</c>
+
+                
 
                 
 
@@ -10029,6 +12211,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -10037,8 +12221,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >d</c>
+
+                      
 
                       
 
@@ -10047,8 +12235,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >n</c>
+
+                      
 
                       
 
@@ -10057,8 +12249,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >s</c>
+
+                      
 
                       
 
@@ -10067,8 +12263,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, this option has no effect.  For <c
                       >o</c>
+
+                      
 
                       
 
@@ -10077,8 +12277,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        and <c
                       >X</c>
+
+                      
 
                       
 
@@ -10087,8 +12291,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (or '<c
                       >0X</c>
+
+                      
 
                       
 
@@ -10097,8 +12305,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions) prepended to it. For <c
                       >a</c>
+
+                      
 
                       
 
@@ -10107,8 +12319,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >e</c>
+
+                      
 
                       
 
@@ -10117,8 +12333,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >f</c>
+
+                      
 
                       
 
@@ -10127,8 +12347,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >g</c>
+
+                      
 
                       
 
@@ -10137,13 +12361,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, the result will always contain a decimal point, even if no digits follow it (normally, a decimal point appears in the results of those conversions only if a digit follows).  For <c
                       >g</c>
 
                       
 
+                      
+
                        and <c
                       >G</c>
+
+                      
 
                       
 
@@ -10157,6 +12387,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (zero)</term
                     >
                     <description
@@ -10165,13 +12397,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , the converted value is padded on the left with zeros rather than blanks.  If a precision is given with a numeric conversion (<c
                       >d</c>
 
                       
 
+                      
+
                       , <c
                       >i</c>
+
+                      
 
                       
 
@@ -10180,8 +12418,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >u</c>
+
+                      
 
                       
 
@@ -10190,13 +12432,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >x</c>
 
                       
 
+                      
+
                       , and <c
                       >X</c>
+
+                      
 
                       
 
@@ -10210,6 +12458,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -10218,13 +12468,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, the converted value is padded on the right with blanks, rather than on the left with blanks or zeros.  A <c
                       >-</c>
 
                       
 
+                      
+
                        overrides a <c
                       >0</c>
+
+                      
 
                       
 
@@ -10238,6 +12494,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (space)</term
                     >
                     <description
@@ -10246,8 +12504,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >A</c>
+
+                      
 
                       
 
@@ -10256,8 +12518,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >e</c>
+
+                      
 
                       
 
@@ -10266,8 +12532,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >f</c>
+
+                      
 
                       
 
@@ -10276,8 +12546,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >g</c>
+
+                      
 
                       
 
@@ -10286,8 +12560,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , or <c
                       >i</c>
+
+                      
 
                       
 
@@ -10301,11 +12579,15 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
                       >A sign must always be placed before a number produced by a signed conversion.  A <c
                       >+</c>
+
+                      
 
                       
 
@@ -10319,6 +12601,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -10327,8 +12611,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >u</c>
+
+                      
 
                       
 
@@ -10337,8 +12625,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ) or the integral portion of a floating point conversion (<c
                       >f</c>
+
+                      
 
                       
 
@@ -10347,8 +12639,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ) should be grouped and separated by thousands using the non-monetary separator returned by <see
                        cref="M:Mono.Unix.Native.Syscall.localeconv" />
+
+                      
 
                       
 
@@ -10368,8 +12664,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >i</c>
+
+                
 
                 
 
@@ -10378,8 +12678,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >u</c>
+
+                
 
                 
 
@@ -10388,8 +12692,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >X</c>
+
+                
 
                 
 
@@ -10398,8 +12706,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >A</c>
+
+                
 
                 
 
@@ -10408,8 +12720,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >E</c>
+
+                
 
                 
 
@@ -10418,8 +12734,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >F</c>
+
+                
 
                 
 
@@ -10428,13 +12748,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >G</c>
 
                 
 
+                
+
                  conversions, or the maximum number of characters to be printed from a string for <c
                 >s</c>
+
+                
 
                 
 
@@ -10448,8 +12774,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >i</c>
+
+                
 
                 
 
@@ -10458,8 +12788,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >o</c>
+
+                
 
                 
 
@@ -10468,13 +12802,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >x</c>
 
                 
 
+                
+
                 , or <c
                 >X</c>
+
+                
 
                 
 
@@ -10486,6 +12826,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
                     <term>Modifier</term>
                     <description>
                       <c>d</c>
+
+                      
 
                       
 
@@ -10533,6 +12875,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        (ell)</term
                     >
                     <description>
@@ -10548,6 +12892,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
                   <item>
                     <term>
                       <c>ll</c>
+
+                      
 
                       
 
@@ -10622,8 +12968,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      modifier, when applied to a <c
                     >o</c>
+
+                    
 
                     
 
@@ -10632,8 +12982,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                     , <c
                     >x</c>
+
+                    
 
                     
 
@@ -10642,8 +12996,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, indicates that the argument is of an unsigned type equivalent in size to a <c
                     >ptrdiff_t</c>
+
+                    
 
                     
 
@@ -10652,8 +13010,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      modifier, when applied to a <c
                     >d</c>
+
+                    
 
                     
 
@@ -10662,8 +13024,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, indicates that the argument is of a signed type equivalent in size to a <c
                     >size_t</c>
+
+                    
 
                     
 
@@ -10672,8 +13038,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, it indicates that the argument is a pointer to a signed type equivalent in size to a <c
                     >size_t</c>
+
+                    
 
                     
 
@@ -10687,8 +13057,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >A</c>
+
+                  
 
                   
 
@@ -10697,8 +13071,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >E</c>
+
+                  
 
                   
 
@@ -10707,8 +13085,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >F</c>
+
+                  
 
                   
 
@@ -10717,8 +13099,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , or <c
                   >G</c>
+
+                  
 
                   
 
@@ -10746,8 +13132,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    or <c
                   >s</c>
+
+                  
 
                   
 
@@ -10766,6 +13156,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
                   <item>
                     <term>
                       <c>l</c>
+
+                      
 
                       
 
@@ -10791,8 +13183,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
             
 
+            
+
             ' or an asterisk followed by one or more decimal digits and a '<c
             >$</c>
+
+            
 
             
 
@@ -10801,8 +13197,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
             
 
+            
+
              argument supplies the field width or precision.  A negative field width is treated as a left adjustment flag followed by a positive field width; a negative precision is treated as though it were missing.  If a single format directive mixes positional (<c
             >nn$</c>
+
+            
 
             
 
@@ -10825,8 +13225,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  (or appropriate variant) argument is converted to signed decimal (<c
                 >d</c>
+
+                
 
                 
 
@@ -10835,8 +13239,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ), unsigned octal (<c
                 >o</c>
+
+                
 
                 
 
@@ -10845,8 +13253,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ), or unsigned hexadecimal (<c
                 >x</c>
+
+                
 
                 
 
@@ -10855,8 +13267,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ) notation.  The letters "<c
                 >abcdef</c>
+
+                
 
                 
 
@@ -10865,13 +13281,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversions; the letters "<c
                 >ABCDEF</c>
 
                 
 
+                
+
                 " are used for <c
                 >X</c>
+
+                
 
                 
 
@@ -10888,8 +13310,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted to signed decimal, unsigned octal, or unsigned decimal, as if the format had been <c
                 >ld</c>
+
+                
 
                 
 
@@ -10898,8 +13324,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , or <c
                 >lu</c>
+
+                
 
                 
 
@@ -10916,8 +13346,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted in the style <c
                 >[-]d.ddde±dd</c>
+
+                
 
                 
 
@@ -10926,13 +13360,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversion uses the letter '<c
                 >E</c>
 
                 
 
+                
+
                 ' (rather than '<c
                 >e</c>
+
+                
 
                 
 
@@ -10944,8 +13384,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >A</c>
+
+                
 
                 
 
@@ -10954,8 +13398,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >E</c>
+
+                
 
                 
 
@@ -10964,8 +13412,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >F</c>
+
+                
 
                 
 
@@ -10974,8 +13426,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >G</c>
+
+                
 
                 
 
@@ -10984,8 +13440,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >-inf</c>
+
+                
 
                 
 
@@ -10994,8 +13454,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >-INF</c>
+
+                
 
                 
 
@@ -11004,13 +13468,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  is represented as <c
                 >nan</c>
 
                 
 
+                
+
                  when using the lowercase conversion, and <c
                 >NAN</c>
+
+                
 
                 
 
@@ -11027,8 +13497,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted to decimal notation in the style <c
                 >[-]ddd.ddd</c>
+
+                
 
                 
 
@@ -11045,13 +13519,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted in style <c
                 >f</c>
 
                 
 
+                
+
                  or <c
                 >e</c>
+
+                
 
                 
 
@@ -11060,8 +13540,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  or <c
                 >E</c>
+
+                
 
                 
 
@@ -11070,8 +13554,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversions). The precision specifies the number of significant digits.  If the precision is missing, 6 digits are given; if the precision is zero, it is treated as 1. Style <c
                 >e</c>
+
+                
 
                 
 
@@ -11088,8 +13576,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted to hexadecimal notation in the style <c
                 >[-]0xh.hhhp[±]d</c>
+
+                
 
                 
 
@@ -11098,8 +13590,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  is a literal character '<c
                 >p</c>
+
+                
 
                 
 
@@ -11108,8 +13604,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversion uses the prefix "<c
                 >0X</c>
+
+                
 
                 
 
@@ -11118,8 +13618,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 "), the letters "<c
                 >ABCDEF</c>
+
+                
 
                 
 
@@ -11128,13 +13632,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ") to represent the hex digits, and the letter '<c
                 >P</c>
 
                 
 
+                
+
                 ' (rather than '<c
                 >p</c>
+
+                
 
                 
 
@@ -11147,8 +13657,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >0x6.48p-1</c>
+
+                  
 
                   
 
@@ -11157,8 +13671,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    are all equivalent.  The format chosen depends on the internal representation of the number, but the implementation guarantees that the length of the mantissa will be minimized.  Zeroes are always represented with a mantissa of 0 (preceded by a '<c
                   >-</c>
+
+                  
 
                   
 
@@ -11177,8 +13695,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  with the <c
                 >l</c>
+
+                
 
                 
 
@@ -11195,8 +13717,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted to an <c
                 >unsigned char</c>
+
+                
 
                 
 
@@ -11209,13 +13735,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    (ell) modifier is used, the <c
                   >wint_t</c>
 
                   
 
+                  
+
                    argument shall be converted to a <c
                   >wchar_t</c>
+
+                  
 
                   
 
@@ -11234,8 +13766,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  with the <c
                 >l</c>
+
+                
 
                 
 
@@ -11246,10 +13782,11 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
               <term>
                 <c>s</c>
               </term>
-              <description
-                >
+              <description>
 The <c
                 >char *</c>
+
+                
 
                 
 
@@ -11262,8 +13799,12 @@ The <c
 
                   
 
+                  
+
                    (ell) modifier is used, the <c
                   >wchar_t *</c>
+
+                  
 
                   
 
@@ -11281,13 +13822,19 @@ The <c
 
                 
 
+                
+
                  pointer argument is printed in hexadecimal (as if by '<c
                 >%#x</c>
 
                 
 
+                
+
                 ' or '<c
                 >%#lx</c>
+
+                
 
                 
 
@@ -11304,6 +13851,8 @@ The <c
 
                 
 
+                
+
                  (or variant) pointer argument.  No argument is converted.</description
               >
             </item>
@@ -11317,8 +13866,12 @@ The <c
 
                 
 
+                
+
                 ' is written.  No argument is converted.  The complete conversion specification is '<c
                 >%%</c>
+
+                
 
                 
 
@@ -11329,6 +13882,8 @@ The <c
           <para
             >The decimal point character is defined in the program's locale (category <c
             >LC_NUMERIC</c>
+
+            
 
             
 
@@ -11378,8 +13933,12 @@ The <c
 
           
 
+          
+
            were unlimited (again, not including the final '<c
           >\0</c>
+
+          
 
           
 
@@ -11391,13 +13950,19 @@ The <c
 
           
 
+          
+
            function will fill at most <paramref
            name="n" />
 
           
 
+          
+
            characters of the input buffer with the string <paramref
            name="message" />
+
+          
 
           
 
@@ -11456,8 +14021,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
           
 
+          
+
            were unlimited (again, not including the final '<c
           >\0</c>
+
+          
 
           
 
@@ -11470,13 +14039,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
             
 
+            
+
             () family of functions produces output according to a format as described below.  <c
             >snprintf</c>
 
             
 
+            
+
             () writes output to the given output <paramref
              name="stream" />
+
+            
 
             
 
@@ -11488,8 +14063,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
             
 
+            
+
              string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of <c
             >stdarg</c>
+
+            
 
             
 
@@ -11505,8 +14084,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , specifying the next argument to access.  If this field is not provided, the argument following the last argument accessed will be used.  Arguments are numbered starting at <c
                 >1</c>
+
+                
 
                 
 
@@ -11530,6 +14113,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -11538,8 +14123,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >d</c>
+
+                      
 
                       
 
@@ -11548,8 +14137,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >n</c>
+
+                      
 
                       
 
@@ -11558,8 +14151,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >s</c>
+
+                      
 
                       
 
@@ -11568,8 +14165,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, this option has no effect.  For <c
                       >o</c>
+
+                      
 
                       
 
@@ -11578,8 +14179,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        and <c
                       >X</c>
+
+                      
 
                       
 
@@ -11588,8 +14193,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (or '<c
                       >0X</c>
+
+                      
 
                       
 
@@ -11598,8 +14207,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions) prepended to it. For <c
                       >a</c>
+
+                      
 
                       
 
@@ -11608,8 +14221,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >e</c>
+
+                      
 
                       
 
@@ -11618,8 +14235,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >f</c>
+
+                      
 
                       
 
@@ -11628,8 +14249,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >g</c>
+
+                      
 
                       
 
@@ -11638,13 +14263,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, the result will always contain a decimal point, even if no digits follow it (normally, a decimal point appears in the results of those conversions only if a digit follows).  For <c
                       >g</c>
 
                       
 
+                      
+
                        and <c
                       >G</c>
+
+                      
 
                       
 
@@ -11658,6 +14289,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (zero)</term
                     >
                     <description
@@ -11666,13 +14299,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , the converted value is padded on the left with zeros rather than blanks.  If a precision is given with a numeric conversion (<c
                       >d</c>
 
                       
 
+                      
+
                       , <c
                       >i</c>
+
+                      
 
                       
 
@@ -11681,8 +14320,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >u</c>
+
+                      
 
                       
 
@@ -11691,13 +14334,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >x</c>
 
                       
 
+                      
+
                       , and <c
                       >X</c>
+
+                      
 
                       
 
@@ -11711,6 +14360,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -11719,13 +14370,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        conversions, the converted value is padded on the right with blanks, rather than on the left with blanks or zeros.  A <c
                       >-</c>
 
                       
 
+                      
+
                        overrides a <c
                       >0</c>
+
+                      
 
                       
 
@@ -11739,6 +14396,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ' (space)</term
                     >
                     <description
@@ -11747,8 +14406,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >A</c>
+
+                      
 
                       
 
@@ -11757,8 +14420,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >e</c>
+
+                      
 
                       
 
@@ -11767,8 +14434,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >f</c>
+
+                      
 
                       
 
@@ -11777,8 +14448,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >g</c>
+
+                      
 
                       
 
@@ -11787,8 +14462,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , or <c
                       >i</c>
+
+                      
 
                       
 
@@ -11802,11 +14481,15 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
                       >A sign must always be placed before a number produced by a signed conversion.  A <c
                       >+</c>
+
+                      
 
                       
 
@@ -11820,6 +14503,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       '</term
                     >
                     <description
@@ -11828,8 +14513,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       , <c
                       >u</c>
+
+                      
 
                       
 
@@ -11838,8 +14527,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ) or the integral portion of a floating point conversion (<c
                       >f</c>
+
+                      
 
                       
 
@@ -11848,8 +14541,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                       ) should be grouped and separated by thousands using the non-monetary separator returned by <see
                        cref="M:Mono.Unix.Native.Syscall.localeconv" />
+
+                      
 
                       
 
@@ -11869,8 +14566,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >i</c>
+
+                
 
                 
 
@@ -11879,8 +14580,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >u</c>
+
+                
 
                 
 
@@ -11889,8 +14594,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >X</c>
+
+                
 
                 
 
@@ -11899,8 +14608,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >A</c>
+
+                
 
                 
 
@@ -11909,8 +14622,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >E</c>
+
+                
 
                 
 
@@ -11919,8 +14636,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >F</c>
+
+                
 
                 
 
@@ -11929,13 +14650,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >G</c>
 
                 
 
+                
+
                  conversions, or the maximum number of characters to be printed from a string for <c
                 >s</c>
+
+                
 
                 
 
@@ -11949,8 +14676,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >i</c>
+
+                
 
                 
 
@@ -11959,8 +14690,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >o</c>
+
+                
 
                 
 
@@ -11969,13 +14704,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >x</c>
 
                 
 
+                
+
                 , or <c
                 >X</c>
+
+                
 
                 
 
@@ -11987,6 +14728,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
                     <term>Modifier</term>
                     <description>
                       <c>d</c>
+
+                      
 
                       
 
@@ -12034,6 +14777,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                       
 
+                      
+
                        (ell)</term
                     >
                     <description>
@@ -12049,6 +14794,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
                   <item>
                     <term>
                       <c>ll</c>
+
+                      
 
                       
 
@@ -12123,8 +14870,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      modifier, when applied to a <c
                     >o</c>
+
+                    
 
                     
 
@@ -12133,8 +14884,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                     , <c
                     >x</c>
+
+                    
 
                     
 
@@ -12143,8 +14898,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, indicates that the argument is of an unsigned type equivalent in size to a <c
                     >ptrdiff_t</c>
+
+                    
 
                     
 
@@ -12153,8 +14912,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      modifier, when applied to a <c
                     >d</c>
+
+                    
 
                     
 
@@ -12163,8 +14926,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, indicates that the argument is of a signed type equivalent in size to a <c
                     >size_t</c>
+
+                    
 
                     
 
@@ -12173,8 +14940,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                     
 
+                    
+
                      conversion, it indicates that the argument is a pointer to a signed type equivalent in size to a <c
                     >size_t</c>
+
+                    
 
                     
 
@@ -12188,8 +14959,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >A</c>
+
+                  
 
                   
 
@@ -12198,8 +14973,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >E</c>
+
+                  
 
                   
 
@@ -12208,8 +14987,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >F</c>
+
+                  
 
                   
 
@@ -12218,8 +15001,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , or <c
                   >G</c>
+
+                  
 
                   
 
@@ -12247,8 +15034,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    or <c
                   >s</c>
+
+                  
 
                   
 
@@ -12267,6 +15058,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
                   <item>
                     <term>
                       <c>l</c>
+
+                      
 
                       
 
@@ -12292,8 +15085,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
             
 
+            
+
             ' or an asterisk followed by one or more decimal digits and a '<c
             >$</c>
+
+            
 
             
 
@@ -12302,8 +15099,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
             
 
+            
+
              argument supplies the field width or precision.  A negative field width is treated as a left adjustment flag followed by a positive field width; a negative precision is treated as though it were missing.  If a single format directive mixes positional (<c
             >nn$</c>
+
+            
 
             
 
@@ -12326,8 +15127,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  (or appropriate variant) argument is converted to signed decimal (<c
                 >d</c>
+
+                
 
                 
 
@@ -12336,8 +15141,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ), unsigned octal (<c
                 >o</c>
+
+                
 
                 
 
@@ -12346,8 +15155,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ), or unsigned hexadecimal (<c
                 >x</c>
+
+                
 
                 
 
@@ -12356,8 +15169,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ) notation.  The letters "<c
                 >abcdef</c>
+
+                
 
                 
 
@@ -12366,13 +15183,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversions; the letters "<c
                 >ABCDEF</c>
 
                 
 
+                
+
                 " are used for <c
                 >X</c>
+
+                
 
                 
 
@@ -12389,8 +15212,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted to signed decimal, unsigned octal, or unsigned decimal, as if the format had been <c
                 >ld</c>
+
+                
 
                 
 
@@ -12399,8 +15226,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , or <c
                 >lu</c>
+
+                
 
                 
 
@@ -12417,8 +15248,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted in the style <c
                 >[-]d.ddde±dd</c>
+
+                
 
                 
 
@@ -12427,13 +15262,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversion uses the letter '<c
                 >E</c>
 
                 
 
+                
+
                 ' (rather than '<c
                 >e</c>
+
+                
 
                 
 
@@ -12445,8 +15286,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >A</c>
+
+                
 
                 
 
@@ -12455,8 +15300,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >E</c>
+
+                
 
                 
 
@@ -12465,8 +15314,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , <c
                 >F</c>
+
+                
 
                 
 
@@ -12475,8 +15328,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 , and <c
                 >G</c>
+
+                
 
                 
 
@@ -12485,8 +15342,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >-inf</c>
+
+                
 
                 
 
@@ -12495,8 +15356,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  and <c
                 >-INF</c>
+
+                
 
                 
 
@@ -12505,13 +15370,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  is represented as <c
                 >nan</c>
 
                 
 
+                
+
                  when using the lowercase conversion, and <c
                 >NAN</c>
+
+                
 
                 
 
@@ -12528,8 +15399,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted to decimal notation in the style <c
                 >[-]ddd.ddd</c>
+
+                
 
                 
 
@@ -12546,13 +15421,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted in style <c
                 >f</c>
 
                 
 
+                
+
                  or <c
                 >e</c>
+
+                
 
                 
 
@@ -12561,8 +15442,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  or <c
                 >E</c>
+
+                
 
                 
 
@@ -12571,8 +15456,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversions). The precision specifies the number of significant digits.  If the precision is missing, 6 digits are given; if the precision is zero, it is treated as 1. Style <c
                 >e</c>
+
+                
 
                 
 
@@ -12589,8 +15478,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is rounded and converted to hexadecimal notation in the style <c
                 >[-]0xh.hhhp[±]d</c>
+
+                
 
                 
 
@@ -12599,8 +15492,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  is a literal character '<c
                 >p</c>
+
+                
 
                 
 
@@ -12609,8 +15506,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  conversion uses the prefix "<c
                 >0X</c>
+
+                
 
                 
 
@@ -12619,8 +15520,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 "), the letters "<c
                 >ABCDEF</c>
+
+                
 
                 
 
@@ -12629,13 +15534,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                 ") to represent the hex digits, and the letter '<c
                 >P</c>
 
                 
 
+                
+
                 ' (rather than '<c
                 >p</c>
+
+                
 
                 
 
@@ -12648,8 +15559,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                   , <c
                   >0x6.48p-1</c>
+
+                  
 
                   
 
@@ -12658,8 +15573,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    are all equivalent.  The format chosen depends on the internal representation of the number, but the implementation guarantees that the length of the mantissa will be minimized.  Zeroes are always represented with a mantissa of 0 (preceded by a '<c
                   >-</c>
+
+                  
 
                   
 
@@ -12678,8 +15597,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  with the <c
                 >l</c>
+
+                
 
                 
 
@@ -12696,8 +15619,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  argument is converted to an <c
                 >unsigned char</c>
+
+                
 
                 
 
@@ -12710,13 +15637,19 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                   
 
+                  
+
                    (ell) modifier is used, the <c
                   >wint_t</c>
 
                   
 
+                  
+
                    argument shall be converted to a <c
                   >wchar_t</c>
+
+                  
 
                   
 
@@ -12735,8 +15668,12 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
                 
 
+                
+
                  with the <c
                 >l</c>
+
+                
 
                 
 
@@ -12747,10 +15684,11 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
               <term>
                 <c>s</c>
               </term>
-              <description
-                >
+              <description>
 The <c
                 >char *</c>
+
+                
 
                 
 
@@ -12763,8 +15701,12 @@ The <c
 
                   
 
+                  
+
                    (ell) modifier is used, the <c
                   >wchar_t *</c>
+
+                  
 
                   
 
@@ -12782,13 +15724,19 @@ The <c
 
                 
 
+                
+
                  pointer argument is printed in hexadecimal (as if by '<c
                 >%#x</c>
 
                 
 
+                
+
                 ' or '<c
                 >%#lx</c>
+
+                
 
                 
 
@@ -12805,6 +15753,8 @@ The <c
 
                 
 
+                
+
                  (or variant) pointer argument.  No argument is converted.</description
               >
             </item>
@@ -12818,8 +15768,12 @@ The <c
 
                 
 
+                
+
                 ' is written.  No argument is converted.  The complete conversion specification is '<c
                 >%%</c>
+
+                
 
                 
 
@@ -12830,6 +15784,8 @@ The <c
           <para
             >The decimal point character is defined in the program's locale (category <c
             >LC_NUMERIC</c>
+
+            
 
             
 
@@ -12873,8 +15829,12 @@ The <c
 
             
 
+            
+
             () function sets its argument <paramref
              name="seed" />
+
+            
 
             
 
@@ -12883,8 +15843,12 @@ The <c
 
             
 
+            
+
             ().  These sequences are repeatable by calling <c
             >srand</c>
+
+            
 
             
 
@@ -12893,6 +15857,8 @@ The <c
           <para
             >If no <paramref
              name="seed" />
+
+            
 
             
 
@@ -12920,6 +15886,8 @@ The <c
 
           
 
+          
+
            stream.</summary
         >
         <remarks>To be added.</remarks>
@@ -12944,6 +15912,8 @@ The <c
 
           
 
+          
+
            stream.</summary
         >
         <remarks>To be added.</remarks>
@@ -12965,6 +15935,8 @@ The <c
         <summary
           >Standard output <c
           >FILE</c>
+
+          
 
           
 
@@ -13008,6 +15980,8 @@ The <c
 
           
 
+          
+
           .</returns
         >
         <remarks>
@@ -13015,6 +15989,8 @@ The <c
           <para
             >If the error number is not recognized, these functions return an error message string containing "<c
             >Unknown error: </c>
+
+            
 
             
 
@@ -13087,8 +16063,12 @@ The <c
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -13097,8 +16077,12 @@ The <c
 
             
 
+            
+
              will return a non-zero value if the command interpreter <c
             >sh</c>
+
+            
 
             
 
@@ -13110,8 +16094,12 @@ The <c
 
             
 
+            
+
              function returns the exit status of the shell as returned by <see
              cref="M:Mono.Unix.Native.Syscall.waitpid" />
+
+            
 
             
 
@@ -13120,8 +16108,12 @@ The <c
 
             
 
+            
+
             (2) or <see
              cref="M:Mono.Unix.Native.Syscall.waitpid" />
+
+            
 
             
 
@@ -13135,8 +16127,12 @@ The <c
 
           
 
+          
+
           () function hands the argument <paramref
            name="string" />
+
+          
 
           
 
@@ -13145,8 +16141,12 @@ The <c
 
           
 
+          
+
           (1).  The calling process waits for the shell to finish executing the command, ignoring <see
            cref="F:Mono.Unix.Native.Signum.SIGINT" />
+
+          
 
           
 
@@ -13155,8 +16155,12 @@ The <c
 
           
 
+          
+
           , and blocking <see
            cref="F:Mono.Unix.Native.Signum.SIGCHLD" />
+
+          
 
           
 
@@ -13189,6 +16193,8 @@ The <c
 
           
 
+          
+
           (3) will return different strings.</summary
         >
         <remarks
@@ -13197,8 +16203,12 @@ The <c
 
           
 
+          
+
           (3) is called more than <c
           >TMP_MAX</c>
+
+          
 
           
 
@@ -13230,8 +16240,12 @@ The <c
 
           
 
+          
+
           () function returns a pointer to an open file stream on success, and <see
            cref="F:System.IntPtr.Zero" />
+
+          
 
           
 
@@ -13244,8 +16258,12 @@ The <c
 
             
 
+            
+
             () function returns a pointer to a stream associated with a file descriptor returned by the routine <see
              cref="M:Mono.Unix.Native.Syscall.mkstemp" />
+
+            
 
             
 
@@ -13254,8 +16272,12 @@ The <c
 
             
 
+            
+
             () returns, causing the file to be automatically deleted when the last reference to it is closed.  The file is opened with the access value '<c
             >w+</c>
+
+            
 
             
 
@@ -13264,13 +16286,19 @@ The <c
 
             
 
+            
+
              if set.  The default location if <c
             >TMPDIR</c>
 
             
 
+            
+
              is not set is <c
             >/tmp</c>
+
+            
 
             
 
@@ -13309,6 +16337,8 @@ The <c
 
           
 
+          
+
            on error.</returns
         >
         <remarks
@@ -13317,8 +16347,12 @@ The <c
 
           
 
+          
+
           () function returns a pointer to a file name, in the <c
           >/tmp</c>
+
+          
 
           
 
@@ -13361,6 +16395,8 @@ The <c
 
           
 
+          
+
            on error.</returns
         >
         <remarks>
@@ -13370,8 +16406,12 @@ The <c
 
             
 
+            
+
             () function returns a pointer to a file name, in the <c
             >/tmp</c>
+
+            
 
             
 
@@ -13380,8 +16420,12 @@ The <c
 
             
 
+            
+
              is not <see
              langword="null" />
+
+            
 
             
 
@@ -13393,8 +16437,12 @@ The <c
 
             
 
+            
+
              is expected to be at least <see
              cref="F:Mono.Unix.Native.Stdlib.L_tmpnam" />
+
+            
 
             
 
@@ -13430,8 +16478,12 @@ The <c
 
           
 
+          
+
            stream to unget <paramref
            name="c" />
+
+          
 
           
 
@@ -13443,6 +16495,8 @@ The <c
 
           
 
+          
+
            stream.</summary
         >
         <returns
@@ -13451,8 +16505,12 @@ The <c
 
           
 
+          
+
           () function returns the character pushed-back after the conversion, or <see
            cref="F:Mono.Unix.Native.Stdlib.EOF" />
+
+          
 
           
 
@@ -13461,8 +16519,12 @@ The <c
 
           
 
+          
+
            character equals <see
            cref="F:Mono.Unix.Native.Stdlib.EOF" />
+
+          
 
           
 
@@ -13475,8 +16537,12 @@ The <c
 
             
 
+            
+
             () function pushes the character <paramref
              name="c" />
+
+            
 
             
 
@@ -13485,8 +16551,12 @@ The <c
 
             
 
+            
+
             .  The pushed-back characters will be returned by subsequent reads on the stream (in reverse order).  A successful intervening call, using the same stream, to one of the file positioning functions (<see
              cref="M:Mono.Unix.Native.Stdlib.fseek" />
+
+            
 
             
 
@@ -13495,8 +16565,12 @@ The <c
 
             
 
+            
+
             (3), or <see
              cref="M:Mono.Unix.Native.Stdlib.rewind" />
+
+            
 
             
 
@@ -13508,6 +16582,8 @@ The <c
           <para
             >If a character is successfully pushed-back, the end-of-file indicator for the stream is cleared.  The file-position indicator is decremented by each successful call to <c
             >ungetc</c>
+
+            
 
             
 

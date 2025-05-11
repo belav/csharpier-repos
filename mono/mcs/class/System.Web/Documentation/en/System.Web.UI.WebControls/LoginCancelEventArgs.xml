@@ -20,8 +20,12 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -30,8 +34,12 @@
 
         
 
+        
+
          object is used with controls that have cancelable actions, such as the <see
          cref="T:System.Web.UI.WebControls.Login" />
+
+        
 
         
 
@@ -40,8 +48,12 @@
 
         
 
+        
+
          control, and the <see
          cref="T:System.Web.UI.WebControls.PasswordRecovery" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
             
 
+            
+
              class with the <see
              cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -99,8 +115,12 @@
 
             
 
+            
+
              class with the <see
              cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -109,6 +129,8 @@
         </summary>
         <param name="cancel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,8 +158,12 @@
 
             
 
+            
+
              property to indicate whether an event, such as the <see
              cref="E:System.Web.UI.WebControls.Login.LoggingIn" />
+
+            
 
             
 
@@ -146,8 +172,12 @@
 
             
 
+            
+
              event, or the <see
              cref="E:System.Web.UI.WebControls.ChangePassword.ChangingPassword" />
+
+            
 
             
 

@@ -29,8 +29,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Security.Policy.TrustManagerContext.#ctor" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >Represents the context for the trust manager to consider when making the decision to run an application, and when setting up the security on a new <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
           <para
             >The following table shows the initial property values for a new instance of the <see
              cref="T:System.Security.Policy.TrustManagerContext" />
+
+            
 
             
 
@@ -157,6 +165,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -189,6 +199,8 @@
 
             
 
+            
+
              property, which is set to the value that is passed in.</para
           >
         </remarks>
@@ -200,8 +212,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Security.Policy.TrustManagerUIContext" />
+
+            
 
             
 
@@ -213,8 +229,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Policy.TrustManagerUIContext" />
+
+          
 
           
 
@@ -247,8 +267,12 @@
 
             
 
+            
+
              ignores persisted decisions for the application and calls the trust manager. If false, the <see
              cref="T:System.Security.Policy.ApplicationSecurityManager" />
+
+            
 
             
 
@@ -283,8 +307,12 @@
 
             
 
+            
+
              method. This property is set to false if the host does not expect to call the trust manager again for the current <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -397,6 +425,8 @@
           <para
             >The <see
              cref="P:System.Security.Policy.TrustManagerContext.UIContext" />
+
+            
 
             
 

@@ -19,8 +19,12 @@
 
         
 
+        
+
          property of the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class is used to manage profile settings, search for user profiles, and delete user profiles that are no longer in use. The <see
          cref="T:System.Web.Profile.ProfileManager" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          class in your application code. For an example, see the Example section in this topic and additional examples in the topics for members of the <see
          cref="T:System.Web.Profile.ProfileManager" />
+
+        
 
         
 
@@ -54,6 +66,8 @@
          type="text/html">
           <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
         </format>
+
+        
 
         
 
@@ -72,6 +86,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -80,13 +96,19 @@
 
         
 
+        
+
          class that stores user profile properties in a SQL Server database. A <see
          cref="T:System.Web.Profile.SqlProfileProvider" />
 
         
 
+        
+
          instance named AspNetSqlProvider is specified in the machine configuration as the default profile provider. The AspNetSqlProvider instance connects to the SQL Server database on the local Web server. You can specify a <see
          cref="T:System.Web.Profile.SqlProfileProvider" />
+
+        
 
         
 
@@ -97,10 +119,14 @@
 
         
 
+        
+
          configuration element and the defaultProvider attribute of the <format
          type="text/html">
           <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
         </format>
+
+        
 
         
 
@@ -147,8 +173,12 @@
 
             
 
+            
+
              uses the <see
              cref="P:System.Web.Profile.ProfileManager.ApplicationName" />
+
+            
 
             
 
@@ -157,8 +187,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.Profile.ProfileManager.ApplicationName" />
+
+            
 
             
 
@@ -170,8 +204,12 @@
 
             
 
+            
+
              property value for ASP.NET applications. For non-ASP.NET applications, the default value is the <see
              cref="P:System.Diagnostics.ProcessModule.ModuleName" />
+
+            
 
             
 
@@ -183,8 +221,12 @@
 
             
 
+            
+
              property exposes the <see
              cref="P:System.Configuration.SettingsProvider.ApplicationName" />
+
+            
 
             
 
@@ -195,13 +237,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, they may be configured with a different application name. To access the application name of a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and access the <see
              cref="P:System.Configuration.SettingsProvider.ApplicationName" />
+
+            
 
             
 
@@ -214,8 +262,12 @@
 
               
 
+              
+
                object, you can have multiple requests executing concurrently and attempting to set the <see
                cref="P:System.Web.Profile.ProfileManager.ApplicationName" />
+
+              
 
               
 
@@ -224,8 +276,12 @@
 
               
 
+              
+
                property is not thread safe for multiple writes, and changing the <see
                cref="P:System.Web.Profile.ProfileManager.ApplicationName" />
+
+              
 
               
 
@@ -234,8 +290,12 @@
 
               
 
+              
+
                property unless you require it. An example of an application where setting the <see
                cref="P:System.Web.Profile.ProfileManager.ApplicationName" />
+
+              
 
               
 
@@ -269,8 +329,12 @@
 
             
 
+            
+
              property indicates whether automatic saving of the user profile is enabled for the application. If automatic saving is enabled, the <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -279,13 +343,19 @@
 
             
 
+            
+
              event and calls the <see
              cref="M:System.Web.Profile.ProfileBase.Save" />
 
             
 
+            
+
              method during the <see
              cref="E:System.Web.HttpApplication.EndRequest" />
+
+            
 
             
 
@@ -297,10 +367,14 @@
 
             
 
+            
+
              property is set using the automaticSaveEnabled attribute of the <format
              type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
+
+            
 
             
 
@@ -342,8 +416,12 @@
 
             
 
+            
+
              method is used to remove unused profile data from the data source for the application specified by the applicationName attribute in the configuration file. Use the <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -352,8 +430,12 @@
 
             
 
+            
+
              that occurs on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -365,8 +447,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Profile.ProfileProvider.DeleteInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)" />
+
+            
 
             
 
@@ -377,13 +463,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, the profile information in the other data source is not deleted. To delete inactive profiles that are managed by a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Web.Profile.ProfileProvider.DeleteInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)" />
+
+            
 
             
 
@@ -403,8 +495,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -415,13 +511,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            that identifies which user profiles are considered inactive. If the <see
            cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
+
+          
 
           
 
@@ -451,13 +553,19 @@
 
             
 
+            
+
              method deletes all profile information and properties for the user profile for the specified <paramref
              name="username" />
 
             
 
+            
+
              from the data source for the specified <see
              cref="P:System.Web.Profile.ProfileManager.ApplicationName" />
+
+            
 
             
 
@@ -469,8 +577,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.String[])" />
+
+            
 
             
 
@@ -481,13 +593,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, they are not deleted. To delete profile properties that are managed by a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.String[])" />
+
+            
 
             
 
@@ -504,6 +622,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -536,13 +656,19 @@
 
             
 
+            
+
              method deletes all profile information and properties for the specified profiles from the data source for the application specified by the <see
              cref="P:System.Web.Profile.ProfileManager.ApplicationName" />
 
             
 
+            
+
              property. The list of profiles to delete is specified as a string array of user names. If profile properties and information exist in the data source for a user name in the <paramref
              name="usernames" />
+
+            
 
             
 
@@ -554,8 +680,12 @@
 
             
 
+            
+
             . This indicates that some of the profiles in the specified array of <paramref
              name="usernames" />
+
+            
 
             
 
@@ -567,8 +697,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.String[])" />
+
+            
 
             
 
@@ -579,13 +713,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, they are not deleted. To delete profile properties that are managed by a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.String[])" />
+
+            
 
             
 
@@ -602,6 +742,8 @@
         </returns>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -634,8 +776,12 @@
 
             
 
+            
+
              method deletes all profile information and properties for the specified profiles from the data source for the application specified by the <see
              cref="P:System.Web.Profile.ProfileManager.ApplicationName" />
+
+            
 
             
 
@@ -644,8 +790,12 @@
 
             
 
+            
+
              that is passed as the <paramref
              name="profiles" />
+
+            
 
             
 
@@ -654,8 +804,12 @@
 
             
 
+            
+
              can be returned from the <see
              cref="M:System.Web.Profile.ProfileManager.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -664,13 +818,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Profile.ProfileManager.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
 
             
 
+            
+
             , and <see
              cref="M:System.Web.Profile.ProfileManager.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -682,13 +842,19 @@
 
             
 
+            
+
              value for the supplied <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
+            
+
             . This indicates that some of the profiles in the specified <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -700,8 +866,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" />
+
+            
 
             
 
@@ -712,13 +882,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, they are not deleted. To delete profile properties that are managed by a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" />
+
+            
 
             
 
@@ -738,8 +914,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+          
 
           
 
@@ -766,6 +946,8 @@
              type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
+
+            
 
             
 
@@ -808,8 +990,12 @@
 
             
 
+            
+
              method is used to retrieve profile information for all unused user profiles for the application specified by the applicationName attribute in the configuration file. This method will only retrieve profiles for which the profile user name matches the supplied <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -818,13 +1004,19 @@
 
             
 
+            
+
              parameter to specify whether you want only anonymous profiles, only authenticated profiles, or all profiles to be searched. Of the searched profiles, any profile with a <see
              cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
 
             
 
+            
+
              that occurs on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -836,13 +1028,19 @@
 
             
 
+            
+
              method that takes additional <paramref
              name="pageIndex" />
 
             
 
+            
+
              and <paramref
              name="pageSize" />
+
+            
 
             
 
@@ -855,8 +1053,12 @@
 
               
 
+              
+
                parameter. For example, the <see
                cref="M:System.Web.Profile.SqlProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+              
 
               
 
@@ -865,8 +1067,12 @@
 
               
 
+              
+
                class supports wildcard characters in the <paramref
                name="usernameToMatch" />
+
+              
 
               
 
@@ -879,8 +1085,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -891,13 +1101,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, the data source for the other profile provider is not searched. To find inactive profiles that are managed by a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -916,8 +1132,12 @@
 
             
 
+            
+
              containing user profile information for inactive profiles in which the user name matches the supplied <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -929,8 +1149,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -941,10 +1165,14 @@
 
           
 
+          
+
           The user name for which to search.</param
         >
         <param name="userInactiveSinceDate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -953,8 +1181,12 @@
 
           
 
+          
+
            that identifies which user profiles are considered inactive. If the <see
            cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
+
+          
 
           
 
@@ -1027,8 +1259,12 @@
 
             
 
+            
+
              method returns a list of all profile information for which the user name matches the supplied <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1037,8 +1273,12 @@
 
             
 
+            
+
              property value. Use the <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -1050,13 +1290,19 @@
 
             
 
+            
+
              method that takes additional <paramref
              name="pageIndex" />
 
             
 
+            
+
              and <paramref
              name="pageSize" />
+
+            
 
             
 
@@ -1068,8 +1314,12 @@
 
             
 
+            
+
              parameter. For example, the <see
              cref="M:System.Web.Profile.SqlProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -1078,8 +1328,12 @@
 
             
 
+            
+
              class supports wildcard characters in the <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1091,8 +1345,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -1103,13 +1361,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, the data source for the other profile provider is not searched. To find profiles that are managed by a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -1128,8 +1392,12 @@
 
             
 
+            
+
              containing user profile information for profiles where the user name matches the supplied <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1141,8 +1409,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -1150,6 +1422,8 @@
         >
         <param name="usernameToMatch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1220,8 +1494,12 @@
 
             
 
+            
+
              method is used to retrieve profile information from the data source for all unused user profiles for the application specified by the applicationName attribute in the configuration file. Use the <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -1230,8 +1508,12 @@
 
             
 
+            
+
              that occurs on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -1243,13 +1525,19 @@
 
             
 
+            
+
              method that takes additional <paramref
              name="pageIndex" />
 
             
 
+            
+
              and <paramref
              name="pageSize" />
+
+            
 
             
 
@@ -1261,8 +1549,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -1273,13 +1565,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, the data source for the other profile provider is not searched. To find unused profiles that are managed by a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -1298,6 +1596,8 @@
 
             
 
+            
+
              containing user profile information about the inactive profiles.</para
           >
         </returns>
@@ -1306,8 +1606,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -1318,13 +1622,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            that identifies which user profiles are considered inactive. If the <see
            cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
+
+          
 
           
 
@@ -1394,8 +1704,12 @@
 
             
 
+            
+
              method is used to retrieve profile information from the data source for the application specified by the applicationName attribute in the configuration file. Use the <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -1407,8 +1721,12 @@
 
             
 
+            
+
              objects for user profiles using the overload for the <see
              cref="M:System.Web.Profile.ProfileManager.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -1417,8 +1735,12 @@
 
             
 
+            
+
              and <paramref
              name="pageSize" />
+
+            
 
             
 
@@ -1430,8 +1752,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -1442,13 +1768,19 @@
 
             
 
+            
+
              configuration element. If the user profile contains properties that are managed by a profile provider other than the default provider, the data source for the other profile provider is not searched. To find profiles that are managed by a profile provider other than the default provider, obtain a reference to the profile provider using the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -1467,6 +1799,8 @@
 
             
 
+            
+
              containing user profile information for all of the profiles in the data source.</para
           >
         </returns>
@@ -1475,8 +1809,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -1545,8 +1883,12 @@
 
             
 
+            
+
              method is used to retrieve a count of all of the unused user profiles from the data source for the application specified by the applicationName attribute in the configuration file. Use the <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -1555,8 +1897,12 @@
 
             
 
+            
+
              that occurs on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -1576,8 +1922,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -1588,13 +1938,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            object that identifies which user profiles are considered inactive. If the <see
            cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
+
+          
 
           
 
@@ -1630,8 +1986,12 @@
 
             
 
+            
+
              method is used to retrieve a count of all of the user profiles from the data source for the application specified by the applicationName attribute in the configuration file. Use the <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -1651,8 +2011,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -1683,8 +2047,12 @@
 
             
 
+            
+
              property enables you to reference the default profile provider for an application directly. This is commonly used to access custom members of the profile provider that are not part of the <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -1720,10 +2088,14 @@
 
             
 
+            
+
              property references all of the profile providers enabled for an application, including providers added in the machine configuration and providers added in all Web.config files. You can control which profile providers are available for an application using the <format
              type="text/html">
               <a href="9e998377-b07f-44c1-ad9b-20a60e83c18f">providers</a>
             </format>
+
+            
 
             
 
@@ -1734,8 +2106,12 @@
 
             
 
+            
+
              section in the configuration file. For example, the following Web.config file removes the profile providers specified in parent configuration files and adds a <see
              cref="T:System.Web.Profile.SqlProfileProvider" />
+
+            
 
             
 
@@ -1766,10 +2142,14 @@
 
             
 
+            
+
              section, you must specify a default provider by setting the defaultProvider attribute. If you do not specify a <format
              type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
+
+            
 
             
 
@@ -1778,11 +2158,15 @@
 
             
 
+            
+
              instance named AspNetSqlProvider is established as the default provider. </para
           >
           <para
             >You can obtain a strongly typed reference to a provider from the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
+
+            
 
             
 

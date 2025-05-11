@@ -27,11 +27,15 @@
 
         
 
+        
+
          contains a lease manager that administers the leases in the domain. The lease manager periodically examines the leases for time expiration. If a lease has expired, it can either be canceled by removing its reference to the lease, or renewed by invoking one or more of the lease's sponsors.</para
       >
       <para
         >A lease contains properties that determine its policies, and methods that renew the lease time. The lease exposes the <see
          cref="T:System.Runtime.Remoting.Lifetime.ILease" />
+
+        
 
         
 
@@ -43,10 +47,14 @@
 
         
 
+        
+
          interface see <format
          type="text/html">
           <a href="334a30e5-33cb-4f0f-a38a-ed4abc5560fa">Lifetimes</a>
         </format>
+
+        
 
         
 
@@ -112,6 +120,8 @@
 
             
 
+            
+
              of the lease.</para
           >
         </summary>
@@ -142,8 +152,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.TimeSpan.Zero" />
+
+            
 
             
 
@@ -191,6 +205,8 @@
 
           
 
+          
+
           The callback object of the sponsor. </param
         >
       </Docs>
@@ -227,6 +243,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -235,10 +253,14 @@
 
           
 
+          
+
           The callback object of the sponsor. </param
         >
         <param name="renewalTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,6 +295,8 @@
 
             
 
+            
+
              or the current time plus the renewal time.</para
           >
         </remarks>
@@ -286,6 +310,8 @@
         </returns>
         <param name="renewalTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -318,8 +344,12 @@
 
             
 
+            
+
              to the <see
              cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
+
+            
 
             
 
@@ -328,8 +358,12 @@
 
             
 
+            
+
              has dropped below the <see
              cref="P:System.Runtime.Remoting.Lifetime.ILease.RenewOnCallTime" />
+
+            
 
             
 
@@ -338,13 +372,19 @@
 
             
 
+            
+
              without bound. Instead, immediately after any call, the <see
              cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
 
             
 
+            
+
              is guaranteed to be the <see
              cref="P:System.Runtime.Remoting.Lifetime.ILease.RenewOnCallTime" />
+
+            
 
             
 
@@ -356,6 +396,8 @@
           <para
             >Gets or sets the amount of time by which a call to the remote object renews the <see
              cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
+
+            
 
             
 
@@ -389,8 +431,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.TimeSpan.Zero" />
+
+            
 
             
 
@@ -437,6 +483,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -13,7 +13,8 @@
   <y4 xmlns="">
     <z4 xmlns="urn:pd4">
       [CDATA[ some cdata contents ]]
-    </z4>
+    </z4
+    >
   </y4>
   <n1:y5 xmlns="urn:pd5">
     <n2:z5 xmlns="urn:pd1">

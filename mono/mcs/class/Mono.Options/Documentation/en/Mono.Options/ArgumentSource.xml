@@ -14,11 +14,12 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary
-      >
+    <summary>
       Support for inserting additional arguments during 
       <see
        cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+
+      
 
       
 
@@ -27,10 +28,11 @@
     </summary
     >
     <remarks>
-      <para
-        >
+      <para>
         The <see
          cref="T:Mono.Options.ArgumentSource" />
+
+        
 
         
 
@@ -39,10 +41,12 @@
         processing while processing arguments.
       </para
       >
-      <para
-        >
+      <para>
         The principal use case is for <i
-        >response files</i>
+        
+>response files</i>
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
         , <c
         >CL.EXE</c>
+
+        
 
         
 
@@ -64,11 +72,12 @@
         command-line length limitations, among other things.
       </para
       >
-      <para
-        >
+      <para>
         Applications must opt-in to response file support by calling 
         <see
          cref="M:Mono.Options.OptionSet.Add(Mono.Options.ArgumentSource)" />
+
+        
 
         
 
@@ -79,11 +88,12 @@
 
         
 
+        
+
         .
       </para
       >
-      <block subset="none" type="overrides"
-        >
+      <block subset="none" type="overrides">
         Inheriting classes must override the following abstract methods:
         <list
          type="bullet">
@@ -121,11 +131,12 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Construct and initialize a
           <see
            cref="T:Mono.Options.ArgumentSource" />
+
+          
 
           
 
@@ -147,21 +158,23 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           The description to provide for the argument source within 
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
           
 
+          
+
           .
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -169,6 +182,8 @@
           the description to provide for the argument source within 
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+
+          
 
           
 
@@ -199,30 +214,33 @@
         <Parameter Name="reader" Type="System.IO.TextReader" />
       </Parameters>
       <Docs>
-        <param name="reader"
-          >
+        <param name="reader">
           A <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
            to extract arguments from.
         </param
         >
-        <summary
-          >
+        <summary>
           Extract arguments from a <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
           .
         </summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+
+          
 
           
 
@@ -232,14 +250,17 @@
 
           
 
+          
+
           .
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Arguments are extracted from <paramref
              name="reader" />
+
+            
 
             
 
@@ -250,15 +271,21 @@
 
             
 
+            
+
              will be
             split as the separate strings <c
             >"A", "B"</c>
 
             
 
+            
+
             , while 
             <c
             >"A B"</c>
+
+            
 
             
 
@@ -270,9 +297,13 @@
 
             
 
+            
+
              is not 
             <see
              cref="M:System.IO&gt;TextReader.Close" />
+
+            
 
             
 
@@ -308,10 +339,11 @@
         />
       </Parameters>
       <Docs>
-        <param name="value"
-          >
+        <param name="value">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -319,10 +351,11 @@
           with additional arguments.
         </param
         >
-        <param name="replacement"
-          >
+        <param name="replacement">
           A <see
            cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+
+          
 
           
 
@@ -333,14 +366,17 @@
 
           
 
+          
+
           ; otherwise, this value should be ignored by
           callers.
         </param
         >
-        <summary
-          >
+        <summary>
           Replace the argument <paramref
            name="value" />
+
+          
 
           
 
@@ -353,9 +389,13 @@
 
           
 
+          
+
            if this 
           <see
            cref="T:Mono.Options.ArgumentSource" />
+
+          
 
           
 
@@ -365,9 +405,13 @@
 
           
 
+          
+
            with a set of replacement strings and
           <paramref
            name="replacement" />
+
+          
 
           
 
@@ -377,15 +421,18 @@
 
           
 
+          
+
           .
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Before
             <see
              cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+
+            
 
             
 
@@ -397,9 +444,13 @@
             
 
             
+
+            
             are consulted in registration order to see if 
             <see
              cref="T:Mono.Options.ArgumentSource" />
+
+            
 
             
 
@@ -410,9 +461,13 @@
 
             
 
+            
+
             .
             The first <c
             >ArgumentSource</c>
+
+            
 
             
 
@@ -422,14 +477,20 @@
             
 
             
+
+            
             from <c
             >GetArguments()</c>
+
+            
 
             
 
              may provide the replacement tokens, and
             no later <c
             >ArgumentSource</c>
+
+            
 
             
 
@@ -461,10 +522,11 @@
         <Parameter Name="file" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="file"
-          >
+        <param name="file">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -475,10 +537,11 @@
         <summary>
           Extract arguments from the specified filename.
         </summary>
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+
+          
 
           
 
@@ -488,12 +551,16 @@
 
           
 
+          
+
           .
         </returns
         >
         <remarks></remarks>
         <exception cref="T:System.IO.IOException">
           <paramref name="file" />
+
+          
 
           
 
@@ -519,21 +586,23 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           The names to provide for the argument source within 
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
           
 
+          
+
           .
         </summary
         >
-        <returns
-          >
+        <returns>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -541,6 +610,8 @@
           the names to provide for the argument source within 
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+
+          
 
           
 

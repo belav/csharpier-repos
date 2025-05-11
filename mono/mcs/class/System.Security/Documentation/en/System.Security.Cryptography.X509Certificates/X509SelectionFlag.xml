@@ -26,6 +26,8 @@
 
         
 
+        
+
          method.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >Specifies the type of selection requested using the <see
          cref="Overload:System.Security.Cryptography.X509Certificates.X509Certificate2UI.SelectFromCollection" />
+
+        
 
         
 

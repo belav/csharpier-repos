@@ -26,13 +26,19 @@
 
         
 
+        
+
          class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
+        
+
          class by calling the <see
          cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+        
 
         
 
@@ -44,6 +50,8 @@
       <para
         >Converts <see
          cref="T:System.Drawing.Font" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
             
 
+            
+
              object through the <see
              cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Type)" />
+
+            
 
             
 
@@ -79,6 +91,8 @@
           <para
             >Initializes a new <see
              cref="T:System.Drawing.FontConverter" />
+
+            
 
             
 
@@ -119,10 +133,14 @@
 
           
 
+          
+
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,6 +174,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -172,6 +192,8 @@
 
           
 
+          
+
           An ITypeDescriptorContext object that provides a format context. </param
         >
         <param name="destinationType">
@@ -179,8 +201,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -221,6 +247,8 @@
 
           
 
+          
+
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
@@ -228,10 +256,14 @@
 
           
 
+          
+
           A CultureInfo object that specifies the culture used to represent the font. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,6 +299,8 @@
 
             
 
+            
+
              method of the object if the object is valid and if the destination type is string.</para
           >
         </remarks>
@@ -283,6 +317,8 @@
 
           
 
+          
+
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
@@ -290,8 +326,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -302,10 +342,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,11 +388,15 @@
 
             
 
+            
+
              useful for creating non-changeable objects that have changeable properties.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,8 +407,12 @@
 
           
 
+          
+
           A dictionary of new property values. The dictionary contains a series of name-value pairs, one for each property returned from the <see
            cref="Overload:System.Drawing.FontConverter.GetProperties" />
+
+          
 
           
 
@@ -393,8 +445,12 @@
 
             
 
+            
+
              to attempt to free resources and perform other cleanup operations before the <see
              cref="T:System.Drawing.FontConverter" />
+
+            
 
             
 
@@ -425,6 +481,8 @@
 
             
 
+            
+
              method to create a new value.</para
           >
         </summary>
@@ -434,6 +492,8 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,11 +534,15 @@
 
             
 
+            
+
              method for the correct data type.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,6 +553,8 @@
 
           
 
+          
+
           The value of the object to get the properties for. </param
         >
         <param name="attributes">
@@ -496,8 +562,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -535,11 +605,15 @@
 
             
 
+            
+
              method should be called to find the properties of this object; otherwise, false.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

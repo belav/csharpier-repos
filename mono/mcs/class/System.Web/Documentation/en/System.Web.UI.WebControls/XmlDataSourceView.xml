@@ -22,8 +22,12 @@
 
         
 
+        
+
          control can present its underlying data in both tabular and hierarchical format to Web server controls that bind to it. Controls such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          use the <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          class, such as <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
          creates each view type internally through different code paths. If the <see
          cref="M:System.Web.UI.IDataSource.GetView(System.String)" />
+
+        
 
         
 
@@ -65,8 +81,12 @@
 
         
 
+        
+
         , an <see
          cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+
+        
 
         
 
@@ -75,8 +95,12 @@
 
         
 
+        
+
         . If the <see
          cref="M:System.Web.UI.WebControls.XmlDataSource.GetHierarchicalView(System.String)" />
+
+        
 
         
 
@@ -85,8 +109,12 @@
 
         
 
+        
+
          is created. The <see
          cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+
+        
 
         
 
@@ -95,13 +123,19 @@
 
         
 
+        
+
          and bind to lists and tabular data, while the <see
          cref="T:System.Web.UI.WebControls.XmlHierarchicalDataSourceView" />
 
         
 
+        
+
          is provided for Web server controls that derive from <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -113,8 +147,12 @@
 
         
 
+        
+
          helper objects, the <see
          cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+
+        
 
         
 
@@ -123,8 +161,12 @@
 
         
 
+        
+
          class only overrides the <see
          cref="M:System.Web.UI.HierarchicalDataSourceView.Select" />
+
+        
 
         
 
@@ -133,8 +175,12 @@
 
         
 
+        
+
          control does not support update, insert, or delete operations. Because the <see
          cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+
+        
 
         
 
@@ -143,13 +189,19 @@
 
         
 
+        
+
          class to add this functionality, but you can derive a data source control from <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
+        
+
          and a view from <see
          cref="T:System.Web.UI.DataSourceView" />
+
+        
 
         
 
@@ -161,6 +213,8 @@
       <para
         >Represents a tabular data source view on XML data for an <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+        
 
         
 
@@ -190,8 +244,12 @@
 
             
 
+            
+
              class, and associates the specified <see
              cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+            
 
             
 
@@ -203,8 +261,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+          
 
           
 
@@ -213,10 +275,14 @@
 
           
 
+          
+
            is associated with. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,6 +342,8 @@
 
             
 
+            
+
              collection of data items.</para
           >
         </returns>
@@ -284,8 +352,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+          
 
           
 

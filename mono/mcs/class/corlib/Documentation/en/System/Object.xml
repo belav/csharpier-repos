@@ -33,6 +33,8 @@
 
         
 
+        
+
          because the inheritance is implicit.</para
       >
       <para
@@ -41,8 +43,12 @@
 
         
 
+        
+
         , every method defined in the <see
          cref="T:System.Object" />
+
+        
 
         
 
@@ -55,12 +61,16 @@
 
             
 
+            
+
              - Supports comparisons between objects.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -73,12 +83,16 @@
 
             
 
+            
+
              - Generates a number corresponding to the value of the object to support the use of a hash table.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -95,6 +109,8 @@
 
         
 
+        
+
          class. However, the process of boxing and unboxing a type carries a performance cost. If you know your new class will frequently handle certain value types you can use one of two tactics to minimize the cost of boxing. </para
       >
       <list type="bullet">
@@ -102,6 +118,8 @@
           <para
             >Create a general method that accepts an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -115,6 +133,8 @@
       <para
         >Although it is sometimes necessary to develop general purpose classes that accept and return <see
          cref="T:System.Object" />
+
+        
 
         
 
@@ -159,6 +179,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -167,6 +189,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -210,6 +234,8 @@
 
             
 
+            
+
              .</para
           >
           <code lang="C#"
@@ -239,15 +265,21 @@ class MyClass {
 
             
 
+            
+
              class that overrides
 the <see
              cref="M:System.Object.Equals(System.Object)" />
 
             
 
+            
+
              method to
 provide value equality and a class <see
              langword="Point3D" />
+
+            
 
             
 
@@ -258,9 +290,13 @@ from <see
             
 
             
+
+            
 . Because Point's override of
 <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -271,9 +307,13 @@ in the inheritance chain to introduce value equality, the
 
             
 
+            
+
              method of 
 the base class (which is inherited from <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -283,9 +323,13 @@ equality) is not invoked. However, <see
 
             
 
+            
+
              invokes
 <see
              langword="Point.Equals" />
+
+            
 
             
 
@@ -294,9 +338,13 @@ equality) is not invoked. However, <see
 
             
 
+            
+
              implements
 <see
              langword="Equals" />
+
+            
 
             
 
@@ -335,8 +383,12 @@ class Point3D: Point {
 
             
 
+            
+
              method checks that the <paramref
              name="obj" />
+
+            
 
             
 
@@ -348,9 +400,13 @@ object. If either of those checks fail, the method returns false. The
 
             
 
+            
+
              method uses 
 <see
              cref="M:System.Object.GetType" />
+
+            
 
             
 
@@ -361,6 +417,8 @@ the run-time types of the two objects are identical. (Note that
 
             
 
+            
+
              is not used here because it returns the static type.) If 
 instead the method had used a check of the form <c
             >
@@ -368,8 +426,12 @@ instead the method had used a check of the form <c
 
               
 
+              
+
                is Point</c
             >
+
+            
 
             
 
@@ -379,15 +441,21 @@ return true in cases where <paramref
 
             
 
+            
+
              is an instance of a subclass of
 <see
              langword="Point" />
 
             
 
+            
+
              ,
 even though <paramref
              name="obj" />
+
+            
 
             
 
@@ -398,9 +466,13 @@ type. Having verified that both objects are of the same type, the method casts
 
             
 
+            
+
              
 to type <see
              langword="Point" />
+
+            
 
             
 
@@ -413,9 +485,13 @@ and returns the result of comparing the instance variables of the two objects.</
 
             
 
+            
+
              , the inherited
 <see
              langword="Equals" />
+
+            
 
             
 
@@ -425,13 +501,19 @@ invoked before anything else is done; the inherited <see
 
             
 
+            
+
              method checks to see that <paramref
              name="obj " />
 
             
 
+            
+
             is non-null, that <paramref
              name="obj" />
+
+            
 
             
 
@@ -442,10 +524,14 @@ object, and that the inherited instance variables match. Only when the inherited
 
             
 
+            
+
              returns true does the method compare the 
 instance variables introduced in the subclass. Specifically, the cast to
 <see
              langword="Point3D" />
+
+            
 
             
 
@@ -456,14 +542,20 @@ is not executed unless <paramref
             
 
             
+
+            
 has been determined to be of type <see
              langword="Point3D" />
+
+            
 
             
 
              or a subclass of
 <see
              langword="Point3D" />
+
+            
 
             
 
@@ -481,9 +573,13 @@ has been determined to be of type <see
 
             
 
+            
+
              method to
    compare instance variables in an <see
              langword="Equals" />
+
+            
 
             
 
@@ -517,10 +613,14 @@ class Rectangle {
 
             
 
+            
+
              method to 
    provide the same functionality. This is typically accomplished by writing the
 <see
              langword="Equals" />
+
+            
 
             
 
@@ -555,9 +655,13 @@ public struct Complex {
             
 
             
+
+            
    . Therefore, the
 <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -568,8 +672,12 @@ public struct Complex {
 
             
 
+            
+
              operator to check the type of the <paramref
              name="obj" />
+
+            
 
             
 
@@ -585,6 +693,8 @@ parameter.</para
 
             
 
+            
+
              parameter depends on whether the current instance is a reference type or a value type. </para
           >
           <list type="bullet">
@@ -595,13 +705,19 @@ parameter.</para
 
                 
 
+                
+
                  method tests for reference equality, and a call to the <see
                  cref="M:System.Object.Equals(System.Object)" />
 
                 
 
+                
+
                  method is equivalent to a call to the <see
                  cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+                
 
                 
 
@@ -616,6 +732,8 @@ parameter.</para
 
                 
 
+                
+
                  method tests for value equality. Value equality means the following:</para
               >
               <list type="bullet">
@@ -626,8 +744,12 @@ parameter.</para
 
                     
 
+                    
+
                      object that has a value of 12 does not equal an <see
                      cref="T:System.Int32" />
+
+                    
 
                     
 
@@ -648,13 +770,19 @@ parameter.</para
 
             
 
+            
+
              class is the base class for all types in the .NET Framework, the <see
              cref="M:System.Object.Equals(System.Object)" />
 
             
 
+            
+
              method provides the default equality comparison for all other types. However, types often override the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -669,8 +797,12 @@ parameter.</para
 
             
 
+            
+
              method overload on a class in the wrt, it provides the default behavior for classes that don’t override <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -683,8 +815,12 @@ parameter.</para
 
             
 
+            
+
             ). Classes in the wrt don’t inherit <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -693,8 +829,12 @@ parameter.</para
 
             
 
+            
+
              method. However, they appear to have <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -703,8 +843,12 @@ parameter.</para
 
             
 
+            
+
             , and <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -714,6 +858,8 @@ parameter.</para
             <para
               >wrt classes that are written in C# or Visual Basic can override the <see
                cref="M:System.Object.Equals(System.Object)" />
+
+              
 
               
 
@@ -729,8 +875,12 @@ parameter.</para
 
             
 
+            
+
              method to implement value equality. In addition, types also frequently provide an additional strongly typed overload to the Equals method, typically by implementing the <see
              cref="T:System.IEquatable`1" />
+
+            
 
             
 
@@ -739,11 +889,15 @@ parameter.</para
 
             
 
+            
+
              and understand how a particular call to an Equals method is resolved. Otherwise, you may be performing a test for equality that is different from what you intended, and the method may return an unexpected value. </para
           >
           <para
             >The following example provides an illustration. It instantiates three <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -756,8 +910,12 @@ parameter.</para
 
             
 
+            
+
              method overload, which tests for value equality, is called. Because the strings assigned to the two <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -766,8 +924,12 @@ parameter.</para
 
             
 
+            
+
              does not override <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -776,8 +938,12 @@ parameter.</para
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -786,8 +952,12 @@ parameter.</para
 
             
 
+            
+
              instance is assigned to a variable of type <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -796,8 +966,12 @@ parameter.</para
 
             
 
+            
+
              method is passed two <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -806,8 +980,12 @@ parameter.</para
 
             
 
+            
+
              method is called. Because <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -816,8 +994,12 @@ parameter.</para
 
             
 
+            
+
              objects to the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -826,11 +1008,15 @@ parameter.</para
 
             
 
+            
+
              objects contain identical strings, they refer to three distinct objects. As a result, these three method calls return false. </para
           >
           <para
             >You can compare the current object to another object for reference equality by calling the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -870,6 +1056,8 @@ parameter.</para
                 <para
                   >Reference equality; equivalent to calling <see
                    cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+                  
 
                   
 
@@ -936,8 +1124,12 @@ parameter.</para
 
             
 
+            
+
             , because tests for equality that rely on reflection offer poor performance. You can also override the default implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -946,8 +1138,12 @@ parameter.</para
 
             
 
+            
+
              return true if the two objects have the same value, even if they are not the same instance. The type's implementer decides what constitutes an object's value, but it is typically some or all the data stored in the instance variables of the object. For example, the value of a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -956,8 +1152,12 @@ parameter.</para
 
             
 
+            
+
               method overrides the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -969,8 +1169,12 @@ parameter.</para
 
             
 
+            
+
              method to test for value equality. It overrides the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -983,8 +1187,12 @@ parameter.</para
 
             
 
+            
+
             , you can implement the <see
              cref="T:System.IEquatable`1" />
+
+            
 
             
 
@@ -993,6 +1201,8 @@ parameter.</para
           <para
             >The following statements must be true for all implementations of the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1024,8 +1234,12 @@ parameter.</para
 
             
 
+            
+
              must not throw exceptions; they should always return a value. For example, if <paramref
              name="obj" />
+
+            
 
             
 
@@ -1034,8 +1248,12 @@ parameter.</para
 
             
 
+            
+
              method should return false instead of throwing an <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -1044,6 +1262,8 @@ parameter.</para
           <para
             >Follow these guidelines when overriding <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1057,8 +1277,12 @@ parameter.</para
 
                 
 
+                
+
                  must override <see
                  cref="M:System.Object.Equals(System.Object)" />
+
+                
 
                 
 
@@ -1072,8 +1296,12 @@ parameter.</para
 
                 
 
+                
+
                  must also override <see
                  cref="M:System.Object.GetHashCode" />
+
+                
 
                 
 
@@ -1087,13 +1315,19 @@ parameter.</para
 
                 
 
+                
+
                  interface to support strongly typed tests for equality. Your <see
                  cref="M:System.IEquatable`1.Equals(`0)" />
 
                 
 
+                
+
                  implementation should return results that are consistent with <see
                  cref="M:System.Object.Equals(System.Object)" />
+
+                
 
                 
 
@@ -1107,8 +1341,12 @@ parameter.</para
 
                 
 
+                
+
                  method to return the same result as the equality operator. This  helps ensure that class library code that uses <see
                  cref="M:System.Object.Equals(System.Object)" />
+
+                
 
                 
 
@@ -1117,8 +1355,12 @@ parameter.</para
 
                 
 
+                
+
                  and <see
                  cref="T:System.Collections.Hashtable" />
+
+                
 
                 
 
@@ -1135,6 +1377,8 @@ parameter.</para
 
             
 
+            
+
              for a reference type:</para
           >
           <list type="bullet">
@@ -1142,6 +1386,8 @@ parameter.</para
               <para
                 >Consider overriding <see
                  cref="M:System.Object.Equals(System.Object)" />
+
+                
 
                 
 
@@ -1155,6 +1401,8 @@ parameter.</para
 
                 
 
+                
+
                 . However, if you are implementing a reference type that is intended to have value semantics, such as a complex number type, you must override the equality operator.</para
               >
             </item>
@@ -1165,13 +1413,19 @@ parameter.</para
 
                 
 
+                
+
                  on a mutable reference type. This is because overriding <see
                  cref="M:System.Object.Equals(System.Object)" />
 
                 
 
+                
+
                  requires that you also override the <see
                  cref="M:System.Object.GetHashCode" />
+
+                
 
                 
 
@@ -1188,6 +1442,8 @@ parameter.</para
 
             
 
+            
+
              for a value type:</para
           >
           <list type="bullet">
@@ -1198,13 +1454,19 @@ parameter.</para
 
                 
 
+                
+
                 . The <see
                  cref="M:System.Object.Equals(System.Object)" />
 
                 
 
+                
+
                  implementation provided by <see
                  cref="T:System.ValueType" />
+
+                
 
                 
 
@@ -1218,6 +1480,8 @@ parameter.</para
 
                 
 
+                
+
                  and your development language supports operator overloading, you must overload the equality operator.</para
               >
             </item>
@@ -1228,13 +1492,19 @@ parameter.</para
 
                 
 
+                
+
                  interface. Calling the strongly typed <see
                  cref="M:System.IEquatable`1.Equals(`0)" />
 
                 
 
+                
+
                  method avoids boxing the <paramref
                  name="obj" />
+
+                
 
                 
 
@@ -1253,6 +1523,8 @@ parameter.</para
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1292,6 +1564,8 @@ parameter.</para
           <para
             >The following example demonstrates the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1347,8 +1621,12 @@ public class MyClass {
 
             
 
+            
+
              method indicates whether two objects, <paramref
              name="objA" />
+
+            
 
             
 
@@ -1357,13 +1635,19 @@ public class MyClass {
 
             
 
+            
+
             , are equal. It also enables you to test objects whose value is  null for equality. It compares <paramref
              name="objA" />
 
             
 
+            
+
              and<paramref
              name=" objB" />
+
+            
 
             
 
@@ -1377,13 +1661,19 @@ public class MyClass {
 
                 
 
+                
+
                  method. In addition, if both <paramref
                  name="objA" />
 
                 
 
+                
+
                  and <paramref
                  name="objB" />
+
+                
 
                 
 
@@ -1397,8 +1687,12 @@ public class MyClass {
 
                 
 
+                
+
                  or <paramref
                  name="objB" />
+
+                
 
                 
 
@@ -1412,8 +1706,12 @@ public class MyClass {
 
                 
 
+                
+
                 .Equals(<paramref
                  name="objB" />
+
+                
 
                 
 
@@ -1422,8 +1720,12 @@ public class MyClass {
 
                 
 
+                
+
                  overrides the <see
                  cref="M:System.Object.Equals(System.Object)" />
+
+                
 
                 
 
@@ -1444,8 +1746,12 @@ public class MyClass {
 
             
 
+            
+
              and <paramref
              name="objB" />
+
+            
 
             
 
@@ -1457,10 +1763,14 @@ public class MyClass {
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="objB">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1497,6 +1807,8 @@ public class MyClass {
           <para
             >The <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1538,8 +1850,12 @@ public class MyClass {
 
             
 
+            
+
              class provides no implementation for the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1548,8 +1864,12 @@ public class MyClass {
 
             
 
+            
+
              for finalization unless they override the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1561,8 +1881,12 @@ public class MyClass {
 
             
 
+            
+
              method, the garbage collector adds an entry for each instance of the type to an internal structure called the finalization queue. The finalization queue contains entries for all the objects in the managed heap whose finalization code must run before the garbage collector can reclaim their memory. The garbage collector then calls the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1573,6 +1897,8 @@ public class MyClass {
               <para
                 >After an object becomes inaccessible, unless the object has been exempted from finalization by a call to the <see
                  cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+                
 
                 
 
@@ -1588,13 +1914,19 @@ public class MyClass {
 
             
 
+            
+
              is automatically called only once on a given instance, unless the object is re-registered by using a mechanism such as <see
              cref="M:System.GC.ReRegisterForFinalize(System.Object)" />
 
             
 
+            
+
              and the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -1605,6 +1937,8 @@ public class MyClass {
 
             
 
+            
+
              operations have the following limitations: </para
           >
           <list type="bullet">
@@ -1612,6 +1946,8 @@ public class MyClass {
               <para
                 >The exact time when the finalizer executes during garbage collection is undefined. To ensure deterministic release of resources for instances of your class, implement a Close method or provide a <see
                  cref="M:System.IDisposable.Dispose" />
+
+                
 
                 
 
@@ -1628,6 +1964,8 @@ public class MyClass {
           <para
             >The <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1648,8 +1986,12 @@ public class MyClass {
 
             
 
+            
+
              or an override of <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1667,6 +2009,8 @@ public class MyClass {
 
             
 
+            
+
              for a class that uses unmanaged resources such as file handles or database connections that must be released when the managed object that uses them is discarded during garbage collection. </para
           >
           <block subset="none" type="note">
@@ -1676,8 +2020,12 @@ public class MyClass {
 
               
 
+              
+
                object is available that wraps your unmanaged resource, the recommended alternative is to implement the dispose pattern with a safe handle and not override <see
                cref="M:System.Object.Finalize" />
+
+              
 
               
 
@@ -1685,6 +2033,8 @@ public class MyClass {
                type="text/html">
                 <a href="#SafeHandle">The SafeHandle alternative</a>
               </format>
+
+              
 
               
 
@@ -1697,13 +2047,19 @@ public class MyClass {
 
             
 
+            
+
              method does nothing by default, but you should override <see
              cref="M:System.Object.Finalize" />
 
             
 
+            
+
              only if necessary, and only to release unmanaged resources. Reclaiming memory during garbage collection tends to take much longer if a finalization operation runs, because it requires at least two garbage collections. In addition, you should override the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1715,13 +2071,19 @@ public class MyClass {
 
             
 
+            
+
              in a derived type must call its base type's implementation of <see
              cref="M:System.Object.Finalize" />
 
             
 
+            
+
             . This is the only case in which application code is allowed to call <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1734,10 +2096,14 @@ public class MyClass {
 
               
 
+              
+
                method. Instead, you provide a finalizer by implementing a <format
                type="text/html">
                 <a href="1ae6e46d-a4b1-4a49-abe5-b97f53d9e049">destructor</a>
               </format>
+
+              
 
               
 
@@ -1749,12 +2115,16 @@ public class MyClass {
 
               
 
+              
+
                method. For more information, see the "Destructors and finalizers" section of <format
                type="text/html">
                 <a href="1c03cb0d-1459-4b5e-af65-97d6b3094fd7"
                   >How to: Define and Consume Classes and Structs (C++/CLI)</a
                 >
               </format>
+
+              
 
               
 
@@ -1769,8 +2139,12 @@ public class MyClass {
 
             
 
+            
+
              and the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1779,13 +2153,19 @@ public class MyClass {
 
             
 
+            
+
              implementation can be called by consumers of your class to free unmanaged resources, and you can use the <see
              cref="M:System.Object.Finalize" />
 
             
 
+            
+
              method to free unmanaged resources in the event that the <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -1796,13 +2176,19 @@ public class MyClass {
 
             
 
+            
+
              can take almost any action, including resurrecting an object (that is, making the object accessible again) after it has been cleaned up during garbage collection. However, the object can only be resurrected once; <see
              cref="M:System.Object.Finalize" />
 
             
 
+            
+
              cannot be called on resurrected objects during garbage collection. There is one action that your implementation of <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1820,8 +2206,12 @@ public class MyClass {
 
             
 
+            
+
              and <see
              cref="T:System.StackOverflowException" />
+
+            
 
             
 
@@ -1830,13 +2220,19 @@ public class MyClass {
 
             
 
+            
+
              class to wrap your unmanaged resources, and then implement the dispose pattern without a finalizer. The .NET Framework provides the following classes in the <see
              cref="N:Microsoft.Win32" />
 
             
 
+            
+
              namespace that are derived from <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -1849,12 +2245,16 @@ public class MyClass {
 
                 
 
+                
+
                  is a wrapper class for a file handle. </para
               >
             </item>
             <item>
               <para>
                 <see cref="T:Microsoft.Win32.SafeHandles.SafeMemoryMappedFileHandle" />
+
+                
 
                 
 
@@ -1867,6 +2267,8 @@ public class MyClass {
 
                 
 
+                
+
                  is a wrapper class for a pointer to a block of unmanaged memory. </para
               >
             </item>
@@ -1876,13 +2278,19 @@ public class MyClass {
 
                 
 
+                
+
                 , <see
                  cref="T:Microsoft.Win32.SafeHandles.SafeNCryptProviderHandle" />
 
                 
 
+                
+
                 , and <see
                  cref="T:Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle" />
+
+                
 
                 
 
@@ -1895,6 +2303,8 @@ public class MyClass {
 
                 
 
+                
+
                  is a wrapper class for pipe handles. </para
               >
             </item>
@@ -1904,12 +2314,16 @@ public class MyClass {
 
                 
 
+                
+
                  is a wrapper class for a handle to a registry key. </para
               >
             </item>
             <item>
               <para>
                 <see cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />
+
+                
 
                 
 
@@ -1925,8 +2339,12 @@ public class MyClass {
 
             
 
+            
+
              with safe handles instead of overriding the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1937,8 +2355,12 @@ public class MyClass {
 
             
 
+            
+
              function calls are passed to the <see
              cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />
+
+            
 
             
 
@@ -1984,9 +2406,13 @@ public class MyClass {
 
             
 
+            
+
              is implemented to simply return an integer value.
 The following example illustrates an implementation of <see
              cref="M:System.Int32.GetHashCode" />
+
+            
 
             
 
@@ -2038,8 +2464,12 @@ public struct Point {
 
             
 
+            
+
              (and should implement <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2081,6 +2511,8 @@ public class MyClass {
 
             
 
+            
+
              in a manner that results in circular references. In
 other words, if AClass.GetHashCode calls BClass.GetHashCode, it should not be
 the case that BClass.GetHashCode calls AClass.GetHashCode. </para
@@ -2095,8 +2527,12 @@ the case that BClass.GetHashCode calls AClass.GetHashCode. </para
 
             
 
+            
+
              is bigger than a <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2125,8 +2561,12 @@ public struct Int64 {
 
             
 
+            
+
              class, the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2135,8 +2575,12 @@ public struct Int64 {
 
             
 
+            
+
              class. The <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2149,12 +2593,16 @@ public struct Int64 {
 
               
 
+              
+
                entry in Wikipedia. </para
             >
           </block>
           <para
             >Two objects that are equal return hash codes that are equal. However, the reverse is not true: equal hash codes do not imply object equality, because different (unequal) objects can have identical hash codes. Furthermore, the .NET Framework does not guarantee the default implementation of the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2187,8 +2635,12 @@ public struct Int64 {
 
                   
 
+                  
+
                    or <see
                    cref="T:System.Security.Cryptography.KeyedHashAlgorithm" />
+
+                  
 
                   
 
@@ -2202,8 +2654,12 @@ public struct Int64 {
 
                   
 
+                  
+
                    or <see
                    cref="M:System.Object.Equals(System.Object)" />
+
+                  
 
                   
 
@@ -2218,8 +2674,12 @@ public struct Int64 {
 
             
 
+            
+
              method can be overridden by a derived type. If <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2228,8 +2688,12 @@ public struct Int64 {
 
             
 
+            
+
              method of the base class, which computes a hash code based on an object's reference; for more information, see <see
              cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" />
+
+            
 
             
 
@@ -2238,8 +2702,12 @@ public struct Int64 {
 
             
 
+            
+
              method returns true have identical hash codes. If value types do not override <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2248,8 +2716,12 @@ public struct Int64 {
 
             
 
+            
+
              method of the base class uses reflection to compute the hash code based on the values of the type's fields. In other words, value types whose fields have equal values have equal hash codes. For more information about overriding <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2262,8 +2734,12 @@ public struct Int64 {
 
               
 
+              
+
                method, you should also override <see
                cref="M:System.Object.Equals(System.Object)" />
+
+              
 
               
 
@@ -2272,8 +2748,12 @@ public struct Int64 {
 
               
 
+              
+
                method returns true when two objects are tested for equality, your overridden <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -2286,13 +2766,19 @@ public struct Int64 {
 
             
 
+            
+
             , you can specify a hash code provider by supplying an <see
              cref="T:System.Collections.IEqualityComparer" />
 
             
 
+            
+
              implementation to one of the overloads of the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2307,8 +2793,12 @@ public struct Int64 {
 
             
 
+            
+
              method on a class in the wrt, it provides the default behavior for classes that don’t override <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2321,8 +2811,12 @@ public struct Int64 {
 
             
 
+            
+
             ). Classes in the wrt don’t inherit <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2331,8 +2825,12 @@ public struct Int64 {
 
             
 
+            
+
             . However, they appear to have <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -2341,8 +2839,12 @@ public struct Int64 {
 
             
 
+            
+
             , and <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2352,6 +2854,8 @@ public struct Int64 {
             <para
               >wrt classes that are written in C# or Visual Basic can override the <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -2399,6 +2903,8 @@ public struct Int64 {
             
 
             
+
+            
 returns the run-time type of the current instance:</para
           >
           <code lang="C#"
@@ -2439,8 +2945,12 @@ public class Test {
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -2449,8 +2959,12 @@ public class Test {
 
             
 
+            
+
              method with the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -2466,8 +2980,12 @@ public class Test {
 
             
 
+            
+
              object exposes the metadata associated with the class of the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2479,6 +2997,8 @@ public class Test {
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2521,6 +3041,8 @@ public class Test {
 
             
 
+            
+
              as well as a representation of the instance of
    <see
              langword="MyClass" />
@@ -2528,8 +3050,12 @@ public class Test {
             
 
             
+
+            
    returned by <see
              cref="M:System.Object.MemberwiseClone" />
+
+            
 
             
 
@@ -2594,12 +3120,16 @@ class MyDerivedClass: MyBaseClass {
 
             
 
+            
+
              method creates a shallow copy by creating a new object, and then copying the nonstatic fields of the current object to the new object. If a field is a value type, a bit-by-bit copy of the field is performed. If a field is a reference type, the reference is copied but the referred object is not; therefore, the original object and its clone refer to the same object.</para
           >
           <para>For example, consider an object called X that references objects A and B. Object B, in turn, references object C. A shallow copy of X creates new object X2 that also references objects A and B. In contrast, a deep copy of X creates a new object X2 that references the new objects A2 and B2, which are copies of A and B. B2, in turn, references the new object C2, which is a copy of C. The example illustrates the difference between a shallow and a deep copy operation.</para>
           <para
             >There are numerous ways to implement a deep copy operation if the shallow copy operation performed by the <see
              cref="M:System.Object.MemberwiseClone" />
+
+            
 
             
 
@@ -2613,6 +3143,8 @@ class MyDerivedClass: MyBaseClass {
               <para
                 >Call the <see
                  cref="M:System.Object.MemberwiseClone" />
+
+                
 
                 
 
@@ -2635,6 +3167,8 @@ class MyDerivedClass: MyBaseClass {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2643,6 +3177,8 @@ class MyDerivedClass: MyBaseClass {
           <para
             >A shallow copy of the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2715,8 +3251,12 @@ class MyClass {
 
             
 
+            
+
              method and the equality operator, the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -2725,11 +3265,15 @@ class MyClass {
 
             
 
+            
+
              method. </para
           >
           <para
             >However, the return value of the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -2743,8 +3287,12 @@ class MyClass {
 
                 
 
+                
+
                  and <paramref
                  name="objB" />
+
+                
 
                 
 
@@ -2753,8 +3301,12 @@ class MyClass {
 
                 
 
+                
+
                  method. This means that if both <paramref
                  name="objA" />
+
+                
 
                 
 
@@ -2763,8 +3315,12 @@ class MyClass {
 
                 
 
+                
+
                  represent the same instance of a value type, the <see
                  cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+                
 
                 
 
@@ -2779,8 +3335,12 @@ class MyClass {
 
                 
 
+                
+
                  and <paramref
                  name="objB" />
+
+                
 
                 
 
@@ -2789,8 +3349,12 @@ class MyClass {
 
                 
 
+                
+
                  method returns true if the string is interned. It does not perform a test for value equality.  In the following example, <paramref
                  name="s1" />
+
+                
 
                 
 
@@ -2799,13 +3363,19 @@ class MyClass {
 
                 
 
+                
+
                  are equal because they are two instances of a single interned string. However, <paramref
                  name="s3" />
 
                 
 
+                
+
                  and <paramref
                  name="s4" />
+
+                
 
                 
 
@@ -2823,6 +3393,8 @@ class MyClass {
 
             
 
+            
+
              instances are the same instance.</para
           >
         </summary>
@@ -2834,8 +3406,12 @@ class MyClass {
 
             
 
+            
+
              is the same instance as <paramref
              name="objB" />
+
+            
 
             
 
@@ -2847,10 +3423,14 @@ class MyClass {
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="objB">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2888,6 +3468,8 @@ class MyClass {
 
             
 
+            
+
              to the console.</para
           >
           <code lang="C#"
@@ -2913,10 +3495,14 @@ class MyClass {
 
             
 
+            
+
              is the major formatting method in the .NET Framework. It converts an object to its string representation so that it is suitable for display. (For information about formatting support in the .NET Framework, see <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
             </format>
+
+            
 
             
 
@@ -2928,8 +3514,12 @@ class MyClass {
 
             
 
+            
+
              method returns the fully qualified name of the type of the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2942,8 +3532,12 @@ class MyClass {
 
             
 
+            
+
              is the base class of all reference types in the .NET Framework, this behavior is inherited by reference types that do not override the <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -2952,8 +3546,12 @@ class MyClass {
 
             
 
+            
+
              members. Its <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -2966,8 +3564,12 @@ class MyClass {
 
             
 
+            
+
              method to return a string that represents the object instance. For example, the base types such as <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -2976,8 +3578,12 @@ class MyClass {
 
             
 
+            
+
             , and <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2986,8 +3592,12 @@ class MyClass {
 
             
 
+            
+
              implementations that return the string form of the value that the object represents. The following example defines a class, Object2, that overrides the <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -3003,8 +3613,12 @@ class MyClass {
 
             
 
+            
+
              method on a class in the wrt, it provides the default behavior for classes that don’t override <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -3017,8 +3631,12 @@ class MyClass {
 
             
 
+            
+
             ). Classes in the wrt don’t inherit <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -3027,8 +3645,12 @@ class MyClass {
 
             
 
+            
+
             . However, they always appear to have <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -3037,8 +3659,12 @@ class MyClass {
 
             
 
+            
+
             , and <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -3053,8 +3679,12 @@ class MyClass {
 
             
 
+            
+
              on a wrt object before falling back to the default implementation of <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -3064,6 +3694,8 @@ class MyClass {
             <para
               >wrt classes that are written in C# or Visual Basic can override the <see
                cref="M:System.Object.ToString" />
+
+              
 
               
 
@@ -3082,6 +3714,8 @@ class MyClass {
 
             
 
+            
+
              interface whose single method, <see
 
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.tostring.aspx"
@@ -3090,8 +3724,12 @@ class MyClass {
 
             
 
+            
+
             , provides basic formatting support comparable to that provided by <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -3100,6 +3738,8 @@ class MyClass {
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
               >IStringable</see
             >
+
+            
 
             
 
@@ -3114,6 +3754,8 @@ class MyClass {
 
             
 
+            
+
             . The common language runtime will automatically route calls from <see
 
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.tostring.aspx"
@@ -3122,8 +3764,12 @@ class MyClass {
 
             
 
+            
+
              to <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -3132,6 +3778,8 @@ class MyClass {
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
               >IStringable</see
             >
+
+            
 
             
 
@@ -3147,6 +3795,8 @@ class MyClass {
 
               
 
+              
+
                for all managed types in win8_appstore_long apps, we recommend that you do not provide your own <see
 
                 cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
@@ -3155,11 +3805,15 @@ class MyClass {
 
               
 
+              
+
                implementation. Implementing <see
 
                 cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                 >IStringable</see
               >
+
+              
 
               
 
@@ -3175,6 +3829,8 @@ class MyClass {
 
             
 
+            
+
              in a public managed type that is exported in a wrt component, the following restrictions apply: </para
           >
           <list type="bullet">
@@ -3185,6 +3841,8 @@ class MyClass {
                   cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                   >IStringable</see
                 >
+
+                
 
                 
 
@@ -3205,6 +3863,8 @@ class MyClass {
 
                 
 
+                
+
                  on an interface. </para
               >
             </item>
@@ -3215,6 +3875,8 @@ class MyClass {
                   cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                   >IStringable</see
                 >
+
+                
 
                 
 
@@ -3230,6 +3892,8 @@ class MyClass {
 
                 
 
+                
+
                  cannot be the return type of a method, property, or field. </para
               >
             </item>
@@ -3240,6 +3904,8 @@ class MyClass {
                   cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                   >IStringable</see
                 >
+
+                
 
                 
 
@@ -3263,6 +3929,8 @@ public class NewClass : IStringable
 
                 
 
+                
+
                  implementation must always override the base class implementation. You can hide a ToString implementation only by invoking it on a strongly typed class instance. </para
               >
             </item>
@@ -3276,11 +3944,15 @@ public class NewClass : IStringable
 
             
 
+            
+
              or hides its <see
 
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.tostring.aspx"
               >ToString</see
             >
+
+            
 
             
 

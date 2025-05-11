@@ -27,6 +27,8 @@
 
         
 
+        
+
          class represents the &lt;KeyReference&gt; element that contains information about the location of an encrypted key. </para
       >
       <para>Use the &lt;KeyReference&gt; element to refer to &lt;EncryptedKey&gt; elements that were encrypted using the key defined in the enclosing &lt;EncryptedKey&gt; element. You can use multiple &lt;KeyReference&gt; elements when multiple &lt;EncryptedKey&gt; elements exist that are encrypted using the same key.</para>
@@ -61,6 +63,8 @@
 
             
 
+            
+
              class that represents the &lt;KeyReference&gt; element. The &lt;KeyReference&gt; element is a child element of the &lt;ReferenceList&gt; element.</para
           >
           <para>For more information about XML encryption standards, see the XML Encryption specification, which is available from the World Wide Web Consortium (W3C) at http://www.w3.org/TR/xmlenc-core/.</para>
@@ -70,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
+
+            
 
             
 
@@ -102,6 +108,8 @@
 
             
 
+            
+
              class that represents the &lt;KeyReference&gt; element, using the supplied Uniform Resource Identifier (URI). The URI indicates the location of the encrypted key. The &lt;KeyReference&gt; element is a child element of the &lt;ReferenceList&gt; element.</para
           >
           <para>For more information about XML encryption standards, see the XML Encryption specification, which is available from the World Wide Web Consortium (W3C) at http://www.w3.org/TR/xmlenc-core/.</para>
@@ -114,11 +122,15 @@
 
             
 
+            
+
              class for XML encryption using the supplied Uniform Resource Identifier (URI).</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -155,6 +167,8 @@
 
             
 
+            
+
              class that represents the &lt;KeyReference&gt; element, using the supplied Uniform Resource Identifier (URI) and transform chain. The URI indicates the location of the encrypted key and the transform chain that can contain XPath transforms, decompression transforms, or information on how to retrieve the encrypted data from a document storage facility. The &lt;KeyReference&gt; element is a child element of the &lt;ReferenceList&gt; element.</para
           >
           <para>For more information about XML encryption standards, see the XML Encryption specification, which is available from the World Wide Web Consortium (W3C) at http://www.w3.org/TR/xmlenc-core/.</para>
@@ -167,8 +181,12 @@
 
             
 
+            
+
              class for XML encryption using the specified Uniform Resource Identifier (URI) and a <see
              cref="T:System.Security.Cryptography.Xml.TransformChain" />
+
+            
 
             
 
@@ -177,6 +195,8 @@
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

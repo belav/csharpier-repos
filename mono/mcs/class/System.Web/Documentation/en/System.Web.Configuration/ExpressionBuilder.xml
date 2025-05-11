@@ -22,13 +22,19 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
         
 
+        
+
          collection, which is made up of the expressionBuilders elements contained in the compilation section of the configuration. The <see
          cref="T:System.Web.Configuration.ExpressionBuilder" />
+
+        
 
         
 
@@ -42,11 +48,15 @@
 
         
 
+        
+
         ) or a custom expression builder type. The ExpressionKey specifies the key used to reference the returned value. </para
       >
       <para
         >If you choose to implement a common expression-builder type, you must map the expression builder to the associated section name in the configuration. If you choose to implement a custom expression-builder type, you must map your expression builder to your custom expression-builder class, which must derive from the <see
          cref="T:System.Web.Configuration.ExpressionBuilder" />
+
+        
 
         
 
@@ -80,6 +90,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -88,10 +100,14 @@
 
           
 
+          
+
           A string that identifies the type of expression to retrieve.</param
         >
         <param name="theType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -124,6 +140,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.ExpressionBuilder.ExpressionPrefix" />
+
+            
 
             
 
@@ -180,6 +198,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.ExpressionBuilder.Type" />
+
+            
 
             
 

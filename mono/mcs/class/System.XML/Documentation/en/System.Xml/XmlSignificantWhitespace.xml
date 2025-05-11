@@ -64,11 +64,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="strData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -79,8 +83,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDocument" />
+
+          
 
           
 
@@ -118,11 +126,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The cloned node has no parent. <see
              cref="P:System.Xml.XmlNode.ParentNode" />
+
+            
 
             
 
@@ -139,6 +151,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,11 +315,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -347,11 +365,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

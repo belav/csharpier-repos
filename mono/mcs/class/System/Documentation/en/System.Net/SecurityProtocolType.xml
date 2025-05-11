@@ -28,8 +28,12 @@
 
         
 
+        
+
          property and specifies the security protocols that are used by instances of the <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 

@@ -18,8 +18,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.ControlPaint" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >Specifies the image to draw when drawing a menu with the <see
          cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" />
+
+        
 
         
 
@@ -105,6 +111,8 @@
 
             
 
+            
+
              value).</para
           >
         </summary>
@@ -126,6 +134,8 @@
           <para
             >The minimum value available by this enumeration (equal to the <see
              cref="F:System.Windows.Forms.MenuGlyph.Arrow" />
+
+            
 
             
 

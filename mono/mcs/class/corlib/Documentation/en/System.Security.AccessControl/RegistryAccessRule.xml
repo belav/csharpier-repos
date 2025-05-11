@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is one of a set of classes that the .NET Framework provides for managing Windows access control security on registry keys. For an overview of these classes, and their relationship to the underlying Windows access control structures, see <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          method to get a <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          method to obtain a collection of <see
          cref="T:System.Security.AccessControl.RegistryAccessRule" />
+
+        
 
         
 
@@ -62,6 +74,8 @@
       >
       <para>
         <see cref="T:System.Security.AccessControl.RegistryAccessRule" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          objects to specify access rights to allow or deny to a user or group. A <see
          cref="T:System.Security.AccessControl.RegistryAccessRule" />
+
+        
 
         
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          method to get the <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+        
 
         
 
@@ -99,8 +121,12 @@
 
         
 
+        
+
          object by using its methods to add the rule, and then use the <see
          cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
+
+        
 
         
 
@@ -113,8 +139,12 @@
 
           
 
+          
+
            object do not affect the access levels of the registry key until you call the <see
            cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
+
+          
 
           
 
@@ -126,8 +156,12 @@
 
         
 
+        
+
          objects are immutable. Security for a registry key is modified using the methods of the <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+        
 
         
 
@@ -169,8 +203,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.PropagationFlags.None" />
+
+            
 
             
 
@@ -185,6 +223,8 @@
 
             
 
+            
+
              class, specifying the user or group the rule applies to, the access rights, and whether the specified access rights are allowed or denied.</para
           >
         </summary>
@@ -193,8 +233,12 @@
 
           
 
+          
+
           The user or group the rule applies to. Must be of type <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -203,8 +247,12 @@
 
           
 
+          
+
            that can be converted to type <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -215,8 +263,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.RegistryRights" />
+
+          
 
           
 
@@ -227,8 +279,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -265,8 +321,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.PropagationFlags.None" />
+
+            
 
             
 
@@ -278,8 +338,12 @@
 
             
 
+            
+
              object, by passing <paramref
              name="identity" />
+
+            
 
             
 
@@ -288,13 +352,19 @@
 
             
 
+            
+
              constructor, and passing the newly created <see
              cref="T:System.Security.Principal.NTAccount" />
 
             
 
+            
+
              object to the <see
              cref="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)" />
+
+            
 
             
 
@@ -309,11 +379,15 @@
 
             
 
+            
+
              class, specifying the name of the user or group the rule applies to, the access rights, and whether the specified access rights are allowed or denied.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -324,8 +398,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.RegistryRights" />
+
+          
 
           
 
@@ -336,8 +414,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -376,6 +458,8 @@
 
             
 
+            
+
              flag. If this flag is not specified, the propagation flags are ignored, and only the immediate key is affected. If the flag is present, the rule is propagated as shown in the following table. The table assumes there is a subkey S with child subkey CS and grandchild subkey GS. That is, the path for the grandchild subkey is S\CS\GS.</para
           >
           <list type="table">
@@ -450,6 +534,8 @@
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
                 </para>
@@ -472,8 +558,12 @@
 
             
 
+            
+
              flag is specified for <paramref
              name="inheritanceFlags" />
+
+            
 
             
 
@@ -482,8 +572,12 @@
 
             
 
+            
+
              propagation flag is specified for <paramref
              name="propagationFlags" />
+
+            
 
             
 
@@ -496,8 +590,12 @@
 
               
 
+              
+
                flag for <paramref
                name="inheritanceFlags" />
+
+              
 
               
 
@@ -506,8 +604,12 @@
 
               
 
+              
+
                flag. Finally, specifying the <see
                cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+              
 
               
 
@@ -523,6 +625,8 @@
 
             
 
+            
+
              class, specifying the user or group the rule applies to, the access rights, the inheritance flags, the propagation flags, and whether the specified access rights are allowed or denied.</para
           >
         </summary>
@@ -531,8 +635,12 @@
 
           
 
+          
+
           The user or group the rule applies to. Must be of type <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -541,8 +649,12 @@
 
           
 
+          
+
            that can be converted to type <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -553,8 +665,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.RegistryRights" />
+
+          
 
           
 
@@ -565,8 +681,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -577,8 +697,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -589,8 +713,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -629,6 +757,8 @@
 
             
 
+            
+
              flag. If this flag is not specified, the propagation flags are ignored, and only the immediate key is affected. If the flag is present, the rule is propagated as shown in the following table. The table assumes there is a subkey S with child subkey CS and grandchild subkey GS. That is, the path for the grandchild subkey is S\CS\GS.</para
           >
           <list type="table">
@@ -703,6 +833,8 @@
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
                 </para>
@@ -725,8 +857,12 @@
 
             
 
+            
+
              flag is specified for <paramref
              name="inheritanceFlags" />
+
+            
 
             
 
@@ -735,8 +871,12 @@
 
             
 
+            
+
              propagation flag is specified for <paramref
              name="propagationFlags" />
+
+            
 
             
 
@@ -749,8 +889,12 @@
 
               
 
+              
+
                flag for <paramref
                name="inheritanceFlags" />
+
+              
 
               
 
@@ -759,8 +903,12 @@
 
               
 
+              
+
                flag. Finally, specifying the <see
                cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+              
 
               
 
@@ -773,8 +921,12 @@
 
             
 
+            
+
              object, by passing <paramref
              name="identity" />
+
+            
 
             
 
@@ -783,13 +935,19 @@
 
             
 
+            
+
              constructor, and passing the newly created <see
              cref="T:System.Security.Principal.NTAccount" />
 
             
 
+            
+
              object to the <see
              cref="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
+
+            
 
             
 
@@ -804,11 +962,15 @@
 
             
 
+            
+
              class, specifying the name of the user or group the rule applies to, the access rights, the inheritance flags, the propagation flags, and whether the specified access rights are allowed or denied.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -819,8 +981,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.RegistryRights" />
+
+          
 
           
 
@@ -831,8 +997,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -843,8 +1013,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -855,8 +1029,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -891,8 +1069,12 @@
 
             
 
+            
+
              objects are immutable. You can create a new access rule representing a different user, different rights, or a different <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 

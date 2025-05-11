@@ -38,8 +38,12 @@
 
         
 
+        
+
          as well as their respective mappings to columns in a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -70,8 +74,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -86,6 +94,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -94,8 +104,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -126,8 +140,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -142,6 +160,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </returns>
@@ -150,8 +170,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -191,8 +215,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -207,11 +235,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,8 +254,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbType" />
+
+          
 
           
 
@@ -257,8 +293,12 @@
 
             
 
+            
+
              method to specify integer parameter values. Because this overload takes a <paramref
              name="value" />
+
+            
 
             
 
@@ -267,8 +307,12 @@
 
             
 
+            
+
             , you must convert the value to an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -278,6 +322,8 @@
           <para
             >If you do not perform this conversion, the compiler will assume you are attempting to call the <see
              cref="M:System.Data.OleDb.OleDbParameterCollection.Add(System.String,System.Data.OleDb.OleDbType)" />
+
+            
 
             
 
@@ -292,8 +338,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -308,11 +358,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,13 +377,19 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.OleDb.OleDbParameter.Value" />
 
           
 
+          
+
            of the <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -373,8 +433,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -389,11 +453,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,8 +472,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbType" />
+
+          
 
           
 
@@ -413,6 +485,8 @@
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -449,8 +523,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -465,11 +543,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -480,8 +562,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbType" />
+
+          
 
           
 
@@ -492,10 +578,14 @@
 
           
 
+          
+
           The length of the column. </param
         >
         <param name="sourceColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +619,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -537,8 +629,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -571,8 +667,12 @@
 
             
 
+            
+
              values to the end of the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -584,8 +684,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.OleDbParameter" />
+
+          
 
           
 
@@ -619,6 +723,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -630,6 +736,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -638,10 +746,14 @@
 
           
 
+          
+
           The name of the parameter.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -666,8 +778,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -705,8 +821,12 @@
 
             
 
+            
+
              is in this <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -721,6 +841,8 @@
 
             
 
+            
+
              is in the collection; otherwise false.</para
           >
         </returns>
@@ -729,8 +851,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -757,8 +883,12 @@
 
             
 
+            
+
              is in this <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -773,8 +903,12 @@
 
             
 
+            
+
              contains <paramref
              name="value" />
+
+            
 
             
 
@@ -786,8 +920,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -818,8 +956,12 @@
 
             
 
+            
+
              is in this <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -834,6 +976,8 @@
 
             
 
+            
+
              contains the value; otherwise false.</para
           >
         </returns>
@@ -842,8 +986,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -878,13 +1026,19 @@
 
             
 
+            
+
              to the specified one-dimensional <see
              cref="T:System.Array" />
 
             
 
+            
+
              starting at the specified destination <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -896,13 +1050,19 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the elements copied from the current <see
            cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+          
 
           
 
@@ -913,8 +1073,12 @@
 
           
 
+          
+
           A 32-bit integer that represents the index in the <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -952,8 +1116,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -965,13 +1133,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
           
 
+          
+
            that is the destination of the elements copied from the current <see
            cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+          
 
           
 
@@ -982,8 +1156,12 @@
 
           
 
+          
+
           A 32-bit integer that represents the index in the <see
            cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+          
 
           
 
@@ -1005,6 +1183,8 @@
           <para
             >Returns an integer that contains the number of elements in the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1037,6 +1217,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1048,8 +1230,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1131,6 +1317,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </summary>
@@ -1142,8 +1330,12 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Data.OleDb.OleDbParameter" />
+
+            
 
             
 
@@ -1155,8 +1347,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -1183,6 +1379,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </summary>
@@ -1194,8 +1392,12 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1207,8 +1409,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1239,6 +1445,8 @@
 
             
 
+            
+
              with the specified name.</para
           >
         </summary>
@@ -1250,6 +1458,8 @@
 
             
 
+            
+
              with the specified case-sensitive name.</para
           >
         </returns>
@@ -1258,8 +1468,12 @@
 
           
 
+          
+
           The case-sensitive name of the <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -1297,8 +1511,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1310,10 +1528,14 @@
 
           
 
+          
+
           The zero-based index at which value should be inserted.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1322,8 +1544,12 @@
 
           
 
+          
+
            object to be inserted in the <see
            cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+          
 
           
 
@@ -1354,8 +1580,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1367,10 +1597,14 @@
 
           
 
+          
+
           The zero-based index at which value should be inserted.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1379,8 +1613,12 @@
 
           
 
+          
+
            to be inserted in the <see
            cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+          
 
           
 
@@ -1412,6 +1650,8 @@
 
             
 
+            
+
              has a fixed size. Read-only.</para
           >
         </summary>
@@ -1437,6 +1677,8 @@
 
             
 
+            
+
              is read-only.</para
           >
         </summary>
@@ -1459,6 +1701,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1554,8 +1798,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1567,8 +1815,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -1595,8 +1847,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1608,13 +1864,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            to be removed from the <see
            cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+          
 
           
 
@@ -1645,8 +1907,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1658,8 +1924,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -1693,8 +1963,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 
@@ -1706,8 +1980,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.OleDb.OleDbParameter" />
+
+          
 
           
 
@@ -1782,6 +2060,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Data.OleDb.OleDbParameterCollection" />
+
+            
 
             
 

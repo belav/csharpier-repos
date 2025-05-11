@@ -44,6 +44,8 @@
 
         
 
+        
+
          exception.</para
       >
       <code lang="C#"
@@ -85,8 +87,12 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
         
 
+        
+
          is created and passed a reference to the exception thrown by the type's class initializer. The <see
          cref="P:System.Exception.InnerException" />
+
+        
 
         
 
@@ -95,10 +101,14 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
         
 
+        
+
          holds the underlying exception.</para
       >
       <para>
         <see cref="T:System.TypeInitializationException" />
+
+        
 
         
 
@@ -110,8 +120,12 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
         
 
+        
+
         , see the <see
          cref="M:System.TypeInitializationException.#ctor(System.String,System.Exception)" />
+
+        
 
         
 
@@ -152,8 +166,12 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -162,11 +180,15 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.TypeInitializationException" />
+
+            
 
             
 
@@ -223,11 +245,15 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
             
 
+            
+
              class with the default error message, the specified type name, and a reference to the inner exception that is the root cause of this exception.</para
           >
         </summary>
         <param name="fullTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,8 +264,12 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -279,6 +309,8 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
             
 
+            
+
              object with the type name and additional exception information.</para
           >
         </summary>
@@ -287,8 +319,12 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -299,8 +335,12 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -333,6 +373,8 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
 
             
 
+            
+
              that contains the fully qualified name of the type that caused the exception.</para
           >
         </value>
@@ -341,6 +383,8 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
           <para
             >The <see
              cref="P:System.TypeInitializationException.TypeName" />
+
+            
 
             
 

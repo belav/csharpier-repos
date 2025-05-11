@@ -37,6 +37,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -72,6 +74,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -83,8 +87,12 @@
 
             
 
+            
+
              representing the new value. If the value of the object has not changed, the <see
              cref="M:System.Windows.Forms.Design.ImageListImageEditor.EditValue(System.ComponentModel.ITypeDescriptorContext,System.IServiceProvider,System.Object)" />
+
+            
 
             
 
@@ -96,8 +104,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -108,8 +120,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -120,8 +136,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -181,6 +201,8 @@
 
             
 
+            
+
              representing supported image types.</para
           >
         </returns>
@@ -215,6 +237,8 @@
 
             
 
+            
+
              is implemented; otherwise, false.</para
           >
         </returns>
@@ -223,8 +247,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -256,8 +284,12 @@
 
             
 
+            
+
              contained within the specified <see
              cref="T:System.Drawing.Design.PaintValueEventArgs" />
+
+            
 
             
 
@@ -272,6 +304,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -280,8 +314,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.PaintValueEventArgs" />
+
+          
 
           
 

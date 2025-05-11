@@ -27,8 +27,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebResponse" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
         . Use this configuration element to specify a module that is registered to work with the <see
          cref="Overload:System.Net.WebRequest.Create" />
+
+        
 
         
 
@@ -54,6 +62,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -62,8 +72,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -115,6 +129,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -148,6 +164,8 @@
 
             
 
+            
+
              parameter contains the fully qualified type name followed by a comma (,) and the assembly information. The elements of the assembly information are separated with commas, for example, "System.Net.DigestClient, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089".</para
           >
           <para
@@ -156,8 +174,12 @@
 
             
 
+            
+
              property is set to <paramref
              name="prefix" />
+
+            
 
             
 
@@ -166,8 +188,12 @@
 
             
 
+            
+
              property is set to <paramref
              name="type" />
+
+            
 
             
 
@@ -182,11 +208,15 @@
 
             
 
+            
+
              class using the specified URI prefix and type information. </para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -197,8 +227,12 @@
 
           
 
+          
+
           A string containing the type and assembly information for the class that handles creating requests for resources that use the <paramref
            name="prefix" />
+
+          
 
           
 
@@ -234,8 +268,12 @@
 
             
 
+            
+
              property is set to <paramref
              name="prefix" />
+
+            
 
             
 
@@ -244,8 +282,12 @@
 
             
 
+            
+
              property is set to <paramref
              name="type" />
+
+            
 
             
 
@@ -260,11 +302,15 @@
 
             
 
+            
+
              class using the specified URI prefix and type identifier.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,13 +321,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
           
 
+          
+
            that identifies the class that handles creating requests for resources that use the <paramref
            name="prefix" />
+
+          
 
           
 
@@ -386,8 +438,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -396,8 +452,12 @@
 
             
 
+            
+
             . Use this property to specify a type that is registered to work with the <see
              cref="M:System.Net.WebRequest.Create(System.String)" />
+
+            
 
             
 

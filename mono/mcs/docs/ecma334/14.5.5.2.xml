@@ -6,8 +6,12 @@
 
     
 
+    
+
      of the <non_terminal
      where="14.5.5">invocation-expression</non_terminal>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
     . Furthermore, considering the <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -26,8 +34,12 @@
 
     
 
+    
+
     , the <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -36,13 +48,19 @@
 
     
 
+    
+
     ) with respect to the <non_terminal
      where="14.4.1">argument-list</non_terminal>
 
     
 
+    
+
      of the <non_terminal
      where="14.5.5">invocation-expression</non_terminal>
+
+    
 
     
 
@@ -54,13 +72,19 @@
 
     
 
+    
+
      of a <non_terminal
      where="11.2">delegate-type</non_terminal>
 
     
 
+    
+
      and A is an optional <non_terminal
      where="14.4.1">argument-list</non_terminal>
+
+    
 
     
 
@@ -71,6 +95,8 @@
       <list_item
         > Otherwise, D is a reference to a delegate instance. A function member invocation (<hyperlink
         >14.4.3</hyperlink>
+
+        
 
         
 

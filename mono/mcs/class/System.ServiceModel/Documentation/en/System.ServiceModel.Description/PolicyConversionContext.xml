@@ -25,13 +25,19 @@
 
         
 
+        
+
          is passed to <see
          cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
 
             
 
+            
+
              method returns all policy assertions that are for the binding.</para
           >
         </item>
@@ -52,6 +60,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetFaultBindingAssertions(System.ServiceModel.Description.FaultDescription)" />
+
+            
 
             
 
@@ -65,6 +75,8 @@
 
             
 
+            
+
              method returns all policy assertions for a specific message.</para
           >
         </item>
@@ -72,6 +84,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+            
 
             
 
@@ -85,6 +99,8 @@
 
             
 
+            
+
              property gets the binding elements for the binding being described or configured.</para
           >
         </item>
@@ -92,6 +108,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
+
+            
 
             
 
@@ -132,6 +150,8 @@
 
             
 
+            
+
              class using the specified endpoint.</para
           >
         </summary>
@@ -140,8 +160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -225,6 +249,8 @@
 
             
 
+            
+
              is not a copy. You can add and remove assertions as necessary.</para
           >
         </remarks>
@@ -240,8 +266,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -278,6 +308,8 @@
 
             
 
+            
+
              is not a copy. You can add and remove assertions as necessary.</para
           >
         </remarks>
@@ -294,8 +326,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.FaultDescription" />
+
+          
 
           
 
@@ -331,6 +367,8 @@
 
             
 
+            
+
              is not a copy. You can add and remove assertions as needed.</para
           >
         </remarks>
@@ -347,8 +385,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MessageDescription" />
+
+          
 
           
 
@@ -384,6 +426,8 @@
 
             
 
+            
+
              is not a copy. You can add and remove assertions as necessary.</para
           >
         </remarks>
@@ -400,8 +444,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 

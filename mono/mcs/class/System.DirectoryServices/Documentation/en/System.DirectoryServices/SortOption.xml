@@ -77,6 +77,8 @@
 
             
 
+            
+
              class.          </para
           >
         </summary>
@@ -102,6 +104,8 @@
 
             
 
+            
+
              class, which contains the specified property name and specified sort direction.          </para
           >
         </summary>
@@ -110,8 +114,12 @@
 
           
 
+          
+
           The name of the property to sort by. The <see
            cref="P:System.DirectoryServices.SortOption.PropertyName" />
+
+          
 
           
 
@@ -122,13 +130,19 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.DirectoryServices.SortDirection" />
 
           
 
+          
+
            values. The <see
            cref="P:System.DirectoryServices.SortOption.Direction" />
+
+          
 
           
 

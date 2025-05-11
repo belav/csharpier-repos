@@ -33,8 +33,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.ParameterStyle" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          property determines whether parameters are formatted Encoded or Literal. The <see
          cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.ParameterStyle" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
 
         
 
+        
+
          to a method specifies that SOAP messages to and from the method use Document formatting.</para
       >
     </summary>
@@ -85,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+
+            
 
             
 
@@ -114,13 +126,19 @@
 
             
 
+            
+
              class, setting the <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.Action" />
 
             
 
+            
+
              property to the value of the <paramref
              name="action" />
+
+            
 
             
 
@@ -132,8 +150,12 @@
 
           
 
+          
+
           The SOAPAction HTTP header field of the SOAP request. Sets the <see
            cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.Action" />
+
+          
 
           
 
@@ -162,8 +184,12 @@
 
             
 
+            
+
              property is a URI indicating the intent of the request. However, the SOAP specification places no restrictions on the format of the URI, or any rules about whether the URI is resolvable. The presence and content of the <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.Action" />
+
+            
 
             
 
@@ -172,6 +198,8 @@
           <para
             >By default, the .NET Framework version 1.1 publishes the <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.Action" />
+
+            
 
             
 
@@ -205,8 +233,12 @@
 
             
 
+            
+
              applied to an XML Web service. An XML Web service can implement multiple bindings when multiple <see
              cref="T:System.Web.Services.WebServiceBindingAttribute" />
+
+            
 
             
 
@@ -218,13 +250,19 @@
 
             
 
+            
+
              attributes are applied to an XML Web service, a <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -233,13 +271,19 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -248,8 +292,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -284,8 +332,12 @@
 
             
 
+            
+
              property set to true, the XML Web service client does not have to wait for the Web server to finish processing the XML Web service method. As soon as the Web server has deserialized the <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -298,8 +350,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+
+            
 
             
 
@@ -308,8 +364,12 @@
 
             
 
+            
+
              property of set to true, do not have access to their <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -318,8 +378,12 @@
 
             
 
+            
+
              property. To access the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -328,8 +392,12 @@
 
             
 
+            
+
              and access the <see
              cref="P:System.Web.Services.WebService.Context" />
+
+            
 
             
 
@@ -386,13 +454,19 @@
 
             
 
+            
+
              defines the XML element used to wrap the parameters beneath the Body element of the SOAP request when <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.ParameterStyle" />
 
             
 
+            
+
              is <see
              cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+
+            
 
             
 
@@ -422,6 +496,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.RequestNamespace" />
+
+            
 
             
 
@@ -455,13 +531,19 @@
 
             
 
+            
+
              defines the XML element used to wrap the parameters beneath the Body element of the SOAP response when <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.ParameterStyle" />
 
             
 
+            
+
              is <see
              cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+
+            
 
             
 
@@ -492,6 +574,8 @@
           <para
             >The <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.ResponseNamespace" />
+
+            
 
             
 
@@ -531,8 +615,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.Services.Description.SoapBindingUse.Literal" />
+
+            
 
             
 
@@ -541,8 +629,12 @@
 
             
 
+            
+
              refers to formatting parameters using SOAP encoding, as outlined in the SOAP specification in section 5. <see
              cref="F:System.Web.Services.Description.SoapBindingUse.Literal" />
+
+            
 
             
 
@@ -555,6 +647,8 @@
                 >[&lt;topic://cpconCustomizingSOAPInASPNETWebServicesWebServiceClients&gt;]</a
               >
             </format>
+
+            
 
             
 

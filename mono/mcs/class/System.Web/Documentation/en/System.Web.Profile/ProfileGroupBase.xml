@@ -19,13 +19,19 @@
 
         
 
+        
+
          class is used by ASP.NET to create grouped properties in the <see
          cref="P:System.Web.HttpContext.Profile" />
 
         
 
+        
+
          property for the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
         , ASP.NET creates a new class with strongly typed accessors for each property in the group. The new class inherits the <see
          cref="T:System.Web.Profile.ProfileGroupBase" />
+
+        
 
         
 
@@ -48,13 +58,19 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.Profile.ProfileGroupBase.SetPropertyValue(System.String,System.Object)" />
 
         
 
+        
+
          methods of the <see
          cref="T:System.Web.Profile.ProfileGroupBase" />
+
+        
 
         
 
@@ -66,8 +82,12 @@
 
         
 
+        
+
          passes calls to get and set property values to the class that inherits the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -76,13 +96,19 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Web.Profile.ProfileGroupBase" />
 
         
 
+        
+
          class. See the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -110,13 +136,19 @@
 
             
 
+            
+
              class to create grouped properties in the <see
              cref="P:System.Web.HttpContext.Profile" />
 
             
 
+            
+
              property for the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -127,8 +159,12 @@
 
             
 
+            
+
              element, ASP.NET creates a new class with strongly typed accessors for each property in the group. The new class inherits the <see
              cref="T:System.Web.Profile.ProfileGroupBase" />
+
+            
 
             
 
@@ -141,6 +177,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.Profile.ProfileGroupBase" />
+
+            
 
             
 
@@ -174,8 +212,12 @@
 
             
 
+            
+
              class to create the class for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -186,13 +228,19 @@
 
             
 
+            
+
              configuration section. The strongly typed accessors of the ProfileCommon class call the <see
              cref="M:System.Web.Profile.ProfileGroupBase.GetPropertyValue(System.String)" />
 
             
 
+            
+
              method to retrieve untyped values from the <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -204,8 +252,12 @@
 
             
 
+            
+
              method to retrieve grouped property values of the user profile for your application by name. Returned values are typed as object and must be cast as the specific object type when retrieved. For strongly typed access to profile property values, you can access the grouped property by name as a member of a group of the <see
              cref="P:System.Web.HttpContext.Profile" />
+
+            
 
             
 
@@ -222,6 +274,8 @@
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,8 +314,12 @@
 
           
 
+          
+
           The class that inherits <see
            cref="T:System.Web.Profile.ProfileBase" />
+
+          
 
           
 
@@ -270,10 +328,14 @@
 
           
 
+          
+
            property.</param
         >
         <param name="myName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -330,8 +392,12 @@
 
             
 
+            
+
              class to create the class used for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -342,13 +408,19 @@
 
             
 
+            
+
              configuration section. The strongly typed accessors of the ProfileCommon class call the <see
              cref="M:System.Web.Profile.ProfileGroupBase.SetPropertyValue(System.String,System.Object)" />
 
             
 
+            
+
              method to pass grouped property values to the <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -360,8 +432,12 @@
 
             
 
+            
+
              method to assign values to grouped properties of the user profile for your application by name. Values are typed as object, and type checking will be done at run time, not compile time. For strongly typed access to profile property values, you can access the grouped property by name as a member of a group of the <see
              cref="P:System.Web.HttpContext.Profile" />
+
+            
 
             
 
@@ -377,10 +453,14 @@
 
           
 
+          
+
           The name of the grouped property to set.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -21,13 +21,19 @@
 
         
 
+        
+
          class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see
          cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
 
         
 
+        
+
          interface. Controls access schema objects by calling the <see
          cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+        
 
         
 
@@ -39,13 +45,19 @@
 
         
 
+        
+
          class represents the parameters required to call a stored procedure in the data store. The <see
          cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" />
 
         
 
+        
+
          property contains a collection of <see
          cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" />
+
+        
 
         
 
@@ -82,11 +94,15 @@
 
             
 
+            
+
              class with the specified name, data type, and input/output semantics. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -97,8 +113,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DbType" />
+
+          
 
           
 
@@ -109,8 +129,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.ParameterDirection" />
+
+          
 
           
 
@@ -134,6 +158,8 @@
           <para
             >The <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataParameter.DataType" />
+
+            
 
             
 
@@ -165,6 +191,8 @@
           <para
             >Use the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataParameter.Direction" />
+
+            
 
             
 

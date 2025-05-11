@@ -26,6 +26,8 @@
 
         
 
+        
+
          class enables a class to appear to have properties it really does not have. The class can then use the properties when needed, and save on memory when the class does not use the properties.</para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          is used internally to the .NET Framework, and its constructors are private. You cannot create an instance of the <see
          cref="T:System.Windows.Forms.OwnerDrawPropertyBag" />
+
+        
 
         
 
@@ -71,6 +77,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -79,8 +87,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -91,8 +103,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -141,6 +157,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -152,6 +170,8 @@
 
             
 
+            
+
              control.</para
           >
         </returns>
@@ -160,8 +180,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.OwnerDrawPropertyBag" />
+
+          
 
           
 
@@ -228,6 +252,8 @@
 
             
 
+            
+
              contains all default values.</para
           >
         </summary>
@@ -236,6 +262,8 @@
           <para
             >true if the <see
              cref="T:System.Windows.Forms.OwnerDrawPropertyBag" />
+
+            
 
             
 
@@ -275,6 +303,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -283,8 +313,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -292,6 +326,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

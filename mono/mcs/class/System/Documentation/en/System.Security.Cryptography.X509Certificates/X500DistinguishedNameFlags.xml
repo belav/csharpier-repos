@@ -31,6 +31,8 @@
 
         
 
+        
+
          class to indicate special characters contained in the distinguished name.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseNewLines" />
+
+        
 
         
 
@@ -49,13 +55,19 @@
 
         
 
+        
+
          values. You would also specify either <see
          cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseT61Encoding" />
 
         
 
+        
+
          or <see
          cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseUTF8Encoding" />
+
+        
 
         
 
@@ -135,6 +147,8 @@
              cref="http://msdn.microsoft.com/en-us/library/windows/desktop/aa379394.aspx"
               >X500NameFlags enumeration</see
             >
+
+            
 
             
 

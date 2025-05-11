@@ -25,8 +25,12 @@
 
         
 
+        
+
          object in general contains the details for how a control can connect to another control and the type of data it can share. For a control acting as the consumer in a connection, its connection point must be a <see
          cref="T:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >To create a <see
          cref="T:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint" />
+
+        
 
         
 
@@ -48,13 +54,19 @@
 
             
 
+            
+
              or other server control (any type of server control that will be added to a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
 
             
 
+            
+
              zone can be used) must be able to consume data from a specific interface instance. The control need not implement the interface; only the provider must implement it. The consumer can either work with the exact interface type served by a provider or, if it does not, a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartTransformer" />
+
+            
 
             
 
@@ -68,6 +80,8 @@
 
             
 
+            
+
              class) to the method that receives the interface instance. When the attribute is added, the only required parameter is a display name to use for the consumer connection point. Optional parameters can also be added, such as an ID.</para
           >
         </item>
@@ -78,12 +92,16 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
             <para
               >During a synchronous request, a consumer should request data directly from the provider during or immediately after the <see
                cref="E:System.Web.UI.Control.PreRender" />
+
+              
 
               
 
@@ -98,6 +116,8 @@
 
         
 
+        
+
          field. </para
       >
       <para
@@ -106,8 +126,12 @@
 
         
 
+        
+
          object by calling the <see
          cref="M:System.Web.UI.WebControls.WebParts.WebPartManager.GetConsumerConnectionPoints(System.Web.UI.WebControls.WebParts.WebPart)" />
+
+        
 
         
 
@@ -116,8 +140,12 @@
 
         
 
+        
+
          object in the consumer control. The returned <see
          cref="T:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint" />
+
+        
 
         
 
@@ -126,13 +154,19 @@
 
         
 
+        
+
          object, are all passed to the <see
          cref="M:System.Web.UI.WebControls.WebParts.WebPartManager.ConnectWebParts(System.Web.UI.WebControls.WebParts.WebPart,System.Web.UI.WebControls.WebParts.ProviderConnectionPoint,System.Web.UI.WebControls.WebParts.WebPart,System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint)" />
 
         
 
+        
+
          method to create a new <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartConnection" />
+
+        
 
         
 
@@ -144,6 +178,8 @@
 
         
 
+        
+
          control on a Web page, it provides a run-time UI for users to create connections. If users choose the provider control as the starting point for establishing the connection by clicking its connect verb (they could also choose the consumer; there is no difference in the resulting connection), in the UI they will see a drop-down list control with the display names of the available consumer connection point (or points if there are multiple ones) that the provider can send the data to. Users must select a consumer connection point to establish a connection. </para
       >
       <para
@@ -152,8 +188,12 @@
 
         
 
+        
+
          object associates directly with a specific consumer control, and stores details about a connection in the properties it inherits from the base <see
          cref="T:System.Web.UI.WebControls.WebParts.ConnectionPoint" />
+
+        
 
         
 
@@ -162,8 +202,12 @@
 
         
 
+        
+
          property, a consumer connection point keeps the type of interface it uses. If the provider and consumer in a connection both understand the interface type, the controls are compatible and capable of forming a direct connection. If the provider and consumer cannot work with the same interface type, they are incompatible and must use a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartTransformer" />
+
+        
 
         
 
@@ -172,8 +216,12 @@
 
         
 
+        
+
          property into a type that the consumer can work with. Another important inherited property is the <see
          cref="P:System.Web.UI.WebControls.WebParts.ConnectionPoint.DisplayName" />
+
+        
 
         
 
@@ -182,13 +230,19 @@
 
         
 
+        
+
          property is also useful, as indicated above, because it provides a unique identifier for a consumer connection point in the event that a consumer has multiple connection points. A consumer can have multiple <see
          cref="T:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint" />
 
         
 
+        
+
          objects defined in it, and in this case, when developers add the ConnectionConsumer attribute to a method, they should specify an ID value to distinguish each connection point. One other notable inherited property is the <see
          cref="P:System.Web.UI.WebControls.WebParts.ConnectionPoint.AllowsMultipleConnections" />
+
+        
 
         
 
@@ -200,8 +254,12 @@
 
         
 
+        
+
          class adds several unique methods to the members it inherits from the <see
          cref="T:System.Web.UI.WebControls.WebParts.ConnectionPoint" />
+
+        
 
         
 
@@ -210,8 +268,12 @@
 
         
 
+        
+
          method invokes the consumer's own defined callback method to retrieve the interface instance from the provider. The <see
          cref="M:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint.SupportsConnection(System.Web.UI.Control,System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection)" />
+
+        
 
         
 
@@ -253,8 +315,12 @@
 
             
 
+            
+
              constructor for the <see
              cref="T:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint" />
+
+            
 
             
 
@@ -267,13 +333,19 @@
 
             
 
+            
+
              constructor to create your own instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint" />
 
             
 
+            
+
              class. However, in cases where you are simply establishing a connection and not extending the class, you should call the <see
              cref="M:System.Web.UI.WebControls.WebParts.WebPartManager.GetConsumerConnectionPoints(System.Web.UI.WebControls.WebParts.WebPart)" />
+
+            
 
             
 
@@ -288,11 +360,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,8 +403,12 @@
 
             
 
+            
+
              method is called by <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartConnection" />
+
+            
 
             
 
@@ -337,6 +417,8 @@
           <para
             >The consumer control in a connection must be able to work with the same type of interface as the provider. If it does not, the controls are incompatible and a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartTransformer" />
+
+            
 
             
 
@@ -352,10 +434,14 @@
 
           
 
+          
+
           The consumer control associated with a consumer connection point.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

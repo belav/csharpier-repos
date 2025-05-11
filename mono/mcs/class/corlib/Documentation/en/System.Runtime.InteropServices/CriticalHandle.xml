@@ -31,8 +31,12 @@
 
         
 
+        
+
          class is similar to the <see
          cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+        
 
         
 
@@ -41,13 +45,19 @@
 
         
 
+        
+
          implements reference counting. You can use <see
          cref="T:System.Runtime.InteropServices.CriticalHandle" />
 
         
 
+        
+
          instead of <see
          cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+        
 
         
 
@@ -59,13 +69,19 @@
 
         
 
+        
+
          class does not perform reference counting, it does not provide protection from handle recycling security attacks. Because the reference counting algorithm implicitly serializes operations, a certain amount of thread safety is also lost. If you call the <see
          cref="M:System.IDisposable.Dispose" />
 
         
 
+        
+
          or <see
          cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+
+        
 
         
 
@@ -74,8 +90,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+
+        
 
         
 
@@ -84,8 +104,12 @@
 
         
 
+        
+
          class still provides the guaranteed critical finalization provided by the <see
          cref="T:System.Runtime.ConstrainedExecution.CriticalFinalizerObject" />
+
+        
 
         
 
@@ -131,11 +155,15 @@
 
             
 
+            
+
              class with the specified invalid handle value.</para
           >
         </summary>
         <param name="invalidHandleValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,8 +201,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Dispose" />
+
+            
 
             
 
@@ -183,8 +215,12 @@
 
             
 
+            
+
              class, this will always happen immediately since there is no reference count to indicate that other threads are using this handle. Therefore, you must employ a synchronization mechanism to ensure it is safe to call the <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Close" />
+
+            
 
             
 
@@ -193,8 +229,12 @@
 
             
 
+            
+
              class do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, the class can provide a finalizer that is guaranteed to run before the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -206,8 +246,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Dispose" />
+
+            
 
             
 
@@ -216,13 +260,19 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Close" />
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -234,8 +284,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Dispose" />
+
+            
 
             
 
@@ -244,13 +298,19 @@
 
             
 
+            
+
              object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
 
             
 
+            
+
              object's <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Finalize" />
+
+            
 
             
 
@@ -293,8 +353,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Dispose" />
+
+            
 
             
 
@@ -303,8 +367,12 @@
 
             
 
+            
+
              class, this will always happen immediately since there is no reference count to indicate that other threads are using this handle. Therefore, you must employ a synchronization mechanism to ensure it is safe to call the <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Dispose" />
+
+            
 
             
 
@@ -313,8 +381,12 @@
 
             
 
+            
+
              class do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, the class can provide a finalizer that is guaranteed to run before the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -326,8 +398,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Dispose" />
+
+            
 
             
 
@@ -336,13 +412,19 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Close" />
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -354,8 +436,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Dispose" />
+
+            
 
             
 
@@ -364,13 +450,19 @@
 
             
 
+            
+
              object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
 
             
 
+            
+
              object's <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Finalize" />
+
+            
 
             
 
@@ -382,6 +474,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -422,8 +516,12 @@
 
             
 
+            
+
              method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -438,11 +536,15 @@
 
             
 
+            
+
              class specifying whether to perform a normal dispose operation.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -480,8 +582,12 @@
 
             
 
+            
+
              method is the destructor for the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -544,8 +650,12 @@
 
             
 
+            
+
              method returns a value indicating whether the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -554,8 +664,12 @@
 
             
 
+            
+
              property, which computes whether a given handle is always considered invalid. The <see
              cref="P:System.Runtime.InteropServices.CriticalHandle.IsClosed" />
+
+            
 
             
 
@@ -569,6 +683,8 @@
 
                 
 
+                
+
                  method was called.</para
               >
             </item>
@@ -579,13 +695,19 @@
 
                 
 
+                
+
                  method or <see
                  cref="M:System.Runtime.InteropServices.CriticalHandle.Close" />
 
                 
 
+                
+
                  method was called and there are no references to the <see
                  cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+                
 
                 
 
@@ -627,6 +749,8 @@
 
             
 
+            
+
              property so that the common language runtime can determine whether critical finalization is required. Derived classes must provide an implementation that suits the general type of handle they support (0 or -1 is invalid). These classes can then be further derived for specific safe handle types.</para
           >
           <para
@@ -635,8 +759,12 @@
 
             
 
+            
+
              property, which reports whether the <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -645,8 +773,12 @@
 
             
 
+            
+
              property calculates whether the given handle value is always considered invalid. Therefore, the <see
              cref="P:System.Runtime.InteropServices.CriticalHandle.IsInvalid" />
+
+            
 
             
 
@@ -689,8 +821,12 @@
 
             
 
+            
+
              method is guaranteed to be called only once, provided that you employ proper synchronization mechanisms to ensure that only one call to the <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.Close" />
+
+            
 
             
 
@@ -699,8 +835,12 @@
 
             
 
+            
+
              method is made. The <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.ReleaseHandle" />
+
+            
 
             
 
@@ -709,8 +849,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Runtime.InteropServices.CriticalHandle.IsClosed" />
+
+            
 
             
 
@@ -719,8 +863,12 @@
 
             
 
+            
+
              derived classes to execute any code that is required to free the handle. Because one of the functions of <see
              cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+            
 
             
 
@@ -729,8 +877,12 @@
 
             
 
+            
+
              must never fail. The garbage collector calls <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.ReleaseHandle" />
+
+            
 
             
 
@@ -739,13 +891,19 @@
 
             
 
+            
+
              method. In particular, apply the <see
              cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
 
             
 
+            
+
              attribute to any methods you call from <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.ReleaseHandle" />
+
+            
 
             
 
@@ -759,10 +917,14 @@
 
             
 
+            
+
              method returns false for any reason, it generates a <format
              type="text/html">
               <a href="44cd98ba-95e5-40a1-874d-e8e163612c51">ReleaseHandleFailed</a>
             </format>
+
+            
 
             
 
@@ -780,6 +942,8 @@
              type="text/html">
               <a href="44cd98ba-95e5-40a1-874d-e8e163612c51">ReleaseHandleFailed</a>
             </format>
+
+            
 
             
 
@@ -820,6 +984,8 @@
 
             
 
+            
+
              method only if you need to support a pre-existing handle (for example, if the handle is returned in a structure) because the .NET Framework COM interop infrastructure does not support marshaling handles in a structure.</para
           >
         </remarks>
@@ -829,6 +995,8 @@
         </summary>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -866,8 +1034,12 @@
 
             
 
+            
+
              method only when you know that your handle is invalid and you want to mark it as such. Doing so does not change the value of the <see
              cref="F:System.Runtime.InteropServices.CriticalHandle.handle" />
+
+            
 
             
 
@@ -879,8 +1051,12 @@
 
             
 
+            
+
              method, use <see
              cref="M:System.Runtime.InteropServices.CriticalHandle.SetHandleAsInvalid" />
+
+            
 
             
 

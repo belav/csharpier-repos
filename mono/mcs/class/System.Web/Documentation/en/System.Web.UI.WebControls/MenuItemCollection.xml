@@ -29,8 +29,12 @@
 
         
 
+        
+
          class is used to store and manage a collection of <see
          cref="T:System.Web.UI.WebControls.MenuItem" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          control. The <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          class to store its root menu items in the <see
          cref="P:System.Web.UI.WebControls.Menu.Items" />
+
+        
 
         
 
@@ -59,8 +71,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Web.UI.WebControls.MenuItem" />
+
+        
 
         
 
@@ -69,6 +85,8 @@
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+        
 
         
 
@@ -82,8 +100,12 @@
 
             
 
+            
+
              indexer to directly retrieve a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -97,6 +119,8 @@
 
             
 
+            
+
              method to create an enumerator that can be used to iterate through the collection.</para
           >
         </item>
@@ -104,6 +128,8 @@
           <para
             >Use the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.CopyTo(System.Array,System.Int32)" />
+
+            
 
             
 
@@ -117,8 +143,12 @@
 
         
 
+        
+
          object by adding and removing <see
          cref="T:System.Web.UI.WebControls.MenuItem" />
+
+        
 
         
 
@@ -127,8 +157,12 @@
 
         
 
+        
+
          or the <see
          cref="M:System.Web.UI.WebControls.MenuItemCollection.AddAt(System.Int32,System.Web.UI.WebControls.MenuItem)" />
+
+        
 
         
 
@@ -137,13 +171,19 @@
 
         
 
+        
+
         , the <see
          cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
 
         
 
+        
+
         , or the <see
          cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
+
+        
 
         
 
@@ -156,13 +196,19 @@
 
           
 
+          
+
            control is bound to a data source, the <see
            cref="P:System.Web.UI.WebControls.Menu.Items" />
 
           
 
+          
+
            and <see
            cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
+
+          
 
           
 
@@ -175,8 +221,12 @@
 
         
 
+        
+
          class contains properties and methods that allow you to retrieve information about the collection itself. To find out how many items are in the collection, use the <see
          cref="P:System.Web.UI.WebControls.MenuItemCollection.Count" />
+
+        
 
         
 
@@ -185,8 +235,12 @@
 
         
 
+        
+
          object, use the <see
          cref="M:System.Web.UI.WebControls.MenuItemCollection.Contains(System.Web.UI.WebControls.MenuItem)" />
+
+        
 
         
 
@@ -195,8 +249,12 @@
 
         
 
+        
+
          object in the collection, use the <see
          cref="M:System.Web.UI.WebControls.MenuItemCollection.IndexOf(System.Web.UI.WebControls.MenuItem)" />
+
+        
 
         
 
@@ -208,6 +266,8 @@
       <para
         >Represents a collection of menu items in a <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -230,12 +290,16 @@
 
             
 
+            
+
              class using the default values. This constructor is commonly used when creating a collection of root menu items where a parent menu (or owner) is not required.</para
           >
           <block subset="none" type="note">
             <para
               >When creating a collection of child menu items, you should use the overloaded constructor that takes the <paramref
                name="owner" />
+
+              
 
               
 
@@ -248,8 +312,12 @@
 
             
 
+            
+
              control to initialize the <see
              cref="P:System.Web.UI.WebControls.Menu.Items" />
+
+            
 
             
 
@@ -261,6 +329,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -291,6 +361,8 @@
 
             
 
+            
+
              class using the specified parent menu item (or owner). This constructor is commonly used when creating a collection of child menu items where you need to specify the parent menu item.</para
           >
           <block subset="none" type="note">
@@ -302,8 +374,12 @@
 
             
 
+            
+
              class to initialize the <see
              cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
+
+            
 
             
 
@@ -318,6 +394,8 @@
 
             
 
+            
+
              class using the specified parent menu item (or owner).</para
           >
         </summary>
@@ -326,13 +404,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
+          
+
            that represents the parent menu item of the current <see
            cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+          
 
           
 
@@ -365,8 +449,12 @@
 
             
 
+            
+
              method to append the specified <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -379,6 +467,8 @@
 
               
 
+              
+
                objects to the collection.</para
             >
           </block>
@@ -388,8 +478,12 @@
 
             
 
+            
+
              object in the collection at a specific index by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.AddAt(System.Int32,System.Web.UI.WebControls.MenuItem)" />
+
+            
 
             
 
@@ -404,8 +498,12 @@
 
             
 
+            
+
              object to the end of the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -417,13 +515,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
+          
+
            to append to the end of the current <see
            cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+          
 
           
 
@@ -457,8 +561,12 @@
 
             
 
+            
+
              method to insert the specified <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -471,6 +579,8 @@
 
               
 
+              
+
                objects to the collection.</para
             >
           </block>
@@ -480,8 +590,12 @@
 
             
 
+            
+
              object to the end of the collection by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.Add(System.Web.UI.WebControls.MenuItem)" />
+
+            
 
             
 
@@ -496,8 +610,12 @@
 
             
 
+            
+
              object in the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -509,8 +627,12 @@
 
           
 
+          
+
           The zero-based index location at which to insert the <see
            cref="T:System.Web.UI.WebControls.MenuItem" />
+
+          
 
           
 
@@ -521,8 +643,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItem" />
+
+          
 
           
 
@@ -550,13 +676,19 @@
 
             
 
+            
+
              method to remove every <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
+            
+
              object from the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -569,8 +701,12 @@
 
               
 
+              
+
                or the <see
                cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
+
+              
 
               
 
@@ -583,6 +719,8 @@
           <para
             >Removes all items from the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -617,8 +755,12 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -627,13 +769,19 @@
 
             
 
+            
+
              object. The <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
+            
+
              and its properties is compared with the passed in value. This method is commonly used to test for the existence of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -648,6 +796,8 @@
 
             
 
+            
+
              object is in the collection.</para
           >
         </summary>
@@ -656,6 +806,8 @@
           <para
             >true if the specified <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -688,8 +840,12 @@
 
             
 
+            
+
              method to copy the contents of the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -698,8 +854,12 @@
 
             
 
+            
+
             . Items are copied starting at the specified index of the target array. With the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -708,11 +868,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >As an alternative, you can also use the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
+
+            
 
             
 
@@ -727,8 +891,12 @@
 
             
 
+            
+
              object to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -737,6 +905,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -771,8 +941,12 @@
 
             
 
+            
+
              method to copy the contents of the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -781,11 +955,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >As an alternative, you can also use the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
+
+            
 
             
 
@@ -800,8 +978,12 @@
 
             
 
+            
+
              object to a compatible one-dimensional array of <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -810,6 +992,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -837,13 +1021,19 @@
 
             
 
+            
+
              property to determine the number of items in a <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
+            
+
              object. This property is commonly used when iterating through a collection to determine the upper bound of the collection. The <see
              cref="P:System.Web.UI.WebControls.MenuItemCollection.Count" />
+
+            
 
             
 
@@ -855,6 +1045,8 @@
           <para
             >Gets the number of menu items contained in the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -886,8 +1078,12 @@
 
             
 
+            
+
              method to create an enumerator that can be easily iterated through to get each item in the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -896,13 +1092,19 @@
 
             
 
+            
+
              property. Use the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              method to move to the next item. If you need to move the enumerator back to the beginning of the collection, use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -915,13 +1117,19 @@
 
               
 
+              
+
                method, you must call the <see
                cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -931,6 +1139,8 @@
           <para
             >As an alternative, you can also use the <see
              cref="Overload:System.Web.UI.WebControls.MenuItemCollection.CopyTo" />
+
+            
 
             
 
@@ -945,6 +1155,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -953,6 +1165,8 @@
           <para
             >An enumerator that can be used to iterate through the items in the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -987,13 +1201,19 @@
 
             
 
+            
+
              method to determine the index of the specified <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
+            
+
              object in the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1011,6 +1231,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </summary>
@@ -1022,8 +1244,12 @@
 
             
 
+            
+
              within the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1052,13 +1278,19 @@
 
             
 
+            
+
              property is used to indicate whether access to the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
+            
+
              object is synchronized (thread safe). This property is derived from the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1070,13 +1302,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1088,6 +1326,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1145,6 +1385,8 @@
 
             
 
+            
+
              method to remove the specified menu item from the collection. All items that follow that menu item are then moved up to fill in the vacant position. The indexes of the moved items are also updated.</para
           >
           <block subset="none" type="note">
@@ -1154,8 +1396,12 @@
 
               
 
+              
+
                object can contain null values, as well as duplicate <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -1168,8 +1414,12 @@
 
             
 
+            
+
              method. You can also remove all menu items from the collection by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
+
+            
 
             
 
@@ -1184,8 +1434,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1216,8 +1470,12 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -1230,8 +1488,12 @@
 
               
 
+              
+
                object can contain null values, as well as duplicate <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -1244,13 +1506,19 @@
 
             
 
+            
+
              object by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
 
             
 
+            
+
              method. You can also remove all menu items from the collection by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
+
+            
 
             
 
@@ -1265,8 +1533,12 @@
 
             
 
+            
+
              object at the specified index location from the current <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1275,6 +1547,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1302,8 +1576,12 @@
 
             
 
+            
+
              property provides a synchronized version of the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1316,8 +1594,12 @@
 
               
 
+              
+
                property of this class always returns false, which indicates that the <see
                cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+              
 
               
 
@@ -1330,8 +1612,12 @@
 
             
 
+            
+
              object of the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1340,8 +1626,12 @@
 
             
 
+            
+
              object itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1354,8 +1644,12 @@
 
               
 
+              
+
                object used to store the <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -1369,13 +1663,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1387,6 +1687,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 
@@ -1441,6 +1743,8 @@
 
             
 
+            
+
              object is saving changes to its view state.</para
           >
         </summary>
@@ -1468,6 +1772,8 @@
 
             
 
+            
+
              object's previously saved view state.</para
           >
         </summary>
@@ -1476,8 +1782,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1505,6 +1815,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1513,6 +1825,8 @@
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1540,6 +1854,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -1548,6 +1864,8 @@
           <para
             >Instructs the <see
              cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+
+            
 
             
 

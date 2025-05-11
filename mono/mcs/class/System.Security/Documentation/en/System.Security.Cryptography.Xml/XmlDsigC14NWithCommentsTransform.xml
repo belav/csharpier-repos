@@ -25,6 +25,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -40,11 +42,15 @@
 
         
 
+        
+
          class represents the C14N XML canonicalization transform that describes the canonical form of an XML document.  This transform allows a signer to create a digest using the canonical form of an XML document.  A recipient can then verify the digital signature using the same canonical form of the XML document with the same transform.         </para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          property, which is accessible from the <see
          cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
          property, which is accessible from the <see
          cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          class is defined by the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" />
+
+        
 
         
 
@@ -92,13 +110,19 @@
 
         
 
+        
+
          class is defined by the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigC14NWithCommentsTransformUrl" />
 
         
 
+        
+
          field and the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationWithCommentsUrl" />
+
+        
 
         
 
@@ -133,6 +157,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
+
+            
 
             
 

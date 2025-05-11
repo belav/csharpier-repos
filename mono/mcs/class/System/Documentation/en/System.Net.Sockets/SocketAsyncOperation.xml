@@ -22,8 +22,12 @@
 
         
 
+        
+
          object. The value of the <see
          cref="P:System.Net.Sockets.SocketAsyncEventArgs.LastOperation" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          until the <see
          cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          type is used by the <see
          cref="P:System.Net.Sockets.SocketAsyncEventArgs.LastOperation" />
+
+        
 
         
 

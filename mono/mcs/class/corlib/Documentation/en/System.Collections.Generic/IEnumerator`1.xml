@@ -38,6 +38,8 @@
 
         
 
+        
+
          is the base interface for all generic enumerators.</para
       >
       <para>The foreach statement of the C# language (for each in C++, For Each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
@@ -48,13 +50,19 @@
 
         
 
+        
+
          is undefined. Therefore, you must call <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
+        
+
          to advance the enumerator to the first element of the collection before reading the value of <see
          cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          returns the same object until <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          sets <see
          cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
         
 
+        
+
          passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -98,8 +118,12 @@
 
         
 
+        
+
          also return false. If the last call to <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -108,8 +132,12 @@
 
         
 
+        
+
          is undefined. You cannot set <see
          cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+        
 
         
 
@@ -121,8 +149,12 @@
 
         
 
+        
+
          method is provided for COM interoperability. It does not necessarily need to be implemented; instead, the implementer can simply throw a <see
          cref="T:System.NotSupportedException" />
+
+        
 
         
 
@@ -133,6 +165,8 @@
       <para
         >Default implementations of collections in the <see
          cref="N:System.Collections.Generic" />
+
+        
 
         
 
@@ -168,8 +202,12 @@
 
             
 
+            
+
               is not called before the first call to <see
              cref="P:System.Collections.Generic.IEnumerator&lt;T&gt;.Current" />
+
+            
 
             
 
@@ -182,8 +220,12 @@
 
             
 
+            
+
               returned <see
              langword="false" />
+
+            
 
             
 
@@ -197,6 +239,8 @@
 
             
 
+            
+
              is undefined under any of the following conditions:</para
           >
           <list type="bullet">
@@ -207,8 +251,12 @@
 
                 
 
+                
+
                  must be called to advance the enumerator to the first element of the collection before reading the value of <see
                  cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+                
 
                 
 
@@ -219,6 +267,8 @@
               <para
                 >The last call to <see
                  cref="M:System.Collections.IEnumerator.MoveNext" />
+
+                
 
                 
 
@@ -234,8 +284,12 @@
 
             
 
+            
+
              returns the same object until <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -244,8 +298,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 

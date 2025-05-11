@@ -40,8 +40,12 @@
 
           
 
+          
+
            with a <see
            cref="T:System.Security.Cryptography.CryptoStream" />
+
+          
 
           
 
@@ -50,13 +54,19 @@
 
           
 
+          
+
            object handles the padding issues that can occur when using <see
            cref="T:System.Security.Cryptography.RijndaelManagedTransform" />
 
           
 
+          
+
            directly. For an example, see the <see
            cref="T:System.Security.Cryptography.RijndaelManaged" />
+
+          
 
           
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
           and <see
          cref="Overload:System.Security.Cryptography.RijndaelManaged.CreateDecryptor" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          class that is initialized with the key information of the current <see
          cref="T:System.Security.Cryptography.RijndaelManaged" />
+
+        
 
         
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          object returned by these methods to a <see
          cref="T:System.Security.Cryptography.CryptoStream" />
+
+        
 
         
 
@@ -194,6 +216,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -202,10 +226,14 @@
 
             
 
+            
+
              to be reallocated for other purposes. For more information about Dispose, see <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -217,6 +245,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Security.Cryptography.RijndaelManagedTransform" />
+
+            
 
             
 
@@ -248,8 +278,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Security.Cryptography.RijndaelManagedTransform" />
+
+            
 
             
 
@@ -258,8 +292,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Security.Cryptography.RijndaelManagedTransform" />
+
+            
 
             
 
@@ -273,10 +311,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -289,8 +331,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Security.Cryptography.RijndaelManagedTransform" />
+
+              
 
               
 
@@ -303,6 +349,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Security.Cryptography.RijndaelManagedTransform" />
+
+            
 
             
 
@@ -378,8 +426,12 @@
 
             
 
+            
+
              method is called automatically when you call <see
              cref="M:System.Security.Cryptography.RijndaelManagedTransform.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -388,13 +440,19 @@
 
             
 
+            
+
              method is not called when, for example, the encrypted input data is garbage and cannot be decrypted. In this case, an exception is thrown and <see
              cref="M:System.Security.Cryptography.RijndaelManagedTransform.Reset" />
 
             
 
+            
+
              is not called. You can choose to manually call the <see
              cref="M:System.Security.Cryptography.RijndaelManagedTransform.Reset" />
+
+            
 
             
 
@@ -406,6 +464,8 @@
           <para
             >Resets the internal state of <see
              cref="T:System.Security.Cryptography.RijndaelManagedTransform" />
+
+            
 
             
 
@@ -473,10 +533,14 @@
 
           
 
+          
+
           The input to perform the operation on. </param
         >
         <param name="inputOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -487,6 +551,8 @@
 
           
 
+          
+
           The number of bytes in the input byte array to use as data. </param
         >
         <param name="outputBuffer">
@@ -494,10 +560,14 @@
 
           
 
+          
+
           The output to write the data to. </param
         >
         <param name="outputOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,6 +613,8 @@
 
           
 
+          
+
           The input to perform the operation on.</param
         >
         <param name="inputOffset">
@@ -550,10 +622,14 @@
 
           
 
+          
+
           The offset into the byte array to begin using data from.</param
         >
         <param name="inputCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

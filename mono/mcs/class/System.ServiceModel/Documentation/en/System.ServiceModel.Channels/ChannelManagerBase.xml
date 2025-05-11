@@ -29,13 +29,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.ChannelListenerBase" />
 
         
 
+        
+
          channel manager classes for managing the default timeouts that are associated with the channel factories and listeners. Channels are added to the list maintained by the manager by using one of the <see
          cref="Overload:System.ServiceModel.Channels.ChannelFactoryBase`1.CreateChannel" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
         , which provides the base implementation for custom channels, gets its default communication timeouts for the open, close, send and receive operations from the <see
          cref="T:System.ServiceModel.Channels.ChannelManagerBase" />
+
+        
 
         
 
@@ -57,6 +67,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.Channels.ChannelBase" />
+
+        
 
         
 
@@ -87,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelManagerBase" />
+
+            
 
             
 
@@ -232,8 +246,12 @@
 
             
 
+            
+
              calls <see
              cref="P:System.ServiceModel.Channels.ChannelManagerBase.DefaultReceiveTimeout" />
+
+            
 
             
 
@@ -271,8 +289,12 @@
 
             
 
+            
+
              calls <see
              cref="P:System.ServiceModel.Channels.ChannelManagerBase.DefaultSendTimeout" />
+
+            
 
             
 

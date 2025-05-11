@@ -9,13 +9,19 @@
 
         
 
+        
+
          namespace contains channels that use the TCP protocol to transport messages and objects to and from remote locations. By default, the TCP channels encode objects and method calls in binary format for transmission, but other encoding and decoding formatter sinks can be specified in the configuration properties of a channel. One of the most important classes of the <see
          cref="N:System.Runtime.Remoting.Channels.Tcp" />
 
         
 
+        
+
          namespace is the <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+        
 
         
 
@@ -30,13 +36,19 @@
 
         
 
+        
+
          class combines the <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpClientChannel" />
 
         
 
+        
+
          class and the <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+        
 
         
 

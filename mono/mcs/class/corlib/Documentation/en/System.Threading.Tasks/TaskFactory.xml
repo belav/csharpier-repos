@@ -22,8 +22,12 @@
 
         
 
+        
+
          class encodes some common <see
          cref="T:System.Threading.Tasks.Task" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          is available through the <see
          cref="P:System.Threading.Tasks.Task.Factory" />
+
+        
 
         
 
@@ -45,6 +53,8 @@
       <para
         >Provides support for creating and scheduling <see
          cref="T:System.Threading.Tasks.Task" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
             
 
+            
+
              instance with a default configuration. The <see
              cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+            
 
             
 
@@ -83,8 +97,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+
+            
 
             
 
@@ -93,13 +111,19 @@
 
             
 
+            
+
             , and the <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
+            
+
              property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -111,6 +135,8 @@
           <para
             >Initializes a <see
              cref="T:System.Threading.Tasks.TaskFactory" />
+
+            
 
             
 
@@ -144,8 +170,12 @@
 
             
 
+            
+
              instance with a default configuration. The <see
              cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+            
 
             
 
@@ -154,8 +184,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+
+            
 
             
 
@@ -164,13 +198,19 @@
 
             
 
+            
+
             , and the <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
+            
+
              property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -185,6 +225,8 @@
 
             
 
+            
+
              instance with the specified configuration.</para
           >
         </summary>
@@ -193,13 +235,19 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
 
           
 
+          
+
            that will be assigned to tasks created by this <see
            cref="T:System.Threading.Tasks.TaskFactory" />
+
+          
 
           
 
@@ -232,8 +280,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Threading.Tasks.TaskCreationOptions.None" />
+
+            
 
             
 
@@ -242,8 +294,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Threading.Tasks.TaskContinuationOptions.None" />
+
+            
 
             
 
@@ -252,13 +308,19 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="scheduler" />
 
             
 
+            
+
             , unless it's null, in which case the property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -273,6 +335,8 @@
 
             
 
+            
+
              instance with the specified configuration.</para
           >
         </summary>
@@ -281,8 +345,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -319,8 +387,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="creationOptions" />
+
+            
 
             
 
@@ -329,8 +401,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -339,8 +415,12 @@
 
             
 
+            
+
              property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -355,6 +435,8 @@
 
             
 
+            
+
              instance with the specified configuration.</para
           >
         </summary>
@@ -363,8 +445,12 @@
 
           
 
+          
+
           The default <see
            cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+          
 
           
 
@@ -375,8 +461,12 @@
 
           
 
+          
+
           The default <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+
+          
 
           
 
@@ -415,8 +505,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="creationOptions" />
+
+            
 
             
 
@@ -425,8 +519,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="continuationOptions" />
+
+            
 
             
 
@@ -435,13 +533,19 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="scheduler" />
 
             
 
+            
+
             , unless it's null, in which case the property is initialized to the current scheduler (see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -456,6 +560,8 @@
 
             
 
+            
+
              instance with the specified configuration.</para
           >
         </summary>
@@ -464,13 +570,19 @@
 
           
 
+          
+
           The default <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
 
           
 
+          
+
            that will be assigned to tasks created by this <see
            cref="T:System.Threading.Tasks.TaskFactory" />
+
+          
 
           
 
@@ -481,8 +593,12 @@
 
           
 
+          
+
           The default <see
            cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+          
 
           
 
@@ -493,8 +609,12 @@
 
           
 
+          
+
           The default <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+
+          
 
           
 
@@ -505,8 +625,12 @@
 
           
 
+          
+
           The default <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -540,8 +664,12 @@
 
             
 
+            
+
              that will be assigned to all tasks created by this factory, unless another <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -614,13 +742,19 @@
 
             
 
+            
+
              method executes the <paramref
              name="continuationAction" />
 
             
 
+            
+
              delegate when all tasks in the <paramref
              name="tasks" />
+
+            
 
             
 
@@ -632,8 +766,12 @@
 
             
 
+            
+
              array are not available to the continuation task through structured exception handling. You can determine which exceptions were thrown by examining the <see
              cref="P:System.Threading.Tasks.Task.Exception" />
+
+            
 
             
 
@@ -642,13 +780,19 @@
 
             
 
+            
+
              array. To use structured exception handling to handle exceptions thrown by tasks in the <paramref
              name="tasks" />
 
             
 
+            
+
              array, call the <see
              cref="M:System.Threading.Tasks.Task.WaitAll(System.Threading.Tasks.Task[])" />
+
+            
 
             
 
@@ -668,6 +812,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationAction">
@@ -675,8 +821,12 @@
 
           
 
+          
+
           The action delegate to execute when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -717,13 +867,19 @@
 
             
 
+            
+
              method executes the <paramref
              name="continuationAction" />
 
             
 
+            
+
              delegate when all tasks in the <paramref
              name="tasks" />
+
+            
 
             
 
@@ -743,10 +899,14 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationAction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -755,10 +915,14 @@
 
           
 
+          
+
            array have completed.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -808,10 +972,14 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationAction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -820,10 +988,14 @@
 
           
 
+          
+
            array have completed.</param
         >
         <param name="continuationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -875,6 +1047,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationAction">
@@ -882,8 +1056,12 @@
 
           
 
+          
+
           The action delegate to execute when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -894,6 +1072,8 @@
 
           
 
+          
+
           The cancellation toke to assign to the new continuation task.</param
         >
         <param name="continuationOptions">
@@ -901,10 +1081,14 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that control the behavior of the new continuation task.</param
         >
         <param name="scheduler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -953,6 +1137,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationAction">
@@ -960,8 +1146,12 @@
 
           
 
+          
+
           The action delegate to execute when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -972,8 +1162,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1023,6 +1217,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationAction">
@@ -1030,8 +1226,12 @@
 
           
 
+          
+
           The action delegate to execute when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1042,6 +1242,8 @@
 
           
 
+          
+
           The cancellation token to assign to the new continuation task.</param
         >
         <typeparam name="TAntecedentResult">
@@ -1049,8 +1251,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1103,6 +1309,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationAction">
@@ -1110,8 +1318,12 @@
 
           
 
+          
+
           The action delegate to execute when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1122,6 +1334,8 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported. </param
         >
         <typeparam name="TAntecedentResult">
@@ -1129,8 +1343,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1185,6 +1403,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationAction">
@@ -1192,8 +1412,12 @@
 
           
 
+          
+
           The action delegate to execute when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1204,10 +1428,14 @@
 
           
 
+          
+
           The cancellation token to assign to the new continuation task.</param
         >
         <param name="continuationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1218,6 +1446,8 @@
 
           
 
+          
+
           The object that is used to schedule the new continuation task.</param
         >
         <typeparam name="TAntecedentResult">
@@ -1225,8 +1455,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1275,6 +1509,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationFunction">
@@ -1282,8 +1518,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1294,8 +1534,12 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
+
+          
 
           
 
@@ -1345,6 +1589,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationFunction">
@@ -1352,8 +1598,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1364,6 +1614,8 @@
 
           
 
+          
+
           The cancellation token to assign to the new continuation task.</param
         >
         <typeparam name="TResult">
@@ -1371,8 +1623,12 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
+
+          
 
           
 
@@ -1425,6 +1681,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationFunction">
@@ -1432,8 +1690,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1444,6 +1706,8 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported. </param
         >
         <typeparam name="TResult">
@@ -1451,8 +1715,12 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
+
+          
 
           
 
@@ -1507,6 +1775,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationFunction">
@@ -1514,8 +1784,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1526,10 +1800,14 @@
 
           
 
+          
+
           The cancellation token to assign to the new continuation task.</param
         >
         <param name="continuationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1540,6 +1818,8 @@
 
           
 
+          
+
           The object that is used to schedule the new continuation task.</param
         >
         <typeparam name="TResult">
@@ -1547,8 +1827,12 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
+
+          
 
           
 
@@ -1598,6 +1882,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationFunction">
@@ -1605,8 +1891,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1617,8 +1907,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1629,8 +1923,12 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
+
+          
 
           
 
@@ -1681,6 +1979,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationFunction">
@@ -1688,8 +1988,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1700,6 +2004,8 @@
 
           
 
+          
+
           The cancellation token to assign to the new continuation task.</param
         >
         <typeparam name="TAntecedentResult">
@@ -1707,8 +2013,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1719,8 +2029,12 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
+
+          
 
           
 
@@ -1774,6 +2088,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationFunction">
@@ -1781,8 +2097,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1793,6 +2113,8 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported. </param
         >
         <typeparam name="TAntecedentResult">
@@ -1800,8 +2122,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1812,8 +2138,12 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
+
+          
 
           
 
@@ -1869,6 +2199,8 @@
 
           
 
+          
+
           The array of tasks from which to continue.</param
         >
         <param name="continuationFunction">
@@ -1876,8 +2208,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when all tasks in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1888,10 +2224,14 @@
 
           
 
+          
+
           The cancellation token to assign to the new continuation task.</param
         >
         <param name="continuationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1902,6 +2242,8 @@
 
           
 
+          
+
           The object that is used to schedule the new continuation task.</param
         >
         <typeparam name="TAntecedentResult">
@@ -1909,8 +2251,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -1921,8 +2267,12 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
+
+          
 
           
 
@@ -1963,6 +2313,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -1974,11 +2326,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1989,8 +2345,12 @@
 
           
 
+          
+
           The action delegate to execute when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2032,6 +2392,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2043,11 +2405,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2058,8 +2424,12 @@
 
           
 
+          
+
           The action delegate to execute when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2070,8 +2440,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -2115,8 +2489,12 @@
 
             
 
+            
+
             , which constrain for which <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -2131,6 +2509,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2142,11 +2522,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2157,8 +2541,12 @@
 
           
 
+          
+
           The action delegate to execute when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2169,13 +2557,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
           
 
+          
+
            value that controls the behavior of the created continuation <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2222,6 +2616,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2233,11 +2629,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2248,8 +2648,12 @@
 
           
 
+          
+
           The action delegate to execute when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2260,8 +2664,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -2272,13 +2680,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
           
 
+          
+
            value that controls the behavior of the created continuation <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2289,13 +2703,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
+          
+
            that is used to schedule the created continuation <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2339,6 +2759,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2350,11 +2772,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2365,8 +2791,12 @@
 
           
 
+          
+
           The action delegate to execute when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2377,8 +2807,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2423,6 +2857,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2434,11 +2870,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2449,8 +2889,12 @@
 
           
 
+          
+
           The action delegate to execute when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2461,8 +2905,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -2473,8 +2921,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2521,8 +2973,12 @@
 
             
 
+            
+
             , which constrain for which <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -2537,6 +2993,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2548,11 +3006,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2563,8 +3025,12 @@
 
           
 
+          
+
           The action delegate to execute when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2575,13 +3041,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
           
 
+          
+
            value that controls the behavior of the created continuation <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2592,8 +3064,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2642,8 +3118,12 @@
 
             
 
+            
+
             , which constrain for which <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -2658,6 +3138,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2669,11 +3151,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2684,8 +3170,12 @@
 
           
 
+          
+
           The action delegate to execute when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2696,8 +3186,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -2708,13 +3202,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
           
 
+          
+
            value that controls the behavior of the created continuation <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -2725,13 +3225,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
+          
+
            that is used to schedule the created continuation <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -2742,8 +3248,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2787,6 +3297,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2798,11 +3310,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2813,8 +3329,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2825,13 +3345,19 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
 
           
 
+          
+
            delegate and associated with the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -2876,6 +3402,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -2887,11 +3415,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2902,8 +3434,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -2914,8 +3450,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -2926,13 +3466,19 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
 
           
 
+          
+
            delegate and associated with the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -2979,8 +3525,12 @@
 
             
 
+            
+
             , which constrain for which <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -2995,6 +3545,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -3006,11 +3558,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3021,8 +3577,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3033,13 +3593,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
           
 
+          
+
            value that controls the behavior of the created continuation <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3050,13 +3616,19 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
 
           
 
+          
+
            delegate and associated with the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3105,8 +3677,12 @@
 
             
 
+            
+
             , which constrain for which <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -3121,6 +3697,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -3132,11 +3710,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3147,8 +3729,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3159,8 +3745,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -3171,13 +3761,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
           
 
+          
+
            value that controls the behavior of the created continuation <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3188,13 +3784,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
+          
+
            that is used to schedule the created continuation <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3205,13 +3807,19 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
 
           
 
+          
+
            delegate and associated with the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3256,6 +3864,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -3267,11 +3877,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3282,8 +3896,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3294,8 +3912,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3306,13 +3928,19 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
 
           
 
+          
+
            delegate and associated with the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3358,6 +3986,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -3369,11 +3999,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3384,8 +4018,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3396,8 +4034,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -3408,8 +4050,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3420,13 +4066,19 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
 
           
 
+          
+
            delegate and associated with the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3474,8 +4126,12 @@
 
             
 
+            
+
             , which constrain for which <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -3490,6 +4146,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -3501,11 +4159,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3516,8 +4178,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3528,13 +4194,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
           
 
+          
+
            value that controls the behavior of the created continuation <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3545,8 +4217,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3557,13 +4233,19 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
 
           
 
+          
+
            delegate and associated with the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3613,8 +4295,12 @@
 
             
 
+            
+
             , which constrain for which <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -3629,6 +4315,8 @@
 
             
 
+            
+
              that will be started upon the completion of any Task in the provided set.</para
           >
         </summary>
@@ -3640,11 +4328,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tasks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3655,8 +4347,12 @@
 
           
 
+          
+
           The function delegate to execute asynchronously when one task in the <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3667,8 +4363,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -3679,13 +4379,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
           
 
+          
+
            value that controls the behavior of the created continuation <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3696,13 +4402,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
+          
+
            that is used to schedule the created continuation <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3713,8 +4425,12 @@
 
           
 
+          
+
           The type of the result of the antecedent <paramref
            name="tasks" />
+
+          
 
           
 
@@ -3725,13 +4441,19 @@
 
           
 
+          
+
           The type of the result that is returned by the <paramref
            name="continuationFunction" />
 
           
 
+          
+
            delegate and associated with the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -3797,8 +4519,12 @@
 
               
 
+              
+
                overloads that take an <paramref
                name="asyncResult" />
+
+              
 
               
 
@@ -3807,13 +4533,19 @@
 
               
 
+              
+
                parameter. If performance is an issue, use the overloads that provide the <paramref
                name="beginMethod" />
 
               
 
+              
+
               /<paramref
                name="endMethod" />
+
+              
 
               
 
@@ -3829,8 +4561,12 @@
 
             
 
+            
+
              that executes an end method action when a specified <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -3845,6 +4581,8 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
@@ -3853,8 +4591,12 @@
 
           
 
+          
+
           The IAsyncResult whose completion should trigger the processing of the <paramref
            name="endMethod" />
+
+          
 
           
 
@@ -3865,8 +4607,12 @@
 
           
 
+          
+
           The action delegate that processes the completed <paramref
            name="asyncResult" />
+
+          
 
           
 
@@ -3907,13 +4653,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on.  This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -3928,6 +4680,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -3939,11 +4693,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3954,6 +4712,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="state">
@@ -3961,8 +4721,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4001,8 +4765,12 @@
 
               
 
+              
+
                overloads that take an <paramref
                name="asyncResult" />
+
+              
 
               
 
@@ -4011,13 +4779,19 @@
 
               
 
+              
+
                parameter. If performance is an issue, use the overloads that provide the <paramref
                name="beginMethod" />
 
               
 
+              
+
               /<paramref
                name="endMethod" />
+
+              
 
               
 
@@ -4033,8 +4807,12 @@
 
             
 
+            
+
              that executes an end method action when a specified <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -4049,6 +4827,8 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
@@ -4057,8 +4837,12 @@
 
           
 
+          
+
           The IAsyncResult whose completion should trigger the processing of the <paramref
            name="endMethod" />
+
+          
 
           
 
@@ -4069,8 +4853,12 @@
 
           
 
+          
+
           The action delegate that processes the completed <paramref
            name="asyncResult" />
+
+          
 
           
 
@@ -4081,8 +4869,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -4124,8 +4916,12 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
+
+            
 
             
 
@@ -4134,8 +4930,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Threading.Tasks.TaskCreationOptions" />
+
+            
 
             
 
@@ -4144,8 +4944,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Threading.Tasks.TaskCreationOptions.LongRunning" />
+
+            
 
             
 
@@ -4154,8 +4958,12 @@
 
             
 
+            
+
              are all mutually exclusive. In the FromAsync methods, either LongRunning or AttachedToParent by themselves will cause an <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -4170,6 +4978,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -4181,11 +4991,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4196,6 +5010,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="state">
@@ -4203,8 +5019,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4215,8 +5035,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -4256,8 +5080,12 @@
 
               
 
+              
+
                overloads that take an <paramref
                name="asyncResult" />
+
+              
 
               
 
@@ -4266,13 +5094,19 @@
 
               
 
+              
+
                parameter. If performance is an issue, use the overloads that provide the <paramref
                name="beginMethod" />
 
               
 
+              
+
               /<paramref
                name="endMethod" />
+
+              
 
               
 
@@ -4288,8 +5122,12 @@
 
             
 
+            
+
              that executes an end method action when a specified <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -4304,6 +5142,8 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
@@ -4312,8 +5152,12 @@
 
           
 
+          
+
           The IAsyncResult whose completion should trigger the processing of the <paramref
            name="endMethod" />
+
+          
 
           
 
@@ -4324,8 +5168,12 @@
 
           
 
+          
+
           The action delegate that processes the completed <paramref
            name="asyncResult" />
+
+          
 
           
 
@@ -4336,8 +5184,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -4348,8 +5200,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -4394,13 +5250,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -4415,6 +5277,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -4426,11 +5290,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4441,6 +5309,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -4448,8 +5318,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4460,8 +5334,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4472,8 +5350,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4519,13 +5401,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -4540,6 +5428,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -4551,11 +5441,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4566,6 +5460,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -4573,8 +5469,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4585,8 +5485,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4597,8 +5501,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -4609,8 +5517,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4651,8 +5563,12 @@
 
               
 
+              
+
                overloads that take an <paramref
                name="asyncResult" />
+
+              
 
               
 
@@ -4661,13 +5577,19 @@
 
               
 
+              
+
                parameter. If performance is an issue, use the overloads that provide the <paramref
                name="beginMethod" />
 
               
 
+              
+
               /<paramref
                name="endMethod" />
+
+              
 
               
 
@@ -4683,8 +5605,12 @@
 
             
 
+            
+
              that executes an end method function when a specified <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -4699,6 +5625,8 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
@@ -4707,8 +5635,12 @@
 
           
 
+          
+
           The IAsyncResult whose completion should trigger the processing of the <paramref
            name="endMethod" />
+
+          
 
           
 
@@ -4719,8 +5651,12 @@
 
           
 
+          
+
           The function delegate that processes the completed <paramref
            name="asyncResult" />
+
+          
 
           
 
@@ -4731,8 +5667,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -4776,6 +5716,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4784,6 +5726,8 @@
           <para
             >Creates a <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -4798,11 +5742,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4813,6 +5761,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="state">
@@ -4820,8 +5770,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -4832,8 +5786,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -4875,8 +5833,12 @@
 
               
 
+              
+
                overloads that take an <paramref
                name="asyncResult" />
+
+              
 
               
 
@@ -4885,13 +5847,19 @@
 
               
 
+              
+
                parameter. If performance is an issue, use the overloads that provide the <paramref
                name="beginMethod" />
 
               
 
+              
+
               /<paramref
                name="endMethod" />
+
+              
 
               
 
@@ -4907,8 +5875,12 @@
 
             
 
+            
+
              that executes an end method function when a specified <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -4923,6 +5895,8 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
@@ -4931,8 +5905,12 @@
 
           
 
+          
+
           The IAsyncResult whose completion should trigger the processing of the <paramref
            name="endMethod" />
+
+          
 
           
 
@@ -4943,8 +5921,12 @@
 
           
 
+          
+
           The function delegate that processes the completed <paramref
            name="asyncResult" />
+
+          
 
           
 
@@ -4955,8 +5937,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -4967,8 +5953,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -5013,6 +6003,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5021,6 +6013,8 @@
           <para
             >Creates a <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -5035,11 +6029,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5050,6 +6048,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="state">
@@ -5057,8 +6057,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5069,8 +6073,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -5081,8 +6089,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -5125,8 +6137,12 @@
 
               
 
+              
+
                overloads that take an <paramref
                name="asyncResult" />
+
+              
 
               
 
@@ -5135,13 +6151,19 @@
 
               
 
+              
+
                parameter. If performance is an issue, use the overloads that provide the <paramref
                name="beginMethod" />
 
               
 
+              
+
               /<paramref
                name="endMethod" />
+
+              
 
               
 
@@ -5157,8 +6179,12 @@
 
             
 
+            
+
              that executes an end method function when a specified <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -5173,6 +6199,8 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
@@ -5181,8 +6209,12 @@
 
           
 
+          
+
           The IAsyncResult whose completion should trigger the processing of the <paramref
            name="endMethod" />
+
+          
 
           
 
@@ -5193,8 +6225,12 @@
 
           
 
+          
+
           The function delegate that processes the completed <paramref
            name="asyncResult" />
+
+          
 
           
 
@@ -5205,8 +6241,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -5217,8 +6257,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
+
+          
 
           
 
@@ -5229,8 +6273,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -5277,13 +6325,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -5298,6 +6352,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -5309,11 +6365,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5324,6 +6384,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -5331,8 +6393,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5343,8 +6409,12 @@
 
           
 
+          
+
           The second argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5355,8 +6425,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5367,8 +6441,12 @@
 
           
 
+          
+
           The type of the second argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5379,8 +6457,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5428,13 +6510,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -5449,6 +6537,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -5460,11 +6550,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5475,6 +6569,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -5482,8 +6578,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5494,8 +6594,12 @@
 
           
 
+          
+
           The second argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5506,8 +6610,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5518,8 +6626,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -5530,8 +6642,12 @@
 
           
 
+          
+
           The type of the second argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5542,8 +6658,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5589,13 +6709,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -5610,6 +6736,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -5621,11 +6749,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5636,6 +6768,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -5643,8 +6777,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5655,8 +6793,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5667,8 +6809,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5679,8 +6825,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -5727,13 +6877,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -5748,6 +6904,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -5759,11 +6917,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5774,6 +6936,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -5781,8 +6945,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5793,8 +6961,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5805,8 +6977,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -5817,8 +6993,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5829,8 +7009,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -5879,13 +7063,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -5900,6 +7090,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -5911,11 +7103,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5926,6 +7122,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -5933,8 +7131,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5945,8 +7147,12 @@
 
           
 
+          
+
           The second argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5957,8 +7163,12 @@
 
           
 
+          
+
           The third argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5969,8 +7179,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5981,8 +7195,12 @@
 
           
 
+          
+
           The type of the second argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -5993,8 +7211,12 @@
 
           
 
+          
+
           The type of the third argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6005,8 +7227,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6056,13 +7282,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -6077,6 +7309,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -6088,11 +7322,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6103,6 +7341,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -6110,8 +7350,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6122,8 +7366,12 @@
 
           
 
+          
+
           The second argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6134,8 +7382,12 @@
 
           
 
+          
+
           The third argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6146,8 +7398,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6158,8 +7414,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -6170,8 +7430,12 @@
 
           
 
+          
+
           The type of the second argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6182,8 +7446,12 @@
 
           
 
+          
+
           The type of the third argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6194,8 +7462,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6243,13 +7515,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -6264,6 +7542,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -6275,11 +7555,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6290,6 +7574,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -6297,8 +7583,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6309,8 +7599,12 @@
 
           
 
+          
+
           The second argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6321,8 +7615,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6333,8 +7631,12 @@
 
           
 
+          
+
           The type of the second argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6345,8 +7647,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6357,8 +7663,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -6407,13 +7717,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -6428,6 +7744,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -6439,11 +7757,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6454,6 +7776,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -6461,8 +7785,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6473,8 +7801,12 @@
 
           
 
+          
+
           The second argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6485,8 +7817,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6497,8 +7833,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -6509,8 +7849,12 @@
 
           
 
+          
+
           The type of the second argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6521,8 +7865,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6533,8 +7881,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -6584,13 +7936,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -6605,6 +7963,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -6616,11 +7976,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6631,6 +7995,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -6638,8 +8004,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6650,8 +8020,12 @@
 
           
 
+          
+
           The second argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6662,8 +8036,12 @@
 
           
 
+          
+
           The third argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6674,8 +8052,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6686,8 +8068,12 @@
 
           
 
+          
+
           The type of the second argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6698,8 +8084,12 @@
 
           
 
+          
+
           The type of the third argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6710,8 +8100,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6722,8 +8116,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -6774,13 +8172,19 @@
 
             
 
+            
+
              delegate is started on the thread that <see
              cref="Overload:System.Threading.Tasks.TaskFactory.FromAsync" />
 
             
 
+            
+
              is running on. This method throws any exceptions thrown by the <paramref
              name="beginMethod" />
+
+            
 
             
 
@@ -6795,6 +8199,8 @@
 
             
 
+            
+
              that represents a pair of begin and end methods that conform to the Asynchronous Programming Model pattern.</para
           >
         </summary>
@@ -6806,11 +8212,15 @@
 
             
 
+            
+
              that represents the asynchronous operation.</para
           >
         </returns>
         <param name="beginMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6821,6 +8231,8 @@
 
           
 
+          
+
           The delegate that ends the asynchronous operation.</param
         >
         <param name="arg1">
@@ -6828,8 +8240,12 @@
 
           
 
+          
+
           The first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6840,8 +8256,12 @@
 
           
 
+          
+
           The second argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6852,8 +8272,12 @@
 
           
 
+          
+
           The third argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6864,8 +8288,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6876,8 +8304,12 @@
 
           
 
+          
+
           The TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -6888,8 +8320,12 @@
 
           
 
+          
+
           The type of the second argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6900,8 +8336,12 @@
 
           
 
+          
+
           The type of the third argument passed to <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6912,8 +8352,12 @@
 
           
 
+          
+
           The type of the first argument passed to the <paramref
            name="beginMethod" />
+
+          
 
           
 
@@ -6924,8 +8368,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -6957,6 +8405,8 @@
           <para
             >If this property value is null, the value of the <see
              cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+
+            
 
             
 
@@ -6997,8 +8447,12 @@
 
             
 
+            
+
              is functionally equivalent to creating a task by using one of its constructors, and then calling the <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -7007,8 +8461,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7017,10 +8475,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7037,6 +8499,8 @@
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7073,8 +8537,12 @@
 
             
 
+            
+
              to schedule it for execution. Starting with the net_v45, you can use the <see
              cref="Overload:System.Threading.Tasks.Task.Run" />
+
+            
 
             
 
@@ -7083,8 +8551,12 @@
 
             
 
+            
+
              object as  a quick way to call <see
              cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" />
+
+            
 
             
 
@@ -7092,6 +8564,8 @@
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7106,6 +8580,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7117,11 +8593,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7132,8 +8612,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -7170,6 +8654,8 @@
 
             
 
+            
+
              to schedule it for execution.</para
           >
           <para
@@ -7178,8 +8664,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7188,10 +8678,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7206,6 +8700,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7217,6 +8713,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -7225,10 +8723,14 @@
 
           
 
+          
+
           The action delegate to execute asynchronously.</param
         >
         <param name="creationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7266,6 +8768,8 @@
 
             
 
+            
+
              to schedule it for execution.</para
           >
           <para
@@ -7274,8 +8778,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7284,10 +8792,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7302,6 +8814,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7313,11 +8827,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7328,8 +8846,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="action" />
+
+          
 
           
 
@@ -7367,6 +8889,8 @@
 
             
 
+            
+
              to schedule it for execution.</para
           >
           <para
@@ -7375,8 +8899,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7385,10 +8913,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7403,6 +8935,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7414,11 +8948,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7429,8 +8967,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="action" />
+
+          
 
           
 
@@ -7441,8 +8983,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -7481,6 +9027,8 @@
 
             
 
+            
+
              to schedule it for execution.</para
           >
           <para
@@ -7489,8 +9037,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7499,10 +9051,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7517,6 +9073,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7528,11 +9086,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7543,8 +9105,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="action" />
+
+          
 
           
 
@@ -7552,6 +9118,8 @@
         >
         <param name="creationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7591,6 +9159,8 @@
 
             
 
+            
+
              to schedule it for execution.</para
           >
           <para
@@ -7599,8 +9169,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7609,10 +9183,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7627,6 +9205,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7638,11 +9218,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7653,8 +9237,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -7666,6 +9254,8 @@
 
           
 
+          
+
           A TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task" />
         </param>
@@ -7674,13 +9264,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
+          
+
            that is used to schedule the created <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -7720,6 +9316,8 @@
 
             
 
+            
+
              to schedule it for execution.</para
           >
           <para
@@ -7728,8 +9326,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7738,10 +9340,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7756,6 +9362,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7767,11 +9375,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7782,8 +9394,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="action" />
+
+          
 
           
 
@@ -7794,8 +9410,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -7803,6 +9423,8 @@
         >
         <param name="creationOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7814,13 +9436,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
+          
+
            that is used to schedule the created <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -7859,8 +9487,12 @@
 
             
 
+            
+
              using one of its constructors and then calling <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -7872,8 +9504,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7882,10 +9518,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs. Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -7900,6 +9540,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7911,6 +9553,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -7919,8 +9563,12 @@
 
           
 
+          
+
           A function delegate that returns the future result to be available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -7931,8 +9579,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -7972,8 +9624,12 @@
 
             
 
+            
+
              using one of its constructors and then calling <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -7985,8 +9641,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -7995,10 +9655,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs. Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -8013,6 +9677,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8024,6 +9690,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8032,8 +9700,12 @@
 
           
 
+          
+
           A function delegate that returns the future result to be available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8044,8 +9716,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="function" />
+
+          
 
           
 
@@ -8056,8 +9732,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8097,8 +9777,12 @@
 
             
 
+            
+
              using one of its constructors and then calling <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -8110,8 +9794,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -8120,10 +9808,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs. Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -8138,6 +9830,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8149,6 +9843,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8157,8 +9853,12 @@
 
           
 
+          
+
           A function delegate that returns the future result to be available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8169,8 +9869,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -8182,8 +9886,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8223,8 +9931,12 @@
 
             
 
+            
+
              using one of its constructors and then calling <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -8236,8 +9948,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -8246,10 +9962,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs. Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -8264,6 +9984,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8275,6 +9997,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8283,8 +10007,12 @@
 
           
 
+          
+
           A function delegate that returns the future result to be available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8295,8 +10023,12 @@
 
           
 
+          
+
           A TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8307,8 +10039,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8349,8 +10085,12 @@
 
             
 
+            
+
              using one of its constructors and then calling <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -8362,8 +10102,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -8372,10 +10116,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs. Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -8390,6 +10138,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8401,6 +10151,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8409,8 +10161,12 @@
 
           
 
+          
+
           A function delegate that returns the future result to be available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8421,8 +10177,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="function" />
+
+          
 
           
 
@@ -8433,8 +10193,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -8446,8 +10210,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8488,8 +10256,12 @@
 
             
 
+            
+
              using one of its constructors and then calling <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -8501,8 +10273,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -8511,10 +10287,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs. Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -8529,6 +10309,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8540,6 +10322,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8548,8 +10332,12 @@
 
           
 
+          
+
           A function delegate that returns the future result to be available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8560,8 +10348,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="function" />
+
+          
 
           
 
@@ -8572,8 +10364,12 @@
 
           
 
+          
+
           A TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8584,8 +10380,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8627,8 +10427,12 @@
 
             
 
+            
+
              using one of its constructors and then calling <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -8640,8 +10444,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -8650,10 +10458,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs. Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -8668,6 +10480,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8679,6 +10493,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8687,8 +10503,12 @@
 
           
 
+          
+
           A function delegate that returns the future result to be available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8699,8 +10519,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -8711,8 +10535,12 @@
 
           
 
+          
+
           A TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8723,13 +10551,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
+          
+
            that is used to schedule the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8740,8 +10574,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8784,8 +10622,12 @@
 
             
 
+            
+
              using one of its constructors and then calling <see
              cref="M:System.Threading.Tasks.Task.Start" />
+
+            
 
             
 
@@ -8797,8 +10639,12 @@
 
             
 
+            
+
              method with an <see
              cref="System.Action" />
+
+            
 
             
 
@@ -8807,10 +10653,14 @@
 
             
 
+            
+
              with default parameters. For more information and code examples, see the entry <see
              cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs. Task.Factory.StartNew</see
             >
+
+            
 
             
 
@@ -8825,6 +10675,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8836,6 +10688,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8844,8 +10698,12 @@
 
           
 
+          
+
           A function delegate that returns the future result to be available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8856,8 +10714,12 @@
 
           
 
+          
+
           An object containing data to be used by the <paramref
            name="function" />
+
+          
 
           
 
@@ -8868,8 +10730,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Threading.Tasks.TaskFactory.CancellationToken" />
+
+          
 
           
 
@@ -8880,8 +10746,12 @@
 
           
 
+          
+
           A TaskCreationOptions value that controls the behavior of the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8892,13 +10762,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
+          
+
            that is used to schedule the created <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 
@@ -8909,8 +10785,12 @@
 
           
 
+          
+
           The type of the result available through the <see
            cref="T:System.Threading.Tasks.Task`1" />
+
+          
 
           
 

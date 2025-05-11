@@ -39,6 +39,8 @@
 
             
 
+            
+
              class based on supplied parameters.</para
           >
         </summary>
@@ -47,10 +49,14 @@
 
           
 
+          
+
           A string value that specifies the absolute path to a physical directory.</param
         >
         <param name="isAppRoot">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -83,11 +89,15 @@
 
             
 
+            
+
              class based on supplied parameters.</para
           >
         </summary>
         <param name="physicalDirectory">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -98,10 +108,14 @@
 
           
 
+          
+
           A Boolean value that indicates whether the virtual directory is the application root of the Web application.</param
         >
         <param name="configFileBaseName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

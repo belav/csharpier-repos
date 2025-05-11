@@ -56,8 +56,12 @@
 
           
 
+          
+
            for the get or set accessor, by calling the <see
            cref="Overload:System.Reflection.PropertyInfo.GetGetMethod" />
+
+          
 
           
 
@@ -66,8 +70,12 @@
 
           
 
+          
+
            method, and examine its <see
            cref="P:System.Reflection.MethodBase.IsStatic" />
+
+          
 
           
 
@@ -90,13 +98,19 @@
 
         
 
+        
+
          on PropertyInfo when the <paramref
          name="inherit" />
 
         
 
+        
+
          parameter of GetCustomAttributes is true does not walk the type hierarchy. Use <see
          cref="T:System.Attribute" />
+
+        
 
         
 
@@ -137,6 +151,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -171,6 +187,8 @@
           <para
             >A <see
              cref="T:System.Reflection.PropertyAttributes" />
+
+            
 
             
 
@@ -214,6 +232,8 @@
 
             
 
+            
+
              if the
    property reflected by the current instance has a <see
              langword="Get" />
@@ -221,9 +241,13 @@
             
 
             
+
+            
    accessor;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -267,6 +291,8 @@
 
             
 
+            
+
              if the
    property reflected by the current instance has a <see
              langword="Set" />
@@ -274,9 +300,13 @@
             
 
             
+
+            
    accessor;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -326,11 +356,15 @@
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -369,8 +403,12 @@
 
             
 
+            
+
             (<see
              langword="false" />
+
+            
 
             
 
@@ -386,6 +424,8 @@
           <para
             >An array of <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -427,6 +467,8 @@
 
           
 
+          
+
           .</permission
         >
         <remarks>
@@ -445,8 +487,12 @@
 
             
 
+            
+
              objects whose elements reflect the get, set, and other accessors of the property reflected by the current instance. If <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -455,11 +501,15 @@
 
             
 
+            
+
              is false, this array contains only public get, set, and other accessors. If no accessors with the specified visibility are found, this method returns an array with zero (0) elements.</para
           >
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,6 +545,8 @@
 
               
 
+              
+
                method instead.</para
             >
           </block>
@@ -508,10 +560,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -528,6 +584,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -565,6 +623,8 @@
 
             
 
+            
+
              parameter set to false.</para
           >
           <para
@@ -573,8 +633,12 @@
 
             
 
+            
+
             . From the <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -623,8 +687,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -633,8 +701,12 @@
 
           
 
+          
+
            accessor for the property reflected by the current instance is non-public, and the caller does not have <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -643,6 +715,8 @@
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+
+          
 
           
 
@@ -656,6 +730,8 @@
 
             
 
+            
+
              representing the get accessor.</para
           >
           <para
@@ -664,8 +740,12 @@
 
             
 
+            
+
             . From the <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -684,8 +764,12 @@
 
             
 
+            
+
              is true. Returns null if <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -694,11 +778,15 @@
 
             
 
+            
+
              is true but no get accessors exist.</para
           >
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -763,8 +851,12 @@
 
           
 
+          
+
            and <see
            langword="Set" />
+
+          
 
           
 
@@ -773,11 +865,15 @@
 
           
 
+          
+
           .</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+
+          
 
           
 
@@ -849,8 +945,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.PropertyInfo.GetRequiredCustomModifiers" />
+
+            
 
             
 
@@ -859,8 +959,12 @@
 
             
 
+            
+
              and related classes in the <see
              cref="N:System.Runtime.CompilerServices" />
+
+            
 
             
 
@@ -871,10 +975,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -893,13 +1001,19 @@
 
             
 
+            
+
              objects that identify the optional custom modifiers of the current property, such as <see
              cref="T:System.Runtime.CompilerServices.IsConst" />
 
             
 
+            
+
              or <see
              cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />
+
+            
 
             
 
@@ -939,10 +1053,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -959,6 +1077,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -992,8 +1112,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.PropertyInfo.GetRequiredCustomModifiers" />
+
+            
 
             
 
@@ -1002,8 +1126,12 @@
 
             
 
+            
+
              and related classes in the <see
              cref="N:System.Runtime.CompilerServices" />
+
+            
 
             
 
@@ -1014,10 +1142,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1036,13 +1168,19 @@
 
             
 
+            
+
              objects that identify the required custom modifiers of the current property, such as <see
              cref="T:System.Runtime.CompilerServices.IsConst" />
 
             
 
+            
+
              or <see
              cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />
+
+            
 
             
 
@@ -1080,11 +1218,15 @@
 
             
 
+            
+
              parameter set to false.</para
           >
           <para
             >To use the GetSetMethod method, first get the class Type. From the Type, get the <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -1133,8 +1275,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -1143,8 +1289,12 @@
 
           
 
+          
+
            accessor for the property reflected by the current instance is non-public, and the caller does not have <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -1156,6 +1306,8 @@
 
           
 
+          
+
           .</permission
         >
         <remarks>
@@ -1163,6 +1315,8 @@
           <para
             >To use the GetSetMethod method, first get the class Type. From the Type, get the <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -1194,6 +1348,8 @@
 
                   
 
+                  
+
                    object representing the Set method for this property. </para
                 >
               </term>
@@ -1202,6 +1358,8 @@
                 <para>-or- </para>
                 <para>
                   <paramref name="nonPublic" />
+
+                  
 
                   
 
@@ -1219,11 +1377,15 @@
 
                   
 
+                  
+
                    is true, but the property is read-only.</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="nonPublic" />
+
+                  
 
                   
 
@@ -1237,6 +1399,8 @@
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1297,6 +1461,8 @@
 
           
 
+          
+
           The object whose property value will be returned.</param
         >
       </Docs>
@@ -1339,12 +1505,16 @@
 
             
 
+            
+
             does not contain the exact type of arguments needed.</para
           >
           <para> -or-</para>
           <para
             > The <see
              langword="Get" />
+
+            
 
             
 
@@ -1357,8 +1527,12 @@
 
           
 
+          
+
            accessor of the property reflected by the current instance is non-public and the caller does not have <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -1370,8 +1544,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1383,11 +1561,15 @@
 
           
 
+          
+
           .Length does not equal the rank of the indexer.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+          
 
           
 
@@ -1398,6 +1580,8 @@
 
           
 
+          
+
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <remarks>
@@ -1405,6 +1589,8 @@
           <para
             >To determine whether a property is indexed, use the <see
              cref="M:System.Reflection.PropertyInfo.GetIndexParameters" />
+
+            
 
             
 
@@ -1424,8 +1610,12 @@ Console.WriteLine("CurrCult: " +
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1435,6 +1625,8 @@ Console.WriteLine("CurrCult: " +
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1456,10 +1648,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The object whose property value will be returned. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1504,12 +1700,16 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              does not contain the exact type of arguments needed.</para
           >
           <para>-or-</para>
           <para
             >The <see
              langword="Get" />
+
+            
 
             
 
@@ -1522,8 +1722,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            accessor of the property reflected by the current instance is non-public and the caller does not have <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -1535,8 +1739,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1548,11 +1756,15 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           .Length does not equal the rank of the indexer.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+          
 
           
 
@@ -1563,10 +1775,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           A bitwise combination of the following enumeration members that specify the invocation attribute: InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, and SetProperty. You must specify a suitable invocation attribute. For example, to invoke a static member, set the Static flag. </param
         >
         <param name="binder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1575,8 +1791,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1587,10 +1807,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1599,8 +1823,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see
            cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+          
 
           
 
@@ -1611,6 +1839,8 @@ Console.WriteLine("CurrCult: " +
           <para
             >To determine whether a property is indexed, use the <see
              cref="M:System.Reflection.PropertyInfo.GetIndexParameters" />
+
+            
 
             
 
@@ -1629,8 +1859,12 @@ Console.WriteLine("CurrCult: " +
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1640,6 +1874,8 @@ Console.WriteLine("CurrCult: " +
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1661,10 +1897,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The object whose property value will be returned. </param
         >
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1675,13 +1915,19 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1692,10 +1938,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1704,8 +1954,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see
            cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+          
 
           
 
@@ -1768,8 +2022,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
             . Therefore, when you examine a set of <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1778,13 +2036,19 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              — the <see
              cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
+            
+
              property returns <see
              cref="F:System.Reflection.MemberTypes.Property" />
+
+            
 
             
 
@@ -1798,6 +2062,8 @@ Console.WriteLine("CurrCult: " +
           <para
             >Gets a <see
              cref="T:System.Reflection.MemberTypes" />
+
+            
 
             
 
@@ -1836,6 +2102,8 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -1847,8 +2115,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -1860,10 +2132,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1901,6 +2177,8 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -1912,8 +2190,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -1925,10 +2207,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1958,6 +2244,8 @@ Console.WriteLine("CurrCult: " +
           <para
             > A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2036,10 +2324,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The object whose property value will be set.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2086,12 +2378,16 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              does not contain the exact type of arguments needed.</para
           >
           <para>-or-</para>
           <para
             > The <see
              langword="Set" />
+
+            
 
             
 
@@ -2104,8 +2400,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            accessor of the property reflected by the current instance is non-public and the caller does not have <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -2117,8 +2417,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2130,11 +2434,15 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           .Length does not equal the rank of the indexer.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+          
 
           
 
@@ -2145,10 +2453,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The new property value. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2162,8 +2474,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              object is a value type and <paramref
              name="value" />
+
+            
 
             
 
@@ -2175,6 +2491,8 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              method. If the resulting array has 0 (zero) elements, the property is not indexed.</para
           >
           <para
@@ -2183,8 +2501,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              method, specifying <see
              cref="F:System.Reflection.BindingFlags.Default" />
+
+            
 
             
 
@@ -2193,13 +2515,19 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              parameter, null for <paramref
              name="Binder" />
 
             
 
+            
+
             , and null for <paramref
              name="CultureInfo" />
+
+            
 
             
 
@@ -2211,8 +2539,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              method, first get a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2221,8 +2553,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
             , get the <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -2231,8 +2567,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
             , use the <see
              cref="Overload:System.Reflection.PropertyInfo.SetValue" />
+
+            
 
             
 
@@ -2245,8 +2585,12 @@ Console.WriteLine("CurrCult: " +
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2256,6 +2600,8 @@ Console.WriteLine("CurrCult: " +
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2273,6 +2619,8 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The object whose property value will be set. </param
         >
         <param name="value">
@@ -2280,10 +2628,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The new property value. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2329,10 +2681,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            array does not contain the exact type of arguments needed. <para
 
             >The <see
              langword="Set" />
+
+            
 
             
 
@@ -2345,8 +2701,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2358,8 +2718,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            accessor of the property reflected by the current instance is non-public and the caller does not have <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -2371,6 +2735,8 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           .Length does not equal the rank of the indexer.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
@@ -2379,10 +2745,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           .</permission
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2396,8 +2766,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              object is a value type and <paramref
              name="value" />
+
+            
 
             
 
@@ -2406,6 +2780,8 @@ Console.WriteLine("CurrCult: " +
           <para
             >To determine whether a property is indexed, use the <see
              cref="M:System.Reflection.PropertyInfo.GetIndexParameters" />
+
+            
 
             
 
@@ -2420,8 +2796,12 @@ Console.WriteLine("CurrCult: " +
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2431,6 +2811,8 @@ Console.WriteLine("CurrCult: " +
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2448,10 +2830,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The object whose property value will be set. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2462,10 +2848,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           A bitwise combination of the following enumeration members that specify the invocation attribute: InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. You must specify a suitable invocation attribute. For example, to invoke a static member, set the Static flag. </param
         >
         <param name="binder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2474,8 +2864,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -2486,10 +2880,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2498,8 +2896,12 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
            property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see
            cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+          
 
           
 
@@ -2567,8 +2969,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -2583,8 +2989,12 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -2625,6 +3035,8 @@ Console.WriteLine("CurrCult: " +
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -2637,6 +3049,8 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -2644,10 +3058,14 @@ Console.WriteLine("CurrCult: " +
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

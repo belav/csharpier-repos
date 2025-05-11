@@ -27,8 +27,12 @@
 
         
 
+        
+
          class provides simple methods that listen for and accept incoming connection requests in blocking synchronous mode. You can use either a <see
          cref="T:System.Net.Sockets.TcpClient" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          to connect with a <see
          cref="T:System.Net.Sockets.TcpListener" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          using an <see
          cref="T:System.Net.IPEndPoint" />
+
+        
 
         
 
@@ -57,8 +69,12 @@
 
         
 
+        
+
          for the local IP address and 0 for the local port number if you want the underlying service provider to assign those values for you. If you choose to do this, you can use the <see
          cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
+
+        
 
         
 
@@ -70,8 +86,12 @@
 
         
 
+        
+
          method to begin listening for incoming connection requests. <see
          cref="M:System.Net.Sockets.TcpListener.Start" />
+
+        
 
         
 
@@ -80,8 +100,12 @@
 
         
 
+        
+
          method or it has queued <see
          cref="F:System.Net.Sockets.SocketOptionName.MaxConnections" />
+
+        
 
         
 
@@ -90,13 +114,19 @@
 
         
 
+        
+
          or <see
          cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
         
 
+        
+
          to pull a connection from the incoming connection request queue. These two methods will block. If you want to avoid blocking, you can use the <see
          cref="M:System.Net.Sockets.TcpListener.Pending" />
+
+        
 
         
 
@@ -108,8 +138,12 @@
 
         
 
+        
+
          method to close the <see
          cref="T:System.Net.Sockets.TcpListener" />
+
+        
 
         
 
@@ -119,6 +153,8 @@
         <para
           >The <see
            cref="M:System.Net.Sockets.TcpListener.Stop" />
+
+          
 
           
 
@@ -162,8 +198,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Net.Sockets.TcpListener.#ctor(System.Net.IPEndPoint)" />
+
+            
 
             
 
@@ -175,11 +215,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >Call the <see
              cref="M:System.Net.Sockets.TcpListener.Start" />
+
+            
 
             
 
@@ -194,11 +238,15 @@
 
             
 
+            
+
              class that listens on the specified port.</para
           >
         </summary>
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,13 +279,19 @@
 
             
 
+            
+
              using the desired local IP address and port number. Pass this <see
              cref="T:System.Net.IPEndPoint" />
 
             
 
+            
+
              to the constructor as the <paramref
              name="localEP" />
+
+            
 
             
 
@@ -249,8 +303,12 @@
 
             
 
+            
+
              using <see
              cref="F:System.Net.IPAddress.Any" />
+
+            
 
             
 
@@ -259,8 +317,12 @@
 
             
 
+            
+
              using 0 for the port number. In this case, the service provider will assign an available port number between 1024 and 5000. If you use this approach, you can discover what local network address and port number has been assigned by using the <see
              cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
+
+            
 
             
 
@@ -269,6 +331,8 @@
           <para
             >Call the <see
              cref="M:System.Net.Sockets.TcpListener.Start" />
+
+            
 
             
 
@@ -285,6 +349,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -297,6 +363,8 @@
 
             
 
+            
+
              class with the specified local endpoint.</para
           >
         </summary>
@@ -305,13 +373,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPEndPoint" />
 
           
 
+          
+
            that represents the local endpoint to which to bind the listener <see
            cref="T:System.Net.Sockets.Socket" />
+
+          
 
           
 
@@ -348,8 +422,12 @@
 
             
 
+            
+
              using the desired local address. Pass this <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -358,8 +436,12 @@
 
             
 
+            
+
              parameter. If you do not care which local address is assigned, specify <see
              cref="F:System.Net.IPAddress.Any" />
+
+            
 
             
 
@@ -368,8 +450,12 @@
 
             
 
+            
+
              parameter, and the underlying service provider will assign the most appropriate network address. This might help simplify your application if you have multiple network interfaces. If you do not care which local port is used, you can specify 0 for the port number. In this case, the service provider will assign an available port number between 1024 and 5000. If you use this approach, you can discover what local network address and port number has been assigned by using the <see
              cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
+
+            
 
             
 
@@ -378,6 +464,8 @@
           <para
             >Call the <see
              cref="M:System.Net.Sockets.TcpListener.Start" />
+
+            
 
             
 
@@ -394,6 +482,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -406,6 +496,8 @@
 
             
 
+            
+
              class that listens for incoming connection attempts on the specified local IP address and port number.</para
           >
         </summary>
@@ -414,8 +506,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -423,6 +519,8 @@
         >
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,13 +552,19 @@
 
             
 
+            
+
              is a blocking method that returns a <see
              cref="T:System.Net.Sockets.Socket" />
 
             
 
+            
+
              that you can use to send and receive data. If you want to avoid blocking, use the <see
              cref="M:System.Net.Sockets.TcpListener.Pending" />
+
+            
 
             
 
@@ -472,8 +576,12 @@
 
             
 
+            
+
              returned is initialized with the IP address and port number of the remote host. You can use any of the <see
              cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
+
+            
 
             
 
@@ -482,8 +590,12 @@
 
             
 
+            
+
              methods available in the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -492,8 +604,12 @@
 
             
 
+            
+
             , be sure to call its <see
              cref="M:System.Net.Sockets.Socket.Close" />
+
+            
 
             
 
@@ -502,13 +618,19 @@
 
             
 
+            
+
              method rather than the <see
              cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
+            
+
              method. <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -525,6 +647,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -538,6 +662,8 @@
           <para
             >A <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -572,6 +698,8 @@
 
             
 
+            
+
               object will complete after the socket connection has been accepted.</para
           >
           <para
@@ -580,8 +708,12 @@
 
             
 
+            
+
              returned in <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -590,8 +722,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.Sockets.Socket.Receive(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
+
+            
 
             
 
@@ -600,8 +736,12 @@
 
             
 
+            
+
              class to communicate with the remote host. When you are finished using the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -610,8 +750,12 @@
 
             
 
+            
+
              method. If your application is relatively simple, consider using the <see
              cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+
+            
 
             
 
@@ -620,8 +764,12 @@
 
             
 
+            
+
              method. <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -635,6 +783,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -658,8 +808,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -695,13 +849,19 @@
 
             
 
+            
+
              is a blocking method that returns a <see
              cref="T:System.Net.Sockets.TcpClient" />
 
             
 
+            
+
              that you can use to send and receive data. Use the <see
              cref="M:System.Net.Sockets.TcpListener.Pending" />
+
+            
 
             
 
@@ -713,8 +873,12 @@
 
             
 
+            
+
              method to obtain the underlying <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -723,8 +887,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -733,8 +901,12 @@
 
             
 
+            
+
             , be sure to call its <see
              cref="M:System.Net.Sockets.TcpClient.Close" />
+
+            
 
             
 
@@ -743,8 +915,12 @@
 
             
 
+            
+
              offers, consider using <see
              cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+
+            
 
             
 
@@ -761,6 +937,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -774,6 +952,8 @@
           <para
             >A <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -808,6 +988,8 @@
 
             
 
+            
+
               object will complete after the TCP connection has been accepted.</para
           >
           <para
@@ -816,8 +998,12 @@
 
             
 
+            
+
              method to obtain the underlying <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -826,8 +1012,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -836,8 +1026,12 @@
 
             
 
+            
+
              will provide you with methods for sending and receiving with the remote host. When you are through with the <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -846,8 +1040,12 @@
 
             
 
+            
+
              method. If you want greater flexibility than a <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -856,8 +1054,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Net.Sockets.TcpListener.AcceptSocketAsync" />
+
+            
 
             
 
@@ -871,6 +1073,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -894,8 +1098,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -926,8 +1134,12 @@
 
             
 
+            
+
              can use this property to determine if the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -936,8 +1148,12 @@
 
             
 
+            
+
              property can be used to avoid redundant <see
              cref="M:System.Net.Sockets.TcpListener.Start" />
+
+            
 
             
 
@@ -949,6 +1165,8 @@
           <para
             >Gets a value that indicates whether <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -987,8 +1205,12 @@
 
             
 
+            
+
              operation must be completed by calling the <see
              cref="M:System.Net.Sockets.TcpListener.EndAcceptSocket(System.IAsyncResult)" />
+
+            
 
             
 
@@ -997,11 +1219,15 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
             >This method does not block until the operation completes. To block until the operation completes, use the <see
              cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+
+            
 
             
 
@@ -1015,6 +1241,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -1024,8 +1252,12 @@
 
               
 
+              
+
                property of the returned <see
                cref="T:System.Net.Sockets.Socket" />
+
+              
 
               
 
@@ -1039,13 +1271,19 @@
 
               
 
+              
+
               , use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
+              
+
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
                cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+
+              
 
               
 
@@ -1060,6 +1298,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -1079,8 +1319,12 @@
 
             
 
+            
+
              that references the asynchronous creation of the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1092,8 +1336,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1104,8 +1352,12 @@
 
           
 
+          
+
           A user-defined object containing information about the accept operation. This object is passed to the <paramref
            name="callback" />
+
+          
 
           
 
@@ -1143,8 +1395,12 @@
 
             
 
+            
+
              operation must be completed by calling the <see
              cref="M:System.Net.Sockets.TcpListener.EndAcceptTcpClient(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1153,11 +1409,15 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
             >This method does not block until the operation completes. To block until the operation completes, use the <see
              cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+
+            
 
             
 
@@ -1171,6 +1431,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -1180,13 +1442,19 @@
 
               
 
+              
+
               , use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
+              
+
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
                cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+
+              
 
               
 
@@ -1201,6 +1469,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -1220,8 +1490,12 @@
 
             
 
+            
+
              that references the asynchronous creation of the <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -1233,8 +1507,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1245,8 +1523,12 @@
 
           
 
+          
+
           A user-defined object containing information about the accept operation. This object is passed to the <paramref
            name="callback" />
+
+          
 
           
 
@@ -1283,6 +1565,8 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
@@ -1292,8 +1576,12 @@
 
               
 
+              
+
                property of the returned <see
                cref="T:System.Net.Sockets.Socket" />
+
+              
 
               
 
@@ -1307,13 +1595,19 @@
 
               
 
+              
+
               , use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
+              
+
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
                cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+
+              
 
               
 
@@ -1331,6 +1625,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1340,6 +1636,8 @@
           <para
             >Asynchronously accepts an incoming connection attempt and creates a new <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1354,11 +1652,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1370,13 +1672,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.Net.Sockets.TcpListener.BeginAcceptSocket(System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1413,6 +1721,8 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
@@ -1422,8 +1732,12 @@
 
               
 
+              
+
                property of the underlying socket (<see
                cref="P:System.Net.Sockets.TcpClient.Client" />
+
+              
 
               
 
@@ -1437,13 +1751,19 @@
 
               
 
+              
+
               , use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
+              
+
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
                cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+
+              
 
               
 
@@ -1461,6 +1781,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1470,6 +1792,8 @@
           <para
             >Asynchronously accepts an incoming connection attempt and creates a new <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -1484,11 +1808,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -1500,13 +1828,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.Net.Sockets.TcpListener.BeginAcceptTcpClient(System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1535,6 +1869,8 @@
 
             
 
+            
+
              property to prevent multiple listeners from listening to a specific port.</para
           >
           <para
@@ -1543,8 +1879,12 @@
 
             
 
+            
+
             , or call the <see
              cref="M:System.Net.Sockets.TcpListener.Stop" />
+
+            
 
             
 
@@ -1559,8 +1899,12 @@
 
             
 
+            
+
              value that specifies whether the <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -1594,8 +1938,12 @@
 
             
 
+            
+
              class finalizer free resources associated with the <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -1607,6 +1955,8 @@
           <para
             >Frees resources used by the <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -1640,8 +1990,12 @@
 
             
 
+            
+
              property to identify the local network interface and port number being used to listen for incoming client connection requests, after a socket connection has been made. You must first cast this <see
              cref="T:System.Net.EndPoint" />
+
+            
 
             
 
@@ -1650,13 +2004,19 @@
 
             
 
+            
+
             . You can then call the <see
              cref="P:System.Net.IPEndPoint.Address" />
 
             
 
+            
+
              property to retrieve the local IP address, and the <see
              cref="P:System.Net.IPEndPoint.Port" />
+
+            
 
             
 
@@ -1671,8 +2031,12 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -1706,8 +2070,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+
+            
 
             
 
@@ -1716,8 +2084,12 @@
 
             
 
+            
+
              method has queued an incoming connection request, the <see
              cref="M:System.Net.Sockets.TcpListener.Pending" />
+
+            
 
             
 
@@ -1758,8 +2130,12 @@
 
             
 
+            
+
              creates a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1768,8 +2144,12 @@
 
             
 
+            
+
              can use this property to get this <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1778,13 +2158,19 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Net.Sockets.TcpListener.Server" />
 
             
 
+            
+
              property if you require access beyond that which <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -1797,8 +2183,12 @@
 
               
 
+              
+
                property only returns the <see
                cref="T:System.Net.Sockets.Socket" />
+
+              
 
               
 
@@ -1807,8 +2197,12 @@
 
               
 
+              
+
                method to accept a pending connection request and obtain a <see
                cref="T:System.Net.Sockets.Socket" />
+
+              
 
               
 
@@ -1817,8 +2211,12 @@
 
               
 
+              
+
                method to accept a pending connection request and obtain a <see
                cref="T:System.Net.Sockets.TcpClient" />
+
+              
 
               
 
@@ -1831,6 +2229,8 @@
           <para
             >Gets the underlying network <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1864,8 +2264,12 @@
 
             
 
+            
+
              method initializes the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1874,8 +2278,12 @@
 
             
 
+            
+
              method will queue the request and continue listening for additional requests until you call the <see
              cref="M:System.Net.Sockets.TcpListener.Stop" />
+
+            
 
             
 
@@ -1884,8 +2292,12 @@
 
             
 
+            
+
              receives a connection request after it has already queued the maximum number of connections, it will throw a <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -1897,8 +2309,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+
+            
 
             
 
@@ -1907,8 +2323,12 @@
 
             
 
+            
+
              method will remove a connection from the queue and return a <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -1917,8 +2337,12 @@
 
             
 
+            
+
              method will return a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1927,8 +2351,12 @@
 
             
 
+            
+
             . For more detailed behavioral control, use <see
              cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+
+            
 
             
 
@@ -1940,8 +2368,12 @@
 
             
 
+            
+
              method to close the <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -1955,6 +2387,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -1994,8 +2428,12 @@
 
             
 
+            
+
              method initializes the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -2004,8 +2442,12 @@
 
             
 
+            
+
              will queue the request and continue listening for additional requests until you call the <see
              cref="M:System.Net.Sockets.TcpListener.Stop" />
+
+            
 
             
 
@@ -2014,8 +2456,12 @@
 
             
 
+            
+
              receives a connection request after it has already queued the maximum number of connections it will throw a <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -2027,8 +2473,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+
+            
 
             
 
@@ -2037,8 +2487,12 @@
 
             
 
+            
+
              method will remove a connection from the queue and return a <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -2047,8 +2501,12 @@
 
             
 
+            
+
              method will return a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -2057,8 +2515,12 @@
 
             
 
+            
+
             . For more detailed behavioral control, use <see
              cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+
+            
 
             
 
@@ -2070,8 +2532,12 @@
 
             
 
+            
+
              method to close the <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -2084,8 +2550,12 @@
 
               
 
+              
+
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
                cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+
+              
 
               
 
@@ -2103,6 +2573,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2113,6 +2585,8 @@
         </summary>
         <param name="backlog">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2144,8 +2618,12 @@
 
             
 
+            
+
              closes the listener. Any unaccepted connection requests in the queue will be lost. Remote hosts waiting for a connection to be accepted will throw a <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -2159,6 +2637,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 

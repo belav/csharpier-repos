@@ -115,8 +115,12 @@
 
               
 
+              
+
                is obsolete. Please use <see
                cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String,System.Boolean)" />
+
+              
 
               
 
@@ -126,6 +130,8 @@
           <para
             >Passing null as the <paramref
              name="filename" />
+
+            
 
             
 
@@ -141,6 +147,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -150,10 +158,14 @@
 
               
 
+              
+
                to control its own lifetime policies, each MBR has a finite lifetime before the .NET Framework remoting system begins the process of deleting it and reclaiming the memory. For more information, see <format
                type="text/html">
                 <a href="c72d561c-1266-4c8b-b258-2c168c08da9a">Lifetime Leases</a>
               </format>
+
+              
 
               
 
@@ -169,8 +181,12 @@
 
             
 
+            
+
              is obsolete. Please use <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -179,6 +195,8 @@
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,6 +235,8 @@
 
             
 
+            
+
              parameter will cause default remoting initialization without requiring the existence of a configuration file. For more information about remoting and security see <format
              type="text/html">
               <a href="9574262c-d4b1-41c5-8600-24ff147c0add">Security in Remoting.</a>
@@ -232,6 +252,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -241,10 +263,14 @@
 
               
 
+              
+
                to control its own lifetime policies, each MBR has a finite lifetime before the .NET Framework remoting system begins the process of deleting it and reclaiming the memory. For more information, see <format
                type="text/html">
                 <a href="c72d561c-1266-4c8b-b258-2c168c08da9a">Lifetime Leases</a>
               </format>
+
+              
 
               
 
@@ -261,10 +287,14 @@
 
           
 
+          
+
           The name of the remoting configuration file. Can be null.</param
         >
         <param name="ensureSecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -307,6 +337,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The following table shows the three server channel property values that specify which callers receive exception information and what type of information they receive.</para>
@@ -339,7 +371,8 @@
             </item>
             <item>
               <term>
-                <para>remoteOnly </para>
+                <para
+>remoteOnly </para>
               </term>
               <description>
                 <para>Local callers receive complete exception information; remote callers receive filtered exception information. </para>
@@ -349,6 +382,8 @@
           <para
             >The following table shows the interaction of the <paramref
              name="isLocalRequest" />
+
+            
 
             
 
@@ -429,7 +464,8 @@
             </item>
             <item>
               <term>
-                <para>remoteOnly </para>
+                <para
+>remoteOnly </para>
               </term>
               <description>
                 <para>true </para>
@@ -443,7 +479,8 @@
             </item>
             <item>
               <term>
-                <para>remoteOnly </para>
+                <para
+>remoteOnly </para>
               </term>
               <description>
                 <para>false </para>
@@ -470,11 +507,15 @@
 
             
 
+            
+
              parameter; false if complete exception information is returned.</para
           >
         </returns>
         <param name="isLocalRequest">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -540,6 +581,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -582,6 +625,8 @@
                 >[&lt;topic://cpconClientActivation&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -631,6 +676,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -677,6 +724,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -720,6 +769,8 @@
 
             
 
+            
+
              is explicitly allowed by the server.</para
           >
         </remarks>
@@ -728,6 +779,8 @@
           <para
             >Returns a Boolean value that indicates whether the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -742,6 +795,8 @@
 
             
 
+            
+
              is allowed to be client activated; otherwise, false.</para
           >
         </returns>
@@ -750,8 +805,12 @@
 
           
 
+          
+
           The object <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -790,6 +849,8 @@
 
             
 
+            
+
              is registered as a remotely activated client type.</para
           >
         </summary>
@@ -801,11 +862,15 @@
 
             
 
+            
+
              that corresponds to the specified object type.</para
           >
         </returns>
         <param name="svrType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -849,6 +914,8 @@
 
             
 
+            
+
              that corresponds to the specified object type.</para
           >
         </returns>
@@ -857,10 +924,14 @@
 
           
 
+          
+
           The type name of the object to check. </param
         >
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -899,6 +970,8 @@
 
             
 
+            
+
              is registered as a well-known client type.</para
           >
         </summary>
@@ -910,6 +983,8 @@
 
             
 
+            
+
              that corresponds to the specified object type.</para
           >
         </returns>
@@ -918,8 +993,12 @@
 
           
 
+          
+
           The object <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -963,6 +1042,8 @@
 
             
 
+            
+
              that corresponds to the specified object type.</para
           >
         </returns>
@@ -971,10 +1052,14 @@
 
           
 
+          
+
           The type name of the object to check. </param
         >
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1033,13 +1118,19 @@
 
             
 
+            
+
              and it must be registered on the server end by using the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedServiceType(System.Type)" />
 
             
 
+            
+
              method. To obtain a proxy for a new instance of the client-activated object, the client must first register a channel with <see
              cref="T:System.Runtime.Remoting.Channels.ChannelServices" />
+
+            
 
             
 
@@ -1051,8 +1142,12 @@
 
             
 
+            
+
              method. Calling the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedClientType(System.Type,System.String)" />
+
+            
 
             
 
@@ -1061,13 +1156,19 @@
 
             
 
+            
+
              method to create a new instance of the client-activated object, you must supply the remote application's URL as a parameter, so no prior registration on the client end is necessary. To supply the <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
             
 
+            
+
              method with the URL of the server where you want to create the object, you must encapsulate the URL in an instance of the <see
              cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            
 
             
 
@@ -1083,6 +1184,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1094,8 +1197,12 @@
 
             
 
+            
+
              recorded in the provided <see
              cref="T:System.Runtime.Remoting.ActivatedClientTypeEntry" />
+
+            
 
             
 
@@ -1104,6 +1211,8 @@
         </summary>
         <param name="entry">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1142,13 +1251,19 @@
 
             
 
+            
+
              and it must be registered on the server end by using the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedServiceType(System.Type)" />
 
             
 
+            
+
              method. To obtain a proxy for a new instance of the client-activated object, the client must first register a channel with <see
              cref="T:System.Runtime.Remoting.Channels.ChannelServices" />
+
+            
 
             
 
@@ -1160,8 +1275,12 @@
 
             
 
+            
+
              method. Calling the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedClientType(System.Type,System.String)" />
+
+            
 
             
 
@@ -1170,13 +1289,19 @@
 
             
 
+            
+
              method to create a new instance of the client-activated object, you must supply the remote application's URL as a parameter, so no prior registration on the client end is necessary. To supply the <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
             
 
+            
+
              method with the URL of the server where you want to create the object, you must encapsulate the URL in an instance of the <see
              cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            
 
             
 
@@ -1199,8 +1324,12 @@
 
             
 
+            
+
              on the client end as a type that can be activated on the server, using the given parameters to initialize a new instance of the <see
              cref="T:System.Runtime.Remoting.ActivatedClientTypeEntry" />
+
+            
 
             
 
@@ -1212,8 +1341,12 @@
 
           
 
+          
+
           The object <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1221,6 +1354,8 @@
         >
         <param name="appUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1258,8 +1393,12 @@
 
             
 
+            
+
              and it must be registered on the server end by using the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedServiceType(System.Type)" />
+
+            
 
             
 
@@ -1268,8 +1407,12 @@
 
             
 
+            
+
              and then activate the object by calling new or <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -1281,8 +1424,12 @@
 
             
 
+            
+
              method. Calling the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedClientType(System.Type,System.String)" />
+
+            
 
             
 
@@ -1291,13 +1438,19 @@
 
             
 
+            
+
              method to create a new instance of the client-activated object, you must supply the remote application's URL as a parameter, so no prior registration on the client end is necessary. To supply the <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
             
 
+            
+
              method with the URL of the server where you want to create the object, you must encapsulate the URL in an instance of the <see
              cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            
 
             
 
@@ -1313,6 +1466,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1324,11 +1479,15 @@
 
             
 
+            
+
              on the service end as one that can be activated on request from a client.</para
           >
         </summary>
         <param name="entry">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1366,8 +1525,12 @@
 
             
 
+            
+
              and it must be registered on the server end by using the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedServiceType(System.Type)" />
+
+            
 
             
 
@@ -1376,8 +1539,12 @@
 
             
 
+            
+
              and then activate the object by calling new or <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -1389,8 +1556,12 @@
 
             
 
+            
+
              method. Calling the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedClientType(System.Type,System.String)" />
+
+            
 
             
 
@@ -1399,13 +1570,19 @@
 
             
 
+            
+
              method to create a new instance of the client-activated object, you must supply the remote application's URL as a parameter, so no prior registration on the client end is necessary. To supply the <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
             
 
+            
+
              method with the URL of the server where you want to create the object, you must encapsulate the URL in an instance of the <see
              cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            
 
             
 
@@ -1421,6 +1598,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1433,8 +1612,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1472,8 +1655,12 @@
 
             
 
+            
+
             , and activating the object by calling new or <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1482,13 +1669,19 @@
 
             
 
+            
+
              method. Calling the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterWellKnownClientType(System.Type,System.String)" />
 
             
 
+            
+
              method gives the remoting infrastructure the location of the remote object, which allows the new keyword to create it. If, on the other hand, you use the <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1504,6 +1697,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1515,8 +1710,12 @@
 
             
 
+            
+
              recorded in the provided <see
              cref="T:System.Runtime.Remoting.WellKnownClientTypeEntry" />
+
+            
 
             
 
@@ -1525,6 +1724,8 @@
         </summary>
         <param name="entry">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1563,8 +1764,12 @@
 
             
 
+            
+
             , and activating the object by calling new or <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1573,13 +1778,19 @@
 
             
 
+            
+
              method. Calling the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterWellKnownClientType(System.Type,System.String)" />
 
             
 
+            
+
              method gives the remoting infrastructure the location of the remote object, which allows the new keyword to create it. If, on the other hand, you use the <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1595,6 +1806,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1606,8 +1819,12 @@
 
             
 
+            
+
              on the client end as a well-known type that can be activated on the server, using the given parameters to initialize a new instance of the <see
              cref="T:System.Runtime.Remoting.WellKnownClientTypeEntry" />
+
+            
 
             
 
@@ -1619,8 +1836,12 @@
 
           
 
+          
+
           The object <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1628,6 +1849,8 @@
         >
         <param name="objectUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1665,8 +1888,12 @@
 
             
 
+            
+
             , and activating the object by calling new or the <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1675,13 +1902,19 @@
 
             
 
+            
+
              method. Calling the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterWellKnownClientType(System.Type,System.String)" />
 
             
 
+            
+
              method gives the remoting infrastructure the location of the remote object, which allows the new keyword to create it. If, on the other hand, you use the <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1693,8 +1926,12 @@
 
             
 
+            
+
             , it is destroyed after the method call is completed. A new instance of the object is created for each method called. The only difference between <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1711,6 +1948,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1722,8 +1961,12 @@
 
             
 
+            
+
              recorded in the provided <see
              cref="T:System.Runtime.Remoting.WellKnownServiceTypeEntry" />
+
+            
 
             
 
@@ -1732,6 +1975,8 @@
         </summary>
         <param name="entry">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1771,8 +2016,12 @@
 
             
 
+            
+
             , and activating the object by calling new or the <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1781,13 +2030,19 @@
 
             
 
+            
+
              method. Calling the <see
              cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterWellKnownClientType(System.Type,System.String)" />
 
             
 
+            
+
              method gives the remoting infrastructure the location of the remote object, which allows the new keyword to create it. If, on the other hand, you use the <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1799,8 +2054,12 @@
 
             
 
+            
+
             , it is destroyed after the method call is completed. A new instance of the object is created for each method called. The only difference between <see
              cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+            
 
             
 
@@ -1817,6 +2076,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1828,8 +2089,12 @@
 
             
 
+            
+
              on the service end as a well-known type, using the given parameters to initialize a new instance of <see
              cref="T:System.Runtime.Remoting.WellKnownServiceTypeEntry" />
+
+            
 
             
 
@@ -1841,8 +2106,12 @@
 
           
 
+          
+
           The object <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1853,6 +2122,8 @@
 
           
 
+          
+
           The object URI. </param
         >
         <param name="mode">
@@ -1860,8 +2131,12 @@
 
           
 
+          
+
           The activation mode of the well-known object type being registered. (See <see
            cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
+
+          
 
           
 

@@ -21,8 +21,7 @@
     <author>
       <first-name>Mary</first-name>
       <last-name>Bob</last-name>
-      <publication
-        >
+      <publication>
 				Selected Short Stories of
 				<first-name
         >JoeBob</first-name>
@@ -37,8 +36,7 @@
     <author>
       <first.name>Mike</first.name>
       <last.name>Hyman</last.name>
-      <publication
-        >
+      <publication>
 				XQL For Dummies
 				<first.name
         >Jonathan</first.name>
@@ -93,8 +91,7 @@
     <author>
       <first.name>Mary F</first.name>
       <last-name>Robinson</last-name>
-      <publication
-        >
+      <publication>
 				Selected Short Stories of
 				<first.name
         >Mary F</first.name>
@@ -111,8 +108,7 @@
       <first-name>Frank</first-name>
       <last-name>Anderson</last-name>
       <award>Pulizer</award>
-      <publication
-        >
+      <publication>
 				Selected Short Stories of
 				<first-name
         >Mary F</first-name>
@@ -159,6 +155,8 @@
 			stormy to someone who has gone through what
 			<emph
         >I</emph>
+
+        
 
         
 

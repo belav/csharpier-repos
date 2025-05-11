@@ -33,6 +33,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -68,11 +70,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="fileItem">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -112,6 +118,8 @@
 
           
 
+          
+
           The file name to append. If it is null, then this method has no effect.</param
         >
       </Docs>
@@ -147,6 +155,8 @@
 
             
 
+            
+
              array, separated by the specified delimiter.</para
           >
         </summary>
@@ -155,10 +165,14 @@
 
           
 
+          
+
           The task item specifications to append. If the array is null, then this method has no effect.</param
         >
         <param name="delimiter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -198,10 +212,14 @@
 
           
 
+          
+
           The file names to append. If the array is null, then this method has no effect.</param
         >
         <param name="delimiter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,6 +255,8 @@
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -293,6 +313,8 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
       </Docs>
@@ -329,10 +351,14 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -372,10 +398,14 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -416,6 +446,8 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
         <param name="parameters">
@@ -423,10 +455,14 @@
 
           
 
+          
+
           An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param
         >
         <param name="delimiter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -467,6 +503,8 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
         <param name="parameters">
@@ -474,10 +512,14 @@
 
           
 
+          
+
           An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param
         >
         <param name="delimiter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -516,10 +558,14 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -558,10 +604,14 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -601,6 +651,8 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
         <param name="parameters">
@@ -608,10 +660,14 @@
 
           
 
+          
+
           An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param
         >
         <param name="delimiter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -651,6 +707,8 @@
 
           
 
+          
+
           The name of the switch to append to the command line. This value cannot be null.</param
         >
         <param name="parameters">
@@ -658,10 +716,14 @@
 
           
 
+          
+
           An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param
         >
         <param name="delimiter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -699,6 +761,8 @@
 
           
 
+          
+
           The string to append to the command line.</param
         >
       </Docs>
@@ -733,6 +797,8 @@
 
           
 
+          
+
           The string to append to the command line.</param
         >
       </Docs>
@@ -758,6 +824,8 @@
           <para
             >Gets the <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -797,6 +865,8 @@
 
           
 
+          
+
           The string to examine for characters that require quotation marks.</param
         >
       </Docs>
@@ -828,6 +898,8 @@
 
             
 
+            
+
              that represents the command line.</para
           >
         </returns>
@@ -855,6 +927,8 @@
 
             
 
+            
+
              is a virtual method so that your applications can override this method if you want to allow double-quotes escaped in filenames.</para
           >
         </remarks>
@@ -867,10 +941,14 @@
 
           
 
+          
+
           A string representing the switch name for the error message.</param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -5,7 +5,7 @@
     <example
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 class A  
 {  
    public static int x;  
@@ -17,6 +17,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

@@ -32,8 +32,12 @@
 
         
 
+        
+
          class. Implementation of a method should exhibit the same behavior as the implementation of that method in the <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.ComponentModel.IBindingList.RemoveSort" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          event with the <see
          cref="F:System.ComponentModel.ListChangedType.Reset" />
+
+        
 
         
 
@@ -68,13 +80,19 @@
 
         
 
+        
+
          method, you should raise a <see
          cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
         
 
+        
+
          event with the <see
          cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
+
+        
 
         
 
@@ -83,13 +101,19 @@
 
         
 
+        
+
          control can remove the new row. Raising the <see
          cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
         
 
+        
+
          event with the <see
          cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
+
+        
 
         
 
@@ -101,8 +125,12 @@
 
         
 
+        
+
          method on a new row (if that row implements <see
          cref="T:System.ComponentModel.IEditableObject" />
+
+        
 
         
 
@@ -111,8 +139,12 @@
 
         
 
+        
+
          event with the <see
          cref="F:System.ComponentModel.ListChangedType.ItemDeleted" />
+
+        
 
         
 
@@ -159,6 +191,8 @@
 
             
 
+            
+
              to the indexes used for searching.</para
           >
         </summary>
@@ -167,8 +201,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -201,8 +239,12 @@
 
             
 
+            
+
              is true; otherwise, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -214,8 +256,12 @@
 
             
 
+            
+
              list must understand the type of objects to add to the list and must understand how to create a new instance of that type. For example, if you have a collection of myCustomer objects, the <see
              cref="M:System.ComponentModel.IBindingList.AddNew" />
+
+            
 
             
 
@@ -228,8 +274,12 @@
 
               
 
+              
+
                interface, calling the <see
                cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
+
+              
 
               
 
@@ -238,8 +288,12 @@
 
               
 
+              
+
                method. The object should only be added to the list when the <see
                cref="M:System.ComponentModel.IEditableObject.EndEdit" />
+
+              
 
               
 
@@ -252,8 +306,12 @@
 
             
 
+            
+
              event with the <see
              cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
+
+            
 
             
 
@@ -262,13 +320,19 @@
 
             
 
+            
+
              control can remove the new row. Raising the <see
              cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
             
 
+            
+
              event with the <see
              cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
+
+            
 
             
 
@@ -328,8 +392,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -341,6 +409,8 @@
           <para
             >Gets whether you can add items to the list using <see
              cref="M:System.ComponentModel.IBindingList.AddNew" />
+
+            
 
             
 
@@ -371,8 +441,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -385,8 +459,12 @@
 
               
 
+              
+
                returns false, <see
                cref="M:System.Collections.IList.Remove(System.Object)" />
+
+              
 
               
 
@@ -395,8 +473,12 @@
 
               
 
+              
+
                throw a <see
                cref="T:System.NotSupportedException" />
+
+              
 
               
 
@@ -412,8 +494,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -454,8 +540,12 @@
 
             
 
+            
+
              is true; otherwise, this method throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -470,8 +560,12 @@
 
             
 
+            
+
              and a <see
              cref="T:System.ComponentModel.ListSortDirection" />
+
+            
 
             
 
@@ -483,8 +577,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -495,8 +593,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.ListSortDirection" />
+
+          
 
           
 
@@ -535,8 +637,12 @@
 
             
 
+            
+
              parameter equals the value of the <paramref
              name="key" />
+
+            
 
             
 
@@ -548,8 +654,12 @@
 
             
 
+            
+
              is true, otherwise this method throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -564,6 +674,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -575,6 +687,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -583,8 +697,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -595,8 +713,12 @@
 
           
 
+          
+
           The value of the <paramref
            name="property" />
+
+          
 
           
 
@@ -626,8 +748,12 @@
 
             
 
+            
+
              is true; otherwise, this property throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -636,6 +762,8 @@
           <para
             >If <see
              cref="P:System.ComponentModel.IBindingList.IsSorted" />
+
+            
 
             
 
@@ -673,6 +801,8 @@
           <para
             >This event is raised only if the <see
              cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
+
+            
 
             
 
@@ -719,6 +849,8 @@
 
             
 
+            
+
              from the indexes used for searching.</para
           >
         </summary>
@@ -727,8 +859,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -761,8 +897,12 @@
 
             
 
+            
+
              is true; otherwise, this property throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -774,8 +914,12 @@
 
             
 
+            
+
              event with the <see
              cref="F:System.ComponentModel.ListChangedType.Reset" />
+
+            
 
             
 
@@ -787,6 +931,8 @@
           <para
             >Removes any sort applied using <see
              cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+
+            
 
             
 
@@ -823,8 +969,12 @@
 
             
 
+            
+
              is true; otherwise, this property throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -865,8 +1015,12 @@
 
             
 
+            
+
              is true; otherwise, this property throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -878,6 +1032,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -911,6 +1067,8 @@
 
             
 
+            
+
              event.</para
           >
         </remarks>
@@ -919,6 +1077,8 @@
           <para
             >Gets whether a <see
              cref="E:System.ComponentModel.IBindingList.ListChanged" />
+
+            
 
             
 
@@ -950,6 +1110,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -977,8 +1139,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ComponentModel.IBindingList.SortProperty" />
+
+            
 
             
 
@@ -987,13 +1153,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
+            
+
             , and <see
              cref="M:System.ComponentModel.IBindingList.RemoveSort" />
+
+            
 
             
 

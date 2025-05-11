@@ -63,6 +63,8 @@
 
         
 
+        
+
         .</para
       >
       <c>
@@ -79,6 +81,8 @@
 
         
 
+        
+
          object. A key cannot be null, but a value can be.</para
       >
       <para
@@ -87,13 +91,19 @@
 
         
 
+        
+
          are required to override the <see
          cref="M:System.Object.GetHashCode" />
 
         
 
+        
+
          method (or the <see
          cref="T:System.Collections.IHashCodeProvider" />
+
+        
 
         
 
@@ -102,8 +112,12 @@
 
         
 
+        
+
          method (or the <see
          cref="T:System.Collections.IComparer" />
+
+        
 
         
 
@@ -112,8 +126,12 @@
 
         
 
+        
+
          might behave incorrectly. For example, when creating a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -122,8 +140,12 @@
 
         
 
+        
+
          class (or any case-insensitive <see
          cref="T:System.Collections.IHashCodeProvider" />
+
+        
 
         
 
@@ -132,8 +154,12 @@
 
         
 
+        
+
          class (or any case-insensitive <see
          cref="T:System.Collections.IComparer" />
+
+        
 
         
 
@@ -145,8 +171,12 @@
 
         
 
+        
+
         . An alternative is to use a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -155,13 +185,19 @@
 
         
 
+        
+
          parameter. If key equality were simply reference equality, the inherited implementation of <see
          cref="M:System.Object.GetHashCode" />
 
         
 
+        
+
          and <see
          cref="M:System.Object.Equals(System.Object)" />
+
+        
 
         
 
@@ -173,11 +209,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >When an element is added to the <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -189,8 +229,12 @@
 
         
 
+        
+
          determines the maximum ratio of elements to buckets. Smaller load factors cause faster average lookup times at the cost of increased memory consumption. The default load factor of 1.0 generally provides the best balance between speed and size. A different load factor can also be specified when the <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -202,8 +246,12 @@
 
         
 
+        
+
         , the actual load factor of the <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -212,8 +260,12 @@
 
         
 
+        
+
          is automatically increased to the smallest prime number that is larger than twice the current number of <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -225,8 +277,12 @@
 
         
 
+        
+
          must provide its own hash function, which can be accessed by calling <see
          cref="M:System.Collections.Hashtable.GetHash(System.Object)" />
+
+        
 
         
 
@@ -235,8 +291,12 @@
 
         
 
+        
+
          can be passed to a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -248,13 +308,19 @@
 
         
 
+        
+
          is the number of elements the <see
          cref="T:System.Collections.Hashtable" />
 
         
 
+        
+
          can hold. As elements are added to a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -266,10 +332,14 @@
 
         
 
+        
+
          objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
          type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
+
+        
 
         
 
@@ -281,8 +351,12 @@
 
         
 
+        
+
          is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -296,8 +370,12 @@
 
         
 
+        
+
          can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see
          cref="M:System.Collections.IEnumerator.Reset" />
+
+        
 
         
 
@@ -307,6 +385,8 @@
         <para
           >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see
            cref="M:System.Type.Equals(System.Object)" />
+
+          
 
           
 
@@ -350,8 +430,12 @@
 
             
 
+            
+
              object. The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -363,8 +447,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -377,6 +465,8 @@
           <para
             >Initializes a new, empty instance of the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -412,8 +502,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -430,8 +524,12 @@
 
             
 
+            
+
              object. The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -443,8 +541,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -456,8 +558,12 @@
 
             
 
+            
+
              are sorted in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -469,13 +575,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in the <paramref
              name="d" />
+
+            
 
             
 
@@ -490,13 +602,19 @@
 
             
 
+            
+
              class by copying the elements from the specified dictionary to the new <see
              cref="T:System.Collections.Hashtable" />
 
             
 
+            
+
              object. The new <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -508,13 +626,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            object to copy to a new <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -553,8 +677,12 @@
 
             
 
+            
+
              object includes both the hash code provider and the comparer. If an <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -563,8 +691,12 @@
 
             
 
+            
+
              constructor, the objects used as keys in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -573,8 +705,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -586,8 +722,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -599,8 +739,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -609,6 +753,8 @@
           <para
             >The <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -624,8 +770,12 @@
 
             
 
+            
+
              class using the default initial capacity and load factor, and the specified <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -637,13 +787,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IEqualityComparer" />
 
           
 
+          
+
            object that defines the hash code provider and the comparer to use with the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -677,6 +833,8 @@
 
           
 
+          
+
            &lt; 0. </exception
         >
         <remarks>
@@ -684,6 +842,8 @@
           <para
             >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -697,8 +857,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -710,8 +874,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -723,13 +891,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -744,6 +918,8 @@
 
             
 
+            
+
              class using the specified initial capacity, and the default load factor, hash code provider, and comparer.</para
           >
         </summary>
@@ -752,8 +928,12 @@
 
           
 
+          
+
           The approximate number of elements that the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -793,8 +973,12 @@
 
             
 
+            
+
              object includes both the hash code provider and the comparer. If an <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -803,8 +987,12 @@
 
             
 
+            
+
              constructor, the objects used as keys in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -813,8 +1001,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -826,8 +1018,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -839,8 +1035,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -852,6 +1052,8 @@
 
             
 
+            
+
              enables scenarios such as doing lookups with case-insensitive strings.</para
           >
           <para
@@ -860,8 +1062,12 @@
 
             
 
+            
+
              are sorted in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -873,13 +1079,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in the <paramref
              name="d" />
+
+            
 
             
 
@@ -894,8 +1106,12 @@
 
             
 
+            
+
              class by copying the elements from the specified dictionary to a new <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -904,8 +1120,12 @@
 
             
 
+            
+
              object has an initial capacity equal to the number of elements copied, and uses the default load factor and the specified <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -917,13 +1137,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            object to copy to a new <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -934,13 +1160,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IEqualityComparer" />
 
           
 
+          
+
            object that defines the hash code provider and the comparer to use with the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -979,8 +1211,12 @@
 
             
 
+            
+
              object. The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -992,8 +1228,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1005,8 +1245,12 @@
 
             
 
+            
+
              are sorted in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1018,13 +1262,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in the <paramref
              name="d" />
+
+            
 
             
 
@@ -1039,13 +1289,19 @@
 
             
 
+            
+
              class by copying the elements from the specified dictionary to the new <see
              cref="T:System.Collections.Hashtable" />
 
             
 
+            
+
              object. The new <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -1057,8 +1313,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1067,10 +1327,14 @@
 
           
 
+          
+
            object.</param
         >
         <param name="loadFactor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1119,8 +1383,12 @@
 
             
 
+            
+
              object. The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1132,8 +1400,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1150,6 +1422,8 @@
 
             
 
+            
+
              class using the default initial capacity and load factor, and the specified hash code provider and comparer.</para
           >
         </summary>
@@ -1158,13 +1432,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IHashCodeProvider" />
 
           
 
+          
+
            object that supplies the hash codes for all keys in the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1175,8 +1455,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -1213,6 +1497,8 @@
 
             
 
+            
+
              object. Capacity is automatically increased as required based on the load factor.</para
           >
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
@@ -1223,8 +1509,12 @@
 
             
 
+            
+
              object includes both the hash code provider and the comparer. If an <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -1233,8 +1523,12 @@
 
             
 
+            
+
              constructor, the objects used as keys in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -1243,8 +1537,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1256,8 +1554,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1269,8 +1571,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1282,6 +1588,8 @@
 
             
 
+            
+
              enables scenarios such as doing lookups with case-insensitive strings.</para
           >
           <para
@@ -1290,13 +1598,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the <paramref
              name="capacity" />
+
+            
 
             
 
@@ -1311,8 +1625,12 @@
 
             
 
+            
+
              class using the specified initial capacity and <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -1324,8 +1642,12 @@
 
           
 
+          
+
           The approximate number of elements that the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1336,13 +1658,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IEqualityComparer" />
 
           
 
+          
+
            object that defines the hash code provider and the comparer to use with the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1375,6 +1703,8 @@
 
             
 
+            
+
              object. Capacity is automatically increased as required based on the load factor.</para
           >
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
@@ -1385,8 +1715,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1398,8 +1732,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1411,13 +1749,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the <paramref
              name="capacity" />
+
+            
 
             
 
@@ -1432,6 +1776,8 @@
 
             
 
+            
+
              class using the specified initial capacity and load factor, and the default hash code provider and comparer.</para
           >
         </summary>
@@ -1440,8 +1786,12 @@
 
           
 
+          
+
           The approximate number of elements that the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1449,6 +1799,8 @@
         >
         <param name="loadFactor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1487,8 +1839,12 @@
 
             
 
+            
+
              object. The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1500,8 +1856,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1513,13 +1873,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -1531,8 +1897,12 @@
 
             
 
+            
+
              can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -1547,13 +1917,19 @@
 
             
 
+            
+
              class that is serializable using the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -1565,13 +1941,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            object containing the information required to serialize the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1582,13 +1964,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            object containing the source and destination of the serialized stream associated with the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1632,8 +2020,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1650,8 +2042,12 @@
 
             
 
+            
+
              object. The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1663,8 +2059,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1677,8 +2077,12 @@
 
             
 
+            
+
              are sorted in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1690,13 +2094,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in the <paramref
              name="d" />
+
+            
 
             
 
@@ -1711,8 +2121,12 @@
 
             
 
+            
+
              class by copying the elements from the specified dictionary to the new <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -1721,8 +2135,12 @@
 
             
 
+            
+
              object has an initial capacity equal to the number of elements copied, and uses the default load factor, and the specified hash code provider and comparer. This API is obsolete. For an alternative, see <see
              cref="M:System.Collections.Hashtable.#ctor(System.Collections.IDictionary,System.Collections.IEqualityComparer)" />
+
+            
 
             
 
@@ -1734,13 +2152,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            object to copy to a new <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1751,13 +2175,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IHashCodeProvider" />
 
           
 
+          
+
            object that supplies the hash codes for all keys in the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1768,8 +2198,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -1810,8 +2244,12 @@
 
             
 
+            
+
              object includes both the hash code provider and the comparer. If an <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -1820,8 +2258,12 @@
 
             
 
+            
+
              constructor, the objects used as keys in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -1830,8 +2272,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1843,8 +2289,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1856,8 +2306,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1869,6 +2323,8 @@
 
             
 
+            
+
              enables scenarios such as doing lookups with case-insensitive strings.</para
           >
           <para
@@ -1877,8 +2333,12 @@
 
             
 
+            
+
              are sorted in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1890,13 +2350,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in the <paramref
              name="d" />
+
+            
 
             
 
@@ -1911,8 +2377,12 @@
 
             
 
+            
+
              class by copying the elements from the specified dictionary to the new <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -1921,8 +2391,12 @@
 
             
 
+            
+
              object has an initial capacity equal to the number of elements copied, and uses the specified load factor and <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -1934,13 +2408,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            object to copy to a new <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -1951,10 +2431,14 @@
 
           
 
+          
+
           A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.</param
         >
         <param name="equalityComparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1963,8 +2447,12 @@
 
           
 
+          
+
            object that defines the hash code provider and the comparer to use with the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2011,6 +2499,8 @@
 
             
 
+            
+
              object. Capacity is automatically increased as required based on the load factor.</para
           >
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
@@ -2021,8 +2511,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2034,8 +2528,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2048,13 +2546,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the <paramref
              name="capacity" />
+
+            
 
             
 
@@ -2069,6 +2573,8 @@
 
             
 
+            
+
              class using the specified initial capacity, hash code provider, comparer, and the default load factor.</para
           >
         </summary>
@@ -2077,8 +2583,12 @@
 
           
 
+          
+
           The approximate number of elements that the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2089,13 +2599,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IHashCodeProvider" />
 
           
 
+          
+
            object that supplies the hash codes for all keys in the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2106,8 +2622,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -2145,6 +2665,8 @@
 
             
 
+            
+
              object. Capacity is automatically increased as required based on the load factor.</para
           >
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
@@ -2155,8 +2677,12 @@
 
             
 
+            
+
              object includes both the hash code provider and the comparer. If an <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -2165,8 +2691,12 @@
 
             
 
+            
+
              constructor, the objects used as keys in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2175,8 +2705,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2188,8 +2722,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2201,8 +2739,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2214,6 +2756,8 @@
 
             
 
+            
+
              enables scenarios such as doing lookups with case-insensitive strings.</para
           >
           <para
@@ -2222,13 +2766,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the <paramref
              name="capacity" />
+
+            
 
             
 
@@ -2243,8 +2793,12 @@
 
             
 
+            
+
              class using the specified initial capacity, load factor, and <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -2256,8 +2810,12 @@
 
           
 
+          
+
           The approximate number of elements that the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2268,10 +2826,14 @@
 
           
 
+          
+
           A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.</param
         >
         <param name="equalityComparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2280,8 +2842,12 @@
 
           
 
+          
+
            object that defines the hash code provider and the comparer to use with the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2327,8 +2893,12 @@
 
             
 
+            
+
              object. The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2340,8 +2910,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2354,8 +2928,12 @@
 
             
 
+            
+
              are sorted in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -2367,13 +2945,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in the <paramref
              name="d" />
+
+            
 
             
 
@@ -2388,13 +2972,19 @@
 
             
 
+            
+
              class by copying the elements from the specified dictionary to the new <see
              cref="T:System.Collections.Hashtable" />
 
             
 
+            
+
              object. The new <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2406,13 +2996,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            object to copy to a new <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2423,10 +3019,14 @@
 
           
 
+          
+
           A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.</param
         >
         <param name="hcp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2435,8 +3035,12 @@
 
           
 
+          
+
            object that supplies the hash codes for all keys in the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2447,8 +3051,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -2491,6 +3099,8 @@
 
             
 
+            
+
              object. Capacity is automatically increased as required based on the load factor.</para
           >
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
@@ -2501,8 +3111,12 @@
 
             
 
+            
+
             . The default hash code provider is the key's implementation of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -2514,8 +3128,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2528,13 +3146,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the <paramref
              name="capacity" />
+
+            
 
             
 
@@ -2549,6 +3173,8 @@
 
             
 
+            
+
              class using the specified initial capacity, load factor, hash code provider, and comparer.</para
           >
         </summary>
@@ -2557,8 +3183,12 @@
 
           
 
+          
+
           The approximate number of elements that the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2569,10 +3199,14 @@
 
           
 
+          
+
           A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.</param
         >
         <param name="hcp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2581,8 +3215,12 @@
 
           
 
+          
+
            object that supplies the hash codes for all keys in the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2593,8 +3231,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -2632,8 +3274,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2656,8 +3302,12 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2666,13 +3316,19 @@
 
             
 
+            
+
             , setting the <see
              cref="P:System.Collections.Hashtable.Item(System.Object)" />
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.Hashtable.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -2684,8 +3340,12 @@
 
             
 
+            
+
              is less than the capacity of the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2694,13 +3354,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -2715,6 +3381,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2723,10 +3391,14 @@
 
           
 
+          
+
           The key of the element to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2768,6 +3440,8 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released. The capacity remains unchanged.</para
           >
           <para
@@ -2776,13 +3450,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -2794,6 +3474,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2831,8 +3513,12 @@
 
             
 
+            
+
              clone has the same count, the same capacity, the same <see
              cref="T:System.Collections.IHashCodeProvider" />
+
+            
 
             
 
@@ -2841,8 +3527,12 @@
 
             
 
+            
+
              implementation as the original <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2854,13 +3544,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -2875,6 +3571,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2883,6 +3581,8 @@
           <para
             >A shallow copy of the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2929,8 +3629,12 @@
 
             
 
+            
+
              to use for the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2967,8 +3671,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2981,13 +3689,19 @@
 
             
 
+            
+
              implements <see
              cref="M:System.Collections.IDictionary.Contains(System.Object)" />
 
             
 
+            
+
             . It behaves exactly as <see
              cref="M:System.Collections.Hashtable.ContainsKey(System.Object)" />
+
+            
 
             
 
@@ -3000,8 +3714,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -3010,8 +3728,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -3020,8 +3742,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -3036,6 +3762,8 @@
 
             
 
+            
+
              contains a specific key.</para
           >
         </summary>
@@ -3047,6 +3775,8 @@
 
             
 
+            
+
              contains an element with the specified key; otherwise, false.</para
           >
         </returns>
@@ -3055,8 +3785,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -3093,8 +3827,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3108,6 +3846,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This method is an O(1) operation.</para>
@@ -3117,8 +3857,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -3127,8 +3871,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -3137,8 +3885,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -3153,6 +3905,8 @@
 
             
 
+            
+
              contains a specific key.</para
           >
         </summary>
@@ -3164,6 +3918,8 @@
 
             
 
+            
+
              contains an element with the specified key; otherwise, false.</para
           >
         </returns>
@@ -3172,8 +3928,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -3213,8 +3973,12 @@
 
             
 
+            
+
              are compared to the specified value using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -3226,13 +3990,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -3244,8 +4014,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -3254,8 +4028,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -3264,8 +4042,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -3280,6 +4062,8 @@
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -3291,8 +4075,12 @@
 
             
 
+            
+
              contains an element with the specified <paramref
              name="value" />
+
+            
 
             
 
@@ -3304,8 +4092,12 @@
 
           
 
+          
+
           The value to locate in the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -3346,8 +4138,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3355,6 +4151,8 @@
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="arrayIndex" />
+
+          
 
           
 
@@ -3366,6 +4164,8 @@
 
             
 
+            
+
              has more than one dimension.</para
           >
           <para>-or-</para>
@@ -3374,13 +4174,19 @@
 
             
 
+            
+
              &gt; <paramref
              name="array" />
 
             
 
+            
+
             .Length - The <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -3390,6 +4196,8 @@
         <exception cref="T:System.InvalidCastException"
           >The type of the current instance is not assignment-compatible with the type of <paramref
            name="array" />
+
+          
 
           
 
@@ -3403,8 +4211,12 @@
 
             
 
+            
+
              in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -3416,11 +4228,15 @@
 
             
 
+            
+
             , use Hashtable.Keys.CopyTo.</para
           >
           <para
             >To copy only the values in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -3432,13 +4248,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -3453,8 +4275,12 @@
 
             
 
+            
+
              elements to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -3466,8 +4292,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -3476,13 +4306,19 @@
 
           
 
+          
+
            objects copied from <see
            cref="T:System.Collections.Hashtable" />
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -3493,8 +4329,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -3528,6 +4368,8 @@
 
             
 
+            
+
              that specifies the number of key-and-value pairs contained in the
    current instance.</para
           >
@@ -3541,6 +4383,8 @@
           <para
             >Gets the number of key/value pairs contained in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -3578,8 +4422,12 @@
 
             
 
+            
+
              includes both the comparer and the hash code provider. If an <see
              cref="T:System.Collections.IEqualityComparer" />
+
+            
 
             
 
@@ -3588,8 +4436,12 @@
 
             
 
+            
+
              constructor, the objects used as keys in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -3598,8 +4450,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -3615,8 +4471,12 @@
 
             
 
+            
+
              to use for the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -3660,8 +4520,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3670,8 +4534,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3682,8 +4550,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3692,13 +4564,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3710,8 +4588,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3720,8 +4602,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3730,8 +4616,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3740,8 +4630,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3756,8 +4650,12 @@
 
             
 
+            
+
              can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -3772,8 +4670,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -3788,8 +4690,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -3827,8 +4733,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3842,13 +4752,19 @@
 
             
 
+            
+
              implementation, this method uses that hash code provider; otherwise, it uses the <see
              cref="M:System.Object.GetHashCode" />
 
             
 
+            
+
              implementation of <paramref
              name="key" />
+
+            
 
             
 
@@ -3868,6 +4784,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3876,8 +4794,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3917,13 +4839,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -3938,8 +4866,12 @@
 
             
 
+            
+
              interface and returns the data needed to serialize the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -3951,13 +4883,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            object containing the information required to serialize the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -3968,13 +4906,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            object containing the source and destination of the serialized stream associated with the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -4041,10 +4985,14 @@
 
             
 
+            
+
              if the
    current instance has a fixed size; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -4062,6 +5010,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4095,10 +5045,14 @@
 
             
 
+            
+
              if the
    current instance is read-only; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -4116,6 +5070,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4149,10 +5105,14 @@
 
             
 
+            
+
              if access to
    the current instance is synchronized
    (thread-safe); otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -4167,8 +5127,12 @@
 
             
 
+            
+
               can support one writer and multiple readers concurrently. To support multiple writers, all operations must be done through the wrapper returned by the <see
              cref="M:System.Collections.Hashtable.Synchronized(System.Collections.Hashtable)" />
+
+            
 
             
 
@@ -4181,6 +5145,8 @@
 
             
 
+            
+
              during the entire enumeration:</para
           >
           <para>code reference: Classic Hashtable.IsSynchronized Example#2</para>
@@ -4190,6 +5156,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4231,8 +5199,12 @@
 
             
 
+            
+
             . If <paramref
              name="key" />
+
+            
 
             
 
@@ -4243,9 +5215,13 @@
 
             
 
+            
+
             , and attempting to set it creates a new entry
       using <paramref
              name="key" />
+
+            
 
             
 
@@ -4265,6 +5241,8 @@
               
 
               
+
+              
       .</block
             >
           </para>
@@ -4279,6 +5257,8 @@
 
               
 
+              
+
                is already contained
    in the current instance, the value associated with the old key is
    replaced.</block
@@ -4290,8 +5270,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4302,6 +5286,8 @@
           <para
             >The property is being set, <paramref
              name="key" />
+
+            
 
             
 
@@ -4344,8 +5330,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -4357,8 +5347,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -4373,8 +5367,12 @@
 
             
 
+            
+
              implementation, this method uses that comparer; that is, <see
              cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+
+            
 
             
 
@@ -4383,8 +5381,12 @@
 
             
 
+            
+
             , <paramref
              name="key" />
+
+            
 
             
 
@@ -4400,8 +5402,12 @@
 
             
 
+            
+
              with a specific key in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4416,8 +5422,12 @@
 
             
 
+            
+
              and <paramref
              name="key" />
+
+            
 
             
 
@@ -4429,13 +5439,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to compare with <paramref
            name="key" />
+
+          
 
           
 
@@ -4446,13 +5462,19 @@
 
           
 
+          
+
           The key in the <see
            cref="T:System.Collections.Hashtable" />
 
           
 
+          
+
            to compare with <paramref
            name="item" />
+
+          
 
           
 
@@ -4492,6 +5514,8 @@
 
             
 
+            
+
              containing the keys of the current instance.</para
           >
         </value>
@@ -4503,13 +5527,19 @@
 
             
 
+            
+
              is unspecified, but it is the same order as the associated values in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Hashtable.Values" />
+
+            
 
             
 
@@ -4521,8 +5551,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -4531,13 +5565,19 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Hashtable" />
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -4553,8 +5593,12 @@
 
             
 
+            
+
              containing the keys in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4594,13 +5638,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Hashtable.Count" />
+
+            
 
             
 
@@ -4612,8 +5662,12 @@
 
             
 
+            
+
              can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -4628,11 +5682,15 @@
 
             
 
+            
+
              interface and raises the deserialization event when the deserialization is complete.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4673,8 +5731,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4691,8 +5753,12 @@
 
             
 
+            
+
              does not contain an element with the specified key, the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4708,11 +5774,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4752,8 +5822,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4767,12 +5841,16 @@
 
             
 
+            
+
              method is thread safe for multiple readers and writers. Furthermore, the synchronized wrapper ensures that there is only one writer writing at a time.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
             >The following code example shows how to lock the collection using the <see
              cref="P:System.Collections.Hashtable.SyncRoot" />
+
+            
 
             
 
@@ -4789,6 +5867,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4800,6 +5880,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4808,8 +5890,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -4843,6 +5929,8 @@
 
             
 
+            
+
              that can be used to synchronize access to the
    current instance.</para
           >
@@ -4855,8 +5943,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Collections.Hashtable.Synchronized(System.Collections.Hashtable)" />
+
+            
 
             
 
@@ -4865,8 +5957,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Hashtable.SyncRoot" />
+
+            
 
             
 
@@ -4875,8 +5971,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4885,8 +5985,12 @@
 
             
 
+            
+
              . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4899,6 +6003,8 @@
 
             
 
+            
+
              during the entire enumeration:</para
           >
           <para>code reference: Classic Hashtable.IsSynchronized Example#2</para>
@@ -4908,6 +6014,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -4948,8 +6056,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -4958,8 +6070,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -4970,8 +6086,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -4980,13 +6100,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -4998,8 +6124,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -5008,8 +6138,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -5018,8 +6152,12 @@
 
             
 
+            
+
              throws an exception. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -5028,8 +6166,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -5041,8 +6183,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -5051,8 +6197,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -5061,8 +6211,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -5080,6 +6234,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -5119,6 +6275,8 @@
 
             
 
+            
+
              containing the values of the current
    instance.</para
           >
@@ -5131,13 +6289,19 @@
 
             
 
+            
+
              is unspecified, but it is the same order as the associated keys in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Hashtable.Keys" />
+
+            
 
             
 
@@ -5149,8 +6313,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -5159,13 +6327,19 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Hashtable" />
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -5181,8 +6355,12 @@
 
             
 
+            
+
              containing the values in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 

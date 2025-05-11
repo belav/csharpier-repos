@@ -42,6 +42,8 @@
 
           
 
+          
+
            equivalent of the deque to allow enumeration. </summary
         >
         <returns
@@ -50,11 +52,15 @@
 
           
 
+          
+
            representation of the elements in the deque (can be the object itself). </returns
         >
         <remarks
           >Implementation can return <see
            langword="null" />
+
+          
 
           
 

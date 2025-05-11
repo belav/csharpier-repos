@@ -25,6 +25,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -33,6 +35,8 @@
       <para
         >Indicates which <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -62,8 +66,12 @@
 
             
 
+            
+
              parameter can refer to a property of the current object, or a property of a property of the current object. For example, if you have a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -72,8 +80,12 @@
 
             
 
+            
+
              property set to a containing <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -82,13 +94,19 @@
 
             
 
+            
+
              object has an <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
+            
+
              property, you could pass "ListView.SmallImageList" as the <paramref
              name="relatedImageList" />
+
+            
 
             
 
@@ -103,6 +121,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -111,8 +131,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ImageList" />
+
+          
 
           
 
@@ -139,8 +163,12 @@
 
             
 
+            
+
              property can refer to a property of the current object, or a property of a property of the current object. For example, if you have a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -149,8 +177,12 @@
 
             
 
+            
+
              property set to a containing <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -159,13 +191,19 @@
 
             
 
+            
+
              object has an <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.RelatedImageListAttribute.RelatedImageList" />
+
+            
 
             
 

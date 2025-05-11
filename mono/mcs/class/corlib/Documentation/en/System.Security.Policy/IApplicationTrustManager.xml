@@ -33,8 +33,12 @@
 
         
 
+        
+
          interface. The host calls the <see
          cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >In the net_v40_long and later, there is only one trust manager, which can be a custom implementation of the <see
          cref="T:System.Security.Policy.IApplicationTrustManager" />
+
+        
 
         
 
@@ -86,8 +92,12 @@
 
             
 
+            
+
              method is called by the host to determine whether an application should be executed and which set of permissions it should be granted. <see
              cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+
+            
 
             
 
@@ -96,8 +106,12 @@
 
             
 
+            
+
              object with a <see
              cref="P:System.Security.Policy.ApplicationTrust.DefaultGrantSet" />
+
+            
 
             
 
@@ -106,13 +120,19 @@
 
             
 
+            
+
              object also has an <see
              cref="P:System.Security.Policy.ApplicationTrust.IsApplicationTrustedToRun" />
 
             
 
+            
+
              property that the trust manager sets to indicate whether the application should be trusted. If the trust manager indicates that the application can be trusted, the host activates the application and grants its assemblies the set of permissions provided in the <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 
@@ -132,10 +152,14 @@
 
           
 
+          
+
           The activation context for the application.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

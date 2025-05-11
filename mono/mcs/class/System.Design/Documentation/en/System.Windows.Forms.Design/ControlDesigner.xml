@@ -25,8 +25,12 @@
 
         
 
+        
+
          provides a base class for designers of components that derive from <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          class, <see
          cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
         
 
+        
+
          provides additional methods to support extending and altering the behavior of an associated <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -53,10 +63,14 @@
 
         
 
+        
+
         . For an overview of customizing design time behavior, see <format
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -68,6 +82,8 @@
       <para
         >Extends the design mode behavior of a <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -87,6 +103,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+            
 
             
 
@@ -146,6 +164,8 @@
 
             
 
+            
+
              assigned to the control.</para
           >
         </summary>
@@ -202,6 +222,8 @@
 
             
 
+            
+
              property. </para
           >
         </summary>
@@ -252,6 +274,8 @@
 
             
 
+            
+
              from the design environment.</para
           >
         </summary>
@@ -278,8 +302,12 @@
 
             
 
+            
+
              controls can only be parented by <see
              cref="T:System.Windows.Forms.TabControl" />
+
+            
 
             
 
@@ -289,6 +317,8 @@
             <para
               >This method is not called when an item is dragged from the <ui
               >Toolbox</ui>
+
+              
 
               
 
@@ -309,8 +339,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesigner" />
+
+          
 
           
 
@@ -386,8 +420,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -417,8 +455,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -427,8 +469,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -440,8 +486,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+            
 
             
 
@@ -456,11 +506,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,8 +551,12 @@
 
             
 
+            
+
              is a child of this control designer's control. The child does not directly participate in persistence, but it will if it is exposed as a property of the main control. Consider a control like the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -507,8 +565,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+            
 
             
 
@@ -517,8 +579,12 @@
 
             
 
+            
+
              control. The <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -527,8 +593,12 @@
 
             
 
+            
+
              for each panel, which allows other components to be dropped on them. But, in order for the contents of <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+            
 
             
 
@@ -537,8 +607,12 @@
 
             
 
+            
+
              to be saved, the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -548,6 +622,8 @@
           <para
             >To support this feature, the hosting infrastructure must expose the <see
              cref="T:System.ComponentModel.INestedContainer" />
+
+            
 
             
 
@@ -567,6 +643,8 @@
 
           
 
+          
+
           The child control for which design mode will be enabled.</param
         >
         <param name="name">
@@ -574,8 +652,12 @@
 
           
 
+          
+
           The name of <paramref
            name="child" />
+
+          
 
           
 
@@ -601,6 +683,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -610,6 +694,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -668,6 +754,8 @@
 
             
 
+            
+
              representing the bounds of this control.</para
           >
         </summary>
@@ -679,6 +767,8 @@
 
             
 
+            
+
              representing the bounds of this control.</para
           >
         </returns>
@@ -687,8 +777,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
+
+          
 
           
 
@@ -723,8 +817,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -744,6 +842,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -754,6 +854,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -768,6 +870,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -776,8 +880,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
+
+          
 
           
 
@@ -806,6 +914,8 @@
 
             
 
+            
+
              method determines whether a click at the specified point should be passed to the control, while the control is in design mode. You can override and implement this method to enable your control to receive clicks in the design-time environment.</para
           >
           <block subset="none" type="note">
@@ -815,8 +925,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.Control" />
+
+              
 
               
 
@@ -826,6 +940,8 @@
           <para
             >The <see
              cref="M:System.Windows.Forms.Design.ControlDesigner.GetHitTest(System.Drawing.Point)" />
+
+            
 
             
 
@@ -845,8 +961,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -907,6 +1027,8 @@
 
             
 
+            
+
              of the designer.</para
           >
         </summary>
@@ -938,13 +1060,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
 
           
 
+          
+
            to associate the designer with. This component must always be an instance of, or derive from, <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -980,6 +1108,8 @@
 
             
 
+            
+
              class overrides this method to handle after-drop cases.</para
           >
         </remarks>
@@ -989,6 +1119,8 @@
         </summary>
         <param name="defaultValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1020,6 +1152,8 @@
 
             
 
+            
+
              class overrides this method. It will look at the default property for the control and, if it is of type string, it will set this property's value to the name of the component. It only does this if the designer has been configured with this option in the options service. This method also connects the control to its parent and positions it. If you override this method, you should always call base.</para
           >
         </remarks>
@@ -1029,6 +1163,8 @@
         </summary>
         <param name="defaultValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1060,13 +1196,19 @@
 
             
 
+            
+
              collection of the <see
              cref="P:System.ComponentModel.Design.IDesignerHost.Container" />
 
             
 
+            
+
             . <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -1081,6 +1223,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1092,11 +1236,15 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </returns>
         <param name="internalControlIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1121,13 +1269,19 @@
 
             
 
+            
+
              has an <see
              cref="P:System.Drawing.Point.X" />
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Point.Y" />
+
+            
 
             
 
@@ -1142,8 +1296,12 @@
 
             
 
+            
+
              that represents the values of an invalid <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -1178,13 +1336,19 @@
 
             
 
+            
+
              collection of the <see
              cref="P:System.ComponentModel.Design.IDesignerHost.Container" />
 
             
 
+            
+
             . <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -1199,6 +1363,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1207,6 +1373,8 @@
           <para
             >The number of internal control designers in the <see
              cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+            
 
             
 
@@ -1236,10 +1404,14 @@
 
           
 
+          
+
           The x coordinate at which to display the context menu. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1296,8 +1468,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragEventArgs" />
+
+          
 
           
 
@@ -1375,8 +1551,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1439,8 +1619,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
+
+          
 
           
 
@@ -1476,8 +1660,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.Control" />
+
+              
 
               
 
@@ -1494,10 +1682,14 @@
 
           
 
+          
+
           The x position of the mouse in screen coordinates. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1526,6 +1718,8 @@
         </summary>
         <param name="cancel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1560,8 +1754,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.Control" />
+
+              
 
               
 
@@ -1578,10 +1776,14 @@
 
           
 
+          
+
           The x position of the mouse in screen coordinates. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1673,8 +1875,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1749,6 +1955,8 @@
 
             
 
+            
+
              returns its parent.</para
           >
         </remarks>
@@ -1757,6 +1965,8 @@
           <para
             >Gets the parent component for the <see
              cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+            
 
             
 
@@ -1788,6 +1998,8 @@
 
             
 
+            
+
              will allow snapline alignment during a drag operation.</para
           >
         </summary>
@@ -1814,6 +2026,8 @@
 
             
 
+            
+
              interface method override adds a set of properties to this designer's component at design time. This method adds the following browsable properties: Visible, Enabled, ContextMenu, AllowDrop, Location, Name, Controls, and Locked.</para
           >
         </remarks>
@@ -1825,6 +2039,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1833,8 +2049,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1893,6 +2113,8 @@
 
             
 
+            
+
              objects to assist in positioning the control on a design surface.</para
           >
         </remarks>
@@ -1901,6 +2123,8 @@
           <para
             >Gets a list of <see
              cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+            
 
             
 

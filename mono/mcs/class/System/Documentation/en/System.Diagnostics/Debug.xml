@@ -31,6 +31,8 @@
 
         
 
+        
+
          class to print debugging information and check your logic with assertions, you can make your code more robust without impacting the performance and code size of your shipping product.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
          dialog box, and to emit an assertion that will always fail. This class provides write methods in the following variations: <see
          cref="M:System.Diagnostics.Debug.Write(System.String)" />
+
+        
 
         
 
@@ -49,13 +55,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Diagnostics.Debug.WriteIf(System.Boolean,System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Diagnostics.Debug.WriteLineIf(System.Boolean,System.String)" />
+
+        
 
         
 
@@ -67,8 +79,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Diagnostics.TraceSwitch" />
+
+        
 
         
 
@@ -77,10 +93,14 @@
 
         
 
+        
+
          class and the <format
          type="text/html">
           <a href="8ab913aa-f400-4406-9436-f45bc6e54fbe">Trace Switches</a>
         </format>
+
+        
 
         
 
@@ -92,8 +112,12 @@
 
         
 
+        
+
          instances to or removing instances from the <see
          cref="P:System.Diagnostics.Debug.Listeners" />
+
+        
 
         
 
@@ -102,8 +126,12 @@
 
         
 
+        
+
          collection is shared by both the <see
          cref="T:System.Diagnostics.Debug" />
+
+        
 
         
 
@@ -112,8 +140,12 @@
 
         
 
+        
+
          classes; adding a trace listener to either class adds the listener to both. By default, the <see
          cref="T:System.Diagnostics.DefaultTraceListener" />
+
+        
 
         
 
@@ -126,8 +158,12 @@
 
           
 
+          
+
            collection can cause an exception to be thrown while tracing, if a resource used by the trace listener is not available. The conditions and the exception thrown depend on the trace listener and cannot be enumerated in this topic. It may be useful to place calls to the <see
            cref="T:System.Diagnostics.Debug" />
+
+          
 
           
 
@@ -140,8 +176,12 @@
 
         
 
+        
+
          method or the <see
          cref="P:System.Diagnostics.Debug.IndentLevel" />
+
+        
 
         
 
@@ -150,8 +190,12 @@
 
         
 
+        
+
          property. You can specify whether to automatically flush the output buffer after each write by setting the <see
          cref="P:System.Diagnostics.Debug.AutoFlush" />
+
+        
 
         
 
@@ -163,13 +207,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Diagnostics.Debug.IndentSize" />
 
         
 
+        
+
          for <see
          cref="T:System.Diagnostics.Debug" />
+
+        
 
         
 
@@ -186,8 +236,12 @@
 
         
 
+        
+
          attribute is applied to the methods of <see
          cref="T:System.Diagnostics.Debug" />
+
+        
 
         
 
@@ -196,8 +250,12 @@
 
         
 
+        
+
          ignore calls to these methods unless "DEBUG" is defined as a conditional compilation symbol. Refer to a compiler's documentation to determine whether <see
          cref="T:System.Diagnostics.ConditionalAttribute" />
+
+        
 
         
 
@@ -209,6 +267,8 @@
            type="text/html">
             <a href="076bd528-1b6f-4e8a-a372-eb5849cf969a">Debug Class in Visual C++</a>
           </format>
+
+          
 
           
 
@@ -255,8 +315,12 @@
 
             
 
+            
+
              method works only in debug builds. Use the <see
              cref="Overload:System.Diagnostics.Trace.Assert" />
+
+            
 
             
 
@@ -264,6 +328,8 @@
              type="text/html">
               <a href="70ab2522-6486-4076-a1a9-e0f11cd0f3a1">Assertions in Managed Code</a>
             </format>
+
+            
 
             
 
@@ -278,8 +344,12 @@
 
             
 
+            
+
              method is used to identify logic errors during program development. <see
              cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" />
+
+            
 
             
 
@@ -288,13 +358,19 @@
 
             
 
+            
+
              collection. You can customize this behavior by adding a <see
              cref="T:System.Diagnostics.TraceListener" />
 
             
 
+            
+
              to, or removing one from, the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -306,8 +382,12 @@
 
             
 
+            
+
             , <ui
             >Retry</ui>
+
+            
 
             
 
@@ -316,8 +396,12 @@
 
             
 
+            
+
             . Clicking the <ui
             >Abort</ui>
+
+            
 
             
 
@@ -326,8 +410,12 @@
 
             
 
+            
+
              sends you to the code in the debugger if your application is running in a debugger, or offers to open a debugger if it is not. Clicking <ui
             >Ignore</ui>
+
+            
 
             
 
@@ -343,8 +431,12 @@
 
               
 
+              
+
               . If the <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -353,8 +445,12 @@
 
               
 
+              
+
                collection, the message box is not displayed. The <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -367,6 +463,8 @@
 
               
 
+              
+
               , the <format
                type="text/html">
                 <a href="9a5cd1b5-be1a-485f-8f0c-2890ad3ef3e0"
@@ -376,13 +474,19 @@
 
               
 
+              
+
               , or by calling the <see
                cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
 
               
 
+              
+
                method on the <see
                cref="P:System.Diagnostics.Trace.Listeners" />
+
+              
 
               
 
@@ -395,8 +499,12 @@
 
             
 
+            
+
              in the configuration file that corresponds to the name of your application. In this file, you can enable and disable the assert message box or set the <see
              cref="P:System.Diagnostics.DefaultTraceListener.LogFileName" />
+
+            
 
             
 
@@ -414,6 +522,8 @@
         </summary>
         <param name="condition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -457,8 +567,12 @@
 
             
 
+            
+
              method works only in debug builds. Use the <see
              cref="Overload:System.Diagnostics.Trace.Assert" />
+
+            
 
             
 
@@ -466,6 +580,8 @@
              type="text/html">
               <a href="70ab2522-6486-4076-a1a9-e0f11cd0f3a1">Assertions in Managed Code</a>
             </format>
+
+            
 
             
 
@@ -477,8 +593,12 @@
 
             
 
+            
+
              method is used to identify logic errors during program development. <see
              cref="M:System.Diagnostics.Debug.Assert(System.Boolean,System.String)" />
+
+            
 
             
 
@@ -487,13 +607,19 @@
 
             
 
+            
+
              collection. You can customize this behavior by adding a <see
              cref="T:System.Diagnostics.TraceListener" />
 
             
 
+            
+
              to, or removing one from, the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -505,8 +631,12 @@
 
             
 
+            
+
             , <ui
             >Retry</ui>
+
+            
 
             
 
@@ -515,8 +645,12 @@
 
             
 
+            
+
             . Clicking the <ui
             >Abort</ui>
+
+            
 
             
 
@@ -525,8 +659,12 @@
 
             
 
+            
+
              sends you to the code in the debugger if your application is running in a debugger, or offers to open a debugger if it is not. Clicking <ui
             >Ignore</ui>
+
+            
 
             
 
@@ -539,8 +677,12 @@
 
               
 
+              
+
               . If the <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -549,8 +691,12 @@
 
               
 
+              
+
                collection, the message box is not displayed. The <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -563,6 +709,8 @@
 
               
 
+              
+
               , the <format
                type="text/html">
                 <a href="9a5cd1b5-be1a-485f-8f0c-2890ad3ef3e0"
@@ -572,13 +720,19 @@
 
               
 
+              
+
               , or by calling the <see
                cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
 
               
 
+              
+
                method on the <see
                cref="P:System.Diagnostics.Trace.Listeners" />
+
+              
 
               
 
@@ -591,8 +745,12 @@
 
             
 
+            
+
              in the configuration file that corresponds to the name of your application. In this file, you can enable and disable the assert message box or set the <see
              cref="P:System.Diagnostics.DefaultTraceListener.LogFileName" />
+
+            
 
             
 
@@ -613,6 +771,8 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the specified message is not sent and the message box is not displayed.  </param
         >
         <param name="message">
@@ -620,8 +780,12 @@
 
           
 
+          
+
           The message to send to the <see
            cref="P:System.Diagnostics.Trace.Listeners" />
+
+          
 
           
 
@@ -666,8 +830,12 @@
 
             
 
+            
+
              method works only in debug builds. Use the <see
              cref="Overload:System.Diagnostics.Trace.Assert" />
+
+            
 
             
 
@@ -675,6 +843,8 @@
              type="text/html">
               <a href="70ab2522-6486-4076-a1a9-e0f11cd0f3a1">Assertions in Managed Code</a>
             </format>
+
+            
 
             
 
@@ -686,8 +856,12 @@
 
             
 
+            
+
              method is used to identify logic errors during program development. <see
              cref="M:System.Diagnostics.Debug.Assert(System.Boolean,System.String,System.String)" />
+
+            
 
             
 
@@ -696,13 +870,19 @@
 
             
 
+            
+
              collection. You can customize this behavior by adding a <see
              cref="T:System.Diagnostics.TraceListener" />
 
             
 
+            
+
              to, or removing one from, the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -714,8 +894,12 @@
 
             
 
+            
+
             , <ui
             >Retry</ui>
+
+            
 
             
 
@@ -724,8 +908,12 @@
 
             
 
+            
+
             . Clicking the <ui
             >Abort</ui>
+
+            
 
             
 
@@ -734,8 +922,12 @@
 
             
 
+            
+
              sends you to the code in the debugger if your application is running in a debugger, or offers to open a debugger if it is not. Clicking <ui
             >Ignore</ui>
+
+            
 
             
 
@@ -748,8 +940,12 @@
 
               
 
+              
+
               . If the <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -758,8 +954,12 @@
 
               
 
+              
+
                collection, the message box is not displayed. The <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -772,6 +972,8 @@
 
               
 
+              
+
               , the <format
                type="text/html">
                 <a href="9a5cd1b5-be1a-485f-8f0c-2890ad3ef3e0"
@@ -781,13 +983,19 @@
 
               
 
+              
+
               , or by calling the <see
                cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
 
               
 
+              
+
                method on the <see
                cref="P:System.Diagnostics.Trace.Listeners" />
+
+              
 
               
 
@@ -800,8 +1008,12 @@
 
             
 
+            
+
              in the configuration file that corresponds to the name of your application. In this file, you can enable and disable the assert message box or set the <see
              cref="P:System.Diagnostics.DefaultTraceListener.LogFileName" />
+
+            
 
             
 
@@ -822,6 +1034,8 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the specified messages are not sent and the message box is not displayed.  </param
         >
         <param name="message">
@@ -829,8 +1043,12 @@
 
           
 
+          
+
           The message to send to the <see
            cref="P:System.Diagnostics.Trace.Listeners" />
+
+          
 
           
 
@@ -841,8 +1059,12 @@
 
           
 
+          
+
           The detailed message to send to the <see
            cref="P:System.Diagnostics.Trace.Listeners" />
+
+          
 
           
 
@@ -894,8 +1116,12 @@
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is sent to the <see
              cref="P:System.Diagnostics.Trace.Listeners" />
+
+            
 
             
 
@@ -907,8 +1133,12 @@
 
             
 
+            
+
              method works only in debug builds. Use the <see
              cref="Overload:System.Diagnostics.Trace.Assert" />
+
+            
 
             
 
@@ -916,6 +1146,8 @@
              type="text/html">
               <a href="70ab2522-6486-4076-a1a9-e0f11cd0f3a1">Assertions in Managed Code</a>
             </format>
+
+            
 
             
 
@@ -927,8 +1159,12 @@
 
             
 
+            
+
              method is used to identify logic errors during program development. <see
              cref="M:System.Diagnostics.Debug.Assert(System.Boolean,System.String,System.String,System.Object[])" />
+
+            
 
             
 
@@ -937,8 +1173,12 @@
 
             
 
+            
+
              method is called and the <paramref
              name="detailMessageFormat" />
+
+            
 
             
 
@@ -947,8 +1187,12 @@
 
             
 
+            
+
              array are passed in as parameters. <see
              cref="M:System.Diagnostics.Debug.Assert(System.Boolean,System.String,System.String,System.Object[])" />
+
+            
 
             
 
@@ -957,13 +1201,19 @@
 
             
 
+            
+
              collection. You can customize this behavior by adding a <see
              cref="T:System.Diagnostics.TraceListener" />
 
             
 
+            
+
              to, or removing one from, the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -975,8 +1225,12 @@
 
             
 
+            
+
             , <ui
             >Retry</ui>
+
+            
 
             
 
@@ -985,8 +1239,12 @@
 
             
 
+            
+
             . Clicking the <ui
             >Abort</ui>
+
+            
 
             
 
@@ -995,8 +1253,12 @@
 
             
 
+            
+
              sends you to the code in the debugger if your application is running in a debugger, or offers to open a debugger if it is not. Clicking <ui
             >Ignore</ui>
+
+            
 
             
 
@@ -1009,8 +1271,12 @@
 
               
 
+              
+
               . If the <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -1019,8 +1285,12 @@
 
               
 
+              
+
                collection, the message box is not displayed. The <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -1033,6 +1303,8 @@
 
               
 
+              
+
               , the <format
                type="text/html">
                 <a href="9a5cd1b5-be1a-485f-8f0c-2890ad3ef3e0"
@@ -1042,13 +1314,19 @@
 
               
 
+              
+
               , or by calling the <see
                cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
 
               
 
+              
+
                method on the <see
                cref="P:System.Diagnostics.Trace.Listeners" />
+
+              
 
               
 
@@ -1061,8 +1339,12 @@
 
             
 
+            
+
              in the configuration file that corresponds to the name of your application. In this file, you can enable and disable the assert message box or set the <see
              cref="P:System.Diagnostics.DefaultTraceListener.LogFileName" />
+
+            
 
             
 
@@ -1083,6 +1365,8 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the specified messages are not sent and the message box is not displayed.  </param
         >
         <param name="message">
@@ -1090,8 +1374,12 @@
 
           
 
+          
+
           The message to send to the <see
            cref="P:System.Diagnostics.Trace.Listeners" />
+
+          
 
           
 
@@ -1102,8 +1390,12 @@
 
           
 
+          
+
           The composite format string (see Remarks) to send to the <see
            cref="P:System.Diagnostics.Trace.Listeners" />
+
+          
 
           
 
@@ -1112,10 +1404,14 @@
 
           
 
+          
+
            array.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1137,10 +1433,11 @@
       </ReturnValue>
       <Parameters></Parameters>
       <Docs>
-        <value
-          >
+        <value>
           Whether or not the <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -1148,6 +1445,8 @@
           objects should be 
           <see
            cref="M:System.Diagnostics.TraceListener.Flush" />
+
+          
 
           
 
@@ -1164,13 +1463,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Debug.Close" />
 
             
 
+            
+
             . Setting <see
              cref="P:System.Diagnostics.Debug.AutoFlush" />
+
+            
 
             
 
@@ -1182,13 +1487,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.Debug.IndentSize" />
 
             
 
+            
+
              for <see
              cref="T:System.Diagnostics.Debug" />
+
+            
 
             
 
@@ -1208,8 +1519,12 @@
 
             
 
+            
+
              should be called on the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -1248,6 +1563,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1256,13 +1573,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Debug.Close" />
 
             
 
+            
+
             . Setting <see
              cref="P:System.Diagnostics.Debug.AutoFlush" />
+
+            
 
             
 
@@ -1274,6 +1597,8 @@
           <para
             >Flushes the output buffer and then calls the Close method on each of the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -1314,13 +1639,19 @@
 
             
 
+            
+
              outputs the message to a message box when the application is running in user interface mode and to the <see
              cref="T:System.Diagnostics.TraceListener" />
 
             
 
+            
+
              instances in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -1333,8 +1664,12 @@
 
               
 
+              
+
               . If the <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -1343,8 +1678,12 @@
 
               
 
+              
+
                collection, the message box is not displayed. The <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -1357,6 +1696,8 @@
 
               
 
+              
+
               , the <format
                type="text/html">
                 <a href="9a5cd1b5-be1a-485f-8f0c-2890ad3ef3e0"
@@ -1366,13 +1707,19 @@
 
               
 
+              
+
               , or by calling the <see
                cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
 
               
 
+              
+
                method on the <see
                cref="P:System.Diagnostics.Trace.Listeners" />
+
+              
 
               
 
@@ -1385,8 +1732,12 @@
 
             
 
+            
+
              to, or removing one from, the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -1399,6 +1750,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1442,13 +1795,19 @@
 
             
 
+            
+
              outputs the message to a message box when the application is running in user interface mode and to the <see
              cref="T:System.Diagnostics.TraceListener" />
 
             
 
+            
+
              instances in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -1461,8 +1820,12 @@
 
               
 
+              
+
               . If the <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -1471,8 +1834,12 @@
 
               
 
+              
+
                collection, the message box is not displayed. The <see
                cref="T:System.Diagnostics.DefaultTraceListener" />
+
+              
 
               
 
@@ -1485,6 +1852,8 @@
 
               
 
+              
+
               , the <format
                type="text/html">
                 <a href="9a5cd1b5-be1a-485f-8f0c-2890ad3ef3e0"
@@ -1494,13 +1863,19 @@
 
               
 
+              
+
               , or by calling the <see
                cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
 
               
 
+              
+
                method on the <see
                cref="P:System.Diagnostics.Trace.Listeners" />
+
+              
 
               
 
@@ -1513,8 +1888,12 @@
 
             
 
+            
+
              to, or removing one from, the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -1530,10 +1909,14 @@
 
           
 
+          
+
           A message to emit. </param
         >
         <param name="detailMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1571,13 +1954,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Debug.Close" />
 
             
 
+            
+
             . Setting <see
              cref="P:System.Diagnostics.Debug.AutoFlush" />
+
+            
 
             
 
@@ -1589,6 +1978,8 @@
           <para
             >Flushes the output buffer and causes buffered data to write to the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -1620,11 +2011,12 @@
       <Parameters />
       <Docs>
         <remarks>
-          <para
-            >
+          <para>
             This is equivalent to incrementing 
             <see
              cref="P:System.Diagnostics.Trace.IndentLevel" />
+
+            
 
             
 
@@ -1637,6 +2029,8 @@
           <para
             >Increases the current <see
              cref="P:System.Diagnostics.Debug.IndentLevel" />
+
+            
 
             
 
@@ -1669,8 +2063,12 @@
 
             
 
+            
+
              property represents the number of times the indent of size <see
              cref="P:System.Diagnostics.Debug.IndentSize" />
+
+            
 
             
 
@@ -1707,8 +2105,12 @@
 
             
 
+            
+
              interprets this number as spaces. An <see
              cref="T:System.Diagnostics.EventLogTraceListener" />
+
+            
 
             
 
@@ -1720,13 +2122,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.Debug.IndentSize" />
 
             
 
+            
+
              for <see
              cref="T:System.Diagnostics.Debug" />
+
+            
 
             
 
@@ -1763,10 +2171,11 @@
         <ReturnType>System.Diagnostics.TraceListenerCollection</ReturnType>
       </ReturnValue>
       <Docs>
-        <value
-          >
+        <value>
           The list of <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -1782,8 +2191,12 @@
 
             
 
+            
+
              class. To remove the default listener, call the <see
              cref="M:System.Diagnostics.TraceListenerCollection.Remove(System.Diagnostics.TraceListener)" />
+
+            
 
             
 
@@ -1792,13 +2205,19 @@
 
             
 
+            
+
             . To redirect output to the console window, add an instance of the <see
              cref="T:System.Diagnostics.ConsoleTraceListener" />
 
             
 
+            
+
             . To redirect output to a file or stream, add an instance of the <see
              cref="T:System.Diagnostics.TextWriterTraceListener" />
+
+            
 
             
 
@@ -1811,13 +2230,19 @@
 
               
 
+              
+
                collection is shared by both the <see
                cref="T:System.Diagnostics.Debug" />
 
               
 
+              
+
                and the <see
                cref="T:System.Diagnostics.Trace" />
+
+              
 
               
 
@@ -1862,6 +2287,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1873,11 +2300,15 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1928,8 +2359,12 @@
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. By default, the output is written to an instance of <see
              cref="T:System.Diagnostics.DefaultTraceListener" />
+
+            
 
             
 
@@ -1944,6 +2379,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -1952,8 +2389,12 @@
 
           
 
+          
+
           A composite format string (see Remarks) that contains text intermixed with zero or more format items, which correspond to objects in the <paramref
            name="args" />
+
+          
 
           
 
@@ -1961,6 +2402,8 @@
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1991,11 +2434,12 @@
       <Parameters />
       <Docs>
         <remarks>
-          <para
-            >
+          <para>
             This is equivalent to decrementing 
             <see
              cref="P:System.Diagnostics.Trace.IndentLevel" />
+
+            
 
             
 
@@ -2008,6 +2452,8 @@
           <para
             >Decreases the current <see
              cref="P:System.Diagnostics.Debug.IndentLevel" />
+
+            
 
             
 
@@ -2048,11 +2494,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+
+            
 
             
 
@@ -2067,8 +2517,12 @@
 
             
 
+            
+
              method to the trace listeners in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -2080,8 +2534,12 @@
 
           
 
+          
+
           An object whose name is sent to the <see
            cref="P:System.Diagnostics.Debug.Listeners" />
+
+          
 
           
 
@@ -2121,11 +2579,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+
+            
 
             
 
@@ -2140,11 +2602,15 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2188,6 +2654,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2196,11 +2664,15 @@
 
             
 
+            
+
              parameter to group output messages.</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+
+            
 
             
 
@@ -2215,8 +2687,12 @@
 
             
 
+            
+
              method to the trace listeners in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -2228,8 +2704,12 @@
 
           
 
+          
+
           An object whose name is sent to the <see
            cref="P:System.Diagnostics.Debug.Listeners" />
+
+          
 
           
 
@@ -2237,6 +2717,8 @@
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2280,6 +2762,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2288,11 +2772,15 @@
 
             
 
+            
+
              parameter to group output messages.</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+
+            
 
             
 
@@ -2307,6 +2795,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -2315,10 +2805,14 @@
 
           
 
+          
+
           A message to write. </param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2362,11 +2856,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+
+            
 
             
 
@@ -2381,8 +2879,12 @@
 
             
 
+            
+
              method to the trace listeners in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -2394,6 +2896,8 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the value is written to the trace listeners in the collection.</param
         >
         <param name="value">
@@ -2401,8 +2905,12 @@
 
           
 
+          
+
           An object whose name is sent to the <see
            cref="P:System.Diagnostics.Debug.Listeners" />
+
+          
 
           
 
@@ -2446,11 +2954,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+
+            
 
             
 
@@ -2465,6 +2977,8 @@
 
             
 
+            
+
              collection if a condition is true.</para
           >
         </summary>
@@ -2473,10 +2987,14 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the message is written to the trace listeners in the collection.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2521,6 +3039,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2529,11 +3049,15 @@
 
             
 
+            
+
              parameter can be used to group output messages.</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+
+            
 
             
 
@@ -2548,8 +3072,12 @@
 
             
 
+            
+
              method to the trace listeners in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -2561,10 +3089,14 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the category name and value are written to the trace listeners in the collection.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2573,10 +3105,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2621,6 +3157,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2629,11 +3167,15 @@
 
             
 
+            
+
              parameter can be used to group output messages.</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+
+            
 
             
 
@@ -2648,11 +3190,15 @@
 
             
 
+            
+
              collection if a condition is true.</para
           >
         </summary>
         <param name="condition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2663,10 +3209,14 @@
 
           
 
+          
+
           A message to write. </param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2706,11 +3256,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -2725,8 +3279,12 @@
 
             
 
+            
+
              method to the trace listeners in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -2738,8 +3296,12 @@
 
           
 
+          
+
           An object whose name is sent to the <see
            cref="P:System.Diagnostics.Debug.Listeners" />
+
+          
 
           
 
@@ -2779,11 +3341,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -2798,11 +3364,15 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2846,6 +3416,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2854,11 +3426,15 @@
 
             
 
+            
+
              parameter can be used to group output messages.</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -2873,8 +3449,12 @@
 
             
 
+            
+
              method to the trace listeners in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -2886,8 +3466,12 @@
 
           
 
+          
+
           An object whose name is sent to the <see
            cref="P:System.Diagnostics.Debug.Listeners" />
+
+          
 
           
 
@@ -2895,6 +3479,8 @@
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2944,6 +3530,8 @@
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string.  </para
           >
           <para
@@ -2954,8 +3542,12 @@
 
             
 
+            
+
              keyword in the syntax for this method implies that the object array can be a single value. The exception to this is the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2964,8 +3556,12 @@
 
             
 
+            
+
              value of a single string will default to the <see
              cref="M:System.Diagnostics.Debug.WriteLine(System.String,System.String)" />
+
+            
 
             
 
@@ -2977,11 +3573,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -2996,6 +3596,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -3004,8 +3606,12 @@
 
           
 
+          
+
           A composite format string (see Remarks) that contains text intermixed with zero or more format items, which correspond to objects in the <paramref
            name="args" />
+
+          
 
           
 
@@ -3013,6 +3619,8 @@
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3056,6 +3664,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3064,11 +3674,15 @@
 
             
 
+            
+
              parameter can be used to group output messages.</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -3083,6 +3697,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -3091,10 +3707,14 @@
 
           
 
+          
+
           A message to write. </param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3138,11 +3758,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -3157,8 +3781,12 @@
 
             
 
+            
+
              method to the trace listeners in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -3170,6 +3798,8 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the value is written to the trace listeners in the collection.</param
         >
         <param name="value">
@@ -3177,8 +3807,12 @@
 
           
 
+          
+
           An object whose name is sent to the <see
            cref="P:System.Diagnostics.Debug.Listeners" />
+
+          
 
           
 
@@ -3222,11 +3856,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -3241,6 +3879,8 @@
 
             
 
+            
+
              collection if a condition is true.</para
           >
         </summary>
@@ -3249,10 +3889,14 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the message is written to the trace listeners in the collection.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3297,6 +3941,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3305,11 +3951,15 @@
 
             
 
+            
+
              parameter can be used to group output messages.</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -3324,8 +3974,12 @@
 
             
 
+            
+
              method to the trace listeners in the <see
              cref="P:System.Diagnostics.Debug.Listeners" />
+
+            
 
             
 
@@ -3337,10 +3991,14 @@
 
           
 
+          
+
           The conditional expression to evaluate. If the condition is true, the category name and value are written to the trace listeners in the collection.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3349,10 +4007,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3397,6 +4059,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3405,11 +4069,15 @@
 
             
 
+            
+
              parameter can be used to group output messages.</para
           >
           <para
             >This method calls the <see
              cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+
+            
 
             
 
@@ -3424,11 +4092,15 @@
 
             
 
+            
+
              collection if a condition is true.</para
           >
         </summary>
         <param name="condition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3439,10 +4111,14 @@
 
           
 
+          
+
           A message to write. </param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

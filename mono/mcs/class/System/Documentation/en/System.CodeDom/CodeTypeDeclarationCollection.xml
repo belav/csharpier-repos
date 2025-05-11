@@ -39,8 +39,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+        
 
         
 
@@ -81,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+
+            
 
             
 
@@ -118,8 +126,12 @@
 
             
 
+            
+
              class that contains the specified array of <see
              cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+            
 
             
 
@@ -131,8 +143,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -169,6 +185,8 @@
 
             
 
+            
+
              class that contains the elements of the specified source collection.</para
           >
         </summary>
@@ -177,8 +195,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+
+          
 
           
 
@@ -217,6 +239,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -229,8 +253,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -270,8 +298,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -310,6 +342,8 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
@@ -318,8 +352,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+
+          
 
           
 
@@ -358,6 +396,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -370,8 +410,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -411,8 +455,12 @@
 
             
 
+            
+
              object to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -424,8 +472,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -433,6 +485,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,8 +525,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+
+            
 
             
 
@@ -488,8 +546,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -529,11 +591,15 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -544,8 +610,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -612,6 +682,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -620,8 +692,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 

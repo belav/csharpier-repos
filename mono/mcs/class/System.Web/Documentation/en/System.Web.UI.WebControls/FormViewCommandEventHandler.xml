@@ -33,8 +33,12 @@
 
         
 
+        
+
          event is raised when a button within the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >Buttons within a <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -70,8 +76,12 @@
 
               
 
+              
+
                control to the mode specified by the <see
                cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+              
 
               
 
@@ -80,8 +90,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+              
 
               
 
@@ -100,8 +114,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
+
+              
 
               
 
@@ -120,13 +138,19 @@
 
               
 
+              
+
                control in edit mode. Raises the <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+              
 
               
 
@@ -145,8 +169,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemInserting" />
+
+              
 
               
 
@@ -165,13 +193,19 @@
 
               
 
+              
+
                control in insert mode. Raises the <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+              
 
               
 
@@ -190,8 +224,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" />
+
+              
 
               
 
@@ -210,8 +248,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" />
+
+              
 
               
 
@@ -226,6 +268,8 @@
 
         
 
+        
+
          event is raised when a button listed in the previous table is clicked, it is recommended that you handle the events listed in the table for the operation.</para
       >
       <para
@@ -234,10 +278,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -252,8 +300,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 

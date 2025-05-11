@@ -11,6 +11,8 @@
 
         
 
+        
+
         ). </list_item
       >
     </list>
@@ -23,6 +25,8 @@
         <list_item
           > The argument list is evaluated as described in <hyperlink
           >14.4.1</hyperlink>
+
+          
 
           
 
@@ -40,6 +44,8 @@
 
           
 
+          
+
           . </list_item
         >
         <list_item> M is invoked. The variable referenced by E becomes the variable referenced by this. </list_item>
@@ -53,6 +59,8 @@
 
           
 
+          
+
           . </list_item
         >
         <list_item
@@ -61,8 +69,12 @@
 
           
 
+          
+
           , a boxing conversion (<hyperlink
           >11.3.1</hyperlink>
+
+          
 
           
 
@@ -78,11 +90,15 @@
 
             
 
+            
+
             ) to determine the implementation of M provided by the run-time type of the instance referenced by E. </list_item
           >
           <list_item
             > Otherwise, if M is a virtual function member, the function member to invoke is the implementation of M provided by the run-time type of the instance referenced by E. This function member is determined by applying the rules for determining the most derived implementation (<hyperlink
             >17.5.3</hyperlink>
+
+            
 
             
 

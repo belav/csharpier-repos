@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes shared by the .NET Framework data providers.</para
       >
     </summary>
@@ -17,6 +19,8 @@
       <para
         >A .NET Framework data provider describes a collection of classes used to access a data source, such as a database, in the managed space. Supported providers include the .NET Framework Data Provider for ODBC, the .NET Framework Data Provider for OLEDB, the .NET Framework Data Provider for Oracle, and the .NET Framework Data Provider for SQL Server. The classes in <see
          cref="N:System.Data.Common" />
+
+        
 
         
 
@@ -29,6 +33,8 @@
             >Writing Provider Independent Code with ADO.NET</a
           >
         </format>
+
+        
 
         
 

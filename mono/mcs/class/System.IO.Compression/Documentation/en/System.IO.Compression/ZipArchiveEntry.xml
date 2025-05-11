@@ -22,8 +22,12 @@
 
         
 
+        
+
          class enables you to examine the properties of an entry, and open or delete the entry. When you open an entry, you can modify the compressed file by writing to the stream for that compressed file. You open an entry by calling the <see
          cref="M:System.IO.Compression.ZipArchiveEntry.Open" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          class. Those methods are <see
          cref="M:System.IO.Compression.ZipFileExtensions.ExtractToFile(System.IO.Compression.ZipArchiveEntry,System.String)" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
         , and they enable you to decompress the contents of the entry to a file. The System.IO.Compression.FileSystem assembly is not available in win8. In win8_appname_long apps, you can decompress the contents of an archive by using <see
          cref="T:System.IO.Compression.DeflateStream" />
+
+        
 
         
 
@@ -55,13 +67,19 @@
 
         
 
+        
+
         , or you can use the wrt types <see
          cref="http://go.microsoft.com/fwlink/p/?LinkId=246357">Compressor</see>
 
         
 
+        
+
          and <see
          cref="http://go.microsoft.com/fwlink/?LinkId=246358">Decompressor</see>
+
+        
 
         
 
@@ -73,8 +91,12 @@
 
         
 
+        
+
          collection in <see
          cref="T:System.IO.Compression.ZipArchive" />
+
+        
 
         
 
@@ -83,8 +105,12 @@
 
         
 
+        
+
          method in <see
          cref="T:System.IO.Compression.ZipArchive" />
+
+        
 
         
 
@@ -93,8 +119,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.IO.Compression.ZipFileExtensions.CreateEntryFromFile(System.IO.Compression.ZipArchive,System.String,System.String)" />
+
+        
 
         
 
@@ -168,8 +198,12 @@
 
             
 
+            
+
             , or the mode is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Update" />
+
+            
 
             
 
@@ -224,8 +258,12 @@
 
             
 
+            
+
              property contains the relative path, including the subdirectory hierarchy, of an entry in a zip archive. (In contrast, the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.Name" />
+
+            
 
             
 
@@ -234,8 +272,12 @@
 
             
 
+            
+
              method and provide NewEntry.txt as the name for the first entry and AddedFolder\\NewEntry.txt for the second entry, both entries will have NewEntry.txt in the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.Name" />
+
+            
 
             
 
@@ -244,8 +286,12 @@
 
             
 
+            
+
              property, but the second entry will have AddedFolder\\NewEntry.txt in the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.FullName" />
+
+            
 
             
 
@@ -254,6 +300,8 @@
           <para
             >You can specify any string as the path of an entry, including strings that specify invalid and absolute paths. Therefore, the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.FullName" />
+
+            
 
             
 
@@ -289,8 +337,12 @@
 
             
 
+            
+
              method, the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.LastWriteTime" />
+
+            
 
             
 
@@ -299,8 +351,12 @@
 
             
 
+            
+
              method, the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.LastWriteTime" />
+
+            
 
             
 
@@ -309,11 +365,15 @@
 
             
 
+            
+
              property if you want the value to reflect the time of the latest change.</para
           >
           <para
             >When you set this property, the <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -346,8 +406,12 @@
 
             
 
+            
+
             , or the mode is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Update" />
+
+            
 
             
 
@@ -381,8 +445,12 @@
 
             
 
+            
+
              property contains the portion of the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.FullName" />
+
+            
 
             
 
@@ -391,8 +459,12 @@
 
             
 
+            
+
              method and provide NewEntry.txt as the name for the first entry and AddedFolder\\NewEntry.txt for the second entry, both entries will have NewEntry.txt in the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.Name" />
+
+            
 
             
 
@@ -401,8 +473,12 @@
 
             
 
+            
+
              property, but the second entry will have AddedFolder\\NewEntry.txt in the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.FullName" />
+
+            
 
             
 

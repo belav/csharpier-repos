@@ -6,11 +6,15 @@
 
     
 
+    
+
      declares a local variable or constant. Declaration statements are permitted in blocks, but are not permitted as embedded statements. <grammar_production
     >
       <name>
         <non_terminal where="15.5">declaration-statement</non_terminal>
       </name>
+
+      
 
       
 

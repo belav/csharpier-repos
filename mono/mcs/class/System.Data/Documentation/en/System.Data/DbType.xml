@@ -23,6 +23,8 @@
 
         
 
+        
+
          when working with byte arrays larger than 8,000 bytes.</para
       >
     </remarks>
@@ -144,8 +146,12 @@
 
             
 
+            
+
              (or -922,337,203,685,477.5808) to 2 <superscript
             >63</superscript>
+
+            
 
             
 
@@ -213,8 +219,12 @@
 
             
 
+            
+
              to approximately 7.9 x 10 <superscript
             >28</superscript>
+
+            
 
             
 
@@ -244,8 +254,12 @@
 
             
 
+            
+
              to 1.7 x 10 <superscript
             >308</superscript>
+
+            
 
             
 
@@ -389,8 +403,12 @@
 
             
 
+            
+
              to 3.4 x 10 <superscript
             >38</superscript>
+
+            
 
             
 
@@ -455,6 +473,8 @@
           <para
             >A type representing a SQL Server DateTime value. If you want to use a SQL Server time value, use <see
              cref="F:System.Data.SqlDbType.Time" />
+
+            
 
             
 

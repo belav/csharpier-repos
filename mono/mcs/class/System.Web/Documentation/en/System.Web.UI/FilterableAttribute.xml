@@ -24,8 +24,12 @@
 
         
 
+        
+
          attribute is applied to a property to specify whether the property supports device filtering. When a property supports device filtering, you can override the value of a property for a specific device by specifying a device filter. By default, properties are filterable, so a control developer could prevent device filtering on a property by setting the <see
          cref="T:System.Web.UI.FilterableAttribute" />
+
+        
 
         
 
@@ -33,6 +37,8 @@
          type="text/html">
           <a href="a7f55dfa-290b-45f8-bf8f-d5a4540bae61">Customizing for Specific Devices</a>
         </format>
+
+        
 
         
 
@@ -46,6 +52,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -54,8 +62,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.FilterableAttribute.#ctor(System.Boolean)" />
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
             
 
+            
+
              class. The following table shows the initial property value for an instance of the <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -115,6 +131,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -129,11 +147,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="filterable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -163,13 +185,19 @@
 
             
 
+            
+
              field represents a predefined <see
              cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
+            
+
              object with default property settings. This field is often used when comparing a <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -182,13 +210,19 @@
 
               
 
+              
+
                field is identical to the <see
                cref="T:System.Web.UI.FilterableAttribute" />
 
               
 
+              
+
                object represented by the <see
                cref="F:System.Web.UI.FilterableAttribute.Yes" />
+
+              
 
               
 
@@ -201,6 +235,8 @@
           <para
             >Represents a predefined <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -231,8 +267,12 @@
 
             
 
+            
+
              method to determine whether the current instance of the <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -246,8 +286,12 @@
 
                 
 
+                
+
                  parameter must be a <see
                  cref="T:System.Web.UI.FilterableAttribute" />
+
+                
 
                 
 
@@ -258,6 +302,8 @@
               <para
                 >The <see
                  cref="P:System.Web.UI.FilterableAttribute.Filterable" />
+
+                
 
                 
 
@@ -277,6 +323,8 @@
 
             
 
+            
+
              class is equal to the specified object.</para
           >
         </summary>
@@ -288,8 +336,12 @@
 
             
 
+            
+
              parameter is equal to the current instance of the <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -301,8 +353,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -330,8 +386,12 @@
 
             
 
+            
+
              property to determine whether the property to which the <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -339,6 +399,8 @@
              type="text/html">
               <a href="a7f55dfa-290b-45f8-bf8f-d5a4540bae61">Customizing for Specific Devices</a>
             </format>
+
+            
 
             
 
@@ -350,6 +412,8 @@
           <para
             >Gets a value indicating whether the property to which the <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -401,8 +465,12 @@
 
             
 
+            
+
              method is a helper method used by ASP.NET to determine whether the current instance of the <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -411,8 +479,12 @@
 
             
 
+            
+
              object contained in the <see
              cref="F:System.Web.UI.FilterableAttribute.Default" />
+
+            
 
             
 
@@ -427,8 +499,12 @@
 
             
 
+            
+
              class is equal to the <see
              cref="F:System.Web.UI.FilterableAttribute.Default" />
+
+            
 
             
 
@@ -443,8 +519,12 @@
 
             
 
+            
+
              is equal to <see
              cref="F:System.Web.UI.FilterableAttribute.Default" />
+
+            
 
             
 
@@ -476,8 +556,12 @@
 
             
 
+            
+
              method to determine whether the specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -487,6 +571,8 @@
             <para
               >An object supports device filtering if its data type supports device filtering. For more information, see the <see
                cref="M:System.Web.UI.FilterableAttribute.IsTypeFilterable(System.Type)" />
+
+              
 
               
 
@@ -502,6 +588,8 @@
 
             
 
+            
+
              supports device filtering.</para
           >
         </summary>
@@ -513,8 +601,12 @@
 
             
 
+            
+
              contained in the <paramref
              name="instance" />
+
+            
 
             
 
@@ -549,8 +641,12 @@
 
             
 
+            
+
              method to determine whether a property supports device filtering. To use this method, you must pass in a <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -569,8 +665,12 @@
 
             
 
+            
+
              object contained in the <paramref
              name="propertyDescriptor" />
+
+            
 
             
 
@@ -601,8 +701,12 @@
 
             
 
+            
+
              method to determine whether the specified type supports device filtering. A type supports device filtering if it has a <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -621,6 +725,8 @@
 
             
 
+            
+
              parameter supports device filtering; otherwise, false.</para
           >
         </returns>
@@ -629,8 +735,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -660,8 +770,12 @@
 
             
 
+            
+
              field represents a predefined <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -670,8 +784,12 @@
 
             
 
+            
+
              object to the predefined <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -683,6 +801,8 @@
           <para
             >Represents a predefined <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -713,8 +833,12 @@
 
             
 
+            
+
              field represents a predefined <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -723,8 +847,12 @@
 
             
 
+            
+
              object to the predefined <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 
@@ -737,6 +865,8 @@
 
               
 
+              
+
                object.</para
             >
           </block>
@@ -746,6 +876,8 @@
           <para
             >Represents a predefined <see
              cref="T:System.Web.UI.FilterableAttribute" />
+
+            
 
             
 

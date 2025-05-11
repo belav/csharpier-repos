@@ -18,6 +18,8 @@
 
         
 
+        
+
          property. </para
       >
     </remarks>
@@ -26,6 +28,8 @@
       <para
         >Defines how a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is used internally by the <see
          cref="T:System.Web.HttpServerUtility" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          object. Additionally, the <see
          cref="T:System.Web.HttpUtility" />
+
+        
 
         
 
@@ -41,11 +49,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >To encode or decode values outside of a web application, use the <see
          cref="T:System.Net.WebUtility" />
+
+        
 
         
 
@@ -72,13 +84,19 @@
 
             
 
+            
+
              class exposes methods for encoding and decoding string based URLs, URL tokens, and paths. The <see
              cref="T:System.Web.HttpUtility" />
 
             
 
+            
+
              is used internally by the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -90,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.HttpUtility" />
+
+            
 
             
 
@@ -120,8 +140,12 @@
 
             
 
+            
+
              method converts only quotation marks ("), ampersands (&amp;), and left angle brackets (&lt;) to equivalent character entities. It is considerably faster than the <see
              cref="M:System.Web.HttpUtility.HtmlEncode(System.String)" />
+
+            
 
             
 
@@ -133,8 +157,12 @@
 
             
 
+            
+
              method should be used only for double-quoted attributes. Security issues might arise when using the <see
              cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
+
+            
 
             
 
@@ -151,6 +179,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,8 +214,12 @@
 
             
 
+            
+
              method converts only quotation marks ("), ampersands (&amp;), and left angle brackets (&lt;) to equivalent character entities. It is considerably faster than the <see
              cref="M:System.Web.HttpUtility.HtmlEncode(System.String,System.IO.TextWriter)" />
+
+            
 
             
 
@@ -197,8 +231,12 @@
 
             
 
+            
+
              method should be used only for double-quoted attributes. Security issues might arise when using the <see
              cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String,System.IO.TextWriter)" />
+
+            
 
             
 
@@ -213,11 +251,15 @@
 
             
 
+            
+
              output stream.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,8 +270,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -260,6 +306,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -273,6 +321,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -307,6 +357,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -318,11 +370,15 @@
 
             
 
+            
+
              output stream.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,8 +389,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -365,6 +425,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -378,6 +440,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -412,6 +476,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -423,11 +489,15 @@
 
             
 
+            
+
              stream of output.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -438,8 +508,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -475,13 +549,19 @@
 
             
 
+            
+
              method uses <see
              cref="P:System.Text.Encoding.UTF8" />
 
             
 
+            
+
              format to parse the query string In the returned <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -494,10 +574,14 @@
 
               
 
+              
+
                method uses query strings that might contain user input, which is a potential security threat. By default, ASP.NET Web pages validate that user input does not include script or HTML elements. For more information, see <format
                type="text/html">
                 <a href="772c7312-211a-4eb3-8d6e-eec0aa1dcc07">Script Exploits Overview</a>
               </format>
+
+              
 
               
 
@@ -513,8 +597,12 @@
 
             
 
+            
+
              using <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -529,11 +617,15 @@
 
             
 
+            
+
              of query parameters and values.</para
           >
         </returns>
         <param name="query">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -566,6 +658,8 @@
 
             
 
+            
+
             , URL-encoded characters are decoded and multiple occurrences of the same query string parameter are listed as a single entry with a comma separating each value. </para
           >
           <block subset="none" type="note">
@@ -575,10 +669,14 @@
 
               
 
+              
+
                method uses query strings that might contain user input, which is a potential security threat. By default, ASP.NET Web pages validate that user input does not include script or HTML elements. For more information, see <format
                type="text/html">
                 <a href="772c7312-211a-4eb3-8d6e-eec0aa1dcc07">Script Exploits Overview</a>
               </format>
+
+              
 
               
 
@@ -594,8 +692,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -610,11 +712,15 @@
 
             
 
+            
+
              of query parameters and values.</para
           >
         </returns>
         <param name="query">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -625,8 +731,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -653,6 +763,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -666,6 +778,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -700,6 +814,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -716,6 +832,8 @@
 
           
 
+          
+
           The array of bytes to decode. </param
         >
         <param name="e">
@@ -723,8 +841,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -763,6 +885,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -779,8 +903,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -817,6 +945,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -833,10 +963,14 @@
 
           
 
+          
+
           The array of bytes to decode. </param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -847,6 +981,8 @@
 
           
 
+          
+
           The number of bytes to decode. </param
         >
         <param name="e">
@@ -854,8 +990,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -889,6 +1029,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -902,6 +1044,8 @@
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -932,6 +1076,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -945,6 +1091,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -979,6 +1127,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -995,6 +1145,8 @@
 
           
 
+          
+
           The string to decode. </param
         >
         <param name="e">
@@ -1002,8 +1154,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -1039,6 +1195,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1055,6 +1213,8 @@
 
           
 
+          
+
           The array of bytes to decode. </param
         >
         <param name="offset">
@@ -1062,10 +1222,14 @@
 
           
 
+          
+
           The position in the byte array at which to begin decoding. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1095,11 +1259,15 @@
 
             
 
+            
+
              method can be used to encode the entire URL, including query-string values. If characters such as blanks and punctuation are passed in an HTTP stream, they might be misinterpreted at the receiving end. URL encoding converts characters that are not allowed in a URL into character-entity equivalents; URL decoding reverses the encoding. For example, when the characters &lt; and &gt; are embedded in a block of text to be transmitted in a URL, they are encoded as %3c and %3e.</para
           >
           <para
             >To encode or decode values outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1116,6 +1284,8 @@
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1145,6 +1315,8 @@
 
             
 
+            
+
              method can be used to encode the entire URL, including query-string values. If characters such as blanks and punctuation are passed in an HTTP stream without encoding, they might be misinterpreted at the receiving end. URL encoding converts characters that are not allowed in a URL into character-entity equivalents; URL decoding reverses the encoding. For example, when the characters &lt; and &gt; are embedded in a block of text to be transmitted in a URL, they are encoded as %3c and %3e.</para
           >
           <para
@@ -1153,8 +1325,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Web.HttpUtility.UrlPathEncode(System.String)" />
+
+            
 
             
 
@@ -1163,13 +1339,19 @@
 
             
 
+            
+
              method converts each space character to a plus character (+). The <see
              cref="M:System.Web.HttpUtility.UrlPathEncode(System.String)" />
 
             
 
+            
+
              method converts each space character into the string "%20", which represents a space in hexadecimal notation. Use the <see
              cref="M:System.Web.HttpUtility.UrlPathEncode(System.String)" />
+
+            
 
             
 
@@ -1181,8 +1363,12 @@
 
             
 
+            
+
              method uses UTF-8 encoding by default. Therefore, using the <see
              cref="M:System.Web.HttpUtility.UrlEncode(System.String)" />
+
+            
 
             
 
@@ -1191,8 +1377,12 @@
 
             
 
+            
+
              method and specifying <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -1203,8 +1393,12 @@
 
             
 
+            
+
              is a convenient way to access the <see
              cref="M:System.Web.HttpUtility.UrlEncode(System.String)" />
+
+            
 
             
 
@@ -1213,8 +1407,12 @@
 
             
 
+            
+
              uses the <see
              cref="M:System.Web.HttpUtility.UrlEncode(System.String)" />
+
+            
 
             
 
@@ -1223,6 +1421,8 @@
           <para
             >To encode or decode values outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1239,6 +1439,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1278,6 +1480,8 @@
           <para
             >To encode or decode values outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1321,11 +1525,15 @@
 
             
 
+            
+
              method can be used to encode the entire URL, including query-string values. If characters such as blanks and punctuation are passed in an HTTP stream, they might be misinterpreted at the receiving end. URL encoding converts characters that are not allowed in a URL into character-entity equivalents; URL decoding reverses the encoding. For example, when the characters &lt; and &gt; are embedded in a block of text to be transmitted in a URL, they are encoded as %3c and %3e.</para
           >
           <para
             >To encode or decode values outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1345,6 +1553,8 @@
 
           
 
+          
+
           The array of bytes to encode. </param
         >
         <param name="offset">
@@ -1352,10 +1562,14 @@
 
           
 
+          
+
           The position in the byte array at which to begin encoding. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1389,6 +1603,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1402,6 +1618,8 @@
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1432,6 +1650,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1445,6 +1665,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1479,6 +1701,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1495,6 +1719,8 @@
 
           
 
+          
+
           The string to encode </param
         >
         <param name="e">
@@ -1502,8 +1728,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -1539,6 +1769,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1555,6 +1787,8 @@
 
           
 
+          
+
           The array of bytes to encode. </param
         >
         <param name="offset">
@@ -1562,10 +1796,14 @@
 
           
 
+          
+
           The position in the byte array at which to begin encoding. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1603,11 +1841,15 @@
 
             
 
+            
+
              notation.</para
           >
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1649,6 +1891,8 @@
 
           
 
+          
+
           The string to convert. </param
         >
       </Docs>
@@ -1674,6 +1918,8 @@
           <para
             >Do not use; intended only for browser compatibility. Use <see
              cref="M:System.Web.HttpUtility.UrlEncode(System.String)" />
+
+            
 
             
 

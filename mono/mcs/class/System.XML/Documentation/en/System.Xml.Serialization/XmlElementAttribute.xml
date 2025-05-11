@@ -35,8 +35,12 @@
 
         
 
+        
+
          belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -49,12 +53,16 @@
 
         
 
+        
+
         .</para
       >
       <para>An XML document usually contains XML elements, each of which consists of three parts: an opening tag with possible attributes, a closing tag, and the data between the tags. XML tags can be nested--that is, the data between tags can also be XML elements. This capacity of one element to enclose another allows the document to contain hierarchies of data. An XML element can also include attributes.</para>
       <para
         >Apply the <see
          cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
          can be applied multiple times to a field that returns an array of objects. The purpose of this is to specify (through the <see
          cref="P:System.Xml.Serialization.XmlElementAttribute.Type" />
+
+        
 
         
 
@@ -90,8 +102,12 @@
 
         
 
+        
+
          multiple times without specifying an <see
          cref="P:System.Xml.Serialization.XmlElementAttribute.ElementName" />
+
+        
 
         
 
@@ -103,6 +119,8 @@
 
         
 
+        
+
          to a field or property that returns an array, the items in the array are encoded as a sequence of XML elements.</para
       >
       <para
@@ -111,13 +129,19 @@
 
         
 
+        
+
          is not applied to such a field or property, the items in the array are encoded as a sequence of elements, nested under an element named after the field or property. (Use the <see
          cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
         
 
+        
+
          and <see
          cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+        
 
         
 
@@ -129,8 +153,12 @@
 
         
 
+        
+
          property to specify a type that is derived from the type of the original field or property--that is, the field or property to which you have applied the <see
          cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+        
 
         
 
@@ -142,13 +170,19 @@
 
         
 
+        
+
         , you can apply multiple instances of the <see
          cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
         
 
+        
+
          to the member. For each instance, set the <see
          cref="P:System.Xml.Serialization.XmlElementAttribute.Type" />
+
+        
 
         
 
@@ -162,12 +196,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can use the word XmlElement in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+          
 
           
 
@@ -180,6 +218,8 @@
       <para
         >Indicates that a public field or property represents an XML element when the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -209,6 +249,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+            
 
             
 
@@ -242,8 +284,12 @@
 
             
 
+            
+
              uses the member name as the XML element name when serializing a class instance. For example, a field named Vehicle generates an XML element named Vehicle. However if you need a different element, such as Cars, pass it in the <paramref
              name="elementName" />
+
+            
 
             
 
@@ -258,11 +304,15 @@
 
             
 
+            
+
              class and specifies the name of the XML element.</para
           >
         </summary>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,13 +345,19 @@
 
             
 
+            
+
              parameter to specify a type that is derived from a base class. For example, suppose a property named MyAnimal returns an Animal object. You want to enhance the object, so you create a new class named Mammal that inherits from the Animal class. To instruct the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
+            
+
              to accept the Mammal class when it serializes the MyAnimal property, pass the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -316,13 +372,19 @@
 
             
 
+            
+
              class and specifies a type for the member to which the <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
+            
+
              is applied. This type is used by the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -334,8 +396,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -372,8 +438,12 @@
 
             
 
+            
+
              uses the member name as the XML element name when serializing a class instance. For example, a field named Vehicle generates an XML element named Vehicle. However, if you need a different element, such as Cars, pass it in the <paramref
              name="elementName" />
+
+            
 
             
 
@@ -385,13 +455,19 @@
 
             
 
+            
+
              parameter to specify a type that is derived from a base class. For example, suppose a property named MyAnimal returns an Animal object. You want to enhance the object, so you create a new class named Mammal that inherits from the Animal class. To instruct the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
+            
+
              to accept the Mammal class when it serializes the MyAnimal property, pass the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -406,13 +482,19 @@
 
             
 
+            
+
              and specifies the name of the XML element and a derived type for the member to which the <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
+            
+
              is applied. This member type is used when the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -424,6 +506,8 @@
 
           
 
+          
+
           The XML element name of the serialized member. </param
         >
         <param name="type">
@@ -431,8 +515,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -464,13 +552,19 @@
 
             
 
+            
+
              structures, and apply a <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.DataType" />
+
+            
 
             
 
@@ -479,13 +573,19 @@
 
             
 
+            
+
              type and apply the <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.DataType" />
+
+            
 
             
 
@@ -497,8 +597,12 @@
 
             
 
+            
+
              with its <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.DataType" />
+
+            
 
             
 
@@ -540,6 +644,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -695,6 +801,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -982,6 +1090,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1010,6 +1120,8 @@
 
             
 
+            
+
              if you want the name of the generated XML element to differ from the member's identifier.</para
           >
           <para
@@ -1018,8 +1130,12 @@
 
             
 
+            
+
              value to more than one class member if the generated XML document uses XML namespaces to distinguish between the identically named members. For details on how to use namespaces and prefixed names in the XML document, see the <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -1061,8 +1177,12 @@
 
             
 
+            
+
              property determines whether an XML element is qualified or unqualified. The <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
+
+            
 
             
 
@@ -1074,8 +1194,12 @@
 
             
 
+            
+
              property is set to any value, attempting to set the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.Form" />
+
+            
 
             
 
@@ -1084,8 +1208,12 @@
 
             
 
+            
+
              to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1102,8 +1230,12 @@
 
             
 
+            
+
              reads the schema, the <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
+
+            
 
             
 
@@ -1140,8 +1272,12 @@
 
             
 
+            
+
              property is set to true, the xsi:nil attribute is generated for class members that have been set to null. For example if you set a field named MyStringArray to null, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1154,12 +1290,16 @@
 
             
 
+            
+
              property is false, no XML element is generated for class members that have been set to null.</para
           >
           <block subset="none" type="note">
             <para
               >You cannot apply the <see
                cref="P:System.Xml.Serialization.XmlElementAttribute.IsNullable" />
+
+              
 
               
 
@@ -1172,6 +1312,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1203,6 +1345,8 @@
 
             
 
+            
+
              property conforms to the World Wide Web Consortium (www.w3.org) specification, "Namespaces in XML".</para
           >
           <para
@@ -1211,13 +1355,19 @@
 
             
 
+            
+
              that contains the namespaces and prefixes used in the XML document. As you set the namespace for each <see
              cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
+            
+
             , it must match one of the namespaces in the <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -1252,13 +1402,19 @@
 
             
 
+            
+
              enumeration to instruct the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
+            
+
              to generate code that sets the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
+
+            
 
             
 
@@ -1268,6 +1424,8 @@
             <para
               >Once the <see
                cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
+
+              
 
               
 
@@ -1304,6 +1462,8 @@
 
             
 
+            
+
              property to specify a derived type for a field or property.</para
           >
           <para
@@ -1312,13 +1472,19 @@
 
             
 
+            
+
             , you can apply multiple instances of the <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
+            
+
              to the member. For each instance, set the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.Type" />
+
+            
 
             
 

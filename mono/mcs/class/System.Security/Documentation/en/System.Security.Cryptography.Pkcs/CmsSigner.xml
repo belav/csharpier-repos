@@ -25,6 +25,8 @@
 
         
 
+        
+
          class provides signing functionality.</para
       >
     </summary>
@@ -49,6 +51,8 @@
           <para
             >The <see
              cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+            
 
             
 
@@ -99,8 +103,12 @@
 
                   
 
+                  
+
                    if <see
                    cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignerIdentifierType" />
+
+                  
 
                   
 
@@ -109,10 +117,14 @@
 
                   
 
+                  
+
                   , </para
                 >
                 <para>
                   <see cref="F:System.Security.Cryptography.X509Certificates.X509IncludeOption.ExcludeRoot" />
+
+                  
 
                   
 
@@ -130,8 +142,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+            
 
             
 
@@ -167,13 +183,19 @@
 
             
 
+            
+
             . An exception to those values when this constructor is used is that <see
              cref="P:System.Security.Cryptography.Pkcs.CmsSigner.IncludeOption" />
 
             
 
+            
+
              is set to <see
              cref="F:System.Security.Cryptography.X509Certificates.X509IncludeOption.None" />
+
+            
 
             
 
@@ -188,13 +210,19 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
             
 
+            
+
              class with the specified cryptographic service provider (CSP) parameters. <see
              cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.CspParameters)" />
+
+            
 
             
 
@@ -206,8 +234,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.CspParameters" />
+
+          
 
           
 
@@ -246,8 +278,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+            
 
             
 
@@ -259,8 +295,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -298,6 +338,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -306,8 +348,12 @@
 
             
 
+            
+
              parameter is not checked for validity on input. To validate the certificate prior to supplying it to this constructor, use the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+
+            
 
             
 
@@ -322,8 +368,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+            
 
             
 
@@ -335,8 +385,12 @@
 
           
 
+          
+
           An    <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -378,8 +432,12 @@
 
             
 
+            
+
              parameter is not checked for validity on input. To validate the certificate prior to supplying it to this constructor, use the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+
+            
 
             
 
@@ -394,8 +452,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+            
 
             
 
@@ -407,8 +469,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -419,8 +485,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -457,8 +527,12 @@
 
             
 
+            
+
              property sets or retrieves the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+            
 
             
 
@@ -495,8 +569,12 @@
 
             
 
+            
+
              property. Not all certificates in the signer's certificate chain are necessarily present in <see
              cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificates" />
+
+            
 
             
 
@@ -511,8 +589,12 @@
 
             
 
+            
+
              property retrieves the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -549,6 +631,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -560,8 +644,12 @@
 
             
 
+            
+
              property sets or retrieves the <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -599,6 +687,8 @@
 
             
 
+            
+
              property sets or retrieves the option that controls whether the root and entire chain associated with the signing certificate are included with the created CMS/PKCS #7 message.</para
           >
         </summary>
@@ -632,13 +722,19 @@
 
             
 
+            
+
              collection retrieved by the <see
              cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
 
             
 
+            
+
              property is the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+
+            
 
             
 
@@ -650,8 +746,12 @@
 
             
 
+            
+
              object and a <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
+
+            
 
             
 
@@ -660,8 +760,12 @@
 
             
 
+            
+
              property for the corresponding signer whenever the <see
              cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
+
+            
 
             
 
@@ -676,13 +780,19 @@
 
             
 
+            
+
              property retrieves the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
+            
+
              collection of signed attributes to be associated with the resulting <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+            
 
             
 
@@ -720,6 +830,8 @@
 
             
 
+            
+
              property sets or retrieves the type of the identifier of the signer.</para
           >
         </summary>
@@ -753,8 +865,12 @@
 
             
 
+            
+
              collection retrieved by the <see
              cref="P:System.Security.Cryptography.Pkcs.CmsSigner.UnsignedAttributes" />
+
+            
 
             
 
@@ -769,13 +885,19 @@
 
             
 
+            
+
              property retrieves the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
+            
+
              collection of unsigned PKCS #9 attributes to be associated with the resulting <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+            
 
             
 

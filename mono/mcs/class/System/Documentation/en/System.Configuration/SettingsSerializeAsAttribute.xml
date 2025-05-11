@@ -35,11 +35,15 @@
 
         
 
+        
+
          enumeration, and include plain text, XML, and binary serialization. In addition, a provider may optionally support a custom serialization scheme.</para
       >
       <para
         >With the <see
          cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+
+        
 
         
 
@@ -80,6 +84,8 @@
 
             
 
+            
+
              parameter, the operation may have one of the following results:</para
           >
           <list type="bullet">
@@ -102,6 +108,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -110,8 +118,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsSerializeAs" />
+
+          
 
           
 
@@ -147,6 +159,8 @@
 
             
 
+            
+
              constructor. </para
           >
         </remarks>
@@ -155,6 +169,8 @@
           <para
             >Gets the <see
              cref="T:System.Configuration.SettingsSerializeAs" />
+
+            
 
             
 

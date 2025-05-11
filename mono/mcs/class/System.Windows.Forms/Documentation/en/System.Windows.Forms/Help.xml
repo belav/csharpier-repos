@@ -19,13 +19,19 @@
 
         
 
+        
+
          class. To provide Help for an application, call the static <see
          cref="M:System.Windows.Forms.Help.ShowHelp(System.Windows.Forms.Control,System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.Help.ShowHelpIndex(System.Windows.Forms.Control,System.String)" />
+
+        
 
         
 
@@ -37,11 +43,15 @@
 
         
 
+        
+
          to show compiled Help files (.chm) or HTML files in the HTML Help format. Compiled Help files provide a table of contents, an index, search capability, and keyword links in pages. Shortcuts work only in compiled Help files.</para
       >
       <para
         >You can generate HTML Help 1.x files by using HTML Help Workshop. For more information about HTML Help, see "HTML Help Workshop" and other HTML Help topics at <see
          cref="http://go.microsoft.com/fwlink/?LinkId=178661">Microsoft HTML Help</see>
+
+        
 
         
 
@@ -76,6 +86,8 @@
 
             
 
+            
+
              parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
           >
         </remarks>
@@ -88,8 +100,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -97,6 +113,8 @@
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,6 +149,8 @@
 
             
 
+            
+
              parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
           >
           <para>If you provide the keyword null, the table of contents for the Help file will be displayed.</para>
@@ -144,8 +164,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -156,10 +180,14 @@
 
           
 
+          
+
           The path and name of the Help file. </param
         >
         <param name="keyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,6 +222,8 @@
 
             
 
+            
+
              parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
           >
           <para
@@ -202,8 +232,12 @@
 
             
 
+            
+
              parameter: <see
              cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            
 
             
 
@@ -212,13 +246,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.HelpNavigator.Index" />
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -234,8 +274,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -246,6 +290,8 @@
 
           
 
+          
+
           The path and name of the Help file. </param
         >
         <param name="navigator">
@@ -253,8 +299,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.HelpNavigator" />
+
+          
 
           
 
@@ -290,8 +340,12 @@
 
             
 
+            
+
              parameter to provide additional refinement of the <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -300,13 +354,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.HelpNavigator.KeywordIndex" />
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.HelpNavigator.AssociateIndex" />
+
+            
 
             
 
@@ -315,8 +375,12 @@
 
             
 
+            
+
              parameter is <see
              cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            
 
             
 
@@ -325,8 +389,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            
 
             
 
@@ -335,8 +403,12 @@
 
             
 
+            
+
              parameter references <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -345,8 +417,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.HelpNavigator.KeywordIndex" />
+
+            
 
             
 
@@ -355,11 +431,15 @@
 
             
 
+            
+
             , this value should be a string that contains the topic name, or the keyword or numeric identifier of the topic to display.</para
           >
           <para
             >The <paramref
              name="url" />
+
+            
 
             
 
@@ -375,8 +455,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -387,10 +471,14 @@
 
           
 
+          
+
           The path and name of the Help file. </param
         >
         <param name="command">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -399,10 +487,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,6 +528,8 @@
 
             
 
+            
+
              parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
           >
         </remarks>
@@ -448,8 +542,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -457,6 +555,8 @@
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -493,8 +593,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -505,10 +609,14 @@
 
           
 
+          
+
           The message to display in the pop-up window. </param
         >
         <param name="location">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

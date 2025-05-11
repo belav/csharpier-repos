@@ -89,6 +89,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -97,8 +99,12 @@
 
           
 
+          
+
           The address of the <see
            cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+          
 
           
 
@@ -134,8 +140,12 @@
 
             
 
+            
+
              other than <unmanagedCodeEntityReference
             >S_OK</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -152,6 +162,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,6 +200,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -199,8 +213,12 @@
 
             
 
+            
+
              if <paramref
              name="ptr" />
+
+            
 
             
 
@@ -209,8 +227,12 @@
 
             
 
+            
+
             ; otherwise, <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -222,8 +244,12 @@
 
           
 
+          
+
           An unmanaged pointer to the <see
            cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+          
 
           
 
@@ -261,6 +287,8 @@
         </summary>
         <param name="removeMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,8 +355,12 @@
 
             
 
+            
+
              method to release the <see
              cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+            
 
             
 
@@ -343,6 +375,8 @@
 
             
 
+            
+
              and copies the specified managed string to it. </para
           >
         </summary>
@@ -354,8 +388,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.IntPtr.Zero" />
+
+            
 
             
 
@@ -364,8 +402,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -374,6 +416,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

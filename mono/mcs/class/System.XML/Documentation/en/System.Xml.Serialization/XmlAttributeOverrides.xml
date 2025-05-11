@@ -26,8 +26,12 @@
 
         
 
+        
+
          enables the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          object, you pass it as an argument to the <see
          cref="M:System.Xml.Serialization.XmlSerializer.#ctor" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          uses the data contained by the <see
          cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+        
 
         
 
@@ -59,8 +71,12 @@
 
         
 
+        
+
          contains a collection of the object types that are overridden, as well as an <see
          cref="T:System.Xml.Serialization.XmlAttributes" />
+
+        
 
         
 
@@ -69,11 +85,15 @@
 
         
 
+        
+
          object itself contains an appropriate set of attribute objects that control how each field, property, or class is serialized.</para
       >
       <para
         >The process for creating and using an <see
          cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+        
 
         
 
@@ -87,6 +107,8 @@
 
             
 
+            
+
              object.</para
           >
         </item>
@@ -97,13 +119,19 @@
 
             
 
+            
+
             , using the new, derived type. You can optionally assign a new <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.ElementName" />
 
             
 
+            
+
             , or <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.Namespace" />
+
+            
 
             
 
@@ -117,8 +145,12 @@
 
             
 
+            
+
              property or collection. For example, you would add the <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+            
 
             
 
@@ -127,8 +159,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -142,6 +178,8 @@
 
             
 
+            
+
              object.</para
           >
         </item>
@@ -152,8 +190,12 @@
 
             
 
+            
+
              method, add the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -162,13 +204,19 @@
 
             
 
+            
+
              object. If the object being overridden is an <see
              cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+            
 
             
 
@@ -182,13 +230,19 @@
 
             
 
+            
+
             , pass the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Serialization.XmlSerializer.#ctor" />
+
+            
 
             
 
@@ -202,6 +256,8 @@
 
             
 
+            
+
              to serialize or deserialize the derived class objects.</para
           >
         </item>
@@ -212,6 +268,8 @@
       <para
         >Allows you to override property, field, and class attributes when you use the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -241,6 +299,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -280,8 +340,12 @@
 
             
 
+            
+
              object contains a union of attribute objects that cause the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -290,8 +354,12 @@
 
             
 
+            
+
              object, depending on the particular behaviors you want to override. For example, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -300,8 +368,12 @@
 
             
 
+            
+
             , assign it to the <see
              cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
+
+            
 
             
 
@@ -310,13 +382,19 @@
 
             
 
+            
+
             , and add the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
+            
+
              object to the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -328,8 +406,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+            
 
             
 
@@ -344,8 +426,12 @@
 
             
 
+            
+
              object to the collection of <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -354,8 +440,12 @@
 
             
 
+            
+
              parameter specifies an object to be overridden by the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -367,8 +457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -379,8 +473,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlAttributes" />
+
+          
 
           
 
@@ -420,8 +518,12 @@
 
             
 
+            
+
              object contains a union of attribute objects that cause the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -430,8 +532,12 @@
 
             
 
+            
+
              object, depending on the particular behaviors you want to override. For example, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -440,8 +546,12 @@
 
             
 
+            
+
             , assign it to the <see
              cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
+
+            
 
             
 
@@ -450,13 +560,19 @@
 
             
 
+            
+
             , and add the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
+            
+
              object to the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -468,8 +584,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+
+            
 
             
 
@@ -478,13 +598,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+
+            
 
             
 
@@ -499,8 +625,12 @@
 
             
 
+            
+
              object to the collection of <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -509,8 +639,12 @@
 
             
 
+            
+
              parameter specifies an object to be overridden. The <paramref
              name="member" />
+
+            
 
             
 
@@ -522,8 +656,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -534,6 +672,8 @@
 
           
 
+          
+
           The name of the member to override. </param
         >
         <param name="attributes">
@@ -541,8 +681,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlAttributes" />
+
+          
 
           
 

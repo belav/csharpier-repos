@@ -43,8 +43,12 @@
 
         
 
+        
+
          enumeration member. When you apply <see
          cref="T:System.Runtime.InteropServices.ClassInterfaceAttribute" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -72,8 +78,12 @@
 
         
 
+        
+
          always applies to imported classes the <see
          cref="F:System.Runtime.InteropServices.ClassInterfaceType.None" />
+
+        
 
         
 
@@ -114,12 +124,16 @@
 
             
 
+            
+
              enumeration member. The <format
              type="text/html">
               <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
                 >[&lt;topic://cpgrftypelibraryImportertlbimpexe&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -134,8 +148,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.ClassInterfaceType" />
+
+            
 
             
 
@@ -144,6 +162,8 @@
         </summary>
         <param name="classInterfaceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,8 +206,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.ClassInterfaceType" />
+
+            
 
             
 
@@ -199,8 +223,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.InteropServices.ClassInterfaceType" />
+
+          
 
           
 
@@ -234,6 +262,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.InteropServices.ClassInterfaceType" />
+
+            
 
             
 

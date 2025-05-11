@@ -38,6 +38,8 @@
 
         
 
+        
+
          class. The file's root element must match the section referring to it. </para
       >
     </remarks>
@@ -68,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.NameValueFileSectionHandler" />
+
+            
 
             
 
@@ -108,8 +112,12 @@
 
             
 
+            
+
              object parameter acts as the configuration settings in the corresponding parent configuration section. The <paramref
              name="configContext" />
+
+            
 
             
 
@@ -118,13 +126,19 @@
 
             
 
+            
+
              parameter is the <see
              cref="T:System.Xml.XmlNode" />
 
             
 
+            
+
              that contains the configuration information to be handled. The <paramref
              name="section" />
+
+            
 
             
 
@@ -144,6 +158,8 @@
 
           
 
+          
+
           The parent object.</param
         >
         <param name="configContext">
@@ -151,10 +167,14 @@
 
           
 
+          
+
           The configuration context object.</param
         >
         <param name="section">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

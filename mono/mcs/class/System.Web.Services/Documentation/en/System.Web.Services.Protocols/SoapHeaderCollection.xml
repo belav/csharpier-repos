@@ -26,6 +26,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -43,6 +45,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+            
 
             
 
@@ -77,8 +81,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+            
 
             
 
@@ -93,6 +101,8 @@
 
             
 
+            
+
              was inserted.</para
           >
         </returns>
@@ -101,13 +111,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -141,8 +157,12 @@
 
             
 
+            
+
              contains a specific <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -157,8 +177,12 @@
 
             
 
+            
+
              parameter is found in the <see
              cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+            
 
             
 
@@ -170,13 +194,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -211,13 +241,19 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at a particular index of the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -229,13 +265,19 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the elements copied from <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -246,8 +288,12 @@
 
           
 
+          
+
           The zero-based index in the <paramref
            name="array" />
+
+          
 
           
 
@@ -281,8 +327,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+            
 
             
 
@@ -297,8 +347,12 @@
 
             
 
+            
+
              parameter, if found in the <see
              cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+            
 
             
 
@@ -310,13 +364,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -350,8 +410,12 @@
 
             
 
+            
+
              parameter equals the number of items in the collection, then the <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -360,6 +424,8 @@
           <para
             >The <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -374,8 +440,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+            
 
             
 
@@ -387,13 +457,19 @@
 
           
 
+          
+
           The zero-based index at which to insert the <see
            cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
+          
+
            into the <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -404,13 +480,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -466,8 +548,12 @@
 
             
 
+            
+
              elements that follow the removed <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -482,8 +568,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+            
 
             
 
@@ -495,13 +585,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 

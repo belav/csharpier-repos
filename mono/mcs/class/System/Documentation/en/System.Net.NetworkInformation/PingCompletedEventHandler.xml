@@ -38,8 +38,12 @@
 
         
 
+        
+
          call is available to the method invoked by this delegate in the <see
          cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Net.NetworkInformation.Ping" />
+
+        
 
         
 

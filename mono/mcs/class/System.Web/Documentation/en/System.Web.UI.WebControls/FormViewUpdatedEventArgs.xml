@@ -19,13 +19,19 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" />
 
         
 
+        
+
          event when an Update button (a button with its CommandName property set to "Update") within the control is clicked, but after the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the update operation, use the <see
          cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.AffectedRows" />
+
+        
 
         
 
@@ -47,8 +57,12 @@
 
         
 
+        
+
          property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event-handling method by setting the <see
          cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.ExceptionHandled" />
+
+        
 
         
 
@@ -57,13 +71,19 @@
 
         
 
+        
+
          property. The original non-key field values can be accessed by using the <see
          cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.OldValues" />
 
         
 
+        
+
          property. Updated values (which include updated key field values, if you allow the user to edit key fields) are accessed using the <see
          cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.NewValues" />
+
+        
 
         
 
@@ -75,8 +95,12 @@
 
         
 
+        
+
          control returns to the mode specified by the <see
          cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+        
 
         
 
@@ -85,8 +109,12 @@
 
         
 
+        
+
          control in edit mode by setting the <see
          cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.KeepInEditMode" />
+
+        
 
         
 
@@ -100,6 +128,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -108,8 +138,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.FormViewUpdatedEventArgs.#ctor(System.Int32,System.Exception)" />
+
+        
 
         
 
@@ -121,6 +155,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" />
+
+        
 
         
 
@@ -149,11 +185,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.FormViewUpdatedEventArgs" />
+
+            
 
             
 
@@ -183,6 +223,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -200,8 +242,12 @@
 
                   
 
+                  
+
                    object contained in the <paramref
                    name="e" />
+
+                  
 
                   
 
@@ -242,11 +288,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="affectedRows">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,8 +307,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -286,6 +340,8 @@
 
             
 
+            
+
              property to determine the number of records affected by the update operation. This property is commonly used to verify that the correct number of records was updated in the following situations:</para
           >
           <list type="bullet">
@@ -302,13 +358,19 @@
 
                 
 
+                
+
                  and <see
                  cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
                 
 
+                
+
                  controls, has its <see
                  cref="P:System.Web.UI.WebControls.SqlDataSource.ConflictDetection" />
+
+                
 
                 
 
@@ -343,6 +405,8 @@
 
             
 
+            
+
              property to determine the exception (if any) that was raised during the update operation. If no exceptions were raised, this property returns null.</para
           >
           <block subset="none" type="note">
@@ -352,8 +416,12 @@
 
               
 
+              
+
                property to true; otherwise, the exception is thrown again by the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -387,13 +455,19 @@
 
             
 
+            
+
              property to indicate whether the exception was handled in the event handler. When this property is set to true, the exception is considered handled and is not thrown again by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
             
 
+            
+
              control. If this property is set to false, the exception is thrown again. To determine which exception was raised, use the <see
              cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.Exception" />
+
+            
 
             
 
@@ -426,8 +500,12 @@
 
             
 
+            
+
              control returns to the mode specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+            
 
             
 
@@ -436,13 +514,19 @@
 
             
 
+            
+
              property to specify whether the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
             
 
+            
+
              control should remain in edit mode. To keep the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -455,8 +539,12 @@
 
               
 
+              
+
                control needs to remain in edit mode by default, set the <see
                cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+              
 
               
 
@@ -469,6 +557,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -500,8 +590,12 @@
 
             
 
+            
+
              property contains the original values of the key fields listed in the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+            
 
             
 
@@ -510,8 +604,12 @@
 
             
 
+            
+
              control. Use the <see
              cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.Keys" />
+
+            
 
             
 
@@ -524,8 +622,12 @@
 
               
 
+              
+
                property contains the original key field values. The updated values are stored in the <see
                cref="P:System.Web.UI.WebControls.FormViewUpdateEventArgs.NewValues" />
+
+              
 
               
 
@@ -538,8 +640,12 @@
 
             
 
+            
+
              property returns an <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -548,8 +654,12 @@
 
             
 
+            
+
              interface. The <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -558,8 +668,12 @@
 
             
 
+            
+
              objects that represent the fields of the updated record. To access the field names, use the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Keys" />
+
+            
 
             
 
@@ -568,8 +682,12 @@
 
             
 
+            
+
              object. Similarly, you can access the field values by using the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Values" />
+
+            
 
             
 
@@ -582,8 +700,12 @@
 
               
 
+              
+
                object to access the field values directly. Data source controls that rely on the field order (such as <see
                cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+              
 
               
 
@@ -620,6 +742,8 @@
 
             
 
+            
+
              property to access the new field values for the updated record. For example, you can use these values to keep a log of updated records.</para
           >
           <block subset="none" type="note">
@@ -629,8 +753,12 @@
 
               
 
+              
+
                property contains the original key field values. The updated values are stored in the <see
                cref="P:System.Web.UI.WebControls.FormViewUpdateEventArgs.NewValues" />
+
+              
 
               
 
@@ -643,8 +771,12 @@
 
             
 
+            
+
              property returns an <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -653,8 +785,12 @@
 
             
 
+            
+
              interface. The <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -663,8 +799,12 @@
 
             
 
+            
+
              objects that represent the fields of the updated record. To access the field names, use the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Keys" />
+
+            
 
             
 
@@ -673,8 +813,12 @@
 
             
 
+            
+
              object. Similarly, you can access the field values by using the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Values" />
+
+            
 
             
 
@@ -687,8 +831,12 @@
 
               
 
+              
+
                object to access the field values directly. Data source controls that rely on the field order (such as <see
                cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+              
 
               
 
@@ -725,8 +873,12 @@
 
             
 
+            
+
              property to access the original non-key field values for the updated record. For example, you can use these values to keep a log of updated records. A data source control that supports conflict detection (optimistic concurrency checking), such as the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -735,8 +887,12 @@
 
             
 
+            
+
              controls, with its <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.ConflictDetection" />
+
+            
 
             
 
@@ -749,13 +905,19 @@
 
               
 
+              
+
                property does not contain key fields. If you allow the user to update the values of the key fields, the original key field values are stored in the <see
                cref="P:System.Web.UI.WebControls.FormViewUpdateEventArgs.Keys" />
 
               
 
+              
+
                property. The updated values are stored in the <see
                cref="P:System.Web.UI.WebControls.FormViewUpdateEventArgs.NewValues" />
+
+              
 
               
 
@@ -768,8 +930,12 @@
 
             
 
+            
+
              property returns an <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -778,8 +944,12 @@
 
             
 
+            
+
              interface. The <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -788,8 +958,12 @@
 
             
 
+            
+
              objects that represent the fields of the updated record. To access the field names, use the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Keys" />
+
+            
 
             
 
@@ -798,8 +972,12 @@
 
             
 
+            
+
              object. Similarly, you can access the field values by using the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Values" />
+
+            
 
             
 
@@ -812,8 +990,12 @@
 
               
 
+              
+
                object to access the field values directly. Data source controls that rely on the field order (such as <see
                cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+              
 
               
 

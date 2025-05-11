@@ -18,13 +18,19 @@
 
         
 
+        
+
          is used by the <see
          cref="T:System.Drawing.Printing.PrintEventArgs" />
 
         
 
+        
+
          type to indicate what type of <see
          cref="M:System.Drawing.Printing.PrintDocument.Print" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
           
 
+          
+
            does not reliably indicate the type of print operation occurring, and returns <see
            cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />
+
+          
 
           
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          specifies the type of scroll event that occurred and the new value of the scroll bar. Use the <see
          cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.ScrollableControl" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -81,13 +93,19 @@
 
             
 
+            
+
              class using the given values for the <see
              cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
+
+            
 
             
 
@@ -99,8 +117,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ScrollEventType" />
+
+          
 
           
 
@@ -108,6 +130,8 @@
         >
         <param name="newValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,8 +167,12 @@
 
             
 
+            
+
              class using the given values for the <see
              cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+
+            
 
             
 
@@ -153,8 +181,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
+
+            
 
             
 
@@ -166,8 +198,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ScrollEventType" />
+
+          
 
           
 
@@ -178,10 +214,14 @@
 
           
 
+          
+
           The old value for the scroll bar. </param
         >
         <param name="newValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,8 +253,12 @@
 
             
 
+            
+
              class using the given values for the <see
              cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+
+            
 
             
 
@@ -223,8 +267,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
+
+            
 
             
 
@@ -236,8 +284,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ScrollEventType" />
+
+          
 
           
 
@@ -248,6 +300,8 @@
 
           
 
+          
+
           The new value for the scroll bar. </param
         >
         <param name="scroll">
@@ -255,8 +309,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ScrollOrientation" />
+
+          
 
           
 
@@ -289,8 +347,12 @@
 
             
 
+            
+
              class using the given values for the <see
              cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+
+            
 
             
 
@@ -299,13 +361,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
+
+            
 
             
 
@@ -317,8 +385,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ScrollEventType" />
+
+          
 
           
 
@@ -329,10 +401,14 @@
 
           
 
+          
+
           The old value for the scroll bar. </param
         >
         <param name="newValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -343,8 +419,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ScrollOrientation" />
+
+          
 
           
 
@@ -366,6 +446,8 @@
           <para
             >Gets or sets the new <see
              cref="P:System.Windows.Forms.ScrollBar.Value" />
+
+            
 
             
 
@@ -398,6 +480,8 @@
 
             
 
+            
+
              of the scroll bar.</para
           >
         </summary>
@@ -425,8 +509,12 @@
 
             
 
+            
+
              property to determine the scroll bar orientation that raised the Scroll event, such as with the <see
              cref="E:System.Windows.Forms.ScrollableControl.Scroll" />
+
+            
 
             
 

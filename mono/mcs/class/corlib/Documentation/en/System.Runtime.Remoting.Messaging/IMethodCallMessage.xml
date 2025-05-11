@@ -36,6 +36,8 @@
 
         
 
+        
+
          is generated as a result of a method called on a remote object, and is used to transport details about the remote method call to the server side.</para
       >
     </remarks>
@@ -78,6 +80,8 @@
 
           
 
+          
+
           The number of the requested in argument. </param
         >
       </Docs>
@@ -112,6 +116,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,13 +168,19 @@
 
             
 
+            
+
              property is redundant since the same functionality can be achieved with the <see
              cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgCount" />
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.Messaging.IMethodCallMessage.GetInArg(System.Int32)" />
+
+            
 
             
 

@@ -42,8 +42,12 @@
 
         
 
+        
+
          stores the proxy settings for the default proxy that <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          property to the result of the <see
          cref="M:System.Net.GlobalProxySelection.GetEmptyWebProxy" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          are used by any <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          property value set to null (the default). Proxies are currently supported by <see
          cref="T:System.Net.FtpWebRequest" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -98,8 +118,12 @@
 
         
 
+        
+
          after a request is made are not reflected in a <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -134,6 +158,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.GlobalProxySelection" />
+
+            
 
             
 
@@ -175,8 +201,12 @@
 
             
 
+            
+
              method returns a blank <see
              cref="T:System.Net.IWebProxy" />
+
+            
 
             
 
@@ -192,6 +222,8 @@
           <para
             >An <see
              cref="T:System.Net.IWebProxy" />
+
+            
 
             
 
@@ -230,8 +262,12 @@
             
 
             
+
+            
 that identifies the proxy server used by the <see
              cref="M:System.Net.HttpWebRequest.GetResponse" qualify="true" />
+
+            
 
             
 
@@ -248,8 +284,12 @@ specified. </para
 
           
 
+          
+
            access. See <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+
+          
 
           
 
@@ -263,8 +303,12 @@ specified. </para
 
             
 
+            
+
              property sets the proxy that all <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -273,13 +317,19 @@ specified. </para
 
             
 
+            
+
              property. Proxies are currently supported by <see
              cref="T:System.Net.FtpWebRequest" />
 
             
 
+            
+
              and <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 

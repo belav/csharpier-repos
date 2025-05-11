@@ -38,13 +38,19 @@
 
           
 
+          
+
            instances using the <see
            cref="T:System.Xml.XmlReaderSettings" />
 
           
 
+          
+
            class and the <see
            cref="Overload:System.Xml.XmlReader.Create" />
+
+          
 
           
 
@@ -55,12 +61,16 @@
 
           
 
+          
+
           .</para
         >
       </block>
       <para
         >The XmlNodeReader has the ability to read an XML DOM subtree. This class does not support document type definition (DTD) or schema validation. To perform data validation, use a validating <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -74,6 +84,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -82,6 +94,8 @@
       <para
         >Represents a reader that provides fast, non-cached forward only access to XML data in an <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -116,8 +130,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -126,10 +144,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -142,8 +164,12 @@
 
             
 
+            
+
              and overloads of the <see
              cref="M:System.Xml.XmlReader.Create(System.IO.Stream)" />
+
+            
 
             
 
@@ -158,11 +184,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,8 +223,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -203,10 +237,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -244,8 +282,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -254,10 +296,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -295,8 +341,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -305,10 +355,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -321,8 +375,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -331,8 +389,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XmlNodeReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -344,6 +406,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Xml.XmlNodeReader" />
+
+            
 
             
 
@@ -375,8 +439,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -385,10 +453,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -428,8 +500,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -438,10 +514,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -455,6 +535,8 @@
           <para
             >Changes the <see
              cref="P:System.Xml.XmlNodeReader.ReadState" />
+
+            
 
             
 
@@ -486,8 +568,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -496,10 +582,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -536,8 +626,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -546,10 +640,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -594,8 +692,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -604,10 +706,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -626,6 +732,8 @@
         </returns>
         <param name="attributeIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -661,8 +769,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -671,10 +783,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -694,6 +810,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -733,8 +851,12 @@
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -743,10 +865,14 @@
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -767,6 +893,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -783,10 +911,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -817,8 +949,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -827,10 +963,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -867,8 +1007,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -877,10 +1021,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -981,6 +1129,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1009,8 +1159,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1019,10 +1173,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1060,8 +1218,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1070,10 +1232,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1179,8 +1345,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1189,10 +1359,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1237,8 +1411,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1247,10 +1425,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1274,6 +1456,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1336,8 +1520,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1346,10 +1534,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1363,6 +1555,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         </summary>
         <param name="attributeIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1398,8 +1592,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1408,10 +1606,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1424,13 +1626,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlNodeReader.NamespaceURI" />
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlNodeReader.Prefix" />
+
+            
 
             
 
@@ -1447,6 +1655,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1486,8 +1696,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1496,10 +1710,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1512,13 +1730,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlNodeReader.NamespaceURI" />
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlNodeReader.Prefix" />
+
+            
 
             
 
@@ -1538,10 +1762,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1575,8 +1803,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1585,10 +1817,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1633,8 +1869,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1643,10 +1883,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1690,13 +1934,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
 
               
 
+              
+
                class and the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -1707,12 +1957,16 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >If the current node is not an attribute node, this method is equivalent to <see
              cref="M:System.Xml.XmlNodeReader.MoveToFirstAttribute" />
+
+            
 
             
 
@@ -1752,8 +2006,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1762,10 +2020,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1802,8 +2064,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1812,10 +2078,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1859,8 +2129,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1869,10 +2143,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1886,6 +2164,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
             >Gets the <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -1923,8 +2203,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1933,10 +2217,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1973,8 +2261,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -1983,10 +2275,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2017,8 +2313,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2027,10 +2327,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2074,8 +2378,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2084,10 +2392,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2132,8 +2444,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2142,10 +2458,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2158,8 +2478,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              to read through the text or entity reference nodes that make up the attribute value. The <see
              cref="P:System.Xml.XmlNodeReader.Depth" />
+
+            
 
             
 
@@ -2211,8 +2535,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2221,10 +2549,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2239,6 +2571,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method until the method returns the value 0.</para
             >
           </block>
@@ -2247,6 +2581,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             <item>
               <para>
                 <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -2259,6 +2595,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             <item>
               <para>
                 <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -2280,6 +2618,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -2287,10 +2627,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2331,8 +2675,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2341,10 +2689,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2359,6 +2711,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method until the method returns the value 0.</para
             >
           </block>
@@ -2367,6 +2721,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             <item>
               <para>
                 <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -2379,6 +2735,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             <item>
               <para>
                 <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -2400,6 +2758,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -2407,10 +2767,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2451,8 +2815,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2461,10 +2829,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2479,6 +2851,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              method except that it can only be called on element node types.</para
           >
           <para
@@ -2487,13 +2861,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              reads all the remaining bytes in the document and returns the number of bytes read. The next <see
              cref="M:System.Xml.XmlNodeReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method call returns a zero and moves the reader to the node following the <see
              cref="F:System.Xml.XmlNodeType.EndElement" />
+
+            
 
             
 
@@ -2505,8 +2885,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
              cref="M:System.Xml.XmlNodeReader.Read" />
+
+            
 
             
 
@@ -2526,6 +2910,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -2533,10 +2919,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2577,8 +2967,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2587,10 +2981,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2605,6 +3003,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              method except that it can only be called on element node types.</para
           >
           <para
@@ -2613,13 +3013,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              reads all the remaining bytes in the document and returns the number of bytes read. The next <see
              cref="T:System.Xml.XmlNodeReader" />
 
             
 
+            
+
              method call returns a zero and moves the reader to the node following the <see
              cref="F:System.Xml.XmlNodeType.EndElement" />
+
+            
 
             
 
@@ -2631,8 +3037,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
              cref="M:System.Xml.XmlNodeReader.Read" />
+
+            
 
             
 
@@ -2652,6 +3062,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -2659,10 +3071,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2699,8 +3115,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2709,10 +3129,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2752,8 +3176,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2762,10 +3190,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2812,8 +3244,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2822,10 +3258,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2838,12 +3278,16 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              is called after calling this method, the entity replacement text is parsed. When the entity replacement text is finished, an EndEntity node is returned to close the entity reference scope.</para
           >
           <block subset="none" type="note">
             <para
               >After calling this method, if the entity is part of an attribute value, you must call <see
                cref="M:System.Xml.XmlNodeReader.ReadAttributeValue" />
+
+              
 
               
 
@@ -2886,13 +3330,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
 
               
 
+              
+
                class and the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2903,12 +3353,16 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >The <see
              cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+
+            
 
             
 
@@ -2947,8 +3401,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2957,10 +3415,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2978,6 +3440,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
             >If the reader is positioned on a leaf node already (such as element "x" or the text node "abc"), calling Skip is the same as calling <see
              cref="M:System.Xml.XmlNodeReader.Read" />
+
+            
 
             
 
@@ -3021,8 +3485,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -3037,6 +3505,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3047,12 +3517,16 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              object that contains the namespaces that are in scope.</para
           >
         </returns>
         <param name="scope">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Xml.XmlNamespaceScope" />
+
+          
 
           
 
@@ -3091,8 +3565,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -3107,6 +3585,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3114,6 +3594,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.String" />
+
+            
 
             
 
@@ -3145,8 +3627,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -3155,10 +3641,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3195,8 +3685,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -3205,10 +3699,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3223,6 +3721,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
             >The string returned is also in <see
              cref="P:System.Xml.XmlNodeReader.NameTable" />
+
+            
 
             
 
@@ -3264,8 +3764,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -3274,10 +3778,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
                type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
+
+              
 
               
 

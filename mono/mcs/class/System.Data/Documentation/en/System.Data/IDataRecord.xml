@@ -19,8 +19,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Data.IDataRecord" />
+
+        
 
         
 
@@ -28,6 +32,8 @@
          type="text/html">
           <a href="97afc121-fb8b-465b-bab3-6d844420badb">Retrieving Data Using the DataReader</a>
         </format>
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IDataRecord" />
+
+        
 
         
 
@@ -49,6 +59,8 @@
       <para
         >Classes that inherit <see
          cref="T:System.Data.IDataRecord" />
+
+        
 
         
 
@@ -362,8 +374,12 @@
 
             
 
+            
+
              method), <see
              cref="P:System.Data.IDataRecord.FieldCount" />
+
+            
 
             
 
@@ -407,6 +423,8 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
       </Docs>
@@ -436,6 +454,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,11 +491,15 @@
 
             
 
+            
+
              returns the number of available bytes in the field. Frequently this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field.</para
           >
           <para
             >If you pass a buffer that is null, <see
              cref="M:System.Data.IDataRecord.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -496,10 +520,14 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
         <param name="fieldOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,10 +538,14 @@
 
           
 
+          
+
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferoffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -522,10 +554,14 @@
 
           
 
+          
+
            to start the read operation. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -561,6 +597,8 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
       </Docs>
@@ -593,6 +631,8 @@
 
             
 
+            
+
              returns the number of available characters in the field. Frequently this is the exact length of the field. However, the number returned may be less than the exact length of the field if GetChars has already been used to obtain characters from the field.</para
           >
           <para>If you pass a buffer that is null, GetChars returns the length of the field in characters.</para>
@@ -611,10 +651,14 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
         <param name="fieldoffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -625,10 +669,14 @@
 
           
 
+          
+
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferoffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -637,10 +685,14 @@
 
           
 
+          
+
            to start the read operation. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -671,6 +723,8 @@
 
             
 
+            
+
              for the specified column ordinal.</para
           >
         </summary>
@@ -682,11 +736,15 @@
 
             
 
+            
+
              for the specified column ordinal.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -725,6 +783,8 @@
 
           
 
+          
+
           The index of the field to find. </param
         >
       </Docs>
@@ -754,6 +814,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -789,6 +851,8 @@
 
           
 
+          
+
           The index of the field to find. </param
         >
       </Docs>
@@ -818,6 +882,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -851,13 +917,19 @@
 
             
 
+            
+
              information corresponding to the type of <see
              cref="T:System.Object" />
 
             
 
+            
+
              that would be returned from <see
              cref="M:System.Data.IDataRecord.GetValue(System.Int32)" />
+
+            
 
             
 
@@ -872,8 +944,12 @@
 
             
 
+            
+
              information corresponding to the type of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -882,11 +958,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -922,6 +1002,8 @@
 
           
 
+          
+
           The index of the field to find. </param
         >
       </Docs>
@@ -951,6 +1033,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -986,6 +1070,8 @@
 
           
 
+          
+
           The index of the field to find. </param
         >
       </Docs>
@@ -1015,6 +1101,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1050,6 +1138,8 @@
 
           
 
+          
+
           The index of the field to find. </param
         >
       </Docs>
@@ -1079,6 +1169,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1118,6 +1210,8 @@
 
           
 
+          
+
           The name of the field to find. </param
         >
       </Docs>
@@ -1147,6 +1241,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1181,11 +1277,15 @@
 
             
 
+            
+
              which will contain the field value upon return.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1215,6 +1315,8 @@
 
             
 
+            
+
              method provides an efficient means for retrieving all columns, instead of retrieving each column individually.</para
           >
           <para
@@ -1223,13 +1325,19 @@
 
             
 
+            
+
              array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see
              cref="T:System.Object" />
 
             
 
+            
+
              array holds is copied to the array. You can also pass an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1248,6 +1356,8 @@
 
             
 
+            
+
              in the array.</para
           >
         </returns>
@@ -1256,8 +1366,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1287,8 +1401,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
+
+            
 
             
 
@@ -1305,6 +1423,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

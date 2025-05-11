@@ -38,11 +38,15 @@
 
         
 
+        
+
          can be used to represent a goto statement, which is used in some languages to redirect program flow to a specified label.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeGotoStatement.Label" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
           
 
+          
+
            method with the <see
            cref="F:System.CodeDom.Compiler.GeneratorSupport.GotoStatements" />
+
+          
 
           
 
@@ -91,6 +99,8 @@
 
             
 
+            
+
              property to indicate the name of the label at which to continue program execution.</para
           >
         </remarks>
@@ -99,6 +109,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeGotoStatement" />
+
+            
 
             
 
@@ -133,11 +145,15 @@
 
             
 
+            
+
              class using the specified label name.</para
           >
         </summary>
         <param name="label">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -166,6 +182,8 @@
           <para
             >A label can be represented by a <see
              cref="T:System.CodeDom.CodeLabeledStatement" />
+
+            
 
             
 

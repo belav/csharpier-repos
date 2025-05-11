@@ -95,6 +95,8 @@
 
             
 
+            
+
              object to this collection.</para
           >
         </summary>
@@ -106,6 +108,8 @@
 
             
 
+            
+
              object that is appended to this collection.</para
           >
         </returns>
@@ -114,8 +118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+          
 
           
 
@@ -140,6 +148,8 @@
           <para
             >Appends the contents of the specified <see
              cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+            
 
             
 
@@ -168,6 +178,8 @@
           <para
             >Appends the contents of the <see
              cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+            
 
             
 
@@ -200,6 +212,8 @@
 
           
 
+          
+
           The property value to find.</param
         >
       </Docs>
@@ -225,10 +239,14 @@
 
           
 
+          
+
           The zero-based index at which to insert the property value.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -255,8 +273,12 @@
 
             
 
+            
+
              method will successfully remove the correct item. However, identifying the correct items by name is difficult with a multi-valued DNWithString property value (as the DNWithString COM class, which is used to store the DNWithString items, has 2 string properties representing the item). The way to remove such items is to find the object in the collection (by looping thru all the items), then call the <see
              cref="M:System.DirectoryServices.PropertyValueCollection.Remove" />
+
+            
 
             
 
@@ -288,6 +310,8 @@
 
             
 
+            
+
              object is in this collection.</para
           >
         </summary>
@@ -300,8 +324,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+          
 
           
 
@@ -330,6 +358,8 @@
 
             
 
+            
+
              objects in this collection to the specified array, starting at the specified index in the target array.</para
           >
         </summary>
@@ -338,8 +368,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -389,6 +423,8 @@
       <para
         >Contains the values of a <see
          cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        
 
         
 

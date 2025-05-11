@@ -37,6 +37,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -69,6 +71,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -81,8 +85,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -93,10 +101,14 @@
 
           
 
+          
+
           A service provider object through which editing services can be obtained. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,6 +141,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -140,6 +154,8 @@
 
             
 
+            
+
              enumeration value indicating the supported editing style.</para
           >
         </returns>
@@ -148,8 +164,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -186,6 +206,8 @@
 
             
 
+            
+
              does not display a visual representation in the Properties Window.</para
           >
         </returns>
@@ -194,8 +216,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

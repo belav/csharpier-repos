@@ -33,13 +33,19 @@
 
         
 
+        
+
          class creates a memory gate. A memory gate checks for sufficient resources before initiating an activity that requires a large amount of memory. Failing the check results in an <see
          cref="T:System.InsufficientMemoryException" />
 
         
 
+        
+
          exception being thrown. This exception prevents an operation from being started and reduces the possibility of failure due to lack of resources. This enables you decrease performance in an effort to avoid an <see
          cref="T:System.OutOfMemoryException" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          exception, an application can distinguish between an estimate that an operation will not be able to complete and  a partially completed operation that may have corrupted the application state. This allows an application to reduce the frequency of a pessimistic escalation policy, which may require unloading the current <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
          checks to see whether sufficient memory and consecutive virtual address space are available in all garbage collection heaps, and may increase the size of the swap file.  <see
          cref="T:System.Runtime.MemoryFailPoint" />
+
+        
 
         
 
@@ -73,8 +87,12 @@
 
         
 
+        
+
          method to ensure that resources associated with <see
          cref="T:System.Runtime.MemoryFailPoint" />
+
+        
 
         
 
@@ -86,8 +104,12 @@
 
         
 
+        
+
          object and specify the number of megabytes (MB) of memory that the next operation is expected to use. If enough memory is not available, an <see
          cref="T:System.InsufficientMemoryException" />
+
+        
 
         
 
@@ -99,10 +121,14 @@
 
         
 
+        
+
          exception.</para
       >
       <para>
         <see cref="T:System.Runtime.MemoryFailPoint" />
+
+        
 
         
 
@@ -138,13 +164,19 @@
 
             
 
+            
+
              method to determine the amount of memory available before and after calling the method that processes the work item. See the <see
              cref="T:System.Runtime.MemoryFailPoint" />
 
             
 
+            
+
              class for a code example that dynamically determines the value for the <paramref
              name="sizeInMegabytes" />
+
+            
 
             
 
@@ -159,11 +191,15 @@
 
             
 
+            
+
              class, specifying the amount of memory required for successful execution. </para
           >
         </summary>
         <param name="sizeInMegabytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,8 +231,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Runtime.MemoryFailPoint" />
+
+            
 
             
 
@@ -205,8 +245,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Runtime.MemoryFailPoint" />
+
+            
 
             
 
@@ -215,13 +259,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Runtime.MemoryFailPoint" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Runtime.MemoryFailPoint" />
+
+            
 
             
 
@@ -232,10 +282,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -248,13 +302,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Runtime.MemoryFailPoint" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Runtime.MemoryFailPoint" />
+
+              
 
               
 
@@ -267,6 +327,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Runtime.MemoryFailPoint" />
+
+            
 
             
 

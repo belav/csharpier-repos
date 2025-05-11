@@ -23,8 +23,12 @@
 
         
 
+        
+
          object provides functionality to parse a particular file type and generate code during compilation of a resource. A build provider generates code for those resources that correspond to the <see
          cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          attribute is respected during code generation for a resource by a <see
          cref="T:System.Web.Compilation.BuildProvider" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
           <para
             >Specifies that the build provider generates code for resources wherever the resources are found. This is the default value for the <see
              cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
+
+            
 
             
 

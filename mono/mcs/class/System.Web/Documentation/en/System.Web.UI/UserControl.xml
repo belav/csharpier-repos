@@ -55,8 +55,12 @@
 
         
 
+        
+
          class is associated with files that have .ascx extensions. These files are compiled at run time as <see
          cref="T:System.Web.UI.UserControl" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
 
         
 
+        
+
          objects. Unlike pages, however, user controls cannot be called independently. They can only be called from the page or other user control that contains them.</para
       >
       <para>Derive from this class if you want to create a user control using the code-behind technique. This is recommended if you are developing Web Forms pages using this technique.</para>
@@ -77,6 +83,8 @@
          type="text/html">
           <a href="5e601b3d-bb16-4dbe-9e35-7e92a34565ca">Web Forms User Controls</a>
         </format>
+
+        
 
         
 
@@ -103,8 +111,12 @@
 
             
 
+            
+
              class. To create your own user control, inherit from the <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -116,6 +128,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -124,6 +138,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -157,6 +173,8 @@
           <para
             >Gets the <see
              cref="P:System.Web.HttpContext.Application" />
+
+            
 
             
 
@@ -227,10 +245,14 @@
 
             
 
+            
+
              allows you to store data for later retrieval, and is shared across the application. The data that you store is independent of the current page or user session. Access data through this property to boost page or application performance if creating the data is slow. For more information about using the Cache, see <format
              type="text/html">
               <a href="206f977d-7860-4d20-bdd5-c3b3d8479f3d">Caching Application Data</a>
             </format>
+
+            
 
             
 
@@ -242,6 +264,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -292,8 +316,12 @@
 
             
 
+            
+
              property defines the cache parameters for the instance of the <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -302,8 +330,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.ControlCachePolicy" />
+
+            
 
             
 
@@ -312,6 +344,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.UserControl.CachePolicy" />
+
+            
 
             
 
@@ -370,6 +404,8 @@
 
             
 
+            
+
              object that has been created declaratively. Since there are some differences between pages and user controls, this method makes sure that the user control is initialized properly.</para
           >
         </summary>
@@ -378,8 +414,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -446,6 +486,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -454,13 +496,19 @@
 
             
 
+            
+
              property later. You can also insert the value into the <see
              cref="P:System.Web.UI.Control.ViewState" />
 
             
 
+            
+
              property just before calling <see
              cref="M:System.Web.UI.UserControl.SaveViewState" />
+
+            
 
             
 
@@ -475,6 +523,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -483,8 +533,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -514,8 +568,12 @@
 
             
 
+            
+
              method, this method maps the path from the .ascx file's location, not the .aspx file's location. You can use this method to obtain a path to a directory of images or other resources associated with your <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -532,6 +590,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -561,13 +621,19 @@
 
             
 
+            
+
              must perform any initialization steps that are required to create and set up an instance. This method confirms site information associated with the <see
              cref="T:System.Web.UI.UserControl" />
 
             
 
+            
+
              instance and ensures that the class is initialized correctly as a <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -583,6 +649,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -591,8 +659,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -622,6 +694,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -660,6 +734,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -726,6 +802,8 @@
 
             
 
+            
+
              object is compatible with ASP pages.</para
           >
         </remarks>
@@ -734,6 +812,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -775,6 +855,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.SessionState.HttpSessionState" />
+
+            
 
             
 
@@ -820,6 +902,8 @@
 
             
 
+            
+
              method to get the value of control attributes that are not exposed as properties on the control.</para
           >
         </remarks>
@@ -833,6 +917,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -866,6 +952,8 @@
 
             
 
+            
+
              method to set the value of control attributes that are not exposed as properties on the control.</para
           >
         </remarks>
@@ -878,10 +966,14 @@
 
           
 
+          
+
           The name of the attribute to set.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1002,6 +1094,8 @@
 
             
 
+            
+
              directive as follows: &lt;%@ Page trace="true" %&gt; </para
           >
         </remarks>
@@ -1010,6 +1104,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 

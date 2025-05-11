@@ -33,13 +33,19 @@
 
         
 
+        
+
          draws a line of specified width and style. Use the <see
          cref="T:System.Drawing.Drawing2D.DashStyle" />
 
         
 
+        
+
          property to draw several varieties of dashed lines. The line drawn by a <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 
@@ -68,13 +74,19 @@
 
             
 
+            
+
              property determines how the <see
              cref="T:System.Drawing.Pen" />
 
             
 
+            
+
              draws lines. Lines are drawn as if they are filled rectangles, with the characteristics of the specified <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -86,8 +98,12 @@
 
             
 
+            
+
              property of the new <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -102,8 +118,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -115,13 +135,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Brush" />
 
           
 
+          
+
            that determines the fill properties of this <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -149,13 +175,19 @@
 
             
 
+            
+
              property is set to the color specified by the <paramref
              name="color" />
 
             
 
+            
+
              parameter. The <see
              cref="P:System.Drawing.Pen.Width" />
+
+            
 
             
 
@@ -170,6 +202,8 @@
 
             
 
+            
+
              class with the specified color.</para
           >
         </summary>
@@ -178,13 +212,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
 
           
 
+          
+
            structure that indicates the color of this <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -216,8 +256,12 @@
 
             
 
+            
+
              is set to the color specified in the <paramref
              name="brush" />
+
+            
 
             
 
@@ -226,13 +270,19 @@
 
             
 
+            
+
              property is set to the value specified in the <paramref
              name="width" />
 
             
 
+            
+
              parameter, and the units are set to <see
              cref="F:System.Drawing.GraphicsUnit.World" />
+
+            
 
             
 
@@ -244,13 +294,19 @@
 
             
 
+            
+
              parameter also specifies the <see
              cref="T:System.Drawing.Color" />
 
             
 
+            
+
              property of this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -262,8 +318,12 @@
 
             
 
+            
+
              of 0 will result in the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -278,13 +338,19 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Brush" />
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Pen.Width" />
+
+            
 
             
 
@@ -296,13 +362,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Brush" />
 
           
 
+          
+
            that determines the characteristics of this <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -313,8 +385,12 @@
 
           
 
+          
+
           The width of the new <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -346,8 +422,12 @@
 
             
 
+            
+
              property is set to the color specified by the <paramref
              name="color" />
+
+            
 
             
 
@@ -356,8 +436,12 @@
 
             
 
+            
+
              property is set to the value specified in the <paramref
              name="width" />
+
+            
 
             
 
@@ -366,8 +450,12 @@
 
             
 
+            
+
              of 0 will result in the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -382,13 +470,19 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Color" />
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Pen.Width" />
+
+            
 
             
 
@@ -400,13 +494,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
 
           
 
+          
+
            structure that indicates the color of this <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -417,8 +517,12 @@
 
           
 
+          
+
           A value indicating the width of this <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -450,8 +554,12 @@
 
             
 
+            
+
              draws closed curves and polygons. The <see
              cref="T:System.Drawing.Drawing2D.PenAlignment" />
+
+            
 
             
 
@@ -460,8 +568,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+
+            
 
             
 
@@ -470,8 +582,12 @@
 
             
 
+            
+
              is the default value for this property and specifies that the width of the pen is centered on the outline of the curve or polygon. A value of <see
              cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+
+            
 
             
 
@@ -480,13 +596,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Drawing.Drawing2D.PenAlignment.Left" />
 
             
 
+            
+
             , and <see
              cref="F:System.Drawing.Drawing2D.PenAlignment.Outset" />
+
+            
 
             
 
@@ -498,13 +620,19 @@
 
             
 
+            
+
              that has its alignment set to <see
              cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
 
             
 
+            
+
              will yield unreliable results, sometimes drawing in the inset position and sometimes in the centered position. Also, an inset pen cannot be used to draw compound lines and cannot draw dashed lines with <see
              cref="F:System.Drawing.Drawing2D.DashCap.Triangle" />
+
+            
 
             
 
@@ -516,6 +644,8 @@
           <para
             >Gets or sets the alignment for this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -545,8 +675,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -561,8 +695,12 @@
 
             
 
+            
+
              that determines attributes of this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -592,6 +730,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -603,8 +743,12 @@
 
             
 
+            
+
              that can be cast to a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -635,6 +779,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -662,6 +808,8 @@
 
             
 
+            
+
              and an array of real numbers. Set the compound array by passing the array with the values 0.0, 0.2, 0.7, and 1.0 to this property.</para
           >
           <para
@@ -670,13 +818,19 @@
 
             
 
+            
+
              has its <see
              cref="P:System.Drawing.Pen.Alignment" />
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+
+            
 
             
 
@@ -714,6 +868,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -741,6 +897,8 @@
           <para
             >Gets or sets a custom cap to use at the beginning of lines drawn with this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -773,8 +931,12 @@
 
             
 
+            
+
              if the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -783,8 +945,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+
+            
 
             
 
@@ -796,6 +962,8 @@
           <para
             >Gets or sets the cap style used at the end of the dashes that make up dashed lines drawn with this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -845,13 +1013,19 @@
 
             
 
+            
+
              property for this <see
              cref="T:System.Drawing.Pen" />
 
             
 
+            
+
              to <see
              cref="F:System.Drawing.Drawing2D.DashStyle.Custom" />
+
+            
 
             
 
@@ -863,11 +1037,15 @@
 
             
 
+            
+
              array set the length of each dash and space in the dash pattern. The first element sets the length of a dash, the second element sets the length of a space, the third element sets the length of a dash, and so on. Consequently, each element should be a non-zero positive number.</para
           >
           <para
             >The length of each dash and space in the dash pattern is the product of the element value in the array and the width of the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -904,8 +1082,12 @@
 
             
 
+            
+
              for this property specifies that a custom pattern of dashes and spaces, defined by the <see
              cref="P:System.Drawing.Pen.DashPattern" />
+
+            
 
             
 
@@ -914,13 +1096,19 @@
 
             
 
+            
+
             . If the value of this property is <see
              cref="F:System.Drawing.Drawing2D.DashStyle.Custom" />
 
             
 
+            
+
              and the value of the <see
              cref="P:System.Drawing.Pen.DashPattern" />
+
+            
 
             
 
@@ -932,6 +1120,8 @@
           <para
             >Gets or sets the style used for dashed lines drawn with this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -960,8 +1150,12 @@
 
             
 
+            
+
              allows the resources used by this <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -973,8 +1167,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -983,8 +1181,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -993,13 +1195,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Drawing.Pen" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1010,10 +1218,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1026,13 +1238,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.Pen" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Drawing.Pen" />
+
+              
 
               
 
@@ -1045,6 +1263,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1075,6 +1295,8 @@
           <para
             >Gets or sets the cap style used at the end of lines drawn with this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1123,8 +1345,12 @@
 
             
 
+            
+
              object, that join style will be applied to all the connected lines in any <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -1139,6 +1365,8 @@
           <para
             >Gets or sets the join style for the ends of two consecutive lines drawn with this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1196,6 +1424,8 @@
 
             
 
+            
+
              parameter to the transformation matrix for the multiplication operation.</para
           >
         </remarks>
@@ -1207,8 +1437,12 @@
 
             
 
+            
+
              by the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -1220,8 +1454,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1255,8 +1493,12 @@
 
             
 
+            
+
              enumeration element (either prepend or append) specified by the <paramref
              name="order" />
+
+            
 
             
 
@@ -1271,8 +1513,12 @@
 
             
 
+            
+
              by the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -1284,8 +1530,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1293,6 +1543,8 @@
         >
         <param name="order">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1323,8 +1575,12 @@
 
             
 
+            
+
              can draw solid lines, filled lines, or textured lines, depending on the style specified by a member of the <see
              cref="T:System.Drawing.Drawing2D.PenType" />
+
+            
 
             
 
@@ -1336,6 +1592,8 @@
           <para
             >Gets the style of lines drawn with this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1362,6 +1620,8 @@
           <para
             >Resets the geometric transformation matrix for this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1401,6 +1661,8 @@
 
           
 
+          
+
           The angle of rotation. </param
         >
       </Docs>
@@ -1436,6 +1698,8 @@
 
           
 
+          
+
           The angle of rotation. </param
         >
         <param name="order">
@@ -1443,8 +1707,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1477,10 +1745,14 @@
 
           
 
+          
+
           The factor by which to scale the transformation in the x-axis direction. </param
         >
         <param name="sy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1517,10 +1789,14 @@
 
           
 
+          
+
           The factor by which to scale the transformation in the x-axis direction. </param
         >
         <param name="sy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1531,8 +1807,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1568,6 +1848,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1576,13 +1858,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.LineCap" />
 
           
 
+          
+
            that represents the cap style to use at the beginning of lines drawn with this <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -1593,13 +1881,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.LineCap" />
 
           
 
+          
+
            that represents the cap style to use at the end of lines drawn with this <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -1610,13 +1904,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.LineCap" />
 
           
 
+          
+
            that represents the cap style to use at the beginning or end of dashed lines drawn with this <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -1649,6 +1949,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1678,6 +1980,8 @@
 
             
 
+            
+
              property is a copy of the pen's geometric transform, you should dispose of the matrix when you no longer need it.</para
           >
         </remarks>
@@ -1686,6 +1990,8 @@
           <para
             >Gets or sets a copy of the geometric transformation for this <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1719,10 +2025,14 @@
 
           
 
+          
+
           The value of the translation in x. </param
         >
         <param name="dy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1759,6 +2069,8 @@
 
           
 
+          
+
           The value of the translation in x. </param
         >
         <param name="dy">
@@ -1766,10 +2078,14 @@
 
           
 
+          
+
           The value of the translation in y. </param
         >
         <param name="order">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1798,8 +2114,12 @@
 
             
 
+            
+
              object using its <see
              cref="P:System.Drawing.Graphics.PageUnit" />
+
+            
 
             
 
@@ -1808,13 +2128,19 @@
 
             
 
+            
+
              of 0 will result in the <see
              cref="T:System.Drawing.Pen" />
 
             
 
+            
+
              drawing as if the <see
              cref="P:System.Drawing.Pen.Width" />
+
+            
 
             
 
@@ -1829,8 +2155,12 @@
 
             
 
+            
+
             , in units of the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 

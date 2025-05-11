@@ -24,8 +24,12 @@
 
         
 
+        
+
          property is set to "1.3.6.1.5.5.7.3.4", the <see
          cref="P:System.Security.Cryptography.Oid.FriendlyName" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -93,6 +99,8 @@
 
             
 
+            
+
              object to a new object.</para
           >
         </remarks>
@@ -104,8 +112,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -114,6 +126,8 @@
         </summary>
         <param name="oid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,6 +159,8 @@
 
             
 
+            
+
              object to a new object.</para
           >
         </remarks>
@@ -156,8 +172,12 @@
 
             
 
+            
+
              class using a string value of an <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -166,6 +186,8 @@
         </summary>
         <param name="oid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -198,13 +220,19 @@
 
             
 
+            
+
              object. Note that if the Oid value is not recognized, the <paramref
              name="value" />
 
             
 
+            
+
              and <paramref
              name="friendlyName" />
+
+            
 
             
 
@@ -219,6 +247,8 @@
 
             
 
+            
+
              class using the specified value and friendly name.</para
           >
         </summary>
@@ -227,10 +257,14 @@
 
           
 
+          
+
           The dotted number of the identifier.</param
         >
         <param name="friendlyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,8 +294,12 @@
 
             
 
+            
+
              property is set to a known value, the other value of an <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -270,8 +308,12 @@
 
             
 
+            
+
              property is set to "Secure Email", the <see
              cref="P:System.Security.Cryptography.Oid.Value" />
+
+            
 
             
 
@@ -306,8 +348,12 @@
 
             
 
+            
+
              property is set to a known value, the other value of an <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -316,8 +362,12 @@
 
             
 
+            
+
              property is set to "1.3.6.1.5.5.7.3.4", the <see
              cref="P:System.Security.Cryptography.Oid.FriendlyName" />
+
+            
 
             
 

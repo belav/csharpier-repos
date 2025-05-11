@@ -3,7 +3,7 @@
   <paragraph
     >For a foreach statement stmt of the form: <code_example
     >
-      <![CDATA[
+<![CDATA[
 foreach (type identifier in expr) embedded-statement  
 ]]>
     </code_example>
@@ -12,6 +12,8 @@ foreach (type identifier in expr) embedded-statement
       <list_item
         > The definite assignment state of v on the control flow transfer to <non_terminal
          where="15">embedded-statement</non_terminal>
+
+        
 
         
 

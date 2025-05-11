@@ -27,8 +27,12 @@
 
         
 
+        
+
          enumeration to define the type of hash algorithm to use with the <see
          cref="T:System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
       <para
         >Defines the type of hash algorithm to use with the <see
          cref="T:System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension" />
+
+        
 
         
 

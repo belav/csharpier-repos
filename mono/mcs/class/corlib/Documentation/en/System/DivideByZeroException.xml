@@ -41,6 +41,8 @@
 
         
 
+        
+
          exception.</para
       >
       <code lang="C#"
@@ -72,8 +74,12 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
         
 
+        
+
          exception. Dividing a floating-point value by zero doesn't throw an exception; it results in positive infinity, negative infinity, or not a number (NaN), according to the rules of IEEE 754 arithmetic. Because the following example uses floating-point division rather than integer division, the operation does not throw a <see
          cref="T:System.DivideByZeroException" />
+
+        
 
         
 
@@ -86,8 +92,12 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
         
 
+        
+
          and <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -96,6 +106,8 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
       <para
         >The following Microsoft intermediate language (MSIL) instructions throw <see
          cref="T:System.DivideByZeroException" />
+
+        
 
         
 
@@ -109,14 +121,18 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
           <para>div.un </para>
         </item>
         <item>
-          <para>rem </para>
+          <para
+>rem </para>
         </item>
         <item>
-          <para>rem.un </para>
+          <para
+>rem.un </para>
         </item>
       </list>
       <para>
         <see cref="T:System.DivideByZeroException" />
+
+        
 
         
 
@@ -128,8 +144,12 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
         
 
+        
+
         , see the <see
          cref="M:System.DivideByZeroException.#ctor" />
+
+        
 
         
 
@@ -169,11 +189,15 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Attempted to divide by zero." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DivideByZeroException" />
+
+            
 
             
 
@@ -220,6 +244,8 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -255,11 +281,15 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DivideByZeroException" />
+
+            
 
             
 
@@ -306,6 +336,8 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
@@ -314,8 +346,12 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -356,6 +392,8 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -364,10 +402,14 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -408,8 +450,12 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -418,11 +464,15 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DivideByZeroException" />
+
+            
 
             
 
@@ -469,11 +519,15 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -484,8 +538,12 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

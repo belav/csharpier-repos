@@ -3,7 +3,7 @@
   <paragraph
     >The predefined integer logical operators are: <code_example
     >
-      <![CDATA[
+<![CDATA[
 int operator &(int x, int y);  
 uint operator &(uint x, uint y);  
 long operator &(long x, long y);  

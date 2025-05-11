@@ -28,8 +28,12 @@
 
         
 
+        
+
          interface is designed to be a format-independent interface to an object that controls serialization. It essentially provides context and services to serializers, which actually perform the deserialization. <see
          cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          interface: designers actually provide the user interface (UI), and <see
          cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          class implements <see
          cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+        
 
         
 
@@ -61,11 +73,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.ComponentModel.Design.Serialization.DesignerSerializationManager" />
+
+        
 
         
 
@@ -110,6 +126,8 @@
       <para
         >The <see
          cref="T:System.ComponentModel.Design.Serialization.DesignerSerializationManager" />
+
+        
 
         
 
@@ -161,6 +179,8 @@
 
               
 
+              
+
                event</para
             >
           </term>
@@ -168,6 +188,8 @@
             <para
               >The <see
                cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.ResolveName" />
+
+              
 
               
 
@@ -182,6 +204,8 @@
 
               
 
+              
+
                event</para
             >
           </term>
@@ -189,6 +213,8 @@
             <para
               >The <see
                cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.SerializationComplete" />
+
+              
 
               
 
@@ -215,6 +241,8 @@
 
               
 
+              
+
                method can safely be called at any time, but its value is cached only if it is called from within a session.</para
             >
           </description>
@@ -227,6 +255,8 @@
             <para
               >The serialization manager maintains an object called the context stack, which you can access with the <see
                cref="P:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.Context" />
+
+              
 
               
 
@@ -245,8 +275,12 @@
 
               
 
+              
+
                property, is cleared when the session is terminated. Accessing the <see
                cref="P:System.ComponentModel.Design.Serialization.DesignerSerializationManager.Errors" />
+
+              
 
               
 
@@ -261,6 +295,8 @@
       <para
         >Provides an implementation of the <see
          cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+        
 
         
 
@@ -285,8 +321,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.Design.Serialization.DesignerSerializationManager.ValidateRecycledTypes" />
+
+            
 
             
 
@@ -298,6 +338,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.DesignerSerializationManager" />
+
+            
 
             
 
@@ -327,6 +369,8 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
@@ -335,8 +379,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.Design.Serialization.DesignerSerializationManager.ValidateRecycledTypes" />
+
+            
 
             
 
@@ -351,6 +399,8 @@
 
             
 
+            
+
              class with the given service provider.</para
           >
         </summary>
@@ -359,8 +409,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -387,6 +441,8 @@
           <para
             >If a container exists, all components that are created by the serialization manager will be added to the container. The default implementation of this property will search the service provider for an <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 
@@ -426,8 +482,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.Design.Serialization.DesignerSerializationManager.RecycleInstances" />
+
+            
 
             
 
@@ -436,8 +496,12 @@
 
             
 
+            
+
              method uses reflection to create instances and will perform some generic <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -456,11 +520,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,10 +539,14 @@
 
           
 
+          
+
           The parameters of the type’s constructor. This can be null or an empty collection to invoke the default constructor.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,8 +557,12 @@
 
           
 
+          
+
           true to add the object to the container if the object implements <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -518,6 +594,8 @@
           <para
             >An <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -581,11 +659,15 @@
 
             
 
+            
+
             , or null, if not found.</para
           >
         </returns>
         <param name="serializerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,6 +694,8 @@
           <para
             >The <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.GetService(System.Type)" />
+
+            
 
             
 
@@ -650,8 +734,12 @@
 
             
 
+            
+
              method will search the service provider for an <see
              cref="T:System.ComponentModel.Design.ITypeResolutionService" />
+
+            
 
             
 
@@ -660,13 +748,19 @@
 
             
 
+            
+
              is not available, <see
              cref="Overload:System.ComponentModel.Design.Serialization.DesignerSerializationManager.GetType" />
 
             
 
+            
+
              will call the <see
              cref="M:System.Object.GetType" />
+
+            
 
             
 
@@ -712,11 +806,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.OnResolveName(System.ComponentModel.Design.Serialization.ResolveNameEventArgs)" />
+
+            
 
             
 
@@ -731,6 +829,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -739,8 +839,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.Serialization.ResolveNameEventArgs" />
+
+          
 
           
 
@@ -774,11 +878,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.OnSessionCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -793,6 +901,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -801,8 +911,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -836,11 +950,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.OnSessionDisposed(System.EventArgs)" />
+
+            
 
             
 
@@ -855,6 +973,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -863,8 +983,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -891,8 +1015,12 @@
 
             
 
+            
+
              property determines the behavior of the <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -901,8 +1029,12 @@
 
             
 
+            
+
              will pass the given component name. If false, <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -911,8 +1043,12 @@
 
             
 
+            
+
              will use the given name. If the name does exist in the container, <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -925,6 +1061,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -952,6 +1090,8 @@
 
             
 
+            
+
              property provides a way to give the serialization manager a set of serialization properties that serializers can use to guide their behavior.</para
           >
           <para>This object's public properties will be inspected and wrapped in new property descriptors that have a target object of the serialization manager.</para>
@@ -961,6 +1101,8 @@
           <para
             >Gets the object that should be used to provide properties to the serialization manager's <see
              cref="P:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.Properties" />
+
+            
 
             
 
@@ -988,8 +1130,12 @@
 
             
 
+            
+
              property is false, the <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -998,8 +1144,12 @@
 
             
 
+            
+
              is true, <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1008,8 +1158,12 @@
 
             
 
+            
+
              will return the existing instance. This second variation is useful for implementing a serializer that applies serialization state to an existing set of objects, rather than always creating a new tree. The <ui
             >Undo</ui>
+
+            
 
             
 
@@ -1021,13 +1175,19 @@
 
             
 
+            
+
              property is true, the <see
              cref="P:System.ComponentModel.Design.Serialization.DesignerSerializationManager.ValidateRecycledTypes" />
 
             
 
+            
+
              property will further modify the behavior of <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1039,6 +1199,8 @@
           <para
             >Gets or sets a flag indicating whether <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1108,6 +1270,8 @@
 
             
 
+            
+
              method is used to request a serialization provider, the serialization manager queries the custom serialization providers first before looking in the type's metadata for the appropriate serializer.</para
           >
         </remarks>
@@ -1117,6 +1281,8 @@
         </summary>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1176,6 +1342,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1188,10 +1356,14 @@
 
           
 
+          
+
           The data type to create. </param
         >
         <param name="arguments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1202,8 +1374,12 @@
 
           
 
+          
+
           The name of the object. This name can be used to access the object later through <see
            cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.GetInstance(System.String)" />
+
+          
 
           
 
@@ -1214,8 +1390,12 @@
 
           
 
+          
+
           true to add this object to the design container. The object must implement <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -1253,6 +1433,8 @@
 
           
 
+          
+
           The name of the object to retrieve.</param
         >
       </Docs>
@@ -1282,13 +1464,19 @@
 
             
 
+            
+
              method cannot find a corresponding name for the <paramref
              name="value" />
 
             
 
+            
+
              parameter, it raises the <see
              cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.ResolveName" />
+
+            
 
             
 
@@ -1334,6 +1522,8 @@
         </returns>
         <param name="serializerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1392,6 +1582,8 @@
 
             
 
+            
+
              property. </para
           >
         </summary>
@@ -1424,8 +1616,12 @@
 
             
 
+            
+
              method removes a custom serialization provider that was previously added by a call to the <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.System#ComponentModel#Design#Serialization#IDesignerSerializationManager#AddSerializationProvider(System.ComponentModel.Design.Serialization.IDesignerSerializationProvider)" />
+
+            
 
             
 
@@ -1441,8 +1637,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
+
+          
 
           
 
@@ -1475,10 +1675,14 @@
 
             
 
+            
+
              method with the error information. The serialization manager may support reporting a list of errors after it completes, or it may throw an exception from this method and abort the serialization process. The serializer should continue after calling this function.</para
           >
           <para>
             <see cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.System#ComponentModel#Design#Serialization#IDesignerSerializationManager#ReportError(System.Object)" />
+
+            
 
             
 
@@ -1487,13 +1691,19 @@
 
             
 
+            
+
              parameter to the <see
              cref="P:System.ComponentModel.Design.Serialization.DesignerSerializationManager.Errors" />
 
             
 
+            
+
              collection. If <paramref
              name="errorInformation" />
+
+            
 
             
 
@@ -1531,13 +1741,19 @@
 
             
 
+            
+
              method provides a way to set the name of an existing object. This enables creation of an instance of the object through a call to the <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.System#ComponentModel#Design#Serialization#IDesignerSerializationManager#GetInstance(System.String)" />
 
             
 
+            
+
              method, avoiding the overhead of the <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1553,6 +1769,8 @@
 
           
 
+          
+
           The object to set the name.</param
         >
         <param name="name">
@@ -1560,8 +1778,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1591,8 +1813,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IServiceProvider" />
+
+            
 
             
 
@@ -1607,6 +1833,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1618,12 +1846,16 @@
 
             
 
+            
+
             .</para
           >
           <para>-or-</para>
           <para
             >null if there is no service object of type <paramref
              name="serviceType" />
+
+            
 
             
 
@@ -1651,13 +1883,19 @@
 
             
 
+            
+
              property modifies the behavior of the <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
 
             
 
+            
+
              method when the <see
              cref="P:System.ComponentModel.Design.Serialization.DesignerSerializationManager.RecycleInstances" />
+
+            
 
             
 
@@ -1716,6 +1954,8 @@
 
             
 
+            
+
              is useful for morphing one type of object to another if they have similar properties but share no common parent or interface. </para
           >
         </remarks>
@@ -1724,6 +1964,8 @@
           <para
             >Gets or sets a flag indicating whether the <see
              cref="M:System.ComponentModel.Design.Serialization.DesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+
+            
 
             
 

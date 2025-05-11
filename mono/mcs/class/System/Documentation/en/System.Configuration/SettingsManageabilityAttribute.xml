@@ -35,6 +35,8 @@
 
         
 
+        
+
          indicates that special, predefined services are to be provided to individual application settings properties and property groups. Most of these services will be provided by the Windows operating system.</para
       >
       <para
@@ -42,6 +44,8 @@
          type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
         </format>
+
+        
 
         
 
@@ -81,6 +85,8 @@
 
             
 
+            
+
              enumeration with the logical OR operator.</para
           >
         </remarks>
@@ -92,6 +98,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -100,8 +108,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsManageability" />
+
+          
 
           
 
@@ -134,6 +146,8 @@
           <para
             >This property is set in the <see
              cref="M:System.Configuration.SettingsManageabilityAttribute.#ctor(System.Configuration.SettingsManageability)" />
+
+            
 
             
 

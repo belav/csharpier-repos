@@ -38,6 +38,8 @@
 
         
 
+        
+
          types.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.UnicastIPAddressInformationCollection" />
+
+            
 
             
 
@@ -104,11 +108,15 @@
 
             
 
+            
+
              because this operation is not supported for this collection.</para
           >
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -139,6 +147,8 @@
           <para
             >Throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -181,6 +191,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -192,6 +204,8 @@
 
             
 
+            
+
              object exists in the collection; otherwise, false.</para
           >
         </returns>
@@ -200,8 +214,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+
+          
 
           
 
@@ -247,11 +265,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -262,8 +284,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -291,6 +317,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+
+            
 
             
 
@@ -327,8 +355,12 @@
 
             
 
+            
+
              method before you can access the first element. To access the element at the current position, call the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -340,13 +372,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
+            
+
              causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -358,8 +396,12 @@
 
             
 
+            
+
              class and the <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -378,8 +420,12 @@
 
             
 
+            
+
              interface and provides access to the <see
              cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+
+            
 
             
 
@@ -471,6 +517,8 @@
 
             
 
+            
+
              because the collection is read-only and elements cannot be removed.</para
           >
         </summary>
@@ -482,11 +530,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -521,8 +573,12 @@
 
             
 
+            
+
              method before you can access the first element. To access the element at the current position, call the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -534,13 +590,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
+            
+
              causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -552,8 +614,12 @@
 
             
 
+            
+
              class and the <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -572,8 +638,12 @@
 
             
 
+            
+
              interface and provides access to the <see
              cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+
+            
 
             
 

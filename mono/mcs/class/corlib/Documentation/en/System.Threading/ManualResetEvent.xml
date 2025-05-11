@@ -35,8 +35,12 @@
 
         
 
+        
+
          derives from the new <see
          cref="T:System.Threading.EventWaitHandle" />
+
+        
 
         
 
@@ -45,13 +49,19 @@
 
         
 
+        
+
          is functionally equivalent to an <see
          cref="T:System.Threading.EventWaitHandle" />
 
         
 
+        
+
          created with <see
          cref="F:System.Threading.EventResetMode.ManualReset" />
+
+        
 
         
 
@@ -64,8 +74,12 @@
 
           
 
+          
+
            class, the <see
            cref="T:System.Threading.EventWaitHandle" />
+
+          
 
           
 
@@ -77,6 +91,8 @@
 
         
 
+        
+
          allows threads to communicate with each other by signaling. Typically, this communication concerns a task which one thread must complete before other threads can proceed.</para
       >
       <para
@@ -85,13 +101,19 @@
 
         
 
+        
+
          to put ManualResetEvent in the non-signaled state. This thread can be thought of as controlling the ManualResetEvent. Threads that call <see
          cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
         
 
+        
+
          on the ManualResetEvent will block, awaiting the signal. When the controlling thread completes the activity, it calls <see
          cref="M:System.Threading.EventWaitHandle.Set" />
+
+        
 
         
 
@@ -105,8 +127,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+        
 
         
 
@@ -117,6 +143,8 @@
          type="text/html">
           <a href="465FDCF9-BA24-4D8D-A43F-D983B7CB0CC6">Manual Reset Event</a>
         </format>
+
+        
 
         
 
@@ -155,8 +183,12 @@
 
             
 
+            
+
              is signaled (that is, if it is created by passing true for <paramref
              name="initialState" />
+
+            
 
             
 
@@ -165,8 +197,12 @@
 
             
 
+            
+
              do not block. If the initial state is nonsignaled, threads block until the <see
              cref="M:System.Threading.EventWaitHandle.Set" />
+
+            
 
             
 
@@ -181,11 +217,15 @@
 
             
 
+            
+
              class with a Boolean value indicating whether to set the initial state to signaled.</para
           >
         </summary>
         <param name="initialState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -207,6 +247,8 @@
             <para
               >Starting with the dnprdnext and the compact_v35_long, this member is inherited from <see
                cref="T:System.Threading.EventWaitHandle" />
+
+              
 
               
 
@@ -244,8 +286,12 @@
 
               
 
+              
+
               . See <see
                cref="M:System.Threading.EventWaitHandle.Set" />
+
+              
 
               
 
@@ -258,8 +304,12 @@
 
             
 
+            
+
              method leaves the wait handle in a signaled state until the <see
              cref="M:System.Threading.ManualResetEvent.Reset" />
+
+            
 
             
 

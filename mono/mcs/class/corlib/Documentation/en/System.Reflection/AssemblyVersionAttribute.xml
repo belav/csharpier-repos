@@ -42,6 +42,8 @@
 
         
 
+        
+
          for more information.</para
       >
       <block subset="none" type="note">
@@ -53,6 +55,8 @@
         <para
           >All components of the version must be integers greater than or equal to 0. Metadata restricts the major, minor, build, and revision components for an assembly to a maximum value of <see
            cref="F:System.UInt16.MaxValue" />
+
+          
 
           
 
@@ -70,8 +74,12 @@
 
         
 
+        
+
          on the assembly to get an <see
          cref="T:System.Reflection.AssemblyName" />
+
+        
 
         
 
@@ -80,8 +88,12 @@
 
         
 
+        
+
          property. To get the name of an assembly you have not loaded, call <see
          cref="M:System.Reflection.AssemblyName.GetAssemblyName(System.String)" />
+
+        
 
         
 
@@ -119,6 +131,8 @@
 
             
 
+            
+
              string is: major. minor. build. revision.</para
           >
           <para>When specifying a version, you have to at least specify major. If you specify major and minor, you can specify an asterisk (*) for build. This will cause build to be equal to the number of days since January 1, 2000 local time, and for revision to be equal to the number of seconds since midnight local time, divided by 2.</para>
@@ -137,6 +151,8 @@
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

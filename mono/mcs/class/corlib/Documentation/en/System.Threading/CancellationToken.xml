@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -60,8 +62,12 @@
 
             
 
+            
+
              parameter. If <paramref
              name="canceled" />
+
+            
 
             
 
@@ -70,8 +76,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+            
 
             
 
@@ -83,13 +93,19 @@
 
             
 
+            
+
              is true, both <see
              cref="P:System.Threading.CancellationToken.CanBeCanceled" />
 
             
 
+            
+
              and <see
              cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+            
 
             
 
@@ -104,11 +120,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="canceled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,6 +153,8 @@
           <para
             >If CanBeCanceled returns false, it is guaranteed that the token will never transition into a canceled state, meaning that <see
              cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+            
 
             
 
@@ -171,8 +193,12 @@
 
             
 
+            
+
              instance is equal to the specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -187,8 +213,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -197,8 +227,12 @@
 
             
 
+            
+
              or if they were both constructed from public CancellationToken constructors and their <see
              cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+            
 
             
 
@@ -207,6 +241,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,6 +279,8 @@
 
             
 
+            
+
              instance is equal to the specified token.</para
           >
         </summary>
@@ -254,8 +292,12 @@
 
             
 
+            
+
              or if they were both constructed from public CancellationToken constructors and their <see
              cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+            
 
             
 
@@ -267,8 +309,12 @@
 
           
 
+          
+
           The other <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -300,6 +346,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -308,6 +356,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -336,8 +386,12 @@
 
             
 
+            
+
              on the token's associated <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -376,6 +430,8 @@
           <para
             >The <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -418,6 +474,8 @@
 
             
 
+            
+
              instances are equal.</para
           >
         </summary>
@@ -430,10 +488,14 @@
 
           
 
+          
+
           The first instance.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,6 +533,8 @@
 
             
 
+            
+
              instances are not equal.</para
           >
         </summary>
@@ -483,10 +547,14 @@
 
           
 
+          
+
           The first instance.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -523,6 +591,8 @@
 
             
 
+            
+
             , if one exists, will be captured along with the delegate and will be used when executing it.</para
           >
           <para></para>
@@ -532,6 +602,8 @@
           <para
             >Registers a delegate that will be called when this <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -546,6 +618,8 @@
 
             
 
+            
+
              instance that can be used to deregister the callback.</para
           >
         </returns>
@@ -554,8 +628,12 @@
 
           
 
+          
+
           The delegate to be executed when the <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -593,6 +671,8 @@
 
             
 
+            
+
             , if one exists, will be captured along with the delegate and will be used when executing it.</para
           >
           <para></para>
@@ -602,6 +682,8 @@
           <para
             >Registers a delegate that will be called when this <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -616,6 +698,8 @@
 
             
 
+            
+
              instance that can be used to deregister the callback.</para
           >
         </returns>
@@ -624,8 +708,12 @@
 
           
 
+          
+
           The delegate to be executed when the <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -636,13 +724,19 @@
 
           
 
+          
+
           A Boolean value that indicates whether to capture the current <see
            cref="T:System.Threading.SynchronizationContext" />
 
           
 
+          
+
            and use it when invoking the <paramref
            name="callback" />
+
+          
 
           
 
@@ -680,6 +774,8 @@
 
             
 
+            
+
             , if one exists, will be captured along with the delegate and will be used when executing it.</para
           >
           <para></para>
@@ -689,6 +785,8 @@
           <para
             >Registers a delegate that will be called when this <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -703,6 +801,8 @@
 
             
 
+            
+
              instance that can be used to deregister the callback.</para
           >
         </returns>
@@ -711,8 +811,12 @@
 
           
 
+          
+
           The delegate to be executed when the <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -723,8 +827,12 @@
 
           
 
+          
+
           The state to pass to the <paramref
            name="callback" />
+
+          
 
           
 
@@ -763,6 +871,8 @@
 
             
 
+            
+
             , if one exists, will be captured along with the delegate and will be used when executing it.</para
           >
           <para></para>
@@ -772,6 +882,8 @@
           <para
             >Registers a delegate that will be called when this <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -786,6 +898,8 @@
 
             
 
+            
+
              instance that can be used to deregister the callback.</para
           >
         </returns>
@@ -794,8 +908,12 @@
 
           
 
+          
+
           The delegate to be executed when the <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -806,8 +924,12 @@
 
           
 
+          
+
           The state to pass to the <paramref
            name="callback" />
+
+          
 
           
 
@@ -818,13 +940,19 @@
 
           
 
+          
+
           A Boolean value that indicates whether to capture the current <see
            cref="T:System.Threading.SynchronizationContext" />
 
           
 
+          
+
            and use it when invoking the <paramref
            name="callback" />
+
+          
 
           
 
@@ -865,6 +993,8 @@
 
             
 
+            
+
              if this token has had cancellation requested.</para
           >
         </summary>
@@ -896,8 +1026,12 @@
 
             
 
+            
+
              to be instantiated. It is preferable to only use this property when necessary, and to then dispose the associated <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -909,6 +1043,8 @@
           <para
             >Gets a <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 

@@ -89,6 +89,8 @@
 
           
 
+          
+
            of the FontFace</summary
         >
         <value
@@ -157,6 +159,8 @@
 
           
 
+          
+
            representing the status of the FontFace</value
         >
         <remarks></remarks>
@@ -177,6 +181,8 @@
         <summary
           >Calls <see
            cref="P:Cairo.FontFace.Dispose" />
+
+          
 
           
 

@@ -18,6 +18,8 @@
 
         
 
+        
+
          class provides static helper methods that are used by a session-state module or a session-state store provider. Application developers will not need to call these methods from their code.</para
       >
       <para>The following table describes the ways the session-state module and session-state store provider use the methods.</para>
@@ -39,6 +41,8 @@
 
               
 
+              
+
                method</para
             >
           </term>
@@ -53,6 +57,8 @@
 
               
 
+              
+
                method</para
             >
           </term>
@@ -63,8 +69,12 @@
 
               
 
+              
+
                and make it available to application code through the <see
                cref="P:System.Web.HttpContext.Session" />
+
+              
 
               
 
@@ -79,6 +89,8 @@
 
               
 
+              
+
                method</para
             >
           </term>
@@ -89,13 +101,19 @@
 
               
 
+              
+
                or <see
                cref="E:System.Web.HttpApplication.EndRequest" />
 
               
 
+              
+
                events at the end of a request, to clear session data from the current <see
                cref="T:System.Web.HttpContext" />
+
+              
 
               
 
@@ -110,6 +128,8 @@
 
               
 
+              
+
                method</para
             >
           </term>
@@ -120,13 +140,19 @@
 
               
 
+              
+
                collection based on objects defined in the Global.asax file. The <see
                cref="T:System.Web.HttpStaticObjectsCollection" />
 
               
 
+              
+
                collection returned is included with the session data added to the current <see
                cref="T:System.Web.HttpContext" />
+
+              
 
               
 
@@ -141,13 +167,19 @@
 
         
 
+        
+
          as an <see
          cref="T:System.Web.SessionState.HttpSessionStateContainer" />
 
         
 
+        
+
          object or any valid implementation of the <see
          cref="T:System.Web.SessionState.IHttpSessionState" />
+
+        
 
         
 
@@ -160,6 +192,8 @@
             >Implementing a Session State Store Provider</a
           >
         </format>
+
+        
 
         
 
@@ -197,8 +231,12 @@
 
             
 
+            
+
              method is used by a session-state module to apply session data to the current request. This occurs during the <see
              cref="E:System.Web.HttpApplication.AcquireRequestState" />
+
+            
 
             
 
@@ -207,8 +245,12 @@
 
             
 
+            
+
              implementation instance, which is passed to the <see
              cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
+
+            
 
             
 
@@ -217,8 +259,12 @@
 
             
 
+            
+
             . The supplied session data is then made available to application code through the <see
              cref="P:System.Web.HttpContext.Session" />
+
+            
 
             
 
@@ -234,13 +280,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
 
           
 
+          
+
            object to which to add the <see
            cref="T:System.Web.SessionState.HttpSessionState" />
+
+          
 
           
 
@@ -251,8 +303,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SessionState.IHttpSessionState" />
+
+          
 
           
 
@@ -284,8 +340,12 @@
 
             
 
+            
+
              method can be used by a session-state module to retrieve session data from the current request. This occurs during the <see
              cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+
+            
 
             
 
@@ -294,8 +354,12 @@
 
             
 
+            
+
             , and the <system
             >Session_OnEnd</system>
+
+            
 
             
 
@@ -314,6 +378,8 @@
 
             
 
+            
+
              implementation instance populated with session data from the current request.</para
           >
         </returns>
@@ -322,8 +388,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -355,8 +425,12 @@
 
             
 
+            
+
              method is used to retrieve the collection of static objects defined in the Global.asax file for the ASP.NET application. A session-state module implementation will supply the returned <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
+
+            
 
             
 
@@ -365,8 +439,12 @@
 
             
 
+            
+
              implementation instance that is added to the current context using the <see
              cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
+
+            
 
             
 
@@ -378,13 +456,19 @@
 
             
 
+            
+
              can also use the <see
              cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" />
 
             
 
+            
+
              method when creating a <see
              cref="T:System.Web.SessionState.SessionStateStoreData" />
+
+            
 
             
 
@@ -403,13 +487,19 @@
 
             
 
+            
+
              collection populated with the <see
              cref="P:System.Web.SessionState.HttpSessionState.StaticObjects" />
 
             
 
+            
+
              property value for the specified <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -421,8 +511,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -456,13 +550,19 @@
 
             
 
+            
+
              method is used by a session-state module to execute the <system
             >Session_OnEnd</system>
 
             
 
+            
+
              event defined in the Global.asax file for an ASP.NET application. A session-state module will call the <see
              cref="M:System.Web.SessionState.SessionStateUtility.RaiseSessionEnd(System.Web.SessionState.IHttpSessionState,System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -477,6 +577,8 @@
 
             
 
+            
+
              event defined in the Global.asax file for the ASP.NET application.</para
           >
         </summary>
@@ -485,8 +587,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SessionState.IHttpSessionState" />
+
+          
 
           
 
@@ -497,6 +603,8 @@
 
           
 
+          
+
           The event source object to supply to the Session_OnEnd event.</param
         >
         <param name="eventArgs">
@@ -504,8 +612,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -537,8 +649,12 @@
 
             
 
+            
+
              method clears session data from the specified <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -547,8 +663,12 @@
 
             
 
+            
+
              method in the handler for the <see
              cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+
+            
 
             
 
@@ -564,8 +684,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 

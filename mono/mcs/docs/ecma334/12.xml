@@ -7,6 +7,8 @@
 
     
 
+    
+
     ) before its value can be obtained. </paragraph
   >
   <paragraph>As described in the following sections, variables are either initially assigned or initially unassigned. An initially assigned variable has a well-defined initial value and is always considered definitely assigned. An initially unassigned variable has no initial value. For an initially unassigned variable to be considered definitely assigned at a certain location, an assignment to the variable must occur in every possible execution path leading to that location. </paragraph>

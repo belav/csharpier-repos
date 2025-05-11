@@ -31,6 +31,8 @@
 
         
 
+        
+
          allows you to extend this capability to objects that are not in the container.</para
       >
     </remarks>
@@ -75,6 +77,8 @@
 
           
 
+          
+
           The extender provider to add. </param
         >
       </Docs>
@@ -111,6 +115,8 @@
         </summary>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

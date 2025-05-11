@@ -52,8 +52,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.Once" />
+
+                
 
                 
 
@@ -66,8 +70,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -77,6 +85,8 @@
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                
 
                 
 
@@ -90,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.KerberosSecurityTokenParameters" />
+
+            
 
             
 
@@ -127,6 +139,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -135,6 +149,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.KerberosSecurityTokenParameters" />
+
+            
 
             
 
@@ -169,8 +185,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -181,8 +201,12 @@
 
             
 
+            
+
              is an abstract class that is overridden by <see
              cref="M:System.ServiceModel.Security.Tokens.KerberosSecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -194,8 +218,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.ServiceModel.Security.Tokens.KerberosSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.KerberosSecurityTokenParameters)" />
+
+            
 
             
 
@@ -211,6 +239,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            
 
             
 
@@ -257,10 +287,14 @@
 
           
 
+          
+
           The token.</param
         >
         <param name="referenceStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +356,8 @@
 
             
 
+            
+
              are initialized:</para
           >
           <list type="bullet">
@@ -331,8 +367,12 @@
 
                 
 
+                
+
                  = <see
                  cref="P:System.IdentityModel.Tokens.SecurityTokenTypes.Kerberos" />
+
+                
 
                 
 
@@ -345,6 +385,8 @@
 
                 
 
+                
+
                  = true.</para
               >
             </item>
@@ -354,8 +396,12 @@
 
                 
 
+                
+
                  = <see
                  cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
+
+                
 
                 
 
@@ -370,6 +416,8 @@
         </summary>
         <param name="requirement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -27,13 +27,19 @@
 
         
 
+        
+
          object will be automatically generated and placed in the <see
          cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
 
         
 
+        
+
          property whenever the <see
          cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
       <para
         >The <see
          cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
+
+        
 
         
 
@@ -76,8 +84,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
+
+            
 
             
 
@@ -116,8 +128,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -132,6 +148,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -140,8 +158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -169,6 +191,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest.MessageDigest" />
+
+            
 
             
 

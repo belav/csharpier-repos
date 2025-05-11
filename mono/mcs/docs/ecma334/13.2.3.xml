@@ -5,7 +5,11 @@
     >
       <list_item
         > From object to any <non_terminal
-         where="11.2">reference-type</non_terminal>
+         where="11.2"
+>reference-type</non_terminal
+        >
+
+        
 
         
 
@@ -17,8 +21,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">class-type</non_terminal>
+
+        
 
         
 
@@ -30,8 +38,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 
@@ -43,8 +55,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">class-type</non_terminal>
+
+        
 
         
 
@@ -56,8 +72,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 
@@ -69,8 +89,12 @@
 
         
 
+        
+
          S with an element type SE to an <non_terminal
          where="19.1">array-type</non_terminal>
+
+        
 
         
 
@@ -80,7 +104,11 @@
         <list_item> S and T differ only in element type. (In other words, S and T have the same number of dimensions.) </list_item>
         <list_item
           > Both SE and TE are <non_terminal
-           where="11.2">reference-type</non_terminal>
+           where="11.2"
+>reference-type</non_terminal
+          >
+
+          
 
           
 
@@ -94,11 +122,15 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
         > From System.Delegate and the interfaces it implements, to any <non_terminal
          where="11.2">delegate-type</non_terminal>
+
+        
 
         
 
@@ -108,7 +140,11 @@
   </paragraph>
   <paragraph
     >The explicit reference conversions are those conversions between <non_terminal
-     where="11.2">reference-type</non_terminal>
+     where="11.2"
+>reference-type</non_terminal
+    >
+
+    
 
     
 
@@ -117,6 +153,8 @@
   <paragraph
     >For an explicit reference conversion to succeed at run-time, the value of the source operand must be null, or the actual type of the object referenced by the source operand must be a type that can be converted to the destination type by an implicit reference conversion (<hyperlink
     >13.1.4</hyperlink>
+
+    
 
     
 

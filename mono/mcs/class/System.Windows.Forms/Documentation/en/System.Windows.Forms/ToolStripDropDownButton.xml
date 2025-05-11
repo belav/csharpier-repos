@@ -21,8 +21,12 @@
 
         
 
+        
+
          looks like <see
          cref="T:System.Windows.Forms.ToolStripButton" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          property. <see
          cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          that displays items that overflow the <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -54,8 +66,12 @@
 
         
 
+        
+
          to activate familiar drop-down controls such as color pickers. Set the <see
          cref="P:System.Windows.Forms.ToolStripDropDownButton.ShowDropDownArrow" />
+
+        
 
         
 
@@ -67,6 +83,8 @@
       <para
         >Represents a control that when clicked displays an associated <see
          cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+        
 
         
 
@@ -87,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+            
 
             
 
@@ -118,6 +138,8 @@
 
             
 
+            
+
              class that displays the specified image.</para
           >
         </summary>
@@ -126,13 +148,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -160,6 +188,8 @@
 
             
 
+            
+
              class that displays the specified text.</para
           >
         </summary>
@@ -168,8 +198,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -201,6 +235,8 @@
 
             
 
+            
+
              class that displays the specified text and image.</para
           >
         </summary>
@@ -209,8 +245,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -221,13 +261,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -260,6 +306,8 @@
 
             
 
+            
+
              class that displays the specified text and image and raises the Click event.</para
           >
         </summary>
@@ -268,8 +316,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -280,13 +332,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -297,8 +355,12 @@
 
           
 
+          
+
           The event handler for the <see
            cref="E:System.Windows.Forms.Control.Click" />
+
+          
 
           
 
@@ -337,6 +399,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -345,8 +409,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -357,13 +425,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -374,13 +448,19 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
+          
+
            containing the items of the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -414,6 +494,8 @@
 
             
 
+            
+
              class that has the specified name, displays the specified text and image, and raises the Click event.</para
           >
         </summary>
@@ -422,8 +504,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -434,13 +520,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Image" />
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -451,8 +543,12 @@
 
           
 
+          
+
           The event handler for the <see
            cref="E:System.Windows.Forms.Control.Click" />
+
+          
 
           
 
@@ -463,8 +559,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -493,8 +593,12 @@
 
             
 
+            
+
              property for the <see
              cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+            
 
             
 
@@ -532,6 +636,8 @@
 
             
 
+            
+
              for which events can be defined.</para
           >
         </summary>
@@ -540,6 +646,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -566,6 +674,8 @@
           <para
             >Gets a value indicating whether to display the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -601,11 +711,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -620,6 +734,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -628,8 +744,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -663,11 +783,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownButton.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -682,6 +806,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -690,8 +816,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -724,6 +854,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -732,8 +864,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -765,11 +901,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -784,6 +924,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -792,8 +934,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -829,6 +975,8 @@
 
             
 
+            
+
              has items.</para
           >
         </summary>
@@ -838,6 +986,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -860,6 +1010,8 @@
           <para
             >Gets or sets a value indicating whether an arrow is displayed on the <see
              cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+            
 
             
 

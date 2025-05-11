@@ -29,13 +29,19 @@
 
         
 
+        
+
          provides some basic functionality for the bindings used to configure secure, reliable, and interoperable Web services, such as that implemented by the <see
          cref="T:System.ServiceModel.WSHttpBinding" />
 
         
 
+        
+
          for non-duplex service contracts, and more particularly, for the secure and interoperable <see
          cref="T:System.ServiceModel.WSFederationHttpBinding" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
       <para
         >The use of WS-ReliableMessaging is configurable using the optional <paramref
          name="reliableSessionEnabled" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.ServiceModel.WSFederationHttpBinding" />
+
+        
 
         
 
@@ -87,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.WSHttpBindingBase" />
+
+            
 
             
 
@@ -121,11 +135,15 @@
 
             
 
+            
+
              class with a value that indicates whether a reliable session is enabled.</para
           >
         </summary>
         <param name="reliableSessionEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,8 +172,12 @@
 
             
 
+            
+
              property determines whether endpoints configured with the <see
              cref="T:System.ServiceModel.WSHttpBindingBase" />
+
+            
 
             
 
@@ -167,8 +189,12 @@
 
             
 
+            
+
              is true, requests to local Internet resources do not use the proxy server. When <see
              cref="P:System.ServiceModel.WSHttpBindingBase.BypassProxyOnLocal" />
+
+            
 
             
 
@@ -215,8 +241,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -252,6 +282,8 @@
 
             
 
+            
+
              from the current binding.</para
           >
         </summary>
@@ -260,6 +292,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -324,6 +358,8 @@
 
             
 
+            
+
              from the current binding.</para
           >
         </returns>
@@ -374,13 +410,19 @@
 
             
 
+            
+
              tries to minimize the cost of using buffers with a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see
              cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
+            
+
              must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see
              cref="P:System.ServiceModel.WSHttpBindingBase.MaxBufferPoolSize" />
+
+            
 
             
 
@@ -410,6 +452,8 @@
           <para
             >The size of the messages that can be received on the wire by services using the <see
              cref="T:System.ServiceModel.WSHttpBindingBase" />
+
+            
 
             
 
@@ -467,8 +511,12 @@
 
             
 
+            
+
              is set to true, the value of <see
              cref="P:System.ServiceModel.WSHttpBindingBase.ProxyAddress" />
+
+            
 
             
 
@@ -532,6 +580,8 @@
           <para
             >Reliable sessions are enabled with the <see
              cref="M:System.ServiceModel.WSHttpBindingBase.#ctor(System.Boolean)" />
+
+            
 
             
 
@@ -649,6 +699,8 @@
           <para
             >It is an error for this to be true and <see
              cref="P:System.ServiceModel.WSHttpBindingBase.ProxyAddress" />
+
+            
 
             
 

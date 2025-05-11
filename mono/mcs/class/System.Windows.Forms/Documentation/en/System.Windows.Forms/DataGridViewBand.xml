@@ -29,8 +29,12 @@
 
         
 
+        
+
          class represents <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          or one of its derived classes. Although a <see
          cref="T:System.Windows.Forms.DataGridViewHeaderCell" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          is the base class of the <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -61,13 +73,19 @@
 
         
 
+        
+
          classes. There are no public constructors for the <see
          cref="T:System.Windows.Forms.DataGridViewBand" />
 
         
 
+        
+
          type, so the only way to access a band is through columns and rows in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -79,6 +97,8 @@
       <para
         >Represents a linear collection of elements in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -112,8 +132,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewBand" />
+
+            
 
             
 
@@ -152,13 +176,19 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
 
             
 
+            
+
              in a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -188,6 +218,8 @@
           <para
             >The default cell style is applied to cells that do not have an associated style. When getting this property, a <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -225,8 +257,12 @@
 
             
 
+            
+
              class or one of its derived types. For example, the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -235,13 +271,19 @@
 
             
 
+            
+
              as the default header cell type. Similarly, the <see
              cref="T:System.Windows.Forms.DataGridViewColumn" />
 
             
 
+            
+
              class uses a <see
              cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
+
+            
 
             
 
@@ -253,8 +295,12 @@
 
             
 
+            
+
              in a row or column, the <see
              cref="P:System.Windows.Forms.DataGridViewBand.DefaultHeaderCellType" />
+
+            
 
             
 
@@ -319,8 +365,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.DataGridViewBand" />
+
+            
 
             
 
@@ -329,8 +379,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.DataGridViewBand" />
+
+            
 
             
 
@@ -339,13 +393,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.DataGridViewBand" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Windows.Forms.DataGridViewBand" />
+
+            
 
             
 
@@ -356,10 +416,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -372,13 +436,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.DataGridViewBand" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Windows.Forms.DataGridViewBand" />
+
+              
 
               
 
@@ -391,6 +461,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Windows.Forms.DataGridViewBand" />
+
+            
 
             
 
@@ -421,8 +493,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -431,8 +507,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -444,8 +524,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.DataGridViewBand" />
+
+            
 
             
 
@@ -460,11 +544,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.  </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -492,8 +580,12 @@
 
             
 
+            
+
             . Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -507,10 +599,14 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -521,11 +617,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When called by the garbage collector, this method calls the <see
              cref="M:System.Windows.Forms.DataGridViewBand.Dispose" />
+
+            
 
             
 
@@ -558,6 +658,8 @@
 
             
 
+            
+
             . Bands adjacent to the frozen band will move over the frozen band.</para
           >
         </remarks>
@@ -566,6 +668,8 @@
           <para
             >Gets or sets a value indicating whether the band will move when a user scrolls through the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -599,8 +703,12 @@
 
             
 
+            
+
              property automatically instantiates a new <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -609,8 +717,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="P:System.Windows.Forms.DataGridViewBand.DefaultCellStyle" />
+
+            
 
             
 
@@ -619,8 +731,12 @@
 
             
 
+            
+
              instance. This is useful to determine which properties of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewBand.InheritedStyle" />
+
+            
 
             
 
@@ -636,6 +752,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -644,6 +762,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Windows.Forms.DataGridViewBand.DefaultCellStyle" />
+
+            
 
             
 
@@ -681,6 +801,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -714,8 +836,12 @@
 
             
 
+            
+
              at run time (assuming the <see
              cref="P:System.Windows.Forms.DataGridView.AllowUserToOrderColumns" />
+
+            
 
             
 
@@ -724,13 +850,19 @@
 
             
 
+            
+
              property of each column will not change. Instead, the column <see
              cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
 
             
 
+            
+
              values change. Sorting rows, however, does change their <see
              cref="P:System.Windows.Forms.DataGridViewBand.Index" />
+
+            
 
             
 
@@ -742,6 +874,8 @@
           <para
             >Gets the relative position of the band within the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -778,6 +912,8 @@
 
             
 
+            
+
              class always returns null because this base class cannot contain elements.</para
           >
           <para
@@ -787,6 +923,8 @@
                 >Cell Styles in the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -844,6 +982,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -869,8 +1009,12 @@
 
             
 
+            
+
              property affects the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ReadOnly" />
+
+            
 
             
 
@@ -879,13 +1023,19 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
 
             
 
+            
+
              changes, then the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ReadOnly" />
+
+            
 
             
 
@@ -926,8 +1076,12 @@
 
             
 
+            
+
              properties. By default, the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Resizable" />
+
+            
 
             
 
@@ -936,8 +1090,12 @@
 
             
 
+            
+
              property value for columns and the <see
              cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeRows" />
+
+            
 
             
 
@@ -946,8 +1104,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.DataGridViewTriState.True" />
+
+            
 
             
 
@@ -956,13 +1118,19 @@
 
             
 
+            
+
             , however, the control value is ignored. Set <see
              cref="P:System.Windows.Forms.DataGridViewBand.Resizable" />
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" />
+
+            
 
             
 
@@ -974,8 +1142,12 @@
 
             
 
+            
+
              restores the value inheritance, the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Resizable" />
+
+            
 
             
 
@@ -984,8 +1156,12 @@
 
             
 
+            
+
              value unless the row or column has not been added to a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -994,8 +1170,12 @@
 
             
 
+            
+
              property value of a row or column is inherited, check its <see
              cref="P:System.Windows.Forms.DataGridViewElement.State" />
+
+            
 
             
 
@@ -1004,8 +1184,12 @@
 
             
 
+            
+
              value includes the <see
              cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" />
+
+            
 
             
 
@@ -1014,13 +1198,19 @@
 
             
 
+            
+
              property value is not inherited. If the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Resizable" />
 
             
 
+            
+
              property value is <see
              cref="F:System.Windows.Forms.DataGridViewTriState.False" />
+
+            
 
             
 
@@ -1058,8 +1248,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Windows.Forms.DataGridView.SelectionMode" />
+
+            
 
             
 
@@ -1100,8 +1294,12 @@
 
             
 
+            
+
              property can store any object that you want to associate with a band. This property is typically used to store identifying information, such as a string name, a unique identifier (for example, a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -1142,8 +1340,12 @@
 
             
 
+            
+
              method. The returned string contains the class's name and <see
              cref="P:System.Windows.Forms.DataGridViewBand.Index" />
+
+            
 
             
 
@@ -1162,8 +1364,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Windows.Forms.DataGridViewBand" />
+
+            
 
             
 

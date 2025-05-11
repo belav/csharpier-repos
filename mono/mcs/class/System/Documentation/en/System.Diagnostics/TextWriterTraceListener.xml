@@ -31,8 +31,12 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          the <see
          cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          the output buffer for the <see
          cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />
+
+        
 
         
 
@@ -64,8 +76,12 @@
 
         
 
+        
+
          a message to the <see
          cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />
+
+        
 
         
 
@@ -105,13 +121,19 @@
 
         
 
+        
+
          or to a <see
          cref="T:System.IO.Stream" />
 
         
 
+        
+
         , such as <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -143,8 +165,12 @@
 
             
 
+            
+
              stream as the recipient of the tracing or debugging output. Its <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -159,8 +185,12 @@
 
             
 
+            
+
              class with <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -197,6 +227,8 @@
 
             
 
+            
+
              property to an empty string ("").</para
           >
         </remarks>
@@ -208,6 +240,8 @@
 
             
 
+            
+
              class, using the stream as the recipient of the debugging and tracing output.</para
           >
         </summary>
@@ -216,13 +250,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            that represents the stream the <see
            cref="T:System.Diagnostics.TextWriterTraceListener" />
+
+          
 
           
 
@@ -258,6 +298,8 @@
 
             
 
+            
+
              property to an empty string ("").</para
           >
         </remarks>
@@ -269,6 +311,8 @@
 
             
 
+            
+
              class using the specified writer as recipient of the tracing or debugging output.</para
           >
         </summary>
@@ -277,13 +321,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
 
           
 
+          
+
            that receives the output from the <see
            cref="T:System.Diagnostics.TextWriterTraceListener" />
+
+          
 
           
 
@@ -316,6 +366,8 @@
 
             
 
+            
+
              property to an empty string ("").</para
           >
         </remarks>
@@ -327,6 +379,8 @@
 
             
 
+            
+
              class, using the file as the recipient of the debugging and tracing output.</para
           >
         </summary>
@@ -335,8 +389,12 @@
 
           
 
+          
+
           The name of the file the <see
            cref="T:System.Diagnostics.TextWriterTraceListener" />
+
+          
 
           
 
@@ -373,13 +431,19 @@
 
             
 
+            
+
              property to the <paramref
              name="name" />
 
             
 
+            
+
              parameter or to an empty string (""), if the <paramref
              name="name" />
+
+            
 
             
 
@@ -394,6 +458,8 @@
 
             
 
+            
+
              class with the specified name, using the stream as the recipient of the debugging and tracing output.</para
           >
         </summary>
@@ -402,8 +468,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -412,10 +482,14 @@
 
           
 
+          
+
            writes to. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -453,6 +527,8 @@
 
             
 
+            
+
              class with the specified name, using the specified writer as recipient of the tracing or debugging output.</para
           >
         </summary>
@@ -461,8 +537,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -471,10 +551,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -511,13 +595,19 @@
 
             
 
+            
+
              property to the <paramref
              name="name" />
 
             
 
+            
+
              parameter or to an empty string (""), if the <paramref
              name="name" />
+
+            
 
             
 
@@ -532,6 +622,8 @@
 
             
 
+            
+
              class with the specified name, using the file as the recipient of the debugging and tracing output.</para
           >
         </summary>
@@ -540,8 +632,12 @@
 
           
 
+          
+
           The name of the file the <see
            cref="T:System.Diagnostics.TextWriterTraceListener" />
+
+          
 
           
 
@@ -549,6 +645,8 @@
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -581,13 +679,19 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Diagnostics.TextWriterTraceListener.WriteLine" />
 
             
 
+            
+
              method after calling <see
              cref="M:System.Diagnostics.TextWriterTraceListener.Close" />
+
+            
 
             
 
@@ -599,6 +703,8 @@
           <para
             >Closes the <see
              cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />
+
+            
 
             
 
@@ -634,13 +740,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Diagnostics.TextWriterTraceListener" />
 
             
 
+            
+
              class to release the managed resources of a <see
              cref="T:System.Diagnostics.TextWriterTraceListener" />
+
+            
 
             
 
@@ -655,6 +767,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -663,8 +777,12 @@
 
           
 
+          
+
           true to release managed resources; if false, <see
            cref="M:System.Diagnostics.TextWriterTraceListener.Dispose(System.Boolean)" />
+
+          
 
           
 
@@ -695,6 +813,8 @@
           <para
             >Flushes the output buffer for the <see
              cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />
+
+            
 
             
 
@@ -731,11 +851,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -771,11 +895,15 @@
 
             
 
+            
+
              followed by a line terminator. The default line terminator is a carriage return followed by a line feed (\r\n).</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

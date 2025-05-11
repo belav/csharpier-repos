@@ -22,8 +22,12 @@
 
         
 
+        
+
          class to create the class used for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          configuration section. The strongly typed accessors of the ProfileCommon class call the <see
          cref="M:System.Web.Profile.ProfileBase.GetPropertyValue(System.String)" />
+
+        
 
         
 
@@ -44,8 +52,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -54,11 +66,15 @@
 
         
 
+        
+
          property for the ASP.NET application.</para
       >
       <para
         >To create an instance of a user profile in an ASP.NET application, it is recommended that you use the <see
          cref="Overload:System.Web.Profile.ProfileBase.Create" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
             
 
+            
+
              class to create the class used for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -97,8 +117,12 @@
 
             
 
+            
+
              configuration section. The strongly typed accessors of the ProfileCommon class call the <see
              cref="M:System.Web.Profile.ProfileBase.GetPropertyValue(System.String)" />
+
+            
 
             
 
@@ -107,13 +131,19 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Web.Profile.ProfileBase" />
 
             
 
+            
+
              base class to retrieve and set profile property values, respectively. An instance of the ProfileCommon class is set as the value of the <see
              cref="P:System.Web.HttpContext.Profile" />
+
+            
 
             
 
@@ -126,6 +156,8 @@
 
               
 
+              
+
                property can be overridden using the inherits attribute of the <format
                type="text/html">
                 <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
@@ -133,8 +165,12 @@
 
               
 
+              
+
                section of the configuration file. In this case you would specify a custom class that inherits from the <see
                cref="T:System.Web.Profile.ProfileBase" />
+
+              
 
               
 
@@ -147,6 +183,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -155,6 +193,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -188,11 +228,15 @@
 
             
 
+            
+
              method creates and initializes a new profile instance and is useful for applications that use a custom profile object or manage user profiles in a non-ASP.NET environment.</para
           >
           <para
             >This overload of the <see
              cref="M:System.Web.Profile.ProfileBase.Create(System.String)" />
+
+            
 
             
 
@@ -211,11 +255,15 @@
 
             
 
+            
+
              that represents the profile for the specified user.</para
           >
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,11 +297,15 @@
 
             
 
+            
+
              method creates and initializes a new profile instance and is useful for applications that use a custom profile object or manage user profiles in a non-ASP.NET environment.</para
           >
           <para
             >This overload of the <see
              cref="M:System.Web.Profile.ProfileBase.Create(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -272,6 +324,8 @@
 
             
 
+            
+
              object that represents the profile for the specified user.</para
           >
         </returns>
@@ -280,10 +334,14 @@
 
           
 
+          
+
           The name of the user to create a profile for.</param
         >
         <param name="isAuthenticated">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,6 +374,8 @@
 
             
 
+            
+
              property can be used to retrieve a group of properties by the group name. You can also access a profile property in a group by specifying the group name as a member of the Profile property available on each page. For example, the ZipCode profile property that is a member of the Address profile group could be accessed using Profile.Address.ZipCode.</para
           >
         </remarks>
@@ -331,11 +391,15 @@
 
             
 
+            
+
              object for a group of properties configured with the specified group name.</para
           >
         </returns>
         <param name="groupName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -368,8 +432,12 @@
 
             
 
+            
+
              class to create the class used for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -380,8 +448,12 @@
 
             
 
+            
+
              configuration section. The strongly typed accessors of the ProfileCommon class call the <see
              cref="M:System.Web.Profile.ProfileBase.GetPropertyValue(System.String)" />
+
+            
 
             
 
@@ -390,11 +462,15 @@
 
             
 
+            
+
              that the generated accessor then casts as the specified type and returns as the property value.</para
           >
           <para
             >You can use the <see
              cref="M:System.Web.Profile.ProfileBase.GetPropertyValue(System.String)" />
+
+            
 
             
 
@@ -411,6 +487,8 @@
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,6 +522,8 @@
 
             
 
+            
+
              overloads to create an instance of the user profile.</para
           >
         </remarks>
@@ -456,10 +536,14 @@
 
           
 
+          
+
           The name of the user to initialize the profile for.</param
         >
         <param name="isAuthenticated">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,10 +573,14 @@
 
             
 
+            
+
              configuration section and the allowAnonymous attribute of the <format
              type="text/html">
               <a href="d3ea033b-751b-4bdc-8917-a5d44560808e">add</a>
             </format>
+
+            
 
             
 
@@ -525,8 +613,12 @@
 
             
 
+            
+
              property can be used by a profile provider during the <see
              cref="M:System.Configuration.SettingsBase.Save" />
+
+            
 
             
 
@@ -535,8 +627,12 @@
 
             
 
+            
+
              objects have been changed. Changed properties are then updated by the profile provider in the <see
              cref="M:System.Configuration.SettingsBase.Save" />
+
+            
 
             
 
@@ -545,8 +641,12 @@
 
             
 
+            
+
              method is automatically called at the end of page execution if the <see
              cref="P:System.Web.Profile.ProfileManager.AutomaticSaveEnabled" />
+
+            
 
             
 
@@ -558,8 +658,12 @@
 
             
 
+            
+
              method cannot explicitly determine whether a profile property with a custom class type or a complex type, such as a collection, has changed. You can use the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+            
 
             
 
@@ -568,8 +672,12 @@
 
             
 
+            
+
              class is to set the <see
              cref="P:System.Web.Profile.ProfileBase.IsDirty" />
+
+            
 
             
 
@@ -625,6 +733,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -651,6 +761,8 @@
           <para
             >This property value is only modified by the default profile provider. Changes made to profile properties by a provider other than the default profile provider do not affect the value of the <see
              cref="P:System.Web.Profile.ProfileBase.LastUpdatedDate" />
+
+            
 
             
 
@@ -686,8 +798,12 @@
 
             
 
+            
+
              of each property. A <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -699,6 +815,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -727,8 +845,12 @@
 
             
 
+            
+
              method writes modified profile property values to the data source. The profile provider can reduce the amount of activity at the data source by performing updates only when the <see
              cref="P:System.Web.Profile.ProfileBase.IsDirty" />
+
+            
 
             
 
@@ -737,8 +859,12 @@
 
             
 
+            
+
             . After the <see
              cref="M:System.Web.Profile.ProfileBase.Save" />
+
+            
 
             
 
@@ -747,11 +873,15 @@
 
             
 
+            
+
              is set to false.</para
           >
           <para
             >You can use the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+            
 
             
 
@@ -790,8 +920,12 @@
 
             
 
+            
+
              class to create the class used for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -802,8 +936,12 @@
 
             
 
+            
+
              configuration section. The strongly typed accessors of the ProfileCommon class call the <see
              cref="M:System.Web.Profile.ProfileBase.SetPropertyValue(System.String,System.Object)" />
+
+            
 
             
 
@@ -812,11 +950,15 @@
 
             
 
+            
+
              to be stored at the data source.</para
           >
           <para
             >You can use the <see
              cref="M:System.Web.Profile.ProfileBase.SetPropertyValue(System.String,System.Object)" />
+
+            
 
             
 
@@ -832,10 +974,14 @@
 
           
 
+          
+
           The name of the property to set.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -863,8 +1009,12 @@
 
             
 
+            
+
              property returns either the name of the authenticated user that the profile is associated with or the anonymous user identifier assigned to the profile if the <see
              cref="P:System.Web.Profile.ProfileBase.IsAnonymous" />
+
+            
 
             
 
@@ -878,10 +1028,14 @@
 
             
 
+            
+
              configuration section and the allowAnonymous attribute of the <format
              type="text/html">
               <a href="d3ea033b-751b-4bdc-8917-a5d44560808e">add</a>
             </format>
+
+            
 
             
 

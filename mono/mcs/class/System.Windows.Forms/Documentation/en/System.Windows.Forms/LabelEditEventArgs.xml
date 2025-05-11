@@ -19,8 +19,12 @@
 
         
 
+        
+
          specifies the index and caption of a <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -29,13 +33,19 @@
 
         
 
+        
+
          property. You can use this property in a <see
          cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
 
         
 
+        
+
          event handler to prevent the user from editing the label. You can also use it in an <see
          cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+
+        
 
         
 
@@ -48,8 +58,12 @@
 
           
 
+          
+
            event takes place before the label edit is committed, calling the <see
            cref="M:System.Windows.Forms.ListView.Sort" />
+
+          
 
           
 
@@ -65,8 +79,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+
+        
 
         
 
@@ -90,13 +108,19 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
 
             
 
+            
+
              event at run time to specify a specific list item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -111,8 +135,12 @@
 
             
 
+            
+
              class with the specified index to the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -124,8 +152,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -153,8 +185,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+
+            
 
             
 
@@ -163,8 +199,12 @@
 
             
 
+            
+
              to edit. The constructor also enables you to specify the new text associated with the label of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -179,13 +219,19 @@
 
             
 
+            
+
              class with the specified index to the <see
              cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
+            
+
              being edited and the new text for the label of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -197,8 +243,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -209,8 +259,12 @@
 
           
 
+          
+
           The new text assigned to the label of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -238,6 +292,8 @@
 
             
 
+            
+
              and revert it to its original text. Use this property to prevent an item's caption from being changed to a value that does not meet your application's requirements.</para
           >
         </remarks>
@@ -246,6 +302,8 @@
           <para
             >Gets or sets a value indicating whether changes made to the label of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -275,6 +333,8 @@
 
             
 
+            
+
              containing the label to edit.</para
           >
         </summary>
@@ -298,6 +358,8 @@
           <para
             >Gets the new text assigned to the label of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 

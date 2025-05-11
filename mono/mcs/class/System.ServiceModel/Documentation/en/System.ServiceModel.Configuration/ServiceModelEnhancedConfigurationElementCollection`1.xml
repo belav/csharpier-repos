@@ -47,8 +47,12 @@
 
         
 
+        
+
          looking for a merge semantic similar to an <see
          cref="F:System.Configuration.ConfigurationElementCollectionType.AddRemoveClearMap" />
+
+        
 
         
 
@@ -86,6 +90,8 @@
 
             
 
+            
+
              to this collection.</para
           >
         </summary>
@@ -94,8 +100,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -121,6 +131,8 @@
           <para
             >Gets a Boolean value that indicates whether an attempt to add a duplicate <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 

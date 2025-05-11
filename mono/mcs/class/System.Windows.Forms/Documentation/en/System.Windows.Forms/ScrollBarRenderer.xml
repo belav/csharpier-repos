@@ -19,6 +19,8 @@
 
         
 
+        
+
          class provides a set of static methods that can be used to render a scroll bar control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style. To draw a scroll bar, use a combination of the methods in this class to render each part of the scroll bar. </para
       >
       <para
@@ -27,8 +29,12 @@
 
         
 
+        
+
         . To determine whether the members of this class can be used, you can check the value of the <see
          cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
          that is set to one of the elements exposed by the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar" />
+
+        
 
         
 
@@ -49,6 +59,8 @@
          type="text/html">
           <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
         </format>
+
+        
 
         
 
@@ -88,6 +100,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -100,8 +114,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -112,8 +130,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -124,8 +146,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarArrowButtonState" />
+
+          
 
           
 
@@ -160,6 +186,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -172,8 +200,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -184,8 +216,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -196,8 +232,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -232,6 +272,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -244,8 +286,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -256,8 +302,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -268,8 +318,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -304,6 +358,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -316,8 +372,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -328,8 +388,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -340,8 +404,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -376,6 +444,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -388,8 +458,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -400,8 +474,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -412,8 +490,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -448,6 +530,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -460,8 +544,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -472,8 +560,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -484,8 +576,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -520,6 +616,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -532,8 +630,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -544,8 +646,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -556,8 +662,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarSizeBoxState" />
+
+          
 
           
 
@@ -592,6 +702,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -604,8 +716,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -616,8 +732,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -628,8 +748,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -664,6 +788,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -676,8 +802,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -688,8 +818,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -700,8 +834,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -736,6 +874,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -748,8 +888,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -760,8 +904,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -772,8 +920,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -808,6 +960,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -823,6 +977,8 @@
 
             
 
+            
+
              that specifies the size of the sizing handle.</para
           >
         </returns>
@@ -831,8 +987,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -843,8 +1003,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -879,6 +1043,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -894,6 +1060,8 @@
 
             
 
+            
+
              that specifies the size of the scroll box grip.</para
           >
         </returns>
@@ -902,8 +1070,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -914,8 +1086,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+          
 
           
 
@@ -943,6 +1119,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -951,6 +1129,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.ScrollBarRenderer" />
+
+            
 
             
 

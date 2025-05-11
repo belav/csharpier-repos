@@ -24,6 +24,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -35,8 +37,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Windows.Forms.TreeView.BeforeCollapse" />
+
+        
 
         
 
@@ -45,13 +51,19 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Windows.Forms.TreeView.BeforeSelect" />
 
         
 
+        
+
          events of a <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
 
             
 
+            
+
              class with the specified tree node, a value specifying whether the event is to be canceled, and the type of tree view action that raised the event.</para
           >
         </summary>
@@ -89,8 +103,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -101,6 +119,8 @@
 
           
 
+          
+
           true to cancel the event; otherwise, false. </param
         >
         <param name="action">
@@ -108,8 +128,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TreeViewAction" />
+
+          
 
           
 
@@ -138,6 +162,8 @@
           <para
             >Gets the type of <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 

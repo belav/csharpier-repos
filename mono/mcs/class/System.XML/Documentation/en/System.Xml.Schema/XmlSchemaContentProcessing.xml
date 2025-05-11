@@ -54,6 +54,8 @@
 
             
 
+            
+
              = XmlSeverityType.Warning. If a validation event handler has not been set up, no information is returned when the warning is produced.</para
           >
         </remarks>
@@ -122,6 +124,8 @@
 
             
 
+            
+
              = XmlSeverityType.Warning that no validation took place for the given item. If a validation event handler has not been set up, no information is returned when the warning is produced.</para
           >
         </remarks>
@@ -158,6 +162,8 @@
           <para
             >If the processor cannot find a schema, or the items are not valid, the XML processor attempts to notify the client through a validation event handler with <see
              cref="P:System.Xml.Schema.ValidationEventArgs.Severity" />
+
+            
 
             
 

@@ -18,13 +18,19 @@
 
         
 
+        
+
          property of a typed <see
          cref="T:System.Data.DataSet" />
 
         
 
+        
+
          to <see
          cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" />
+
+        
 
         
 
@@ -36,6 +42,8 @@
       <para
         >Indicates the schema serialization mode for a typed <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -81,6 +91,8 @@
           <para
             >Includes schema serialization for a typed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

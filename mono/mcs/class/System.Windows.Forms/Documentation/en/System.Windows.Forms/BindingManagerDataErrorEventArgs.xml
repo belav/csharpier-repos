@@ -22,8 +22,12 @@
 
         
 
+        
+
          provides the <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -71,13 +79,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
 
           
 
+          
+
            that occurred in the binding process that caused the <see
            cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+
+          
 
           
 
@@ -106,8 +120,12 @@
 
             
 
+            
+
              caught in the binding process that caused the <see
              cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+
+            
 
             
 

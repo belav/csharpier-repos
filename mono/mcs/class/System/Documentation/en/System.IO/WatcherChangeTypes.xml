@@ -31,8 +31,12 @@
 
         
 
+        
+
          member is associated with an event in <see
          cref="T:System.IO.FileSystemWatcher" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.IO.FileSystemWatcher.Deleted" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.IO.FileSystemWatcher.Renamed" />
+
+        
 
         
 

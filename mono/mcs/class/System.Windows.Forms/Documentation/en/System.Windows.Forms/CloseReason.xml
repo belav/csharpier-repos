@@ -18,8 +18,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Form.FormClosed" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          is closed, either through user action or programmatically. Handlers for these events receive parameters of type <see
          cref="T:System.Windows.Forms.FormClosingEventArgs" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
         , respectively. Both of these event argument classes use the <see
          cref="T:System.Windows.Forms.CloseReason" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.Application" />
+
+            
 
             
 
@@ -165,8 +181,12 @@
 
             
 
+            
+
              button on the form window, selecting <ui
             >Close</ui>
+
+            
 
             
 

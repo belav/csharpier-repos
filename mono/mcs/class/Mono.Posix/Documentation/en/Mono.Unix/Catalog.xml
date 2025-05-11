@@ -22,6 +22,8 @@
 
       
 
+      
+
        library providing message translation capabilities.</summary
     >
     <remarks>
@@ -30,6 +32,8 @@
           >The following example demonstrates the use of the 
       <see
            cref="T:Mono.Unix.Catalog" />
+
+          
 
           
 
@@ -62,9 +66,13 @@ public class i18n
 
           
 
+          
+
           , then compile the
       translations and copy the file so that <c
           >libintl</c>
+
+          
 
           
 
@@ -111,6 +119,8 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
 
           
 
+          
+
            containing the singular form of the string. It is also used as the key to search the catalog on.</param
         >
         <param name="p"
@@ -119,12 +129,15 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
 
           
 
+          
+
            containing the plural form of the string.</param
         >
-        <param name="n"
-          >
+        <param name="n">
 	  An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -135,15 +148,21 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
 
           
 
+          
+
            is one, the translation for 
 	  <paramref
            name="s" />
 
           
 
+          
+
            is returned; otherwise, the translation for
 	  <paramref
            name="p" />
+
+          
 
           
 
@@ -157,6 +176,8 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
 
           
 
+          
+
            == 1, the plural form otherwise.</returns
         >
         <remarks>
@@ -165,6 +186,8 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
               >The following example demonstrates the use of the 
               <see
                cref="T:Mono.Unix.Catalog" />
+
+              
 
               
 
@@ -218,12 +241,16 @@ public class i18n
 
           
 
+          
+
            containing the text to be translated. It is used as the key to search the catalog on.</param
         >
         <summary>Returns a native language translation of the text passed as the parameter.</summary>
         <returns
           >The translated string, if found in the catalog, <paramref
            name="s" />
+
+          
 
           
 
@@ -235,6 +262,8 @@ public class i18n
               >The following example demonstrates the use of the 
               <see
                cref="T:Mono.Unix.Catalog" />
+
+              
 
               
 
@@ -292,11 +321,15 @@ public class i18n
 
           
 
+          
+
            containing the name of the package (domain) that is to be accessed.</param
         >
         <param name="localedir"
           >A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -309,8 +342,12 @@ public class i18n
 
           
 
+          
+
           . In this notation <c
           >locale</c>
+
+          
 
           
 
@@ -319,8 +356,12 @@ public class i18n
 
           
 
+          
+
            are, respectively, the locale name and the message category name, such as <c
           >LC_MESSAGES</c>
+
+          
 
           
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          class allows you to implement custom double buffering for your graphics. It provides a wrapper for a graphics buffer, along with methods that you can use to write to the buffer and render its contents to an output device.</para
       >
       <para>Graphics that use double buffering can reduce or eliminate flicker that is caused by redrawing a display surface. When you use double buffering, updated graphics are first drawn to a buffer in memory, and the contents of this buffer are then quickly written to some or all of the displayed surface. This relatively brief overwrite of the displayed graphics typically reduces or eliminates the flicker that sometimes occurs when graphics are updated.</para>
@@ -33,13 +35,19 @@
 
           
 
+          
+
            control style flag on a control using the <see
            cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
 
           
 
+          
+
            method. Setting the <see
            cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
+
+          
 
           
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          class has no public constructor and must be created by the <see
          cref="T:System.Drawing.BufferedGraphicsContext" />
+
+        
 
         
 
@@ -62,13 +74,19 @@
 
         
 
+        
+
          method. You can retrieve the <see
          cref="T:System.Drawing.BufferedGraphicsContext" />
 
         
 
+        
+
          for the current application domain from the static <see
          cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+
+        
 
         
 
@@ -80,13 +98,19 @@
 
         
 
+        
+
          property can be used for drawing to the graphics buffer. This property provides access to the <see
          cref="T:System.Drawing.Graphics" />
 
         
 
+        
+
          object that draws to the graphics buffer allocated for this <see
          cref="T:System.Drawing.BufferedGraphics" />
+
+        
 
         
 
@@ -98,8 +122,12 @@
 
         
 
+        
+
          method with no arguments draws the contents of the graphics buffer to the surface specified when the buffer was allocated. Other overloads of the <see
          cref="M:System.Drawing.BufferedGraphics.Render" />
+
+        
 
         
 
@@ -108,8 +136,12 @@
 
         
 
+        
+
          object or an <see
          cref="T:System.IntPtr" />
+
+        
 
         
 
@@ -120,6 +152,8 @@
          type="text/html">
           <a href="4F6FEF99-0972-436E-9D73-0167E4033F71">Double Buffered Graphics</a>
         </format>
+
+        
 
         
 
@@ -149,8 +183,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Drawing.BufferedGraphics" />
+
+            
 
             
 
@@ -159,8 +197,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Drawing.BufferedGraphics" />
+
+            
 
             
 
@@ -169,13 +211,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Drawing.BufferedGraphics" />
 
             
 
+            
+
              object so the garbage collector can reclaim the memory that the <see
              cref="T:System.Drawing.BufferedGraphics" />
+
+            
 
             
 
@@ -186,10 +234,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -202,13 +254,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.BufferedGraphics" />
 
               
 
+              
+
                object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Drawing.BufferedGraphics" />
+
+              
 
               
 
@@ -221,6 +279,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Drawing.BufferedGraphics" />
+
+            
 
             
 
@@ -265,8 +325,12 @@
 
             
 
+            
+
              object that draws to the graphics buffer allocated for this <see
              cref="T:System.Drawing.BufferedGraphics" />
+
+            
 
             
 
@@ -278,6 +342,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -306,13 +372,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
+            
+
              used to create this <see
              cref="T:System.Drawing.BufferedGraphics" />
+
+            
 
             
 
@@ -347,6 +419,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -358,6 +432,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -366,8 +442,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -397,6 +477,8 @@
 
             
 
+            
+
              handle.</para
           >
         </remarks>
@@ -408,6 +490,8 @@
 
             
 
+            
+
              handle.</para
           >
         </summary>
@@ -416,8 +500,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 

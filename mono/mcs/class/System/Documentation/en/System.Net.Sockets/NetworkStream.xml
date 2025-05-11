@@ -34,13 +34,19 @@
 
         
 
+        
+
          class provides methods for sending and receiving data over <see
          cref="F:System.Net.Sockets.SocketType.Stream" />
 
         
 
+        
+
          sockets in blocking mode. For more information about blocking versus nonblocking <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
         . You can use the <see
          cref="T:System.Net.Sockets.NetworkStream" />
+
+        
 
         
 
@@ -60,6 +70,8 @@
          type="text/html">
           <a href="10D22735-BD37-42C1-A2BE-C1932F979A7D">Sockets</a>
         </format>
+
+        
 
         
 
@@ -71,8 +83,12 @@
 
         
 
+        
+
         , you must provide a connected <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -81,8 +97,12 @@
 
         
 
+        
+
          permission the <see
          cref="T:System.Net.Sockets.NetworkStream" />
+
+        
 
         
 
@@ -91,8 +111,12 @@
 
         
 
+        
+
         . By default, closing the <see
          cref="T:System.Net.Sockets.NetworkStream" />
+
+        
 
         
 
@@ -101,8 +125,12 @@
 
         
 
+        
+
         . If you want the <see
          cref="T:System.Net.Sockets.NetworkStream" />
+
+        
 
         
 
@@ -111,8 +139,12 @@
 
         
 
+        
+
         , you must specify true for the value of the <paramref
          name="ownsSocket" />
+
+        
 
         
 
@@ -124,8 +156,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -134,8 +170,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
+
+        
 
         
 
@@ -144,8 +184,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+
+        
 
         
 
@@ -157,8 +201,12 @@
 
         
 
+        
+
          does not support random access to the network data stream. The value of the <see
          cref="P:System.Net.Sockets.NetworkStream.CanSeek" />
+
+        
 
         
 
@@ -167,8 +215,12 @@
 
         
 
+        
+
          property, reading the <see
          cref="P:System.Net.Sockets.NetworkStream.Length" />
+
+        
 
         
 
@@ -177,8 +229,12 @@
 
         
 
+        
+
          method will throw a <see
          cref="T:System.NotSupportedException" />
+
+        
 
         
 
@@ -187,6 +243,8 @@
       <para
         >Read and write operations can be performed simultaneously on an instance of the <see
          cref="T:System.Net.Sockets.NetworkStream" />
+
+        
 
         
 
@@ -228,8 +286,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -242,13 +304,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -261,13 +329,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -280,13 +354,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is not <see
              cref="F:System.Net.Sockets.SocketType.Stream" />
+
+            
 
             
 
@@ -301,8 +381,12 @@
 
             
 
+            
+
              is created with read/write access to the specified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -311,8 +395,12 @@
 
             
 
+            
+
              does not own the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -321,8 +409,12 @@
 
             
 
+            
+
              method does not close the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -337,8 +429,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -350,13 +446,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Sockets.Socket" />
 
           
 
+          
+
            that the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -395,8 +497,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -409,13 +515,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -428,13 +540,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -447,13 +565,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is not <see
              cref="F:System.Net.Sockets.SocketType.Stream" />
+
+            
 
             
 
@@ -468,8 +592,12 @@
 
             
 
+            
+
              is created with read/write access to the specified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -478,8 +606,12 @@
 
             
 
+            
+
              parameter is true, the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -488,13 +620,19 @@
 
             
 
+            
+
             , and calling the <see
              cref="M:System.Net.Sockets.NetworkStream.Close" />
 
             
 
+            
+
              method also closes the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -509,13 +647,19 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Net.Sockets.Socket" />
 
             
 
+            
+
              with the specified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -527,13 +671,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Sockets.Socket" />
 
           
 
+          
+
            that the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -544,13 +694,19 @@
 
           
 
+          
+
           Set to true to indicate that the <see
            cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
+          
+
            will take ownership of the <see
            cref="T:System.Net.Sockets.Socket" />
+
+          
 
           
 
@@ -589,8 +745,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -603,13 +763,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -622,13 +788,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -641,13 +813,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is not <see
              cref="F:System.Net.Sockets.SocketType.Stream" />
+
+            
 
             
 
@@ -662,8 +840,12 @@
 
             
 
+            
+
              is created with the specified access to the specified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -672,8 +854,12 @@
 
             
 
+            
+
              does not own the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -682,8 +868,12 @@
 
             
 
+            
+
              method does not close the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -695,8 +885,12 @@
 
             
 
+            
+
              parameter sets the <see
              cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+
+            
 
             
 
@@ -705,8 +899,12 @@
 
             
 
+            
+
              properties of the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -715,8 +913,12 @@
 
             
 
+            
+
             , then the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -725,8 +927,12 @@
 
             
 
+            
+
              method. If you specify <see
              cref="F:System.IO.FileAccess.Read" />
+
+            
 
             
 
@@ -735,13 +941,19 @@
 
             
 
+            
+
              allows calls to the <see
              cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method. If you specify <see
              cref="F:System.IO.FileAccess.ReadWrite" />
+
+            
 
             
 
@@ -756,8 +968,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -769,13 +985,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Sockets.Socket" />
 
           
 
+          
+
            that the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -786,8 +1008,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -796,8 +1022,12 @@
 
           
 
+          
+
            over the provided <see
            cref="T:System.Net.Sockets.Socket" />
+
+          
 
           
 
@@ -837,8 +1067,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -851,13 +1085,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -870,13 +1110,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -889,13 +1135,19 @@
 
             
 
+            
+
              property of <paramref
              name="socket" />
 
             
 
+            
+
              is not <see
              cref="F:System.Net.Sockets.SocketType.Stream" />
+
+            
 
             
 
@@ -910,8 +1162,12 @@
 
             
 
+            
+
              is created with read/write access to the specified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -920,8 +1176,12 @@
 
             
 
+            
+
              parameter is true, the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -930,13 +1190,19 @@
 
             
 
+            
+
             , and calling the <see
              cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" />
 
             
 
+            
+
              method also closes the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -948,8 +1214,12 @@
 
             
 
+            
+
              parameter sets the <see
              cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+
+            
 
             
 
@@ -958,8 +1228,12 @@
 
             
 
+            
+
              properties of the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -968,8 +1242,12 @@
 
             
 
+            
+
             , then the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -978,8 +1256,12 @@
 
             
 
+            
+
              method. If you specify <see
              cref="F:System.IO.FileAccess.Read" />
+
+            
 
             
 
@@ -988,13 +1270,19 @@
 
             
 
+            
+
              allows calls to the <see
              cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method. If you specify <see
              cref="F:System.IO.FileAccess.ReadWrite" />
+
+            
 
             
 
@@ -1009,13 +1297,19 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Net.Sockets.Socket" />
 
             
 
+            
+
              with the specified access rights and the specified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1027,13 +1321,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Sockets.Socket" />
 
           
 
+          
+
            that the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -1044,8 +1344,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -1054,8 +1358,12 @@
 
           
 
+          
+
            over the provided <see
            cref="T:System.Net.Sockets.Socket" />
+
+          
 
           
 
@@ -1066,13 +1374,19 @@
 
           
 
+          
+
           Set to true to indicate that the <see
            cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
+          
+
            will take ownership of the <see
            cref="T:System.Net.Sockets.Socket" />
+
+          
 
           
 
@@ -1116,8 +1430,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1129,6 +1447,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -1137,8 +1457,12 @@
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
+
+            
 
             
 
@@ -1150,6 +1474,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -1158,13 +1484,19 @@
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
 
             
 
+            
+
             .Length - <paramref
              name="offset" />
+
+            
 
             
 
@@ -1183,13 +1515,19 @@
 
               
 
+              
+
                method is caught and rethrown as an <see
                langword="IOException" />
 
               
 
+              
+
                with the original exception stored in the <see
                cref="P:System.Exception.InnerException" />
+
+              
 
               
 
@@ -1210,9 +1548,13 @@
 
             
 
+            
+
              method. For the complete example, see
    the <see
              cref="T:System.Net.Sockets.Socket" qualify="true" />
+
+            
 
             
 
@@ -1227,8 +1569,12 @@
 
             
 
+            
+
              method starts asynchronously reading data from the incoming network buffers. Calling the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1240,8 +1586,12 @@
 
             
 
+            
+
              delegate and pass its name to the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1250,8 +1600,12 @@
 
             
 
+            
+
              parameter must contain the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1260,8 +1614,12 @@
 
             
 
+            
+
              method through the <paramref
              name="state" />
+
+            
 
             
 
@@ -1273,8 +1631,12 @@
 
             
 
+            
+
              method. When your application calls <see
              cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1283,8 +1645,12 @@
 
             
 
+            
+
              until the provided <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1293,8 +1659,12 @@
 
             
 
+            
+
              method, use the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1303,10 +1673,14 @@
 
             
 
+            
+
              in the callback method when you want the original thread to continue executing. For additional information about writing callback methods, see <format
              type="text/html">
               <a href="6DDD7866-9804-4571-84DE-83F5CC017A5A">Callback Sample</a>
             </format>
+
+            
 
             
 
@@ -1318,8 +1692,12 @@
 
             
 
+            
+
              method reads as much data as is available, up to the number of bytes specified by the <paramref
              name="size" />
+
+            
 
             
 
@@ -1332,8 +1710,12 @@
 
               
 
+              
+
               , check the <see
                cref="P:System.Exception.InnerException" />
+
+              
 
               
 
@@ -1342,8 +1724,12 @@
 
               
 
+              
+
               . If so, use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+              
 
               
 
@@ -1353,6 +1739,8 @@
           <para
             >Read and write operations can be performed simultaneously on an instance of the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1367,6 +1755,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1378,6 +1768,8 @@
 
             
 
+            
+
              that represents the asynchronous call.</para
           >
         </returns>
@@ -1386,13 +1778,19 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Byte" />
 
           
 
+          
+
            that is the location in memory to store data read from the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -1403,8 +1801,12 @@
 
           
 
+          
+
           The location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1415,8 +1817,12 @@
 
           
 
+          
+
           The number of bytes to read from the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -1427,8 +1833,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1437,10 +1847,14 @@
 
           
 
+          
+
            completes. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1484,8 +1898,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1497,6 +1915,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -1505,8 +1925,12 @@
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
+
+            
 
             
 
@@ -1518,6 +1942,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -1526,13 +1952,19 @@
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
 
             
 
+            
+
             .Length - <paramref
              name="offset" />
+
+            
 
             
 
@@ -1551,13 +1983,19 @@
 
               
 
+              
+
                method is caught and rethrown as an <see
                langword="IOException" />
 
               
 
+              
+
                with the original exception stored in the <see
                cref="P:System.Exception.InnerException" />
+
+              
 
               
 
@@ -1579,8 +2017,12 @@
             
 
             
+
+            
 method. For the complete example, see the <see
              cref="T:System.Net.Sockets.Socket" qualify="true" />
+
+            
 
             
 
@@ -1595,8 +2037,12 @@ method. For the complete example, see the <see
 
             
 
+            
+
              method starts an asynchronous send operation to the remote host. Calling the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1608,8 +2054,12 @@ method. For the complete example, see the <see
 
             
 
+            
+
              delegate and pass its name to the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1618,8 +2068,12 @@ method. For the complete example, see the <see
 
             
 
+            
+
              parameter must contain the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1628,13 +2082,19 @@ method. For the complete example, see the <see
 
             
 
+            
+
              and the other required information. Pass the structure or class instance to the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
+            
+
              method through the <paramref
              name="state" />
+
+            
 
             
 
@@ -1646,8 +2106,12 @@ method. For the complete example, see the <see
 
             
 
+            
+
              method. When your application calls <see
              cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1656,8 +2120,12 @@ method. For the complete example, see the <see
 
             
 
+            
+
              until the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1666,8 +2134,12 @@ method. For the complete example, see the <see
 
             
 
+            
+
              method, use the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1676,10 +2148,14 @@ method. For the complete example, see the <see
 
             
 
+            
+
              in the callback method when you want the original thread to continue executing. For additional information about writing callback methods, see <format
              type="text/html">
               <a href="6DDD7866-9804-4571-84DE-83F5CC017A5A">Callback Sample</a>
             </format>
+
+            
 
             
 
@@ -1692,8 +2168,12 @@ method. For the complete example, see the <see
 
               
 
+              
+
               , check the <see
                cref="P:System.Exception.InnerException" />
+
+              
 
               
 
@@ -1702,8 +2182,12 @@ method. For the complete example, see the <see
 
               
 
+              
+
               . If so, use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+              
 
               
 
@@ -1713,6 +2197,8 @@ method. For the complete example, see the <see
           <para
             >Read and write operations can be performed simultaneously on an instance of the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1731,6 +2217,8 @@ method. For the complete example, see the <see
 
             
 
+            
+
              that represents the asynchronous call.</para
           >
         </returns>
@@ -1739,13 +2227,19 @@ method. For the complete example, see the <see
 
           
 
+          
+
           An array of type <see
            cref="T:System.Byte" />
 
           
 
+          
+
            that contains the data to write to the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -1756,8 +2250,12 @@ method. For the complete example, see the <see
 
           
 
+          
+
           The location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1768,8 +2266,12 @@ method. For the complete example, see the <see
 
           
 
+          
+
           The number of bytes to write to the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -1780,8 +2282,12 @@ method. For the complete example, see the <see
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1790,10 +2296,14 @@ method. For the complete example, see the <see
 
           
 
+          
+
            completes. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1826,9 +2336,13 @@ method. For the complete example, see the <see
 
             
 
+            
+
              indicates that the current stream supports reading; 
 <see
              langword="false" />
+
+            
 
             
 
@@ -1844,8 +2358,12 @@ method. For the complete example, see the <see
 
             
 
+            
+
              is true, <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1854,8 +2372,12 @@ method. For the complete example, see the <see
 
             
 
+            
+
              method. Provide the appropriate <see
              cref="T:System.IO.FileAccess" />
+
+            
 
             
 
@@ -1864,13 +2386,19 @@ method. For the complete example, see the <see
 
             
 
+            
+
             . The <see
              cref="P:System.Net.Sockets.NetworkStream.CanRead" />
 
             
 
+            
+
              property is set when the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1882,6 +2410,8 @@ method. For the complete example, see the <see
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1915,6 +2445,8 @@ method. For the complete example, see the <see
 
             
 
+            
+
             .</para
           >
         </value>
@@ -1924,6 +2456,8 @@ method. For the complete example, see the <see
             <para
               >This property overrides <see
                cref="P:System.IO.Stream.CanSeek" qualify="true" />
+
+              
 
               
 
@@ -1959,6 +2493,8 @@ method. For the complete example, see the <see
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1967,6 +2503,8 @@ method. For the complete example, see the <see
           <para
             >Indicates whether timeout properties are usable for <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -1999,9 +2537,13 @@ method. For the complete example, see the <see
 
             
 
+            
+
              indicates that the current stream supports writing; 
 <see
              langword="false" />
+
+            
 
             
 
@@ -2017,8 +2559,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              is true, <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2027,8 +2573,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method. Provide the appropriate <see
              cref="T:System.IO.FileAccess" />
+
+            
 
             
 
@@ -2037,13 +2587,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             . The <see
              cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
 
             
 
+            
+
              property is set when the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2055,6 +2611,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2081,8 +2639,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method frees both unmanaged and managed resources associated with the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2091,8 +2653,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              owns the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -2104,8 +2670,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              was associated with a <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -2114,8 +2684,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method will close the TCP connection, but not dispose of the associated <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -2127,6 +2701,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Closes the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2165,8 +2741,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method frees both unmanaged and managed resources associated with the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2175,8 +2755,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              owns the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -2188,8 +2772,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              was associated with a <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -2198,8 +2786,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method will close the TCP connection, but not dispose of the associated <see
              cref="T:System.Net.Sockets.TcpClient" />
+
+            
 
             
 
@@ -2214,11 +2806,15 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              after waiting the specified time to allow data to be sent.</para
           >
         </summary>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2250,9 +2846,13 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              indicates that data is available to be
    read; <see
              langword="false" />
+
+            
 
             
 
@@ -2271,8 +2871,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              property to determine if data is ready to be read. If <see
              cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
+
+            
 
             
 
@@ -2281,13 +2885,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              returns immediately. If the remote host shuts down or closes the connection, <see
              cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
 
             
 
+            
+
              may throw a <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -2299,6 +2909,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Gets a value that indicates whether data is available on the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2339,8 +2951,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2349,8 +2965,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2362,8 +2982,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2378,11 +3002,15 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2420,6 +3048,8 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
            object that holds the state information for the asynchronous operation. </param
         >
         <exception cref="T:System.ArgumentNullException">
@@ -2427,8 +3057,12 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2440,6 +3074,8 @@ indicates that the current stream does not support writing.</para
             <block subset="none" type="note"
               >This method catches all exceptions thrown by the <see
                cref="M:System.Net.Sockets.Socket.EndReceive(System.IAsyncResult)" qualify="true" />
+
+              
 
               
 
@@ -2460,9 +3096,13 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method.
    For the complete example, see the <see
              cref="T:System.Net.Sockets.Socket" qualify="true" />
+
+            
 
             
 
@@ -2477,8 +3117,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method completes the asynchronous read operation started in the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2490,8 +3134,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             , you need to create a callback method that implements the <see
              cref="T:System.AsyncCallback" />
+
+            
 
             
 
@@ -2500,13 +3148,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              returns. The callback method must accept the <see
              cref="T:System.IAsyncResult" />
 
             
 
+            
+
              returned from the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2518,8 +3172,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              property of the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -2528,8 +3186,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method. Extract the receiving <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2538,8 +3200,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             , call the <see
              cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2551,8 +3217,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method blocks until data is available. The <see
              cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2561,8 +3231,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2571,8 +3245,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              connection and all available data has been received, the <see
              cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2584,8 +3262,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              property of the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -2598,8 +3280,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
               , check the <see
                cref="P:System.Exception.InnerException" />
+
+              
 
               
 
@@ -2608,8 +3294,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
               . If so, use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+              
 
               
 
@@ -2626,6 +3316,8 @@ indicates that the current stream does not support writing.</para
           <para
             >The number of bytes read from the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2664,6 +3356,8 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
            object that holds the state information for the asynchronous operation. </param
         >
         <exception cref="T:System.ArgumentNullException">
@@ -2671,8 +3365,12 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2684,6 +3382,8 @@ indicates that the current stream does not support writing.</para
             <block subset="none" type="note"
               >This method catches all exceptions thrown by the <see
                cref="M:System.Net.Sockets.Socket.EndSend(System.IAsyncResult)" qualify="true" />
+
+              
 
               
 
@@ -2704,9 +3404,13 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method.
    For the complete example, see the <see
              cref="T:System.Net.Sockets.Socket" qualify="true" />
+
+            
 
             
 
@@ -2721,8 +3425,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              completes the asynchronous send operation started in <see
              cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2734,8 +3442,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             , you need to create a callback method that implements the <see
              cref="T:System.AsyncCallback" />
+
+            
 
             
 
@@ -2744,13 +3456,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              returns. The callback method must accept the <see
              cref="T:System.IAsyncResult" />
 
             
 
+            
+
              returned from the <see
              cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2762,8 +3480,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              property of the <paramref
              name="IAsyncResult" />
+
+            
 
             
 
@@ -2772,8 +3494,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             . After obtaining the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2782,11 +3508,15 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method to successfully complete the send operation and return the number of bytes sent.</para
           >
           <para
             >The <see
              cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2799,8 +3529,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
               , check the <see
                cref="P:System.Exception.InnerException" />
+
+              
 
               
 
@@ -2809,8 +3543,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
               . If so, use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+              
 
               
 
@@ -2851,13 +3589,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             . Application code should not call this method; an object's <see
              cref="M:System.Object.Finalize" />
 
             
 
+            
+
              method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -2871,6 +3615,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
@@ -2878,10 +3624,14 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             , and <format
              type="text/html">
               <a href="8026CB68-FE93-43FC-96C1-C09AD7D64CD3">Overriding the Finalize Method</a>
             </format>
+
+            
 
             
 
@@ -2893,6 +3643,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Releases all resources used by the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -2928,8 +3680,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method implements the <see
              cref="M:System.IO.Stream.Flush" />
+
+            
 
             
 
@@ -2938,8 +3694,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              is not buffered, it has no affect on network streams. Calling the <see
              cref="M:System.Net.Sockets.NetworkStream.Flush" />
+
+            
 
             
 
@@ -2980,10 +3740,14 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                base class implements this property to return the length of the data
       available on the stream. This functionality is not supported in
       the <see
                cref="T:System.Net.Sockets.NetworkStream" />
+
+              
 
               
 
@@ -2992,6 +3756,8 @@ indicates that the current stream does not support writing.</para
             <para
               >This property overrides <see
                cref="P:System.IO.Stream.Length" qualify="true" />
+
+              
 
               
 
@@ -3007,6 +3773,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Gets the length of the data available on the stream. This property is not currently supported and always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3043,9 +3811,13 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                base class implements this property to return or set the
       current position in the stream. This functionality is not supported in the <see
                cref="T:System.Net.Sockets.NetworkStream" />
+
+              
 
               
 
@@ -3055,6 +3827,8 @@ indicates that the current stream does not support writing.</para
             <para
               >This property overrides <see
                cref="P:System.IO.Stream.Position" qualify="true" />
+
+              
 
               
 
@@ -3070,6 +3844,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Gets or sets the current position in the stream. This property is not currently supported and always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3112,8 +3888,12 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3125,6 +3905,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -3133,8 +3915,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
+
+            
 
             
 
@@ -3146,6 +3932,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -3154,13 +3942,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
 
             
 
+            
+
             .Length - <paramref
              name="offset" />
+
+            
 
             
 
@@ -3179,6 +3973,8 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                method.</block
             >
           </para>
@@ -3194,8 +3990,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              parameter and returns the number of bytes successfully read. If no data is available for reading, the <see
              cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -3204,13 +4004,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              operation reads as much data as is available, up to the number of bytes specified by the <paramref
              name="size" />
 
             
 
+            
+
              parameter. If the remote host shuts down the connection, and all available data has been received, the <see
              cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -3223,8 +4029,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                is readable by calling the <see
                cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+
+              
 
               
 
@@ -3233,8 +4043,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                that is not readable, you will get an <see
                cref="T:System.IO.IOException" />
+
+              
 
               
 
@@ -3248,8 +4062,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
               , check the <see
                cref="P:System.Exception.InnerException" />
+
+              
 
               
 
@@ -3258,8 +4076,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
               . If so, use the <see
                cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+              
 
               
 
@@ -3275,6 +4097,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3286,6 +4110,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3294,13 +4120,19 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
           An array of type <see
            cref="T:System.Byte" />
 
           
 
+          
+
            that is the location in memory to store data read from the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -3311,8 +4143,12 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
           The location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3323,8 +4159,12 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
           The number of bytes to read from the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -3355,8 +4195,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              class to use the <see
              cref="P:System.Net.Sockets.NetworkStream.Readable" />
+
+            
 
             
 
@@ -3365,8 +4209,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              is true, <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -3375,13 +4223,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method. You can also determine whether a <see
              cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
+            
+
              is readable by checking the publicly accessible <see
              cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+
+            
 
             
 
@@ -3393,8 +4247,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              property is set when the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -3406,6 +4264,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -3435,6 +4295,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -3444,8 +4306,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                method. This property does not affect asynchronous reads performed by calling the <see
                cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+              
 
               
 
@@ -3494,9 +4360,13 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                base class uses this method to set the current
       position in the stream. This functionality is not supported in the <see
                cref="T:System.Net.Sockets.NetworkStream" />
+
+              
 
               
 
@@ -3506,6 +4376,8 @@ indicates that the current stream does not support writing.</para
             <para
               >This method overrides <see
                cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" qualify="true" />
+
+              
 
               
 
@@ -3522,6 +4394,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3534,10 +4408,14 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
           This parameter is not used. </param
         >
         <param name="origin">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3578,9 +4456,13 @@ indicates that the current stream does not support writing.</para
               
 
               
+
+              
    base class uses this method to set the length of the data available on the
    stream. This functionality is not supported in the <see
                cref="T:System.Net.Sockets.NetworkStream" />
+
+              
 
               
 
@@ -3589,6 +4471,8 @@ indicates that the current stream does not support writing.</para
             <para
               >This method overrides <see
                cref="M:System.IO.Stream.SetLength(System.Int64)" qualify="true" />
+
+              
 
               
 
@@ -3605,11 +4489,15 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3643,8 +4531,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              can use this property to get the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -3653,13 +4545,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              returned from the <see
              cref="P:System.Net.Sockets.NetworkStream.Socket" />
 
             
 
+            
+
              property if you require access beyond that which <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -3674,6 +4572,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Gets the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -3702,8 +4602,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -3712,8 +4616,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -3722,13 +4630,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -3739,10 +4653,14 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -3755,13 +4673,19 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
+              
+
               . Otherwise, the resources it is using are not freed until the garbage collector calls the <see
                cref="T:System.Net.Sockets.NetworkStream" />
+
+              
 
               
 
@@ -3774,6 +4698,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Releases all resources used by the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -3815,8 +4741,12 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3828,6 +4758,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -3836,8 +4768,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
+
+            
 
             
 
@@ -3849,6 +4785,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -3857,13 +4795,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
 
             
 
+            
+
             .Length - <paramref
              name="offset" />
+
+            
 
             
 
@@ -3882,6 +4826,8 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                method.</block
             >
           </para>
@@ -3897,8 +4843,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method starts at the specified <paramref
              name="offset" />
+
+            
 
             
 
@@ -3907,8 +4857,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              bytes from the contents of <paramref
              name="buffer" />
+
+            
 
             
 
@@ -3917,8 +4871,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method blocks until the requested number of bytes is sent or a <see
              cref="T:System.Net.Sockets.SocketException" />
+
+            
 
             
 
@@ -3927,8 +4885,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             , use the <see
              cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+
+            
 
             
 
@@ -3941,8 +4903,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                is writable by accessing the <see
                cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
+
+              
 
               
 
@@ -3951,8 +4917,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                that is not writable, you will get an <see
                cref="T:System.IO.IOException" />
+
+              
 
               
 
@@ -3961,13 +4931,19 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
               , check the <see
                cref="P:System.Exception.InnerException" />
 
               
 
+              
+
                property to determine if it was caused by a <see
                cref="T:System.Net.Sockets.SocketException" />
+
+              
 
               
 
@@ -3983,6 +4959,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3991,13 +4969,19 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
           An array of type <see
            cref="T:System.Byte" />
 
           
 
+          
+
            that contains the data to write to the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -4008,8 +4992,12 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
           The location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -4020,8 +5008,12 @@ indicates that the current stream does not support writing.</para
 
           
 
+          
+
           The number of bytes to write to the <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 
@@ -4052,8 +5044,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              class to use the <see
              cref="P:System.Net.Sockets.NetworkStream.Writeable" />
+
+            
 
             
 
@@ -4062,8 +5058,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              is true, <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -4072,13 +5072,19 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              method. You can also determine whether a <see
              cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
+            
+
              is writable by checking the publicly accessible <see
              cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
+
+            
 
             
 
@@ -4090,8 +5096,12 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
              property is set when the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -4103,6 +5113,8 @@ indicates that the current stream does not support writing.</para
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -4132,6 +5144,8 @@ indicates that the current stream does not support writing.</para
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -4141,8 +5155,12 @@ indicates that the current stream does not support writing.</para
 
               
 
+              
+
                method. This property does not affect asynchronous writes performed by calling the <see
                cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+              
 
               
 

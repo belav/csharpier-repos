@@ -37,13 +37,19 @@
 
         
 
+        
+
          interface provides contextual information about a component. <see
          cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
         
 
+        
+
          is typically used at design time to provide information about a design-time container. This interface is commonly used in type conversion. For details, see <see
          cref="T:System.ComponentModel.TypeConverter" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
 
             
 
+            
+
              property gets the logical container of the component associated with the type descriptor.</para
           >
         </remarks>
@@ -95,6 +103,8 @@
           <para
             >Gets the container representing this <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -125,8 +135,12 @@
 
             
 
+            
+
              property gets the object that is invoking the <see
              cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+            
 
             
 
@@ -135,8 +149,12 @@
 
             
 
+            
+
              to convert, <see
              cref="P:System.ComponentModel.ITypeDescriptorContext.Instance" />
+
+            
 
             
 
@@ -145,8 +163,12 @@
 
             
 
+            
+
             . You can subsequently query the control for further information about its services and its <see
              cref="P:System.ComponentModel.ITypeDescriptorContext.Container" />
+
+            
 
             
 
@@ -184,6 +206,8 @@
 
             
 
+            
+
              method to send notification that an instance of an object has changed.</para
           >
           <para
@@ -191,6 +215,8 @@
              type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -202,6 +228,8 @@
 
             
 
+            
+
              method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
         </remarks>
@@ -210,6 +238,8 @@
           <para
             >Raises the <see
              cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+            
 
             
 
@@ -243,6 +273,8 @@
 
             
 
+            
+
              method to send notification that an instance of an object is about to be changed. This method also returns a value indicating whether this object can be changed. When false is returned, do not change the object.</para
           >
           <para
@@ -250,6 +282,8 @@
              type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -261,6 +295,8 @@
 
             
 
+            
+
              method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
         </remarks>
@@ -269,6 +305,8 @@
           <para
             >Raises the <see
              cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+
+            
 
             
 
@@ -307,6 +345,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 

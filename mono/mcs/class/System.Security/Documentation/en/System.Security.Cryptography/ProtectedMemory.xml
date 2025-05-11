@@ -25,8 +25,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Security.Cryptography.ProtectedMemory.Unprotect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
 
             
 
+            
+
              parameter must be 16 bytes in length or a multiple of 16 bytes.</para
           >
           <para>Support for this method is available in the Windows XP and later operating systems.</para>
@@ -83,10 +89,14 @@
 
           
 
+          
+
           The byte array containing data in memory to protect. The array must be a multiple of 16 bytes. </param
         >
         <param name="scope">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -125,6 +135,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>Support for this method is available in the Windows XP and later operating systems.</para>
@@ -137,6 +149,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -145,10 +159,14 @@
 
           
 
+          
+
           The byte array in memory to unencrypt. </param
         >
         <param name="scope">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

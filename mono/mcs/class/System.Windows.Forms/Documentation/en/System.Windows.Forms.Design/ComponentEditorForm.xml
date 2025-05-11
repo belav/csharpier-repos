@@ -33,6 +33,8 @@
 
         
 
+        
+
          shows a view of available component editor pages along with a user interface for selection.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Provides a user interface for a <see
          cref="T:System.Windows.Forms.Design.WindowsFormsComponentEditor" />
+
+        
 
         
 
@@ -69,11 +73,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -84,8 +92,12 @@
 
           
 
+          
+
           The set of <see
            cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+
+          
 
           
 
@@ -150,6 +162,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -173,6 +187,8 @@
 
             
 
+            
+
              method is executed, it shows the first component editor page in the list.</para
           >
           <para
@@ -183,11 +199,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnActivated(System.EventArgs)" />
+
+            
 
             
 
@@ -202,6 +222,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -210,8 +232,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -244,6 +270,8 @@
 
             
 
+            
+
              method shows the Help page that is associated with the component editor page, if there is one.</para
           >
           <para
@@ -254,11 +282,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnHelpRequested(System.Windows.Forms.HelpEventArgs)" />
+
+            
 
             
 
@@ -273,6 +305,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -281,8 +315,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.HelpEventArgs" />
+
+          
 
           
 
@@ -318,6 +356,8 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
@@ -325,8 +365,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewEventArgs" />
+
+          
 
           
 
@@ -385,6 +429,8 @@
 
             
 
+            
+
              values indicating the result code returned from the dialog box.</para
           >
         </returns>
@@ -420,11 +466,15 @@
 
             
 
+            
+
              values indicating the result code returned from the dialog box.</para
           >
         </returns>
         <param name="page">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,6 +512,8 @@
 
             
 
+            
+
              values indicating the result code returned from the dialog box.</para
           >
         </returns>
@@ -470,8 +522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -510,6 +566,8 @@
 
             
 
+            
+
              values indicating the result code returned from the dialog box.</para
           >
         </returns>
@@ -518,8 +576,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -527,6 +589,8 @@
         >
         <param name="page">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

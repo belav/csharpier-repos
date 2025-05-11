@@ -25,8 +25,12 @@
 
         
 
+        
+
          method and pass the component to search and an <see
          cref="T:System.ComponentModel.IContainer" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          method to retrieve an <see
          cref="T:System.ComponentModel.InheritanceAttribute" />
 
         
 
+        
+
          for a component that has been identified by the <see
          cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
+
+        
 
         
 
@@ -85,8 +95,12 @@
 
             
 
+            
+
             , adds each to the specified container, and stores an <see
              cref="T:System.ComponentModel.InheritanceAttribute" />
+
+            
 
             
 
@@ -95,8 +109,12 @@
 
             
 
+            
+
              for a component indicates whether the field is inherited from a base class and can be retrieved using the <see
              cref="M:System.ComponentModel.Design.IInheritanceService.GetInheritanceAttribute(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -111,8 +129,12 @@
 
             
 
+            
+
              interface and adds each to the specified container, storing the inheritance level of each which can be retrieved using the <see
              cref="M:System.ComponentModel.Design.IInheritanceService.GetInheritanceAttribute(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -124,8 +146,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -136,8 +162,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IContainer" />
+
+          
 
           
 
@@ -175,8 +205,12 @@
 
             
 
+            
+
              method, this method returns the value <see
              cref="F:System.ComponentModel.InheritanceAttribute.NotInherited" />
+
+            
 
             
 
@@ -188,8 +222,12 @@
 
             
 
+            
+
              on the specified component or a parent of the specified component before attempting to obtain an <see
              cref="T:System.ComponentModel.InheritanceAttribute" />
+
+            
 
             
 
@@ -208,6 +246,8 @@
 
             
 
+            
+
              that describes the level of inheritance of the specified component.</para
           >
         </returns>
@@ -216,8 +256,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 

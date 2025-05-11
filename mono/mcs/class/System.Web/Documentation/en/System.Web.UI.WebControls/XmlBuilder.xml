@@ -20,6 +20,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -37,6 +39,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.XmlBuilder" />
+
+            
 
             
 
@@ -66,8 +70,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.XmlBuilder" />
+
+            
 
             
 
@@ -76,8 +84,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.ControlBuilder" />
+
+            
 
             
 
@@ -90,6 +102,8 @@
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,8 +136,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.XmlBuilder" />
+
+            
 
             
 
@@ -132,13 +150,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.ControlBuilder" />
 
             
 
+            
+
              class. This implementation of the <see
              cref="M:System.Web.UI.WebControls.XmlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -153,8 +177,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -169,6 +197,8 @@
 
             
 
+            
+
              method is overridden to always return null.</para
           >
         </returns>
@@ -177,10 +207,14 @@
 
           
 
+          
+
           The tag name of the child control.</param
         >
         <param name="attribs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -207,8 +241,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.XmlBuilder" />
+
+            
 
             
 
@@ -217,8 +255,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.ControlBuilder" />
+
+            
 
             
 
@@ -234,6 +276,8 @@
 
             
 
+            
+
              control needs to get its inner text.</para
           >
         </summary>
@@ -242,6 +286,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.ControlBuilder.NeedsTagInnerText" />
+
+            
 
             
 
@@ -271,13 +317,19 @@
 
             
 
+            
+
              passed in to an XML document to determine whether it is well-formed. If it is, the code calls the <see
              cref="M:System.Web.UI.ControlBuilder.SetTagInnerText(System.String)" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.ControlBuilder" />
+
+            
 
             
 
@@ -292,11 +344,15 @@
 
             
 
+            
+
              control's inner text. </para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

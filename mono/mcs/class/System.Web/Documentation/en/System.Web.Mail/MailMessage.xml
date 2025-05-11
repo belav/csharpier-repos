@@ -15,8 +15,7 @@
   <Docs>
     <remarks>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 using System;
 using System.Web.Mail;
 
@@ -51,6 +50,8 @@ class SmtpExample
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -71,8 +72,12 @@ class SmtpExample
 
             
 
+            
+
              class. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -105,8 +110,12 @@ class SmtpExample
 
             
 
+            
+
              for an example of <see
              cref="T:System.Web.Mail.SmtpMail" />
+
+            
 
             
 
@@ -118,6 +127,8 @@ class SmtpExample
           <para
             >Specifies the collection of attachments that are transmitted with the message. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -148,6 +159,8 @@ class SmtpExample
 
             
 
+            
+
             ) recipients do not see the addresses in the Bcc field.</para
           >
         </remarks>
@@ -156,6 +169,8 @@ class SmtpExample
           <para
             >Gets or sets a semicolon-delimited list of email addresses that receive a blind carbon copy (BCC) of the e-mail message. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -183,6 +198,8 @@ class SmtpExample
           <para
             >Gets or sets the body of the e-mail message. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -219,6 +236,8 @@ class SmtpExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -246,6 +265,8 @@ class SmtpExample
           <para
             >Gets or sets the content type of the body of the e-mail message. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -279,6 +300,8 @@ class SmtpExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -307,6 +330,8 @@ class SmtpExample
 
             
 
+            
+
              property is used to set extended properties for Collaboration Data Objects (CDO). For more information about CDO, see "Collaboration Data Objects" and "Configuration CoClass" in the MSDN library at http://msdn.microsoft.com/library.</para
           >
         </remarks>
@@ -315,6 +340,8 @@ class SmtpExample
           <para
             >Gets a collection of objects that map to Microsoft Collaboration Data Objects (CDO) fields. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -342,6 +369,8 @@ class SmtpExample
           <para
             >Gets or sets the e-mail address of the sender. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -378,6 +407,8 @@ class SmtpExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -408,6 +439,8 @@ class SmtpExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -432,6 +465,8 @@ class SmtpExample
           <para
             >Gets or sets the subject line of the e-mail message. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -465,6 +500,8 @@ class SmtpExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -492,6 +529,8 @@ class SmtpExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -516,6 +555,8 @@ class SmtpExample
           <para
             >Gets or sets the Content-Location HTTP header for the e-mail message. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 

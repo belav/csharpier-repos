@@ -19,7 +19,7 @@
       <Using Namespace="System.Text.RegularExpressions" />
       <Using Namespace="System.IO" />
       <Code Type="Fragment" Language="cs">
-        <![CDATA[
+<![CDATA[
                 MonoVersion = null;
                 MonoCorlibVersion = null;
 
@@ -81,7 +81,7 @@
     </ParameterGroup>
     <Task>
       <Code Type="Class" Language="cs">
-        <![CDATA[
+<![CDATA[
                 using System;
                 using System.IO;
                 using System.Text;

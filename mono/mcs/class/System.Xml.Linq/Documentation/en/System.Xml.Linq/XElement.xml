@@ -38,8 +38,12 @@
 
         
 
+        
+
         , optionally one or more attributes, and can optionally contain content (for more information, see <see
          cref="M:System.Xml.Linq.XContainer.Nodes" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
       <para
         >An <see
          cref="T:System.Xml.Linq.XElement" />
+
+        
 
         
 
@@ -81,12 +87,16 @@
 
         
 
+        
+
         , see <format
          type="text/html">
           <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
             >Valid Content of XElement and XDocument Objects</a
           >
         </format>
+
+        
 
         
 
@@ -97,13 +107,19 @@
 
         
 
+        
+
          derives from <see
          cref="T:System.Xml.Linq.XContainer" />
 
         
 
+        
+
         , which derives from <see
          cref="T:System.Xml.Linq.XNode" />
+
+        
 
         
 
@@ -115,10 +131,14 @@
 
         
 
+        
+
          methods can be used from XAML. For more information, see <format
          type="text/html">
           <a href="0455f47c-4a68-4f2e-a3f8-dd1d85b99012">LINQ to XML Dynamic Properties</a>
         </format>
+
+        
 
         
 
@@ -157,8 +177,12 @@
 
             
 
+            
+
              class from another <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -170,8 +194,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -202,8 +230,12 @@
 
             
 
+            
+
             . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -212,8 +244,12 @@
 
             
 
+            
+
              and a string to create an <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -221,6 +257,8 @@
              type="text/html">
               <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
             </format>
+
+            
 
             
 
@@ -235,6 +273,8 @@
 
             
 
+            
+
              class with the specified name. </para
           >
         </summary>
@@ -243,8 +283,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -277,6 +321,8 @@
 
             
 
+            
+
             , and creates an element with its contents.</para
           >
         </remarks>
@@ -288,8 +334,12 @@
 
             
 
+            
+
              class from an <see
              cref="T:System.Xml.Linq.XStreamingElement" />
+
+            
 
             
 
@@ -301,13 +351,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XStreamingElement" />
 
           
 
+          
+
            that contains unevaluated queries that will be iterated for the contents of this <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -342,8 +398,12 @@
 
             
 
+            
+
             . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -355,8 +415,12 @@
 
             
 
+            
+
              and a string to create an <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -364,6 +428,8 @@
              type="text/html">
               <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
             </format>
+
+            
 
             
 
@@ -379,6 +445,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -390,6 +458,8 @@
 
             
 
+            
+
              class with the specified name and content.</para
           >
         </summary>
@@ -398,8 +468,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -407,6 +481,8 @@
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,8 +523,12 @@
 
             
 
+            
+
             . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -460,8 +540,12 @@
 
             
 
+            
+
              and a string to create an <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -469,6 +553,8 @@
              type="text/html">
               <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
             </format>
+
+            
 
             
 
@@ -484,6 +570,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -495,6 +583,8 @@
 
             
 
+            
+
              class with the specified name and content.</para
           >
         </summary>
@@ -503,8 +593,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -512,6 +606,8 @@
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -554,8 +650,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -597,6 +697,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -608,13 +710,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              that contain this element, and the ancestors of this element. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -626,8 +734,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -663,8 +775,12 @@
 
             
 
+            
+
              (in contrast to a <newTerm
             >collection</newTerm>
+
+            
 
             
 
@@ -680,13 +796,19 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              that has the specified <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -701,8 +823,12 @@
 
             
 
+            
+
              that has the specified <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -714,13 +840,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
 
           
 
+          
+
            of the <see
            cref="T:System.Xml.Linq.XAttribute" />
+
+          
 
           
 
@@ -763,8 +895,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XAttribute" />
+
+            
 
             
 
@@ -806,6 +942,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -817,13 +955,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XAttribute" />
 
             
 
+            
+
              that contains the attributes of this element. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -835,8 +979,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -878,8 +1026,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -922,8 +1074,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -964,6 +1120,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -975,13 +1133,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -993,8 +1157,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1025,6 +1193,8 @@
           <para
             >This property is typically used by class implementers when writing a method that returns a collection of elements. If the method must return no elements, it can use this property to get an empty collection of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1091,11 +1261,15 @@
 
             
 
+            
+
              for the default namespace.</para
           >
           <para
             >If there is no attribute that declares the default namespace, then this method returns <see
              cref="P:System.Xml.Linq.XNamespace.None" />
+
+            
 
             
 
@@ -1112,8 +1286,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1128,8 +1306,12 @@
 
             
 
+            
+
              that contains the default namespace of this <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1170,6 +1352,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1181,8 +1365,12 @@
 
             
 
+            
+
              for the namespace associated with the prefix for this <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1191,6 +1379,8 @@
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1231,6 +1421,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1242,6 +1434,8 @@
 
             
 
+            
+
              that contains the namespace prefix.</para
           >
         </returns>
@@ -1250,8 +1444,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XNamespace" />
+
+          
 
           
 
@@ -1375,8 +1573,12 @@
 
             
 
+            
+
              overload that takes <see
              cref="T:System.Xml.Linq.LoadOptions" />
+
+            
 
             
 
@@ -1388,8 +1590,12 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -1398,11 +1604,15 @@
 
             
 
+            
+
              methods that read and parse the document. </para
           >
           <para
             >If you have to modify <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -1416,13 +1626,19 @@
 
                 
 
+                
+
                  by calling one of the <see
                  cref="Overload:System.Xml.XmlReader.Create" />
 
                 
 
+                
+
                  overloads that take <see
                  cref="T:System.Xml.XmlReaderSettings" />
+
+                
 
                 
 
@@ -1436,8 +1652,12 @@
 
                 
 
+                
+
                  to one of the <see
                  cref="T:System.Xml.Linq.XElement" />
+
+                
 
                 
 
@@ -1446,8 +1666,12 @@
 
                 
 
+                
+
                  overloads that takes <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -1464,6 +1688,8 @@
 
             
 
+            
+
              instance by using the specified stream.</para
           >
         </summary>
@@ -1475,11 +1701,15 @@
 
             
 
+            
+
              object used to read the data that is contained in the stream.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1516,13 +1746,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1537,8 +1773,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1553,8 +1793,12 @@
 
             
 
+            
+
              that contains the XML that was read from the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1566,13 +1810,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
 
           
 
+          
+
            that will be read for the <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -1609,13 +1859,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1630,6 +1886,8 @@
 
             
 
+            
+
              from a file.</para
           >
         </summary>
@@ -1641,6 +1899,8 @@
 
             
 
+            
+
              that contains the contents of the specified file.</para
           >
         </returns>
@@ -1649,8 +1909,12 @@
 
           
 
+          
+
           A URI string referencing the file to load into a new <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -1686,13 +1950,19 @@
 
             
 
+            
+
              from a DOM document, and then using the <see
              cref="T:System.Xml.XmlNodeReader" />
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1704,13 +1974,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1725,8 +2001,12 @@
 
             
 
+            
+
              from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1741,8 +2021,12 @@
 
             
 
+            
+
              that contains the XML that was read from the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1754,13 +2038,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            that will be read for the content of the <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -1797,8 +2087,12 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -1807,11 +2101,15 @@
 
             
 
+            
+
              methods that read and parse the document. </para
           >
           <para
             >If you have to modify <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -1825,13 +2123,19 @@
 
                 
 
+                
+
                  by calling one of the <see
                  cref="Overload:System.Xml.XmlReader.Create" />
 
                 
 
+                
+
                  overloads that take <see
                  cref="T:System.Xml.XmlReaderSettings" />
+
+                
 
                 
 
@@ -1845,8 +2149,12 @@
 
                 
 
+                
+
                  to one of the <see
                  cref="T:System.Xml.Linq.XElement" />
+
+                
 
                 
 
@@ -1855,8 +2163,12 @@
 
                 
 
+                
+
                  overloads that takes <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -1873,6 +2185,8 @@
 
             
 
+            
+
              instance by using the specified stream, optionally preserving white space, setting the base URI, and retaining line information.</para
           >
         </summary>
@@ -1884,11 +2198,15 @@
 
             
 
+            
+
              object used to read the data that the stream contains.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1899,8 +2217,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -1937,13 +2259,19 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
 
             
 
+            
+
              causes the reader to read all white space in the source XML. Nodes of type <see
              cref="T:System.Xml.Linq.XText" />
+
+            
 
             
 
@@ -1955,8 +2283,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -1968,8 +2300,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -1985,12 +2321,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -2002,8 +2342,12 @@
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -2015,8 +2359,12 @@
 
             
 
+            
+
              will have no effect when loading from a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -2025,6 +2373,8 @@
           <para
             >There is a performance penalty if you set the <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -2037,13 +2387,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2058,8 +2414,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -2074,8 +2434,12 @@
 
             
 
+            
+
              that contains the XML that was read from the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -2087,13 +2451,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
 
           
 
+          
+
            that will be read for the <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -2104,8 +2474,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -2142,13 +2516,19 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
 
             
 
+            
+
              causes the reader to read all white space in the source XML. Nodes of type <see
              cref="T:System.Xml.Linq.XText" />
+
+            
 
             
 
@@ -2160,8 +2540,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -2173,8 +2557,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -2190,12 +2578,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -2207,8 +2599,12 @@
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -2220,8 +2616,12 @@
 
             
 
+            
+
              and the <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -2234,13 +2634,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2255,6 +2661,8 @@
 
             
 
+            
+
              from a file, optionally preserving white space, setting the base URI, and retaining line information.</para
           >
         </summary>
@@ -2266,6 +2674,8 @@
 
             
 
+            
+
              that contains the contents of the specified file.</para
           >
         </returns>
@@ -2274,8 +2684,12 @@
 
           
 
+          
+
           A URI string referencing the file to load into an <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -2286,8 +2700,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -2324,13 +2742,19 @@
 
             
 
+            
+
              from a DOM document, and then using the <see
              cref="T:System.Xml.XmlNodeReader" />
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -2342,8 +2766,12 @@
 
             
 
+            
+
              to create an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -2355,8 +2783,12 @@
 
             
 
+            
+
              is not valid when loading from a <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2365,8 +2797,12 @@
 
             
 
+            
+
              will be configured to either read whitespace or not. The LINQ to XML tree will be populated with the whitespace nodes that the reader surfaces. This will be the behavior regardless of whether <see
              cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+            
 
             
 
@@ -2378,13 +2814,19 @@
 
             
 
+            
+
              may have a valid base URI or not. If you set <see
              cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
 
             
 
+            
+
             , the base URI will be set in the XML tree from the base URI that is reported by the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2396,8 +2838,12 @@
 
             
 
+            
+
              may have a valid line information or not. If you set <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -2406,11 +2852,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >There is a performance penalty if you set the <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -2423,13 +2873,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2444,8 +2900,12 @@
 
             
 
+            
+
              from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2460,8 +2920,12 @@
 
             
 
+            
+
              that contains the XML that was read from the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2473,13 +2937,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            that will be read for the content of the <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -2490,8 +2960,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -2522,8 +2996,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -2562,13 +3040,19 @@
 
             
 
+            
+
              contain a <see
              cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
+            
+
              property, you can write code that operates on collections of concrete subclass of <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -3384,8 +3868,12 @@
 
             
 
+            
+
              method that takes <see
              cref="T:System.Xml.Linq.LoadOptions" />
+
+            
 
             
 
@@ -3398,12 +3886,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -3415,13 +3907,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3436,6 +3934,8 @@
 
             
 
+            
+
              from a string that contains XML.</para
           >
         </summary>
@@ -3447,6 +3947,8 @@
 
             
 
+            
+
              populated from the string that contains XML.</para
           >
         </returns>
@@ -3455,8 +3957,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3493,13 +3999,19 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
 
             
 
+            
+
              causes the reader to read all white space in the source XML. Nodes of type <see
              cref="T:System.Xml.Linq.XText" />
+
+            
 
             
 
@@ -3511,8 +4023,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -3524,8 +4040,12 @@
 
             
 
+            
+
              flag in <paramref
              name="options" />
+
+            
 
             
 
@@ -3541,12 +4061,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -3558,8 +4082,12 @@
 
             
 
+            
+
              will have no effect when parsing from a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3571,8 +4099,12 @@
 
             
 
+            
+
              may have a valid line information or not. If you set <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -3581,11 +4113,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >There is a performance penalty if you set the <see
              cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            
 
             
 
@@ -3598,13 +4134,19 @@
 
             
 
+            
+
             . Therefore, you might catch any exceptions that are thrown by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
+            
+
              overload methods and the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3619,6 +4161,8 @@
 
             
 
+            
+
              from a string that contains XML, optionally preserving white space and retaining line information.</para
           >
         </summary>
@@ -3630,6 +4174,8 @@
 
             
 
+            
+
              populated from the string that contains XML.</para
           >
         </returns>
@@ -3638,8 +4184,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3650,8 +4200,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.LoadOptions" />
+
+          
 
           
 
@@ -3682,8 +4236,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -3695,6 +4253,8 @@
           <para
             >Removes nodes and attributes from this <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -3726,8 +4286,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -3739,6 +4303,8 @@
           <para
             >Removes the attributes of this <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -3772,6 +4338,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This method uses snapshot semantics—that is, it creates a separate copy of the new content before replacing the contents of the current element with the new content. This means that you can query the contents of the current element and use the results of the query as the specified new content.</para>
@@ -3785,6 +4353,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3793,8 +4363,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -3807,6 +4381,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3845,6 +4421,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This method uses snapshot semantics—that is, it creates a separate copy of the new content before replacing the contents of the current element with the new content. This means that you can query the contents of the current element and use the results of the query as the specified new content.</para>
@@ -3858,6 +4436,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3866,8 +4446,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -3880,6 +4464,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3912,6 +4498,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3924,6 +4512,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3932,8 +4522,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -3946,6 +4540,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3984,6 +4580,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3996,6 +4594,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4004,8 +4604,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -4018,6 +4622,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4051,8 +4657,12 @@
 
             
 
+            
+
              that takes <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -4061,11 +4671,15 @@
 
             
 
+            
+
              option to save unindented XML. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
           >
           <para
             >Use the <see
              cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+
+            
 
             
 
@@ -4080,8 +4694,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -4093,8 +4711,12 @@
 
           
 
+          
+
           The stream to output this <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -4128,8 +4750,12 @@
 
             
 
+            
+
              that allows you to specify <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -4142,12 +4768,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -4162,6 +4792,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4170,13 +4802,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
 
           
 
+          
+
            that the <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -4210,8 +4848,12 @@
 
             
 
+            
+
              that allows you to specify <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -4224,12 +4866,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -4245,8 +4891,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -4280,6 +4930,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4288,13 +4940,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlWriter" />
 
           
 
+          
+
            that the <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -4331,8 +4989,12 @@
 
             
 
+            
+
              are set to <see
              cref="F:System.Xml.Linq.SaveOptions.None" />
+
+            
 
             
 
@@ -4344,8 +5006,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -4354,6 +5020,8 @@
           <para
             >Use <see
              cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+
+            
 
             
 
@@ -4368,8 +5036,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -4381,8 +5053,12 @@
 
           
 
+          
+
           The stream to output this <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -4393,8 +5069,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -4431,8 +5111,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -4444,8 +5128,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -4454,8 +5142,12 @@
 
             
 
+            
+
              methods that do not take <paramref
              name="options" />
+
+            
 
             
 
@@ -4471,12 +5163,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -4491,6 +5187,8 @@
 
             
 
+            
+
             , optionally disabling formatting.</para
           >
         </summary>
@@ -4499,8 +5197,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -4511,8 +5213,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -4549,8 +5255,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -4562,8 +5272,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -4572,8 +5286,12 @@
 
             
 
+            
+
              methods that do not take <paramref
              name="options" />
+
+            
 
             
 
@@ -4589,12 +5307,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -4610,8 +5332,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -4622,8 +5348,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -4660,6 +5390,8 @@
 
             
 
+            
+
             , this method removes the attribute.</para
           >
           <para
@@ -4668,8 +5400,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -4681,6 +5417,8 @@
              type="text/html">
               <a href="fe9798bf-b5e2-4a3c-a86c-7f8638912691">Maintaining Name/Value Pairs</a>
             </format>
+
+            
 
             
 
@@ -4696,8 +5434,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -4708,8 +5450,12 @@
 
           
 
+          
+
           The value to assign to the attribute. The attribute is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see
            cref="P:System.Xml.Linq.XAttribute.Value" />
+
+          
 
           
 
@@ -4746,6 +5492,8 @@
 
             
 
+            
+
             , this method removes the child element.</para
           >
           <para>This method will raise events.</para>
@@ -4756,8 +5504,12 @@
 
             
 
+            
+
              is passed as <paramref
              name="value" />
+
+            
 
             
 
@@ -4768,6 +5520,8 @@
              type="text/html">
               <a href="fe9798bf-b5e2-4a3c-a86c-7f8638912691">Maintaining Name/Value Pairs</a>
             </format>
+
+            
 
             
 
@@ -4783,8 +5537,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -4795,8 +5553,12 @@
 
           
 
+          
+
           The value to assign to the child element. The child element is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see
            cref="P:System.Xml.Linq.XElement.Value" />
+
+          
 
           
 
@@ -4829,8 +5591,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -4842,8 +5608,12 @@
 
             
 
+            
+
             , such as <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -4859,8 +5629,12 @@
 
           
 
+          
+
           The value to assign to this element. The value is converted to its string representation and assigned to the <see
            cref="P:System.Xml.Linq.XElement.Value" />
+
+          
 
           
 
@@ -4894,6 +5668,8 @@
 
             
 
+            
+
              interface.</para
           >
           <para
@@ -4903,6 +5679,8 @@
                 >Serializing Object Graphs that Contain XElement or XDocument Objects</a
               >
             </format>
+
+            
 
             
 
@@ -4921,13 +5699,19 @@
 
             
 
+            
+
              that describes the XML representation of the object that is produced by the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
 
             
 
+            
+
              method and consumed by the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -4964,6 +5748,8 @@
 
             
 
+            
+
              interface.</para
           >
           <para
@@ -4973,6 +5759,8 @@
                 >Serializing Object Graphs that Contain XElement or XDocument Objects</a
               >
             </format>
+
+            
 
             
 
@@ -4988,8 +5776,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -5029,6 +5821,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5041,8 +5835,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -5071,8 +5869,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -5084,13 +5886,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Int32" />
 
             
 
+            
+
             . If the element does not exist, the nullable type is set to null. By contrast, if you want to use this property, you must make sure that the <see
              cref="M:System.Xml.Linq.XContainer.Element(System.Xml.Linq.XName)" />
+
+            
 
             
 
@@ -5132,6 +5940,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5140,8 +5950,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

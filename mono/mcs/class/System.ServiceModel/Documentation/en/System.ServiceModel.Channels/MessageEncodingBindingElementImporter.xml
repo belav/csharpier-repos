@@ -39,11 +39,15 @@
 
         
 
+        
+
          using an application configuration file.</para
       >
       <para
         >Use the <see
          cref="M:System.ServiceModel.Channels.MessageEncodingBindingElementImporter.System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
+
+        
 
         
 
@@ -74,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.MessageEncodingBindingElementImporter" />
+
+            
 
             
 
@@ -113,8 +119,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+          
 
           
 
@@ -125,8 +135,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 
@@ -170,6 +184,8 @@
 
             
 
+            
+
              does the import.</para
           >
         </remarks>
@@ -182,8 +198,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+          
 
           
 
@@ -194,13 +214,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
+          
+
            that contains the schema for the <paramref
            name="wsdlDocuments" />
+
+          
 
           
 
@@ -211,13 +237,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
+          
+
            of type <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -259,10 +291,14 @@
 
           
 
+          
+
           The contract importer.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,8 +340,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+          
 
           
 
@@ -316,8 +356,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlEndpointConversionContext" />
+
+          
 
           
 

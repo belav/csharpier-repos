@@ -31,8 +31,12 @@
 
         
 
+        
+
          is a transformation that takes an input <paramref
          name="m" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          (that is, <paramref
          name="h" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          (<paramref
          name="m" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
             
 
+            
+
              (<paramref
              name="x)" />
+
+            
 
             
 
@@ -86,8 +102,12 @@
 
             
 
+            
+
              (<paramref
              name="x" />
+
+            
 
             
 
@@ -100,8 +120,12 @@
 
             
 
+            
+
              (<paramref
              name="x" />
+
+            
 
             
 

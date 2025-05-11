@@ -25,8 +25,12 @@
 
         
 
+        
+
          provides all the information needed for a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          in which the drawing should be done and the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
       <para
         >Provides data for the <see
          cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
+
+        
 
         
 
@@ -79,11 +89,15 @@
 
             
 
+            
+
              class using the specified values.</para
           >
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -94,6 +108,8 @@
 
           
 
+          
+
           The value to paint. </param
         >
         <param name="graphics">
@@ -101,8 +117,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -113,8 +133,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -165,6 +189,8 @@
 
             
 
+            
+
              interface to be used to gain additional information about the context this value appears in.</para
           >
         </summary>
@@ -188,6 +214,8 @@
           <para
             >Gets the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 

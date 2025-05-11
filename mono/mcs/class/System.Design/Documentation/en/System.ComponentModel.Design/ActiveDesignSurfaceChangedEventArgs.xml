@@ -25,6 +25,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -53,6 +55,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -61,10 +65,14 @@
 
           
 
+          
+
           The design surface that is losing activation.</param
         >
         <param name="newSurface">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

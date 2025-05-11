@@ -93,6 +93,8 @@
 
               
 
+              
+
                or <see
                cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
             </para>
@@ -161,8 +163,12 @@
 
             
 
+            
+
              or <see
              cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+
+            
 
             
 
@@ -195,8 +201,12 @@
 
             
 
+            
+
              or <see
              cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+
+            
 
             
 
@@ -226,6 +236,8 @@
           <para
             >Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see
              cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+
+            
 
             
 

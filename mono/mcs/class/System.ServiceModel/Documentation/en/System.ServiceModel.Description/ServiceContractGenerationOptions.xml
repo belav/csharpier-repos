@@ -29,8 +29,12 @@
 
         
 
+        
+
          enumeration with the <see
          cref="P:System.ServiceModel.Description.ServiceContractGenerator.Options" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >Represents the contract generation options available using the <see
          cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+        
 
         
 
@@ -92,6 +98,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -116,6 +124,8 @@
           <para
             >Generates a indigo1 client class that extends <see
              cref="T:System.ServiceModel.ClientBase`1" />
+
+            
 
             
 

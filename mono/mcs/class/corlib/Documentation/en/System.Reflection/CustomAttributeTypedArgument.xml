@@ -29,8 +29,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          structure is used by the <see
          cref="T:System.Reflection.CustomAttributeData" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          structures. The positional attributes returned by the <see
          cref="P:System.Reflection.CustomAttributeData.ConstructorArguments" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          structures, but the named arguments returned by the <see
          cref="P:System.Reflection.CustomAttributeData.NamedArguments" />
+
+        
 
         
 
@@ -75,13 +91,19 @@
 
         
 
+        
+
          structures; to get the <see
          cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
         
 
+        
+
          structure for a named argument, use the <see
          cref="P:System.Reflection.CustomAttributeNamedArgument.TypedValue" />
+
+        
 
         
 
@@ -93,8 +115,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+        
 
         
 
@@ -103,13 +129,19 @@
 
         
 
+        
+
          of <see
          cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
         
 
+        
+
          objects. Each <see
          cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+        
 
         
 
@@ -121,8 +153,12 @@
 
         
 
+        
+
          class, use the static <see
          cref="Overload:System.Reflection.CustomAttributeData.GetCustomAttributes" />
+
+        
 
         
 
@@ -157,8 +193,12 @@
 
             
 
+            
+
              parameter cannot be null for this constructor, because the argument type is inferred from the type of <paramref
              name="value" />
+
+            
 
             
 
@@ -167,11 +207,15 @@
 
             
 
+            
+
              constructor.</para
           >
           <para
             >This constructor is for use by inheritors of the <see
              cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+            
 
             
 
@@ -186,11 +230,15 @@
 
             
 
+            
+
              class with the specified value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -224,6 +272,8 @@
 
             
 
+            
+
              class. It is not intended for use in application code.</para
           >
         </remarks>
@@ -235,6 +285,8 @@
 
             
 
+            
+
              class with the specified type and value.</para
           >
         </summary>
@@ -243,10 +295,14 @@
 
           
 
+          
+
           The type of the custom attribute argument.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,8 +332,12 @@
 
             
 
+            
+
              property. For array arguments, this property returns the array type, but the <see
              cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
+
+            
 
             
 
@@ -366,6 +426,8 @@
 
             
 
+            
+
              structures are equivalent.</para
           >
         </summary>
@@ -377,6 +439,8 @@
 
             
 
+            
+
              structures are equal; otherwise, false.</para
           >
         </returns>
@@ -385,8 +449,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+          
 
           
 
@@ -397,8 +465,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+          
 
           
 
@@ -437,6 +509,8 @@
 
             
 
+            
+
              structures are different.</para
           >
         </summary>
@@ -448,6 +522,8 @@
 
             
 
+            
+
              structures are different; otherwise, false.</para
           >
         </returns>
@@ -456,8 +532,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+          
 
           
 
@@ -468,8 +548,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+          
 
           
 
@@ -527,6 +611,8 @@
 
             
 
+            
+
              represents an array argument, this property returns a ReadOnlyCollection&lt;CustomAttributeTypedArgument&gt; (ReadOnlyCollection(Of CustomAttributeTypedArgument) in Visual Basic). Each element of the collection represents the corresponding element of the array argument.</para
           >
           <para
@@ -535,13 +621,19 @@
 
             
 
+            
+
              property. <see
              cref="P:System.Reflection.CustomAttributeTypedArgument.ArgumentType" />
 
             
 
+            
+
              gets the actual type of the value returned by the <see
              cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
+
+            
 
             
 

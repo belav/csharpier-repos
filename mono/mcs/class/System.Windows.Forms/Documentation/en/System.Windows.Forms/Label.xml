@@ -38,8 +38,12 @@
 
         
 
+        
+
          controls are typically used to provide descriptive text for a control. For example, you can use a <see
          cref="T:System.Windows.Forms.Label" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          control to inform the user about the type of data expected in the control. <see
          cref="T:System.Windows.Forms.Label" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          to provide the user with helpful information. For example, you can add a <see
          cref="T:System.Windows.Forms.Label" />
+
+        
 
         
 
@@ -68,13 +80,19 @@
 
         
 
+        
+
          that provides instructions to the user on how to input data in the controls on the form. <see
          cref="T:System.Windows.Forms.Label" />
 
         
 
+        
+
          controls can be also used to display run time information on the status of an application. For example, you can add a <see
          cref="T:System.Windows.Forms.Label" />
+
+        
 
         
 
@@ -86,8 +104,12 @@
 
         
 
+        
+
          participates in the tab order of a form, but does not receive focus (the next control in the tab order receives focus). For example, if the <see
          cref="P:System.Windows.Forms.Label.UseMnemonic" />
+
+        
 
         
 
@@ -96,8 +118,12 @@
 
         
 
+        
+
          property of the control, when a user presses ALT+ the mnemonic key, focus moves to the next control in the tab order. This feature provides keyboard navigation for a form. In addition to displaying text, the <see
          cref="T:System.Windows.Forms.Label" />
+
+        
 
         
 
@@ -106,13 +132,19 @@
 
         
 
+        
+
          property, or a combination of the <see
          cref="P:System.Windows.Forms.Label.ImageIndex" />
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Label.ImageList" />
+
+        
 
         
 
@@ -125,13 +157,19 @@
 
           
 
+          
+
            can be made transparent by setting its <see
            cref="P:System.Windows.Forms.Control.BackColor" />
 
           
 
+          
+
            property to Color.Transparent. When you use a transparent label, use only the current device coordinate system to draw on the container, or the <see
            cref="T:System.Windows.Forms.Label" />
+
+          
 
           
 
@@ -158,8 +196,12 @@
 
             
 
+            
+
              property set to false and with its <see
              cref="P:System.Windows.Forms.Label.BorderStyle" />
+
+            
 
             
 
@@ -171,6 +213,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -213,13 +257,19 @@
 
             
 
+            
+
              to true to display text that extends beyond the width of the <see
              cref="T:System.Windows.Forms.Label" />
 
             
 
+            
+
              when the user passes over the control with the mouse. If <see
              cref="P:System.Windows.Forms.Label.AutoSize" />
+
+            
 
             
 
@@ -232,13 +282,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.Label.AutoEllipsis" />
 
               
 
+              
+
                is true, you must set <see
                cref="P:System.Windows.Forms.Label.AutoSize" />
+
+              
 
               
 
@@ -254,13 +310,19 @@
 
             
 
+            
+
             , denoting that the <see
              cref="T:System.Windows.Forms.Label" />
 
             
 
+            
+
              text extends beyond the specified length of the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -305,8 +367,12 @@
 
             
 
+            
+
              adjusts its width to display its entire contents. This property is typically set to true when you use a <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -319,13 +385,19 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.Label.AutoEllipsis" />
 
               
 
+              
+
                is true, you must set <see
                cref="P:System.Windows.Forms.Label.AutoSize" />
+
+              
 
               
 
@@ -360,6 +432,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -368,6 +442,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Label.AutoSize" />
+
+            
 
             
 
@@ -451,6 +527,8 @@
 
             
 
+            
+
              property changes. </para
           >
         </summary>
@@ -525,6 +603,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -557,8 +637,12 @@
 
             
 
+            
+
              that labels another control from a <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -598,13 +682,19 @@
 
             
 
+            
+
             , to determine the size and location of an image to draw within the <see
              cref="T:System.Windows.Forms.Label" />
 
             
 
+            
+
              control based on its location within the control. The location of the image is based on the value of the control's <see
              cref="P:System.Windows.Forms.Label.ImageAlign" />
+
+            
 
             
 
@@ -619,6 +709,8 @@
 
             
 
+            
+
              control based on the alignment of the control.</para
           >
         </summary>
@@ -630,6 +722,8 @@
 
             
 
+            
+
              that represents the size and location of the specified image within the control.</para
           >
         </returns>
@@ -638,8 +732,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -650,8 +748,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -659,6 +761,8 @@
         >
         <param name="align">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -691,6 +795,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -808,8 +914,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -818,8 +928,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -831,8 +945,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -847,11 +965,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -888,6 +1010,8 @@
 
             
 
+            
+
              within the specified bounds.</para
           >
         </summary>
@@ -896,8 +1020,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -908,8 +1036,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -920,8 +1052,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -932,8 +1068,12 @@
 
           
 
+          
+
           The alignment of the image to draw within the <see
            cref="T:System.Windows.Forms.Label" />
+
+          
 
           
 
@@ -969,8 +1109,12 @@
 
             
 
+            
+
              property is set to FlatStyle.System, any values assigned to the <see
              cref="P:System.Windows.Forms.Label.ImageList" />
+
+            
 
             
 
@@ -979,8 +1123,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+            
 
             
 
@@ -989,8 +1137,12 @@
 
             
 
+            
+
              properties are ignored. In addition, the <see
              cref="P:System.Windows.Forms.Label.TextAlign" />
+
+            
 
             
 
@@ -999,8 +1151,12 @@
 
             
 
+            
+
              property are aligned to the top of the control. For example, if you set the <see
              cref="P:System.Windows.Forms.Label.TextAlign" />
+
+            
 
             
 
@@ -1009,8 +1165,12 @@
 
             
 
+            
+
              property is set to FlatStyle.System, the text in the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -1023,13 +1183,19 @@
 
               
 
+              
+
                property to FlatStyle.System does not cause the value of the <see
                cref="P:System.Windows.Forms.Label.TextAlign" />
 
               
 
+              
+
                property to be ignored. In addition, the property has no effect in the derived class, <see
                cref="T:System.Windows.Forms.LinkLabel" />
+
+              
 
               
 
@@ -1076,11 +1242,15 @@
 
             
 
+            
+
              representing the width and height of a rectangle.</para
           >
         </returns>
         <param name="proposedSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1109,13 +1279,19 @@
 
             
 
+            
+
              property cannot be used at the same time as the <see
              cref="P:System.Windows.Forms.Label.ImageList" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+            
 
             
 
@@ -1124,13 +1300,19 @@
 
             
 
+            
+
              property is used to display an image, the <see
              cref="P:System.Windows.Forms.Label.ImageList" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+            
 
             
 
@@ -1142,6 +1324,8 @@
           <para
             >Gets or sets the image that is displayed on a <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -1181,8 +1365,12 @@
 
             
 
+            
+
              control to ensure that the image is properly displayed. You can add an image to a <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -1191,13 +1379,19 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Windows.Forms.Label.ImageList" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+            
 
             
 
@@ -1247,8 +1441,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.Label.ImageList" />
+
+            
 
             
 
@@ -1257,8 +1455,12 @@
 
             
 
+            
+
              property. When the <see
              cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+            
 
             
 
@@ -1267,8 +1469,12 @@
 
             
 
+            
+
              properties are used to display an image, the <see
              cref="P:System.Windows.Forms.Label.Image" />
+
+            
 
             
 
@@ -1280,6 +1486,8 @@
           <para
             >Gets or sets the index value of the image displayed on the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -1328,8 +1536,12 @@
 
             
 
+            
+
              property specifies the image from the image list to display on the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -1341,6 +1553,8 @@
           <para
             >Gets or sets the key accessor for the image in the <see
              cref="P:System.Windows.Forms.Label.ImageList" />
+
+            
 
             
 
@@ -1376,8 +1590,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.Label.ImageList" />
+
+            
 
             
 
@@ -1386,8 +1604,12 @@
 
             
 
+            
+
              property. When the <see
              cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+            
 
             
 
@@ -1396,8 +1618,12 @@
 
             
 
+            
+
              properties are used to display an image, the <see
              cref="P:System.Windows.Forms.Label.Image" />
+
+            
 
             
 
@@ -1410,8 +1636,12 @@
 
               
 
+              
+
                will not be garbage collected if its <see
                cref="P:System.Windows.Forms.Label.ImageList" />
+
+              
 
               
 
@@ -1420,8 +1650,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Windows.Forms.Label" />
+
+              
 
               
 
@@ -1437,8 +1671,12 @@
 
             
 
+            
+
              that contains the images to display in the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -1508,6 +1746,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.Label.ImeMode" />
+
+            
 
             
 
@@ -1659,6 +1899,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1667,8 +1909,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1699,6 +1945,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1707,8 +1955,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1744,11 +1996,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Label.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -1763,6 +2019,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1771,8 +2029,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1803,6 +2065,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1811,8 +2075,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1843,6 +2111,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1851,8 +2121,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1888,6 +2162,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1896,8 +2172,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1927,6 +2207,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1935,8 +2217,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1970,6 +2256,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1978,8 +2266,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2017,11 +2309,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Label.OnRightToLeftChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2036,6 +2332,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2044,8 +2342,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2076,6 +2378,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2087,6 +2391,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2095,8 +2401,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2127,6 +2437,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2135,8 +2447,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2170,6 +2486,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2178,8 +2496,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2218,8 +2540,12 @@
 
             
 
+            
+
              property to ensure that the text in the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -2228,8 +2554,12 @@
 
             
 
+            
+
              property to automatically adjust the height and the width of the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -2242,13 +2572,19 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Windows.Forms.Label" />
 
               
 
+              
+
                control is set to BorderStyle.None, the value returned by <see
                cref="P:System.Windows.Forms.Label.PreferredHeight" />
+
+              
 
               
 
@@ -2293,8 +2629,12 @@
 
             
 
+            
+
              that is only 100 pixels wide. The <see
              cref="P:System.Windows.Forms.Label.PreferredWidth" />
+
+            
 
             
 
@@ -2303,8 +2643,12 @@
 
             
 
+            
+
              property, to ensure that the text in the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -2313,8 +2657,12 @@
 
             
 
+            
+
              property to automatically adjust the height and the width of the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -2327,13 +2675,19 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Windows.Forms.Label" />
 
               
 
+              
+
                control is set to BorderStyle.None, the value returned by <see
                cref="P:System.Windows.Forms.Label.PreferredWidth" />
+
+              
 
               
 
@@ -2378,6 +2732,8 @@
 
           
 
+          
+
           The character to process.</param
         >
       </Docs>
@@ -2406,6 +2762,8 @@
           <para
             >Indicates whether the container control background is rendered on the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -2448,13 +2806,19 @@
 
             
 
+            
+
              property to true, the label will be sized to fit the contents of the label. If you set <see
              cref="P:System.Windows.Forms.Label.AutoSize" />
 
             
 
+            
+
              to false after calling the <see
              cref="M:System.Windows.Forms.Label.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)" />
+
+            
 
             
 
@@ -2470,8 +2834,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Left" />
+
+          
 
           
 
@@ -2482,8 +2850,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Top" />
+
+          
 
           
 
@@ -2494,8 +2866,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Width" />
+
+          
 
           
 
@@ -2506,8 +2882,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Height" />
+
+          
 
           
 
@@ -2518,8 +2898,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -2558,13 +2942,19 @@
 
             
 
+            
+
              property is not relevant for the <see
              cref="T:System.Windows.Forms.Label" />
 
             
 
+            
+
              class, so setting <see
              cref="P:System.Windows.Forms.Label.TabStop" />
+
+            
 
             
 
@@ -2576,6 +2966,8 @@
           <para
             >Gets or sets a value indicating whether the user can tab to the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -2612,6 +3004,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.Label.TabStop" />
+
+            
 
             
 
@@ -2679,8 +3073,12 @@
 
             
 
+            
+
              property to one of the right-aligned horizontal alignments (<see
              cref="F:System.Drawing.ContentAlignment.TopRight" />
+
+            
 
             
 
@@ -2689,8 +3087,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Drawing.ContentAlignment.BottomRight" />
+
+            
 
             
 
@@ -2724,6 +3126,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2732,6 +3136,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Label.TextAlign" />
+
+            
 
             
 
@@ -2761,6 +3167,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2769,6 +3177,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -2798,8 +3208,12 @@
 
             
 
+            
+
              class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2811,8 +3225,12 @@
 
             
 
+            
+
              class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2821,13 +3239,19 @@
 
             
 
+            
+
              class to render text, this could cause the text for controls that use <see
              cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
+            
+
              to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
              cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+            
 
             
 
@@ -2842,8 +3266,12 @@
 
             
 
+            
+
              class (ndptecgdiplus) or the <see
              cref="T:System.Windows.Forms.TextRenderer" />
+
+            
 
             
 
@@ -2881,8 +3309,12 @@
 
             
 
+            
+
              property is set to true and a mnemonic character (a character preceded by the ampersand) is defined in the <see
              cref="P:System.Windows.Forms.Control.Text" />
+
+            
 
             
 
@@ -2891,8 +3323,12 @@
 
             
 
+            
+
             , pressing ALT+ the mnemonic character sets the focus to the control that follows the <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 
@@ -2904,6 +3340,8 @@
           <para
             >Gets or sets a value indicating whether the control interprets an ampersand character (&amp;) in the control's <see
              cref="P:System.Windows.Forms.Control.Text" />
+
+            
 
             
 

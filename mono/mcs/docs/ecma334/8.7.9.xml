@@ -4,7 +4,7 @@
   <paragraph
     >The example <code_example
     >
-      <![CDATA[
+<![CDATA[
 using System;  
 class Point  
 {  
@@ -22,6 +22,8 @@ class Point
 }  
 ]]>
     </code_example>
+
+    
 
     
 

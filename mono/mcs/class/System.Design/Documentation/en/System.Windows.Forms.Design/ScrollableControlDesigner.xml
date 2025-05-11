@@ -24,8 +24,12 @@
 
         
 
+        
+
          provides a base class for designers of controls that respond to scroll messages. In addition to the methods and functionality inherited from the <see
          cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+        
 
         
 
@@ -44,8 +52,12 @@
 
         
 
+        
+
          provides a <see
          cref="M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)" />
+
+        
 
         
 
@@ -58,6 +70,8 @@
 
           
 
+          
+
            property set to active, the scroll bars are always active in the design-time environment.</para
         >
       </block>
@@ -67,10 +81,14 @@
 
         
 
+        
+
         . For an overview of customizing design time behavior, see <format
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -82,6 +100,8 @@
       <para
         >Base designer class for extending the design mode behavior of a <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -101,6 +121,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.ScrollableControlDesigner" />
+
+            
 
             
 
@@ -135,6 +157,8 @@
 
             
 
+            
+
              method determines whether a click at the specified point should be passed to the control, while the control is in design mode. You can override and implement this method to enable your control to receive clicks in the design-time environment.</para
           >
           <block subset="none" type="note">
@@ -144,8 +168,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.Control" />
+
+              
 
               
 

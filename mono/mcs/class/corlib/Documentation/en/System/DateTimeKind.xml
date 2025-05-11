@@ -28,8 +28,12 @@
 
         
 
+        
+
          enumeration is returned by the <see
          cref="P:System.DateTime.Kind" />
+
+        
 
         
 
@@ -41,10 +45,14 @@
 
         
 
+        
+
          enumeration are used in conversion operations between local time and Coordinated Universal Time (UTC), but not in comparison or arithmetic operations. For more information about time conversions, see <format
          type="text/html">
           <a href="a51e1a3b-c983-4320-b31a-1f9fa3cf824a">Converting Times Between Time Zones</a>
         </format>
+
+        
 
         
 
@@ -56,6 +64,8 @@
       <para
         >Specifies whether a <see
          cref="T:System.DateTime" />
+
+        
 
         
 

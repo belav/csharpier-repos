@@ -38,6 +38,8 @@
 
         
 
+        
+
          interface is intended for implementation by query providers.</para
       >
       <para
@@ -46,13 +48,19 @@
 
         
 
+        
+
          interface so that if it represents a query, the results of that query can be enumerated. Enumeration forces the expression tree associated with an <see
          cref="T:System.Linq.IQueryable`1" />
 
         
 
+        
+
          object to be executed. Queries that do not return enumerable results are executed when the <see
          cref="M:System.Linq.IQueryProvider.Execute``1(System.Linq.Expressions.Expression)" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          interface enables queries to be polymorphic. That is, because a query against an <unmanagedCodeEntityReference
         >IQueryable</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          (except for <see
          cref="Overload:System.Linq.Queryable.AsQueryable" />
+
+        
 
         
 
@@ -88,13 +104,19 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Linq.Queryable.ThenByDescending" />
 
         
 
+        
+
         ) extend objects of types that implement the <see
          cref="T:System.Linq.IQueryable`1" />
+
+        
 
         
 
@@ -105,6 +127,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
+
+        
 
         
 

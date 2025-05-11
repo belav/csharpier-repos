@@ -30,8 +30,12 @@
 
         
 
+        
+
          must be set to XmlReturnReader and <see
          cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          to XmlReturnReader and <see
          cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+            
 
             
 
@@ -99,6 +109,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -107,13 +119,19 @@
 
           
 
+          
+
           Initializes the <see
            cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
 
           
 
+          
+
            property to a <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -124,13 +142,19 @@
 
           
 
+          
+
           Initializes the <see
            cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
 
           
 
+          
+
            property to a <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -159,6 +183,8 @@
 
             
 
+            
+
              must be XMLReturnReader.</para
           >
         </remarks>
@@ -167,6 +193,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -196,8 +224,12 @@
 
             
 
+            
+
              must be UrlParameterWriter, whereas a client using HTTP-POST must set <see
              cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
+
+            
 
             
 
@@ -209,6 +241,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Type" />
+
+            
 
             
 

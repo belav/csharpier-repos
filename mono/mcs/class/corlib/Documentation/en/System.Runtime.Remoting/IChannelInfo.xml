@@ -25,8 +25,12 @@
 
         
 
+        
+
          property. It provides access to transport specific information contributed by the channels that are able to receive calls in the process or application domain where the object lives. This interface might also be used when building custom <see
          cref="T:System.Runtime.Remoting.ObjRef" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         , the <see
          cref="P:System.Runtime.Remoting.IChannelInfo.ChannelData" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         ) for each registered channel and stored in the <see
          cref="T:System.Runtime.Remoting.ObjRef" />
+
+        
 
         
 
@@ -58,13 +70,19 @@
 
         
 
+        
+
          is unmarshaled at its destination, the <see
          cref="P:System.Runtime.Remoting.IChannelInfo.ChannelData" />
 
         
 
+        
+
          provided through the <see
          cref="T:System.Runtime.Remoting.IChannelInfo" />
+
+        
 
         
 
@@ -76,6 +94,8 @@
       <para
         >Provides custom channel information that is carried along with the <see
          cref="T:System.Runtime.Remoting.ObjRef" />
+
+        
 
         
 

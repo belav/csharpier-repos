@@ -44,8 +44,12 @@
 
         
 
+        
+
          objects. If the array of <see
          cref="T:System.Threading.WaitHandle" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          is thrown. For more information, see <see
          cref="T:System.Threading.WaitHandle" />
+
+        
 
         
 
@@ -73,6 +85,8 @@
       >
       <para>
         <see cref="T:System.DuplicateWaitObjectException" />
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.DuplicateWaitObjectException.#ctor" />
+
+        
 
         
 
@@ -98,6 +116,8 @@
 
           
 
+          
+
            or the <format
            type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
@@ -105,8 +125,12 @@
 
           
 
+          
+
           , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
            cref="T:System.ArgumentException" />
+
+          
 
           
 
@@ -147,11 +171,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Duplicate objects in argument." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DuplicateWaitObjectException" />
+
+            
 
             
 
@@ -198,6 +226,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -236,11 +266,15 @@
 
             
 
+            
+
              is intended to be understood by humans.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DuplicateWaitObjectException" />
+
+            
 
             
 
@@ -297,11 +331,15 @@
 
             
 
+            
+
              class with the name of the parameter that causes this exception.</para
           >
         </summary>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,6 +380,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -353,6 +393,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -361,10 +403,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -400,8 +446,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -410,6 +460,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DuplicateWaitObjectException" />
+
+            
 
             
 
@@ -439,6 +491,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -456,6 +510,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -470,11 +526,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,8 +545,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -527,8 +591,12 @@
 
             
 
+            
+
              and <paramref
              name="message" />
+
+            
 
             
 
@@ -540,8 +608,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -550,11 +622,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DuplicateWaitObjectException" />
+
+            
 
             
 
@@ -611,6 +687,8 @@
 
             
 
+            
+
              class with a specified error message and the name of the parameter that causes this exception.</para
           >
         </summary>
@@ -619,10 +697,14 @@
 
           
 
+          
+
           The name of the parameter that caused the exception. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

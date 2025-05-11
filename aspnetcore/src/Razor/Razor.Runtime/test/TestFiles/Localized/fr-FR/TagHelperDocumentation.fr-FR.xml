@@ -5,20 +5,22 @@
   </assembly>
   <members>
     <member name="T:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper">
-      <summary
-        >
+      <summary>
         fr-FR: The summary for <see
          cref="T:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper" />
+
+        
 
         
 
         .
       </summary
       >
-      <remarks
-        >
+      <remarks>
         fr-FR: Inherits from <see
          cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" />
+
+        
 
         
 
@@ -27,10 +29,11 @@
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty">
-      <summary
-        >
+      <summary>
         fr-FR: This <see
          cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
+
+        
 
         
 
@@ -39,15 +42,18 @@
 
         
 
+        
+
         .
       </summary
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.RemarksProperty">
-      <remarks
-        >
+      <remarks>
         fr-FR: The <see
          cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
+
+        
 
         
 
@@ -56,23 +62,25 @@
 
         
 
+        
+
         .
       </remarks
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.RemarksAndSummaryProperty">
-      <summary
-        >
+      <summary>
         fr-FR: This is a complex <see
          cref="T:System.Collections.Generic.IDictionary`2" />
+
+        
 
         
 
         .
       </summary
       >
-      <remarks
-        >
+      <remarks>
         fr-FR: <see
          cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
         <see cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.RemarksProperty" />

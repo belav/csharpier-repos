@@ -24,8 +24,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          class represents information about a CMS/PKCS #7 message recipient. The <see
          cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+        
 
         
 
@@ -82,8 +94,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+            
 
             
 
@@ -95,6 +111,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.EncryptedKey" />
+
+            
 
             
 
@@ -131,8 +149,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+            
 
             
 
@@ -144,6 +166,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.KeyEncryptionAlgorithm" />
+
+            
 
             
 
@@ -180,8 +204,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+            
 
             
 
@@ -193,6 +221,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.RecipientIdentifier" />
+
+            
 
             
 
@@ -230,6 +260,8 @@
 
             
 
+            
+
              property retrieves the type of the recipient. The type of the recipient determines which of two major protocols is used to establish a key between the originator and the recipient of a CMS/PKCS #7 message.</para
           >
         </summary>
@@ -257,8 +289,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+            
 
             
 
@@ -274,8 +310,12 @@
 
             
 
+            
+
              abstract property retrieves the version of the recipient information. Derived classes automatically set this property for their objects, and the value indicates whether it is using PKCS #7 or Cryptographic Message Syntax (CMS) to protect messages. The version also implies whether the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+            
 
             
 

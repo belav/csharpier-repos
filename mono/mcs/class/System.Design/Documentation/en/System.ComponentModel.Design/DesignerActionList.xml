@@ -18,8 +18,12 @@
 
         
 
+        
+
          can be displayed in the smart tag panel and also in the shortcut menu associated with a component or control. The <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -27,6 +31,8 @@
       >
       <para>
         <see cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
          method to return a collection of objects derived from <see
          cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+        
 
         
 
@@ -48,13 +58,19 @@
 
         
 
+        
+
          is displayed as a static text label. Active panel items, represented by the <see
          cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
         
 
+        
+
          and <see
          cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+
+        
 
         
 
@@ -66,12 +82,16 @@
 
         
 
+        
+
          method.</para
       >
       <block subset="none" type="note">
         <para
           >Forms and dialog boxes can be displayed by members of the class derived from <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -107,8 +127,12 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.ComponentModel.Design.DesignerActionList.AutoShow" />
+
+            
 
             
 
@@ -123,6 +147,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -131,8 +157,12 @@
 
           
 
+          
+
           A component related to the <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -159,11 +189,15 @@
 
             
 
+            
+
              is associated will automatically expand and display the smart tag panel when the component is created. </para
           >
           <para
             >You can opt out of this behavior by setting the <see
              cref="P:System.Windows.Forms.Design.DesignerOptions.ObjectBoundSmartTagAutoShow" />
+
+            
 
             
 
@@ -199,6 +233,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -226,6 +262,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -237,13 +275,19 @@
 
             
 
+            
+
              that represents a service provided by the <see
              cref="T:System.ComponentModel.Component" />
 
             
 
+            
+
             . This value is null if the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -255,8 +299,12 @@
 
           
 
+          
+
           A service provided by the <see
            cref="T:System.ComponentModel.Component" />
+
+          
 
           
 
@@ -286,8 +334,12 @@
 
             
 
+            
+
              method is implemented to return, in the expected display order, a collection of objects derived from the <see
              cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+            
 
             
 
@@ -351,13 +403,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
             
 
+            
+
             , a corresponding method or property must be added to the programmer-supplied class derived from the <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -369,11 +427,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The order of the items in the returned array reflects the order that they will appear in the panel. The items are grouped according to the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+
+            
 
             
 
@@ -393,6 +455,8 @@
 
                 
 
+                
+
                  property is set to false.</para
               >
             </item>
@@ -403,8 +467,12 @@
 
             
 
+            
+
              method is called when the panel is first created. You must call the <see
              cref="M:System.ComponentModel.Design.DesignerActionUIService.Refresh(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -419,6 +487,8 @@
 
             
 
+            
+
              objects contained in the list.</para
           >
         </summary>
@@ -427,6 +497,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+            
 
             
 

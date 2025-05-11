@@ -29,13 +29,19 @@
 
         
 
+        
+
          interface indicates that an <see
          cref="T:System.ServiceModel.Channels.IRequestChannel" />
 
         
 
+        
+
          implements <see
          cref="T:System.ServiceModel.Channels.IOutputSession" />
+
+        
 
         
 
@@ -47,13 +53,19 @@
 
         
 
+        
+
          associated with its <see
          cref="T:System.ServiceModel.Channels.IReplySessionChannel" />
 
         
 
+        
+
          can be retrieved through the <see
          cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
+
+        
 
         
 

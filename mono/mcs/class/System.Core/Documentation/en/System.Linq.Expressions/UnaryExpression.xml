@@ -31,6 +31,8 @@
 
         
 
+        
+
          that has a specific node type.</para
       >
       <list type="table">
@@ -161,8 +163,12 @@
 
         
 
+        
+
          methods can also be used to create a <see
          cref="T:System.Linq.Expressions.UnaryExpression" />
+
+        
 
         
 
@@ -171,8 +177,12 @@
 
         
 
+        
+
          of any node type that represents a unary operation. The parameter of these methods that is of type <see
          cref="P:System.Linq.Expressions.Expression.NodeType" />
+
+        
 
         
 
@@ -251,6 +261,8 @@
 
             
 
+            
+
              if the operator expects a non-nullable operand but a nullable operand is passed to it.</para
           >
         </remarks>
@@ -281,8 +293,12 @@
 
             
 
+            
+
              if the operator expects a non-nullable operand but a nullable operand is passed to it. If the value of <see
              cref="P:System.Linq.Expressions.UnaryExpression.IsLiftedToNull" />
+
+            
 
             
 
@@ -342,6 +358,8 @@
           <para
             >Returns the node type of this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -430,6 +448,8 @@
 
             
 
+            
+
              represents.</para
           >
         </summary>
@@ -469,8 +489,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.UnaryExpression.Operand" />
+
+          
 
           
 

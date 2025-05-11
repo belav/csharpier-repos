@@ -38,6 +38,8 @@
 
         
 
+        
+
         .</para
       >
       <para>An example of the syntax is [assembly:AssemblyKeyNameAttribute("myContainer")].</para>
@@ -50,10 +52,14 @@
 
         
 
+        
+
          on MSDN and <see
          cref="http://go.microsoft.com/fwlink/?LinkID=65552"
           >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
         >
+
+        
 
         
 
@@ -92,11 +98,15 @@
 
             
 
+            
+
              class with the name of the container holding the key pair used to generate a strong name for the assembly being attributed.</para
           >
         </summary>
         <param name="keyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

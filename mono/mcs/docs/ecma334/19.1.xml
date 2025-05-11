@@ -6,6 +6,8 @@
 
     
 
+    
+
      followed by one or more rank-specifiers: <grammar_production
     >
       <name>
@@ -14,16 +16,22 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="19.1">non-array-type</non_terminal>
-        <non_terminal where="19.1">rank-specifiers</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifiers</non_terminal
+        >
       </rhs>
     </grammar_production>
     <grammar_production>
       <name>
         <non_terminal where="19.1">non-array-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -34,7 +42,11 @@
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="19.1">rank-specifier</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifier</non_terminal
+        >
+
+        
 
         
 
@@ -43,19 +55,31 @@
 
       
 
+      
+
        : <rhs
       >
-        <non_terminal where="19.1">rank-specifier</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifier</non_terminal
+        >
       </rhs>
       <rhs>
-        <non_terminal where="19.1">rank-specifiers</non_terminal>
-        <non_terminal where="19.1">rank-specifier</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifiers</non_terminal
+        >
+        <non_terminal where="19.1"
+>rank-specifier</non_terminal
+        >
       </rhs>
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="19.1">rank-specifier</non_terminal>
+        <non_terminal where="19.1"
+>rank-specifier</non_terminal
+        >
       </name>
+
+      
 
       
 
@@ -71,6 +95,8 @@
       <name>
         <non_terminal where="19.1">dim-separators</non_terminal>
       </name>
+
+      
 
       
 
@@ -90,8 +116,12 @@
 
     
 
+    
+
      is any type that is not itself an <non_terminal
      where="19.1">array-type</non_terminal>
+
+    
 
     
 
@@ -99,17 +129,29 @@
   >
   <paragraph
     >The rank of an array type is given by the leftmost <non_terminal
-     where="19.1">rank-specifier</non_terminal>
+     where="19.1"
+>rank-specifier</non_terminal
+    >
+
+    
 
     
 
      in the array-type: A <non_terminal
-     where="19.1">rank-specifier</non_terminal>
+     where="19.1"
+>rank-specifier</non_terminal
+    >
+
+    
 
     
 
      indicates that the array is an array with a rank of one plus the number of "," tokens in the <non_terminal
-     where="19.1">rank-specifier</non_terminal>
+     where="19.1"
+>rank-specifier</non_terminal
+    >
+
+    
 
     
 
@@ -124,7 +166,11 @@
   </paragraph>
   <paragraph
     >In effect, the <non_terminal
-     where="19.1">rank-specifier</non_terminal>
+     where="19.1"
+>rank-specifier</non_terminal
+    >
+
+    
 
     
 
@@ -132,6 +178,8 @@
 
       >[Example: The type int[][,,][,] is a single-dimensional array of three-dimensional arrays of two-dimensional arrays of <keyword
       >int</keyword>
+
+      
 
       
 

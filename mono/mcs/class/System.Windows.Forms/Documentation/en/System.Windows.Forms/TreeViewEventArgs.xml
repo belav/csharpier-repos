@@ -21,6 +21,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -32,8 +34,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Windows.Forms.TreeView.AfterCollapse" />
+
+        
 
         
 
@@ -42,13 +48,19 @@
 
         
 
+        
+
         , or <see
          cref="E:System.Windows.Forms.TreeView.AfterSelect" />
 
         
 
+        
+
          events of a <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
 
             
 
+            
+
              class for the specified tree node.</para
           >
         </summary>
@@ -84,8 +98,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -117,6 +135,8 @@
 
             
 
+            
+
              class for the specified tree node and with the specified type of action that raised the event.</para
           >
         </summary>
@@ -125,8 +145,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -137,8 +161,12 @@
 
           
 
+          
+
           The type of <see
            cref="T:System.Windows.Forms.TreeViewAction" />
+
+          
 
           
 

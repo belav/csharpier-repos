@@ -18,13 +18,19 @@
 
         
 
+        
+
          enumeration specifies whether a <see
          cref="T:System.Web.UI.WebControls.TableRow" />
 
         
 
+        
+
          object is placed in the body, header, or footer of a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -36,13 +42,19 @@
 
         
 
+        
+
          enumeration represents the possible values for the <see
          cref="P:System.Web.UI.WebControls.TableRow.TableSection" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.TableRow" />
+
+        
 
         
 
@@ -54,8 +66,12 @@
 
         
 
+        
+
          enumeration enables you to build accessible Web sites using the <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -71,8 +87,12 @@
 
         
 
+        
+
          object is placed in a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -97,8 +117,12 @@
 
             
 
+            
+
              is placed in the body of the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -126,8 +150,12 @@
 
             
 
+            
+
              is placed in the footer of the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -155,8 +183,12 @@
 
             
 
+            
+
              is placed in the header of the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 

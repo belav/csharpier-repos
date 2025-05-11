@@ -42,8 +42,12 @@
 
         
 
+        
+
          assigns a code point (a number) to each character in every supported script. A Unicode Transformation Format (UTF) is a way to encode that code point. The <see
          cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+        
 
         
 
@@ -69,10 +73,14 @@
 
         
 
+        
+
         , see <format
          type="text/html">
           <a href="bf6d9823-4c2d-48af-b280-919c5af66ae9">Understanding Encodings</a>
         </format>
+
+        
 
         
 
@@ -84,8 +92,12 @@
 
         
 
+        
+
          method determines how many bytes result in encoding a set of Unicode characters, and the <see
          cref="M:System.Text.UnicodeEncoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+        
 
         
 
@@ -97,8 +109,12 @@
 
         
 
+        
+
          method determines how many characters result in decoding a sequence of bytes, and the <see
          cref="M:System.Text.UnicodeEncoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+        
 
         
 
@@ -107,10 +123,14 @@
 
         
 
+        
+
          methods perform the actual decoding.</para
       >
       <para>
         <see cref="T:System.Text.UnicodeEncoding" />
+
+        
 
         
 
@@ -132,8 +152,12 @@
 
         
 
+        
+
          object provides a preamble, which is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (BOM), it helps the decoder determine the byte order and the transformation format or UTF. The <see
          cref="M:System.Text.UnicodeEncoding.GetPreamble" />
+
+        
 
         
 
@@ -146,13 +170,19 @@
 
           
 
+          
+
            constructor that takes a <paramref
            name="throwOnInvalidBytes" />
 
           
 
+          
+
            parameter, and set that parameter to true. With error detection, a method that detects an invalid sequence of characters or bytes throws a <see
            cref="T:System.ArgumentException" />
+
+          
 
           
 
@@ -195,6 +225,8 @@
 
               
 
+              
+
                parameter and setting that parameter to true.</para
             >
           </block>
@@ -204,6 +236,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -248,6 +282,8 @@
 
               
 
+              
+
                parameter and setting that parameter to true.</para
             >
           </block>
@@ -260,6 +296,8 @@
 
             
 
+            
+
              class. Parameters specify whether to use the big endian byte order and whether to provide a Unicode byte order mark.</para
           >
         </summary>
@@ -268,10 +306,14 @@
 
           
 
+          
+
           true to use the big endian byte order (most significant byte first), or false to use the little endian byte order (least significant byte first). </param
         >
         <param name="byteOrderMark">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,8 +351,12 @@
 
             
 
+            
+
              parameter is true, a method that detects an invalid byte sequence throws <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -323,8 +369,12 @@
 
               
 
+              
+
                class and turn on error detection by setting <paramref
                name="throwOnInvalidBytes" />
+
+              
 
               
 
@@ -340,11 +390,15 @@
 
             
 
+            
+
              class. Parameters specify whether to use the big endian byte order, whether to provide a Unicode byte order mark, and whether to throw an exception when an invalid encoding is detected.</para
           >
         </summary>
         <param name="bigEndian">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -355,10 +409,14 @@
 
           
 
+          
+
           true to specify that a Unicode byte order mark is provided; otherwise, false. </param
         >
         <param name="throwOnInvalidBytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -421,6 +479,8 @@
 
             
 
+            
+
              objects are considered equal if all of the following conditions are true: </para
           >
           <list type="bullet">
@@ -443,8 +503,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -459,8 +523,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -472,8 +540,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -510,8 +582,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -525,8 +601,12 @@
 
             
 
+            
+
              to store the resulting bytes, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -535,8 +615,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -545,11 +629,15 @@
 
             
 
+            
+
              method generally executes faster.</para
           >
           <para
             >With error detection, an invalid sequence causes this method to throw a <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -567,6 +655,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -579,8 +669,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -628,8 +722,12 @@
 
             
 
+            
+
              requires to store the resulting bytes, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -638,8 +736,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -648,11 +750,15 @@
 
             
 
+            
+
              method generally executes faster.</para
           >
           <para
             >With error detection, an invalid sequence causes this method to throw a <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -675,10 +781,14 @@
 
           
 
+          
+
           A pointer to the first character to encode. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -719,8 +829,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -732,11 +846,15 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -748,8 +866,12 @@
 
             
 
+            
+
              and<paramref
              name=" count " />
+
+            
 
             
 
@@ -758,8 +880,12 @@
 
             
 
+            
+
              (i.e. (<paramref
              name=" index" />
+
+            
 
             
 
@@ -768,8 +894,12 @@
 
             
 
+            
+
             ) &gt; <paramref
              name="chars" />
+
+            
 
             
 
@@ -784,8 +914,12 @@
 
             
 
+            
+
              to store the resulting bytes, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -794,8 +928,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -804,11 +942,15 @@
 
             
 
+            
+
              method generally executes faster.</para
           >
           <para
             >With error detection, an invalid sequence causes this method to throw a <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -831,6 +973,8 @@
 
           
 
+          
+
           The character array containing the set of characters to encode. </param
         >
         <param name="index">
@@ -838,10 +982,14 @@
 
           
 
+          
+
           The index of the first character to encode. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -870,6 +1018,8 @@
 
           
 
+          
+
            to encode as Unicode-encoded characters. </param
         >
         <summary>
@@ -882,9 +1032,13 @@
 
             
 
+            
+
              array containing the encoded representation of
 <paramref
              name="s" />
+
+            
 
             
 
@@ -899,6 +1053,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -908,8 +1064,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -962,8 +1122,12 @@
 
             
 
+            
+
              requires to store the resulting bytes, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -972,13 +1136,19 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method generally allows allocation of less memory, while the <see
              cref="M:System.Text.UnicodeEncoding.GetMaxByteCount(System.Int32)" />
+
+            
 
             
 
@@ -990,6 +1160,8 @@
 
             
 
+            
+
             . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
           >
           <para
@@ -998,8 +1170,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -1008,8 +1184,12 @@
 
             
 
+            
+
              or the <see
              cref="M:System.Text.UnicodeEncoding.GetEncoder" />
+
+            
 
             
 
@@ -1031,11 +1211,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="chars">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1046,6 +1230,8 @@
 
           
 
+          
+
           The number of characters to encode. </param
         >
         <param name="bytes">
@@ -1053,10 +1239,14 @@
 
           
 
+          
+
           A pointer to the location at which to start writing the resulting sequence of bytes. </param
         >
         <param name="byteCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1100,6 +1290,8 @@
 
             
 
+            
+
              does not contain sufficient space to store the encoded characters.</para
           >
         </exception>
@@ -1109,8 +1301,12 @@
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -1122,8 +1318,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1136,11 +1336,15 @@
 
             
 
+            
+
              &lt; 0. </para
           >
           <para> -or- </para>
           <para>
             <paramref name="charCount " />
+
+            
 
             
 
@@ -1152,6 +1356,8 @@
 
             
 
+            
+
              &lt; 0. </para
           >
           <para> -or- </para>
@@ -1160,8 +1366,12 @@
 
             
 
+            
+
              and <paramref
              name="charCount" />
+
+            
 
             
 
@@ -1170,8 +1380,12 @@
 
             
 
+            
+
              (i.e. ( <paramref
              name="charIndex " />
+
+            
 
             
 
@@ -1180,8 +1394,12 @@
 
             
 
+            
+
             ) &gt; <paramref
              name="chars" />
+
+            
 
             
 
@@ -1193,8 +1411,12 @@
 
             
 
+            
+
              &gt; <paramref
              name="bytes" />
+
+            
 
             
 
@@ -1209,8 +1431,12 @@
 
             
 
+            
+
              to store the resulting bytes, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1219,13 +1445,19 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method generally allows allocation of less memory, while the <see
              cref="M:System.Text.UnicodeEncoding.GetMaxByteCount(System.Int32)" />
+
+            
 
             
 
@@ -1237,6 +1469,8 @@
 
             
 
+            
+
             . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
           >
           <para
@@ -1245,8 +1479,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -1255,8 +1493,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Text.UnicodeEncoding.GetEncoder" />
+
+            
 
             
 
@@ -1278,11 +1520,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="chars">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1293,10 +1539,14 @@
 
           
 
+          
+
           The index of the first character to encode. </param
         >
         <param name="charCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1307,10 +1557,14 @@
 
           
 
+          
+
           The byte array to contain the resulting sequence of bytes. </param
         >
         <param name="byteIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1355,6 +1609,8 @@
 
             
 
+            
+
              does not contain sufficient space to store the encoded characters.</para
           >
         </exception>
@@ -1364,8 +1620,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1377,8 +1637,12 @@
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -1391,11 +1655,15 @@
 
             
 
+            
+
              &lt; 0. </para
           >
           <para>-or-</para>
           <para>
             <paramref name="charCount " />
+
+            
 
             
 
@@ -1407,6 +1675,8 @@
 
             
 
+            
+
              &lt; 0. </para
           >
           <para>-or-</para>
@@ -1415,8 +1685,12 @@
 
             
 
+            
+
             and <paramref
              name="charCount" />
+
+            
 
             
 
@@ -1425,8 +1699,12 @@
 
             
 
+            
+
              (i.e. (<paramref
              name="charIndex" />
+
+            
 
             
 
@@ -1435,8 +1713,12 @@
 
             
 
+            
+
             ) &gt; <paramref
              name="s" />
+
+            
 
             
 
@@ -1448,8 +1730,12 @@
 
             
 
+            
+
              &gt;= <paramref
              name="bytes" />
+
+            
 
             
 
@@ -1464,8 +1750,12 @@
 
             
 
+            
+
              to store the resulting bytes, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1474,13 +1764,19 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method generally allows allocation of less memory, while the <see
              cref="M:System.Text.UnicodeEncoding.GetMaxByteCount(System.Int32)" />
+
+            
 
             
 
@@ -1492,6 +1788,8 @@
 
             
 
+            
+
             . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
           >
           <para
@@ -1500,8 +1798,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -1510,8 +1812,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Text.UnicodeEncoding.GetEncoder" />
+
+            
 
             
 
@@ -1529,6 +1835,8 @@
 
             
 
+            
+
              into the specified byte array.</para
           >
         </summary>
@@ -1540,6 +1848,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1548,8 +1858,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1560,10 +1874,14 @@
 
           
 
+          
+
           The index of the first character to encode. </param
         >
         <param name="charCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1574,10 +1892,14 @@
 
           
 
+          
+
           The byte array to contain the resulting sequence of bytes. </param
         >
         <param name="byteIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1625,8 +1947,12 @@
 
             
 
+            
+
              requires to store the resulting characters, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1635,8 +1961,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1645,11 +1975,15 @@
 
             
 
+            
+
              method generally executes faster.</para
           >
           <para
             >With error detection, an invalid sequence causes this method to throw a <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1669,10 +2003,14 @@
 
           
 
+          
+
           A pointer to the first byte to decode. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1713,8 +2051,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1726,11 +2068,15 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para> -or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -1742,8 +2088,12 @@
 
             
 
+            
+
              and <paramref
              name="count" />
+
+            
 
             
 
@@ -1752,8 +2102,12 @@
 
             
 
+            
+
              (i.e. (<paramref
              name="index" />
+
+            
 
             
 
@@ -1762,8 +2116,12 @@
 
             
 
+            
+
             ) &gt; <paramref
              name=" bytes" />
+
+            
 
             
 
@@ -1778,8 +2136,12 @@
 
             
 
+            
+
              to store the resulting characters, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1788,8 +2150,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1798,11 +2164,15 @@
 
             
 
+            
+
              method generally executes faster.</para
           >
           <para
             >With error detection, an invalid sequence causes this method to throw a <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1822,6 +2192,8 @@
 
           
 
+          
+
           The byte array containing the sequence of bytes to decode. </param
         >
         <param name="index">
@@ -1829,10 +2201,14 @@
 
           
 
+          
+
           The index of the first byte to decode. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1882,8 +2258,12 @@
 
             
 
+            
+
              requires to store the resulting characters, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1892,13 +2272,19 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method generally allows allocation of less memory, while the <see
              cref="M:System.Text.UnicodeEncoding.GetMaxCharCount(System.Int32)" />
+
+            
 
             
 
@@ -1910,6 +2296,8 @@
 
             
 
+            
+
             . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
           >
           <para
@@ -1918,8 +2306,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -1928,8 +2320,12 @@
 
             
 
+            
+
              or the <see
              cref="M:System.Text.UnicodeEncoding.GetEncoder" />
+
+            
 
             
 
@@ -1948,11 +2344,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1963,6 +2363,8 @@
 
           
 
+          
+
           The number of bytes to decode. </param
         >
         <param name="chars">
@@ -1970,10 +2372,14 @@
 
           
 
+          
+
           A pointer to the location at which to start writing the resulting set of characters. </param
         >
         <param name="charCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2017,6 +2423,8 @@
 
             
 
+            
+
              does not contain sufficient space to store the decoded characters.</para
           >
         </exception>
@@ -2026,8 +2434,12 @@
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -2039,8 +2451,12 @@
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -2053,6 +2469,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -2061,11 +2479,15 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="charIndex" />
+
+            
 
             
 
@@ -2077,8 +2499,12 @@
 
             
 
+            
+
              and <paramref
              name="byteCount" />
+
+            
 
             
 
@@ -2087,8 +2513,12 @@
 
             
 
+            
+
              (i.e. (<paramref
              name="byteIndex " />
+
+            
 
             
 
@@ -2097,8 +2527,12 @@
 
             
 
+            
+
             ) &gt; <paramref
              name="bytes" />
+
+            
 
             
 
@@ -2110,8 +2544,12 @@
 
             
 
+            
+
              &gt; <paramref
              name="chars" />
+
+            
 
             
 
@@ -2126,8 +2564,12 @@
 
             
 
+            
+
              to store the resulting characters, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2136,13 +2578,19 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method generally allows allocation of less memory, while the <see
              cref="M:System.Text.UnicodeEncoding.GetMaxCharCount(System.Int32)" />
+
+            
 
             
 
@@ -2154,6 +2602,8 @@
 
             
 
+            
+
             . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
           >
           <para
@@ -2162,8 +2612,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -2172,8 +2626,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Text.UnicodeEncoding.GetEncoder" />
+
+            
 
             
 
@@ -2192,11 +2650,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2207,10 +2669,14 @@
 
           
 
+          
+
           The index of the first byte to decode. </param
         >
         <param name="byteCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2221,10 +2687,14 @@
 
           
 
+          
+
           The character array to contain the resulting set of characters. </param
         >
         <param name="charIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2262,8 +2732,12 @@
 
             
 
+            
+
              method converts sequential blocks of bytes into sequential blocks of characters, in a manner similar to the <see
              cref="M:System.Text.UnicodeEncoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+            
 
             
 
@@ -2272,8 +2746,12 @@
 
             
 
+            
+
              maintains state information between calls so it can correctly decode byte sequences that span blocks. The <see
              cref="T:System.Text.Decoder" />
+
+            
 
             
 
@@ -2282,8 +2760,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Text.UnicodeEncoding.GetEncoder" />
+
+            
 
             
 
@@ -2295,8 +2777,12 @@
 
             
 
+            
+
              parameter of the constructor is set to true, error detection is also enabled in the <see
              cref="T:System.Text.Decoder" />
+
+            
 
             
 
@@ -2312,6 +2798,8 @@
           <para
             >A <see
              cref="T:System.Text.Decoder" />
+
+            
 
             
 
@@ -2351,8 +2839,12 @@
 
             
 
+            
+
              method converts sequential blocks of characters into sequential blocks of bytes in a manner similar to the <see
              cref="M:System.Text.UnicodeEncoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -2361,8 +2853,12 @@
 
             
 
+            
+
              object maintains state information between calls so that it can correctly encode character sequences that span blocks. The <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -2371,8 +2867,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Text.UnicodeEncoding.GetEncoder" />
+
+            
 
             
 
@@ -2384,8 +2884,12 @@
 
             
 
+            
+
              parameter of the constructor is set to true, error detection is also enabled in the <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -2401,6 +2905,8 @@
           <para
             >A <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -2440,6 +2946,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -2453,6 +2961,8 @@
           <para
             >The hash code for the current <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -2491,6 +3001,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
         </exception>
@@ -2502,8 +3014,12 @@
 
             
 
+            
+
              to store the resulting bytes, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2512,13 +3028,19 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method generally allows allocation of less memory, while the <see
              cref="M:System.Text.UnicodeEncoding.GetMaxByteCount(System.Int32)" />
+
+            
 
             
 
@@ -2529,13 +3051,19 @@
 
             
 
+            
+
              retrieves a worst-case number, including the worst case for the currently selected <see
              cref="T:System.Text.EncoderFallback" />
 
             
 
+            
+
             . If a fallback is chosen with a potentially large string, <see
              cref="M:System.Text.UnicodeEncoding.GetMaxByteCount(System.Int32)" />
+
+            
 
             
 
@@ -2547,8 +3075,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Text.Encoder.Convert" />
+
+            
 
             
 
@@ -2559,8 +3091,12 @@
 
             
 
+            
+
              has no relation to <see
              cref="M:System.Text.UnicodeEncoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+            
 
             
 
@@ -2569,8 +3105,12 @@
 
             
 
+            
+
             , it should use <see
              cref="M:System.Text.UnicodeEncoding.GetMaxCharCount(System.Int32)" />
+
+            
 
             
 
@@ -2590,6 +3130,8 @@
         </returns>
         <param name="charCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2627,6 +3169,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
         </exception>
@@ -2638,8 +3182,12 @@
 
             
 
+            
+
              to store the resulting characters, the application uses <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2648,13 +3196,19 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method generally allows allocation of less memory, while the <see
              cref="M:System.Text.UnicodeEncoding.GetMaxCharCount(System.Int32)" />
+
+            
 
             
 
@@ -2665,13 +3219,19 @@
 
             
 
+            
+
              retrieves a worst-case number, including the worst case for the currently selected <see
              cref="T:System.Text.DecoderFallback" />
 
             
 
+            
+
             . If a fallback is chosen with a potentially large string, <see
              cref="M:System.Text.UnicodeEncoding.GetMaxCharCount(System.Int32)" />
+
+            
 
             
 
@@ -2683,8 +3243,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Text.Decoder.Convert" />
+
+            
 
             
 
@@ -2695,8 +3259,12 @@
 
             
 
+            
+
              has no relation to <see
              cref="M:System.Text.UnicodeEncoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -2705,8 +3273,12 @@
 
             
 
+            
+
             , it should use <see
              cref="M:System.Text.UnicodeEncoding.GetMaxByteCount(System.Int32)" />
+
+            
 
             
 
@@ -2726,6 +3298,8 @@
         </returns>
         <param name="byteCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2760,6 +3334,8 @@
           <para
             >Optionally, the <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -2829,6 +3405,8 @@
 
             
 
+            
+
             . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
           >
           <para
@@ -2837,8 +3415,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -2847,8 +3429,12 @@
 
             
 
+            
+
              or the <see
              cref="M:System.Text.UnicodeEncoding.GetEncoder" />
+
+            
 
             
 
@@ -2867,11 +3453,15 @@
 
             
 
+            
+
              object containing the results of decoding the specified sequence of bytes.</para
           >
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2882,10 +3472,14 @@
 
           
 
+          
+
           The index of the first byte to decode. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

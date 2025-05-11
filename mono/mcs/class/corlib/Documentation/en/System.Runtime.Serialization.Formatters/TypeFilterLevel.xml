@@ -28,8 +28,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          deserialization level helps protect against deserialization attacks by deserializing only the types associated with the most basic remoting functionality. The <see
          cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+
+        
 
         
 
@@ -59,6 +71,8 @@
             >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -74,12 +88,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >Do not assume that controlling deserialization is the only security your application requires. In distributed applications, even a high degree of control over serialization might not prevent malicious clients from intercepting the communication and using it in some way, even if that is merely showing data to others. Therefore, although the <see
            cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
+
+          
 
           
 

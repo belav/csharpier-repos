@@ -21,8 +21,12 @@
 
         
 
+        
+
          is a <see
          cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -44,13 +52,19 @@
 
         
 
+        
+
          to be displayed, you must add it to a <see
          cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -62,8 +76,12 @@
 
         
 
+        
+
          class provides properties that enable you to configure the appearance and functionality of a menu item. To display a check mark next to a menu item, use the <see
          cref="P:System.Windows.Forms.ToolStripMenuItem.Checked" />
+
+        
 
         
 
@@ -72,13 +90,19 @@
 
         
 
+        
+
          control, use the <see
          cref="P:System.Windows.Forms.ToolStripMenuItem.Checked" />
 
         
 
+        
+
          property to identify which color is currently selected. Use the <see
          cref="P:System.Windows.Forms.ToolStripMenuItem.ShortcutKeys" />
+
+        
 
         
 
@@ -93,8 +117,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -103,13 +131,19 @@
 
         
 
+        
+
          replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.MenuItem" />
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -130,6 +164,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -160,8 +196,12 @@
 
             
 
+            
+
              constructor to create a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -176,8 +216,12 @@
 
             
 
+            
+
              class that displays the specified <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -189,8 +233,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -217,8 +265,12 @@
 
             
 
+            
+
              constructor to create a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -233,11 +285,15 @@
 
             
 
+            
+
              class that displays the specified text.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,8 +324,12 @@
 
             
 
+            
+
              constructor to create a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -284,11 +344,15 @@
 
             
 
+            
+
              class that displays the specified text and image.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,8 +363,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -332,13 +400,19 @@
 
             
 
+            
+
              to create a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
+            
+
              that displays both text and an image and that does the specified action when the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -353,8 +427,12 @@
 
             
 
+            
+
              class that displays the specified text and image and that does the specified action when the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -366,6 +444,8 @@
 
           
 
+          
+
           The text to display on the menu item.</param
         >
         <param name="image">
@@ -373,8 +453,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -385,8 +469,12 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.Control.Click" />
+
+          
 
           
 
@@ -424,13 +512,19 @@
 
             
 
+            
+
              constructor to create a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
+            
+
              that displays text and an image and that contains the specified <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -445,8 +539,12 @@
 
             
 
+            
+
              class that displays the specified text and image and that contains the specified <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -458,10 +556,14 @@
 
           
 
+          
+
           The text to display on the menu item.</param
         >
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,10 +572,14 @@
 
           
 
+          
+
            to display on the control.</param
         >
         <param name="dropDownItems">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -507,8 +613,12 @@
 
             
 
+            
+
              class with the specified name that displays the specified text and image that does the specified action when the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -520,6 +630,8 @@
 
           
 
+          
+
           The text to display on the menu item.</param
         >
         <param name="image">
@@ -527,8 +639,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -539,8 +655,12 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.Control.Click" />
+
+          
 
           
 
@@ -548,6 +668,8 @@
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -580,8 +702,12 @@
 
             
 
+            
+
              constructor to create a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -596,8 +722,12 @@
 
             
 
+            
+
              class that displays the specified text and image, does the specified action when the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -609,6 +739,8 @@
 
           
 
+          
+
           The text to display on the menu item.</param
         >
         <param name="image">
@@ -616,8 +748,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -628,8 +764,12 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.Control.Click" />
+
+          
 
           
 
@@ -640,13 +780,19 @@
 
           
 
+          
+
           One of the values of <see
            cref="T:System.Windows.Forms.Keys" />
 
           
 
+          
+
            that represents the shortcut key for the <see
            cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+          
 
           
 
@@ -685,8 +831,12 @@
 
             
 
+            
+
              property returns false if and only if the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -698,6 +848,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -727,6 +879,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -735,6 +889,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripMenuItem.Checked" />
+
+            
 
             
 
@@ -766,6 +922,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -808,8 +966,12 @@
 
             
 
+            
+
              property to control or determine whether a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -821,6 +983,8 @@
           <para
             >Gets or sets a value indicating whether a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -850,6 +1014,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -858,6 +1024,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripMenuItem.CheckState" />
+
+            
 
             
 
@@ -897,6 +1065,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -908,8 +1078,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -938,8 +1112,12 @@
 
             
 
+            
+
              method is automatically called if the <see
              cref="P:System.Windows.Forms.ToolStripDropDownItem.DropDown" />
+
+            
 
             
 
@@ -948,8 +1126,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -964,6 +1146,8 @@
 
             
 
+            
+
              for which events can be defined.</para
           >
         </summary>
@@ -972,6 +1156,8 @@
           <para
             >A generic <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1006,6 +1192,8 @@
 
             
 
+            
+
              and an adjacent item.</para
           >
         </summary>
@@ -1029,6 +1217,8 @@
           <para
             >Gets the internal spacing within the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -1060,8 +1250,12 @@
 
             
 
+            
+
              in derived classes to configure a default size for a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -1073,6 +1267,8 @@
           <para
             >Gets the default size of the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -1103,8 +1299,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1113,8 +1313,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1126,8 +1330,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -1142,11 +1350,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1200,8 +1412,12 @@
 
             
 
+            
+
              must be specified by the <see
              cref="P:System.Windows.Forms.MenuStrip.MdiWindowListItem" />
+
+            
 
             
 
@@ -1213,6 +1429,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -1245,11 +1463,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnCheckedChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1264,6 +1486,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1272,8 +1496,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1308,11 +1536,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnCheckStateChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1327,6 +1559,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1335,8 +1569,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1368,11 +1606,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnClick(System.EventArgs)" />
+
+            
 
             
 
@@ -1387,6 +1629,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1395,8 +1639,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1431,11 +1679,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnDropDownHide(System.EventArgs)" />
+
+            
 
             
 
@@ -1450,6 +1702,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1458,8 +1712,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1494,11 +1752,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnDropDownShow(System.EventArgs)" />
+
+            
 
             
 
@@ -1513,6 +1775,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1521,8 +1785,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1553,6 +1821,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1561,8 +1831,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1597,11 +1871,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1616,6 +1894,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1624,8 +1904,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1657,11 +1941,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnMouseEnter(System.EventArgs)" />
+
+            
 
             
 
@@ -1676,6 +1964,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1684,8 +1974,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1717,11 +2011,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -1736,6 +2034,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1744,8 +2044,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1780,11 +2084,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1799,6 +2107,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1807,8 +2117,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1843,11 +2157,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnOwnerChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1862,6 +2180,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1870,8 +2190,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1906,11 +2230,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1925,6 +2253,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1933,8 +2263,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1973,13 +2307,19 @@
 
             
 
+            
+
              is attached to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
+            
+
              or the <see
              cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+
+            
 
             
 
@@ -2042,6 +2382,8 @@
 
           
 
+          
+
           The character to process. </param
         >
       </Docs>
@@ -2071,6 +2413,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2079,13 +2423,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the size and location of the <see
            cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+          
 
           
 
@@ -2150,8 +2500,12 @@
 
             
 
+            
+
              property to assign a key combination to a menu command, such as CTRL+C for the <ui
             >Copy</ui>
+
+            
 
             
 
@@ -2163,6 +2517,8 @@
           <para
             >Gets or sets the shortcut keys associated with the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -2202,8 +2558,12 @@
 
             
 
+            
+
              are displayed next to the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 

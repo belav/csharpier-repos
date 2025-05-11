@@ -38,8 +38,12 @@
 
         
 
+        
+
          can be used to represent code that consists of a conditional expression, a collection of statements to execute if the conditional expression evaluates to true, and an optional collection of statements to execute if the conditional expression evaluates to false. A <see
          cref="T:System.CodeDom.CodeConditionStatement" />
+
+        
 
         
 
@@ -51,13 +55,19 @@
 
         
 
+        
+
          property indicates the expression to test. The <see
          cref="P:System.CodeDom.CodeConditionStatement.TrueStatements" />
 
         
 
+        
+
          property contains the statements to execute if the expression to test evaluates to true. The <see
          cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
+
+        
 
         
 
@@ -91,6 +101,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeConditionStatement" />
+
+            
 
             
 
@@ -135,6 +147,8 @@
 
             
 
+            
+
              class using the specified condition and statements.</para
           >
         </summary>
@@ -143,8 +157,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -155,8 +173,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -195,6 +217,8 @@
 
             
 
+            
+
              class using the specified condition and statements.</para
           >
         </summary>
@@ -203,8 +227,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -215,8 +243,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -227,8 +259,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -265,13 +301,19 @@
 
             
 
+            
+
              collection will be executed. If this conditional expression evaluates to false and the <see
              cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
 
             
 
+            
+
              collection is not empty, the code contained in the <see
              cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
+
+            
 
             
 

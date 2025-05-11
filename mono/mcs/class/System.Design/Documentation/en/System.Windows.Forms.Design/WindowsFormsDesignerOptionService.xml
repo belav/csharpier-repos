@@ -40,6 +40,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -68,8 +70,12 @@
 
             
 
+            
+
              exposed by the <see
              cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" />
+
+            
 
             
 

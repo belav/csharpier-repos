@@ -35,8 +35,12 @@
 
         
 
+        
+
          always uses the default <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          contains its own locale Id and compare flags. The comparison result of two <see
          cref="T:System.Data.SqlTypes.SqlString" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
       <para
         >When you use <see
          cref="T:System.Data.SqlTypes.SqlString" />
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          has a different underlying data structure from its corresponding .NET Framework <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -99,11 +113,15 @@
 
             
 
+            
+
              structure using the specified string.</para
           >
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,11 +151,15 @@
 
             
 
+            
+
              structure using the specified string and locale id values.</para
           >
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -148,8 +170,12 @@
 
           
 
+          
+
           Specifies the geographical locale and language for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -183,6 +209,8 @@
 
             
 
+            
+
              structure using the specified locale id, compare options, and data.</para
           >
         </summary>
@@ -191,8 +219,12 @@
 
           
 
+          
+
           Specifies the geographical locale and language for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -203,8 +235,12 @@
 
           
 
+          
+
           Specifies the compare options for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -212,6 +248,8 @@
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,11 +283,15 @@
 
             
 
+            
+
              structure using the specified string, locale id, and compare option values.</para
           >
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,8 +302,12 @@
 
           
 
+          
+
           Specifies the geographical locale and language for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -272,8 +318,12 @@
 
           
 
+          
+
           Specifies the compare options for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -308,6 +358,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -316,8 +368,12 @@
 
           
 
+          
+
           Specifies the geographical locale and language for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -328,8 +384,12 @@
 
           
 
+          
+
           Specifies the compare options for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -340,10 +400,14 @@
 
           
 
+          
+
           The data array to store. </param
         >
         <param name="fUnicode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,6 +443,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -387,8 +453,12 @@
 
           
 
+          
+
           Specifies the geographical locale and language for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -399,8 +469,12 @@
 
           
 
+          
+
           Specifies the compare options for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -411,6 +485,8 @@
 
           
 
+          
+
           The data array to store. </param
         >
         <param name="index">
@@ -418,10 +494,14 @@
 
           
 
+          
+
           The starting index within the array. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -458,6 +538,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -466,8 +548,12 @@
 
           
 
+          
+
           Specifies the geographical locale and language for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -478,8 +564,12 @@
 
           
 
+          
+
           Specifies the compare options for the new <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -490,10 +580,14 @@
 
           
 
+          
+
           The data array to store. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -504,10 +598,14 @@
 
           
 
+          
+
           The number of characters from index to copy. </param
         >
         <param name="fUnicode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,13 +641,19 @@
 
             
 
+            
+
              will appear first in the resulting <see
              cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
+            
+
             , followed by <paramref
              name="y" />
+
+            
 
             
 
@@ -564,8 +668,12 @@
 
             
 
+            
+
              values to create a new <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -580,13 +688,19 @@
 
             
 
+            
+
              that is the concatenated value of <paramref
              name="x" />
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -598,8 +712,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -610,8 +728,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -634,8 +756,12 @@
 
             
 
+            
+
              functions as a constant for the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -670,6 +796,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -678,6 +806,8 @@
           <para
             >A new <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -710,8 +840,12 @@
 
             
 
+            
+
              object that defines how string comparisons should be performed for this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -746,8 +880,12 @@
 
             
 
+            
+
              enumeration equilvalent of the specified <see
              cref="T:System.Data.SqlTypes.SqlCompareOptions" />
+
+            
 
             
 
@@ -762,6 +900,8 @@
 
             
 
+            
+
              structure.</para
           >
         </returns>
@@ -770,13 +910,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlCompareOptions" />
 
           
 
+          
+
            value that describes the comparison options for this <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -813,8 +959,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -868,8 +1018,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -896,8 +1050,12 @@
 
             
 
+            
+
              object to the supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -951,8 +1109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -987,6 +1149,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -998,8 +1162,12 @@
 
             
 
+            
+
              that contains the newly concatenated value representing the contents of the two <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1011,8 +1179,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1023,8 +1195,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1056,8 +1232,12 @@
 
             
 
+            
+
              structure that represents information about the culture of this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1089,8 +1269,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1105,11 +1289,15 @@
 
             
 
+            
+
              and the two are equal; otherwise false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1144,6 +1332,8 @@
 
             
 
+            
+
              operands to determine whether they are equal.</para
           >
         </summary>
@@ -1156,8 +1346,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1168,8 +1362,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1221,6 +1419,8 @@
 
             
 
+            
+
              in ANSI format.</para
           >
         </summary>
@@ -1229,6 +1429,8 @@
           <para
             >An byte array, that contains the contents of the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1258,6 +1460,8 @@
 
             
 
+            
+
              in Unicode format.</para
           >
         </summary>
@@ -1266,6 +1470,8 @@
           <para
             >An byte array, that contains the contents of the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1303,6 +1509,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1314,6 +1522,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1322,8 +1532,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -1354,6 +1568,8 @@
 
             
 
+            
+
              operands to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -1365,8 +1581,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1375,8 +1595,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1385,13 +1609,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1403,8 +1633,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1415,8 +1649,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1451,6 +1689,8 @@
 
             
 
+            
+
              operands to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -1462,8 +1702,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1472,8 +1716,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1482,13 +1730,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1500,8 +1754,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1512,8 +1770,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1540,8 +1802,12 @@
 
             
 
+            
+
              functions as a constant for the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1553,6 +1819,8 @@
           <para
             >Specifies that <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1582,8 +1850,12 @@
 
             
 
+            
+
              functions as a constant for the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1617,8 +1889,12 @@
 
             
 
+            
+
              functions as a constant for the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1652,8 +1928,12 @@
 
             
 
+            
+
              functions as a constant for the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1689,6 +1969,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1697,6 +1979,8 @@
           <para
             >Indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1723,6 +2007,8 @@
           <para
             >Specifies the geographical locale and language for the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1758,6 +2044,8 @@
 
             
 
+            
+
              operands to determine whether the first is less than the second.</para
           >
         </summary>
@@ -1769,8 +2057,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1779,8 +2071,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1789,13 +2085,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1807,8 +2109,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1819,8 +2125,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1855,6 +2165,8 @@
 
             
 
+            
+
              operands to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1866,8 +2178,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1876,8 +2192,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1886,13 +2206,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1904,8 +2230,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1916,8 +2246,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -1952,6 +2286,8 @@
 
             
 
+            
+
              operands to determine whether they are not equal.</para
           >
         </summary>
@@ -1963,8 +2299,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1973,8 +2313,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -1983,13 +2327,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2001,8 +2351,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2013,8 +2367,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2045,10 +2403,14 @@
 
             
 
+            
+
              structure.  For more information, see <format
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -2063,8 +2425,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2104,6 +2470,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -2115,8 +2483,12 @@
 
             
 
+            
+
              that contains the newly concatenated value representing the contents of the two <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2128,8 +2500,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2140,8 +2516,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2176,6 +2556,8 @@
 
             
 
+            
+
              operands to determine whether they are equal.</para
           >
         </summary>
@@ -2187,8 +2569,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2197,8 +2583,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2207,13 +2597,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2225,8 +2621,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2237,8 +2637,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2549,6 +2953,8 @@
 
             
 
+            
+
              operands to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -2560,8 +2966,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2570,8 +2980,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2580,13 +2994,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2598,8 +3018,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2610,8 +3034,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2646,6 +3074,8 @@
 
             
 
+            
+
              operands to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -2657,8 +3087,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2667,8 +3101,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2677,13 +3115,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2695,8 +3139,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2707,8 +3155,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2766,6 +3218,8 @@
 
             
 
+            
+
              operands to determine whether they are not equal.</para
           >
         </summary>
@@ -2777,8 +3231,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2787,8 +3245,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2797,13 +3259,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2815,8 +3283,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2827,8 +3299,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2863,6 +3339,8 @@
 
             
 
+            
+
              operands to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2874,8 +3352,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2884,8 +3366,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2894,13 +3380,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2912,8 +3404,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2924,8 +3420,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -2960,6 +3460,8 @@
 
             
 
+            
+
              operands to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2971,8 +3473,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2981,8 +3487,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2991,13 +3501,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3009,8 +3525,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -3021,8 +3541,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlString" />
+
+          
 
           
 
@@ -3050,13 +3574,19 @@
 
             
 
+            
+
              enumeration values that represent the way in which this <see
              cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
+            
+
              should be compared to other <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3120,6 +3650,8 @@
 
           
 
+          
+
           XmlReader</param
         >
       </Docs>
@@ -3150,6 +3682,8 @@
 
           
 
+          
+
           XmlWriter</param
         >
       </Docs>
@@ -3174,8 +3708,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3187,6 +3725,8 @@
           <para
             >true if the <see
              cref="P:System.Data.SqlTypes.SqlString.Value" />
+
+            
 
             
 
@@ -3216,8 +3756,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3232,8 +3776,12 @@
 
             
 
+            
+
              equals the number represented by this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3266,8 +3814,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -3279,6 +3831,8 @@
           <para
             >A new SqlDateTime structure that contains the date value represented by this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3311,8 +3865,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3327,8 +3885,12 @@
 
             
 
+            
+
              that contains the value of this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3361,8 +3923,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3377,8 +3943,12 @@
 
             
 
+            
+
              that is equal to the numeric value of this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3408,8 +3978,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -3424,13 +3998,19 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlGuid.Value" />
 
             
 
+            
+
              is the Guid represented by this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3460,8 +4040,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3476,8 +4060,12 @@
 
             
 
+            
+
              that is equal to the numeric value of this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3507,8 +4095,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -3523,8 +4115,12 @@
 
             
 
+            
+
              that is equal to the numeric value of this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3554,8 +4150,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3570,8 +4170,12 @@
 
             
 
+            
+
              that is equal to the numeric value of this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3601,8 +4205,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -3617,8 +4225,12 @@
 
             
 
+            
+
              that is equal to the numeric value of this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3651,8 +4263,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3667,8 +4283,12 @@
 
             
 
+            
+
              that is equal to the numeric value of this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3698,8 +4318,12 @@
 
             
 
+            
+
              object to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3714,8 +4338,12 @@
 
             
 
+            
+
              with the same value as this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3742,6 +4370,8 @@
           <para
             >Gets the string that is stored in this <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 

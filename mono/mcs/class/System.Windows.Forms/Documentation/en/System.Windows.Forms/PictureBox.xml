@@ -46,6 +46,8 @@
 
         
 
+        
+
          is used to display graphics from a bitmap, metafile, icon, JPEG, GIF, or PNG file.</para
       >
       <para
@@ -54,8 +56,12 @@
 
         
 
+        
+
          property to the <see
          cref="T:System.Drawing.Image" />
+
+        
 
         
 
@@ -64,13 +70,19 @@
 
         
 
+        
+
          property and load the image synchronously using the <see
          cref="Overload:System.Windows.Forms.PictureBox.Load" />
 
         
 
+        
+
          method or asynchronously using the <see
          cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
+
+        
 
         
 
@@ -83,8 +95,12 @@
 
           
 
+          
+
            controls, create a clone of the image for each <see
            cref="T:System.Windows.Forms.PictureBox" />
+
+          
 
           
 
@@ -97,13 +113,19 @@
 
         
 
+        
+
          property, which is set to values in the <see
          cref="T:System.Windows.Forms.PictureBoxSizeMode" />
 
         
 
+        
+
          enumeration, controls the clipping and positioning of the image in the display area. You can change the size of the display area at run time with the <see
          cref="P:System.Windows.Forms.Control.ClientSize" />
+
+        
 
         
 
@@ -115,13 +137,19 @@
 
         
 
+        
+
          control is displayed by without any borders. You can provide a standard or three-dimensional border using the <see
          cref="P:System.Windows.Forms.PictureBox.BorderStyle" />
 
         
 
+        
+
          property to distinguish the picture box from the rest of the form, even if it contains no image. The <see
          cref="T:System.Windows.Forms.PictureBox" />
+
+        
 
         
 
@@ -144,6 +172,8 @@
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -192,6 +222,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -223,6 +255,8 @@
           <para
             >Overrides the <see
              cref="P:System.Windows.Forms.Control.AllowDrop" />
+
+            
 
             
 
@@ -287,8 +321,12 @@
 
             
 
+            
+
              image is loaded asynchronously when the <see
              cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+
+            
 
             
 
@@ -297,8 +335,12 @@
 
             
 
+            
+
              method is used to load the image. If a load is canceled with the <see
              cref="M:System.Windows.Forms.PictureBox.CancelAsync" />
+
+            
 
             
 
@@ -307,13 +349,19 @@
 
             
 
+            
+
              event with the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+            
 
             
 
@@ -351,6 +399,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -384,6 +434,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -413,6 +465,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -439,6 +493,8 @@
           <para
             >Gets a value indicating the mode for Input Method Editor (IME) for the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -488,8 +544,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -498,8 +558,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -511,8 +575,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -527,11 +595,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -570,6 +642,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -603,6 +677,8 @@
           <para
             >If no <see
              cref="P:System.Windows.Forms.PictureBox.ErrorImage" />
+
+            
 
             
 
@@ -670,6 +746,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -678,6 +756,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PictureBox.Font" />
+
+            
 
             
 
@@ -718,6 +798,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -752,6 +834,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -760,6 +844,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PictureBox.ForeColor" />
+
+            
 
             
 
@@ -796,8 +882,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -810,8 +900,12 @@
 
               
 
+              
+
                controls, create a clone of the image for each <see
                cref="T:System.Windows.Forms.PictureBox" />
+
+              
 
               
 
@@ -824,6 +918,8 @@
           <para
             >Gets or sets the image that is displayed by <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -867,13 +963,19 @@
 
             
 
+            
+
              method will overwrite the <see
              cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
             
 
+            
+
              property, setting <see
              cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+
+            
 
             
 
@@ -885,6 +987,8 @@
           <para
             >Gets or sets the path or URL for the image to display in the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -948,6 +1052,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -956,6 +1062,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PictureBox.ImeMode" />
+
+            
 
             
 
@@ -996,13 +1104,19 @@
 
             
 
+            
+
              is specified, a default image is displayed. The <see
              cref="P:System.Windows.Forms.PictureBox.InitialImage" />
 
             
 
+            
+
              is always displayed non-stretched, in the center of the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -1014,6 +1128,8 @@
           <para
             >Gets or sets the image displayed in the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -1146,6 +1262,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1154,6 +1272,8 @@
           <para
             >Occurs when input focus leaves the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -1186,8 +1306,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -1217,8 +1341,12 @@
 
             
 
+            
+
              parameter indicates a local file, the recommended format is a local file path. For example, an image file named myPicture.jpg located at c:\ would be accessed by passing <userInputLocalizable
             >c:\myPicture.jpg</userInputLocalizable>
+
+            
 
             
 
@@ -1227,8 +1355,12 @@
 
             
 
+            
+
              parameter. A full path, such as <userInputLocalizable
             >http://www.contoso.com/path/images/image.jpg</userInputLocalizable>
+
+            
 
             
 
@@ -1237,8 +1369,12 @@
 
             
 
+            
+
             , can be used. If a relative path is used, it will be considered relative to the working directory. A call to the <see
              cref="M:System.Windows.Forms.PictureBox.Load(System.String)" />
+
+            
 
             
 
@@ -1247,8 +1383,12 @@
 
             
 
+            
+
              property to the value of <paramref
              name="url" />
+
+            
 
             
 
@@ -1263,6 +1403,8 @@
 
             
 
+            
+
              to the specified URL and displays the image indicated.</para
           >
         </summary>
@@ -1271,8 +1413,12 @@
 
           
 
+          
+
           The path for the image to display in the <see
            cref="T:System.Windows.Forms.PictureBox" />
+
+          
 
           
 
@@ -1299,8 +1445,12 @@
 
             
 
+            
+
              method, the <see
              cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+
+            
 
             
 
@@ -1309,8 +1459,12 @@
 
             
 
+            
+
              event to determine the progress of an image load or the <see
              cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
+
+            
 
             
 
@@ -1344,8 +1498,12 @@
 
             
 
+            
+
              parameter indicates a local file, the recommended format is a local file path. For example, an image file named myPicture.jpg located at c:\ would be accessed by passing <userInputLocalizable
             >c:\myPicture.jpg</userInputLocalizable>
+
+            
 
             
 
@@ -1354,8 +1512,12 @@
 
             
 
+            
+
              parameter. A full path, such as <userInputLocalizable
             >http://www.contoso.com/path/images/image.jpg</userInputLocalizable>
+
+            
 
             
 
@@ -1364,8 +1526,12 @@
 
             
 
+            
+
             , can be used. If a relative path is used, it will be considered relative to the working directory. A call to the <see
              cref="M:System.Windows.Forms.PictureBox.Load(System.String)" />
+
+            
 
             
 
@@ -1374,8 +1540,12 @@
 
             
 
+            
+
              property to the value of <paramref
              name="url" />
+
+            
 
             
 
@@ -1387,8 +1557,12 @@
 
             
 
+            
+
              method sets the <see
              cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+
+            
 
             
 
@@ -1397,8 +1571,12 @@
 
             
 
+            
+
             . Besides calling the <see
              cref="M:System.Windows.Forms.PictureBox.LoadAsync" />
+
+            
 
             
 
@@ -1407,8 +1585,12 @@
 
             
 
+            
+
              property to false to load an image asynchronously. When you load an image asynchronously, you can handle the <see
              cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
+
+            
 
             
 
@@ -1417,13 +1599,19 @@
 
             
 
+            
+
              event to determine when an image load has completed. If an error occurs during an asynchronous image-loading operation, it will be caught and reported by the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+            
 
             
 
@@ -1439,8 +1627,12 @@
 
           
 
+          
+
           The path for the image to display in the <see
            cref="T:System.Windows.Forms.PictureBox" />
+
+          
 
           
 
@@ -1469,8 +1661,12 @@
 
             
 
+            
+
              occurs only when the image is loaded asynchronously by using one of the <see
              cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
+
+            
 
             
 
@@ -1479,8 +1675,12 @@
 
             
 
+            
+
              is false. If the image-load is canceled by calling the <see
              cref="M:System.Windows.Forms.PictureBox.CancelAsync" />
+
+            
 
             
 
@@ -1489,8 +1689,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+            
 
             
 
@@ -1499,8 +1703,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+            
 
             
 
@@ -1511,6 +1719,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1544,8 +1754,12 @@
 
             
 
+            
+
              occurs only when the image is loaded asynchronously by using one of the <see
              cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
+
+            
 
             
 
@@ -1554,8 +1768,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.ProgressChangedEventArgs" />
+
+            
 
             
 
@@ -1567,8 +1785,12 @@
 
             
 
+            
+
              if you want to reflect the progress of an asynchronous image-loading operation in a <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -1577,8 +1799,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.ProgressChangedEventArgs" />
+
+            
 
             
 
@@ -1589,6 +1815,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1654,11 +1882,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PictureBox.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -1673,6 +1905,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1681,8 +1915,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1721,11 +1959,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PictureBox.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -1740,6 +1982,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1748,8 +1992,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1783,11 +2031,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PictureBox.OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />
+
+            
 
             
 
@@ -1802,6 +2054,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1810,8 +2064,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+          
 
           
 
@@ -1845,11 +2103,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PictureBox.OnLoadProgressChanged(System.ComponentModel.ProgressChangedEventArgs)" />
+
+            
 
             
 
@@ -1864,6 +2126,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1872,8 +2136,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ProgressChangedEventArgs" />
+
+          
 
           
 
@@ -1903,6 +2171,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1911,8 +2181,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1964,8 +2238,12 @@
 
             
 
+            
+
              method redraws the image if the <see
              cref="P:System.Windows.Forms.PictureBox.SizeMode" />
+
+            
 
             
 
@@ -1974,13 +2252,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.PictureBoxSizeMode.CenterImage" />
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.PictureBoxSizeMode.StretchImage" />
+
+            
 
             
 
@@ -1994,11 +2278,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PictureBox.OnResize(System.EventArgs)" />
+
+            
 
             
 
@@ -2013,6 +2301,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2021,8 +2311,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2057,11 +2351,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PictureBox.OnSizeModeChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2076,6 +2374,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2084,8 +2384,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2179,6 +2483,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -2247,6 +2553,8 @@
 
             
 
+            
+
              enumeration. </para
           >
           <para
@@ -2255,8 +2563,12 @@
 
             
 
+            
+
              mode, the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -2265,8 +2577,12 @@
 
             
 
+            
+
             , and any part of the image that is too big for the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -2275,8 +2591,12 @@
 
             
 
+            
+
              value causes the image to stretch or shrink to fit the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -2285,8 +2605,12 @@
 
             
 
+            
+
              value causes the image to be stretched or shrunk to fit the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -2298,8 +2622,12 @@
 
             
 
+            
+
              value causes the control to resize to always fit the image. Using the <see
              cref="F:System.Windows.Forms.PictureBoxSizeMode.CenterImage" />
+
+            
 
             
 
@@ -2333,6 +2661,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2341,6 +2671,8 @@
           <para
             >Occurs when <see
              cref="P:System.Windows.Forms.PictureBox.SizeMode" />
+
+            
 
             
 
@@ -2449,6 +2781,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -2515,6 +2849,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -2551,8 +2887,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -2564,6 +2904,8 @@
           <para
             >Gets or sets the text of the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -2602,6 +2944,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2610,6 +2954,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PictureBox.Text" />
+
+            
 
             
 
@@ -2638,8 +2984,12 @@
 
             
 
+            
+
              method returns a string that includes the type and the <see
              cref="P:System.Windows.Forms.PictureBox.SizeMode" />
+
+            
 
             
 
@@ -2654,6 +3004,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -2662,6 +3014,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -2701,8 +3055,12 @@
 
             
 
+            
+
              property to true means the image is loaded synchronously. This causes the user interface to be blocked from other input until the image is loaded. When <see
              cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+
+            
 
             
 
@@ -2711,8 +3069,12 @@
 
             
 
+            
+
              method is used to load the image, the <see
              cref="P:System.Windows.Forms.PictureBox.InitialImage" />
+
+            
 
             
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          custom attribute. Every user-defined aggregate must be annotated with this attribute.</para
       >
       <para>See "CLR User-Defined Aggregates" in SQL Server 2005 Books Online for more information on user-defined aggregates and examples.</para>
@@ -80,6 +82,8 @@
           <para
             >The serialization format as a <see
              cref="T:Microsoft.SqlServer.Server.Format" />
+
+            
 
             
 
@@ -202,8 +206,12 @@
 
             
 
+            
+
              property with the UserDefined serialization <see
              cref="T:Microsoft.SqlServer.Server.Format" />
+
+            
 
             
 
@@ -212,6 +220,8 @@
           <para
             >The maximum allowed value for this property is specified by the <see
              cref="F:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSizeValue" />
+
+            
 
             
 
@@ -224,8 +234,12 @@
 
             
 
+            
+
              refers to the total size of the serialized data. Consider an aggregate serializing a string of 10 characters (<see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -234,8 +248,12 @@
 
             
 
+            
+
             , the total size of the serialized string is 22 bytes: 2 bytes per Unicode UTF-16 character, multiplied by the maximum number of characters, plus 2 control bytes of overhead incurred from serializing a binary stream. So, when determining the value of <see
              cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
+
+            
 
             
 
@@ -265,6 +283,8 @@
           <para
             >An <see
              cref="T:System.Int32" />
+
+            
 
             
 

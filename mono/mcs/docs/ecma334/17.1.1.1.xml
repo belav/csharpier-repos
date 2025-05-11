@@ -13,7 +13,7 @@
 
       >[Example: In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 abstract class A  
 {  
    public abstract void F();  
@@ -30,6 +30,8 @@ class C: B
 }  
 ]]>
       </code_example>
+
+      
 
       
 

@@ -9,8 +9,12 @@
 
         
 
+        
+
          namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the <see
          cref="N:System.Drawing" />
+
+        
 
         
 
@@ -25,13 +29,19 @@
 
         
 
+        
+
          class provides methods for recording and saving metafiles. The <see
          cref="T:System.Drawing.Imaging.Encoder" />
 
         
 
+        
+
          class enables users to extend GDI+ to support any image format. The <see
          cref="T:System.Drawing.Imaging.PropertyItem" />
+
+        
 
         
 
@@ -41,6 +51,8 @@
         <para
           >Classes within the <see
            cref="N:System.Drawing.Imaging" />
+
+          
 
           
 

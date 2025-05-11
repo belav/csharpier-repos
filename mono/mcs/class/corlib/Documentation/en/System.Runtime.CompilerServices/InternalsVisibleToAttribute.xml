@@ -35,6 +35,8 @@
 
         
 
+        
+
          attribute makes them also visible to the types in a specified assembly, which is known as a friend assembly.</para
       >
       <para>The attribute is applied at the assembly level. This means that it can be included at the beginning of a source code file, or it can be included in the AssemblyInfo file in a Visual Studio project. You can use the attribute to specify a single friend assembly that can access the internal types and members of the current assembly. You can define multiple friend assemblies in two ways. They can appear as individual assembly-level attributes, as the following example illustrates.</para>
@@ -42,6 +44,8 @@
       <para
         >They can also appear with separate <see
          cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          constructor. Both the current assembly and the friend assembly must be unsigned, or both assemblies must be signed with a strong name. If they are signed with a strong name, the argument to the <see
          cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          with strong-named assemblies, see the <see
          cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
+
+        
 
         
 
@@ -77,13 +89,19 @@
 
         
 
+        
+
         , <see
          cref="P:System.Reflection.AssemblyName.Version" />
 
         
 
+        
+
         , or <see
          cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
+
+        
 
         
 
@@ -94,13 +112,19 @@
 
         
 
+        
+
         ) and the assemblies are strong-named, a <see
          cref="T:System.MethodAccessException" />
 
         
 
+        
+
          exception is thrown the first time the specified friend assembly accesses the assembly that contains the <see
          cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+
+        
 
         
 
@@ -160,6 +184,8 @@
 
             
 
+            
+
              constructor defines a friend assembly, which is an assembly that has access to the internal types and members of the current assembly. </para
           >
           <para
@@ -172,8 +198,12 @@
 
             
 
+            
+
             .) If both are unsigned, the <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -182,8 +212,12 @@
 
             
 
+            
+
              consists of the name of the friend assembly along with its full public key (but not its public key token). The other components of a strong name, such as those that provide culture, version, or processor architecture information, cannot be specified in the <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -197,6 +231,8 @@
 
             
 
+            
+
              to retrieve the full public key from a strong-named key (.snk) file. To do this, you perform the following steps:</para
           >
           <list type="ordered">
@@ -204,6 +240,8 @@
               <para>Extract the public key from the strong-named key file to a separate file:</para>
               <para>
                 <system>Sn -p</system>
+
+                
 
                 
 
@@ -217,6 +255,8 @@
 
                 
 
+                
+
                  outfile</para
               >
             </item>
@@ -227,6 +267,8 @@
           <para
             >For more information about how to use the <see
              cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+
+            
 
             
 
@@ -259,11 +301,15 @@
 
             
 
+            
+
              class with the name of the specified friend assembly. </para
           >
         </summary>
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,6 +356,8 @@
           <para
             >For more information about how to use the <see
              cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+
+            
 
             
 

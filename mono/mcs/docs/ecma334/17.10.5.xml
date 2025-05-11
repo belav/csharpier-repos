@@ -5,7 +5,7 @@
 
       >[Example: Private instance constructors are commonly used in classes that contain only static members. For example: <code_example
       >
-        <![CDATA[
+<![CDATA[
 public class Trig  
 {  
    private Trig() {}   // Prevent instantiation  
@@ -20,6 +20,8 @@ public class Trig
   </paragraph>
   <paragraph>
     <example>The Trig class groups related methods and constants, but is not intended to be instantiated. Therefore, it declares a single empty private instance constructor. end example]</example>
+
+    
 
     
 

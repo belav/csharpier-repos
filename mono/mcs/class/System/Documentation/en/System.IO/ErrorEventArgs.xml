@@ -26,8 +26,12 @@
 
         
 
+        
+
          contains the <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          event. This class provides the <see
          cref="M:System.IO.ErrorEventArgs.GetException" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
       <para
         >Provides data for the <see
          cref="E:System.IO.FileSystemWatcher.Error" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -91,8 +103,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -126,6 +142,8 @@
 
             
 
+            
+
              that represents the error that occurred.</para
           >
         </summary>
@@ -134,6 +152,8 @@
           <para
             >An <see
              cref="T:System.Exception" />
+
+            
 
             
 

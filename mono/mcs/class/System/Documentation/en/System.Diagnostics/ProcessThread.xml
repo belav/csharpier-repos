@@ -37,8 +37,12 @@
 
           
 
+          
+
            class. As a result, some applications that did not get exceptions in earlier versions of the .NET Framework may now get a <see
            cref="T:System.NotSupportedException" />
+
+          
 
           
 
@@ -48,6 +52,8 @@
       <para
         >Use <see
          cref="T:System.Diagnostics.ProcessThread" />
+
+        
 
         
 
@@ -67,13 +73,19 @@
 
         
 
+        
+
          objects associated with the current process, get the <see
          cref="P:System.Diagnostics.Process.Threads" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Diagnostics.Process" />
+
+        
 
         
 
@@ -116,6 +128,8 @@
 
             
 
+            
+
              is the starting priority for the process thread. You can view information about the base priority through the System Monitor's Priority Base counter.</para
           >
           <para
@@ -124,8 +138,12 @@
 
             
 
+            
+
              property to one of the values in the <see
              cref="T:System.Diagnostics.ProcessPriorityClass" />
+
+            
 
             
 
@@ -134,8 +152,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.ProcessPriorityClass.Normal" />
+
+            
 
             
 
@@ -144,8 +166,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.ProcessPriorityClass.AboveNormal" />
+
+            
 
             
 
@@ -154,13 +180,19 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Diagnostics.ProcessPriorityClass.RealTime" />
 
             
 
+            
+
             . You can set the thread's <see
              cref="P:System.Diagnostics.ProcessThread.PriorityLevel" />
+
+            
 
             
 
@@ -172,8 +204,12 @@
 
             
 
+            
+
              property based on the time elapsed or other boosts when a process must be put ahead of others for access to the processor. In addition, you can set the <see
              cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
+
+            
 
             
 
@@ -216,8 +252,12 @@
 
             
 
+            
+
              property based on the time elapsed, or other boosts, when a process must be put ahead of others for access to the processor. In addition, you can set the <see
              cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
+
+            
 
             
 
@@ -293,6 +333,8 @@
 
             
 
+            
+
              value is zero-based.  In other words, to set the thread affinity for the first processor, set the property to zero.</para
           >
           <para>The system schedules threads on their preferred processors whenever possible.</para>
@@ -335,13 +377,19 @@
 
             
 
+            
+
              is true, the system temporarily boosts the thread's priority whenever its associated process is taken out of the wait state. This action prevents other processes from interrupting the processing of the current thread. The <see
              cref="P:System.Diagnostics.ProcessThread.PriorityBoostEnabled" />
 
             
 
+            
+
              setting affects all existing threads as well as any threads subsequently created by the process. To restore normal behavior, set the <see
              cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
+
+            
 
             
 
@@ -352,8 +400,12 @@
 
             
 
+            
+
              has an effect only when the thread is running in a process that has a <see
              cref="P:System.Diagnostics.Process.PriorityClass" />
+
+            
 
             
 
@@ -362,13 +414,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.ProcessPriorityClass.High" />
 
             
 
+            
+
             , or <see
              cref="F:System.Diagnostics.ProcessPriorityClass.RealTime" />
+
+            
 
             
 
@@ -421,8 +479,12 @@
 
             
 
+            
+
              to choose a value from the range specified in the <see
              cref="P:System.Diagnostics.ProcessThread.PriorityLevel" />
+
+            
 
             
 
@@ -468,8 +530,12 @@
 
             
 
+            
+
              corresponds to the amount of time that the application has spent running in privileged mode, inside the operating system core. The <see
              cref="P:System.Diagnostics.ProcessThread.UserProcessorTime" />
+
+            
 
             
 
@@ -514,8 +580,12 @@
 
             
 
+            
+
              represents each processor as a bit. Bit 0 represents processor one, bit 1 represents processor two, and so on. The following table shows a subset of the possible <see
              cref="P:System.Diagnostics.ProcessThread.ProcessorAffinity" />
+
+            
 
             
 
@@ -595,6 +665,8 @@
 
             
 
+            
+
              property. A process thread can migrate from processor to processor, with each migration reloading the processor cache. Specifying a processor for a thread can improve performance under heavy system loads by reducing the number of times the processor cache is reloaded.</para
           >
         </remarks>
@@ -662,6 +734,8 @@
           <para
             >Every Windows thread actually begins execution in a system-supplied function, not the application-supplied function. The starting address for the primary thread is, therefore, the same (as it represents the address of the system-supplied function) for every Windows process in the system. However, the <see
              cref="P:System.Diagnostics.ProcessThread.StartAddress" />
+
+            
 
             
 
@@ -742,8 +816,12 @@
 
             
 
+            
+
              property value is valid only when the <see
              cref="P:System.Diagnostics.ProcessThread.ThreadState" />
+
+            
 
             
 
@@ -752,13 +830,19 @@
 
             
 
+            
+
             . Therefore, check the <see
              cref="P:System.Diagnostics.ProcessThread.ThreadState" />
 
             
 
+            
+
              value before you get the <see
              cref="P:System.Diagnostics.ProcessThread.WaitReason" />
+
+            
 
             
 
@@ -804,6 +888,8 @@
 
             
 
+            
+
              property indicates the total amount of time that the system has taken the thread out of the wait state and given it priority on any processor. On a multiple processor system, this value would include time spent on each processor, if the thread used more than one processor.</para
           >
           <para
@@ -812,13 +898,19 @@
 
             
 
+            
+
              property is the sum of the <see
              cref="P:System.Diagnostics.ProcessThread.UserProcessorTime" />
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.ProcessThread.PrivilegedProcessorTime" />
+
+            
 
             
 
@@ -864,8 +956,12 @@
 
             
 
+            
+
              corresponds to the amount of time that the application has spent running in user mode, outside the operating system core. The <see
              cref="P:System.Diagnostics.ProcessThread.PrivilegedProcessorTime" />
+
+            
 
             
 
@@ -915,8 +1011,12 @@
 
             
 
+            
+
              property is valid only when the <see
              cref="P:System.Diagnostics.ProcessThread.ThreadState" />
+
+            
 
             
 
@@ -925,13 +1025,19 @@
 
             
 
+            
+
             . Therefore, check the <see
              cref="P:System.Diagnostics.ProcessThread.ThreadState" />
 
             
 
+            
+
              value before you get the <see
              cref="P:System.Diagnostics.ProcessThread.WaitReason" />
+
+            
 
             
 

@@ -32,6 +32,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -68,6 +70,8 @@
 
             
 
+            
+
              class by using the specified minimum and maximum values. </para
           >
         </summary>
@@ -76,10 +80,14 @@
 
           
 
+          
+
           Specifies the minimum value allowed for the data field value.</param
         >
         <param name="maximum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -111,6 +119,8 @@
 
             
 
+            
+
              class by using the specified minimum and maximum values.</para
           >
         </summary>
@@ -119,10 +129,14 @@
 
           
 
+          
+
           Specifies the minimum value allowed for the data field value.</param
         >
         <param name="maximum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,6 +171,8 @@
 
             
 
+            
+
              interface.</para
           >
         </remarks>
@@ -168,11 +184,15 @@
 
             
 
+            
+
              class by using the specified minimum and maximum values and the specific type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,10 +203,14 @@
 
           
 
+          
+
           Specifies the minimum value allowed for the data field value.</param
         >
         <param name="maximum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,8 +246,12 @@
 
             
 
+            
+
              creates the error message by using the name of the data field that caused the validation failure. You can override this method in a custom validation attribute to customize how errors are created, or to provide a more complex message that contains parameters that you evaluate at run time. For an example, see the <see
              cref="M:System.ComponentModel.DataAnnotations.RangeAttribute.#ctor(System.Type,System.String,System.String)" />
+
+            
 
             
 
@@ -240,6 +268,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,6 +305,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -340,6 +372,8 @@
           <para
             >The object to be tested must implement the <see
              cref="T:System.IComparable" />
+
+            
 
             
 

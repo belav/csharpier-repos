@@ -24,13 +24,19 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Net.NetworkInformation.PingOptions.Ttl" />
 
         
 
+        
+
          and <see
          cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+        
 
         
 
@@ -42,13 +48,19 @@
 
         
 
+        
+
          property specifies the Time to Live for packets sent by the <see
          cref="T:System.Net.NetworkInformation.Ping" />
 
         
 
+        
+
          class. This value indicates the number of routing nodes that can forward a <see
          cref="T:System.Net.NetworkInformation.Ping" />
+
+        
 
         
 
@@ -60,6 +72,8 @@
 
         
 
+        
+
           property controls whether data sent to a remote host can be divided into multiple packets.  This option is useful if you want to test the maximum transmission unit (MTU) of the routers and gateways used to transmit the packet.</para
       >
       <para
@@ -68,8 +82,12 @@
 
         
 
+        
+
          class are passed to the <see
          cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+        
 
         
 
@@ -78,8 +96,12 @@
 
         
 
+        
+
          methods, and the <see
          cref="T:System.Net.NetworkInformation.PingReply" />
+
+        
 
         
 
@@ -88,8 +110,12 @@
 
         
 
+        
+
          via the <see
          cref="P:System.Net.NetworkInformation.PingReply.Options" />
+
+        
 
         
 
@@ -101,8 +127,12 @@
 
         
 
+        
+
         , see the <see
          cref="Overload:System.Net.NetworkInformation.PingOptions.#ctor" />
+
+        
 
         
 
@@ -114,6 +144,8 @@
       <para
         >Used to control how <see
          cref="T:System.Net.NetworkInformation.Ping" />
+
+        
 
         
 
@@ -141,6 +173,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Net.NetworkInformation.PingOptions" />
+
+            
 
             
 
@@ -184,8 +218,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -197,6 +235,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.PingOptions" />
+
+            
 
             
 
@@ -230,8 +270,12 @@
 
             
 
+            
+
              parameter limits the number of routers and gateways that can forward the data. This is useful for testing the length of the route between the local and remote computers. The <paramref
              name="dontFragment" />
+
+            
 
             
 
@@ -246,6 +290,8 @@
 
             
 
+            
+
              class and sets the Time to Live and fragmentation values.</para
           >
         </summary>
@@ -254,8 +300,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -264,10 +314,14 @@
 
           
 
+          
+
            data packets can be forwarded.</param
         >
         <param name="dontFragment">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,8 +351,12 @@
 
             
 
+            
+
              class can be divided into multiple packets.  This option is useful if you want to test the maximum transmission unit (MTU) of the routers and gateways used to transmit the packet. If this property is true and the data sent to the remote host is larger then the MTU of a gateway or router between the sender and the remote host, the ping operation fails with status <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -310,6 +368,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -341,6 +401,8 @@
           <para
             >Gets or sets the number of routing nodes that can forward the <see
              cref="T:System.Net.NetworkInformation.Ping" />
+
+            
 
             
 

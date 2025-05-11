@@ -30,6 +30,8 @@
 
         
 
+        
+
          class defines an assembly-level attribute needed to specify tag prefix aliases for custom controls. This attribute is used by tools such as Microsoft Visual Studio to automatically generate a Register directive in the ASP.NET page where the custom controls are used.</para
       >
       <para>This directive registers the tag prefix with a namespace. Moreover, it specifies the assembly where the custom control code implementation resides. With this directive in place, you can use custom controls in a Web page declaratively.</para>
@@ -38,6 +40,8 @@
          type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -75,6 +79,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -83,10 +89,14 @@
 
           
 
+          
+
           A string that identifies the custom control namespace. </param
         >
         <param name="tagPrefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

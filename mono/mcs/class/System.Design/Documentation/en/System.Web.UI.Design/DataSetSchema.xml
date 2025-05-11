@@ -25,13 +25,19 @@
 
         
 
+        
+
          class to list the elements of a data source at design time. This implementation of <see
          cref="T:System.Web.UI.Design.IDataSourceSchema" />
 
         
 
+        
+
          uses a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -43,11 +49,15 @@
 
         
 
+        
+
          class is used by custom control designer components to provide lists of views and fields for data-bound controls at design time.</para
       >
       <para
         >To examine the components of data using a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -79,6 +89,8 @@
 
         
 
+        
+
          class represents the structure, or schema, of a data source. This class cannot be inherited.</para
       >
     </summary>
@@ -103,8 +115,12 @@
 
             
 
+            
+
              class using a specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -116,13 +132,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataSet" />
 
           
 
+          
+
            that the <see
            cref="T:System.Web.UI.Design.DataSetSchema" />
+
+          
 
           
 
@@ -152,8 +174,12 @@
 
             
 
+            
+
              objects returned by this method can be converted to a <see
              cref="T:System.Web.UI.Design.DataSetViewSchema" />
+
+            
 
             
 
@@ -169,6 +195,8 @@
           <para
             >An array of <see
              cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+
+            
 
             
 

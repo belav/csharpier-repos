@@ -29,13 +29,19 @@
 
         
 
+        
+
          interface indicates that an <see
          cref="T:System.ServiceModel.Channels.IDuplexChannel" />
 
         
 
+        
+
          implements <see
          cref="T:System.ServiceModel.Channels.IDuplexSession" />
+
+        
 
         
 
@@ -47,13 +53,19 @@
 
         
 
+        
+
         , its associated <see
          cref="T:System.ServiceModel.Channels.IDuplexSession" />
 
         
 
+        
+
          can be retrieved through the <see
          cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
+
+        
 
         
 

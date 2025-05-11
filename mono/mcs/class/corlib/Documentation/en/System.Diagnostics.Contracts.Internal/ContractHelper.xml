@@ -65,6 +65,8 @@
 
             
 
+            
+
              method does not perform the failure behavior (an assert or throw) itself. If the failure is handled by the listeners, the method returns null. If the failure is not handled by the listeners, a localized failure message is returned.</para
           >
         </remarks>
@@ -81,10 +83,14 @@
 
           
 
+          
+
           The type of failure.</param
         >
         <param name="userMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -95,10 +101,14 @@
 
           
 
+          
+
           The description of the condition that caused the failure.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,13 +156,19 @@
 
             
 
+            
+
             , which causes the <ui
             >Assert</ui>
 
             
 
+            
+
              dialog box to be displayed. You can change that behavior to throw an <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -168,10 +184,14 @@
 
           
 
+          
+
           The type of failure.</param
         >
         <param name="displayMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +202,8 @@
 
           
 
+          
+
           Additional user information.</param
         >
         <param name="conditionText">
@@ -189,10 +211,14 @@
 
           
 
+          
+
           The description of the condition that caused the failure.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -64,8 +64,12 @@
 
         
 
+        
+
          generic class is always read-only.  A collection that is read-only is simply a collection with a wrapper that prevents modifying the collection; therefore, if changes are made to the underlying collection, the read-only collection reflects those changes.  See <see
          cref="T:System.Collections.ObjectModel.Collection`1" />
+
+        
 
         
 
@@ -179,6 +183,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -214,13 +220,19 @@
 
             
 
+            
+
              is undefined. Therefore, you must call <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -231,8 +243,12 @@
 
             
 
+            
+
              returns the same object until <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -241,8 +257,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -254,8 +274,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -264,8 +288,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -274,8 +302,12 @@
 
             
 
+            
+
              is undefined. You cannot set <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -286,6 +318,8 @@
           <para
             >Default implementations of collections in <see
              cref="N:System.Collections.Generic" />
+
+            
 
             
 
@@ -301,6 +335,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -312,8 +348,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+
+            
 
             
 
@@ -401,8 +441,12 @@
 
             
 
+            
+
              that the <see
              cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+
+            
 
             
 
@@ -611,8 +655,12 @@
 
               
 
+              
+
                cannot be cast automatically to the type of the destination <paramref
                name="array" />
+
+              
 
               
 
@@ -621,13 +669,19 @@
 
               
 
+              
+
                throw <see
                cref="T:System.InvalidCastException" />
 
               
 
+              
+
               , whereas the generic implementations throw <see
                cref="T:System.ArgumentException" />
+
+              
 
               
 
@@ -640,13 +694,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.ReadOnlyCollection`1.Count" />
+
+            
 
             
 
@@ -658,8 +718,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -674,13 +738,19 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -692,8 +762,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -702,8 +776,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -714,8 +792,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -751,6 +833,8 @@
 
             
 
+            
+
              are not synchronized.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure.  To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
@@ -759,8 +843,12 @@
 
             
 
+            
+
              returns an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -773,8 +861,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -786,6 +878,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -822,6 +916,8 @@
 
             
 
+            
+
              are not synchronized.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
@@ -830,13 +926,19 @@
 
             
 
+            
+
              returns an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
             . Synchronization is effective only if all threads lock this object before accessing the collection. The following code shows the use of the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -865,8 +967,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -878,6 +984,8 @@ finally {
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -916,8 +1024,12 @@ finally {
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -926,8 +1038,12 @@ finally {
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -938,8 +1054,12 @@ finally {
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -948,13 +1068,19 @@ finally {
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -966,8 +1092,12 @@ finally {
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -976,8 +1106,12 @@ finally {
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -986,8 +1120,12 @@ finally {
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -996,8 +1134,12 @@ finally {
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1011,6 +1153,8 @@ finally {
 
             
 
+            
+
              are not synchronized.</para
           >
           <para>This method is an O(1) operation.</para>
@@ -1020,8 +1164,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1037,6 +1185,8 @@ finally {
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1072,8 +1222,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1088,8 +1242,12 @@ finally {
 
             
 
+            
+
             .  This implementation always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1105,13 +1263,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1144,8 +1308,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1160,8 +1328,12 @@ finally {
 
             
 
+            
+
             .  This implementation always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1197,6 +1369,8 @@ finally {
 
             
 
+            
+
             .  </para
           >
           <para
@@ -1205,13 +1379,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.ReadOnlyCollection`1.Count" />
+
+            
 
             
 
@@ -1223,8 +1403,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1239,6 +1423,8 @@ finally {
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -1250,8 +1436,12 @@ finally {
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1263,13 +1453,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1304,6 +1500,8 @@ finally {
 
             
 
+            
+
             .  </para
           >
           <para
@@ -1312,13 +1510,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.ReadOnlyCollection`1.Count" />
+
+            
 
             
 
@@ -1330,8 +1534,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1346,6 +1554,8 @@ finally {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1357,6 +1567,8 @@ finally {
 
             
 
+            
+
              if found in the list; otherwise, -1.</para
           >
         </returns>
@@ -1365,13 +1577,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1407,8 +1625,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1423,8 +1645,12 @@ finally {
 
             
 
+            
+
              at the specified index.  This implementation always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1436,8 +1662,12 @@ finally {
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1448,13 +1678,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1490,8 +1726,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1503,6 +1743,8 @@ finally {
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1539,8 +1781,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1552,6 +1798,8 @@ finally {
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1615,8 +1863,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1631,8 +1883,12 @@ finally {
 
             
 
+            
+
             .  This implementation always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1644,13 +1900,19 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1685,8 +1947,12 @@ finally {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1701,8 +1967,12 @@ finally {
 
             
 
+            
+
              item at the specified index.  This implementation always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1711,6 +1981,8 @@ finally {
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -41,6 +41,8 @@
 
         
 
+        
+
          exception.</para
       >
       <code lang="C#"
@@ -70,8 +72,12 @@ public class InvalidOpExample  {
 
         
 
+        
+
          is used in cases when the failure to invoke a method is caused by reasons other than invalid arguments. For example, <see
          cref="T:System.InvalidOperationException" />
+
+        
 
         
 
@@ -84,12 +90,16 @@ public class InvalidOpExample  {
 
             
 
+            
+
              if objects of a collection are modified after the enumerator is created.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Resources.ResourceSet.GetString(System.String)" />
+
+            
 
             
 
@@ -104,13 +114,19 @@ public class InvalidOpExample  {
 
         
 
+        
+
          or one of its derived classes, <see
          cref="T:System.ArgumentNullException" />
 
         
 
+        
+
          or <see
          cref="T:System.ArgumentOutOfRangeException" />
+
+        
 
         
 
@@ -124,8 +140,12 @@ public class InvalidOpExample  {
 
             
 
+            
+
              Microsoft intermediate language (MSIL) instruction throws <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -138,6 +158,8 @@ public class InvalidOpExample  {
 
         
 
+        
+
          uses the HRESULT COR_E_INVALIDOPERATION, which has the value 0x80131509.</para
       >
       <para
@@ -146,8 +168,12 @@ public class InvalidOpExample  {
 
         
 
+        
+
         , see the <see
          cref="M:System.InvalidOperationException.#ctor" />
+
+        
 
         
 
@@ -187,11 +213,15 @@ public class InvalidOpExample  {
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The requested operation cannot be performed." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -238,6 +268,8 @@ public class InvalidOpExample  {
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -273,8 +305,12 @@ public class InvalidOpExample  {
 
             
 
+            
+
              property of the new exception using the <paramref
              name="message" />
+
+            
 
             
 
@@ -283,11 +319,15 @@ public class InvalidOpExample  {
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -334,11 +374,15 @@ public class InvalidOpExample  {
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,6 +423,8 @@ public class InvalidOpExample  {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -390,6 +436,8 @@ public class InvalidOpExample  {
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -398,10 +446,14 @@ public class InvalidOpExample  {
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -442,8 +494,12 @@ public class InvalidOpExample  {
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -452,11 +508,15 @@ public class InvalidOpExample  {
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -503,11 +563,15 @@ public class InvalidOpExample  {
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -518,8 +582,12 @@ public class InvalidOpExample  {
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

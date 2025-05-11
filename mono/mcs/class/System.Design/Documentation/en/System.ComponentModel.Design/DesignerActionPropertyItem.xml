@@ -24,13 +24,19 @@
 
         
 
+        
+
          class represents individual items in a smart tag panel. Each item is typically associated with a property in a class that is derived from the <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
+        
+
          class and supplied by the component author. The association is maintained through the name of the property, as stored in the <see
          cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.MemberName" />
+
+        
 
         
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
 
               
 
+              
+
               )</para
             >
           </term>
@@ -84,6 +96,8 @@
 
               
 
+              
+
               )</para
             >
           </term>
@@ -94,8 +108,12 @@
 
               
 
+              
+
                will likely display a <see
                cref="T:System.Windows.Forms.TextBox" />
+
+              
 
               
 
@@ -122,6 +140,8 @@
 
               
 
+              
+
                method.</para
             >
           </description>
@@ -133,8 +153,12 @@
 
         
 
+        
+
         , and common dnprdnshort data types, such as <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -145,6 +169,8 @@
 
         
 
+        
+
          or <format
          type="text/html">
           <a href="49253ae6-7657-4810-82ab-1176a6feeada">Generalized Type Conversion</a>
@@ -152,10 +178,14 @@
 
         
 
+        
+
         . For more information about type editors, see <format
          type="text/html">
           <a href="ed961fb9-ee02-4666-b511-05f3204bb75c">How to: Implement a UI Type Editor</a>
         </format>
+
+        
 
         
 
@@ -167,6 +197,8 @@
       <para
         >Represents a panel item that is associated with a property in a class derived from <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -197,13 +229,19 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+
+            
 
             
 
@@ -215,8 +253,12 @@
 
             
 
+            
+
              parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from the <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -231,6 +273,8 @@
 
             
 
+            
+
              class, with the specified property and display names.</para
           >
         </summary>
@@ -239,10 +283,14 @@
 
           
 
+          
+
           The case-sensitive name of the property associated with this panel item.</param
         >
         <param name="displayName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,8 +321,12 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+
+            
 
             
 
@@ -286,8 +338,12 @@
 
             
 
+            
+
              parameter is used to group items on a panel, see the <see
              cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+            
 
             
 
@@ -299,8 +355,12 @@
 
             
 
+            
+
              parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -315,11 +375,15 @@
 
             
 
+            
+
              class, with the specified property and category names, and display text.</para
           >
         </summary>
         <param name="memberName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -330,6 +394,8 @@
 
           
 
+          
+
           The panel text for this item.</param
         >
         <param name="category">
@@ -337,8 +403,12 @@
 
           
 
+          
+
           The case-sensitive <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -370,8 +440,12 @@
 
             
 
+            
+
              parameter is used to group items on a panel, see the <see
              cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+            
 
             
 
@@ -383,8 +457,12 @@
 
             
 
+            
+
              parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from the <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -399,11 +477,15 @@
 
             
 
+            
+
              class, with the specified property and category names, and display and description text.</para
           >
         </summary>
         <param name="memberName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,10 +496,14 @@
 
           
 
+          
+
           The panel text for this item.</param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,10 +512,14 @@
 
           
 
+          
+
            used to group similar items on the panel.</param
         >
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -456,8 +546,12 @@
 
             
 
+            
+
              property specifies which property—in the class derived from the <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -465,6 +559,8 @@
           >
           <para>
             <see cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.MemberName" />
+
+            
 
             
 
@@ -499,8 +595,12 @@
 
             
 
+            
+
              property, another component can lend its pull-model panel items to the current list. For example, a user control might aggregate the <see
              cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+            
 
             
 
@@ -509,6 +609,8 @@
           <para
             >This property works in conjunction with the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+
+            
 
             
 

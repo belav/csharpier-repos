@@ -28,6 +28,8 @@
 
       
 
+      
+
       .</summary
     >
     <remarks>
@@ -41,10 +43,14 @@
 
             
 
+            
+
              within the callback
         registered by
         <see
              cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
+
+            
 
             
 
@@ -60,8 +66,12 @@
             
 
             
+
+            
           could not convert a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -71,21 +81,26 @@
 
             
 
+            
+
             .
         </term
           >
         </item>
         <item>
-          <term
-            >
+          <term>
           An option with a <see
              cref="P:Mono.Options.Option.OptionValueType" />
+
+            
 
             
 
              
           value of <see
              cref="F:Mono.Options.OptionValueType.Required" />
+
+            
 
             
 
@@ -138,10 +153,11 @@
         <Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" />
       </Parameters>
       <Docs>
-        <param name="info"
-          >
+        <param name="info">
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -150,10 +166,11 @@
           thrown.
         </param
         >
-        <param name="context"
-          >
+        <param name="context">
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -162,11 +179,12 @@
           destination.
         </param
         >
-        <summary
-          >
+        <summary>
           Initializes a new instance of the 
           <see
            cref="T:Mono.Options.OptionException" />
+
+          
 
           
 
@@ -202,20 +220,22 @@
         <Parameter Name="optionName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="message"
-          >
+        <param name="message">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
            that describes the error.
         </param
         >
-        <param name="optionName"
-          >
+        <param name="optionName">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -223,28 +243,32 @@
 		      option that caused the exception.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the 
           <see
            cref="T:Mono.Options.OptionException" />
 
           
 
+          
+
            class.
         </summary
         >
-        <remarks
-          >
+        <remarks>
           This constructor initializes the 
           <see
            cref="P:System.Exception.Message" />
 
           
 
+          
+
            property of the new
           instance using <paramref
            name="message" />
+
+          
 
           
 
@@ -255,8 +279,12 @@
           
 
           
+
+          
           property of the new instance using <paramref
            name="optionName" />
+
+          
 
           
 
@@ -287,20 +315,22 @@
         <Parameter Name="innerException" Type="System.Exception" />
       </Parameters>
       <Docs>
-        <param name="message"
-          >
+        <param name="message">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
            that describes the error.
         </param
         >
-        <param name="optionName"
-          >
+        <param name="optionName">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -308,10 +338,11 @@
           option that caused the exception.
         </param
         >
-        <param name="innerException"
-          >
+        <param name="innerException">
           An instance of <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -321,9 +352,13 @@
 
           
 
+          
+
            is
           non-<see
            langword="null" />
+
+          
 
           
 
@@ -333,25 +368,29 @@
 
           
 
+          
+
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the 
           <see
            cref="T:Mono.Options.OptionException" />
 
           
 
+          
+
            class.
         </summary
         >
-        <remarks
-          >
+        <remarks>
           This constructor initializes the 
           <see
            cref="P:System.Exception.Message" />
+
+          
 
           
 
@@ -361,15 +400,21 @@
 
           
 
+          
+
           , the
           <see
            cref="P:System.Exception.InnerException" />
 
           
 
+          
+
            property of the new
           instance using <paramref
            name="innerException" />
+
+          
 
           
 
@@ -380,8 +425,12 @@
           
 
           
+
+          
           property of the new instance using <paramref
            name="optionName" />
+
+          
 
           
 
@@ -414,10 +463,11 @@
         <Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" />
       </Parameters>
       <Docs>
-        <param name="info"
-          >
+        <param name="info">
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -426,10 +476,11 @@
           thrown.
         </param
         >
-        <param name="context"
-          >
+        <param name="context">
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -438,11 +489,12 @@
           destination.
         </param
         >
-        <summary
-          >
+        <summary>
           Adds information about the exception to the provided 
           <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -450,11 +502,12 @@
           instance.
         </summary
         >
-        <remarks
-          >
+        <remarks>
           Adds information about this exception instance to the provided 
           <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -479,10 +532,11 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -490,10 +544,11 @@
           caused the exception.
         </summary
         >
-        <value
-          >
+        <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 

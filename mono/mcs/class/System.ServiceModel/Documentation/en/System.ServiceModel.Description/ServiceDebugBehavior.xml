@@ -29,11 +29,15 @@
 
         
 
+        
+
          properties from a configuration file or programmatically to enable the flow of managed exception information to the client for debugging purposes as well as the publication of HTML information files for users browsing the service in Web browsers.</para
       >
       <para
         >Set the <see
          cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
           
 
+          
+
            properties can also be set programmatically, it can be easy to forget to disable <see
            cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+          
 
           
 
@@ -60,6 +68,8 @@
           <para
             >You use an application configuration file to set the value of the <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+            
 
             
 
@@ -80,6 +90,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -88,8 +100,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
+
+        
 
         
 
@@ -101,8 +117,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+
+        
 
         
 
@@ -111,6 +131,8 @@
       <para
         >To enable or disable one of the <see
          cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+
+        
 
         
 
@@ -126,6 +148,8 @@
 
             
 
+            
+
              element for your indigo2 service. Endpoint behaviors are configured on <format
              type="text/html">
               <a href="13aa23b7-2f08-4add-8dbf-a99f8127c017">&lt;endpoint&gt;</a>
@@ -133,10 +157,14 @@
 
             
 
+            
+
              elements; service behaviors on <format
              type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format>
+
+            
 
             
 
@@ -152,10 +180,14 @@
 
             
 
+            
+
              section and add a <format
              type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
             </format>
+
+            
 
             
 
@@ -166,10 +198,14 @@
 
             
 
+            
+
              element; service behaviors are configured using a <format
              type="text/html">
               <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">&lt;serviceBehaviors&gt;</a>
             </format>
+
+            
 
             
 
@@ -185,10 +221,14 @@
 
             
 
+            
+
              element to the <format
              type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
             </format>
+
+            
 
             
 
@@ -224,6 +264,8 @@
 
             
 
+            
+
              object with the following defaults:</para
           >
           <list type="bullet">
@@ -231,6 +273,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+                
 
                 
 
@@ -244,6 +288,8 @@
 
                 
 
+                
+
                  property is true.</para
               >
             </item>
@@ -251,6 +297,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
+
+                
 
                 
 
@@ -264,6 +312,8 @@
 
                 
 
+                
+
                  property is the base address of the service that supports HTTP requests.</para
               >
             </item>
@@ -271,6 +321,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+
+                
 
                 
 
@@ -284,6 +336,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+
+            
 
             
 
@@ -337,11 +391,15 @@
 
             
 
+            
+
              property to false to disable the publication of an HTML help page visible to HTML browsers.</para
           >
           <para
             >To ensure the HTML help page is published at the location controlled by the <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+
+            
 
             
 
@@ -352,6 +410,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+
+                
 
                 
 
@@ -368,6 +428,8 @@
 
             
 
+            
+
              property, any other scenario in which neither of the preceding criteria is met results in no exception and no HTML help page.</para
           >
         </remarks>
@@ -376,6 +438,8 @@
           <para
             >Gets or sets a value that controls whether indigo1 publishes an HTML help page at the address controlled by the <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
+
+            
 
             
 
@@ -407,6 +471,8 @@
 
             
 
+            
+
              property to enable the use of a custom HTML help file that is returned from an HTTP/Get request such as that of an HTML browser. The location of the HTML help file is resolved as follows:</para
           >
           <list type="bullet">
@@ -423,6 +489,8 @@
           <para
             >This property is applied only in the case that the <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
+
+            
 
             
 
@@ -480,11 +548,15 @@
 
             
 
+            
+
              property to false to disable the publication of an HTML help page visible to HTML browsers. </para
           >
           <para
             >To ensure the HTML help page is published at the location controlled by the <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+
+            
 
             
 
@@ -495,6 +567,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+
+                
 
                 
 
@@ -511,6 +585,8 @@
 
             
 
+            
+
              property, any other scenario in which neither of the preceding criteria is met results in no exception and no HTML help page.</para
           >
         </remarks>
@@ -519,6 +595,8 @@
           <para
             >Gets or sets a value that specifies whether indigo1 returns an HTML help file over HTTPS at the address controlled by the <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+
+            
 
             
 
@@ -550,6 +628,8 @@
 
             
 
+            
+
              property to enable the use of a custom HTML help file that is returned from an HTTPS/Get request such as that of an HTML browser.</para
           >
           <para>The location of the HTML help file is resolved as follows:</para>
@@ -567,6 +647,8 @@
           <para
             >This property is applied only in the case that the <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
+
+            
 
             
 
@@ -605,6 +687,8 @@
 
             
 
+            
+
              property to true to instruct indigo2 to return managed exception information to the client in SOAP faults to ease debugging.</para
           >
           <block subset="none" type="note">
@@ -614,8 +698,12 @@
 
               
 
+              
+
                properties can also be set programmatically, it can be easy to forget to disable <see
                cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+              
 
               
 
@@ -628,6 +716,8 @@
               <para
                 >You use an application configuration file to set the value of the <see
                  cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+                
 
                 
 
@@ -645,6 +735,8 @@
                 >Specifying and Handling Faults in Contracts and Services</a
               >
             </format>
+
+            
 
             
 
@@ -694,6 +786,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -705,11 +799,15 @@
 
             
 
+            
+
              method to support the behavior.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -720,6 +818,8 @@
 
           
 
+          
+
           The service host.</param
         >
         <param name="endpoints">
@@ -727,10 +827,14 @@
 
           
 
+          
+
           The endpoints for the service.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -768,6 +872,8 @@
 
             
 
+            
+
              method to support the behavior.</para
           >
         </summary>
@@ -776,10 +882,14 @@
 
           
 
+          
+
           The service description.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -817,6 +927,8 @@
 
             
 
+            
+
              method to support the behavior.</para
           >
         </summary>
@@ -825,10 +937,14 @@
 
           
 
+          
+
           The service description.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

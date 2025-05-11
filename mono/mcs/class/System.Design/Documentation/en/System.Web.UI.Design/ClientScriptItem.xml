@@ -18,8 +18,12 @@
 
         
 
+        
+
          class represents a script element that is contained in a Web document at design time. A custom control designer implementation can use a <see
          cref="T:System.Web.UI.Design.ClientScriptItem" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          class to set or examine client script elements that are contained in a document, such as a Web form, a Web server control, a content page, or a master page, on the design surface. Retrieve the collection of client script elements that are contained within the Web document by using the <see
          cref="M:System.Web.UI.Design.WebFormsRootDesigner.GetClientScriptsInDocument" />
 
         
 
+        
+
          method. Add a client script element to the Web document by using the <see
          cref="M:System.Web.UI.Design.WebFormsRootDesigner.AddClientScriptToDocument(System.Web.UI.Design.ClientScriptItem)" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          constructor to initialize the properties for a new script object. Use the <see
          cref="T:System.Web.UI.Design.ClientScriptItem" />
+
+        
 
         
 
@@ -59,13 +73,19 @@
 
         
 
+        
+
          property represents the language attribute of the script element. The <see
          cref="P:System.Web.UI.Design.ClientScriptItem.Source" />
 
         
 
+        
+
          property represents the src attribute. The <see
          cref="P:System.Web.UI.Design.ClientScriptItem.Text" />
+
+        
 
         
 
@@ -77,6 +97,8 @@
 
         
 
+        
+
          class to manage scripts that are to be executed at design-time.</para
       >
       <para
@@ -85,10 +107,14 @@
 
         
 
+        
+
          class. For more information about using client scripts at run time, see <format
          type="text/html">
           <a href="13edb6b9-2dea-43c6-b8c1-a47207de19aa">Client Script in ASP.NET Web Pages</a>
         </format>
+
+        
 
         
 
@@ -101,8 +127,12 @@
 
           
 
+          
+
            class represents script elements at design time that are ultimately parsed and run in the client browser. Because the script elements that are generated for the <see
            cref="T:System.Web.UI.Design.ClientScriptItem" />
+
+          
 
           
 
@@ -141,8 +171,12 @@
 
             
 
+            
+
              object by using either the <paramref
              name="text" />
+
+            
 
             
 
@@ -151,13 +185,19 @@
 
             
 
+            
+
              parameter (not both). Use <paramref
              name="text" />
 
             
 
+            
+
              to initialize the script using an input string that contains the statements. Alternately, use <paramref
              name="source" />
+
+            
 
             
 
@@ -172,6 +212,8 @@
 
                 
 
+                
+
                 , the corresponding script element does not contain script statements. </para
               >
             </item>
@@ -182,6 +224,8 @@
 
                 
 
+                
+
                 , the src attribute is not set in the script element. </para
               >
             </item>
@@ -189,6 +233,8 @@
               <para
                 >For <paramref
                  name="language" />
+
+                
 
                 
 
@@ -203,6 +249,8 @@
 
                 
 
+                
+
                 , the type attribute is not set in the script element.</para
               >
               <para>When a client script block does not specify the script type, the client browser determines the type.</para>
@@ -214,8 +262,12 @@
 
                 
 
+                
+
                 , the design host (for example, vsprvslong) will throw an <see
                  cref="T:System.ArgumentNullException" />
+
+                
 
                 
 
@@ -232,11 +284,15 @@
 
             
 
+            
+
              class using the provided parameters.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -247,10 +303,14 @@
 
           
 
+          
+
           The src attribute value for the script element, specifying an external source location for the client script contents.</param
         >
         <param name="language">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,10 +321,14 @@
 
           
 
+          
+
           The type attribute value for the script element, indicating the MIME type for the associated scripting engine.</param
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,8 +373,12 @@
 
             
 
+            
+
              property represents the language in which the script statements are written. If the <see
              cref="P:System.Web.UI.Design.ClientScriptItem.Language" />
+
+            
 
             
 
@@ -322,8 +390,12 @@
 
             
 
+            
+
              property is initialized by the <see
              cref="M:System.Web.UI.Design.ClientScriptItem.#ctor(System.String,System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -355,13 +427,19 @@
 
             
 
+            
+
              property specifies an external source location for the client script contents. Typically, the script statements for a script element are specified using either the <see
              cref="P:System.Web.UI.Design.ClientScriptItem.Text" />
 
             
 
+            
+
              or <see
              cref="P:System.Web.UI.Design.ClientScriptItem.Source" />
+
+            
 
             
 
@@ -373,6 +451,8 @@
 
             
 
+            
+
              property is null or an empty string (""), the src attribute is not set in the script element.</para
           >
           <para
@@ -381,8 +461,12 @@
 
             
 
+            
+
              property is initialized by the <see
              cref="M:System.Web.UI.Design.ClientScriptItem.#ctor(System.String,System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -414,13 +498,19 @@
 
             
 
+            
+
              property represents the statements that are contained in the script element. Typically, the script statements for a script element are specified using either the <see
              cref="P:System.Web.UI.Design.ClientScriptItem.Text" />
 
             
 
+            
+
              or <see
              cref="P:System.Web.UI.Design.ClientScriptItem.Source" />
+
+            
 
             
 
@@ -432,6 +522,8 @@
 
             
 
+            
+
              property is null or an empty string (""), the script element does not contain any script statements.</para
           >
           <para
@@ -440,8 +532,12 @@
 
             
 
+            
+
              property is initialized by the <see
              cref="M:System.Web.UI.Design.ClientScriptItem.#ctor(System.String,System.String,System.String,System.String,System.String)" />
+
+            
 
             
 

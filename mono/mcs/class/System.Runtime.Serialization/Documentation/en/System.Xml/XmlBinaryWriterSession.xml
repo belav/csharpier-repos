@@ -22,8 +22,12 @@
 
         
 
+        
+
         ) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries. For more information about dynamic dictionaries see <see
          cref="T:System.Xml.XmlDictionary" />
+
+        
 
         
 

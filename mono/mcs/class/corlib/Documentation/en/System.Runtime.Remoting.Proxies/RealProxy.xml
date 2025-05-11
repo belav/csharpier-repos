@@ -31,6 +31,8 @@
 
         
 
+        
+
          class is the abstract base class from which proxies must derive.</para
       >
       <para>A client that uses an object across any kind of a remoting boundary is actually using a transparent proxy for the object. The transparent proxy provides the illusion that the actual object resides in the client's space. It achieves this by forwarding calls made on it to the real object using the remoting infrastructure.</para>
@@ -40,8 +42,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+        
 
         
 
@@ -50,6 +56,8 @@
       <para
         >A proxy object can be used without regard to any remoting subdivisions within a <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -62,10 +70,14 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
            type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
+
+          
 
           
 
@@ -75,6 +87,8 @@
               >[&lt;topic://cpconInheritanceDemands&gt;]</a
             >
           </format>
+
+          
 
           
 
@@ -112,6 +126,8 @@
 
             
 
+            
+
              class with default values.</para
           >
         </summary>
@@ -142,6 +158,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>A client that uses an object across any kind of a remoting boundary is actually using a transparent proxy for the object. The transparent proxy gives the impression that the actual object resides in the client's space. It achieves this by forwarding calls made on it to the real object using the remoting infrastructure.</para>
@@ -151,8 +169,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -167,8 +189,12 @@
 
             
 
+            
+
              class that represents a remote object of the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -180,8 +206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -223,6 +253,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -231,8 +263,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -243,10 +279,14 @@
 
           
 
+          
+
           A stub to associate with the new proxy instance. </param
         >
         <param name="stubData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,6 +322,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -290,8 +332,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.MarshalByRefObject" />
+
+          
 
           
 
@@ -330,6 +376,8 @@
 
             
 
+            
+
              for the specified object type, and registers it with the remoting infrastructure as a client-activated object.</para
           >
         </summary>
@@ -341,6 +389,8 @@
 
             
 
+            
+
              that is created for the specified type.</para
           >
         </returns>
@@ -349,8 +399,12 @@
 
           
 
+          
+
           The object type that an <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -416,6 +470,8 @@
 
             
 
+            
+
              method, then that instance is returned; otherwise, a new instance is returned.</para
           >
           <para
@@ -425,6 +481,8 @@
                 >[&lt;topic://cpconcomcallablewrapper&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -447,11 +505,15 @@
 
             
 
+            
+
              if the object reference is requested for communication with unmanaged objects in the current process through COM, or a pointer to a cached or newly generated IUnknown COM interface if the object reference is requested for marshaling to a remote location.</para
           >
         </returns>
         <param name="fIsMarshalled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -491,8 +553,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -504,8 +570,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -513,6 +583,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -546,8 +618,12 @@
 
             
 
+            
+
              of the object that the current instance of <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -562,8 +638,12 @@
 
             
 
+            
+
              of the object that the current instance of <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -611,6 +691,8 @@
 
           
 
+          
+
           The proxy for which stub data is requested. </param
         >
       </Docs>
@@ -638,6 +720,8 @@
           <para
             >Returns the transparent proxy for the current instance of <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -675,13 +759,19 @@
 
             
 
+            
+
              method is used in scenarios involving an external <see
              cref="T:System.Runtime.Remoting.Contexts.Context" />
 
             
 
+            
+
              in the same <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -736,13 +826,19 @@
 
             
 
+            
+
              parameter is null, then the <see
              cref="M:System.Runtime.Remoting.Proxies.RealProxy.InitializeServerObject(System.Runtime.Remoting.Activation.IConstructionCallMessage)" />
 
             
 
+            
+
              method calls the default constructor for the new instance of the remote object that is represented by the current <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -757,13 +853,19 @@
 
             
 
+            
+
              of the remote object that the current instance of <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
             
 
+            
+
              represents with the specified <see
              cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+            
 
             
 
@@ -779,8 +881,12 @@
 
           
 
+          
+
           A construction call message that contains the constructor parameters for the new instance of the remote object that is represented by the current <see
            cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+          
 
           
 
@@ -818,8 +924,12 @@
 
             
 
+            
+
              is called, it delegates the calls to the <see
              cref="M:System.Runtime.Remoting.Proxies.RealProxy.Invoke(System.Runtime.Remoting.Messaging.IMessage)" />
+
+            
 
             
 
@@ -828,8 +938,12 @@
 
             
 
+            
+
              method transforms the message in the <paramref
              name="msg" />
+
+            
 
             
 
@@ -838,8 +952,12 @@
 
             
 
+            
+
             , and sends it to the remote object that is represented by the current instance of <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -851,8 +969,12 @@
 
             
 
+            
+
              parameter provides a dictionary through the <see
              cref="P:System.Runtime.Remoting.Messaging.IMessage.Properties" />
+
+            
 
             
 
@@ -864,6 +986,8 @@
           <para
             >When overridden in a derived class, invokes the method that is specified in the provided <see
              cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+
+            
 
             
 
@@ -879,13 +1003,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Remoting.Messaging.IMessage" />
 
           
 
+          
+
            that contains a <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -921,8 +1051,12 @@
 
             
 
+            
+
             , then it is serialized and copied to the current location. If it is derived from <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -935,6 +1069,8 @@
         </summary>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -978,10 +1114,14 @@
 
           
 
+          
+
           The proxy for which to set stub data. </param
         >
         <param name="stubData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

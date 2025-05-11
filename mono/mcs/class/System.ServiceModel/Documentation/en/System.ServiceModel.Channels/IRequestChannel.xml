@@ -26,8 +26,12 @@
 
         
 
+        
+
          defines synchronous and asynchronous variants of a <see
          cref="M:System.ServiceModel.Channels.IRequestChannel.Request(System.ServiceModel.Message)" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Channels.IRequestChannel.Via" />
+
+        
 
         
 
@@ -80,8 +88,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -100,6 +112,8 @@
 
             
 
+            
+
              that references the asynchronous message transmission. </para
           >
         </returns>
@@ -108,8 +122,12 @@
 
           
 
+          
+
           The request <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -120,8 +138,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -129,6 +151,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,8 +191,12 @@
 
             
 
+            
+
              should be thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -180,8 +208,12 @@
 
             
 
+            
+
              is passed while calling the function then that value is used. If the <see
              cref="P:System.ServiceModel.Channels.Binding.SendTimeout" />
+
+            
 
             
 
@@ -190,11 +222,15 @@
 
             
 
+            
+
              is specified while calling the function.</para
           >
           <para
             >The <see
              cref="P:System.ServiceModel.Channels.ChannelBase.DefaultSendTimeout" />
+
+            
 
             
 
@@ -213,6 +249,8 @@
 
             
 
+            
+
              that references the asynchronous message transmission. </para
           >
         </returns>
@@ -221,8 +259,12 @@
 
           
 
+          
+
           The request <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -233,8 +275,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -245,8 +291,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -254,6 +304,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,8 +341,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -309,6 +365,8 @@
 
             
 
+            
+
              received in response to the request. </para
           >
         </returns>
@@ -317,13 +375,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="Overload:System.ServiceModel.Channels.IInputChannel.BeginReceive" />
+
+          
 
           
 
@@ -357,13 +421,19 @@
 
             
 
+            
+
              serves as both the ultimate destination and the physical address if a <see
              cref="P:System.ServiceModel.Channels.IRequestChannel.Via" />
 
             
 
+            
+
              is not specified. If the <see
              cref="P:System.ServiceModel.Channels.IRequestChannel.Via" />
+
+            
 
             
 
@@ -404,11 +474,15 @@
 
             
 
+            
+
              ensure that the response message is correlated with the request message. </para
           >
           <para
             >Generally, if an implementation of <see
              cref="T:System.ServiceModel.Channels.IRequestChannel" />
+
+            
 
             
 
@@ -420,6 +494,8 @@
 
             
 
+            
+
              method can be called concurrently across multiple threads. </para
           >
           <para
@@ -428,8 +504,12 @@
 
             
 
+            
+
             , you can no longer inspect the message or call <see
              cref="M:System.ServiceModel.Channels.Message.Close" />
+
+            
 
             
 
@@ -441,8 +521,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -461,6 +545,8 @@
 
             
 
+            
+
              received in response to the request. </para
           >
         </returns>
@@ -469,8 +555,12 @@
 
           
 
+          
+
           The request <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -507,11 +597,15 @@
 
             
 
+            
+
              ensure that the response message is correlated with the request message. </para
           >
           <para
             >Generally, if an implementation of <see
              cref="T:System.ServiceModel.Channels.IRequestChannel" />
+
+            
 
             
 
@@ -523,6 +617,8 @@
 
             
 
+            
+
              method can be called concurrently across multiple threads. </para
           >
           <para
@@ -531,8 +627,12 @@
 
             
 
+            
+
             , you can no longer inspect the message or call <see
              cref="M:System.ServiceModel.Channels.Message.Close" />
+
+            
 
             
 
@@ -544,8 +644,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -557,8 +661,12 @@
 
             
 
+            
+
              is passed while calling the function then that value is used. If the <see
              cref="P:System.ServiceModel.Channels.Binding.SendTimeout" />
+
+            
 
             
 
@@ -567,11 +675,15 @@
 
             
 
+            
+
              is specified while calling the function.</para
           >
           <para
             >The <see
              cref="P:System.ServiceModel.Channels.ChannelBase.DefaultSendTimeout" />
+
+            
 
             
 
@@ -590,6 +702,8 @@
 
             
 
+            
+
              received in response to the request. </para
           >
         </returns>
@@ -598,8 +712,12 @@
 
           
 
+          
+
           The request <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -610,8 +728,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -639,13 +761,19 @@
 
             
 
+            
+
              serves as both the ultimate destination and the physical address if a <see
              cref="P:System.ServiceModel.Channels.IRequestChannel.Via" />
 
             
 
+            
+
              is not specified. If the <see
              cref="P:System.ServiceModel.Channels.IRequestChannel.Via" />
+
+            
 
             
 

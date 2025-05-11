@@ -36,11 +36,15 @@
 
         
 
+        
+
          is the most interoperable, but the least efficient encoder for XML messages. Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is not efficient. </para
       >
       <para
         >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see
          cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
+
+        
 
         
 
@@ -52,11 +56,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >crabout how to implement a custom message encoder, use the <see
          cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              for this constructor is the version of WS-Addressing 1.0 and SOAP 1.2. The default text encoding is the UTF-8 format.</para
           >
         </remarks>
@@ -97,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />
+
+            
 
             
 
@@ -132,6 +144,8 @@
 
             
 
+            
+
              class with a specified message version and encoding.</para
           >
         </summary>
@@ -140,8 +154,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+          
 
           
 
@@ -152,8 +170,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -197,8 +219,12 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -210,8 +236,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -219,6 +249,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,8 +299,12 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -280,8 +316,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -289,6 +329,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -338,8 +380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -347,6 +393,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,6 +432,8 @@
 
             
 
+            
+
              object initialized from the current one.</para
           >
         </summary>
@@ -392,6 +442,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />
+
+            
 
             
 
@@ -426,6 +478,8 @@
 
             
 
+            
+
              objects that the factory produces can read messages from a stream and write them to a stream for specific types of message encoding.</para
           >
         </remarks>
@@ -438,6 +492,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+
+            
 
             
 
@@ -489,6 +545,8 @@
 
             
 
+            
+
              requested if it is present or null if it is not.</para
           >
         </returns>
@@ -497,8 +555,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -506,6 +568,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -583,6 +647,8 @@
 
             
 
+            
+
              for this constructor is the version of WS-Addressing 1.0 and SOAP 1.2.</para
           >
         </remarks>
@@ -651,12 +717,16 @@
 
                 
 
+                
+
                  = 32</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" />
+
+                
 
                 
 
@@ -669,6 +739,8 @@
 
                 
 
+                
+
                  = 16384</para
               >
             </item>
@@ -678,12 +750,16 @@
 
                 
 
+                
+
                  = 4096</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" />
+
+                
 
                 
 
@@ -729,8 +805,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -741,8 +821,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+          
 
           
 
@@ -782,13 +866,19 @@
 
             
 
+            
+
              is responsible for setting information about the message version in the WSDL. But this is done by the <see
              cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
 
             
 
+            
+
              method, not by <see
              cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+
+            
 
             
 
@@ -804,8 +894,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -816,8 +910,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+          
 
           
 
@@ -857,8 +955,12 @@
 
             
 
+            
+
              is responsible for setting information about the message version in the WSDL. But this is done by the <see
              cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+
+            
 
             
 
@@ -874,8 +976,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -886,8 +992,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+          
 
           
 

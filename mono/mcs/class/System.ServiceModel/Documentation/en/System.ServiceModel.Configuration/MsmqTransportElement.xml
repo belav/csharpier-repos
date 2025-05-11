@@ -25,11 +25,15 @@
 
         
 
+        
+
          enables the user to set the properties of the queued communication channel. The queued communication channel uses MSMQ for its transport.</para
       >
       <para
         >This binding element is the default binding element used by the MSMQ standard binding (<see
          cref="T:System.ServiceModel.NetMsmqBinding" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.MsmqTransportElement" />
+
+            
 
             
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              binding element.</para
           >
         </summary>
@@ -105,8 +113,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingElement" />
+
+          
 
           
 
@@ -168,11 +180,15 @@
 
             
 
+            
+
              to this configuration element.</para
           >
         </summary>
         <param name="from">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,8 +327,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
+
+            
 
             
 
@@ -321,8 +341,12 @@
 
             
 
+            
+
              when <see
              cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+
+            
 
             
 
@@ -358,6 +382,8 @@
           <para
             >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see
              cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+
+            
 
             
 

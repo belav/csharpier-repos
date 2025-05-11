@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is a read-only collection of <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          zone to track the set of <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          object consisting of the <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+        
 
         
 
@@ -58,13 +70,19 @@
 
         
 
+        
+
          object to save or retrieve property values between the <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
 
         
 
+        
+
          controls in the collection and the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -76,13 +94,19 @@
 
         
 
+        
+
          collection of controls for your own programmatic use if, for example, you need to perform some mass operation on a set of <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
 
         
 
+        
+
          controls. Even though the <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+        
 
         
 
@@ -97,8 +121,12 @@
 
         
 
+        
+
          controls used for editing the properties, layout, appearance, and behavior of <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -121,8 +149,12 @@
 
             
 
+            
+
              constructor initializes an empty instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -131,13 +163,19 @@
 
             
 
+            
+
              class in its <see
              cref="M:System.Web.UI.WebControls.WebParts.EditorZone.CreateEditorParts" />
 
             
 
+            
+
              method to create an empty collection object. The zone then creates instances of all the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -149,8 +187,12 @@
 
             
 
+            
+
              constructor to create a new instance of <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -159,8 +201,12 @@
 
             
 
+            
+
              controls to it. You must use one of the other overloads for the <see
              cref="M:System.Web.UI.WebControls.WebParts.EditorPartCollection.#ctor" />
+
+            
 
             
 
@@ -172,6 +218,8 @@
           <para
             >Initializes an empty new instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -202,8 +250,12 @@
 
             
 
+            
+
              constructor initializes an instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -212,8 +264,12 @@
 
             
 
+            
+
              controls. This is one overload of the <see
              cref="Overload:System.Web.UI.WebControls.WebParts.EditorPartCollection.#ctor" />
+
+            
 
             
 
@@ -222,8 +278,12 @@
 
             
 
+            
+
              object and add <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -235,8 +295,12 @@
 
             
 
+            
+
              instance created by the constructor is read-only, you can still access the individual <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -248,8 +312,12 @@
 
             
 
+            
+
              constructor would be if you want to perform some batch operation on an entire set of <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -261,8 +329,12 @@
 
             
 
+            
+
              constructor is developing custom <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -271,8 +343,12 @@
 
             
 
+            
+
              interface, and as part of that task, it must implement the <see
              cref="M:System.Web.UI.WebControls.WebParts.IWebEditable.CreateEditorParts" />
+
+            
 
             
 
@@ -281,8 +357,12 @@
 
             
 
+            
+
              controls to edit your server control, you must add the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -291,8 +371,12 @@
 
             
 
+            
+
              instance, such as an <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -301,8 +385,12 @@
 
             
 
+            
+
              controls to the <see
              cref="M:System.Web.UI.WebControls.WebParts.EditorPartCollection.#ctor(System.Web.UI.WebControls.WebParts.EditorPartCollection,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -311,8 +399,12 @@
 
             
 
+            
+
              object, which the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorZoneBase" />
+
+            
 
             
 
@@ -327,13 +419,19 @@
 
             
 
+            
+
              class by passing in an <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              collection of <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -345,13 +443,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ICollection" />
 
           
 
+          
+
            of <see
            cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+          
 
           
 
@@ -386,8 +490,12 @@
 
             
 
+            
+
              class by passing in an <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -396,13 +504,19 @@
 
             
 
+            
+
              controls, and an <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              collection of additional <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -414,13 +528,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ICollection" />
 
           
 
+          
+
            of existing <see
            cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+          
 
           
 
@@ -431,13 +551,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ICollection" />
 
           
 
+          
+
            of <see
            cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+          
 
           
 
@@ -470,13 +596,19 @@
 
             
 
+            
+
              method determines whether a specific <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
 
             
 
+            
+
              control is already in the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -495,6 +627,8 @@
 
             
 
+            
+
              is in the collection.</para
           >
         </returns>
@@ -503,8 +637,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+          
 
           
 
@@ -538,13 +676,19 @@
 
             
 
+            
+
              method is useful when you want to create a custom array that can contain the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
 
             
 
+            
+
              controls in the <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -559,6 +703,8 @@
 
             
 
+            
+
              controls.</para
           >
         </summary>
@@ -567,8 +713,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+          
 
           
 
@@ -576,6 +726,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -602,6 +754,8 @@
           <para
             >A static, read-only, empty instance of <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPartCollection" />
+
+            
 
             
 
@@ -639,8 +793,12 @@
 
             
 
+            
+
              method is useful if you have multiple <see
              cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+            
 
             
 
@@ -659,6 +817,8 @@
 
             
 
+            
+
              control in the collection.</para
           >
         </returns>
@@ -667,8 +827,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
+
+          
 
           
 

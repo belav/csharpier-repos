@@ -46,6 +46,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -72,6 +74,8 @@
           <para
             >The template can accept and expose property values. Used with an <see
              cref="T:System.Web.UI.IBindableTemplate" />
+
+            
 
             
 

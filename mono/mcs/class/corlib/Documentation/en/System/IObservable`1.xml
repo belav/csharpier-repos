@@ -27,8 +27,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IObservable`1" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          interface represents the class that sends notifications (the provider); the <see
          cref="T:System.IObserver`1" />
+
+        
 
         
 
@@ -47,13 +55,19 @@
 
         
 
+        
+
          represents the class that provides the notification information. In some push-based notifications, the <see
          cref="T:System.IObserver`1" />
 
         
 
+        
+
          implementation and <paramref
          name="T" />
+
+        
 
         
 
@@ -65,8 +79,12 @@
 
         
 
+        
+
         , that indicates that an observer wants to receive push-based notifications. Callers to the method pass an instance of the observer. The method returns an <see
          cref="T:System.IDisposable" />
+
+        
 
         
 
@@ -78,11 +96,15 @@
 
         
 
+        
+
          interface does not make any assumptions about the number of observers or the order in which notifications are sent.</para
       >
       <para
         >The provider sends the following three kinds of notifications to the observer by calling <see
          cref="T:System.IObserver`1" />
+
+        
 
         
 
@@ -96,8 +118,12 @@
 
             
 
+            
+
              method to pass the observer a <paramref
              name="T" />
+
+            
 
             
 
@@ -111,6 +137,8 @@
 
             
 
+            
+
              method to notify the observer that some error condition has occurred.</para
           >
         </item>
@@ -118,6 +146,8 @@
           <para
             >No further data. The provider can call the <see
              cref="M:System.IObserver`1.OnCompleted" />
+
+            
 
             
 

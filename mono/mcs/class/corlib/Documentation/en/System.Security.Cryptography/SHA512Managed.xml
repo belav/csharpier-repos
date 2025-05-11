@@ -36,6 +36,8 @@
 
         
 
+        
+
          algorithm is 512 bits.</para
       >
     </remarks>
@@ -44,6 +46,8 @@
       <para
         >Computes the <see
          cref="T:System.Security.Cryptography.SHA512" />
+
+        
 
         
 
@@ -76,11 +80,15 @@
 
             
 
+            
+
              algorithm is 512 bits.</para
           >
           <para
             >Important   If you enable the FIPS security setting either in the Local Security Policy or as part of Group Policy you will get an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -92,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.SHA512Managed" />
+
+            
 
             
 
@@ -137,11 +147,15 @@
 
             
 
+            
+
              hash algorithm for computing the hash.</para
           >
         </summary>
         <param name="rgb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -152,10 +166,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="cbSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,6 +238,8 @@
 
             
 
+            
+
              algorithm is 512 bits.</para
           >
         </remarks>
@@ -228,6 +248,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Security.Cryptography.SHA512Managed" />
+
+            
 
             
 

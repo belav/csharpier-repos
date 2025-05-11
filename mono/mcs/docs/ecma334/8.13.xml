@@ -5,7 +5,7 @@
   <paragraph
     >As an example, consider the situation of a base class author who ships a class named Base. In the first version, Base contains no method F. A component named Derived derives from Base, and introduces an F. This Derived class, along with the class Base on which it depends, is released to customers, who deploy to numerous clients and servers. <code_example
     >
-      <![CDATA[
+<![CDATA[
 // Author A  
 namespace A   
 {  
@@ -29,7 +29,7 @@ namespace B
   <paragraph
     >So far, so good, but now the versioning trouble begins. The author of Base produces a new version, giving it its own method F. <code_example
     >
-      <![CDATA[
+<![CDATA[
 // Author A  
 namespace A   
 {  
@@ -50,7 +50,7 @@ namespace A
   <paragraph
     >If Derived's F is semantically unrelated to Base's F, then Derived's author can express this intent-and, in effect, turn off the warning-by using the new keyword in the declaration of F. <code_example
     >
-      <![CDATA[
+<![CDATA[
 // Author A  
 namespace A   
 {  
@@ -77,7 +77,7 @@ namespace B
   <paragraph
     >On the other hand, Derived's author might investigate further, and decide that Derived's F should override Base's F. This intent can be specified by using the override keyword, as shown below. <code_example
     >
-      <![CDATA[
+<![CDATA[
 // Author A  
 namespace A   
 {  

@@ -22,6 +22,8 @@
 
         
 
+        
+
          as a sibling of the root element node.</para
       >
     </remarks>
@@ -54,6 +56,8 @@
 
             
 
+            
+
              class with the specified string content. </para
           >
         </summary>
@@ -62,8 +66,12 @@
 
           
 
+          
+
           A string that contains the contents of the new <see
            cref="T:System.Xml.Linq.XComment" />
+
+          
 
           
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
              class from an existing comment node. </para
           >
         </summary>
@@ -105,8 +115,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XComment" />
+
+          
 
           
 
@@ -140,13 +154,19 @@
 
             
 
+            
+
              contain a <see
              cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
+            
+
              property, you can write code that operates on collections of concrete subclass of <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -179,8 +199,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Linq.XAttribute" />
+
+            
 
             
 
@@ -192,8 +216,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -234,6 +262,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -245,6 +275,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -253,8 +285,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

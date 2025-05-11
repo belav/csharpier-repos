@@ -47,6 +47,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -73,11 +75,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="enableSession">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,6 +126,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -128,10 +136,14 @@
 
           
 
+          
+
           Initializes whether session state is enabled for the XML Web service method. </param
         >
         <param name="transactionOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,11 +187,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="enableSession">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,10 +206,14 @@
 
           
 
+          
+
           Initializes the transaction support of an XML Web service method. </param
         >
         <param name="cacheDuration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,11 +258,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="enableSession">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,6 +277,8 @@
 
           
 
+          
+
           Initializes the transaction support of an XML Web service method. </param
         >
         <param name="cacheDuration">
@@ -260,10 +286,14 @@
 
           
 
+          
+
           Initializes the number of seconds the response is cached. </param
         >
         <param name="bufferResponse">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -292,8 +322,12 @@
 
             
 
+            
+
              to true, serializes the response of the XML Web service method into a memory buffer until either the response is completely serialized or the buffer is full. Once the response is buffered, it is returned to the XML Web service client over the network. When <see
              cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
+
+            
 
             
 
@@ -302,8 +336,12 @@
 
             
 
+            
+
              to false, if it is known that an XML Web service method returns large amounts of data to the client. For smaller amounts of data, XML Web service performance is better with <see
              cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
+
+            
 
             
 
@@ -312,6 +350,8 @@
           <para
             >When <see
              cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
+
+            
 
             
 
@@ -395,8 +435,12 @@
 
             
 
+            
+
              object, the XML Web service must inherit from <see
              cref="T:System.Web.Services.WebService" />
+
+            
 
             
 
@@ -405,8 +449,12 @@
 
             
 
+            
+
              applied to the XML Web service method, setting the <see
              cref="P:System.Web.Services.WebMethodAttribute.EnableSession" />
+
+            
 
             
 
@@ -418,8 +466,12 @@
 
             
 
+            
+
              and assigning that to the <see
              cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
+
+            
 
             
 
@@ -428,8 +480,12 @@
 
             
 
+            
+
              in its own session state. Because not all XML Web services use session state and thus clients are not always required to use the <see
              cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
+
+            
 
             
 
@@ -463,8 +519,12 @@
 
             
 
+            
+
              property can be used to alias method or property names. The most common use of the <see
              cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
+
+            
 
             
 
@@ -473,8 +533,12 @@
 
             
 
+            
+
              is set to the name of the XML Web service method. Therefore, if an XML Web service contains two or more XML Web service methods with the same name, you can uniquely identify the individual XML Web service methods by setting the <see
              cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
+
+            
 
             
 
@@ -483,6 +547,8 @@
           <para
             >When data is passed to an XML Web service it is sent in a request and when it is returned it is sent in a response. Within the request and response, the name used for the XML Web service method is its <see
              cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
+
+            
 
             
 
@@ -524,8 +590,12 @@
 
             
 
+            
+
              property of Required or RequiresNew invokes another XML Web service method with a <see
              cref="P:System.Web.Services.WebMethodAttribute.TransactionOption" />
+
+            
 
             
 

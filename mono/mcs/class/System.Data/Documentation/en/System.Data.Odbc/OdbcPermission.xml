@@ -24,6 +24,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -55,6 +57,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -83,8 +87,12 @@
 
             
 
+            
+
              class with one of the <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -96,8 +104,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -133,8 +145,12 @@
 
             
 
+            
+
              enumeration takes precedence over the <see
              cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+
+            
 
             
 
@@ -143,8 +159,12 @@
 
             
 
+            
+
              to false, you must also set <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -159,6 +179,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -167,10 +189,14 @@
 
           
 
+          
+
           One of the System.Security.Permissions.PermissionState values. </param
         >
         <param name="allowBlankPassword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,10 +251,14 @@
 
           
 
+          
+
           A permitted connection string. </param
         >
         <param name="restrictions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,8 +269,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.KeyRestrictionBehavior" />
+
+          
 
           
 
@@ -265,8 +299,12 @@
 
             
 
+            
+
              as an <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 

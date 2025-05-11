@@ -3,7 +3,7 @@
   <paragraph
     >Application startup occurs when the execution environment calls a designated method, which is referred to as the application's entry point. This entry point method is always named Main, and shall have one of the following signatures: <code_example
     >
-      <![CDATA[
+<![CDATA[
 static void Main() {...}  
 static void Main(string[] args) {...}  
 static int Main() {...}  
@@ -17,8 +17,12 @@ static int Main(string[] args) {...}
 
     
 
+    
+
      value. This return value is used in application termination (<hyperlink
     >10.2</hyperlink>
+
+    
 
     
 
@@ -42,8 +46,12 @@ static int Main(string[] args) {...}
 
     
 
+    
+
     ) of a method is determined by the access modifiers (<hyperlink
     >17.2.3</hyperlink>
+
+    
 
     
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          is displayed on the drop-down box from the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          method is called with the <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -46,6 +54,8 @@
       <para
         >Creates an instance of a particular type of property from a drop-down box within the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -73,6 +83,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.InstanceCreationEditor" />
+
+            
 
             
 
@@ -115,6 +127,8 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

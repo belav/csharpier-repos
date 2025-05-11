@@ -27,8 +27,12 @@
 
         
 
+        
+
          object can have an <see
          cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          objects can construct an <see
          cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+
+            
 
             
 
@@ -199,6 +209,8 @@
 
             
 
+            
+
              members to their default values.</para
           >
         </summary>
@@ -232,8 +244,12 @@
 
             
 
+            
+
              enumeration. <see
              cref="F:System.Security.Cryptography.X509Certificates.X509RevocationFlag.ExcludeRoot" />
+
+            
 
             
 
@@ -274,8 +290,12 @@
 
             
 
+            
+
              enumeration. <see
              cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.Online" />
+
+            
 
             
 
@@ -340,6 +360,8 @@
           <para
             >This property returns values from the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509VerificationFlags" />
+
+            
 
             
 

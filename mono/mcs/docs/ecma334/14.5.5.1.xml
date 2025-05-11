@@ -6,13 +6,19 @@
 
     
 
+    
+
      of the <non_terminal
      where="14.5.5">invocation-expression</non_terminal>
 
     
 
+    
+
      must be a method group. The method group identifies the one method to invoke or the set of overloaded methods from which to choose a specific method to invoke. In the latter case, determination of the specific method to invoke is based on the context provided by the types of the arguments in the <non_terminal
      where="14.4.1">argument-list</non_terminal>
+
+    
 
     
 
@@ -24,11 +30,15 @@
 
     
 
+    
+
     , consists of the following steps: <list
     >
       <list_item
         > The set of candidate methods for the method invocation is constructed. Starting with the set of methods associated with M, which were found by a previous member lookup (<hyperlink
         >14.3</hyperlink>
+
+        
 
         
 
@@ -41,11 +51,15 @@
 
           
 
+          
+
           ), then N is removed from the set. </list_item
         >
         <list_item
           > If N is applicable with respect to A (<hyperlink
           >14.4.2.1</hyperlink>
+
+          
 
           
 
@@ -58,11 +72,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > The best method of the set of candidate methods is identified using the overload resolution rules of <hyperlink
         >14.4.2</hyperlink>
+
+        
 
         
 
@@ -74,8 +92,12 @@
 
         
 
+        
+
          or a  <non_terminal
          where="14.5.4">member-access</non_terminal>
+
+        
 
         
 
@@ -84,13 +106,19 @@
 
         
 
+        
+
         , a <non_terminal
          where="14.5.4">member-access</non_terminal>
 
         
 
+        
+
          through a variable or value, or a <non_terminal
          where="14.5.8">base-access</non_terminal>
+
+        
 
         
 
@@ -101,6 +129,8 @@
   <paragraph
     >Once a method has been selected and validated at compile-time by the above steps, the actual run-time invocation is processed according to the rules of function member invocation described in <hyperlink
     >14.4.3</hyperlink>
+
+    
 
     
 

@@ -29,8 +29,12 @@
 
         
 
+        
+
          class associates settings information with a settings property. The <see
          cref="T:System.Configuration.ApplicationSettingsBase" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingAttribute" />
+
+            
 
             
 

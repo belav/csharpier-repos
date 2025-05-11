@@ -35,8 +35,12 @@
 
         
 
+        
+
          class provides methods that simplify reading primitive data types from a stream. For example, you can use the <see
          cref="M:System.IO.BinaryReader.ReadBoolean" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          class, you provide the stream to read from, and optionally specify the type of encoding and whether to leave the stream open after disposing the <see
          cref="T:System.IO.BinaryReader" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -100,11 +110,15 @@
 
             
 
+            
+
              class based on the specified stream and using UTF-8 encoding.</para
           >
         </summary>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,6 +157,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -154,6 +170,8 @@
 
             
 
+            
+
              class based on the specified stream and character encoding.</para
           >
         </summary>
@@ -162,10 +180,14 @@
 
           
 
+          
+
           The input stream. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,11 +223,15 @@
 
             
 
+            
+
              class based on the specified stream and character encoding, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -216,6 +242,8 @@
 
           
 
+          
+
           The character encoding to use.</param
         >
         <param name="leaveOpen">
@@ -223,8 +251,12 @@
 
           
 
+          
+
           true to leave the stream open after the <see
            cref="T:System.IO.BinaryReader" />
+
+          
 
           
 
@@ -262,6 +294,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -270,6 +304,8 @@
           <para
             >Exposes access to the underlying stream of the <see
              cref="T:System.IO.BinaryReader" />
+
+            
 
             
 
@@ -303,6 +339,8 @@
 
             
 
+            
+
              method passing a true value.</para
           >
           <para
@@ -311,8 +349,12 @@
 
             
 
+            
+
              or Close. Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -348,8 +390,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.IO.BinaryReader" />
+
+            
 
             
 
@@ -358,8 +404,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.IO.BinaryReader" />
+
+            
 
             
 
@@ -373,10 +423,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -389,8 +443,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.IO.BinaryReader" />
+
+              
 
               
 
@@ -403,6 +461,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.IO.BinaryReader" />
+
+            
 
             
 
@@ -438,8 +498,12 @@
 
             
 
+            
+
             . By default, this method specifies the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -448,8 +512,12 @@
 
             
 
+            
+
              specifies the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -461,8 +529,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.BinaryReader" />
+
+            
 
             
 
@@ -477,11 +549,15 @@
 
             
 
+            
+
              class and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -516,6 +592,8 @@
 
             
 
+            
+
              for the specified encoding.</para
           >
           <para
@@ -523,6 +601,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -535,6 +615,8 @@
         </summary>
         <param name="numBytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -567,6 +649,8 @@
 
             
 
+            
+
              method, then set the stream back to the original position.</para
           >
           <para
@@ -574,6 +658,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -614,6 +700,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para
@@ -621,6 +709,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -668,6 +758,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read operation.</para
           >
           <para
@@ -675,6 +767,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -693,11 +787,15 @@
 
             
 
+            
+
             . This might be less than the number of bytes requested if that many bytes are not available, or it might be zero if the end of the stream is reached.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -708,10 +806,14 @@
 
           
 
+          
+
           The starting point in the buffer at which to begin reading into the buffer. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -750,6 +852,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read operation.</para
           >
           <para
@@ -757,6 +861,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -776,6 +882,8 @@
 
           
 
+          
+
           The buffer to read data into. </param
         >
         <param name="index">
@@ -783,10 +891,14 @@
 
           
 
+          
+
           The starting point in the buffer at which to begin reading into the buffer. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -818,11 +930,15 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para
             >If the integer will fit in seven bits, the integer takes only one byte of space. The integer is expected to have been written through <see
              cref="M:System.IO.BinaryWriter.Write7BitEncodedInt(System.Int32)" />
+
+            
 
             
 
@@ -833,6 +949,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -873,6 +991,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para
@@ -880,6 +1000,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -920,6 +1042,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>Because of data formatting conflicts, using this method with the following encodings is not recommended:</para>
@@ -939,6 +1063,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -981,6 +1107,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read operation.</para
           >
           <para
@@ -988,6 +1116,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1004,6 +1134,8 @@
         </returns>
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1036,13 +1168,19 @@
 
             
 
+            
+
              method attempts to read a surrogate character in the stream an exception will be raised and the position in the stream will advance. The position is restored to the original location before <see
              cref="M:System.IO.BinaryReader.ReadChar" />
 
             
 
+            
+
              was called if the stream is seekable; however, if the stream is unseekable, the position will not be corrected. If surrogate characters can be expected in the stream, use the <see
              cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
+
+            
 
             
 
@@ -1065,6 +1203,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1107,6 +1247,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read operation.</para
           >
           <para
@@ -1115,8 +1257,12 @@
 
             
 
+            
+
              method might read an extra character from the stream if the <see
              cref="T:System.IO.BinaryReader" />
+
+            
 
             
 
@@ -1125,8 +1271,12 @@
 
             
 
+            
+
              method to read a fixed-length byte array, and then pass that array to the <see
              cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
+
+            
 
             
 
@@ -1143,6 +1293,8 @@
         </returns>
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1174,6 +1326,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para
@@ -1181,6 +1335,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1221,6 +1377,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
@@ -1229,6 +1387,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1269,6 +1429,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
@@ -1277,6 +1439,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1317,10 +1481,14 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>
             <see cref="T:System.IO.BinaryReader" />
+
+            
 
             
 
@@ -1331,6 +1499,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1371,6 +1541,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
@@ -1379,6 +1551,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1424,6 +1598,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para
@@ -1431,6 +1607,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1471,6 +1649,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
@@ -1479,6 +1659,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1519,6 +1701,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para
@@ -1526,6 +1710,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1571,6 +1757,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
@@ -1579,6 +1767,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1624,6 +1814,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
@@ -1632,6 +1824,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1677,6 +1871,8 @@
 
             
 
+            
+
              does not restore the file position after an unsuccessful read.</para
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
@@ -1685,6 +1881,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1717,8 +1915,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1730,6 +1932,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.IO.BinaryReader" />
+
+            
 
             
 

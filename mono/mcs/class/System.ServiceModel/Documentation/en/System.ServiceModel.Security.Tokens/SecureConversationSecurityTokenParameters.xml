@@ -53,8 +53,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -67,8 +71,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -78,6 +86,8 @@
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                
 
                 
 
@@ -91,6 +101,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters" />
+
+            
 
             
 
@@ -124,6 +136,8 @@
 
             
 
+            
+
              specifies the security binding element to use when securing the messages exchanged as part of the secure conversation token issuance.</para
           >
         </remarks>
@@ -135,8 +149,12 @@
 
             
 
+            
+
              class from the properties of a specified <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -178,6 +196,8 @@
 
             
 
+            
+
              class from another instance of this class.</para
           >
         </summary>
@@ -209,8 +229,12 @@
 
             
 
+            
+
              specifies the security binding element to use when securing the messages exchanged as part of the secure conversation token issuance. If <paramref
              name="requireCancellation" />
+
+            
 
             
 
@@ -225,8 +249,12 @@
 
             
 
+            
+
              class from the properties of a specified <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -235,6 +263,8 @@
         </summary>
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,8 +303,12 @@
 
             
 
+            
+
              specifies the security binding element to use when securing the messages exchanged as part of the secure conversation token issuance. If <paramref
              name="requireCancellation" />
+
+            
 
             
 
@@ -282,6 +316,8 @@
           >
           <para>
             <paramref name="bootstrapProtectionRequirements" />
+
+            
 
             
 
@@ -296,8 +332,12 @@
 
             
 
+            
+
              class from the properties of a specified <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -306,11 +346,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,8 +438,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -406,8 +454,12 @@
 
             
 
+            
+
              is an abstract class which is overridden by <see
              cref="M:System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -419,8 +471,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters)" />
+
+            
 
             
 
@@ -436,6 +492,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters" />
+
+            
 
             
 
@@ -476,8 +534,12 @@
 
             
 
+            
+
              method, with <paramref
              name="referenceStyle" />
+
+            
 
             
 
@@ -497,10 +559,14 @@
 
           
 
+          
+
           The token.</param
         >
         <param name="referenceStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -561,6 +627,8 @@
 
             
 
+            
+
              are initialized:</para
           >
           <list type="bullet">
@@ -570,8 +638,12 @@
 
                 
 
+                
+
                  = <see
                  cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.SecureConversation" />
+
+                
 
                 
 
@@ -581,6 +653,8 @@
             <item>
               <para>
                 <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" />
+
+                
 
                 
 
@@ -594,13 +668,19 @@
 
                 
 
+                
+
                  property in <see
                  cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
 
                 
 
+                
+
                  is set to <see
                  cref="P:System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters.RequireCancellation" />
+
+                
 
                 
 
@@ -614,13 +694,19 @@
 
                 
 
+                
+
                  property in <see
                  cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
 
                 
 
+                
+
                  is set to <see
                  cref="P:System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters.BootstrapSecurityBindingElement" />
+
+                
 
                 
 
@@ -634,8 +720,12 @@
 
                 
 
+                
+
                  property in <see
                  cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
+
+                
 
                 
 
@@ -648,8 +738,12 @@
 
                 
 
+                
+
                  = <see
                  cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
+
+                
 
                 
 
@@ -664,6 +758,8 @@
         </summary>
         <param name="requirement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -691,13 +787,19 @@
 
             
 
+            
+
              property with the actual caller's identity, but instead sets the property to anonymous. Because indigo2 security must re-create the content of the service security context for every request from the incoming security context token, the server does not keep track of the security session in the memory. Because it is impossible to serialize the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
+            
+
              instance into the security context token, the <see
              cref="P:System.ServiceModel.ServiceSecurityContext.WindowsIdentity" />
+
+            
 
             
 
@@ -722,6 +824,8 @@
                 >How To: Create a Security Context Token for a Secure Session</a
               >
             </format>
+
+            
 
             
 
@@ -832,8 +936,12 @@
 
             
 
+            
+
             , and, if non-null, <see
              cref="P:System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters.BootstrapSecurityBindingElement" />
+
+            
 
             
 

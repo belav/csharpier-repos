@@ -16,8 +16,12 @@
 
         
 
+        
+
          interface provides several UI-oriented properties that enhance the user experience of working with <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -26,13 +30,19 @@
 
         
 
+        
+
          class, you get an implementation of all the properties in the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
+        
+
          interface, because the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -44,8 +54,12 @@
 
         
 
+        
+
          class as part of a Web Parts application, and they can also use these UI-oriented properties declared by the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+
+        
 
         
 
@@ -54,8 +68,12 @@
 
         
 
+        
+
          zone, at run time they are wrapped with a <see
          cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" />
+
+        
 
         
 
@@ -64,8 +82,12 @@
 
         
 
+        
+
          class inherits from the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -74,8 +96,12 @@
 
         
 
+        
+
          controls and it adds to them the properties of the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+
+        
 
         
 
@@ -87,8 +113,12 @@
 
         
 
+        
+
          controls in zones, they can use the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+
+        
 
         
 
@@ -97,13 +127,19 @@
 
         
 
+        
+
          properties that are declared on server controls. Declared properties on these controls still work when you load the page, but Microsoft Visual Studio does not recognize the properties as valid at design time. If you want to add the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
+        
+
          properties to existing server and user controls to enhance the design-time user experience, you can implement the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+
+        
 
         
 
@@ -115,8 +151,12 @@
 
         
 
+        
+
          interface is for controls that do not support the use of expando (custom) properties. Expando properties are strings that can be added to a class dynamically as a property, by means of the <see
          cref="T:System.Web.UI.IAttributeAccessor" />
+
+        
 
         
 
@@ -125,8 +165,12 @@
 
         
 
+        
+
          class and its children, can use expando properties. Therefore, all ASP.NET server controls, custom controls that derive from them, Web user controls, and <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -135,8 +179,12 @@
 
         
 
+        
+
          class do not support expando properties. Thus, if you declare these controls within a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" />
+
+        
 
         
 
@@ -145,8 +193,12 @@
 
         
 
+        
+
          properties on the controls, properties such as <see
          cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
+
+        
 
         
 
@@ -155,8 +207,12 @@
 
         
 
+        
+
         . If you want to use these properties with such controls, you must implement the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+
+        
 
         
 
@@ -168,6 +224,8 @@
       <para
         >Defines common user interface (UI) properties used by ASP.NET <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -193,6 +251,8 @@
 
             
 
+            
+
              property on a control contains the URL to an image that represents the control when it appears in a catalog.</para
           >
         </remarks>
@@ -201,6 +261,8 @@
           <para
             >Gets or sets the URL to an image that represents a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -229,8 +291,12 @@
 
             
 
+            
+
              property value is typically used as a descriptive string for a control in catalogs that provide lists of <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -242,6 +308,8 @@
           <para
             >Gets or sets a brief phrase that summarizes what a control does, for use in ToolTips and catalogs of <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -270,8 +338,12 @@
 
             
 
+            
+
              property is used to return a default subtitle string for a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -283,13 +355,19 @@
 
             
 
+            
+
              property in a control that implements the <see
              cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
             
 
+            
+
              interface, the Web Parts control set automatically appends it to the value of the <see
              cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
+
+            
 
             
 
@@ -304,8 +382,12 @@
 
             
 
+            
+
              property value to form a complete title for a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -334,6 +416,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -342,8 +426,12 @@
 
             
 
+            
+
             . Also, it is possible to provide a default subtitle that is appended to the title string. For details, see <see
              cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Subtitle" />
+
+            
 
             
 
@@ -355,6 +443,8 @@
           <para
             >Gets or sets the title of a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -383,8 +473,12 @@
 
             
 
+            
+
              property provides a way to associate an icon with a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -393,11 +487,15 @@
 
             
 
+            
+
              property). </para
           >
           <para
             >As it is implemented in the Web Parts control set, the <see
              cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleIconImageUrl" />
+
+            
 
             
 
@@ -430,6 +528,8 @@
 
             
 
+            
+
              property, the title of the control becomes a link. The purpose of this property is to provide a convenient way for end users to access additional information about a control. The additional information could provide copyright data, contact data, details about the creator of the control, or a summary of the control's purpose. </para
           >
           <block subset="none" type="note">
@@ -439,8 +539,12 @@
 
               
 
+              
+
                property to link to Help content. The best way to provide a link to Help for a control is to use the <see
                cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpUrl" />
+
+              
 
               
 
@@ -453,6 +557,8 @@
           <para
             >Gets or sets a URL to supplemental information about a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 

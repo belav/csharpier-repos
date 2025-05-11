@@ -23,6 +23,8 @@
 
         
 
+        
+
          drawing.</para
       >
     </summary>
@@ -49,8 +51,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -62,8 +68,12 @@
 
           
 
+          
+
           The graphics used to paint the <see
            cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          
 
           
 
@@ -74,8 +84,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          
 
           
 
@@ -101,6 +115,8 @@
           <para
             >Gets or sets the graphics used to paint the <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -149,6 +165,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 

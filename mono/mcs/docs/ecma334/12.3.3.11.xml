@@ -3,7 +3,7 @@
   <paragraph
     >For a statement stmt of the form <code_example
     >
-      <![CDATA[
+<![CDATA[
 throw expr ;  
 ]]>
     </code_example>

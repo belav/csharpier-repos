@@ -17,8 +17,12 @@
 
         
 
+        
+
          enumeration is used when you call the <see
          cref="M:System.ComponentModel.Design.Data.IDataEnvironment.BuildQuery(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.ComponentModel.Design.Data.QueryBuilderMode,System.String)" />
+
+        
 
         
 

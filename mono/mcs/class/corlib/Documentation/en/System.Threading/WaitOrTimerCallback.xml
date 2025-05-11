@@ -42,8 +42,12 @@
 
         
 
+        
+
          represents a callback method that you want to execute when a registered wait handle times out or is signaled. Create the delegate by passing your callback method to the <see
          cref="T:System.Threading.WaitOrTimerCallback" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          delegate and a <see
          cref="T:System.Threading.WaitHandle" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
         . Your callback method executes each time the <see
          cref="T:System.Threading.WaitHandle" />
+
+        
 
         
 
@@ -80,8 +92,12 @@
 
           
 
+          
+
            constructor, and simply use the AddressOf operator when passing the callback method to <see
            cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+
+          
 
           
 
@@ -94,8 +110,12 @@
 
         
 
+        
+
          when you create the registered wait handle. Each time your callback method executes, the <paramref
          name="state" />
+
+        
 
         
 
@@ -109,6 +129,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -117,6 +139,8 @@
       <para
         >Represents a method to be called when a <see
          cref="T:System.Threading.WaitHandle" />
+
+        
 
         
 

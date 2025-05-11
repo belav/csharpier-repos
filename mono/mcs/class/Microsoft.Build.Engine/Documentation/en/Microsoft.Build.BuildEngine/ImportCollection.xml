@@ -29,6 +29,8 @@
 
         
 
+        
+
          elements in a project. </para
       >
     </summary>
@@ -58,13 +60,19 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
 
             
 
+            
+
              of <see
              cref="T:Microsoft.Build.BuildEngine.Import" />
+
+            
 
             
 
@@ -76,8 +84,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -86,13 +98,19 @@
 
           
 
+          
+
            objects that is the destination of the elements copied from <see
            cref="T:Microsoft.Build.BuildEngine.ImportCollection" />
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -103,8 +121,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -136,8 +158,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -149,8 +175,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -159,8 +189,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -171,8 +205,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -200,10 +238,14 @@
 
             
 
+            
+
              object in the collection represents a <format
              type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
+
+            
 
             
 
@@ -218,8 +260,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.ImportCollection" />
+
+            
 
             
 
@@ -251,8 +297,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.ImportCollection" />
+
+            
 
             
 
@@ -267,6 +317,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -278,8 +330,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:Microsoft.Build.BuildEngine.ImportCollection" />
+
+            
 
             
 
@@ -309,6 +365,8 @@
 
             
 
+            
+
              is synchronized (thread safe).</para
           >
         </summary>
@@ -332,6 +390,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:Microsoft.Build.BuildEngine.ImportCollection" />
+
+            
 
             
 

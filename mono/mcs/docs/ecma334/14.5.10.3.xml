@@ -6,8 +6,12 @@
 
     
 
+    
+
      is used to create a new instance of a <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="14.5.10.3">delegate-creation-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -35,13 +41,19 @@
 
     
 
+    
+
     ) or a value of a  <non_terminal
      where="11.2">delegate-type</non_terminal>
 
     
 
+    
+
     . If the argument is a method group, it identifies the method and, for an instance method, the object for which to create a delegate. If the argument is a value of a <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -53,8 +65,12 @@
 
     
 
+    
+
      of the form new D(E), where D is a <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -68,6 +84,8 @@
 
           
 
+          
+
           ) with D, and this method becomes the one to which the newly created delegate refers. If no matching method exists, or if more than one matching method exists, a compile-time error occurs. If the selected method is an instance method, the instance expression associated with E determines the target object of the delegate. </list_item
         >
         <list_item
@@ -76,8 +94,12 @@
 
           
 
+          
+
            or a <non_terminal
            where="14.5.4">member-access</non_terminal>
+
+          
 
           
 
@@ -86,8 +108,12 @@
 
           
 
+          
+
            or a <non_terminal
            where="14.5.4">member-access</non_terminal>
+
+          
 
           
 
@@ -100,6 +126,8 @@
         <list_item
           > D and E must be compatible (<hyperlink
           >22.1</hyperlink>
+
+          
 
           
 
@@ -116,8 +144,12 @@
 
     
 
+    
+
      of the form new D(E), where D is a <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -130,7 +162,11 @@
           <list_item> The instance expression is evaluated. If this evaluation causes an exception, no further steps are executed. </list_item>
           <list_item
             > If the instance expression is of a <non_terminal
-             where="11.2">reference-type</non_terminal>
+             where="11.2"
+>reference-type</non_terminal
+            >
+
+            
 
             
 
@@ -142,8 +178,12 @@
 
             
 
+            
+
             , a boxing operation (<hyperlink
             >11.3.1</hyperlink>
+
+            
 
             
 
@@ -171,7 +211,7 @@
     <example
       >[Example: As described above, when a delegate is created from a method group, the formal parameter list and return type of the delegate determine which of the overloaded methods to select. In the example <code_example
       >
-        <![CDATA[
+<![CDATA[
 delegate double DoubleFunc(double x);  
 class A  
 {  
@@ -185,6 +225,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

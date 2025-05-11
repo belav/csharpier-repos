@@ -27,13 +27,19 @@
 
         
 
+        
+
          object using the <see
          cref="M:System.Drawing.Graphics.BeginContainer" />
 
         
 
+        
+
          and <see
          cref="M:System.Drawing.Graphics.EndContainer(System.Drawing.Drawing2D.GraphicsContainer)" />
+
+        
 
         
 

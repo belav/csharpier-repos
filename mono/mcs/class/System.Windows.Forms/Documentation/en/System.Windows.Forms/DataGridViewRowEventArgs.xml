@@ -19,8 +19,12 @@
 
         
 
+        
+
          class provides data for the following <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -97,6 +101,8 @@
 
         
 
+        
+
          events. </para
       >
     </summary>
@@ -121,8 +127,12 @@
 
             
 
+            
+
              parameter value to initialize the <see
              cref="P:System.Windows.Forms.DataGridViewRowEventArgs.Row" />
+
+            
 
             
 
@@ -137,6 +147,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -145,8 +157,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -175,6 +191,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 

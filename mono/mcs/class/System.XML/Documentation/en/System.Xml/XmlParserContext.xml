@@ -34,6 +34,8 @@
 
         
 
+        
+
          to parse an XML fragment.</para
       >
     </summary>
@@ -73,13 +75,19 @@
 
             
 
+            
+
             (<paramref
              name="nt" />
 
             
 
+            
+
             , <paramref
              name="nsMgr" />
+
+            
 
             
 
@@ -89,8 +97,12 @@
 
             
 
+            
+
             , <see
              langword="null" />
+
+            
 
             
 
@@ -99,8 +111,12 @@
 
             
 
+            
+
             , <see
              langword="null" />
+
+            
 
             
 
@@ -110,8 +126,12 @@
 
             
 
+            
+
             , <paramref
              name="xmlLang" />
+
+            
 
             
 
@@ -121,8 +141,12 @@
 
             
 
+            
+
             , <see
              langword="null" />
+
+            
 
             
 
@@ -134,13 +158,19 @@
 
           
 
+          
+
            is not the same <see
            cref="T:System.Xml.XmlNameTable" />
 
           
 
+          
+
            used to construct <paramref
            name="nsMgr" />
+
+          
 
           
 
@@ -154,8 +184,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -167,8 +201,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -177,8 +215,12 @@
 
           
 
+          
+
            is used instead. For more information about atomized strings, see <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -189,8 +231,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 
@@ -201,6 +247,8 @@
 
           
 
+          
+
           The xml:lang scope. </param
         >
         <param name="xmlSpace">
@@ -208,8 +256,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlSpace" />
+
+          
 
           
 
@@ -253,8 +305,12 @@
 
             
 
+            
+
             (<paramref
              name="nt" />
+
+            
 
             
 
@@ -264,8 +320,12 @@
 
             
 
+            
+
             , <see
              langword="null" />
+
+            
 
             
 
@@ -274,8 +334,12 @@
 
             
 
+            
+
             , <see
              langword="null" />
+
+            
 
             
 
@@ -285,8 +349,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -295,14 +363,20 @@
 
             
 
+            
+
             , <paramref
              name="xmlSpace" />
+
+            
 
             
 
             , 
 <paramref
              name="enc" />
+
+            
 
             
 
@@ -314,13 +388,19 @@
 
           
 
+          
+
            is not the same <see
            cref="T:System.Xml.XmlNameTable" />
 
           
 
+          
+
            used to construct <paramref
            name="nsMgr" />
+
+          
 
           
 
@@ -334,8 +414,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -347,8 +431,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -357,8 +445,12 @@
 
           
 
+          
+
            is used instead. For more information on atomized strings, see <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -369,8 +461,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 
@@ -381,6 +477,8 @@
 
           
 
+          
+
           The xml:lang scope. </param
         >
         <param name="xmlSpace">
@@ -388,8 +486,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlSpace" />
+
+          
 
           
 
@@ -400,8 +502,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -447,13 +553,19 @@
 
           
 
+          
+
            is not the same <see
            cref="T:System.Xml.XmlNameTable" />
 
           
 
+          
+
            used to construct <paramref
            name="nsMgr" />
+
+          
 
           
 
@@ -467,8 +579,12 @@
 
             
 
+            
+
             . If this XmlParserContext is passed to an <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -477,6 +593,8 @@
           <para
             >If you pass a DTD as the <paramref
              name="internalSubset" />
+
+            
 
             
 
@@ -491,8 +609,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -504,8 +626,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -514,8 +640,12 @@
 
           
 
+          
+
            is used instead. For more information about atomized strings, see <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -526,8 +656,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 
@@ -538,10 +672,14 @@
 
           
 
+          
+
           The name of the document type declaration. </param
         >
         <param name="pubId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -552,10 +690,14 @@
 
           
 
+          
+
           The system identifier. </param
         >
         <param name="internalSubset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -566,10 +708,14 @@
 
           
 
+          
+
           The base URI for the XML fragment (the location from which the fragment was loaded). </param
         >
         <param name="xmlLang">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -580,8 +726,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlSpace" />
+
+          
 
           
 
@@ -630,8 +780,12 @@
 
             
 
+            
+
              to <paramref
              name="baseURI" />
+
+            
 
             
 
@@ -640,8 +794,12 @@
 
             
 
+            
+
              to <paramref
              name="docTypeName" />
+
+            
 
             
 
@@ -650,8 +808,12 @@
 
             
 
+            
+
              to <paramref
              name="internalSubset" />
+
+            
 
             
 
@@ -660,8 +822,12 @@
 
             
 
+            
+
              to <paramref
              name="pubId" />
+
+            
 
             
 
@@ -670,8 +836,12 @@
 
             
 
+            
+
              to <paramref
              name="sysId" />
+
+            
 
             
 
@@ -680,8 +850,12 @@
 
             
 
+            
+
              to <paramref
              name="xmlLang" />
+
+            
 
             
 
@@ -691,9 +865,13 @@
 
             
 
+            
+
              is passed for any of these parameters, the corresponding 
    property is set to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -708,6 +886,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -717,13 +897,19 @@
 
           
 
+          
+
            is not the same <see
            cref="T:System.Xml.XmlNameTable" />
 
           
 
+          
+
            used to construct <paramref
            name="nsMgr" />
+
+          
 
           
 
@@ -737,8 +923,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -750,8 +940,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -760,8 +954,12 @@
 
           
 
+          
+
            is used instead. For more information about atomized strings, see <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -772,8 +970,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 
@@ -784,10 +986,14 @@
 
           
 
+          
+
           The name of the document type declaration. </param
         >
         <param name="pubId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -798,10 +1004,14 @@
 
           
 
+          
+
           The system identifier. </param
         >
         <param name="internalSubset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -812,10 +1022,14 @@
 
           
 
+          
+
           The base URI for the XML fragment (the location from which the fragment was loaded). </param
         >
         <param name="xmlLang">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -826,8 +1040,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlSpace" />
+
+          
 
           
 
@@ -838,8 +1056,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -870,6 +1092,8 @@
           <para
             >A <see
              cref="T:System.String" qualify="true" />
+
+            
 
             
 
@@ -912,6 +1136,8 @@
 
             
 
+            
+
              specifying the name of the document type.</para
           >
         </value>
@@ -923,13 +1149,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlParserContext.SystemId" />
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlParserContext.InternalSubset" />
+
+            
 
             
 
@@ -971,6 +1203,8 @@
 
             
 
+            
+
              indicating the encoding
    type.</para
           >
@@ -1008,6 +1242,8 @@
 
             
 
+            
+
              
 specifying
 the internal subset. </para
@@ -1021,13 +1257,19 @@ the internal subset. </para
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlParserContext.PublicId" />
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlParserContext.SystemId" />
+
+            
 
             
 
@@ -1073,6 +1315,8 @@ the internal subset. </para
 
             
 
+            
+
              used by the current
    instance.</para
           >
@@ -1086,6 +1330,8 @@ the internal subset. </para
           <para
             >Gets or sets the <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -1126,6 +1372,8 @@ the internal subset. </para
 
             
 
+            
+
              used by the current instance.</para
           >
         </value>
@@ -1138,8 +1386,12 @@ the internal subset. </para
 
             
 
+            
+
              used to atomize strings. For more information on atomized strings, see <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -1174,6 +1426,8 @@ the internal subset. </para
 
             
 
+            
+
              
 specifying the public identifier.</para
           >
@@ -1186,13 +1440,19 @@ specifying the public identifier.</para
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlParserContext.SystemId" />
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlParserContext.InternalSubset" />
+
+            
 
             
 
@@ -1231,6 +1491,8 @@ specifying the public identifier.</para
 
             
 
+            
+
              
 specifying the system identifier.</para
           >
@@ -1243,13 +1505,19 @@ specifying the system identifier.</para
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlParserContext.PublicId" />
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlParserContext.InternalSubset" />
+
+            
 
             
 
@@ -1288,9 +1556,13 @@ specifying the system identifier.</para
 
             
 
+            
+
              specifying the 
    current <c
             >xml:lang</c>
+
+            
 
             
 
@@ -1300,8 +1572,12 @@ scope. If there is no <c
 
             
 
+            
+
              in scope, <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1347,9 +1623,13 @@ scope. If there is no <c
 
             
 
+            
+
              enumeration
    indicating the <c
             >xml:space</c>
+
+            
 
             
 
@@ -1361,6 +1641,8 @@ scope. If there is no <c
             <para
               >The white space attribute, <c
               >xml:space</c>
+
+              
 
               
 

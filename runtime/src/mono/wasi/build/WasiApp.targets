@@ -529,7 +529,7 @@
     <PropertyGroup>
       <_WasmNodeJSPath>$(WasmAppDir)node.mjs</_WasmNodeJSPath>
       <_WasmNodeJSContents>
-        <![CDATA[
+<![CDATA[
 import { readFile } from 'node:fs/promises';
 import { WASI } from 'wasi';
 import { argv, env } from 'node:process';

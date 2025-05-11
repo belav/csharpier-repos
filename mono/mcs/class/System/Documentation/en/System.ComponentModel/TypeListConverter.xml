@@ -32,10 +32,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -58,8 +66,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -98,6 +110,8 @@
 
             
 
+            
+
              parameter can be used to populate a list box with the available types.</para
           >
         </remarks>
@@ -109,6 +123,8 @@
 
             
 
+            
+
              class using the type array as the available types.</para
           >
         </summary>
@@ -117,8 +133,12 @@
 
           
 
+          
+
           The array of type <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -158,6 +178,8 @@
 
             
 
+            
+
              of the source object using the given context.</para
           >
         </summary>
@@ -170,8 +192,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -182,8 +208,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -222,6 +252,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -238,8 +270,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -250,8 +286,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -296,6 +336,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -304,8 +346,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -316,8 +362,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -328,8 +378,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -371,6 +425,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -386,8 +442,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -399,8 +459,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -411,8 +475,12 @@
 
           
 
+          
+
           An optional <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -423,8 +491,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -435,8 +507,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -474,6 +550,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -489,6 +567,8 @@
 
             
 
+            
+
              that holds a standard set of valid values, or null if the data type does not support a standard set of values.</para
           >
         </returns>
@@ -497,8 +577,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -536,11 +620,15 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
           <para
             >When the list is exclusive, no other values are valid besides the list of standard values the <see
              cref="M:System.ComponentModel.TypeListConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -555,6 +643,8 @@
 
             
 
+            
+
              method is an exclusive list.</para
           >
         </summary>
@@ -566,8 +656,12 @@
 
             
 
+            
+
              returned from <see
              cref="M:System.ComponentModel.TypeListConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -579,8 +673,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -618,6 +716,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -633,6 +733,8 @@
 
             
 
+            
+
              should be called to find a common set of values the object supports. This method never returns false.</para
           >
         </returns>
@@ -641,8 +743,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

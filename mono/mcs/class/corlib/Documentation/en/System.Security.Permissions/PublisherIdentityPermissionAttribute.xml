@@ -41,6 +41,8 @@
 
         
 
+        
+
          that is used.</para
       >
       <para
@@ -49,13 +51,19 @@
 
         
 
+        
+
         , <see
          cref="P:System.Security.Permissions.PublisherIdentityPermissionAttribute.SignedFile" />
 
         
 
+        
+
         , and <see
          cref="P:System.Security.Permissions.PublisherIdentityPermissionAttribute.X509Certificate" />
+
+        
 
         
 
@@ -70,8 +78,12 @@
 
           
 
+          
+
            permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
            cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+          
 
           
 
@@ -85,8 +97,12 @@
 
           
 
+          
+
            evidence. Unless your computer has a custom code group based on the <see
            cref="T:System.Security.Policy.PublisherMembershipCondition" />
+
+          
 
           
 
@@ -95,10 +111,14 @@
 
           
 
+          
+
            evidence for code access security. For more information about how to configure this option and which applications can use it, see the <format
            type="text/html">
             <a href="7d208f50-e8d5-4a42-bc1a-1cf3590706a8">&lt;generatePublisherEvidence&gt;</a>
           </format>
+
+          
 
           
 
@@ -111,6 +131,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.PublisherIdentityPermission" />
+
+        
 
         
 
@@ -148,8 +170,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -161,8 +187,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -189,6 +219,8 @@
           <para
             >If <see
              cref="P:System.Security.Permissions.PublisherIdentityPermissionAttribute.X509Certificate" />
+
+            
 
             
 
@@ -234,6 +266,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -242,6 +276,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.PublisherIdentityPermission" />
+
+            
 
             
 
@@ -272,8 +308,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Security.Permissions.PublisherIdentityPermissionAttribute.CertFile" />
+
+            
 
             
 
@@ -308,8 +348,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Permissions.PublisherIdentityPermissionAttribute.SignedFile" />
+
+            
 
             
 
@@ -322,10 +366,14 @@
 
             
 
+            
+
              keyfile) against a file that has an Authenticode signature. For more information, see <format
              type="text/html">
               <a href="c1d2b532-1b8e-4c7a-8ac5-53b801135ec6">Sn.exe (Strong Name Tool)</a>
             </format>
+
+            
 
             
 

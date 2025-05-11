@@ -18,6 +18,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -26,6 +28,8 @@
       <para
         >Specifies the scroll bar orientation for the <see
          cref="E:System.Windows.Forms.ScrollBar.Scroll" />
+
+        
 
         
 

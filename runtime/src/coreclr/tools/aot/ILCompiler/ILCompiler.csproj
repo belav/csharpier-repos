@@ -33,7 +33,8 @@
     <_hostArchitecture Condition="'$(OS)' == 'Windows_NT'"
       >$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</_hostArchitecture
     >
-    <_hostPackageName>runtime.$(_hostOS)-$(_hostArchitecture).Microsoft.DotNet.ILCompiler</_hostPackageName>
+    <_hostPackageName
+>runtime.$(_hostOS)-$(_hostArchitecture).Microsoft.DotNet.ILCompiler</_hostPackageName>
   </PropertyGroup>
   <ItemGroup Condition="'$(NativeAotSupported)' == 'true'">
     <PackageReference

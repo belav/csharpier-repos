@@ -42,6 +42,8 @@
 
         
 
+        
+
          class to create digital signatures and protect the integrity of your data. </para
       >
       <para>To use a public-key system to digitally sign a message, the sender first applies a hash function to the message to create a message digest. The sender then encrypts the message digest with the sender's private key to create the sender's personal signature. Upon receiving the message and signature, the receiver decrypts the signature using the sender's public key to recover the message digest and hashes the message using the same hash algorithm that the sender used. If the message digest that the receiver computes exactly matches the message digest received from the sender, the receiver can be sure that the message was not altered while in transit. Note that a signature can be verified by anyone, because the sender's public key is common knowledge.</para>
@@ -52,13 +54,19 @@
 
           
 
+          
+
            class instead of the <see
            cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
 
           
 
+          
+
            class. Use <see
            cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+          
 
           
 
@@ -72,6 +80,8 @@
       <para
         >Defines a wrapper object to access the cryptographic service provider (CSP) implementation of the <see
          cref="T:System.Security.Cryptography.DSA" />
+
+        
 
         
 
@@ -101,6 +111,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+            
 
             
 
@@ -135,11 +147,15 @@
 
             
 
+            
+
              class with the specified key size.</para
           >
         </summary>
         <param name="dwKeySize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,11 +192,15 @@
 
             
 
+            
+
              class with the specified parameters for the cryptographic service provider (CSP).</para
           >
         </summary>
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +238,8 @@
 
             
 
+            
+
              class with the specified key size and parameters for the cryptographic service provider (CSP).</para
           >
         </summary>
@@ -226,10 +248,14 @@
 
           
 
+          
+
           The size of the key for the cryptographic algorithm in bits. </param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -265,6 +291,8 @@
 
           
 
+          
+
            will be thrown if the instance doesn't have a private key or if the parameter rgbHash isn't exactly 20 bytes long (like all SHA1 hashes are).</remarks
         >
         <summary>
@@ -272,6 +300,8 @@
           <para
             >Creates the <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -284,6 +314,8 @@
         </returns>
         <param name="rgbHash">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -324,8 +356,12 @@
 
             
 
+            
+
              property to retrieve additional information about a cryptographic key pair.  The returned <see
              cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -337,8 +373,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -347,8 +387,12 @@
 
             
 
+            
+
              if a key container has not been created.  To make sure that a key container has been created, call a method such as <see
              cref="Overload:System.Security.Cryptography.DSACryptoServiceProvider.SignData" />
+
+            
 
             
 
@@ -357,8 +401,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.Cryptography.DSACryptoServiceProvider.VerifyData(System.Byte[],System.Byte[])" />
+
+            
 
             
 
@@ -367,8 +415,12 @@
 
             
 
+            
+
             , and so on, before you call the <see
              cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -380,6 +432,8 @@
           <para
             >Gets a <see
              cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -416,8 +470,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+            
 
             
 
@@ -432,11 +490,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -479,6 +541,8 @@
 
             
 
+            
+
              method returns a blob containing key information that is compatible with the unmanaged Microsoft Cryptographic API (CAPI).</para
           >
         </remarks>
@@ -487,6 +551,8 @@
           <para
             >Exports a blob containing the key information associated with a <see
              cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+            
 
             
 
@@ -501,11 +567,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,11 +612,12 @@
 
             
 
+            
+
              is thrown if the private key is requested but not available. Sadly there is not way (before 2.0) to know if the private key is available without throwing an exception. Here is a safe way to test for the private key presence:</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 bool IsPrivateKeyAvailable (DSA dsa)
 {
 	if (dsa == null)
@@ -571,8 +642,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
             .<see
              cref="M:System.Security.Cryptography.DSAParameters.X" />
+
+            
 
             
 
@@ -587,6 +662,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -598,11 +675,15 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -663,8 +744,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              method initializes the key data of a <see
              cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+            
 
             
 
@@ -677,6 +762,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
         </summary>
         <param name="keyBlob">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -712,8 +799,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
            is required if you want to import the DSA private key into the instance. Note that you are responsable to zeroize the private key inside the <see
            cref="T:System.Security.Cryptography.DSAParameters" />
+
+          
 
           
 
@@ -727,6 +818,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -735,8 +828,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
           The parameters for <see
            cref="T:System.Security.Cryptography.DSA" />
+
+          
 
           
 
@@ -788,8 +885,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              class does not allow you to change key sizes using the <see
              cref="P:System.Security.Cryptography.DSACryptoServiceProvider.KeySize" />
+
+            
 
             
 
@@ -818,6 +919,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
           <para
             >Only values represented in this array are valid for the property <see
              cref="P:System.Security.Cryptography.DSACryptoServiceProvider.KeySize" />
+
+            
 
             
 
@@ -885,8 +988,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              class can be initialized either with a public key only or with both a public and private key.  Use the <see
              cref="P:System.Security.Cryptography.DSACryptoServiceProvider.PublicOnly" />
+
+            
 
             
 
@@ -898,6 +1005,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+            
 
             
 
@@ -954,6 +1063,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              method.</para
           >
           <para>
@@ -961,8 +1072,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              uses the <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -981,11 +1096,15 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              signature for the specified data.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1022,8 +1141,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              uses the <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -1042,11 +1165,15 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              signature for the specified data.</para
           >
         </returns>
         <param name="inputStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1086,6 +1213,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              method.</para
           >
           <para>
@@ -1093,8 +1222,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              uses the <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -1113,11 +1246,15 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              signature for the specified data.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1128,10 +1265,14 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
           The offset into the array from which to begin using data. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1167,6 +1308,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              method.</para
           >
           <para>
@@ -1174,8 +1317,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              uses the <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -1194,6 +1341,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              signature for the specified hash value.</para
           >
         </returns>
@@ -1202,10 +1351,14 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
           The hash value of the data to be signed. </param
         >
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1235,8 +1388,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
               flag to a <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -1245,8 +1402,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              property applies to all code in the current application domain, while the <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -1290,8 +1451,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              digital signature produced by <see
              cref="M:System.Security.Cryptography.DSACryptoServiceProvider.SignData(System.IO.Stream)" />
+
+            
 
             
 
@@ -1302,8 +1467,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              uses the <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -1323,10 +1492,14 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
           The data that was signed. </param
         >
         <param name="rgbSignature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1366,8 +1539,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              digital signature produced by <see
              cref="M:System.Security.Cryptography.DSACryptoServiceProvider.SignHash(System.Byte[],System.String)" />
+
+            
 
             
 
@@ -1379,8 +1556,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              parameter is null, the default hash algorithm (SHA1) is used. The valid hash algorithms is <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -1400,6 +1581,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
           The hash value of the data to be signed. </param
         >
         <param name="str">
@@ -1407,10 +1590,14 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
           The name of the hash algorithm used to create the hash value of the data. </param
         >
         <param name="rgbSignature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1447,6 +1634,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
            will be thrown if the parameter rgbHash isn't exactly 20 bytes long (like all SHA1 hashes are) or if the signature length isn't 40 bytes long (as all DSA signatures are).</remarks
         >
         <summary>
@@ -1454,6 +1643,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
           <para
             >Verifies the <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -1468,8 +1659,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
             
 
+            
+
              matches the signature computed using the specified hash algorithm and key on <paramref
              name="rgbHash" />
+
+            
 
             
 
@@ -1481,8 +1676,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
           The data signed with <paramref
            name="rgbSignature" />
+
+          
 
           
 
@@ -1493,8 +1692,12 @@ bool IsPrivateKeyAvailable (DSA dsa)
 
           
 
+          
+
           The signature to be verified for <paramref
            name="rgbData" />
+
+          
 
           
 

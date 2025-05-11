@@ -18,8 +18,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.TrackBar" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >Specifies the location of tick marks in a <see
          cref="T:System.Windows.Forms.TrackBar" />
+
+        
 
         
 

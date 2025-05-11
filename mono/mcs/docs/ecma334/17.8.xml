@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -27,8 +29,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -45,6 +51,8 @@
       <name>
         <non_terminal where="17.8">indexer-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -87,6 +95,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11">type</non_terminal>
@@ -112,8 +122,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -122,8 +136,12 @@
 
     
 
+    
+
     ), the new (<hyperlink
     >17.2.2</hyperlink>
+
+    
 
     
 
@@ -132,8 +150,12 @@
 
     
 
+    
+
     ), override (<hyperlink
     >17.5.4</hyperlink>
+
+    
 
     
 
@@ -142,8 +164,12 @@
 
     
 
+    
+
     ), abstract (<hyperlink
     >17.5.6</hyperlink>
+
+    
 
     
 
@@ -152,11 +178,15 @@
 
     
 
+    
+
     ) modifiers. </paragraph
   >
   <paragraph
     >Indexer declarations are subject to the same rules as method declarations (<hyperlink
     >17.5</hyperlink>
+
+    
 
     
 
@@ -169,6 +199,8 @@
 
     
 
+    
+
     , a ".", and the keyword this. Unlike other members, indexers do not have user-defined names. </paragraph
   >
   <paragraph
@@ -177,8 +209,12 @@
 
     
 
+    
+
      specifies the parameters of the indexer. The formal parameter list of an indexer corresponds to that of a method (<hyperlink
     >17.5.1</hyperlink>
+
+    
 
     
 
@@ -190,8 +226,12 @@
 
     
 
+    
+
      must be at least as accessible as the indexer itself (<hyperlink
     >10.5.4</hyperlink>
+
+    
 
     
 
@@ -203,8 +243,12 @@
 
     
 
+    
+
      (<hyperlink
     >17.6.2</hyperlink>
+
+    
 
     
 
@@ -217,8 +261,12 @@
 
     
 
+    
+
      of an indexer defines the signature (<hyperlink
     >10.6</hyperlink>
+
+    
 
     
 
@@ -235,8 +283,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.2</hyperlink>
+
+        
 
         
 
@@ -245,8 +297,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.4</hyperlink>
+
+        
 
         
 
@@ -255,8 +311,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.6.2</hyperlink>
+
+        
 
         
 
@@ -275,8 +335,12 @@
 
     
 
+    
+
      and <hyperlink
     >17.6.3</hyperlink>
+
+    
 
     
 
@@ -288,13 +352,15 @@
 
     
 
+    
+
      consists of a semicolon. </paragraph
   >
   <paragraph>
     <example
       >[Example: The example below declares a BitArray class that implements an indexer for accessing the individual bits in the bit array. <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 class BitArray  
 {  
@@ -339,6 +405,8 @@ class BitArray
 
       
 
+      
+
       ), but it permits the same operations as a bool[]. </example
     >
   </paragraph>
@@ -346,7 +414,7 @@ class BitArray
     <example
       >The following CountPrimes class uses a BitArray and the classical "sieve" algorithm to compute the number of primes between 1 and a given maximum: <code_example
       >
-        <![CDATA[
+<![CDATA[
 class CountPrimes  
 {  
    static int Count(int max) {  
@@ -381,9 +449,11 @@ class CountPrimes
 
       
 
+      
+
       10 grid class that has an indexer with two parameters. The first parameter is required to be an  upper-or lowercase letter in the range A-Z, and the second is required to be an integer in the range 0-9. <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 class Grid  
 {  
@@ -417,6 +487,8 @@ class Grid
 }  
 ]]>
       </code_example>
+
+      
 
       
 

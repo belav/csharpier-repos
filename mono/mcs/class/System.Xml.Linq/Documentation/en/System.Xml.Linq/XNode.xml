@@ -21,6 +21,8 @@
 
         
 
+        
+
          is an abstract common base class for the following types:</para
       >
       <list type="bullet">
@@ -55,6 +57,8 @@
 
         
 
+        
+
          is an abstract common base class for the following types:</para
       >
       <list type="bullet">
@@ -75,6 +79,8 @@
 
         
 
+        
+
          can contain child nodes.</para
       >
       <block subset="none" type="note">
@@ -84,8 +90,12 @@
 
           
 
+          
+
            is not an <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -129,10 +139,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -145,6 +159,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,6 +203,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -195,8 +213,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -209,6 +231,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,6 +269,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -253,8 +279,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -266,13 +296,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="Overload:System.Xml.Linq.XNode.AddBeforeSelf" />
+
+            
 
             
 
@@ -285,6 +321,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,6 +365,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -335,8 +375,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -348,13 +392,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="Overload:System.Xml.Linq.XNode.AddBeforeSelf" />
+
+            
 
             
 
@@ -367,6 +417,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,8 +462,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -452,6 +508,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -463,13 +521,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              of the ancestor elements of this node. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -483,8 +547,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -521,13 +589,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="M:System.Xml.Linq.XNode.CompareDocumentOrder" />
+
+            
 
             
 
@@ -546,8 +620,12 @@
 
             
 
+            
+
              is before <paramref
              name="n2" />
+
+            
 
             
 
@@ -556,8 +634,12 @@
 
             
 
+            
+
              is after <paramref
              name="n2" />
+
+            
 
             
 
@@ -569,8 +651,12 @@
 
           
 
+          
+
           First <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -581,8 +667,12 @@
 
           
 
+          
+
           Second <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -613,13 +703,19 @@
 
             
 
+            
+
             . For example, you can create an <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
              from a sqltecxlinq tree, and then pass that reader to <see
              cref="M:System.Xml.XmlDocument.Load(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -631,13 +727,19 @@
 
             
 
+            
+
              are normalizing readers. They always perform line break normalization and full normalization of attributes. In contrast, the <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
              returned by <see
              cref="M:System.Xml.Linq.XNode.CreateReader" />
+
+            
 
             
 
@@ -649,6 +751,8 @@
 
             
 
+            
+
              will always return false regardless of whether the attribute was populated from a default value or not.</para
           >
           <para
@@ -657,8 +761,12 @@
 
             
 
+            
+
              are not available through the <see
              cref="M:System.Xml.XmlReader.MoveToAttribute(System.Int32)" />
+
+            
 
             
 
@@ -667,8 +775,12 @@
 
             
 
+            
+
              method that takes the qualified name of the attribute as a parameter. If you have to retrieve the PUBLIC or SYSTEM attributes, you should use the <see
              cref="M:System.Xml.XmlReader.GetAttribute(System.String)" />
+
+            
 
             
 
@@ -680,8 +792,12 @@
 
             
 
+            
+
             ), the reader will throw <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -690,6 +806,8 @@
           <para
             >The xml declaration is not surfaced by the reader. While reading, you will not encounter a node of type <see
              cref="F:System.Xml.XmlNodeType.XmlDeclaration" />
+
+            
 
             
 
@@ -704,6 +822,8 @@
 
             
 
+            
+
              for this node.</para
           >
         </summary>
@@ -712,6 +832,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -749,8 +871,12 @@
 
             
 
+            
+
              with the options specified by the <paramref
              name="readerOptions" />
+
+            
 
             
 
@@ -765,6 +891,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -773,8 +901,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.ReaderOptions" />
+
+          
 
           
 
@@ -817,6 +949,8 @@
 
                 
 
+                
+
                  objects of different types are never equal. </para
               >
             </item>
@@ -824,6 +958,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XText" />
+
+                
 
                 
 
@@ -837,6 +973,8 @@
 
                 
 
+                
+
                  nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions) contain two equal length sequences of equal content nodes. </para
               >
             </item>
@@ -844,6 +982,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XDocument" />
+
+                
 
                 
 
@@ -857,6 +997,8 @@
 
                 
 
+                
+
                  nodes are equal if they contain the same comment text. </para
               >
             </item>
@@ -867,6 +1009,8 @@
 
                 
 
+                
+
                  nodes are equal if they have the same target and data. </para
               >
             </item>
@@ -874,6 +1018,8 @@
               <para
                 >Two <see
                  cref="T:System.Xml.Linq.XDocumentType" />
+
+                
 
                 
 
@@ -895,8 +1041,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -907,8 +1057,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -939,6 +1093,8 @@
           <para
             >This property is primarily used internally for implementing the <see
              cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
+
+            
 
             
 
@@ -986,8 +1142,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1029,6 +1189,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -1040,13 +1202,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              of the sibling elements after this node, in document order. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -1058,8 +1226,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1102,8 +1274,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -1145,6 +1321,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -1156,13 +1334,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              of the sibling elements before this node, in document order. Only elements that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -1174,8 +1358,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1233,13 +1421,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="M:System.Xml.Linq.XNode.CompareDocumentOrder" />
+
+            
 
             
 
@@ -1259,8 +1453,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -1293,13 +1491,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="M:System.Xml.Linq.XNode.IsBefore" />
+
+            
 
             
 
@@ -1319,8 +1523,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -1348,6 +1556,8 @@
           <para
             >If this <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -1395,8 +1605,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -1440,8 +1654,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
+
+            
 
             
 
@@ -1473,6 +1691,8 @@
 
             
 
+            
+
              does not have a parent, or if there is no previous node, this property returns null.</para
           >
           <para
@@ -1481,13 +1701,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="P:System.Xml.Linq.XNode.PreviousNode" />
+
+            
 
             
 
@@ -1529,13 +1755,19 @@
 
             
 
+            
+
              does not catch all exceptions thrown by the reader; the unhandled exceptions bubble up to the code that called <see
              cref="M:System.Xml.Linq.XNode.ReadFrom(System.Xml.XmlReader)" />
 
             
 
+            
+
             . In particular, your code should be prepared to handle <see
              cref="T:System.Xml.XmlException" />
+
+            
 
             
 
@@ -1551,11 +1783,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Certain standard query operators, such as <see
              cref="Overload:System.Linq.Enumerable.OrderBy" />
+
+            
 
             
 
@@ -1571,6 +1807,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1582,8 +1820,12 @@
 
             
 
+            
+
              from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1598,8 +1840,12 @@
 
             
 
+            
+
              that contains the node and its descendant nodes that were read from the reader. The runtime type of the node is determined by the node type (<see
              cref="P:System.Xml.Linq.XObject.NodeType" />
+
+            
 
             
 
@@ -1611,13 +1857,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            positioned at the node to read into this <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -1648,8 +1900,12 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Linq.Enumerable.ToList``1(System.Collections.Generic.IEnumerable{``0})" />
+
+            
 
             
 
@@ -1662,11 +1918,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Alternatively, if you want to remove a set of nodes, it is recommended that you use the <see
              cref="Overload:System.Xml.Linq.Extensions.Remove" />
+
+            
 
             
 
@@ -1678,8 +1938,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -1691,13 +1955,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="M:System.Xml.Linq.XNode.Remove" />
+
+            
 
             
 
@@ -1736,13 +2006,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="Overload:System.Xml.Linq.XNode.ReplaceWith" />
+
+            
 
             
 
@@ -1758,6 +2034,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1766,8 +2044,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -1780,6 +2062,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1819,13 +2103,19 @@
 
             
 
+            
+
              stores its child nodes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XNode" />
 
             
 
+            
+
              objects. This means that the <see
              cref="Overload:System.Xml.Linq.XNode.ReplaceWith" />
+
+            
 
             
 
@@ -1841,6 +2131,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1849,8 +2141,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -1863,6 +2159,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1895,6 +2193,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1936,6 +2236,8 @@
 
             
 
+            
+
              containing the XML.</para
           >
         </returns>
@@ -1944,8 +2246,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -1985,6 +2291,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1996,6 +2304,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2004,8 +2314,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

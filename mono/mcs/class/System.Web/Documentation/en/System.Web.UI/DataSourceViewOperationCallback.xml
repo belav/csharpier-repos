@@ -34,8 +34,12 @@
 
         
 
+        
+
          object supports the <see
          cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+
+        
 
         
 
@@ -44,13 +48,19 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
         
 
+        
+
          methods for asynchronous data processing. The <see
          cref="T:System.Web.UI.DataSourceViewOperationCallback" />
+
+        
 
         
 

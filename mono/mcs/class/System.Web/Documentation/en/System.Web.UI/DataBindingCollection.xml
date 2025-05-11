@@ -29,8 +29,12 @@
 
         
 
+        
+
          objects on an ASP.NET server control. You can access the objects contained in this collection through the <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -39,13 +43,19 @@
 
         
 
+        
+
          interface. Any <see
          cref="T:System.Web.UI.DataBinding" />
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.DataBindingCollection" />
+
+        
 
         
 
@@ -57,6 +67,8 @@
       <para
         >Provides a collection of <see
          cref="T:System.Web.UI.DataBinding" />
+
+        
 
         
 
@@ -77,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.DataBindingCollection" />
+
+            
 
             
 
@@ -108,8 +122,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.UI.DataBindingCollection" />
+
+            
 
             
 
@@ -118,6 +136,8 @@
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,13 +167,19 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.Web.UI.DataBindingCollection.Clear" />
 
             
 
+            
+
              method, or the <see
              cref="Overload:System.Web.UI.DataBindingCollection.Remove" />
+
+            
 
             
 
@@ -165,6 +191,8 @@
           <para
             >Occurs when the collection of <see
              cref="T:System.Web.UI.DataBinding" />
+
+            
 
             
 
@@ -190,8 +218,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.UI.DataBindingCollection" />
+
+            
 
             
 
@@ -226,6 +258,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -237,11 +271,15 @@
 
             
 
+            
+
              contains an element with the specified name; otherwise, false.</para
           >
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -269,13 +307,19 @@
 
             
 
+            
+
              values to a one-dimensional <see
              cref="T:System.Array" />
 
             
 
+            
+
             , beginning at the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -287,13 +331,19 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the values copied from <see
            cref="T:System.Web.UI.DataBindingCollection" />
+
+          
 
           
 
@@ -304,8 +354,12 @@
 
           
 
+          
+
           The index in the array, specified by the <paramref
            name="array" />
+
+          
 
           
 
@@ -334,8 +388,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.DataBindingCollection" />
+
+            
 
             
 
@@ -368,6 +426,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -376,6 +436,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -405,6 +467,8 @@
 
             
 
+            
+
              collection is read-only.</para
           >
         </summary>
@@ -428,6 +492,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.DataBindingCollection" />
+
+            
 
             
 
@@ -482,13 +548,19 @@
 
             
 
+            
+
              object associated with the specified property name from the <see
              cref="T:System.Web.UI.DataBindingCollection" />
 
             
 
+            
+
              collection and adds it to the <see
              cref="P:System.Web.UI.DataBindingCollection.RemovedBindings" />
+
+            
 
             
 
@@ -500,8 +572,12 @@
 
           
 
+          
+
           The property name associated with the <see
            cref="T:System.Web.UI.DataBinding" />
+
+          
 
           
 
@@ -535,13 +611,19 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.DataBindingCollection" />
 
             
 
+            
+
              collection and adds it to the <see
              cref="P:System.Web.UI.DataBindingCollection.RemovedBindings" />
+
+            
 
             
 
@@ -553,13 +635,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.DataBinding" />
 
           
 
+          
+
            to be removed from the <see
            cref="T:System.Web.UI.DataBindingCollection" />
+
+          
 
           
 
@@ -594,13 +682,19 @@
 
             
 
+            
+
              object, associated with the specified property name, from the <see
              cref="T:System.Web.UI.DataBindingCollection" />
 
             
 
+            
+
              collection and controls whether to add the binding to the <see
              cref="P:System.Web.UI.DataBindingCollection.RemovedBindings" />
+
+            
 
             
 
@@ -612,8 +706,12 @@
 
           
 
+          
+
           The property associated with the <see
            cref="T:System.Web.UI.DataBinding" />
+
+          
 
           
 
@@ -624,8 +722,12 @@
 
           
 
+          
+
           A Boolean value that indicates whether to add the property name to the <see
            cref="P:System.Web.UI.DataBindingCollection.RemovedBindings" />
+
+          
 
           
 
@@ -634,8 +736,12 @@
 
           
 
+          
+
            parameter will be added to the <see
            cref="P:System.Web.UI.DataBindingCollection.RemovedBindings" />
+
+          
 
           
 
@@ -644,8 +750,12 @@
 
           
 
+          
+
            will not be added to the <see
            cref="P:System.Web.UI.DataBindingCollection.RemovedBindings" />
+
+          
 
           
 
@@ -674,6 +784,8 @@
 
             
 
+            
+
              objects removed from the collection.</para
           >
         </summary>
@@ -697,6 +809,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.DataBindingCollection" />
+
+            
 
             
 

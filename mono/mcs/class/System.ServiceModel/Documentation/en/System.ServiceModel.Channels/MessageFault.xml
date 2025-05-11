@@ -22,6 +22,8 @@
 
         
 
+        
+
          class any time you need an in-memory SOAP fault that can be modified and used to create a SOAP message that contains the fault information.</para
       >
       <para
@@ -30,8 +32,12 @@
 
         
 
+        
+
          class is used when implementing the <see
          cref="T:System.ServiceModel.Dispatcher.IErrorHandler" />
+
+        
 
         
 
@@ -40,13 +46,19 @@
 
         
 
+        
+
          object and you use it for your specific needs (for example, you can customize the <see
          cref="T:System.ServiceModel.Channels.MessageFault" />
 
         
 
+        
+
          or to log fault information). However, <see
          cref="T:System.ServiceModel.Channels.MessageFault" />
+
+        
 
         
 
@@ -58,6 +70,8 @@
       <para
         >Represents an in-memory representation of a SOAP fault that can be passed to <see
          cref="Overload:System.ServiceModel.Channels.Message.CreateMessage" />
+
+        
 
         
 
@@ -84,6 +98,8 @@
           <para
             >When called in a derived class, initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.MessageFault" />
+
+            
 
             
 
@@ -166,8 +182,12 @@
 
             
 
+            
+
              object that uses the specified <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -182,6 +202,8 @@
 
             
 
+            
+
              object with initial values from the passed in parameters.</para
           >
         </returns>
@@ -190,8 +212,12 @@
 
           
 
+          
+
           The specified <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -200,10 +226,14 @@
 
           
 
+          
+
            object.</param
         >
         <param name="maxBufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,13 +271,19 @@
 
             
 
+            
+
              object that uses the specified <see
              cref="T:System.ServiceModel.FaultCode" />
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.FaultReason" />
+
+            
 
             
 
@@ -262,6 +298,8 @@
 
             
 
+            
+
              object with initial values from the passed in parameters.</para
           >
         </returns>
@@ -270,10 +308,14 @@
 
           
 
+          
+
           The fault code for the fault message.</param
         >
         <param name="reason">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,8 +353,12 @@
 
             
 
+            
+
              object that uses the specified <see
              cref="T:System.ServiceModel.FaultCode" />
+
+            
 
             
 
@@ -327,6 +373,8 @@
 
             
 
+            
+
              object with initial values from the passed in parameters.</para
           >
         </returns>
@@ -335,10 +383,14 @@
 
           
 
+          
+
           The fault code for the fault message.</param
         >
         <param name="reason">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -377,13 +429,19 @@
 
             
 
+            
+
              object that uses the specified <see
              cref="T:System.ServiceModel.FaultCode" />
 
             
 
+            
+
             , <see
              cref="T:System.ServiceModel.FaultReason" />
+
+            
 
             
 
@@ -398,11 +456,15 @@
 
             
 
+            
+
              object with initial values from the passed in parameters.</para
           >
         </returns>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -413,10 +475,14 @@
 
           
 
+          
+
           The reason for the fault.</param
         >
         <param name="detail">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -457,8 +523,12 @@
 
             
 
+            
+
              object that uses the specified <see
              cref="T:System.ServiceModel.FaultCode" />
+
+            
 
             
 
@@ -467,8 +537,12 @@
 
             
 
+            
+
             , detail object, and  <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+            
 
             
 
@@ -483,11 +557,15 @@
 
             
 
+            
+
              object with initial values from the passed in parameters.</para
           >
         </returns>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -498,10 +576,14 @@
 
           
 
+          
+
           The reason for the fault.</param
         >
         <param name="detail">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,8 +625,12 @@
 
             
 
+            
+
              object that uses the specified <see
              cref="T:System.ServiceModel.FaultCode" />
+
+            
 
             
 
@@ -553,8 +639,12 @@
 
             
 
+            
+
             , detail object, <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+            
 
             
 
@@ -569,11 +659,15 @@
 
             
 
+            
+
              object with initial values from the passed in parameters.</para
           >
         </returns>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,6 +678,8 @@
 
           
 
+          
+
           The reason for the fault.</param
         >
         <param name="detail">
@@ -591,10 +687,14 @@
 
           
 
+          
+
           The fault detail object.</param
         >
         <param name="actor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -637,8 +737,12 @@
 
             
 
+            
+
              object that uses the specified <see
              cref="T:System.ServiceModel.FaultCode" />
+
+            
 
             
 
@@ -647,8 +751,12 @@
 
             
 
+            
+
             , detail object, <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+            
 
             
 
@@ -663,11 +771,15 @@
 
             
 
+            
+
              object with initial values from the passed in parameters.</para
           >
         </returns>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -678,10 +790,14 @@
 
           
 
+          
+
           The reason for the fault.</param
         >
         <param name="detail">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -692,10 +808,14 @@
 
           
 
+          
+
           The value of the actor.</param
         >
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -732,6 +852,8 @@
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -772,6 +894,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -783,11 +907,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -822,8 +950,12 @@
 
             
 
+            
+
              object that is positioned on the detail object of the <see
              cref="T:System.ServiceModel.Channels.MessageFault" />
+
+            
 
             
 
@@ -838,8 +970,12 @@
 
             
 
+            
+
              object that is positioned on the detail object of the <see
              cref="T:System.ServiceModel.Channels.MessageFault" />
+
+            
 
             
 
@@ -866,6 +1002,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.ServiceModel.Channels.MessageFault" />
+
+            
 
             
 
@@ -920,8 +1058,12 @@
 
             
 
+            
+
              object that is positioned on the detail object of the <see
              cref="T:System.ServiceModel.Channels.MessageFault" />
+
+            
 
             
 
@@ -936,8 +1078,12 @@
 
             
 
+            
+
              object that is positioned on the detail object of the <see
              cref="T:System.ServiceModel.Channels.MessageFault" />
+
+            
 
             
 
@@ -975,13 +1121,19 @@
 
             
 
+            
+
              method to participate in the detail writing process. The default behavior is to call <see
              cref="M:System.ServiceModel.Channels.MessageFault.OnWriteStartDetail(System.Xml.XmlDictionaryWriter,System.ServiceModel.EnvelopeVersion)" />
 
             
 
+            
+
              followed by <see
              cref="M:System.ServiceModel.Channels.MessageFault.OnWriteDetailContents(System.Xml.XmlDictionaryWriter)" />
+
+            
 
             
 
@@ -997,8 +1149,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1006,6 +1162,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1041,8 +1199,12 @@
 
             
 
+            
+
              method is called subsequent to <see
              cref="M:System.ServiceModel.Channels.MessageFault.OnWriteStartDetail(System.Xml.XmlDictionaryWriter,System.ServiceModel.EnvelopeVersion)" />
+
+            
 
             
 
@@ -1058,8 +1220,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1097,6 +1263,8 @@
 
             
 
+            
+
              and SOAP envelope version.</para
           >
         </summary>
@@ -1105,8 +1273,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1114,6 +1286,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1176,6 +1350,8 @@
 
             
 
+            
+
              and SOAP envelope version.</para
           >
         </summary>
@@ -1184,8 +1360,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1193,6 +1373,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1230,6 +1412,8 @@
 
             
 
+            
+
              and SOAP envelope version.</para
           >
         </summary>
@@ -1238,8 +1422,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1247,6 +1435,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -32,8 +32,12 @@
 
         
 
+        
+
          provides data for the following <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -102,6 +106,8 @@
       <para
         >Represents the method that will handle column-related events of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

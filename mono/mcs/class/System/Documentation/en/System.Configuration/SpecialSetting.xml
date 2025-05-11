@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration defines a set of special categories that are applied to application settings properties with the <see
          cref="T:System.Configuration.SpecialSettingAttribute" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
         <para
           >The default settings provider, <see
            cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+          
 
           
 

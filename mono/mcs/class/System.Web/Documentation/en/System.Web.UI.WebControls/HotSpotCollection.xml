@@ -27,13 +27,19 @@
 
         
 
+        
+
          class represents a collection that enables an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
 
         
 
+        
+
          control to maintain a list of the <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          method to add a specified <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          method to add a <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -65,8 +79,12 @@
 
         
 
+        
+
          indexer to directly access a <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -78,8 +96,12 @@
 
         
 
+        
+
          method to remove a <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -88,8 +110,12 @@
 
         
 
+        
+
          method to remove a <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -104,8 +130,12 @@
 
         
 
+        
+
          objects inside an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -128,6 +158,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -136,6 +168,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.HotSpotCollection" />
+
+            
 
             
 
@@ -169,8 +203,12 @@
 
             
 
+            
+
              method adds the specified <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -179,8 +217,12 @@
 
             
 
+            
+
              object to the collection at a specific index location, use the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" />
+
+            
 
             
 
@@ -195,8 +237,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.HotSpotCollection" />
+
+            
 
             
 
@@ -212,8 +258,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -244,13 +294,19 @@
 
             
 
+            
+
              method creates an instance of a <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
+            
+
              object according to the index of the type returned by the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.GetKnownTypes" />
+
+            
 
             
 
@@ -304,8 +360,12 @@
 
             
 
+            
+
              parameter, the method returns a <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -314,8 +374,12 @@
 
             
 
+            
+
              parameter, the method returns a <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -327,13 +391,19 @@
 
             
 
+            
+
              method returns an <see
              cref="T:System.Collections.ArrayList" />
 
             
 
+            
+
              object containing the known types of controls derived from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -351,6 +421,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -359,6 +431,8 @@
           <para
             >An object of a specified type derived from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -387,8 +461,12 @@
 
             
 
+            
+
              method returns an array of <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -397,13 +475,19 @@
 
             
 
+            
+
              object, the <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
 
             
 
+            
+
              object, and the <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -415,8 +499,12 @@
 
             
 
+            
+
              method to return an instance of one of the types contained in the array. If you specify 0 for the method's <paramref
              name="index" />
+
+            
 
             
 
@@ -425,8 +513,12 @@
 
             
 
+            
+
              object. If you specify 1 for the <paramref
              name="index" />
+
+            
 
             
 
@@ -435,13 +527,19 @@
 
             
 
+            
+
              object. If you specify 2 for the <paramref
              name="index" />
 
             
 
+            
+
              parameter, the method returns a <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -459,8 +557,12 @@
 
             
 
+            
+
              object-derived types that a <see
              cref="T:System.Web.UI.WebControls.HotSpotCollection" />
+
+            
 
             
 
@@ -475,8 +577,12 @@
 
             
 
+            
+
              object-derived types that a <see
              cref="T:System.Web.UI.WebControls.HotSpotCollection" />
+
+            
 
             
 
@@ -512,8 +618,12 @@
 
             
 
+            
+
              method adds the specified <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -522,8 +632,12 @@
 
             
 
+            
+
              object to the end of the collection, use the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" />
+
+            
 
             
 
@@ -538,8 +652,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Web.UI.WebControls.HotSpotCollection" />
+
+            
 
             
 
@@ -551,8 +669,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -605,8 +727,12 @@
 
             
 
+            
+
              to determine whether it is a valid type derived from the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -615,13 +741,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
 
             
 
+            
+
             , or <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -639,11 +771,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -676,8 +812,12 @@
 
             
 
+            
+
              method removes the specified <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -686,8 +826,12 @@
 
             
 
+            
+
              object from the collection at a specified index location, use the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -699,13 +843,19 @@
 
             
 
+            
+
              objects to the collection, use the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" />
 
             
 
+            
+
              or the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" />
+
+            
 
             
 
@@ -720,8 +870,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.HotSpotCollection" />
+
+            
 
             
 
@@ -733,8 +887,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -765,8 +923,12 @@
 
             
 
+            
+
              method removes the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -775,8 +937,12 @@
 
             
 
+            
+
              object from the collection by name, use the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.Remove(System.Web.UI.WebControls.HotSpot)" />
+
+            
 
             
 
@@ -788,13 +954,19 @@
 
             
 
+            
+
              objects to the collection, use the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" />
 
             
 
+            
+
              or the <see
              cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" />
+
+            
 
             
 
@@ -806,6 +978,8 @@
           <para
             >Removes the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -836,6 +1010,8 @@
 
             
 
+            
+
              object as changed since it was last loaded or saved from view state. This allows the object to save its entire view state.</para
           >
           <block subset="none" type="note">
@@ -850,6 +1026,8 @@
 
             
 
+            
+
              object as changed since it was last loaded or saves from view state.</para
           >
         </summary>
@@ -858,8 +1036,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 

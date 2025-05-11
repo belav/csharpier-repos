@@ -33,11 +33,15 @@
 
         
 
+        
+
          provides an optional layer in the stack that can establish a reliable session between endpoints and configure the behavior of this session.</para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+
+        
 
         
 
@@ -113,6 +117,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -141,11 +147,15 @@
 
             
 
+            
+
              class that specifies whether message delivery must preserve the order in which messages are sent.</para
           >
         </summary>
         <param name="ordered">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -179,8 +189,12 @@
 
             
 
+            
+
              but not <see
              cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+            
 
             
 
@@ -189,6 +203,8 @@
           <para
             >The value that is set with the <see
              cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.AcknowledgementInterval" />
+
+            
 
             
 
@@ -232,13 +248,19 @@
 
             
 
+            
+
              produced by the factory is of type <paramref
              name="TChannel" />
 
             
 
+            
+
             . The types of <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -329,13 +351,19 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
+            
+
              initialized from the <paramref
              name="context" />
+
+            
 
             
 
@@ -347,8 +375,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -357,10 +389,14 @@
 
           
 
+          
+
           .</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,13 +440,19 @@
 
             
 
+            
+
              accepted by the listener is of type <paramref
              name="TChannel" />
 
             
 
+            
+
             . The types of <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -501,13 +543,19 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
+            
+
              initialized from the <paramref
              name="context" />
+
+            
 
             
 
@@ -519,13 +567,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
+          
+
            that contains the information required to build the listeners that can accept channels of type <paramref
            name="TChannel" />
+
+          
 
           
 
@@ -536,8 +590,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -576,8 +634,12 @@
 
             
 
+            
+
              in accordance with the table of values provided in <see
              cref="M:System.ServiceModel.Channels.ReliableSessionBindingElement.BuildChannelFactory``1(System.ServiceModel.Channels.BindingContext)" />
+
+            
 
             
 
@@ -596,8 +658,12 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -609,8 +675,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -619,10 +689,14 @@
 
           
 
+          
+
           .</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -667,8 +741,12 @@
 
             
 
+            
+
              in accordance with the table of values provided in <see
              cref="M:System.ServiceModel.Channels.ReliableSessionBindingElement.BuildChannelListener``1(System.ServiceModel.Channels.BindingContext)" />
+
+            
 
             
 
@@ -687,13 +765,19 @@
 
             
 
+            
+
              that can produce an <see
              cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -705,13 +789,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
+          
+
            that contains the information required to build the listeners that can accept channels of type <paramref
            name="TChannel" />
+
+          
 
           
 
@@ -722,8 +812,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.IChanne" />
+
+          
 
           
 
@@ -759,6 +853,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -829,13 +925,19 @@
 
             
 
+            
+
              with the specified <paramref
              name="context" />
 
             
 
+            
+
              or null if no property of type <paramref
              name="T" />
+
+            
 
             
 
@@ -847,8 +949,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -857,10 +963,14 @@
 
           
 
+          
+
           .</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -888,6 +998,8 @@
           <para
             >Activity on a channel is defined as receiving an application or infrastructure message. The inactivity timeout parameter controls the maximum amount of time to keep an inactive session alive. If more than <see
              cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.InactivityTimeout" />
+
+            
 
             
 
@@ -945,6 +1057,8 @@
 
             
 
+            
+
              number of times. Not receiving an acknowledgment before this limit is reached is considered a fatal communication failure and causes the channel faulted event to be raised. </para
           >
           <para>The infrastructure uses an exponential back-off algorithm to determine when to retransmit, based on a computed average round-trip time. The initial retry time is computed based on the measured roundtrip time of establishing the session. The retransmission algorithm doubles the delay with every attempt, which results in approximately 8.5 minutes passing between the first transmission attempt and the last retransmission attempt. The time for the first retransmission attempt is adjusted according to the calculated round-trip time and the resulting stretch of time that those attempts take varies accordingly. This allows the retransmission time to dynamically adapt to varying network conditions. </para>
@@ -975,12 +1089,16 @@
 
             
 
+            
+
              property can be set on both the sender and the receiver. This value is included in the binding policy of the WSDL, so if you use the <format
              type="text/html">
               <a href="1abf3d9f-b420-46f1-b628-df238751f308"
                 >ServiceModel Metadata Utility Tool (Svcutil.exe)</a
               >
             </format>
+
+            
 
             
 
@@ -1015,8 +1133,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+
+            
 
             
 
@@ -1088,8 +1210,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -1100,8 +1226,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 

@@ -31,13 +31,19 @@
 
         
 
+        
+
          when wait times are expected to be very short, and when the event does not cross a process boundary. <see
          cref="T:System.Threading.ManualResetEventSlim" />
 
         
 
+        
+
          uses busy spinning for a short time while it waits for the event to become signaled. When wait times are short, spinning can be much less expensive than waiting by using wait handles. However, if the event does not become signaled within a certain period of time, <see
          cref="T:System.Threading.ManualResetEventSlim" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
       <para
         >Provides a slimmed down version of <see
          cref="T:System.Threading.ManualResetEvent" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.ManualResetEventSlim" />
+
+            
 
             
 
@@ -106,11 +116,15 @@
 
             
 
+            
+
              class with a Boolean value indicating whether to set the intial state to signaled.</para
           >
         </summary>
         <param name="initialState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,6 +159,8 @@
 
             
 
+            
+
              class with a Boolean value indicating whether to set the intial state to signaled and a specified spin count.</para
           >
         </summary>
@@ -153,10 +169,14 @@
 
           
 
+          
+
           true to set the initial state to signaled; false to set the initial state to nonsignaled.</param
         >
         <param name="spinCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,8 +207,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.ManualResetEventSlim" />
+
+            
 
             
 
@@ -197,8 +221,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.ManualResetEventSlim" />
+
+            
 
             
 
@@ -212,10 +240,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -228,8 +260,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.ManualResetEventSlim" />
+
+              
 
               
 
@@ -242,6 +278,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.ManualResetEventSlim" />
+
+            
 
             
 
@@ -275,8 +313,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.ManualResetEventSlim.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -291,11 +333,15 @@
 
             
 
+            
+
             , and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,8 +390,12 @@
 
             
 
+            
+
              can be called concurrently with all members except <see
              cref="P:System.Threading.ManualResetEventSlim.WaitHandle" />
+
+            
 
             
 
@@ -426,6 +476,8 @@
 
             
 
+            
+
              is set.</para
           >
         </summary>
@@ -457,6 +509,8 @@
 
             
 
+            
+
              is set, using a 32-bit signed integer to measure the time interval.</para
           >
         </summary>
@@ -468,6 +522,8 @@
 
             
 
+            
+
              was set; otherwise, false.</para
           >
         </returns>
@@ -476,8 +532,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -517,8 +577,12 @@
 
             
 
+            
+
              receives a signal, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -530,8 +594,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -565,8 +633,12 @@
 
             
 
+            
+
              is set, using a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -581,6 +653,8 @@
 
             
 
+            
+
              was set; otherwise, false.</para
           >
         </returns>
@@ -589,13 +663,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -633,8 +713,12 @@
 
             
 
+            
+
              is set, using a 32-bit signed integer to measure the time interval, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -649,6 +733,8 @@
 
             
 
+            
+
              was set; otherwise, false.</para
           >
         </returns>
@@ -657,8 +743,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -669,8 +759,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -708,13 +802,19 @@
 
             
 
+            
+
              is set, using a <see
              cref="T:System.TimeSpan" />
 
             
 
+            
+
              to measure the time interval, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -729,6 +829,8 @@
 
             
 
+            
+
              was set; otherwise, false.</para
           >
         </returns>
@@ -737,13 +839,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -754,8 +862,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -789,8 +901,12 @@
 
             
 
+            
+
             , the public Wait methods should be preferred. It is recommended to dispose the <see
              cref="T:System.Threading.ManualResetEventSlim" />
+
+            
 
             
 
@@ -805,8 +921,12 @@
 
             
 
+            
+
              object for this <see
              cref="T:System.Threading.ManualResetEventSlim" />
+
+            
 
             
 

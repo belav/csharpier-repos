@@ -28,6 +28,8 @@
 
         
 
+        
+
          class represents code generation options specified in an XML text file.</para
       >
     </summary>
@@ -45,6 +47,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+            
 
             
 
@@ -85,8 +89,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+            
 
             
 
@@ -122,6 +130,8 @@
 
             
 
+            
+
              based on the code generation options described in the specified stream.</para
           >
         </summary>
@@ -133,6 +143,8 @@
 
             
 
+            
+
              based on the code generation options described in the specified stream.</para
           >
         </returns>
@@ -141,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -153,13 +169,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
+          
+
            to be associated with the new instance of <see
            cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+          
 
           
 
@@ -194,8 +216,12 @@
 
             
 
+            
+
              based on the code generation options described in the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -210,8 +236,12 @@
 
             
 
+            
+
              based on the code generation options described in the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -223,8 +253,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -235,13 +269,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
+          
+
            to be associated with the new instance of <see
            cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+          
 
           
 
@@ -276,8 +316,12 @@
 
             
 
+            
+
              based on the code generation options described in the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -292,8 +336,12 @@
 
             
 
+            
+
              based on the code generation options described in the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -305,8 +353,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -317,13 +369,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
+          
+
            to be associated with the new instance of <see
            cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+          
 
           
 
@@ -355,8 +413,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+            
 
             
 
@@ -397,8 +459,12 @@
 
             
 
+            
+
              that represents the schema importer extensions associated with this <see
              cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+            
 
             
 
@@ -439,8 +505,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+            
 
             
 
@@ -469,8 +539,12 @@
 
             
 
+            
+
              that contains the target namespace for the <see
              cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+            
 
             
 
@@ -502,6 +576,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

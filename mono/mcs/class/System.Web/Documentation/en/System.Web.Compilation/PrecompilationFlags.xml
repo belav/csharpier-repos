@@ -23,8 +23,12 @@
 
         
 
+        
+
          class takes PrecompilationFlags as one of its constructor parameters. Precompilation can be performed programmatically through <see
          cref="T:System.Web.Compilation.ClientBuildManager" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
           <para
             >An <see
              cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
+
+            
 
             
 

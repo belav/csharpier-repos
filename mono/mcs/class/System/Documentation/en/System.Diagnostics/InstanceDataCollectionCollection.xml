@@ -34,8 +34,12 @@
 
         
 
+        
+
          class represents the collection returned from the <see
          cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          object for each counter. Each <see
          cref="T:System.Diagnostics.InstanceDataCollection" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
       <para
         >Provides a strongly typed collection of <see
          cref="T:System.Diagnostics.InstanceDataCollection" />
+
+        
 
         
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -126,6 +138,8 @@
 
             
 
+            
+
              parameter is case-insensitive.</para
           >
           <para
@@ -134,8 +148,12 @@
 
             
 
+            
+
              object in the collection contains the performance data for all counters for an instance. The data is indexed by counter name and then by instance name. <see
              cref="M:System.Diagnostics.InstanceDataCollectionCollection.Contains(System.String)" />
+
+            
 
             
 
@@ -144,8 +162,12 @@
 
             
 
+            
+
              object whose associated counter has the name specified by the <paramref
              name="counterName" />
+
+            
 
             
 
@@ -160,6 +182,8 @@
 
             
 
+            
+
              objects) exists in the collection.</para
           >
         </summary>
@@ -169,6 +193,8 @@
         </returns>
         <param name="counterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,6 +234,8 @@
 
             
 
+            
+
              instances to the collection, at the specified index.</para
           >
         </summary>
@@ -216,8 +244,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Diagnostics.InstanceDataCollection" />
+
+          
 
           
 
@@ -225,6 +257,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

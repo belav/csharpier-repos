@@ -22,8 +22,12 @@
 
         
 
+        
+
          event sets the Abort property to true in the <see
          cref="T:System.Data.SqlClient.SqlRowsCopiedEventArgs" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          method stops sending rows to the server and throws an <see
          cref="T:System.Data.OperationAbortedException" />
+
+        
 
         
 

@@ -6,13 +6,19 @@
 
     
 
+    
+
      includes a volatile modifier, the fields introduced by that declaration are volatile fields. For non-volatile fields, optimization techniques that reorder instructions can lead to unexpected and unpredictable results in multi-threaded programs that access fields without synchronization such as that provided by the <non_terminal
      where="15.12">lock-statement</non_terminal>
 
     
 
+    
+
      (<hyperlink
     >15.12</hyperlink>
+
+    
 
     
 
@@ -27,7 +33,11 @@
     >
       <list_item
         > A <non_terminal
-         where="11.2">reference-type</non_terminal>
+         where="11.2"
+>reference-type</non_terminal
+        >
+
+        
 
         
 
@@ -39,8 +49,12 @@
 
         
 
+        
+
         , <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -49,8 +63,12 @@
 
         
 
+        
+
         , <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -59,8 +77,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -69,13 +91,19 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
 
         
 
+        
+
         , or <keyword
         >bool</keyword>
+
+        
 
         
 
@@ -87,8 +115,12 @@
 
         
 
+        
+
          having an enum base type of <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -97,8 +129,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -107,13 +143,19 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
 
         
 
+        
+
         , or <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -125,7 +167,7 @@
     <example
       >[Example: The example <code_example
       >
-        <![CDATA[
+<![CDATA[
 using System;  
 using System.Threading;  
 class Test  
@@ -155,9 +197,11 @@ class Test
 
       
 
+      
+
       produces the output: <code_example
       >
-        <![CDATA[
+<![CDATA[
 result = 143  
 ]]>
       </code_example>

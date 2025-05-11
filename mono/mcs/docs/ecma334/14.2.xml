@@ -15,6 +15,8 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
@@ -23,8 +25,12 @@
 
     
 
+    
+
      Certain operators can be overloaded. Operator overloading permits  user-defined operator implementations to be specified for operations where one or both of the operands are of a user-defined class or struct type (<hyperlink
     >14.2.2</hyperlink>
+
+    
 
     
 

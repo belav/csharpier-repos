@@ -19,8 +19,12 @@
 
         
 
+        
+
          event contains an <see
          cref="T:System.Data.Odbc.OdbcErrorCollection" />
+
+        
 
         
 
@@ -32,6 +36,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+
+        
 
         
 
@@ -78,13 +84,19 @@
 
             
 
+            
+
              property of the first <see
              cref="T:System.Data.Odbc.OdbcError" />
 
             
 
+            
+
              in the <see
              cref="P:System.Data.Odbc.OdbcInfoMessageEventArgs.Errors" />
+
+            
 
             
 
@@ -118,6 +130,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -126,6 +140,8 @@
           <para
             >A string representing the <see
              cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+
+            
 
             
 
